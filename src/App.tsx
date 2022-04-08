@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Root } from 'Views/Root';
+import { Root } from 'views/Root';
 import { ThemeProvider } from 'styled-components';
-import { theme } from 'Styles/theme';
+import { theme } from 'styles/theme';
 
 const App: FC = (): JSX.Element => (
   <BrowserRouter>

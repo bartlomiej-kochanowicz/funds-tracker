@@ -30,6 +30,7 @@ specifiers:
   react-dom: ^17.0.2
   react-router-dom: ^6.3.0
   styled-components: ^5.3.5
+  tsconfig-paths-webpack-plugin: ^3.5.2
   typescript: ^4.5.4
   vite: ^2.9.0
   vite-tsconfig-paths: ^3.4.1
@@ -67,6 +68,7 @@ devDependencies:
   eslint-plugin-react: 7.29.4_eslint@8.12.0
   eslint-plugin-react-hooks: 4.4.0_eslint@8.12.0
   prettier: 2.6.2
+  tsconfig-paths-webpack-plugin: 3.5.2
   typescript: 4.6.3
   vite: 2.9.1
 
@@ -5588,6 +5590,14 @@ packages:
       tapable: 1.1.3
     dev: true
 
+  /enhanced-resolve/5.9.2:
+    resolution: {integrity: sha512-GIm3fQfwLJ8YZx2smuHpBKkXC1yOk+OBEmKckVyL0i/ea8mqDEykK3ld5dgH1QYPNyT/lIllxV2LULnxCHaHkA==}
+    engines: {node: '>=10.13.0'}
+    dependencies:
+      graceful-fs: 4.2.10
+      tapable: 2.2.1
+    dev: true
+
   /entities/2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
     dev: true
@@ -10480,6 +10490,11 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /tapable/2.2.1:
+    resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
+    engines: {node: '>=6'}
+    dev: true
+
   /tar/6.1.11:
     resolution: {integrity: sha512-an/KZQzQUkZCkuoAA64hM92X0Urb6VpRhAFllDzz44U2mcD5scmT3zBc4VgVpkugF580+DQn8eAFSyoQt0tznA==}
     engines: {node: '>= 10'}
@@ -10682,6 +10697,14 @@ packages:
         optional: true
     dependencies:
       typescript: 4.6.3
+    dev: true
+
+  /tsconfig-paths-webpack-plugin/3.5.2:
+    resolution: {integrity: sha512-EhnfjHbzm5IYI9YPNVIxx1moxMI4bpHD2e0zTXeDNQcwjjRaGepP7IhTHJkyDBG0CAOoxRfe7jCG630Ou+C6Pw==}
+    dependencies:
+      chalk: 4.1.2
+      enhanced-resolve: 5.9.2
+      tsconfig-paths: 3.14.1
     dev: true
 
   /tsconfig-paths/3.14.1:
