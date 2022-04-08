@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import { Dashboard } from 'Views/Dashboard';
+import { BrowserRouter } from 'react-router-dom';
+import { Root } from 'Views/Root';
 
-const App: FC = () => (
-  <div>
-    <Dashboard />
-  </div>
+const App: FC = (): JSX.Element => (
+  <BrowserRouter>
+    <Root />
+  </BrowserRouter>
 );
 
 export default App;
