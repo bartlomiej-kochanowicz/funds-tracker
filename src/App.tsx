@@ -1,18 +1,10 @@
-import { Switch } from 'antd';
+import { FC } from 'react';
+import { Dashboard } from 'Views/Dashboard';
 
-const App = () => {
-  const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
-  };
-
-  return (
-    <div>
-      <Switch
-        defaultChecked
-        onChange={onChange}
-      />
-    </div>
-  );
-};
+const App: FC = () => (
+  <div>
+    <Dashboard />
+  </div>
+);
 
 export default App;
