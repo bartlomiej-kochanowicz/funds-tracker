@@ -1,5 +1,4 @@
 import { Switch } from 'antd';
-import 'antd/dist/antd.css';
 
 const App = () => {
   const onChange = (checked: boolean) => {
