@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
@@ -11,7 +11,10 @@
     "check:circular-deps": "madge --warning --circular --extensions ts,tsx src",
     "jest": "jest --colors --runInBand --detectOpenHandles --collectCoverage=false",
     "jest:coverage": "jest --colors --runInBand --detectOpenHandles --coverage --no-cache",
-    "jest:watch": "jest --colors --runInBand --detectOpenHandles --watch --collectCoverage=false"
+    "jest:watch": "jest --colors --runInBand --detectOpenHandles --watch --collectCoverage=false",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "format": "prettier --write ./src"
   },
   "dependencies": {
     "formik": "^2.2.9",
@@ -53,6 +56,7 @@
     "jest-watch-typeahead": "1.0.0",
     "madge": "^5.0.1",
     "prettier": "^2.6.2",
+    "rollup-plugin-analyzer": "^4.0.0",
     "storybook-addon-styled-component-theme": "^2.0.0",
     "ts-jest": "^27.1.4",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
