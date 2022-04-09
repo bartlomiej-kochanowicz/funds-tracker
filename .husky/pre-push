@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm check:circular-deps && pnpm jest
+pnpm lint && pnpm check:circular-deps && pnpm jest
