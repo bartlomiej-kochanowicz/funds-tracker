@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styled from 'styled-components';
+/* import styled from 'styled-components'; */
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -10,14 +10,7 @@ const defaultProps = {
   submit: false,
 };
 
-const StyledButton = styled.button`
-  color: red;
-`;
-
-export const Button: FC<ButtonProps & typeof defaultProps> = ({
-  children,
-  submit,
-}): JSX.Element => (
+export const Button: FC<ButtonProps> = ({ children, submit }): JSX.Element => (
   <button type={submit ? 'submit' : 'button'}>{children}</button>
 );
 

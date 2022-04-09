@@ -1,0 +1,16 @@
+{
+  "roots": ["<rootDir>/src"],
+  "setupFilesAfterEnv": ["<rootDir>/config/tests/setupTests.js"],
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "collectCoverage": true,
+  "watchPlugins": [
+    "jest-watch-typeahead/filename",
+    "jest-watch-typeahead/testname"
+  ],
+  "moduleDirectories": ["node_modules", "src"],
+  "testEnvironment": "jsdom"
+}

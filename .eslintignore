@@ -1,1 +1,4 @@
 vite.config.ts
+jest.config.js
+globals.d.ts
+/config/*
