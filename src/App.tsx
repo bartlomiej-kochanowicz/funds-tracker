@@ -9,6 +9,7 @@ const App: FC = (): JSX.Element => (
   <BrowserRouter>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+
       <Root />
     </ThemeProvider>
   </BrowserRouter>
