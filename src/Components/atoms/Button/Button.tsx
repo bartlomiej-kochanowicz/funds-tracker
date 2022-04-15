@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 
 type Size = 'small' | 'medium' | 'large';
@@ -23,12 +22,12 @@ const StyledButton = styled.button<ButtonProps>`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export const Button: FC<ButtonProps> = ({
+export const Button = ({
   children,
   type,
   size,
   color,
-}): JSX.Element => (
+}: ButtonProps): JSX.Element => (
   <StyledButton
     type={type}
     size={size}
