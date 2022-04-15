@@ -1,3 +1,5 @@
+import { customMediaQuery } from 'helpers/customMediaQuery';
+
 export const theme = {
   colors: {
     // blue
@@ -14,5 +16,10 @@ export const theme = {
     white: 'hsl(0, 0%, 100%, 1)',
     // black
     black: 'hsl(0, 0%, 0%, 1)',
+  },
+  breakpoints: {
+    desktop: customMediaQuery(922),
+    tablet: customMediaQuery(768),
+    phone: customMediaQuery(576),
   },
 };

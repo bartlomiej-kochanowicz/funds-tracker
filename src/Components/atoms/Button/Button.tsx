@@ -1,17 +1,41 @@
 import { FC } from 'react';
-/* import styled from 'styled-components'; */
+import styled, { DefaultTheme } from 'styled-components';
+
+type Size = 'small' | 'medium' | 'large';
+type Type = 'button' | 'submit';
+
+const defaultProps = {
+  type: 'button' as Type,
+  size: 'medium' as Size,
+  color: 'blueBase' as DefaultTheme['colors']['blueBase'],
+};
 
 type ButtonProps = {
   children: React.ReactNode;
-  submit?: boolean;
-};
+  size?: Size;
+  type?: Type;
+  color?: keyof DefaultTheme['colors'];
+} & typeof defaultProps;
 
-const defaultProps = {
-  submit: false,
-};
+const StyledButton = styled.button<ButtonProps>`
+  border: none;
+  background-color: ${({ theme, color }) => theme.colors[color]};
+  color: ${({ theme }) => theme.colors.white};
+`;
 
-export const Button: FC<ButtonProps> = ({ children, submit }): JSX.Element => (
-  <button type={submit ? 'submit' : 'button'}>{children}</button>
+export const Button: FC<ButtonProps> = ({
+  children,
+  type,
+  size,
+  color,
+}): JSX.Element => (
+  <StyledButton
+    type={type}
+    size={size}
+    color={color}
+  >
+    {children}
+  </StyledButton>
 );
 
 Button.defaultProps = defaultProps;
