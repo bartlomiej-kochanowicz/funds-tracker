@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 
 type Size = 'small' | 'medium' | 'large';
@@ -10,7 +11,7 @@ const defaultProps = {
 };
 
 type ButtonProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   size?: Size;
   type?: Type;
   color?: keyof DefaultTheme['colors'];

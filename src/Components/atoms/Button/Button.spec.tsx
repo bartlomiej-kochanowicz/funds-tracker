@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from 'utils/test-utils';
 import { Button } from 'components/atoms/Button';
 
 describe('Button tests', () => {

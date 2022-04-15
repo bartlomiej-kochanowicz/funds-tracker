@@ -14,7 +14,7 @@
     "sourceType": "module",
     "project": ["./tsconfig.json"]
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "jest-dom", "testing-library"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -38,7 +38,8 @@
           "**/*.stories.*",
           "**/.storybook/**/*.*",
           "**/*.spec.*",
-          "**/*.test.*"
+          "**/*.test.*",
+          "**/*/test-utils.tsx"
         ],
         "peerDependencies": true
       }
