@@ -47,4 +47,8 @@ export const theme = {
       500: '500',
     },
   },
+  radius: {
+    primary: rem(0.571),
+    circle: '50%',
+  },
 };

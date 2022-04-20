@@ -1,7 +1,19 @@
 import 'styled-components';
 import { theme } from 'styles/theme';
 
+export type Colors =
+  | 'blueBase'
+  | 'pinkBase'
+  | 'blackBase'
+  | 'grayBase'
+  | 'silverBase'
+  | 'white'
+  | 'black';
+
 declare module 'styled-components' {
-  type Theme = typeof theme;
+  export type Theme = typeof theme & {
+    colors: Colors;
+  };
+
   export interface DefaultTheme extends Theme {}
 }
