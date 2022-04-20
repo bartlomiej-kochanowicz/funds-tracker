@@ -14,9 +14,11 @@ export const theme = {
     // silver
     silverBase: 'hsla(0, 0%, 96%, 1)',
     // white
-    white: 'hsl(0, 0%, 100%, 1)',
+    white: 'hsla(0, 0%, 100%, 1)',
     // black
-    black: 'hsl(0, 0%, 0%, 1)',
+    black: 'hsla(0, 0%, 0%, 1)',
+    // transparent
+    transparent: 'hsla(0, 0%, 0%, 0)',
   },
   breakpoints: {
     desktop: customMediaQuery(1200),
@@ -48,7 +50,7 @@ export const theme = {
     },
   },
   radius: {
-    primary: rem(0.571),
+    primary: rem(0.5),
     circle: '50%',
   },
 };
