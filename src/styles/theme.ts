@@ -1,24 +1,27 @@
 import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
 
+enum Colors {
+  Blue = 'hsla(230, 62%, 50%, 1)',
+  Pink = 'hsla(5, 100%, 75%, 1)',
+  Navy = 'hsla(234, 51%, 17%, 1)',
+  Gray = 'hsla(226, 8%, 69%, 1)',
+  Silver = 'hsla(0, 0%, 96%, 1)',
+  White = 'hsla(0, 0%, 100%, 1)',
+  Black = 'hsla(0, 0%, 0%, 1)',
+  Transparent = 'hsla(0, 0%, 0%, 0)',
+}
+
 export const theme = {
   colors: {
-    // blue
-    blueBase: 'hsla(230, 62%, 50%, 1)',
-    // pink
-    pinkBase: 'hsla(5, 100%, 75%, 1)',
-    // black
-    blackBase: 'hsla(234, 51%, 17%, 1)',
-    // gray
-    grayBase: 'hsla(226, 8%, 69%, 1)',
-    // silver
-    silverBase: 'hsla(0, 0%, 96%, 1)',
-    // white
-    white: 'hsla(0, 0%, 100%, 1)',
-    // black
-    black: 'hsla(0, 0%, 0%, 1)',
-    // transparent
-    transparent: 'hsla(0, 0%, 0%, 0)',
+    blue: Colors.Blue,
+    pink: Colors.Pink,
+    navy: Colors.Navy,
+    gray: Colors.Gray,
+    silver: Colors.Silver,
+    white: Colors.White,
+    black: Colors.Black,
+    transparent: Colors.Transparent,
   },
   breakpoints: {
     desktop: customMediaQuery(1200),
@@ -41,6 +44,16 @@ export const theme = {
       lineHeigth: rem(1.7),
       padding: [rem(0.45), rem(1.25)],
     },
+  },
+  buttonColors: {
+    blue: {
+      background: Colors.Blue,
+      font: Colors.White,
+    },
+    pink: { background: Colors.Pink, font: Colors.White },
+    gray: { background: Colors.Gray, font: Colors.White },
+    silver: { background: Colors.Silver, font: Colors.Navy },
+    white: { background: Colors.White, font: Colors.Navy },
   },
   font: {
     weight: {
