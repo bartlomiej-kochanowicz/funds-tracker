@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import styled, { DefaultTheme } from 'styled-components';
+import { ReactNode, forwardRef } from 'react';
+import styled, { DefaultTheme, css } from 'styled-components';
 
 type Size = 'small' | 'medium' | 'large';
 type Type = 'button' | 'submit';
@@ -19,8 +19,16 @@ type ButtonProps = {
 
 const StyledButton = styled.button<ButtonProps>`
   border: none;
-  background-color: ${({ theme, color }) => theme.colors[color]};
-  color: ${({ theme }) => theme.colors.white};
+  border-radius: 10px;
+
+  ${({ size, theme, color }) =>
+    css`
+      font-size: ${theme.buttonSizes[size].fontSize};
+      background-color: ${theme.colors[color]};
+      color: ${theme.colors.white};
+      box-shadow: 0px 15px 31px -13px ${theme.colors[color]};
+      padding: ${theme.buttonSizes[size].padding.map(p => p).join(' ')};
+    `}
 `;
 
 export const Button = ({
