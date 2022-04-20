@@ -40,4 +40,11 @@ export const theme = {
       padding: [rem(0.45), rem(1.25)],
     },
   },
+  font: {
+    weight: {
+      300: '300',
+      400: '300',
+      500: '500',
+    },
+  },
 };
