@@ -11,9 +11,7 @@ export type Colors =
   | 'black';
 
 declare module 'styled-components' {
-  export type Theme = typeof theme & {
-    colors: Colors;
-  };
+  export type Theme = typeof theme;
 
   export interface DefaultTheme extends Theme {}
 }
