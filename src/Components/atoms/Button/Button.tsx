@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react';
+import { ReactNode } from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
 
 type Size = 'small' | 'medium' | 'large';
