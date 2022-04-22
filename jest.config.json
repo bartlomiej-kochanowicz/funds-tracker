@@ -7,10 +7,16 @@
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
   "collectCoverage": true,
-  "watchPlugins": [
-    "jest-watch-typeahead/filename",
-    "jest-watch-typeahead/testname"
+  "collectCoverageFrom": [
+    "src/components/**/*.{ts,tsx}",
+    "src/helpers/**/*.{ts,tsx}",
+    "src/store/**/*.{ts,tsx}",
+    "src/styles/**/*.{ts,tsx}",
+    "src/utlis/**/*.{ts,tsx}",
+    "src/views/**/*.{ts,tsx}"
   ],
+  "coveragePathIgnorePatterns": [".stories.ts", ".stories.tx"],
+  "watchPlugins": ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
   "moduleDirectories": ["node_modules", "src"],
   "testEnvironment": "jsdom"
 }

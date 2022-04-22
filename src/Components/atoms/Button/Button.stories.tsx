@@ -1,15 +1,19 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Button } from 'components/atoms/Button';
+import { Button as ButtonComponent } from 'components/atoms/Button';
 
 export default {
-  title: 'Button',
-  component: Button,
-} as ComponentMeta<typeof Button>;
+  title: 'Atoms',
+  component: ButtonComponent,
+} as ComponentMeta<typeof ButtonComponent>;
 
-const Template: ComponentStory<typeof Button> = args => <Button {...args} />;
+const Template: ComponentStory<typeof ButtonComponent> = args => <ButtonComponent {...args} />;
 
-export const Primary = Template.bind({});
+export const Button = Template.bind({});
 
-Primary.args = {
+Button.args = {
   children: 'Get Started Now',
+  size: 'medium',
+  type: 'button',
+  color: 'blue',
+  fontWeight: 400,
 };
