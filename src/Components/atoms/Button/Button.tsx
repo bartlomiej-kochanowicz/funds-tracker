@@ -3,8 +3,8 @@ import styled, { DefaultTheme, css } from 'styled-components';
 import { ButtonColors } from 'styles/styled';
 import { darken, transparentize } from 'color2k';
 
-type Size = 'small' | 'medium' | 'large';
-type Type = 'button' | 'submit';
+export type Size = 'small' | 'medium' | 'large';
+export type Type = 'button' | 'submit';
 
 const defaultProps = {
   type: 'button' as Type,

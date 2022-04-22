@@ -1,7 +1,7 @@
 import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
 
-enum Colors {
+export enum Colors {
   Blue = 'hsla(230, 62%, 50%, 1)',
   Pink = 'hsla(5, 100%, 75%, 1)',
   Navy = 'hsla(234, 51%, 17%, 1)',
