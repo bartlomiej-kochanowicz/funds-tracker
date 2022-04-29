@@ -28,32 +28,34 @@ export const theme = {
     tablet: customMediaQuery(900),
     phone: customMediaQuery(600),
   },
-  buttonSizes: {
-    small: {
-      fontSize: rem(0.85),
-      lineHeigth: rem(1),
-      padding: [rem(0.25), rem(0.75)],
+  button: {
+    size: {
+      small: {
+        fontSize: rem(0.85),
+        lineHeigth: rem(1),
+        padding: [rem(0.25), rem(0.75)],
+      },
+      medium: {
+        fontSize: rem(1),
+        lineHeigth: rem(1.5),
+        padding: [rem(0.375), rem(1)],
+      },
+      large: {
+        fontSize: rem(1.2),
+        lineHeigth: rem(1.7),
+        padding: [rem(0.45), rem(1.25)],
+      },
     },
-    medium: {
-      fontSize: rem(1),
-      lineHeigth: rem(1.5),
-      padding: [rem(0.375), rem(1)],
+    color: {
+      blue: {
+        background: Colors.Blue,
+        font: Colors.White,
+      },
+      pink: { background: Colors.Pink, font: Colors.White },
+      gray: { background: Colors.Gray, font: Colors.White },
+      silver: { background: Colors.Silver, font: Colors.Navy },
+      white: { background: Colors.White, font: Colors.Navy },
     },
-    large: {
-      fontSize: rem(1.2),
-      lineHeigth: rem(1.7),
-      padding: [rem(0.45), rem(1.25)],
-    },
-  },
-  buttonColors: {
-    blue: {
-      background: Colors.Blue,
-      font: Colors.White,
-    },
-    pink: { background: Colors.Pink, font: Colors.White },
-    gray: { background: Colors.Gray, font: Colors.White },
-    silver: { background: Colors.Silver, font: Colors.Navy },
-    white: { background: Colors.White, font: Colors.Navy },
   },
   font: {
     weight: {
@@ -65,5 +67,16 @@ export const theme = {
   radius: {
     primary: rem(0.5),
     circle: '50%',
+  },
+  loader: {
+    size: {
+      small: rem(1),
+      medium: rem(1.2),
+      large: rem(1.7),
+    },
+    colors: {
+      white: Colors.White,
+      navy: Colors.Navy,
+    },
   },
 };
