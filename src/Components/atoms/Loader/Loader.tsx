@@ -1,25 +1,25 @@
 import styled, { keyframes } from 'styled-components';
 import { Colors } from 'styles/theme';
 
-const clip = keyframes`
-	0% { transform: rotate(0); }
-	100% { transform: rotate(360deg); }
-`;
-
 export type Size = 'small' | 'medium' | 'large';
 export type LoaderColors = Colors.Blue | Colors.White | Colors.Navy;
 
 const defaultProps = {
   size: 'medium' as Size,
-  color: 'blue' as Colors,
-  'data-testid': null,
+  color: 'blue' as LoaderColors,
+  'data-testid': 'loader',
 };
 
 type LoaderProps = {
   size?: Size;
   color?: LoaderColors;
-  'data-testid'?: string | null;
+  'data-testid'?: string;
 } & typeof defaultProps;
+
+const clip = keyframes`
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
+`;
 
 const StyledLoader = styled.div<LoaderProps>`
   align-self: center;
@@ -44,5 +44,7 @@ export const Loader = ({ size, color, 'data-testid': dataTestId }: LoaderProps):
     data-testid={dataTestId}
   />
 );
+
+Loader.displayName = 'Loader';
 
 Loader.defaultProps = defaultProps;

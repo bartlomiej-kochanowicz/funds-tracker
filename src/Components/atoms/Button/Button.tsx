@@ -60,4 +60,6 @@ export const Button = ({ children, type, size, color, fontWeight }: ButtonProps)
   </StyledButton>
 );
 
+Button.displayName = 'Button';
+
 Button.defaultProps = defaultProps;

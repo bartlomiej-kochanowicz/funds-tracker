@@ -3,12 +3,18 @@ import { Loader, Size } from 'components/atoms/Loader';
 
 describe('Loader tests', () => {
   it.each([
-    ['small' as Size, '0.25rem 0.75rem'],
-    ['medium' as Size, '0.375rem 1rem'],
-    ['large' as Size, '0.45rem 1.25rem'],
-  ])('has correct padding for %s', (size, expected) => {
-    const { getByText } = render(<Loader size={size} />);
+    ['small' as Size, '1rem'],
+    ['medium' as Size, '1.2rem'],
+    ['large' as Size, '1.7rem'],
+  ])('has correct size for %s', (size, expected) => {
+    const { getByTestId } = render(
+      <Loader
+        size={size}
+        data-testid="test-loader"
+      />,
+    );
 
-    expect(getByText('test button')).toHaveStyleRule('padding', expected);
+    expect(getByTestId('test-loader')).toHaveStyleRule('width', expected);
+    expect(getByTestId('test-loader')).toHaveStyleRule('height', expected);
   });
 });
