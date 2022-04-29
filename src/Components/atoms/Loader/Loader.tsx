@@ -1,12 +1,11 @@
 import styled, { keyframes } from 'styled-components';
-import { Colors } from 'styles/theme';
 
 export type Size = 'small' | 'medium' | 'large';
-export type LoaderColors = Colors.Blue | Colors.White | Colors.Navy;
+export type LoaderColors = 'white' | 'navy' | 'gray';
 
 const defaultProps = {
   size: 'medium' as Size,
-  color: 'blue' as LoaderColors,
+  color: 'gray' as LoaderColors,
   'data-testid': 'loader',
 };
 
@@ -29,7 +28,7 @@ const StyledLoader = styled.div<LoaderProps>`
   height: ${({ size, theme }) => theme.loader.size[size]};
   border-radius: 100%;
   margin: 0 auto ${({ size, theme }) => theme.loader.size[size]};
-  border: 3px solid ${({ color }) => color};
+  border: 3px solid ${({ color, theme }) => theme.loader.colors[color]};
   border-left: 3px solid transparent;
   border-bottom: 3px solid transparent;
   display: inline-block;

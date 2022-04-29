@@ -77,6 +77,7 @@ export const theme = {
     colors: {
       white: Colors.White,
       navy: Colors.Navy,
+      gray: Colors.Gray,
     },
   },
 };
