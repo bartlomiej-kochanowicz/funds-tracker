@@ -7,16 +7,18 @@ const clip = keyframes`
 `;
 
 export type Size = 'small' | 'medium' | 'large';
-export type LoaderColors = 'blue' | 'pink' | 'gray' | 'silver' | 'white';
+export type LoaderColors = Colors.Blue | Colors.White | Colors.Navy;
 
 const defaultProps = {
   size: 'medium' as Size,
   color: 'blue' as Colors,
+  'data-testid': null,
 };
 
 type LoaderProps = {
   size?: Size;
-  color?: Colors;
+  color?: LoaderColors;
+  'data-testid'?: string | null;
 } & typeof defaultProps;
 
 const StyledLoader = styled.div<LoaderProps>`
@@ -35,10 +37,11 @@ const StyledLoader = styled.div<LoaderProps>`
   animation-fill-mode: both;
 `;
 
-export const Loader = ({ size, color }: LoaderProps): JSX.Element => (
+export const Loader = ({ size, color, 'data-testid': dataTestId }: LoaderProps): JSX.Element => (
   <StyledLoader
     color={color}
     size={size}
+    data-testid={dataTestId}
   />
 );
 
