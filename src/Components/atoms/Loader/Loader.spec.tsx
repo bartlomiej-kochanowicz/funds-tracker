@@ -19,9 +19,9 @@ describe('Loader tests', () => {
   });
 
   it.each([
-    ['blue' as LoaderColors, '1rem'],
-    ['white' as LoaderColors, '1.2rem'],
-    ['navy' as LoaderColors, '1.7rem'],
+    ['gray' as LoaderColors, '3px solid hsla(226,8%,69%,1)'],
+    ['white' as LoaderColors, '3px solid hsla(0,0%,100%,1)'],
+    ['navy' as LoaderColors, '3px solid hsla(234,51%,17%,1)'],
   ])('has correct color for %s', (color, expected) => {
     const { getByTestId } = render(
       <Loader
@@ -30,7 +30,6 @@ describe('Loader tests', () => {
       />,
     );
 
-    expect(getByTestId('test-loader')).toHaveStyleRule('width', expected);
-    expect(getByTestId('test-loader')).toHaveStyleRule('height', expected);
+    expect(getByTestId('test-loader')).toHaveStyleRule('border', expected);
   });
 });
