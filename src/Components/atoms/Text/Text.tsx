@@ -1,14 +1,23 @@
 import styled, { css } from 'styled-components';
-import { fontable, FontableProps, marginable, MarginableProps } from 'styles/mixins';
+import {
+  fontable,
+  FontableProps,
+  marginMixin,
+  MarginMixinProps,
+  paddingMixin,
+  PaddingMixinProps,
+} from 'styles/mixins';
 
 type TextProps = {
   display: 'inline' | 'inline-block' | 'block';
 } & FontableProps &
-  MarginableProps;
+  MarginMixinProps &
+  PaddingMixinProps;
 
 export const Text = styled.span<TextProps>`
   ${fontable}
-  ${marginable}
+  ${marginMixin}
+  ${paddingMixin}
 
   ${({ display = 'inline' }) => css`
     display: ${display};

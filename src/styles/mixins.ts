@@ -31,7 +31,9 @@ export const fontable = css<FontableProps>`
   `}
 `;
 
-export type MarginableProps = {
+const offset = 0.25;
+
+export type PaddingMixinProps = {
   p: number;
   px: number;
   py: number;
@@ -39,18 +41,9 @@ export type MarginableProps = {
   pb: number;
   pl: number;
   pr: number;
-  m: number;
-  mx: number;
-  my: number;
-  mt: number;
-  mb: number;
-  ml: number;
-  mr: number;
 };
 
-const offset = 0.25;
-
-export const marginable = css<MarginableProps>`
+export const paddingMixin = css<PaddingMixinProps>`
   ${({ p }) =>
     p &&
     css`
@@ -93,15 +86,26 @@ export const marginable = css<MarginableProps>`
     css`
       padding-right: ${pr * offset}rem;
     `}
+`;
 
+export type MarginMixinProps = {
+  m: number;
+  mx: number;
+  my: number;
+  mt: number;
+  mb: number;
+  ml: number;
+  mr: number;
+};
 
-		${({ m }) =>
+export const marginMixin = css<MarginMixinProps>`
+  ${({ m }) =>
     m &&
     css`
       margin: ${m * offset}rem;
     `}
 
-		${({ mx }) =>
+  ${({ mx }) =>
     mx &&
     css`
       margin-left: ${mx * offset}rem;
