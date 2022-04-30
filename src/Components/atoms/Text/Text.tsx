@@ -1,16 +1,18 @@
-import styled from 'styled-components';
-import { fontable, FontableProps } from 'styles/mixins';
-
-export type Size = 'small' | 'medium' | 'large';
-export type Color = 'black' | 'white' | 'navy' | 'gray' | 'blue';
+import styled, { css } from 'styled-components';
+import { fontable, FontableProps, marginable, MarginableProps } from 'styles/mixins';
 
 type TextProps = {
-  size?: Size;
-  color?: Color;
-} & FontableProps;
+  display: 'inline' | 'inline-block' | 'block';
+} & FontableProps &
+  MarginableProps;
 
 export const Text = styled.span<TextProps>`
   ${fontable}
+  ${marginable}
+
+  ${({ display = 'inline' }) => css`
+    display: ${display};
+  `}
 `;
 
 Text.displayName = 'Text';
