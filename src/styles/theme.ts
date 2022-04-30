@@ -63,6 +63,11 @@ export const theme = {
       400: '300',
       500: '500',
     },
+    size: {
+      small: rem(0.75),
+      medium: rem(1),
+      large: rem(1.25),
+    },
   },
   radius: {
     primary: rem(0.5),
