@@ -64,9 +64,9 @@ export const theme = {
       500: '500',
     },
     size: {
-      small: rem(0.75 / 2), // devide by 2 - top and bottom or right and left
-      medium: rem(1 / 2), // devide by 2 - top and bottom or right and left
-      large: rem(1.25 / 2), // devide by 2 - top and bottom or right and left
+      small: rem(0.75),
+      medium: rem(1),
+      large: rem(1.25),
     },
   },
   radius: {
@@ -86,8 +86,8 @@ export const theme = {
     },
   },
   spacing: {
-    small: rem(0.5),
-    medium: rem(1),
-    large: rem(1.5),
+    small: rem(0.75 / 2), // devide by 2 - top and bottom or right and left
+    medium: rem(1 / 2), // devide by 2 - top and bottom or right and left
+    large: rem(1.25 / 2), // devide by 2 - top and bottom or right and left
   },
 };
