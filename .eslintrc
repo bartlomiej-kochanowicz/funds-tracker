@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
   "parser": "@typescript-eslint/parser",
@@ -23,10 +24,7 @@
     }
   },
   "rules": {
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": "off",
     "import/prefer-default-export": "off",
@@ -39,7 +37,8 @@
           "**/.storybook/**/*.*",
           "**/*.spec.*",
           "**/*.test.*",
-          "**/*/test-utils.tsx"
+          "**/*/test-utils.tsx",
+          "**/*/setupTests.ts"
         ],
         "peerDependencies": true
       }

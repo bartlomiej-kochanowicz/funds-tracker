@@ -1,6 +1,9 @@
 {
   "roots": ["<rootDir>/src"],
-  "setupFilesAfterEnv": ["<rootDir>/config/tests/setupTests.js"],
+  "setupFilesAfterEnv": [
+    "<rootDir>/config/tests/setupTests.ts",
+    "@testing-library/jest-dom/extend-expect"
+  ],
   "transform": {
     "^.+\\.tsx?$": "ts-jest"
   },
