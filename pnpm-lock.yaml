@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@babel/core': 7.17.10
+  '@storybook/addon-a11y': 6.4.22
   '@storybook/addon-actions': 6.4.22
   '@storybook/addon-essentials': 6.4.22
   '@storybook/addon-interactions': 6.4.22
@@ -63,6 +64,7 @@ dependencies:
 
 devDependencies:
   '@babel/core': 7.17.10
+  '@storybook/addon-a11y': 6.4.22_i6xcbgvvylvakhe2evaee3dlf4
   '@storybook/addon-actions': 6.4.22_i6xcbgvvylvakhe2evaee3dlf4
   '@storybook/addon-essentials': 6.4.22_v3arvj6gve366xf6o63w2gonli
   '@storybook/addon-interactions': 6.4.22_2o2qtzwf7dzuc2di3qvhrrb6my
@@ -2212,6 +2214,39 @@ packages:
     resolution: {integrity: sha512-BPS4ynJW/o92PUR4wgriz2Ud5gpST5vz6GQfMixEDK0Z8ZCUv2M7SkBLykH56T++Xs+8ln9zTGbOvNGIe02/jw==}
     dependencies:
       '@sinonjs/commons': 1.8.3
+    dev: true
+
+  /@storybook/addon-a11y/6.4.22_i6xcbgvvylvakhe2evaee3dlf4:
+    resolution: {integrity: sha512-y125LDx5VR6JmiHB6/0RHWudwhe9QcFXqoAqGqWIj4zRv0kb9AyDPDtWvtDOSImCDXIPRmd8P05xTOnYH0ET3w==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@storybook/addons': 6.4.22_ef5jwxihqo6n7gxfmzogljlgcm
+      '@storybook/api': 6.4.22_ef5jwxihqo6n7gxfmzogljlgcm
+      '@storybook/channels': 6.4.22
+      '@storybook/client-logger': 6.4.22
+      '@storybook/components': 6.4.22_i6xcbgvvylvakhe2evaee3dlf4
+      '@storybook/core-events': 6.4.22
+      '@storybook/csf': 0.0.2--canary.87bc651.0
+      '@storybook/theming': 6.4.22_ef5jwxihqo6n7gxfmzogljlgcm
+      axe-core: 4.4.1
+      core-js: 3.22.4
+      global: 4.4.0
+      lodash: 4.17.21
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+      react-sizeme: 3.0.2
+      regenerator-runtime: 0.13.9
+      ts-dedent: 2.2.0
+      util-deprecate: 1.0.2
+    transitivePeerDependencies:
+      - '@types/react'
     dev: true
 
   /@storybook/addon-actions/6.4.22_i6xcbgvvylvakhe2evaee3dlf4:

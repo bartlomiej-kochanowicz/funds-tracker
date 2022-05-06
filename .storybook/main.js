@@ -7,6 +7,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     'storybook-addon-styled-component-theme/dist/preset',
+    '@storybook/addon-a11y',
   ],
   framework: '@storybook/react',
   webpackFinal: async config => {
