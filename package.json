@@ -23,12 +23,13 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-router-dom": "6.3.0",
+    "simple-flexbox": "2.3.3",
     "styled-components": "5.3.5"
   },
   "devDependencies": {
     "@babel/core": "7.17.10",
-    "@storybook/addon-actions": "6.4.22",
     "@storybook/addon-a11y": "6.4.22",
+    "@storybook/addon-actions": "6.4.22",
     "@storybook/addon-essentials": "6.4.22",
     "@storybook/addon-interactions": "6.4.22",
     "@storybook/addon-links": "6.4.22",
@@ -73,6 +74,6 @@
   },
   "engines": {
     "node": "16.15.0",
-    "pnpm": "7.0.0"
+    "pnpm": "7.1.0"
   }
 }

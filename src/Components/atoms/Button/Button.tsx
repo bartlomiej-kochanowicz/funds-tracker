@@ -22,6 +22,8 @@ type ButtonProps = {
 } & typeof defaultProps;
 
 const StyledButton = styled.button<ButtonProps>`
+  display: block;
+  width: fit-content;
   border: none;
   position: relative;
   transition: 0.2s all;

@@ -45,6 +45,7 @@ specifiers:
   react-dom: 18.1.0
   react-router-dom: 6.3.0
   rollup-plugin-analyzer: 4.0.0
+  simple-flexbox: ^2.3.3
   storybook-addon-styled-component-theme: 2.0.0
   styled-components: 5.3.5
   ts-jest: 28.0.1
@@ -60,6 +61,7 @@ dependencies:
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-router-dom: 6.3.0_ef5jwxihqo6n7gxfmzogljlgcm
+  simple-flexbox: 2.3.3_react@18.1.0
   styled-components: 5.3.5_ef5jwxihqo6n7gxfmzogljlgcm
 
 devDependencies:
@@ -12128,6 +12130,16 @@ packages:
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: true
+
+  /simple-flexbox/2.3.3_react@18.1.0:
+    resolution: {integrity: sha512-5INKo4u1m5LDWBeEZXcAesIRxamrMCbcYInLg9Dz0A/7lwLMbIBKIon+71qVw91m3ivSB/5fA5KDObrt+VT6vg==}
+    peerDependencies:
+      prop-types: ^15.7.2
+      react: ^17.0.2
+      webpack-cli: ^4.7.2
+    dependencies:
+      react: 18.1.0
+    dev: false
 
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
