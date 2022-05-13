@@ -10,11 +10,11 @@ export default {
 
 const Template: ComponentStory<typeof SpacerComponent> = args => (
   <Column>
-    <Button>Left</Button>
+    <Button>Top</Button>
 
     <SpacerComponent {...args} />
 
-    <Button>Right</Button>
+    <Button>Bottom</Button>
   </Column>
 );
 

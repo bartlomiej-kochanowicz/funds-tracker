@@ -9,9 +9,9 @@ describe('Atoms/Spacer tests', () => {
   });
 
   it.each([
-    ['small' as Space, '0.375rem 0'],
-    ['medium' as Space, '0.5rem 0'],
-    ['large' as Space, '0.625rem 0'],
+    ['small' as Space, '0.5rem 0'],
+    ['medium' as Space, '1rem 0'],
+    ['large' as Space, '1.5rem 0'],
   ])('has correct size for %s', (space, padding) => {
     const { getByTestId } = render(
       <Spacer

@@ -86,8 +86,8 @@ export const theme = {
     },
   },
   spacing: {
-    small: rem(0.75 / 2), // devide by 2 - top and bottom or right and left
-    medium: rem(1 / 2), // devide by 2 - top and bottom or right and left
-    large: rem(1.25 / 2), // devide by 2 - top and bottom or right and left
+    small: rem(1 / 2), // devide by 2 - top and bottom or right and left(both sides) - 1rem
+    medium: rem(2 / 2), // devide by 2 - top and bottom or right and left(both sides) - 2rem
+    large: rem(3 / 2), // devide by 2 - top and bottom or right and left(both sides) - 3rem
   },
 };
