@@ -9,7 +9,7 @@ import {
 } from 'styles/mixins';
 
 type TextProps = {
-  display: 'inline' | 'inline-block' | 'block';
+  display?: 'inline' | 'inline-block' | 'block';
 } & FontableProps &
   MarginMixinProps &
   PaddingMixinProps;

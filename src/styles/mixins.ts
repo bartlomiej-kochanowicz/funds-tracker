@@ -10,10 +10,10 @@ export const resolveProps = ({
 });
 
 export type FontableProps = {
-  fontWeight: keyof DefaultTheme['font']['weight'];
-  fontColor: Colors;
-  fontSize: keyof DefaultTheme['font']['size'];
-  lineHeight: string;
+  fontWeight?: keyof DefaultTheme['font']['weight'];
+  fontColor?: Colors;
+  fontSize?: keyof DefaultTheme['font']['size'];
+  lineHeight?: string;
 };
 
 export const fontable = css<FontableProps>`
@@ -21,34 +21,40 @@ export const fontable = css<FontableProps>`
     font-weight: ${fontWeight};
   `}
 
-  ${({ theme: { colors }, fontColor }) => css`
-    color: ${colors[fontColor]};
-  `}
+  ${({ theme: { colors }, fontColor }) =>
+    fontColor &&
+    css`
+      color: ${colors[fontColor]};
+    `}
 
   ${({
     theme: {
       font: { size },
     },
     fontSize,
-  }) => css`
-    font-size: ${size[fontSize]};
-  `}
+  }) =>
+    fontSize &&
+    css`
+      font-size: ${size[fontSize]};
+    `}
 
-  ${({ lineHeight }) => css`
-    line-height: ${lineHeight}rem;
-  `}
+  ${({ lineHeight }) =>
+    lineHeight &&
+    css`
+      line-height: ${lineHeight}rem;
+    `}
 `;
 
 const offset = 0.25;
 
 export type PaddingMixinProps = {
-  p: number;
-  px: number;
-  py: number;
-  pt: number;
-  pb: number;
-  pl: number;
-  pr: number;
+  p?: number;
+  px?: number;
+  py?: number;
+  pt?: number;
+  pb?: number;
+  pl?: number;
+  pr?: number;
 };
 
 export const paddingMixin = css<PaddingMixinProps>`
@@ -97,13 +103,13 @@ export const paddingMixin = css<PaddingMixinProps>`
 `;
 
 export type MarginMixinProps = {
-  m: number;
-  mx: number;
-  my: number;
-  mt: number;
-  mb: number;
-  ml: number;
-  mr: number;
+  m?: number;
+  mx?: number;
+  my?: number;
+  mt?: number;
+  mb?: number;
+  ml?: number;
+  mr?: number;
 };
 
 export const marginMixin = css<MarginMixinProps>`
