@@ -3,24 +3,24 @@ import styled, { css, DefaultTheme } from 'styled-components';
 export type Spread = keyof DefaultTheme['spacing'];
 
 const defaultProps = {
-  space: 'medium' as Spread,
+  spread: 'medium' as Spread,
   'data-testid': 'spreader',
 };
 
 export type SpreaderProps = {
-  space?: Spread;
+  spread?: Spread;
   'data-testid'?: string;
 } & typeof defaultProps;
 
 const StyledSpreader = styled.span<SpreaderProps>`
-  ${({ theme: { spacing }, space }) => css`
-    padding: 0 ${spacing[space]};
+  ${({ theme: { spacing }, spread }) => css`
+    padding: 0 ${spacing[spread]};
   `}
 `;
 
-export const Spreader = ({ space, 'data-testid': dataTestId }: SpreaderProps) => (
+export const Spreader = ({ spread, 'data-testid': dataTestId }: SpreaderProps) => (
   <StyledSpreader
-    space={space}
+    spread={spread}
     data-testid={dataTestId}
   />
 );
