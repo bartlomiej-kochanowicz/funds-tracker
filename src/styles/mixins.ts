@@ -1,10 +1,10 @@
 import { css, DefaultTheme } from 'styled-components';
 import { Colors } from 'styles/styled.d';
 
-export const resolveProps = ({
+export const resolveProps = <Props extends { className?: string; ['data-testid']?: string }>({
   className,
   'data-testid': dataTestId,
-}: { className?: string; ['data-testid']?: string } & FontableProps) => ({
+}: Props) => ({
   className,
   'data-testid': dataTestId,
 });
