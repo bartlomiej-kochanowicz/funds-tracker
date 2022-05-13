@@ -1,12 +1,14 @@
 import styled, { css, DefaultTheme } from 'styled-components';
 
+export type Space = keyof DefaultTheme['spacing'];
+
 const defaultProps = {
-  space: 'medium',
+  space: 'medium' as Space,
   'data-testid': 'spacer',
 };
 
 export type SpacerProps = {
-  space?: keyof DefaultTheme['spacing'];
+  space?: Space;
   'data-testid'?: string;
 } & typeof defaultProps;
 
