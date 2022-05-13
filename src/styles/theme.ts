@@ -62,6 +62,7 @@ export const theme = {
       300: '300',
       400: '300',
       500: '500',
+      700: '700',
     },
     size: {
       small: rem(0.75),
@@ -89,5 +90,17 @@ export const theme = {
     small: rem(1 / 2), // devide by 2 - top and bottom or right and left(both sides) - 1rem
     medium: rem(2 / 2), // devide by 2 - top and bottom or right and left(both sides) - 2rem
     large: rem(3 / 2), // devide by 2 - top and bottom or right and left(both sides) - 3rem
+  },
+  heading: {
+    h1: { fontSize: rem(1.7) },
+    h2: { fontSize: rem(1.25) },
+    h3: { fontSize: rem(1.1) },
+    h4: { fontSize: rem(0.85) },
+    h5: {
+      fontSize: rem(0.65),
+    },
+    h6: {
+      fontSize: rem(0.5),
+    },
   },
 };
