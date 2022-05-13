@@ -68,6 +68,7 @@ export const theme = {
       small: rem(0.75),
       medium: rem(1),
       large: rem(1.25),
+      huge: rem(4.643),
     },
   },
   radius: {
