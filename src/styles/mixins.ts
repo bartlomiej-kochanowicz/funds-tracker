@@ -4,7 +4,7 @@ import { Colors } from 'styles/styled.d';
 export const resolveProps = ({
   className,
   'data-testid': dataTestId,
-}: { className: string; ['data-testid']?: string } & FontableProps) => ({
+}: { className?: string; ['data-testid']?: string } & FontableProps) => ({
   className,
   'data-testid': dataTestId,
 });

@@ -4,24 +4,18 @@ import { resolveProps, fontable, FontableProps } from 'styles/mixins';
 
 export type Level = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-const defaultProps = {
-  level: 'h1' as Level,
-  inline: false,
-};
-
 export type HeadingProps = {
   level?: Level;
   inline?: boolean;
   children: ReactNode;
   ['data-testid']?: string;
-} & FontableProps &
-  typeof defaultProps;
+} & FontableProps;
 
 export const Heading = styled(
-  ({ level, children, ...props }: { className: string } & HeadingProps) =>
+  ({ level = 'h1', children, ...props }: { className?: string } & HeadingProps) =>
     createElement(level, resolveProps(props), children),
 )(
-  ({ theme, level, inline }) => css`
+  ({ theme, level = 'h1', inline }) => css`
     font-size: ${theme.heading[level].fontSize};
     font-weight: ${theme.font.weight[700]};
 
@@ -35,7 +29,5 @@ export const Heading = styled(
 );
 
 Heading.displayName = 'Heading';
-
-Heading.defaultProps = defaultProps;
 
 export default Heading;
