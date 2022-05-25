@@ -72,7 +72,7 @@ export const theme = {
     },
   },
   radius: {
-    primary: rem(0.5),
+    primary: rem(0.571),
     circle: '50%',
   },
   loader: {

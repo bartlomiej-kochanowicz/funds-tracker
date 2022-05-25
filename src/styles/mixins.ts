@@ -14,6 +14,7 @@ export type FontableProps = {
   fontColor?: Colors;
   fontSize?: keyof DefaultTheme['font']['size'];
   lineHeight?: string;
+  textShadow?: boolean;
 };
 
 export const fontable = css<FontableProps>`
@@ -42,6 +43,12 @@ export const fontable = css<FontableProps>`
     lineHeight &&
     css`
       line-height: ${lineHeight}rem;
+    `}
+
+  ${({ textShadow }) =>
+    textShadow &&
+    css`
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     `}
 `;
 

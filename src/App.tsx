@@ -4,7 +4,6 @@ import { Root } from 'views/Root';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles/theme';
 import { GlobalStyle } from 'styles/GlobalStyle';
-import 'base';
 
 const App: FC = (): JSX.Element => (
   <BrowserRouter>
