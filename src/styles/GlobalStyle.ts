@@ -3,6 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+  :root {
+    --doc-height: 100%;
+  }
+
   *,
   *::before,
   *::after {
@@ -20,6 +24,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     font-size: 14px;
+    height: 100vh; /* fallback for Js load */
+    height: var(--doc-height);
   }
 
   body {

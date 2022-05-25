@@ -7,7 +7,7 @@ import { paths } from 'routes/paths';
 
 export const Root: FC = () => {
   const routes = useRoutes([
-    { path: '*', element: <Navigate to="/404" /> },
+    { path: '*', element: <Navigate to={paths.notFound} /> },
     { path: paths.notFound, element: <NotFound /> },
     { path: paths.welcome, element: <Welcome /> },
     { path: paths.dashboard, element: <Dashboard /> },
