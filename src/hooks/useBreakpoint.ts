@@ -16,7 +16,7 @@ export const useBreakpoint = (name: keyof typeof breakpoints, type: Media) => {
 
   const matchMediaQuery = getMatchMediaQuery(type);
 
-  const [match, setMatch] = useState(
+  const [match, setMatch] = useState<boolean>(
     typeof window !== 'undefined' ? window.matchMedia(matchMediaQuery).matches : false,
   );
 

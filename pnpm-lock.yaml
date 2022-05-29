@@ -10,8 +10,8 @@ specifiers:
   '@storybook/react': 6.4.22
   '@storybook/testing-library': 0.0.11
   '@testing-library/jest-dom': 5.16.4
-  '@testing-library/react': 13.2.0
-  '@testing-library/react-hooks': ^8.0.0
+  '@testing-library/react': 13.3.0
+  '@testing-library/react-hooks': 8.0.0
   '@types/jest': 27.5.0
   '@types/node': 17.0.31
   '@types/react': 18.0.8
@@ -41,7 +41,7 @@ specifiers:
   jest-styled-components: 7.0.8
   jest-watch-typeahead: 1.1.0
   madge: 5.0.1
-  mq-polyfill: ^1.1.8
+  mq-polyfill: 1.1.8
   prettier: 2.6.2
   react: 18.1.0
   react-dom: 18.1.0
@@ -78,7 +78,7 @@ devDependencies:
   '@storybook/react': 6.4.22_jd46k7ngxunefds3gkiclt6t54
   '@storybook/testing-library': 0.0.11_ef5jwxihqo6n7gxfmzogljlgcm
   '@testing-library/jest-dom': 5.16.4
-  '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
+  '@testing-library/react': 13.3.0_ef5jwxihqo6n7gxfmzogljlgcm
   '@testing-library/react-hooks': 8.0.0_i6xcbgvvylvakhe2evaee3dlf4
   '@types/jest': 27.5.0
   '@types/node': 17.0.31
@@ -3778,8 +3778,8 @@ packages:
       react-error-boundary: 3.1.4_react@18.1.0
     dev: true
 
-  /@testing-library/react/13.2.0_ef5jwxihqo6n7gxfmzogljlgcm:
-    resolution: {integrity: sha512-Bprbz/SZVONCJy5f7hcihNCv313IJXdYiv0nSJklIs1SQCIHHNlnGNkosSXnGZTmesyGIcBGNppYhXcc11pb7g==}
+  /@testing-library/react/13.3.0_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-DB79aA426+deFgGSjnf5grczDPiL4taK3hFaa+M5q7q20Kcve9eQottOG5kZ74KEr55v0tU2CQormSSDK87zYQ==}
     engines: {node: '>=12'}
     peerDependencies:
       react: ^18.0.0
