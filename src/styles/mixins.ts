@@ -15,6 +15,7 @@ export type FontableProps = {
   fontSize?: keyof DefaultTheme['font']['size'];
   lineHeight?: string;
   textShadow?: boolean;
+  textAlign?: 'left' | 'center' | 'right' | 'justify';
 };
 
 export const fontable = css<FontableProps>`
@@ -49,6 +50,12 @@ export const fontable = css<FontableProps>`
     textShadow &&
     css`
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    `}
+
+  ${({ textAlign }) =>
+    textAlign &&
+    css`
+      text-align: ${textAlign};
     `}
 `;
 

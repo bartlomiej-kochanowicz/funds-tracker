@@ -1,5 +1,6 @@
 import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
+import { BREAKPOINTS } from 'constants/breakpoints';
 
 export enum Colors {
   Blue = 'hsla(230, 62%, 50%, 1)',
@@ -24,9 +25,9 @@ export const theme = {
     transparent: Colors.Transparent,
   },
   breakpoints: {
-    desktop: customMediaQuery(1200),
-    tablet: customMediaQuery(900),
-    phone: customMediaQuery(600),
+    desktop: customMediaQuery(BREAKPOINTS.DESKTOP),
+    tablet: customMediaQuery(BREAKPOINTS.TABLET),
+    phone: customMediaQuery(BREAKPOINTS.PHONE),
   },
   button: {
     size: {
@@ -68,7 +69,7 @@ export const theme = {
       small: rem(0.75),
       medium: rem(1),
       large: rem(1.25),
-      huge: rem(4.643),
+      huge: rem(4),
     },
   },
   radius: {

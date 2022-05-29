@@ -24,7 +24,8 @@
     "react-dom": "18.1.0",
     "react-router-dom": "6.3.0",
     "simple-flexbox": "2.3.3",
-    "styled-components": "5.3.5"
+    "styled-components": "5.3.5",
+    "vite-plugin-svgr": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.17.10",
