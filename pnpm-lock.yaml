@@ -11,6 +11,7 @@ specifiers:
   '@storybook/testing-library': 0.0.11
   '@testing-library/jest-dom': 5.16.4
   '@testing-library/react': 13.2.0
+  '@testing-library/react-hooks': ^8.0.0
   '@types/jest': 27.5.0
   '@types/node': 17.0.31
   '@types/react': 18.0.8
@@ -40,6 +41,7 @@ specifiers:
   jest-styled-components: 7.0.8
   jest-watch-typeahead: 1.1.0
   madge: 5.0.1
+  mq-polyfill: ^1.1.8
   prettier: 2.6.2
   react: 18.1.0
   react-dom: 18.1.0
@@ -77,6 +79,7 @@ devDependencies:
   '@storybook/testing-library': 0.0.11_ef5jwxihqo6n7gxfmzogljlgcm
   '@testing-library/jest-dom': 5.16.4
   '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
+  '@testing-library/react-hooks': 8.0.0_i6xcbgvvylvakhe2evaee3dlf4
   '@types/jest': 27.5.0
   '@types/node': 17.0.31
   '@types/react': 18.0.8
@@ -103,6 +106,7 @@ devDependencies:
   jest-environment-jsdom: 28.1.0
   jest-watch-typeahead: 1.1.0_jest@28.1.0
   madge: 5.0.1
+  mq-polyfill: 1.1.8
   prettier: 2.6.2
   rollup-plugin-analyzer: 4.0.0
   storybook-addon-styled-component-theme: 2.0.0_edrwcvezyc3w5uznhjyyaduc7y
@@ -3749,6 +3753,29 @@ packages:
       dom-accessibility-api: 0.5.14
       lodash: 4.17.21
       redent: 3.0.0
+    dev: true
+
+  /@testing-library/react-hooks/8.0.0_i6xcbgvvylvakhe2evaee3dlf4:
+    resolution: {integrity: sha512-uZqcgtcUUtw7Z9N32W13qQhVAD+Xki2hxbTR461MKax8T6Jr8nsUvZB+vcBTkzY2nFvsUet434CsgF0ncW2yFw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@types/react': ^16.9.0 || ^17.0.0
+      react: ^16.9.0 || ^17.0.0
+      react-dom: ^16.9.0 || ^17.0.0
+      react-test-renderer: ^16.9.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react-dom:
+        optional: true
+      react-test-renderer:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.17.9
+      '@types/react': 18.0.8
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+      react-error-boundary: 3.1.4_react@18.1.0
     dev: true
 
   /@testing-library/react/13.2.0_ef5jwxihqo6n7gxfmzogljlgcm:
@@ -10310,6 +10337,11 @@ packages:
       run-queue: 1.0.3
     dev: true
 
+  /mq-polyfill/1.1.8:
+    resolution: {integrity: sha1-wUQZCyEhS/jYsJnn405soriI3BQ=}
+    engines: {node: '>=6.*'}
+    dev: true
+
   /ms/2.0.0:
     resolution: {integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=}
     dev: true
@@ -11509,6 +11541,16 @@ packages:
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
       react-is: 17.0.2
+    dev: true
+
+  /react-error-boundary/3.1.4_react@18.1.0:
+    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.17.9
+      react: 18.1.0
     dev: true
 
   /react-fast-compare/2.0.4:

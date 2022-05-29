@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { BREAKPOINTS } from 'constants/breakpoints';
+import { breakpoints } from 'constants/breakpoints';
 
 type Media = 'min' | 'max';
 
-export const useBreakpoint = (name: keyof typeof BREAKPOINTS, type: Media) => {
-  const pixels = BREAKPOINTS[name];
+export const useBreakpoint = (name: keyof typeof breakpoints, type: Media) => {
+  const pixels = breakpoints[name];
 
   const getMatchMediaQuery = (mediaType: Media) => {
     if (mediaType === 'min') {

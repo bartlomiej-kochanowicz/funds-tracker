@@ -1,17 +1,17 @@
 import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
-import { BREAKPOINTS } from 'constants/breakpoints';
+import { breakpoints } from 'constants/breakpoints';
 
-export enum Colors {
-  Blue = 'hsla(230, 62%, 50%, 1)',
-  Pink = 'hsla(5, 100%, 75%, 1)',
-  Navy = 'hsla(234, 51%, 17%, 1)',
-  Gray = 'hsla(226, 8%, 69%, 1)',
-  Silver = 'hsla(0, 0%, 96%, 1)',
-  White = 'hsla(0, 0%, 100%, 1)',
-  Black = 'hsla(0, 0%, 0%, 1)',
-  Transparent = 'hsla(0, 0%, 0%, 0)',
-}
+export const Colors = {
+  Blue: 'hsla(230, 62%, 50%, 1)',
+  Pink: 'hsla(5, 100%, 75%, 1)',
+  Navy: 'hsla(234, 51%, 17%, 1)',
+  Gray: 'hsla(226, 8%, 69%, 1)',
+  Silver: 'hsla(0, 0%, 96%, 1)',
+  White: 'hsla(0, 0%, 100%, 1)',
+  Black: 'hsla(0, 0%, 0%, 1)',
+  Transparent: 'hsla(0, 0%, 0%, 0)',
+};
 
 export const theme = {
   colors: {
@@ -25,9 +25,9 @@ export const theme = {
     transparent: Colors.Transparent,
   },
   breakpoints: {
-    desktop: customMediaQuery(BREAKPOINTS.DESKTOP),
-    tablet: customMediaQuery(BREAKPOINTS.TABLET),
-    phone: customMediaQuery(BREAKPOINTS.PHONE),
+    desktop: customMediaQuery(breakpoints.desktop),
+    tablet: customMediaQuery(breakpoints.tablet),
+    phone: customMediaQuery(breakpoints.phone),
   },
   button: {
     size: {

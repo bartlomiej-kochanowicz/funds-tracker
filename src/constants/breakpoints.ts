@@ -1,5 +1,5 @@
-export const BREAKPOINTS = {
-  DESKTOP: 1200,
-  TABLET: 900,
-  PHONE: 600,
+export const breakpoints = {
+  desktop: 1200,
+  tablet: 900,
+  phone: 600,
 };

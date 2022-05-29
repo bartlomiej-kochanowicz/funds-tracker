@@ -26,8 +26,7 @@ describe('Atoms/Text fontable tests', () => {
 
     expect(text).toHaveStyleRule('color', 'hsla(230,62%,50%,1)');
     expect(text).toHaveStyleRule('font-weight', '500');
-    expect(text).toHaveStyleRule('font-size', '4.643rem');
-    expect(text).toHaveStyleRule('font-size', '4.643rem');
+    expect(text).toHaveStyleRule('font-size', '4rem');
     expect(text).toHaveStyleRule('line-height', '1.5rem');
   });
 });
