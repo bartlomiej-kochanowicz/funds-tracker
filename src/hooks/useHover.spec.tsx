@@ -6,7 +6,7 @@ describe('useHover tests', () => {
   it('set isHover on true when mouse over', async () => {
     const {
       result: {
-        current: [props, isHover],
+        current: { props, isHover },
       },
     } = renderHook(() => useHover());
 
