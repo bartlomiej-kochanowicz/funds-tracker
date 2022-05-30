@@ -14,7 +14,7 @@ const Wrapper = styled(Column)`
   padding: ${({ theme }) => theme.spacing.medium};
 `;
 
-export const Hello: FC = () => {
+export const Onboarding00: FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -44,12 +44,12 @@ export const Hello: FC = () => {
         textAlign="center"
         fontWeight={400}
       >
-        {t('views.welcome.main.description')}
+        {t('views.welcome.onboarding00.description')}
       </Heading>
 
       <Spacer />
 
-      <Button size="huge">{t('views.welcome.main.button')}</Button>
+      <Button size="huge">{t('views.welcome.onboarding00.button')}</Button>
     </Wrapper>
   );
 };
