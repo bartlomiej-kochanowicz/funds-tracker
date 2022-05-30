@@ -24,6 +24,8 @@ export const Heading = styled(
       display: inline-block;
     `}
 
+    line-height: initial;
+
     ${fontable}
   `,
 );

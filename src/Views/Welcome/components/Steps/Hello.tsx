@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Column } from 'simple-flexbox';
+import { useTranslation } from 'react-i18next';
 import { Heading } from 'components/atoms/Heading';
 import { Button } from 'components/atoms/Button';
 import { Spacer } from 'components/atoms/Spacer';
@@ -13,27 +14,42 @@ const Wrapper = styled(Column)`
   padding: ${({ theme }) => theme.spacing.medium};
 `;
 
-export const Hello: FC = () => (
-  <Wrapper
-    justifyContent="center"
-    alignItems="center"
-  >
-    <Wallet />
+export const Hello: FC = () => {
+  const { t } = useTranslation();
 
-    <Spacer space="small" />
-
-    <Heading
-      fontColor="white"
-      level="h1"
-      fontSize="huge"
-      textAlign="center"
-      textShadow
+  return (
+    <Wrapper
+      justifyContent="center"
+      alignItems="center"
     >
-      Simple Passive Wallet
-    </Heading>
+      <Wallet />
 
-    <Spacer space="small" />
+      <Spacer space="small" />
 
-    <Button size="large">Get started Now</Button>
-  </Wrapper>
-);
+      <Heading
+        fontColor="white"
+        level="h1"
+        fontSize="huge"
+        textAlign="center"
+        textShadow
+      >
+        Simple Passive Wallet
+      </Heading>
+
+      <Spacer space="small" />
+
+      <Heading
+        fontColor="white"
+        level="h2"
+        textAlign="center"
+        fontWeight={400}
+      >
+        {t('welcome')}
+      </Heading>
+
+      <Spacer />
+
+      <Button size="large">Get started Now</Button>
+    </Wrapper>
+  );
+};

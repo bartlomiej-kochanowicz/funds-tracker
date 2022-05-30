@@ -95,7 +95,7 @@ export const theme = {
   },
   heading: {
     h1: { fontSize: rem(1.7) },
-    h2: { fontSize: rem(1.25) },
+    h2: { fontSize: rem(1.286) },
     h3: { fontSize: rem(1.1) },
     h4: { fontSize: rem(0.85) },
     h5: {

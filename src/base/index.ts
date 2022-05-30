@@ -1,7 +1,5 @@
-const documentHeight = () => {
-  const doc = document.documentElement;
-  doc.style.setProperty('--doc-height', `${window.innerHeight}px`);
-};
+import { documentHeight } from 'helpers/documentHeight';
+import 'utils/i18next';
 
 window.addEventListener('resize', documentHeight);
 

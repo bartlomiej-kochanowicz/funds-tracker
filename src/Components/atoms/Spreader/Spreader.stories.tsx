@@ -21,5 +21,5 @@ const Template: ComponentStory<typeof SpreaderComponent> = args => (
 export const Spreader = Template.bind({});
 
 Spreader.args = {
-  space: 'medium',
+  spread: 'medium',
 };
