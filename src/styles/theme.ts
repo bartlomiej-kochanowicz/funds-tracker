@@ -46,6 +46,11 @@ export const theme = {
         lineHeigth: rem(1.7),
         padding: [rem(0.45), rem(1.25)],
       },
+      huge: {
+        fontSize: rem(1.5),
+        lineHeigth: rem(1.7),
+        padding: [rem(0.75), rem(3.25)],
+      },
     },
     color: {
       blue: {

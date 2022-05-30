@@ -49,7 +49,7 @@ export const Hello: FC = () => {
 
       <Spacer />
 
-      <Button size="large">{t('views.welcome.main.button')}</Button>
+      <Button size="huge">{t('views.welcome.main.button')}</Button>
     </Wrapper>
   );
 };

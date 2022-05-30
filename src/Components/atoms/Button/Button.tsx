@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
 
-export type Size = 'small' | 'medium' | 'large';
+export type Size = 'small' | 'medium' | 'large' | 'huge';
 export type Type = 'button' | 'submit';
 export type ButtonColors = 'blue' | 'pink' | 'gray' | 'silver' | 'white';
 
