@@ -19,5 +19,3 @@ i18next
       en: { translation: en },
     },
   });
-
-export default i18next;
