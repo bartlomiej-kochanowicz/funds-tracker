@@ -1,3 +1,4 @@
 {
-  "views.welcome.description": "Money Transfer, Wallet & Finance UI Kit"
+  "views.welcome.main.description": "Money Transfer, Wallet & Finance UI Kit",
+  "views.welcome.main.button": "Get started Now"
 }

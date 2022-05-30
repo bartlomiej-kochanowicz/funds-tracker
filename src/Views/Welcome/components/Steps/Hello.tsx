@@ -44,12 +44,12 @@ export const Hello: FC = () => {
         textAlign="center"
         fontWeight={400}
       >
-        {t('welcome')}
+        {t('views.welcome.main.description')}
       </Heading>
 
       <Spacer />
 
-      <Button size="large">Get started Now</Button>
+      <Button size="large">{t('views.welcome.main.button')}</Button>
     </Wrapper>
   );
 };
