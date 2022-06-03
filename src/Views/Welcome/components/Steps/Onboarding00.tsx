@@ -15,7 +15,7 @@ const Wrapper = styled(Column)`
 `;
 
 export const Onboarding00: FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['welcome']);
 
   return (
     <Wrapper
@@ -44,12 +44,12 @@ export const Onboarding00: FC = () => {
         textAlign="center"
         fontWeight={400}
       >
-        {t('views.welcome.onboarding00.description')}
+        {t('onboarding00.description')}
       </Heading>
 
       <Spacer />
 
-      <Button size="huge">{t('views.welcome.onboarding00.button')}</Button>
+      <Button size="huge">{t('onboarding00.button')}</Button>
     </Wrapper>
   );
 };
