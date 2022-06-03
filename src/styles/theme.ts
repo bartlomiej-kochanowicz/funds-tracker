@@ -99,7 +99,7 @@ export const theme = {
     large: rem(3 / 2), // devide by 2 - top and bottom or right and left(both sides) - 3rem
   },
   heading: {
-    h1: { fontSize: rem(1.7) },
+    h1: { fontSize: rem(3.143) },
     h2: { fontSize: rem(1.286) },
     h3: { fontSize: rem(1.1) },
     h4: { fontSize: rem(0.85) },

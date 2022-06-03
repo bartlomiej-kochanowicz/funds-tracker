@@ -1,34 +1,25 @@
-import { ReactNode } from 'react';
+import { HTMLProps, ReactNode } from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
 
 export type Size = 'small' | 'medium' | 'large' | 'huge';
-export type Type = 'button' | 'submit';
 export type ButtonColors = 'blue' | 'pink' | 'gray' | 'silver' | 'white';
 
-const defaultProps = {
-  type: 'button' as Type,
-  size: 'medium' as Size,
-  color: 'blue' as ButtonColors,
-  fontWeight: 400,
-};
-
-type ButtonProps = {
+interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'> {
   children: ReactNode;
-  size?: Size;
-  type?: Type;
-  color?: ButtonColors;
+  size?: 'small' | 'medium' | 'large' | 'huge';
+  color?: 'blue' | 'pink' | 'gray' | 'silver' | 'white';
   fontWeight?: keyof DefaultTheme['font']['weight'];
-} & typeof defaultProps;
+}
 
-const StyledButton = styled.button<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   display: block;
   width: fit-content;
   border: none;
   position: relative;
   transition: 0.2s all;
 
-  ${({ size, theme, color, fontWeight }) =>
+  ${({ theme, size = 'medium', color = 'blue', fontWeight = 400 }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
       background-color: ${theme.button.color[color].background};
@@ -51,17 +42,4 @@ const StyledButton = styled.button<ButtonProps>`
     `}
 `;
 
-export const Button = ({ children, type, size, color, fontWeight }: ButtonProps): JSX.Element => (
-  <StyledButton
-    type={type}
-    size={size}
-    color={color}
-    fontWeight={fontWeight}
-  >
-    {children}
-  </StyledButton>
-);
-
 Button.displayName = 'Button';
-
-Button.defaultProps = defaultProps;

@@ -1,6 +1,7 @@
 import { FC, Suspense } from 'react';
 import { Splash } from 'views/Welcome/components/Steps/Splash';
-import { Onboarding01 } from 'views/Welcome/components/Steps/Onboarding01';
+import { Onboarding } from 'views/Welcome/components/Onboarding';
+/* import { Onboarding01 } from 'views/Welcome/components/Steps/Onboarding01'; */
 import { Onboarding02 } from 'views/Welcome/components/Steps/Onboarding02';
 import { Onboarding03 } from 'views/Welcome/components/Steps/Onboarding03';
 import { Welcome as WelcomeStep } from 'views/Welcome/components/Steps/Welcome';
@@ -14,7 +15,12 @@ const WelcomeContent: FC = () => {
       <div>
         {compareState(states.splash) && <Splash />}
 
-        {compareState(states.onboarding01) && <Onboarding01 />}
+        {compareState(states.onboarding01) && (
+          <Onboarding
+            title="test"
+            subtitle="test 2"
+          />
+        )}
 
         {compareState(states.onboarding02) && <Onboarding02 />}
 

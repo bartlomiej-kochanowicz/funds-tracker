@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Heading } from 'components/atoms/Heading';
 import { Button } from 'components/atoms/Button';
 import { Spacer } from 'components/atoms/Spacer';
+import { useWelcomeContext } from 'views/Welcome/context';
 import { ReactComponent as Wallet } from 'assets/images/wallet.svg';
 
 const Wrapper = styled(Column)`
@@ -16,6 +17,10 @@ const Wrapper = styled(Column)`
 
 export const Splash: FC = () => {
   const { t } = useTranslation(['welcome']);
+
+  const { actions, updateState } = useWelcomeContext();
+
+  const handleClick = () => updateState(actions.CHANGE_ONBOARDING01);
 
   return (
     <Wrapper
@@ -49,7 +54,12 @@ export const Splash: FC = () => {
 
       <Spacer />
 
-      <Button size="huge">{t('onboarding00.button')}</Button>
+      <Button
+        size="huge"
+        onClick={handleClick}
+      >
+        {t('onboarding00.button')}
+      </Button>
     </Wrapper>
   );
 };
