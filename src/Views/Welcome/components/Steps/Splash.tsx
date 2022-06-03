@@ -14,7 +14,7 @@ const Wrapper = styled(Column)`
   padding: ${({ theme }) => theme.spacing.medium};
 `;
 
-export const Onboarding00: FC = () => {
+export const Splash: FC = () => {
   const { t } = useTranslation(['welcome']);
 
   return (

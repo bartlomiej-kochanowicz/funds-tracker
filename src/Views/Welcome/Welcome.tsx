@@ -1,23 +1,33 @@
 import { FC, Suspense } from 'react';
-import { Onboarding00 } from 'views/Welcome/components/Steps/Onboarding00';
-/* import { Onboarding01 } from 'views/Welcome/components/Steps/Onboarding01';
+import { Splash } from 'views/Welcome/components/Steps/Splash';
+import { Onboarding01 } from 'views/Welcome/components/Steps/Onboarding01';
 import { Onboarding02 } from 'views/Welcome/components/Steps/Onboarding02';
-import { Onboarding03 } from 'views/Welcome/components/Steps/Onboarding03'; */
+import { Onboarding03 } from 'views/Welcome/components/Steps/Onboarding03';
+import { Welcome as WelcomeStep } from 'views/Welcome/components/Steps/Welcome';
+import { WelcomeProvider, useWelcomeContext } from './context';
 
-export const Welcome: FC = () => {
-  const step = 'onboarding00';
+const WelcomeContent: FC = () => {
+  const { states, compareState } = useWelcomeContext();
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div>
-        {step === 'onboarding00' && <Onboarding00 />}
+        {compareState(states.splash) && <Splash />}
 
-        {/* {step === 'onboarding01' && <Onboarding01 />}
+        {compareState(states.onboarding01) && <Onboarding01 />}
 
-        {step === 'onboarding01' && <Onboarding02 />}
+        {compareState(states.onboarding02) && <Onboarding02 />}
 
-        {step === 'onboarding01' && <Onboarding03 />} */}
+        {compareState(states.onboarding03) && <Onboarding03 />}
+
+        {compareState(states.welcome) && <WelcomeStep />}
       </div>
     </Suspense>
   );
 };
+
+export const Welcome: FC = () => (
+  <WelcomeProvider>
+    <WelcomeContent />
+  </WelcomeProvider>
+);
