@@ -1,7 +1,7 @@
 import { render } from 'utils/test-utils';
 import { Text } from 'components/atoms/Text';
 
-describe.skip('Atoms/Text tests', () => {
+describe('Atoms/Text tests', () => {
   it('renders properly', () => {
     const { getByText } = render(<Text>Hello World</Text>);
 
@@ -24,7 +24,7 @@ describe('Atoms/Text fontable tests', () => {
 
     const text = getByText('Hello World');
 
-    expect(text).toHaveStyleRule('color', 'hsla(230,62%,50%,1)');
+    expect(text).toHaveStyleRule('color', '#3F8CFF');
     expect(text).toHaveStyleRule('font-weight', '500');
     expect(text).toHaveStyleRule('font-size', '4rem');
     expect(text).toHaveStyleRule('line-height', '1.5rem');

@@ -1,7 +1,7 @@
 import { render } from 'utils/test-utils';
 import { Button, Size, ButtonColors } from 'components/atoms/Button';
 
-describe.skip('Atoms/Button tests', () => {
+describe('Atoms/Button tests', () => {
   it('renders properly', () => {
     const { getByText } = render(<Button>test button</Button>);
 
@@ -9,11 +9,8 @@ describe.skip('Atoms/Button tests', () => {
   });
 
   it.each([
-    ['blue' as ButtonColors, { background: 'hsla(230,62%,50%,1)', font: 'hsla(0,0%,100%,1)' }],
-    ['pink' as ButtonColors, { background: 'hsla(5,100%,75%,1)', font: 'hsla(0,0%,100%,1)' }],
-    ['gray' as ButtonColors, { background: 'hsla(226,8%,69%,1)', font: 'hsla(0,0%,100%,1)' }],
-    ['silver' as ButtonColors, { background: 'hsla(0,0%,96%,1)', font: 'hsla(234,51%,17%,1)' }],
-    ['white' as ButtonColors, { background: 'hsla(0,0%,100%,1)', font: 'hsla(234,51%,17%,1)' }],
+    ['blue' as ButtonColors, { background: '#3F8CFF', font: '#ffffff' }],
+    ['black' as ButtonColors, { background: '#111111', font: '#ffffff' }],
   ])('has correct color for %s', (color, { background, font }) => {
     const { getByText } = render(<Button color={color}>test button</Button>);
 

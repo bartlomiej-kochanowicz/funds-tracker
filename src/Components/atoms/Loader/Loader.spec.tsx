@@ -1,7 +1,7 @@
 import { render } from 'utils/test-utils';
 import { Loader, Size, LoaderColors } from 'components/atoms/Loader';
 
-describe.skip('Atoms/Loader tests', () => {
+describe('Atoms/Loader tests', () => {
   it.each([
     ['small' as Size, '1rem'],
     ['medium' as Size, '1.2rem'],
@@ -19,9 +19,9 @@ describe.skip('Atoms/Loader tests', () => {
   });
 
   it.each([
-    ['gray' as LoaderColors, '3px solid hsla(226,8%,69%,1)'],
-    ['white' as LoaderColors, '3px solid hsla(0,0%,100%,1)'],
-    ['navy' as LoaderColors, '3px solid hsla(234,51%,17%,1)'],
+    ['white' as LoaderColors, '3px solid #ffffff'],
+    ['black' as LoaderColors, '3px solid #111111'],
+    ['blue' as LoaderColors, '3px solid #3F8CFF'],
   ])('has correct color for %s', (color, expected) => {
     const { getByTestId } = render(
       <Loader

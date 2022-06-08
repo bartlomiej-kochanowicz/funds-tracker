@@ -85,7 +85,8 @@ export const theme = {
     },
     colors: {
       white: Colors.White,
-      gray: Colors.Gray,
+      black: Colors.Black,
+      blue: Colors.Blue,
     },
   },
   spacing: {

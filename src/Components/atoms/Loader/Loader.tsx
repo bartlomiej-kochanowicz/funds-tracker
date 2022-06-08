@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 export type Size = 'small' | 'medium' | 'large';
-export type LoaderColors = 'white' | 'navy' | 'gray';
+export type LoaderColors = 'white' | 'black' | 'blue';
 
 const defaultProps = {
   size: 'medium' as Size,

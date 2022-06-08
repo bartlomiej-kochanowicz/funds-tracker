@@ -2,13 +2,13 @@ import { HTMLProps, ReactNode } from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
 
-export type Size = 'small' | 'medium' | 'large' | 'huge';
-export type ButtonColors = 'blue' | 'pink' | 'gray' | 'silver' | 'white';
+export type Size = 'small' | 'medium' | 'large';
+export type ButtonColors = 'blue' | 'black';
 
 interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'> {
   children: ReactNode;
-  size?: 'small' | 'medium' | 'large';
-  color?: 'blue' | 'black';
+  size?: Size;
+  color?: ButtonColors;
   fontWeight?: keyof DefaultTheme['font']['weight'];
 }
 
