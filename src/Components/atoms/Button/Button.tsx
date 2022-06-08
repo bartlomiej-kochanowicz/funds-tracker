@@ -7,8 +7,8 @@ export type ButtonColors = 'blue' | 'pink' | 'gray' | 'silver' | 'white';
 
 interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'> {
   children: ReactNode;
-  size?: 'small' | 'medium' | 'large' | 'huge';
-  color?: 'blue' | 'pink' | 'gray' | 'silver' | 'white';
+  size?: 'small' | 'medium' | 'large';
+  color?: 'blue' | 'black';
   fontWeight?: keyof DefaultTheme['font']['weight'];
 }
 

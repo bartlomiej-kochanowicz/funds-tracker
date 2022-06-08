@@ -39,7 +39,7 @@
     "@storybook/addon-essentials": "6.5.5",
     "@storybook/addon-interactions": "6.5.5",
     "@storybook/addon-links": "6.5.5",
-    "@storybook/react": "6.5.5",
+    "@storybook/react": "6.5.7",
     "@storybook/testing-library": "0.0.11",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -82,7 +82,7 @@
     "vite-tsconfig-paths": "3.5.0"
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": ">=16.0.0",
     "pnpm": ">=7.0.0"
   }
 }

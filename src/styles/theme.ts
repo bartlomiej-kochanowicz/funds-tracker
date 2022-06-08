@@ -3,26 +3,30 @@ import { rem } from 'helpers/units';
 import { breakpoints } from 'constants/breakpoints';
 
 export const Colors = {
-  Blue: 'hsla(230, 62%, 50%, 1)',
-  Pink: 'hsla(5, 100%, 75%, 1)',
-  Navy: 'hsla(234, 51%, 17%, 1)',
-  Gray: 'hsla(226, 8%, 69%, 1)',
-  Silver: 'hsla(0, 0%, 96%, 1)',
-  White: 'hsla(0, 0%, 100%, 1)',
-  Black: 'hsla(0, 0%, 0%, 1)',
-  Transparent: 'hsla(0, 0%, 0%, 0)',
+  Green: '#7DCAC7',
+  Blue: '#3F8CFF',
+  Black: '#111111',
+  White: '#ffffff',
+  Purple: '#725BFE',
+  DarkGray: '#7C8DA6',
+  Gray: '#A5B4CB',
+  LightGray: '#F5F7F9',
+  Light: '#FAFBFC',
+  LightYellow: '#FAF9F4',
 };
 
 export const theme = {
   colors: {
+    green: Colors.Green,
     blue: Colors.Blue,
-    pink: Colors.Pink,
-    navy: Colors.Navy,
-    gray: Colors.Gray,
-    silver: Colors.Silver,
-    white: Colors.White,
     black: Colors.Black,
-    transparent: Colors.Transparent,
+    white: Colors.White,
+    purple: Colors.Purple,
+    darkGray: Colors.DarkGray,
+    gray: Colors.Gray,
+    lightGray: Colors.LightGray,
+    light: Colors.Light,
+    lightYellow: Colors.LightYellow,
   },
   breakpoints: {
     desktop: customMediaQuery(breakpoints.desktop),
@@ -46,21 +50,13 @@ export const theme = {
         lineHeigth: rem(1.7),
         padding: [rem(0.45), rem(1.25)],
       },
-      huge: {
-        fontSize: rem(1.5),
-        lineHeigth: rem(1.7),
-        padding: [rem(0.75), rem(3.25)],
-      },
     },
     color: {
       blue: {
         background: Colors.Blue,
         font: Colors.White,
       },
-      pink: { background: Colors.Pink, font: Colors.White },
-      gray: { background: Colors.Gray, font: Colors.White },
-      silver: { background: Colors.Silver, font: Colors.Navy },
-      white: { background: Colors.White, font: Colors.Navy },
+      black: { background: Colors.Black, font: Colors.White },
     },
   },
   font: {
@@ -78,7 +74,7 @@ export const theme = {
     },
   },
   radius: {
-    primary: rem(0.571),
+    primary: rem(6.25),
     circle: '50%',
   },
   loader: {
@@ -89,7 +85,6 @@ export const theme = {
     },
     colors: {
       white: Colors.White,
-      navy: Colors.Navy,
       gray: Colors.Gray,
     },
   },
@@ -99,15 +94,15 @@ export const theme = {
     large: rem(3 / 2), // devide by 2 - top and bottom or right and left(both sides) - 3rem
   },
   heading: {
-    h1: { fontSize: rem(3.143) },
-    h2: { fontSize: rem(1.286) },
-    h3: { fontSize: rem(1.1) },
-    h4: { fontSize: rem(0.85) },
+    h1: { fontSize: rem(2.5) },
+    h2: { fontSize: rem(1.5) },
+    h3: { fontSize: rem(1.25) },
+    h4: { fontSize: rem(1.25) },
     h5: {
-      fontSize: rem(0.65),
+      fontSize: rem(1.25),
     },
     h6: {
-      fontSize: rem(0.5),
+      fontSize: rem(1.25),
     },
   },
 };

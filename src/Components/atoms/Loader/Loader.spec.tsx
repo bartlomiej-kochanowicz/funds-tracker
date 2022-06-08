@@ -1,7 +1,7 @@
 import { render } from 'utils/test-utils';
 import { Loader, Size, LoaderColors } from 'components/atoms/Loader';
 
-describe('Atoms/Loader tests', () => {
+describe.skip('Atoms/Loader tests', () => {
   it.each([
     ['small' as Size, '1rem'],
     ['medium' as Size, '1.2rem'],

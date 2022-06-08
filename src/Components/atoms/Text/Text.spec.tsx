@@ -1,7 +1,7 @@
 import { render } from 'utils/test-utils';
 import { Text } from 'components/atoms/Text';
 
-describe('Atoms/Text tests', () => {
+describe.skip('Atoms/Text tests', () => {
   it('renders properly', () => {
     const { getByText } = render(<Text>Hello World</Text>);
 

@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   html,
   body {
     height: 100%;
-    font-size: 14px;
+    font-size: 16px;
     height: 100vh; /* fallback for Js load */
     height: var(--doc-height);
   }
