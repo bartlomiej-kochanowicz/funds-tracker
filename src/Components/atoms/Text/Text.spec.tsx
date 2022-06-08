@@ -13,9 +13,9 @@ describe('Atoms/Text fontable tests', () => {
   it('renders properly with custom font property', () => {
     const { getByText } = render(
       <Text
-        fontWeight={500}
+        fontWeight="500"
         fontColor="blue"
-        fontSize="huge"
+        fontSize="2.5"
         lineHeight="1.5"
       >
         Hello World
@@ -26,7 +26,7 @@ describe('Atoms/Text fontable tests', () => {
 
     expect(text).toHaveStyleRule('color', '#3F8CFF');
     expect(text).toHaveStyleRule('font-weight', '500');
-    expect(text).toHaveStyleRule('font-size', '4rem');
+    expect(text).toHaveStyleRule('font-size', '2.5rem');
     expect(text).toHaveStyleRule('line-height', '1.5rem');
   });
 });

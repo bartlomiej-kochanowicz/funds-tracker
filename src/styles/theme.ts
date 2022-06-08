@@ -36,8 +36,8 @@ export const theme = {
   button: {
     size: {
       small: {
-        fontSize: rem(0.85),
-        lineHeigth: rem(1),
+        fontSize: rem(0.75),
+        lineHeigth: rem(1.25),
         padding: [rem(0.25), rem(0.75)],
       },
       medium: {
@@ -46,8 +46,8 @@ export const theme = {
         padding: [rem(0.375), rem(1)],
       },
       large: {
-        fontSize: rem(1.2),
-        lineHeigth: rem(1.7),
+        fontSize: rem(1.25),
+        lineHeigth: rem(1.5),
         padding: [rem(0.45), rem(1.25)],
       },
     },
@@ -61,21 +61,22 @@ export const theme = {
   },
   font: {
     weight: {
-      300: '300',
-      400: '300',
-      500: '500',
-      700: '700',
+      '300': '300',
+      '400': '400',
+      '500': '500',
+      '700': '700',
     },
     size: {
-      small: rem(0.75),
-      medium: rem(1),
-      large: rem(1.25),
-      huge: rem(4),
+      '0.75': rem(0.75),
+      '0.875': rem(0.875),
+      '1': rem(1),
+      '1.25': rem(1.25),
+      '1.5': rem(1.5),
+      '2.5': rem(2.5),
     },
   },
   radius: {
     primary: rem(6.25),
-    circle: '50%',
   },
   loader: {
     size: {
