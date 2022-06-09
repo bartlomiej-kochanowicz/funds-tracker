@@ -17,7 +17,7 @@ export const Heading = styled(
 )(
   ({ theme, level = 'h1', inline }) => css`
     font-size: ${theme.heading[level].fontSize};
-    font-weight: ${theme.font.weight[700]};
+    font-weight: ${theme.font.weight['700']};
 
     ${inline &&
     css`

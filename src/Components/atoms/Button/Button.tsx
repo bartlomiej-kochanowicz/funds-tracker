@@ -19,7 +19,7 @@ export const Button = styled.button<ButtonProps>`
   position: relative;
   transition: 0.2s all;
 
-  ${({ theme, size = 'medium', color = 'blue', fontWeight = 400 }) =>
+  ${({ theme, size = 'medium' as Size, color = 'blue' as ButtonColors, fontWeight = '400' }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
       background-color: ${theme.button.color[color].background};
