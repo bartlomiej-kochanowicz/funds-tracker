@@ -14,4 +14,5 @@ Input.args = {
   label: 'Test label',
   id: 'test-id',
   name: 'test-name',
+  placeholder: 'Testing placeholder...',
 };

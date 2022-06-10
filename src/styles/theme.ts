@@ -64,6 +64,7 @@ export const theme = {
       '300': '300',
       '400': '400',
       '500': '500',
+      '600': '600',
       '700': '700',
     },
     size: {
@@ -77,6 +78,7 @@ export const theme = {
   },
   radius: {
     primary: rem(6.25),
+    secondary: rem(0.4),
   },
   loader: {
     size: {

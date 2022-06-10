@@ -10,7 +10,7 @@ const WelcomeContent: FC = () => (
       label="test"
       id="id"
       name="name"
-      value="test"
+      defaultValue="test"
     />
   </Suspense>
 );

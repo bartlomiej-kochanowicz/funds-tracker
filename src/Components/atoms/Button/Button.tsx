@@ -4,8 +4,9 @@ import { darken, transparentize } from 'color2k';
 
 export type Size = 'small' | 'medium' | 'large';
 export type ButtonColors = 'blue' | 'black';
+export type Variant = 'primary' | 'secondary';
 
-interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'> {
+interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size' | 'color'> {
   children: ReactNode;
   size?: Size;
   color?: ButtonColors;
@@ -19,7 +20,7 @@ export const Button = styled.button<ButtonProps>`
   position: relative;
   transition: 0.2s all;
 
-  ${({ theme, size = 'medium' as Size, color = 'blue' as ButtonColors, fontWeight = '400' }) =>
+  ${({ theme, size = 'medium', color = 'blue', fontWeight = '400' }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
       background-color: ${theme.button.color[color].background};
