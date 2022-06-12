@@ -34,8 +34,8 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
 `;
 
 export const Select: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const buttonRef = useRef(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { renderLayer, triggerProps, layerProps } = useLayer({
     isOpen,
@@ -53,6 +53,8 @@ export const Select: FC = () => {
 
   const handleOpen = () => setIsOpen(prev => !prev);
 
+  const minMenuWidth = buttonRef.current?.offsetWidth ?? null;
+
   return (
     <Fragment>
       <StyledButton
@@ -67,7 +69,17 @@ export const Select: FC = () => {
         {isOpen ? <FaChevronUp /> : <FaChevronDown />}
       </StyledButton>
 
-      {isOpen && renderLayer(<Menu {...layerProps}>zajebiste menu</Menu>)}
+      {isOpen &&
+        renderLayer(
+          <Menu
+            minMenuWidth={minMenuWidth}
+            {...layerProps}
+          >
+            zajebiste menu
+          </Menu>,
+        )}
     </Fragment>
   );
 };
+
+Select.displayName = 'Select';
