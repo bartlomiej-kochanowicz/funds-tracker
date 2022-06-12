@@ -1,6 +1,7 @@
 import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
 import { breakpoints } from 'constants/breakpoints';
+import { transparentize } from 'color2k';
 
 export const Colors = {
   Green: '#7DCAC7',
@@ -108,5 +109,9 @@ export const theme = {
     h6: {
       fontSize: rem(1.25),
     },
+  },
+  shadows: {
+    dropdown: `0 10px 15px -3px ${transparentize(Colors.Black, 0.9)},
+    0 4px 6px -4px ${transparentize(Colors.Black, 0.9)}`,
   },
 };

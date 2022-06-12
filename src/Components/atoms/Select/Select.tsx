@@ -43,6 +43,7 @@ export const Select: FC = () => {
     placement: 'bottom-center',
     auto: true,
     possiblePlacements: ['bottom-center', 'top-center'],
+    triggerOffset: 5,
     onDisappear: disappearType => {
       if (disappearType === 'full') {
         setIsOpen(false);
