@@ -1,9 +1,10 @@
-import { FC, Fragment, HTMLProps, useState } from 'react';
+import { FC, Fragment, HTMLProps, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useLayer } from 'react-laag';
 import { darken } from 'color2k';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Spreader } from 'components/atoms/Spreader';
+import { Menu } from 'components/atoms/Menu';
 
 const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
   display: flex;
@@ -33,6 +34,7 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
 
 export const Select: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const buttonRef = useRef(null);
 
   const { renderLayer, triggerProps, layerProps } = useLayer({
     isOpen,
@@ -55,6 +57,7 @@ export const Select: FC = () => {
       <StyledButton
         type="button"
         onClick={handleOpen}
+        ref={buttonRef}
         {...triggerProps}
       >
         <span>Selected empty</span>
@@ -64,7 +67,7 @@ export const Select: FC = () => {
         {isOpen ? <FaChevronUp /> : <FaChevronDown />}
       </StyledButton>
 
-      {isOpen && renderLayer(<div {...layerProps}>zajebiste menu</div>)}
+      {isOpen && renderLayer(<Menu {...layerProps}>zajebiste menu</Menu>)}
     </Fragment>
   );
 };
