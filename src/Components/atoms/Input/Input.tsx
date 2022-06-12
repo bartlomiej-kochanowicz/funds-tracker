@@ -1,6 +1,6 @@
 import { HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
-import { darken, lighten } from 'color2k';
+import { darken } from 'color2k';
 
 interface InputProps extends HTMLProps<HTMLButtonElement> {}
 
@@ -13,7 +13,7 @@ export const Input = styled.input<InputProps>`
     padding: 0.5rem 1.25rem;
     outline-color: ${theme.colors.blue};
     color: ${theme.colors.black};
-    font-weight: ${theme.font.weight[600]};
+    font-weight: ${theme.font.weight[500]};
 
     &:focus {
       background-color: ${darken(theme.colors.lightGray, 0.05)};

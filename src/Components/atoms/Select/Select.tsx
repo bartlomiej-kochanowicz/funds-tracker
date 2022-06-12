@@ -1,0 +1,70 @@
+import { FC, Fragment, HTMLProps, useState } from 'react';
+import styled, { css } from 'styled-components';
+import { useLayer } from 'react-laag';
+import { darken } from 'color2k';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { Spreader } from 'components/atoms/Spreader';
+
+const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ${({ theme }) => css`
+    border-radius: ${theme.radius.secondary};
+    border: 1px solid ${darken(theme.colors.lightGray, 0.05)};
+    background-color: transparent;
+    padding: 0.5rem 1.25rem;
+    color: ${theme.colors.black};
+    outline-color: ${theme.colors.blue};
+    font-weight: ${theme.font.weight[500]};
+
+    &:focus {
+      background-color: ${darken(theme.colors.lightGray, 0.05)};
+      color: ${theme.colors.blue};
+      border: 1px solid ${theme.colors.blue};
+    }
+
+    &::placeholder {
+      color: ${theme.colors.gray};
+    }
+  `}
+`;
+
+export const Select: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { renderLayer, triggerProps, layerProps } = useLayer({
+    isOpen,
+    overflowContainer: false,
+    placement: 'bottom-center',
+    auto: true,
+    possiblePlacements: ['bottom-center', 'top-center'],
+    onDisappear: disappearType => {
+      if (disappearType === 'full') {
+        setIsOpen(false);
+      }
+    },
+    onOutsideClick: () => setIsOpen(false),
+  });
+
+  const handleOpen = () => setIsOpen(prev => !prev);
+
+  return (
+    <Fragment>
+      <StyledButton
+        type="button"
+        onClick={handleOpen}
+        {...triggerProps}
+      >
+        <span>Selected empty</span>
+
+        <Spreader />
+
+        {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+      </StyledButton>
+
+      {isOpen && renderLayer(<div {...layerProps}>zajebiste menu</div>)}
+    </Fragment>
+  );
+};

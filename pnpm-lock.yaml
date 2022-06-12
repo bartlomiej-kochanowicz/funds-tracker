@@ -48,6 +48,8 @@ specifiers:
   react: 18.1.0
   react-dom: 18.1.0
   react-i18next: 11.16.11
+  react-icons: ^4.4.0
+  react-laag: ^2.0.4
   react-router-dom: 6.3.0
   rollup-plugin-analyzer: 4.0.0
   simple-flexbox: 2.3.3
@@ -71,6 +73,8 @@ dependencies:
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-i18next: 11.16.11_nw4hjwi74v2s344wj4mzshrrta
+  react-icons: 4.4.0_react@18.1.0
+  react-laag: 2.0.4_ef5jwxihqo6n7gxfmzogljlgcm
   react-router-dom: 6.3.0_ef5jwxihqo6n7gxfmzogljlgcm
   simple-flexbox: 2.3.3_react@18.1.0
   styled-components: 5.3.5_ef5jwxihqo6n7gxfmzogljlgcm
@@ -12344,6 +12348,14 @@ packages:
       react-dom: 18.1.0_react@18.1.0
     dev: false
 
+  /react-icons/4.4.0_react@18.1.0:
+    resolution: {integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.1.0
+    dev: false
+
   /react-inspector/5.1.1_react@18.1.0:
     resolution: {integrity: sha512-GURDaYzoLbW8pMGXwYPDBIv6nqei4kK7LPRZ9q9HCZF54wqXz/dnylBp/kfE9XmekBhHvLDdcYeyIwSrvtOiWg==}
     peerDependencies:
@@ -12365,6 +12377,17 @@ packages:
   /react-is/18.1.0:
     resolution: {integrity: sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg==}
     dev: true
+
+  /react-laag/2.0.4_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-9CGIwYJbysmpQC4KeeTx3fNzchvZT3AIYapi2/z7kOJrYopP2uCoPK39qHKuiyawE57EVRI8F1OtbJeyJ7NTrg==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0
+      react-dom: ^16.0.0 || ^17.0.0
+    dependencies:
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+      tiny-warning: 1.0.3
+    dev: false
 
   /react-lifecycles-compat/3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}

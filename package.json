@@ -28,6 +28,8 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-i18next": "11.16.11",
+    "react-icons": "^4.4.0",
+    "react-laag": "^2.0.4",
     "react-router-dom": "6.3.0",
     "simple-flexbox": "2.3.3",
     "styled-components": "5.3.5"
