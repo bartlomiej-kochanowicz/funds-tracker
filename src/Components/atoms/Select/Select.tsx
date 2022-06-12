@@ -76,7 +76,8 @@ export const Select: FC = () => {
             minMenuWidth={minMenuWidth}
             {...layerProps}
           >
-            zajebiste menu
+            <Menu.Item>zajebiste menu 1</Menu.Item>
+            <Menu.Item>zajebiste menu 2</Menu.Item>
           </Menu>,
         )}
     </Fragment>

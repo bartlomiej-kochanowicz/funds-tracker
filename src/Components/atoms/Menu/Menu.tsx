@@ -2,7 +2,7 @@ import { ReactNode, forwardRef } from 'react';
 import { darken } from 'color2k';
 import styled, { css } from 'styled-components';
 
-interface MenuProps {
+export interface MenuProps {
   children: ReactNode;
   minMenuWidth?: number | null;
 }
