@@ -5,6 +5,7 @@ import { darken } from 'color2k';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Spreader } from 'components/atoms/Spreader';
 import { Menu } from 'components/atoms/Menu';
+import { composeRefs } from 'utils/composeRefs';
 
 const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
   display: flex;
@@ -57,8 +58,7 @@ export const Select: FC = () => {
       <StyledButton
         type="button"
         onClick={handleOpen}
-        ref={buttonRef}
-        {...triggerProps}
+        ref={composeRefs(buttonRef, triggerProps.ref)}
       >
         <span>Selected empty</span>
 
