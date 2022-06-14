@@ -25,4 +25,5 @@ Select.args = {
     { value: 'test-11', label: 'test-11' },
     { value: 'test-12', label: 'test-12' },
   ],
+  defaultValue: 'test-1',
 };

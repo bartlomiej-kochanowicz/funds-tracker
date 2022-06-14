@@ -11,6 +11,7 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 
   ${({ theme }) => css`
     border-radius: ${theme.radius.secondary};
@@ -48,12 +49,17 @@ type Item = {
 
 interface SelectProps {
   options: Item[];
-  placeholder?: string;
+  placeholder?: string | null;
+  defaultValue?: string | number | null;
 }
 
-export const Select: FC<SelectProps> = ({ options, placeholder }) => {
+export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<Item | null>(null);
+
+  const getDefaultSelected = (): Item | null =>
+    defaultValue ? options.find(option => option.value === defaultValue) || null : null;
+
+  const [selected, setSelected] = useState<Item | null>(getDefaultSelected());
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -99,11 +105,16 @@ export const Select: FC<SelectProps> = ({ options, placeholder }) => {
             {...layerProps}
           >
             {options.map(({ value, label, ...rest }) => {
-              const handleSelect = () => setSelected({ value, label, ...rest });
+              const handleSelect = () => {
+                setSelected({ value, label, ...rest });
+
+                setIsOpen(false);
+              };
 
               return (
                 <Menu.Item
                   onClick={handleSelect}
+                  isSelected={selected?.value === value}
                   key={value}
                 >
                   {label}
@@ -119,5 +130,6 @@ export const Select: FC<SelectProps> = ({ options, placeholder }) => {
 Select.displayName = 'Select';
 
 Select.defaultProps = {
-  placeholder: 'Placeholder...',
+  placeholder: null,
+  defaultValue: null,
 };

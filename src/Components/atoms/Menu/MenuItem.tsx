@@ -4,18 +4,24 @@ import styled, { css } from 'styled-components';
 export interface MenuItemProps {
   children: ReactNode;
   onClick: () => void;
+  isSelected: boolean;
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<{ isSelected: boolean }>`
   border: none;
   width: 100%;
   background-color: transparent;
   cursor: pointer;
 
-  ${({ theme }) => css`
+  ${({ theme, isSelected }) => css`
     color: ${theme.colors.black};
     padding: ${theme.padding.small.map(p => p).join(' ')};
     outline-color: ${theme.colors.blue};
+
+    ${isSelected &&
+    css`
+      font-weight: ${theme.font.weight[600]};
+    `}
 
     &:hover {
       background-color: ${theme.colors.blue};
@@ -24,11 +30,12 @@ const StyledButton = styled.button`
   `};
 `;
 
-export const MenuItem: FC<MenuItemProps> = ({ children, onClick }) => (
+export const MenuItem: FC<MenuItemProps> = ({ children, onClick, isSelected }) => (
   <li>
     <StyledButton
       type="button"
       onClick={onClick}
+      isSelected={isSelected}
     >
       {children}
     </StyledButton>
