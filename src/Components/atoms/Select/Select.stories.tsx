@@ -10,4 +10,19 @@ const Template: ComponentStory<typeof SelectComponent> = args => <SelectComponen
 
 export const Select = Template.bind({});
 
-Select.args = {};
+Select.args = {
+  options: [
+    { value: 'test-1', label: 'test-1' },
+    { value: 'test-2', label: 'test-2' },
+    { value: 'test-3', label: 'test-3' },
+    { value: 'test-4', label: 'test-4' },
+    { value: 'test-5', label: 'test-5' },
+    { value: 'test-6', label: 'test-6' },
+    { value: 'test-7', label: 'test-7' },
+    { value: 'test-8', label: 'test-8' },
+    { value: 'test-9', label: 'test-9' },
+    { value: 'test-10', label: 'test-10' },
+    { value: 'test-11', label: 'test-11' },
+    { value: 'test-12', label: 'test-12' },
+  ],
+};

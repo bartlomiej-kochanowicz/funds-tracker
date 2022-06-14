@@ -8,19 +8,28 @@ export interface MenuProps {
 }
 
 const StyledUl = styled.ul<MenuProps>`
+  max-height: 14rem;
+  overflow-y: auto;
+
   ${({ theme, minMenuWidth }) => css`
     border-radius: ${theme.radius.secondary};
     background-color: ${theme.colors.lightGray};
-    padding: 0.5rem 1.25rem;
+    padding: 0.5rem 0;
     outline-color: ${theme.colors.blue};
     color: ${theme.colors.black};
     border: 1px solid ${darken(theme.colors.lightGray, 0.05)};
     box-shadow: ${theme.shadows.dropdown};
+    display: flex;
+    flex-direction: column;
 
     ${minMenuWidth &&
     css`
       min-width: ${minMenuWidth}px;
     `}
+
+    li {
+      list-style: none;
+    }
   `}
 `;
 

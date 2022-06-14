@@ -16,7 +16,7 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
     border-radius: ${theme.radius.secondary};
     border: 1px solid ${darken(theme.colors.lightGray, 0.05)};
     background-color: transparent;
-    padding: 0.5rem 1.25rem;
+    padding: ${theme.padding.medium.map(p => p).join(' ')};
     color: ${theme.colors.black};
     outline-color: ${theme.colors.blue};
     font-weight: ${theme.font.weight[500]};
@@ -33,8 +33,28 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
   `}
 `;
 
-export const Select: FC = () => {
+interface ContentProps {
+  isSelected: boolean;
+}
+
+const StyledContent = styled.div<ContentProps>`
+  color: ${({ theme, isSelected }) => (isSelected ? theme.colors.black : theme.colors.gray)};
+`;
+
+type Item = {
+  value: string | number;
+  label: string;
+};
+
+interface SelectProps {
+  options: Item[];
+  placeholder?: string;
+}
+
+export const Select: FC<SelectProps> = ({ options, placeholder }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<Item | null>(null);
+
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { renderLayer, triggerProps, layerProps } = useLayer({
@@ -63,7 +83,9 @@ export const Select: FC = () => {
         onClick={handleOpen}
         ref={composeRefs(buttonRef, triggerProps.ref)}
       >
-        <span>Selected empty</span>
+        <StyledContent isSelected={Boolean(selected)}>
+          {selected?.label ?? placeholder}
+        </StyledContent>
 
         <Spreader />
 
@@ -76,8 +98,18 @@ export const Select: FC = () => {
             minMenuWidth={minMenuWidth}
             {...layerProps}
           >
-            <Menu.Item>zajebiste menu 1</Menu.Item>
-            <Menu.Item>zajebiste menu 2</Menu.Item>
+            {options.map(({ value, label, ...rest }) => {
+              const handleSelect = () => setSelected({ value, label, ...rest });
+
+              return (
+                <Menu.Item
+                  onClick={handleSelect}
+                  key={value}
+                >
+                  {label}
+                </Menu.Item>
+              );
+            })}
           </Menu>,
         )}
     </Fragment>
@@ -85,3 +117,7 @@ export const Select: FC = () => {
 };
 
 Select.displayName = 'Select';
+
+Select.defaultProps = {
+  placeholder: 'Placeholder...',
+};

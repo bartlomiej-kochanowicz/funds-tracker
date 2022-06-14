@@ -19,6 +19,10 @@ export const Input = styled.input<InputProps>`
       background-color: ${darken(theme.colors.lightGray, 0.05)};
       color: ${theme.colors.blue};
     }
+
+    &::placeholder {
+      color: ${theme.colors.gray};
+    }
   `}
 `;
 

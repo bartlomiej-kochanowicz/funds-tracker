@@ -39,17 +39,14 @@ export const theme = {
       small: {
         fontSize: rem(0.75),
         lineHeigth: rem(1.25),
-        padding: [rem(0.25), rem(0.75)],
       },
       medium: {
         fontSize: rem(1),
         lineHeigth: rem(1.5),
-        padding: [rem(0.375), rem(1)],
       },
       large: {
         fontSize: rem(1.25),
         lineHeigth: rem(1.5),
-        padding: [rem(0.45), rem(1.25)],
       },
     },
     color: {
@@ -59,6 +56,11 @@ export const theme = {
       },
       black: { background: Colors.Black, font: Colors.White },
     },
+  },
+  padding: {
+    small: [rem(0.25), rem(0.75)],
+    medium: [rem(0.5), rem(1.25)],
+    large: [rem(0.75), rem(1.5)],
   },
   font: {
     weight: {
