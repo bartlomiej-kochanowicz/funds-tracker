@@ -20,8 +20,8 @@ describe('Atoms/Button tests', () => {
 
   it.each([
     ['small' as Size, '0.25rem 0.75rem'],
-    ['medium' as Size, '0.375rem 1rem'],
-    ['large' as Size, '0.45rem 1.25rem'],
+    ['medium' as Size, '0.5rem 1.25rem'],
+    ['large' as Size, '0.75rem 1.5rem'],
   ])('has correct padding for %s', (padding, expected) => {
     const { getByText } = render(<Button size={padding}>test button</Button>);
 
