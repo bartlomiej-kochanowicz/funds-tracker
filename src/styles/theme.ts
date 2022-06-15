@@ -116,4 +116,8 @@ export const theme = {
     dropdown: `0 10px 15px -3px ${transparentize(Colors.Black, 0.9)},
     0 4px 6px -4px ${transparentize(Colors.Black, 0.9)}`,
   },
+  gradients: {
+    primary: `radial-gradient(circle at right bottom, #AFE39D , #7DCAC7)`,
+    secondary: `radial-gradient(circle at right bottom, #5E5E5E , #111111)`,
+  },
 };

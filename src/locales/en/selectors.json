@@ -1,0 +1,10 @@
+{
+  "instruments.cash": "Cash",
+  "instruments.stocks": "Stocks",
+  "instruments.saving-accounts": "Saving accounts",
+  "instruments.deposits": "Deposits",
+  "instruments.bonds": "Bonds",
+  "instruments.commodies": "Commodies",
+  "instruments.crypto": "Crypto",
+  "instruments.others": "Others"
+}

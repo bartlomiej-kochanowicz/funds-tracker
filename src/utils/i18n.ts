@@ -13,7 +13,7 @@ i18next
       loadPath: 'src/locales/{{lng}}/{{ns}}.json',
       addPath: 'src/locales/{{lng}}/{{ns}}.missed.json',
     },
-    ns: ['common', 'welcome'],
+    ns: ['common', 'selectors'],
     defaultNS: 'common',
     fallbackLng: 'en',
     interpolation: {
