@@ -9,9 +9,9 @@
     "build-storybook": "build-storybook",
     "check:circular-deps": "madge --warning --circular --extensions ts,tsx src",
     "check:circular-deps-image": "madge --image graph.svg --extensions ts,tsx src",
-    "jest": "jest --colors --runInBand --detectOpenHandles --collectCoverage=false",
-    "jest:coverage": "jest --colors --runInBand --detectOpenHandles --coverage --no-cache",
-    "jest:watch": "jest --colors --runInBand --detectOpenHandles --watch --collectCoverage=false",
+    "test": "jest --colors --runInBand --detectOpenHandles --collectCoverage=false",
+    "test:coverage": "jest --colors --runInBand --detectOpenHandles --coverage --no-cache",
+    "test:watch": "jest --colors --runInBand --detectOpenHandles --watch --collectCoverage=false",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
     "format": "prettier --write ./src"
