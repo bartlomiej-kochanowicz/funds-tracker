@@ -58,9 +58,9 @@ export const theme = {
     },
   },
   padding: {
-    small: [rem(0.25), rem(0.75)],
-    medium: [rem(0.5), rem(1.25)],
-    large: [rem(0.75), rem(1.5)],
+    small: `${rem(0.25)} ${rem(0.75)}`,
+    medium: `${rem(0.5)} ${rem(1.25)}`,
+    large: `${rem(0.75)} ${rem(1.5)}`,
   },
   font: {
     weight: {
@@ -118,6 +118,6 @@ export const theme = {
   },
   gradients: {
     primary: `radial-gradient(circle at right bottom, #AFE39D , #7DCAC7)`,
-    secondary: `radial-gradient(circle at right bottom, #5E5E5E , #111111)`,
+    secondary: `radial-gradient(circle at right bottom, #2a2a2a , #111111)`,
   },
 };

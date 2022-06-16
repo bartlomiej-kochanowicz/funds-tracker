@@ -1,5 +1,5 @@
 {
-  "name": "funds-tracker",
+  "name": "funds-tracker-webapp",
   "version": "0.0.1",
   "scripts": {
     "start": "vite",
@@ -15,6 +15,23 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
     "format": "prettier --write ./src"
+  },
+  "nx": {
+    "targets": {
+      "start": {
+        "dependsOn": [
+          "start"
+        ]
+      },
+      "build": {
+        "outputs": [
+          "webapp/dist/"
+        ],
+        "dependsOn": [
+          "build"
+        ]
+      }
+    }
   },
   "dependencies": {
     "color2k": "2.0.0",

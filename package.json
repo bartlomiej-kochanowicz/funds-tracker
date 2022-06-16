@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "install": "cd api && pnpm install && cd ../webapp && pnpm install",
-    "prepare": "husky install .husky"
+    "prepare": "husky install .husky",
+    "start:api": "nx start:dev funds-tracker-api",
+    "start:webapp": "nx start funds-tracker-webapp",
+    "start:all": "nx run-many --target=start --all",
+    "build": "nx run-many --target=build --all"
   },
   "devDependencies": {
     "husky": "8.0.1",
@@ -17,6 +21,7 @@
   ],
   "engines": {
     "node": ">=16.0.0",
-    "pnpm": ">=7.0.0"
+    "pnpm": ">=7.0.0",
+    "nx": ">=14.0.0"
   }
 }

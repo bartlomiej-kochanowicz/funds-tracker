@@ -15,7 +15,7 @@ const StyledButton = styled.button<{ isSelected: boolean }>`
 
   ${({ theme, isSelected }) => css`
     color: ${theme.colors.black};
-    padding: ${theme.padding.small.map(p => p).join(' ')};
+    padding: ${theme.padding.small};
     outline-color: ${theme.colors.blue};
 
     ${isSelected &&

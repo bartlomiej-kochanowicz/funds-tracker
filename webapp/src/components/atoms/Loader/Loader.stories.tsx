@@ -12,5 +12,5 @@ export const Loader = Template.bind({});
 
 Loader.args = {
   size: 'medium',
-  color: 'gray',
+  color: 'black',
 };

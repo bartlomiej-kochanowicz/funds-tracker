@@ -1,5 +1,5 @@
 export const paths = {
-  welcome: '/',
-  dashboard: '/dashboard',
+  home: '/',
+  any: '*',
   notFound: '/404',
 };
