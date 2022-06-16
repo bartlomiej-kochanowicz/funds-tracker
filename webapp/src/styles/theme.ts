@@ -118,6 +118,6 @@ export const theme = {
   },
   gradients: {
     primary: `radial-gradient(circle at right bottom, #AFE39D , #7DCAC7)`,
-    secondary: `radial-gradient(circle at right bottom, #5E5E5E , #111111)`,
+    secondary: `radial-gradient(circle at right bottom, #2a2a2a , #111111)`,
   },
 };
