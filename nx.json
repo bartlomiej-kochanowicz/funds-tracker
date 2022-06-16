@@ -1,0 +1,39 @@
+{
+  "extends": "nx/presets/npm.json",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "prebuild",
+          "build",
+          "format",
+          "lint",
+          "test",
+          "test:watch",
+          "test:cov",
+          "test:debug",
+          "test:e2e",
+          "preview",
+          "storybook",
+          "build-storybook",
+          "check:circular-deps",
+          "check:circular-deps-image",
+          "test:coverage",
+          "lint:fix"
+        ],
+        "accessToken": "OGE4ODg3NzUtNzNkOS00OWNmLTkwYTgtY2Q1OWQwZGU5YjE4fHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ]
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  }
+}

@@ -7,7 +7,9 @@
     "prepare": "husky install .husky"
   },
   "devDependencies": {
-    "husky": "8.0.1"
+    "husky": "8.0.1",
+    "nx": "14.3.5",
+    "@nrwl/nx-cloud": "latest"
   },
   "workspaces": [
     "api",
