@@ -11,6 +11,7 @@ const Wrapper = styled(Row)`
 
   ${({ theme }) => css`
     background: ${theme.gradients.secondary};
+    padding: ${theme.padding.medium};
   `}
 `;
 
@@ -29,6 +30,7 @@ export const Home: FC = () => (
       <Heading
         level="h1"
         fontColor="light"
+        textAlign="center"
       >
         Coming summer 2022...
       </Heading>

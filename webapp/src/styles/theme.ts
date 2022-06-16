@@ -58,9 +58,9 @@ export const theme = {
     },
   },
   padding: {
-    small: [rem(0.25), rem(0.75)],
-    medium: [rem(0.5), rem(1.25)],
-    large: [rem(0.75), rem(1.5)],
+    small: `${rem(0.25)} ${rem(0.75)}`,
+    medium: `${rem(0.5)} ${rem(1.25)}`,
+    large: `${rem(0.75)} ${rem(1.5)}`,
   },
   font: {
     weight: {

@@ -17,7 +17,7 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
     border-radius: ${theme.radius.secondary};
     border: 1px solid ${darken(theme.colors.lightGray, 0.05)};
     background-color: transparent;
-    padding: ${theme.padding.medium.map(p => p).join(' ')};
+    padding: ${theme.padding.medium};
     color: ${theme.colors.black};
     outline-color: ${theme.colors.blue};
     font-weight: ${theme.font.weight[500]};

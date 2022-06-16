@@ -26,7 +26,7 @@ export const Button = styled.button<ButtonProps>`
       background-color: ${theme.button.color[color].background};
       color: ${theme.button.color[color].font};
       box-shadow: 7px 6px 28px 1px ${transparentize(theme.button.color[color].background, 0.76)};
-      padding: ${theme.padding[size].map(p => p).join(' ')};
+      padding: ${theme.padding[size]};
       font-weight: ${fontWeight};
       border-radius: ${theme.radius.primary};
 
