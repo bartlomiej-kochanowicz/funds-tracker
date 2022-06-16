@@ -10,17 +10,7 @@
           "format",
           "lint",
           "test",
-          "test:watch",
-          "test:cov",
-          "test:debug",
-          "test:e2e",
-          "preview",
-          "storybook",
-          "build-storybook",
-          "check:circular-deps",
-          "check:circular-deps-image",
-          "test:coverage",
-          "lint:fix"
+          "build-storybook"
         ],
         "accessToken": "OGE4ODg3NzUtNzNkOS00OWNmLTkwYTgtY2Q1OWQwZGU5YjE4fHJlYWQtd3JpdGU="
       }
@@ -28,9 +18,7 @@
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     }
   },
   "affected": {
