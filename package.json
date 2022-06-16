@@ -4,5 +4,13 @@
   "private": true,
   "scripts": {
     "install": "cd api && pnpm install && cd ../webapp && pnpm install"
+  },
+  "workspaces": [
+    "api",
+    "webapp"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "pnpm": ">=7.0.0"
   }
 }
