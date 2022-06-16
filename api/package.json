@@ -1,10 +1,5 @@
 {
-  "name": "api",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "name": "funds-tracker-api",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",

@@ -1,0 +1,8 @@
+{
+  "name": "funds-tracker",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "install": "cd api && pnpm install && cd ../webapp && pnpm install"
+  }
+}

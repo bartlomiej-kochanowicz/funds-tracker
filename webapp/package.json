@@ -1,6 +1,5 @@
 {
   "name": "funds-tracker",
-  "private": false,
   "version": "0.0.1",
   "scripts": {
     "start": "vite",
@@ -82,9 +81,5 @@
     "vite-plugin-eslint": "1.6.1",
     "vite-plugin-svgr": "2.1.0",
     "vite-tsconfig-paths": "3.5.0"
-  },
-  "engines": {
-    "node": ">=16.0.0",
-    "pnpm": ">=7.0.0"
   }
 }
