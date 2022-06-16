@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "install": "cd api && pnpm install && cd ../webapp && pnpm install",
-    "prepare": "husky install .husky"
+    "prepare": "husky install .husky",
+    "start:webapp": "nx start funds-tracker-webapp"
   },
   "devDependencies": {
     "husky": "8.0.1",

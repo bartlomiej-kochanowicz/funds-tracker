@@ -1,5 +1,5 @@
 {
-  "name": "funds-tracker",
+  "name": "funds-tracker-webapp",
   "version": "0.0.1",
   "scripts": {
     "start": "vite",
