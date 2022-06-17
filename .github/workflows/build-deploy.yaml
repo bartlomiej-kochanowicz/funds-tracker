@@ -1,0 +1,23 @@
+name: Production deploy
+on:
+  workflow_dispatch:
+    branches:
+      - master
+jobs:
+  static-analysis:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./frontend/client/
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.2.0"
+      - name: Setup
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.1.2
+      - run: pnpm install
+      - run: pnpm test
+      - run: pnpm lint

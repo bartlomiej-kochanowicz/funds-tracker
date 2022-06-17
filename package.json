@@ -8,7 +8,15 @@
     "start:api": "nx start:dev funds-tracker-api",
     "start:webapp": "nx start funds-tracker-webapp",
     "start:all": "nx run-many --target=start --all",
-    "build": "nx run-many --target=build --all"
+    "lint:api": "nx lint funds-tracker-api",
+    "lint:webapp": "nx lint funds-tracker-webapp",
+    "lint:all": "nx run-many --target=lint --all",
+    "test:api": "nx test funds-tracker-api",
+    "test:webapp": "nx test funds-tracker-webapp",
+    "test:all": "nx run-many --target=test --all",
+    "build:api": "nx build funds-tracker-api",
+    "build:webapp": "nx build funds-tracker-webapp",
+    "build:all": "nx run-many --target=build --all"
   },
   "devDependencies": {
     "husky": "8.0.1",
