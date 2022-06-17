@@ -5,10 +5,7 @@ on:
       - master
 jobs:
   static-analysis:
-    runs-on: ubuntu-20.04
-    defaults:
-      run:
-        working-directory: ./frontend/client/
+    runs-on: ubuntu@latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -19,5 +16,5 @@ jobs:
         with:
           version: 7.1.2
       - run: pnpm install
-      - run: pnpm test
-      - run: pnpm lint
+      - run: pnpm test:all
+      - run: pnpm lint:all
