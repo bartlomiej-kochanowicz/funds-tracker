@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -20,10 +20,8 @@ jobs:
       - run: pnpm test:webapp
       - run: pnpm lint:webapp
       - run: pnpm build:webapp
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "funds-tracker-webapp"
-          heroku_email: "bkochanovitz@gmail.com"
-          appdir: webapp/dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./webapp/dist
