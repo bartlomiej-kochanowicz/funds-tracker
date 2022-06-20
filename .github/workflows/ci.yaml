@@ -26,4 +26,4 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "funds-tracker-webapp"
           heroku_email: "bkochanovitz@gmail.com"
-          appdir: webapp
+          appdir: webapp/dist
