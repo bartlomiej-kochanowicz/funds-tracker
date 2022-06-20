@@ -16,10 +16,10 @@ jobs:
         uses: pnpm/action-setup@v2.0.1
         with:
           version: 7.x
-      - run: pnpm install:wabapp
-      - run: pnpm test:wabapp
-      - run: pnpm lint:wabapp
-      - run: pnpm build:wabapp
+      - run: pnpm install:webapp
+      - run: pnpm test:webapp
+      - run: pnpm lint:webapp
+      - run: pnpm build:webapp
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
