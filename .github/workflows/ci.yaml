@@ -1,10 +1,10 @@
-name: Continuous integration
+name: CI/CD
 on:
   pull_request:
     branches:
       - master
 jobs:
-  static-analysis:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,6 +17,14 @@ jobs:
         uses: pnpm/action-setup@v2.0.1
         with:
           version: 7.x
-      - run: pnpm install
-      - run: pnpm test:all
-      - run: pnpm lint:all
+      - run: pnpm install:wabapp
+      - run: pnpm test:wabapp
+      - run: pnpm lint:wabapp
+      - run: pnpm build:wabapp
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          args: deploy --dir=build --prod
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "funds-tracker-webapp"
+          heroku_email: "bkochanovitz@gmail.com"
