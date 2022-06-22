@@ -59,6 +59,7 @@ specifiers:
   typescript: 4.7.2
   vite: 2.9.9
   vite-plugin-eslint: 1.6.1
+  vite-plugin-static-copy: ^0.5.1
   vite-plugin-svgr: 2.1.0
   vite-tsconfig-paths: 3.5.0
 
@@ -123,6 +124,7 @@ devDependencies:
   typescript: 4.7.2
   vite: 2.9.9
   vite-plugin-eslint: 1.6.1_eslint@8.16.0+vite@2.9.9
+  vite-plugin-static-copy: 0.5.1_vite@2.9.9
   vite-plugin-svgr: 2.1.0_vite@2.9.9
   vite-tsconfig-paths: 3.5.0_vite@2.9.9
 
@@ -14029,6 +14031,19 @@ packages:
       '@types/eslint': 8.4.3
       eslint: 8.16.0
       rollup: 2.75.6
+      vite: 2.9.9
+    dev: true
+
+  /vite-plugin-static-copy/0.5.1_vite@2.9.9:
+    resolution: {integrity: sha512-jRB+TzYUc93lSCRb0xKCJNAjaYb1LwHoLVPsz7cqFN2kDybwLsDpayUzPiNSn1Nb8lX5aoZ5Az/gV9zQu3t8dg==}
+    engines: {node: '>=12.2'}
+    peerDependencies:
+      vite: ^2.6.14
+    dependencies:
+      chokidar: 3.5.3
+      fast-glob: 3.2.11
+      fs-extra: 10.1.0
+      picocolors: 1.0.0
       vite: 2.9.9
     dev: true
 
