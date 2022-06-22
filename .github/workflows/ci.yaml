@@ -1,4 +1,4 @@
-name: CI/CD-WEBAPP
+name: CI/CD
 on:
   pull_request:
     branches:
