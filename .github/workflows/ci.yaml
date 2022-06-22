@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD-webapp
 on:
   pull_request:
     branches:
@@ -21,10 +21,10 @@ jobs:
       - run: pnpm lint:webapp
       - run: pnpm build:webapp
       - name: Configure AWS Credentials
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: eu-central-1
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
       - name: Deploy static site to S3 bucket
-          run: aws s3 sync ./webapp/dist s3://${{ secrets.AWS_BUCKET_NAME }}
+        run: aws s3 sync ./webapp/dist s3://${{ secrets.AWS_BUCKET_NAME }}
