@@ -47,8 +47,8 @@ specifiers:
   react: 18.1.0
   react-dom: 18.1.0
   react-i18next: 11.16.11
-  react-icons: ^4.4.0
-  react-laag: ^2.0.4
+  react-icons: 4.4.0
+  react-laag: 2.0.4
   react-router-dom: 6.3.0
   rollup-plugin-analyzer: 4.0.0
   simple-flexbox: 2.3.3
@@ -59,7 +59,7 @@ specifiers:
   typescript: 4.7.2
   vite: 2.9.9
   vite-plugin-eslint: 1.6.1
-  vite-plugin-static-copy: ^0.5.1
+  vite-plugin-static-copy: 0.5.1
   vite-plugin-svgr: 2.1.0
   vite-tsconfig-paths: 3.5.0
 
