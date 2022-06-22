@@ -4,14 +4,15 @@ import { initReactI18next } from 'react-i18next';
 import { IS_DEVELOPMENT } from 'config/env';
 import Backend from 'i18next-http-backend';
 
+const loadPath = IS_DEVELOPMENT ? 'src/locales/{{lng}}/{{ns}}.json' : 'locales/{{lng}}/{{ns}}.json';
+
 i18next
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     backend: {
-      loadPath: 'src/locales/{{lng}}/{{ns}}.json',
-      addPath: 'src/locales/{{lng}}/{{ns}}.missed.json',
+      loadPath,
     },
     ns: ['common', 'selectors'],
     defaultNS: 'common',
