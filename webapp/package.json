@@ -11,6 +11,7 @@
     "check:circular-deps-image": "madge --image graph.svg --extensions ts,tsx src",
     "test": "jest --colors --runInBand --detectOpenHandles --collectCoverage=false",
     "test:coverage": "jest --colors --runInBand --detectOpenHandles --coverage --no-cache",
+    "test:badges": "pnpm test:coverage && jest-coverage-badges",
     "test:watch": "jest --colors --runInBand --detectOpenHandles --watch --collectCoverage=false",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
