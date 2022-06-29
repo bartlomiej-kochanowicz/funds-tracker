@@ -37,7 +37,7 @@
 ## 💸 About the Project
 
 <p>In the application you can create your custom investment model portfolio, add your financial instruments like: <strong>stocks, bonds, crypto, deposits and saving acconuts</strong>, select the interval you want to update instruments worth and provide a new values. The algorithm calculates
-deviation from the model you provide before, tells you how to align the instruments of the portfolio and shows summary. <strong>You can admire how your savings grow 📈</strong></p>
+deviation from the model you provide before, tells you how to rebalance the instruments of the portfolio and shows summary. <strong>You can admire how your savings grow 📈</strong></p>
 
 ### 🧨 Tech Stack
 
