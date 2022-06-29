@@ -13,6 +13,7 @@ specifiers:
   '@testing-library/react': 13.3.0
   '@testing-library/react-hooks': 8.0.0
   '@types/jest': 28.1.0
+  '@types/js-cookie': 3.0.2
   '@types/react': 18.0.10
   '@types/react-dom': 18.0.5
   '@types/styled-components': 5.1.25
@@ -41,6 +42,7 @@ specifiers:
   jest-environment-jsdom: 28.1.0
   jest-styled-components: 7.0.8
   jest-watch-typeahead: 1.1.0
+  js-cookie: 3.0.1
   madge: 5.0.1
   mq-polyfill: 1.1.8
   prettier: 2.6.2
@@ -70,6 +72,7 @@ dependencies:
   i18next-browser-languagedetector: 6.1.4
   i18next-http-backend: 1.4.1
   jest-styled-components: 7.0.8_styled-components@5.3.5
+  js-cookie: 3.0.1
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-i18next: 11.16.11_nw4hjwi74v2s344wj4mzshrrta
@@ -92,6 +95,7 @@ devDependencies:
   '@testing-library/react': 13.3.0_ef5jwxihqo6n7gxfmzogljlgcm
   '@testing-library/react-hooks': 8.0.0_4hkwgow5356cdmtz5c5vaxngqm
   '@types/jest': 28.1.0
+  '@types/js-cookie': 3.0.2
   '@types/react': 18.0.10
   '@types/react-dom': 18.0.5
   '@types/styled-components': 5.1.25
@@ -3872,6 +3876,10 @@ packages:
     dependencies:
       jest-matcher-utils: 27.5.1
       pretty-format: 27.5.1
+    dev: true
+
+  /@types/js-cookie/3.0.2:
+    resolution: {integrity: sha512-6+0ekgfusHftJNYpihfkMu8BWdeHs9EOJuGcSofErjstGPfPGEu9yTu4t460lTzzAMl2cM5zngQJqPMHbbnvYA==}
     dev: true
 
   /@types/jsdom/16.2.14:
@@ -9913,6 +9921,11 @@ packages:
       - supports-color
       - ts-node
     dev: true
+
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /js-string-escape/1.0.1:
     resolution: {integrity: sha512-Smw4xcfIQ5LVjAOuJCvN/zIodzA/BBSsluuoSykP+lUvScIi4U6RJLfwHet5cxFnCswUjISV8oAXaqaJDY3chg==}

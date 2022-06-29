@@ -1,10 +1,10 @@
-name: CI/CD-webapp
+name: CI-webapp
 on:
   pull_request:
     branches:
       - master
 jobs:
-  build:
+  static-analytics:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -19,12 +19,3 @@ jobs:
       - run: pnpm install:webapp
       - run: pnpm test:webapp
       - run: pnpm lint:webapp
-      - run: pnpm build:webapp
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
-      - name: Deploy static site to S3 bucket
-        run: aws s3 sync ./webapp/dist s3://${{ secrets.AWS_BUCKET_NAME }}

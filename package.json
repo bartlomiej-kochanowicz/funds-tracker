@@ -21,9 +21,9 @@
     "build:all": "nx run-many --target=build --all"
   },
   "devDependencies": {
+    "@nrwl/nx-cloud": "latest",
     "husky": "8.0.1",
-    "nx": "14.3.5",
-    "@nrwl/nx-cloud": "latest"
+    "nx": "14.3.5"
   },
   "workspaces": [
     "api",
