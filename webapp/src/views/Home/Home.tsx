@@ -5,8 +5,6 @@ import { ReactComponent as LogoHorizontal } from 'assets/logo/logo-name-horizont
 import { Column, Row } from 'simple-flexbox';
 import { Heading } from 'components/atoms/Heading';
 import { Spacer } from 'components/atoms/Spacer';
-import { hasAccess } from 'helpers/hasAccess';
-import { Button } from 'components/atoms/Button';
 
 const Wrapper = styled(Row)`
   width: 100%;
@@ -31,17 +29,13 @@ export const Home: FC = () => {
 
         <Spacer />
 
-        {hasAccess ? (
-          <Button size="large">{t('page.welcome.button')}</Button>
-        ) : (
-          <Heading
-            level="h1"
-            fontColor="light"
-            textAlign="center"
-          >
-            {t('page.welcome.release_info')}
-          </Heading>
-        )}
+        <Heading
+          level="h1"
+          fontColor="light"
+          textAlign="center"
+        >
+          {t('page.welcome.release_info')}
+        </Heading>
       </Column>
     </Wrapper>
   );
