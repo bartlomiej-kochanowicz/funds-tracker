@@ -5,6 +5,7 @@ import { ReactComponent as LogoHorizontal } from 'assets/logo/logo-name-horizont
 import { Column, Row } from 'simple-flexbox';
 import { Spacer } from 'components/atoms/Spacer';
 import { Button } from 'components/atoms/Button';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled(Row)`
   width: 100%;
@@ -29,7 +30,13 @@ export const Home: FC = () => {
 
         <Spacer />
 
-        <Button size="large">{t('page.welcome.button')}</Button>
+        <Button
+          size="large"
+          as={Link}
+          to="/link"
+        >
+          {t('page.welcome.button')}
+        </Button>
       </Column>
     </Wrapper>
   );

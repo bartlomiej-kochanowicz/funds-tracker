@@ -1,19 +1,38 @@
-import { HTMLProps, ReactNode } from 'react';
+import { HTMLProps, ReactNode, ComponentProps } from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
+import { Link } from 'react-router-dom';
 
 export type Size = 'small' | 'medium' | 'large';
 export type ButtonColors = 'blue' | 'black';
 export type Variant = 'primary' | 'secondary';
 
-interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size' | 'color' | 'sizes'> {
+type CommonProps = {
   children: ReactNode;
   size?: Size;
   color?: ButtonColors;
   fontWeight?: keyof DefaultTheme['font']['weight'];
-}
+  to?: string;
+};
 
-export const Button = styled.button<ButtonProps>`
+type NativeButtonProps = Omit<
+  HTMLProps<HTMLButtonElement>,
+  'size' | 'color' | 'sizes' | 'children'
+>;
+
+type ReactRouterLinkProps = Omit<ComponentProps<typeof Link>, 'children'>;
+
+type ButtonProps = CommonProps &
+  (
+    | ({
+        as?: 'button';
+      } & NativeButtonProps)
+    | ({
+        as?: typeof Link;
+      } & ReactRouterLinkProps)
+  );
+
+export const Button = styled.div<ButtonProps>`
   display: block;
   width: fit-content;
   border: none;
@@ -44,3 +63,11 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 Button.displayName = 'Button';
+
+Button.defaultProps = {
+  size: 'medium',
+  color: 'blue',
+  fontWeight: '500',
+  to: undefined,
+  as: 'button',
+};
