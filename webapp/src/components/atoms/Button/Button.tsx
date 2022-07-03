@@ -6,7 +6,7 @@ export type Size = 'small' | 'medium' | 'large';
 export type ButtonColors = 'blue' | 'black';
 export type Variant = 'primary' | 'secondary';
 
-interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size' | 'color'> {
+interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size' | 'color' | 'sizes'> {
   children: ReactNode;
   size?: Size;
   color?: ButtonColors;

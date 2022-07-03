@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as LogoHorizontal } from 'assets/logo/logo-name-horizontal.svg';
 import { Column, Row } from 'simple-flexbox';
-import { Heading } from 'components/atoms/Heading';
 import { Spacer } from 'components/atoms/Spacer';
+import { Button } from 'components/atoms/Button';
 
 const Wrapper = styled(Row)`
   width: 100%;
@@ -29,13 +29,7 @@ export const Home: FC = () => {
 
         <Spacer />
 
-        <Heading
-          level="h1"
-          fontColor="light"
-          textAlign="center"
-        >
-          {t('page.welcome.release_info')}
-        </Heading>
+        <Button size="large">{t('page.welcome.button')}</Button>
       </Column>
     </Wrapper>
   );
