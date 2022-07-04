@@ -115,7 +115,8 @@ export const theme = {
     0 4px 6px -4px ${transparentize(Colors.Black, 0.9)}`,
   },
   gradients: {
-    primary: `radial-gradient(circle at right bottom, #AFE39D , #7DCAC7)`,
-    secondary: `radial-gradient(circle at right bottom, #2a2a2a , #111111)`,
+    primary: `background: linear-gradient(to top left, #B0B0B0, #FAFBFC);`,
+    secondary: `linear-gradient(to top, #2a2a2a , #111111)`,
+    tertiary: `radial-gradient(circle at right bottom, #AFE39D , #7DCAC7)`,
   },
 };

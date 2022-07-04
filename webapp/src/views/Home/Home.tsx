@@ -15,6 +15,7 @@ export const Home: FC = () => {
     <FullscreenClear
       justifyContent="center"
       alignItems="center"
+      background="secondary"
     >
       <Column alignItems="center">
         <LogoHorizontal width="500px" />

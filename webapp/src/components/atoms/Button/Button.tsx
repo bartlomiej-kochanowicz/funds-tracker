@@ -11,6 +11,7 @@ type CommonProps = {
   children: ReactNode;
   size?: Size;
   color?: ButtonColors;
+  width?: 'fit-content' | 'auto';
   fontWeight?: keyof DefaultTheme['font']['weight'];
   to?: string;
 };
@@ -34,13 +35,12 @@ type ButtonProps = CommonProps &
 
 export const Button = styled.div<ButtonProps>`
   display: block;
-  width: fit-content;
   border: none;
   position: relative;
   transition: 0.2s all;
   text-decoration: none;
 
-  ${({ theme, size = 'medium', color = 'blue', fontWeight = '400' }) =>
+  ${({ theme, size = 'medium', color = 'blue', width = 'fit-content', fontWeight = '400' }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
       background-color: ${theme.button.color[color].background};
@@ -49,6 +49,7 @@ export const Button = styled.div<ButtonProps>`
       padding: ${theme.padding[size]};
       font-weight: ${fontWeight};
       border-radius: ${theme.radius.primary};
+      width: ${width};
 
       &:hover {
         cursor: pointer;
@@ -68,6 +69,7 @@ Button.displayName = 'Button';
 Button.defaultProps = {
   size: 'medium',
   color: 'blue',
+  width: 'fit-content',
   fontWeight: '500',
   to: undefined,
   as: 'button',

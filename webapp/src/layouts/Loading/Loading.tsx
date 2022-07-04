@@ -1,4 +1,5 @@
 import { Loader } from 'components/atoms/Loader';
+import { FC } from 'react';
 import { Row } from 'simple-flexbox';
 import styled from 'styled-components';
 
@@ -7,7 +8,7 @@ const Wrapper = styled(Row)`
   height: var(--doc-height);
 `;
 
-export const Loading = () => (
+export const Loading: FC = () => (
   <Wrapper
     justifyContent="center"
     alignItems="center"
@@ -15,3 +16,5 @@ export const Loading = () => (
     <Loader size="large" />
   </Wrapper>
 );
+
+Loading.displayName = 'LayoutLoading';
