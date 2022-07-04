@@ -38,6 +38,7 @@ export const Button = styled.div<ButtonProps>`
   border: none;
   position: relative;
   transition: 0.2s all;
+  text-decoration: none;
 
   ${({ theme, size = 'medium', color = 'blue', fontWeight = '400' }) =>
     css`
