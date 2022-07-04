@@ -6,16 +6,15 @@ import { Spacer } from 'components/atoms/Spacer';
 import { Button } from 'components/atoms/Button';
 import { Link } from 'react-router-dom';
 import { paths } from 'routes/paths';
-import { FullscreenClear } from 'layouts/FullscreenClear';
+import { StyledFullscreenClear } from './Home.styles';
 
 export const Home: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <FullscreenClear
+    <StyledFullscreenClear
       justifyContent="center"
       alignItems="center"
-      background="secondary"
     >
       <Column alignItems="center">
         <LogoHorizontal width="500px" />
@@ -30,6 +29,6 @@ export const Home: FC = () => {
           {t('page.welcome.button')}
         </Button>
       </Column>
-    </FullscreenClear>
+    </StyledFullscreenClear>
   );
 };

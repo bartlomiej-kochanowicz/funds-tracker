@@ -1,23 +1,15 @@
-import styled from 'styled-components';
-import { Input } from 'components/atoms/Input';
-import { Spacer } from 'components/atoms/Spacer';
-import { FullscreenClear } from 'layouts/FullscreenClear';
-import { Column } from 'simple-flexbox';
 import { Button } from 'components/atoms/Button';
+import { Spacer } from 'components/atoms/Spacer';
+import { Input } from 'components/atoms/Input';
 import { Heading } from 'components/atoms/Heading';
 import { Text } from 'components/atoms/Text';
-
-const Wrapper = styled(Column)`
-  width: 350px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
+import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
 export const Login = () => (
-  <FullscreenClear background="primary">
+  <StyledFullscreenClear
+    alignItems="center"
+    justifyContent="center"
+  >
     <Wrapper alignItems="stretch">
       <Heading textAlign="center">Sign in</Heading>
 
@@ -50,5 +42,5 @@ export const Login = () => (
         </Button>
       </Form>
     </Wrapper>
-  </FullscreenClear>
+  </StyledFullscreenClear>
 );
