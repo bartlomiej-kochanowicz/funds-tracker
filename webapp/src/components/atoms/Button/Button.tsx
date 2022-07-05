@@ -1,26 +1,47 @@
-import { HTMLProps, ReactNode } from 'react';
+import { HTMLProps, ReactNode, ComponentProps } from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
+import { Link } from 'react-router-dom';
 
 export type Size = 'small' | 'medium' | 'large';
 export type ButtonColors = 'blue' | 'black';
-export type Variant = 'primary' | 'secondary';
 
-interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size' | 'color' | 'sizes'> {
+type CommonProps = {
   children: ReactNode;
   size?: Size;
   color?: ButtonColors;
+  width?: 'fit-content' | 'auto';
   fontWeight?: keyof DefaultTheme['font']['weight'];
-}
+  to?: string;
+};
 
-export const Button = styled.button<ButtonProps>`
-  display: block;
-  width: fit-content;
+type NativeButtonProps = Omit<
+  HTMLProps<HTMLButtonElement>,
+  'size' | 'color' | 'sizes' | 'children'
+>;
+
+type ReactRouterLinkProps = Omit<ComponentProps<typeof Link>, 'children'>;
+
+type ButtonProps = CommonProps &
+  (
+    | ({
+        as?: 'button';
+      } & NativeButtonProps)
+    | ({
+        as?: typeof Link;
+      } & ReactRouterLinkProps)
+  );
+
+export const Button = styled.div<ButtonProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   position: relative;
   transition: 0.2s all;
+  text-decoration: none;
 
-  ${({ theme, size = 'medium', color = 'blue', fontWeight = '400' }) =>
+  ${({ theme, size = 'medium', color = 'blue', width = 'fit-content', fontWeight = '400' }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
       background-color: ${theme.button.color[color].background};
@@ -29,6 +50,7 @@ export const Button = styled.button<ButtonProps>`
       padding: ${theme.padding[size]};
       font-weight: ${fontWeight};
       border-radius: ${theme.radius.primary};
+      width: ${width};
 
       &:hover {
         cursor: pointer;
@@ -44,3 +66,12 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 Button.displayName = 'Button';
+
+Button.defaultProps = {
+  size: 'medium',
+  color: 'blue',
+  width: 'fit-content',
+  fontWeight: '500',
+  to: undefined,
+  as: 'button',
+};
