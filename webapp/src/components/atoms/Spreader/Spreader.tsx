@@ -1,13 +1,13 @@
 import styled, { css, DefaultTheme } from 'styled-components';
 
-export type Spread = keyof DefaultTheme['spacing'];
+type Spread = keyof DefaultTheme['spacing'];
 
 const defaultProps = {
   spread: 'medium' as Spread,
   'data-testid': 'spreader',
 };
 
-export type SpreaderProps = {
+type SpreaderProps = {
   spread?: Spread;
   'data-testid'?: string;
 } & typeof defaultProps;

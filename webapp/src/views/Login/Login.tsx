@@ -1,17 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { object, string } from 'yup';
-import { Button } from 'components/atoms/Button';
-import { Spacer } from 'components/atoms/Spacer';
-import { Input } from 'components/atoms/Input';
-import { Heading } from 'components/atoms/Heading';
-import { Text } from 'components/atoms/Text';
+import { Button, Spacer, Input, Heading, Text } from 'components/atoms';
+import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
-
-const validationSchema = object().shape({
-  email: string().email('Invalid email').required('Required'),
-  password: string().min(12, 'Too Short!').max(50, 'Too Long!').required('Required'),
-});
 
 export const Login = () => {
   const { t } = useTranslation(['common', 'login']);
