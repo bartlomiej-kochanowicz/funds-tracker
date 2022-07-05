@@ -1,6 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Button, Spacer, Input, Heading, Text } from 'components/atoms';
+import { Button } from 'components/atoms/Button';
+import { Spacer } from 'components/atoms/Spacer';
+import { Input } from 'components/atoms/Input';
+import { Heading } from 'components/atoms/Heading';
+import { Text } from 'components/atoms/Text';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 

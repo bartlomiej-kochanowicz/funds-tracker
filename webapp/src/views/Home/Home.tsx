@@ -1,8 +1,9 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
-import { Spacer, Button } from 'components/atoms';
-import { Link } from 'react-router-dom';
+import { Spacer } from 'components/atoms/Spacer';
+import { Button } from 'components/atoms/Button';
 import { paths } from 'routes/paths';
 import { ReactComponent as LogoHorizontal } from 'assets/logo/logo-name-horizontal.svg';
 import { StyledFullscreenClear } from './Home.styles';
