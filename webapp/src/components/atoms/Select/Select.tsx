@@ -15,8 +15,8 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
 
   ${({ theme }) => css`
     border-radius: ${theme.radius.secondary};
-    border: 1px solid ${darken(theme.colors.lightGray, 0.05)};
-    background-color: transparent;
+    border: none;
+    background-color: ${theme.colors.lightGray};
     padding: ${theme.padding.medium};
     color: ${theme.colors.black};
     outline-color: ${theme.colors.blue};
@@ -25,7 +25,7 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
     &:focus {
       background-color: ${darken(theme.colors.lightGray, 0.05)};
       color: ${theme.colors.blue};
-      border: 1px solid ${theme.colors.blue};
+      outline: solid 2px;
     }
 
     &::placeholder {
@@ -39,7 +39,7 @@ interface ContentProps {
 }
 
 const StyledContent = styled.div<ContentProps>`
-  color: ${({ theme, isSelected }) => (isSelected ? theme.colors.black : theme.colors.gray)};
+  color: ${({ theme, isSelected }) => (isSelected ? 'inline' : theme.colors.gray)};
 `;
 
 type Item = {

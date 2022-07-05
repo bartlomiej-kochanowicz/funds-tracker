@@ -5,4 +5,5 @@ export { Loader } from './Loader';
 export { Menu } from './Menu';
 export { Select } from './Select';
 export { Spacer } from './Spacer';
+export { Spreader } from './Spreader';
 export { Text } from './Text';
