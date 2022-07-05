@@ -1,26 +1,17 @@
 import { FC } from 'react';
-import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Column } from 'simple-flexbox';
+import { Spacer, Button } from 'components/atoms';
+import { paths } from 'routes/paths';
 import { ReactComponent as LogoHorizontal } from 'assets/logo/logo-name-horizontal.svg';
-import { Column, Row } from 'simple-flexbox';
-import { Spacer } from 'components/atoms/Spacer';
-import { Button } from 'components/atoms/Button';
-
-const Wrapper = styled(Row)`
-  width: 100%;
-  height: var(--doc-height);
-
-  ${({ theme }) => css`
-    background: ${theme.gradients.secondary};
-    padding: ${theme.padding.medium};
-  `}
-`;
+import { StyledFullscreenClear } from './Home.styles';
 
 export const Home: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Wrapper
+    <StyledFullscreenClear
       justifyContent="center"
       alignItems="center"
     >
@@ -29,8 +20,14 @@ export const Home: FC = () => {
 
         <Spacer />
 
-        <Button size="large">{t('page.welcome.button')}</Button>
+        <Button
+          size="large"
+          as={Link}
+          to={paths.login}
+        >
+          {t('page.welcome.button')}
+        </Button>
       </Column>
-    </Wrapper>
+    </StyledFullscreenClear>
   );
 };

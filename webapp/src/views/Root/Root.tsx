@@ -1,15 +1,31 @@
-import { FC } from 'react';
-import { Navigate, useRoutes } from 'react-router-dom';
-import { Home } from 'views/Home';
-import { NotFound } from 'views/NotFound';
+import { FC, lazy, Suspense } from 'react';
+import { useRoutes } from 'react-router-dom';
 import { paths } from 'routes/paths';
+import { Loading } from 'layouts/Loading';
+
+const Home = lazy(() => import('views/Home').then(({ Home: HomeView }) => ({ default: HomeView })));
+
+const Login = lazy(() =>
+  import('views/Login').then(({ Login: LoginView }) => ({ default: LoginView })),
+);
+
+const AddModelPortfolio = lazy(() =>
+  import('views/AddModelPortfolio').then(({ AddModelPortfolio: AddModelPortfolioView }) => ({
+    default: AddModelPortfolioView,
+  })),
+);
+
+const NotFound = lazy(() =>
+  import('views/NotFound').then(({ NotFound: NotFoundView }) => ({ default: NotFoundView })),
+);
 
 export const Root: FC = () => {
   const routes = useRoutes([
     { path: paths.home, element: <Home /> },
-    { path: paths.any, element: <Navigate to={paths.notFound} /> },
-    { path: paths.notFound, element: <NotFound /> },
+    { path: paths.login, element: <Login /> },
+    { path: paths.addModelPortfolio, element: <AddModelPortfolio /> },
+    { path: paths.any, element: <NotFound /> },
   ]);
 
-  return routes;
+  return <Suspense fallback={<Loading />}>{routes}</Suspense>;
 };

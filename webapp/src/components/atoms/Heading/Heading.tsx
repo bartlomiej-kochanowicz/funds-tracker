@@ -2,9 +2,9 @@ import { createElement, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { resolveProps, fontable, FontableProps } from 'styles/mixins';
 
-export type Level = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+type Level = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-export type HeadingProps = {
+type HeadingProps = {
   level?: Level;
   inline?: boolean;
   children: ReactNode;

@@ -27,7 +27,6 @@ const StyledLoader = styled.div<LoaderProps>`
   width: ${({ size, theme }) => theme.loader.size[size]};
   height: ${({ size, theme }) => theme.loader.size[size]};
   border-radius: 100%;
-  margin: 0 auto ${({ size, theme }) => theme.loader.size[size]};
   border: 3px solid ${({ color, theme }) => theme.loader.colors[color]};
   border-left: 3px solid transparent;
   border-bottom: 3px solid transparent;

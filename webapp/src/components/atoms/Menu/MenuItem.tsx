@@ -20,7 +20,7 @@ const StyledButton = styled.button<{ isSelected: boolean }>`
 
     ${isSelected &&
     css`
-      font-weight: ${theme.font.weight[600]};
+      font-weight: ${theme.font.weight[700]};
     `}
 
     &:hover {

@@ -6,6 +6,7 @@ interface InputProps extends HTMLProps<HTMLButtonElement> {}
 
 export const Input = styled.input<InputProps>`
   border: none;
+  width: auto;
 
   ${({ theme }) => css`
     border-radius: ${theme.radius.secondary};

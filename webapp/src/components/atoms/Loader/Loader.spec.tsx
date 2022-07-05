@@ -4,8 +4,8 @@ import { Loader, Size, LoaderColors } from 'components/atoms/Loader';
 describe('Atoms/Loader tests', () => {
   it.each([
     ['small' as Size, '1rem'],
-    ['medium' as Size, '1.2rem'],
-    ['large' as Size, '1.7rem'],
+    ['medium' as Size, '1.5rem'],
+    ['large' as Size, '2rem'],
   ])('has correct size for %s', (size, expected) => {
     const { getByTestId } = render(
       <Loader
