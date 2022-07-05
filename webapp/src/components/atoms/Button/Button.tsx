@@ -3,8 +3,8 @@ import styled, { DefaultTheme, css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
 import { Link } from 'react-router-dom';
 
-type Size = 'small' | 'medium' | 'large';
-type ButtonColors = 'blue' | 'black';
+export type Size = 'small' | 'medium' | 'large';
+export type ButtonColors = 'blue' | 'black';
 
 type CommonProps = {
   children: ReactNode;
