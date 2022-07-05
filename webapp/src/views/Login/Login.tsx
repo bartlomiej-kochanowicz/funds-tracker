@@ -1,16 +1,30 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Button, Spacer, Input, Heading, Text } from 'components/atoms';
+import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
+import { useNavigate } from 'react-router-dom';
+import { paths } from 'routes/paths';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
 export const Login = () => {
   const { t } = useTranslation(['common', 'login']);
 
-  const { handleSubmit } = useFormik({
-    initialValues: {},
+  const navigate = useNavigate();
+
+  const initialValues = { userEmail: '', userPassword: '' };
+
+  const onSubmit = async (/* values: typeof initialValues */) => {
+    await new Promise(resolve => {
+      setTimeout(resolve, 3000);
+    });
+
+    navigate(paths.addModelPortfolio);
+  };
+
+  const { handleSubmit, values, handleChange, isSubmitting } = useFormik({
+    initialValues,
     validationSchema,
-    onSubmit: () => {},
+    onSubmit,
   });
 
   return (
@@ -37,6 +51,10 @@ export const Login = () => {
           <Input
             placeholder={t('login:page.login.email.placeholder')}
             type="email"
+            id="userEmail"
+            name="userEmail"
+            value={values.userEmail}
+            onChange={handleChange}
           />
 
           <Spacer />
@@ -44,6 +62,10 @@ export const Login = () => {
           <Input
             placeholder={t('password')}
             type="password"
+            id="userPassword"
+            name="userPassword"
+            value={values.userPassword}
+            onChange={handleChange}
           />
 
           <Spacer />
@@ -51,8 +73,9 @@ export const Login = () => {
           <Button
             color="black"
             width="auto"
+            type="submit"
           >
-            {t('sign_in')}
+            {isSubmitting ? <Loader color="white" /> : t('sign_in')}
           </Button>
         </Form>
       </Wrapper>

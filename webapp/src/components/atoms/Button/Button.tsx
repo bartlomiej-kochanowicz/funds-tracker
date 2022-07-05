@@ -33,7 +33,9 @@ type ButtonProps = CommonProps &
   );
 
 export const Button = styled.div<ButtonProps>`
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   position: relative;
   transition: 0.2s all;

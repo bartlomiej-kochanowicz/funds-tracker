@@ -84,8 +84,8 @@ export const theme = {
   loader: {
     size: {
       small: rem(1),
-      medium: rem(1.2),
-      large: rem(1.7),
+      medium: rem(1.5),
+      large: rem(2),
     },
     colors: {
       white: Colors.White,

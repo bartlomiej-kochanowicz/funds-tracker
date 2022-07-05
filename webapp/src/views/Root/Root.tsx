@@ -9,6 +9,12 @@ const Login = lazy(() =>
   import('views/Login').then(({ Login: LoginView }) => ({ default: LoginView })),
 );
 
+const AddModelPortfolio = lazy(() =>
+  import('views/AddModelPortfolio').then(({ AddModelPortfolio: AddModelPortfolioView }) => ({
+    default: AddModelPortfolioView,
+  })),
+);
+
 const NotFound = lazy(() =>
   import('views/NotFound').then(({ NotFound: NotFoundView }) => ({ default: NotFoundView })),
 );
@@ -17,6 +23,7 @@ export const Root: FC = () => {
   const routes = useRoutes([
     { path: paths.home, element: <Home /> },
     { path: paths.login, element: <Login /> },
+    { path: paths.addModelPortfolio, element: <AddModelPortfolio /> },
     { path: paths.any, element: <NotFound /> },
   ]);
 
