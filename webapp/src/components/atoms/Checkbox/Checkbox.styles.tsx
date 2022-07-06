@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { transparentize } from 'color2k';
 
 export const Container = styled.label`
   display: inline-flex;
@@ -20,7 +19,7 @@ export const Marker = styled.span`
 
   svg {
     opacity: 0;
-    fill: #fff;
+    fill: ${({ theme }) => theme.colors.white};
   }
 `;
 
