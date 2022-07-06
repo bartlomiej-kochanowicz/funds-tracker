@@ -3,6 +3,7 @@ import { Row } from 'simple-flexbox';
 import { Input, Select, Spreader } from 'components/atoms';
 import instruments from 'constants/selectors/instruments';
 import { useTranslation } from 'react-i18next';
+import { Checkbox } from 'components/atoms/Checkbox';
 
 export const AddModelPortfolio = () => {
   const { t } = useTranslation(['common', 'selectors']);
@@ -16,13 +17,21 @@ export const AddModelPortfolio = () => {
     <div>
       <form>
         <Row>
-          <Input />
+          <Input placeholder="Name" />
 
           <Spreader />
 
           <Select
             options={options}
             placeholder="Select the instrument"
+          />
+
+          <Spreader />
+
+          <Checkbox
+            id="test"
+            name="test"
+            label="test"
           />
         </Row>
       </form>

@@ -15,6 +15,7 @@ export const Input = styled.input<InputProps>`
     outline-color: ${theme.colors.blue};
     color: ${theme.colors.black};
     font-weight: ${theme.font.weight[500]};
+    border: 2px solid ${theme.colors.gray};
 
     &:focus {
       background-color: ${darken(theme.colors.lightGray, 0.05)};
