@@ -1,8 +1,10 @@
 // import styled from 'styled-components';
-import { Row } from 'simple-flexbox';
-import { Input, Select, Spreader } from 'components/atoms';
+import { Column } from 'simple-flexbox';
+import { Input, Select, Spacer } from 'components/atoms';
 import instruments from 'constants/selectors/instruments';
 import { useTranslation } from 'react-i18next';
+import { Checkbox } from 'components/atoms/Checkbox';
+import { FullscreenClear } from 'layouts/FullscreenClear';
 
 export const AddModelPortfolio = () => {
   const { t } = useTranslation(['common', 'selectors']);
@@ -13,19 +15,30 @@ export const AddModelPortfolio = () => {
   }));
 
   return (
-    <div>
+    <FullscreenClear
+      alignItems="center"
+      justifyContent="center"
+    >
       <form>
-        <Row>
-          <Input />
+        <Column>
+          <Input placeholder="Name" />
 
-          <Spreader />
+          <Spacer />
 
           <Select
             options={options}
             placeholder="Select the instrument"
           />
-        </Row>
+
+          <Spacer />
+
+          <Checkbox
+            id="test"
+            name="test"
+            label="test"
+          />
+        </Column>
       </form>
-    </div>
+    </FullscreenClear>
   );
 };

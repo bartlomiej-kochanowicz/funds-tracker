@@ -21,11 +21,12 @@ const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
     color: ${theme.colors.black};
     outline-color: ${theme.colors.blue};
     font-weight: ${theme.font.weight[500]};
+    border: 2px solid ${theme.colors.gray};
 
     &:focus {
       background-color: ${darken(theme.colors.lightGray, 0.05)};
       color: ${theme.colors.blue};
-      outline: solid 2px;
+      border: 2px solid ${theme.colors.blue};
     }
 
     &::placeholder {
