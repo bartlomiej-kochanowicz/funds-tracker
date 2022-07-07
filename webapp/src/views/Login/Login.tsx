@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,9 +8,6 @@ import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
 export const Login = () => {
-  // temporary - react query in the future
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const { t } = useTranslation(['common', 'login']);
 
   const navigate = useNavigate();
@@ -19,17 +15,18 @@ export const Login = () => {
   const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async (/* values: typeof initialValues */) => {
-    setIsLoading(true);
-
     await new Promise(resolve => {
       setTimeout(resolve, 3000);
     });
 
-    setIsLoading(false);
     navigate(paths.addModelPortfolio);
   };
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
   });
@@ -59,6 +56,7 @@ export const Login = () => {
             placeholder={t('login:page.login.email.placeholder')}
             type="email"
             {...register('userEmail')}
+            error={errors.userEmail?.message}
           />
 
           <Spacer />
@@ -67,6 +65,7 @@ export const Login = () => {
             placeholder={t('password')}
             type="password"
             {...register('userPassword')}
+            error={errors.userPassword?.message}
           />
 
           <Spacer />
@@ -76,7 +75,7 @@ export const Login = () => {
             width="auto"
             type="submit"
           >
-            {isLoading ? <Loader color="white" /> : t('sign_in')}
+            {isSubmitting ? <Loader color="white" /> : t('sign_in')}
           </Button>
         </Form>
       </Wrapper>

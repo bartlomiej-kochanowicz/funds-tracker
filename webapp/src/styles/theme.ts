@@ -6,6 +6,7 @@ import { transparentize } from 'color2k';
 export const Colors = {
   Green: '#7DCAC7',
   Blue: '#3F8CFF',
+  Red: '#FF6961',
   Black: '#111111',
   White: '#ffffff',
   Purple: '#725BFE',
@@ -20,6 +21,7 @@ export const theme = {
   colors: {
     green: Colors.Green,
     blue: Colors.Blue,
+    red: Colors.Red,
     black: Colors.Black,
     white: Colors.White,
     purple: Colors.Purple,
