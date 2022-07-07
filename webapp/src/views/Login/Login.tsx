@@ -31,6 +31,9 @@ export const Login = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  const emailError = errors.userEmail?.message && t(`login:${errors.userEmail.message}`);
+  const paswordError = errors.userPassword?.message && t(`login:${errors.userPassword.message}`);
+
   return (
     <StyledFullscreenClear
       alignItems="center"
@@ -56,7 +59,7 @@ export const Login = () => {
             placeholder={t('login:page.login.email.placeholder')}
             type="email"
             {...register('userEmail')}
-            error={errors.userEmail?.message}
+            error={emailError}
           />
 
           <Spacer />
@@ -65,7 +68,7 @@ export const Login = () => {
             placeholder={t('password')}
             type="password"
             {...register('userPassword')}
-            error={errors.userPassword?.message}
+            error={paswordError}
           />
 
           <Spacer />
