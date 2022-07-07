@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useFormik } from 'formik';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'routes/paths';
@@ -7,24 +9,29 @@ import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
 export const Login = () => {
+  // temporary - react query in the future
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { t } = useTranslation(['common', 'login']);
 
   const navigate = useNavigate();
 
-  const initialValues = { userEmail: '', userPassword: '' };
+  const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async (/* values: typeof initialValues */) => {
+    setIsLoading(true);
+
     await new Promise(resolve => {
       setTimeout(resolve, 3000);
     });
 
+    setIsLoading(false);
     navigate(paths.addModelPortfolio);
   };
 
-  const { handleSubmit, values, handleChange, isSubmitting } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit,
+  const { register, handleSubmit } = useForm({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
   });
 
   return (
@@ -47,14 +54,11 @@ export const Login = () => {
 
         <Spacer space="large" />
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Input
             placeholder={t('login:page.login.email.placeholder')}
             type="email"
-            id="userEmail"
-            name="userEmail"
-            value={values.userEmail}
-            onChange={handleChange}
+            {...register('userEmail')}
           />
 
           <Spacer />
@@ -62,10 +66,7 @@ export const Login = () => {
           <Input
             placeholder={t('password')}
             type="password"
-            id="userPassword"
-            name="userPassword"
-            value={values.userPassword}
-            onChange={handleChange}
+            {...register('userPassword')}
           />
 
           <Spacer />
@@ -75,7 +76,7 @@ export const Login = () => {
             width="auto"
             type="submit"
           >
-            {isSubmitting ? <Loader color="white" /> : t('sign_in')}
+            {isLoading ? <Loader color="white" /> : t('sign_in')}
           </Button>
         </Form>
       </Wrapper>
