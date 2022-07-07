@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { useFormik } from 'formik';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'routes/paths';
@@ -11,7 +12,7 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  const initialValues = { userEmail: '', userPassword: '' };
+  const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async (/* values: typeof initialValues */) => {
     await new Promise(resolve => {
@@ -21,11 +22,17 @@ export const Login = () => {
     navigate(paths.addModelPortfolio);
   };
 
-  const { handleSubmit, values, handleChange, isSubmitting } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit,
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
   });
+
+  const emailError = errors.userEmail?.message && t(`login:${errors.userEmail.message}`);
+  const paswordError = errors.userPassword?.message && t(`login:${errors.userPassword.message}`);
 
   return (
     <StyledFullscreenClear
@@ -47,14 +54,12 @@ export const Login = () => {
 
         <Spacer space="large" />
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Input
             placeholder={t('login:page.login.email.placeholder')}
             type="email"
-            id="userEmail"
-            name="userEmail"
-            value={values.userEmail}
-            onChange={handleChange}
+            {...register('userEmail')}
+            error={emailError}
           />
 
           <Spacer />
@@ -62,10 +67,8 @@ export const Login = () => {
           <Input
             placeholder={t('password')}
             type="password"
-            id="userPassword"
-            name="userPassword"
-            value={values.userPassword}
-            onChange={handleChange}
+            {...register('userPassword')}
+            error={paswordError}
           />
 
           <Spacer />

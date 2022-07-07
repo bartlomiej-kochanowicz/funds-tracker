@@ -1,4 +1,9 @@
 {
   "page.login.description": "Witaj ponownie! Moesz kontynuować zarządzanie swoimi finansami",
-  "page.login.email.placeholder": "Podaj adres email"
+  "page.login.email.placeholder": "Podaj adres email",
+  "page.login.email.invalid": "Niepoprawny adres email!",
+  "page.login.email.required": "Email wymagany",
+  "page.login.password.too_short": "Hasło jest za krótkie, min. 12 znaków",
+  "page.login.password.too_long": "Hasło jest za długie, max. 50 znaków",
+  "page.login.password.required": "Hasło wymagane"
 }
