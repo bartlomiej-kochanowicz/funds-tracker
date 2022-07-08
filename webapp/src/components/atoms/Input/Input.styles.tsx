@@ -1,15 +1,14 @@
 import styled, { css } from 'styled-components';
 import { darken } from 'color2k';
-import { Column } from 'simple-flexbox';
 
-export const StyledInput = styled.input<{ error: boolean }>`
+export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
   border: none;
   width: 100%;
 
-  ${({ theme, error }) => css`
+  ${({ theme, error, hasUnit }) => css`
     border-radius: ${theme.radius.secondary};
     background-color: ${theme.colors.lightGray};
-    padding: 0.5rem 1.25rem;
+    padding: ${hasUnit ? '0.5rem 2.5rem 0.5rem 1.25rem' : '0.5rem 1.25rem'};
     outline-color: ${theme.colors[error ? 'red' : 'blue']};
     color: ${theme.colors[error ? 'red' : 'black']};
     font-weight: ${theme.font.weight[500]};
@@ -50,17 +49,11 @@ export const Error = styled.span`
   `}
 `;
 
-const ArrowButtonsWrapper = styled(Column)`
+export const Unit = styled.span`
+  color: ${({ theme }) => theme.colors.gray};
   position: absolute;
+  line-height: 2.75rem;
+  right: 1.25rem;
   top: 0;
-  right: 0;
   bottom: 0;
 `;
-
-const ArrowButton = styled.button`
-background-color`;
-
-export const StyledArrowButtons = {
-  Wrapper: ArrowButtonsWrapper,
-  Button: ArrowButton,
-};

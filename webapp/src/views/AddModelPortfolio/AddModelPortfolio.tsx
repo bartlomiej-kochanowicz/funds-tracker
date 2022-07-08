@@ -58,6 +58,7 @@ export const AddModelPortfolio = () => {
           <Input
             placeholder="Percentage of your portfolio"
             type="number"
+            unit="percentage"
             min="0"
             max="100"
           />
