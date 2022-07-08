@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'routes/paths';
+import { LangSelector } from 'components/molecules/LangSelector';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
@@ -81,6 +82,8 @@ export const Login = () => {
             {isSubmitting ? <Loader color="white" /> : t('sign_in')}
           </Button>
         </Form>
+
+        <LangSelector />
       </Wrapper>
     </StyledFullscreenClear>
   );

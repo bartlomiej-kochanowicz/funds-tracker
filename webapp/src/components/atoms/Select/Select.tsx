@@ -6,6 +6,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Spreader } from 'components/atoms/Spreader';
 import { Menu } from 'components/atoms/Menu';
 import { composeRefs } from 'utils/composeRefs';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
 
 const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
   display: flex;
@@ -44,23 +45,37 @@ const StyledContent = styled.div<ContentProps>`
 `;
 
 type Item = {
-  value: string | number;
+  value: string;
   label: string;
 };
 
 interface SelectProps {
   options: Item[];
-  placeholder?: string | null;
-  defaultValue?: string | number | null;
+  placeholder?: string;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
 }
 
-export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder }) => {
+export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder, onChange }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const getDefaultSelected = (): Item | null =>
     defaultValue ? options.find(option => option.value === defaultValue) || null : null;
 
   const [selected, setSelected] = useState<Item | null>(getDefaultSelected());
+
+  useUpdateEffect(() => {
+    if (onChange && selected) onChange(selected.value);
+  }, [selected]);
+
+  // fix for <LangSelector />
+  useUpdateEffect(() => {
+    const newSelected = options.find(({ value }) => value === selected?.value) ?? null;
+
+    if (selected?.label !== newSelected?.label) {
+      setSelected(newSelected);
+    }
+  }, [options]);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -131,6 +146,7 @@ export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder }) 
 Select.displayName = 'Select';
 
 Select.defaultProps = {
-  placeholder: null,
-  defaultValue: null,
+  placeholder: undefined,
+  defaultValue: undefined,
+  onChange: () => {},
 };

@@ -10,12 +10,14 @@
   "page.login.password.too_short": "Password is too short, min. 12 characters",
   "page.login.password.too_long": "Password is too long, max. 50 characters",
   "page.login.password.required": "Password Required",
-  "instruments.cash": "Cash",
-  "instruments.stocks": "Stocks",
-  "instruments.saving-accounts": "Saving accounts",
-  "instruments.deposits": "Deposits",
-  "instruments.bonds": "Bonds",
-  "instruments.commodies": "Commodies",
-  "instruments.crypto": "Crypto",
-  "instruments.others": "Others"
+  "selectors.instruments.cash": "Cash",
+  "selectors.instruments.stocks": "Stocks",
+  "selectors.instruments.saving-accounts": "Saving accounts",
+  "selectors.instruments.deposits": "Deposits",
+  "selectors.instruments.bonds": "Bonds",
+  "selectors.instruments.commodies": "Commodies",
+  "selectors.instruments.crypto": "Crypto",
+  "selectors.instruments.others": "Others",
+  "selectors.languages.pl": "Polish",
+  "selectors.languages.en": "English"
 }
