@@ -1,9 +1,0 @@
-{
-  "page.login.description": "Welcome back! You can continue to manage your finances",
-  "page.login.email.placeholder": "Enter email adress",
-  "page.login.email.invalid": "Invalid email address!",
-  "page.login.email.required": "Email required",
-  "page.login.password.too_short": "Password is too short, min. 12 characters",
-  "page.login.password.too_long": "Password is too long, max. 50 characters",
-  "page.login.password.required": "Password Required"
-}
