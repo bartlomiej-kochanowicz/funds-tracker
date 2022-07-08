@@ -1,0 +1,21 @@
+{
+  "page.welcome.release_info": "Coming september 2022...",
+  "page.welcome.button": "Start now",
+  "sign_in": "Sign in",
+  "password": "Password",
+  "page.login.description": "Welcome back! You can continue to manage your finances",
+  "page.login.email.placeholder": "Enter email adress",
+  "page.login.email.invalid": "Invalid email address!",
+  "page.login.email.required": "Email required",
+  "page.login.password.too_short": "Password is too short, min. 12 characters",
+  "page.login.password.too_long": "Password is too long, max. 50 characters",
+  "page.login.password.required": "Password Required",
+  "instruments.cash": "Cash",
+  "instruments.stocks": "Stocks",
+  "instruments.saving-accounts": "Saving accounts",
+  "instruments.deposits": "Deposits",
+  "instruments.bonds": "Bonds",
+  "instruments.commodies": "Commodies",
+  "instruments.crypto": "Crypto",
+  "instruments.others": "Others"
+}

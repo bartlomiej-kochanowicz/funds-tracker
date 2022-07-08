@@ -4,9 +4,7 @@ import { initReactI18next } from 'react-i18next';
 import { IS_DEVELOPMENT } from 'config/env';
 import Backend from 'i18next-http-backend';
 
-const loadPath = IS_DEVELOPMENT
-  ? 'src/locales/{{lng}}/{{ns}}.json'
-  : '/locales/{{lng}}/{{ns}}.json';
+const loadPath = IS_DEVELOPMENT ? 'src/locales/{{lng}}.json' : '/locales/{{lng}}.json';
 
 i18next
   .use(Backend)
@@ -16,8 +14,6 @@ i18next
     backend: {
       loadPath,
     },
-    ns: ['common', 'selectors'],
-    defaultNS: 'common',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,

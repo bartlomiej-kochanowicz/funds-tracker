@@ -1,0 +1,21 @@
+{
+  "page.welcome.release_info": "Już we wrześniu 2022...",
+  "page.welcome.button": "Zacznij teraz",
+  "sign_in": "Zaloguj się",
+  "password": "Hasło",
+  "page.login.description": "Witaj ponownie! Moesz kontynuować zarządzanie swoimi finansami",
+  "page.login.email.placeholder": "Podaj adres email",
+  "page.login.email.invalid": "Niepoprawny adres email!",
+  "page.login.email.required": "Email wymagany",
+  "page.login.password.too_short": "Hasło jest za krótkie, min. 12 znaków",
+  "page.login.password.too_long": "Hasło jest za długie, max. 50 znaków",
+  "page.login.password.required": "Hasło wymagane",
+  "instruments.cash": "Gotówka",
+  "instruments.stocks": "Akcje",
+  "instruments.saving-accounts": "Konta oszczędnościowe",
+  "instruments.deposits": "Lokaty",
+  "instruments.bonds": "Obligacje",
+  "instruments.commodies": "Surowce",
+  "instruments.crypto": "Kryptowaluty",
+  "instruments.others": "Inne"
+}

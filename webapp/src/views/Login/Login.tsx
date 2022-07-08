@@ -8,7 +8,7 @@ import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
 export const Login = () => {
-  const { t } = useTranslation(['common', 'login']);
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -31,8 +31,8 @@ export const Login = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const emailError = errors.userEmail?.message && t(`login:${errors.userEmail.message}`);
-  const paswordError = errors.userPassword?.message && t(`login:${errors.userPassword.message}`);
+  const emailError = errors.userEmail?.message && t(errors.userEmail.message);
+  const paswordError = errors.userPassword?.message && t(errors.userPassword.message);
 
   return (
     <StyledFullscreenClear
@@ -49,14 +49,14 @@ export const Login = () => {
           fontColor="darkGray"
           textAlign="center"
         >
-          {t('login:page.login.description')}
+          {t('page.login.description')}
         </Text>
 
         <Spacer space="large" />
 
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Input
-            placeholder={t('login:page.login.email.placeholder')}
+            placeholder={t('page.login.email.placeholder')}
             type="email"
             {...register('userEmail')}
             error={emailError}
