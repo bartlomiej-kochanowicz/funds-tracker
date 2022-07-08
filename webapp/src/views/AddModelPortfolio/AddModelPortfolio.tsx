@@ -7,10 +7,10 @@ import { Checkbox } from 'components/atoms/Checkbox';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 
 export const AddModelPortfolio = () => {
-  const { t } = useTranslation(['common', 'selectors']);
+  const { t } = useTranslation();
 
   const options = instruments.map(({ label, ...rest }) => ({
-    label: t(`selectors:${label}`),
+    label: t(label),
     ...rest,
   }));
 
