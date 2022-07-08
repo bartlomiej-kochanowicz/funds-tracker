@@ -1,4 +1,4 @@
-import { FC, Fragment, HTMLProps, useRef, useState } from 'react';
+import { FC, Fragment, HTMLProps, ReactNode, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useLayer } from 'react-laag';
 import { darken } from 'color2k';
@@ -54,9 +54,16 @@ interface SelectProps {
   placeholder?: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
+  customLabel?: (value: Item) => ReactNode;
 }
 
-export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder, onChange }) => {
+export const Select: FC<SelectProps> = ({
+  options,
+  defaultValue,
+  placeholder,
+  onChange,
+  customLabel,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const getDefaultSelected = (): Item | null =>
@@ -67,15 +74,6 @@ export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder, on
   useUpdateEffect(() => {
     if (onChange && selected) onChange(selected.value);
   }, [selected]);
-
-  // fix for <LangSelector />
-  useUpdateEffect(() => {
-    const newSelected = options.find(({ value }) => value === selected?.value) ?? null;
-
-    if (selected?.label !== newSelected?.label) {
-      setSelected(newSelected);
-    }
-  }, [options]);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -106,10 +104,17 @@ export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder, on
         ref={composeRefs(buttonRef, triggerProps.ref)}
       >
         <StyledContent isSelected={Boolean(selected)}>
-          {selected?.label ?? placeholder}
+          {/* Render default label when customLabel is not provided */}
+          {!customLabel && selected && selected.label}
+
+          {/* Render customLabel when customLabel is provided */}
+          {customLabel && selected && customLabel(selected)}
+
+          {/* Render placeholder when is not selected */}
+          {!selected && placeholder}
         </StyledContent>
 
-        <Spreader />
+        <Spreader spread="small" />
 
         {isOpen ? <FaChevronUp /> : <FaChevronDown />}
       </StyledButton>
@@ -149,4 +154,5 @@ Select.defaultProps = {
   placeholder: undefined,
   defaultValue: undefined,
   onChange: () => {},
+  customLabel: undefined,
 };

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
+import { Row } from 'simple-flexbox';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { useNavigate } from 'react-router-dom';
@@ -82,9 +83,17 @@ export const Login = () => {
             {isSubmitting ? <Loader color="white" /> : t('sign_in')}
           </Button>
         </Form>
-
-        <LangSelector />
       </Wrapper>
+
+      <Spacer space="large" />
+
+      <Spacer space="large" />
+
+      <Spacer space="large" />
+
+      <Row justifyContent="flex-end">
+        <LangSelector />
+      </Row>
     </StyledFullscreenClear>
   );
 };
