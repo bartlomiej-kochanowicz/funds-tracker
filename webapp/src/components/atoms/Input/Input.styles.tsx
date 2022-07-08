@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { darken } from 'color2k';
+import { Column } from 'simple-flexbox';
 
 export const StyledInput = styled.input<{ error: boolean }>`
   border: none;
@@ -23,6 +24,14 @@ export const StyledInput = styled.input<{ error: boolean }>`
       color: ${theme.colors.gray};
     }
   `}
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -40,3 +49,18 @@ export const Error = styled.span`
     color: ${theme.colors.red};
   `}
 `;
+
+const ArrowButtonsWrapper = styled(Column)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+const ArrowButton = styled.button`
+background-color`;
+
+export const StyledArrowButtons = {
+  Wrapper: ArrowButtonsWrapper,
+  Button: ArrowButton,
+};
