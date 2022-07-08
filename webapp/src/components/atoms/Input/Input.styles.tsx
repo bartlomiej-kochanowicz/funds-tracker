@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components';
 import { darken } from 'color2k';
 
-export const StyledInput = styled.input<{ error: boolean }>`
+export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
   border: none;
   width: 100%;
 
-  ${({ theme, error }) => css`
+  ${({ theme, error, hasUnit }) => css`
     border-radius: ${theme.radius.secondary};
     background-color: ${theme.colors.lightGray};
-    padding: 0.5rem 1.25rem;
+    padding: ${hasUnit ? '0.5rem 2.5rem 0.5rem 1.25rem' : '0.5rem 1.25rem'};
     outline-color: ${theme.colors[error ? 'red' : 'blue']};
     color: ${theme.colors[error ? 'red' : 'black']};
     font-weight: ${theme.font.weight[500]};
@@ -23,6 +23,14 @@ export const StyledInput = styled.input<{ error: boolean }>`
       color: ${theme.colors.gray};
     }
   `}
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -39,4 +47,13 @@ export const Error = styled.span`
     font-size: ${theme.font.size['0.75']};
     color: ${theme.colors.red};
   `}
+`;
+
+export const Unit = styled.span`
+  color: ${({ theme }) => theme.colors.gray};
+  position: absolute;
+  line-height: 2.75rem;
+  right: 1.25rem;
+  top: 0;
+  bottom: 0;
 `;

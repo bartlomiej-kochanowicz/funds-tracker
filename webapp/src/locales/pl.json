@@ -10,12 +10,14 @@
   "page.login.password.too_short": "Hasło jest za krótkie, min. 12 znaków",
   "page.login.password.too_long": "Hasło jest za długie, max. 50 znaków",
   "page.login.password.required": "Hasło wymagane",
-  "instruments.cash": "Gotówka",
-  "instruments.stocks": "Akcje",
-  "instruments.saving-accounts": "Konta oszczędnościowe",
-  "instruments.deposits": "Lokaty",
-  "instruments.bonds": "Obligacje",
-  "instruments.commodies": "Surowce",
-  "instruments.crypto": "Kryptowaluty",
-  "instruments.others": "Inne"
+  "selectors.instruments.cash": "Gotówka",
+  "selectors.instruments.stocks": "Akcje",
+  "selectors.instruments.saving-accounts": "Konta oszczędnościowe",
+  "selectors.instruments.deposits": "Lokaty",
+  "selectors.instruments.bonds": "Obligacje",
+  "selectors.instruments.commodies": "Surowce",
+  "selectors.instruments.crypto": "Kryptowaluty",
+  "selectors.instruments.others": "Inne",
+  "selectors.languages.pl": "Polski",
+  "selectors.languages.en": "Angielski"
 }

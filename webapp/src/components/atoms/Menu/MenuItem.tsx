@@ -12,6 +12,7 @@ const StyledButton = styled.button<{ isSelected: boolean }>`
   width: 100%;
   background-color: transparent;
   cursor: pointer;
+  text-align: left;
 
   ${({ theme, isSelected }) => css`
     color: ${theme.colors.black};
