@@ -33,8 +33,6 @@
       "error",
       {
         "devDependencies": [
-          "**/*.stories.*",
-          "**/.storybook/**/*.*",
           "**/*.spec.*",
           "**/*.test.*",
           "**/*/test-utils.tsx",
