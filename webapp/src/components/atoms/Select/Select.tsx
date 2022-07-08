@@ -1,4 +1,4 @@
-import { FC, Fragment, HTMLProps, useRef, useState } from 'react';
+import { FC, Fragment, HTMLProps, ReactNode, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useLayer } from 'react-laag';
 import { darken } from 'color2k';
@@ -6,6 +6,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Spreader } from 'components/atoms/Spreader';
 import { Menu } from 'components/atoms/Menu';
 import { composeRefs } from 'utils/composeRefs';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
 
 const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
   display: flex;
@@ -44,23 +45,35 @@ const StyledContent = styled.div<ContentProps>`
 `;
 
 type Item = {
-  value: string | number;
+  value: string;
   label: string;
 };
 
 interface SelectProps {
   options: Item[];
-  placeholder?: string | null;
-  defaultValue?: string | number | null;
+  placeholder?: string;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
+  customLabel?: (value: Item) => ReactNode;
 }
 
-export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder }) => {
+export const Select: FC<SelectProps> = ({
+  options,
+  defaultValue,
+  placeholder,
+  onChange,
+  customLabel,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const getDefaultSelected = (): Item | null =>
     defaultValue ? options.find(option => option.value === defaultValue) || null : null;
 
   const [selected, setSelected] = useState<Item | null>(getDefaultSelected());
+
+  useUpdateEffect(() => {
+    if (onChange && selected) onChange(selected.value);
+  }, [selected]);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -91,10 +104,17 @@ export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder }) 
         ref={composeRefs(buttonRef, triggerProps.ref)}
       >
         <StyledContent isSelected={Boolean(selected)}>
-          {selected?.label ?? placeholder}
+          {/* Render default label when customLabel is not provided */}
+          {!customLabel && selected && selected.label}
+
+          {/* Render customLabel when customLabel is provided */}
+          {customLabel && selected && customLabel(selected)}
+
+          {/* Render placeholder when is not selected */}
+          {!selected && placeholder}
         </StyledContent>
 
-        <Spreader />
+        <Spreader spread="small" />
 
         {isOpen ? <FaChevronUp /> : <FaChevronDown />}
       </StyledButton>
@@ -131,6 +151,8 @@ export const Select: FC<SelectProps> = ({ options, defaultValue, placeholder }) 
 Select.displayName = 'Select';
 
 Select.defaultProps = {
-  placeholder: null,
-  defaultValue: null,
+  placeholder: undefined,
+  defaultValue: undefined,
+  onChange: () => {},
+  customLabel: undefined,
 };

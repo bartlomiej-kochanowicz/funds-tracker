@@ -1,9 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
+import { Row } from 'simple-flexbox';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'routes/paths';
+import { LangSelector } from 'components/molecules/LangSelector';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
@@ -82,6 +84,16 @@ export const Login = () => {
           </Button>
         </Form>
       </Wrapper>
+
+      <Spacer space="large" />
+
+      <Spacer space="large" />
+
+      <Spacer space="large" />
+
+      <Row justifyContent="flex-end">
+        <LangSelector />
+      </Row>
     </StyledFullscreenClear>
   );
 };
