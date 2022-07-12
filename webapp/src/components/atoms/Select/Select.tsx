@@ -51,10 +51,10 @@ type Item = {
 
 interface SelectProps {
   options: Item[];
-  placeholder?: string;
-  defaultValue?: string;
+  placeholder?: string | null;
+  defaultValue?: string | null;
   onChange?: (value: string) => void;
-  customLabel?: (value: Item) => ReactNode;
+  customLabel?: ((value: Item) => ReactNode) | null;
 }
 
 export const Select: FC<SelectProps> = ({
@@ -151,8 +151,8 @@ export const Select: FC<SelectProps> = ({
 Select.displayName = 'Select';
 
 Select.defaultProps = {
-  placeholder: undefined,
-  defaultValue: undefined,
+  placeholder: null,
+  defaultValue: null,
   onChange: () => {},
-  customLabel: undefined,
+  customLabel: null,
 };

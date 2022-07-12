@@ -4,10 +4,13 @@ import { useForm } from 'react-hook-form';
 import { Button, Heading, Input, Select, Spacer, Spreader, Checkbox } from 'components/atoms';
 import { Column, Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
+import { yupResolver } from '@hookform/resolvers/yup';
 import instruments from 'constants/selectors/instruments';
 /* import { useAddModelPortfolioContext } from 'views/AddModelPortfolio/context'; */
 import { useSelect } from 'hooks/useSelect';
+import { useInput } from 'hooks/useInput';
 import { DescribeText } from './DescribeText';
+import { validationSchema } from './AddInstrumentForm.schema';
 
 export const AddInstrumentForm = () => {
   const { t } = useTranslation();
@@ -31,15 +34,27 @@ export const AddInstrumentForm = () => {
 
   const defaultValues = { instrumentName: '', instrumentType: 'stocks' };
 
-  const { register, setValue, handleSubmit } = useForm({
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<typeof defaultValues>({
     defaultValues,
-    // resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
+  });
+
+  const instrumentNameInputProps = useInput<typeof defaultValues>({
+    register,
+    name: 'instrumentName',
+    errors,
   });
 
   const instrumentTypeSelectProps = useSelect<typeof defaultValues>({
     setValue,
     name: 'instrumentType',
-    defaultValue: defaultValues.instrumentType,
+    defaultValues,
+    errors,
   });
 
   return (
@@ -63,7 +78,7 @@ export const AddInstrumentForm = () => {
         <Column>
           <Input
             placeholder="Name oy your instrument"
-            {...register('instrumentName')}
+            {...instrumentNameInputProps}
           />
 
           <Spacer />
