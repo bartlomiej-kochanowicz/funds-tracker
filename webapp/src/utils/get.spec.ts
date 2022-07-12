@@ -25,11 +25,11 @@ describe('typed get', () => {
   it('should return a value from a list', () => {
     expect(get(user, 'address.street.0')).toBe('20 Deans Yd');
     expect(get(user, 'address.street[0]')).toBe('20 Deans Yd');
-    expect(get(user, 'address.street.1')).toBeUndefined();
+    expect(get(user, 'address.street.1')).toBeNull();
   });
 
-  it('should return undefined if field does not exist', () => {
-    expect(get(user, 'phone.number')).toBeUndefined();
+  it('should return null if field does not exist', () => {
+    expect(get(user, 'phone.number')).toBeNull();
   });
 
   it('should return default value if field does not exist', () => {
