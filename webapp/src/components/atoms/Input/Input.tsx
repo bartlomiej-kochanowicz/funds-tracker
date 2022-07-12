@@ -6,9 +6,9 @@ interface InputProps
     HTMLProps<HTMLInputElement>,
     'onChange' | 'id' | 'name' | 'placeholder' | 'min' | 'max'
   > {
-  error?: string;
+  error?: string | null;
   type?: 'text' | 'number' | 'password' | 'email';
-  unit?: 'percentage';
+  unit?: 'percentage' | null;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({ error, unit, ...rest }, ref) => (
@@ -29,7 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ error, unit, ..
 Input.displayName = 'Input';
 
 Input.defaultProps = {
-  error: undefined,
+  error: null,
   type: 'text',
-  unit: undefined,
+  unit: null,
 };
