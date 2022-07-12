@@ -96,6 +96,7 @@ export const theme = {
     },
   },
   spacing: {
+    tiny: rem(0.5 / 2), // devide by 2 - top and bottom or right and left(both sides) - 1rem
     small: rem(1 / 2), // devide by 2 - top and bottom or right and left(both sides) - 1rem
     medium: rem(2 / 2), // devide by 2 - top and bottom or right and left(both sides) - 2rem
     large: rem(3 / 2), // devide by 2 - top and bottom or right and left(both sides) - 3rem
