@@ -1,4 +1,5 @@
 import { DeepMap, FieldError, Path, PathValue, UseFormSetValue } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { get } from 'utils/get';
 
 interface UseSelectProps<Fields> {
@@ -18,9 +19,11 @@ export const useSelect = <Fields>({
     setValue(name, value);
   };
 
+  const { t } = useTranslation();
+
   return {
     onChange,
     defaultValue: get(defaultValues, name),
-    error: get(errors, name)?.message || null,
+    error: t(get(errors, name)?.message) || null,
   };
 };

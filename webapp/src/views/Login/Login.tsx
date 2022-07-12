@@ -6,6 +6,7 @@ import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'routes/paths';
 import { LangSelector } from 'components/molecules/LangSelector';
+import { useInput } from 'hooks/useInput';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
@@ -33,8 +34,17 @@ export const Login = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const emailError = errors.userEmail?.message && t(errors.userEmail.message);
-  const paswordError = errors.userPassword?.message && t(errors.userPassword.message);
+  const userEmailProps = useInput<typeof defaultValues>({
+    register,
+    name: 'userEmail',
+    errors,
+  });
+
+  const userPasswordProps = useInput<typeof defaultValues>({
+    register,
+    name: 'userPassword',
+    errors,
+  });
 
   return (
     <StyledFullscreenClear
@@ -60,8 +70,7 @@ export const Login = () => {
           <Input
             placeholder={t('page.login.email.placeholder')}
             type="email"
-            {...register('userEmail')}
-            error={emailError}
+            {...userEmailProps}
           />
 
           <Spacer />
@@ -69,8 +78,7 @@ export const Login = () => {
           <Input
             placeholder={t('password')}
             type="password"
-            {...register('userPassword')}
-            error={paswordError}
+            {...userPasswordProps}
           />
 
           <Spacer />
