@@ -29,13 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ error, unit, ..
 Input.displayName = 'Input';
 
 Input.defaultProps = {
-<<<<<<< HEAD
   error: null,
   type: 'text',
   unit: null,
-=======
-  error: undefined,
-  type: 'text',
-  unit: undefined,
->>>>>>> development
 };
