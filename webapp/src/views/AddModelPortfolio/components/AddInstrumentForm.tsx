@@ -5,7 +5,8 @@ import { Button, Heading, Input, Select, Spacer, Spreader, Checkbox } from 'comp
 import { Column, Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
 import instruments from 'constants/selectors/instruments';
-import { useAddModelPortfolioContext } from 'views/AddModelPortfolio/context';
+/* import { useAddModelPortfolioContext } from 'views/AddModelPortfolio/context'; */
+import { useSelect } from 'hooks/useSelect';
 import { DescribeText } from './DescribeText';
 
 export const AddInstrumentForm = () => {
@@ -16,25 +17,29 @@ export const AddInstrumentForm = () => {
     ...rest,
   }));
 
-  const { updateState, actions } = useAddModelPortfolioContext();
+  /* const { updateState, actions } = useAddModelPortfolioContext(); */
 
-  const onSubmit = async (/* values: typeof initialValues */) => {
+  const onSubmit = async (values: typeof defaultValues) => {
+    console.log(values);
+
     await new Promise(resolve => {
       setTimeout(resolve, 3000);
     });
 
-    updateState(actions.CHANGE_ADD_FIRST_SUCCESS);
+    // updateState(actions.CHANGE_ADD_FIRST_SUCCESS);
   };
 
-  const defaultValues = { instrumentName: '' };
+  const defaultValues = { instrumentName: '', instrumentType: 'stocks' };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
+  const { register, setValue, handleSubmit } = useForm({
     defaultValues,
     // resolver: yupResolver(validationSchema),
+  });
+
+  const instrumentTypeSelectProps = useSelect<typeof defaultValues>({
+    setValue,
+    name: 'instrumentType',
+    defaultValue: defaultValues.instrumentType,
   });
 
   return (
@@ -66,7 +71,7 @@ export const AddInstrumentForm = () => {
           <Select
             options={options}
             placeholder="Select type"
-            {...register('instrumentName')}
+            {...instrumentTypeSelectProps}
           />
 
           <Spacer />

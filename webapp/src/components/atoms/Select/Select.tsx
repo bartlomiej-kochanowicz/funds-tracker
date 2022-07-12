@@ -110,7 +110,7 @@ export const Select: FC<SelectProps> = ({
           {/* Render customLabel when customLabel is provided */}
           {customLabel && selected && customLabel(selected)}
 
-          {/* Render placeholder when is not selected */}
+          {/* Render placeholder when nothing is selected */}
           {!selected && placeholder}
         </StyledContent>
 
