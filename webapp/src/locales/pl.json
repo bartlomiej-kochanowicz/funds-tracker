@@ -19,5 +19,14 @@
   "selectors.instruments.crypto": "Kryptowaluty",
   "selectors.instruments.others": "Inne",
   "selectors.languages.pl": "Polski",
-  "selectors.languages.en": "Angielski"
+  "selectors.languages.en": "Angielski",
+  "add.instrument.title": "Stwóż swoje modelowe portfolio",
+  "add.instrument.description": "Wprowadź tutaj instrumenty, na które masz ekspozycję lub posiadane pasywa(takie jak konta bankowe / oszczędnościowe).",
+  "add.instrument.name.placeholder": "Nazwa instrumentu",
+  "add.instrument.name.required": "Podaj nazwę instrumentu",
+  "add.instrument.type.placeholder": "Wbierz typ",
+  "add.instrument.type.required": "Typ instrumentu wymagany",
+  "add.instrument.take_into_rebalance.label": "Uwzględnij w rebalansingu",
+  "add.instrument.percentage.placeholder": "Procent Twojego portfolio",
+  "add.instrument.percentage.required": "Procent wymagany"
 }

@@ -9,7 +9,7 @@
   "page.login.email.required": "Email required",
   "page.login.password.too_short": "Password is too short, min. 12 characters",
   "page.login.password.too_long": "Password is too long, max. 50 characters",
-  "page.login.password.required": "Password Required",
+  "page.login.password.required": "Password required",
   "selectors.instruments.cash": "Cash",
   "selectors.instruments.stocks": "Stocks",
   "selectors.instruments.saving-accounts": "Saving accounts",
@@ -19,5 +19,14 @@
   "selectors.instruments.crypto": "Crypto",
   "selectors.instruments.others": "Others",
   "selectors.languages.pl": "Polish",
-  "selectors.languages.en": "English"
+  "selectors.languages.en": "English",
+  "add.instrument.title": "Create your model portfolio",
+  "add.instrument.description": "Here you can provide the financial instruments you want to be exposed to or just your passives(like money on banking account / saving accounts).",
+  "add.instrument.name.placeholder": "Name oy your instrument",
+  "add.instrument.name.required": "Enter instrument name",
+  "add.instrument.type.placeholder": "Select type",
+  "add.instrument.type.required": "Instrument type required",
+  "add.instrument.take_into_rebalance.label": "Want to take into account in rebalance report",
+  "add.instrument.percentage.placeholder": "Percentage of your portfolio",
+  "add.instrument.percentage.required": "Enter percentage"
 }

@@ -23,7 +23,7 @@ export const useSelect = <Fields>({
 
   return {
     onChange,
-    defaultValue: get(defaultValues, name),
+    defaultValue: get(defaultValues, name) as keyof Fields,
     error: t(get(errors, name)?.message) || null,
   };
 };
