@@ -5,14 +5,13 @@ export const validationSchema = object().shape({
   instrumentType: string().nullable().required('add.instrument.type.required'),
   instrumentRebalancing: boolean(),
   instrumentPercentage: mixed()
-    .typeError('aosidjoaisjdoiajsd')
     .notRequired()
     .when('instrumentRebalancing', {
       is: (field: boolean) => field,
       then: number()
         .typeError('add.instrument.percentage.required')
-        .min(1, 'za malo')
-        .max(100, 'za duzo')
+        .min(1, 'add.instrument.percentage.error.range.min')
+        .max(100, 'add.instrument.percentage.error.range.max')
         .required('add.instrument.percentage.required'),
     }),
 });

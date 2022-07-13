@@ -78,7 +78,7 @@ export const AddInstrumentForm = () => {
 
   return (
     <Fragment>
-      <Heading textAlign="center">Create your model portfolio</Heading>
+      <Heading textAlign="center">{t('add.instrument.title')}</Heading>
 
       <Spacer space="small" />
 
@@ -87,8 +87,7 @@ export const AddInstrumentForm = () => {
         fontColor="darkGray"
         textAlign="center"
       >
-        Here you can provide the financial instruments you want to be exposed to or just your
-        passives(like money on banking account / saving accounts).
+        {t('add.instrument.description')}
       </DescribeText>
 
       <Spacer space="large" />
@@ -99,7 +98,7 @@ export const AddInstrumentForm = () => {
       >
         <Column>
           <Input
-            placeholder="Name oy your instrument"
+            placeholder={t('add.instrument.name.placeholder')}
             {...instrumentNameInputProps}
           />
 
@@ -107,21 +106,21 @@ export const AddInstrumentForm = () => {
 
           <Select
             options={options}
-            placeholder="Select type"
+            placeholder={t('add.instrument.type.placeholder')}
             {...instrumentTypeSelectProps}
           />
 
           <Spacer />
 
           <Checkbox
-            label="Want to take into account in rebalance report"
+            label={t('add.instrument.take_into_rebalance.label')}
             {...register('instrumentRebalancing')}
           />
 
           <Spacer />
 
           <Input
-            placeholder="Percentage of your portfolio"
+            placeholder={t('add.instrument.percentage.placeholder')}
             type="number"
             unit="percentage"
             min="0"

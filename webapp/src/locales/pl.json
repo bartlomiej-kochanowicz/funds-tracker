@@ -28,5 +28,7 @@
   "add.instrument.type.required": "Typ instrumentu wymagany",
   "add.instrument.take_into_rebalance.label": "Uwzględnij w rebalansingu",
   "add.instrument.percentage.placeholder": "Procent Twojego portfolio",
-  "add.instrument.percentage.required": "Procent wymagany"
+  "add.instrument.percentage.required": "Procent wymagany",
+  "add.instrument.percentage.error.range.min": "min. 1%",
+  "add.instrument.percentage.error.range.max": "maks. 100%"
 }
