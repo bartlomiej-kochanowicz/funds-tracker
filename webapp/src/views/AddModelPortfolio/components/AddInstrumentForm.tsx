@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { ChangeEvent, Fragment } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { Button, Heading, Input, Select, Spacer, Spreader, Checkbox } from 'components/atoms';
@@ -36,14 +36,14 @@ export const AddInstrumentForm = () => {
     instrumentName: string;
     instrumentType: string | null;
     instrumentRebalancing: boolean;
-    instrumentPercentage: number;
+    instrumentPercentage: number | undefined;
   };
 
   const defaultValues = {
     instrumentName: '',
     instrumentType: null,
     instrumentRebalancing: true,
-    instrumentPercentage: 10,
+    instrumentPercentage: undefined,
   } as DefaultValues;
 
   const {
@@ -52,6 +52,8 @@ export const AddInstrumentForm = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    resetField,
+    clearErrors,
   } = useForm<DefaultValues>({
     defaultValues,
     resolver: yupResolver(validationSchema),
@@ -68,7 +70,12 @@ export const AddInstrumentForm = () => {
     name: 'instrumentType',
     defaultValues,
     errors,
+    clearErrors,
   });
+
+  const handleChangeRebalancing = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.checked) resetField('instrumentPercentage');
+  };
 
   const instrumentPercentageInputProps = useInput<DefaultValues>({
     register,
@@ -114,7 +121,9 @@ export const AddInstrumentForm = () => {
 
           <Checkbox
             label={t('add.instrument.take_into_rebalance.label')}
-            {...register('instrumentRebalancing')}
+            {...register('instrumentRebalancing', {
+              onChange: handleChangeRebalancing,
+            })}
           />
 
           <Spacer />
