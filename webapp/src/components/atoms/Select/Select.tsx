@@ -1,48 +1,11 @@
-import { FC, Fragment, HTMLProps, ReactNode, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
+import { FC, Fragment, ReactNode, useRef, useState } from 'react';
 import { useLayer } from 'react-laag';
-import { darken } from 'color2k';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Spreader } from 'components/atoms/Spreader';
 import { Menu } from 'components/atoms/Menu';
 import { composeRefs } from 'utils/composeRefs';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
-
-const StyledButton = styled.button<HTMLProps<HTMLButtonElement>>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-
-  ${({ theme }) => css`
-    border-radius: ${theme.radius.secondary};
-    border: none;
-    background-color: ${theme.colors.lightGray};
-    padding: ${theme.padding.medium};
-    color: ${theme.colors.black};
-    outline-color: ${theme.colors.blue};
-    font-weight: ${theme.font.weight[500]};
-    border: 2px solid ${theme.colors.gray};
-
-    &:focus {
-      background-color: ${darken(theme.colors.lightGray, 0.05)};
-      color: ${theme.colors.blue};
-      border: 2px solid ${theme.colors.blue};
-    }
-
-    &::placeholder {
-      color: ${theme.colors.gray};
-    }
-  `}
-`;
-
-interface ContentProps {
-  isSelected: boolean;
-}
-
-const StyledContent = styled.div<ContentProps>`
-  color: ${({ theme, isSelected }) => (isSelected ? 'inline' : theme.colors.gray)};
-`;
+import { Error, StyledButton, StyledContent, Wrapper } from './Select.styles';
 
 type Item = {
   value: string;
@@ -55,6 +18,7 @@ interface SelectProps {
   defaultValue?: string | null;
   onChange?: (value: string) => void;
   customLabel?: ((value: Item) => ReactNode) | null;
+  error?: string | null;
 }
 
 export const Select: FC<SelectProps> = ({
@@ -63,6 +27,7 @@ export const Select: FC<SelectProps> = ({
   placeholder,
   onChange,
   customLabel,
+  error,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -98,26 +63,31 @@ export const Select: FC<SelectProps> = ({
 
   return (
     <Fragment>
-      <StyledButton
-        type="button"
-        onClick={handleOpen}
-        ref={composeRefs(buttonRef, triggerProps.ref)}
-      >
-        <StyledContent isSelected={Boolean(selected)}>
-          {/* Render default label when customLabel is not provided */}
-          {!customLabel && selected && selected.label}
+      <Wrapper>
+        <StyledButton
+          type="button"
+          onClick={handleOpen}
+          ref={composeRefs(buttonRef, triggerProps.ref)}
+          error={Boolean(error)}
+        >
+          <StyledContent isSelected={Boolean(selected)}>
+            {/* Render default label when customLabel is not provided */}
+            {!customLabel && selected && selected.label}
 
-          {/* Render customLabel when customLabel is provided */}
-          {customLabel && selected && customLabel(selected)}
+            {/* Render customLabel when customLabel is provided */}
+            {customLabel && selected && customLabel(selected)}
 
-          {/* Render placeholder when nothing is selected */}
-          {!selected && placeholder}
-        </StyledContent>
+            {/* Render placeholder when nothing is selected */}
+            {!selected && placeholder}
+          </StyledContent>
 
-        <Spreader spread="small" />
+          <Spreader spread="small" />
 
-        {isOpen ? <FaChevronUp /> : <FaChevronDown />}
-      </StyledButton>
+          {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+        </StyledButton>
+
+        {error && <Error>{error}</Error>}
+      </Wrapper>
 
       {isOpen &&
         renderLayer(
@@ -155,4 +125,5 @@ Select.defaultProps = {
   defaultValue: null,
   onChange: () => {},
   customLabel: null,
+  error: null,
 };
