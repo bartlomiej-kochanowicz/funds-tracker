@@ -1,4 +1,4 @@
-import { FC, Fragment, ReactNode, useRef, useState } from 'react';
+import { forwardRef, Fragment, ReactNode, useImperativeHandle, useRef, useState } from 'react';
 import { useLayer } from 'react-laag';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Spreader } from 'components/atoms/Spreader';
@@ -21,102 +21,99 @@ interface SelectProps {
   error?: string | null;
 }
 
-export const Select: FC<SelectProps> = ({
-  options,
-  defaultValue,
-  placeholder,
-  onChange,
-  customLabel,
-  error,
-}) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+export const Select = forwardRef<HTMLButtonElement, SelectProps>(
+  ({ options, defaultValue, placeholder, onChange, customLabel, error }, ref) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const getDefaultSelected = (): Item | null =>
-    defaultValue ? options.find(option => option.value === defaultValue) || null : null;
+    const getDefaultSelected = (): Item | null =>
+      defaultValue ? options.find(option => option.value === defaultValue) || null : null;
 
-  const [selected, setSelected] = useState<Item | null>(getDefaultSelected());
+    const [selected, setSelected] = useState<Item | null>(getDefaultSelected());
 
-  useUpdateEffect(() => {
-    if (onChange && selected) onChange(selected.value);
-  }, [selected]);
+    useUpdateEffect(() => {
+      if (onChange && selected) onChange(selected.value);
+    }, [selected]);
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const { renderLayer, triggerProps, layerProps } = useLayer({
-    isOpen,
-    overflowContainer: false,
-    placement: 'bottom-center',
-    auto: true,
-    possiblePlacements: ['bottom-center', 'top-center'],
-    triggerOffset: 5,
-    onDisappear: disappearType => {
-      if (disappearType === 'full') {
-        setIsOpen(false);
-      }
-    },
-    onOutsideClick: () => setIsOpen(false),
-  });
+    useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement);
 
-  const handleOpen = () => setIsOpen(prev => !prev);
+    const { renderLayer, triggerProps, layerProps } = useLayer({
+      isOpen,
+      overflowContainer: false,
+      placement: 'bottom-center',
+      auto: true,
+      possiblePlacements: ['bottom-center', 'top-center'],
+      triggerOffset: 5,
+      onDisappear: disappearType => {
+        if (disappearType === 'full') {
+          setIsOpen(false);
+        }
+      },
+      onOutsideClick: () => setIsOpen(false),
+    });
 
-  const minMenuWidth = buttonRef.current?.offsetWidth ?? null;
+    const handleOpen = () => setIsOpen(prev => !prev);
 
-  return (
-    <Fragment>
-      <Wrapper>
-        <StyledButton
-          type="button"
-          onClick={handleOpen}
-          ref={composeRefs(buttonRef, triggerProps.ref)}
-          error={Boolean(error)}
-        >
-          <StyledContent isSelected={Boolean(selected)}>
-            {/* Render default label when customLabel is not provided */}
-            {!customLabel && selected && selected.label}
+    const minMenuWidth = buttonRef.current?.offsetWidth ?? null;
 
-            {/* Render customLabel when customLabel is provided */}
-            {customLabel && selected && customLabel(selected)}
-
-            {/* Render placeholder when nothing is selected */}
-            {!selected && placeholder}
-          </StyledContent>
-
-          <Spreader spread="small" />
-
-          {isOpen ? <FaChevronUp /> : <FaChevronDown />}
-        </StyledButton>
-
-        {error && <Error>{error}</Error>}
-      </Wrapper>
-
-      {isOpen &&
-        renderLayer(
-          <Menu
-            minMenuWidth={minMenuWidth}
-            {...layerProps}
+    return (
+      <Fragment>
+        <Wrapper>
+          <StyledButton
+            type="button"
+            onClick={handleOpen}
+            ref={composeRefs(buttonRef, triggerProps.ref)}
+            error={Boolean(error)}
           >
-            {options.map(({ value, label, ...rest }) => {
-              const handleSelect = () => {
-                setSelected({ value, label, ...rest });
+            <StyledContent isSelected={Boolean(selected)}>
+              {/* Render default label when customLabel is not provided */}
+              {!customLabel && selected && selected.label}
 
-                setIsOpen(false);
-              };
+              {/* Render customLabel when customLabel is provided */}
+              {customLabel && selected && customLabel(selected)}
 
-              return (
-                <Menu.Item
-                  onClick={handleSelect}
-                  isSelected={selected?.value === value}
-                  key={value}
-                >
-                  {label}
-                </Menu.Item>
-              );
-            })}
-          </Menu>,
-        )}
-    </Fragment>
-  );
-};
+              {/* Render placeholder when nothing is selected */}
+              {!selected && placeholder}
+            </StyledContent>
+
+            <Spreader spread="small" />
+
+            {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+          </StyledButton>
+
+          {error && <Error>{error}</Error>}
+        </Wrapper>
+
+        {isOpen &&
+          renderLayer(
+            <Menu
+              minMenuWidth={minMenuWidth}
+              {...layerProps}
+            >
+              {options.map(({ value, label, ...rest }) => {
+                const handleSelect = () => {
+                  setSelected({ value, label, ...rest });
+
+                  setIsOpen(false);
+                };
+
+                return (
+                  <Menu.Item
+                    onClick={handleSelect}
+                    isSelected={selected?.value === value}
+                    key={value}
+                  >
+                    {label}
+                  </Menu.Item>
+                );
+              })}
+            </Menu>,
+          )}
+      </Fragment>
+    );
+  },
+);
 
 Select.displayName = 'Select';
 
