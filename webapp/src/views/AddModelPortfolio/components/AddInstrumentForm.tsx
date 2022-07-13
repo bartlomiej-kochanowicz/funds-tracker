@@ -32,28 +32,47 @@ export const AddInstrumentForm = () => {
     // updateState(actions.CHANGE_ADD_FIRST_SUCCESS);
   };
 
-  const defaultValues = { instrumentName: '', instrumentType: 'stocks' };
+  type DefaultValues = {
+    instrumentName: string;
+    instrumentType: string | null;
+    instrumentRebalancing: boolean;
+    instrumentPercentage: number;
+  };
+
+  const defaultValues = {
+    instrumentName: '',
+    instrumentType: null,
+    instrumentRebalancing: true,
+    instrumentPercentage: 10,
+  } as DefaultValues;
 
   const {
     register,
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<typeof defaultValues>({
+    watch,
+  } = useForm<DefaultValues>({
     defaultValues,
     resolver: yupResolver(validationSchema),
   });
 
-  const instrumentNameInputProps = useInput<typeof defaultValues>({
+  const instrumentNameInputProps = useInput<DefaultValues>({
     register,
     name: 'instrumentName',
     errors,
   });
 
-  const instrumentTypeSelectProps = useSelect<typeof defaultValues>({
+  const instrumentTypeSelectProps = useSelect<DefaultValues>({
     setValue,
     name: 'instrumentType',
     defaultValues,
+    errors,
+  });
+
+  const instrumentPercentageInputProps = useInput<DefaultValues>({
+    register,
+    name: 'instrumentPercentage',
     errors,
   });
 
@@ -74,7 +93,10 @@ export const AddInstrumentForm = () => {
 
       <Spacer space="large" />
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <Column>
           <Input
             placeholder="Name oy your instrument"
@@ -91,7 +113,10 @@ export const AddInstrumentForm = () => {
 
           <Spacer />
 
-          <Checkbox label="Want to take into account in rebalance report" />
+          <Checkbox
+            label="Want to take into account in rebalance report"
+            {...register('instrumentRebalancing')}
+          />
 
           <Spacer />
 
@@ -101,6 +126,8 @@ export const AddInstrumentForm = () => {
             unit="percentage"
             min="0"
             max="100"
+            disabled={!watch('instrumentRebalancing')}
+            {...instrumentPercentageInputProps}
           />
 
           <Spacer space="large" />

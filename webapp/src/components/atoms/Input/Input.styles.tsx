@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { darken } from 'color2k';
+import { darken, transparentize } from 'color2k';
 
 export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
   border: none;
@@ -7,16 +7,23 @@ export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
 
   ${({ theme, error, hasUnit }) => css`
     border-radius: ${theme.radius.secondary};
-    background-color: ${theme.colors.lightGray};
     padding: ${hasUnit ? '0.5rem 2.5rem 0.5rem 1.25rem' : '0.5rem 1.25rem'};
     outline-color: ${theme.colors[error ? 'red' : 'blue']};
-    color: ${theme.colors[error ? 'red' : 'black']};
     font-weight: ${theme.font.weight[500]};
+    background-color: ${theme.colors.lightGray};
+    color: ${theme.colors[error ? 'red' : 'black']};
     border: 2px solid ${theme.colors[error ? 'red' : 'gray']};
 
     &:focus {
       background-color: ${darken(theme.colors.lightGray, 0.05)};
       color: ${theme.colors[error ? 'red' : 'blue']};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: ${transparentize(theme.colors.lightGray, 0.5)};
+      color: ${transparentize(theme.colors.black, 0.5)};
+      border: 2px solid ${transparentize(theme.colors.gray, 0.5)};
     }
 
     &::placeholder {

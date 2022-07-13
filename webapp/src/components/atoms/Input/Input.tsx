@@ -4,7 +4,7 @@ import { StyledInput, Wrapper, Error, Unit } from './Input.styles';
 interface InputProps
   extends Pick<
     HTMLProps<HTMLInputElement>,
-    'onChange' | 'id' | 'name' | 'placeholder' | 'min' | 'max'
+    'onChange' | 'id' | 'name' | 'placeholder' | 'min' | 'max' | 'disabled'
   > {
   error?: string | null;
   type?: 'text' | 'number' | 'password' | 'email';
