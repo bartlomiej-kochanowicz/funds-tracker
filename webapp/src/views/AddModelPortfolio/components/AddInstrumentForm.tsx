@@ -48,12 +48,10 @@ export const AddInstrumentForm = () => {
 
   const {
     register,
-    setValue,
     handleSubmit,
     formState: { errors },
     watch,
     resetField,
-    clearErrors,
   } = useForm<DefaultValues>({
     defaultValues,
     resolver: yupResolver(validationSchema),
@@ -66,11 +64,10 @@ export const AddInstrumentForm = () => {
   });
 
   const instrumentTypeSelectProps = useSelect<DefaultValues>({
-    setValue,
+    register,
     name: 'instrumentType',
     defaultValues,
     errors,
-    clearErrors,
   });
 
   const handleChangeRebalancing = (e: ChangeEvent<HTMLInputElement>) => {

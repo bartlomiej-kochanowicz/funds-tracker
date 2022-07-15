@@ -1,5 +1,6 @@
 import { forwardRef, Fragment, ReactNode, useImperativeHandle, useRef, useState } from 'react';
 import { useLayer } from 'react-laag';
+import { ChangeHandler } from 'react-hook-form';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Spreader } from 'components/atoms/Spreader';
 import { Menu } from 'components/atoms/Menu';
@@ -17,12 +18,13 @@ interface SelectProps {
   placeholder?: string | null;
   defaultValue?: string | null;
   onChange?: (value: string) => void;
+  onBlur?: () => void | ChangeHandler;
   customLabel?: ((value: Item) => ReactNode) | null;
   error?: string | null;
 }
 
 export const Select = forwardRef<HTMLButtonElement, SelectProps>(
-  ({ options, defaultValue, placeholder, onChange, customLabel, error }, ref) => {
+  ({ options, defaultValue, placeholder, onChange, onBlur, customLabel, error }, ref) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const getDefaultSelected = (): Item | null =>
@@ -63,6 +65,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
           <StyledButton
             type="button"
             onClick={handleOpen}
+            onBlur={onBlur}
             ref={composeRefs(buttonRef, triggerProps.ref)}
             error={Boolean(error)}
           >
@@ -121,6 +124,7 @@ Select.defaultProps = {
   placeholder: null,
   defaultValue: null,
   onChange: () => {},
+  onBlur: () => {},
   customLabel: null,
   error: null,
 };
