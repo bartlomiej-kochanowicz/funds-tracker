@@ -6,10 +6,10 @@ import { Column, Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import instruments from 'constants/selectors/instruments';
-/* import { useAddModelPortfolioContext } from 'views/AddModelPortfolio/context'; */
+import { useAddModelPortfolioContext } from 'views/AddModelPortfolio/context';
 import { useSelect } from 'hooks/useSelect';
 import { useInput } from 'hooks/useInput';
-import { DescribeText } from './DescribeText';
+import { DescribeText } from 'views/AddModelPortfolio/AddModelPortfolio.styles';
 import { validationSchema } from './AddInstrumentForm.schema';
 
 export const AddInstrumentForm = () => {
@@ -20,7 +20,7 @@ export const AddInstrumentForm = () => {
     ...rest,
   }));
 
-  /* const { updateState, actions } = useAddModelPortfolioContext(); */
+  const { updateState, actions } = useAddModelPortfolioContext();
 
   const onSubmit = async (values: typeof defaultValues) => {
     console.log(values);
@@ -29,7 +29,7 @@ export const AddInstrumentForm = () => {
       setTimeout(resolve, 3000);
     });
 
-    // updateState(actions.CHANGE_ADD_FIRST_SUCCESS);
+    updateState(actions.CHANGE_ADD_FIRST_SUCCESS);
   };
 
   type DefaultValues = {
