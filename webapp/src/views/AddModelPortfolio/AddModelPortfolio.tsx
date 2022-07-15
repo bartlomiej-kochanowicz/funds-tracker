@@ -12,7 +12,7 @@ const AddModelPortfolioContent = () => {
     >
       {compareState(states.addFirstInstrument) && <AddInstrumentForm />}
 
-      {compareState(states.addFirstSuccess) && <AddInstrumentForm />}
+      {compareState(states.addFirstSuccess) && <div>test</div>}
     </FullscreenClear>
   );
 };

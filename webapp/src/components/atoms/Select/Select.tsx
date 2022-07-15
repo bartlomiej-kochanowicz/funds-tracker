@@ -18,7 +18,7 @@ interface SelectProps {
   placeholder?: string | null;
   defaultValue?: string | null;
   onChange?: (value: string) => void;
-  onBlur?: () => void | ChangeHandler;
+  onBlur?: (() => void) | ChangeHandler;
   customLabel?: ((value: Item) => ReactNode) | null;
   error?: string | null;
 }
