@@ -14,7 +14,10 @@ export const signInThunk = createAsyncThunk<SignInResponse, SignInProps, RejectV
     } catch (err) {
       const error = err as AxiosError<RequestReject>;
 
-      return rejectWithValue(error.response?.data ?? { message: 'Unknown error' });
+      return rejectWithValue({
+        message: error.response?.data.message ?? 'Unknown error',
+        status: null,
+      });
     }
   },
 );

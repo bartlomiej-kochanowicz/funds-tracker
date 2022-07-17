@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Row } from 'simple-flexbox';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 // import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
@@ -9,7 +9,8 @@ import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { LangSelector } from 'components/molecules/LangSelector';
 import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
-import { signInThunk } from 'store/thunks/signInThunk';
+import { signInThunk } from 'store/thunks/auth/signInThunk';
+import { selectSignInErrorMessage } from 'store/selectors/auth';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
@@ -20,10 +21,14 @@ export const Login = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const errorMessage = useSelector(selectSignInErrorMessage);
+
+  console.log('errorMessage', errorMessage);
+
   const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
-    dispatch(signInThunk({ userEmail, userPassword }));
+    await dispatch(signInThunk({ userEmail, userPassword }));
 
     // navigate(paths.addModelPortfolio);
   };
