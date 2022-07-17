@@ -31,5 +31,7 @@
   "add.instrument.percentage.required": "Procent wymagany",
   "add.instrument.percentage.error.range.min": "min. 1%",
   "add.instrument.percentage.error.range.max": "maks. 100%",
-  "add.instrument.button.submit.first": "Dodaj pierwszy instrument"
+  "add.instrument.button.submit.first": "Dodaj pierwszy instrument",
+  "add.instrument.success.title": "Świetnie!",
+  "add.instrument.success.description": "Właśnie dodałeś do portfela pierwszy instrument finansowy. Tak trzymaj, dodaj kolejny instrument do portfolio!"
 }

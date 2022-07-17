@@ -17,9 +17,13 @@ export const Login = () => {
 
   const defaultValues = { userEmail: '', userPassword: '' };
 
-  const onSubmit = async (/* values: typeof initialValues */) => {
-    await new Promise(resolve => {
-      setTimeout(resolve, 3000);
+  const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
+    await fetch('https://api.funds-tracker.com/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: userEmail,
+        password: userPassword,
+      }),
     });
 
     navigate(paths.addModelPortfolio);
