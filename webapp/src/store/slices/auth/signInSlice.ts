@@ -8,7 +8,7 @@ export const signInSlice = createSlice({
   initialState: {
     data: {} as SignInResponse,
     status: 'idle' as RequestState,
-    error: { status: null, message: null } as ErrorObject,
+    error: { code: undefined, message: undefined } as ErrorObject,
   },
   reducers: {},
   extraReducers: builder => {
@@ -22,11 +22,10 @@ export const signInSlice = createSlice({
     });
 
     builder.addCase(signInThunk.rejected, (state, action) => {
-      console.log(action);
       state.status = 'rejected';
       state.error = {
-        status: action.error?.code ?? null,
-        message: action.payload?.message ?? null,
+        code: action.error?.code ?? undefined,
+        message: action.payload?.message ?? undefined,
       };
     });
   },

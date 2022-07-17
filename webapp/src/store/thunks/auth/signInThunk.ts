@@ -16,7 +16,7 @@ export const signInThunk = createAsyncThunk<SignInResponse, SignInProps, RejectV
 
       return rejectWithValue({
         message: error.response?.data.message ?? 'Unknown error',
-        status: null,
+        code: undefined,
       });
     }
   },
