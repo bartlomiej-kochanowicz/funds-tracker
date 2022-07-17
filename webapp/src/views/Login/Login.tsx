@@ -1,13 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Row } from 'simple-flexbox';
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { useNavigate } from 'react-router-dom';
+import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { paths } from 'routes/paths';
 import { LangSelector } from 'components/molecules/LangSelector';
 import { useInput } from 'hooks/useInput';
-import { client } from 'config/client';
+import { signInThunk } from 'store/thunks/signInThunk';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
@@ -16,13 +17,14 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
-    await client.post('/auth/login', {
-      email: userEmail,
-      password: userPassword,
-    });
+    console.log({ userEmail, userPassword });
+
+    dispatch(signInThunk({ userEmail, userPassword }));
 
     navigate(paths.addModelPortfolio);
   };
