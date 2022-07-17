@@ -8,6 +8,7 @@ import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { paths } from 'routes/paths';
 import { LangSelector } from 'components/molecules/LangSelector';
 import { useInput } from 'hooks/useInput';
+import { AppDispatch } from 'store';
 import { signInThunk } from 'store/thunks/signInThunk';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
@@ -17,16 +18,14 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
-    console.log({ userEmail, userPassword });
-
     dispatch(signInThunk({ userEmail, userPassword }));
-
-    navigate(paths.addModelPortfolio);
+    console.log('@@@@@@');
+    // navigate(paths.addModelPortfolio);
   };
 
   const {
