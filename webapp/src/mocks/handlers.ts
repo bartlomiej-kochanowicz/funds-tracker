@@ -12,7 +12,7 @@ interface LoginResponse {
 
 export const handlers = [
   rest.post<LoginBody, LoginResponse>(
-    'https://api.funds-tracker.com/auth/login',
+    `https://api.funds-tracker.com/auth/login`,
     (req, res, ctx) => {
       const { email } = req.body;
 
