@@ -1,7 +1,16 @@
 import { ChangeEvent, Fragment } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
-import { Button, Heading, Input, Select, Spacer, Spreader, Checkbox } from 'components/atoms';
+import {
+  Button,
+  Heading,
+  Input,
+  Select,
+  Spacer,
+  Spreader,
+  Checkbox,
+  Loader,
+} from 'components/atoms';
 import { Column, Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -49,7 +58,7 @@ export const AddInstrumentForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch,
     resetField,
   } = useForm<DefaultValues>({
@@ -139,12 +148,17 @@ export const AddInstrumentForm = () => {
 
           <Row justifyContent="flex-end">
             <Button
+              size="large"
               type="submit"
               color="black"
+              disabled={isSubmitting}
+              width="100%"
             >
-              <FaPlus />
+              {isSubmitting ? <Loader color="white" /> : <FaPlus />}
+
               <Spreader spread="tiny" />
-              Add instrument
+
+              {t('add.instrument.button.submit.first')}
             </Button>
           </Row>
         </Column>

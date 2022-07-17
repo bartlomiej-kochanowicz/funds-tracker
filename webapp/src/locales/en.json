@@ -30,5 +30,6 @@
   "add.instrument.percentage.placeholder": "Percentage of your portfolio",
   "add.instrument.percentage.required": "Enter percentage",
   "add.instrument.percentage.error.range.min": "min. 1%",
-  "add.instrument.percentage.error.range.max": "max. 100%"
+  "add.instrument.percentage.error.range.max": "max. 100%",
+  "add.instrument.button.submit.first": "Add first instrument"
 }

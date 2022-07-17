@@ -45,6 +45,7 @@
   "dependencies": {
     "@hookform/resolvers": "2.9.4",
     "color2k": "2.0.0",
+    "framer-motion": "6.5.1",
     "i18next": "21.8.11",
     "i18next-browser-languagedetector": "6.1.4",
     "i18next-http-backend": "1.4.1",
