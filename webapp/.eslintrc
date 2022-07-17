@@ -59,6 +59,7 @@
           "some": ["nesting", "id"]
         }
       }
-    ]
+    ],
+    "no-param-reassign": "off"
   }
 }

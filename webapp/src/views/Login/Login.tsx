@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import { Row } from 'simple-flexbox';
 import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
-import { paths } from 'routes/paths';
+// import { paths } from 'routes/paths';
 import { LangSelector } from 'components/molecules/LangSelector';
 import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
@@ -16,7 +16,7 @@ import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 export const Login = () => {
   const { t } = useTranslation();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -24,7 +24,7 @@ export const Login = () => {
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     dispatch(signInThunk({ userEmail, userPassword }));
-    console.log('@@@@@@');
+
     // navigate(paths.addModelPortfolio);
   };
 

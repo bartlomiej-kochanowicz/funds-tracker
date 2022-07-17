@@ -14,13 +14,22 @@ interface LoginResponse {
 
 export default [
   rest.post<LoginBody, LoginResponse>(`${API_URL_MOCK}/auth/login`, (req, res, ctx) => {
-    const { email } = req.body;
+    const { email, password } = req.body;
+
+    if (email === 'admin@funds-tracker.com' && password === 'FundsTracker2137')
+      return res(
+        ctx.delay(3000),
+        ctx.json({
+          uuid: 'f79e82e8-c34a-4dc7-a49e-9fadc0979fda',
+          email,
+          username: 'Admin',
+        }),
+      );
 
     return res(
+      ctx.status(403),
       ctx.json({
-        uuid: 'f79e82e8-c34a-4dc7-a49e-9fadc0979fda',
-        email,
-        username: 'Test user',
+        message: 'Sorry, we could not find your account.',
       }),
     );
   }),
