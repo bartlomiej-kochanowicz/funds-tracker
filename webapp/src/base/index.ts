@@ -6,4 +6,4 @@ window.addEventListener('resize', documentHeight);
 
 documentHeight();
 
-worker.start();
+worker.start({ onUnhandledRequest: 'bypass' });
