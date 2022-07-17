@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { SignInResponse } from 'services/auth/signIn';
-import { signInThunk } from 'store/thunks/signInThunk';
-import { RequestState } from 'types/store';
+import { signInThunk } from 'store/thunks/auth/signInThunk';
+import { ErrorObject, RequestState } from 'types/store';
 
 export const signInSlice = createSlice({
   name: 'auth/singIn',
   initialState: {
     data: {} as SignInResponse,
     status: 'idle' as RequestState,
-    error: null as string | null,
+    error: { status: null, message: null } as ErrorObject,
   },
   reducers: {},
   extraReducers: builder => {
@@ -24,7 +24,10 @@ export const signInSlice = createSlice({
     builder.addCase(signInThunk.rejected, (state, action) => {
       console.log(action);
       state.status = 'rejected';
-      state.error = action.payload?.message ?? null;
+      state.error = {
+        status: action.error?.code ?? null,
+        message: action.payload?.message ?? null,
+      };
     });
   },
 });

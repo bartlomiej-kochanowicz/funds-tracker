@@ -78,6 +78,13 @@ deviation from the model you provide before, tells you how to rebalance the inst
   </ul>
 </details>
 
+### 🫡 To do
+
+- [x] add axios
+- [x] add mocked api
+- [x] add redux
+- [ ] add toasts
+
 ### 🪨 Milestones
 
 - [x] Create monorepo
