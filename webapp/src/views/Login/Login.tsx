@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { paths } from 'routes/paths';
 import { LangSelector } from 'components/molecules/LangSelector';
 import { useInput } from 'hooks/useInput';
+import { client } from 'config/client';
 import { validationSchema } from './Login.schema';
 import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
 
@@ -18,12 +19,9 @@ export const Login = () => {
   const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
-    await fetch('https://api.funds-tracker.com/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: userEmail,
-        password: userPassword,
-      }),
+    await client.post('/auth/login', {
+      email: userEmail,
+      password: userPassword,
     });
 
     navigate(paths.addModelPortfolio);
