@@ -10,7 +10,7 @@ type CommonProps = {
   children: ReactNode;
   size?: Size;
   color?: ButtonColors;
-  width?: 'fit-content' | 'auto';
+  width?: 'fit-content' | 'auto' | '100%';
   fontWeight?: keyof DefaultTheme['font']['weight'];
   to?: string;
 };
@@ -58,9 +58,15 @@ export const Button = styled.div<ButtonProps>`
         background-color: ${darken(theme.button.color[color].background, 0.05)};
       }
 
-      &:active {
+      &:active:not(&:disabled) {
         transform: scale(0.98);
         box-shadow: 3px 2px 22px 1px ${transparentize(theme.button.color[color].background, 0.76)};
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: ${transparentize(theme.button.color[color].background, 0.5)};
+        color: ${transparentize(theme.button.color[color].font, 0.5)};
       }
     `}
 `;

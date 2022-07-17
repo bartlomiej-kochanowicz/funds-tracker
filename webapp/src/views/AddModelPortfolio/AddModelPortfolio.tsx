@@ -1,5 +1,6 @@
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { AddInstrumentForm } from './components/AddInstrumentForm';
+import { AddFirstInstrumentSuccess } from './components/AddFirstInstrumentSuccess';
 import { AddModelPortfolioProvider, useAddModelPortfolioContext } from './context';
 
 const AddModelPortfolioContent = () => {
@@ -12,7 +13,7 @@ const AddModelPortfolioContent = () => {
     >
       {compareState(states.addFirstInstrument) && <AddInstrumentForm />}
 
-      {compareState(states.addFirstSuccess) && <div>test</div>}
+      {compareState(states.addFirstSuccess) && <AddFirstInstrumentSuccess />}
     </FullscreenClear>
   );
 };

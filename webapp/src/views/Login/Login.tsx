@@ -66,7 +66,10 @@ export const Login = () => {
 
         <Spacer space="large" />
 
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
           <Input
             placeholder={t('page.login.email.placeholder')}
             type="email"
@@ -86,6 +89,7 @@ export const Login = () => {
           <Button
             color="black"
             width="auto"
+            disabled={isSubmitting}
             type="submit"
           >
             {isSubmitting ? <Loader color="white" /> : t('sign_in')}
