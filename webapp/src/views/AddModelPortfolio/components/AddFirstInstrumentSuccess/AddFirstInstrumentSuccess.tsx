@@ -3,12 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Button, Heading, Spacer, Spreader } from 'components/atoms';
 import { DescribeText } from 'views/AddModelPortfolio/AddModelPortfolio.styles';
+import { ThumbUp } from 'components/atoms/ThumbUp/ThumbUp';
 
 export const AddFirstInstrumentSuccess = () => {
   const { t } = useTranslation();
 
   return (
     <Column alignItems="center">
+      <ThumbUp />
+
       <Heading>{t('add.instrument.success.title')}</Heading>
 
       <Spacer space="small" />

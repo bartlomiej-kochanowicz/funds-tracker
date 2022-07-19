@@ -16,20 +16,21 @@ export default [
   rest.post<LoginBody, LoginResponse>(`${API_URL_MOCK}/auth/login`, (req, res, ctx) => {
     const { email, password } = req.body;
 
-    if (email === 'admin@funds-tracker.com' && password === 'FundsTracker2137')
+    if (email === 'admin@funds-tracker.com' && password === 'FundsTracker2137') {
       return res(
-        ctx.delay(3000),
+        ctx.delay(2000),
         ctx.json({
           uuid: 'f79e82e8-c34a-4dc7-a49e-9fadc0979fda',
           email,
           username: 'Admin',
         }),
       );
+    }
 
     return res(
-      ctx.status(403),
+      ctx.status(404),
       ctx.json({
-        message: 'Sorry, we could not find your account.',
+        message: 'Account does not exist.',
       }),
     );
   }),

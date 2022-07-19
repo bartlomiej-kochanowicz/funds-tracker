@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import * as styled from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = styled.createGlobalStyle`
   :root {
     --doc-height: 100%;
   }
