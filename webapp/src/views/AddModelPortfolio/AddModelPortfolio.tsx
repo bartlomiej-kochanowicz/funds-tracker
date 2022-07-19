@@ -1,7 +1,20 @@
+import { lazy, Suspense } from 'react';
 import { FullscreenClear } from 'layouts/FullscreenClear';
-import { AddInstrumentForm } from './components/AddInstrumentForm';
-import { AddFirstInstrumentSuccess } from './components/AddFirstInstrumentSuccess';
 import { AddModelPortfolioProvider, useAddModelPortfolioContext } from './context';
+
+const AddInstrumentForm = lazy(() =>
+  import('./components/AddInstrumentForm').then(({ AddInstrumentForm: component }) => ({
+    default: component,
+  })),
+);
+
+const AddFirstInstrumentSuccess = lazy(() =>
+  import('./components/AddFirstInstrumentSuccess').then(
+    ({ AddFirstInstrumentSuccess: component }) => ({
+      default: component,
+    }),
+  ),
+);
 
 const AddModelPortfolioContent = () => {
   const { states, compareState } = useAddModelPortfolioContext();
@@ -11,9 +24,11 @@ const AddModelPortfolioContent = () => {
       alignItems="center"
       justifyContent="center"
     >
-      {compareState(states.addFirstInstrument) && <AddInstrumentForm />}
+      <Suspense>
+        {compareState(states.addFirstInstrument) && <AddInstrumentForm />}
 
-      {compareState(states.addFirstSuccess) && <AddFirstInstrumentSuccess />}
+        {compareState(states.addFirstSuccess) && <AddFirstInstrumentSuccess />}
+      </Suspense>
     </FullscreenClear>
   );
 };

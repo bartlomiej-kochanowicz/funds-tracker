@@ -9,10 +9,15 @@ export const ThumbUp = () => (
 
     <DotsWrapper>
       <Dot position="top" />
+
       <Dot position="topRight" />
+
       <Dot position="bottomRight" />
+
       <Dot position="bottom" />
+
       <Dot position="bottomLeft" />
+
       <Dot position="topLeft" />
     </DotsWrapper>
   </Center>
