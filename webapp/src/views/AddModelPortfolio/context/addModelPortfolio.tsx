@@ -19,9 +19,7 @@ type StateType = ValueOf<typeof states>;
 type ActionType = ValueOf<typeof actions>;
 
 const useProviderAddModelPortfolio = () => {
-  const [currentState, setCurrentState] = useState<StateType>(
-    states.addFirstInstrument as StateType,
-  );
+  const [currentState, setCurrentState] = useState<StateType>(states.addFirstSuccess as StateType);
 
   const transitions = {
     [states.addFirstInstrument]: {
