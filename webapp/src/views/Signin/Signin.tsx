@@ -13,7 +13,8 @@ import { AppDispatch } from 'store';
 import { signInThunk } from 'store/thunks/auth/signInThunk';
 import { selectSignInError, selectSignInStatus } from 'store/selectors/auth';
 import { validationSchema } from './Signin.schema';
-import { StyledFullscreenClear, Wrapper, Form } from './Signin.styles';
+import { Wrapper, Form } from './Signin.styles';
+import { FullscreenClear } from 'layouts/FullscreenClear';
 
 export const Signin = () => {
   const { t } = useTranslation();
@@ -43,7 +44,7 @@ export const Signin = () => {
 
   useUpdateEffect(() => {
     if (signInStatus === 'fulfilled') {
-      navigate(ROUTES.INTRODUCTION);
+      navigate(ROUTES.DASHBOARD);
     }
 
     if (signInStatus === 'rejected') {
@@ -64,7 +65,7 @@ export const Signin = () => {
   });
 
   return (
-    <StyledFullscreenClear
+    <FullscreenClear
       alignItems="center"
       justifyContent="center"
     >
@@ -123,6 +124,6 @@ export const Signin = () => {
       <Row justifyContent="flex-end">
         <LangSelector />
       </Row>
-    </StyledFullscreenClear>
+    </FullscreenClear>
   );
 };
