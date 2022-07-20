@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
-import { paths } from 'routes/paths';
+import { ROUTES } from 'ROUTES';
 import { LangSelector } from 'components/molecules/LangSelector';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { useInput } from 'hooks/useInput';
@@ -43,7 +43,7 @@ export const Login = () => {
 
   useUpdateEffect(() => {
     if (signInStatus === 'fulfilled') {
-      navigate(paths.addModelPortfolio);
+      navigate(ROUTES.INTRODUCTION);
     }
 
     if (signInStatus === 'rejected') {
