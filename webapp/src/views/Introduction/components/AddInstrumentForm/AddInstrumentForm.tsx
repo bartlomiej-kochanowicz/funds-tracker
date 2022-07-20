@@ -15,10 +15,10 @@ import { Column, Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import instruments from 'constants/selectors/instruments';
-import { useAddModelPortfolioContext } from 'views/AddModelPortfolio/context';
+import { useAddModelPortfolioContext } from 'views/Introduction/context';
 import { useSelect } from 'hooks/useSelect';
 import { useInput } from 'hooks/useInput';
-import { DescribeText } from 'views/AddModelPortfolio/AddModelPortfolio.styles';
+import { DescribeText } from 'views/Introduction/Introduction.styles';
 import { validationSchema } from './AddInstrumentForm.schema';
 
 export const AddInstrumentForm = () => {

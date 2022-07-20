@@ -33,5 +33,6 @@
   "add.instrument.percentage.error.range.max": "max. 100%",
   "add.instrument.button.submit.first": "Add first instrument",
   "add.instrument.success.title": "Great!",
-  "add.instrument.success.description": "You have just added to your portfolio first finance instrument. Keep going, add the next one!"
+  "add.instrument.success.description": "You have just added to your portfolio first finance instrument. Keep going, add the next one!",
+  "add.instrument.success.start_manage": "Go to portfolio manager"
 }

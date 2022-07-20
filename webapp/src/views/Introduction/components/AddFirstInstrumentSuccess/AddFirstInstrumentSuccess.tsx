@@ -1,8 +1,9 @@
 import { Column } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
-import { FaPlus } from 'react-icons/fa';
-import { Button, Heading, Spacer, Spreader, ThumbUp } from 'components/atoms';
-import { DescribeText } from 'views/AddModelPortfolio/AddModelPortfolio.styles';
+import { Button, Heading, Spacer, ThumbUp } from 'components/atoms';
+import { DescribeText } from 'views/Introduction/Introduction.styles';
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'ROUTES';
 
 export const AddFirstInstrumentSuccess = () => {
   const { t } = useTranslation();
@@ -31,10 +32,10 @@ export const AddFirstInstrumentSuccess = () => {
         color="black"
         width="100%"
         size="large"
+        as={Link}
+        to={ROUTES.MODEL_PORTFOLIO}
       >
-        <FaPlus />
-        <Spreader spread="tiny" />
-        Add next one
+        {t('add.instrument.success.start_manage')}
       </Button>
     </Column>
   );

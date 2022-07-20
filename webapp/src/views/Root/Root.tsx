@@ -1,6 +1,6 @@
 import { FC, lazy, Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { paths } from 'routes/paths';
+import { ROUTES } from 'ROUTES';
 import { Loading } from 'layouts/Loading';
 
 const Home = lazy(() =>
@@ -11,8 +11,8 @@ const Login = lazy(() =>
   import('views/Login').then(({ Login: component }) => ({ default: component })),
 );
 
-const AddModelPortfolio = lazy(() =>
-  import('views/AddModelPortfolio').then(({ AddModelPortfolio: component }) => ({
+const Introduction = lazy(() =>
+  import('views/Introduction').then(({ Introduction: component }) => ({
     default: component,
   })),
 );
@@ -22,12 +22,12 @@ const NotFound = lazy(() =>
 );
 
 export const Root: FC = () => {
-  const routes = useRoutes([
-    { path: paths.home, element: <Home /> },
-    { path: paths.login, element: <Login /> },
-    { path: paths.addModelPortfolio, element: <AddModelPortfolio /> },
-    { path: paths.any, element: <NotFound /> },
+  const views = useRoutes([
+    { path: ROUTES.HOME, element: <Home /> },
+    { path: ROUTES.SIGNIN, element: <Login /> },
+    { path: ROUTES.INTRODUCTION, element: <Introduction /> },
+    { path: ROUTES.ANY, element: <NotFound /> },
   ]);
 
-  return <Suspense fallback={<Loading />}>{routes}</Suspense>;
+  return <Suspense fallback={<Loading />}>{views}</Suspense>;
 };

@@ -16,7 +16,7 @@ const AddFirstInstrumentSuccess = lazy(() =>
   ),
 );
 
-const AddModelPortfolioContent = () => {
+const IntroductionContent = () => {
   const { states, compareState } = useAddModelPortfolioContext();
 
   return (
@@ -33,10 +33,10 @@ const AddModelPortfolioContent = () => {
   );
 };
 
-export const AddModelPortfolio = () => (
+export const Introduction = () => (
   <AddModelPortfolioProvider>
-    <AddModelPortfolioContent />
+    <IntroductionContent />
   </AddModelPortfolioProvider>
 );
 
-AddModelPortfolio.displayName = 'AddModelPortfolio';
+Introduction.displayName = 'Introduction';
