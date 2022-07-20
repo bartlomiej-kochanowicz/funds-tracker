@@ -45,8 +45,8 @@ export const Root: FC = () => {
     { path: ROUTES.SIGNIN, element: <Signin /> },
     { path: ROUTES.INTRODUCTION, element: <Introduction /> },
     { path: ROUTES.DASHBOARD, element: <Dashboard /> },
-    { path: ROUTES.DASHBOARD, element: <ModelPortfolio /> },
-    { path: ROUTES.DASHBOARD, element: <ActualPortfolio /> },
+    { path: ROUTES.MODEL_PORTFOLIO, element: <ModelPortfolio /> },
+    { path: ROUTES.ACTUAL_PORTFOLIO, element: <ActualPortfolio /> },
     { path: ROUTES.ANY, element: <NotFound /> },
   ]);
 
