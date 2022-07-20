@@ -12,10 +12,10 @@ import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
 import { signInThunk } from 'store/thunks/auth/signInThunk';
 import { selectSignInError, selectSignInStatus } from 'store/selectors/auth';
-import { validationSchema } from './Login.schema';
-import { StyledFullscreenClear, Wrapper, Form } from './Login.styles';
+import { validationSchema } from './Signin.schema';
+import { StyledFullscreenClear, Wrapper, Form } from './Signin.styles';
 
-export const Login = () => {
+export const Signin = () => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ export const Login = () => {
           fontColor="darkGray"
           textAlign="center"
         >
-          {t('page.login.description')}
+          {t('page.signin.description')}
         </Text>
 
         <Spacer space="large" />
@@ -88,7 +88,7 @@ export const Login = () => {
           noValidate
         >
           <Input
-            placeholder={t('page.login.email.placeholder')}
+            placeholder={t('page.signin.email.placeholder')}
             type="email"
             {...userEmailProps}
           />

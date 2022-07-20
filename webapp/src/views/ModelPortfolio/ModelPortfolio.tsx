@@ -1,1 +1,1 @@
-export const ManageModelPortfolio = () => <div>manage model portfolio</div>;
+export const ModelPortfolio = () => <div>Model portfolio</div>;
