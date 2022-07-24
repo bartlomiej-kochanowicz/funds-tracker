@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
-import { ROUTES } from 'ROUTES';
+import { ROUTES } from 'routes';
 import { LangSelector } from 'components/molecules/LangSelector';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
 import { signInThunk } from 'store/thunks/auth/signInThunk';
 import { selectSignInError, selectSignInStatus } from 'store/selectors/auth';
+import { FullscreenClear } from 'layouts/FullscreenClear';
 import { validationSchema } from './Signin.schema';
 import { Wrapper, Form } from './Signin.styles';
-import { FullscreenClear } from 'layouts/FullscreenClear';
 
 export const Signin = () => {
   const { t } = useTranslation();
