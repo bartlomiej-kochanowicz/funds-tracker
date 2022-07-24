@@ -34,5 +34,6 @@
   "add.instrument.button.submit.first": "Add first instrument",
   "add.instrument.success.title": "Great!",
   "add.instrument.success.description": "You have just added to your portfolio first finance instrument. Keep going, add the next one!",
-  "add.instrument.success.start_manage": "Go to portfolio manager"
+  "add.instrument.success.start_manage": "Go to portfolio manager",
+  "service.unknown_error": "Unknown error"
 }

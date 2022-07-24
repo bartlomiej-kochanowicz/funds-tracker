@@ -34,5 +34,6 @@
   "add.instrument.button.submit.first": "Dodaj pierwszy instrument",
   "add.instrument.success.title": "Świetnie!",
   "add.instrument.success.description": "Właśnie dodałeś do portfela pierwszy instrument finansowy. Tak trzymaj, dodaj kolejny instrument do portfolio!",
-  "add.instrument.success.start_manage": "Menadżer portfolio modelowego"
+  "add.instrument.success.start_manage": "Menadżer portfolio modelowego",
+  "service.unknown_error": "Wystapił nieznany błąd"
 }

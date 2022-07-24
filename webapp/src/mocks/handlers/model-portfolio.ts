@@ -14,7 +14,7 @@ interface InstrumentsResponse {
 }
 
 export default [
-  rest.get<InstrumentsResponse>(`${API_URL_MOCK}/model-portfolio/instruments`, (req, res, ctx) =>
+  rest.get<InstrumentsResponse>(`${API_URL_MOCK}/model-portfolio`, (req, res, ctx) =>
     res(
       ctx.status(200),
       ctx.json({

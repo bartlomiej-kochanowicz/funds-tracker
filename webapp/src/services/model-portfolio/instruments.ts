@@ -13,4 +13,4 @@ export interface InstrumentsResponse {
 }
 
 export const getModelPortfolioInstruments = () =>
-  client.get<InstrumentsResponse>('/model-portfolio/instruments');
+  client.get<InstrumentsResponse>('/model-portfolio');

@@ -1,14 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { signIn, SignInProps, SignInResponse } from 'services/auth/signIn';
+import {
+  getModelPortfolioInstruments,
+  InstrumentsResponse,
+} from 'services/model-portfolio/instruments';
 import { RequestReject } from 'types/service';
 import { RejectValue } from 'types/store';
 
-export const signInThunk = createAsyncThunk<SignInResponse, SignInProps, RejectValue>(
-  'auth/singIn',
-  async ({ userEmail, userPassword }, { rejectWithValue }) => {
+export const instrumentsThunk = createAsyncThunk<InstrumentsResponse, undefined, RejectValue>(
+  'model-portfolio/instruments',
+  async (none, { rejectWithValue }) => {
     try {
-      const { data } = await signIn({ userEmail, userPassword });
+      const { data } = await getModelPortfolioInstruments();
 
       return data;
     } catch (err) {
