@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { STATUS } from 'constants/store';
 import { InstrumentsResponse } from 'services/model-portfolio/instruments';
 import { instrumentsThunk } from 'store/thunks/model-portfolio/instrumentsThunk';
 import { ErrorObject, RequestState } from 'types/store';
 
-export const signInSlice = createSlice({
+export const instrumentsSlice = createSlice({
   name: 'model-portfolio/instruments',
   initialState: {
     data: {} as InstrumentsResponse,
@@ -13,16 +14,16 @@ export const signInSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(instrumentsThunk.pending, state => {
-      state.status = 'pending';
+      state.status = STATUS.PENDING;
     });
 
     builder.addCase(instrumentsThunk.fulfilled, (state, action) => {
-      state.status = 'fulfilled';
+      state.status = STATUS.FULFILLED;
       state.data = action.payload;
     });
 
     builder.addCase(instrumentsThunk.rejected, (state, action) => {
-      state.status = 'rejected';
+      state.status = STATUS.REJECTED;
       state.error = {
         code: action.error?.code ?? undefined,
         message: action.payload?.message ?? undefined,

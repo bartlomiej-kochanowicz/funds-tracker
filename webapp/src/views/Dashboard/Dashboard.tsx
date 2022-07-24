@@ -1,7 +1,7 @@
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Button, Spacer } from 'components/atoms';
 import { Link } from 'react-router-dom';
-import { ROUTES } from 'ROUTES';
+import { ROUTES } from 'routes';
 
 export const Dashboard = () => (
   <FullscreenClear

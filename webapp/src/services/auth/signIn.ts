@@ -1,4 +1,5 @@
 import { client } from 'config/client';
+import { retryHTTP } from 'utils/retryHTTP';
 
 export interface SignInProps {
   userEmail: string;
@@ -11,8 +12,13 @@ export interface SignInResponse {
   username: string;
 }
 
-export const signIn = ({ userEmail, userPassword }: SignInProps) =>
-  client.post<SignInResponse>('/auth/login', {
-    email: userEmail,
-    password: userPassword,
-  });
+export const signIn = retryHTTP(
+  ({ userEmail, userPassword }: SignInProps) =>
+    client.post<SignInResponse>('/auth/login', {
+      email: userEmail,
+      password: userPassword,
+    }),
+  {
+    maxAttempts: 3,
+  },
+);

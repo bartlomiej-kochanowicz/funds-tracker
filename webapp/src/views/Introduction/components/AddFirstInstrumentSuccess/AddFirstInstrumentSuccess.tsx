@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, Heading, Spacer, ThumbUp } from 'components/atoms';
 import { DescribeText } from 'views/Introduction/Introduction.styles';
 import { Link } from 'react-router-dom';
-import { ROUTES } from 'ROUTES';
+import { ROUTES } from 'routes';
 
 export const AddFirstInstrumentSuccess = () => {
   const { t } = useTranslation();

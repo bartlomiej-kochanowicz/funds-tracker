@@ -1,5 +1,6 @@
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Box } from 'components/atoms';
+import { Instruments } from './components/Instruments';
 
 export const ModelPortfolio = () => (
   <FullscreenClear
@@ -11,7 +12,7 @@ export const ModelPortfolio = () => (
       p={4}
       borderRadius="tertiary"
     >
-      test
+      <Instruments />
     </Box>
   </FullscreenClear>
 );
