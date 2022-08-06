@@ -7,5 +7,8 @@
     "install:api": "pnpm install && cd api && pnpm install",
     "install:webapp": "pnpm install && cd webapp && pnpm install",
     "prepare": "husky install .husky"
+  },
+  "devDependencies": {
+    "husky": "8.0.1"
   }
 }
