@@ -6,7 +6,10 @@
     "install:all": "pnpm install && cd api && pnpm install && cd ../webapp && pnpm install",
     "install:api": "pnpm install && cd api && pnpm install",
     "install:webapp": "pnpm install && cd webapp && pnpm install",
-    "prepare": "husky install .husky"
+    "prepare": "husky install .husky",
+    "lint": "cd webapp && pnpm lint && cd ../api && pnpm lint",
+    "test": "cd webapp && pnpm test && cd ../api && pnpm test",
+    "check:circular-deps": "cd webapp && pnpm check:circular-deps && cd ../api && pnpm check:circular-deps"
   },
   "devDependencies": {
     "husky": "8.0.1"
