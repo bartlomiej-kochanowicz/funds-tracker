@@ -15,33 +15,6 @@
     "lint:fix": "eslint --fix ./src",
     "format": "prettier --write ./src"
   },
-  "nx": {
-    "targets": {
-      "start": {
-        "dependsOn": [
-          "start"
-        ]
-      },
-      "build": {
-        "outputs": [
-          "dist/"
-        ],
-        "dependsOn": [
-          "build"
-        ]
-      },
-      "lint": {
-        "dependsOn": [
-          "lint"
-        ]
-      },
-      "test": {
-        "dependsOn": [
-          "test"
-        ]
-      }
-    }
-  },
   "dependencies": {
     "@hookform/resolvers": "2.9.7",
     "@reduxjs/toolkit": "1.8.3",
