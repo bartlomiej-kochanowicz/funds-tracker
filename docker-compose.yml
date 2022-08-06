@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  mongo:
+    container_name: mongo-database
+    image: mongo
+    restart: always
+    ports:
+      - "27018:27017"
+    networks:
+      - default
+    volumes:
+      - ./backend/docker-setup/mongo/db-init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./backend/docker-setup/mongo/mongo-volume:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=funds_tracker
+      - MONGO_INITDB_USER=local_user
+      - MONGO_INITDB_PASSWORD=Password123
+
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: docker-setup/node/development/Dockerfile
+    networks:
+      - default
+      - frontend
+    volumes:
+      - ./backend:/home/node/app
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - ./api/.env.local
+    tty: true
+    stdin_open: true
+    depends_on:
+      - mongo
+    ports:
+      - "5000:3001"
+
+  webapp:
+    container_name: react-mern-docker-boilerplate
+    build:
+      context: ./frontend
+      dockerfile: docker-setup/react/development/Dockerfile
+    networks:
+      - frontend
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/frontend
+    depends_on:
+      - backend
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:5173"
+
+networks:
+  default:
+    name: backend-network-funds-tracker
+  frontend:
+    name: frontend-network-fuds-tracker
