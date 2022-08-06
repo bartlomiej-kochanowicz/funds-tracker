@@ -10,8 +10,8 @@ services:
     networks:
       - default
     volumes:
-      - ./backend/docker-setup/mongo/db-init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - ./backend/docker-setup/mongo/mongo-volume:/data/db
+      - ./api/docker/mongo/db-init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./api/docker/mongo/mongo-volume:/data/db
     environment:
       - MONGO_INITDB_DATABASE=funds_tracker
       - MONGO_INITDB_USER=local_user
@@ -21,12 +21,12 @@ services:
     container_name: api
     build:
       context: ./api
-      dockerfile: docker-setup/node/development/Dockerfile
+      dockerfile: docker/node/development/Dockerfile
     networks:
       - default
-      - frontend
+      - webapp
     volumes:
-      - ./backend:/home/node/app
+      - ./api:/home/node/app
     environment:
       - NODE_ENV=development
     env_file:
@@ -36,28 +36,28 @@ services:
     depends_on:
       - mongo
     ports:
-      - "5000:3001"
+      - "5001:3001"
 
   webapp:
-    container_name: react-mern-docker-boilerplate
+    container_name: webapp
     build:
-      context: ./frontend
-      dockerfile: docker-setup/react/development/Dockerfile
+      context: ./webapp
+      dockerfile: docker/react/development/Dockerfile
     networks:
-      - frontend
+      - webapp
     environment:
       - NODE_ENV=development
     volumes:
-      - ./frontend:/frontend
+      - ./webapp:/webapp
     depends_on:
-      - backend
+      - api
     tty: true
     stdin_open: true
     ports:
-      - "3000:5173"
+      - "5173:5173"
 
 networks:
   default:
-    name: backend-network-funds-tracker
-  frontend:
-    name: frontend-network-fuds-tracker
+    name: api-network-funds-tracker
+  webapp:
+    name: webapp-network-fuds-tracker
