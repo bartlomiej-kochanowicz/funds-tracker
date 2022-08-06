@@ -26,3 +26,5 @@ dist-ssr
 
 .DS_Store
 graph.svg
+
+mongo-volume
