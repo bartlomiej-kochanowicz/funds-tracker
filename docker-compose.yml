@@ -1,6 +1,22 @@
 version: "3.9"
 
 services:
+  database:
+    container_name: database
+    image: mongo
+    restart: always
+    ports:
+      - "27018:27017"
+    networks:
+      - api
+    volumes:
+      - ./database/db-init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./database/mongo-volume:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=funds-tracker
+      - MONGO_INITDB_USER=admin
+      - MONGO_INITDB_PASSWORD=admin
+
   api:
     container_name: api
     build:
@@ -15,9 +31,13 @@ services:
       - ./api:/api
     tty: true
     stdin_open: true
+    env_file:
+      - ./api/.env.local
     command: npm run start:dev
+    depends_on:
+      - database
     ports:
-      - "3002:3001"
+      - "3001:3001"
       - "9229:9229"
   webapp:
     container_name: webapp
@@ -35,6 +55,8 @@ services:
       - api
     tty: true
     stdin_open: true
+    env_file:
+      - ./webapp/.env.local
     ports:
       - "5173:5173"
 
