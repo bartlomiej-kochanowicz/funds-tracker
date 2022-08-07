@@ -1,48 +1,30 @@
 version: "3.9"
 
 services:
-  mongo:
-    container_name: mongo-database
-    image: mongo
-    restart: always
-    ports:
-      - "27018:27017"
-    networks:
-      - default
-    volumes:
-      - ./api/docker/mongo/db-init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - ./api/docker/mongo/mongo-volume:/data/db
-    environment:
-      - MONGO_INITDB_DATABASE=funds_tracker
-      - MONGO_INITDB_USER=local_user
-      - MONGO_INITDB_PASSWORD=Password123
-
   api:
     container_name: api
     build:
+      target: development
       context: ./api
-      dockerfile: docker/node/development/Dockerfile
+      dockerfile: Dockerfile
     networks:
-      - default
-      - webapp
-    volumes:
-      - ./api:/home/src/app
+      - api
     environment:
       - NODE_ENV=development
-    env_file:
-      - ./api/.env.local
+    volumes:
+      - ./api:/api
     tty: true
     stdin_open: true
-    depends_on:
-      - mongo
+    command: npm run start:dev
     ports:
-      - "5001:3001"
-
+      - "3002:3001"
+      - "9229:9229"
   webapp:
     container_name: webapp
     build:
+      target: development
       context: ./webapp
-      dockerfile: docker/react/development/Dockerfile
+      dockerfile: Dockerfile
     networks:
       - webapp
     environment:
@@ -57,7 +39,7 @@ services:
       - "5173:5173"
 
 networks:
-  default:
-    name: api-network-funds-tracker
+  api:
+    name: api-network-fuds-tracker
   webapp:
     name: webapp-network-fuds-tracker
