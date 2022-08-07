@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
-import { DB_URL } from 'config/database';
+/* import { MongooseModule } from '@nestjs/mongoose';
+import { DB_URL } from 'config/database'; */
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -10,7 +10,7 @@ import { AppService } from './app.service';
     ConfigModule.forRoot({
       envFilePath: ['.env.local'],
     }),
-    MongooseModule.forRoot(DB_URL),
+    /* MongooseModule.forRoot(DB_URL), */
   ],
   controllers: [AppController],
   providers: [AppService],
