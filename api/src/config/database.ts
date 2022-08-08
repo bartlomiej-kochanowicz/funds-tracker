@@ -1,3 +1,9 @@
-import { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } from 'config/env';
+import {
+  MONGO_HOSTNAME,
+  MONGO_PORT,
+  MONGO_DATABASE,
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
+} from 'config/env';
 
-export const DB_URL = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+export const DB_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DATABASE}`;
