@@ -114,10 +114,10 @@ Install funds-tracker with pnpm
 
 ### :running: Run Locally
 
-Start webapp and server
+Start monorepo
 
 ```bash
-  pnpm start:all
+  make up
 ```
 
 Start only webapp

@@ -4,7 +4,7 @@ db.createUser({
   roles: [
     {
       role: "readWrite",
-      db: "funds-tracker",
+      db: "funds_tracker",
     },
   ],
 });

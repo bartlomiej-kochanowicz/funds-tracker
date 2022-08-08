@@ -28,3 +28,4 @@ dist-ssr
 graph.svg
 
 mongo-volume
+.env

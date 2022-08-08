@@ -6,16 +6,17 @@ services:
     image: mongo
     restart: always
     ports:
-      - "27018:27017"
+      - "${MONGO_PORT}:${MONGO_PORT}"
     networks:
       - api
     volumes:
       - ./database/db-init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./database/mongo-volume:/data/db
     environment:
-      - MONGO_INITDB_DATABASE=funds-tracker
-      - MONGO_INITDB_USER=admin
-      - MONGO_INITDB_PASSWORD=admin
+      - MONGO_HOSTNAME=mongodb
+      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
 
   api:
     container_name: api
@@ -25,6 +26,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - api
+      - webapp
     environment:
       - NODE_ENV=development
     volumes:
@@ -32,12 +34,12 @@ services:
     tty: true
     stdin_open: true
     env_file:
-      - ./api/.env.local
+      - ./api/.env
     command: npm run start:dev
     depends_on:
       - database
     ports:
-      - "3001:3001"
+      - ${API_PORT}:${API_PORT}
       - "9229:9229"
   webapp:
     container_name: webapp
@@ -47,6 +49,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - webapp
+      - api
     environment:
       - NODE_ENV=development
     volumes:
@@ -56,12 +59,10 @@ services:
     tty: true
     stdin_open: true
     env_file:
-      - ./webapp/.env.local
+      - ./webapp/.env
     ports:
       - "5173:5173"
 
 networks:
   api:
-    name: api-network-fuds-tracker
   webapp:
-    name: webapp-network-fuds-tracker
