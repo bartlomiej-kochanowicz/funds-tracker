@@ -3,7 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ROUTES } from 'routes';
 import { Loading } from 'layouts/Loading';
-import { ErrorContent } from 'components/molecules';
+import { ErrorContent } from 'components/molecules/ErrorContent';
 
 const Home = lazy(() =>
   import('views/Home').then(({ Home: component }) => ({ default: component })),

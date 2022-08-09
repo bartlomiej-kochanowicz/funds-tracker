@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
 import { ROUTES } from 'routes';
-import { LangSelector } from 'components/molecules';
+import { LangSelector } from 'components/molecules/LangSelector';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
