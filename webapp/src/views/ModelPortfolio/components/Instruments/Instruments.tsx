@@ -6,6 +6,7 @@ export const Instruments = ({ collection }: InstrumentsResponse) => (
   <Ul>
     {collection.map(({ uuid, ...rest }) => (
       <Instrument
+        key={uuid}
         uuid={uuid}
         {...rest}
       />

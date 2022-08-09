@@ -1,7 +1,8 @@
 import { Instrument as InstrumentProps } from 'services/model-portfolio/instruments';
+import { Wrapper } from './Instrument.styles';
 
 export const Instrument = ({ name, type, percentage }: InstrumentProps) => (
-  <div>
+  <Wrapper>
     {name}, {type}, {percentage}%
-  </div>
+  </Wrapper>
 );

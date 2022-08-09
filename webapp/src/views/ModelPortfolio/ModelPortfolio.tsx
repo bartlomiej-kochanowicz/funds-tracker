@@ -27,7 +27,7 @@ export const ModelPortfolio = () => {
     >
       <Box
         backgroundColor="lightGray"
-        p={4}
+        p={6}
         borderRadius="tertiary"
       >
         <Loading
