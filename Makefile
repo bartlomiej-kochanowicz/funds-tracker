@@ -6,6 +6,8 @@ stop:
 	docker compose stop
 build:
 	docker compose build --no-cache
+restart:
+	docker compose restart
 logs-webapp:
 	docker logs -f webapp
 logs-api:
