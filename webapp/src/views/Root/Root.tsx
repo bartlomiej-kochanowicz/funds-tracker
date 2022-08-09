@@ -13,6 +13,10 @@ const Signin = lazy(() =>
   import('views/Signin').then(({ Signin: component }) => ({ default: component })),
 );
 
+const Signup = lazy(() =>
+  import('views/Signup').then(({ Signup: component }) => ({ default: component })),
+);
+
 const Introduction = lazy(() =>
   import('views/Introduction').then(({ Introduction: component }) => ({
     default: component,
@@ -56,6 +60,14 @@ export const Root: FC = () => {
       element: (
         <ErrorBoundary FallbackComponent={ErrorContent}>
           <Signin />
+        </ErrorBoundary>
+      ),
+    },
+    {
+      path: ROUTES.SIGNUP,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorContent}>
+          <Signup />
         </ErrorBoundary>
       ),
     },
