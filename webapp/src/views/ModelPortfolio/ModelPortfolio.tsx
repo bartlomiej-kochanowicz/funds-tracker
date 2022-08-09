@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Box } from 'components/atoms';
-import { Loading } from 'components/molecules/Loading';
+import { Loading } from 'components/molecules';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectInstruments } from 'store/selectors/model-portfolio';
 import { instrumentsThunk } from 'store/thunks/model-portfolio/instrumentsThunk';
