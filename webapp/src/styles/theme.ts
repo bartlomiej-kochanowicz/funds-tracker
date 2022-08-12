@@ -61,8 +61,14 @@ export const theme = {
   },
   padding: {
     small: `${rem(0.25)} ${rem(0.75)}`,
+    smallX: `0 ${rem(0.75)}`,
+    smallY: `${rem(0.25)} 0`,
     medium: `${rem(0.5)} ${rem(1.25)}`,
+    mediumX: `0 ${rem(1.25)}`,
+    mediumY: `${rem(0.5)} 0`,
     large: `${rem(0.75)} ${rem(1.5)}`,
+    largeX: `0 ${rem(1.5)}`,
+    largeY: `${rem(0.75)} 0`,
   },
   font: {
     weight: {

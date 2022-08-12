@@ -20,10 +20,7 @@ export const ModelPortfolio = () => {
   }, [dispatch]);
 
   return (
-    <FullscreenClear
-      alignItems="center"
-      justifyContent="center"
-    >
+    <FullscreenClear>
       <Loading
         loading={loading}
         loaded={loaded}

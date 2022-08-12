@@ -14,7 +14,7 @@ import { signInThunk } from 'store/thunks/auth/signInThunk';
 import { selectSignInError, selectSignInStatus } from 'store/selectors/auth';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { validationSchema } from './Signin.schema';
-import { Wrapper, Form } from './Signin.styles';
+import { Form } from './Signin.styles';
 
 export const Signin = () => {
   const { t } = useTranslation();
@@ -65,55 +65,50 @@ export const Signin = () => {
   });
 
   return (
-    <FullscreenClear
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Wrapper alignItems="stretch">
-        <Heading textAlign="center">{t('sign_in')}</Heading>
+    <FullscreenClear>
+      <Heading textAlign="center">{t('sign_in')}</Heading>
 
-        <Spacer space="small" />
+      <Spacer space="small" />
 
-        <Text
-          fontSize="0.875"
-          fontColor="darkGray"
-          textAlign="center"
+      <Text
+        fontSize="0.875"
+        fontColor="darkGray"
+        textAlign="center"
+      >
+        {t('page.signin.description')}
+      </Text>
+
+      <Spacer space="large" />
+
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
+        <Input
+          placeholder={t('page.signin.email.placeholder')}
+          type="email"
+          {...userEmailProps}
+        />
+
+        <Spacer />
+
+        <Input
+          placeholder={t('password')}
+          type="password"
+          {...userPasswordProps}
+        />
+
+        <Spacer />
+
+        <Button
+          color="black"
+          width="auto"
+          disabled={isSubmitting}
+          type="submit"
         >
-          {t('page.signin.description')}
-        </Text>
-
-        <Spacer space="large" />
-
-        <Form
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-          <Input
-            placeholder={t('page.signin.email.placeholder')}
-            type="email"
-            {...userEmailProps}
-          />
-
-          <Spacer />
-
-          <Input
-            placeholder={t('password')}
-            type="password"
-            {...userPasswordProps}
-          />
-
-          <Spacer />
-
-          <Button
-            color="black"
-            width="auto"
-            disabled={isSubmitting}
-            type="submit"
-          >
-            {isSubmitting ? <Loader color="white" /> : t('sign_in')}
-          </Button>
-        </Form>
-      </Wrapper>
+          {isSubmitting ? <Loader color="white" /> : t('sign_in')}
+        </Button>
+      </Form>
 
       <Spacer space="large" />
 
