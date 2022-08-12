@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { FullscreenClear } from 'layouts/FullscreenClear';
-import { Box } from 'components/atoms';
 import { Loading } from 'components/molecules/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectInstruments } from 'store/selectors/model-portfolio';
@@ -25,19 +24,13 @@ export const ModelPortfolio = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Box
-        backgroundColor="lightGray"
-        p={6}
-        borderRadius="tertiary"
-      >
-        <Loading
-          loading={loading}
-          loaded={loaded}
-          error={error}
-          propsComponent={data}
-          renderComponent={props => <Instruments {...props} />}
-        />
-      </Box>
+      <Loading
+        loading={loading}
+        loaded={loaded}
+        error={error}
+        propsComponent={data}
+        renderComponent={props => <Instruments {...props} />}
+      />
     </FullscreenClear>
   );
 };
