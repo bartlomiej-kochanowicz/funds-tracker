@@ -1,10 +1,20 @@
 import { client } from 'config/client';
 import { retryHTTP } from 'utils/retryHTTP';
 
+export type InstrumentType =
+  | 'cash'
+  | 'saving-accounts'
+  | 'deposits'
+  | 'stocks'
+  | 'bonds'
+  | 'commodies'
+  | 'crypto'
+  | 'others';
+
 export type Instrument = {
   uuid: string;
   name: string;
-  type: string;
+  type: InstrumentType;
   percentage: number;
   rebalancing: boolean;
 };

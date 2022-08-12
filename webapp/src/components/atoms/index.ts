@@ -3,6 +3,7 @@ export { Button } from './Button';
 export { Checkbox } from './Checkbox';
 export { Heading } from './Heading';
 export { Input } from './Input';
+export { InstrumentSymbol } from './InstrumentSymbol';
 export { Loader } from './Loader';
 export { Menu } from './Menu';
 export { Select } from './Select';
