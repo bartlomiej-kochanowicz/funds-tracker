@@ -13,5 +13,8 @@
   },
   "devDependencies": {
     "husky": "8.0.1"
+  },
+  "dependencies": {
+    "@types/passport-jwt": "^3.0.6"
   }
 }

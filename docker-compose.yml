@@ -30,6 +30,7 @@ services:
       - NODE_ENV=development
     volumes:
       - ./api:/api
+      - /api/node_modules
     tty: true
     stdin_open: true
     env_file:

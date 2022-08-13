@@ -4,15 +4,15 @@ WORKDIR /api
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN apt-get update && apt-get install -y vim && apt-get install -y procps
+RUN apt-get update && apt-get install -y vim && apt-get install -y procps && apt-get install -y build-essential && apt-get install -y python3
 
-RUN corepack enable && corepack prepare pnpm@7.8.0 --activate
+RUN npm i -g npm && npm i -g pnpm
 
-RUN npm install -g npm
-
-RUN pnpm install glob rimraf
+RUN pnpm install glob rimraf node-gyp
 
 RUN pnpm install
+
+RUN pnpm rebuild bcrypt
 
 COPY . .
 
