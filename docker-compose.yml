@@ -10,6 +10,7 @@ services:
     networks:
       - api
     volumes:
+      - ./database/db-init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - mongo_data:/data/db
     environment:
       - MONGO_HOSTNAME=${MONGO_HOSTNAME}
