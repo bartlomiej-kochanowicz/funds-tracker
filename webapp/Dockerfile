@@ -10,7 +10,7 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 RUN apt-get update && apt-get install -y vim
-RUN corepack enable && corepack prepare pnpm@7.8.0 --activate
+RUN corepack enable && corepack prepare pnpm@7.9.0 --activate
 
 COPY package.json pnpm-lock.yaml ./
 

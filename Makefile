@@ -1,7 +1,7 @@
 up:
 	docker compose up -d
 down:
-	docker compose down --remove-orphans
+	docker compose down --remove-orphans -v
 stop:
 	docker compose stop
 build:

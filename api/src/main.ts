@@ -5,6 +5,11 @@ import { AppModule } from './app.module';
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
 
+  // temporaty
+  app.enableCors();
+
+  app.setGlobalPrefix('api');
+
   await app.listen(API_PORT);
 };
 
