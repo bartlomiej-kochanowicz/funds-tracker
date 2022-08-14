@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { API_URL_MOCK } from 'config/env';
+import { API_URL_MOCK } from 'common/config/env';
 
 interface LoginBody {
   email: string;

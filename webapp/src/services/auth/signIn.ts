@@ -1,4 +1,4 @@
-import { client } from 'config/client';
+import { client } from 'common/config/client';
 import { retryHTTP } from 'utils/retryHTTP';
 
 export interface SignInProps {
