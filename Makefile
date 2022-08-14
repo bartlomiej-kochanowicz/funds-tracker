@@ -8,6 +8,8 @@ build:
 	docker compose build --no-cache
 restart:
 	docker compose restart
+prisma-generate:
+	docker compose exec api npx prisma generate
 logs-webapp:
 	docker logs -f webapp
 logs-api:

@@ -8,9 +8,9 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt       DateTime @default(now())
-  email           String   @unique
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt       DateTime   @default(now())
+  email           String     @unique
   password        String
   name            String
   refresh_token   String?
