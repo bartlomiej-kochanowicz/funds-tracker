@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AT_SECRET, RT_SECRET } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
@@ -15,6 +15,12 @@ export class AuthService {
 
     const hashedPwd = await this.hashData(password);
 
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (user) {
+      throw new ForbiddenException('Email already in use.');
+    }
+
     const { id: newUserId, email: newUserEmail } =
       await this.prisma.user.create({
         data: {
@@ -30,9 +36,37 @@ export class AuthService {
     return tokens;
   }
 
-  signinLocal() {}
+  async signinLocal(dto: AuthDto): Promise<Tokens> {
+    const { email, password } = dto;
 
-  logout() {}
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) throw new ForbiddenException('no acount for these email.');
+
+    const isPasswordsMatches = await bcrypt.compare(password, user.rtHash);
+
+    if (isPasswordsMatches) throw new ForbiddenException('Wrong password.');
+
+    const tokens = await this.getTokens(user.id, user.email);
+
+    await this.updateRtHash(user.id, tokens.refresh_token);
+
+    return tokens;
+  }
+
+  async logout(userId: string) {
+    await this.prisma.user.updateMany({
+      where: {
+        id: userId,
+        rtHash: {
+          not: null,
+        },
+      },
+      data: {
+        rtHash: null,
+      },
+    });
+  }
 
   refreshToken() {}
 
