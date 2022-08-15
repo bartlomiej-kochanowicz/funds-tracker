@@ -4,7 +4,7 @@ import { AT_SECRET, RT_SECRET } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { AuthDto } from './dto';
-import { Tokens } from './types/tokens.type';
+import { Tokens } from './types';
 
 @Injectable()
 export class AuthService {
@@ -43,7 +43,7 @@ export class AuthService {
 
     if (!user) throw new ForbiddenException('no acount for these email.');
 
-    const isPasswordsMatches = await bcrypt.compare(password, user.rtHash);
+    const isPasswordsMatches = await bcrypt.compare(user.password, password);
 
     if (isPasswordsMatches) throw new ForbiddenException('Wrong password.');
 
@@ -68,7 +68,21 @@ export class AuthService {
     });
   }
 
-  refreshToken() {}
+  async refreshToken(userId: string, rt: string) {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+
+    if (!user || !user.rtHash) throw new ForbiddenException();
+
+    const isRtMatches = await bcrypt.compare(user.rtHash, rt);
+
+    if (!isRtMatches) throw new ForbiddenException();
+
+    const tokens = await this.getTokens(user.id, user.email);
+
+    await this.updateRtHash(user.id, tokens.refresh_token);
+
+    return tokens;
+  }
 
   private async updateRtHash(userId: string, rt: string) {
     const rtHash = await this.hashData(rt);
@@ -79,8 +93,10 @@ export class AuthService {
     });
   }
 
-  private hashData(pwd: string): Promise<string> {
-    return bcrypt.hash(pwd, 10);
+  private async hashData(pwd: string): Promise<string> {
+    const salt = await bcrypt.genSalt(10);
+
+    return bcrypt.hash(pwd, salt);
   }
 
   private async getTokens(userId: string, email: string): Promise<Tokens> {
@@ -91,7 +107,7 @@ export class AuthService {
       ),
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 60 * 60 * 7, secret: RT_SECRET },
+        { expiresIn: 60 * 60 * 24 * 7, secret: RT_SECRET },
       ),
     ]);
 

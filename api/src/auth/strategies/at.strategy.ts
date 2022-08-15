@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
+import { JwtPayload } from 'auth/types';
 import { AT_SECRET } from 'common/config/env';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
@@ -12,7 +13,7 @@ export class AtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  validate(payload: any) {
+  validate(payload: JwtPayload) {
     return payload;
   }
 }
