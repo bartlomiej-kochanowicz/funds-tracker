@@ -12,6 +12,5 @@ model User {
   createdAt       DateTime   @default(now())
   email           String     @unique
   password        String
-  name            String
   refresh_token   String?
 }

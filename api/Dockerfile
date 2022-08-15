@@ -16,4 +16,6 @@ RUN pnpm rebuild bcrypt
 
 COPY . .
 
+RUN npx prisma generate
+
 RUN pnpm build
