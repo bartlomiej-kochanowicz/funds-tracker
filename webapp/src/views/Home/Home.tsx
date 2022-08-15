@@ -11,10 +11,7 @@ export const Home: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <StyledFullscreenClear
-      justifyContent="center"
-      alignItems="center"
-    >
+    <StyledFullscreenClear>
       <Column alignItems="center">
         <LogoHorizontal width="500px" />
 

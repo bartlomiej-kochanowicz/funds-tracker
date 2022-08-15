@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes';
 
 export const Dashboard = () => (
-  <FullscreenClear
-    alignItems="center"
-    justifyContent="center"
-  >
+  <FullscreenClear>
     <Button
       as={Link}
       to={ROUTES.MODEL_PORTFOLIO}
