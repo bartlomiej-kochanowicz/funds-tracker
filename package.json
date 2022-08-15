@@ -7,14 +7,15 @@
     "install:api": "pnpm install && cd api && pnpm install",
     "install:webapp": "pnpm install && cd webapp && pnpm install",
     "prepare": "husky install .husky",
-    "lint": "cd webapp && pnpm lint && cd ../api && pnpm lint",
-    "test": "cd webapp && pnpm test && cd ../api && pnpm test",
+    "lint:api": "cd api && pnpm lint",
+    "lint:webapp": "cd webapp && pnpm lint",
+    "lint": "pnpm lint:api && pnpm lint:webapp",
+    "test:api": "cd api && pnpm test",
+    "test:webapp": "cd webapp && pnpm test",
+    "test": "pnpm test:api && pnpm test:webapp",
     "check:circular-deps": "cd webapp && pnpm check:circular-deps && cd ../api && pnpm check:circular-deps"
   },
   "devDependencies": {
     "husky": "8.0.1"
-  },
-  "dependencies": {
-    "@types/passport-jwt": "^3.0.6"
   }
 }
