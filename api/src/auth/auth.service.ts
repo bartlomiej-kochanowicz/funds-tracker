@@ -1,21 +1,55 @@
 import { Injectable } from '@nestjs/common';
-// import { User, Prisma } from '@prisma/client';
+import { JwtService } from '@nestjs/jwt';
+import { AT_SECRET, RT_SECRET } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { AuthDto } from './dto';
 import { Tokens } from './types/tokens.type';
-import { JwtService } from '@nestjs/jwt';
-import { AT_SECRET, RT_SECRET } from 'common/config/env';
 
 @Injectable()
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
-  private hashPwd(pwd: string): Promise<string> {
+  async signupLocal(dto: AuthDto): Promise<Tokens> {
+    const { email, password } = dto;
+
+    const hashedPwd = await this.hashData(password);
+
+    const { id: newUserId, email: newUserEmail } =
+      await this.prisma.user.create({
+        data: {
+          email,
+          password: hashedPwd,
+        },
+      });
+
+    const tokens = await this.getTokens(newUserId, newUserEmail);
+
+    await this.updateRtHash(newUserId, tokens.refresh_token);
+
+    return tokens;
+  }
+
+  signinLocal() {}
+
+  logout() {}
+
+  refreshToken() {}
+
+  private async updateRtHash(userId: string, rt: string) {
+    const rtHash = await this.hashData(rt);
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { rtHash },
+    });
+  }
+
+  private hashData(pwd: string): Promise<string> {
     return bcrypt.hash(pwd, 10);
   }
 
-  async getTokens(userId: string, email: string): Promise<Tokens> {
+  private async getTokens(userId: string, email: string): Promise<Tokens> {
     const [at, rt] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, email },
@@ -32,27 +66,4 @@ export class AuthService {
       refresh_token: rt,
     };
   }
-
-  async signupLocal(dto: AuthDto): Promise<Tokens> {
-    const { email, password } = dto;
-
-    const hashedPwd = await this.hashPwd(password);
-
-    const newUser = await this.prisma.user.create({
-      data: {
-        email,
-        password: hashedPwd,
-      },
-    });
-
-    const tokens = await this.getTokens(newUser.id, newUser.email);
-
-    return tokens;
-  }
-
-  signinLocal() {}
-
-  logout() {}
-
-  refreshToken() {}
 }
