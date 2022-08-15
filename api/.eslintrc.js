@@ -36,5 +36,6 @@ module.exports = {
     '@typescript-eslint/no-inferrable-types': 'off',
     'no-underscore-dangle': 'off',
     'new-cap': 'off',
+    '@typescript-eslint/no-useless-constructor': 'off',
   },
 };
