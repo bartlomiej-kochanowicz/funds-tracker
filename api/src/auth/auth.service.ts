@@ -54,7 +54,7 @@ export class AuthService {
     return tokens;
   }
 
-  async logout(userId: string) {
+  async logout(userId: string): Promise<void> {
     await this.prisma.user.updateMany({
       where: {
         id: userId,
@@ -68,7 +68,7 @@ export class AuthService {
     });
   }
 
-  async refreshToken(userId: string, rt: string) {
+  async refreshToken(userId: string, rt: string): Promise<Tokens> {
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
 
     if (!user || !user.rtHash) throw new ForbiddenException();
