@@ -7,7 +7,7 @@ import { tokensStub } from './stubs/tokens.stub';
 
 jest.mock('auth/auth.service');
 
-describe('AuthConroller', () => {
+describe('AuthController', () => {
   let authController: AuthController;
   let authService: AuthService;
 
@@ -40,7 +40,9 @@ describe('AuthConroller', () => {
         expect(tokens).toEqual(tokensStub());
       });
     });
+  });
 
+  describe('signinLocal', () => {
     describe('when signinLocal is called', () => {
       let tokens: Tokens;
 
@@ -56,7 +58,9 @@ describe('AuthConroller', () => {
         expect(tokens).toEqual(tokensStub());
       });
     });
+  });
 
+  describe('logout', () => {
     describe('when logout is called', () => {
       const userId = 'c40ddade-02c0-448a-84b7-56de4da2ca70';
 
@@ -68,26 +72,28 @@ describe('AuthConroller', () => {
         expect(authService.logout).toBeCalledWith(userId);
       });
     });
+  });
 
+  describe('refreshToken', () => {
     describe('when refreshToken is called', () => {
       let tokens: Tokens;
 
-      const data = {
+      const refreshDto = {
         userId: 'c40ddade-02c0-448a-84b7-56de4da2ca70',
         refreshToken: 'refresh-token-mock',
       };
 
       beforeEach(async () => {
         tokens = await authController.refreshToken(
-          data.userId,
-          data.refreshToken,
+          refreshDto.userId,
+          refreshDto.refreshToken,
         );
       });
 
       it('should call refreshToken service', () => {
         expect(authService.refreshToken).toBeCalledWith(
-          data.userId,
-          data.refreshToken,
+          refreshDto.userId,
+          refreshDto.refreshToken,
         );
       });
 
