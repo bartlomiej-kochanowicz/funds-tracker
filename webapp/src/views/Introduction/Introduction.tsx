@@ -20,10 +20,7 @@ const IntroductionContent = () => {
   const { states, compareState } = useAddModelPortfolioContext();
 
   return (
-    <FullscreenClear
-      alignItems="center"
-      justifyContent="center"
-    >
+    <FullscreenClear>
       <Suspense>
         {compareState(states.addFirstInstrument) && <AddInstrumentForm />}
 
