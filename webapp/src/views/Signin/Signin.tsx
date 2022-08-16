@@ -10,8 +10,8 @@ import { LangSelector } from 'components/molecules/LangSelector';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
-import { signInThunk } from 'store/thunks/auth/signInThunk';
-import { selectSignInError, selectSignInStatus } from 'store/selectors/auth';
+import { signinThunk } from 'store/thunks/auth/signinThunk';
+import { selectSigninError, selectSigninStatus } from 'store/selectors/auth';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
@@ -23,13 +23,13 @@ export const Signin = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const signInStatus = useSelector(selectSignInStatus);
-  const errorMessage = useSelector(selectSignInError);
+  const signinStatus = useSelector(selectSigninStatus);
+  const errorMessage = useSelector(selectSigninError);
 
   const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
-    await dispatch(signInThunk({ userEmail, userPassword }));
+    await dispatch(signinThunk({ userEmail, userPassword }));
   };
 
   const {
@@ -43,14 +43,14 @@ export const Signin = () => {
   });
 
   useUpdateEffect(() => {
-    if (signInStatus === 'fulfilled') {
+    if (signinStatus === 'fulfilled') {
       navigate(ROUTES.DASHBOARD);
     }
 
-    if (signInStatus === 'rejected') {
+    if (signinStatus === 'rejected') {
       setError('userEmail', { type: 'custom', message: errorMessage.message });
     }
-  }, [signInStatus]);
+  }, [signinStatus]);
 
   const userEmailProps = useInput<typeof defaultValues>({
     register,

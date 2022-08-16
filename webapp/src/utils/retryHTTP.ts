@@ -8,7 +8,7 @@ interface RetryHTTPParams {
 
 export function retryHTTP<TAsyncFn extends (...args: any[]) => Promise<any>>(
   asyncFn: TAsyncFn,
-  { maxAttempts = Infinity, backoff = () => 0, retryIf = () => true }: Partial<RetryHTTPParams>,
+  { maxAttempts = 3, backoff = () => 0, retryIf = () => true }: Partial<RetryHTTPParams>,
 ) {
   return async (...args: Parameters<typeof asyncFn>): Promise<ReturnType<typeof asyncFn>> => {
     let counter = 0;

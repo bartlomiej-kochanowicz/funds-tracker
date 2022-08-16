@@ -1,27 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SignInResponse } from 'services/auth/signIn';
-import { signInThunk } from 'store/thunks/auth/signInThunk';
+import { SigninResponse } from 'services/auth/signin';
+import { signinThunk } from 'store/thunks/auth/signinThunk';
 import { ErrorObject, RequestState } from 'types/store';
 
-export const signInSlice = createSlice({
-  name: 'auth/singIn',
+export const signinSlice = createSlice({
+  name: 'auth/singin',
   initialState: {
-    data: {} as SignInResponse,
+    data: {} as SigninResponse,
     status: 'idle' as RequestState,
     error: { code: undefined, message: undefined } as ErrorObject,
   },
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(signInThunk.pending, state => {
+    builder.addCase(signinThunk.pending, state => {
       state.status = 'pending';
     });
 
-    builder.addCase(signInThunk.fulfilled, (state, action) => {
+    builder.addCase(signinThunk.fulfilled, (state, action) => {
       state.status = 'fulfilled';
       state.data = action.payload;
     });
 
-    builder.addCase(signInThunk.rejected, (state, action) => {
+    builder.addCase(signinThunk.rejected, (state, action) => {
       state.status = 'rejected';
       state.error = {
         code: action.error?.code ?? undefined,

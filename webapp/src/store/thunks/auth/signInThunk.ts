@@ -1,14 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { signIn, SignInProps, SignInResponse } from 'services/auth/signIn';
+import { signin, SigninProps, SigninResponse } from 'services/auth/signin';
 import { RequestReject } from 'types/service';
 import { RejectValue } from 'types/store';
 
-export const signInThunk = createAsyncThunk<SignInResponse, SignInProps, RejectValue>(
-  'auth/singIn',
+export const signinThunk = createAsyncThunk<SigninResponse, SigninProps, RejectValue>(
+  'auth/singin',
   async ({ userEmail, userPassword }, { rejectWithValue }) => {
     try {
-      const { data } = await signIn({ userEmail, userPassword });
+      const { data } = await signin({ userEmail, userPassword });
 
       return data;
     } catch (err) {
