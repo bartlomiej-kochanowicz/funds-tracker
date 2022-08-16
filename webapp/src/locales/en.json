@@ -11,6 +11,7 @@
   "page.signin.password.too_long": "Password is too long, max. 50 characters",
   "page.signin.password.required": "Password required",
   "selectors.instruments.cash": "Cash",
+  "page.signin.dont_have_account": "Don't have an account? <signup>Signup here</signup>",
   "selectors.instruments.stocks": "Stocks",
   "selectors.instruments.saving-accounts": "Saving accounts",
   "selectors.instruments.deposits": "Deposits",
