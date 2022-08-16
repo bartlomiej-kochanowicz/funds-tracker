@@ -24,6 +24,12 @@ export const Link = styled(ReactRouterLink)<LinkProps>`
   ${({ display = 'inline' }) => css`
     display: ${display};
   `}
+
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 Link.displayName = 'Link';

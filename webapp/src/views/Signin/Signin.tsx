@@ -122,20 +122,12 @@ export const Signin = () => {
           components={{
             signup: (
               <Link
-                to="/"
+                to={ROUTES.SIGNUP}
                 fontColor="blue"
               />
             ),
           }}
         />
-      </Text>
-
-      <Text
-        fontSize="0.875"
-        fontColor="darkGray"
-        textAlign="right"
-      >
-        Forgot password? Signup here
       </Text>
 
       <Spacer space="large" />

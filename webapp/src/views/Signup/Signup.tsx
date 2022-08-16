@@ -7,40 +7,29 @@ import { LangSelector } from 'components/molecules/LangSelector';
 export const Signup = () => {
   const { t } = useTranslation();
 
-  <FullscreenClear>
-    <Heading textAlign="center">{t('sign_up')}</Heading>
+  return (
+    <FullscreenClear>
+      <Heading textAlign="center">{t('sign_up')}</Heading>
 
-    <Spacer space="small" />
+      <Spacer space="small" />
 
-    <Text
-      fontSize="0.875"
-      fontColor="darkGray"
-      textAlign="left"
-    >
-      {t('test', {})}
-      Don't have account? Signup here
-    </Text>
+      <Text
+        fontSize="0.875"
+        fontColor="darkGray"
+        textAlign="center"
+      >
+        {t('page.signup.description')}
+      </Text>
 
-    <Spacer space="small" />
+      <Spacer space="large" />
 
-    <Text
-      fontSize="0.875"
-      fontColor="darkGray"
-      textAlign="center"
-    >
-      {t('page.signup.description')}
-    </Text>
+      <Spacer space="large" />
 
-    <Spacer space="large" />
+      <Spacer space="large" />
 
-    <Spacer space="large" />
-
-    <Spacer space="large" />
-
-    <Spacer space="large" />
-
-    <Row justifyContent="center">
-      <LangSelector />
-    </Row>
-  </FullscreenClear>;
+      <Row justifyContent="center">
+        <LangSelector />
+      </Row>
+    </FullscreenClear>
+  );
 };
