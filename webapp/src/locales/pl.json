@@ -12,6 +12,7 @@
   "page.signin.password.too_long": "Hasło jest za długie, max. 50 znaków",
   "page.signin.password.required": "Hasło wymagane",
   "page.signin.dont_have_account": "Nie masz jeszcze konta? <signup>Zarajestruj się tutaj</signup>",
+  "page.signup.description": "[TO_DO]",
   "selectors.instruments.cash": "Gotówka",
   "selectors.instruments.stocks": "Akcje",
   "selectors.instruments.saving-accounts": "Konta oszczędnościowe",

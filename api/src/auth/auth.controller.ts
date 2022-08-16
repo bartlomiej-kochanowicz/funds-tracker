@@ -9,7 +9,7 @@ import {
 import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto';
+import { AuthDto, EmailDto } from './dto';
 import { Tokens } from './types/tokens.type';
 
 @Controller('auth')
@@ -28,6 +28,13 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   signinLocal(@Body() dto: AuthDto): Promise<Tokens> {
     return this.authService.signinLocal(dto);
+  }
+
+  @Public()
+  @Post('local/signin/email')
+  @HttpCode(HttpStatus.OK)
+  checkEmailExist(@Body() dto: EmailDto): Promise<void> {
+    return this.authService.checkEmailExist(dto);
   }
 
   @Post('logout')

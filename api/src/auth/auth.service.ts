@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AT_SECRET, RT_SECRET } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
-import { AuthDto } from './dto';
+import { AuthDto, EmailDto } from './dto';
 import { Tokens } from './types';
 
 @Injectable()
@@ -41,7 +41,7 @@ export class AuthService {
 
     const user = await this.prisma.user.findUnique({ where: { email } });
 
-    if (!user) throw new ForbiddenException('no acount for these email.');
+    if (!user) throw new ForbiddenException('No acount for these email.');
 
     const isPasswordsMatches = await bcrypt.compare(user.password, password);
 
@@ -52,6 +52,14 @@ export class AuthService {
     await this.updateRtHash(user.id, tokens.refresh_token);
 
     return tokens;
+  }
+
+  async checkEmailExist(dto: EmailDto): Promise<void> {
+    const { email } = dto;
+
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) throw new ForbiddenException('No acount for these email.');
   }
 
   async logout(userId: string): Promise<void> {
