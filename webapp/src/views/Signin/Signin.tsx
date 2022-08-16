@@ -13,6 +13,8 @@ import { AppDispatch } from 'store';
 import { signinThunk } from 'store/thunks/auth/signinThunk';
 import { selectSigninError, selectSigninStatus } from 'store/selectors/auth';
 import { FullscreenClear } from 'layouts/FullscreenClear';
+import useRequest from 'hooks/useRequest';
+import { signinCheckEmail, SigninCheckEmailResponse } from 'services/auth/signinCheckEmail';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -22,6 +24,12 @@ export const Signin = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const fetchSigninEmailCheck = () => signinCheckEmail({ userEmail: 'test@gmail.com' });
+
+  const data = useRequest<SigninCheckEmailResponse>(fetchSigninEmailCheck, {});
+
+  console.log(data);
 
   const signinStatus = useSelector(selectSigninStatus);
   const errorMessage = useSelector(selectSigninError);
