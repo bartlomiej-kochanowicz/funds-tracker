@@ -4,6 +4,7 @@
   "sign_in": "Sign in",
   "sign_up": "Sign up",
   "password": "Password",
+  "next": "Next",
   "page.signin.description": "Welcome back! You can continue to manage your finances",
   "page.signin.email.placeholder": "Enter email adress",
   "page.signin.email.invalid": "Invalid email address!",

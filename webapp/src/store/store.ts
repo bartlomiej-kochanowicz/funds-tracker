@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { signInSlice } from 'store/slices/auth/signInSlice';
+import { signinSlice } from 'store/slices/auth/signinSlice';
 import { instrumentsSlice } from 'store/slices/model-portfolio/instrumentsSlice';
 
 export const store = configureStore({
   reducer: {
-    signIn: signInSlice.reducer,
+    signin: signinSlice.reducer,
     modelPortfolio: combineReducers({ instruments: instrumentsSlice.reducer }),
   },
 });

@@ -4,6 +4,7 @@
   "sign_in": "Zaloguj się",
   "sign_up": "Zarejestruj się",
   "password": "Hasło",
+  "next": "Dalej",
   "page.signin.description": "Witaj ponownie! Możesz kontynuować zarządzanie swoimi finansami",
   "page.signin.email.placeholder": "Podaj adres email",
   "page.signin.email.invalid": "Niepoprawny adres email!",
