@@ -1,10 +1,10 @@
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Row } from 'simple-flexbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { Button, Spacer, Input, Heading, Text, Loader } from 'components/atoms';
+import { Button, Spacer, Input, Heading, Text, Loader, Link } from 'components/atoms';
 import { ROUTES } from 'routes';
 import { LangSelector } from 'components/molecules/LangSelector';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
@@ -110,13 +110,41 @@ export const Signin = () => {
         </Button>
       </Form>
 
-      <Spacer space="large" />
+      <Spacer />
+
+      <Text
+        fontSize="0.875"
+        fontColor="darkGray"
+        textAlign="right"
+      >
+        <Trans
+          i18nKey="page.signin.dont_have_account"
+          components={{
+            signup: (
+              <Link
+                to="/"
+                fontColor="blue"
+              />
+            ),
+          }}
+        />
+      </Text>
+
+      <Text
+        fontSize="0.875"
+        fontColor="darkGray"
+        textAlign="right"
+      >
+        Forgot password? Signup here
+      </Text>
 
       <Spacer space="large" />
 
       <Spacer space="large" />
 
-      <Row justifyContent="flex-end">
+      <Spacer space="large" />
+
+      <Row justifyContent="center">
         <LangSelector />
       </Row>
     </FullscreenClear>
