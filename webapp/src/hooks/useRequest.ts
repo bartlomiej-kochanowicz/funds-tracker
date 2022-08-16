@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
+import { RequestReject } from 'types/service';
 
 const defaultOptions = {
   fetchOnStart: false,
@@ -12,19 +12,22 @@ const defaultOptions = {
 
 interface UseRequestOptions<Response> {
   fetchOnStart: boolean;
-  defaultData: Response | null;
+  defaultData: AxiosResponse<Response> | null;
   successToastKey: string | null;
   errorToastKey: string | null;
   callback: (() => void) | null;
 }
 
-interface UseRequestReturn<Response> {
-  request: () => Promise<Promise<AxiosResponse<Response, any>>>;
+interface State<Response> {
   isLoading: boolean;
   isLoaded: boolean;
   isError: boolean;
-  data: Response | null;
-  error: null;
+  data: AxiosResponse<Response | any> | null;
+  error: AxiosError<RequestReject> | null;
+}
+
+interface UseRequestReturn<Response> extends State<Response> {
+  request: () => Promise<AxiosResponse<Response, any> | null>;
 }
 
 const useRequest = <Response>(
@@ -45,13 +48,49 @@ const useRequest = <Response>(
     error: null,
   };
 
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState<State<Response>>(initialState);
 
-  useEffect(() => {});
+  const service = async () => {
+    setState(prev => ({ ...prev, isLoading: true }));
+
+    try {
+      const data = await request();
+
+      setState({ ...initialState, data, isLoaded: true });
+
+      if (successToastKey) {
+        // emitTimingToastToggle(t(successToastKey), 'success');
+      }
+
+      if (callback) callback();
+
+      return data;
+    } catch (err) {
+      const error = err as AxiosError<RequestReject>;
+
+      setState({ ...initialState, isLoaded: true, isError: true, error });
+
+      if (typeof errorToastKey === 'function') {
+        // emitTimingToastToggle(errorToastKey(error), 'alert');
+      }
+
+      if (errorToastKey) {
+        // emitTimingToastToggle(t(errorToastKey), 'alert');
+      }
+
+      return defaultData;
+    }
+  };
+
+  useEffect(() => {
+    if (fetchOnStart) {
+      request();
+    }
+  }, [fetchOnStart, request]);
 
   return {
     ...state,
-    request,
+    request: service,
   };
 };
 
