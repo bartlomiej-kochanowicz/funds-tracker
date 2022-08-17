@@ -1,4 +1,5 @@
 import { createContext, FC, useState, useContext } from 'react';
+import { ValueOf } from 'types/mapped-types';
 
 const AddModelPortfolioContext = createContext<AddModelPortfolioContextType | null>(null);
 
@@ -12,8 +13,6 @@ const states = {
 const actions = {
   CHANGE_ADD_FIRST_SUCCESS: 'CHANGE_ADD_FIRST_SUCCESS',
 };
-
-type ValueOf<T> = T[keyof T];
 
 type StateType = ValueOf<typeof states>;
 type ActionType = ValueOf<typeof actions>;
