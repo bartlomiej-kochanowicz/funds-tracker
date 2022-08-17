@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,10 +11,13 @@ import { signinThunk } from 'store/thunks/auth/signinThunk';
 import { selectSigninError, selectSigninStatus } from 'store/selectors/auth';
 import useRequest from 'hooks/useRequest';
 import { signinCheckEmail, SigninCheckEmailResponse } from 'services/auth/signinCheckEmail';
+import { ROUTES } from 'routes';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
 export const SigninForm = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
@@ -29,8 +33,11 @@ export const SigninForm = () => {
 
   const defaultValues = { userEmail: '', userPassword: '' };
 
-  const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
+  /* const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     await dispatch(signinThunk({ userEmail, userPassword }));
+  }; */
+  const onSubmit = async (...data) => {
+    console.log(data);
   };
 
   const {
@@ -43,6 +50,7 @@ export const SigninForm = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  // handle async redux action
   useUpdateEffect(() => {
     if (signinStatus === 'fulfilled') {
       navigate(ROUTES.DASHBOARD);
