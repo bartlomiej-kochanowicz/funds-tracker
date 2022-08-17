@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +28,7 @@ export const SigninForm = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const data = useStateMachine<FormStates, FormActions>(
+  const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
     new StateMachine<FormStates, FormActions>(
       'email',
       { email: 'email', password: 'password' },
@@ -35,8 +36,6 @@ export const SigninForm = () => {
       { email: { CHANGE_TO_PASSWORD: 'password' } },
     ),
   );
-
-  console.log(data);
 
   const fetchSigninEmailCheck = () => signinCheckEmail({ userEmail: 'test@gmail.com' });
 
@@ -50,13 +49,15 @@ export const SigninForm = () => {
   const defaultValues = { userEmail: '', userPassword: '' };
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
-    await dispatch(signinThunk({ userEmail, userPassword }));
+    if (compareState(states.email)) updateState(actions.CHANGE_TO_PASSWORD);
+
+    if (compareState(states.password)) await dispatch(signinThunk({ userEmail, userPassword }));
   };
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
     setError,
   } = useForm({
     defaultValues,
@@ -97,13 +98,17 @@ export const SigninForm = () => {
         {...userEmailProps}
       />
 
-      <Spacer />
+      {compareState(states.password) && (
+        <Fragment>
+          <Spacer />
 
-      <Input
-        placeholder={t('password')}
-        type="password"
-        {...userPasswordProps}
-      />
+          <Input
+            placeholder={t('password')}
+            type="password"
+            {...userPasswordProps}
+          />
+        </Fragment>
+      )}
 
       <Spacer />
 
@@ -113,7 +118,11 @@ export const SigninForm = () => {
         disabled={isSubmitting}
         type="submit"
       >
-        {isSubmitting ? <Loader color="white" /> : t('sign_in')}
+        {isSubmitting && <Loader color="white" />}
+
+        {!isSubmitting && compareState(states.email) && t('next')}
+
+        {!isSubmitting && compareState(states.password) && t('sign_in')}
       </Button>
     </Form>
   );
