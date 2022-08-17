@@ -12,11 +12,11 @@ const defaultOptions = {
 };
 
 interface UseRequestOptions<Response> {
-  fetchOnStart: boolean;
-  defaultData: AxiosResponse<Response> | null;
-  successToast: string | null;
-  errorToast: string | ((error: AxiosError<RequestReject>) => string) | null;
-  callback: (() => void) | null;
+  fetchOnStart?: boolean;
+  defaultData?: AxiosResponse<Response> | null;
+  successToast?: string | null;
+  errorToast?: string | ((error: AxiosError<RequestReject>) => string) | null;
+  callback?: (() => void) | null;
 }
 
 interface State<Response> {
@@ -34,11 +34,11 @@ interface UseRequestReturn<Response> extends State<Response> {
 const useRequest = <Response>(
   request: () => Promise<Promise<AxiosResponse<Response, any>>>,
   {
-    fetchOnStart,
-    defaultData,
-    successToast,
-    errorToast,
-    callback,
+    fetchOnStart = defaultOptions.fetchOnStart,
+    defaultData = defaultOptions.defaultData,
+    successToast = defaultOptions.successToast,
+    errorToast = defaultOptions.errorToast,
+    callback = defaultOptions.callback,
   }: UseRequestOptions<Response> = defaultOptions,
 ): UseRequestReturn<Response> => {
   const initialState = {
