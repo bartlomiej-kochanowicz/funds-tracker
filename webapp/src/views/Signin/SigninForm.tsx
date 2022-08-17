@@ -8,6 +8,7 @@ import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
 import { signinThunk } from 'store/thunks/auth/signinThunk';
+import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import { selectSigninError, selectSigninStatus } from 'store/selectors/auth';
 import useRequest from 'hooks/useRequest';
 import { signinCheckEmail, SigninCheckEmailResponse } from 'services/auth/signinCheckEmail';
@@ -15,12 +16,27 @@ import { ROUTES } from 'routes';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
+type FormStates = 'email' | 'password';
+
+type FormActions = 'CHANGE_TO_PASSWORD';
+
 export const SigninForm = () => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const data = useStateMachine<FormStates, FormActions>(
+    new StateMachine<FormStates, FormActions>(
+      'email',
+      { email: 'email', password: 'password' },
+      { CHANGE_TO_PASSWORD: 'CHANGE_TO_PASSWORD' },
+      { email: { CHANGE_TO_PASSWORD: 'password' } },
+    ),
+  );
+
+  console.log(data);
 
   const fetchSigninEmailCheck = () => signinCheckEmail({ userEmail: 'test@gmail.com' });
 
@@ -33,11 +49,8 @@ export const SigninForm = () => {
 
   const defaultValues = { userEmail: '', userPassword: '' };
 
-  /* const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
+  const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     await dispatch(signinThunk({ userEmail, userPassword }));
-  }; */
-  const onSubmit = async (...data) => {
-    console.log(data);
   };
 
   const {
