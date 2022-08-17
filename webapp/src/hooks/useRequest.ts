@@ -1,20 +1,21 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { RequestReject } from 'types/service';
 
 const defaultOptions = {
   fetchOnStart: false,
   defaultData: null,
-  successToastKey: null,
-  errorToastKey: null,
+  successToast: null,
+  errorToast: null,
   callback: null,
 };
 
 interface UseRequestOptions<Response> {
   fetchOnStart: boolean;
   defaultData: AxiosResponse<Response> | null;
-  successToastKey: string | null;
-  errorToastKey: string | null;
+  successToast: string | null;
+  errorToast: string | ((error: AxiosError<RequestReject>) => string) | null;
   callback: (() => void) | null;
 }
 
@@ -35,8 +36,8 @@ const useRequest = <Response>(
   {
     fetchOnStart,
     defaultData,
-    successToastKey,
-    errorToastKey,
+    successToast,
+    errorToast,
     callback,
   }: UseRequestOptions<Response> = defaultOptions,
 ): UseRequestReturn<Response> => {
@@ -58,8 +59,16 @@ const useRequest = <Response>(
 
       setState({ ...initialState, data, isLoaded: true });
 
-      if (successToastKey) {
-        // emitTimingToastToggle(t(successToastKey), 'success');
+      if (successToast) {
+        toast.success(successToast, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
 
       if (callback) callback();
@@ -70,12 +79,28 @@ const useRequest = <Response>(
 
       setState({ ...initialState, isLoaded: true, isError: true, error });
 
-      if (typeof errorToastKey === 'function') {
-        // emitTimingToastToggle(errorToastKey(error), 'alert');
+      if (typeof errorToast === 'function') {
+        toast.error(errorToast(error), {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
 
-      if (errorToastKey) {
-        // emitTimingToastToggle(t(errorToastKey), 'alert');
+      if (typeof errorToast === 'string') {
+        toast.error(errorToast, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
 
       return defaultData;
