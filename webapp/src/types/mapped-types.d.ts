@@ -1,3 +1,3 @@
-export type Dict<T> = { [k: string]: T };
+export type Dict<T extends string> = { [k in T]: T };
 
-type ValueOf<T> = T[keyof T];
+export type ValueOf<T> = T[keyof T];

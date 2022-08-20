@@ -18,6 +18,8 @@ import {
   SigninCheckEmailResponse,
 } from 'services/auth/signinCheckEmail';
 import { ROUTES } from 'routes';
+import { useStatus } from 'hooks/useStatus';
+import { STATUS } from 'constants/store';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -34,7 +36,7 @@ const SignUpStateMachine = new StateMachine<FormStates, FormActions>(
 
 export const SigninForm = () => {
   const { t } = useTranslation();
-
+  console.log('@@__RENDER__@@');
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
@@ -61,7 +63,6 @@ export const SigninForm = () => {
   const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
     signinCheckEmail,
     {
-      failureToast: error => error.response?.data.message,
       successCallback: () => updateState(actions.CHANGE_TO_PASSWORD),
       failureCallback: error =>
         setError('userEmail', { type: 'custom', message: error.response?.data.message }),
@@ -76,15 +77,15 @@ export const SigninForm = () => {
     if (compareState(states.password)) await dispatch(signinThunk({ userEmail, userPassword }));
   };
 
-  useUpdateEffect(() => {
-    if (signinStatus === 'fulfilled') {
-      navigate(ROUTES.DASHBOARD);
-    }
+  const { loading, loaded, rejected } = useStatus(signinStatus);
 
-    if (signinStatus === 'rejected') {
-      setError('userEmail', { type: 'custom', message: errorMessage.message });
-    }
-  }, [signinStatus]);
+  if (!loading && loaded && !rejected) {
+    navigate(ROUTES.DASHBOARD);
+  }
+
+  if (!loading && loaded && rejected) {
+    setError('userEmail', { type: 'custom', message: errorMessage.message });
+  }
 
   const userEmailProps = useInput<typeof defaultValues>({
     register,
