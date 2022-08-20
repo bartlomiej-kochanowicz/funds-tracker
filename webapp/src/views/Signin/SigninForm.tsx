@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Loader } from 'components/atoms';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
 import { signinThunk } from 'store/thunks/auth/signinThunk';
@@ -19,7 +18,6 @@ import {
 } from 'services/auth/signinCheckEmail';
 import { ROUTES } from 'routes';
 import { useStatus } from 'hooks/useStatus';
-import { STATUS } from 'constants/store';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -36,7 +34,7 @@ const SignUpStateMachine = new StateMachine<FormStates, FormActions>(
 
 export const SigninForm = () => {
   const { t } = useTranslation();
-  console.log('@@__RENDER__@@');
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();

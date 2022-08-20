@@ -9,12 +9,13 @@ export interface SigninProps {
 export interface SigninResponse {
   uuid: string;
   email: string;
-  username: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export const signin = retryHTTP(
   ({ userEmail, userPassword }: SigninProps) =>
-    client.post<SigninResponse>('/auth/login', {
+    client.post<SigninResponse>('/auth/local/signin', {
       email: userEmail,
       password: userPassword,
     }),

@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AT_SECRET, RT_SECRET } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { User } from '@prisma/client';
 import { AuthDto, EmailDto } from './dto';
 import { Tokens } from './types';
 
@@ -21,7 +22,7 @@ export class AuthService {
       throw new ForbiddenException('Email already in use.');
     }
 
-    const { id: newUserId, email: newUserEmail } =
+    const { uuid: newUserId, email: newUserEmail } =
       await this.prisma.user.create({
         data: {
           email,
@@ -31,12 +32,14 @@ export class AuthService {
 
     const tokens = await this.getTokens(newUserId, newUserEmail);
 
-    await this.updateRtHash(newUserId, tokens.refresh_token);
+    await this.updateRtHash(newUserId, tokens.refreshToken);
 
     return tokens;
   }
 
-  async signinLocal(dto: AuthDto): Promise<Tokens> {
+  async signinLocal(
+    dto: AuthDto,
+  ): Promise<Tokens & Pick<User, 'uuid' | 'email'>> {
     const { email, password } = dto;
 
     const user = await this.prisma.user.findUnique({ where: { email } });
@@ -47,11 +50,11 @@ export class AuthService {
 
     if (isPasswordsMatches) throw new ForbiddenException('Wrong password.');
 
-    const tokens = await this.getTokens(user.id, user.email);
+    const tokens = await this.getTokens(user.uuid, user.email);
 
-    await this.updateRtHash(user.id, tokens.refresh_token);
+    await this.updateRtHash(user.uuid, tokens.refreshToken);
 
-    return tokens;
+    return { ...tokens, uuid: user.uuid, email: user.email };
   }
 
   async checkEmailExist(dto: EmailDto): Promise<void> {
@@ -65,7 +68,7 @@ export class AuthService {
   async logout(userId: string): Promise<void> {
     await this.prisma.user.updateMany({
       where: {
-        id: userId,
+        uuid: userId,
         rtHash: {
           not: null,
         },
@@ -77,7 +80,7 @@ export class AuthService {
   }
 
   async refreshToken(userId: string, rt: string): Promise<Tokens> {
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    const user = await this.prisma.user.findUnique({ where: { uuid: userId } });
 
     if (!user || !user.rtHash) throw new ForbiddenException();
 
@@ -85,9 +88,9 @@ export class AuthService {
 
     if (!isRtMatches) throw new ForbiddenException();
 
-    const tokens = await this.getTokens(user.id, user.email);
+    const tokens = await this.getTokens(user.uuid, user.email);
 
-    await this.updateRtHash(user.id, tokens.refresh_token);
+    await this.updateRtHash(user.uuid, tokens.refreshToken);
 
     return tokens;
   }
@@ -96,7 +99,7 @@ export class AuthService {
     const rtHash = await this.hashData(rt);
 
     await this.prisma.user.update({
-      where: { id: userId },
+      where: { uuid: userId },
       data: { rtHash },
     });
   }
@@ -120,8 +123,8 @@ export class AuthService {
     ]);
 
     return {
-      access_token: at,
-      refresh_token: rt,
+      accessToken: at,
+      refreshToken: rt,
     };
   }
 }
