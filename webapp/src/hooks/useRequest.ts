@@ -14,7 +14,11 @@ const defaultOptions = {
 interface UseRequestOptions<Response> {
   defaultData?: AxiosResponse<Response> | null;
   successToast?: string | null;
-  failureToast?: string | ((error: AxiosError<RequestReject>) => string) | null;
+  failureToast?:
+    | string
+    | ((error: AxiosError<RequestReject>) => string | undefined)
+    | null
+    | undefined;
   successCallback?: (() => void) | null;
   failureCallback?: ((error: AxiosError<RequestReject>) => void) | null;
 }
