@@ -11,8 +11,8 @@ const initialState = {
   error: { code: undefined, message: undefined } as ErrorObject,
 };
 
-export const signinSlice = createSlice({
-  name: 'auth/singin',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: builder => {
