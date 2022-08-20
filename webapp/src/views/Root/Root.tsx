@@ -52,11 +52,25 @@ export const Root: FC = () => {
     },
     {
       path: ROUTES.SIGNIN,
-      element: <Signin />,
+      element: (
+        <ProtectedRoute
+          to={ROUTES.DASHBOARD}
+          reverse
+        >
+          <Signin />
+        </ProtectedRoute>
+      ),
     },
     {
       path: ROUTES.SIGNUP,
-      element: <Signup />,
+      element: (
+        <ProtectedRoute
+          to={ROUTES.DASHBOARD}
+          reverse
+        >
+          <Signup />
+        </ProtectedRoute>
+      ),
     },
     {
       path: ROUTES.INTRODUCTION,

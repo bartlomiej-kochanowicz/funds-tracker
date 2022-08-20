@@ -84,7 +84,7 @@ export class AuthService {
 
     if (!user || !user.rtHash) throw new ForbiddenException();
 
-    const isRtMatches = await bcrypt.compare(user.rtHash, rt);
+    const isRtMatches = await bcrypt.compare(rt, user.rtHash);
 
     if (!isRtMatches) throw new ForbiddenException();
 
