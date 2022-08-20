@@ -16,7 +16,7 @@ export const signinCheckEmail = retryHTTP(
     }),
   {
     retryIf: e => {
-      console.log(e);
+      console.log('ERROR IS SERVICE', e);
       return true;
     },
   },

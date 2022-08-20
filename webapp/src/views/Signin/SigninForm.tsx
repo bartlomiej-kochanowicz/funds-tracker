@@ -12,7 +12,11 @@ import { signinThunk } from 'store/thunks/auth/signinThunk';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import { selectSigninError, selectSigninStatus } from 'store/selectors/auth';
 import useRequest from 'hooks/useRequest';
-import { signinCheckEmail, SigninCheckEmailResponse } from 'services/auth/signinCheckEmail';
+import {
+  signinCheckEmail,
+  SigninCheckEmailProps,
+  SigninCheckEmailResponse,
+} from 'services/auth/signinCheckEmail';
 import { ROUTES } from 'routes';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
@@ -20,6 +24,13 @@ import { Form } from './Signin.styles';
 type FormStates = 'email' | 'password';
 
 type FormActions = 'CHANGE_TO_PASSWORD';
+
+const SignUpStateMachine = new StateMachine<FormStates, FormActions>(
+  'email',
+  { email: 'email', password: 'password' },
+  { CHANGE_TO_PASSWORD: 'CHANGE_TO_PASSWORD' },
+  { email: { CHANGE_TO_PASSWORD: 'password' } },
+);
 
 export const SigninForm = () => {
   const { t } = useTranslation();
@@ -29,42 +40,41 @@ export const SigninForm = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
-    new StateMachine<FormStates, FormActions>(
-      'email',
-      { email: 'email', password: 'password' },
-      { CHANGE_TO_PASSWORD: 'CHANGE_TO_PASSWORD' },
-      { email: { CHANGE_TO_PASSWORD: 'password' } },
-    ),
+    SignUpStateMachine,
   );
-
-  const fetchSigninEmailCheck = () => signinCheckEmail({ userEmail: 'test@gmail.com' });
-
-  const { request: checkEmail } = useRequest<SigninCheckEmailResponse>(fetchSigninEmailCheck, {
-    errorToast: 'wyjabało sie',
-  });
 
   const signinStatus = useSelector(selectSigninStatus);
   const errorMessage = useSelector(selectSigninError);
 
   const defaultValues = { userEmail: '', userPassword: '' };
 
-  const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
-    if (compareState(states.email)) updateState(actions.CHANGE_TO_PASSWORD);
-
-    if (compareState(states.password)) await dispatch(signinThunk({ userEmail, userPassword }));
-  };
-
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
   });
 
-  // handle async redux action
+  const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
+    signinCheckEmail,
+    {
+      failureToast: error => error.message,
+      successCallback: () => updateState(actions.CHANGE_TO_PASSWORD),
+      failureCallback: error => setError('userEmail', { type: 'custom', message: error.message }),
+    },
+  );
+
+  const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
+    if (compareState(states.email)) {
+      checkEmail({ userEmail });
+    }
+
+    if (compareState(states.password)) await dispatch(signinThunk({ userEmail, userPassword }));
+  };
+
   useUpdateEffect(() => {
     if (signinStatus === 'fulfilled') {
       navigate(ROUTES.DASHBOARD);
