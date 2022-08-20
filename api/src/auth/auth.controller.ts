@@ -6,6 +6,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { User } from '@prisma/client';
 import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { AuthService } from './auth.service';
@@ -26,7 +27,9 @@ export class AuthController {
   @Public()
   @Post('local/signin')
   @HttpCode(HttpStatus.OK)
-  signinLocal(@Body() dto: AuthDto): Promise<Tokens> {
+  signinLocal(
+    @Body() dto: AuthDto,
+  ): Promise<Tokens & Pick<User, 'uuid' | 'email'>> {
     return this.authService.signinLocal(dto);
   }
 
