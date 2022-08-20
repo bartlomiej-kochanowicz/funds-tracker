@@ -41,7 +41,7 @@ export class AuthService {
 
     const user = await this.prisma.user.findUnique({ where: { email } });
 
-    if (!user) throw new ForbiddenException('No acount for these email.');
+    if (!user) throw new ForbiddenException('No account for these email.');
 
     const isPasswordsMatches = await bcrypt.compare(user.password, password);
 
@@ -59,7 +59,7 @@ export class AuthService {
 
     const user = await this.prisma.user.findUnique({ where: { email } });
 
-    if (!user) throw new ForbiddenException('No acount for these email.');
+    if (!user) throw new ForbiddenException('No account for these email.');
   }
 
   async logout(userId: string): Promise<void> {

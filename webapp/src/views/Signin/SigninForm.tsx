@@ -61,9 +61,10 @@ export const SigninForm = () => {
   const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
     signinCheckEmail,
     {
-      failureToast: error => error.message,
+      failureToast: error => error.response?.data.message,
       successCallback: () => updateState(actions.CHANGE_TO_PASSWORD),
-      failureCallback: error => setError('userEmail', { type: 'custom', message: error.message }),
+      failureCallback: error =>
+        setError('userEmail', { type: 'custom', message: error.response?.data.message }),
     },
   );
 

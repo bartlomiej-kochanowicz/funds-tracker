@@ -11,7 +11,7 @@ export interface SigninCheckEmailResponse {
 
 export const signinCheckEmail = retryHTTP(
   ({ userEmail }: SigninCheckEmailProps) =>
-    client.post<SigninCheckEmailResponse>('/local/signin/email', {
+    client.post<SigninCheckEmailResponse>('/auth/local/signin/email', {
       email: userEmail,
     }),
   {
