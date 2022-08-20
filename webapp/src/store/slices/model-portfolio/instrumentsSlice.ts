@@ -14,16 +14,16 @@ export const instrumentsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(instrumentsThunk.pending, state => {
-      state.status = STATUS.PENDING;
+      state.status = STATUS.pending;
     });
 
     builder.addCase(instrumentsThunk.fulfilled, (state, action) => {
-      state.status = STATUS.FULFILLED;
+      state.status = STATUS.fulfilled;
       state.data = action.payload;
     });
 
     builder.addCase(instrumentsThunk.rejected, (state, action) => {
-      state.status = STATUS.REJECTED;
+      state.status = STATUS.rejected;
       state.error = {
         code: action.error?.code ?? undefined,
         message: action.payload?.message ?? undefined,

@@ -1,12 +1,13 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { RequestReject } from 'types/service';
+import { useTranslation } from 'react-i18next';
 
 const defaultOptions = {
   defaultData: null,
   successToast: null,
-  failureToast: null,
+  failureToast: true,
   successCallback: null,
   failureCallback: null,
 };
@@ -14,11 +15,7 @@ const defaultOptions = {
 interface UseRequestOptions<Response> {
   defaultData?: AxiosResponse<Response> | null;
   successToast?: string | null;
-  failureToast?:
-    | string
-    | ((error: AxiosError<RequestReject>) => string | undefined)
-    | null
-    | undefined;
+  failureToast?: boolean;
   successCallback?: (() => void) | null;
   failureCallback?: ((error: AxiosError<RequestReject>) => void) | null;
 }
@@ -45,6 +42,8 @@ const useRequest = <Request, Response>(
     failureCallback = defaultOptions.failureCallback,
   }: UseRequestOptions<Response> = defaultOptions,
 ): UseRequestReturn<Request, Response> => {
+  const { t } = useTranslation();
+
   const initialState = useMemo(
     () => ({
       isLoading: false,
@@ -58,74 +57,51 @@ const useRequest = <Request, Response>(
 
   const [state, setState] = useState<State<Response>>(initialState);
 
-  const service = useCallback(
-    async (args_0: Request) => {
-      setState(prev => ({ ...prev, isLoading: true }));
+  const service = async (args_0: Request) => {
+    setState(prev => ({ ...prev, isLoading: true }));
 
-      try {
-        const data = await request(args_0);
+    try {
+      const data = await request(args_0);
 
-        setState({ ...initialState, data, isLoaded: true });
+      setState({ ...initialState, data, isLoaded: true });
 
-        if (successToast) {
-          toast.success(successToast, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-
-        if (successCallback) successCallback();
-
-        return data;
-      } catch (err) {
-        const error = err as AxiosError<RequestReject>;
-
-        setState({ ...initialState, isLoaded: true, isError: true, error });
-
-        if (failureCallback) failureCallback(error);
-
-        if (typeof failureToast === 'function') {
-          toast.error(failureToast(error), {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-
-        if (typeof failureToast === 'string') {
-          toast.error(failureToast, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-
-        return defaultData;
+      if (successToast) {
+        toast.success(successToast, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
-    },
-    [
-      defaultData,
-      failureCallback,
-      failureToast,
-      initialState,
-      request,
-      successCallback,
-      successToast,
-    ],
-  );
+
+      if (successCallback) successCallback();
+
+      return data;
+    } catch (err) {
+      const error = err as AxiosError<RequestReject>;
+
+      setState({ ...initialState, isLoaded: true, isError: true, error });
+
+      if (failureCallback) failureCallback(error);
+
+      if (failureToast) {
+        toast.error(error.response?.data.message ?? t('service.unknown_error'), {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      return defaultData;
+    }
+  };
 
   return {
     ...state,
