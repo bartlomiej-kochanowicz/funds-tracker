@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build && npx msw init ./public --save",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "check:circular-deps": "madge --warning --circular --extensions ts,tsx src",
     "check:circular-deps-image": "madge --image graph.svg --extensions ts,tsx src",
@@ -25,7 +25,6 @@
     "i18next-browser-languagedetector": "6.1.4",
     "i18next-http-backend": "1.4.1",
     "js-cookie": "3.0.1",
-    "msw": "0.44.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-error-boundary": "3.1.4",

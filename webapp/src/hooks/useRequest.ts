@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
-import { toast } from 'react-toastify';
 import { RequestReject } from 'types/service';
 import { useTranslation } from 'react-i18next';
+import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 
 const defaultOptions = {
   defaultData: null,
@@ -66,15 +66,7 @@ const useRequest = <Request, Response>(
       setState({ ...initialState, data, isLoaded: true });
 
       if (successToast) {
-        toast.success(successToast, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        showSuccessToast(successToast);
       }
 
       if (successCallback) successCallback();
@@ -88,15 +80,7 @@ const useRequest = <Request, Response>(
       if (failureCallback) failureCallback(error);
 
       if (failureToast) {
-        toast.error(error.response?.data.message ?? t('service.unknown_error'), {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        showErrorToast(error.response?.data.message ?? t('service.unknown_error'));
       }
 
       return defaultData;

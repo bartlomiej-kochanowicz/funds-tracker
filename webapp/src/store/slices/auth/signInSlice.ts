@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { STATUS } from 'constants/store';
 import { SigninResponse } from 'services/auth/signin';
 import { signinThunk } from 'store/thunks/auth/signinThunk';
 import { ErrorObject, RequestState } from 'types/store';
@@ -7,7 +8,7 @@ export const signinSlice = createSlice({
   name: 'auth/singin',
   initialState: {
     data: {} as SigninResponse,
-    status: 'idle' as RequestState,
+    status: STATUS.idle as RequestState,
     error: { code: undefined, message: undefined } as ErrorObject,
   },
   reducers: {},
