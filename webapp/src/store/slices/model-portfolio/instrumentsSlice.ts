@@ -8,7 +8,7 @@ export const instrumentsSlice = createSlice({
   name: 'model-portfolio/instruments',
   initialState: {
     data: {} as InstrumentsResponse,
-    status: 'idle' as RequestState,
+    status: STATUS.idle as RequestState,
     error: { code: undefined, message: undefined } as ErrorObject,
   },
   reducers: {},

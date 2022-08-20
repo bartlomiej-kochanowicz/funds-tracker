@@ -46,9 +46,9 @@ export class AuthService {
 
     if (!user) throw new ForbiddenException('No account for these email.');
 
-    const isPasswordsMatches = await bcrypt.compare(user.password, password);
+    const isPasswordsMatches = await bcrypt.compare(password, user.password);
 
-    if (isPasswordsMatches) throw new ForbiddenException('Wrong password.');
+    if (!isPasswordsMatches) throw new ForbiddenException('Wrong password.');
 
     const tokens = await this.getTokens(user.uuid, user.email);
 

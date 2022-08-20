@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Loader } from 'components/atoms';
@@ -9,15 +9,16 @@ import { useInput } from 'hooks/useInput';
 import { AppDispatch } from 'store';
 import { signinThunk } from 'store/thunks/auth/signinThunk';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
-import { selectSigninError, selectSigninStatus } from 'store/selectors/auth';
 import useRequest from 'hooks/useRequest';
 import {
   signinCheckEmail,
   SigninCheckEmailProps,
   SigninCheckEmailResponse,
 } from 'services/auth/signinCheckEmail';
+import { STATUS } from 'constants/store';
 import { ROUTES } from 'routes';
-import { useStatus } from 'hooks/useStatus';
+import { ErrorObject } from 'types/store';
+import { showErrorToast } from 'helpers/showToast';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -42,9 +43,6 @@ export const SigninForm = () => {
   const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
     SignUpStateMachine,
   );
-
-  const signinStatus = useSelector(selectSigninStatus);
-  const errorMessage = useSelector(selectSigninError);
 
   const defaultValues = { userEmail: '', userPassword: '' };
 
@@ -72,18 +70,26 @@ export const SigninForm = () => {
       checkEmail({ userEmail });
     }
 
-    if (compareState(states.password)) await dispatch(signinThunk({ userEmail, userPassword }));
+    if (compareState(states.password)) {
+      try {
+        const { meta, payload } = await dispatch(signinThunk({ userEmail, userPassword }));
+
+        const { requestStatus } = meta;
+
+        if (requestStatus === STATUS.fulfilled) {
+          navigate(ROUTES.DASHBOARD);
+        }
+
+        if (requestStatus === STATUS.rejected && payload) {
+          const { message } = payload as ErrorObject;
+
+          setError('userPassword', { type: 'custom', message });
+        }
+      } catch {
+        showErrorToast(t('service.unknown_error'));
+      }
+    }
   };
-
-  const { loading, loaded, rejected } = useStatus(signinStatus);
-
-  if (!loading && loaded && !rejected) {
-    navigate(ROUTES.DASHBOARD);
-  }
-
-  if (!loading && loaded && rejected) {
-    setError('userEmail', { type: 'custom', message: errorMessage.message });
-  }
 
   const userEmailProps = useInput<typeof defaultValues>({
     register,
@@ -105,6 +111,7 @@ export const SigninForm = () => {
       <Input
         placeholder={t('page.signin.email.placeholder')}
         type="email"
+        disabled={compareState(states.password)}
         {...userEmailProps}
       />
 
