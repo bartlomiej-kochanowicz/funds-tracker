@@ -1,9 +1,8 @@
 import { FC, lazy, Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { ErrorBoundary } from 'react-error-boundary';
 import { ROUTES } from 'routes';
 import { Loading } from 'layouts/Loading';
-import { ErrorContent } from 'components/molecules/ErrorContent';
+import { ProtectedRoute } from 'utils/ProtectedRoute';
 
 const Home = lazy(() =>
   import('views/Home').then(({ Home: component }) => ({ default: component })),
@@ -49,67 +48,51 @@ export const Root: FC = () => {
   const views = useRoutes([
     {
       path: ROUTES.HOME,
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorContent}>
-          <Home />
-        </ErrorBoundary>
-      ),
+      element: <Home />,
     },
     {
       path: ROUTES.SIGNIN,
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorContent}>
-          <Signin />
-        </ErrorBoundary>
-      ),
+      element: <Signin />,
     },
     {
       path: ROUTES.SIGNUP,
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorContent}>
-          <Signup />
-        </ErrorBoundary>
-      ),
+      element: <Signup />,
     },
     {
       path: ROUTES.INTRODUCTION,
       element: (
-        <ErrorBoundary FallbackComponent={ErrorContent}>
+        <ProtectedRoute>
           <Introduction />
-        </ErrorBoundary>
+        </ProtectedRoute>
       ),
     },
     {
       path: ROUTES.DASHBOARD,
       element: (
-        <ErrorBoundary FallbackComponent={ErrorContent}>
+        <ProtectedRoute>
           <Dashboard />
-        </ErrorBoundary>
+        </ProtectedRoute>
       ),
     },
     {
       path: ROUTES.MODEL_PORTFOLIO,
       element: (
-        <ErrorBoundary FallbackComponent={ErrorContent}>
+        <ProtectedRoute>
           <ModelPortfolio />
-        </ErrorBoundary>
+        </ProtectedRoute>
       ),
     },
     {
       path: ROUTES.ACTUAL_PORTFOLIO,
       element: (
-        <ErrorBoundary FallbackComponent={ErrorContent}>
+        <ProtectedRoute>
           <ActualPortfolio />
-        </ErrorBoundary>
+        </ProtectedRoute>
       ),
     },
     {
       path: ROUTES.ANY,
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorContent}>
-          <NotFound />
-        </ErrorBoundary>
-      ),
+      element: <NotFound />,
     },
   ]);
 

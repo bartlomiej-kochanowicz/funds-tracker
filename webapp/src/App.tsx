@@ -7,6 +7,8 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles/theme';
 import { GlobalStyle } from 'styles/GlobalStyle';
 import { store } from 'store';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorContent } from 'components/molecules/ErrorContent';
 
 const App: FC = (): JSX.Element => (
   <Provider store={store}>
@@ -26,7 +28,9 @@ const App: FC = (): JSX.Element => (
           pauseOnHover
         />
 
-        <Root />
+        <ErrorBoundary FallbackComponent={ErrorContent}>
+          <Root />
+        </ErrorBoundary>
       </ThemeProvider>
     </BrowserRouter>
   </Provider>
