@@ -2,11 +2,17 @@ import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Button, Spacer, Text } from 'components/atoms';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectAuth } from 'store/selectors/auth';
+import { AppDispatch } from 'store';
+import { logoutThunk } from 'store/thunks/auth/logoutThunk';
 
 export const Dashboard = () => {
   const { data } = useSelector(selectAuth);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleLogout = () => dispatch(logoutThunk());
 
   return (
     <FullscreenClear>
@@ -26,6 +32,15 @@ export const Dashboard = () => {
         to={ROUTES.ACTUAL_PORTFOLIO}
       >
         Go to actual portfolio
+      </Button>
+
+      <Spacer />
+
+      <Button
+        onClick={handleLogout}
+        color="black"
+      >
+        Logout
       </Button>
     </FullscreenClear>
   );

@@ -28,3 +28,14 @@ export const saveStore = (value: unknown, key: string) => {
     throw new Error("Can't save changes in local storage");
   }
 };
+
+/**
+ * @param {string} key - name of local storage key
+ */
+export const removeStore = (key: string): void => {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    throw new Error("Can't remove data in local storage");
+  }
+};
