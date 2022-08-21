@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { AxiosRequestConfig } from 'axios';
+import { client } from 'config/client';
 import { STATUS } from 'constants/store';
 import { setLocalAuth, getLocalAuth, removeLocalAuth } from 'helpers/userAuth';
 import { SigninResponse } from 'services/auth/signin';
@@ -29,6 +31,12 @@ export const authSlice = createSlice({
       state.data = action.payload;
       state.error = initialState.error;
 
+      client.interceptors.request.use((config: AxiosRequestConfig) => {
+        if (config.headers) config.headers.Authorization = `Bearer ${action.payload.accessToken}`;
+
+        return config;
+      });
+
       setLocalAuth(action.payload);
     });
 
@@ -48,6 +56,12 @@ export const authSlice = createSlice({
       state.status = 'fulfilled';
       state.data = action.payload;
       state.error = initialState.error;
+
+      client.interceptors.request.use((config: AxiosRequestConfig) => {
+        if (config.headers) config.headers.Authorization = `Bearer ${action.payload.accessToken}`;
+
+        return config;
+      });
 
       setLocalAuth(action.payload);
     });
