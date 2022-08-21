@@ -8,8 +8,8 @@ import { ErrorObject, RequestState } from 'types/store';
 
 const initialState = {
   data: getLocalAuth() ?? ({} as SigninResponse),
-  status: (getLocalAuth() ? STATUS.fulfilled : STATUS.idle) as RequestState,
-  signinStatus: STATUS.idle as RequestState,
+  status: (getLocalAuth() ? STATUS.fulfilled : STATUS.idle) as RequestState, // status for global user authentication
+  signinStatus: STATUS.idle as RequestState, // status for signin action
   error: { code: undefined, message: undefined } as ErrorObject,
 };
 
