@@ -8,7 +8,7 @@ interface RetryHTTPParams {
   retryIf: (e: unknown) => boolean;
 }
 
-const statusCodeBlacklist = [403, 404];
+const statusCodeBlacklist = [401, 403, 404];
 
 const defaultArgs = {
   maxAttempts: 3,
