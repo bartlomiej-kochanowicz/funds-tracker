@@ -3,6 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import { ROUTES } from 'routes';
 import { Loading } from 'layouts/Loading';
 import { ProtectedRoute } from 'utils/ProtectedRoute';
+import { Authentication } from 'utils/Authentication';
 
 const Home = lazy(() =>
   import('views/Home').then(({ Home: component }) => ({ default: component })),
@@ -110,5 +111,9 @@ export const Root: FC = () => {
     },
   ]);
 
-  return <Suspense fallback={<Loading />}>{views}</Suspense>;
+  return (
+    <Suspense fallback={<Loading />}>
+      <Authentication>{views}</Authentication>
+    </Suspense>
+  );
 };

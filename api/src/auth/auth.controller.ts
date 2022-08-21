@@ -53,7 +53,7 @@ export class AuthController {
   refreshToken(
     @GetCurrentUserId() userId: string,
     @GetCurrentUser('refreshToken') refreshToken: string,
-  ): Promise<Tokens> {
+  ): Promise<Tokens & Pick<User, 'uuid' | 'email'>> {
     return this.authService.refreshToken(userId, refreshToken);
   }
 }

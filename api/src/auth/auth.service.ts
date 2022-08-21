@@ -79,7 +79,10 @@ export class AuthService {
     });
   }
 
-  async refreshToken(userId: string, rt: string): Promise<Tokens> {
+  async refreshToken(
+    userId: string,
+    rt: string,
+  ): Promise<Tokens & Pick<User, 'uuid' | 'email'>> {
     const user = await this.prisma.user.findUnique({ where: { uuid: userId } });
 
     if (!user || !user.rtHash) throw new ForbiddenException();
@@ -92,7 +95,7 @@ export class AuthService {
 
     await this.updateRtHash(user.uuid, tokens.refreshToken);
 
-    return tokens;
+    return { ...tokens, uuid: user.uuid, email: user.email };
   }
 
   private async updateRtHash(userId: string, rt: string) {
