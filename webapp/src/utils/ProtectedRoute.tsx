@@ -1,6 +1,7 @@
-import { getAccessToken } from 'helpers/accessTokens';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { ROUTES } from 'routes';
+import { selectAuth } from 'store/selectors/auth';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
@@ -13,11 +14,13 @@ export const ProtectedRoute = ({
   to = ROUTES.SIGNIN,
   reverse = false,
 }: ProtectedRouteProps) => {
-  const accessToken = getAccessToken();
+  const { data, status } = useSelector(selectAuth);
 
-  if (reverse) return accessToken ? <Navigate to={to} /> : children;
+  const isAuth = data.uuid && status === 'fulfilled';
 
-  return accessToken ? children : <Navigate to={to} />;
+  if (reverse) return isAuth ? <Navigate to={to} /> : children;
+
+  return isAuth ? children : <Navigate to={to} />;
 };
 
 ProtectedRoute.displayName = 'ProtectedRoute';
