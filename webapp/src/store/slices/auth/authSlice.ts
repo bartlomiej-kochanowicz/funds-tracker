@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { STATUS } from 'constants/store';
-import { setLocalAuth, getLocalAuth } from 'helpers/userAuth';
+import { setLocalAuth, getLocalAuth, removeLocalAuth } from 'helpers/userAuth';
 import { SigninResponse } from 'services/auth/signin';
+import { logoutThunk } from 'store/thunks/auth/logoutThunk';
 import { refreshThunk } from 'store/thunks/auth/refreshThunk';
 import { signinThunk } from 'store/thunks/auth/signinThunk';
 import { ErrorObject, RequestState } from 'types/store';
@@ -57,6 +58,15 @@ export const authSlice = createSlice({
         code: action.error?.code ?? undefined,
         message: action.payload?.message ?? undefined,
       };
+    });
+
+    builder.addCase(logoutThunk.fulfilled, state => {
+      state.data = {} as SigninResponse;
+      state.status = STATUS.idle;
+      state.signinStatus = STATUS.idle;
+      state.error = initialState.error;
+
+      removeLocalAuth();
     });
   },
 });
