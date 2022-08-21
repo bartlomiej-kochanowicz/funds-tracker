@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ROUTES } from 'routes';
 import { selectAuth } from 'store/selectors/auth';
+import { useStatus } from 'hooks/useStatus';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
@@ -16,7 +17,9 @@ export const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
   const { data, status } = useSelector(selectAuth);
 
-  const isAuth = data.uuid && status === 'fulfilled';
+  const { loaded } = useStatus(status);
+
+  const isAuth = loaded && data.uuid;
 
   if (reverse) return isAuth ? <Navigate to={to} /> : children;
 
