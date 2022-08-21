@@ -4,9 +4,7 @@ import { signin, SigninProps, SigninResponse } from 'services/auth/signin';
 import { RequestReject } from 'types/service';
 import { RejectValue } from 'types/store';
 
-// bla bla - write refresh thunk anf fetch in when logged user opens tha app
-
-export const signinThunk = createAsyncThunk<SigninResponse, SigninProps, RejectValue>(
+export const refrestThunk = createAsyncThunk<SigninResponse, SigninProps, RejectValue>(
   'auth/refresh',
   async ({ userEmail, userPassword }, { rejectWithValue }) => {
     try {

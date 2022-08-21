@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios';
+import { RequestReject } from 'types/service';
 import { delay } from 'utils/delay';
 
 interface RetryHTTPParams {
@@ -6,9 +8,27 @@ interface RetryHTTPParams {
   retryIf: (e: unknown) => boolean;
 }
 
+const statusCodeBlacklist = [403, 404];
+
+const defaultArgs = {
+  maxAttempts: 3,
+  backoff: () => 0,
+  retryIf: err => {
+    const error = err as AxiosError<RequestReject>;
+
+    if (error.response && statusCodeBlacklist.includes(error.response.status)) return false;
+
+    return true;
+  },
+} as RetryHTTPParams;
+
 export function retryHTTP<TAsyncFn extends (...args: any[]) => Promise<any>>(
   asyncFn: TAsyncFn,
-  { maxAttempts = 3, backoff = () => 0, retryIf = () => true }: Partial<RetryHTTPParams>,
+  {
+    maxAttempts = defaultArgs.maxAttempts,
+    backoff = defaultArgs.backoff,
+    retryIf = defaultArgs.retryIf,
+  }: Partial<RetryHTTPParams> = defaultArgs,
 ) {
   return async (...args: Parameters<typeof asyncFn>): Promise<ReturnType<typeof asyncFn>> => {
     let counter = 0;
