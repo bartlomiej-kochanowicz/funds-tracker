@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getAccessToken, getRefreshToken } from 'helpers/accessTokens';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { useStatus } from 'hooks/useStatus';
 import { selectAuth } from 'store/selectors/auth';
 import { refreshThunk } from 'store/thunks/auth/refreshThunk';
@@ -14,15 +14,15 @@ interface AuthenticationProps {
 export const Authentication = ({ children }: AuthenticationProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { status } = useSelector(selectAuth);
+  const { status, data } = useSelector(selectAuth);
 
-  const accessToken = getAccessToken();
-  const refreshToken = getRefreshToken();
+  const { loading, loaded, rejected } = useStatus(status);
 
-  const { loading, loaded } = useStatus(status);
+  if (loaded && !rejected) {
+    const { exp } = jwtDecode<JwtPayload>(data.accessToken);
 
-  if (!loaded && accessToken && refreshToken) {
-    dispatch(refreshThunk({ refreshToken }));
+    if (exp && Date.now() >= exp * 1000)
+      dispatch(refreshThunk({ refreshToken: data.refreshToken }));
   }
 
   return loading ? (
