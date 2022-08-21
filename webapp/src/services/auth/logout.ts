@@ -1,4 +1,4 @@
-import { client } from 'config/client';
+import { clientPrivate } from 'config/client';
 import { retryHTTP } from 'utils/retryHTTP';
 
-export const logout = retryHTTP(() => client.post('/auth/logout'));
+export const logout = retryHTTP(() => clientPrivate.post('/auth/logout'));
