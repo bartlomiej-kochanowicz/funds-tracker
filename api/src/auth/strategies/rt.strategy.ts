@@ -8,15 +8,23 @@ import { Injectable } from '@nestjs/common';
 export class RtStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (request: Request) => {
+          const data = request?.cookies.refreshToken;
+
+          if (!data) {
+            return null;
+          }
+
+          return data;
+        },
+      ]),
       secretOrKey: RT_SECRET,
       passReqToCallback: true,
     });
   }
 
   validate(req: Request, payload: any) {
-    const refreshToken = req.get('authorization').replace('Bearer', '').trim();
-
-    return { ...payload, refreshToken };
+    return { ...payload, refreshToken: req.cookies.refreshToken };
   }
 }

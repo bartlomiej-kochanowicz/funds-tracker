@@ -1,10 +1,9 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { API_PORT, IS_DEVELOPMENT } from 'common/config/env';
+import * as cookieParser from 'cookie-parser';
+import { API_PORT } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import { AppModule } from './app.module';
-
-const whitelist = ['https://funds-tracker.com'];
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
@@ -14,17 +13,15 @@ const bootstrap = async () => {
 
   app.setGlobalPrefix('api');
 
-  app.useGlobalPipes(new ValidationPipe());
-
   app.enableCors({
-    origin: (origin, callback) => {
-      if (whitelist.includes(origin) || IS_DEVELOPMENT) {
-        callback(null, true);
-      } else {
-        callback(new Error(`Not allowed by CORS ${origin}`));
-      }
-    },
+    credentials: true,
+    origin: ['http://localhost:5173'],
+    exposedHeaders: ['Set-cookie'],
   });
+
+  app.use(cookieParser());
+
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(API_PORT);
 };
