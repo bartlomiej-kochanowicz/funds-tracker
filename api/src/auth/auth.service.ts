@@ -1,6 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AT_SECRET, RT_SECRET } from 'common/config/env';
+import { Response } from 'express';
+import { AT_SECRET, IS_DEVELOPMENT, RT_SECRET } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
@@ -11,50 +12,89 @@ import { Tokens } from './types';
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
-  async signupLocal(dto: AuthDto): Promise<Tokens> {
-    const { email, password } = dto;
+  async signupLocal(dto: AuthDto, res: Response): Promise<unknown> {
+    try {
+      const { email, password } = dto;
 
-    const hashedPwd = await this.hashData(password);
+      const hashedPwd = await this.hashData(password);
 
-    const user = await this.prisma.user.findUnique({ where: { email } });
+      const user = await this.prisma.user.findUnique({ where: { email } });
 
-    if (user) {
-      throw new ForbiddenException('Email already in use.');
-    }
+      if (user) {
+        throw new ForbiddenException('Email already in use.');
+      }
 
-    const { uuid: newUserId, email: newUserEmail } =
-      await this.prisma.user.create({
-        data: {
-          email,
-          password: hashedPwd,
-        },
+      const { uuid: newUserId, email: newUserEmail } =
+        await this.prisma.user.create({
+          data: {
+            email,
+            password: hashedPwd,
+          },
+        });
+
+      const { accessToken, refreshToken } = await this.getTokens(
+        newUserId,
+        newUserEmail,
+      );
+
+      await this.updateRtHash(newUserId, refreshToken);
+
+      res.cookie('accessToken', accessToken, {
+        expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
       });
 
-    const tokens = await this.getTokens(newUserId, newUserEmail);
+      res.cookie('refreshToken', refreshToken, {
+        expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60000), // 7 days
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
 
-    await this.updateRtHash(newUserId, tokens.refreshToken);
-
-    return tokens;
+      return res.status(201).send();
+    } catch (error) {
+      return res.json(error);
+    }
   }
 
   async signinLocal(
     dto: AuthDto,
-  ): Promise<Tokens & Pick<User, 'uuid' | 'email'>> {
-    const { email, password } = dto;
+    res: Response,
+  ): Promise<Response<Pick<User, 'uuid' | 'email'>>> {
+    try {
+      const { email, password } = dto;
 
-    const user = await this.prisma.user.findUnique({ where: { email } });
+      const user = await this.prisma.user.findUnique({ where: { email } });
 
-    if (!user) throw new ForbiddenException('No account for these email.');
+      if (!user) throw new ForbiddenException('No account for these email.');
 
-    const isPasswordsMatches = await bcrypt.compare(password, user.password);
+      const isPasswordsMatches = await bcrypt.compare(password, user.password);
 
-    if (!isPasswordsMatches) throw new ForbiddenException('Wrong password.');
+      if (!isPasswordsMatches) throw new ForbiddenException('Wrong password.');
 
-    const tokens = await this.getTokens(user.uuid, user.email);
+      const { accessToken, refreshToken } = await this.getTokens(
+        user.uuid,
+        user.email,
+      );
 
-    await this.updateRtHash(user.uuid, tokens.refreshToken);
+      await this.updateRtHash(user.uuid, refreshToken);
 
-    return { ...tokens, uuid: user.uuid, email: user.email };
+      res.cookie('accessToken', accessToken, {
+        expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
+
+      res.cookie('refreshToken', refreshToken, {
+        expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60000), // 7 days
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
+
+      return res.json({ uuid: user.uuid, email: user.email }).send();
+    } catch (error) {
+      return res.json(error);
+    }
   }
 
   async checkEmailExist(dto: EmailDto): Promise<void> {
@@ -65,37 +105,75 @@ export class AuthService {
     if (!user) throw new ForbiddenException('No account for these email.');
   }
 
-  async logout(userId: string): Promise<void> {
-    await this.prisma.user.updateMany({
-      where: {
-        uuid: userId,
-        rtHash: {
-          not: null,
+  async logout(userId: string, res): Promise<unknown> {
+    try {
+      await this.prisma.user.updateMany({
+        where: {
+          uuid: userId,
+          rtHash: {
+            not: null,
+          },
         },
-      },
-      data: {
-        rtHash: null,
-      },
-    });
+        data: {
+          rtHash: null,
+        },
+      });
+
+      res.clearCookie('accessToken', {
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
+
+      res.clearCookie('refreshToken', {
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
+
+      return res.status(200).send();
+    } catch (error) {
+      return res.json(error);
+    }
   }
 
   async refreshToken(
     userId: string,
     rt: string,
-  ): Promise<Tokens & Pick<User, 'uuid' | 'email'>> {
-    const user = await this.prisma.user.findUnique({ where: { uuid: userId } });
+    res: Response,
+  ): Promise<unknown> {
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: { uuid: userId },
+      });
 
-    if (!user || !user.rtHash) throw new ForbiddenException();
+      if (!user || !user.rtHash) throw new ForbiddenException();
 
-    const isRtMatches = await bcrypt.compare(rt, user.rtHash);
+      const isRtMatches = await bcrypt.compare(rt, user.rtHash);
 
-    if (!isRtMatches) throw new ForbiddenException();
+      if (!isRtMatches) throw new ForbiddenException();
 
-    const tokens = await this.getTokens(user.uuid, user.email);
+      const { accessToken, refreshToken } = await this.getTokens(
+        user.uuid,
+        user.email,
+      );
 
-    await this.updateRtHash(user.uuid, tokens.refreshToken);
+      await this.updateRtHash(user.uuid, refreshToken);
 
-    return { ...tokens, uuid: user.uuid, email: user.email };
+      res.cookie('accessToken', accessToken, {
+        expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
+
+      res.cookie('refreshToken', refreshToken, {
+        expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60000), // 7 days
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
+
+      return res.status(200).send();
+    } catch (error) {
+      return res.json(error);
+    }
   }
 
   private async updateRtHash(userId: string, rt: string) {
@@ -117,11 +195,11 @@ export class AuthService {
     const [at, rt] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 15, secret: AT_SECRET },
+        { expiresIn: 60 * 15, secret: AT_SECRET }, // 15 minutes
       ),
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 60 * 24 * 7, secret: RT_SECRET },
+        { expiresIn: 60 * 60 * 24 * 7, secret: RT_SECRET }, // 7 days
       ),
     ]);
 

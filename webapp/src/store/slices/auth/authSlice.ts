@@ -31,12 +31,6 @@ export const authSlice = createSlice({
       state.data = action.payload;
       state.error = initialState.error;
 
-      client.interceptors.request.use((config: AxiosRequestConfig) => {
-        if (config.headers) config.headers.Authorization = `Bearer ${action.payload.accessToken}`;
-
-        return config;
-      });
-
       setLocalAuth(action.payload);
     });
 

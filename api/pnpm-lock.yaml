@@ -13,6 +13,7 @@ specifiers:
   '@nestjs/testing': 9.0.11
   '@prisma/client': 4.2.1
   '@types/bcrypt': 5.0.0
+  '@types/cookie-parser': ^1.4.3
   '@types/express': 4.17.13
   '@types/jest': 28.1.7
   '@types/node': 18.7.9
@@ -23,6 +24,7 @@ specifiers:
   bcrypt: 5.0.1
   class-transformer: 0.5.1
   class-validator: 0.13.2
+  cookie-parser: ^1.4.6
   eslint: 8.22.0
   eslint-config-airbnb-base: 15.0.0
   eslint-config-airbnb-typescript: 17.0.0
@@ -59,6 +61,7 @@ dependencies:
   bcrypt: 5.0.1
   class-transformer: 0.5.1
   class-validator: 0.13.2
+  cookie-parser: 1.4.6
   passport: 0.6.0
   passport-jwt: 4.0.0
   reflect-metadata: 0.1.13
@@ -70,6 +73,7 @@ devDependencies:
   '@nestjs/schematics': 9.0.1_typescript@4.7.4
   '@nestjs/testing': 9.0.11_z6gh3n3qpn6ig2eqi2q57zofvq
   '@types/bcrypt': 5.0.0
+  '@types/cookie-parser': 1.4.3
   '@types/express': 4.17.13
   '@types/jest': 28.1.7
   '@types/node': 18.7.9
@@ -1196,6 +1200,12 @@ packages:
       '@types/node': 18.7.9
     dev: true
 
+  /@types/cookie-parser/1.4.3:
+    resolution: {integrity: sha512-CqSKwFwefj4PzZ5n/iwad/bow2hTCh0FlNAeWLtQM3JA/NX/iYagIpWG2cf1bQKQ2c9gU2log5VUCrn7LDOs0w==}
+    dependencies:
+      '@types/express': 4.17.13
+    dev: true
+
   /@types/cookiejar/2.1.2:
     resolution: {integrity: sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==}
     dev: true
@@ -2256,8 +2266,21 @@ packages:
       safe-buffer: 5.1.2
     dev: true
 
+  /cookie-parser/1.4.6:
+    resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      cookie: 0.4.1
+      cookie-signature: 1.0.6
+    dev: false
+
   /cookie-signature/1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
+
+  /cookie/0.4.1:
+    resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==}
+    engines: {node: '>= 0.6'}
+    dev: false
 
   /cookie/0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}

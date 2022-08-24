@@ -18,13 +18,13 @@ export const Authentication = ({ children }: AuthenticationProps) => {
 
   const { loading, loaded, rejected } = useStatus(status);
 
-  if (loaded && !rejected) {
+  /* if (loaded && !rejected) {
     const { exp } = jwtDecode<JwtPayload>(data.accessToken);
 
     if (exp && Date.now() >= exp * 1000)
       dispatch(refreshThunk({ refreshToken: data.refreshToken }));
   }
-
+ */
   return loading ? (
     <FullscreenClear>
       <Loader />
