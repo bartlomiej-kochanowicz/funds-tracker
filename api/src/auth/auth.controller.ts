@@ -13,7 +13,6 @@ import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { AuthDto, EmailDto } from './dto';
-import { Tokens } from './types/tokens.type';
 
 @Controller('auth')
 export class AuthController {

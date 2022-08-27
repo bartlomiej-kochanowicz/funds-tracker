@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { API_URL } from 'config/env';
 import { refresh } from 'services/auth/refresh';
 
@@ -13,16 +13,13 @@ clientPrivate.interceptors.response.use(
   async error => {
     const prevRequest = error?.config;
 
-    console.log('AUTH ERROR', error?.response?.status === 401 && !prevRequest?.sent);
-
+    // when accessToken is expired send request to gen new access token from refresh token and send failed request again
     if (error?.response?.status === 401 && !prevRequest?.sent) {
       prevRequest.sent = true;
 
-      /* const { accessToken } = data;
+      await refresh();
 
-      prevRequest.headers.Authorization = `Bearer ${accessToken}`;
-
-      return clientPrivate(prevRequest); */
+      return clientPrivate(prevRequest);
     }
 
     return Promise.reject(error);
