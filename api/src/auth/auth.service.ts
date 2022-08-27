@@ -1,10 +1,11 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
+import { User } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 import { AT_SECRET, IS_DEVELOPMENT, RT_SECRET } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
-import * as bcrypt from 'bcrypt';
-import { User } from '@prisma/client';
+import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { AuthDto, EmailDto } from './dto';
 import { Tokens } from './types';
 
@@ -39,16 +40,20 @@ export class AuthService {
 
       await this.updateRtHash(newUserId, refreshToken);
 
-      res.cookie('accessToken', accessToken, {
-        expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
+      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+        expires: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
-      res.cookie('refreshToken', refreshToken, {
-        expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60000), // 7 days
+      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+        expires: EXPIRES['7DAYS'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
+      });
+
+      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+        expires: EXPIRES['7DAYS'],
       });
 
       return res.status(201).send();
@@ -79,17 +84,20 @@ export class AuthService {
 
       await this.updateRtHash(user.uuid, refreshToken);
 
-      res.cookie('accessToken', accessToken, {
-        expires: new Date(new Date().getTime() + 2 * 60000), // 2 minutes
-        // expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
+      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+        expires: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
-      res.cookie('refreshToken', refreshToken, {
-        expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60000), // 7 days
+      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+        expires: EXPIRES['7DAYS'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
+      });
+
+      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+        expires: EXPIRES['7DAYS'],
       });
 
       return res.json({ uuid: user.uuid, email: user.email }).send();
@@ -120,15 +128,17 @@ export class AuthService {
         },
       });
 
-      res.clearCookie('accessToken', {
+      res.clearCookie(COOKIE_NAMES.ACCESS_TOKEN, {
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
-      res.clearCookie('refreshToken', {
+      res.clearCookie(COOKIE_NAMES.REFRESH_TOKEN, {
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
+
+      res.clearCookie(COOKIE_NAMES.IS_LOGGED_IN);
 
       return res.status(200).send();
     } catch (error) {
@@ -159,17 +169,20 @@ export class AuthService {
 
       await this.updateRtHash(user.uuid, refreshToken);
 
-      res.cookie('accessToken', accessToken, {
-        expires: new Date(new Date().getTime() + 2 * 60000), // 2 minutes
-        // expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
+      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+        expires: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
-      res.cookie('refreshToken', refreshToken, {
-        expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60000), // 7 days
+      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+        expires: EXPIRES['7DAYS'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
+      });
+
+      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+        expires: EXPIRES['7DAYS'],
       });
 
       return res.status(200).send();
@@ -197,8 +210,7 @@ export class AuthService {
     const [at, rt] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 2, secret: AT_SECRET }, // 2 minutes
-        // { expiresIn: 60 * 15, secret: AT_SECRET }, // 15 minutes
+        { expiresIn: 60 * 15, secret: AT_SECRET }, // 15 minutes
       ),
       this.jwtService.signAsync(
         { sub: userId, email },
