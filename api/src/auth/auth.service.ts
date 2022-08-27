@@ -80,7 +80,8 @@ export class AuthService {
       await this.updateRtHash(user.uuid, refreshToken);
 
       res.cookie('accessToken', accessToken, {
-        expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
+        expires: new Date(new Date().getTime() + 2 * 60000), // 2 minutes
+        // expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
@@ -159,7 +160,8 @@ export class AuthService {
       await this.updateRtHash(user.uuid, refreshToken);
 
       res.cookie('accessToken', accessToken, {
-        expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
+        expires: new Date(new Date().getTime() + 2 * 60000), // 2 minutes
+        // expires: new Date(new Date().getTime() + 15 * 60000), // 15 minutes
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
@@ -195,7 +197,8 @@ export class AuthService {
     const [at, rt] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 15, secret: AT_SECRET }, // 15 minutes
+        { expiresIn: 60 * 2, secret: AT_SECRET }, // 2 minutes
+        // { expiresIn: 60 * 15, secret: AT_SECRET }, // 15 minutes
       ),
       this.jwtService.signAsync(
         { sub: userId, email },
