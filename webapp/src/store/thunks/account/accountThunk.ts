@@ -1,14 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { refresh, RefreshProps, RefreshResponse } from 'services/auth/refresh';
+import { AccountResponse, getAccount } from 'services/auth/account';
 import { RequestReject } from 'types/service';
 import { RejectValue } from 'types/store';
 
-export const refreshThunk = createAsyncThunk<RefreshResponse, RefreshProps, RejectValue>(
-  'auth/refresh',
-  async ({ refreshToken }, { rejectWithValue }) => {
+export const accountThunk = createAsyncThunk<AccountResponse, undefined, RejectValue>(
+  'account',
+  async (empty, { rejectWithValue }) => {
     try {
-      const { data } = await refresh({ refreshToken });
+      const { data } = await getAccount();
 
       return data;
     } catch (err) {

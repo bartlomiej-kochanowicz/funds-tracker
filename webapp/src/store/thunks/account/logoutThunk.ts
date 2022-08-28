@@ -6,7 +6,7 @@ import { RequestReject } from 'types/service';
 import { RejectValue } from 'types/store';
 
 export const logoutThunk = createAsyncThunk<null, undefined, RejectValue>(
-  'auth/logout',
+  'logout',
   async (empty, { rejectWithValue }) => {
     try {
       await logout();

@@ -1,8 +1,6 @@
 import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { ROUTES } from 'routes';
-import { selectAuth } from 'store/selectors/auth';
-import { useStatus } from 'hooks/useStatus';
+import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
@@ -15,15 +13,9 @@ export const ProtectedRoute = ({
   to = ROUTES.SIGNIN,
   reverse = false,
 }: ProtectedRouteProps) => {
-  const { data, status } = useSelector(selectAuth);
+  if (reverse) return isUserLoggedIn ? <Navigate to={to} /> : children;
 
-  const { loaded } = useStatus(status);
-
-  const isAuth = loaded && data.uuid;
-
-  if (reverse) return isAuth ? <Navigate to={to} /> : children;
-
-  return isAuth ? children : <Navigate to={to} />;
+  return isUserLoggedIn ? children : <Navigate to={to} />;
 };
 
 ProtectedRoute.displayName = 'ProtectedRoute';

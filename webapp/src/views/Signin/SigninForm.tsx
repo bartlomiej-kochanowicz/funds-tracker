@@ -1,13 +1,10 @@
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Loader } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
-import { AppDispatch } from 'store';
-import { signinThunk } from 'store/thunks/auth/signinThunk';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import useRequest from 'hooks/useRequest';
 import {
@@ -15,9 +12,9 @@ import {
   SigninCheckEmailProps,
   SigninCheckEmailResponse,
 } from 'services/auth/signinCheckEmail';
-import { STATUS } from 'constants/store';
+import { signin } from 'services/auth/signin';
+import { AxiosError } from 'axios';
 import { ROUTES } from 'routes';
-import { ErrorObject } from 'types/store';
 import { showErrorToast } from 'helpers/showToast';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
@@ -37,8 +34,6 @@ export const SigninForm = () => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
-
-  const dispatch = useDispatch<AppDispatch>();
 
   const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
     SignUpStateMachine,
@@ -72,20 +67,14 @@ export const SigninForm = () => {
 
     if (compareState(states.password)) {
       try {
-        const { meta, payload } = await dispatch(signinThunk({ userEmail, userPassword }));
+        await signin({ userEmail, userPassword });
 
-        const { requestStatus } = meta;
+        navigate(ROUTES.DASHBOARD);
+      } catch (err) {
+        const error = err as AxiosError<{ message: string }>;
 
-        if (requestStatus === STATUS.fulfilled) {
-          navigate(ROUTES.DASHBOARD);
-        }
+        setError('userPassword', { type: 'custom', message: error.message });
 
-        if (requestStatus === STATUS.rejected && payload) {
-          const { message } = payload as ErrorObject;
-
-          setError('userPassword', { type: 'custom', message });
-        }
-      } catch {
         showErrorToast(t('service.unknown_error'));
       }
     }

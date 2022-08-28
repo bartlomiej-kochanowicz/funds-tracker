@@ -6,6 +6,7 @@ import {
   Post,
   UseGuards,
   Res,
+  Get,
 } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
@@ -28,10 +29,7 @@ export class AuthController {
   @Public()
   @Post('local/signin')
   @HttpCode(HttpStatus.OK)
-  signinLocal(
-    @Body() dto: AuthDto,
-    @Res() res: Response,
-  ): Promise<Response<Pick<User, 'uuid' | 'email'>>> {
+  signinLocal(@Body() dto: AuthDto, @Res() res: Response): Promise<unknown> {
     return this.authService.signinLocal(dto, res);
   }
 
@@ -40,6 +38,14 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   checkEmailExist(@Body() dto: EmailDto): Promise<void> {
     return this.authService.checkEmailExist(dto);
+  }
+
+  @Get('account')
+  @HttpCode(HttpStatus.OK)
+  getAccount(
+    @GetCurrentUserId() userId: string,
+  ): Promise<Pick<User, 'email' | 'uuid' | 'createdAt'>> {
+    return this.authService.getAccount(userId);
   }
 
   @Post('logout')
