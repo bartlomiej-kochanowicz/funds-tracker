@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { useStatus } from 'hooks/useStatus';
-import { selectAuth } from 'store/selectors/auth';
-import { refreshThunk } from 'store/thunks/auth/refreshThunk';
+import { selectAccount } from 'store/selectors/account';
 import { AppDispatch } from 'store';
 import { Loader } from 'components/atoms';
 import { FullscreenClear } from 'layouts/FullscreenClear';
+import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
+import { accountThunk } from 'store/thunks/account/accountThunk';
 
 interface AuthenticationProps {
   children: JSX.Element | null;
@@ -14,17 +14,14 @@ interface AuthenticationProps {
 export const Authentication = ({ children }: AuthenticationProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { status, data } = useSelector(selectAuth);
+  const { status } = useSelector(selectAccount);
 
-  const { loading, loaded, rejected } = useStatus(status);
+  const { loading, loaded } = useStatus(status);
 
-  /* if (loaded && !rejected) {
-    const { exp } = jwtDecode<JwtPayload>(data.accessToken);
-
-    if (exp && Date.now() >= exp * 1000)
-      dispatch(refreshThunk({ refreshToken: data.refreshToken }));
+  if (isUserLoggedIn && !loaded && !loading) {
+    dispatch(accountThunk());
   }
- */
+
   return loading ? (
     <FullscreenClear>
       <Loader />

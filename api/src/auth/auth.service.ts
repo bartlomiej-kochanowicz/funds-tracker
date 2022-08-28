@@ -100,7 +100,7 @@ export class AuthService {
         expires: EXPIRES['7DAYS'],
       });
 
-      return res.json({ uuid: user.uuid, email: user.email }).send();
+      return res.status(200).send();
     } catch (error) {
       return res.json(error);
     }
@@ -112,6 +112,16 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) throw new ForbiddenException('No account for these email.');
+  }
+
+  async getAccount(
+    userId: string,
+  ): Promise<Pick<User, 'email' | 'uuid' | 'createdAt'>> {
+    const { email, uuid, createdAt } = await this.prisma.user.findUnique({
+      where: { uuid: userId },
+    });
+
+    return { email, uuid, createdAt };
   }
 
   async logout(userId: string, res): Promise<unknown> {
