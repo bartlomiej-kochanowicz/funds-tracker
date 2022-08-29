@@ -9,7 +9,6 @@ import { AppDispatch } from 'store';
 import { accountThunk } from 'store/thunks/account/accountThunk';
 import { Loader } from 'components/atoms';
 import { FullscreenClear } from 'layouts/FullscreenClear';
-import { logoutThunk } from 'store/thunks/account/logoutThunk';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
