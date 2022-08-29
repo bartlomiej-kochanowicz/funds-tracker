@@ -47,13 +47,13 @@ export class AuthService {
       });
 
       res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['30days'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['30days'],
       });
 
       return res.status(201).send();
@@ -91,13 +91,13 @@ export class AuthService {
       });
 
       res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['30days'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['30days'],
       });
 
       return res.status(200).send();
@@ -186,13 +186,13 @@ export class AuthService {
       });
 
       res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['30days'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['30days'],
       });
 
       return res.status(200).send();
