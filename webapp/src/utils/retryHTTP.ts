@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { RequestReject } from 'types/service';
 import { delay } from 'utils/delay';
+import { refresh } from 'services/auth/refresh';
 
 interface RetryHTTPParams {
   maxAttempts: number;
@@ -45,7 +46,14 @@ export function retryHTTP<TAsyncFn extends (...args: any[]) => Promise<any>>(
         succeeded = true;
       } catch (e: unknown) {
         lastError = e;
-        if (retryIf(e)) {
+
+        const error = e as AxiosError<RequestReject>;
+
+        if (error.response?.status === 401) {
+          await refresh();
+
+          await delay(backoff(counter));
+        } else if (retryIf(error)) {
           // keep on retrying if condition is met
           await delay(backoff(counter));
         } else {

@@ -16,6 +16,9 @@ import { signin } from 'services/auth/signin';
 import { AxiosError } from 'axios';
 import { ROUTES } from 'routes';
 import { showErrorToast } from 'helpers/showToast';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'store';
+import { accountThunk } from 'store/thunks/account/accountThunk';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -34,6 +37,8 @@ export const SigninForm = () => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
     SignUpStateMachine,
@@ -68,6 +73,8 @@ export const SigninForm = () => {
     if (compareState(states.password)) {
       try {
         await signin({ userEmail, userPassword });
+
+        await dispatch(accountThunk());
 
         navigate(ROUTES.DASHBOARD);
       } catch (err) {
