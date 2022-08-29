@@ -1,6 +1,6 @@
 export const EXPIRES = {
-  '15MIN': new Date(new Date().getTime() + 15 * 60000),
-  '7DAYS': new Date(new Date().getTime() + 7 * 24 * 60 * 60000),
+  '15MIN': 15 * 60 * 1000,
+  '7DAYS': 7 * 24 * 60 * 60 * 1000,
 };
 
 export const COOKIE_NAMES = {

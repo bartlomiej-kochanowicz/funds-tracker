@@ -41,19 +41,19 @@ export class AuthService {
       await this.updateRtHash(newUserId, refreshToken);
 
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        expires: EXPIRES['15MIN'],
+        maxAge: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        expires: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['7DAYS'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        expires: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['7DAYS'],
       });
 
       return res.status(201).send();
@@ -85,19 +85,19 @@ export class AuthService {
       await this.updateRtHash(user.uuid, refreshToken);
 
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        expires: EXPIRES['15MIN'],
+        maxAge: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        expires: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['7DAYS'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        expires: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['7DAYS'],
       });
 
       return res.status(200).send();
@@ -180,19 +180,19 @@ export class AuthService {
       await this.updateRtHash(user.uuid, refreshToken);
 
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        expires: EXPIRES['15MIN'],
+        maxAge: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        expires: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['7DAYS'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        expires: EXPIRES['7DAYS'],
+        maxAge: EXPIRES['7DAYS'],
       });
 
       return res.status(200).send();

@@ -3,12 +3,12 @@ import { Button, Spacer, Text } from 'components/atoms';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAuth } from 'store/selectors/account';
+import { selectAccount } from 'store/selectors/account';
 import { AppDispatch } from 'store';
-import { logoutThunk } from 'store/thunks/auth/logoutThunk';
+import { logoutThunk } from 'store/thunks/account/logoutThunk';
 
 export const Dashboard = () => {
-  const { data } = useSelector(selectAuth);
+  const { data } = useSelector(selectAccount);
 
   const dispatch = useDispatch<AppDispatch>();
 

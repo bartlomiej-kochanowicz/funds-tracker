@@ -28,8 +28,6 @@ export const accountSlice = createSlice({
       state.data = action.payload;
       state.error = initialState.error;
 
-      console.log('@@@', action.payload);
-
       setLocalAccount(action.payload);
     });
 
@@ -42,6 +40,14 @@ export const accountSlice = createSlice({
     });
 
     builder.addCase(logoutThunk.fulfilled, state => {
+      state.data = {} as AccountResponse;
+      state.status = STATUS.idle;
+      state.error = initialState.error;
+
+      removeLocalAccount();
+    });
+
+    builder.addCase(logoutThunk.rejected, state => {
       state.data = {} as AccountResponse;
       state.status = STATUS.idle;
       state.error = initialState.error;
