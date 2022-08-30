@@ -81,8 +81,5 @@
     "vite-plugin-static-copy": "0.7.0",
     "vite-plugin-svgr": "2.2.1",
     "vite-tsconfig-paths": "3.5.0"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }
