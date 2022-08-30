@@ -1,14 +1,8 @@
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectAccount } from 'store/selectors/account';
-import { STATUS } from 'constants/store';
-import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
 import { useStatus } from 'hooks/useStatus';
-import { AppDispatch } from 'store';
-import { accountThunk } from 'store/thunks/account/accountThunk';
-import { Loader } from 'components/atoms';
-import { FullscreenClear } from 'layouts/FullscreenClear';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
@@ -23,21 +17,9 @@ export const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
   const { status } = useSelector(selectAccount);
 
-  const dispatch = useDispatch<AppDispatch>();
+  const { loaded, rejected } = useStatus(status);
 
-  const { loaded, loading } = useStatus(status);
-
-  const isAuthenticated = status === STATUS.fulfilled || isUserLoggedIn;
-
-  if (isUserLoggedIn && !loaded && !loading) {
-    dispatch(accountThunk());
-
-    return (
-      <FullscreenClear>
-        <Loader />
-      </FullscreenClear>
-    );
-  }
+  const isAuthenticated = loaded && !rejected;
 
   if (reverse) return isAuthenticated ? <Navigate to={to} /> : children;
 
