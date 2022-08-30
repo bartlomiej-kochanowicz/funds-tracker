@@ -62,7 +62,7 @@ services:
     env_file:
       - ./webapp/.env
     ports:
-      - "5173:5173"
+      - "${WEBAPP_PORT}:${WEBAPP_PORT}"
 
 networks:
   api:
