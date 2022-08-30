@@ -118,6 +118,7 @@ export const SigninForm = () => {
           <Input
             placeholder={t('password')}
             type="password"
+            autoFocus
             {...userPasswordProps}
           />
         </Fragment>
