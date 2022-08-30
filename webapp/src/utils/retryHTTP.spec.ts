@@ -6,6 +6,8 @@ jest.mock('services/model-portfolio/instruments', () => ({
   getModelPortfolioInstruments: jest.fn(),
 }));
 
+jest.mock('services/auth/refresh', () => ({ refresh: jest.fn() }));
+
 describe('retryHTTP', () => {
   beforeEach(() => jest.clearAllMocks());
 
