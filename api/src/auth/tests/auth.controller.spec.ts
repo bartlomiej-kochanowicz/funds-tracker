@@ -1,9 +1,15 @@
 import { Test } from '@nestjs/testing';
 import { AuthController } from 'auth/auth.controller';
 import { AuthService } from 'auth/auth.service';
-import { Tokens } from 'auth/types';
+import { createMock } from '@golevelup/ts-jest';
+import { Response } from 'express';
 import { authStub } from './stubs/auth.stub';
-import { tokensStub } from './stubs/tokens.stub';
+
+const mockResponseObject = () =>
+  createMock<Response>({
+    json: jest.fn().mockReturnThis(),
+    status: jest.fn().mockReturnThis(),
+  });
 
 jest.mock('auth/auth.service');
 
@@ -26,36 +32,28 @@ describe('AuthController', () => {
 
   describe('signupLocal', () => {
     describe('when signupLocal is called', () => {
-      let tokens: Tokens;
+      const res = mockResponseObject();
 
       beforeEach(async () => {
-        tokens = await authController.signupLocal(authStub());
+        await authController.signupLocal(authStub(), res);
       });
 
       it('should call signupLocal service', () => {
-        expect(authService.signupLocal).toBeCalledWith(authStub());
-      });
-
-      it('should return a tokens', () => {
-        expect(tokens).toEqual(tokensStub());
+        expect(authService.signupLocal).toBeCalledWith(authStub(), res);
       });
     });
   });
 
   describe('signinLocal', () => {
     describe('when signinLocal is called', () => {
-      let tokens: Tokens;
+      const res = mockResponseObject();
 
       beforeEach(async () => {
-        tokens = await authController.signinLocal(authStub());
+        await authController.signinLocal(authStub(), res);
       });
 
       it('should call signinLocal service', () => {
-        expect(authService.signinLocal).toBeCalledWith(authStub());
-      });
-
-      it('should return a tokens', () => {
-        expect(tokens).toEqual(tokensStub());
+        expect(authService.signinLocal).toBeCalledWith(authStub(), res);
       });
     });
   });
@@ -64,29 +62,32 @@ describe('AuthController', () => {
     describe('when logout is called', () => {
       const userId = 'c40ddade-02c0-448a-84b7-56de4da2ca70';
 
+      const res = mockResponseObject();
+
       beforeEach(async () => {
-        await authController.logout(userId);
+        await authController.logout(userId, res);
       });
 
       it('should call logout service', () => {
-        expect(authService.logout).toBeCalledWith(userId);
+        expect(authService.logout).toBeCalledWith(userId, res);
       });
     });
   });
 
   describe('refreshToken', () => {
     describe('when refreshToken is called', () => {
-      let tokens: Tokens;
-
       const refreshDto = {
         userId: 'c40ddade-02c0-448a-84b7-56de4da2ca70',
         refreshToken: 'refresh-token-mock',
       };
 
+      const res = mockResponseObject();
+
       beforeEach(async () => {
-        tokens = await authController.refreshToken(
+        await authController.refreshToken(
           refreshDto.userId,
           refreshDto.refreshToken,
+          res,
         );
       });
 
@@ -94,11 +95,8 @@ describe('AuthController', () => {
         expect(authService.refreshToken).toBeCalledWith(
           refreshDto.userId,
           refreshDto.refreshToken,
+          res,
         );
-      });
-
-      it('should return a tokens', () => {
-        expect(tokens).toEqual(tokensStub());
       });
     });
   });
