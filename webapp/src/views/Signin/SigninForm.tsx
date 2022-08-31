@@ -105,7 +105,7 @@ export const SigninForm = () => {
       noValidate
     >
       <Input
-        placeholder={t('page.signin.email.placeholder')}
+        placeholder={t('email.placeholder')}
         type="email"
         disabled={compareState(states.password)}
         {...userEmailProps}
