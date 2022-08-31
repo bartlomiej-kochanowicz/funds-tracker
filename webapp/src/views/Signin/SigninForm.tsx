@@ -53,7 +53,7 @@ export const SigninForm = () => {
     setError,
   } = useForm({
     defaultValues,
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema(compareState(states.password))),
   });
 
   const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
