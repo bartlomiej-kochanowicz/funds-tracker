@@ -16,7 +16,7 @@ interface UseRequestOptions<Response> {
   defaultData?: AxiosResponse<Response> | null;
   successToast?: string | null;
   failureToast?: boolean;
-  successCallback?: (() => void) | null;
+  successCallback?: ((data: AxiosResponse<Response>) => void) | null;
   failureCallback?: ((error: AxiosError<RequestReject>) => void) | null;
 }
 
@@ -69,7 +69,7 @@ const useRequest = <Request, Response>(
         showSuccessToast(successToast);
       }
 
-      if (successCallback) successCallback();
+      if (successCallback) successCallback(data);
 
       return data;
     } catch (err) {

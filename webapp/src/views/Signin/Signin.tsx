@@ -11,7 +11,7 @@ export const Signin = () => {
 
   return (
     <FullscreenClear>
-      <Heading textAlign="center">{t('sign_in')}</Heading>
+      <Heading textAlign="center">{t('common.sign_in')}</Heading>
 
       <Spacer space="small" />
 
