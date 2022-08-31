@@ -32,6 +32,7 @@
   "page.signup.description": "Join Funds Tracker and begin managing your investment today.",
   "page.signup.email.already_in_use": "Email already in use",
   "page.signup.name.required": "What’s your name?",
+  "page.signup.password.confirm": "Confirm password",
   "page.welcome.button": "Start now",
   "page.welcome.release_info": "Coming september 2022...",
   "selectors.instruments.bonds": "Bonds",
