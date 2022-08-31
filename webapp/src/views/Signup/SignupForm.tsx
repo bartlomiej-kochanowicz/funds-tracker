@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Loader, Spacer } from 'components/atoms';
-import { useInput } from 'hooks/useInput';
+import { Button, Loader, Spacer } from 'components/atoms';
 import useRequest from 'hooks/useRequest';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { useForm } from 'react-hook-form';
@@ -10,6 +9,8 @@ import {
   SigninCheckEmailProps,
   SigninCheckEmailResponse,
 } from 'services/auth/signinCheckEmail';
+import { NameAndEmail } from './components/NameAndEmail';
+import { Passwords } from './components/Passwords';
 import { validationSchema } from './Signup.schema';
 import { Form } from './Signup.styles';
 
@@ -31,7 +32,12 @@ export const SignupForm = () => {
     SignupStateMachine,
   );
 
-  const defaultValues = { userName: '', userEmail: '', userPassword: '' };
+  const defaultValues = {
+    userName: '',
+    userEmail: '',
+    userPassword: '',
+    userPasswordConfirmation: '',
+  };
 
   const {
     register,
@@ -43,32 +49,27 @@ export const SignupForm = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const userNameProps = useInput<typeof defaultValues>({
-    register,
-    name: 'userName',
-    errors,
-  });
-
-  const userEmailProps = useInput<typeof defaultValues>({
-    register,
-    name: 'userEmail',
-    errors,
-  });
-
   const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
     signinCheckEmail,
     {
-      successCallback: () => updateState(actions.CHANGE_TO_PASSWORDS),
-      failureCallback: error =>
-        setError('userEmail', { type: 'custom', message: error.response?.data.message }),
+      successCallback: ({ data }) => {
+        if (data.exist) {
+          setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
+        } else {
+          updateState(actions.CHANGE_TO_PASSWORDS);
+        }
+      },
     },
   );
 
   const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
-    console.log({ userEmail, userPassword });
-
     if (compareState(states.nameAndEmail)) {
       checkEmail({ userEmail });
+    }
+
+    if (compareState(states.passwords)) {
+      // register here
+      console.log('register');
     }
   };
 
@@ -77,19 +78,19 @@ export const SignupForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
-      <Input
-        placeholder={t('common.name')}
-        type="text"
-        {...userNameProps}
-      />
+      {compareState(states.nameAndEmail) && (
+        <NameAndEmail
+          register={register}
+          errors={errors}
+        />
+      )}
 
-      <Spacer />
-
-      <Input
-        placeholder={t('common.email')}
-        type="text"
-        {...userEmailProps}
-      />
+      {compareState(states.passwords) && (
+        <Passwords
+          register={register}
+          errors={errors}
+        />
+      )}
 
       <Spacer />
 
