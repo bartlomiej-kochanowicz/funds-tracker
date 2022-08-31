@@ -26,7 +26,7 @@ type FormStates = 'email' | 'password';
 
 type FormActions = 'CHANGE_TO_PASSWORD';
 
-const SignUpStateMachine = new StateMachine<FormStates, FormActions>(
+const SigninStateMachine = new StateMachine<FormStates, FormActions>(
   'email',
   { email: 'email', password: 'password' },
   { CHANGE_TO_PASSWORD: 'CHANGE_TO_PASSWORD' },
@@ -41,7 +41,7 @@ export const SigninForm = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
-    SignUpStateMachine,
+    SigninStateMachine,
   );
 
   const defaultValues = { userEmail: '', userPassword: '' };
