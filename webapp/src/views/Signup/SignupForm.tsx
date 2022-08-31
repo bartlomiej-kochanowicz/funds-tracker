@@ -46,7 +46,7 @@ export const SignupForm = () => {
     setError,
   } = useForm({
     defaultValues,
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema(compareState(states.passwords))),
   });
 
   const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
@@ -62,14 +62,19 @@ export const SignupForm = () => {
     },
   );
 
-  const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
+  const onSubmit = async ({
+    userName,
+    userEmail,
+    userPassword,
+    userPasswordConfirmation,
+  }: typeof defaultValues) => {
     if (compareState(states.nameAndEmail)) {
       checkEmail({ userEmail });
     }
 
     if (compareState(states.passwords)) {
       // register here
-      console.log('register');
+      console.log('register', { userName, userEmail, userPassword, userPasswordConfirmation });
     }
   };
 
