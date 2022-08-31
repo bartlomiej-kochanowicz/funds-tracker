@@ -106,12 +106,14 @@ export class AuthService {
     }
   }
 
-  async checkEmailExist(dto: EmailDto): Promise<void> {
+  async checkEmail(dto: EmailDto): Promise<{ exist: boolean }> {
     const { email } = dto;
 
     const user = await this.prisma.user.findUnique({ where: { email } });
 
-    if (!user) throw new ForbiddenException('No account for these email.');
+    return {
+      exist: Boolean(user),
+    };
   }
 
   async getAccount(

@@ -11,7 +11,7 @@ export const Signup = () => {
 
   return (
     <FullscreenClear>
-      <Heading textAlign="center">{t('sign_up')}</Heading>
+      <Heading textAlign="center">{t('common.sign_up')}</Heading>
 
       <Spacer space="small" />
 

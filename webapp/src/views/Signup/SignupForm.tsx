@@ -1,9 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Loader, Spacer } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
+import useRequest from 'hooks/useRequest';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import {
+  signinCheckEmail,
+  SigninCheckEmailProps,
+  SigninCheckEmailResponse,
+} from 'services/auth/signinCheckEmail';
 import { validationSchema } from './Signup.schema';
 import { Form } from './Signup.styles';
 
@@ -49,8 +55,21 @@ export const SignupForm = () => {
     errors,
   });
 
-  const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
+  const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
+    signinCheckEmail,
+    {
+      successCallback: () => updateState(actions.CHANGE_TO_PASSWORDS),
+      failureCallback: error =>
+        setError('userEmail', { type: 'custom', message: error.response?.data.message }),
+    },
+  );
+
+  const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
     console.log({ userEmail, userPassword });
+
+    if (compareState(states.nameAndEmail)) {
+      checkEmail({ userEmail });
+    }
   };
 
   return (
@@ -59,7 +78,7 @@ export const SignupForm = () => {
       noValidate
     >
       <Input
-        placeholder={t('name')}
+        placeholder={t('common.name')}
         type="text"
         {...userNameProps}
       />
@@ -67,7 +86,7 @@ export const SignupForm = () => {
       <Spacer />
 
       <Input
-        placeholder={t('email.placeholder')}
+        placeholder={t('common.email')}
         type="text"
         {...userEmailProps}
       />
@@ -82,9 +101,9 @@ export const SignupForm = () => {
       >
         {isSubmitting && <Loader color="white" />}
 
-        {!isSubmitting && compareState(states.nameAndEmail) && t('next')}
+        {!isSubmitting && compareState(states.nameAndEmail) && t('common.next')}
 
-        {!isSubmitting && compareState(states.passwords) && t('sign_up')}
+        {!isSubmitting && compareState(states.passwords) && t('common.sign_up')}
       </Button>
     </Form>
   );

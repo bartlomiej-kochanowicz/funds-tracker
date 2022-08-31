@@ -6,11 +6,11 @@ export interface SigninCheckEmailProps {
 }
 
 export interface SigninCheckEmailResponse {
-  status: string;
+  exist: boolean;
 }
 
 export const signinCheckEmail = retryHTTP(({ userEmail }: SigninCheckEmailProps) =>
-  client.post<SigninCheckEmailResponse>('/auth/local/signin/email', {
+  client.post<SigninCheckEmailResponse>('/auth/check-email', {
     email: userEmail,
   }),
 );

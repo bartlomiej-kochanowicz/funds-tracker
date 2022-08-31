@@ -59,9 +59,16 @@ export const SigninForm = () => {
   const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
     signinCheckEmail,
     {
-      successCallback: () => updateState(actions.CHANGE_TO_PASSWORD),
-      failureCallback: error =>
-        setError('userEmail', { type: 'custom', message: error.response?.data.message }),
+      successCallback: ({ data }) => {
+        if (data.exist) {
+          updateState(actions.CHANGE_TO_PASSWORD);
+        } else {
+          setError('userEmail', {
+            type: 'custom',
+            message: t('page.signin.account.does_not_exist'),
+          });
+        }
+      },
     },
   );
 
@@ -105,7 +112,7 @@ export const SigninForm = () => {
       noValidate
     >
       <Input
-        placeholder={t('email.placeholder')}
+        placeholder={t('common.email')}
         type="email"
         disabled={compareState(states.password)}
         {...userEmailProps}
@@ -116,7 +123,7 @@ export const SigninForm = () => {
           <Spacer />
 
           <Input
-            placeholder={t('password')}
+            placeholder={t('common.password')}
             type="password"
             autoFocus
             {...userPasswordProps}
@@ -134,9 +141,9 @@ export const SigninForm = () => {
       >
         {isSubmitting && <Loader color="white" />}
 
-        {!isSubmitting && compareState(states.email) && t('next')}
+        {!isSubmitting && compareState(states.email) && t('common.next')}
 
-        {!isSubmitting && compareState(states.password) && t('sign_in')}
+        {!isSubmitting && compareState(states.password) && t('common.sign_in')}
       </Button>
     </Form>
   );

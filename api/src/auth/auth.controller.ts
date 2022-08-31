@@ -34,10 +34,10 @@ export class AuthController {
   }
 
   @Public()
-  @Post('local/signin/email')
+  @Post('check-email')
   @HttpCode(HttpStatus.OK)
-  checkEmailExist(@Body() dto: EmailDto): Promise<void> {
-    return this.authService.checkEmailExist(dto);
+  checkEmailExist(@Body() dto: EmailDto): Promise<{ exist: boolean }> {
+    return this.authService.checkEmail(dto);
   }
 
   @Get('account')
