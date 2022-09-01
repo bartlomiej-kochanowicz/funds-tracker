@@ -13,7 +13,7 @@ import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { AuthDto, EmailDto } from './dto';
+import { SigninDto, SignupDto, EmailDto } from './dto';
 
 @Controller('auth')
 export class AuthController {
@@ -22,14 +22,14 @@ export class AuthController {
   @Public()
   @Post('local/signup')
   @HttpCode(HttpStatus.CREATED)
-  signupLocal(@Body() dto: AuthDto, @Res() res: Response): Promise<unknown> {
+  signupLocal(@Body() dto: SignupDto, @Res() res: Response): Promise<unknown> {
     return this.authService.signupLocal(dto, res);
   }
 
   @Public()
   @Post('local/signin')
   @HttpCode(HttpStatus.OK)
-  signinLocal(@Body() dto: AuthDto, @Res() res: Response): Promise<unknown> {
+  signinLocal(@Body() dto: SigninDto, @Res() res: Response): Promise<unknown> {
     return this.authService.signinLocal(dto, res);
   }
 

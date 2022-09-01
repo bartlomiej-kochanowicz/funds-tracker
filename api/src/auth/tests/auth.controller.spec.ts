@@ -3,7 +3,7 @@ import { AuthController } from 'auth/auth.controller';
 import { AuthService } from 'auth/auth.service';
 import { createMock } from '@golevelup/ts-jest';
 import { Response } from 'express';
-import { authStub } from './stubs/auth.stub';
+import { signupStub, signinStub } from './stubs/auth.stub';
 
 const mockResponseObject = () =>
   createMock<Response>({
@@ -35,11 +35,11 @@ describe('AuthController', () => {
       const res = mockResponseObject();
 
       beforeEach(async () => {
-        await authController.signupLocal(authStub(), res);
+        await authController.signupLocal(signupStub(), res);
       });
 
       it('should call signupLocal service', () => {
-        expect(authService.signupLocal).toBeCalledWith(authStub(), res);
+        expect(authService.signupLocal).toBeCalledWith(signupStub(), res);
       });
     });
   });
@@ -49,11 +49,11 @@ describe('AuthController', () => {
       const res = mockResponseObject();
 
       beforeEach(async () => {
-        await authController.signinLocal(authStub(), res);
+        await authController.signinLocal(signinStub(), res);
       });
 
       it('should call signinLocal service', () => {
-        expect(authService.signinLocal).toBeCalledWith(authStub(), res);
+        expect(authService.signinLocal).toBeCalledWith(signinStub(), res);
       });
     });
   });

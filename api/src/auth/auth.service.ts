@@ -6,16 +6,16 @@ import * as bcrypt from 'bcrypt';
 import { AT_SECRET, IS_DEVELOPMENT, RT_SECRET } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
-import { AuthDto, EmailDto } from './dto';
+import { SignupDto, SigninDto, EmailDto } from './dto';
 import { Tokens } from './types';
 
 @Injectable()
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
-  async signupLocal(dto: AuthDto, res: Response): Promise<unknown> {
+  async signupLocal(dto: SignupDto, res: Response): Promise<unknown> {
     try {
-      const { email, password } = dto;
+      const { email, password, name } = dto;
 
       const hashedPwd = await this.hashData(password);
 
@@ -29,6 +29,7 @@ export class AuthService {
         await this.prisma.user.create({
           data: {
             email,
+            name,
             password: hashedPwd,
           },
         });
@@ -58,12 +59,14 @@ export class AuthService {
 
       return res.status(201).send();
     } catch (error) {
+      delete error.response;
+
       return res.json(error);
     }
   }
 
   async signinLocal(
-    dto: AuthDto,
+    dto: SigninDto,
     res: Response,
   ): Promise<Response<Pick<User, 'uuid' | 'email'>>> {
     try {
@@ -102,6 +105,8 @@ export class AuthService {
 
       return res.status(200).send();
     } catch (error) {
+      delete error.response;
+
       return res.json(error);
     }
   }
@@ -199,6 +204,8 @@ export class AuthService {
 
       return res.status(200).send();
     } catch (error) {
+      delete error.response;
+
       return res.json(error);
     }
   }
