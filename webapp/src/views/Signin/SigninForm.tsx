@@ -7,12 +7,8 @@ import { Button, Spacer, Input, Loader } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import useRequest from 'hooks/useRequest';
-import {
-  signinCheckEmail,
-  SigninCheckEmailProps,
-  SigninCheckEmailResponse,
-} from 'services/auth/signinCheckEmail';
-import { signin } from 'services/auth/signin';
+import { checkEmail, CheckEmailProps, CheckEmailResponse } from 'services/auth/checkEmail';
+import { signin, SigninProps } from 'services/auth/signin';
 import { AxiosError } from 'axios';
 import { ROUTES } from 'routes';
 import { showErrorToast } from 'helpers/showToast';
@@ -56,8 +52,8 @@ export const SigninForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.password))),
   });
 
-  const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
-    signinCheckEmail,
+  const { request: checkEmailRequest } = useRequest<CheckEmailProps, CheckEmailResponse>(
+    checkEmail,
     {
       successCallback: ({ data }) => {
         if (data.exist) {
@@ -72,23 +68,26 @@ export const SigninForm = () => {
     },
   );
 
+  const { request: signinlRequest } = useRequest<SigninProps, undefined>(signin, {
+    successCallback: async () => {
+      await dispatch(accountThunk());
+
+      navigate(ROUTES.DASHBOARD);
+    },
+    failureCallback: error => {
+      setError('userPassword', { type: 'custom', message: error.message });
+    },
+  });
+
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.email)) {
-      checkEmail({ userEmail });
+      checkEmailRequest({ userEmail });
     }
 
     if (compareState(states.password)) {
       try {
-        await signin({ userEmail, userPassword });
-
-        await dispatch(accountThunk());
-
-        navigate(ROUTES.DASHBOARD);
-      } catch (err) {
-        const error = err as AxiosError<{ message: string }>;
-
-        setError('userPassword', { type: 'custom', message: error.message });
-
+        await signinlRequest({ userEmail, userPassword });
+      } catch {
         showErrorToast(t('service.unknown_error'));
       }
     }

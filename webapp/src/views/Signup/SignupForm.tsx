@@ -4,11 +4,11 @@ import useRequest from 'hooks/useRequest';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import {
-  signinCheckEmail,
-  SigninCheckEmailProps,
-  SigninCheckEmailResponse,
-} from 'services/auth/signinCheckEmail';
+import { useDispatch } from 'react-redux';
+import { checkEmail, CheckEmailProps, CheckEmailResponse } from 'services/auth/checkEmail';
+import { signup } from 'services/auth/signup';
+import { AppDispatch } from 'store';
+import { accountThunk } from 'store/thunks/account/accountThunk';
 import { NameAndEmail } from './components/NameAndEmail';
 import { Passwords } from './components/Passwords';
 import { validationSchema } from './Signup.schema';
@@ -32,6 +32,8 @@ export const SignupForm = () => {
     SignupStateMachine,
   );
 
+  const dispatch = useDispatch<AppDispatch>();
+
   const defaultValues = {
     userName: '',
     userEmail: '',
@@ -49,8 +51,8 @@ export const SignupForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.passwords))),
   });
 
-  const { request: checkEmail } = useRequest<SigninCheckEmailProps, SigninCheckEmailResponse>(
-    signinCheckEmail,
+  const { request: checkEmailRequest } = useRequest<CheckEmailProps, CheckEmailResponse>(
+    checkEmail,
     {
       successCallback: ({ data }) => {
         if (data.exist) {
@@ -69,12 +71,23 @@ export const SignupForm = () => {
     userPasswordConfirmation,
   }: typeof defaultValues) => {
     if (compareState(states.nameAndEmail)) {
-      checkEmail({ userEmail });
+      checkEmailRequest({ userEmail });
     }
 
     if (compareState(states.passwords)) {
-      // register here
-      console.log('register', { userName, userEmail, userPassword, userPasswordConfirmation });
+      try {
+        await signup({ userName, userEmail, userPassword });
+
+        await dispatch(accountThunk());
+
+        // navigate(ROUTES.DASHBOARD);
+      } catch (err) {
+        const error = err as AxiosError<{ message: string }>;
+
+        setError('userPassword', { type: 'custom', message: error.message });
+
+        showErrorToast(t('service.unknown_error'));
+      }
     }
   };
 

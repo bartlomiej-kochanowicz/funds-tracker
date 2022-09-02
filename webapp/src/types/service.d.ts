@@ -1,4 +1,5 @@
-export type RequestReject = {
+export type ErrorResponse = {
   message: string;
-  statusCode: number;
+  status: number;
+  name: string;
 };

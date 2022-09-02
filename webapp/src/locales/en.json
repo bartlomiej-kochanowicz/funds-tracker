@@ -47,5 +47,6 @@
   "selectors.instruments.stocks": "Stocks",
   "selectors.languages.en": "English",
   "selectors.languages.pl": "Polish",
-  "service.unknown_error": "Unknown error"
+  "service.unknown_error": "Unknown error",
+  "page.signup.name.too_long": "Max 50 characters"
 }

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
-import { RequestReject } from 'types/service';
+import { ErrorResponse } from 'types/service';
 import { useTranslation } from 'react-i18next';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 
@@ -17,7 +17,7 @@ interface UseRequestOptions<Response> {
   successToast?: string | null;
   failureToast?: boolean;
   successCallback?: ((data: AxiosResponse<Response>) => void) | null;
-  failureCallback?: ((error: AxiosError<RequestReject>) => void) | null;
+  failureCallback?: ((error: ErrorResponse) => void) | null;
 }
 
 interface State<Response> {
@@ -25,7 +25,7 @@ interface State<Response> {
   isLoaded: boolean;
   isError: boolean;
   data: AxiosResponse<Response | any> | null;
-  error: AxiosError<RequestReject> | null;
+  error: AxiosError<ErrorResponse> | null;
 }
 
 interface UseRequestReturn<Request, Response> extends State<Response> {
@@ -73,11 +73,11 @@ const useRequest = <Request, Response>(
 
       return data;
     } catch (err) {
-      const error = err as AxiosError<RequestReject>;
+      const error = err as AxiosError<ErrorResponse>;
 
       setState({ ...initialState, isLoaded: true, isError: true, error });
 
-      if (failureCallback) failureCallback(error);
+      if (failureCallback && error.response) failureCallback(error.response.data);
 
       if (failureToast) {
         showErrorToast(error.response?.data.message ?? t('service.unknown_error'));

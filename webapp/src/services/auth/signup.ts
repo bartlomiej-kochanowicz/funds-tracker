@@ -1,14 +1,16 @@
 import { clientPrivate } from 'config/privateClient';
 import { retryHTTP } from 'utils/retryHTTP';
 
-export interface SigninProps {
+export interface SignupProps {
+  userName: string;
   userEmail: string;
   userPassword: string;
 }
 
-export const signin = retryHTTP(
-  ({ userEmail, userPassword }: SigninProps) =>
-    clientPrivate.post('/auth/local/signin', {
+export const signup = retryHTTP(
+  ({ userName, userEmail, userPassword }: SignupProps) =>
+    clientPrivate.post('/auth/local/signup', {
+      name: userName,
       email: userEmail,
       password: userPassword,
     }),
