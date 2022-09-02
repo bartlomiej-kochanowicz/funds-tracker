@@ -107,7 +107,7 @@ export class AuthService {
     } catch (error) {
       delete error.response;
 
-      return res.json(error);
+      return res.status(error.status ?? 500).json(error);
     }
   }
 

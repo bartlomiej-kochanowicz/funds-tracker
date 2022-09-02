@@ -4,7 +4,7 @@ import {
   getModelPortfolioInstruments,
   InstrumentsResponse,
 } from 'services/model-portfolio/instruments';
-import { RequestReject } from 'types/service';
+import { ErrorResponse } from 'types/service';
 import { RejectValue } from 'types/store';
 
 export const instrumentsThunk = createAsyncThunk<InstrumentsResponse, undefined, RejectValue>(
@@ -15,7 +15,7 @@ export const instrumentsThunk = createAsyncThunk<InstrumentsResponse, undefined,
 
       return data;
     } catch (err) {
-      const error = err as AxiosError<RequestReject>;
+      const error = err as AxiosError<ErrorResponse>;
 
       return rejectWithValue({
         message: error.response?.data.message ?? 'service.unknown_error',

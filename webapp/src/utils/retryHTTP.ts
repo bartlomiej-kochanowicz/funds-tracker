@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { RequestReject } from 'types/service';
+import { ErrorResponse } from 'types/service';
 import { delay } from 'utils/delay';
 import { refresh } from 'services/auth/refresh';
 
@@ -15,7 +15,7 @@ const defaultArgs = {
   maxAttempts: 3,
   backoff: () => 0,
   retryIf: err => {
-    const error = err as AxiosError<RequestReject>;
+    const error = err as AxiosError<ErrorResponse>;
 
     if (error.response && statusCodeBlacklist.includes(error.response.status)) return false;
 
@@ -47,7 +47,7 @@ export function retryHTTP<TAsyncFn extends (...args: any[]) => Promise<any>>(
       } catch (e: unknown) {
         lastError = e;
 
-        const error = e as AxiosError<RequestReject>;
+        const error = e as AxiosError<ErrorResponse>;
 
         if (error.response?.status === 401) {
           await refresh();

@@ -36,6 +36,7 @@ export const Passwords = ({ register, errors }: PasswordsProps) => {
       <Input
         placeholder={t('common.password')}
         type="password"
+        autoFocus
         {...userPasswordProps}
       />
 
