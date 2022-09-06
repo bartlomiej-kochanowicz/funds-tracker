@@ -21,11 +21,13 @@ interface FullscreenClearProps {
   children: ReactNode;
 }
 
-export const FullscreenClear = ({ children }: FullscreenClearProps) => (
+export const FullscreenClear = ({ children, ...rest }: FullscreenClearProps) => (
   <Wrapper
     alignItems="center"
     justifyContent="center"
+    {...rest}
   >
+    {console.log(rest)}
     <InnerWrapper alignItems="stretch">{children}</InnerWrapper>
   </Wrapper>
 );
