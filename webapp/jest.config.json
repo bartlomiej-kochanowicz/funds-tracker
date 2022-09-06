@@ -1,6 +1,6 @@
 {
   "roots": ["<rootDir>/src"],
-  "setupFilesAfterEnv": ["<rootDir>/config/tests/setupTests.ts"],
+  "setupFilesAfterEnv": ["<rootDir>/src/config/tests/tests.setup.ts"],
   "transform": {
     "^.+\\.tsx?$": "ts-jest"
   },
