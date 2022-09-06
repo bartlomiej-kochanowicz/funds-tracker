@@ -27,7 +27,6 @@ export const FullscreenClear = ({ children, ...rest }: FullscreenClearProps) => 
     justifyContent="center"
     {...rest}
   >
-    {console.log(rest)}
     <InnerWrapper alignItems="stretch">{children}</InnerWrapper>
   </Wrapper>
 );
