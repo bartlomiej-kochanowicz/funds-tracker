@@ -35,8 +35,9 @@
         "devDependencies": [
           "**/*.spec.*",
           "**/*.test.*",
+          "**/*.po.*",
           "**/*/test-utils.tsx",
-          "**/*/setupTests.ts"
+          "**/*/config/tests/*"
         ],
         "peerDependencies": true
       }
@@ -64,6 +65,7 @@
     "no-plusplus": "off",
     "no-await-in-loop": "off",
     "no-unused-vars": "warn",
-    "@typescript-eslint/no-unused-vars": "warn"
+    "@typescript-eslint/no-unused-vars": "warn",
+    "class-methods-use-this": "off"
   }
 }

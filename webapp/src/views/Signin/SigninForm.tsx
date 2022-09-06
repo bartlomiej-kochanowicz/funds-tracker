@@ -113,6 +113,7 @@ export const SigninForm = () => {
         placeholder={t('common.email')}
         type="email"
         disabled={compareState(states.password)}
+        data-testid="email-input"
         {...userEmailProps}
       />
 
@@ -124,6 +125,7 @@ export const SigninForm = () => {
             placeholder={t('common.password')}
             type="password"
             autoFocus
+            data-testid="password-input"
             {...userPasswordProps}
           />
         </Fragment>
