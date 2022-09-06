@@ -1,12 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Loader, Spacer } from 'components/atoms';
+import { showErrorToast } from 'helpers/showToast';
 import useRequest from 'hooks/useRequest';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from 'routes';
 import { checkEmail, CheckEmailProps, CheckEmailResponse } from 'services/auth/checkEmail';
-import { signup } from 'services/auth/signup';
+import { signup, SignupProps } from 'services/auth/signup';
 import { AppDispatch } from 'store';
 import { accountThunk } from 'store/thunks/account/accountThunk';
 import { NameAndEmail } from './components/NameAndEmail';
@@ -33,6 +36,8 @@ export const SignupForm = () => {
   );
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const navigate = useNavigate();
 
   const defaultValues = {
     userName: '',
@@ -64,28 +69,30 @@ export const SignupForm = () => {
     },
   );
 
-  const onSubmit = async ({
-    userName,
-    userEmail,
-    userPassword,
-    userPasswordConfirmation,
-  }: typeof defaultValues) => {
+  const { request: signuplRequest } = useRequest<SignupProps, undefined>(signup, {
+    successCallback: async () => {
+      await dispatch(accountThunk());
+
+      navigate(ROUTES.INTRODUCTION);
+    },
+    failureCallback: () => {
+      setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
+      setError('userPasswordConfirmation', {
+        type: 'custom',
+        message: '',
+      });
+    },
+  });
+
+  const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.nameAndEmail)) {
       checkEmailRequest({ userEmail });
     }
 
     if (compareState(states.passwords)) {
       try {
-        await signup({ userName, userEmail, userPassword });
-
-        await dispatch(accountThunk());
-
-        // navigate(ROUTES.DASHBOARD);
-      } catch (err) {
-        const error = err as AxiosError<{ message: string }>;
-
-        setError('userPassword', { type: 'custom', message: error.message });
-
+        await signuplRequest({ userName, userEmail, userPassword });
+      } catch {
         showErrorToast(t('service.unknown_error'));
       }
     }

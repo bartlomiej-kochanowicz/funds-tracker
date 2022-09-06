@@ -2,7 +2,10 @@ import { object, ref, string } from 'yup';
 
 export const validationSchema = (isPasswordsStep: boolean) =>
   object().shape({
-    userName: string().max(50, 'page.signup.name.too_long').required('page.signup.name.required'),
+    userName: string()
+      .min(4, 'page.signup.name.too_short')
+      .max(50, 'page.signup.name.too_long')
+      .required('page.signup.name.required'),
     userEmail: string().email('page.signin.email.invalid').required('page.signin.email.required'),
     userPassword: string().when(['userName', 'userEmail'], {
       is: () => isPasswordsStep,
