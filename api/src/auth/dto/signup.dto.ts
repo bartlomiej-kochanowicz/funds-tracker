@@ -7,7 +7,7 @@ export class SignupDto {
 
   @IsNotEmpty()
   @IsString()
-  @MinLength(10, {
+  @MinLength(4, {
     message: 'Name is short',
     context: 'name',
   })
