@@ -2,6 +2,7 @@ import { screen } from 'utils/test-utils';
 import { Signin } from './Signin';
 import { SigninPO } from './Signin.po';
 
+jest.mock('services/auth/checkEmail');
 // jest.mock('services/auth/signin');
 
 describe('Signin tests', () => {
@@ -17,6 +18,7 @@ describe('Signin tests', () => {
 
     // when
     signinPO.setEmail('test@email.xyz');
+    signinPO.submitForm();
 
     screen.debug(undefined, Infinity);
   });

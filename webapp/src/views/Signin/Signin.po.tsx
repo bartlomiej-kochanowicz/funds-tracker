@@ -28,6 +28,10 @@ export class SigninPO {
     fireEvent.change(this.elements.chooseEmailInput, { target: { value } });
   }
 
+  submitForm() {
+    fireEvent.click(this.elements.chooseSubmitButton);
+  }
+
   expectButtonHasProperText(text: string) {
     expect(this.elements.chooseSubmitButton).toHaveTextContent(text);
   }
