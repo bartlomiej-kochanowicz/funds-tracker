@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { fireEvent, getByTestId, render } from 'utils/test-utils';
+import { fireEvent, getByTestId, queryByTestId, render, waitFor } from 'utils/test-utils';
 import { unsafeCast } from 'utils/unsafeCast';
 
 export class SigninPO {
@@ -34,6 +34,13 @@ export class SigninPO {
 
   expectButtonHasProperText(text: string) {
     expect(this.elements.chooseSubmitButton).toHaveTextContent(text);
+  }
+
+  async expectLoaderDisappeared() {
+    await waitFor(() => {
+      // await loader disappears
+      expect(queryByTestId(this.container, 'button-loader')).not.toBeInTheDocument();
+    });
   }
 
   static render(SigninComponent: FC) {
