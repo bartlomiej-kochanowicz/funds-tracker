@@ -138,6 +138,7 @@ export const SigninForm = () => {
         width="auto"
         disabled={isSubmitting}
         type="submit"
+        data-testid="submit-button"
       >
         {isSubmitting && <Loader color="white" />}
 
