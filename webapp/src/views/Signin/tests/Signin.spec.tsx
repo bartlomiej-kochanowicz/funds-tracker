@@ -77,11 +77,11 @@ describe('Signin tests', () => {
     const signinPO = SigninPO.render(Signin, mockNavigate);
 
     // when
-    signinPO.setEmail('test@email.xyz');
     signinPO.setEmail('test');
+    signinPO.submitForm();
 
     // then
-    signinPO.expectTextDisplayed('Invalid email address!');
+    await signinPO.expectTextDisplayed('Invalid email address!');
   });
 
   it('shows error when email does not exist', async () => {
@@ -96,6 +96,6 @@ describe('Signin tests', () => {
 
     // then
     await signinPO.expectLoaderDisappeared();
-    signinPO.expectTextDisplayed('Account does not exist');
+    await signinPO.expectTextDisplayed('Account does not exist');
   });
 });
