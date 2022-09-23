@@ -1,5 +1,6 @@
 import { waitFor } from 'utils/test-utils';
 import { checkEmail } from 'services/auth/checkEmail';
+import { signin } from 'services/auth/signin';
 import { getAccount } from 'services/auth/account';
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
@@ -28,6 +29,20 @@ describe('Signin tests', () => {
       }),
   };
 
+  const fail = {
+    checkEmail: () => (checkEmail as jest.Mock).mockResolvedValue({ data: { exist: false } }),
+    getAccount: () =>
+      (getAccount as jest.Mock).mockResolvedValue({
+        data: { uuid: '', email: '', createdAt: new Date('07-12-2000').toString() },
+      }),
+  };
+
+  afterEach(() => {
+    (checkEmail as jest.Mock).mockReset();
+    (signin as jest.Mock).mockReset();
+    (getAccount as jest.Mock).mockReset();
+  });
+
   it('sign in properly', async () => {
     pass.checkEmail();
     pass.getAccount();
@@ -53,6 +68,34 @@ describe('Signin tests', () => {
     signinPO.setPassword('TestPassword1122');
     signinPO.submitForm();
 
+    // then
     await waitFor(() => signinPO.expectSuccessCallback.toHaveBeenCalled());
+  });
+
+  it('shows error when email is invalid', async () => {
+    // given
+    const signinPO = SigninPO.render(Signin, mockNavigate);
+
+    // when
+    signinPO.setEmail('test@email.xyz');
+    signinPO.setEmail('test');
+
+    // then
+    signinPO.expectTextDisplayed('Invalid email address!');
+  });
+
+  it('shows error when email does not exist', async () => {
+    fail.checkEmail();
+
+    // given
+    const signinPO = SigninPO.render(Signin, mockNavigate);
+
+    // when
+    signinPO.setEmail('test@email.xyz');
+    signinPO.submitForm();
+
+    // then
+    await signinPO.expectLoaderDisappeared();
+    signinPO.expectTextDisplayed('Account does not exist');
   });
 });

@@ -1,6 +1,13 @@
 import { FC } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { fireEvent, getByTestId, queryByTestId, render, waitFor } from 'utils/test-utils';
+import {
+  findByText,
+  fireEvent,
+  getByTestId,
+  queryByTestId,
+  render,
+  waitFor,
+} from 'utils/test-utils';
 import { unsafeCast } from 'utils/unsafeCast';
 
 export class SigninPO {
@@ -53,6 +60,10 @@ export class SigninPO {
 
   get expectSuccessCallback() {
     return expect(this.mockNavigate);
+  }
+
+  async expectTextDisplayed(text: string) {
+    return findByText(this.container, text, { exact: false });
   }
 
   static render(SigninComponent: FC, mockNavigate: jest.Mock) {

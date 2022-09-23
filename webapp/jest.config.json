@@ -12,7 +12,8 @@
     "src/store/**/*.{ts,tsx}",
     "src/styles/**/*.{ts,tsx}",
     "src/utlis/**/*.{ts,tsx}",
-    "src/views/**/*.{ts,tsx}"
+    "src/views/**/*.{ts,tsx}",
+    "!src/**/index.{ts,tsx}"
   ],
   "coveragePathIgnorePatterns": [".stories.ts", ".stories.tsx"],
   "watchPlugins": ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
