@@ -10,7 +10,6 @@ import useRequest from 'hooks/useRequest';
 import { checkEmail, CheckEmailProps, CheckEmailResponse } from 'services/auth/checkEmail';
 import { signin, SigninProps } from 'services/auth/signin';
 import { ROUTES } from 'routes';
-import { showErrorToast } from 'helpers/showToast';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store';
 import { accountThunk } from 'store/thunks/account/accountThunk';
@@ -67,7 +66,7 @@ export const SigninForm = () => {
     },
   );
 
-  const { request: signinlRequest } = useRequest<SigninProps, undefined>(signin, {
+  const { request: signinRequest } = useRequest<SigninProps, undefined>(signin, {
     successCallback: async () => {
       await dispatch(accountThunk());
 
@@ -80,15 +79,11 @@ export const SigninForm = () => {
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.email)) {
-      checkEmailRequest({ userEmail });
+      await checkEmailRequest({ userEmail });
     }
 
     if (compareState(states.password)) {
-      try {
-        await signinlRequest({ userEmail, userPassword });
-      } catch {
-        showErrorToast(t('service.unknown_error'));
-      }
+      await signinRequest({ userEmail, userPassword });
     }
   };
 
@@ -140,7 +135,12 @@ export const SigninForm = () => {
         type="submit"
         data-testid="submit-button"
       >
-        {isSubmitting && <Loader color="white" />}
+        {isSubmitting && (
+          <Loader
+            color="white"
+            data-testid="button-loader"
+          />
+        )}
 
         {!isSubmitting && compareState(states.email) && t('common.next')}
 
