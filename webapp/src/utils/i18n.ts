@@ -18,7 +18,6 @@ i18next
     interpolation: {
       escapeValue: false,
     },
-    saveMissing: true,
     debug: IS_DEVELOPMENT,
     load: 'languageOnly',
   });
