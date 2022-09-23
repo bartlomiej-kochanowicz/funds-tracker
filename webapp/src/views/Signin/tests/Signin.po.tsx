@@ -7,6 +7,7 @@ export class SigninPO {
   private elements: {
     chooseEmailInput: HTMLElement;
     chooseSubmitButton: HTMLElement;
+    choosePasswordInput: HTMLElement;
   };
 
   private elementsByDataID(container: HTMLElement) {
@@ -17,10 +18,13 @@ export class SigninPO {
       get chooseSubmitButton() {
         return getByTestId(container, 'submit-button');
       },
+      get choosePasswordInput() {
+        return getByTestId(container, 'password-input');
+      },
     };
   }
 
-  protected constructor(protected container: HTMLElement) {
+  protected constructor(protected container: HTMLElement, protected mockNavigate: jest.Mock) {
     this.elements = this.elementsByDataID(container);
   }
 
@@ -30,6 +34,10 @@ export class SigninPO {
 
   submitForm() {
     fireEvent.click(this.elements.chooseSubmitButton);
+  }
+
+  setPassword(value: string) {
+    fireEvent.change(this.elements.choosePasswordInput, { target: { value } });
   }
 
   expectButtonHasProperText(text: string) {
@@ -43,13 +51,17 @@ export class SigninPO {
     });
   }
 
-  static render(SigninComponent: FC) {
+  get expectSuccessCallback() {
+    return expect(this.mockNavigate);
+  }
+
+  static render(SigninComponent: FC, mockNavigate: jest.Mock) {
     const { container } = render(
       <MemoryRouter>
         <SigninComponent />
       </MemoryRouter>,
     );
 
-    return new SigninPO(unsafeCast.ElementToHTMLElement(container));
+    return new SigninPO(unsafeCast.ElementToHTMLElement(container), mockNavigate);
   }
 }
