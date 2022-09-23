@@ -31,6 +31,10 @@ describe('Signin tests', () => {
 
   const fail = {
     checkEmail: () => (checkEmail as jest.Mock).mockResolvedValue({ data: { exist: false } }),
+    signin: () =>
+      (signin as jest.Mock).mockRejectedValue({
+        response: { data: { message: 'Wrong password' } },
+      }),
     getAccount: () =>
       (getAccount as jest.Mock).mockResolvedValue({
         data: { uuid: '', email: '', createdAt: new Date('07-12-2000').toString() },
@@ -97,5 +101,35 @@ describe('Signin tests', () => {
     // then
     await signinPO.expectLoaderDisappeared();
     await signinPO.expectTextDisplayed('Account does not exist');
+  });
+
+  it('shows error when password is wrond', async () => {
+    pass.checkEmail();
+    fail.signin();
+
+    // given
+    const signinPO = SigninPO.render(Signin, mockNavigate);
+
+    // when
+    signinPO.setEmail('test@email.xyz');
+
+    // then
+    signinPO.expectButtonHasProperText('Next');
+
+    // when
+    signinPO.setEmail('test@email.xyz');
+    signinPO.submitForm();
+
+    // then
+    await signinPO.expectLoaderDisappeared();
+    signinPO.expectButtonHasProperText('Sign in');
+
+    // when
+    signinPO.setPassword('TestPassword1122');
+    signinPO.submitForm();
+
+    // then
+    await signinPO.expectLoaderDisappeared();
+    await signinPO.expectTextDisplayed('Wrong password');
   });
 });
