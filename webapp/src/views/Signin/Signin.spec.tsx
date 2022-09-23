@@ -1,6 +1,6 @@
 import { screen } from 'utils/test-utils';
 import { Signin } from './Signin';
-import { SigninPO } from './Signis.po';
+import { SigninPO } from './Signin.po';
 
 // jest.mock('services/auth/signin');
 
