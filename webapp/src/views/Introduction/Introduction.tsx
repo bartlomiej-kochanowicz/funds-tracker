@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { IntroductionProvider, useIntroductionContext } from './context';
+import { Welcome } from './components/Welcome';
+import { AddCashAccountsForm } from './components/AddCashAccountsForm';
 
 const AddInstrumentForm = lazy(() =>
   import('./components/AddInstrumentForm').then(({ AddInstrumentForm: component }) => ({
@@ -20,6 +22,10 @@ const IntroductionContent = () => {
   return (
     <FullscreenClear>
       <Suspense>
+        {compareState(states.welcome) && <Welcome />}
+
+        {compareState(states.addCashAccounts) && <AddCashAccountsForm />}
+
         {compareState(states.addInstrument) && <AddInstrumentForm />}
 
         {compareState(states.formSuccess) && <FormSuccess />}
