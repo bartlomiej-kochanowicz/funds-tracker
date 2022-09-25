@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
-import { ErrorResponse } from 'types/service';
+import { ErrorResponse } from 'types/service.type';
 import { useTranslation } from 'react-i18next';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 

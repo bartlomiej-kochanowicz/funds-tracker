@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { showErrorToast } from 'helpers/showToast';
 import { logout } from 'services/auth/logout';
-import { ErrorResponse } from 'types/service';
-import { RejectValue } from 'types/store';
+import { ErrorResponse } from 'types/service.type';
+import { RejectValue } from 'types/store.type';
 
 export const logoutThunk = createAsyncThunk<null, undefined, RejectValue>(
   'logout',

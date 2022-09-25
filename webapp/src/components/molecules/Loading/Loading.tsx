@@ -1,6 +1,6 @@
 import { Loader } from 'components/atoms';
 import { Fragment, ReactNode } from 'react';
-import { ErrorObject } from 'types/store';
+import { ErrorObject } from 'types/store.type';
 
 interface LoadingProps<Props> {
   loading: boolean;

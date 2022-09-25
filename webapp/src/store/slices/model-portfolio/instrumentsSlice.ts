@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { STATUS } from 'constants/store';
 import { InstrumentsResponse } from 'services/model-portfolio/instruments';
 import { instrumentsThunk } from 'store/thunks/model-portfolio/instrumentsThunk';
-import { ErrorObject, RequestState } from 'types/store';
+import { ErrorObject, RequestState } from 'types/store.type';
 
 export const instrumentsSlice = createSlice({
   name: 'model-portfolio/instruments',
