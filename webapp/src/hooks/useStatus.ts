@@ -1,4 +1,4 @@
-import { RequestState } from 'types/store';
+import { RequestState } from 'types/store.type';
 import { STATUS } from 'constants/store';
 
 export const useStatus = (

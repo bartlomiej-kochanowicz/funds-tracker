@@ -4,8 +4,8 @@ import {
   getModelPortfolioInstruments,
   InstrumentsResponse,
 } from 'services/model-portfolio/instruments';
-import { ErrorResponse } from 'types/service';
-import { RejectValue } from 'types/store';
+import { ErrorResponse } from 'types/service.type';
+import { RejectValue } from 'types/store.type';
 
 export const instrumentsThunk = createAsyncThunk<InstrumentsResponse, undefined, RejectValue>(
   'model-portfolio/instruments',

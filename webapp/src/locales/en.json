@@ -49,5 +49,6 @@
   "selectors.languages.pl": "Polish",
   "service.unknown_error": "Unknown error",
   "page.signup.name.too_long": "Max 50 characters",
-  "page.signup.name.too_short": "Min 4 characters"
+  "page.signup.name.too_short": "Min 4 characters",
+  "add.cash.accounts.title": "Add cash accounts"
 }

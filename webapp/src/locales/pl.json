@@ -49,5 +49,6 @@
   "selectors.languages.pl": "Polski",
   "service.unknown_error": "Wystapił nieznany błąd",
   "page.signup.name.too_long": "Maksimum 50 znaków",
-  "page.signup.name.too_short": "Minimum 4 znaki"
+  "page.signup.name.too_short": "Minimum 4 znaki",
+  "add.cash.accounts.title": "Dodaj konta gotówkowe"
 }

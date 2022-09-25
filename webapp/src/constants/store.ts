@@ -1,5 +1,5 @@
-import { RequestState } from 'types/store';
-import { Dict } from 'types/mapped-types';
+import { RequestState } from 'types/store.type';
+import { Dict } from 'types/mapped-types.type';
 
 export const STATUS: Dict<RequestState> = {
   idle: 'idle',

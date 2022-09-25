@@ -3,7 +3,7 @@ import { STATUS } from 'constants/store';
 import { getLocalAccount, removeLocalAccount, setLocalAccount } from 'helpers/localAccount';
 import { logoutThunk } from 'store/thunks/account/logoutThunk';
 import { accountThunk } from 'store/thunks/account/accountThunk';
-import { ErrorObject, RequestState } from 'types/store';
+import { ErrorObject, RequestState } from 'types/store.type';
 import { AccountResponse } from 'services/auth/account';
 
 const localAccount = getLocalAccount();

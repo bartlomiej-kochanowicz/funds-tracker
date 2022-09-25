@@ -10,16 +10,23 @@ import {
   Spreader,
   Checkbox,
   Loader,
+  Text,
 } from 'components/atoms';
 import { Column, Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import instruments from 'constants/selectors/instruments';
-import { useAddModelPortfolioContext } from 'views/Introduction/context';
+import { useIntroductionContext } from 'views/Introduction/context';
 import { useSelect } from 'hooks/useSelect';
 import { useInput } from 'hooks/useInput';
-import { DescribeText } from 'views/Introduction/Introduction.styles';
 import { validationSchema } from './AddInstrumentForm.schema';
+
+type DefaultValues = {
+  instrumentName: string;
+  instrumentType: string | null;
+  instrumentRebalancing: boolean;
+  instrumentPercentage: number | undefined;
+};
 
 export const AddInstrumentForm = () => {
   const { t } = useTranslation();
@@ -29,23 +36,16 @@ export const AddInstrumentForm = () => {
     ...rest,
   }));
 
-  const { updateState, actions } = useAddModelPortfolioContext();
+  const { updateState, actions } = useIntroductionContext();
 
-  const onSubmit = async (values: typeof defaultValues) => {
+  const onSubmit = async (values: DefaultValues) => {
     console.log(values);
 
     await new Promise(resolve => {
       setTimeout(resolve, 3000);
     });
 
-    updateState(actions.CHANGE_ADD_FIRST_SUCCESS);
-  };
-
-  type DefaultValues = {
-    instrumentName: string;
-    instrumentType: string | null;
-    instrumentRebalancing: boolean;
-    instrumentPercentage: number | undefined;
+    updateState(actions.CHANGE_TO_FORM_SUCCESS);
   };
 
   const defaultValues = {
@@ -95,13 +95,13 @@ export const AddInstrumentForm = () => {
 
       <Spacer space="small" />
 
-      <DescribeText
+      <Text
         fontSize="0.875"
         fontColor="darkGray"
         textAlign="center"
       >
         {t('add.instrument.description')}
-      </DescribeText>
+      </Text>
 
       <Spacer space="large" />
 

@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { ErrorResponse } from 'types/service';
+import { ErrorResponse } from 'types/service.type';
 import { delay } from 'utils/delay';
 import { refresh } from 'services/auth/refresh';
 

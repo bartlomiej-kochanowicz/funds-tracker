@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { AccountResponse, getAccount } from 'services/auth/account';
-import { ErrorResponse } from 'types/service';
-import { RejectValue } from 'types/store';
+import { ErrorResponse } from 'types/service.type';
+import { RejectValue } from 'types/store.type';
 
 export const accountThunk = createAsyncThunk<AccountResponse, undefined, RejectValue>(
   'account',
