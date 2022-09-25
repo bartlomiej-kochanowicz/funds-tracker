@@ -1,11 +1,21 @@
 import { Input } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
+import { DeepMap, FieldArrayWithId, FieldError, UseFormRegister } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { DefaultValues } from 'views/Introduction/components/AddCashAccountsForm/AddCashAccountsForm.type';
 
-export const Field = ({ register, errors }) => {
+interface FieldProps extends FieldArrayWithId<DefaultValues, 'accounts', 'id'> {
+  register: UseFormRegister<DefaultValues>;
+  errors: Partial<DeepMap<DefaultValues, FieldError>>;
+  index: number;
+}
+
+export const Field = ({ register, errors, index }: FieldProps) => {
+  const { t } = useTranslation();
+
   const nameInputProps = useInput<DefaultValues>({
     register,
-    name: 'instrumentName',
+    name: `accounts.${index}.name`,
     errors,
   });
 

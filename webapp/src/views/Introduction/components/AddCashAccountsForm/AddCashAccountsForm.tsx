@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Heading, Spacer, Text } from 'components/atoms';
-import { Currencies } from 'constants/selectors/currencies';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
@@ -62,9 +61,11 @@ export const AddCashAccountsForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        {fields.map(props => (
+        {fields.map((field, index) => (
           <Field
-            {...props}
+            {...field}
+            key={field.id}
+            index={index}
             register={register}
             errors={errors}
           />
