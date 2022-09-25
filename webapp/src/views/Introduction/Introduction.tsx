@@ -1,8 +1,18 @@
 import { lazy, Suspense } from 'react';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { IntroductionProvider, useIntroductionContext } from './context';
-import { Welcome } from './components/Welcome';
-import { AddCashAccountsForm } from './components/AddCashAccountsForm';
+
+const Welcome = lazy(() =>
+  import('./components/Welcome').then(({ Welcome: component }) => ({
+    default: component,
+  })),
+);
+
+const AddCashAccountsForm = lazy(() =>
+  import('./components/AddCashAccountsForm').then(({ AddCashAccountsForm: component }) => ({
+    default: component,
+  })),
+);
 
 const AddInstrumentForm = lazy(() =>
   import('./components/AddInstrumentForm').then(({ AddInstrumentForm: component }) => ({
