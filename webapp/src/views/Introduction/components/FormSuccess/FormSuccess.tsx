@@ -5,7 +5,7 @@ import { DescribeText } from 'views/Introduction/Introduction.styles';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes';
 
-export const AddFirstInstrumentSuccess = () => {
+export const FormSuccess = () => {
   const { t } = useTranslation();
 
   return (

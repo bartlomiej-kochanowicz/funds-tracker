@@ -1,42 +1,45 @@
-import { createContext, FC, useState, useContext } from 'react';
-import { ValueOf } from 'types/mapped-types';
+import { createContext, FC, useContext } from 'react';
+import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 
 const AddModelPortfolioContext = createContext<AddModelPortfolioContextType | null>(null);
 
-type AddModelPortfolioContextType = ReturnType<typeof useProviderAddModelPortfolio>;
+type AddModelPortfolioContextType = ReturnType<typeof useIntroduction>;
 
-const states = {
-  addFirstInstrument: 'addFirstInstrument',
-  addFirstSuccess: 'addFirstSuccess',
-};
+type IntroductionStates = 'welcome' | 'addCashAccounts' | 'addInstrument' | 'formSuccess';
 
-const actions = {
-  CHANGE_ADD_FIRST_SUCCESS: 'CHANGE_ADD_FIRST_SUCCESS',
-};
+type IntroductionActions =
+  | 'CHANGE_TO_ADD_CASH_ACCOUNTS'
+  | 'CHANGE_TO_ADD_INSTRUMENT'
+  | 'CHANGE_TO_FORM_SUCCESS';
 
-type StateType = ValueOf<typeof states>;
-type ActionType = ValueOf<typeof actions>;
-
-const useProviderAddModelPortfolio = () => {
-  const [currentState, setCurrentState] = useState<StateType>(
-    states.addFirstInstrument as StateType,
-  );
-
-  const transitions = {
-    [states.addFirstInstrument]: {
-      [actions.CHANGE_ADD_FIRST_SUCCESS]: states.addFirstSuccess,
+const IntroductionStateMachine = new StateMachine<IntroductionStates, IntroductionActions>(
+  'welcome',
+  {
+    welcome: 'welcome',
+    addCashAccounts: 'addCashAccounts',
+    addInstrument: 'addInstrument',
+    formSuccess: 'formSuccess',
+  },
+  {
+    CHANGE_TO_ADD_CASH_ACCOUNTS: 'CHANGE_TO_ADD_CASH_ACCOUNTS',
+    CHANGE_TO_ADD_INSTRUMENT: 'CHANGE_TO_ADD_INSTRUMENT',
+    CHANGE_TO_FORM_SUCCESS: 'CHANGE_TO_FORM_SUCCESS',
+  },
+  {
+    welcome: { CHANGE_TO_ADD_CASH_ACCOUNTS: 'addCashAccounts' },
+    addCashAccounts: { CHANGE_TO_ADD_INSTRUMENT: 'addInstrument' },
+    addInstrument: {
+      CHANGE_TO_FORM_SUCCESS: 'formSuccess',
+      CHANGE_TO_ADD_CASH_ACCOUNTS: 'addCashAccounts',
     },
-  };
+  },
+);
 
-  const transition = (state: StateType, action: ActionType): StateType => {
-    const nextState = transitions[state][action] as StateType;
-
-    return nextState || state;
-  };
-
-  const updateState = (action: ActionType) => setCurrentState(state => transition(state, action));
-
-  const compareState = (state: StateType) => currentState === state;
+const useIntroduction = () => {
+  const { states, actions, updateState, compareState } = useStateMachine<
+    IntroductionStates,
+    IntroductionActions
+  >(IntroductionStateMachine);
 
   return {
     states,
@@ -50,15 +53,15 @@ type ProviderProps = {
   children: React.ReactNode;
 };
 
-export const AddModelPortfolioProvider: FC<ProviderProps> = ({ children }) => {
-  const value = useProviderAddModelPortfolio();
+export const IntroductionProvider: FC<ProviderProps> = ({ children }) => {
+  const value = useIntroduction();
 
   return (
     <AddModelPortfolioContext.Provider value={value}>{children}</AddModelPortfolioContext.Provider>
   );
 };
 
-export const useAddModelPortfolioContext = () => {
+export const useIntroductionContext = () => {
   const value = useContext(AddModelPortfolioContext);
 
   if (!value) {

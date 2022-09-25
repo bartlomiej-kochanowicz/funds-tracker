@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { FullscreenClear } from 'layouts/FullscreenClear';
-import { AddModelPortfolioProvider, useAddModelPortfolioContext } from './context';
+import { IntroductionProvider, useIntroductionContext } from './context';
 
 const AddInstrumentForm = lazy(() =>
   import('./components/AddInstrumentForm').then(({ AddInstrumentForm: component }) => ({
@@ -8,32 +8,30 @@ const AddInstrumentForm = lazy(() =>
   })),
 );
 
-const AddFirstInstrumentSuccess = lazy(() =>
-  import('./components/AddFirstInstrumentSuccess').then(
-    ({ AddFirstInstrumentSuccess: component }) => ({
-      default: component,
-    }),
-  ),
+const FormSuccess = lazy(() =>
+  import('./components/FormSuccess').then(({ FormSuccess: component }) => ({
+    default: component,
+  })),
 );
 
 const IntroductionContent = () => {
-  const { states, compareState } = useAddModelPortfolioContext();
+  const { states, compareState } = useIntroductionContext();
 
   return (
     <FullscreenClear>
       <Suspense>
-        {compareState(states.addFirstInstrument) && <AddInstrumentForm />}
+        {compareState(states.addInstrument) && <AddInstrumentForm />}
 
-        {compareState(states.addFirstSuccess) && <AddFirstInstrumentSuccess />}
+        {compareState(states.formSuccess) && <FormSuccess />}
       </Suspense>
     </FullscreenClear>
   );
 };
 
 export const Introduction = () => (
-  <AddModelPortfolioProvider>
+  <IntroductionProvider>
     <IntroductionContent />
-  </AddModelPortfolioProvider>
+  </IntroductionProvider>
 );
 
 Introduction.displayName = 'Introduction';
