@@ -1,11 +1,11 @@
-import { DeepMap, FieldError, FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { DeepRequired, FieldErrorsImpl, FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { get } from 'utils/get';
 
 interface UseInputProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;
   name: Path<Fields>;
-  errors: Partial<DeepMap<Fields, FieldError>>;
+  errors: FieldErrorsImpl<DeepRequired<Fields>>;
 }
 
 export const useInput = <Fields extends FieldValues>({
