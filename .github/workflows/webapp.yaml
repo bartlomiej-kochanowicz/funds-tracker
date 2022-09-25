@@ -3,7 +3,6 @@ on:
   pull_request:
     branches:
       - master
-      - development
 jobs:
   static-analytics:
     runs-on: ubuntu-20.04
@@ -17,6 +16,7 @@ jobs:
         uses: pnpm/action-setup@v2.0.1
         with:
           version: 7.x
-      - run: pnpm install:webapp
-      - run: pnpm test:webapp
-      - run: pnpm lint:webapp
+      - run: pnpm install:all
+      - run: pnpm tsc
+      - run: pnpm lint
+      - run: pnpm test
