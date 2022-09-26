@@ -15,16 +15,21 @@ type Item = {
 
 interface SelectProps {
   options: Item[];
-  placeholder?: string | null;
-  defaultValue?: string | null;
+  placeholder?: string;
+  defaultValue?: string;
   onChange?: (value: string) => void;
   onBlur?: (() => void) | ChangeHandler;
-  customLabel?: ((value: Item) => ReactNode) | null;
-  error?: string | null;
+  customLabel?: (value: Item) => ReactNode;
+  error?: string;
+  width?: 'auto' | '100%' | `${number}px`;
+  flexGrow?: number;
 }
 
 export const Select = forwardRef<HTMLButtonElement, SelectProps>(
-  ({ options, defaultValue, placeholder, onChange, onBlur, customLabel, error }, ref) => {
+  (
+    { options, defaultValue, placeholder, onChange, onBlur, customLabel, error, width, flexGrow },
+    ref,
+  ) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const getDefaultSelected = (): Item | null =>
@@ -61,7 +66,10 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
 
     return (
       <Fragment>
-        <Wrapper>
+        <Wrapper
+          width={width}
+          flexGrow={flexGrow}
+        >
           <StyledButton
             type="button"
             onClick={handleOpen}
@@ -121,10 +129,12 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
 Select.displayName = 'Select';
 
 Select.defaultProps = {
-  placeholder: null,
-  defaultValue: null,
+  placeholder: undefined,
+  defaultValue: undefined,
   onChange: () => {},
   onBlur: () => {},
-  customLabel: null,
-  error: null,
+  customLabel: undefined,
+  error: undefined,
+  width: 'auto',
+  flexGrow: undefined,
 };

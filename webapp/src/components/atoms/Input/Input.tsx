@@ -6,30 +6,39 @@ interface InputProps
     HTMLProps<HTMLInputElement>,
     'onChange' | 'id' | 'name' | 'placeholder' | 'min' | 'max' | 'disabled' | 'autoFocus'
   > {
-  error?: string | null;
+  error?: string;
   type?: 'text' | 'number' | 'password' | 'email';
-  unit?: 'percentage' | null;
+  unit?: 'percentage';
+  width?: 'auto' | '100%' | `${number}px`;
+  flexGrow?: number;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({ error, unit, ...rest }, ref) => (
-  <Wrapper>
-    <StyledInput
-      error={Boolean(error)}
-      ref={ref}
-      hasUnit={Boolean(unit)}
-      {...rest}
-    />
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ error, unit, width, flexGrow, ...rest }, ref) => (
+    <Wrapper
+      width={width}
+      flexGrow={flexGrow}
+    >
+      <StyledInput
+        error={Boolean(error)}
+        ref={ref}
+        hasUnit={Boolean(unit)}
+        {...rest}
+      />
 
-    {error && <Error>{error}</Error>}
+      {error && <Error>{error}</Error>}
 
-    {unit && <Unit>%</Unit>}
-  </Wrapper>
-));
+      {unit && <Unit>%</Unit>}
+    </Wrapper>
+  ),
+);
 
 Input.displayName = 'Input';
 
 Input.defaultProps = {
-  error: null,
+  error: undefined,
   type: 'text',
-  unit: null,
+  unit: undefined,
+  width: 'auto',
+  flexGrow: undefined,
 };
