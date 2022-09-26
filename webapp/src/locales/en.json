@@ -50,5 +50,10 @@
   "service.unknown_error": "Unknown error",
   "page.signup.name.too_long": "Max 50 characters",
   "page.signup.name.too_short": "Min 4 characters",
-  "add.cash.accounts.title": "Add cash accounts"
+  "add.cash.accounts.title": "Add cash accounts",
+  "currency.CHF": "Swiss franc (CHF)",
+  "currency.EUR": "Euro (EUR)",
+  "currency.GBP": "British pound (GBP)",
+  "currency.USD": "United States dollar (USD)",
+  "currency.PLN": "Polish zloty (PLN)"
 }

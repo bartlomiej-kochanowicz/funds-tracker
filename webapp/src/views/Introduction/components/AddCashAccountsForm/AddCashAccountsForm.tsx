@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Heading, Spacer, Text } from 'components/atoms';
+import { Button, Heading, Spacer, Text } from 'components/atoms';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Column } from 'simple-flexbox';
+import { Column, Row } from 'simple-flexbox';
 import { DefaultValues } from './AddCashAccountsForm.type';
 
 import { Field } from './components/Field';
@@ -61,15 +62,31 @@ export const AddCashAccountsForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        {fields.map((field, index) => (
-          <Field
-            {...field}
-            key={field.id}
-            index={index}
-            register={register}
-            errors={errors}
-          />
-        ))}
+        <Column>
+          {fields.map((field, index) => (
+            <Field
+              {...field}
+              key={field.id}
+              index={index}
+              register={register}
+              errors={errors}
+            />
+          ))}
+
+          <Spacer space="large" />
+
+          <Row justifyContent="flex-end">
+            <Button
+              size="large"
+              type="submit"
+              color="black"
+              disabled={isSubmitting}
+              width="100%"
+            >
+              Accept & Next
+            </Button>
+          </Row>
+        </Column>
       </form>
     </Column>
   );

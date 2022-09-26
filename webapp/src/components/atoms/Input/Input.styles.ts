@@ -40,9 +40,17 @@ export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div.withConfig({
+  shouldForwardProp: prop => !['width', 'flexGrow'].includes(prop),
+})<{ width?: 'auto' | '100%' | `${number}px`; flexGrow?: number }>`
   position: relative;
-  width: auto;
+  width: ${({ width }) => width};
+
+  ${({ flexGrow }) =>
+    flexGrow &&
+    css`
+      flex-grow: ${flexGrow};
+    `}
 `;
 
 export const Error = styled.span`

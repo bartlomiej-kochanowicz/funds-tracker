@@ -17,6 +17,6 @@ export const useInput = <Fields extends FieldValues>({
 
   return {
     ...register(name),
-    error: t(get(errors, name)?.message) || null,
+    error: t(get(errors, name)?.message) || undefined,
   };
 };

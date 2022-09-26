@@ -10,6 +10,7 @@ export const StyledButton = styled.button<
   align-items: center;
   cursor: pointer;
   width: 100%;
+  min-height: 44px;
 
   ${({ theme, error }) => css`
     border-radius: ${theme.radius.secondary};
@@ -39,9 +40,17 @@ export const StyledContent = styled.div<{
   color: ${({ theme, isSelected }) => (isSelected ? 'inline' : theme.colors.gray)};
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div.withConfig({
+  shouldForwardProp: prop => !['width', 'flexGrow'].includes(prop),
+})<{ width?: 'auto' | '100%' | `${number}px`; flexGrow?: number }>`
   position: relative;
-  width: auto;
+  width: ${({ width }) => width};
+
+  ${({ flexGrow }) =>
+    flexGrow &&
+    css`
+      flex-grow: ${flexGrow};
+    `}
 `;
 
 export const Error = styled.span`
