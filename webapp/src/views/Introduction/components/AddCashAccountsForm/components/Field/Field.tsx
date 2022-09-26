@@ -1,25 +1,35 @@
-import { Input, Select, Spreader } from 'components/atoms';
+import { Button, Input, Select, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useInput } from 'hooks/useInput';
+import { useSelect } from 'hooks/useSelect';
 import { useMemo } from 'react';
-import { DeepRequired, FieldArrayWithId, FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
+import { DeepRequired, FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { FaPlus } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 import { DefaultValues } from 'views/Introduction/components/AddCashAccountsForm/AddCashAccountsForm.type';
 
-interface FieldProps extends FieldArrayWithId<DefaultValues, 'accounts', 'id'> {
+interface FieldProps {
   register: UseFormRegister<DefaultValues>;
   errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
   index: number;
+  defaultValues: DefaultValues;
 }
 
-export const Field = ({ register, errors, index }: FieldProps) => {
+export const Field = ({ register, errors, index, defaultValues }: FieldProps) => {
   const { t } = useTranslation();
 
   const nameInputProps = useInput<DefaultValues>({
     register,
     name: `accounts.${index}.name`,
     errors,
+  });
+
+  const currencySelectProps = useSelect<DefaultValues>({
+    register,
+    name: `accounts.${index}.currency`,
+    errors,
+    defaultValues,
   });
 
   const options = useMemo(
@@ -44,10 +54,20 @@ export const Field = ({ register, errors, index }: FieldProps) => {
       <Spreader spread="tiny" />
 
       <Select
-        width="110px"
+        width="130px"
         options={options}
         customLabel={customLabel}
+        {...currencySelectProps}
       />
+
+      <Spreader spread="tiny" />
+
+      <Button
+        borderRadius="secondary"
+        color="black"
+      >
+        <FaPlus />
+      </Button>
     </Row>
   );
 };

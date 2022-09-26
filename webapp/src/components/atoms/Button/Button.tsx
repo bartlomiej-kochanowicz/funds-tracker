@@ -12,6 +12,7 @@ type CommonProps = {
   color?: ButtonColors;
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   fontWeight?: keyof DefaultTheme['font']['weight'];
+  borderRadius?: keyof DefaultTheme['radius'];
   to?: string;
 };
 
@@ -32,7 +33,9 @@ type ButtonProps = CommonProps &
       } & ReactRouterLinkProps)
   );
 
-export const Button = styled.div<ButtonProps>`
+export const Button = styled.div.withConfig({
+  shouldForwardProp: prop => !['width', 'fontWeight', 'borderRadius', 'color'].includes(prop),
+})<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +44,14 @@ export const Button = styled.div<ButtonProps>`
   transition: 0.2s all;
   text-decoration: none;
 
-  ${({ theme, size = 'medium', color = 'blue', width = 'fit-content', fontWeight = '400' }) =>
+  ${({
+    theme,
+    size = 'medium',
+    color = 'blue',
+    width = 'fit-content',
+    fontWeight = '400',
+    borderRadius = 'primary',
+  }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
       background-color: ${theme.button.color[color].background};
@@ -49,7 +59,7 @@ export const Button = styled.div<ButtonProps>`
       box-shadow: 7px 6px 28px 1px ${transparentize(theme.button.color[color].background, 0.76)};
       padding: ${theme.padding[size]};
       font-weight: ${fontWeight};
-      border-radius: ${theme.radius.primary};
+      border-radius: ${theme.radius[borderRadius]};
       width: ${width};
 
       &:hover {
@@ -78,6 +88,7 @@ Button.defaultProps = {
   color: 'blue',
   width: 'fit-content',
   fontWeight: '500',
+  borderRadius: 'primary',
   to: undefined,
   as: 'button',
 };

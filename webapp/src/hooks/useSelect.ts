@@ -1,6 +1,6 @@
 import {
-  DeepMap,
-  FieldError,
+  DeepRequired,
+  FieldErrorsImpl,
   FieldValues,
   Path,
   PathValue,
@@ -13,7 +13,7 @@ interface UseSelectProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;
   name: Path<Fields>;
   defaultValues: Fields;
-  errors: Partial<DeepMap<Fields, FieldError>>;
+  errors: FieldErrorsImpl<DeepRequired<Fields>>;
 }
 
 export const useSelect = <Fields extends FieldValues>({
