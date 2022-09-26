@@ -21,7 +21,7 @@ interface SelectProps {
   onBlur?: (() => void) | ChangeHandler;
   customLabel?: (value: Item) => ReactNode;
   error?: string;
-  width?: 'auto' | '100%' | `${number}px`;
+  width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   flexGrow?: number;
 }
 

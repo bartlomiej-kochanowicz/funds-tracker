@@ -10,7 +10,7 @@ type CommonProps = {
   children: ReactNode;
   size?: Size;
   color?: ButtonColors;
-  width?: 'fit-content' | 'auto' | '100%';
+  width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   fontWeight?: keyof DefaultTheme['font']['weight'];
   to?: string;
 };

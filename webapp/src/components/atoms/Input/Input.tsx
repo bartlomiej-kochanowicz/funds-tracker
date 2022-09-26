@@ -9,7 +9,7 @@ interface InputProps
   error?: string;
   type?: 'text' | 'number' | 'password' | 'email';
   unit?: 'percentage';
-  width?: 'auto' | '100%' | `${number}px`;
+  width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   flexGrow?: number;
 }
 

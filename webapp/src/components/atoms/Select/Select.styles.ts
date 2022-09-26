@@ -42,7 +42,7 @@ export const StyledContent = styled.div<{
 
 export const Wrapper = styled.div.withConfig({
   shouldForwardProp: prop => !['width', 'flexGrow'].includes(prop),
-})<{ width?: 'auto' | '100%' | `${number}px`; flexGrow?: number }>`
+})<{ width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`; flexGrow?: number }>`
   position: relative;
   width: ${({ width }) => width};
 
