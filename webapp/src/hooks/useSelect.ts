@@ -1,15 +1,22 @@
-import { DeepMap, FieldError, Path, PathValue, UseFormRegister } from 'react-hook-form';
+import {
+  DeepMap,
+  FieldError,
+  FieldValues,
+  Path,
+  PathValue,
+  UseFormRegister,
+} from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { get } from 'utils/get';
 
-interface UseSelectProps<Fields> {
+interface UseSelectProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;
   name: Path<Fields>;
   defaultValues: Fields;
   errors: Partial<DeepMap<Fields, FieldError>>;
 }
 
-export const useSelect = <Fields>({
+export const useSelect = <Fields extends FieldValues>({
   register,
   name,
   defaultValues,
@@ -33,7 +40,7 @@ export const useSelect = <Fields>({
   return {
     onChange,
     defaultValue: get(defaultValues, name) as keyof Fields,
-    error: t(get(errors, name)?.message) || null,
+    error: t(get(errors, name)?.message) || undefined,
     ref,
     onBlur,
   };
