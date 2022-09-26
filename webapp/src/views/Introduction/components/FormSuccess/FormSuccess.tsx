@@ -1,7 +1,6 @@
 import { Column } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
-import { Button, Heading, Spacer, ThumbUp } from 'components/atoms';
-import { DescribeText } from 'views/Introduction/Introduction.styles';
+import { Button, Heading, Spacer, Text, ThumbUp } from 'components/atoms';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes';
 
@@ -18,13 +17,13 @@ export const FormSuccess = () => {
 
       <Spacer space="small" />
 
-      <DescribeText
+      <Text
         fontSize="0.875"
         fontColor="darkGray"
         textAlign="center"
       >
         {t('add.instrument.success.description')}
-      </DescribeText>
+      </Text>
 
       <Spacer space="large" />
 
