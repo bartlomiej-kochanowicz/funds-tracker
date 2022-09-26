@@ -20,7 +20,12 @@ export const AddCashAccountsForm = () => {
   };
 
   const defaultValues = {
-    accounts: [{ name: 'test', currency: 'PLN' as const }],
+    accounts: [
+      { name: 'test 0', currency: 'USD' as const },
+      { name: 'test 1', currency: 'PLN' as const },
+      { name: 'test 3', currency: 'PLN' as const },
+      { name: 'test 4', currency: 'PLN' as const },
+    ],
   };
 
   const {
@@ -34,7 +39,7 @@ export const AddCashAccountsForm = () => {
     defaultValues,
     // resolver: yupResolver(validationSchema),
   });
-  const { fields, append, prepend, remove, swap, move, insert, replace } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: 'accounts',
     rules: {
@@ -63,15 +68,18 @@ export const AddCashAccountsForm = () => {
         noValidate
       >
         <Column>
-          {fields.map((field, index) => (
-            <Field
-              {...field}
-              key={field.id}
-              index={index}
-              register={register}
-              errors={errors}
-            />
+          {fields.map(field => (
+            <div>
+              {field.name}, {field.currency}
+            </div>
           ))}
+
+          <Field
+            index={fields.length + 1}
+            register={register}
+            errors={errors}
+            defaultValues={defaultValues}
+          />
 
           <Spacer space="large" />
 
