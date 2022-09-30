@@ -48,7 +48,14 @@ export const Root: FC = () => {
   const views = useRoutes([
     {
       path: ROUTES.HOME,
-      element: <Home />,
+      element: (
+        <ProtectedRoute
+          to={ROUTES.DASHBOARD}
+          reverse
+        >
+          <Home />
+        </ProtectedRoute>
+      ),
     },
     {
       path: ROUTES.SIGNIN,
