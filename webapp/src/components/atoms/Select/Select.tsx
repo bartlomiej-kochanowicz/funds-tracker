@@ -47,7 +47,6 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
-      overflowContainer: false,
       placement: 'bottom-center',
       auto: true,
       possiblePlacements: ['bottom-center', 'top-center'],

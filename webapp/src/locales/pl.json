@@ -50,10 +50,13 @@
   "service.unknown_error": "Wystapił nieznany błąd",
   "page.signup.name.too_long": "Maksimum 50 znaków",
   "page.signup.name.too_short": "Minimum 4 znaki",
-  "add.cash.accounts.title": "Dodaj konta gotówkowe",
   "currency.CHF": "Frank szwajcarski (CHF)",
   "currency.EUR": "Euro (EUR)",
   "currency.GBP": "Funt brytyjski (GBP)",
   "currency.USD": "Dolar amerykański (USD)",
-  "currency.PLN": "Polski złoty (PLN)"
+  "currency.PLN": "Polski złoty (PLN)",
+  "add.cash.accounts.title": "Dodaj konta gotówkowe",
+  "add.cash.accounts.description": "add.cash.accounts.description.pl",
+  "add.cash.accounts.empty": "Nie dodano kont. Dodaj nowe, klikając przycisk poniżej.",
+  "add.cash.accounts.button.add": "Dodaj konto"
 }
