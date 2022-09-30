@@ -1,11 +1,11 @@
-import { Button, Input, Select, Spreader } from 'components/atoms';
+import { Fragment, useMemo } from 'react';
+import { Button, Input, Select, Spacer, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useInput } from 'hooks/useInput';
 import { useSelect } from 'hooks/useSelect';
-import { useMemo } from 'react';
 import { DeepRequired, FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { FaPlus } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 import { DefaultValues } from 'views/Introduction/components/AddCashAccountsForm/AddCashAccountsForm.type';
 
@@ -44,30 +44,34 @@ export const Field = ({ register, errors, index, defaultValues }: FieldProps) =>
   const customLabel = ({ value }: { value: string }) => value;
 
   return (
-    <Row>
-      <Input
-        placeholder={t('add.instrument.name.placeholder')}
-        flexGrow={1}
-        {...nameInputProps}
-      />
+    <Fragment>
+      <Row>
+        <Input
+          placeholder={t('add.instrument.name.placeholder')}
+          flexGrow={1}
+          {...nameInputProps}
+        />
 
-      <Spreader spread="tiny" />
+        <Spreader spread="tiny" />
 
-      <Select
-        width="130px"
-        options={options}
-        customLabel={customLabel}
-        {...currencySelectProps}
-      />
+        <Select
+          width="130px"
+          options={options}
+          customLabel={customLabel}
+          {...currencySelectProps}
+        />
 
-      <Spreader spread="tiny" />
+        <Spreader spread="tiny" />
 
-      <Button
-        borderRadius="secondary"
-        color="black"
-      >
-        <FaPlus />
-      </Button>
-    </Row>
+        <Button
+          borderRadius="secondary"
+          color="black"
+        >
+          <FaTrash />
+        </Button>
+      </Row>
+
+      <Spacer space="tiny" />
+    </Fragment>
   );
 };

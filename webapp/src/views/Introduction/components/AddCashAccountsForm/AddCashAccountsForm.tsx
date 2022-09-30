@@ -68,18 +68,15 @@ export const AddCashAccountsForm = () => {
         noValidate
       >
         <Column>
-          {fields.map(field => (
-            <div>
-              {field.name}, {field.currency}
-            </div>
+          {fields.map((field, index) => (
+            <Field
+              key={field.id}
+              index={index}
+              register={register}
+              errors={errors}
+              defaultValues={defaultValues}
+            />
           ))}
-
-          <Field
-            index={fields.length + 1}
-            register={register}
-            errors={errors}
-            defaultValues={defaultValues}
-          />
 
           <Spacer space="large" />
 
