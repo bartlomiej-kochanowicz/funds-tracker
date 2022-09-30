@@ -58,5 +58,7 @@
   "add.cash.accounts.title": "Dodaj konta gotówkowe",
   "add.cash.accounts.description": "Moższ tu podać wszystkie twoje konta 'gotówkowe' t.j konto na, które otrzymujesz wypłatę, nieoprocentowane konto oszczędnościowe lub realną gotówkę. <bold>Maksymalnie 10 kont, po 2 znaki długości każdy.</bold>",
   "add.cash.accounts.empty": "Nie dodano kont. Dodaj nowe, klikając przycisk poniżej.",
-  "add.cash.accounts.button.add": "Dodaj konto"
+  "add.cash.accounts.button.add": "Dodaj konto",
+  "common.welcome": "Witaj",
+  "add.cash.accounts.submit": "Potwierdz i przejdź do następnego kroku"
 }

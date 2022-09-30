@@ -58,5 +58,7 @@
   "add.cash.accounts.title": "Add cash accounts",
   "add.cash.accounts.description": "Here you can provide all your cash accounts e.g. daily account you receive your salary, interest-free savings account or real cash. <bold>Maximum 10 accounts, min. 2 characters length each.</bold>",
   "add.cash.accounts.empty": "No accounts added. Add new by clicking button below.",
-  "add.cash.accounts.button.add": "Add account"
+  "add.cash.accounts.button.add": "Add account",
+  "common.welcome": "Welcome",
+  "add.cash.accounts.submit": "Confirm and go to next step"
 }

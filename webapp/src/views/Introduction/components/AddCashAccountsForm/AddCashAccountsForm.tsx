@@ -1,10 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Heading, Spacer, Spreader, Text } from 'components/atoms';
+import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
+import { useIntroductionContext } from 'views/Introduction/context';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
 import { DefaultValues } from './AddCashAccountsForm.type';
@@ -14,12 +15,16 @@ import { Field } from './components/Field';
 export const AddCashAccountsForm = () => {
   const { t } = useTranslation();
 
+  const { updateState, actions } = useIntroductionContext();
+
   const onSubmit = async (values: DefaultValues) => {
     console.log(values);
 
     await new Promise(resolve => {
       setTimeout(resolve, 3000);
     });
+
+    updateState(actions.CHANGE_TO_ADD_INSTRUMENT);
   };
 
   const defaultValues = {
@@ -119,7 +124,7 @@ export const AddCashAccountsForm = () => {
             disabled={isSubmitting || !isValid || !isDirty}
             width="100%"
           >
-            Accept & Next
+            {isSubmitting ? <Loader color="white" /> : t('add.cash.accounts.submit')}
           </Button>
         </Column>
       </form>

@@ -154,11 +154,17 @@ export const AddInstrumentForm = () => {
               disabled={isSubmitting}
               width="100%"
             >
-              {isSubmitting ? <Loader color="white" /> : <FaPlus />}
+              {isSubmitting ? (
+                <Loader color="white" />
+              ) : (
+                <Fragment>
+                  <FaPlus />
 
-              <Spreader spread="tiny" />
+                  <Spreader spread="tiny" />
 
-              {t('add.instrument.button.submit.first')}
+                  {t('add.instrument.button.submit.first')}
+                </Fragment>
+              )}
             </Button>
           </Row>
         </Column>
