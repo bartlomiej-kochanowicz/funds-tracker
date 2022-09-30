@@ -91,4 +91,5 @@ Button.defaultProps = {
   borderRadius: 'primary',
   to: undefined,
   as: 'button',
+  type: 'button',
 };

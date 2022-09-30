@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Heading, Spacer, Text } from 'components/atoms';
+import { Button, Heading, Spacer, Spreader, Text } from 'components/atoms';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { FaPlus } from 'react-icons/fa';
 import { Column, Row } from 'simple-flexbox';
+import { validationSchema } from './AddCashAccountsForm.schema';
+import { FieldsWrapper } from './AddCashAccountsForm.styles';
 import { DefaultValues } from './AddCashAccountsForm.type';
-
+import { EmptyList } from './components/EmptyList';
 import { Field } from './components/Field';
 
 export const AddCashAccountsForm = () => {
@@ -20,32 +22,33 @@ export const AddCashAccountsForm = () => {
   };
 
   const defaultValues = {
-    accounts: [
-      { name: 'test 0', currency: 'USD' as const },
-      { name: 'test 1', currency: 'PLN' as const },
-      { name: 'test 3', currency: 'PLN' as const },
-      { name: 'test 4', currency: 'PLN' as const },
-    ],
+    accounts: [],
   };
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid, isDirty },
     control,
-    watch,
-    resetField,
+    getValues,
   } = useForm<DefaultValues>({
     defaultValues,
-    // resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
+    mode: 'onBlur',
   });
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'accounts',
-    rules: {
-      minLength: 1,
-    },
   });
+
+  const values = getValues();
+
+  const handleAppend = () =>
+    append({
+      name: '',
+      currency: 'USD',
+    });
 
   return (
     <Column>
@@ -58,7 +61,7 @@ export const AddCashAccountsForm = () => {
         fontColor="darkGray"
         textAlign="center"
       >
-        {t('add.instrument.description')}
+        {t('add.cash.accounts.description')}
       </Text>
 
       <Spacer space="large" />
@@ -68,16 +71,31 @@ export const AddCashAccountsForm = () => {
         noValidate
       >
         <Column>
-          {fields.map((field, index) => (
-            <Field
-              key={field.id}
-              index={index}
-              register={register}
-              errors={errors}
-              defaultValues={defaultValues}
-              remove={remove}
-            />
-          ))}
+          {fields.length === 0 ? <EmptyList handleAppend={handleAppend} /> : null}
+
+          <FieldsWrapper>
+            {fields.map((field, index) => (
+              <Field
+                key={field.id}
+                index={index}
+                register={register}
+                errors={errors}
+                values={values}
+                remove={remove}
+              />
+            ))}
+          </FieldsWrapper>
+
+          <Spacer space="tiny" />
+
+          {fields.length > 0 ? (
+            <Button
+              color="black"
+              onClick={handleAppend}
+            >
+              {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />
+            </Button>
+          ) : null}
 
           <Spacer space="large" />
 
@@ -86,7 +104,7 @@ export const AddCashAccountsForm = () => {
               size="large"
               type="submit"
               color="black"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValid || !isDirty}
               width="100%"
             >
               Accept & Next

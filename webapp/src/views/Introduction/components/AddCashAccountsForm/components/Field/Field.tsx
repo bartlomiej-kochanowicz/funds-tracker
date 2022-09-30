@@ -1,5 +1,5 @@
-import { Fragment, useMemo } from 'react';
-import { Button, Input, Select, Spacer, Spreader } from 'components/atoms';
+import { useMemo } from 'react';
+import { Button, Input, Select, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useInput } from 'hooks/useInput';
 import { useSelect } from 'hooks/useSelect';
@@ -18,11 +18,11 @@ interface FieldProps {
   register: UseFormRegister<DefaultValues>;
   errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
   index: number;
-  defaultValues: DefaultValues;
+  values: DefaultValues;
   remove: UseFieldArrayRemove;
 }
 
-export const Field = ({ register, errors, index, defaultValues, remove }: FieldProps) => {
+export const Field = ({ register, errors, index, values, remove }: FieldProps) => {
   const { t } = useTranslation();
 
   const nameInputProps = useInput<DefaultValues>({
@@ -35,7 +35,7 @@ export const Field = ({ register, errors, index, defaultValues, remove }: FieldP
     register,
     name: `accounts.${index}.currency`,
     errors,
-    defaultValues,
+    defaultValues: values,
   });
 
   const options = useMemo(
@@ -52,35 +52,31 @@ export const Field = ({ register, errors, index, defaultValues, remove }: FieldP
   const handleRemoveField = () => remove(index);
 
   return (
-    <Fragment>
-      <Row>
-        <Input
-          placeholder={t('add.instrument.name.placeholder')}
-          flexGrow={1}
-          {...nameInputProps}
-        />
+    <Row>
+      <Input
+        placeholder={t('common.name')}
+        flexGrow={1}
+        {...nameInputProps}
+      />
 
-        <Spreader spread="tiny" />
+      <Spreader spread="tiny" />
 
-        <Select
-          width="130px"
-          options={options}
-          customLabel={customLabel}
-          {...currencySelectProps}
-        />
+      <Select
+        width="130px"
+        options={options}
+        customLabel={customLabel}
+        {...currencySelectProps}
+      />
 
-        <Spreader spread="tiny" />
+      <Spreader spread="tiny" />
 
-        <Button
-          borderRadius="secondary"
-          color="black"
-          onClick={handleRemoveField}
-        >
-          <FaTrash />
-        </Button>
-      </Row>
-
-      <Spacer space="tiny" />
-    </Fragment>
+      <Button
+        borderRadius="secondary"
+        color="black"
+        onClick={handleRemoveField}
+      >
+        <FaTrash />
+      </Button>
+    </Row>
   );
 };
