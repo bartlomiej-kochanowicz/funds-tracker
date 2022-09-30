@@ -80,7 +80,7 @@ const useRequest = <Request, Response>(
       if (failureCallback && error.response) failureCallback(error.response.data);
 
       if (failureToast) {
-        showErrorToast(error.response?.data.message ?? t('service.unknown_error'));
+        showErrorToast(error.response?.data?.message ?? t('service.unknown_error'));
       }
 
       return defaultData;
