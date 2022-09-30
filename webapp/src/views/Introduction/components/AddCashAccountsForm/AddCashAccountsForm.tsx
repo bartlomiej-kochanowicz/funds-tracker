@@ -75,6 +75,7 @@ export const AddCashAccountsForm = () => {
               register={register}
               errors={errors}
               defaultValues={defaultValues}
+              remove={remove}
             />
           ))}
 
