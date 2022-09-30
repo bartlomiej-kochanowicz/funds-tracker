@@ -3,7 +3,12 @@ import { Button, Input, Select, Spacer, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useInput } from 'hooks/useInput';
 import { useSelect } from 'hooks/useSelect';
-import { DeepRequired, FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
+import {
+  DeepRequired,
+  FieldErrorsImpl,
+  UseFieldArrayRemove,
+  UseFormRegister,
+} from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
@@ -14,9 +19,10 @@ interface FieldProps {
   errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
   index: number;
   defaultValues: DefaultValues;
+  remove: UseFieldArrayRemove;
 }
 
-export const Field = ({ register, errors, index, defaultValues }: FieldProps) => {
+export const Field = ({ register, errors, index, defaultValues, remove }: FieldProps) => {
   const { t } = useTranslation();
 
   const nameInputProps = useInput<DefaultValues>({
@@ -43,6 +49,8 @@ export const Field = ({ register, errors, index, defaultValues }: FieldProps) =>
 
   const customLabel = ({ value }: { value: string }) => value;
 
+  const handleRemoveField = () => remove(index);
+
   return (
     <Fragment>
       <Row>
@@ -66,6 +74,7 @@ export const Field = ({ register, errors, index, defaultValues }: FieldProps) =>
         <Button
           borderRadius="secondary"
           color="black"
+          onClick={handleRemoveField}
         >
           <FaTrash />
         </Button>
