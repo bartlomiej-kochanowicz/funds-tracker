@@ -1,9 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Heading, Spacer, Spreader, Text } from 'components/atoms';
+import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { Column, Row } from 'simple-flexbox';
+import { Column } from 'simple-flexbox';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
 import { DefaultValues } from './AddCashAccountsForm.type';
@@ -61,7 +62,19 @@ export const AddCashAccountsForm = () => {
         fontColor="darkGray"
         textAlign="center"
       >
-        {t('add.cash.accounts.description')}
+        <Trans
+          i18nKey="add.cash.accounts.description"
+          components={{
+            bold: (
+              <Text
+                fontSize="0.875"
+                fontColor="darkGray"
+                textAlign="center"
+                fontWeight="700"
+              />
+            ),
+          }}
+        />
       </Text>
 
       <Spacer space="large" />
@@ -88,7 +101,7 @@ export const AddCashAccountsForm = () => {
 
           <Spacer space="tiny" />
 
-          {fields.length > 0 ? (
+          {fields.length > 0 && fields.length < MAX_CASH_ACCOUNTS ? (
             <Button
               color="black"
               onClick={handleAppend}
@@ -99,17 +112,15 @@ export const AddCashAccountsForm = () => {
 
           <Spacer space="large" />
 
-          <Row justifyContent="flex-end">
-            <Button
-              size="large"
-              type="submit"
-              color="black"
-              disabled={isSubmitting || !isValid || !isDirty}
-              width="100%"
-            >
-              Accept & Next
-            </Button>
-          </Row>
+          <Button
+            size="large"
+            type="submit"
+            color="black"
+            disabled={isSubmitting || !isValid || !isDirty}
+            width="100%"
+          >
+            Accept & Next
+          </Button>
         </Column>
       </form>
     </Column>

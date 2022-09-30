@@ -14,6 +14,7 @@ type CommonProps = {
   fontWeight?: keyof DefaultTheme['font']['weight'];
   borderRadius?: keyof DefaultTheme['radius'];
   to?: string;
+  boxShadow?: 'default' | 'none';
 };
 
 type NativeButtonProps = Omit<
@@ -34,7 +35,8 @@ type ButtonProps = CommonProps &
   );
 
 export const Button = styled.div.withConfig({
-  shouldForwardProp: prop => !['width', 'fontWeight', 'borderRadius', 'color'].includes(prop),
+  shouldForwardProp: prop =>
+    !['width', 'fontWeight', 'borderRadius', 'color', 'boxShadow'].includes(prop),
 })<ButtonProps>`
   display: flex;
   align-items: center;
@@ -51,16 +53,28 @@ export const Button = styled.div.withConfig({
     width = 'fit-content',
     fontWeight = '400',
     borderRadius = 'primary',
+    boxShadow = 'default',
   }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
       background-color: ${theme.button.color[color].background};
       color: ${theme.button.color[color].font};
-      box-shadow: 7px 6px 28px 1px ${transparentize(theme.button.color[color].background, 0.76)};
       padding: ${theme.padding[size]};
       font-weight: ${fontWeight};
       border-radius: ${theme.radius[borderRadius]};
       width: ${width};
+      box-shadow: ${() => {
+        switch (boxShadow) {
+          case 'default':
+            return css`7px 6px 28px 1px ${transparentize(
+              theme.button.color[color].background,
+              0.76,
+            )}`;
+          case 'none':
+          default:
+            return 'none';
+        }
+      }};
 
       &:hover {
         cursor: pointer;
@@ -92,4 +106,5 @@ Button.defaultProps = {
   to: undefined,
   as: 'button',
   type: 'button',
+  boxShadow: 'default',
 };
