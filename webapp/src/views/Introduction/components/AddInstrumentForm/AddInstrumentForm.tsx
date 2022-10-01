@@ -1,4 +1,5 @@
 import { ChangeEvent, Fragment } from 'react';
+import { motion } from 'framer-motion';
 import { FaPlus } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import {
@@ -90,85 +91,91 @@ export const AddInstrumentForm = () => {
   });
 
   return (
-    <Fragment>
-      <Heading textAlign="center">{t('add.instrument.title')}</Heading>
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0 }}
+    >
+      <Column>
+        <Heading textAlign="center">{t('add.instrument.title')}</Heading>
 
-      <Spacer space="small" />
+        <Spacer space="small" />
 
-      <Text
-        fontSize="0.875"
-        fontColor="darkGray"
-        textAlign="center"
-      >
-        {t('add.instrument.description')}
-      </Text>
+        <Text
+          fontSize="0.875"
+          fontColor="darkGray"
+          textAlign="center"
+        >
+          {t('add.instrument.description')}
+        </Text>
 
-      <Spacer space="large" />
+        <Spacer space="large" />
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <Column>
-          <Input
-            placeholder={t('add.instrument.name.placeholder')}
-            {...instrumentNameInputProps}
-          />
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
+          <Column>
+            <Input
+              placeholder={t('add.instrument.name.placeholder')}
+              {...instrumentNameInputProps}
+            />
 
-          <Spacer />
+            <Spacer />
 
-          <Select
-            options={options}
-            placeholder={t('add.instrument.type.placeholder')}
-            {...instrumentTypeSelectProps}
-          />
+            <Select
+              options={options}
+              placeholder={t('add.instrument.type.placeholder')}
+              {...instrumentTypeSelectProps}
+            />
 
-          <Spacer />
+            <Spacer />
 
-          <Checkbox
-            label={t('add.instrument.take_into_rebalance.label')}
-            {...register('instrumentRebalancing', {
-              onChange: handleChangeRebalancing,
-            })}
-          />
+            <Checkbox
+              label={t('add.instrument.take_into_rebalance.label')}
+              {...register('instrumentRebalancing', {
+                onChange: handleChangeRebalancing,
+              })}
+            />
 
-          <Spacer />
+            <Spacer />
 
-          <Input
-            placeholder={t('add.instrument.percentage.placeholder')}
-            type="number"
-            unit="percentage"
-            min="0"
-            max="100"
-            disabled={!watch('instrumentRebalancing')}
-            {...instrumentPercentageInputProps}
-          />
+            <Input
+              placeholder={t('add.instrument.percentage.placeholder')}
+              type="number"
+              unit="percentage"
+              min="0"
+              max="100"
+              disabled={!watch('instrumentRebalancing')}
+              {...instrumentPercentageInputProps}
+            />
 
-          <Spacer space="large" />
+            <Spacer space="large" />
 
-          <Row justifyContent="flex-end">
-            <Button
-              size="large"
-              type="submit"
-              color="black"
-              disabled={isSubmitting}
-              width="100%"
-            >
-              {isSubmitting ? (
-                <Loader color="white" />
-              ) : (
-                <Fragment>
-                  <FaPlus />
+            <Row justifyContent="flex-end">
+              <Button
+                size="large"
+                type="submit"
+                color="black"
+                disabled={isSubmitting}
+                width="100%"
+              >
+                {isSubmitting ? (
+                  <Loader color="white" />
+                ) : (
+                  <Fragment>
+                    <FaPlus />
 
-                  <Spreader spread="tiny" />
+                    <Spreader spread="tiny" />
 
-                  {t('add.instrument.button.submit.first')}
-                </Fragment>
-              )}
-            </Button>
-          </Row>
-        </Column>
-      </form>
-    </Fragment>
+                    {t('add.instrument.button.submit.first')}
+                  </Fragment>
+                )}
+              </Button>
+            </Row>
+          </Column>
+        </form>
+      </Column>
+    </motion.div>
   );
 };

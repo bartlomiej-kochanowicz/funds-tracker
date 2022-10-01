@@ -1,5 +1,6 @@
-import { Button, Heading, Text } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+import { Button, Heading, Spacer, Text } from 'components/atoms';
 import { Column } from 'simple-flexbox';
 import { useIntroductionContext } from 'views/Introduction/context';
 
@@ -10,14 +11,32 @@ export const Welcome = () => {
 
   const handleNextStep = () => updateState(actions.CHANGE_TO_ADD_CASH_ACCOUNTS);
 
+  // dodać cofanie, animacje przejścia, tłumaczenia na stronie głownej
+
   return (
-    <Column alignItems="center">
-      <Heading textAlign="center">{t('common.welcome')}</Heading>
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0 }}
+    >
+      <Column alignItems="center">
+        <Heading textAlign="center">{t('common.welcome')}</Heading>
 
-      <Text>No description idea for now</Text>
+        <Spacer space="small" />
 
-      <Button onClick={handleNextStep}>next step</Button>
-    </Column>
+        <Text
+          fontSize="0.875"
+          fontColor="darkGray"
+          textAlign="center"
+        >
+          {t('page.welcome.description')}
+        </Text>
+
+        <Spacer space="large" />
+
+        <Button onClick={handleNextStep}>{t('page.welcome.button')}</Button>
+      </Column>
+    </motion.div>
   );
 };
 

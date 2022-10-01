@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { FullscreenClear } from 'layouts/FullscreenClear';
+import { AnimatePresence } from 'framer-motion';
 import { IntroductionProvider, useIntroductionContext } from './context';
 
 const Welcome = lazy(() =>
@@ -32,13 +33,15 @@ const IntroductionContent = () => {
   return (
     <FullscreenClear>
       <Suspense>
-        {compareState(states.welcome) && <Welcome />}
+        <AnimatePresence>
+          {compareState(states.welcome) && <Welcome />}
 
-        {compareState(states.addCashAccounts) && <AddCashAccountsForm />}
+          {compareState(states.addCashAccounts) && <AddCashAccountsForm />}
 
-        {compareState(states.addInstrument) && <AddInstrumentForm />}
+          {compareState(states.addInstrument) && <AddInstrumentForm />}
 
-        {compareState(states.formSuccess) && <FormSuccess />}
+          {compareState(states.formSuccess) && <FormSuccess />}
+        </AnimatePresence>
       </Suspense>
     </FullscreenClear>
   );

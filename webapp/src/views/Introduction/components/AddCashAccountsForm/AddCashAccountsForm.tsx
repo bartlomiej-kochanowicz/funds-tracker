@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
@@ -57,78 +58,84 @@ export const AddCashAccountsForm = () => {
     });
 
   return (
-    <Column>
-      <Heading textAlign="center">{t('add.cash.accounts.title')}</Heading>
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0 }}
+    >
+      <Column>
+        <Heading textAlign="center">{t('add.cash.accounts.title')}</Heading>
 
-      <Spacer space="small" />
+        <Spacer space="small" />
 
-      <Text
-        fontSize="0.875"
-        fontColor="darkGray"
-        textAlign="center"
-      >
-        <Trans
-          i18nKey="add.cash.accounts.description"
-          components={{
-            bold: (
-              <Text
-                fontSize="0.875"
-                fontColor="darkGray"
-                textAlign="center"
-                fontWeight="700"
-              />
-            ),
-          }}
-        />
-      </Text>
+        <Text
+          fontSize="0.875"
+          fontColor="darkGray"
+          textAlign="center"
+        >
+          <Trans
+            i18nKey="add.cash.accounts.description"
+            components={{
+              bold: (
+                <Text
+                  fontSize="0.875"
+                  fontColor="darkGray"
+                  textAlign="center"
+                  fontWeight="700"
+                />
+              ),
+            }}
+          />
+        </Text>
 
-      <Spacer space="large" />
+        <Spacer space="large" />
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <Column>
-          {fields.length === 0 ? <EmptyList handleAppend={handleAppend} /> : null}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
+          <Column>
+            {fields.length === 0 ? <EmptyList handleAppend={handleAppend} /> : null}
 
-          <FieldsWrapper>
-            {fields.map((field, index) => (
-              <Field
-                key={field.id}
-                index={index}
-                register={register}
-                errors={errors}
-                values={values}
-                remove={remove}
-              />
-            ))}
-          </FieldsWrapper>
+            <FieldsWrapper>
+              {fields.map((field, index) => (
+                <Field
+                  key={field.id}
+                  index={index}
+                  register={register}
+                  errors={errors}
+                  values={values}
+                  remove={remove}
+                />
+              ))}
+            </FieldsWrapper>
 
-          <Spacer space="tiny" />
+            <Spacer space="tiny" />
 
-          {fields.length > 0 && fields.length < MAX_CASH_ACCOUNTS ? (
+            {fields.length > 0 && fields.length < MAX_CASH_ACCOUNTS ? (
+              <Button
+                color="black"
+                onClick={handleAppend}
+              >
+                {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />
+              </Button>
+            ) : null}
+
+            <Spacer space="large" />
+
             <Button
+              size="large"
+              type="submit"
               color="black"
-              onClick={handleAppend}
+              disabled={isSubmitting || !isValid || !isDirty}
+              width="100%"
             >
-              {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />
+              {isSubmitting ? <Loader color="white" /> : t('add.cash.accounts.submit')}
             </Button>
-          ) : null}
-
-          <Spacer space="large" />
-
-          <Button
-            size="large"
-            type="submit"
-            color="black"
-            disabled={isSubmitting || !isValid || !isDirty}
-            width="100%"
-          >
-            {isSubmitting ? <Loader color="white" /> : t('add.cash.accounts.submit')}
-          </Button>
-        </Column>
-      </form>
-    </Column>
+          </Column>
+        </form>
+      </Column>
+    </motion.div>
   );
 };
 
