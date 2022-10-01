@@ -60,5 +60,6 @@
   "add.cash.accounts.empty": "Nie dodano kont. Dodaj nowe, klikając przycisk poniżej.",
   "add.cash.accounts.button.add": "Dodaj konto",
   "common.welcome": "Witaj",
-  "add.cash.accounts.submit": "Potwierdz i przejdź do następnego kroku"
+  "add.cash.accounts.submit": "Potwierdz i przejdź do następnego kroku",
+  "page.welcome.description": ""
 }
