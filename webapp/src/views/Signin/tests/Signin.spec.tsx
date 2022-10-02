@@ -1,6 +1,6 @@
 import { waitFor } from 'utils/test-utils';
 import { checkEmail } from 'services/auth/checkEmail';
-import { signin } from 'services/auth/signin';
+import { signin } from 'services/auth/signinaaa';
 import { getAccount } from 'services/auth/account';
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
@@ -9,7 +9,7 @@ jest.mock('services/auth/checkEmail', () => ({
   checkEmail: jest.fn(),
 }));
 
-jest.mock('services/auth/signin', () => ({ signin: jest.fn() }));
+jest.mock('services/auth/signinaaa', () => ({ signin: jest.fn() }));
 
 jest.mock('services/auth/account', () => ({ getAccount: jest.fn() }));
 
