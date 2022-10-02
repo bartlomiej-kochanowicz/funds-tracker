@@ -1,7 +1,7 @@
 {
   "add.instrument.button.submit.first": "Add first instrument",
   "add.instrument.description": "Here you can provide the financial instruments you want to be exposed to or just your passives(like money on banking account / saving accounts).",
-  "add.instrument.name.placeholder": "Name oy your instrument",
+  "add.instrument.name.placeholder": "Name of your instrument",
   "add.instrument.name.required": "Enter instrument name",
   "add.instrument.percentage.error.range.max": "max. 100%",
   "add.instrument.percentage.error.range.min": "min. 1%",
@@ -21,7 +21,7 @@
   "common.sign_in": "Sign in",
   "common.sign_up": "Sign up",
   "page.signin.account.does_not_exist": "Account does not exist",
-  "page.signin.description": "Welcome back! You can continue to manage your finances",
+  "page.signin.description": "Welcome back! You can continue to manage your investments",
   "page.signin.dont_have_account": "Don't have an account? <signup>Signup here</signup>",
   "page.signin.email.invalid": "Invalid email address!",
   "page.signin.email.required": "Email required",
@@ -61,5 +61,5 @@
   "add.cash.accounts.button.add": "Add account",
   "common.welcome": "Welcome",
   "add.cash.accounts.submit": "Confirm and go to next step",
-  "page.welcome.description": "page.welcome.description.en"
+  "page.welcome.description": "Manage your investments from single place simply and purely thanks to Funds Tracker"
 }
