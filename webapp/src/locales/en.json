@@ -8,7 +8,7 @@
   "add.instrument.percentage.placeholder": "Percentage of your portfolio",
   "add.instrument.percentage.required": "Enter percentage",
   "add.instrument.success.description": "You have just added to your portfolio first finance instrument. Keep going, add the next one!",
-  "add.instrument.success.start_manage": "Go to portfolio manager",
+  "add.instrument.success.dashboard": "Go to dashboard",
   "add.instrument.success.title": "Great!",
   "add.instrument.take_into_rebalance.label": "Want to take into account in rebalance report",
   "add.instrument.title": "Create your model portfolio",

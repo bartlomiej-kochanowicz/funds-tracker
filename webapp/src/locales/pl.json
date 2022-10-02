@@ -8,7 +8,7 @@
   "add.instrument.percentage.placeholder": "Procent Twojego portfolio",
   "add.instrument.percentage.required": "Procent wymagany",
   "add.instrument.success.description": "Właśnie dodałeś do portfela pierwszy instrument finansowy. Tak trzymaj, dodaj kolejny instrument do portfolio!",
-  "add.instrument.success.start_manage": "Menadżer portfolio modelowego",
+  "add.instrument.success.dashboard": "Przejdź do aplikacji",
   "add.instrument.success.title": "Świetnie!",
   "add.instrument.take_into_rebalance.label": "Uwzględnij w rebalansingu",
   "add.instrument.title": "Stwóż swoje modelowe portfolio",

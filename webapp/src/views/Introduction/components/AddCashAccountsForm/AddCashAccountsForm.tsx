@@ -41,7 +41,7 @@ export const AddCashAccountsForm = () => {
   } = useForm<DefaultValues>({
     defaultValues,
     resolver: yupResolver(validationSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const { fields, append, remove } = useFieldArray({

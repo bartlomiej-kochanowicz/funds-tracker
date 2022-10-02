@@ -32,9 +32,9 @@ export const FormSuccess = () => {
         width="100%"
         size="large"
         as={Link}
-        to={ROUTES.MODEL_PORTFOLIO}
+        to={ROUTES.DASHBOARD}
       >
-        {t('add.instrument.success.start_manage')}
+        {t('add.instrument.success.dashboard')}
       </Button>
     </Column>
   );
