@@ -5,7 +5,7 @@ const AddModelPortfolioContext = createContext<AddModelPortfolioContextType | nu
 
 type AddModelPortfolioContextType = ReturnType<typeof useIntroduction>;
 
-type IntroductionStates = 'welcome' | 'addCashAccounts' | 'addInstrument' | 'formSuccess';
+type IntroductionStates = 'addCashAccounts' | 'addInstrument' | 'formSuccess';
 
 type IntroductionActions =
   | 'CHANGE_TO_ADD_CASH_ACCOUNTS'
@@ -13,9 +13,8 @@ type IntroductionActions =
   | 'CHANGE_TO_FORM_SUCCESS';
 
 const IntroductionStateMachine = new StateMachine<IntroductionStates, IntroductionActions>(
-  'welcome',
+  'addCashAccounts',
   {
-    welcome: 'welcome',
     addCashAccounts: 'addCashAccounts',
     addInstrument: 'addInstrument',
     formSuccess: 'formSuccess',
@@ -26,7 +25,6 @@ const IntroductionStateMachine = new StateMachine<IntroductionStates, Introducti
     CHANGE_TO_FORM_SUCCESS: 'CHANGE_TO_FORM_SUCCESS',
   },
   {
-    welcome: { CHANGE_TO_ADD_CASH_ACCOUNTS: 'addCashAccounts' },
     addCashAccounts: { CHANGE_TO_ADD_INSTRUMENT: 'addInstrument' },
     addInstrument: {
       CHANGE_TO_FORM_SUCCESS: 'formSuccess',

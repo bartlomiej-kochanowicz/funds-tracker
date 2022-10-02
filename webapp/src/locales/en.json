@@ -59,6 +59,7 @@
   "add.cash.accounts.description": "Here you can provide all your cash accounts e.g. daily account you receive your salary, interest-free savings account or real cash. <bold>Maximum 10 accounts, min. 2 characters length each.</bold>",
   "add.cash.accounts.empty": "No accounts added. Add new by clicking button below.",
   "add.cash.accounts.button.add": "Add account",
+  "common.input.name.placeholder": "Name",
   "common.welcome": "Welcome",
   "add.cash.accounts.submit": "Confirm and go to next step",
   "page.welcome.description": "Manage your investments from single place simply and purely thanks to Funds Tracker"
