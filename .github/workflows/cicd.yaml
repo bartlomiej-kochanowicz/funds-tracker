@@ -17,6 +17,5 @@ jobs:
         with:
           version: 7.x
       - run: pnpm install:all
-      - run: pnpm tsc
       - run: pnpm lint
       - run: pnpm test
