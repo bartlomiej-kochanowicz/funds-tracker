@@ -35,7 +35,7 @@
   "page.signup.password.confirm": "Potwierdź hasło",
   "page.signup.password.confirm.required": "Podaj hasło potwierdzające",
   "page.signup.password.do_not_match": "Hasła muszą być identyczne",
-  "page.welcome.button": "Zacznij teraz",
+  "page.welcome.button": "Rozpocznij teraz",
   "page.welcome.release_info": "Już we wrześniu 2022...",
   "selectors.instruments.bonds": "Obligacje",
   "selectors.instruments.cash": "Gotówka",
@@ -60,6 +60,6 @@
   "add.cash.accounts.empty": "Nie dodano kont. Dodaj nowe, klikając przycisk poniżej.",
   "add.cash.accounts.button.add": "Dodaj konto",
   "common.welcome": "Witaj",
-  "add.cash.accounts.submit": "Potwierdz i przejdź do następnego kroku",
-  "page.welcome.description": ""
+  "add.cash.accounts.submit": "Następny krok",
+  "page.welcome.description": "Kontroluj swoje inwestycje z jednego miejsca, prosto i czytelnie dzięki Funds Tracker."
 }
