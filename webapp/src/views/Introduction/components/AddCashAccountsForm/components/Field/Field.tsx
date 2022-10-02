@@ -54,7 +54,7 @@ export const Field = ({ register, errors, index, values, remove }: FieldProps) =
   return (
     <Row>
       <Input
-        placeholder={t('common.name')}
+        placeholder={t('common.input.name.placeholder')}
         flexGrow={1}
         {...nameInputProps}
       />

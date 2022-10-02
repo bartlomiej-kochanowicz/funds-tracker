@@ -1,13 +1,9 @@
-import { lazy, Suspense } from 'react';
-import { FullscreenClear } from 'layouts/FullscreenClear';
+import { Fragment, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { FullscreenClear } from 'layouts/FullscreenClear';
+import { Back } from 'components/atoms';
 import { IntroductionProvider, useIntroductionContext } from './context';
-
-const Welcome = lazy(() =>
-  import('./components/Welcome').then(({ Welcome: component }) => ({
-    default: component,
-  })),
-);
+import { BackWrapper } from './Introduction.styles';
 
 const AddCashAccountsForm = lazy(() =>
   import('./components/AddCashAccountsForm').then(({ AddCashAccountsForm: component }) => ({
@@ -31,19 +27,25 @@ const IntroductionContent = () => {
   const { states, compareState } = useIntroductionContext();
 
   return (
-    <FullscreenClear>
-      <Suspense>
-        <AnimatePresence>
-          {compareState(states.welcome) && <Welcome />}
+    <Fragment>
+      {compareState(states.addInstrument) && (
+        <BackWrapper>
+          <Back />
+        </BackWrapper>
+      )}
 
-          {compareState(states.addCashAccounts) && <AddCashAccountsForm />}
+      <FullscreenClear>
+        <Suspense>
+          <AnimatePresence>
+            {compareState(states.addCashAccounts) && <AddCashAccountsForm />}
 
-          {compareState(states.addInstrument) && <AddInstrumentForm />}
+            {compareState(states.addInstrument) && <AddInstrumentForm />}
 
-          {compareState(states.formSuccess) && <FormSuccess />}
-        </AnimatePresence>
-      </Suspense>
-    </FullscreenClear>
+            {compareState(states.formSuccess) && <FormSuccess />}
+          </AnimatePresence>
+        </Suspense>
+      </FullscreenClear>
+    </Fragment>
   );
 };
 
