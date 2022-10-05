@@ -6,7 +6,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
-import { useIntroductionContext } from 'views/Introduction/context';
+import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
 import { DefaultValues } from './AddCashAccountsForm.type';
