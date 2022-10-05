@@ -4,10 +4,6 @@ import { ROUTES } from 'routes';
 import { Loading } from 'layouts/Loading';
 import { ProtectedRoute } from 'utils/ProtectedRoute';
 
-const Home = lazy(() =>
-  import('views/Home').then(({ Home: component }) => ({ default: component })),
-);
-
 const Signin = lazy(() =>
   import('views/Signin').then(({ Signin: component }) => ({ default: component })),
 );
@@ -47,21 +43,10 @@ const NotFound = lazy(() =>
 export const Root: FC = () => {
   const views = useRoutes([
     {
-      path: ROUTES.HOME,
-      element: (
-        <ProtectedRoute
-          to={ROUTES.DASHBOARD}
-          reverse
-        >
-          <Home />
-        </ProtectedRoute>
-      ),
-    },
-    {
       path: ROUTES.SIGNIN,
       element: (
         <ProtectedRoute
-          to={ROUTES.DASHBOARD}
+          to={ROUTES.DASHBOARD.HOME}
           reverse
         >
           <Signin />
@@ -72,7 +57,7 @@ export const Root: FC = () => {
       path: ROUTES.SIGNUP,
       element: (
         <ProtectedRoute
-          to={ROUTES.DASHBOARD}
+          to={ROUTES.DASHBOARD.HOME}
           reverse
         >
           <Signup />
@@ -88,7 +73,7 @@ export const Root: FC = () => {
       ),
     },
     {
-      path: ROUTES.DASHBOARD,
+      path: ROUTES.DASHBOARD.DASHBOARD,
       element: (
         <ProtectedRoute>
           <Dashboard />

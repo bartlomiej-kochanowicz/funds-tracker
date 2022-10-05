@@ -70,7 +70,7 @@ export const SigninForm = () => {
     successCallback: async () => {
       await dispatch(accountThunk());
 
-      navigate(ROUTES.DASHBOARD);
+      navigate(ROUTES.DASHBOARD.HOME);
     },
     failureCallback: error => {
       setError('userPassword', { type: 'custom', message: error.message });
