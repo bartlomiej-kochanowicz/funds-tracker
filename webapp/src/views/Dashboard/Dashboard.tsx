@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectAccount } from 'store/selectors/account';
 import { AppDispatch } from 'store';
 import { logoutThunk } from 'store/thunks/account/logoutThunk';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 
 export const Dashboard = () => {
   const { data } = useSelector(selectAccount);
@@ -13,6 +14,17 @@ export const Dashboard = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogout = () => dispatch(logoutThunk());
+
+  const desktopMax = useBreakpoint('desktop', 'max');
+  const desktopMin = useBreakpoint('desktop', 'min');
+
+  const tabletMax = useBreakpoint('tablet', 'max');
+  const tabletMin = useBreakpoint('tablet', 'min');
+
+  const phoneMax = useBreakpoint('phone', 'max');
+  const phoneMin = useBreakpoint('phone', 'min');
+
+  console.log({ desktopMax, desktopMin, tabletMax, tabletMin, phoneMax, phoneMin });
 
   return (
     <FullscreenClear>
