@@ -9,18 +9,6 @@ import { SignupRoutes } from 'views/Signup';
 import { IntroductionRoutes } from 'views/Introduction';
 import { DashboardRoutes } from 'views/Dashboard';
 
-const ModelPortfolio = lazy(() =>
-  import('views/ModelPortfolio').then(({ ModelPortfolio: component }) => ({
-    default: component,
-  })),
-);
-
-const ActualPortfolio = lazy(() =>
-  import('views/ActualPortfolio').then(({ ActualPortfolio: component }) => ({
-    default: component,
-  })),
-);
-
 const NotFound = lazy(() =>
   import('views/NotFound').then(({ NotFound: component }) => ({ default: component })),
 );
@@ -32,22 +20,6 @@ export const Root: FC = () => {
     ...SignupRoutes,
     ...IntroductionRoutes,
     ...DashboardRoutes,
-    {
-      path: ROUTES.MODEL_PORTFOLIO,
-      element: (
-        <ProtectedRoute>
-          <ModelPortfolio />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: ROUTES.ACTUAL_PORTFOLIO,
-      element: (
-        <ProtectedRoute>
-          <ActualPortfolio />
-        </ProtectedRoute>
-      ),
-    },
     {
       path: ROUTES.ANY,
       element: <NotFound />,
