@@ -7,12 +7,7 @@ import { HomeRoutes } from 'views/Home';
 import { SinginRoutes } from 'views/Signin';
 import { SignupRoutes } from 'views/Signup';
 import { IntroductionRoutes } from 'views/Introduction';
-
-const Dashboard = lazy(() =>
-  import('views/Dashboard').then(({ Dashboard: component }) => ({
-    default: component,
-  })),
-);
+import { DashboardRoutes } from 'views/Dashboard';
 
 const ModelPortfolio = lazy(() =>
   import('views/ModelPortfolio').then(({ ModelPortfolio: component }) => ({
@@ -36,14 +31,7 @@ export const Root: FC = () => {
     ...SinginRoutes,
     ...SignupRoutes,
     ...IntroductionRoutes,
-    {
-      path: ROUTES.DASHBOARD.DASHBOARD,
-      element: (
-        <ProtectedRoute>
-          <Dashboard />
-        </ProtectedRoute>
-      ),
-    },
+    ...DashboardRoutes,
     {
       path: ROUTES.MODEL_PORTFOLIO,
       element: (
