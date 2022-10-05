@@ -4,7 +4,7 @@ import { FullscreenClear } from 'layouts/FullscreenClear';
 
 export const NotFound: FC = (): JSX.Element => (
   <FullscreenClear>
-    <Heading>404</Heading>
+    <Heading textAlign="center">404</Heading>
 
     <Spacer space="tiny" />
 
