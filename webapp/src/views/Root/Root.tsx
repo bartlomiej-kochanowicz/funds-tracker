@@ -5,10 +5,7 @@ import { Loading } from 'layouts/Loading';
 import { ProtectedRoute } from 'utils/ProtectedRoute';
 import { HomeRoutes } from 'views/Home';
 import { SinginRoutes } from 'views/Signin';
-
-const Signup = lazy(() =>
-  import('views/Signup').then(({ Signup: component }) => ({ default: component })),
-);
+import { SignupRoutes } from 'views/Signup';
 
 const Introduction = lazy(() =>
   import('views/Introduction').then(({ Introduction: component }) => ({
@@ -42,17 +39,7 @@ export const Root: FC = () => {
   const views = useRoutes([
     ...HomeRoutes,
     ...SinginRoutes,
-    {
-      path: ROUTES.SIGNUP,
-      element: (
-        <ProtectedRoute
-          to={ROUTES.DASHBOARD.HOME}
-          reverse
-        >
-          <Signup />
-        </ProtectedRoute>
-      ),
-    },
+    ...SignupRoutes,
     {
       path: ROUTES.INTRODUCTION,
       element: (
