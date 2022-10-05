@@ -12,7 +12,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
-import { DefaultValues } from 'views/Introduction/components/AddCashAccountsForm/AddCashAccountsForm.type';
+import { DefaultValues } from 'views/Introduction/routes/Introduction/components/AddCashAccountsForm/AddCashAccountsForm.type';
 
 interface FieldProps {
   register: UseFormRegister<DefaultValues>;

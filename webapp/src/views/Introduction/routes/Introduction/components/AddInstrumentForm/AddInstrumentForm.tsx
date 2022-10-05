@@ -17,7 +17,7 @@ import { Column, Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import instruments from 'constants/selectors/instruments';
-import { useIntroductionContext } from 'views/Introduction/context';
+import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 import { useSelect } from 'hooks/useSelect';
 import { useInput } from 'hooks/useInput';
 import { validationSchema } from './AddInstrumentForm.schema';
