@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'routes/paths';
 import { ProtectedRoute } from 'utils/ProtectedRoute';
 
 const Signin = lazy(() =>

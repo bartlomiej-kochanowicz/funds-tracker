@@ -9,7 +9,7 @@ import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import useRequest from 'hooks/useRequest';
 import { checkEmail, CheckEmailProps, CheckEmailResponse } from 'services/auth/checkEmail';
 import { signin, SigninProps } from 'services/auth/signin';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'routes/paths';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store';
 import { accountThunk } from 'store/thunks/account/accountThunk';

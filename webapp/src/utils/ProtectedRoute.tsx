@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'routes/paths';
 import { useSelector } from 'react-redux';
 import { selectAccount } from 'store/selectors/account';
 import { useStatus } from 'hooks/useStatus';

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
 import { Spacer, Button } from 'components/atoms';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'routes/paths';
 import { ReactComponent as LogoHorizontal } from 'assets/logo/logo-name-horizontal.svg';
 import { StyledFullscreenClear } from './Home.styles';
 

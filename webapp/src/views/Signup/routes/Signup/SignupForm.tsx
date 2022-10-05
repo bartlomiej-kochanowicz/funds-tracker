@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'routes/paths';
 import { checkEmail, CheckEmailProps, CheckEmailResponse } from 'services/auth/checkEmail';
 import { signup, SignupProps } from 'services/auth/signup';
 import { AppDispatch } from 'store';
