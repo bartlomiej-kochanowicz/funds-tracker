@@ -3,7 +3,7 @@ import { Heading, Link, Spacer, Text } from 'components/atoms';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Row } from 'simple-flexbox';
 import { LangSelector } from 'components/molecules/LangSelector';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'routes/paths';
 import { SignupForm } from './SignupForm';
 
 export const Signup = () => {

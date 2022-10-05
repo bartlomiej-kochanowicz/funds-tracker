@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'routes/paths';
 
 const NotFound = lazy(() =>
   import('./NotFound').then(({ NotFound: component }) => ({ default: component })),

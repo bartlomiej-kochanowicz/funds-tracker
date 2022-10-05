@@ -1,7 +1,7 @@
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Button, Spacer, Text } from 'components/atoms';
 import { Link } from 'react-router-dom';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'routes/paths';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAccount } from 'store/selectors/account';
 import { AppDispatch } from 'store';
