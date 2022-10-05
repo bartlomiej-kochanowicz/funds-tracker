@@ -3,10 +3,8 @@ import { useRoutes } from 'react-router-dom';
 import { ROUTES } from 'routes';
 import { Loading } from 'layouts/Loading';
 import { ProtectedRoute } from 'utils/ProtectedRoute';
-
-const Signin = lazy(() =>
-  import('views/Signin').then(({ Signin: component }) => ({ default: component })),
-);
+import { HomeRoutes } from 'views/Home';
+import { SinginRoutes } from 'views/Signin';
 
 const Signup = lazy(() =>
   import('views/Signup').then(({ Signup: component }) => ({ default: component })),
@@ -42,17 +40,8 @@ const NotFound = lazy(() =>
 
 export const Root: FC = () => {
   const views = useRoutes([
-    {
-      path: ROUTES.SIGNIN,
-      element: (
-        <ProtectedRoute
-          to={ROUTES.DASHBOARD.HOME}
-          reverse
-        >
-          <Signin />
-        </ProtectedRoute>
-      ),
-    },
+    ...HomeRoutes,
+    ...SinginRoutes,
     {
       path: ROUTES.SIGNUP,
       element: (
