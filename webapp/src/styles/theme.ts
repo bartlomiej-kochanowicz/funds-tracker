@@ -103,10 +103,11 @@ export const theme = {
     },
   },
   spacing: {
-    tiny: rem(0.5 / 2), // devide by 2 - top and bottom or right and left(both sides) - 1rem
-    small: rem(1 / 2), // devide by 2 - top and bottom or right and left(both sides) - 1rem
-    medium: rem(2 / 2), // devide by 2 - top and bottom or right and left(both sides) - 2rem
-    large: rem(3 / 2), // devide by 2 - top and bottom or right and left(both sides) - 3rem
+    tiny: rem(0.25),
+    small: rem(0.5),
+    medium: rem(1),
+    large: rem(1.5),
+    huge: rem(3.5),
   },
   heading: {
     h1: { fontSize: rem(2.5) },
