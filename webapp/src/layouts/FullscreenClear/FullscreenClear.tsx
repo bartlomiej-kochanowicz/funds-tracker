@@ -1,21 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Column } from 'simple-flexbox';
 import { ReactNode } from 'react';
-
-export const Wrapper = styled(Column)`
-  width: 100%;
-  height: 100%;
-  height: var(--doc-height);
-
-  ${({ theme }) => css`
-    padding: ${theme.padding.medium};
-    background: ${theme.colors.white};
-  `}
-`;
-
-export const InnerWrapper = styled(Column)`
-  width: 350px;
-`;
+import { InnerWrapper, Wrapper } from './FullscreenClear.styles';
 
 interface FullscreenClearProps {
   children: ReactNode;

@@ -1,4 +1,3 @@
-import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Button, Spacer, Text } from 'components/atoms';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
@@ -6,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectAccount } from 'store/selectors/account';
 import { AppDispatch } from 'store';
 import { logoutThunk } from 'store/thunks/account/logoutThunk';
-import { useBreakpoint } from 'hooks/useBreakpoint';
+import { Column } from 'simple-flexbox';
 
 export const Home = () => {
   const { data } = useSelector(selectAccount);
@@ -15,19 +14,8 @@ export const Home = () => {
 
   const handleLogout = () => dispatch(logoutThunk());
 
-  const desktopMax = useBreakpoint('desktop', 'max');
-  const desktopMin = useBreakpoint('desktop', 'min');
-
-  const tabletMax = useBreakpoint('tablet', 'max');
-  const tabletMin = useBreakpoint('tablet', 'min');
-
-  const phoneMax = useBreakpoint('phone', 'max');
-  const phoneMin = useBreakpoint('phone', 'min');
-
-  console.log({ desktopMax, desktopMin, tabletMax, tabletMin, phoneMax, phoneMin });
-
   return (
-    <FullscreenClear>
+    <Column>
       <Text>You are signin as:{data.email}</Text>
 
       <Button
@@ -54,6 +42,6 @@ export const Home = () => {
       >
         Logout
       </Button>
-    </FullscreenClear>
+    </Column>
   );
 };
