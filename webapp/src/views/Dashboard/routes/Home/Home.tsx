@@ -8,7 +8,7 @@ import { AppDispatch } from 'store';
 import { logoutThunk } from 'store/thunks/account/logoutThunk';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 
-export const Dashboard = () => {
+export const Home = () => {
   const { data } = useSelector(selectAccount);
 
   const dispatch = useDispatch<AppDispatch>();
