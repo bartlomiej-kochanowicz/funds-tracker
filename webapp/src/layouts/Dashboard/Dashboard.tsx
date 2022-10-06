@@ -1,4 +1,4 @@
-import { Sidebar, BottomBar } from 'components/organisms';
+import { Sidebar, BottomBar, Topbar } from 'components/organisms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { ReactNode } from 'react';
 import { Wrapper } from './Dashboard.styles';
@@ -12,6 +12,8 @@ export const Dashboard = ({ children }: DashboardProps) => {
 
   return (
     <Wrapper>
+      {isDesktop && <Topbar />}
+
       {isDesktop && <Sidebar />}
 
       {!isDesktop && <BottomBar />}

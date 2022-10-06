@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
 import { Spacer, Button } from 'components/atoms';
 import { ROUTES } from 'routes/paths';
-import { ReactComponent as LogoHorizontal } from 'assets/logo/logo-name-horizontal.svg';
+import { ReactComponent as LogoNameHorizontal } from 'assets/logo/logo-name-horizontal.svg';
 import { StyledFullscreenClear } from './Home.styles';
 
 export const Home: FC = () => {
@@ -13,7 +13,7 @@ export const Home: FC = () => {
   return (
     <StyledFullscreenClear>
       <Column alignItems="center">
-        <LogoHorizontal width="500px" />
+        <LogoNameHorizontal width="500px" />
 
         <Spacer />
 
