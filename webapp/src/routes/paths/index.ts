@@ -6,13 +6,19 @@ export const ROUTES = {
   DASHBOARD: {
     DASHBOARD: '/dashboard',
     HOME: '/dashboard/home',
-    SUMMARY: '/dashboard/summary',
+    DETAILS: '/dashboard/details',
     PORTFOLIO: '/dashboard/portfolio',
     TRANSACTIONS: '/dashboard/transactions',
     HISTORY: '/dashboard/history',
   },
-  MODEL_PORTFOLIO: '/model-portfolio',
-  ACTUAL_PORTFOLIO: '/actual-portfolio',
-  CASH_ACCOUNTS: '/cash-accounts',
+  MANAGE: {
+    MANAGE: '/manage',
+    CASH_ACCOUNTS: '/manage/cash-accounts',
+    MODEL_PORTFOLIO: '/manage/model-portfolio',
+  },
+  SETTINGS: {
+    SETTINGS: '/settings',
+    MY_PROFILE: '/settings/my-profile',
+  },
   ANY: '*',
 };
