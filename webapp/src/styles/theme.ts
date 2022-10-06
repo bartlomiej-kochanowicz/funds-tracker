@@ -69,6 +69,9 @@ export const theme = {
     large: `${rem(0.75)} ${rem(1.5)}`,
     largeX: `0 ${rem(1.5)}`,
     largeY: `${rem(0.75)} 0`,
+    huge: `${rem(1.75)} ${rem(3.5)}`,
+    hugeX: `0 ${rem(3.5)}`,
+    hugeY: `${rem(1.75)} 0`,
   },
   font: {
     weight: {
@@ -129,5 +132,9 @@ export const theme = {
     primary: `linear-gradient(to top left, #B0B0B0, #FAFBFC);`,
     secondary: `linear-gradient(to top, #2a2a2a , #111111)`,
     tertiary: `radial-gradient(circle at right bottom, #AFE39D , #7DCAC7)`,
+  },
+  zIndex: {
+    sidebar: 1,
+    topbar: 2,
   },
 };
