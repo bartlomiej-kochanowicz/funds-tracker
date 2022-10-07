@@ -6,7 +6,7 @@ import { transparentize } from 'color2k';
 export const Colors = {
   Green: '#7DCAC7',
   Blue: '#3F8CFF',
-  Red: '#FF6961',
+  Red: '#e74c3c',
   Black: '#333333',
   White: '#ffffff',
   Purple: '#725BFE',
@@ -127,6 +127,7 @@ export const theme = {
   shadows: {
     dropdown: `0 10px 15px -3px ${transparentize(Colors.Black, 0.9)},
     0 4px 6px -4px ${transparentize(Colors.Black, 0.9)}`,
+    box: `0 0 10px 0 ${transparentize(Colors.Black, 0.9)}`,
   },
   gradients: {
     primary: `linear-gradient(to top left, #B0B0B0, #FAFBFC);`,
@@ -135,6 +136,7 @@ export const theme = {
   },
   zIndex: {
     sidebar: 1,
+    bottomBar: 1,
     topbar: 2,
   },
 };

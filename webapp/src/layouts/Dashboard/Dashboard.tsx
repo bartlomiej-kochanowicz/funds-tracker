@@ -1,6 +1,7 @@
 import { Sidebar, BottomBar, Topbar } from 'components/organisms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
-import { ReactNode } from 'react';
+import { Loading } from 'layouts/Loading';
+import { ReactNode, Suspense } from 'react';
 import { Wrapper } from './Dashboard.styles';
 
 interface DashboardProps {
@@ -18,7 +19,7 @@ export const Dashboard = ({ children }: DashboardProps) => {
 
       {!isDesktop && <BottomBar />}
 
-      {children}
+      <Suspense fallback={<Loading />}>{children}</Suspense>
     </Wrapper>
   );
 };
