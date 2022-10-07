@@ -13,7 +13,7 @@ export type FontableProps = {
   fontWeight?: keyof DefaultTheme['font']['weight'];
   fontColor?: Colors;
   fontSize?: keyof DefaultTheme['font']['size'];
-  lineHeight?: string;
+  lineHeight?: `${string}rem`;
   textShadow?: boolean;
   textAlign?: 'left' | 'center' | 'right' | 'justify';
 };
@@ -43,7 +43,7 @@ export const fontable = css<FontableProps>`
   ${({ lineHeight }) =>
     lineHeight &&
     css`
-      line-height: ${lineHeight}rem;
+      line-height: ${lineHeight};
     `}
 
   ${({ textShadow }) =>

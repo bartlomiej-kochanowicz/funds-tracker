@@ -16,7 +16,7 @@ describe('Atoms/Text fontable tests', () => {
         fontWeight="500"
         fontColor="blue"
         fontSize="2.5"
-        lineHeight="1.5"
+        lineHeight="1.5rem"
       >
         Hello World
       </Text>,

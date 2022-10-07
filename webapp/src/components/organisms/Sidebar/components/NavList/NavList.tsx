@@ -1,10 +1,11 @@
 import { Spreader, Text } from 'components/atoms';
 import { Fragment } from 'react';
+import { IconType } from 'react-icons';
 import { Row } from 'simple-flexbox';
 import { Bar, List, ListItem, StyledNavLink } from './NavList.styles';
 
 interface NavListProps {
-  routes: { to: string; title: string; icon: any }[];
+  routes: { to: string; title: string; icon: IconType }[];
 }
 
 export const NavList = ({ routes }: NavListProps) => (
@@ -24,7 +25,7 @@ export const NavList = ({ routes }: NavListProps) => (
                   <Spreader spread="small" />
 
                   <Text
-                    fontColor={isActive ? 'black' : 'gray'}
+                    fontColor={isActive ? 'black' : 'darkGray'}
                     fontWeight={isActive ? '700' : '500'}
                   >
                     {title}

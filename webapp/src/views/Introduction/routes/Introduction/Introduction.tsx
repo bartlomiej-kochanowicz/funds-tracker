@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { IntroductionProvider, useIntroductionContext } from './context';
+import { Loading } from 'layouts/Loading';
 
 const AddCashAccountsForm = lazy(() =>
   import('./components/AddCashAccountsForm').then(({ AddCashAccountsForm: component }) => ({
@@ -26,7 +27,7 @@ const IntroductionContent = () => {
 
   return (
     <FullscreenClear>
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <AnimatePresence>
           {compareState(states.addCashAccounts) && <AddCashAccountsForm />}
 

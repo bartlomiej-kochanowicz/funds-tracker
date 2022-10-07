@@ -17,7 +17,7 @@ export const StyledNavLink = styled(NavLink)`
   width: 214px;
 
   ${({ theme }) => css`
-    color: ${theme.colors.gray};
+    color: ${theme.colors.darkGray};
     padding: ${theme.padding.small};
     padding-right: 0;
 
