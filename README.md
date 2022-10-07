@@ -88,11 +88,11 @@ deviation from the model you provide before, tells you how to rebalance the inst
 ### 🪨 Milestones
 
 - [x] Create monorepo
-- [x] CI / CD fro webapp
-- [x] Publish website on custom domain
+- [x] CI / CD for webapp
+- [ ] Publish website on custom domain
 - [ ] Add model portfolio view
 - [ ] Add instrument view
-- [ ] Dashboard
+- [x] Dashboard
 
 ## 🛠 Getting Started
 
