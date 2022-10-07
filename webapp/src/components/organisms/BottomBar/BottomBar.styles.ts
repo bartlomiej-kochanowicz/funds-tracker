@@ -18,9 +18,8 @@ export const StyledNav = styled.nav`
 
 export const List = styled.ul`
   padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 `;
 
 export const ListItem = styled.li`
