@@ -3,7 +3,7 @@ import { StyledRow } from './Topbar.styles';
 
 export const Topbar = () => (
   <StyledRow justifyContent="space-between">
-    <LogoNameVerticalDark width="175px" />
+    <LogoNameVerticalDark width="135px" />
 
     <div>profil</div>
   </StyledRow>

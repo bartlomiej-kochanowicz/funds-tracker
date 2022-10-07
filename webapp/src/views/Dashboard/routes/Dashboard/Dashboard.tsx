@@ -5,7 +5,7 @@ import { AppDispatch } from 'store';
 import { logoutThunk } from 'store/thunks/account/logoutThunk';
 import { Column } from 'simple-flexbox';
 
-export const Home = () => {
+export const Dashboard = () => {
   const { data } = useSelector(selectAccount);
 
   const dispatch = useDispatch<AppDispatch>();
