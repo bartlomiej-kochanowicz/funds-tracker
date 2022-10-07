@@ -20,7 +20,7 @@ describe('Atoms/Loader tests', () => {
 
   it.each([
     ['white' as LoaderColors, '3px solid #ffffff'],
-    ['black' as LoaderColors, '3px solid #111111'],
+    ['black' as LoaderColors, '3px solid #333333'],
     ['blue' as LoaderColors, '3px solid #3F8CFF'],
   ])('has correct color for %s', (color, expected) => {
     const { getByTestId } = render(
