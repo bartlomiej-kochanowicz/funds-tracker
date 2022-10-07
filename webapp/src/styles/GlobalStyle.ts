@@ -24,7 +24,7 @@ export const GlobalStyle = styled.createGlobalStyle`
     font-size: 16px;
     height: 100vh; /* fallback for Js load */
     height: var(--doc-height);
-    color: #111111;
+    color: #333333;
   }
 
   body {
