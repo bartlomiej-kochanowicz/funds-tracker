@@ -15,11 +15,12 @@ export const StyledNavLink = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   width: 214px;
+  padding-right: 0;
 
   ${({ theme }) => css`
     color: ${theme.colors.darkGray};
     padding: ${theme.padding.small};
-    padding-right: 0;
+    outline-color: ${theme.colors.blue};
 
     &.active {
       color: ${theme.colors.blue};

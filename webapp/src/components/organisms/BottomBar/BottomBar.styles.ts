@@ -31,6 +31,7 @@ export const StyledNavLink = styled(NavLink)`
 
   ${({ theme }) => css`
     color: ${theme.colors.darkGray};
+    outline-color: ${theme.colors.blue};
 
     &.active {
       color: ${theme.colors.blue};
