@@ -12,6 +12,12 @@ const Dashboard = lazy(() =>
   })),
 );
 
+const Hub = lazy(() =>
+  import('./Hub').then(({ Hub: component }) => ({
+    default: component,
+  })),
+);
+
 export const DashboardRoutes = [
   {
     path: ROUTES.DASHBOARD.HOME,
@@ -26,6 +32,7 @@ export const DashboardRoutes = [
     ),
     children: [
       { path: ROUTES.DASHBOARD.HOME, element: <Dashboard /> },
+      { path: ROUTES.DASHBOARD.HUB, element: <Hub /> },
       { path: ROUTES.DASHBOARD.PORTFOLIO, element: <div>portfolio</div> },
       { path: ROUTES.DASHBOARD.CASH_ACCOUNTS, element: <div>cash accounts</div> },
       { path: ROUTES.DASHBOARD.TRANSACTIONS, element: <div>transactions</div> },

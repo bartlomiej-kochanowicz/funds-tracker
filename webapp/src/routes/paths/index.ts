@@ -9,8 +9,8 @@ export const ROUTES = {
     CASH_ACCOUNTS: '/dashboard/cash-accounts',
     TRANSACTIONS: '/dashboard/transactions',
     HISTORY: '/dashboard/history',
+    HUB: '/dashboard/hub',
   },
-  HUB: '/hub',
   SETTINGS: {
     SETTINGS: '/settings',
     MY_PROFILE: '/settings/account',
