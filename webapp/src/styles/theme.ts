@@ -12,8 +12,8 @@ export const Colors = {
   Purple: '#725BFE',
   DarkGray: '#7C8DA6',
   Gray: '#A5B4CB',
-  LightGray: '#F5F7F9',
-  Light: '#FAFBFC',
+  LightGray: '#e3e3e3',
+  Light: '#F5F7F9',
   LightYellow: '#FAF9F4',
 };
 

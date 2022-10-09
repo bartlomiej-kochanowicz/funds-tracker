@@ -7,10 +7,10 @@ export const DropdownContent = forwardRef<HTMLButtonElement, {}>(({ ...rest }, r
     ref={ref}
     {...rest}
   >
-    <Menu.Item>test</Menu.Item>
+    <Menu.Item padding="medium">My profile</Menu.Item>
 
-    <Menu.Divider />
+    <Menu.Divider width="85%" />
 
-    <Menu.Item>3</Menu.Item>
+    <Menu.Item padding="medium">Sign out</Menu.Item>
   </Menu>
 ));

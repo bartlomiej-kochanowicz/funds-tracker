@@ -15,7 +15,7 @@ export const StyledButton = styled.button<
   ${({ theme, error }) => css`
     border-radius: ${theme.radius.secondary};
     border: none;
-    background-color: ${theme.colors.lightGray};
+    background-color: ${theme.colors.light};
     padding: ${theme.padding.medium};
     color: ${theme.colors[error ? 'red' : 'black']};
     outline-color: ${theme.colors[error ? 'red' : 'blue']};
@@ -23,7 +23,7 @@ export const StyledButton = styled.button<
     border: 2px solid ${theme.colors[error ? 'red' : 'gray']};
 
     &:focus {
-      background-color: ${darken(theme.colors.lightGray, 0.05)};
+      background-color: ${darken(theme.colors.light, 0.05)};
       color: ${theme.colors[error ? 'red' : 'blue']};
       border: 2px solid ${theme.colors[error ? 'red' : 'blue']};
     }

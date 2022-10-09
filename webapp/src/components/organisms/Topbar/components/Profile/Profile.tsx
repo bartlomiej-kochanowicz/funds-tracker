@@ -11,7 +11,10 @@ export const Profile = () => {
   const { t } = useTranslation();
 
   return (
-    <Dropdown content={DropdownContent}>
+    <Dropdown
+      content={DropdownContent}
+      placement="bottom-end"
+    >
       <Row alignItems="center">
         <Avatar name={data.name} />
 
