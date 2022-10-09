@@ -64,5 +64,10 @@
   "add.cash.accounts.submit": "Następny krok",
   "page.welcome.description": "Kontroluj swoje inwestycje z jednego miejsca, prosto i czytelnie dzięki Funds Tracker.",
   "common.hi": "Cześć",
-  "common.dashboard": "Kokpit"
+  "common.dashboard": "Kokpit",
+  "sidebar.navigation.home": "Strona główna",
+  "sidebar.navigation.portfolio": "Portfele",
+  "sidebar.navigation.cash_accounts": "Konta gotówkowe",
+  "sidebar.navigation.transactions": "Transakcje",
+  "sidebar.navigation.history": "Historia"
 }

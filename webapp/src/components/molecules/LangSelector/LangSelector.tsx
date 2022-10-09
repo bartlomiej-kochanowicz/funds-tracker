@@ -32,13 +32,12 @@ export const LangSelector = () => {
   );
 
   return (
-    <div>
-      <Select
-        options={options}
-        defaultValue={i18n.resolvedLanguage}
-        onChange={handleChangeLanguage}
-        customLabel={customLabel}
-      />
-    </div>
+    <Select
+      options={options}
+      defaultValue={i18n.resolvedLanguage}
+      onChange={handleChangeLanguage}
+      customLabel={customLabel}
+      width="fit-content"
+    />
   );
 };

@@ -11,7 +11,7 @@ export const StyledColumn = styled(Column)`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     z-index: ${theme.zIndex.sidebar};
-    padding: calc(${theme.spacing.huge} * 2.5) 0 0 ${theme.spacing.huge};
+    padding: calc(${theme.spacing.huge} * 2.5) 0 ${theme.spacing.huge} ${theme.spacing.huge};
     box-shadow: ${theme.shadows.box};
   `}
 `;

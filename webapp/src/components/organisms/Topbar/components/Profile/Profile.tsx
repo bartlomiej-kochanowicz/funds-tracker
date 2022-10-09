@@ -14,7 +14,7 @@ export const Profile = () => {
     <Row alignItems="center">
       <Avatar name={data.name} />
 
-      <Spreader spread="small" />
+      <Spreader spread="tiny" />
 
       <Text fontWeight="700">
         {t('common.hi')}, {data.name}!

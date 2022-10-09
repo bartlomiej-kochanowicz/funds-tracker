@@ -64,5 +64,10 @@
   "add.cash.accounts.submit": "Confirm and go to next step",
   "page.welcome.description": "Manage your investments from single place simply and purely thanks to Funds Tracker",
   "common.hi": "Hi",
-  "common.dashboard": "Dashboard"
+  "common.dashboard": "Dashboard",
+  "sidebar.navigation.home": "Home",
+  "sidebar.navigation.portfolio": "Portfolios",
+  "sidebar.navigation.cash_accounts": "Cash Accounts",
+  "sidebar.navigation.transactions": "Transactions",
+  "sidebar.navigation.history": "History"
 }

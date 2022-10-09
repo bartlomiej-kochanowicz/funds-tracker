@@ -4,9 +4,13 @@ import { BiTransfer } from 'react-icons/bi';
 import { ROUTES } from 'routes/paths';
 
 export const dashboardNavigation = [
-  { to: ROUTES.DASHBOARD.HOME, title: 'Home', icon: FaHome },
-  { to: ROUTES.DASHBOARD.PORTFOLIO, title: 'Portfolio', icon: FaWallet },
-  { to: ROUTES.DASHBOARD.CASH_ACCOUNTS, title: 'Cash accounts', icon: MdAccountBalance },
-  { to: ROUTES.DASHBOARD.TRANSACTIONS, title: 'Transactions', icon: BiTransfer },
-  { to: ROUTES.DASHBOARD.HISTORY, title: 'History', icon: FaHistory },
+  { to: ROUTES.DASHBOARD.HOME, title: 'sidebar.navigation.home', icon: FaHome },
+  { to: ROUTES.DASHBOARD.PORTFOLIO, title: 'sidebar.navigation.portfolio', icon: FaWallet },
+  {
+    to: ROUTES.DASHBOARD.CASH_ACCOUNTS,
+    title: 'sidebar.navigation.cash_accounts',
+    icon: MdAccountBalance,
+  },
+  { to: ROUTES.DASHBOARD.TRANSACTIONS, title: 'sidebar.navigation.transactions', icon: BiTransfer },
+  { to: ROUTES.DASHBOARD.HISTORY, title: 'sidebar.navigation.history', icon: FaHistory },
 ];
