@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   height: var(--doc-height);
 
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightGray};
+    background-color: ${theme.colors.light};
     padding: ${theme.spacing.large};
 
     ${theme.breakpoints.desktop} {

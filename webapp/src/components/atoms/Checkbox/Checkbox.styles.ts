@@ -13,7 +13,7 @@ export const Marker = styled.span`
   justify-content: center;
   width: 24px;
   height: 24px;
-  background-color: ${({ theme }) => theme.colors.lightGray};
+  background-color: ${({ theme }) => theme.colors.light};
   border: 2px solid ${({ theme }) => theme.colors.gray};
   border-radius: 0.3rem;
 

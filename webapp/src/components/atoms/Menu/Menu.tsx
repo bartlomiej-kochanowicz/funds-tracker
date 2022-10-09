@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 export interface MenuProps {
   children: ReactNode;
-  minMenuWidth?: number | null;
+  minMenuWidth?: `${number}${'px' | 'rem'}`;
 }
 
 const StyledUl = styled.ul<MenuProps>`
@@ -13,18 +13,18 @@ const StyledUl = styled.ul<MenuProps>`
 
   ${({ theme, minMenuWidth }) => css`
     border-radius: ${theme.radius.secondary};
-    background-color: ${theme.colors.lightGray};
-    padding: 0.5rem 0;
+    background-color: ${theme.colors.light};
+    padding: ${theme.padding.mediumY};
     outline-color: ${theme.colors.blue};
     color: ${theme.colors.black};
-    border: 1px solid ${darken(theme.colors.lightGray, 0.05)};
+    border: 1px solid ${darken(theme.colors.light, 0.05)};
     box-shadow: ${theme.shadows.dropdown};
     display: flex;
     flex-direction: column;
 
     ${minMenuWidth &&
     css`
-      min-width: ${minMenuWidth}px;
+      min-width: ${minMenuWidth};
     `}
 
     li {
@@ -46,5 +46,5 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({ children, ...rest
 Menu.displayName = 'Menu';
 
 Menu.defaultProps = {
-  minMenuWidth: null,
+  minMenuWidth: undefined,
 };

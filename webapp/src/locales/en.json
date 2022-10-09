@@ -62,5 +62,15 @@
   "common.input.name.placeholder": "Name",
   "common.welcome": "Welcome",
   "add.cash.accounts.submit": "Confirm and go to next step",
-  "page.welcome.description": "Manage your investments from single place simply and purely thanks to Funds Tracker"
+  "page.welcome.description": "Manage your investments from single place simply and purely thanks to Funds Tracker",
+  "common.hi": "Hi",
+  "common.dashboard": "Dashboard",
+  "navigation.home": "Home",
+  "navigation.portfolios": "Portfolios",
+  "navigation.cash_accounts": "Cash Accounts",
+  "navigation.transactions": "Transactions",
+  "navigation.history": "History",
+  "navigation.my_profile": "My profile",
+  "navigation.hub": "Hub",
+  "common.sign_out": "Sign out"
 }

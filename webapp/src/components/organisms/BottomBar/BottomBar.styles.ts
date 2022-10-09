@@ -1,25 +1,27 @@
+import { Text } from 'components/atoms';
 import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const StyledNav = styled.nav`
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  width: 270px;
+  left: calc(50% - 135px);
+  right: calc(50% - 135px);
 
   ${({ theme }) => css`
-    padding: ${theme.spacing.medium} ${theme.spacing.large} ${theme.spacing.large}
-      ${theme.spacing.large};
+    padding: ${theme.padding.medium};
     background-color: ${theme.colors.white};
     z-index: ${theme.zIndex.bottomBar};
     box-shadow: ${theme.shadows.box};
+    bottom: ${theme.spacing.large};
+    border-radius: ${theme.radius.primary};
   `}
 `;
 
 export const List = styled.ul`
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 export const ListItem = styled.li`
@@ -37,4 +39,13 @@ export const StyledNavLink = styled(NavLink)`
       color: ${theme.colors.blue};
     }
   `}
+`;
+
+export const Title = styled(Text)`
+  width: 75px;
+  overflow: hidden;
+  display: inline-block;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

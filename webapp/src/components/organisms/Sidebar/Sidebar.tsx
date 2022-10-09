@@ -1,20 +1,31 @@
 import { Heading, Spacer } from 'components/atoms';
-import { dashboardNavigation } from 'routes/navigation';
+import { LangSelector } from 'components/molecules/LangSelector';
+import { useTranslation } from 'react-i18next';
+import { Column } from 'simple-flexbox';
 import { NavList } from './components/NavList';
+import { sidebarNavigation } from './constants';
 import { StyledColumn } from './Sidebar.styles';
 
-export const Sidebar = () => (
-  <StyledColumn>
-    <Heading
-      level="h2"
-      fontColor="black"
-      fontSize="1.25"
-    >
-      DASHBOARD
-    </Heading>
+export const Sidebar = () => {
+  const { t } = useTranslation();
 
-    <Spacer space="small" />
+  return (
+    <StyledColumn justifyContent="space-between">
+      <Column>
+        <Heading
+          level="h2"
+          fontColor="black"
+          fontSize="1.25"
+        >
+          {t('common.dashboard')}
+        </Heading>
 
-    <NavList routes={dashboardNavigation} />
-  </StyledColumn>
-);
+        <Spacer space="small" />
+
+        <NavList navigation={sidebarNavigation} />
+      </Column>
+
+      <LangSelector />
+    </StyledColumn>
+  );
+};
