@@ -1,6 +1,14 @@
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
+import { Column } from 'simple-flexbox';
+import { Profile } from './components/Profile';
+
+const HubContent = () => (
+  <Column>
+    <Profile />
+  </Column>
+);
 
 export const Hub = () => {
   const isDesktop = useBreakpoint('desktop', 'min');
@@ -11,6 +19,8 @@ export const Hub = () => {
       replace
     />
   ) : (
-    <div>Hub</div>
+    <HubContent />
   );
 };
+
+Hub.displayName = 'Hub';
