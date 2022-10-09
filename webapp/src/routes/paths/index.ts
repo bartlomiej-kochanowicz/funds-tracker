@@ -5,7 +5,7 @@ export const ROUTES = {
   INTRODUCTION: '/introduction',
   DASHBOARD: {
     HOME: '/dashboard',
-    PORTFOLIO: '/dashboard/portfolio',
+    PORTFOLIO: '/dashboard/portfolios',
     CASH_ACCOUNTS: '/dashboard/cash-accounts',
     TRANSACTIONS: '/dashboard/transactions',
     HISTORY: '/dashboard/history',

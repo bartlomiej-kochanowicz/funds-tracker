@@ -5,7 +5,7 @@ import { ROUTES } from 'routes/paths';
 
 export const dashboardNavigation = [
   { to: ROUTES.DASHBOARD.HOME, title: 'sidebar.navigation.home', icon: FaHome },
-  { to: ROUTES.DASHBOARD.PORTFOLIO, title: 'sidebar.navigation.portfolio', icon: FaWallet },
+  { to: ROUTES.DASHBOARD.PORTFOLIO, title: 'sidebar.navigation.portfolios', icon: FaWallet },
   {
     to: ROUTES.DASHBOARD.CASH_ACCOUNTS,
     title: 'sidebar.navigation.cash_accounts',
