@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 export interface MenuProps {
   children: ReactNode;
-  minMenuWidth?: number | null;
+  minMenuWidth?: `${number}${'px' | 'rem'}`;
 }
 
 const StyledUl = styled.ul<MenuProps>`
@@ -46,5 +46,5 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({ children, ...rest
 Menu.displayName = 'Menu';
 
 Menu.defaultProps = {
-  minMenuWidth: null,
+  minMenuWidth: undefined,
 };

@@ -1,13 +1,13 @@
-import { Fragment, useState } from 'react';
+import { ForwardRefExoticComponent, Fragment, RefAttributes, useState } from 'react';
 import { useLayer } from 'react-laag';
 import { Trigger } from './Dropdown.styles';
 
 interface DropdownProps {
   children: React.ReactNode;
-  content: React.ReactNode;
+  content: ForwardRefExoticComponent<RefAttributes<HTMLButtonElement>>;
 }
 
-export const Dropdown = ({ children, content }: DropdownProps) => {
+export const Dropdown = ({ children, content: Content }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { renderLayer, triggerProps, layerProps } = useLayer({
@@ -36,7 +36,7 @@ export const Dropdown = ({ children, content }: DropdownProps) => {
         {children}
       </Trigger>
 
-      {isOpen && renderLayer(<div {...layerProps}>{content}</div>)}
+      {isOpen && renderLayer(<Content {...layerProps} />)}
     </Fragment>
   );
 };

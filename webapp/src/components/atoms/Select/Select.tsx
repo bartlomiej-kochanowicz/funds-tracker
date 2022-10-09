@@ -61,7 +61,9 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
 
     const handleOpen = () => setIsOpen(prev => !prev);
 
-    const minMenuWidth = buttonRef.current?.offsetWidth ?? null;
+    const minMenuWidth = (
+      buttonRef.current?.offsetWidth ? `${Number(buttonRef.current?.offsetWidth)}px` : undefined
+    ) as `${number}px`;
 
     return (
       <Fragment>

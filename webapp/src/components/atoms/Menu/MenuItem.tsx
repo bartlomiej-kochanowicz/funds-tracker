@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 
 export interface MenuItemProps {
   children: ReactNode;
-  onClick: () => void;
-  isSelected: boolean;
+  onClick?: () => void;
+  isSelected?: boolean;
 }
 
 const StyledButton = styled.button<{ isSelected: boolean }>`
@@ -31,7 +31,7 @@ const StyledButton = styled.button<{ isSelected: boolean }>`
   `};
 `;
 
-export const MenuItem: FC<MenuItemProps> = ({ children, onClick, isSelected }) => (
+export const MenuItem: FC<MenuItemProps> = ({ children, onClick, isSelected = false }) => (
   <li>
     <StyledButton
       type="button"
@@ -44,3 +44,8 @@ export const MenuItem: FC<MenuItemProps> = ({ children, onClick, isSelected }) =
 );
 
 MenuItem.displayName = 'MenuItem';
+
+MenuItem.defaultProps = {
+  onClick: () => null,
+  isSelected: false,
+};
