@@ -1,16 +1,43 @@
-import { Menu } from 'components/atoms';
 import { forwardRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { AppDispatch } from 'store';
+import { logoutThunk } from 'store/thunks/account/logoutThunk';
+import { Menu } from 'components/atoms';
 
-export const DropdownContent = forwardRef<HTMLButtonElement, {}>(({ ...rest }, ref) => (
-  <Menu
-    minMenuWidth="270px"
-    ref={ref}
-    {...rest}
-  >
-    <Menu.Item padding="medium">My profile</Menu.Item>
+interface DropdownContentProps {
+  handleToggle: () => void;
+}
 
-    <Menu.Divider width="85%" />
+export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProps>(
+  ({ handleToggle, ...rest }, ref) => {
+    const { t } = useTranslation();
 
-    <Menu.Item padding="medium">Sign out</Menu.Item>
-  </Menu>
-));
+    const dispatch = useDispatch<AppDispatch>();
+
+    const handleSignOut = () => {
+      dispatch(logoutThunk());
+
+      handleToggle();
+    };
+
+    return (
+      <Menu
+        minMenuWidth="270px"
+        ref={ref}
+        {...rest}
+      >
+        <Menu.Item padding="medium">My profile</Menu.Item>
+
+        <Menu.Divider width="85%" />
+
+        <Menu.Item
+          padding="medium"
+          onClick={handleSignOut}
+        >
+          {t('common.sign_out')}
+        </Menu.Item>
+      </Menu>
+    );
+  },
+);

@@ -1,12 +1,15 @@
 import { Spacer, Text } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import { dashboardNavigation } from 'routes/navigation';
 import { Column } from 'simple-flexbox';
 import { List, ListItem, StyledNav, StyledNavLink } from './BottomBar.styles';
 
 export const BottomBar = () => {
   const isPhone = useBreakpoint('phone', 'max');
+
+  const { t } = useTranslation();
 
   return (
     <StyledNav>
@@ -31,7 +34,7 @@ export const BottomBar = () => {
                         lineHeight="1rem"
                         textAlign="center"
                       >
-                        {title}
+                        {t(title)}
                       </Text>
                     </Fragment>
                   )}

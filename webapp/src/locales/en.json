@@ -69,5 +69,6 @@
   "sidebar.navigation.portfolios": "Portfolios",
   "sidebar.navigation.cash_accounts": "Cash Accounts",
   "sidebar.navigation.transactions": "Transactions",
-  "sidebar.navigation.history": "History"
+  "sidebar.navigation.history": "History",
+  "common.sign_out": "Sign out"
 }

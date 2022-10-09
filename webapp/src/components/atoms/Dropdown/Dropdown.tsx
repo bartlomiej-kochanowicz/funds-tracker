@@ -6,7 +6,9 @@ import { Trigger } from './Dropdown.styles';
 interface DropdownProps {
   placement?: PlacementType;
   children: React.ReactNode;
-  content: ForwardRefExoticComponent<RefAttributes<HTMLButtonElement>>;
+  content: ForwardRefExoticComponent<
+    { handleToggle: () => void } & RefAttributes<HTMLButtonElement>
+  >;
 }
 
 export const Dropdown = ({ placement, children, content: Content }: DropdownProps) => {
@@ -26,19 +28,25 @@ export const Dropdown = ({ placement, children, content: Content }: DropdownProp
     onOutsideClick: () => setIsOpen(false),
   });
 
-  const handleOpen = () => setIsOpen(prev => !prev);
+  const handleToggle = () => setIsOpen(prev => !prev);
 
   return (
     <Fragment>
       <Trigger
         {...triggerProps}
-        onClick={handleOpen}
+        onClick={handleToggle}
         type="button"
       >
         {children}
       </Trigger>
 
-      {isOpen && renderLayer(<Content {...layerProps} />)}
+      {isOpen &&
+        renderLayer(
+          <Content
+            {...layerProps}
+            handleToggle={handleToggle}
+          />,
+        )}
     </Fragment>
   );
 };

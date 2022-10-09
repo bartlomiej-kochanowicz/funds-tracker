@@ -9,12 +9,10 @@ export const Colors = {
   Red: '#e74c3c',
   Black: '#333333',
   White: '#ffffff',
-  Purple: '#725BFE',
   DarkGray: '#7C8DA6',
   Gray: '#A5B4CB',
   LightGray: '#e3e3e3',
   Light: '#F5F7F9',
-  LightYellow: '#FAF9F4',
 };
 
 export const theme = {
@@ -24,12 +22,10 @@ export const theme = {
     red: Colors.Red,
     black: Colors.Black,
     white: Colors.White,
-    purple: Colors.Purple,
     darkGray: Colors.DarkGray,
     gray: Colors.Gray,
     lightGray: Colors.LightGray,
     light: Colors.Light,
-    lightYellow: Colors.LightYellow,
   },
   breakpoints: {
     desktop: customMediaQuery(breakpoints.desktop),
