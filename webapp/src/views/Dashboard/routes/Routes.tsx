@@ -1,8 +1,10 @@
 import { lazy } from 'react';
 import { Outlet } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import { ROUTES } from 'routes/paths';
 import { Dashboard as DashboardLayout } from 'layouts/Dashboard';
 import { ProtectedRoute } from 'utils/ProtectedRoute';
+import { ErrorContent } from 'components/molecules/ErrorContent';
 
 const Dashboard = lazy(() =>
   import('./Dashboard').then(({ Dashboard: component }) => ({
@@ -16,7 +18,9 @@ export const DashboardRoutes = [
     element: (
       <ProtectedRoute>
         <DashboardLayout>
-          <Outlet />
+          <ErrorBoundary FallbackComponent={ErrorContent}>
+            <Outlet />
+          </ErrorBoundary>
         </DashboardLayout>
       </ProtectedRoute>
     ),

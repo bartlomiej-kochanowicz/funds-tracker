@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import { Text } from 'components/atoms/Text';
+import { Initials } from 'helpers/Initials';
 import { Circle } from './Avatar.styles';
 
 interface AvatarProps {
@@ -6,7 +8,7 @@ interface AvatarProps {
 }
 
 export const Avatar = ({ name }: AvatarProps) => {
-  console.log(name);
+  const initials = useMemo(() => new Initials(name), [name]);
 
   return (
     <Circle
@@ -17,7 +19,7 @@ export const Avatar = ({ name }: AvatarProps) => {
         fontColor="white"
         fontSize="1.25"
       >
-        BK
+        {initials.getInitials()}
       </Text>
     </Circle>
   );
