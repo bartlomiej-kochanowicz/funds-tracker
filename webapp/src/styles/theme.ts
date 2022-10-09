@@ -134,4 +134,9 @@ export const theme = {
     bottomBar: 1,
     topbar: 2,
   },
+  zIndex: {
+    sidebar: 1,
+    bottomBar: 1,
+    topbar: 2,
+  },
 };
