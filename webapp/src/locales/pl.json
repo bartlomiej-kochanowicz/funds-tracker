@@ -70,5 +70,6 @@
   "sidebar.navigation.cash_accounts": "Konta gotówkowe",
   "sidebar.navigation.transactions": "Transakcje",
   "sidebar.navigation.history": "Historia",
+  "sidebar.navigation.my_profile": "Mój profil",
   "common.sign_out": "Wyloguj się"
 }

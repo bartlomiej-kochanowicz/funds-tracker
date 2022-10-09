@@ -70,5 +70,6 @@
   "sidebar.navigation.cash_accounts": "Cash Accounts",
   "sidebar.navigation.transactions": "Transactions",
   "sidebar.navigation.history": "History",
+  "sidebar.navigation.my_profile": "My profile",
   "common.sign_out": "Sign out"
 }

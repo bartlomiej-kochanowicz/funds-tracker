@@ -19,7 +19,11 @@ export const StyledNav = styled.nav`
 export const List = styled.ul`
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+
+  ${({ theme }) => css`
+    column-gap: ${theme.spacing.large};
+  `}
 `;
 
 export const ListItem = styled.li`
@@ -28,6 +32,7 @@ export const ListItem = styled.li`
 
 export const StyledNavLink = styled(NavLink)`
   text-decoration: none;
+  white-space: nowrap;
 
   ${({ theme }) => css`
     color: ${theme.colors.darkGray};

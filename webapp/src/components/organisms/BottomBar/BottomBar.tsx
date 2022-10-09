@@ -1,20 +1,23 @@
 import { Spacer, Text } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { dashboardNavigation } from 'routes/navigation';
 import { Column } from 'simple-flexbox';
 import { List, ListItem, StyledNav, StyledNavLink } from './BottomBar.styles';
 
 export const BottomBar = () => {
+  const isDesktop = useBreakpoint('desktop', 'min');
   const isPhone = useBreakpoint('phone', 'max');
 
   const { t } = useTranslation();
 
+  const navigation = useMemo(() => dashboardNavigation(isDesktop), [isDesktop]);
+
   return (
     <StyledNav>
       <List>
-        {dashboardNavigation.map(({ to, title, icon: Icon }) => (
+        {navigation.map(({ to, title, icon: Icon }) => (
           <ListItem key={title}>
             <StyledNavLink
               to={to}

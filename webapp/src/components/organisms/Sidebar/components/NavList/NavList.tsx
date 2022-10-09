@@ -6,16 +6,16 @@ import { Row } from 'simple-flexbox';
 import { Bar, List, ListItem, StyledNavLink } from './NavList.styles';
 
 interface NavListProps {
-  routes: { to: string; title: string; icon: IconType }[];
+  navigation: { to: string; title: string; icon: IconType }[];
 }
 
-export const NavList = ({ routes }: NavListProps) => {
+export const NavList = ({ navigation }: NavListProps) => {
   const { t } = useTranslation();
 
   return (
     <nav>
       <List>
-        {routes.map(({ to, title, icon: Icon }) => (
+        {navigation.map(({ to, title, icon: Icon }) => (
           <ListItem key={title}>
             <StyledNavLink
               to={to}
