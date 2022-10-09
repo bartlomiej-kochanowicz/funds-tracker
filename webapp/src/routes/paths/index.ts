@@ -10,6 +10,7 @@ export const ROUTES = {
     TRANSACTIONS: '/dashboard/transactions',
     HISTORY: '/dashboard/history',
   },
+  HUB: '/hub',
   SETTINGS: {
     SETTINGS: '/settings',
     MY_PROFILE: '/settings/account',

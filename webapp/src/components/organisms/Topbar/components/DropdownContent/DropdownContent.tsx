@@ -27,7 +27,7 @@ export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProp
         ref={ref}
         {...rest}
       >
-        <Menu.Item padding="medium">{t('sidebar.navigation.my_profile')}</Menu.Item>
+        <Menu.Item padding="medium">{t('navigation.my_profile')}</Menu.Item>
 
         <Menu.Divider width="85%" />
 

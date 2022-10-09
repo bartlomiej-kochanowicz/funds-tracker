@@ -1,23 +1,16 @@
-import { Spacer, Text } from 'components/atoms';
-import { useBreakpoint } from 'hooks/useBreakpoint';
-import { Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { dashboardNavigation } from 'routes/navigation';
 import { Column } from 'simple-flexbox';
-import { List, ListItem, StyledNav, StyledNavLink } from './BottomBar.styles';
+import { Spacer } from 'components/atoms';
+import { bottomBarNavigation } from './constants';
+import { List, ListItem, StyledNav, StyledNavLink, Title } from './BottomBar.styles';
 
 export const BottomBar = () => {
-  const isDesktop = useBreakpoint('desktop', 'min');
-  const isPhone = useBreakpoint('phone', 'max');
-
   const { t } = useTranslation();
-
-  const navigation = useMemo(() => dashboardNavigation(isDesktop), [isDesktop]);
 
   return (
     <StyledNav>
       <List>
-        {navigation.map(({ to, title, icon: Icon }) => (
+        {bottomBarNavigation.map(({ to, title, icon: Icon }) => (
           <ListItem key={title}>
             <StyledNavLink
               to={to}
@@ -25,22 +18,19 @@ export const BottomBar = () => {
             >
               {({ isActive }) => (
                 <Column alignItems="center">
-                  <Icon size={isPhone ? '1.75rem' : '1.5rem'} />
+                  <Icon size="1.5rem" />
 
-                  {!isPhone && (
-                    <Fragment>
-                      <Spacer space="tiny" />
+                  <Spacer space="tiny" />
 
-                      <Text
-                        fontColor={isActive ? 'black' : 'darkGray'}
-                        fontWeight={isActive ? '700' : '500'}
-                        lineHeight="1rem"
-                        textAlign="center"
-                      >
-                        {t(title)}
-                      </Text>
-                    </Fragment>
-                  )}
+                  <Title
+                    fontColor={isActive ? 'black' : 'darkGray'}
+                    fontWeight={isActive ? '700' : '500'}
+                    lineHeight="1rem"
+                    textAlign="center"
+                    fontSize="0.875"
+                  >
+                    {t(title)}
+                  </Title>
                 </Column>
               )}
             </StyledNavLink>

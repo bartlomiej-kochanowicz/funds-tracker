@@ -65,11 +65,12 @@
   "page.welcome.description": "Kontroluj swoje inwestycje z jednego miejsca, prosto i czytelnie dzięki Funds Tracker.",
   "common.hi": "Cześć",
   "common.dashboard": "Kokpit",
-  "sidebar.navigation.home": "Strona główna",
-  "sidebar.navigation.portfolios": "Portfele",
-  "sidebar.navigation.cash_accounts": "Konta gotówkowe",
-  "sidebar.navigation.transactions": "Transakcje",
-  "sidebar.navigation.history": "Historia",
-  "sidebar.navigation.my_profile": "Mój profil",
+  "navigation.home": "Strona główna",
+  "navigation.portfolios": "Portfele",
+  "navigation.cash_accounts": "Konta gotówkowe",
+  "navigation.transactions": "Transakcje",
+  "navigation.history": "Historia",
+  "navigation.my_profile": "Mój profil",
+  "navigation.hub": "Centrum",
   "common.sign_out": "Wyloguj się"
 }

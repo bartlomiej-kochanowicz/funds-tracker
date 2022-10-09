@@ -65,11 +65,12 @@
   "page.welcome.description": "Manage your investments from single place simply and purely thanks to Funds Tracker",
   "common.hi": "Hi",
   "common.dashboard": "Dashboard",
-  "sidebar.navigation.home": "Home",
-  "sidebar.navigation.portfolios": "Portfolios",
-  "sidebar.navigation.cash_accounts": "Cash Accounts",
-  "sidebar.navigation.transactions": "Transactions",
-  "sidebar.navigation.history": "History",
-  "sidebar.navigation.my_profile": "My profile",
+  "navigation.home": "Home",
+  "navigation.portfolios": "Portfolios",
+  "navigation.cash_accounts": "Cash Accounts",
+  "navigation.transactions": "Transactions",
+  "navigation.history": "History",
+  "navigation.my_profile": "My profile",
+  "navigation.hub": "Hub",
   "common.sign_out": "Sign out"
 }
