@@ -62,5 +62,7 @@
   "common.input.name.placeholder": "Nazwa",
   "common.welcome": "Witaj",
   "add.cash.accounts.submit": "Następny krok",
-  "page.welcome.description": "Kontroluj swoje inwestycje z jednego miejsca, prosto i czytelnie dzięki Funds Tracker."
+  "page.welcome.description": "Kontroluj swoje inwestycje z jednego miejsca, prosto i czytelnie dzięki Funds Tracker.",
+  "common.hi": "Cześć",
+  "common.dashboard": "Kokpit"
 }

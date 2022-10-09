@@ -1,20 +1,25 @@
 import { Heading, Spacer } from 'components/atoms';
+import { useTranslation } from 'react-i18next';
 import { dashboardNavigation } from 'routes/navigation';
 import { NavList } from './components/NavList';
 import { StyledColumn } from './Sidebar.styles';
 
-export const Sidebar = () => (
-  <StyledColumn>
-    <Heading
-      level="h2"
-      fontColor="black"
-      fontSize="1.25"
-    >
-      DASHBOARD
-    </Heading>
+export const Sidebar = () => {
+  const { t } = useTranslation();
 
-    <Spacer space="small" />
+  return (
+    <StyledColumn>
+      <Heading
+        level="h2"
+        fontColor="black"
+        fontSize="1.25"
+      >
+        {t('common.dashboard')}
+      </Heading>
 
-    <NavList routes={dashboardNavigation} />
-  </StyledColumn>
-);
+      <Spacer space="small" />
+
+      <NavList routes={dashboardNavigation} />
+    </StyledColumn>
+  );
+};
