@@ -5,6 +5,7 @@ export interface AccountResponse {
   uuid: string;
   email: string;
   createdAt: Date;
+  name: string;
 }
 
 export const getAccount = retryHTTP(() => clientPrivate.get<AccountResponse>('/auth/account'));

@@ -15,7 +15,6 @@ export const StyledNavLink = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   width: 214px;
-  padding-right: 0;
 
   ${({ theme }) => css`
     color: ${theme.colors.darkGray};
@@ -26,6 +25,8 @@ export const StyledNavLink = styled(NavLink)`
       color: ${theme.colors.blue};
     }
   `}
+
+  padding-right: 0;
 `;
 
 export const Bar = styled.span`

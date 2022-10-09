@@ -132,7 +132,6 @@ export const theme = {
   gradients: {
     primary: `linear-gradient(to top left, #B0B0B0, #FAFBFC);`,
     secondary: `linear-gradient(to top, #2a2a2a , #333333)`,
-    tertiary: `radial-gradient(circle at right bottom, #AFE39D , #7DCAC7)`,
   },
   zIndex: {
     sidebar: 1,

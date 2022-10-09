@@ -123,12 +123,12 @@ export class AuthService {
 
   async getAccount(
     userId: string,
-  ): Promise<Pick<User, 'email' | 'uuid' | 'createdAt'>> {
-    const { email, uuid, createdAt } = await this.prisma.user.findUnique({
+  ): Promise<Pick<User, 'email' | 'uuid' | 'createdAt' | 'name'>> {
+    const { email, uuid, createdAt, name } = await this.prisma.user.findUnique({
       where: { uuid: userId },
     });
 
-    return { email, uuid, createdAt };
+    return { email, uuid, createdAt, name };
   }
 
   async logout(userId: string, res): Promise<unknown> {
