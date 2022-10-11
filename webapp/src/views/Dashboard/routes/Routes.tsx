@@ -4,7 +4,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { ROUTES } from 'routes/paths';
 import { Dashboard as DashboardLayout } from 'layouts/Dashboard';
 import { ProtectedRoute } from 'utils/ProtectedRoute';
-import { ErrorContent } from 'components/molecules/ErrorContent';
+import { ErrorContent } from 'components/molecules';
 
 const Dashboard = lazy(() =>
   import('./Dashboard').then(({ Dashboard: component }) => ({

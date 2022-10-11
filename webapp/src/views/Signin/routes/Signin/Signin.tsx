@@ -2,7 +2,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Row } from 'simple-flexbox';
 import { Spacer, Heading, Text, Link } from 'components/atoms';
 import { ROUTES } from 'routes/paths';
-import { LangSelector } from 'components/molecules/LangSelector';
+import { LangSelector } from 'components/molecules';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { SigninForm } from './SigninForm';
 

@@ -1,30 +1,5 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Column } from 'simple-flexbox';
-import { Spacer, Button } from 'components/atoms';
+import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { ReactComponent as LogoNameHorizontal } from 'assets/logo/logo-name-horizontal.svg';
-import { StyledFullscreenClear } from './Home.styles';
 
-export const Home: FC = () => {
-  const { t } = useTranslation();
-
-  return (
-    <StyledFullscreenClear>
-      <Column alignItems="center">
-        <LogoNameHorizontal width="500px" />
-
-        <Spacer />
-
-        <Button
-          size="large"
-          as={Link}
-          to={ROUTES.SIGNIN}
-        >
-          {t('page.welcome.button')}
-        </Button>
-      </Column>
-    </StyledFullscreenClear>
-  );
-};
+export const Home: FC = () => <Navigate to={ROUTES.SIGNIN} />;
