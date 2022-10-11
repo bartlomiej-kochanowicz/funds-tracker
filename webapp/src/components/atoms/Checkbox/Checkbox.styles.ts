@@ -13,8 +13,8 @@ export const Marker = styled.span`
   justify-content: center;
   width: 24px;
   height: 24px;
-  background-color: ${({ theme }) => theme.colors.light};
-  border: 2px solid ${({ theme }) => theme.colors.gray};
+  background-color: ${({ theme }) => theme.colors.gray100};
+  border: 2px solid ${({ theme }) => theme.colors.gray300};
   border-radius: 0.3rem;
 
   svg {

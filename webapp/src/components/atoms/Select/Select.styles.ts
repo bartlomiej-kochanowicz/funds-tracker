@@ -15,21 +15,21 @@ export const StyledButton = styled.button<
   ${({ theme, error }) => css`
     border-radius: ${theme.radius.secondary};
     border: none;
-    background-color: ${theme.colors.light};
+    background-color: ${theme.colors.gray100};
     padding: ${theme.padding.medium};
     color: ${theme.colors[error ? 'red' : 'black']};
     outline-color: ${theme.colors[error ? 'red' : 'blue']};
     font-weight: ${theme.font.weight[500]};
-    border: 2px solid ${theme.colors[error ? 'red' : 'gray']};
+    border: 2px solid ${theme.colors[error ? 'red' : 'gray300']};
 
     &:focus {
-      background-color: ${darken(theme.colors.light, 0.05)};
+      background-color: ${darken(theme.colors.gray100, 0.05)};
       color: ${theme.colors[error ? 'red' : 'blue']};
       border: 2px solid ${theme.colors[error ? 'red' : 'blue']};
     }
 
     &::placeholder {
-      color: ${theme.colors.gray};
+      color: ${theme.colors.gray300};
     }
   `}
 `;
@@ -37,7 +37,7 @@ export const StyledButton = styled.button<
 export const StyledContent = styled.div<{
   isSelected: boolean;
 }>`
-  color: ${({ theme, isSelected }) => (isSelected ? 'inline' : theme.colors.gray)};
+  color: ${({ theme, isSelected }) => (isSelected ? 'inline' : theme.colors.gray300)};
 `;
 
 export const Wrapper = styled.div.withConfig({

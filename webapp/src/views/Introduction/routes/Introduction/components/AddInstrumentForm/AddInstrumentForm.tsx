@@ -103,7 +103,7 @@ export const AddInstrumentForm = () => {
 
         <Text
           fontSize="0.875"
-          fontColor="darkGray"
+          fontColor="gray400"
           textAlign="center"
         >
           {t('add.instrument.description')}

@@ -10,24 +10,24 @@ export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
     padding: ${hasUnit ? '0.5rem 2.5rem 0.5rem 1.25rem' : '0.5rem 1.25rem'};
     outline-color: ${theme.colors[error ? 'red' : 'blue']};
     font-weight: ${theme.font.weight[500]};
-    background-color: ${theme.colors.light};
+    background-color: ${theme.colors.gray100};
     color: ${theme.colors[error ? 'red' : 'black']};
-    border: 2px solid ${theme.colors[error ? 'red' : 'gray']};
+    border: 2px solid ${theme.colors[error ? 'red' : 'gray300']};
 
     &:focus {
-      background-color: ${darken(theme.colors.light, 0.05)};
+      background-color: ${darken(theme.colors.gray100, 0.05)};
       color: ${theme.colors[error ? 'red' : 'blue']};
     }
 
     &:disabled {
       cursor: not-allowed;
-      background-color: ${transparentize(theme.colors.light, 0.5)};
+      background-color: ${transparentize(theme.colors.gray100, 0.5)};
       color: ${transparentize(theme.colors.black, 0.5)};
-      border: 2px solid ${transparentize(theme.colors.gray, 0.5)};
+      border: 2px solid ${transparentize(theme.colors.gray300, 0.5)};
     }
 
     &::placeholder {
-      color: ${theme.colors.gray};
+      color: ${theme.colors.gray300};
     }
   `}
 
@@ -65,7 +65,7 @@ export const Error = styled.span`
 `;
 
 export const Unit = styled.span`
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.gray300};
   position: absolute;
   line-height: 2.75rem;
   right: 1.25rem;

@@ -17,7 +17,7 @@ export const Signup = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="darkGray"
+        fontColor="gray400"
         textAlign="center"
       >
         {t('page.signup.description')}
@@ -31,7 +31,7 @@ export const Signup = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="darkGray"
+        fontColor="gray400"
         textAlign="right"
       >
         <Trans

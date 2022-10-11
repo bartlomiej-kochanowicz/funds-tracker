@@ -8,10 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'styles/GlobalStyle';
 import { store } from 'store';
 import { ErrorContent } from 'components/molecules';
-import {
-  ColorThemeProvider,
-  useColorThemeContext,
-} from 'contexts/ColorThemeContext/colorThemeContext';
+import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
 
 const Content = () => {
   const { theme } = useColorThemeContext();

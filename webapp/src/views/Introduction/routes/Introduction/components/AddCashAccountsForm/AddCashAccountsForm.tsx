@@ -70,7 +70,7 @@ export const AddCashAccountsForm = () => {
 
         <Text
           fontSize="0.875"
-          fontColor="darkGray"
+          fontColor="gray400"
           textAlign="center"
         >
           <Trans
@@ -79,7 +79,7 @@ export const AddCashAccountsForm = () => {
               bold: (
                 <Text
                   fontSize="0.875"
-                  fontColor="darkGray"
+                  fontColor="gray400"
                   textAlign="center"
                   fontWeight="700"
                 />

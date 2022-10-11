@@ -17,7 +17,7 @@ export const Signin = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="darkGray"
+        fontColor="gray400"
         textAlign="center"
       >
         {t('page.signin.description')}
@@ -31,7 +31,7 @@ export const Signin = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="darkGray"
+        fontColor="gray400"
         textAlign="right"
       >
         <Trans

@@ -23,7 +23,7 @@ export const BottomBar = () => {
                   <Spacer space="tiny" />
 
                   <Title
-                    fontColor={isActive ? 'black' : 'darkGray'}
+                    fontColor={isActive ? 'black' : 'gray400'}
                     fontWeight={isActive ? '700' : '500'}
                     lineHeight="1rem"
                     textAlign="center"

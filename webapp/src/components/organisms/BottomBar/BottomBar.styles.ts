@@ -32,7 +32,7 @@ export const StyledNavLink = styled(NavLink)`
   text-decoration: none;
 
   ${({ theme }) => css`
-    color: ${theme.colors.darkGray};
+    color: ${theme.colors.gray400};
     outline-color: ${theme.colors.blue};
 
     &.active {

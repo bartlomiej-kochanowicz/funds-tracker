@@ -29,7 +29,7 @@ export const NavList = ({ navigation }: NavListProps) => {
                     <Spreader spread="small" />
 
                     <Text
-                      fontColor={isActive ? 'black' : 'darkGray'}
+                      fontColor={isActive ? 'black' : 'gray400'}
                       fontWeight={isActive ? '700' : '500'}
                     >
                       {t(title)}

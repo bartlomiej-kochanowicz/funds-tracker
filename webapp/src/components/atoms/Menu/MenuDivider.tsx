@@ -10,9 +10,9 @@ export const MenuDivider = styled.hr<MenuDividerProps>`
 
   ${({ theme, width = '80%' }) => css`
     width: ${width};
-    color: ${theme.colors.lightGray};
-    border-color: ${theme.colors.lightGray};
-    background-color: ${theme.colors.lightGray};
-    border: 1px solid ${theme.colors.lightGray};
+    color: ${theme.colors.gray200};
+    border-color: ${theme.colors.gray200};
+    background-color: ${theme.colors.gray200};
+    border: 1px solid ${theme.colors.gray200};
   `}
 `;
