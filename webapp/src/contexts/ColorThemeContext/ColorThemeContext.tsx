@@ -1,20 +1,21 @@
 import { createContext, FC, useContext, useState } from 'react';
-import { COLOR_THEME } from 'constants/common';
+import { theme, darkTheme } from 'styles/theme';
+import { COLOR_THEME, ColorThemeType } from 'constants/common';
 
 type ColorThemeContextType = ReturnType<typeof useColorTheme>;
-
-type ColorThemeType = keyof typeof COLOR_THEME;
 
 const ColorThemeContext = createContext<ColorThemeContextType | null>(null);
 
 const useColorTheme = () => {
-  const [theme, setTheme] = useState<ColorThemeType>(COLOR_THEME.LIGHT);
+  const [colorTheme, setColorTheme] = useState<ColorThemeType>(COLOR_THEME.LIGHT);
 
   const toggleTheme = () =>
-    setTheme(prevTheme => (prevTheme === COLOR_THEME.LIGHT ? COLOR_THEME.DARK : COLOR_THEME.LIGHT));
+    setColorTheme(prevTheme =>
+      prevTheme === COLOR_THEME.LIGHT ? COLOR_THEME.DARK : COLOR_THEME.LIGHT,
+    );
 
   return {
-    theme,
+    theme: colorTheme === COLOR_THEME.LIGHT ? theme : darkTheme,
     toggleTheme,
   };
 };

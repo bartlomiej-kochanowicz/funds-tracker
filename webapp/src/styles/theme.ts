@@ -2,6 +2,7 @@ import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
 import { breakpoints } from 'constants/breakpoints';
 import { transparentize } from 'color2k';
+import { ColorThemeType, COLOR_THEME } from 'constants/common';
 
 export const Colors = {
   Green: '#7DCAC7',
@@ -9,23 +10,36 @@ export const Colors = {
   Red: '#e74c3c',
   Black: '#333333',
   White: '#ffffff',
-  DarkGray: '#7C8DA6',
-  Gray: '#A5B4CB',
-  LightGray: '#e3e3e3',
-  Light: '#F5F7F9',
+  Gray400: '#696969',
+  Gray300: '#808080',
+  Gray200: '#E0E0E0',
+  Gray100: '#F0F0F0',
+};
+
+export const darkThemeColors = {
+  green: Colors.Green,
+  blue: Colors.Blue,
+  red: Colors.Red,
+  black: Colors.White,
+  white: Colors.Black,
+  gray400: Colors.Gray100,
+  gray300: Colors.Gray200,
+  gray200: Colors.Gray300,
+  gray100: Colors.Gray400,
 };
 
 export const theme = {
+  colorTheme: COLOR_THEME.LIGHT as ColorThemeType,
   colors: {
     green: Colors.Green,
     blue: Colors.Blue,
     red: Colors.Red,
     black: Colors.Black,
     white: Colors.White,
-    darkGray: Colors.DarkGray,
-    gray: Colors.Gray,
-    lightGray: Colors.LightGray,
-    light: Colors.Light,
+    gray400: Colors.Gray400,
+    gray300: Colors.Gray300,
+    gray200: Colors.Gray200,
+    gray100: Colors.Gray100,
   },
   breakpoints: {
     desktop: customMediaQuery(breakpoints.desktop),
@@ -135,3 +149,9 @@ export const theme = {
     topbar: 2,
   },
 };
+
+export const darkTheme = {
+  ...JSON.parse(JSON.stringify(theme)),
+  colors: darkThemeColors,
+  colorTheme: COLOR_THEME.DARK,
+} as typeof theme;
