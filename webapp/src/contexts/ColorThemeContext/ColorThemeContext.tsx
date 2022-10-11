@@ -16,6 +16,7 @@ const useColorTheme = () => {
 
   return {
     theme: colorTheme === COLOR_THEME.LIGHT ? theme : darkTheme,
+    isDark: colorTheme === COLOR_THEME.DARK,
     toggleTheme,
   };
 };

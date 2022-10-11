@@ -1,11 +1,8 @@
-import { COLOR_THEME } from 'constants/common';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { Handle, spring, StyledBiMoon, StyledBiSun, StyledButton } from './ThemeSwitcher.styles';
 
 export const ThemeSwitcher = () => {
-  const { theme, toggleTheme } = useColorThemeContext();
-
-  const isDark = theme.colorTheme === COLOR_THEME.DARK;
+  const { isDark, toggleTheme } = useColorThemeContext();
 
   return (
     <StyledButton
@@ -23,3 +20,5 @@ export const ThemeSwitcher = () => {
     </StyledButton>
   );
 };
+
+ThemeSwitcher.displayName = 'ThemeSwitcher';
