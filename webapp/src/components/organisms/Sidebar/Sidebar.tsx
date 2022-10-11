@@ -1,4 +1,4 @@
-import { Heading, Spacer } from 'components/atoms';
+import { Heading, Spacer, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
 import { useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
@@ -25,7 +25,13 @@ export const Sidebar = () => {
         <NavList navigation={sidebarNavigation} />
       </Column>
 
-      <LangSelector />
+      <Column alignItems="center">
+        <ThemeSwitcher />
+
+        <Spacer />
+
+        <LangSelector />
+      </Column>
     </StyledColumn>
   );
 };

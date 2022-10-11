@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { Handle, spring, StyledButton } from './Toggle.styles';
 
 interface ToggleProps {
-  isToggled?: boolean;
-  onToggle?: (isToggled: boolean) => void;
+  defaultValue?: boolean;
+  onChange?: (isToggled: boolean) => void;
 }
 
-export const Toggle = ({ isToggled: defaultState = false, onToggle }: ToggleProps) => {
-  const [isToggled, setIsToggled] = useState(defaultState);
+export const Toggle = ({ defaultValue = false, onChange }: ToggleProps) => {
+  const [isToggled, setIsToggled] = useState(defaultValue);
 
   const handleToggle = () =>
     setIsToggled(prev => {
-      onToggle?.(!prev);
+      onChange?.(!prev);
 
       return !prev;
     });
@@ -32,6 +32,6 @@ export const Toggle = ({ isToggled: defaultState = false, onToggle }: ToggleProp
 Toggle.displayName = 'Toggle';
 
 Toggle.defaultProps = {
-  isToggled: false,
-  onToggle: () => {},
+  defaultValue: false,
+  onChange: () => {},
 };
