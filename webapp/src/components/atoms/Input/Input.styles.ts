@@ -8,15 +8,15 @@ export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
   ${({ theme, error, hasUnit }) => css`
     border-radius: ${theme.radius.secondary};
     padding: ${hasUnit ? '0.5rem 2.5rem 0.5rem 1.25rem' : '0.5rem 1.25rem'};
-    outline-color: ${theme.colors[error ? 'red' : 'blue']};
+    outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
     background-color: ${theme.colors.gray100};
-    color: ${theme.colors[error ? 'red' : 'black']};
-    border: 2px solid ${theme.colors[error ? 'red' : 'gray300']};
+    color: ${theme.colors[error ? 'error' : 'black']};
+    border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};
-      color: ${theme.colors[error ? 'red' : 'blue']};
+      color: ${theme.colors[error ? 'error' : 'blue']};
     }
 
     &:disabled {
@@ -60,7 +60,7 @@ export const Error = styled.span`
 
   ${({ theme }) => css`
     font-size: ${theme.font.size['0.75']};
-    color: ${theme.colors.red};
+    color: ${theme.colors.error};
   `}
 `;
 

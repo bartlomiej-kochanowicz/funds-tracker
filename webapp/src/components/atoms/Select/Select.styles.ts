@@ -17,15 +17,15 @@ export const StyledButton = styled.button<
     border: none;
     background-color: ${theme.colors.gray100};
     padding: ${theme.padding.medium};
-    color: ${theme.colors[error ? 'red' : 'black']};
-    outline-color: ${theme.colors[error ? 'red' : 'blue']};
+    color: ${theme.colors[error ? 'error' : 'black']};
+    outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
-    border: 2px solid ${theme.colors[error ? 'red' : 'gray300']};
+    border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};
-      color: ${theme.colors[error ? 'red' : 'blue']};
-      border: 2px solid ${theme.colors[error ? 'red' : 'blue']};
+      color: ${theme.colors[error ? 'error' : 'blue']};
+      border: 2px solid ${theme.colors[error ? 'error' : 'blue']};
     }
 
     &::placeholder {
@@ -60,6 +60,6 @@ export const Error = styled.span`
 
   ${({ theme }) => css`
     font-size: ${theme.font.size['0.75']};
-    color: ${theme.colors.red};
+    color: ${theme.colors.error};
   `}
 `;

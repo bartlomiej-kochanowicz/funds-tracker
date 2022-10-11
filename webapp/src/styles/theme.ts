@@ -7,7 +7,8 @@ import { ColorThemeType, COLOR_THEME } from 'constants/common';
 export const Colors = {
   Green: '#7DCAC7',
   Blue: '#3F8CFF',
-  Red: '#e74c3c',
+  Error: '#e74c3c',
+  Success: '#07bc0c',
   Black: '#333333',
   White: '#ffffff',
   Gray400: '#6c757d',
@@ -19,7 +20,8 @@ export const Colors = {
 export const DarkThemeColors = {
   green: Colors.Green,
   blue: Colors.Blue,
-  red: Colors.Red,
+  error: Colors.Error,
+  success: Colors.Success,
   black: Colors.White,
   white: Colors.Black,
   gray400: Colors.Gray100,
@@ -33,7 +35,8 @@ export const theme = {
   colors: {
     green: Colors.Green,
     blue: Colors.Blue,
-    red: Colors.Red,
+    error: Colors.Error,
+    success: Colors.Success,
     black: Colors.Black,
     white: Colors.White,
     gray400: Colors.Gray400,

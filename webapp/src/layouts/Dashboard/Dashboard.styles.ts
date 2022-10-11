@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
     ${theme.breakpoints.desktop} {
       margin-left: 270px;
       padding: ${theme.spacing.huge};
+      padding-top: 98px;
     }
   `}
 `;

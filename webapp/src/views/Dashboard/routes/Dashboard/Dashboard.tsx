@@ -1,1 +1,7 @@
-export const Dashboard = () => <div>Dashboard</div>;
+import { Toggle } from 'components/atoms';
+
+export const Dashboard = () => (
+  <div>
+    <Toggle />
+  </div>
+);
