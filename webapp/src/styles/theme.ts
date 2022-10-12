@@ -18,6 +18,20 @@ export const Colors = {
   Gray100: '#f9f9fa',
 };
 
+const darkColors = {
+  green: Colors.Green,
+  blue: Colors.Blue,
+  error: Colors.Error,
+  success: Colors.Success,
+  black: Colors.White,
+  white: Colors.Black,
+  gray500: Colors.Gray500,
+  gray400: Colors.Gray200,
+  gray300: Colors.Gray300,
+  gray200: Colors.Gray200,
+  gray100: Colors.Gray100,
+};
+
 export const theme = {
   colorTheme: COLOR_THEME.LIGHT as ColorThemeType,
   colors: {
@@ -27,6 +41,7 @@ export const theme = {
     success: Colors.Success,
     black: Colors.Black,
     white: Colors.White,
+    gray500: Colors.Gray500,
     gray400: Colors.Gray400,
     gray300: Colors.Gray300,
     gray200: Colors.Gray200,
@@ -144,4 +159,5 @@ export const theme = {
 export const darkTheme = {
   ...JSON.parse(JSON.stringify(theme)),
   colorTheme: COLOR_THEME.DARK,
+  colors: darkColors,
 } as typeof theme;

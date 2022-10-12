@@ -1,7 +1,7 @@
 import { Trans, useTranslation } from 'react-i18next';
-import { Heading, Link, Spacer, Text } from 'components/atoms';
+import { Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { FullscreenClear } from 'layouts/FullscreenClear';
-import { Row } from 'simple-flexbox';
+import { Column } from 'simple-flexbox';
 import { LangSelector } from 'components/molecules';
 import { ROUTES } from 'routes/paths';
 import { SignupForm } from './SignupForm';
@@ -53,9 +53,13 @@ export const Signup = () => {
 
       <Spacer space="large" />
 
-      <Row justifyContent="center">
+      <Column alignItems="center">
         <LangSelector />
-      </Row>
+
+        <Spacer />
+
+        <ThemeSwitcher />
+      </Column>
     </FullscreenClear>
   );
 };
