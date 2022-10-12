@@ -8,7 +8,7 @@ export const Wrapper = styled(Column)`
 
   ${({ theme }) => css`
     padding: ${theme.padding.medium};
-    background: ${theme.colors.white};
+    background: ${theme.colors.gray100};
   `}
 `;
 

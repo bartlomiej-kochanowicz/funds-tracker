@@ -24,7 +24,8 @@ export const GlobalStyle = styled.createGlobalStyle`
     font-size: 16px;
     height: 100vh; /* fallback for Js load */
     height: var(--doc-height);
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.text};
+    background-color: ${({ theme }) => theme.colors.gray100};
   }
 
   body {

@@ -16,7 +16,7 @@ const StyledButton = styled.button<{ isSelected: boolean; padding: keyof Default
   text-align: left;
 
   ${({ theme, isSelected, padding }) => css`
-    color: ${theme.colors.black};
+    color: ${theme.colors.text};
     padding: ${theme.padding[padding]};
     outline-color: ${theme.colors.blue};
 

@@ -23,13 +23,14 @@ const darkColors = {
   blue: Colors.Blue,
   error: Colors.Error,
   success: Colors.Success,
-  black: Colors.White,
-  white: Colors.Black,
-  gray500: Colors.Gray500,
+  black: Colors.Black,
+  white: Colors.White,
+  gray500: Colors.Gray100,
   gray400: Colors.Gray200,
   gray300: Colors.Gray300,
-  gray200: Colors.Gray200,
-  gray100: Colors.Gray100,
+  gray200: Colors.Gray400,
+  gray100: Colors.Gray500,
+  text: Colors.White,
 };
 
 export const theme = {
@@ -46,6 +47,7 @@ export const theme = {
     gray300: Colors.Gray300,
     gray200: Colors.Gray200,
     gray100: Colors.Gray100,
+    text: Colors.Black,
   },
   breakpoints: {
     desktop: customMediaQuery(breakpoints.desktop),

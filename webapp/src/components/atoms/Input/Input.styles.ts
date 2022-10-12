@@ -11,7 +11,7 @@ export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
     outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
     background-color: ${theme.colors.gray100};
-    color: ${theme.colors[error ? 'error' : 'black']};
+    color: ${theme.colors[error ? 'error' : 'text']};
     border: 3px solid ${theme.colors[error ? 'error' : 'gray300']};
 
     &:focus {

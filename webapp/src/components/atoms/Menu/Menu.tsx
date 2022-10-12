@@ -13,7 +13,7 @@ const StyledUl = styled.ul<MenuProps>`
 
   ${({ theme, minMenuWidth }) => css`
     border-radius: ${theme.radius.secondary};
-    background-color: ${theme.colors.gray100};
+    background-color: ${theme.colors.gray200};
     padding: ${theme.padding.mediumY};
     outline-color: ${theme.colors.blue};
     color: ${theme.colors.black};

@@ -17,15 +17,18 @@ export const StyledButton = styled.button<
     border: none;
     background-color: ${theme.colors.gray100};
     padding: ${theme.padding.medium};
-    color: ${theme.colors[error ? 'error' : 'black']};
+    color: ${theme.colors[error ? 'error' : 'text']};
     outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
-    border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
+    border: 3px solid ${theme.colors[error ? 'error' : 'gray300']};
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};
       color: ${theme.colors[error ? 'error' : 'blue']};
-      border: 2px solid ${theme.colors[error ? 'error' : 'blue']};
+      border: 3px solid ${theme.colors[error ? 'error' : 'blue']};
+      outline-style: solid;
+      outline-width: 3px;
+      outline-offset: -3px;
     }
 
     &::placeholder {
