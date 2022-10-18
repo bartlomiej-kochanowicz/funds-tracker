@@ -1,14 +1,17 @@
 import { HTMLProps, ReactNode, ComponentProps } from 'react';
-import styled, { DefaultTheme, css } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
 import { Link } from 'react-router-dom';
 
 export type Size = 'small' | 'medium' | 'large';
 
+export type ButtonColors = keyof DefaultTheme['button']['color'];
+
 type CommonProps = {
   children: ReactNode;
   size?: Size;
-  color?: keyof DefaultTheme['button']['color'];
+  color?: ButtonColors;
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   fontWeight?: keyof DefaultTheme['font']['weight'];
   borderRadius?: keyof DefaultTheme['radius'];

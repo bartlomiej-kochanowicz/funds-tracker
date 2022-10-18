@@ -1,0 +1,40 @@
+name: Pull Request check
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  webapp:
+    name: CI-webapp
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache-dependency-path: webapp/pnpm-lock.yaml
+      - name: Setup
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.x
+      - run: pnpm install:webapp
+      - run: pnpm tsc:webapp
+      - run: pnpm lint:webapp
+      - run: pnpm test:webapp
+  api:
+    name: CI-api
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache-dependency-path: api/pnpm-lock.yaml
+      - name: Setup
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.x
+      - run: pnpm install:api
+      - run: pnpm tsc:api
+      - run: pnpm lint:api
+      - run: pnpm test:api
