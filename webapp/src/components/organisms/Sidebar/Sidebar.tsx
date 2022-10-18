@@ -14,7 +14,6 @@ export const Sidebar = () => {
       <Column>
         <Heading
           level="h2"
-          fontColor="black"
           fontSize="1.25"
         >
           {t('common.dashboard')}

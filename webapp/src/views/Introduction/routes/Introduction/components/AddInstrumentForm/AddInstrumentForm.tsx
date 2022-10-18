@@ -156,7 +156,7 @@ export const AddInstrumentForm = () => {
               <Button
                 size="large"
                 type="submit"
-                color="black"
+                color="secondary"
                 disabled={isSubmitting}
                 width="100%"
               >

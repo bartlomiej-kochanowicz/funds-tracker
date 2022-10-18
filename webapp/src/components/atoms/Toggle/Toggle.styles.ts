@@ -13,7 +13,7 @@ export const StyledButton = styled.button<{ isToggled: boolean }>`
   border: 0;
 
   ${({ theme, isToggled }) => css`
-    background-color: ${theme.colors.gray400};
+    background-color: ${theme.colors.gray300};
     outline-color: ${theme.colors.blue};
     box-shadow: ${theme.shadows.box};
 

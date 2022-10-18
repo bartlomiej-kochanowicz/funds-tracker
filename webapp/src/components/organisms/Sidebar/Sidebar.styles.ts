@@ -1,3 +1,4 @@
+import { darken } from 'color2k';
 import { Column } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
@@ -8,10 +9,10 @@ export const StyledColumn = styled(Column)`
   height: 100%;
   height: var(--doc-height);
 
-  ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-    z-index: ${theme.zIndex.sidebar};
-    padding: calc(${theme.spacing.huge} * 2.5) 0 ${theme.spacing.huge} ${theme.spacing.huge};
-    box-shadow: ${theme.shadows.box};
+  ${({ theme: { isDark, colors, zIndex, shadows, spacing } }) => css`
+    background-color: ${isDark ? darken(colors.gray100, 0.03) : colors.white};
+    z-index: ${zIndex.sidebar};
+    padding: calc(${spacing.huge} * 2.5) 0 ${spacing.huge} ${spacing.huge};
+    box-shadow: ${shadows.box};
   `}
 `;

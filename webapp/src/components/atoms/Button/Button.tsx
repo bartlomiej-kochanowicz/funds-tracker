@@ -4,12 +4,11 @@ import { darken, transparentize } from 'color2k';
 import { Link } from 'react-router-dom';
 
 export type Size = 'small' | 'medium' | 'large';
-export type ButtonColors = 'blue' | 'black';
 
 type CommonProps = {
   children: ReactNode;
   size?: Size;
-  color?: ButtonColors;
+  color?: keyof DefaultTheme['button']['color'];
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   fontWeight?: keyof DefaultTheme['font']['weight'];
   borderRadius?: keyof DefaultTheme['radius'];
@@ -49,7 +48,7 @@ export const Button = styled.div.withConfig({
   ${({
     theme,
     size = 'medium',
-    color = 'blue',
+    color = 'primary',
     width = 'fit-content',
     fontWeight = '400',
     borderRadius = 'primary',
@@ -99,7 +98,7 @@ Button.displayName = 'Button';
 
 Button.defaultProps = {
   size: 'medium',
-  color: 'blue',
+  color: 'primary',
   width: 'fit-content',
   fontWeight: '500',
   borderRadius: 'primary',

@@ -2,7 +2,6 @@ import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
 import { breakpoints } from 'constants/breakpoints';
 import { transparentize } from 'color2k';
-import { ColorThemeType, COLOR_THEME } from 'constants/common';
 
 export const Colors = {
   Green: '#7DCAC7',
@@ -18,23 +17,8 @@ export const Colors = {
   Gray100: '#f9f9fa',
 };
 
-const darkColors = {
-  green: Colors.Green,
-  blue: Colors.Blue,
-  error: Colors.Error,
-  success: Colors.Success,
-  black: Colors.Black,
-  white: Colors.White,
-  gray500: Colors.Gray100,
-  gray400: Colors.Gray200,
-  gray300: Colors.Gray300,
-  gray200: Colors.Gray400,
-  gray100: Colors.Gray500,
-  text: Colors.White,
-};
-
 export const theme = {
-  colorTheme: COLOR_THEME.LIGHT as ColorThemeType,
+  isDark: false,
   colors: {
     green: Colors.Green,
     blue: Colors.Blue,
@@ -70,11 +54,11 @@ export const theme = {
       },
     },
     color: {
-      blue: {
+      primary: {
         background: Colors.Blue,
         font: Colors.White,
       },
-      black: { background: Colors.Black, font: Colors.White },
+      secondary: { background: Colors.Black, font: Colors.White },
     },
   },
   padding: {
@@ -158,8 +142,31 @@ export const theme = {
   },
 };
 
+const darkColors = {
+  green: Colors.Green,
+  blue: Colors.Blue,
+  error: Colors.Error,
+  success: Colors.Success,
+  black: Colors.Black,
+  white: Colors.White,
+  gray500: Colors.Gray100,
+  gray400: Colors.Gray200,
+  gray300: Colors.Gray300,
+  gray200: Colors.Gray400,
+  gray100: Colors.Gray500,
+  text: Colors.White,
+};
+
 export const darkTheme = {
   ...JSON.parse(JSON.stringify(theme)),
-  colorTheme: COLOR_THEME.DARK,
+  isDark: true,
   colors: darkColors,
+  button: {
+    ...JSON.parse(JSON.stringify(theme.button)),
+    color: {
+      ...JSON.parse(JSON.stringify(theme.button.color)),
+
+      secondary: { background: Colors.White, font: Colors.Black },
+    },
+  },
 } as typeof theme;
