@@ -1,3 +1,4 @@
+import { darken } from 'color2k';
 import { Text } from 'components/atoms';
 import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
@@ -8,13 +9,13 @@ export const StyledNav = styled.nav`
   left: calc(50% - 135px);
   right: calc(50% - 135px);
 
-  ${({ theme }) => css`
-    padding: ${theme.padding.medium};
-    background-color: ${theme.colors.white};
-    z-index: ${theme.zIndex.bottomBar};
-    box-shadow: ${theme.shadows.box};
-    bottom: ${theme.spacing.large};
-    border-radius: ${theme.radius.primary};
+  ${({ theme: { isDark, colors, padding, zIndex, shadows, spacing, radius } }) => css`
+    padding: ${padding.medium};
+    background-color: ${isDark ? darken(colors.gray100, 0.03) : colors.white};
+    z-index: ${zIndex.bottomBar};
+    box-shadow: ${shadows.box};
+    bottom: ${spacing.large};
+    border-radius: ${radius.primary};
   `}
 `;
 

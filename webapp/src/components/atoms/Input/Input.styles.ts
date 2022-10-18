@@ -25,7 +25,7 @@ export const StyledInput = styled.input<{ error: boolean; hasUnit: boolean }>`
     &:disabled {
       cursor: not-allowed;
       background-color: ${transparentize(theme.colors.gray100, 0.5)};
-      color: ${transparentize(theme.colors.black, 0.5)};
+      color: ${transparentize(theme.colors.text, 0.5)};
       border: 2px solid ${transparentize(theme.colors.gray300, 0.5)};
     }
 
