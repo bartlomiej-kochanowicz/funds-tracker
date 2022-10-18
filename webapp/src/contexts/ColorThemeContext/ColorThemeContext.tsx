@@ -1,18 +1,26 @@
 import { createContext, FC, useContext, useState } from 'react';
 import { theme, darkTheme } from 'styles/theme';
 import { COLOR_THEME, ColorThemeType } from 'constants/common';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
+import { getLocalColorTheme, setLocalColorTheme } from 'helpers/localColorTheme';
 
 type ColorThemeContextType = ReturnType<typeof useColorTheme>;
 
 const ColorThemeContext = createContext<ColorThemeContextType | null>(null);
 
 const useColorTheme = () => {
-  const [colorTheme, setColorTheme] = useState<ColorThemeType>(COLOR_THEME.LIGHT);
+  const localTheme = getLocalColorTheme();
+
+  const [colorTheme, setColorTheme] = useState<ColorThemeType>(localTheme || COLOR_THEME.LIGHT);
 
   const toggleTheme = () =>
     setColorTheme(prevTheme =>
       prevTheme === COLOR_THEME.LIGHT ? COLOR_THEME.DARK : COLOR_THEME.LIGHT,
     );
+
+  useUpdateEffect(() => {
+    setLocalColorTheme(colorTheme);
+  }, [colorTheme]);
 
   return {
     theme: colorTheme === COLOR_THEME.LIGHT ? theme : darkTheme,
