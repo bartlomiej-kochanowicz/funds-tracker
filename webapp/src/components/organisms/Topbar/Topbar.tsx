@@ -1,11 +1,30 @@
-import { ReactComponent as LogoNameVerticalDark } from 'assets/logo/logo-name-vertical-dark.svg';
+import { lazy, Suspense } from 'react';
+import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { Profile } from './components/Profile';
 import { StyledRow } from './Topbar.styles';
 
-export const Topbar = () => (
-  <StyledRow justifyContent="space-between">
-    <LogoNameVerticalDark width="135px" />
-
-    <Profile />
-  </StyledRow>
+const LogoNameVertical = lazy(() =>
+  import('assets/logo/logo-name-vertical.svg').then(({ ReactComponent: component }) => ({
+    default: component,
+  })),
 );
+
+const LogoNameVerticalDark = lazy(() =>
+  import('assets/logo/logo-name-vertical-dark.svg').then(({ ReactComponent: component }) => ({
+    default: component,
+  })),
+);
+
+export const Topbar = () => {
+  const { isDark } = useColorThemeContext();
+
+  return (
+    <StyledRow justifyContent="space-between">
+      <Suspense>
+        {isDark ? <LogoNameVertical width="135px" /> : <LogoNameVerticalDark width="135px" />}
+      </Suspense>
+
+      <Profile />
+    </StyledRow>
+  );
+};

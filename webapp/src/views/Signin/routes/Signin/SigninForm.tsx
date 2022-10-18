@@ -129,7 +129,6 @@ export const SigninForm = () => {
       <Spacer />
 
       <Button
-        color="black"
         width="auto"
         disabled={isSubmitting}
         type="submit"

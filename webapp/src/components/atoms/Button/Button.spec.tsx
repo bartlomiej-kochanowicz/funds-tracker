@@ -1,5 +1,6 @@
 import { render } from 'utils/test-utils';
-import { Button, Size, ButtonColors } from 'components/atoms/Button';
+import type { ButtonColors } from 'components/atoms/Button';
+import { Button, Size } from 'components/atoms/Button';
 
 describe('Atoms/Button tests', () => {
   it('renders properly', () => {
@@ -9,8 +10,8 @@ describe('Atoms/Button tests', () => {
   });
 
   it.each([
-    ['blue' as ButtonColors, { background: '#3F8CFF', font: '#ffffff' }],
-    ['black' as ButtonColors, { background: '#333333', font: '#ffffff' }],
+    ['primary' as ButtonColors, { background: '#3F8CFF', font: '#ffffff' }],
+    ['secondary' as ButtonColors, { background: '#333333', font: '#ffffff' }],
   ])('has correct color for %s', (color, { background, font }) => {
     const { getByText } = render(<Button color={color}>test button</Button>);
 

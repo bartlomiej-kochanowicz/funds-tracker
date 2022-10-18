@@ -1,8 +1,8 @@
 import { Trans, useTranslation } from 'react-i18next';
-import { Row } from 'simple-flexbox';
-import { Spacer, Heading, Text, Link } from 'components/atoms';
+import { Column } from 'simple-flexbox';
+import { Spacer, Heading, Text, Link, ThemeSwitcher } from 'components/atoms';
 import { ROUTES } from 'routes/paths';
-import { LangSelector } from 'components/molecules/LangSelector';
+import { LangSelector } from 'components/molecules';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { SigninForm } from './SigninForm';
 
@@ -17,7 +17,7 @@ export const Signin = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="darkGray"
+        fontColor="gray400"
         textAlign="center"
       >
         {t('page.signin.description')}
@@ -31,7 +31,7 @@ export const Signin = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="darkGray"
+        fontColor="gray400"
         textAlign="right"
       >
         <Trans
@@ -53,9 +53,13 @@ export const Signin = () => {
 
       <Spacer space="large" />
 
-      <Row justifyContent="center">
+      <Column alignItems="center">
         <LangSelector />
-      </Row>
+
+        <Spacer />
+
+        <ThemeSwitcher />
+      </Column>
     </FullscreenClear>
   );
 };

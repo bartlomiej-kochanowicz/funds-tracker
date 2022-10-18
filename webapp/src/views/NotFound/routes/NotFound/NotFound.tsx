@@ -9,7 +9,7 @@ export const NotFound: FC = (): JSX.Element => (
     <Spacer space="tiny" />
 
     <Text
-      fontColor="darkGray"
+      fontColor="gray400"
       textAlign="center"
     >
       Page not found

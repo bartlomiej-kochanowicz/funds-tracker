@@ -1,10 +1,12 @@
 import { HTMLProps, ReactNode, ComponentProps } from 'react';
-import styled, { DefaultTheme, css } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
 import { Link } from 'react-router-dom';
 
 export type Size = 'small' | 'medium' | 'large';
-export type ButtonColors = 'blue' | 'black';
+
+export type ButtonColors = keyof DefaultTheme['button']['color'];
 
 type CommonProps = {
   children: ReactNode;
@@ -49,7 +51,7 @@ export const Button = styled.div.withConfig({
   ${({
     theme,
     size = 'medium',
-    color = 'blue',
+    color = 'primary',
     width = 'fit-content',
     fontWeight = '400',
     borderRadius = 'primary',
@@ -99,7 +101,7 @@ Button.displayName = 'Button';
 
 Button.defaultProps = {
   size: 'medium',
-  color: 'blue',
+  color: 'primary',
   width: 'fit-content',
   fontWeight: '500',
   borderRadius: 'primary',

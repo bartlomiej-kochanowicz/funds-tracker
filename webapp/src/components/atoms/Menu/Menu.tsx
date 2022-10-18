@@ -1,5 +1,4 @@
 import { ReactNode, forwardRef } from 'react';
-import { darken } from 'color2k';
 import styled, { css } from 'styled-components';
 
 export interface MenuProps {
@@ -13,11 +12,10 @@ const StyledUl = styled.ul<MenuProps>`
 
   ${({ theme, minMenuWidth }) => css`
     border-radius: ${theme.radius.secondary};
-    background-color: ${theme.colors.light};
+    background-color: ${theme.colors.gray200};
     padding: ${theme.padding.mediumY};
     outline-color: ${theme.colors.blue};
     color: ${theme.colors.black};
-    border: 1px solid ${darken(theme.colors.light, 0.05)};
     box-shadow: ${theme.shadows.dropdown};
     display: flex;
     flex-direction: column;

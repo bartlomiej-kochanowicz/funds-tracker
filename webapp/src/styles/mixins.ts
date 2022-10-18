@@ -24,9 +24,8 @@ export const fontable = css<FontableProps>`
   `}
 
   ${({ theme: { colors }, fontColor }) =>
-    fontColor &&
     css`
-      color: ${colors[fontColor]};
+      color: ${fontColor ? colors[fontColor] : colors.text};
     `}
 
   ${({

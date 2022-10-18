@@ -103,7 +103,7 @@ export const AddInstrumentForm = () => {
 
         <Text
           fontSize="0.875"
-          fontColor="darkGray"
+          fontColor="gray400"
           textAlign="center"
         >
           {t('add.instrument.description')}
@@ -156,7 +156,7 @@ export const AddInstrumentForm = () => {
               <Button
                 size="large"
                 type="submit"
-                color="black"
+                color="secondary"
                 disabled={isSubmitting}
                 width="100%"
               >

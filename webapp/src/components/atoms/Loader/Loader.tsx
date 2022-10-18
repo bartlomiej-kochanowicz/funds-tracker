@@ -5,7 +5,7 @@ export type LoaderColors = 'white' | 'black' | 'blue';
 
 const defaultProps = {
   size: 'medium' as Size,
-  color: 'gray' as LoaderColors,
+  color: 'gray300' as LoaderColors,
   'data-testid': 'loader',
 };
 

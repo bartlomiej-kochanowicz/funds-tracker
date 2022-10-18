@@ -19,7 +19,7 @@ export const FormSuccess = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="darkGray"
+        fontColor="gray400"
         textAlign="center"
       >
         {t('add.instrument.success.description')}
@@ -28,7 +28,7 @@ export const FormSuccess = () => {
       <Spacer space="large" />
 
       <Button
-        color="black"
+        color="secondary"
         width="100%"
         size="large"
         as={Link}

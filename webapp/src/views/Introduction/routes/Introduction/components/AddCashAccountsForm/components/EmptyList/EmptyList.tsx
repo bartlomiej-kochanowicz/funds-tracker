@@ -22,7 +22,7 @@ export const EmptyList = ({ handleAppend }: EmptyListProps) => {
       <Spacer space="tiny" />
 
       <Button
-        color="black"
+        color="secondary"
         onClick={handleAppend}
       >
         {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />

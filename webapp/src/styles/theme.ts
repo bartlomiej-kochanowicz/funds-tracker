@@ -6,26 +6,32 @@ import { transparentize } from 'color2k';
 export const Colors = {
   Green: '#7DCAC7',
   Blue: '#3F8CFF',
-  Red: '#e74c3c',
+  Error: '#e74c3c',
+  Success: '#07bc0c',
   Black: '#333333',
   White: '#ffffff',
-  DarkGray: '#7C8DA6',
-  Gray: '#A5B4CB',
-  LightGray: '#e3e3e3',
-  Light: '#F5F7F9',
+  Gray500: '#374047',
+  Gray400: '#606e79',
+  Gray300: '#98a1a8',
+  Gray200: '#dee1e3',
+  Gray100: '#f9f9fa',
 };
 
 export const theme = {
+  isDark: false,
   colors: {
     green: Colors.Green,
     blue: Colors.Blue,
-    red: Colors.Red,
+    error: Colors.Error,
+    success: Colors.Success,
     black: Colors.Black,
     white: Colors.White,
-    darkGray: Colors.DarkGray,
-    gray: Colors.Gray,
-    lightGray: Colors.LightGray,
-    light: Colors.Light,
+    gray500: Colors.Gray500,
+    gray400: Colors.Gray400,
+    gray300: Colors.Gray300,
+    gray200: Colors.Gray200,
+    gray100: Colors.Gray100,
+    text: Colors.Black,
   },
   breakpoints: {
     desktop: customMediaQuery(breakpoints.desktop),
@@ -48,11 +54,11 @@ export const theme = {
       },
     },
     color: {
-      blue: {
+      primary: {
         background: Colors.Blue,
         font: Colors.White,
       },
-      black: { background: Colors.Black, font: Colors.White },
+      secondary: { background: Colors.Black, font: Colors.White },
     },
   },
   padding: {
@@ -135,3 +141,32 @@ export const theme = {
     topbar: 2,
   },
 };
+
+const darkColors = {
+  green: Colors.Green,
+  blue: Colors.Blue,
+  error: Colors.Error,
+  success: Colors.Success,
+  black: Colors.Black,
+  white: Colors.White,
+  gray500: Colors.Gray100,
+  gray400: Colors.Gray200,
+  gray300: Colors.Gray300,
+  gray200: Colors.Gray400,
+  gray100: Colors.Gray500,
+  text: Colors.White,
+};
+
+export const darkTheme = {
+  ...JSON.parse(JSON.stringify(theme)),
+  isDark: true,
+  colors: darkColors,
+  button: {
+    ...JSON.parse(JSON.stringify(theme.button)),
+    color: {
+      ...JSON.parse(JSON.stringify(theme.button.color)),
+
+      secondary: { background: Colors.White, font: Colors.Black },
+    },
+  },
+} as typeof theme;

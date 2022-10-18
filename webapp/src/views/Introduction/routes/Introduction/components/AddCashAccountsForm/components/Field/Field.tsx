@@ -72,7 +72,7 @@ export const Field = ({ register, errors, index, values, remove }: FieldProps) =
 
       <Button
         borderRadius="secondary"
-        color="black"
+        color="secondary"
         onClick={handleRemoveField}
         boxShadow="none"
       >

@@ -13,4 +13,6 @@ export { Select } from './Select';
 export { Spacer } from './Spacer';
 export { Spreader } from './Spreader';
 export { Text } from './Text';
+export { ThemeSwitcher } from './ThemeSwitcher';
 export { ThumbUp } from './ThumbUp';
+export { Toggle } from './Toggle';

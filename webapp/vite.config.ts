@@ -12,7 +12,19 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [
+          [
+            'babel-plugin-styled-components',
+            {
+              displayName: true,
+              fileName: false,
+            },
+          ],
+        ],
+      },
+    }),
     tsconfigPaths(),
     svgr(),
     eslint(),

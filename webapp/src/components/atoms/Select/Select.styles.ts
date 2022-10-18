@@ -15,21 +15,24 @@ export const StyledButton = styled.button<
   ${({ theme, error }) => css`
     border-radius: ${theme.radius.secondary};
     border: none;
-    background-color: ${theme.colors.light};
+    background-color: ${theme.colors.gray100};
     padding: ${theme.padding.medium};
-    color: ${theme.colors[error ? 'red' : 'black']};
-    outline-color: ${theme.colors[error ? 'red' : 'blue']};
+    color: ${theme.colors[error ? 'error' : 'text']};
+    outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
-    border: 2px solid ${theme.colors[error ? 'red' : 'gray']};
+    border: 3px solid ${theme.colors[error ? 'error' : 'gray300']};
 
     &:focus {
-      background-color: ${darken(theme.colors.light, 0.05)};
-      color: ${theme.colors[error ? 'red' : 'blue']};
-      border: 2px solid ${theme.colors[error ? 'red' : 'blue']};
+      background-color: ${darken(theme.colors.gray100, 0.05)};
+      color: ${theme.colors[error ? 'error' : 'blue']};
+      border: 3px solid ${theme.colors[error ? 'error' : 'blue']};
+      outline-style: solid;
+      outline-width: 3px;
+      outline-offset: -3px;
     }
 
     &::placeholder {
-      color: ${theme.colors.gray};
+      color: ${theme.colors.gray300};
     }
   `}
 `;
@@ -37,7 +40,7 @@ export const StyledButton = styled.button<
 export const StyledContent = styled.div<{
   isSelected: boolean;
 }>`
-  color: ${({ theme, isSelected }) => (isSelected ? 'inline' : theme.colors.gray)};
+  color: ${({ theme, isSelected }) => (isSelected ? 'inline' : theme.colors.gray300)};
 `;
 
 export const Wrapper = styled.div.withConfig({
@@ -60,6 +63,6 @@ export const Error = styled.span`
 
   ${({ theme }) => css`
     font-size: ${theme.font.size['0.75']};
-    color: ${theme.colors.red};
+    color: ${theme.colors.error};
   `}
 `;

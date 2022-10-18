@@ -1,5 +1,5 @@
-import { Heading, Spacer } from 'components/atoms';
-import { LangSelector } from 'components/molecules/LangSelector';
+import { Heading, Spacer, ThemeSwitcher } from 'components/atoms';
+import { LangSelector } from 'components/molecules';
 import { useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
 import { NavList } from './components/NavList';
@@ -14,7 +14,6 @@ export const Sidebar = () => {
       <Column>
         <Heading
           level="h2"
-          fontColor="black"
           fontSize="1.25"
         >
           {t('common.dashboard')}
@@ -25,7 +24,13 @@ export const Sidebar = () => {
         <NavList navigation={sidebarNavigation} />
       </Column>
 
-      <LangSelector />
+      <Column alignItems="center">
+        <ThemeSwitcher />
+
+        <Spacer />
+
+        <LangSelector />
+      </Column>
     </StyledColumn>
   );
 };
