@@ -55,22 +55,21 @@ describe('Signin tests', () => {
     const signinPO = SigninPO.render(Signin, mockNavigate);
 
     // when
-    signinPO.setEmail('test@email.xyz');
+    await signinPO.setEmail('test@email.xyz');
 
     // then
     signinPO.expectButtonHasProperText('Next');
 
     // when
-    signinPO.setEmail('test@email.xyz');
-    signinPO.submitForm();
+    await signinPO.submitForm();
 
     // then
     await signinPO.expectLoaderDisappeared();
     signinPO.expectButtonHasProperText('Sign in');
 
     // when
-    signinPO.setPassword('TestPassword1122');
-    signinPO.submitForm();
+    await signinPO.setPassword('TestPassword1122');
+    await signinPO.submitForm();
 
     // then
     await waitFor(() => signinPO.expectSuccessCallback.toHaveBeenCalled());
@@ -81,8 +80,8 @@ describe('Signin tests', () => {
     const signinPO = SigninPO.render(Signin, mockNavigate);
 
     // when
-    signinPO.setEmail('test');
-    signinPO.submitForm();
+    await signinPO.setEmail('test');
+    await signinPO.submitForm();
 
     // then
     await signinPO.expectTextDisplayed('Invalid email address!');
@@ -95,8 +94,8 @@ describe('Signin tests', () => {
     const signinPO = SigninPO.render(Signin, mockNavigate);
 
     // when
-    signinPO.setEmail('test@email.xyz');
-    signinPO.submitForm();
+    await signinPO.setEmail('test@email.xyz');
+    await signinPO.submitForm();
 
     // then
     await signinPO.expectLoaderDisappeared();
@@ -111,22 +110,21 @@ describe('Signin tests', () => {
     const signinPO = SigninPO.render(Signin, mockNavigate);
 
     // when
-    signinPO.setEmail('test@email.xyz');
+    await signinPO.setEmail('test@email.xyz');
 
     // then
     signinPO.expectButtonHasProperText('Next');
 
     // when
-    signinPO.setEmail('test@email.xyz');
-    signinPO.submitForm();
+    await signinPO.submitForm();
 
     // then
     await signinPO.expectLoaderDisappeared();
     signinPO.expectButtonHasProperText('Sign in');
 
     // when
-    signinPO.setPassword('TestPassword1122');
-    signinPO.submitForm();
+    await signinPO.setPassword('TestPassword1122');
+    await signinPO.submitForm();
 
     // then
     await signinPO.expectLoaderDisappeared();
