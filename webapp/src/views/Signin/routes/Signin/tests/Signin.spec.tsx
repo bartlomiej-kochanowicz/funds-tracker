@@ -1,4 +1,4 @@
-import { screen, waitFor } from 'utils/test-utils';
+import { waitFor } from 'utils/test-utils';
 import { checkEmail } from 'services/auth/checkEmail';
 import { signin } from 'services/auth/signin';
 import { getAccount } from 'services/auth/account';
