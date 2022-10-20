@@ -1,13 +1,7 @@
 import { FC } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import {
-  findByText,
-  fireEvent,
-  getByTestId,
-  queryByTestId,
-  render,
-  waitFor,
-} from 'utils/test-utils';
+import userEvent from '@testing-library/user-event';
+import { findByText, getByTestId, queryByTestId, render, waitFor } from 'utils/test-utils';
 import { unsafeCast } from 'utils/unsafeCast';
 
 export class SigninPO {
@@ -35,16 +29,16 @@ export class SigninPO {
     this.elements = this.elementsByDataID(container);
   }
 
-  setEmail(value: string) {
-    fireEvent.change(this.elements.chooseEmailInput, { target: { value } });
+  async setEmail(value: string) {
+    await userEvent.type(this.elements.chooseEmailInput, value);
   }
 
-  submitForm() {
-    fireEvent.click(this.elements.chooseSubmitButton);
+  async submitForm() {
+    await userEvent.click(this.elements.chooseSubmitButton);
   }
 
-  setPassword(value: string) {
-    fireEvent.change(this.elements.choosePasswordInput, { target: { value } });
+  async setPassword(value: string) {
+    await userEvent.type(this.elements.choosePasswordInput, value);
   }
 
   expectButtonHasProperText(text: string) {

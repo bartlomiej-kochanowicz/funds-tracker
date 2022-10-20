@@ -1,4 +1,5 @@
-import { render, fireEvent } from 'utils/test-utils';
+import userEvent from '@testing-library/user-event';
+import { render } from 'utils/test-utils';
 import { useHover } from 'hooks/useHover';
 import { renderHook } from '@testing-library/react-hooks';
 
@@ -23,8 +24,8 @@ describe('useHover tests', () => {
 
     expect(isHover).toBe(false);
 
-    fireEvent.mouseOver(div);
+    await userEvent.hover(div);
 
-    fireEvent.mouseLeave(div);
+    await userEvent.unhover(div);
   });
 });
