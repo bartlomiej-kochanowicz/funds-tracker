@@ -20,7 +20,8 @@
     "build:api": "cd api && pnpm build",
     "build:webapp": "cd webapp && pnpm build",
     "check:circular-deps": "cd webapp && pnpm check:circular-deps && cd ../api && pnpm check:circular-deps",
-    "build": "pnpm build:api && pnpm build:webapp"
+    "build": "pnpm build:api && pnpm build:webapp",
+    "prisma:generate": "cd api && pnpx prisma generate"
   },
   "devDependencies": {
     "husky": "8.0.1"
