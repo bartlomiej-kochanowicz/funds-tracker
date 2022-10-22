@@ -18,6 +18,7 @@
     "test": "pnpm test:api && pnpm test:webapp",
     "build:api": "cd api && pnpm build",
     "build:webapp": "cd webapp && pnpm build",
+    "check:circular-deps": "cd webapp && pnpm check:circular-deps && cd ../api && pnpm check:circular-deps",
     "build": "pnpm build:api && pnpm build:webapp"
   },
   "devDependencies": {
