@@ -18,4 +18,4 @@ jobs:
         with:
           version: 7.x
       - run: pnpm install:deployment
-      - run: pnpm install:api
+      - run: pnpm build
