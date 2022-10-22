@@ -7,6 +7,12 @@ jobs:
   merged_to_master:
     name: CD-fullstack
     runs-on: self-hosted
+    env:
+      API_PORT: ${{ secrets.API_PORT }}
+      AT_SECRET: ${{ secrets.AT_SECRET }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      RT_SECRET: ${{ secrets.RT_SECRET }}
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
