@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   merged_to_master:
-    name: CD-fullstack
+    name: CD-app
     runs-on: self-hosted
     env:
       API_PORT: ${{ secrets.API_PORT }}
