@@ -18,4 +18,5 @@ jobs:
         with:
           version: 7.x
       - run: pnpm install:deployment
+      - run: pnpx prisma generate
       - run: pnpm build
