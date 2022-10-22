@@ -31,7 +31,7 @@ jobs:
           node-version: 18.x
           cache-dependency-path: api/pnpm-lock.yaml
       - name: Setup
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v2.2.4
         with:
           version: 7.x
       - run: pnpm install:api
