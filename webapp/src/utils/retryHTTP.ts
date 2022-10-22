@@ -63,9 +63,11 @@ export function retryHTTP<TAsyncFn extends (...args: any[]) => Promise<any>>(
         }
       }
     }
+
     if (!succeeded) {
       throw lastError;
     }
-    return result;
+
+    return result as ReturnType<typeof asyncFn>;
   };
 }
