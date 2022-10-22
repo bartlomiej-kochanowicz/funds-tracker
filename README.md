@@ -45,6 +45,7 @@ deviation from the model you provide before, tells you how to rebalance the inst
   <summary>Client</summary>
   <ul>
     <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
+    <li><a href="https://vitejs.dev/">Vitejs</a></li>
     <li><a href="https://reactjs.org/">React.js</a></li>
     <li><a href="https://styled-components.com/">Styled Components</a></li>
     <li><a href="https://www.i18next.com/">i18next</a></li>
@@ -65,7 +66,8 @@ deviation from the model you provide before, tells you how to rebalance the inst
 <details>
 <summary>Database</summary>
   <ul>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
+    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+    <li><a href="https://www.prisma.io/">Prisma</a></li>
   </ul>
 </details>
 
@@ -80,36 +82,32 @@ deviation from the model you provide before, tells you how to rebalance the inst
 
 ### 🫡 To do
 
-- [x] add axios
-- [x] add mocked api
+- [x] introduction client (add money account and first instrument)
+- [ ] introduction api (add money account and first instrument)
+- [ ] summary page
 - [x] add redux
-- [ ] add toasts
+- [x] add toasts
 
 ### 🪨 Milestones
 
 - [x] Create monorepo
 - [x] CI for webapp
 - [ ] Setup production deploy
-- [ ] Add model portfolio view
-- [ ] Add instrument view
 - [x] Dashboard
 
 ## 🛠 Getting Started
 
 ### 🧰 Prerequisites
 
-This project uses pnpm as package manager
-
-```bash
- npm install --global pnpm
-```
+This project uses [pnpm](https://pnpm.io/installation) as package manager and docker to run the application locally.
 
 ### ⚙️ Installation
 
 Install funds-tracker with pnpm
 
 ```bash
-  pnpm install
+  $ pnpm install:all
+  $ make build
 ```
 
 ### :running: Run Locally
@@ -117,19 +115,19 @@ Install funds-tracker with pnpm
 Start monorepo
 
 ```bash
-  make up
+  $ make up
 ```
 
-Start only webapp
+Start webapp only (bypass docker)
 
 ```bash
-  pnpm start:webapp
+  $ pnpm start:webapp
 ```
 
-Start only api
+Start api only (bypass docker)
 
 ```bash
-  pnpm start:api
+  $ pnpm start:api
 ```
 
 ### :triangular_flag_on_post: Deployment
