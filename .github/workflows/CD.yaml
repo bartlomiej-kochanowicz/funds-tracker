@@ -1,0 +1,21 @@
+name: Post PR Deployment
+on:
+  push:
+    branches:
+      - master
+jobs:
+  merged_to_master:
+    name: CD-fullstack
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cahce: "pnpm"
+      - name: Setup
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.x
+      - run: pnpm install:deployment
+      - run: pnpm install:api
