@@ -25,4 +25,5 @@ jobs:
           version: 7.x
       - run: pnpm install:deployment
       - run: pnpm prisma:generate
-      - run: pnpm build
+      - run: pnpm build:api
+      - run: pnpm build:webapp
