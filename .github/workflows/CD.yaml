@@ -23,3 +23,5 @@ jobs:
         uses: pnpm/action-setup@v2.2.4
         with:
           version: 7.x
+      - run: pnpm install:deployment
+      - run: pnpm prisma:generate
