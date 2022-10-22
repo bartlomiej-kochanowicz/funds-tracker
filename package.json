@@ -16,7 +16,10 @@
     "test:api": "cd api && pnpm test",
     "test:webapp": "cd webapp && pnpm test",
     "test": "pnpm test:api && pnpm test:webapp",
-    "check:circular-deps": "cd webapp && pnpm check:circular-deps && cd ../api && pnpm check:circular-deps"
+    "build:api": "cd api && pnpm build",
+    "build:webapp": "cd webapp && pnpm build",
+    "check:circular-deps": "cd webapp && pnpm check:circular-deps && cd ../api && pnpm check:circular-deps",
+    "build": "pnpm build:api && pnpm build:webapp"
   },
   "devDependencies": {
     "husky": "8.0.1"
