@@ -25,3 +25,4 @@ jobs:
           version: 7.x
       - run: pnpm install:deployment
       - run: pnpm prisma:generate
+      - run: pm2 restart api
