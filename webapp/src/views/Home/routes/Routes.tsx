@@ -1,6 +1,9 @@
 import { lazy } from 'react';
 import { ROUTES } from 'routes/paths';
-import { ProtectedRoute } from 'utils/ProtectedRoute';
+
+const ProtectedRoute = lazy(() =>
+  import('utils/ProtectedRoute').then(({ ProtectedRoute: component }) => ({ default: component })),
+);
 
 const Home = lazy(() => import('./Home').then(({ Home: component }) => ({ default: component })));
 

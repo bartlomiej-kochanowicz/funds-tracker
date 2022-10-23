@@ -2,9 +2,17 @@ import { lazy } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ROUTES } from 'routes/paths';
-import { Dashboard as DashboardLayout } from 'layouts/Dashboard';
-import { ProtectedRoute } from 'utils/ProtectedRoute';
 import { ErrorContent } from 'components/molecules';
+
+const ProtectedRoute = lazy(() =>
+  import('utils/ProtectedRoute').then(({ ProtectedRoute: component }) => ({ default: component })),
+);
+
+const DashboardLayout = lazy(() =>
+  import('layouts/Dashboard').then(({ Dashboard: component }) => ({
+    default: component,
+  })),
+);
 
 const Dashboard = lazy(() =>
   import('./Dashboard').then(({ Dashboard: component }) => ({

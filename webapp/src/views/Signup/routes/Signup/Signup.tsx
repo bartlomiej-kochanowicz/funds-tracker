@@ -32,7 +32,7 @@ export const Signup = () => {
       <Text
         fontSize="0.875"
         fontColor="gray400"
-        textAlign="right"
+        textAlign="center"
       >
         <Trans
           i18nKey="page.signup.already_have_account"
