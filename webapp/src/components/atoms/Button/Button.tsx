@@ -68,10 +68,7 @@ export const Button = styled.div.withConfig({
       box-shadow: ${() => {
         switch (boxShadow) {
           case 'default':
-            return css`7px 6px 28px 1px ${transparentize(
-              theme.button.color[color].background,
-              0.76,
-            )}`;
+            return css`7px 6px 28px 1px ${transparentize(theme.colors.black, 0.76)}`;
           case 'none':
           default:
             return 'none';
