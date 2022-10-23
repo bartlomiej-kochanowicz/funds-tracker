@@ -5,7 +5,10 @@ export const ThemeSwitcher = () => {
   const { isDark, toggleTheme } = useColorThemeContext();
 
   return (
-    <StyledButton onClick={toggleTheme}>
+    <StyledButton
+      onClick={toggleTheme}
+      type="button"
+    >
       {isDark && <StyledBiMoon />}
 
       <Handle

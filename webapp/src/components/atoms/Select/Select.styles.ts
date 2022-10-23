@@ -20,15 +20,15 @@ export const StyledButton = styled.button<
     color: ${theme.colors[error ? 'error' : 'text']};
     outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
-    border: 3px solid ${theme.colors[error ? 'error' : 'gray300']};
+    border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};
       color: ${theme.colors[error ? 'error' : 'blue']};
-      border: 3px solid ${theme.colors[error ? 'error' : 'blue']};
+      border: 2px solid ${theme.colors[error ? 'error' : 'blue']};
       outline-style: solid;
-      outline-width: 3px;
-      outline-offset: -3px;
+      outline-width: 2px;
+      outline-offset: -2px;
     }
 
     &::placeholder {
