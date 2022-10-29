@@ -3,6 +3,8 @@ import { Button, Loader, Spacer } from 'components/atoms';
 import { showErrorToast } from 'helpers/showToast';
 import useRequest from 'hooks/useRequest';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
+import { useCallback, useState } from 'react';
+import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -30,6 +32,9 @@ const SignupStateMachine = new StateMachine<FormStates, FormActions>(
 
 export const SignupForm = () => {
   const { t } = useTranslation();
+
+  const [token, setToken] = useState<string>('');
+  const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
 
   const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
     SignupStateMachine,
@@ -84,18 +89,22 @@ export const SignupForm = () => {
     },
   });
 
+  const onVerify = useCallback(setToken, [setToken]);
+
   const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.nameAndEmail)) {
-      checkEmailRequest({ userEmail });
+      checkEmailRequest({ userEmail, token });
     }
 
     if (compareState(states.passwords)) {
       try {
-        await signuplRequest({ userName, userEmail, userPassword });
+        await signuplRequest({ userName, userEmail, userPassword, token });
       } catch {
         showErrorToast(t('service.unknown_error'));
       }
     }
+
+    setRefreshReCaptcha(r => !r);
   };
 
   return (
@@ -103,6 +112,11 @@ export const SignupForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
+      <GoogleReCaptcha
+        onVerify={onVerify}
+        refreshReCaptcha={refreshReCaptcha}
+      />
+
       {compareState(states.nameAndEmail) && (
         <NameAndEmail
           register={register}

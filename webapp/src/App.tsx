@@ -3,14 +3,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { Root } from 'views/Root';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'styles/GlobalStyle';
 import { store } from 'store';
 import { ErrorContent } from 'components/molecules';
 import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
-import { RECAPTCHA_SITE_KEY } from 'config/env';
 
 const Content = () => {
   const { theme } = useColorThemeContext();
@@ -42,9 +40,7 @@ const App: FC = (): JSX.Element => (
   <Provider store={store}>
     <BrowserRouter>
       <ColorThemeProvider>
-        <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-          <Content />
-        </GoogleReCaptchaProvider>
+        <Content />
       </ColorThemeProvider>
     </BrowserRouter>
   </Provider>
