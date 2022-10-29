@@ -14,10 +14,10 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const axios_1 = require("@nestjs/axios");
 const bcrypt = require("bcrypt");
-const env_1 = require("../common/config/env");
+const env_1 = require("common/config/env");
 const rxjs_1 = require("rxjs");
-const prisma_service_1 = require("../prisma/prisma.service");
-const cookies_1 = require("../common/constants/cookies");
+const prisma_service_1 = require("prisma/prisma.service");
+const cookies_1 = require("common/constants/cookies");
 let AuthService = class AuthService {
     constructor(prisma, jwtService, httpService) {
         this.prisma = prisma;
