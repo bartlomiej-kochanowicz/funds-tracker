@@ -26,7 +26,7 @@ let AuthService = class AuthService {
     }
     async signupLocal(dto, res) {
         try {
-            const { email, password, token } = dto;
+            const { email, password, name, token } = dto;
             const isHuman = await this.validateHuman(token);
             if (!isHuman) {
                 throw new common_1.ForbiddenException('You are a robot!');

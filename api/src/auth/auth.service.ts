@@ -26,7 +26,7 @@ export class AuthService {
 
   async signupLocal(dto: SignupDto, res: Response): Promise<unknown> {
     try {
-      const { email, password, token } = dto;
+      const { email, password, name, token } = dto;
 
       const isHuman = await this.validateHuman(token);
 
