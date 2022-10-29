@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { waitFor } from 'utils/test-utils';
 import { checkEmail } from 'services/auth/checkEmail';
 import { signin } from 'services/auth/signin';
@@ -12,6 +13,22 @@ jest.mock('services/auth/checkEmail', () => ({
 jest.mock('services/auth/signin', () => ({ signin: jest.fn() }));
 
 jest.mock('services/auth/account', () => ({ getAccount: jest.fn() }));
+
+jest.mock('react-google-recaptcha-v3', () => ({
+  GoogleReCaptcha: ({
+    onVerify,
+    refreshReCaptcha,
+  }: {
+    onVerify: (token: string) => string;
+    refreshReCaptcha: boolean;
+  }) => {
+    useEffect(() => {
+      onVerify('token');
+    }, [onVerify, refreshReCaptcha]);
+
+    return null;
+  },
+}));
 
 const mockNavigate = jest.fn();
 
