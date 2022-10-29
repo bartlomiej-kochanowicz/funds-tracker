@@ -15,9 +15,9 @@ const jwt_1 = require("@nestjs/jwt");
 const axios_1 = require("@nestjs/axios");
 const bcrypt = require("bcrypt");
 const env_1 = require("../common/config/env");
+const rxjs_1 = require("rxjs");
 const prisma_service_1 = require("../prisma/prisma.service");
 const cookies_1 = require("../common/constants/cookies");
-const rxjs_1 = require("rxjs");
 let AuthService = class AuthService {
     constructor(prisma, jwtService, httpService) {
         this.prisma = prisma;
@@ -26,7 +26,11 @@ let AuthService = class AuthService {
     }
     async signupLocal(dto, res) {
         try {
-            const { email, password, name } = dto;
+            const { email, password, token } = dto;
+            const isHuman = await this.validateHuman(token);
+            if (!isHuman) {
+                throw new common_1.ForbiddenException('You are a robot!');
+            }
             const hashedPwd = await this.hashData(password);
             const user = await this.prisma.user.findUnique({ where: { email } });
             if (user) {
@@ -64,7 +68,11 @@ let AuthService = class AuthService {
     async signinLocal(dto, res) {
         var _a;
         try {
-            const { email, password } = dto;
+            const { email, password, token } = dto;
+            const isHuman = await this.validateHuman(token);
+            if (!isHuman) {
+                throw new common_1.ForbiddenException('You are a robot!');
+            }
             const user = await this.prisma.user.findUnique({ where: { email } });
             if (!user)
                 throw new common_1.ForbiddenException('No account for these email.');
@@ -95,7 +103,10 @@ let AuthService = class AuthService {
     }
     async checkEmail(dto) {
         const { email, token } = dto;
-        await this.validateHuman(token);
+        const isHuman = await this.validateHuman(token);
+        if (!isHuman) {
+            throw new common_1.ForbiddenException('You are a robot!');
+        }
         const user = await this.prisma.user.findUnique({ where: { email } });
         return {
             exist: Boolean(user),

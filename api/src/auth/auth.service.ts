@@ -10,11 +10,11 @@ import {
   RECAPTCHA_SECRET,
   RT_SECRET,
 } from 'common/config/env';
+import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { SignupDto, SigninDto, EmailDto } from './dto';
 import { Tokens } from './types';
-import { catchError, firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +26,13 @@ export class AuthService {
 
   async signupLocal(dto: SignupDto, res: Response): Promise<unknown> {
     try {
-      const { email, password, name } = dto;
+      const { email, password, token } = dto;
+
+      const isHuman = await this.validateHuman(token);
+
+      if (!isHuman) {
+        throw new ForbiddenException('You are a robot!');
+      }
 
       const hashedPwd = await this.hashData(password);
 
@@ -81,7 +87,13 @@ export class AuthService {
     res: Response,
   ): Promise<Response<Pick<User, 'uuid' | 'email'>>> {
     try {
-      const { email, password } = dto;
+      const { email, password, token } = dto;
+
+      const isHuman = await this.validateHuman(token);
+
+      if (!isHuman) {
+        throw new ForbiddenException('You are a robot!');
+      }
 
       const user = await this.prisma.user.findUnique({ where: { email } });
 
@@ -125,7 +137,11 @@ export class AuthService {
   async checkEmail(dto: EmailDto): Promise<{ exist: boolean }> {
     const { email, token } = dto;
 
-    await this.validateHuman(token);
+    const isHuman = await this.validateHuman(token);
+
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
+    }
 
     const user = await this.prisma.user.findUnique({ where: { email } });
 
