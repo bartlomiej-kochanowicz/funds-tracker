@@ -1,17 +1,28 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { HttpService } from '@nestjs/axios';
 import { Response } from 'express';
 import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import { AT_SECRET, IS_DEVELOPMENT, RT_SECRET } from 'common/config/env';
+import {
+  AT_SECRET,
+  IS_DEVELOPMENT,
+  RECAPTCHA_SECRET,
+  RT_SECRET,
+} from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { SignupDto, SigninDto, EmailDto } from './dto';
 import { Tokens } from './types';
+import { catchError, firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService,
+    private readonly httpService: HttpService,
+  ) {}
 
   async signupLocal(dto: SignupDto, res: Response): Promise<unknown> {
     try {
@@ -112,7 +123,9 @@ export class AuthService {
   }
 
   async checkEmail(dto: EmailDto): Promise<{ exist: boolean }> {
-    const { email } = dto;
+    const { email, token } = dto;
+
+    await this.validateHuman(token);
 
     const user = await this.prisma.user.findUnique({ where: { email } });
 
@@ -241,5 +254,24 @@ export class AuthService {
       accessToken: at,
       refreshToken: rt,
     };
+  }
+
+  private async validateHuman(token: string): Promise<boolean> {
+    const { data } = await firstValueFrom(
+      this.httpService
+        .post('https://www.google.com/recaptcha/api/siteverify', null, {
+          params: {
+            secret: RECAPTCHA_SECRET,
+            response: token,
+          },
+        })
+        .pipe(
+          catchError(() => {
+            throw Error('Google reCAPTCHA error.');
+          }),
+        ),
+    );
+
+    return data.success;
   }
 }

@@ -4,4 +4,8 @@ export class EmailDto {
   @IsNotEmpty()
   @IsString()
   email: string;
+
+  @IsNotEmpty()
+  @IsString()
+  token: string;
 }

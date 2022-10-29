@@ -1,4 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
+import { HttpService } from '@nestjs/axios';
 import { Response } from 'express';
 import { User } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
@@ -6,7 +7,8 @@ import { SignupDto, SigninDto, EmailDto } from './dto';
 export declare class AuthService {
     private prisma;
     private jwtService;
-    constructor(prisma: PrismaService, jwtService: JwtService);
+    private readonly httpService;
+    constructor(prisma: PrismaService, jwtService: JwtService, httpService: HttpService);
     signupLocal(dto: SignupDto, res: Response): Promise<unknown>;
     signinLocal(dto: SigninDto, res: Response): Promise<Response<Pick<User, 'uuid' | 'email'>>>;
     checkEmail(dto: EmailDto): Promise<{
@@ -18,4 +20,5 @@ export declare class AuthService {
     private updateRtHash;
     private hashData;
     private getTokens;
+    private validateHuman;
 }

@@ -5,11 +5,13 @@ const signupStub = () => ({
     email: 'bart.koch@funds-tracker.com',
     name: 'Bart',
     password: 'qwe123qwe',
+    token: 'token',
 });
 exports.signupStub = signupStub;
 const signinStub = () => ({
     email: 'bart.koch@funds-tracker.com',
     password: 'qwe123qwe',
+    token: 'token',
 });
 exports.signinStub = signinStub;
 //# sourceMappingURL=auth.stub.js.map
