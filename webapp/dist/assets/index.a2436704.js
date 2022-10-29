@@ -1,1 +1,0 @@
-import{d as o,h as a,j as s,O as r,S as e,B as t}from"./index.cb11aff0.js";const c=()=>o(a.exports.Column,{children:[s(r,{}),s(e,{}),s(t,{color:"secondary",size:"large",children:"test"})]});export{c as Dashboard};

@@ -20,7 +20,7 @@ export const StyledButton = styled.button<{ isToggled: boolean }>`
     ${isToggled &&
     css`
       justify-content: flex-end;
-      background-color: ${theme.colors.success};
+      background-color: ${theme.colors.blue};
     `}
   `}
 `;

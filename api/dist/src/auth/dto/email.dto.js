@@ -18,5 +18,10 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], EmailDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EmailDto.prototype, "token", void 0);
 exports.EmailDto = EmailDto;
 //# sourceMappingURL=email.dto.js.map

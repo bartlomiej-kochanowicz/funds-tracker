@@ -1,6 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
+import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Loader } from 'components/atoms';
@@ -29,6 +30,9 @@ const SigninStateMachine = new StateMachine<FormStates, FormActions>(
 
 export const SigninForm = () => {
   const { t } = useTranslation();
+
+  const [token, setToken] = useState<string>('');
+  const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -77,14 +81,18 @@ export const SigninForm = () => {
     },
   });
 
+  const onVerify = useCallback(setToken, [setToken]);
+
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.email)) {
-      await checkEmailRequest({ userEmail });
+      await checkEmailRequest({ userEmail, token });
     }
 
     if (compareState(states.password)) {
-      await signinRequest({ userEmail, userPassword });
+      await signinRequest({ userEmail, userPassword, token });
     }
+
+    setRefreshReCaptcha(r => !r);
   };
 
   const userEmailProps = useInput<typeof defaultValues>({
@@ -104,6 +112,11 @@ export const SigninForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
+      <GoogleReCaptcha
+        onVerify={onVerify}
+        refreshReCaptcha={refreshReCaptcha}
+      />
+
       <Input
         placeholder={t('common.email')}
         type="email"

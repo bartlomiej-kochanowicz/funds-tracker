@@ -23,5 +23,10 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SigninDto.prototype, "password", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SigninDto.prototype, "token", void 0);
 exports.SigninDto = SigninDto;
 //# sourceMappingURL=signin.dto.js.map

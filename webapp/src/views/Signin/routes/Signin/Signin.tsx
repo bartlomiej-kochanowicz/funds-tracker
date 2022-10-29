@@ -32,7 +32,7 @@ export const Signin = () => {
       <Text
         fontSize="0.875"
         fontColor="gray400"
-        textAlign="right"
+        textAlign="center"
       >
         <Trans
           i18nKey="page.signin.dont_have_account"

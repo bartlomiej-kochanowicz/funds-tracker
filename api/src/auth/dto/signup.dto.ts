@@ -12,7 +12,7 @@ export class SignupDto {
     context: 'name',
   })
   @MaxLength(50, {
-    message: 'Name is ooo long',
+    message: 'Name is too long',
   })
   name: string;
 
@@ -20,4 +20,8 @@ export class SignupDto {
   @IsString()
   @MinLength(12, { message: 'Password is too short' })
   password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  token: string;
 }

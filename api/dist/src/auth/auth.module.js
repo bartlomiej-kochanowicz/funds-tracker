@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
+const axios_1 = require("@nestjs/axios");
 const auth_controller_1 = require("./auth.controller");
 const auth_service_1 = require("./auth.service");
 const strategies_1 = require("./strategies");
@@ -16,7 +17,7 @@ let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [jwt_1.JwtModule.register({})],
+        imports: [jwt_1.JwtModule.register({}), axios_1.HttpModule],
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService, strategies_1.AtStrategy, strategies_1.RtStrategy],
     })

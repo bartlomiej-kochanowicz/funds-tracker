@@ -1,6 +1,11 @@
 import { lazy } from 'react';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import { RECAPTCHA_SITE_KEY } from 'config/env';
 import { ROUTES } from 'routes/paths';
-import { ProtectedRoute } from 'utils/ProtectedRoute';
+
+const ProtectedRoute = lazy(() =>
+  import('utils/ProtectedRoute').then(({ ProtectedRoute: component }) => ({ default: component })),
+);
 
 const Signin = lazy(() =>
   import('./Signin').then(({ Signin: component }) => ({ default: component })),
@@ -14,7 +19,9 @@ export const SinginRoutes = [
         to={ROUTES.DASHBOARD.HOME}
         reverse
       >
-        <Signin />
+        <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+          <Signin />
+        </GoogleReCaptchaProvider>
       </ProtectedRoute>
     ),
   },
