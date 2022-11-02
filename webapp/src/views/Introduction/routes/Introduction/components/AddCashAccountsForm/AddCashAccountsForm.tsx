@@ -9,9 +9,9 @@ import { Column } from 'simple-flexbox';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
-import { DefaultValues } from './AddCashAccountsForm.type';
+import type { DefaultValues } from './AddCashAccountsForm.type';
 import { EmptyList } from '../EmptyList';
-import { Field } from '../Field';
+import { CashAccountsField } from '../CashAccountsField';
 
 export const AddCashAccountsForm = () => {
   const { t } = useTranslation();
@@ -99,7 +99,7 @@ export const AddCashAccountsForm = () => {
 
             <FieldsWrapper>
               {fields.map((field, index) => (
-                <Field
+                <CashAccountsField
                   key={field.id}
                   index={index}
                   register={register}

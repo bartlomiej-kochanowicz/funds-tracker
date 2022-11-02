@@ -14,7 +14,7 @@ import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 import { DefaultValues } from 'views/Introduction/routes/Introduction/components/AddCashAccountsForm/AddCashAccountsForm.type';
 
-interface FieldProps {
+interface CashAccountsFieldProps {
   register: UseFormRegister<DefaultValues>;
   errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
   index: number;
@@ -22,7 +22,13 @@ interface FieldProps {
   remove: UseFieldArrayRemove;
 }
 
-export const Field = ({ register, errors, index, values, remove }: FieldProps) => {
+export const CashAccountsField = ({
+  register,
+  errors,
+  index,
+  values,
+  remove,
+}: CashAccountsFieldProps) => {
   const { t } = useTranslation();
 
   const nameInputProps = useInput<DefaultValues>({
