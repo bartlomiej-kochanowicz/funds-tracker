@@ -10,8 +10,8 @@ import { useIntroductionContext } from 'views/Introduction/routes/Introduction/c
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
 import { DefaultValues } from './AddCashAccountsForm.type';
-import { EmptyList } from './components/EmptyList';
-import { Field } from './components/Field';
+import { EmptyList } from '../EmptyList';
+import { Field } from '../Field';
 
 export const AddCashAccountsForm = () => {
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ export const AddCashAccountsForm = () => {
       setTimeout(resolve, 3000);
     });
 
-    updateState(actions.CHANGE_TO_ADD_INSTRUMENT);
+    updateState(actions.CHANGE_TO_ADD_PORTFOLIOS);
   };
 
   const defaultValues = {

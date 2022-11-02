@@ -5,27 +5,31 @@ const AddModelPortfolioContext = createContext<AddModelPortfolioContextType | nu
 
 type AddModelPortfolioContextType = ReturnType<typeof useIntroduction>;
 
-type IntroductionStates = 'addCashAccounts' | 'addInstrument' | 'formSuccess';
+type IntroductionStates = 'addCashAccounts' | 'addPortfolios' | 'addInstrument' | 'formSuccess';
 
 type IntroductionActions =
   | 'CHANGE_TO_ADD_CASH_ACCOUNTS'
+  | 'CHANGE_TO_ADD_PORTFOLIOS'
   | 'CHANGE_TO_ADD_INSTRUMENT'
   | 'CHANGE_TO_FORM_SUCCESS';
 
 const IntroductionStateMachine = new StateMachine<IntroductionStates, IntroductionActions>(
-  'addCashAccounts',
+  'addPortfolios',
   {
     addCashAccounts: 'addCashAccounts',
+    addPortfolios: 'addPortfolios',
     addInstrument: 'addInstrument',
     formSuccess: 'formSuccess',
   },
   {
     CHANGE_TO_ADD_CASH_ACCOUNTS: 'CHANGE_TO_ADD_CASH_ACCOUNTS',
+    CHANGE_TO_ADD_PORTFOLIOS: 'CHANGE_TO_ADD_PORTFOLIOS',
     CHANGE_TO_ADD_INSTRUMENT: 'CHANGE_TO_ADD_INSTRUMENT',
     CHANGE_TO_FORM_SUCCESS: 'CHANGE_TO_FORM_SUCCESS',
   },
   {
-    addCashAccounts: { CHANGE_TO_ADD_INSTRUMENT: 'addInstrument' },
+    addCashAccounts: { CHANGE_TO_ADD_PORTFOLIOS: 'addPortfolios' },
+    addPortfolios: { CHANGE_TO_ADD_INSTRUMENT: 'addInstrument' },
     addInstrument: {
       CHANGE_TO_FORM_SUCCESS: 'formSuccess',
       CHANGE_TO_ADD_CASH_ACCOUNTS: 'addCashAccounts',
