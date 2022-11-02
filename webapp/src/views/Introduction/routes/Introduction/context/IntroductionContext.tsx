@@ -14,7 +14,7 @@ type IntroductionActions =
   | 'CHANGE_TO_FORM_SUCCESS';
 
 const IntroductionStateMachine = new StateMachine<IntroductionStates, IntroductionActions>(
-  'addPortfolios',
+  'addCashAccounts',
   {
     addCashAccounts: 'addCashAccounts',
     addPortfolios: 'addPortfolios',
