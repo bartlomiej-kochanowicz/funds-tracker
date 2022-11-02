@@ -3,79 +3,60 @@
   <head>
     <meta charset="UTF-8" />
 
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="data:image/png;base64,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"
-    />
-
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABj1BMVEUAAAD////5/Pz6/Pz6+/z6+/z6+/z6+/z6+/z6/Pz5/Pz////4+P/6/Pz6+/z6+/z6/Pz4+P/////6+/v6+/z5+/v////1///6+/z////6+vr7+/z6+vz5+fn////7+/z6+vz////////6+/z6+/z7+/36+/z////6+/v6+/z6+/z////5/Pz6/Pz6+/z6+/z7+/z6+/z6+/z4/Pz////6+/z2///7+/3////6+/z////////6/Pz6+vz////6/Pz6+/z6+/z7+/36+/z5/Pz6/Pz6+/zS5P12rP54r/7W5v3Y5/19sf5AjP8/jP9xqv7U5f3b6f12rf55r/7e6/yZwf5wqf7I3f3E2/1sp/6fxv13rf7Q4v3P4f1Bjf/V5f2Dtf5Cjv9Ej//h7fyQvP5FkP/n8Pzl7vzb7+/r9PXp9fTd8PC54eF+ysem29nm8/Pk8/Oq3Np/y8i94+J9ysej2dfe8PGa1dPV7Ozc8PCY1NLU7OzR6+uV09Ho9PSp3Nrq9fXl8/Tn9PPl8/P///+KczqwAAAARnRSTlMADlqcyuv66smZVwwnnvb0miMJjvuHBxrGGDDl4SsZ4+AXCMjFffIWkfXxClGTy8Lk+cFOC/McfgXABhTe3xXcv8N88FKSlkl4pQAAAAFiS0dEAf8CLd4AAAAJcEhZcwAAAGgAAABoAaPmejwAAAAHdElNRQfmBhARMRb8/YukAAABm0lEQVQ4y4WT51vCMBDGIwIKAk5w4EBURBBRUYYDd5zUPcG9xVbB4t7+49KkSQc8+n65y72/52nuegGAqkBTqNXp9UXFBmMJyJXJbIFUpWXlKruisgoqpLfa5H51McxRTa3k19lhHtU3EL+xiRanZ2bn6MHRjH1nC6nML8QYhllcIudWfI9Khc3IkTbUX5XKliGu9ixgFrLlFUap2OqaUHdn59chJOtifWNza1tMd4S6xws0kAKxeELId+MxCsBOUEiAvfg+7ebgkAA+0IWBo4M1+ZCOT04x4Ac6FBNn6jmeT6PQDXrgn3L9D+BPXFyqnaskCk1Ai+I1y93I7dtU+g4lvcCAAZ5nM/fETmZYnseAGxgJkNXDo5A/ZdABAwHQ1y8BPP/88vompgjwVABQJiTvHMsrlP74FH8WKMeNfqXSks1y36hoCQoLYRWvRhFiQxhCGxWOQDki2dA/gJdycIj2/8N9UBsOR8laNzjyTXnEJD2MwdFcf6xd/rRs4y6lbQmFVa8z6pYhE+5gnvftnfT57R5Pd2Qq4JSqv4U88tQ74OtSAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIyLTA2LTE2VDE3OjQ5OjIyKzAwOjAwEi2v9AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMi0wNi0xNlQxNzo0OToyMiswMDowMGNwF0gAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAV3pUWHRSYXcgcHJvZmlsZSB0eXBlIGlwdGMAAHic4/IMCHFWKCjKT8vMSeVSAAMjCy5jCxMjE0uTFAMTIESANMNkAyOzVCDL2NTIxMzEHMQHy4BIoEouAOoXEXTyQjWVAAAAAElFTkSuQmCC"
-    />
-
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA6lBMVEUAAAD5+fn6+/v6+/v6+/z6+/36+/v5+fn////6/Pz6+/z6+/z6/Pz////6+/z6+/z////6/Pz5+f/6/Pz6+/v6+/36+/z6+/z6+/z6+/z6+/35+/v6+/z4+P/6+/v5+/z5+/v6+/zP4v3R4/3Q4v13rf4/jP9qpv7M4P1yqv50q/7S5P1sp/7C2f3O4f1wqf5tp/7S4/3X5v2Dtf5xqv7q8vzu9veb1tOf19Xe8PDd8PCj2dee19V9ysed19TY7u7W7e2c1tSe19Tg8fKi2NZ+ysei2dfi8vLj8vOm29ng8fHf8fHh8fL/////+JQvAAAAIXRSTlMALZHV9NSPKweW/fyTBr67BZcpkozR8+/y7tCJ+yeNt4qWMer6AAAAAWJLR0QIht6VegAAAAlwSFlzAAAANAAAADQBzqSg6AAAAAd0SU1FB+YGEBExFWX02h4AAADHSURBVBjTNY9rW4JAEIUnLpIigQRRKtgRpVK7aorVVpaYXf7/73EG7HyY5z1nZ2dniVgHmm4YZs2iSof1BkrZTaf0R2L6qVTX46DFMBhm2cUlg8b3G0ivslKjMWyfjoEJH1/fcNMtEJAO3A3vZcDDdAaEdAI8Yi+GiE6B+X/AcEYmsMiXYp+eX4A21ThQ6vXtfaXUB9Ahy8bnWomKzRe6MVGTu7ffhcp/GBLe1HFlwO+f1J6sTo5mV490E2//Xz8Io6h9HgvvAM9iHiRqCK2QAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIyLTA2LTE2VDE3OjQ5OjIxKzAwOjAwI8W1aQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMi0wNi0xNlQxNzo0OToyMSswMDowMFKYDdUAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAV3pUWHRSYXcgcHJvZmlsZSB0eXBlIGlwdGMAAHic4/IMCHFWKCjKT8vMSeVSAAMjCy5jCxMjE0uTFAMTIESANMNkAyOzVCDL2NTIxMzEHMQHy4BIoEouAOoXEXTyQjWVAAAAAElFTkSuQmCC"
-    />
-
-    <link
-      rel="manifest"
-      href="data:application/manifest+json;base64,ewogICAgIm5hbWUiOiAiRnVuZHMgVHJhY2tlciIsCiAgICAic2hvcnRfbmFtZSI6ICJGdW5kcyBUcmFja2VyIiwKICAgICJpY29ucyI6IFsKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiL2FuZHJvaWQtY2hyb21lLTE5MngxOTIucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiL2FuZHJvaWQtY2hyb21lLTUxMng1MTIucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICAgICAgfQogICAgXSwKICAgICJ0aGVtZV9jb2xvciI6ICIjZmZmZmZmIiwKICAgICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIKfQo="
-    />
-
-    <link
-      rel="mask-icon"
-      href="/assets/safari-pinned-tab.3e601928.svg"
-      color="#7dcac7"
-    />
-
-    <meta
-      name="msapplication-TileColor"
-      content="#fafbfc"
-    />
-
-    <meta
-      name="theme-color"
-      content="#ffffff"
-    />
-
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
 
     <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon.5933cca4.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="data:image/png;base64,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"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAoFJREFUOE9dU01PE1EUPffNTKnlS43aKgRJK6gLXRHRkLjxD8gKDbrRn6AbYFMW1A1/QReGaFipP8CNhgiBjYkxCoKQiG2NCVBIKTNv5pp7XyHEyWSSeffec8859z7Cfw8nnLdx/JiBOyD0EgBmrBPove/Tc0PeGksNsbyQuH454cDauMjAUzBSeigZLhdMmhqCMR34pmgMRRLVUyk+sPGsIQwTCAxXuFJ1GX1nmzQVRKNvAt8bMUSRg43iKTDGJSg5K1XCzKLBJyVLuJUHHtyIcemc/DkQMJWCFm+CGo2DgvG8rwClfv5lvJw3mFuVuOQJG/cYAobyjIc3E+TPqKzQ972rFEV2iiHdCWNvDZY2WLtcv8C4P8hiIGYXDT5val8M9DCe3U2cN0QlCiM7D6ZBORh/R9rp3gDjWldTrThNwJffwOslA46BqWGBUm4LFMW2wgll5WCrTjidEX3NyRwbMakcxtY+cCrT9IGoSpEVAGSlS82G6PBTSlvNIik5sk3nU4tCtActblYGVfFgHhAJjFery2AmDGVzuNjefjg7TV7f3cVcpQwYYLTQr8AAL6iJIl96zvz4hrW9HZXQ09aJoawoI8z9KWNjr6Zc8m0dGO27oh4QUKJGo1HwPF/HWN6v42P5F77vbKsNR5umljAud57E7fPdyKVbwcRujBJqRGHJgMbcYjIq9To+VDaxXNtWlH4pzHUjlzmhUORMKgWBP6EAzHFgLc8yMOy2TIeMcn1XiXZlWtWPw6WSVU753giRcassIAknQWjtpAE9AZA64t/cAy1mCol42ve9otyDYxKbcwUgq+15/iO5zkTcK0w4Yb3OcRy9SKfTq4c3WJr8A9ZJI3YKxMs6AAAAAElFTkSuQmCC"
+    />
+    <link
+      rel="manifest"
+      href="data:application/manifest+json;base64,eyJuYW1lIjoiIiwic2hvcnRfbmFtZSI6IiIsImljb25zIjpbeyJzcmMiOiIvYW5kcm9pZC1jaHJvbWUtMTkyeDE5Mi5wbmciLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn0seyJzcmMiOiIvYW5kcm9pZC1jaHJvbWUtNTEyeDUxMi5wbmciLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn1dLCJ0aGVtZV9jb2xvciI6IiNmZmZmZmYiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI2ZmZmZmZiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIn0="
     />
 
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
+    <style>
+      @font-face {
+        font-family: Roboto;
+        src: url(/assets/Roboto-Medium.3310766b.woff2);
+      }
 
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+      @font-face {
+        font-family: Roboto;
+        src: url(/assets/Roboto-Medium.3310766b.woff2);
+        font-weight: 500;
+      }
+
+      @font-face {
+        font-family: Roboto;
+        src: url(/assets/Roboto-Bold.fb13c3a1.woff2);
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: Roboto;
+        src: url(/assets/Roboto-Regular.fc5c015f.woff2);
+        font-weight: 400;
+      }
+    </style>
 
     <title>Funds Tracker</title>
-    <script type="module" crossorigin src="/assets/index.e27de611.js"></script>
+    <script type="module" crossorigin src="/assets/index.3015572c.js"></script>
     <link rel="stylesheet" href="/assets/index.26b45885.css">
   </head>
 

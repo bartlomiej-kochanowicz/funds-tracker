@@ -1,1 +1,0 @@
-import{g as o}from"./array.f9feca11.js";import{u as f}from"./useTranslation.40c97f66.js";const d=({register:r,name:e,defaultValues:s,errors:n})=>{var t;const{onChange:a,ref:g,onBlur:u}=r(e),c=l=>{a({target:{name:e,value:l}})},{t:i}=f();return{onChange:c,defaultValue:o(s,e),error:i((t=o(n,e))==null?void 0:t.message)||void 0,ref:g,onBlur:u}};export{d as u};
