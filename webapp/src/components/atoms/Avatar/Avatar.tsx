@@ -8,7 +8,6 @@ interface AvatarProps {
 }
 
 export const Avatar = ({ name }: AvatarProps) => {
-  console.log({ name });
   const initials = useMemo(() => new Initials(name), [name]);
 
   return (
