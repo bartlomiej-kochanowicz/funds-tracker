@@ -72,5 +72,10 @@
   "navigation.history": "History",
   "navigation.my_profile": "My profile",
   "navigation.hub": "Hub",
-  "common.sign_out": "Sign out"
+  "common.sign_out": "Sign out",
+  "add.portfolios.title": "Add your portfolios",
+  "add.portfolios.description": "Don't be limited to one strategy, divide your investments into <bold>independent portfolios</bold>. For example, you can separate your passively and actively managed portfolios. <bold>Maximum 10 portfolios.</bold>",
+  "add.portfolios.empty": "No portfolios added. Add new by clicking button below.",
+  "add.portfolios.button.add": "Add portfolio",
+  "add.portfolios.input.placeholder": "e.g. Passive, Active"
 }
