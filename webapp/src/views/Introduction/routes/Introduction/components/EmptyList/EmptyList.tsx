@@ -1,34 +1,33 @@
 import { Button, Spacer, Spreader, Text } from 'components/atoms';
-import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
 
 interface EmptyListProps {
   handleAppend: () => void;
+  i18n: {
+    title: string;
+    button: string;
+  };
 }
 
-export const EmptyList = ({ handleAppend }: EmptyListProps) => {
-  const { t } = useTranslation();
+export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
+  <Column alignItems="center">
+    <Text
+      textAlign="center"
+      fontWeight="700"
+    >
+      {i18n.title}
+    </Text>
 
-  return (
-    <Column alignItems="center">
-      <Text
-        textAlign="center"
-        fontWeight="700"
-      >
-        {t('add.cash.accounts.empty')}
-      </Text>
+    <Spacer space="tiny" />
 
-      <Spacer space="tiny" />
-
-      <Button
-        color="secondary"
-        onClick={handleAppend}
-      >
-        {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />
-      </Button>
-    </Column>
-  );
-};
+    <Button
+      color="secondary"
+      onClick={handleAppend}
+    >
+      {i18n.button} <Spreader spread="tiny" /> <FaPlus />
+    </Button>
+  </Column>
+);
 
 EmptyList.displayName = 'AddCashAccountsEmptyList';

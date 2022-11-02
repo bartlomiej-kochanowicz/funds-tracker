@@ -32,7 +32,7 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
   return (
     <Row>
       <Input
-        placeholder={t('common.input.name.placeholder')}
+        placeholder={t('add.portfolios.input.placeholder')}
         flexGrow={1}
         {...nameInputProps}
       />

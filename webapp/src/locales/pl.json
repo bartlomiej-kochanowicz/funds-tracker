@@ -72,5 +72,10 @@
   "navigation.history": "Historia",
   "navigation.my_profile": "Mój profil",
   "navigation.hub": "Centrum",
-  "common.sign_out": "Wyloguj się"
+  "common.sign_out": "Wyloguj się",
+  "add.portfolios.title": "Dodaj portfele",
+  "add.portfolios.description": "Nie ograniczaj się do jednej strategii, podziel swoje inwestycje na <bold>nieżalene portfele</bold>. Dla przykładu możesz rozdzielić swoje pasywnie i aktywnie zarządzane portfele. <bold>Maksymalnie 10 portfeli.</bold>",
+  "add.portfolios.empty": "Nie dodano portfeli. Dodaj nowe, klikając przycisk poniżej.",
+  "add.portfolios.button.add": "Dodaj portfel",
+  "add.portfolios.input.placeholder": "np.Pasywny, Aktywny..."
 }

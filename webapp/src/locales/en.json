@@ -72,5 +72,7 @@
   "navigation.history": "History",
   "navigation.my_profile": "My profile",
   "navigation.hub": "Hub",
-  "common.sign_out": "Sign out"
+  "common.sign_out": "Sign out",
+  "add.portfolios.title": "Add your portfolios",
+  "add.portfolios.button.add": "add.portfolios.button.add"
 }

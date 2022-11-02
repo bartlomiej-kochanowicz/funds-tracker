@@ -95,7 +95,15 @@ export const AddCashAccountsForm = () => {
           noValidate
         >
           <Column>
-            {fields.length === 0 ? <EmptyList handleAppend={handleAppend} /> : null}
+            {fields.length === 0 ? (
+              <EmptyList
+                handleAppend={handleAppend}
+                i18n={{
+                  title: t('add.cash.accounts.empty'),
+                  button: t('add.cash.accounts.button.add'),
+                }}
+              />
+            ) : null}
 
             <FieldsWrapper>
               {fields.map((field, index) => (

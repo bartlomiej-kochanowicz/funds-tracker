@@ -60,7 +60,7 @@ export const AddPortfoliosForm = () => {
       exit={{ opacity: 0, scale: 0 }}
     >
       <Column>
-        <Heading textAlign="center">{t('add.cash.accounts.title')}</Heading>
+        <Heading textAlign="center">{t('add.portfolios.title')}</Heading>
 
         <Spacer space="small" />
 
@@ -70,7 +70,7 @@ export const AddPortfoliosForm = () => {
           textAlign="center"
         >
           <Trans
-            i18nKey="add.cash.accounts.description"
+            i18nKey="add.portfolios.description"
             components={{
               bold: (
                 <Text
@@ -91,7 +91,15 @@ export const AddPortfoliosForm = () => {
           noValidate
         >
           <Column>
-            {fields.length === 0 ? <EmptyList handleAppend={handleAppend} /> : null}
+            {fields.length === 0 ? (
+              <EmptyList
+                handleAppend={handleAppend}
+                i18n={{
+                  title: t('add.portfolios.empty'),
+                  button: t('add.portfolios.button.add'),
+                }}
+              />
+            ) : null}
 
             <FieldsWrapper>
               {fields.map((field, index) => (
@@ -112,7 +120,7 @@ export const AddPortfoliosForm = () => {
                 color="secondary"
                 onClick={handleAppend}
               >
-                {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />
+                {t('add.portfolios.button.add')} <Spreader spread="tiny" /> <FaPlus />
               </Button>
             ) : null}
 
