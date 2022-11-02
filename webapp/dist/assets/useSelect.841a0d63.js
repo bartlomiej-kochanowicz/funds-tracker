@@ -1,0 +1,1 @@
+import{g as o}from"./array.ed45da59.js";import{a as f}from"./index.531bdd1d.js";const d=({register:r,name:e,defaultValues:s,errors:n})=>{var t;const{onChange:a,ref:g,onBlur:u}=r(e),c=l=>{a({target:{name:e,value:l}})},{t:i}=f();return{onChange:c,defaultValue:o(s,e),error:i((t=o(n,e))==null?void 0:t.message)||void 0,ref:g,onBlur:u}};export{d as u};
