@@ -12,18 +12,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
+const axios_1 = require("@nestjs/axios");
 const bcrypt = require("bcrypt");
 const env_1 = require("../common/config/env");
+const rxjs_1 = require("rxjs");
 const prisma_service_1 = require("../prisma/prisma.service");
 const cookies_1 = require("../common/constants/cookies");
 let AuthService = class AuthService {
-    constructor(prisma, jwtService) {
+    constructor(prisma, jwtService, httpService) {
         this.prisma = prisma;
         this.jwtService = jwtService;
+        this.httpService = httpService;
     }
     async signupLocal(dto, res) {
         try {
-            const { email, password, name } = dto;
+            const { email, password, name, token } = dto;
+            const isHuman = await this.validateHuman(token);
+            if (!isHuman) {
+                throw new common_1.ForbiddenException('You are a robot!');
+            }
             const hashedPwd = await this.hashData(password);
             const user = await this.prisma.user.findUnique({ where: { email } });
             if (user) {
@@ -61,7 +68,11 @@ let AuthService = class AuthService {
     async signinLocal(dto, res) {
         var _a;
         try {
-            const { email, password } = dto;
+            const { email, password, token } = dto;
+            const isHuman = await this.validateHuman(token);
+            if (!isHuman) {
+                throw new common_1.ForbiddenException('You are a robot!');
+            }
             const user = await this.prisma.user.findUnique({ where: { email } });
             if (!user)
                 throw new common_1.ForbiddenException('No account for these email.');
@@ -91,17 +102,21 @@ let AuthService = class AuthService {
         }
     }
     async checkEmail(dto) {
-        const { email } = dto;
+        const { email, token } = dto;
+        const isHuman = await this.validateHuman(token);
+        if (!isHuman) {
+            throw new common_1.ForbiddenException('You are a robot!');
+        }
         const user = await this.prisma.user.findUnique({ where: { email } });
         return {
             exist: Boolean(user),
         };
     }
     async getAccount(userId) {
-        const { email, uuid, createdAt } = await this.prisma.user.findUnique({
+        const { email, uuid, createdAt, name } = await this.prisma.user.findUnique({
             where: { uuid: userId },
         });
-        return { email, uuid, createdAt };
+        return { email, uuid, createdAt, name };
     }
     async logout(userId, res) {
         try {
@@ -184,10 +199,25 @@ let AuthService = class AuthService {
             refreshToken: rt,
         };
     }
+    async validateHuman(token) {
+        const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService
+            .post('https://www.google.com/recaptcha/api/siteverify', null, {
+            params: {
+                secret: env_1.RECAPTCHA_SECRET,
+                response: token,
+            },
+        })
+            .pipe((0, rxjs_1.catchError)(() => {
+            throw Error('Google reCAPTCHA error.');
+        })));
+        return data.success;
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService, jwt_1.JwtService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        jwt_1.JwtService,
+        axios_1.HttpService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"email.dto.js","sourceRoot":"","sources":["../../../src/auth/dto/email.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAAuD;AAEvD,MAAa,QAAQ;CAIpB;AADC;IAFC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;;uCACG;AAHhB,4BAIC"}
+{"version":3,"file":"email.dto.js","sourceRoot":"","sources":["../../../src/auth/dto/email.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAAuD;AAEvD,MAAa,QAAQ;CAQpB;AAPC;IAAC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;;uCACG;AAEd;IAAC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;;uCACG;AAPhB,4BAQC"}

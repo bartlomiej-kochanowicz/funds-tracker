@@ -26,7 +26,7 @@ __decorate([
         context: 'name',
     }),
     (0, class_validator_1.MaxLength)(50, {
-        message: 'Name is ooo long',
+        message: 'Name is too long',
     }),
     __metadata("design:type", String)
 ], SignupDto.prototype, "name", void 0);
@@ -36,5 +36,10 @@ __decorate([
     (0, class_validator_1.MinLength)(12, { message: 'Password is too short' }),
     __metadata("design:type", String)
 ], SignupDto.prototype, "password", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SignupDto.prototype, "token", void 0);
 exports.SignupDto = SignupDto;
 //# sourceMappingURL=signup.dto.js.map
