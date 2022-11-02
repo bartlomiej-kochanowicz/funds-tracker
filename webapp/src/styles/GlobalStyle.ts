@@ -63,4 +63,8 @@ export const GlobalStyle = styled.createGlobalStyle`
   #__next {
     isolation: isolate;
   }
+
+  .grecaptcha-badge {
+    display: none;
+  }
 `;

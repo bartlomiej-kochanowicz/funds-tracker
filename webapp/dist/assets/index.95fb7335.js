@@ -1,1 +1,0 @@
-import{e as n,j as e,H as r,g as t,T as o}from"./index.531bdd1d.js";import{F as a}from"./FullscreenClear.16d1157a.js";const i=()=>n(a,{children:[e(r,{textAlign:"center",children:"404"}),e(t,{space:"tiny"}),e(o,{fontColor:"gray400",textAlign:"center",children:"Page not found"})]});export{i as NotFound};
