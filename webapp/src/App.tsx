@@ -7,7 +7,7 @@ import { Root } from 'views/Root';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'styles/GlobalStyle';
 import { store } from 'store';
-import { ErrorContent } from 'components/molecules';
+import { FullscreenErrorContent } from 'components/organisms';
 import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
 
 const Content = () => {
@@ -29,7 +29,7 @@ const Content = () => {
         pauseOnHover
       />
 
-      <ErrorBoundary FallbackComponent={ErrorContent}>
+      <ErrorBoundary FallbackComponent={FullscreenErrorContent}>
         <Root />
       </ErrorBoundary>
     </ThemeProvider>
