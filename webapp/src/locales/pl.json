@@ -78,5 +78,7 @@
   "add.portfolios.empty": "Nie dodano portfeli. Dodaj nowe, klikając przycisk poniżej.",
   "add.portfolios.button.add": "Dodaj portfel",
   "add.portfolios.input.placeholder": "np.Pasywny, Aktywny...",
-  "common.theme_switcher": "Zmień motyw"
+  "common.theme_switcher": "Zmień motyw",
+  "error.component.title": "Błąd ładowania",
+  "error.component.description": "Błąd się powtarza? Skontaktuj się z zespołem support."
 }

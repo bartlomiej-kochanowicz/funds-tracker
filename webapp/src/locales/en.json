@@ -78,5 +78,7 @@
   "add.portfolios.empty": "No portfolios added. Add new by clicking button below.",
   "add.portfolios.button.add": "Add portfolio",
   "add.portfolios.input.placeholder": "e.g. Passive, Active",
-  "common.theme_switcher": "Theme switcher"
+  "common.theme_switcher": "Theme switcher",
+  "error.component.title": "Couldn’t load ",
+  "error.component.description": "If this issue continues, please contact support."
 }

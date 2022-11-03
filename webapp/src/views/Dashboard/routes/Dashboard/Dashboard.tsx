@@ -1,5 +1,6 @@
 import { Column } from 'simple-flexbox';
 import { Button, Spacer, Toggle } from 'components/atoms';
+import { ErrorContent } from 'components/molecules';
 
 export const Dashboard = () => (
   <Column>
@@ -13,5 +14,7 @@ export const Dashboard = () => (
     >
       test
     </Button>
+
+    <ErrorContent />
   </Column>
 );
