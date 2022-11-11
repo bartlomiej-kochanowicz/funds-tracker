@@ -1,12 +1,18 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { CollectionService } from 'collection/collection.service';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
+import { Pagination } from 'common/types/pagination.type';
 import { PrismaService } from 'prisma/prisma.service';
+import { CashAccountDto } from './dto/cash-account.dto';
 import { CreateCashAccountDto } from './dto/create-cash-account.dto';
 import { UpdateCashAccountDto } from './dto/update-cash-account.dto';
 
 @Injectable()
 export class CashAccountsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private collection: CollectionService,
+  ) {}
 
   async create(userUuid: string, createCashAccountDto: CreateCashAccountDto) {
     const cashAccounts = await this.prisma.cashAccounts.count({
@@ -32,7 +38,17 @@ export class CashAccountsService {
     return null;
   }
 
-  async findAll(userUuid: string) {
+  async findAll(
+    userUuid: string,
+    page: number,
+    limit: number,
+  ): Promise<Pagination<CashAccountDto>> {
+    const count = await this.prisma.cashAccounts.count({
+      where: {
+        userUuid,
+      },
+    });
+
     const cashAccounts = await this.prisma.cashAccounts.findMany({
       where: {
         userUuid,
@@ -43,12 +59,19 @@ export class CashAccountsService {
         currency: true,
         balance: true,
       },
+      skip: (page - 1) * limit,
+      take: limit,
     });
 
-    return cashAccounts;
+    return this.collection.paginate<CashAccountDto>(
+      cashAccounts,
+      count,
+      page,
+      limit,
+    );
   }
 
-  async findOne(userUuid: string, uuid: string) {
+  async findOne(userUuid: string, uuid: string): Promise<CashAccountDto> {
     const cashAccount = await this.prisma.cashAccounts.findUnique({
       where: {
         userUuid_uuid: {

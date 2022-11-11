@@ -1,7 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { IsIn, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
-import { CURRENCIES_ARRAY } from 'common/constants/currencies';
-import { Currencies } from 'common/types/currencies.type';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { Currency } from '@prisma/client';
 import { CashAccountDto } from './cash-account.dto';
 
 export class UpdateCashAccountDto extends PartialType(CashAccountDto) {
@@ -10,6 +9,6 @@ export class UpdateCashAccountDto extends PartialType(CashAccountDto) {
   balance: number;
 
   @IsOptional()
-  @IsIn(CURRENCIES_ARRAY)
-  currency: Currencies;
+  @IsEnum(Currency)
+  currency: Currency;
 }

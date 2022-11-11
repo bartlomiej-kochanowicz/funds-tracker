@@ -1,12 +1,25 @@
-import { IsIn, IsNotEmpty, IsString } from 'class-validator';
-import { CURRENCIES_ARRAY } from 'common/constants/currencies';
-import { Currencies } from 'common/types/currencies.type';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { Currency } from '@prisma/client';
 
 export class CashAccountDto {
+  @IsString()
+  @IsOptional()
+  uuid: string;
+
   @IsString()
   @IsNotEmpty()
   name: string;
 
-  @IsIn(CURRENCIES_ARRAY)
-  currency: Currencies;
+  @IsEnum(Currency)
+  currency: Currency;
+
+  @IsOptional()
+  @IsNumber()
+  balance: number;
 }

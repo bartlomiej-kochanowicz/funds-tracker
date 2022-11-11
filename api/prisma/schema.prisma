@@ -18,12 +18,20 @@ model User {
 }
 
 model CashAccounts {
-  uuid     String @id @default(uuid())
+  uuid     String   @id @default(uuid())
   name     String
-  balance  Float  @default(0)
-  currency String
-  user     User   @relation(fields: [userUuid], references: [uuid])
+  balance  Float    @default(0)
+  currency Currency
+  user     User     @relation(fields: [userUuid], references: [uuid])
   userUuid String
 
   @@unique([userUuid, uuid])
+}
+
+enum Currency {
+  CHF
+  EUR
+  GBP
+  USD
+  PLN
 }
