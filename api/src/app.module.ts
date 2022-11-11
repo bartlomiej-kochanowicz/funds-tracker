@@ -3,9 +3,10 @@ import { Module } from '@nestjs/common';
 import { AtGuard } from 'common/guards';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
+import { CashAccountsModule } from './cash-accounts/cash-accounts.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule],
+  imports: [PrismaModule, AuthModule, CashAccountsModule],
   controllers: [],
   providers: [
     {

@@ -12,11 +12,12 @@ const common_1 = require("@nestjs/common");
 const guards_1 = require("./common/guards");
 const prisma_module_1 = require("./prisma/prisma.module");
 const auth_module_1 = require("./auth/auth.module");
+const cash_accounts_module_1 = require("./cash-accounts/cash-accounts.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, auth_module_1.AuthModule],
+        imports: [prisma_module_1.PrismaModule, auth_module_1.AuthModule, cash_accounts_module_1.CashAccountsModule],
         controllers: [],
         providers: [
             {
