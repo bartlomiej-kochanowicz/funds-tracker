@@ -4,8 +4,13 @@ import { UpdateCashAccountDto } from './dto/update-cash-account.dto';
 export declare class CashAccountsController {
     private readonly cashAccountsService;
     constructor(cashAccountsService: CashAccountsService);
-    create(createCashAccountDto: CreateCashAccountDto): string;
-    findAll(): string;
+    create(userId: string, createCashAccountDto: CreateCashAccountDto): Promise<import("@prisma/client").CashAccounts>;
+    findAll(userId: string): Promise<{
+        name: string;
+        currency: string;
+        uuid: string;
+        balance: number;
+    }[]>;
     findOne(id: string): string;
     update(id: string, updateCashAccountDto: UpdateCashAccountDto): string;
     remove(id: string): string;

@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CashAccountsController = void 0;
 const common_1 = require("@nestjs/common");
+const decorators_1 = require("../common/decorators");
 const cash_accounts_service_1 = require("./cash-accounts.service");
 const create_cash_account_dto_1 = require("./dto/create-cash-account.dto");
 const update_cash_account_dto_1 = require("./dto/update-cash-account.dto");
@@ -21,11 +22,11 @@ let CashAccountsController = class CashAccountsController {
     constructor(cashAccountsService) {
         this.cashAccountsService = cashAccountsService;
     }
-    create(createCashAccountDto) {
-        return this.cashAccountsService.create(createCashAccountDto);
+    create(userId, createCashAccountDto) {
+        return this.cashAccountsService.create(userId, createCashAccountDto);
     }
-    findAll() {
-        return this.cashAccountsService.findAll();
+    findAll(userId) {
+        return this.cashAccountsService.findAll(userId);
     }
     findOne(id) {
         return this.cashAccountsService.findOne(+id);
@@ -39,15 +40,17 @@ let CashAccountsController = class CashAccountsController {
 };
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, decorators_1.GetCurrentUserId)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_cash_account_dto_1.CreateCashAccountDto]),
+    __metadata("design:paramtypes", [String, create_cash_account_dto_1.CreateCashAccountDto]),
     __metadata("design:returntype", void 0)
 ], CashAccountsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, decorators_1.GetCurrentUserId)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], CashAccountsController.prototype, "findAll", null);
 __decorate([

@@ -288,6 +288,6 @@ export class AuthService {
         ),
     );
 
-    return data.success;
+    return IS_DEVELOPMENT ? true : data.success;
   }
 }

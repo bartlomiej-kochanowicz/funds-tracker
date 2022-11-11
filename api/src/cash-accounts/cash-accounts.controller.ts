@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
 import { CreateCashAccountDto } from './dto/create-cash-account.dto';
 import { UpdateCashAccountDto } from './dto/update-cash-account.dto';
@@ -8,13 +17,16 @@ export class CashAccountsController {
   constructor(private readonly cashAccountsService: CashAccountsService) {}
 
   @Post()
-  create(@Body() createCashAccountDto: CreateCashAccountDto) {
-    return this.cashAccountsService.create(createCashAccountDto);
+  create(
+    @GetCurrentUserId() userId: string,
+    @Body() createCashAccountDto: CreateCashAccountDto,
+  ) {
+    return this.cashAccountsService.create(userId, createCashAccountDto);
   }
 
   @Get()
-  findAll() {
-    return this.cashAccountsService.findAll();
+  findAll(@GetCurrentUserId() userId: string) {
+    return this.cashAccountsService.findAll(userId);
   }
 
   @Get(':id')
@@ -23,7 +35,10 @@ export class CashAccountsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCashAccountDto: UpdateCashAccountDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCashAccountDto: UpdateCashAccountDto,
+  ) {
     return this.cashAccountsService.update(+id, updateCashAccountDto);
   }
 

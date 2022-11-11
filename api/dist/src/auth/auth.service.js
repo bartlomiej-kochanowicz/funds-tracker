@@ -210,7 +210,7 @@ let AuthService = class AuthService {
             .pipe((0, rxjs_1.catchError)(() => {
             throw Error('Google reCAPTCHA error.');
         })));
-        return data.success;
+        return env_1.IS_DEVELOPMENT ? true : data.success;
     }
 };
 AuthService = __decorate([
