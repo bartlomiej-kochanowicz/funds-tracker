@@ -19,7 +19,7 @@ export class CashAccountsController {
   @Post()
   create(
     @GetCurrentUserId() userId: string,
-    @Body() createCashAccountDto: CreateCashAccountDto,
+    @Body() createCashAccountDto: CreateCashAccountDto | CreateCashAccountDto[],
   ) {
     return this.cashAccountsService.create(userId, createCashAccountDto);
   }
@@ -43,8 +43,8 @@ export class CashAccountsController {
     return this.cashAccountsService.update(userId, uuid, updateCashAccountDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cashAccountsService.remove(+id);
+  @Delete(':uuid')
+  remove(@GetCurrentUserId() userId: string, @Param('uuid') uuid: string) {
+    return this.cashAccountsService.remove(userId, uuid);
   }
 }

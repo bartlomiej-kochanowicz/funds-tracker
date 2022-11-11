@@ -16,7 +16,6 @@ exports.CashAccountsController = void 0;
 const common_1 = require("@nestjs/common");
 const decorators_1 = require("../common/decorators");
 const cash_accounts_service_1 = require("./cash-accounts.service");
-const create_cash_account_dto_1 = require("./dto/create-cash-account.dto");
 const update_cash_account_dto_1 = require("./dto/update-cash-account.dto");
 let CashAccountsController = class CashAccountsController {
     constructor(cashAccountsService) {
@@ -34,8 +33,8 @@ let CashAccountsController = class CashAccountsController {
     update(userId, uuid, updateCashAccountDto) {
         return this.cashAccountsService.update(userId, uuid, updateCashAccountDto);
     }
-    remove(id) {
-        return this.cashAccountsService.remove(+id);
+    remove(userId, uuid) {
+        return this.cashAccountsService.remove(userId, uuid);
     }
 };
 __decorate([
@@ -43,7 +42,7 @@ __decorate([
     __param(0, (0, decorators_1.GetCurrentUserId)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, create_cash_account_dto_1.CreateCashAccountDto]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
 ], CashAccountsController.prototype, "create", null);
 __decorate([
@@ -71,10 +70,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CashAccountsController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)(':uuid'),
+    __param(0, (0, decorators_1.GetCurrentUserId)()),
+    __param(1, (0, common_1.Param)('uuid')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], CashAccountsController.prototype, "remove", null);
 CashAccountsController = __decorate([

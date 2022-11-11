@@ -18,20 +18,39 @@ let CashAccountsService = class CashAccountsService {
         this.prisma = prisma;
     }
     async create(userUuid, createCashAccountDto) {
-        const { name, currency } = createCashAccountDto;
         const cashAccounts = await this.prisma.cashAccounts.count({
             where: {
                 userUuid,
             },
         });
+        if (createCashAccountDto instanceof Array) {
+            if (cashAccounts + createCashAccountDto.length > common_2.MAX_CASH_ACCOUNTS) {
+                throw new common_1.HttpException('Max accounts reached', common_1.HttpStatus.FORBIDDEN);
+            }
+            const newCashAccounts = await this.prisma.cashAccounts.createMany({
+                data: createCashAccountDto.map(({ name, currency }) => ({
+                    name,
+                    currency,
+                    userUuid,
+                })),
+            });
+            return newCashAccounts;
+        }
         if (cashAccounts >= common_2.MAX_CASH_ACCOUNTS) {
             throw new common_1.HttpException('Max accounts reached', common_1.HttpStatus.FORBIDDEN);
         }
+        const { name, currency } = createCashAccountDto;
         const cashAccount = await this.prisma.cashAccounts.create({
             data: {
                 name,
                 currency,
                 userUuid,
+            },
+            select: {
+                uuid: true,
+                name: true,
+                currency: true,
+                balance: true,
             },
         });
         return cashAccount;
@@ -93,8 +112,20 @@ let CashAccountsService = class CashAccountsService {
             throw new common_1.HttpException('Account not fount', common_1.HttpStatus.NOT_FOUND);
         }
     }
-    remove(id) {
-        return `This action removes a #${id} cashAccount`;
+    async remove(userUuid, uuid) {
+        try {
+            await this.prisma.cashAccounts.delete({
+                where: {
+                    userUuid_uuid: {
+                        userUuid,
+                        uuid,
+                    },
+                },
+            });
+        }
+        catch (_a) {
+            throw new common_1.HttpException('Account not fount', common_1.HttpStatus.NOT_FOUND);
+        }
     }
 };
 CashAccountsService = __decorate([
