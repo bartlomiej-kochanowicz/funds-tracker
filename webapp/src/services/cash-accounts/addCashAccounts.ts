@@ -1,5 +1,5 @@
 import { clientPrivate } from 'config/privateClient';
-import { Currencies } from 'types/currencies';
+import { Currencies } from 'types/currencies.type';
 import { retryHTTP } from 'utils/retryHTTP';
 
 export type CashAccount = {

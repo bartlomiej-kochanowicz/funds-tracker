@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCashAccountDto = void 0;
 const class_validator_1 = require("class-validator");
-const common_1 = require("../../common/constants/common");
+const common_1 = require("common/constants/common");
 class CreateCashAccountDto {
 }
 __decorate([

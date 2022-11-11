@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateCashAccountDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
 const class_validator_1 = require("class-validator");
-const currencies_1 = require("../../common/constants/currencies");
+const currencies_1 = require("common/constants/currencies");
 const cash_account_dto_1 = require("./cash-account.dto");
 class UpdateCashAccountDto extends (0, mapped_types_1.PartialType)(cash_account_dto_1.CashAccountDto) {
 }

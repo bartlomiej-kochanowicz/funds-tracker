@@ -7,14 +7,14 @@ export declare class CashAccountsService {
     create(userUuid: string, createCashAccountDto: CreateCashAccountDto): Promise<any>;
     findAll(userUuid: string): Promise<{
         name: string;
-        currency: string;
         uuid: string;
+        currency: string;
         balance: number;
     }[]>;
     findOne(userUuid: string, uuid: string): Promise<{
         name: string;
-        currency: string;
         uuid: string;
+        currency: string;
         balance: number;
     }>;
     update(userUuid: string, uuid: string, updateCashAccountDto: UpdateCashAccountDto): Promise<any>;

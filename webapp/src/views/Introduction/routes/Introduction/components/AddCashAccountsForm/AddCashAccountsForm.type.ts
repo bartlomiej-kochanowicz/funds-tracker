@@ -1,4 +1,4 @@
-import { Currencies } from 'constants/selectors/currencies';
+import type { Currencies } from 'types/currencies.type';
 
 export type DefaultValues = {
   accounts: {

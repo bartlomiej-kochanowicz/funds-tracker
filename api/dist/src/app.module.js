@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const core_1 = require("@nestjs/core");
 const common_1 = require("@nestjs/common");
-const guards_1 = require("./common/guards");
+const guards_1 = require("common/guards");
 const prisma_module_1 = require("./prisma/prisma.module");
 const auth_module_1 = require("./auth/auth.module");
 const cash_accounts_module_1 = require("./cash-accounts/cash-accounts.module");

@@ -4,6 +4,6 @@ import { CashAccountsController } from './cash-accounts.controller';
 
 @Module({
   controllers: [CashAccountsController],
-  providers: [CashAccountsService]
+  providers: [CashAccountsService],
 })
 export class CashAccountsModule {}
