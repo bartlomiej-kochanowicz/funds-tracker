@@ -1,15 +1,11 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { HttpService } from '@nestjs/axios';
+import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import {
-  AT_SECRET,
-  IS_DEVELOPMENT,
-  RECAPTCHA_SECRET,
-  RT_SECRET,
-} from 'common/config/env';
+import { IS_DEVELOPMENT } from 'common/config/env';
 import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
@@ -22,6 +18,7 @@ export class AuthService {
     private prisma: PrismaService,
     private jwtService: JwtService,
     private readonly httpService: HttpService,
+    private config: ConfigService,
   ) {}
 
   async signupLocal(dto: SignupDto, res: Response): Promise<unknown> {
@@ -258,11 +255,11 @@ export class AuthService {
     const [at, rt] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 15, secret: AT_SECRET }, // 15 minutes
+        { expiresIn: 60 * 15, secret: this.config.get('AT_SECRET') }, // 15 minutes
       ),
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 60 * 24 * 7, secret: RT_SECRET }, // 7 days
+        { expiresIn: 60 * 60 * 24 * 7, secret: this.config.get('RT_SECRET') }, // 7 days
       ),
     ]);
 
@@ -277,7 +274,7 @@ export class AuthService {
       this.httpService
         .post('https://www.google.com/recaptcha/api/siteverify', null, {
           params: {
-            secret: RECAPTCHA_SECRET,
+            secret: this.config.get('RECAPTCHA_SECRET'),
             response: token,
           },
         })
