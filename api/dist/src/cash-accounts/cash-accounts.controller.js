@@ -28,8 +28,8 @@ let CashAccountsController = class CashAccountsController {
     findAll(userId) {
         return this.cashAccountsService.findAll(userId);
     }
-    findOne(id) {
-        return this.cashAccountsService.findOne(+id);
+    findOne(userId, uuid) {
+        return this.cashAccountsService.findOne(userId, uuid);
     }
     update(id, updateCashAccountDto) {
         return this.cashAccountsService.update(+id, updateCashAccountDto);
@@ -54,10 +54,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CashAccountsController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)(':uuid'),
+    __param(0, (0, decorators_1.GetCurrentUserId)()),
+    __param(1, (0, common_1.Param)('uuid')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], CashAccountsController.prototype, "findOne", null);
 __decorate([

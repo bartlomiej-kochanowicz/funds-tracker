@@ -24,4 +24,6 @@ model CashAccounts {
   currency String
   user     User   @relation(fields: [userUuid], references: [uuid])
   userUuid String
+
+  @@unique([userUuid, uuid])
 }

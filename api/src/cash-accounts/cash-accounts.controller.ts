@@ -29,9 +29,9 @@ export class CashAccountsController {
     return this.cashAccountsService.findAll(userId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cashAccountsService.findOne(+id);
+  @Get(':uuid')
+  findOne(@GetCurrentUserId() userId: string, @Param('uuid') uuid: string) {
+    return this.cashAccountsService.findOne(userId, uuid);
   }
 
   @Patch(':id')

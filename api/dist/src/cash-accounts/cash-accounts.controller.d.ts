@@ -11,7 +11,12 @@ export declare class CashAccountsController {
         uuid: string;
         balance: number;
     }[]>;
-    findOne(id: string): string;
+    findOne(userId: string, uuid: string): Promise<{
+        name: string;
+        currency: string;
+        uuid: string;
+        balance: number;
+    }>;
     update(id: string, updateCashAccountDto: UpdateCashAccountDto): string;
     remove(id: string): string;
 }

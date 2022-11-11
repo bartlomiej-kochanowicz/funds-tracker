@@ -50,8 +50,25 @@ let CashAccountsService = class CashAccountsService {
         });
         return cashAccounts;
     }
-    findOne(id) {
-        return `This action returns a #${id} cashAccount`;
+    async findOne(userUuid, uuid) {
+        const cashAccount = await this.prisma.cashAccounts.findUnique({
+            where: {
+                userUuid_uuid: {
+                    userUuid,
+                    uuid,
+                },
+            },
+            select: {
+                uuid: true,
+                name: true,
+                currency: true,
+                balance: true,
+            },
+        });
+        if (!cashAccount) {
+            throw new common_1.HttpException('Account not fount', common_1.HttpStatus.NOT_FOUND);
+        }
+        return cashAccount;
     }
     update(id, updateCashAccountDto) {
         return `This action updates a #${id} cashAccount`;
