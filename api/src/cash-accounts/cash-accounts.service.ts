@@ -8,53 +8,28 @@ import { UpdateCashAccountDto } from './dto/update-cash-account.dto';
 export class CashAccountsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(
-    userUuid: string,
-    createCashAccountDto: CreateCashAccountDto | CreateCashAccountDto[],
-  ) {
+  async create(userUuid: string, createCashAccountDto: CreateCashAccountDto) {
     const cashAccounts = await this.prisma.cashAccounts.count({
       where: {
         userUuid,
       },
     });
 
-    if (createCashAccountDto instanceof Array) {
-      if (cashAccounts + createCashAccountDto.length > MAX_CASH_ACCOUNTS) {
-        throw new HttpException('Max accounts reached', HttpStatus.FORBIDDEN);
-      }
+    const { cashAccounts: newCashAccounts } = createCashAccountDto;
 
-      const newCashAccounts = await this.prisma.cashAccounts.createMany({
-        data: createCashAccountDto.map(({ name, currency }) => ({
-          name,
-          currency,
-          userUuid,
-        })),
-      });
-
-      return newCashAccounts;
-    }
-
-    if (cashAccounts >= MAX_CASH_ACCOUNTS) {
+    if (cashAccounts + newCashAccounts.length > MAX_CASH_ACCOUNTS) {
       throw new HttpException('Max accounts reached', HttpStatus.FORBIDDEN);
     }
 
-    const { name, currency } = createCashAccountDto;
-
-    const cashAccount = await this.prisma.cashAccounts.create({
-      data: {
+    await this.prisma.cashAccounts.createMany({
+      data: newCashAccounts.map(({ name, currency }) => ({
         name,
         currency,
         userUuid,
-      },
-      select: {
-        uuid: true,
-        name: true,
-        currency: true,
-        balance: true,
-      },
+      })),
     });
 
-    return cashAccount;
+    return null;
   }
 
   async findAll(userUuid: string) {
@@ -102,7 +77,7 @@ export class CashAccountsService {
     updateCashAccountDto: UpdateCashAccountDto,
   ) {
     try {
-      const cashAccount = await this.prisma.cashAccounts.update({
+      await this.prisma.cashAccounts.update({
         where: {
           userUuid_uuid: {
             userUuid,
@@ -110,15 +85,9 @@ export class CashAccountsService {
           },
         },
         data: updateCashAccountDto,
-        select: {
-          uuid: true,
-          name: true,
-          balance: true,
-          currency: true,
-        },
       });
 
-      return cashAccount;
+      return null;
     } catch {
       throw new HttpException('Account not fount', HttpStatus.NOT_FOUND);
     }
@@ -134,6 +103,8 @@ export class CashAccountsService {
           },
         },
       });
+
+      return null;
     } catch {
       throw new HttpException('Account not fount', HttpStatus.NOT_FOUND);
     }

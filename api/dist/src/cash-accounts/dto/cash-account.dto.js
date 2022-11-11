@@ -9,17 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateCashAccountDto = void 0;
+exports.CashAccountDto = void 0;
 const class_validator_1 = require("class-validator");
-const common_1 = require("../../common/constants/common");
-class CreateCashAccountDto {
+const currencies_1 = require("../../common/constants/currencies");
+class CashAccountDto {
 }
 __decorate([
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.ArrayMinSize)(1),
-    (0, class_validator_1.ArrayMaxSize)(common_1.MAX_CASH_ACCOUNTS),
-    __metadata("design:type", Array)
-], CreateCashAccountDto.prototype, "cashAccounts", void 0);
-exports.CreateCashAccountDto = CreateCashAccountDto;
-//# sourceMappingURL=create-cash-account.dto.js.map
+    __metadata("design:type", String)
+], CashAccountDto.prototype, "name", void 0);
+__decorate([
+    (0, class_validator_1.IsIn)(currencies_1.CURRENCIES_ARRAY),
+    __metadata("design:type", String)
+], CashAccountDto.prototype, "currency", void 0);
+exports.CashAccountDto = CashAccountDto;
+//# sourceMappingURL=cash-account.dto.js.map

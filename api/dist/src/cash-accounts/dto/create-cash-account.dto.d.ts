@@ -1,5 +1,4 @@
-import { Currencies } from 'common/types/currencies.type';
+import { CashAccountDto } from './cash-account.dto';
 export declare class CreateCashAccountDto {
-    name: string;
-    currency: Currencies;
+    cashAccounts: CashAccountDto[];
 }

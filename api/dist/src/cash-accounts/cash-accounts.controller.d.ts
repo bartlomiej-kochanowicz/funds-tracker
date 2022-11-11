@@ -4,12 +4,7 @@ import { UpdateCashAccountDto } from './dto/update-cash-account.dto';
 export declare class CashAccountsController {
     private readonly cashAccountsService;
     constructor(cashAccountsService: CashAccountsService);
-    create(userId: string, createCashAccountDto: CreateCashAccountDto | CreateCashAccountDto[]): Promise<import("@prisma/client").Prisma.BatchPayload | {
-        name: string;
-        currency: string;
-        uuid: string;
-        balance: number;
-    }>;
+    create(userId: string, createCashAccountDto: CreateCashAccountDto): Promise<any>;
     findAll(userId: string): Promise<{
         name: string;
         currency: string;
@@ -22,11 +17,6 @@ export declare class CashAccountsController {
         uuid: string;
         balance: number;
     }>;
-    update(userId: string, uuid: string, updateCashAccountDto: UpdateCashAccountDto): Promise<{
-        name: string;
-        currency: string;
-        uuid: string;
-        balance: number;
-    }>;
-    remove(userId: string, uuid: string): Promise<void>;
+    update(userId: string, uuid: string, updateCashAccountDto: UpdateCashAccountDto): Promise<any>;
+    remove(userId: string, uuid: string): Promise<any>;
 }

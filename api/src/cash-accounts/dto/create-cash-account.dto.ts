@@ -1,13 +1,16 @@
-import { IsIn, IsNotEmpty, IsString } from 'class-validator';
-import { CURRENCIES_ARRAY } from 'common/constants/currencies';
-import { Currencies } from 'common/types/currencies.type';
+import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
+  IsNotEmpty,
+} from 'class-validator';
+import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
+import { CashAccountDto } from './cash-account.dto';
 
 export class CreateCashAccountDto {
   @IsNotEmpty()
-  @IsString()
-  name: string;
-
-  @IsNotEmpty()
-  @IsIn(CURRENCIES_ARRAY)
-  currency: Currencies;
+  @IsArray()
+  @ArrayMinSize(1)
+  @ArrayMaxSize(MAX_CASH_ACCOUNTS)
+  cashAccounts: CashAccountDto[];
 }

@@ -19,7 +19,7 @@ export class CashAccountsController {
   @Post()
   create(
     @GetCurrentUserId() userId: string,
-    @Body() createCashAccountDto: CreateCashAccountDto | CreateCashAccountDto[],
+    @Body() createCashAccountDto: CreateCashAccountDto,
   ) {
     return this.cashAccountsService.create(userId, createCashAccountDto);
   }

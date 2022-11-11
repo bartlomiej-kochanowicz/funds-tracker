@@ -1,6 +1,6 @@
 import { Currencies } from 'common/types/currencies.type';
-import { CreateCashAccountDto } from './create-cash-account.dto';
-declare const UpdateCashAccountDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateCashAccountDto>>;
+import { CashAccountDto } from './cash-account.dto';
+declare const UpdateCashAccountDto_base: import("@nestjs/mapped-types").MappedType<Partial<CashAccountDto>>;
 export declare class UpdateCashAccountDto extends UpdateCashAccountDto_base {
     balance: number;
     currency: Currencies;

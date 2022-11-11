@@ -13,8 +13,8 @@ exports.UpdateCashAccountDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
 const class_validator_1 = require("class-validator");
 const currencies_1 = require("../../common/constants/currencies");
-const create_cash_account_dto_1 = require("./create-cash-account.dto");
-class UpdateCashAccountDto extends (0, mapped_types_1.PartialType)(create_cash_account_dto_1.CreateCashAccountDto) {
+const cash_account_dto_1 = require("./cash-account.dto");
+class UpdateCashAccountDto extends (0, mapped_types_1.PartialType)(cash_account_dto_1.CashAccountDto) {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
