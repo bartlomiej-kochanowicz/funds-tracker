@@ -70,8 +70,28 @@ let CashAccountsService = class CashAccountsService {
         }
         return cashAccount;
     }
-    update(id, updateCashAccountDto) {
-        return `This action updates a #${id} cashAccount`;
+    async update(userUuid, uuid, updateCashAccountDto) {
+        try {
+            const cashAccount = await this.prisma.cashAccounts.update({
+                where: {
+                    userUuid_uuid: {
+                        userUuid,
+                        uuid,
+                    },
+                },
+                data: updateCashAccountDto,
+                select: {
+                    uuid: true,
+                    name: true,
+                    balance: true,
+                    currency: true,
+                },
+            });
+            return cashAccount;
+        }
+        catch (_a) {
+            throw new common_1.HttpException('Account not fount', common_1.HttpStatus.NOT_FOUND);
+        }
     }
     remove(id) {
         return `This action removes a #${id} cashAccount`;

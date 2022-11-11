@@ -17,6 +17,11 @@ export declare class CashAccountsService {
         uuid: string;
         balance: number;
     }>;
-    update(id: number, updateCashAccountDto: UpdateCashAccountDto): string;
+    update(userUuid: string, uuid: string, updateCashAccountDto: UpdateCashAccountDto): Promise<{
+        name: string;
+        currency: string;
+        uuid: string;
+        balance: number;
+    }>;
     remove(id: number): string;
 }

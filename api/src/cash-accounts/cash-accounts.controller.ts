@@ -34,12 +34,13 @@ export class CashAccountsController {
     return this.cashAccountsService.findOne(userId, uuid);
   }
 
-  @Patch(':id')
+  @Patch(':uuid')
   update(
-    @Param('id') id: string,
+    @GetCurrentUserId() userId: string,
+    @Param('uuid') uuid: string,
     @Body() updateCashAccountDto: UpdateCashAccountDto,
   ) {
-    return this.cashAccountsService.update(+id, updateCashAccountDto);
+    return this.cashAccountsService.update(userId, uuid, updateCashAccountDto);
   }
 
   @Delete(':id')

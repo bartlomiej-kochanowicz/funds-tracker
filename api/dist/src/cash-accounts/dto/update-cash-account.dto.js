@@ -12,18 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateCashAccountDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
 const class_validator_1 = require("class-validator");
+const currencies_1 = require("../../common/constants/currencies");
 const create_cash_account_dto_1 = require("./create-cash-account.dto");
 class UpdateCashAccountDto extends (0, mapped_types_1.PartialType)(create_cash_account_dto_1.CreateCashAccountDto) {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateCashAccountDto.prototype, "uuid", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateCashAccountDto.prototype, "balance", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsIn)(currencies_1.CURRENCIES_ARRAY),
+    __metadata("design:type", String)
+], UpdateCashAccountDto.prototype, "currency", void 0);
 exports.UpdateCashAccountDto = UpdateCashAccountDto;
 //# sourceMappingURL=update-cash-account.dto.js.map
