@@ -2,6 +2,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { AtGuard } from 'common/guards';
 import { PrismaModule } from './prisma/prisma.module';
+// import { CollectionModule } from './collection/collection.module';
 import { AuthModule } from './auth/auth.module';
 import { CashAccountsModule } from './cash-accounts/cash-accounts.module';
 
