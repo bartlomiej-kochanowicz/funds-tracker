@@ -1,5 +1,6 @@
 import { clientPrivate } from 'config/privateClient';
 import { Currencies } from 'types/currencies.type';
+import { Pagination } from 'types/pagination.type';
 import { retryHTTP } from 'utils/retryHTTP';
 
 export interface GetCashAccountResponse {
@@ -10,7 +11,7 @@ export interface GetCashAccountResponse {
 }
 
 export const getCashAccount = retryHTTP(
-  () => clientPrivate.get<GetCashAccountResponse[]>('/cash-accounts'),
+  () => clientPrivate.get<Pagination<GetCashAccountResponse>>('/cash-accounts'),
   {
     maxAttempts: 3,
   },
