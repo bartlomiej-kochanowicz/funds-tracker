@@ -8,12 +8,30 @@ datasource db {
 }
 
 model User {
-  uuid        String     @id @default(uuid())
-  createdAt   DateTime   @default(now())
-  email       String     @unique
-  name        String
-  password    String
-  rtHash      String?
+  uuid         String         @id @default(uuid())
+  createdAt    DateTime       @default(now())
+  email        String         @unique
+  name         String
+  password     String
+  rtHash       String?
+  cashAccounts CashAccounts[]
+}
 
-  @@map("users")
+model CashAccounts {
+  uuid     String   @id @default(uuid())
+  name     String
+  balance  Float    @default(0)
+  currency Currency
+  user     User     @relation(fields: [userUuid], references: [uuid])
+  userUuid String
+
+  @@unique([userUuid, uuid])
+}
+
+enum Currency {
+  CHF
+  EUR
+  GBP
+  USD
+  PLN
 }

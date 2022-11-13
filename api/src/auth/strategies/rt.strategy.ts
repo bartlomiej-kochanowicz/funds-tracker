@@ -1,12 +1,12 @@
 import { PassportStrategy } from '@nestjs/passport';
+import { ConfigService } from '@nestjs/config';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
-import { RT_SECRET } from 'common/config/env';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class RtStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
-  constructor() {
+  constructor(@Inject(ConfigService) config: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
@@ -19,7 +19,7 @@ export class RtStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
           return data;
         },
       ]),
-      secretOrKey: RT_SECRET,
+      secretOrKey: config.get('RT_SECRET'),
       passReqToCallback: true,
     });
   }
