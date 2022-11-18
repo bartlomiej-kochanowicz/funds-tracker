@@ -13,7 +13,7 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": ["tsconfig.json"]
+    "project": ["./tsconfig.json", "./webapp/tsconfig.json"]
   },
   "plugins": ["react", "@typescript-eslint", "jest-dom", "testing-library"],
   "settings": {
