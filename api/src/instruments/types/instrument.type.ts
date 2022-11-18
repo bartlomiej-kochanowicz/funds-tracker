@@ -1,15 +1,20 @@
-export type Instrument = {
-  exchange: string;
-  shortname: string;
+export type SearchInstrument = {
   quoteType: string;
   symbol: string;
-  index: string;
   score: number;
-  typeDisp: string;
-  exchDisp: string;
-  isYahooFinance: boolean;
+  longname: string;
 };
 
-export type InstrumentCollection = {
-  collection: Instrument[];
+export type SearchInstrumentCollection = {
+  collection: SearchInstrument[];
+};
+
+export type Instrument = {
+  language: string;
+  region: string;
+  currency: string;
+  exchangeTimezoneName: string;
+  longName: string;
+  symbol: string;
+  quoteType: string;
 };

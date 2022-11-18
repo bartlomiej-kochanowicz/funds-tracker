@@ -1,13 +1,16 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom } from 'rxjs';
-import { InstrumentCollection } from './types/instrument.type';
+import {
+  Instrument,
+  SearchInstrumentCollection,
+} from './types/instrument.type';
 
 @Injectable()
 export class InstrumentsService {
   constructor(private readonly httpService: HttpService) {}
 
-  async search(q): Promise<InstrumentCollection> {
+  async search(q): Promise<SearchInstrumentCollection> {
     const { data } = await firstValueFrom(
       this.httpService
         .get('https://query2.finance.yahoo.com/v1/finance/search', {
@@ -36,7 +39,7 @@ export class InstrumentsService {
     };
   }
 
-  async findOne(paramSymbol: string) {
+  async findOne(paramSymbol: string): Promise<Instrument> {
     const { data } = await firstValueFrom(
       this.httpService
         .get('https://query2.finance.yahoo.com/v7/finance/quote', {
