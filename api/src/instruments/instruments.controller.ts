@@ -9,7 +9,7 @@ import {
 export class InstrumentsController {
   constructor(private readonly instrumentsService: InstrumentsService) {}
 
-  @Get('/search')
+  @Get('search')
   search(@Query('q') q: string = ''): Promise<SearchInstrumentCollection> {
     return this.instrumentsService.search(q);
   }
