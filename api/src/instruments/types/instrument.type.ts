@@ -3,6 +3,7 @@ export type SearchInstrument = {
   symbol: string;
   score: number;
   longname: string;
+  exchange: string;
 };
 
 export type SearchInstrumentCollection = {

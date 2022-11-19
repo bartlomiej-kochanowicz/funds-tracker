@@ -26,11 +26,12 @@ export class InstrumentsService {
     );
 
     const collection = data.quotes.map(
-      ({ quoteType, symbol, score, longname }) => ({
+      ({ quoteType, symbol, score, longname, exchange }) => ({
         quoteType,
         symbol,
         score,
         longname,
+        exchange,
       }),
     );
 
