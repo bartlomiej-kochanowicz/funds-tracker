@@ -18,4 +18,11 @@ export type Instrument = {
   longName: string;
   symbol: string;
   quoteType: string;
+  regularMarketPrice: number;
+  regularMarketDayRange: string;
+  exchange: string;
+  fiftyTwoWeekRange: string;
+  ytdReturn: number;
+  quoteSourceName: string;
+  regularMarketPreviousClose: number;
 };

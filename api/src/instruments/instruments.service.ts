@@ -63,6 +63,13 @@ export class InstrumentsService {
       longName,
       symbol,
       quoteType,
+      regularMarketPrice,
+      regularMarketDayRange,
+      exchange,
+      fiftyTwoWeekRange,
+      ytdReturn,
+      quoteSourceName,
+      regularMarketPreviousClose,
     } = data.quoteResponse.result[0];
 
     return {
@@ -73,6 +80,13 @@ export class InstrumentsService {
       exchangeTimezoneName,
       longName,
       symbol,
+      regularMarketPrice,
+      regularMarketDayRange,
+      exchange,
+      fiftyTwoWeekRange,
+      ytdReturn,
+      quoteSourceName,
+      regularMarketPreviousClose,
     };
   }
 }
