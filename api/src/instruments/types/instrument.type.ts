@@ -26,3 +26,14 @@ export type Instrument = {
   quoteSourceName: string;
   regularMarketPreviousClose: number;
 };
+
+export type InstrumentHistory = {
+  symbol: string;
+  collection: {
+    date: string;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+  }[];
+};

@@ -37,5 +37,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'new-cap': 'off',
     '@typescript-eslint/no-useless-constructor': 'off',
+    'no-plusplus': 'off',
   },
 };

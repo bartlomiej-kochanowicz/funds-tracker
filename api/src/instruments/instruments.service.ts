@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom } from 'rxjs';
 import {
   Instrument,
+  InstrumentHistory,
   SearchInstrumentCollection,
 } from './types/instrument.type';
 
@@ -88,5 +89,71 @@ export class InstrumentsService {
       symbol,
       ytdReturn,
     };
+  }
+
+  async findHistoryOne(
+    paramSymbol: string,
+    interval: '1d' | '1wk' | '1mo',
+    from: `${string}-${string}-${string}`,
+  ): Promise<InstrumentHistory> {
+    const period1 = Math.round(new Date(from).getTime() / 1000);
+    const period2 = Math.round(new Date().getTime() / 1000);
+
+    const { data } = await firstValueFrom(
+      this.httpService
+        .get(
+          `https://query2.finance.yahoo.com/v7/finance/download/${paramSymbol}`,
+          {
+            responseType: 'blob',
+            params: {
+              events: 'history',
+              includeAdjustedClose: true,
+              interval,
+              period1,
+              period2,
+            },
+          },
+        )
+        .pipe(
+          catchError((err) => {
+            throw Error(err);
+          }),
+        ),
+    );
+
+    return {
+      symbol: paramSymbol,
+      collection: this.csvJSON(data).map(
+        ({ Date, Open, Close, High, Low }) => ({
+          date: Date,
+          open: this.parseNumber(Open),
+          close: this.parseNumber(Close),
+          high: this.parseNumber(High),
+          low: this.parseNumber(Low),
+        }),
+      ),
+    };
+  }
+
+  csvJSON(csvStr) {
+    const lines = csvStr.split('\n');
+    const result = [];
+    const headers = lines[0].split(',');
+
+    for (let i = 1; i < lines.length; i++) {
+      const obj = {};
+      const currentline = lines[i].split(',');
+
+      for (let j = 0; j < headers.length; j++) {
+        obj[headers[j]] = currentline[j];
+      }
+
+      result.push(obj);
+    }
+    return result;
+  }
+
+  parseNumber(str: string): number {
+    return Number(Number(str).toFixed(2));
   }
 }
