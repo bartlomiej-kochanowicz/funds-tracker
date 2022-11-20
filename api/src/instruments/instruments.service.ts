@@ -135,7 +135,14 @@ export class InstrumentsService {
     };
   }
 
-  csvJSON(csvStr) {
+  csvJSON(csvStr: string): {
+    Date: string;
+    Open: string;
+    Close: string;
+    High: string;
+    Low: string;
+    Volume: string;
+  }[] {
     const lines = csvStr.split('\n');
     const result = [];
     const headers = lines[0].split(',');
