@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { GetCurrentUserId } from 'common/decorators';
 import { PortfoliosService } from './portfolios.service';
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
@@ -16,8 +17,11 @@ export class PortfoliosController {
   constructor(private readonly portfoliosService: PortfoliosService) {}
 
   @Post()
-  create(@Body() createPortfolioDto: CreatePortfolioDto) {
-    return this.portfoliosService.create(createPortfolioDto);
+  create(
+    @GetCurrentUserId() userId: string,
+    @Body() createPortfolioDto: CreatePortfolioDto,
+  ) {
+    return this.portfoliosService.create(userId, createPortfolioDto);
   }
 
   @Get()

@@ -14,7 +14,10 @@ export class CashAccountsService {
     private collection: CollectionService,
   ) {}
 
-  async create(userUuid: string, createCashAccountDto: CreateCashAccountDto) {
+  async create(
+    userUuid: string,
+    createCashAccountDto: CreateCashAccountDto,
+  ): Promise<null> {
     const cashAccounts = await this.prisma.cashAccounts.count({
       where: {
         userUuid,
