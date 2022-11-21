@@ -30,22 +30,35 @@ model CashAccounts {
 }
 
 model Portfolios {
-  uuid        String        @id @default(uuid())
-  name        String
-  instruments Instruments[]
-  user        User          @relation(fields: [userUuid], references: [uuid])
-  userUuid    String
+  uuid               String        @id @default(uuid())
+  name               String
+  rebalancingEnabled Boolean       @default(false)
+  instruments        Instruments[]
+  user               User          @relation(fields: [userUuid], references: [uuid])
+  userUuid           String
 
   @@unique([userUuid, uuid])
 }
 
 model Instruments {
-  uuid          String     @id @default(uuid())
-  name          String
-  portfolio     Portfolios @relation(fields: [portfolioUuid], references: [uuid])
-  portfolioUuid String
+  uuid                  String         @id @default(uuid())
+  name                  String
+  percentageOfPortfolio Int?           @default(0)
+  type                  InstrumentType
+  portfolio             Portfolios     @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid         String
 
   @@unique([portfolioUuid, uuid])
+}
+
+enum InstrumentType {
+  stocks
+  bonds
+  commodies
+  crypto
+  immovables
+  movables
+  deposits
 }
 
 enum Currency {
