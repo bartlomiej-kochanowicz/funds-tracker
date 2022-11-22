@@ -6,9 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
 } from '@nestjs/common';
-import { MAX_PER_PAGE } from 'common/constants/common';
 import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
 import { CreateCashAccountDto } from './dto/create-cash-account.dto';
