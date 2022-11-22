@@ -1,5 +1,4 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CollectionService } from 'collection/collection.service';
 import { MAX_PORTFOLIOS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
@@ -7,10 +6,7 @@ import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 
 @Injectable()
 export class PortfoliosService {
-  constructor(
-    private prisma: PrismaService,
-    private collection: CollectionService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async create(
     userUuid: string,
@@ -39,19 +35,75 @@ export class PortfoliosService {
     return null;
   }
 
-  findAll() {
-    return `This action returns all portfolios`;
+  async findAll(userUuid: string): Promise<CreatePortfolioDto[]> {
+    const portfolios = await this.prisma.portfolios.findMany({
+      where: {
+        userUuid,
+      },
+      select: {
+        uuid: true,
+        name: true,
+        rebalancingEnabled: true,
+      },
+    });
+
+    return portfolios;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} portfolio`;
+  async findOne(userUuid: string, uuid: string): Promise<CreatePortfolioDto> {
+    const portfolio = await this.prisma.portfolios.findUnique({
+      where: {
+        userUuid_uuid: {
+          userUuid,
+          uuid,
+        },
+      },
+      select: {
+        uuid: true,
+        name: true,
+        rebalancingEnabled: true,
+      },
+    });
+
+    return portfolio;
   }
 
-  update(id: number, updatePortfolioDto: UpdatePortfolioDto) {
-    return `This action updates a #${id} portfolio`;
+  async update(
+    userUuid: string,
+    uuid: string,
+    updatePortfolioDto: UpdatePortfolioDto,
+  ): Promise<null> {
+    try {
+      await this.prisma.portfolios.update({
+        where: {
+          userUuid_uuid: {
+            userUuid,
+            uuid,
+          },
+        },
+        data: updatePortfolioDto,
+      });
+
+      return null;
+    } catch {
+      throw new HttpException('Portfolio not found', HttpStatus.NOT_FOUND);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} portfolio`;
+  async remove(userUuid: string, uuid: string): Promise<null> {
+    try {
+      await this.prisma.portfolios.delete({
+        where: {
+          userUuid_uuid: {
+            userUuid,
+            uuid,
+          },
+        },
+      });
+
+      return null;
+    } catch {
+      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
+    }
   }
 }

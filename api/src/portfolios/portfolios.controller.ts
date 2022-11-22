@@ -25,25 +25,26 @@ export class PortfoliosController {
   }
 
   @Get()
-  findAll() {
-    return this.portfoliosService.findAll();
+  findAll(@GetCurrentUserId() userId: string) {
+    return this.portfoliosService.findAll(userId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.portfoliosService.findOne(+id);
+  @Get(':uuid')
+  findOne(@GetCurrentUserId() userId: string, @Param('uuid') uuid: string) {
+    return this.portfoliosService.findOne(userId, uuid);
   }
 
-  @Patch(':id')
+  @Patch(':uuid')
   update(
-    @Param('id') id: string,
+    @GetCurrentUserId() userId: string,
+    @Param('uuid') uuid: string,
     @Body() updatePortfolioDto: UpdatePortfolioDto,
   ) {
-    return this.portfoliosService.update(+id, updatePortfolioDto);
+    return this.portfoliosService.update(userId, uuid, updatePortfolioDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.portfoliosService.remove(+id);
+  @Delete(':uuid')
+  remove(@GetCurrentUserId() userId: string, @Param('uuid') uuid: string) {
+    return this.portfoliosService.remove(userId, uuid);
   }
 }
