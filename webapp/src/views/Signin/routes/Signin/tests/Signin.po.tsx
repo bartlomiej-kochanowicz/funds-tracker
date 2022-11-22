@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { findByText, getByTestId, queryByTestId, render, waitFor } from 'utils/test-utils';
 import { unsafeCast } from 'utils/unsafeCast';
+import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup';
 
 export class SigninPO {
   private elements: {
@@ -10,6 +11,8 @@ export class SigninPO {
     chooseSubmitButton: HTMLElement;
     choosePasswordInput: HTMLElement;
   };
+
+  private user: UserEvent;
 
   private elementsByDataID(container: HTMLElement) {
     return {
@@ -27,18 +30,19 @@ export class SigninPO {
 
   protected constructor(protected container: HTMLElement, protected mockNavigate: jest.Mock) {
     this.elements = this.elementsByDataID(container);
+    this.user = userEvent.setup();
   }
 
   async setEmail(value: string) {
-    await userEvent.type(this.elements.chooseEmailInput, value);
+    await this.user.type(this.elements.chooseEmailInput, value);
   }
 
   async submitForm() {
-    await userEvent.click(this.elements.chooseSubmitButton);
+    await this.user.click(this.elements.chooseSubmitButton);
   }
 
   async setPassword(value: string) {
-    await userEvent.type(this.elements.choosePasswordInput, value);
+    await this.user.type(this.elements.choosePasswordInput, value);
   }
 
   expectButtonHasProperText(text: string) {

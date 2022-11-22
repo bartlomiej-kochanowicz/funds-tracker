@@ -15,6 +15,7 @@ model User {
   password     String
   rtHash       String?
   cashAccounts CashAccounts[]
+  portfolios   Portfolios[]
 }
 
 model CashAccounts {
@@ -26,6 +27,38 @@ model CashAccounts {
   userUuid String
 
   @@unique([userUuid, uuid])
+}
+
+model Portfolios {
+  uuid               String        @id @default(uuid())
+  name               String
+  rebalancingEnabled Boolean       @default(false)
+  instruments        Instruments[]
+  user               User          @relation(fields: [userUuid], references: [uuid])
+  userUuid           String
+
+  @@unique([userUuid, uuid])
+}
+
+model Instruments {
+  uuid                  String         @id @default(uuid())
+  name                  String
+  percentageOfPortfolio Int?           @default(0)
+  type                  InstrumentType
+  portfolio             Portfolios     @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid         String
+
+  @@unique([portfolioUuid, uuid])
+}
+
+enum InstrumentType {
+  stocks
+  bonds
+  commodies
+  crypto
+  immovables
+  movables
+  deposits
 }
 
 enum Currency {

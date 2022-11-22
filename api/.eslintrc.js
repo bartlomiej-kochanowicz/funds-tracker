@@ -1,7 +1,7 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: 'tsconfig.json',
+    project: ['./tsconfig.json', './api/tsconfig.json'],
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
@@ -37,5 +37,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'new-cap': 'off',
     '@typescript-eslint/no-useless-constructor': 'off',
+    'no-plusplus': 'off',
   },
 };

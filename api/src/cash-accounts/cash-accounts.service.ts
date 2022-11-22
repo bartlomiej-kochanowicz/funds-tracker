@@ -1,7 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CollectionService } from 'collection/collection.service';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
-import { Pagination } from 'common/types/pagination.type';
 import { PrismaService } from 'prisma/prisma.service';
 import { CashAccountDto } from './dto/cash-account.dto';
 import { CreateCashAccountDto } from './dto/create-cash-account.dto';
@@ -9,12 +7,12 @@ import { UpdateCashAccountDto } from './dto/update-cash-account.dto';
 
 @Injectable()
 export class CashAccountsService {
-  constructor(
-    private prisma: PrismaService,
-    private collection: CollectionService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
-  async create(userUuid: string, createCashAccountDto: CreateCashAccountDto) {
+  async create(
+    userUuid: string,
+    createCashAccountDto: CreateCashAccountDto,
+  ): Promise<null> {
     const cashAccounts = await this.prisma.cashAccounts.count({
       where: {
         userUuid,
@@ -38,17 +36,7 @@ export class CashAccountsService {
     return null;
   }
 
-  async findAll(
-    userUuid: string,
-    page: number,
-    limit: number,
-  ): Promise<Pagination<CashAccountDto>> {
-    const count = await this.prisma.cashAccounts.count({
-      where: {
-        userUuid,
-      },
-    });
-
+  async findAll(userUuid: string): Promise<CashAccountDto[]> {
     const cashAccounts = await this.prisma.cashAccounts.findMany({
       where: {
         userUuid,
@@ -59,16 +47,9 @@ export class CashAccountsService {
         currency: true,
         balance: true,
       },
-      skip: (page - 1) * limit,
-      take: limit,
     });
 
-    return this.collection.paginate<CashAccountDto>(
-      cashAccounts,
-      count,
-      page,
-      limit,
-    );
+    return cashAccounts;
   }
 
   async findOne(userUuid: string, uuid: string): Promise<CashAccountDto> {
@@ -88,7 +69,7 @@ export class CashAccountsService {
     });
 
     if (!cashAccount) {
-      throw new HttpException('Account not fount', HttpStatus.NOT_FOUND);
+      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
     }
 
     return cashAccount;
@@ -112,7 +93,7 @@ export class CashAccountsService {
 
       return null;
     } catch {
-      throw new HttpException('Account not fount', HttpStatus.NOT_FOUND);
+      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
     }
   }
 
@@ -129,7 +110,7 @@ export class CashAccountsService {
 
       return null;
     } catch {
-      throw new HttpException('Account not fount', HttpStatus.NOT_FOUND);
+      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
     }
   }
 }

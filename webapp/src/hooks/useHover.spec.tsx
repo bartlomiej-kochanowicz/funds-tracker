@@ -24,8 +24,10 @@ describe('useHover tests', () => {
 
     expect(isHover).toBe(false);
 
-    await userEvent.hover(div);
+    const user = userEvent.setup();
 
-    await userEvent.unhover(div);
+    await user.hover(div);
+
+    await user.unhover(div);
   });
 });

@@ -6,9 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
 } from '@nestjs/common';
-import { MAX_PER_PAGE } from 'common/constants/common';
 import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
 import { CreateCashAccountDto } from './dto/create-cash-account.dto';
@@ -27,12 +25,8 @@ export class CashAccountsController {
   }
 
   @Get()
-  findAll(
-    @GetCurrentUserId() userId: string,
-    @Query('page') page: string = String(1),
-    @Query('limit') limit: string = String(MAX_PER_PAGE),
-  ) {
-    return this.cashAccountsService.findAll(userId, +page, +limit);
+  findAll(@GetCurrentUserId() userId: string) {
+    return this.cashAccountsService.findAll(userId);
   }
 
   @Get(':uuid')
