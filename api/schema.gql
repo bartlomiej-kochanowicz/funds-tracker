@@ -22,11 +22,14 @@ enum Currency {
 }
 
 type Query {
-  findAll: [CashAccount!]!
+  cashAccounts: [CashAccount!]!
+  cashAccount(uuid: String!): CashAccount!
 }
 
 type Mutation {
-  create(createCashAccountInput: CreateCashAccountInput!): CashAccount!
+  createCashAccount(data: CreateCashAccountInput!): CashAccount!
+  updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
+  deleteCashAccount(uuid: String!): CashAccount!
 }
 
 input CreateCashAccountInput {
@@ -35,4 +38,12 @@ input CreateCashAccountInput {
 
   """Cash account currency."""
   currency: Currency!
+}
+
+input UpdateCashAccountInput {
+  """Cash account uuid."""
+  name: String
+
+  """Cash account currency."""
+  currency: Currency
 }

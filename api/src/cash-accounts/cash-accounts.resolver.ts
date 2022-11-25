@@ -3,44 +3,53 @@ import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
 import { CashAccount } from './entities/cash-account.entity';
 import { CreateCashAccountInput } from './inputs/create-cash-account.input';
+import { UpdateCashAccountInput } from './inputs/update-cash-account.input';
 
 @Resolver(() => CashAccount)
 export class CashAccountsResolver {
   constructor(private readonly cashAccountsService: CashAccountsService) {}
 
   @Mutation(() => CashAccount)
-  create(
+  createCashAccount(
     @GetCurrentUserId() userId: string,
-    @Args('createCashAccountInput')
+    @Args('data')
     createCashAccountInput: CreateCashAccountInput,
   ) {
     return this.cashAccountsService.create(userId, createCashAccountInput);
   }
 
   @Query(() => [CashAccount])
-  findAll(@GetCurrentUserId() userId: string) {
-    console.log('user id=', userId);
+  cashAccounts(@GetCurrentUserId() userId: string) {
     return this.cashAccountsService.findAll(userId);
   }
 
-  /*
-
-  @Get(':uuid')
-  findOne(@GetCurrentUserId() userId: string, @Param('uuid') uuid: string) {
+  @Query(() => CashAccount)
+  cashAccount(
+    @GetCurrentUserId() userId: string,
+    @Args('uuid', { type: () => String }) uuid: string,
+  ) {
     return this.cashAccountsService.findOne(userId, uuid);
   }
 
-  @Patch(':uuid')
-  update(
+  @Mutation(() => CashAccount)
+  updateCashAccount(
     @GetCurrentUserId() userId: string,
-    @Param('uuid') uuid: string,
-    @Body() updateCashAccountDto: UpdateCashAccountInput,
+    @Args('uuid', { type: () => String }) uuid: string,
+    @Args('data')
+    updateCashAccountInput: UpdateCashAccountInput,
   ) {
-    return this.cashAccountsService.update(userId, uuid, updateCashAccountDto);
+    return this.cashAccountsService.update(
+      userId,
+      uuid,
+      updateCashAccountInput,
+    );
   }
 
-  @Delete(':uuid')
-  remove(@GetCurrentUserId() userId: string, @Param('uuid') uuid: string) {
-    return this.cashAccountsService.remove(userId, uuid);
-  } */
+  @Mutation(() => CashAccount)
+  deleteCashAccount(
+    @GetCurrentUserId() userId: string,
+    @Args('uuid', { type: () => String }) uuid: string,
+  ) {
+    return this.cashAccountsService.delete(userId, uuid);
+  }
 }

@@ -3,6 +3,7 @@ import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { CashAccount } from './entities/cash-account.entity';
 import { CreateCashAccountInput } from './inputs/create-cash-account.input';
+import { UpdateCashAccountInput } from './inputs/update-cash-account.input';
 
 @Injectable()
 export class CashAccountsService {
@@ -51,7 +52,7 @@ export class CashAccountsService {
     return cashAccounts;
   }
 
-  /* async findOne(userUuid: string, uuid: string): Promise<CashAccountDto> {
+  async findOne(userUuid: string, uuid: string): Promise<CashAccount> {
     const cashAccount = await this.prisma.cashAccounts.findUnique({
       where: {
         userUuid_uuid: {
@@ -77,28 +78,28 @@ export class CashAccountsService {
   async update(
     userUuid: string,
     uuid: string,
-    updateCashAccountDto: UpdateCashAccountDto,
-  ) {
+    updateCashAccountInput: UpdateCashAccountInput,
+  ): Promise<CashAccount> {
     try {
-      await this.prisma.cashAccounts.update({
+      const cashAccount = await this.prisma.cashAccounts.update({
         where: {
           userUuid_uuid: {
             userUuid,
             uuid,
           },
         },
-        data: updateCashAccountDto,
+        data: updateCashAccountInput,
       });
 
-      return null;
+      return cashAccount;
     } catch {
       throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
     }
   }
 
-  async remove(userUuid: string, uuid: string) {
+  async delete(userUuid: string, uuid: string) {
     try {
-      await this.prisma.cashAccounts.delete({
+      const cashAccount = await this.prisma.cashAccounts.delete({
         where: {
           userUuid_uuid: {
             userUuid,
@@ -107,9 +108,9 @@ export class CashAccountsService {
         },
       });
 
-      return null;
+      return cashAccount;
     } catch {
       throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
     }
-  } */
+  }
 }
