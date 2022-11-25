@@ -9,20 +9,18 @@ export class CashAccountsResolver {
   constructor(private readonly cashAccountsService: CashAccountsService) {}
 
   @Mutation(() => CashAccount)
-  async create(
+  create(
     @GetCurrentUserId() userId: string,
     @Args('createCashAccountInput')
     createCashAccountInput: CreateCashAccountInput,
   ) {
-    return await this.cashAccountsService.create(
-      userId,
-      createCashAccountInput,
-    );
+    return this.cashAccountsService.create(userId, createCashAccountInput);
   }
 
   @Query(() => [CashAccount])
-  async findAll(@GetCurrentUserId() userId: string) {
-    return await this.cashAccountsService.findAll(userId);
+  findAll(@GetCurrentUserId() userId: string) {
+    console.log('user id=', userId);
+    return this.cashAccountsService.findAll(userId);
   }
 
   /*

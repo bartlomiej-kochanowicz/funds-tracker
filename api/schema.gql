@@ -2,8 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-directive @upper on FIELD_DEFINITION
-
 type CashAccount {
   """Cash account uuid."""
   uuid: String!
