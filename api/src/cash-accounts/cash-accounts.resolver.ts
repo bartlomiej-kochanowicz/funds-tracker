@@ -1,33 +1,28 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
-import { CreateCashAccountDto } from './dto/create-cash-account.dto';
-import { UpdateCashAccountDto } from './dto/update-cash-account.dto';
+import { CashAccount } from './entities/cash-account.entity';
+import { CreateCashAccountInput } from './inputs/create-cash-account.input';
 
-@Controller('cash-accounts')
-export class CashAccountsController {
+@Resolver(() => CashAccount)
+export class CashAccountsResolver {
   constructor(private readonly cashAccountsService: CashAccountsService) {}
 
-  @Post()
+  @Mutation('createCashAccount')
   create(
     @GetCurrentUserId() userId: string,
-    @Body() createCashAccountDto: CreateCashAccountDto,
+    @Args('createCashAccountInput')
+    createCashAccountInput: CreateCashAccountInput,
   ) {
-    return this.cashAccountsService.create(userId, createCashAccountDto);
+    return this.cashAccountsService.create(userId, createCashAccountInput);
   }
 
-  @Get()
+  @Query(() => [CashAccount])
   findAll(@GetCurrentUserId() userId: string) {
     return this.cashAccountsService.findAll(userId);
   }
+
+  /*
 
   @Get(':uuid')
   findOne(@GetCurrentUserId() userId: string, @Param('uuid') uuid: string) {
@@ -38,7 +33,7 @@ export class CashAccountsController {
   update(
     @GetCurrentUserId() userId: string,
     @Param('uuid') uuid: string,
-    @Body() updateCashAccountDto: UpdateCashAccountDto,
+    @Body() updateCashAccountDto: UpdateCashAccountInput,
   ) {
     return this.cashAccountsService.update(userId, uuid, updateCashAccountDto);
   }
@@ -46,5 +41,5 @@ export class CashAccountsController {
   @Delete(':uuid')
   remove(@GetCurrentUserId() userId: string, @Param('uuid') uuid: string) {
     return this.cashAccountsService.remove(userId, uuid);
-  }
+  } */
 }

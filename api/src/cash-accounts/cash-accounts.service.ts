@@ -1,9 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CashAccountDto } from './dto/cash-account.dto';
-import { CreateCashAccountDto } from './dto/create-cash-account.dto';
-import { UpdateCashAccountDto } from './dto/update-cash-account.dto';
+import { CashAccount } from './entities/cash-account.entity';
+import { CreateCashAccountInput } from './inputs/create-cash-account.input';
 
 @Injectable()
 export class CashAccountsService {
@@ -11,7 +10,7 @@ export class CashAccountsService {
 
   async create(
     userUuid: string,
-    createCashAccountDto: CreateCashAccountDto,
+    createCashAccountInput: CreateCashAccountInput,
   ): Promise<null> {
     const cashAccounts = await this.prisma.cashAccounts.count({
       where: {
@@ -19,24 +18,24 @@ export class CashAccountsService {
       },
     });
 
-    const { cashAccounts: newCashAccounts } = createCashAccountDto;
+    const { name, currency } = createCashAccountInput;
 
-    if (cashAccounts + newCashAccounts.length > MAX_CASH_ACCOUNTS) {
+    if (cashAccounts > MAX_CASH_ACCOUNTS) {
       throw new HttpException('Max accounts reached', HttpStatus.FORBIDDEN);
     }
 
-    await this.prisma.cashAccounts.createMany({
-      data: newCashAccounts.map(({ name, currency }) => ({
+    await this.prisma.cashAccounts.create({
+      data: {
+        userUuid,
         name,
         currency,
-        userUuid,
-      })),
+      },
     });
 
     return null;
   }
 
-  async findAll(userUuid: string): Promise<CashAccountDto[]> {
+  async findAll(userUuid: string): Promise<CashAccount[]> {
     const cashAccounts = await this.prisma.cashAccounts.findMany({
       where: {
         userUuid,
@@ -52,7 +51,7 @@ export class CashAccountsService {
     return cashAccounts;
   }
 
-  async findOne(userUuid: string, uuid: string): Promise<CashAccountDto> {
+  /* async findOne(userUuid: string, uuid: string): Promise<CashAccountDto> {
     const cashAccount = await this.prisma.cashAccounts.findUnique({
       where: {
         userUuid_uuid: {
@@ -112,5 +111,5 @@ export class CashAccountsService {
     } catch {
       throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
     }
-  }
+  } */
 }

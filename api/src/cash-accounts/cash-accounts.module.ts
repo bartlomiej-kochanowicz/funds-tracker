@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { CashAccountsService } from './cash-accounts.service';
-import { CashAccountsController } from './cash-accounts.controller';
+import { CashAccountsResolver } from './cash-accounts.resolver';
 
 @Module({
-  controllers: [CashAccountsController],
-  providers: [CashAccountsService],
+  providers: [CashAccountsResolver, CashAccountsService],
 })
 export class CashAccountsModule {}

@@ -111,7 +111,7 @@ devDependencies:
   ts-jest: 29.0.3_7yfpbkrrkkmtlepb2un4d37cti
   ts-loader: 9.4.1_qqxisngxjbp7lstdk7boexbu3e
   ts-morph: 17.0.1
-  ts-node: 10.9.1_lw7q66ikwuedwcorwkk4v6trsa
+  ts-node: link:node_modules/ts-node
   tsconfig-paths: 4.1.0
   typescript: 4.8.4
   webpack: 5.74.0

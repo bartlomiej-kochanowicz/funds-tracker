@@ -6,11 +6,13 @@ import { ConfigModule } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { AtGuard } from 'common/guards';
+import { allowedCurrency as Currency } from 'common/resolvers/Currency';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { CashAccountsModule } from './cash-accounts/cash-accounts.module';
 import { InstrumentsModule } from './instruments/instruments.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
+import { AbcdModule } from './abcd/abcd.module';
 
 @Module({
   imports: [
@@ -25,12 +27,16 @@ import { PortfoliosModule } from './portfolios/portfolios.module';
         path: join(process.cwd(), 'src/types/graphql.ts'),
         outputAs: 'class',
       },
+      resolvers: {
+        Currency,
+      },
     }),
     PrismaModule,
     AuthModule,
     CashAccountsModule,
     InstrumentsModule,
     PortfoliosModule,
+    AbcdModule,
   ],
   controllers: [],
   providers: [
