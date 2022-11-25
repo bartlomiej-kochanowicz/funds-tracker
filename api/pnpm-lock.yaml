@@ -2,13 +2,14 @@ lockfileVersion: 5.4
 
 specifiers:
   '@golevelup/ts-jest': 0.3.3
-  '@nestjs/apollo': ^10.1.6
+  '@graphql-tools/utils': ^9.1.1
+  '@nestjs/apollo': 10.1.6
   '@nestjs/axios': 0.1.0
   '@nestjs/cli': 9.1.4
   '@nestjs/common': 9.1.5
   '@nestjs/config': 2.2.0
   '@nestjs/core': 9.1.5
-  '@nestjs/graphql': ^10.1.6
+  '@nestjs/graphql': 10.1.6
   '@nestjs/jwt': 9.0.0
   '@nestjs/mapped-types': 1.2.0
   '@nestjs/passport': 9.0.0
@@ -25,8 +26,8 @@ specifiers:
   '@types/supertest': 2.0.12
   '@typescript-eslint/eslint-plugin': 5.40.1
   '@typescript-eslint/parser': 5.40.1
-  apollo-server-core: ^3.11.1
-  apollo-server-express: ^3.11.1
+  apollo-server-core: 3.11.1
+  apollo-server-express: 3.11.1
   bcrypt: 5.1.0
   class-transformer: 0.5.1
   class-validator: 0.13.2
@@ -37,7 +38,7 @@ specifiers:
   eslint-config-prettier: 8.5.0
   eslint-plugin-import: 2.26.0
   eslint-plugin-prettier: 4.2.1
-  graphql: ^16.6.0
+  graphql: 16.6.0
   jest: 29.2.1
   madge: 5.0.1
   passport: 0.6.0
@@ -51,13 +52,14 @@ specifiers:
   supertest: 6.3.0
   ts-jest: 29.0.3
   ts-loader: 9.4.1
-  ts-morph: ^17.0.1
+  ts-morph: 17.0.1
   ts-node: 10.9.1
   tsconfig-paths: 4.1.0
   typescript: 4.8.4
   webpack: 5.74.0
 
 dependencies:
+  '@graphql-tools/utils': 9.1.1_graphql@16.6.0
   '@nestjs/apollo': 10.1.6_zyd5ldsrwmonzjidtbebfpgzfu
   '@nestjs/axios': 0.1.0_vsetaglwzqrh7m5f7qpuxwsv6i
   '@nestjs/common': 9.1.5_x6yqyveuahcdef4z4mxykmuv6a
@@ -111,7 +113,7 @@ devDependencies:
   ts-jest: 29.0.3_7yfpbkrrkkmtlepb2un4d37cti
   ts-loader: 9.4.1_qqxisngxjbp7lstdk7boexbu3e
   ts-morph: 17.0.1
-  ts-node: link:node_modules/ts-node
+  ts-node: 10.9.1_lw7q66ikwuedwcorwkk4v6trsa
   tsconfig-paths: 4.1.0
   typescript: 4.8.4
   webpack: 5.74.0

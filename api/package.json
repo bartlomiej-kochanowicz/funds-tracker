@@ -19,6 +19,7 @@
     "graphql:generate-typings": "ts-node ./src/generate-typings.ts"
   },
   "dependencies": {
+    "@graphql-tools/utils": "^9.1.1",
     "@nestjs/apollo": "10.1.6",
     "@nestjs/axios": "0.1.0",
     "@nestjs/common": "9.1.5",

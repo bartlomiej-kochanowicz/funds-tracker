@@ -11,7 +11,7 @@ export class CashAccountsService {
   async create(
     userUuid: string,
     createCashAccountInput: CreateCashAccountInput,
-  ): Promise<null> {
+  ): Promise<CashAccount> {
     const cashAccounts = await this.prisma.cashAccounts.count({
       where: {
         userUuid,
@@ -24,7 +24,7 @@ export class CashAccountsService {
       throw new HttpException('Max accounts reached', HttpStatus.FORBIDDEN);
     }
 
-    await this.prisma.cashAccounts.create({
+    const cashAccount = await this.prisma.cashAccounts.create({
       data: {
         userUuid,
         name,
@@ -32,7 +32,7 @@ export class CashAccountsService {
       },
     });
 
-    return null;
+    return cashAccount;
   }
 
   async findAll(userUuid: string): Promise<CashAccount[]> {

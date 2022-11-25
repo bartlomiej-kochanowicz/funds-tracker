@@ -8,18 +8,21 @@ import { CreateCashAccountInput } from './inputs/create-cash-account.input';
 export class CashAccountsResolver {
   constructor(private readonly cashAccountsService: CashAccountsService) {}
 
-  @Mutation('createCashAccount')
-  create(
+  @Mutation(() => CashAccount)
+  async create(
     @GetCurrentUserId() userId: string,
     @Args('createCashAccountInput')
     createCashAccountInput: CreateCashAccountInput,
   ) {
-    return this.cashAccountsService.create(userId, createCashAccountInput);
+    return await this.cashAccountsService.create(
+      userId,
+      createCashAccountInput,
+    );
   }
 
   @Query(() => [CashAccount])
-  findAll(@GetCurrentUserId() userId: string) {
-    return this.cashAccountsService.findAll(userId);
+  async findAll(@GetCurrentUserId() userId: string) {
+    return await this.cashAccountsService.findAll(userId);
   }
 
   /*

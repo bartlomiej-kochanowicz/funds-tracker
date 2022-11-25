@@ -1,0 +1,40 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+type CashAccount {
+  """Cash account uuid."""
+  uuid: String!
+
+  """Cash account uuid."""
+  name: String!
+
+  """Cash account currency."""
+  currency: Currency!
+}
+
+enum Currency {
+  CHF
+  EUR
+  GBP
+  USD
+  PLN
+}
+
+type Query {
+  findAll: [CashAccount!]!
+}
+
+type Mutation {
+  create(createCashAccountInput: CreateCashAccountInput!): CashAccount!
+}
+
+input CreateCashAccountInput {
+  """Cash account uuid."""
+  name: String!
+
+  """Cash account currency."""
+  currency: Currency!
+}
