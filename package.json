@@ -24,7 +24,6 @@
     "prisma:generate": "cd api && pnpx prisma generate"
   },
   "devDependencies": {
-    "husky": "8.0.1",
-    "prisma-nestjs-graphql": "^17.0.2"
+    "husky": "8.0.1"
   }
 }
