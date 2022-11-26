@@ -1,32 +1,32 @@
 import {
-  Body,
-  Controller,
-  HttpCode,
-  HttpStatus,
-  Post,
-  UseGuards,
-  Res,
-  Get,
-} from '@nestjs/common';
-import { User } from '@prisma/client';
+  Args,
+  Context,
+  GraphQLExecutionContext,
+  Mutation,
+  Resolver,
+} from '@nestjs/graphql';
 import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { SigninDto, SignupDto, EmailDto } from './dto';
+import { User } from './entities';
+import { SigninInput, SignupInput } from './inputs';
 
-@Controller('auth')
-export class AuthController {
+@Resolver(() => User)
+export class AuthResolver {
   constructor(private authService: AuthService) {}
 
   @Public()
-  @Post('local/signup')
-  @HttpCode(HttpStatus.CREATED)
-  signupLocal(@Body() dto: SignupDto, @Res() res: Response): Promise<unknown> {
-    return this.authService.signupLocal(dto, res);
+  @Mutation(() => User)
+  signupLocal(
+    @Args('data')
+    signupInput: SignupInput,
+    @Context('res') res: Response,
+  ): Promise<User> {
+    return this.authService.signupLocal(signupInput, res);
   }
 
-  @Public()
+  /*   @Public()
   @Post('local/signin')
   @HttpCode(HttpStatus.OK)
   signinLocal(@Body() dto: SigninDto, @Res() res: Response): Promise<unknown> {
@@ -67,5 +67,5 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<unknown> {
     return this.authService.refreshToken(userId, refreshToken, res);
-  }
+  } */
 }

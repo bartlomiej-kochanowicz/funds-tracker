@@ -3,14 +3,14 @@ import { JwtService } from '@nestjs/jwt';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { IS_DEVELOPMENT } from 'common/config/env';
 import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
-import { SignupDto, SigninDto, EmailDto } from './dto';
 import { Tokens } from './types';
+import { SignupInput } from './inputs';
+import { User } from './entities';
 
 @Injectable()
 export class AuthService {
@@ -21,65 +21,58 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async signupLocal(dto: SignupDto, res: Response): Promise<unknown> {
-    try {
-      const { email, password, name, token } = dto;
+  async signupLocal(signupInput: SignupInput, res: Response): Promise<User> {
+    const { email, password, name, token } = signupInput;
 
-      const isHuman = await this.validateHuman(token);
+    const isHuman = await this.validateHuman(token);
 
-      if (!isHuman) {
-        throw new ForbiddenException('You are a robot!');
-      }
-
-      const hashedPwd = await this.hashData(password);
-
-      const user = await this.prisma.user.findUnique({ where: { email } });
-
-      if (user) {
-        throw new ForbiddenException('Email already in use.');
-      }
-
-      const { uuid: newUserId, email: newUserEmail } =
-        await this.prisma.user.create({
-          data: {
-            email,
-            name,
-            password: hashedPwd,
-          },
-        });
-
-      const { accessToken, refreshToken } = await this.getTokens(
-        newUserId,
-        newUserEmail,
-      );
-
-      await this.updateRtHash(newUserId, refreshToken);
-
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['30days'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['30days'],
-      });
-
-      return res.status(201).send();
-    } catch (error) {
-      delete error.response;
-
-      return res.json(error);
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
     }
+
+    const hashedPwd = await this.hashData(password);
+
+    const existedUser = await this.prisma.user.findUnique({ where: { email } });
+
+    if (existedUser) {
+      throw new ForbiddenException('Email already in use.');
+    }
+
+    const user = await this.prisma.user.create({
+      data: {
+        email,
+        name,
+        password: hashedPwd,
+      },
+    });
+
+    const { accessToken, refreshToken } = await this.getTokens(
+      user.uuid,
+      user.email,
+    );
+
+    await this.updateRtHash(user.uuid, refreshToken);
+
+    res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+      maxAge: EXPIRES['15MIN'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
+
+    res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+      maxAge: EXPIRES['30days'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
+
+    res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+      maxAge: EXPIRES['30days'],
+    });
+
+    return user;
   }
 
-  async signinLocal(
+  /* async signinLocal(
     dto: SigninDto,
     res: Response,
   ): Promise<Response<Pick<User, 'uuid' | 'email'>>> {
@@ -145,7 +138,7 @@ export class AuthService {
     return {
       exist: Boolean(user),
     };
-  }
+  } */
 
   async getAccount(
     userId: string,
@@ -247,6 +240,8 @@ export class AuthService {
 
   private async hashData(pwd: string): Promise<string> {
     const salt = await bcrypt.genSalt(10);
+
+    console.log({ pwd, salt });
 
     return bcrypt.hash(pwd, salt);
   }

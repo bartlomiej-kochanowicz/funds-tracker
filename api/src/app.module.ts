@@ -18,6 +18,7 @@ import { PortfoliosModule } from './portfolios/portfolios.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
+      context: ({ req, res }) => ({ req, res }),
     }),
     PrismaModule,
     AuthModule,

@@ -2,6 +2,31 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  """User uuid."""
+  uuid: String!
+
+  """User date created."""
+  createdAt: DateTime!
+
+  """User email."""
+  email: String!
+
+  """User name."""
+  name: String!
+
+  """User password."""
+  password: String!
+
+  """User refresh token hash."""
+  rtHash: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type CashAccount {
   """Cash account uuid."""
   uuid: String!
@@ -40,12 +65,27 @@ type Query {
 }
 
 type Mutation {
+  signupLocal(data: SignupInput!): User!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: String!): CashAccount!
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
   deletePortfolio(uuid: String!): Portfolio!
+}
+
+input SignupInput {
+  """Email."""
+  email: String!
+
+  """Name."""
+  name: String!
+
+  """Password."""
+  password: String!
+
+  """Token."""
+  token: String!
 }
 
 input CreateCashAccountInput {
