@@ -45,7 +45,7 @@ type Mutation {
   deleteCashAccount(uuid: String!): CashAccount!
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
-  removePortfolio(uuid: String!): Portfolio!
+  deletePortfolio(uuid: String!): Portfolio!
 }
 
 input CreateCashAccountInput {

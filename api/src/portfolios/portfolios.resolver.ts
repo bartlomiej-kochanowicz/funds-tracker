@@ -42,10 +42,10 @@ export class PortfoliosResolver {
   }
 
   @Mutation(() => Portfolio)
-  removePortfolio(
+  deletePortfolio(
     @GetCurrentUserId() userId: string,
     @Args('uuid', { type: () => String }) uuid: string,
   ) {
-    return this.portfoliosService.remove(userId, uuid);
+    return this.portfoliosService.delete(userId, uuid);
   }
 }

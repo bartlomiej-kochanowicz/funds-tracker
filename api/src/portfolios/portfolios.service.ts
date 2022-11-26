@@ -91,7 +91,7 @@ export class PortfoliosService {
     }
   }
 
-  async remove(userUuid: string, uuid: string): Promise<Portfolio> {
+  async delete(userUuid: string, uuid: string): Promise<Portfolio> {
     try {
       const portfolio = await this.prisma.portfolio.delete({
         where: {
@@ -104,7 +104,7 @@ export class PortfoliosService {
 
       return portfolio;
     } catch {
-      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Portfolio not found', HttpStatus.NOT_FOUND);
     }
   }
 }
