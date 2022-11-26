@@ -9,8 +9,8 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { Tokens } from './types';
-import { SigninInput, SignupInput } from './inputs';
-import { User } from './entities';
+import { EmailInput, SigninInput, SignupInput } from './inputs';
+import { Email, User } from './entities';
 
 @Injectable()
 export class AuthService {
@@ -115,10 +115,8 @@ export class AuthService {
     return user;
   }
 
-  /*
-
-  async checkEmail(dto: EmailDto): Promise<{ exist: boolean }> {
-    const { email, token } = dto;
+  async checkEmail(emailInput: EmailInput): Promise<Email> {
+    const { email, token } = emailInput;
 
     const isHuman = await this.validateHuman(token);
 
@@ -131,16 +129,14 @@ export class AuthService {
     return {
       exist: Boolean(user),
     };
-  } */
+  }
 
-  async getAccount(
-    userId: string,
-  ): Promise<Pick<User, 'email' | 'uuid' | 'createdAt' | 'name'>> {
-    const { email, uuid, createdAt, name } = await this.prisma.user.findUnique({
+  async getAccount(userId: string): Promise<User> {
+    const user = await this.prisma.user.findUnique({
       where: { uuid: userId },
     });
 
-    return { email, uuid, createdAt, name };
+    return user;
   }
 
   async logout(userId: string, res): Promise<unknown> {

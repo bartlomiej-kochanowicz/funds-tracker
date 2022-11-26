@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Email {
+  """Email existence."""
+  exist: Boolean!
+}
+
 type User {
   """User uuid."""
   uuid: String!
@@ -58,10 +63,20 @@ type Portfolio {
 }
 
 type Query {
+  emailExist(data: EmailInput!): Email!
+  user: User!
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: String!): CashAccount!
   portfolios: [Portfolio!]!
   portfolio(uuid: String!): Portfolio!
+}
+
+input EmailInput {
+  """Email."""
+  email: String!
+
+  """Token."""
+  token: String!
 }
 
 type Mutation {

@@ -3,14 +3,15 @@ import {
   Context,
   GraphQLExecutionContext,
   Mutation,
+  Query,
   Resolver,
 } from '@nestjs/graphql';
 import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { User } from './entities';
-import { SigninInput, SignupInput } from './inputs';
+import { Email, User } from './entities';
+import { EmailInput, SigninInput, SignupInput } from './inputs';
 
 @Resolver(() => User)
 export class AuthResolver {
@@ -36,22 +37,21 @@ export class AuthResolver {
     return this.authService.signinLocal(signinInput, res);
   }
 
-  /*
-
   @Public()
-  @Post('check-email')
-  @HttpCode(HttpStatus.OK)
-  checkEmailExist(@Body() dto: EmailDto): Promise<{ exist: boolean }> {
-    return this.authService.checkEmail(dto);
+  @Query(() => Email)
+  emailExist(
+    @Args('data')
+    emailInput: EmailInput,
+  ): Promise<Email> {
+    return this.authService.checkEmail(emailInput);
   }
 
-  @Get('account')
-  @HttpCode(HttpStatus.OK)
-  getAccount(
-    @GetCurrentUserId() userId: string,
-  ): Promise<Pick<User, 'email' | 'uuid' | 'createdAt'>> {
+  @Query(() => User)
+  user(@GetCurrentUserId() userId: string): Promise<User> {
     return this.authService.getAccount(userId);
   }
+
+  /*
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
