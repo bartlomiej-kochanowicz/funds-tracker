@@ -1,9 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CashAccount } from './entities/cash-account.entity';
-import { CreateCashAccountInput } from './inputs/create-cash-account.input';
-import { UpdateCashAccountInput } from './inputs/update-cash-account.input';
+import { CashAccount } from './entities';
+import { CreateCashAccountInput, UpdateCashAccountInput } from './inputs';
 
 @Injectable()
 export class CashAccountsService {
