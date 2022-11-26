@@ -3,7 +3,7 @@ import { Currency } from '@prisma/client';
 
 @InputType()
 export class CreateCashAccountInput {
-  @Field(() => String, { description: 'Cash account uuid.' })
+  @Field(() => String, { description: 'Cash account name.' })
   name: string;
 
   @Field(() => Currency, { description: 'Cash account currency.' })

@@ -6,7 +6,7 @@ export class CashAccount {
   @Field(() => String, { description: 'Cash account uuid.' })
   uuid: string;
 
-  @Field(() => String, { description: 'Cash account uuid.' })
+  @Field(() => String, { description: 'Cash account name.' })
   name: string;
 
   @Field(() => Currency, { description: 'Cash account currency.' })
