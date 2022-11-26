@@ -7,6 +7,11 @@ type Email {
   exist: Boolean!
 }
 
+type Logout {
+  """Logout successful."""
+  success: Boolean!
+}
+
 type User {
   """User uuid."""
   uuid: String!
@@ -82,6 +87,7 @@ input EmailInput {
 type Mutation {
   signupLocal(data: SignupInput!): User!
   signinLocal(data: SigninInput!): User!
+  logout: Logout!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: String!): CashAccount!

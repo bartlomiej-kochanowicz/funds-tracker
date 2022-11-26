@@ -10,7 +10,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { Tokens } from './types';
 import { EmailInput, SigninInput, SignupInput } from './inputs';
-import { Email, User } from './entities';
+import { Email, Logout, User } from './entities';
 
 @Injectable()
 export class AuthService {
@@ -139,7 +139,7 @@ export class AuthService {
     return user;
   }
 
-  async logout(userId: string, res): Promise<unknown> {
+  async logout(userId: string, res): Promise<Logout> {
     try {
       await this.prisma.user.updateMany({
         where: {
@@ -165,9 +165,13 @@ export class AuthService {
 
       res.clearCookie(COOKIE_NAMES.IS_LOGGED_IN);
 
-      return res.status(200).send();
-    } catch (error) {
-      return res.json(error);
+      return {
+        success: true,
+      };
+    } catch {
+      return {
+        success: false,
+      };
     }
   }
 

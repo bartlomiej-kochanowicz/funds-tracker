@@ -10,7 +10,7 @@ import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { Email, User } from './entities';
+import { Email, Logout, User } from './entities';
 import { EmailInput, SigninInput, SignupInput } from './inputs';
 
 @Resolver(() => User)
@@ -51,16 +51,15 @@ export class AuthResolver {
     return this.authService.getAccount(userId);
   }
 
-  /*
-
-  @Post('logout')
-  @HttpCode(HttpStatus.OK)
+  @Mutation(() => Logout)
   logout(
     @GetCurrentUserId() userId: string,
-    @Res() res: Response,
-  ): Promise<unknown> {
+    @Context('res') res: Response,
+  ): Promise<Logout> {
     return this.authService.logout(userId, res);
   }
+
+  /*
 
   @Public()
   @UseGuards(RtGuard)
