@@ -2,23 +2,28 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "../src/@generated"
+}
+
 datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  uuid         String         @id @default(uuid())
-  createdAt    DateTime       @default(now())
-  email        String         @unique
+  uuid         String        @id @default(uuid())
+  createdAt    DateTime      @default(now())
+  email        String        @unique
   name         String
   password     String
   rtHash       String?
-  cashAccounts CashAccounts[]
-  portfolios   Portfolios[]
+  cashAccounts CashAccount[]
+  portfolios   Portfolio[]
 }
 
-model CashAccounts {
+model CashAccount {
   uuid     String   @id @default(uuid())
   name     String
   balance  Float    @default(0)
@@ -29,23 +34,23 @@ model CashAccounts {
   @@unique([userUuid, uuid])
 }
 
-model Portfolios {
-  uuid               String        @id @default(uuid())
+model Portfolio {
+  uuid               String       @id @default(uuid())
   name               String
-  rebalancingEnabled Boolean       @default(false)
-  instruments        Instruments[]
-  user               User          @relation(fields: [userUuid], references: [uuid])
+  rebalancingEnabled Boolean      @default(false)
+  instruments        Instrument[]
+  user               User         @relation(fields: [userUuid], references: [uuid])
   userUuid           String
 
   @@unique([userUuid, uuid])
 }
 
-model Instruments {
+model Instrument {
   uuid                  String         @id @default(uuid())
   name                  String
   percentageOfPortfolio Int?           @default(0)
   type                  InstrumentType
-  portfolio             Portfolios     @relation(fields: [portfolioUuid], references: [uuid])
+  portfolio             Portfolio      @relation(fields: [portfolioUuid], references: [uuid])
   portfolioUuid         String
 
   @@unique([portfolioUuid, uuid])

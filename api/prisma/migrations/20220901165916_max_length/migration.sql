@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "users" ALTER COLUMN "password" SET DATA TYPE CHAR(50),
-ALTER COLUMN "name" SET DATA TYPE CHAR(50);
