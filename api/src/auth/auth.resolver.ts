@@ -26,12 +26,17 @@ export class AuthResolver {
     return this.authService.signupLocal(signupInput, res);
   }
 
-  /*   @Public()
-  @Post('local/signin')
-  @HttpCode(HttpStatus.OK)
-  signinLocal(@Body() dto: SigninDto, @Res() res: Response): Promise<unknown> {
-    return this.authService.signinLocal(dto, res);
+  @Public()
+  @Mutation(() => User)
+  signinLocal(
+    @Args('data')
+    signinInput: SigninInput,
+    @Context('res') res: Response,
+  ): Promise<User> {
+    return this.authService.signinLocal(signinInput, res);
   }
+
+  /*
 
   @Public()
   @Post('check-email')

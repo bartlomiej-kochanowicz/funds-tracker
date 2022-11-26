@@ -9,7 +9,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { Tokens } from './types';
-import { SignupInput } from './inputs';
+import { SigninInput, SignupInput } from './inputs';
 import { User } from './entities';
 
 @Injectable()
@@ -72,57 +72,50 @@ export class AuthService {
     return user;
   }
 
-  /* async signinLocal(
-    dto: SigninDto,
-    res: Response,
-  ): Promise<Response<Pick<User, 'uuid' | 'email'>>> {
-    try {
-      const { email, password, token } = dto;
+  async signinLocal(signinInput: SigninInput, res: Response): Promise<User> {
+    const { email, password, token } = signinInput;
 
-      const isHuman = await this.validateHuman(token);
+    const isHuman = await this.validateHuman(token);
 
-      if (!isHuman) {
-        throw new ForbiddenException('You are a robot!');
-      }
-
-      const user = await this.prisma.user.findUnique({ where: { email } });
-
-      if (!user) throw new ForbiddenException('No account for these email.');
-
-      const isPasswordsMatches = await bcrypt.compare(password, user.password);
-
-      if (!isPasswordsMatches) throw new ForbiddenException('Wrong password.');
-
-      const { accessToken, refreshToken } = await this.getTokens(
-        user.uuid,
-        user.email,
-      );
-
-      await this.updateRtHash(user.uuid, refreshToken);
-
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['30days'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['30days'],
-      });
-
-      return res.status(200).send();
-    } catch (error) {
-      delete error.response;
-
-      return res.status(error.status ?? 500).json(error);
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
     }
+
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) throw new ForbiddenException('No account for these email.');
+
+    const isPasswordsMatches = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordsMatches) throw new ForbiddenException('Wrong password.');
+
+    const { accessToken, refreshToken } = await this.getTokens(
+      user.uuid,
+      user.email,
+    );
+
+    await this.updateRtHash(user.uuid, refreshToken);
+
+    res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+      maxAge: EXPIRES['15MIN'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
+
+    res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+      maxAge: EXPIRES['30days'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
+
+    res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+      maxAge: EXPIRES['30days'],
+    });
+
+    return user;
   }
+
+  /*
 
   async checkEmail(dto: EmailDto): Promise<{ exist: boolean }> {
     const { email, token } = dto;

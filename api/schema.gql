@@ -66,6 +66,7 @@ type Query {
 
 type Mutation {
   signupLocal(data: SignupInput!): User!
+  signinLocal(data: SigninInput!): User!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: String!): CashAccount!
@@ -80,6 +81,17 @@ input SignupInput {
 
   """Name."""
   name: String!
+
+  """Password."""
+  password: String!
+
+  """Token."""
+  token: String!
+}
+
+input SigninInput {
+  """Email."""
+  email: String!
 
   """Password."""
   password: String!
