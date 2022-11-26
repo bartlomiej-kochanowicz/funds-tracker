@@ -35,8 +35,8 @@ type Portfolio {
 type Query {
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: String!): CashAccount!
-  portfolio: [Portfolio!]!
-  portfolios(uuid: String!): Portfolio!
+  portfolios: [Portfolio!]!
+  portfolio(uuid: String!): Portfolio!
 }
 
 type Mutation {

@@ -66,6 +66,10 @@ export class PortfoliosService {
       },
     });
 
+    if (!portfolio) {
+      throw new HttpException('Portfolio not found', HttpStatus.NOT_FOUND);
+    }
+
     return portfolio;
   }
 

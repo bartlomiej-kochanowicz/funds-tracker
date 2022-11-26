@@ -19,12 +19,12 @@ export class PortfoliosResolver {
   }
 
   @Query(() => [Portfolio])
-  portfolio(@GetCurrentUserId() userId: string) {
+  portfolios(@GetCurrentUserId() userId: string) {
     return this.portfoliosService.findAll(userId);
   }
 
   @Query(() => Portfolio)
-  portfolios(
+  portfolio(
     @GetCurrentUserId() userId: string,
     @Args('uuid', { type: () => String }) uuid: string,
   ) {
