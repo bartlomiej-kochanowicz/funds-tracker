@@ -6,7 +6,7 @@ type CashAccount {
   """Cash account uuid."""
   uuid: String!
 
-  """Cash account uuid."""
+  """Cash account name."""
   name: String!
 
   """Cash account currency."""
@@ -21,19 +21,35 @@ enum Currency {
   PLN
 }
 
+type Portfolio {
+  """Portfolio uuid."""
+  uuid: String!
+
+  """Portfolio name."""
+  name: String!
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean!
+}
+
 type Query {
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: String!): CashAccount!
+  portfolio: [Portfolio!]!
+  portfolios(uuid: String!): Portfolio!
 }
 
 type Mutation {
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: String!): CashAccount!
+  createPortfolio(data: CreatePortfolioInput!): Portfolio!
+  updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
+  removePortfolio(uuid: String!): Portfolio!
 }
 
 input CreateCashAccountInput {
-  """Cash account uuid."""
+  """Cash account name."""
   name: String!
 
   """Cash account currency."""
@@ -41,9 +57,25 @@ input CreateCashAccountInput {
 }
 
 input UpdateCashAccountInput {
-  """Cash account uuid."""
+  """Cash account name."""
   name: String
 
   """Cash account currency."""
   currency: Currency
+}
+
+input CreatePortfolioInput {
+  """Portfolio name."""
+  name: String!
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean!
+}
+
+input UpdatePortfolioInput {
+  """Portfolio name."""
+  name: String
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean
 }
