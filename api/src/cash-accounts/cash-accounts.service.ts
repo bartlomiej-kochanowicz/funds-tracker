@@ -13,7 +13,7 @@ export class CashAccountsService {
     userUuid: string,
     createCashAccountInput: CreateCashAccountInput,
   ): Promise<CashAccount> {
-    const cashAccounts = await this.prisma.cashAccounts.count({
+    const cashAccounts = await this.prisma.cashAccount.count({
       where: {
         userUuid,
       },
@@ -25,7 +25,7 @@ export class CashAccountsService {
       throw new HttpException('Max accounts reached', HttpStatus.FORBIDDEN);
     }
 
-    const cashAccount = await this.prisma.cashAccounts.create({
+    const cashAccount = await this.prisma.cashAccount.create({
       data: {
         userUuid,
         name,
@@ -37,7 +37,7 @@ export class CashAccountsService {
   }
 
   async findAll(userUuid: string): Promise<CashAccount[]> {
-    const cashAccounts = await this.prisma.cashAccounts.findMany({
+    const cashAccounts = await this.prisma.cashAccount.findMany({
       where: {
         userUuid,
       },
@@ -53,7 +53,7 @@ export class CashAccountsService {
   }
 
   async findOne(userUuid: string, uuid: string): Promise<CashAccount> {
-    const cashAccount = await this.prisma.cashAccounts.findUnique({
+    const cashAccount = await this.prisma.cashAccount.findUnique({
       where: {
         userUuid_uuid: {
           userUuid,
@@ -81,7 +81,7 @@ export class CashAccountsService {
     updateCashAccountInput: UpdateCashAccountInput,
   ): Promise<CashAccount> {
     try {
-      const cashAccount = await this.prisma.cashAccounts.update({
+      const cashAccount = await this.prisma.cashAccount.update({
         where: {
           userUuid_uuid: {
             userUuid,
@@ -99,7 +99,7 @@ export class CashAccountsService {
 
   async delete(userUuid: string, uuid: string) {
     try {
-      const cashAccount = await this.prisma.cashAccounts.delete({
+      const cashAccount = await this.prisma.cashAccount.delete({
         where: {
           userUuid_uuid: {
             userUuid,

@@ -12,7 +12,7 @@ export class PortfoliosService {
     userUuid: string,
     createPortfolioDto: CreatePortfolioDto,
   ): Promise<null> {
-    const portfolios = await this.prisma.portfolios.count({
+    const portfolios = await this.prisma.portfolio.count({
       where: {
         userUuid,
       },
@@ -24,7 +24,7 @@ export class PortfoliosService {
       throw new HttpException('Max portfolios reached', HttpStatus.FORBIDDEN);
     }
 
-    await this.prisma.portfolios.create({
+    await this.prisma.portfolio.create({
       data: {
         name,
         rebalancingEnabled,
@@ -36,7 +36,7 @@ export class PortfoliosService {
   }
 
   async findAll(userUuid: string): Promise<CreatePortfolioDto[]> {
-    const portfolios = await this.prisma.portfolios.findMany({
+    const portfolios = await this.prisma.portfolio.findMany({
       where: {
         userUuid,
       },
@@ -51,7 +51,7 @@ export class PortfoliosService {
   }
 
   async findOne(userUuid: string, uuid: string): Promise<CreatePortfolioDto> {
-    const portfolio = await this.prisma.portfolios.findUnique({
+    const portfolio = await this.prisma.portfolio.findUnique({
       where: {
         userUuid_uuid: {
           userUuid,
@@ -74,7 +74,7 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto,
   ): Promise<null> {
     try {
-      await this.prisma.portfolios.update({
+      await this.prisma.portfolio.update({
         where: {
           userUuid_uuid: {
             userUuid,
@@ -92,7 +92,7 @@ export class PortfoliosService {
 
   async remove(userUuid: string, uuid: string): Promise<null> {
     try {
-      await this.prisma.portfolios.delete({
+      await this.prisma.portfolio.delete({
         where: {
           userUuid_uuid: {
             userUuid,
