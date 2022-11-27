@@ -38,5 +38,12 @@ module.exports = {
     'new-cap': 'off',
     '@typescript-eslint/no-useless-constructor': 'off',
     'no-plusplus': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['**/*.spec.*', '**/*/test/*'],
+        peerDependencies: true,
+      },
+    ],
   },
 };

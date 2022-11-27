@@ -1,18 +1,30 @@
 version: "3.9"
 
 services:
-  database:
+  tests-database:
     image: postgres:14.5-alpine
-    container_name: database
+    restart: always
+    container_name: tests-database
+    ports:
+      - "${TESTS_POSTGRES_PORT}:5433"
+    environment:
+      - POSTGRES_USER=${TESTS_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${TESTS_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${TESTS_POSTGRES_DB}
+  development-database:
+    image: postgres:14.5-alpine
+    container_name: development-database
     restart: always
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${DEVELOPMENT_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DEVELOPMENT_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DEVELOPMENT_POSTGRES_DB}
+    env_file:
+      - ./webserver/.env.development
     ports:
-      - "5433:${POSTGRES_PORT}"
+      - "${DEVELOPMENT_POSTGRES_PORT}:5433"
     volumes:
-      - funds-tracker-database:/var/lib/postgresql/data
+      - development-database:/var/lib/postgresql/data
     networks:
       - webserver
 
@@ -33,15 +45,14 @@ services:
     tty: true
     stdin_open: true
     env_file:
-      - ./webserver/.env
+      - ./webserver/.env.development
     command: npm run start:dev
     depends_on:
-      - database
+      - development-database
     links:
-      - database
+      - development-database
     ports:
-      - ${API_PORT}:${API_PORT}
-      - "9229:9229"
+      - ${WEBSERVER_PORT}:${WEBSERVER_PORT}
   webapp:
     container_name: webapp
     build:
@@ -60,7 +71,7 @@ services:
     tty: true
     stdin_open: true
     env_file:
-      - ./webapp/.env
+      - ./webapp/.env.development
     ports:
       - "${WEBAPP_PORT}:${WEBAPP_PORT}"
 
@@ -69,5 +80,5 @@ networks:
   webapp:
 
 volumes:
-  funds-tracker-database:
+  development-database:
     driver: local

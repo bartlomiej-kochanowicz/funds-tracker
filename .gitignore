@@ -29,3 +29,5 @@ graph.svg
 
 mongo-volume
 .env
+.env.development
+.env.test
