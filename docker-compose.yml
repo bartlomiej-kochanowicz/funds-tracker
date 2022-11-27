@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: tests-database
     ports:
-      - "${TESTS_POSTGRES_PORT}:5433"
+      - "${TESTS_POSTGRES_PORT}:5432"
     environment:
       - POSTGRES_USER=${TESTS_POSTGRES_USER}
       - POSTGRES_PASSWORD=${TESTS_POSTGRES_PASSWORD}
@@ -22,7 +22,7 @@ services:
     env_file:
       - ./webserver/.env.development
     ports:
-      - "${DEVELOPMENT_POSTGRES_PORT}:5433"
+      - "${DEVELOPMENT_POSTGRES_PORT}:5432"
     volumes:
       - development-database:/var/lib/postgresql/data
     networks:
