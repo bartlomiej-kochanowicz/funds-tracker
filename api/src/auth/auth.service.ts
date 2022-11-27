@@ -236,8 +236,6 @@ export class AuthService {
   private async hashData(pwd: string): Promise<string> {
     const salt = await bcrypt.genSalt(10);
 
-    console.log({ pwd, salt });
-
     return bcrypt.hash(pwd, salt);
   }
 
