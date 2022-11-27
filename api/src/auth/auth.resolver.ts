@@ -1,3 +1,4 @@
+import { UseGuards } from '@nestjs/common';
 import {
   Args,
   Context,
@@ -10,7 +11,7 @@ import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { Email, Logout, User } from './entities';
+import { Email, Logout, Refresh, User } from './entities';
 import { EmailInput, SigninInput, SignupInput } from './inputs';
 
 @Resolver(() => User)
@@ -59,17 +60,14 @@ export class AuthResolver {
     return this.authService.logout(userId, res);
   }
 
-  /*
-
   @Public()
   @UseGuards(RtGuard)
-  @Post('refresh')
-  @HttpCode(HttpStatus.OK)
+  @Mutation(() => Refresh)
   refreshToken(
     @GetCurrentUserId() userId: string,
     @GetCurrentUser('refreshToken') refreshToken: string,
-    @Res() res: Response,
-  ): Promise<unknown> {
+    @Context('res') res: Response,
+  ): Promise<Refresh> {
     return this.authService.refreshToken(userId, refreshToken, res);
-  } */
+  }
 }

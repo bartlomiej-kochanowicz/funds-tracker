@@ -12,6 +12,11 @@ type Logout {
   success: Boolean!
 }
 
+type Refresh {
+  """Refresh successful."""
+  success: Boolean!
+}
+
 type User {
   """User uuid."""
   uuid: String!
@@ -88,6 +93,7 @@ type Mutation {
   signupLocal(data: SignupInput!): User!
   signinLocal(data: SigninInput!): User!
   logout: Logout!
+  refreshToken: Refresh!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: String!): CashAccount!

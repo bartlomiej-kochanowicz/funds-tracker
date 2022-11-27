@@ -10,7 +10,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { Tokens } from './types';
 import { EmailInput, SigninInput, SignupInput } from './inputs';
-import { Email, Logout, User } from './entities';
+import { Email, Logout, Refresh, User } from './entities';
 
 @Injectable()
 export class AuthService {
@@ -179,7 +179,7 @@ export class AuthService {
     userId: string,
     rt: string,
     res: Response,
-  ): Promise<unknown> {
+  ): Promise<Refresh> {
     try {
       const user = await this.prisma.user.findUnique({
         where: { uuid: userId },
@@ -214,11 +214,13 @@ export class AuthService {
         maxAge: EXPIRES['30days'],
       });
 
-      return res.status(200).send();
-    } catch (error) {
-      delete error.response;
-
-      return res.json(error);
+      return {
+        success: true,
+      };
+    } catch {
+      return {
+        success: false,
+      };
     }
   }
 
