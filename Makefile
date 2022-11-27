@@ -9,12 +9,12 @@ build:
 restart:
 	docker compose restart
 prisma-generate:
-	docker compose exec api npx prisma generate && cd api && npx prisma generate
+	docker compose exec webserver npx prisma generate && cd webserver && npx prisma generate
 prisma-migration:
-	docker compose exec api npx prisma migrate dev
+	docker compose exec webserver npx prisma migrate dev
 prisma-migration-push:
-	docker compose exec api npx prisma db push
+	docker compose exec webserver npx prisma db push
 logs-webapp:
 	docker logs -f webapp
-logs-api:
-	docker logs -f api
+logs-webserver:
+	docker logs -f webserver

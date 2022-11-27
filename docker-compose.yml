@@ -14,26 +14,26 @@ services:
     volumes:
       - funds-tracker-database:/var/lib/postgresql/data
     networks:
-      - api
+      - webserver
 
-  api:
-    container_name: api
+  webserver:
+    container_name: webserver
     build:
       target: development
-      context: ./api
+      context: ./webserver
       dockerfile: Dockerfile
     networks:
-      - api
+      - webserver
       - webapp
     environment:
       - NODE_ENV=development
     volumes:
-      - ./api:/api
-      - /api/node_modules
+      - ./webserver:/webserver
+      - /webserver/node_modules
     tty: true
     stdin_open: true
     env_file:
-      - ./api/.env
+      - ./webserver/.env
     command: npm run start:dev
     depends_on:
       - database
@@ -50,13 +50,13 @@ services:
       dockerfile: Dockerfile
     networks:
       - webapp
-      - api
+      - webserver
     environment:
       - NODE_ENV=development
     volumes:
       - ./webapp:/webapp
     depends_on:
-      - api
+      - webserver
     tty: true
     stdin_open: true
     env_file:
@@ -65,7 +65,7 @@ services:
       - "${WEBAPP_PORT}:${WEBAPP_PORT}"
 
 networks:
-  api:
+  webserver:
   webapp:
 
 volumes:

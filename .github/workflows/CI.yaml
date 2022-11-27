@@ -21,20 +21,20 @@ jobs:
       - run: pnpm tsc:webapp
       - run: pnpm lint:webapp
       - run: pnpm test:webapp
-  api:
-    name: CI-api
+  webserver:
+    name: CI-webserver
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache-dependency-path: api/pnpm-lock.yaml
+          cache-dependency-path: webserver/pnpm-lock.yaml
       - name: Setup
         uses: pnpm/action-setup@v2.2.4
         with:
           version: 7.x
-      - run: pnpm install:api
-      - run: pnpm tsc:api
-      - run: pnpm lint:api
-      - run: pnpm test:api
+      - run: pnpm install:webserver
+      - run: pnpm tsc:webserver
+      - run: pnpm lint:webserver
+      - run: pnpm test:webserver

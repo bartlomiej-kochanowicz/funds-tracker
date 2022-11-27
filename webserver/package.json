@@ -1,5 +1,5 @@
 {
-  "name": "funds-tracker-api",
+  "name": "funds-tracker-webserver",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
