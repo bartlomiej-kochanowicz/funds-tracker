@@ -8,10 +8,7 @@ import { CreatePortfolioInput, UpdatePortfolioInput } from './inputs';
 export class PortfoliosService {
   constructor(private prisma: PrismaService) {}
 
-  async create(
-    userUuid: string,
-    createPortfolioInput: CreatePortfolioInput,
-  ): Promise<Portfolio> {
+  async create(userUuid: string, createPortfolioInput: CreatePortfolioInput): Promise<Portfolio> {
     const portfolios = await this.prisma.portfolio.count({
       where: {
         userUuid,

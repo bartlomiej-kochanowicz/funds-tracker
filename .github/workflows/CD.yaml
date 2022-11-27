@@ -8,7 +8,7 @@ jobs:
     name: CD-app
     runs-on: self-hosted
     env:
-      API_PORT: ${{ secrets.API_PORT }}
+      WEBSERVER_PORT: ${{ secrets.WEBSERVER_PORT }}
       AT_SECRET: ${{ secrets.AT_SECRET }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       RT_SECRET: ${{ secrets.RT_SECRET }}

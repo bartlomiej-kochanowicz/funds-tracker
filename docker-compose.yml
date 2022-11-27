@@ -46,7 +46,6 @@ services:
     stdin_open: true
     env_file:
       - ./webserver/.env.development
-    command: npm run start:dev
     depends_on:
       - development-database
     links:
@@ -74,6 +73,7 @@ services:
       - ./webapp/.env.development
     ports:
       - "${WEBAPP_PORT}:${WEBAPP_PORT}"
+      - "9229:9229"
 
 networks:
   webserver:

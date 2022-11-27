@@ -1,7 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
-import { API_PORT } from 'common/config/env';
+import { WEBSERVER_PORT } from 'common/config/env';
 import { PrismaService } from 'prisma/prisma.service';
 import { AppModule } from './app.module';
 
@@ -21,7 +21,7 @@ const bootstrap = async () => {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(API_PORT);
+  await app.listen(WEBSERVER_PORT);
 };
 
 bootstrap();

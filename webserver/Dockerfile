@@ -1,6 +1,6 @@
 FROM node:18-slim as development
 
-WORKDIR /api
+WORKDIR /webserver
 
 COPY package.json pnpm-lock.yaml ./
 
@@ -18,4 +18,4 @@ COPY . .
 
 RUN npx prisma generate
 
-RUN pnpm build
+CMD [ "pnpm", "start:dev" ]
