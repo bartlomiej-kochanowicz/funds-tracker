@@ -1,12 +1,19 @@
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { AppModule } from 'app.module';
 import * as cookieParser from 'cookie-parser';
+import { AppModule } from 'app.module';
+import { PrismaService } from 'prisma/prisma.service';
+import { testUser } from 'auth/tests/stubs/signin.stub';
+import { AuthService } from 'auth/auth.service';
 
 export class IntegrationTestManager {
   public httpServer: any;
 
   private app: INestApplication;
+
+  private accessToken: string;
+
+  private prismaService: PrismaService;
 
   async beforeAll(): Promise<void> {
     const moduleRef = await Test.createTestingModule({
@@ -18,5 +25,29 @@ export class IntegrationTestManager {
 
     await this.app.init();
     this.httpServer = this.app.getHttpServer();
+
+    this.prismaService = moduleRef.get<PrismaService>(PrismaService);
+    const authService = moduleRef.get<AuthService>(AuthService);
+
+    const { uuid: userUuid } = await this.prismaService.user.findUnique({
+      where: {
+        email: testUser.email,
+      },
+    });
+
+    const { accessToken } = await authService.signinLocalTests(userUuid);
+    this.accessToken = accessToken;
+  }
+
+  async afterAll(): Promise<void> {
+    await this.app.close();
+  }
+
+  getPrismaService(): PrismaService {
+    return this.prismaService;
+  }
+
+  getAccessToken(): string {
+    return this.accessToken;
   }
 }

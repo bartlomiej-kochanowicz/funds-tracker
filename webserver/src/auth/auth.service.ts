@@ -46,10 +46,7 @@ export class AuthService {
       },
     });
 
-    const { accessToken, refreshToken } = await this.getTokens(
-      user.uuid,
-      user.email,
-    );
+    const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
     await this.updateRtHash(user.uuid, refreshToken);
 
@@ -89,10 +86,7 @@ export class AuthService {
 
     if (!isPasswordsMatches) throw new ForbiddenException('Wrong password.');
 
-    const { accessToken, refreshToken } = await this.getTokens(
-      user.uuid,
-      user.email,
-    );
+    const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
     await this.updateRtHash(user.uuid, refreshToken);
 
@@ -113,6 +107,18 @@ export class AuthService {
     });
 
     return user;
+  }
+
+  async signinLocalTests(uuid: string): Promise<{ accessToken: string }> {
+    const user = await this.prisma.user.findUnique({ where: { uuid } });
+
+    const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
+
+    await this.updateRtHash(user.uuid, refreshToken);
+
+    return {
+      accessToken,
+    };
   }
 
   async checkEmail(emailInput: EmailInput): Promise<Email> {
@@ -175,11 +181,7 @@ export class AuthService {
     }
   }
 
-  async refreshToken(
-    userId: string,
-    rt: string,
-    res: Response,
-  ): Promise<Refresh> {
+  async refreshToken(userId: string, rt: string, res: Response): Promise<Refresh> {
     try {
       const user = await this.prisma.user.findUnique({
         where: { uuid: userId },
@@ -191,10 +193,7 @@ export class AuthService {
 
       if (!isRtMatches) throw new ForbiddenException();
 
-      const { accessToken, refreshToken } = await this.getTokens(
-        user.uuid,
-        user.email,
-      );
+      const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
       await this.updateRtHash(user.uuid, refreshToken);
 
