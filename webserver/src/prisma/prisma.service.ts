@@ -13,10 +13,11 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   }
 
   async cleanDatabase() {
-    if (IS_DEVELOPMENT) return;
-
-    // teardown logic
-    Promise.all([this.user.deleteMany()]);
+    await Promise.all([
+      this.portfolio.deleteMany(),
+      this.cashAccount.deleteMany(),
+      this.user.deleteMany(),
+    ]);
   }
 
   async enableShutdownHooks(app: INestApplication) {

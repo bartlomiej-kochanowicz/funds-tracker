@@ -15,6 +15,8 @@ export default async () => {
 
   const prismaService = moduleRef.get<PrismaService>(PrismaService);
 
+  await prismaService.cleanDatabase();
+
   await prismaService.user.create({
     data: {
       email: testUser.email,

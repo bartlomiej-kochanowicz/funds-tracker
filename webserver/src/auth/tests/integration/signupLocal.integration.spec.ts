@@ -4,10 +4,9 @@ import { User } from 'auth/entities';
 import { IntegrationTestManager } from 'test/IntegrationTestManager';
 import { testUser } from 'test/stubs/testUser.stub';
 import { getGqlErrorStatus } from 'test/gqlStatus';
-import { HttpCode, HttpException } from '@nestjs/common';
 import { signupUser } from '../stubs/signin.stub';
 
-describe('signupLocal', () => {
+describe('signup local', () => {
   const integrationTestManager = new IntegrationTestManager();
 
   beforeAll(async () => {

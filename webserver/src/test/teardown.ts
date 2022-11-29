@@ -14,7 +14,7 @@ export default async () => {
 
   const prismaService = moduleRef.get<PrismaService>(PrismaService);
 
-  await prismaService.user.deleteMany();
+  await prismaService.cleanDatabase();
 
   await app.close();
 };
