@@ -1,14 +1,16 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { MaxLength, MinLength } from 'class-validator';
+import { IsEmail, MaxLength, MinLength } from 'class-validator';
 
 @InputType()
 export class SignupInput {
   @Field(() => String, { description: 'Email.' })
+  @IsEmail({
+    message: 'Email is not valid.',
+  })
   email: string;
 
   @MinLength(4, {
     message: 'Name is short',
-    context: 'name',
   })
   @MaxLength(50, {
     message: 'Name is too long',
