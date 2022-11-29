@@ -1,11 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom } from 'rxjs';
-import {
-  Instrument,
-  InstrumentHistory,
-  SearchInstrumentCollection,
-} from './types/instrument.type';
+import { Instrument, InstrumentHistory, SearchInstrumentCollection } from './types/instrument.type';
 
 @Injectable()
 export class InstrumentsService {
@@ -20,21 +16,19 @@ export class InstrumentsService {
           },
         })
         .pipe(
-          catchError((err) => {
+          catchError(err => {
             throw Error(err);
           }),
         ),
     );
 
-    const collection = data.quotes.map(
-      ({ quoteType, symbol, score, longname, exchange }) => ({
-        quoteType,
-        symbol,
-        score,
-        longname,
-        exchange,
-      }),
-    );
+    const collection = data.quotes.map(({ quoteType, symbol, score, longname, exchange }) => ({
+      quoteType,
+      symbol,
+      score,
+      longname,
+      exchange,
+    }));
 
     return {
       collection,
@@ -50,7 +44,7 @@ export class InstrumentsService {
           },
         })
         .pipe(
-          catchError((err) => {
+          catchError(err => {
             throw Error(err);
           }),
         ),
@@ -101,21 +95,18 @@ export class InstrumentsService {
 
     const { data } = await firstValueFrom(
       this.httpService
-        .get(
-          `https://query2.finance.yahoo.com/v7/finance/download/${paramSymbol}`,
-          {
-            responseType: 'blob',
-            params: {
-              events: 'history',
-              includeAdjustedClose: true,
-              interval,
-              period1,
-              period2,
-            },
+        .get(`https://query2.finance.yahoo.com/v7/finance/download/${paramSymbol}`, {
+          responseType: 'blob',
+          params: {
+            events: 'history',
+            includeAdjustedClose: true,
+            interval,
+            period1,
+            period2,
           },
-        )
+        })
         .pipe(
-          catchError((err) => {
+          catchError(err => {
             throw Error(err);
           }),
         ),
@@ -123,15 +114,13 @@ export class InstrumentsService {
 
     return {
       symbol: paramSymbol,
-      collection: this.csvJSON(data).map(
-        ({ Date, Open, Close, High, Low }) => ({
-          date: Date,
-          open: this.parseNumber(Open),
-          close: this.parseNumber(Close),
-          high: this.parseNumber(High),
-          low: this.parseNumber(Low),
-        }),
-      ),
+      collection: this.csvJSON(data).map(({ Date, Open, Close, High, Low }) => ({
+        date: Date,
+        open: this.parseNumber(Open),
+        close: this.parseNumber(Close),
+        high: this.parseNumber(High),
+        low: this.parseNumber(Low),
+      })),
     };
   }
 

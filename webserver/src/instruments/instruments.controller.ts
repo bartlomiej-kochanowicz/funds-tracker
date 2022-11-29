@@ -1,10 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { InstrumentsService } from './instruments.service';
-import {
-  Instrument,
-  InstrumentHistory,
-  SearchInstrumentCollection,
-} from './types/instrument.type';
+import { Instrument, InstrumentHistory, SearchInstrumentCollection } from './types/instrument.type';
 
 @Controller('instruments')
 export class InstrumentsController {

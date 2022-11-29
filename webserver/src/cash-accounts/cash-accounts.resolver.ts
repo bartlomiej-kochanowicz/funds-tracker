@@ -37,11 +37,7 @@ export class CashAccountsResolver {
     @Args('data')
     updateCashAccountInput: UpdateCashAccountInput,
   ) {
-    return this.cashAccountsService.update(
-      userId,
-      uuid,
-      updateCashAccountInput,
-    );
+    return this.cashAccountsService.update(userId, uuid, updateCashAccountInput);
   }
 
   @Mutation(() => CashAccount)
