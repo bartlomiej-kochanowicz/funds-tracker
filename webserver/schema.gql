@@ -29,12 +29,6 @@ type User {
 
   """User name."""
   name: String!
-
-  """User password."""
-  password: String!
-
-  """User refresh token hash."""
-  rtHash: String
 }
 
 """

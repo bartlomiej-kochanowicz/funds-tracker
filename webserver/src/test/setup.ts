@@ -2,7 +2,7 @@ import 'tsconfig-paths/register';
 import { Test } from '@nestjs/testing';
 import { PrismaService } from 'prisma/prisma.service';
 import { AppModule } from 'app.module';
-import { testUser } from 'auth/tests/stubs/signin.stub';
+import { testUser } from 'test/stubs/testUser.stub';
 
 export default async () => {
   const moduleRef = await Test.createTestingModule({
@@ -16,7 +16,11 @@ export default async () => {
   const prismaService = moduleRef.get<PrismaService>(PrismaService);
 
   await prismaService.user.create({
-    data: testUser,
+    data: {
+      email: testUser.email,
+      name: testUser.name,
+      password: testUser.password,
+    },
   });
 
   await app.close();

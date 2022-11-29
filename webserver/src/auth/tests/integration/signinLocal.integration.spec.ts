@@ -25,8 +25,8 @@ describe('signinLocal', () => {
             gql`
               mutation SignupLocal($data: SignupInput!) {
                 signupLocal(data: $data) {
-                  uuid
                   name
+                  email
                 }
               }
             `,
@@ -39,8 +39,21 @@ describe('signinLocal', () => {
         signupedUser = response.data.signupLocal;
       });
 
-      test('then the user is signuped', async () => {
-        console.log('end');
+      it('should return user entity', async () => {
+        expect(signupedUser).toMatchObject({
+          name: signupUser.name,
+          email: signupUser.email,
+        });
+      });
+
+      it('should create new user in database', async () => {
+        const user = await integrationTestManager.getPrismaService().user.findUnique({
+          where: {
+            email: signupUser.email,
+          },
+        });
+
+        expect(user).toBeDefined();
       });
     });
   });

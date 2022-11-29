@@ -46,10 +46,7 @@ export class AuthResolver {
   }
 
   @Mutation(() => Logout)
-  logout(
-    @GetCurrentUserId() userId: string,
-    @Context('res') res: Response,
-  ): Promise<Logout> {
+  logout(@GetCurrentUserId() userId: string, @Context('res') res: Response): Promise<Logout> {
     return this.authService.logout(userId, res);
   }
 

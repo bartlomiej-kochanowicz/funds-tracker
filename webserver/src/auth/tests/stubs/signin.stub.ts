@@ -6,10 +6,3 @@ export const signupUser: SignupInput = {
   name: 'testsignupName',
   token: 'mocksignupToken',
 };
-
-export const testUser: SignupInput = {
-  email: 'test@email.com',
-  password: 'testPassword',
-  name: 'testName',
-  token: 'mockToken',
-};

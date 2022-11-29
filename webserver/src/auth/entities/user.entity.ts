@@ -13,13 +13,4 @@ export class User {
 
   @Field(() => String, { description: 'User name.' })
   name: string;
-
-  @Field(() => String, { description: 'User password.' })
-  password: string;
-
-  @Field(() => String, {
-    description: 'User refresh token hash.',
-    nullable: true,
-  })
-  rtHash: string;
 }
