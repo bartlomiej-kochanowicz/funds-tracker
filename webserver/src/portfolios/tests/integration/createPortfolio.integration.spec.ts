@@ -48,5 +48,15 @@ describe('create portfolio', () => {
         rebalancingEnabled: createPortfolioStub.rebalancingEnabled,
       });
     });
+
+    it('should create new user in database', async () => {
+      const portfolio = await integrationTestManager.getPrismaService().portfolio.findUnique({
+        where: {
+          uuid: createdPortfolio.uuid,
+        },
+      });
+
+      expect(portfolio).toBeDefined();
+    });
   });
 });
