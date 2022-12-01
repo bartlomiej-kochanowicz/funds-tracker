@@ -1,4 +1,4 @@
-import { Logout, User } from 'auth/entities';
+import { Logout } from 'auth/entities';
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
@@ -36,7 +36,7 @@ describe('logout', () => {
       logout = response.data.logout;
     });
 
-    it('should return logout entity', async () => {
+    it('should return logout entity with truth value', async () => {
       expect(logout).toMatchObject({
         success: true,
       });
@@ -56,11 +56,43 @@ describe('logout', () => {
     });
   });
 
+  describe('when logout mutation is executed and user does not exist', () => {
+    let logout: Logout;
+
+    beforeAll(async () => {
+      await integrationTestManager
+        .getPrismaService()
+        .user.delete({ where: { email: testUser.email } });
+
+      const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
+        .set('Cookie', `accessToken=${integrationTestManager.getAccessToken()}`)
+        .mutate(
+          gql`
+            mutation Logout {
+              logout {
+                success
+              }
+            }
+          `,
+        );
+
+      logout = response.data.logout;
+    });
+
+    it('should return logout entity with falsy value', async () => {
+      expect(logout).toMatchObject({
+        success: false,
+      });
+    });
+  });
+
   describe('when logout mutation is executed and user is not authenticated', () => {
     let resStatus: number;
 
     beforeAll(async () => {
-      const { response } = await request<{ user: User }>(integrationTestManager.httpServer).mutate(
+      const { response } = await request<{ logout: Logout }>(
+        integrationTestManager.httpServer,
+      ).mutate(
         gql`
           mutation Logout {
             logout {

@@ -149,12 +149,9 @@ export class AuthService {
 
   async logout(userId: string, res): Promise<Logout> {
     try {
-      await this.prisma.user.updateMany({
+      await this.prisma.user.update({
         where: {
           uuid: userId,
-          rtHash: {
-            not: null,
-          },
         },
         data: {
           rtHash: null,
@@ -259,7 +256,7 @@ export class AuthService {
   }
 
   private async validateHuman(token: string): Promise<boolean> {
-    if (IS_DEVELOPMENT || IS_TEST) {
+    if (IS_TEST || IS_DEVELOPMENT) {
       return true;
     }
 
