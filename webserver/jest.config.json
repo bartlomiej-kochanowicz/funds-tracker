@@ -8,7 +8,7 @@
   "transform": {
     ".+\\.(t|j)s$": "ts-jest"
   },
-  "collectCoverageFrom": ["**/*.(t|j)s"],
+  "collectCoverageFrom": ["**/*.(t|j)s", "!**/*/index.ts", "!src/**/*.type.ts", "!main.ts"],
   "watchPlugins": ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
   "coverageDirectory": "../coverage",
   "testEnvironment": "node"

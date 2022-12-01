@@ -1,6 +1,5 @@
 import { INestApplication, Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { IS_DEVELOPMENT } from 'common/config/env';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
@@ -14,9 +13,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 
   async cleanDatabase() {
     await Promise.all([
-      this.portfolio.deleteMany(),
-      this.cashAccount.deleteMany(),
-      this.user.deleteMany(),
+      await this.portfolio.deleteMany(),
+      await this.cashAccount.deleteMany(),
+      await this.user.deleteMany(),
     ]);
   }
 

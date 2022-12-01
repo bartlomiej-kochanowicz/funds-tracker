@@ -1,6 +1,6 @@
 import { SignupInput } from 'auth/inputs';
 
-export const signupUser: SignupInput = {
+export const signupUserStub: SignupInput = {
   email: 'testsignupuser@email.com',
   password: 'testsignupPassword',
   name: 'testsignupName',

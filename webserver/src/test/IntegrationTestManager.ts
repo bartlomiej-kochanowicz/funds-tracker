@@ -35,7 +35,7 @@ export class IntegrationTestManager {
       },
     });
 
-    const { accessToken } = await authService.signinLocalTests(userUuid);
+    const { accessToken } = await authService.signinLocalForTests(userUuid);
     this.accessToken = accessToken;
   }
 

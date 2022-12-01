@@ -4,7 +4,7 @@ import { User } from 'auth/entities';
 import { IntegrationTestManager } from 'test/IntegrationTestManager';
 import { testUser } from 'test/stubs/testUser.stub';
 import { getGqlErrorStatus } from 'test/gqlStatus';
-import { signupUser } from '../stubs/signin.stub';
+import { signupUserStub } from '../stubs/signup.stub';
 
 describe('signup local', () => {
   const integrationTestManager = new IntegrationTestManager();
@@ -19,7 +19,7 @@ describe('signup local', () => {
 
   describe('given does the user does not already signup', () => {
     describe('when a signinLocal mutation is executed', () => {
-      let signupedUser: User;
+      let signupUser: User;
 
       beforeAll(async () => {
         const response = await request<{ signupLocal: User }>(integrationTestManager.httpServer)
@@ -34,17 +34,17 @@ describe('signup local', () => {
             `,
           )
           .variables({
-            data: signupUser,
+            data: signupUserStub,
           })
           .expectNoErrors();
 
-        signupedUser = response.data.signupLocal;
+        signupUser = response.data.signupLocal;
       });
 
       it('should return user entity', async () => {
-        expect(signupedUser).toMatchObject({
-          name: signupUser.name,
-          email: signupUser.email,
+        expect(signupUser).toMatchObject({
+          name: signupUserStub.name,
+          email: signupUserStub.email,
         });
       });
 
