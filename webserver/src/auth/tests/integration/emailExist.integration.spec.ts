@@ -3,7 +3,6 @@ import request from 'supertest-graphql';
 import { Email } from 'auth/entities';
 import { IntegrationTestManager } from 'test/IntegrationTestManager';
 import { testUser } from 'test/stubs/testUser.stub';
-import { getGqlErrorStatus } from 'test/gqlStatus';
 
 describe('signin local', () => {
   const integrationTestManager = new IntegrationTestManager();
