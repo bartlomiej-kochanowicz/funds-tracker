@@ -56,7 +56,7 @@ describe('logout', () => {
     });
   });
 
-  /* describe.skip('when user query is executed and user is not authenticated', () => {
+  describe('when logout mutation is executed and user is not authenticated', () => {
     let resStatus: number;
 
     beforeAll(async () => {
@@ -76,5 +76,5 @@ describe('logout', () => {
     it('should return 401 status code', async () => {
       expect(resStatus).toBe(401);
     });
-  }); */
+  });
 });
