@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
 import { Portfolio } from 'portfolios/entities';
-import { IntegrationTestManager } from 'test/IntegrationTestManager';
+import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { createPortfolioStub } from '../stubs/createPortfolio.stub';
 
 describe('create portfolio', () => {

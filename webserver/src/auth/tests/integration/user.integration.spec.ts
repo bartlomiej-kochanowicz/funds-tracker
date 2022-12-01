@@ -1,9 +1,9 @@
 import { User } from 'auth/entities';
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { getGqlErrorStatus } from 'test/gqlStatus';
-import { IntegrationTestManager } from 'test/IntegrationTestManager';
-import { testUser } from 'test/stubs/testUser.stub';
+import { getGqlErrorStatus } from 'common/tests/gqlStatus';
+import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
+import { testUser } from 'common/tests/stubs/testUser.stub';
 
 describe('user', () => {
   const integrationTestManager = new IntegrationTestManager();

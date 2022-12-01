@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
 import { Email } from 'auth/entities';
-import { IntegrationTestManager } from 'test/IntegrationTestManager';
-import { testUser } from 'test/stubs/testUser.stub';
+import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
+import { testUser } from 'common/tests/stubs/testUser.stub';
 
 describe('signin local', () => {
   const integrationTestManager = new IntegrationTestManager();

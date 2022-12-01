@@ -3,7 +3,7 @@ import { CookieOptions, Response } from 'express';
 import { Test } from '@nestjs/testing';
 import { PrismaService } from 'prisma/prisma.service';
 import { AppModule } from 'app.module';
-import { testUser } from 'test/stubs/testUser.stub';
+import { testUser } from 'common/tests/stubs/testUser.stub';
 import { AuthService } from 'auth/auth.service';
 
 export default async () => {
