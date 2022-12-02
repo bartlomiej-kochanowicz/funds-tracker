@@ -15,6 +15,8 @@ export class IntegrationTestManager {
 
   private prismaService: PrismaService;
 
+  private authService: AuthService;
+
   async beforeAll(): Promise<void> {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
@@ -27,7 +29,7 @@ export class IntegrationTestManager {
     this.httpServer = this.app.getHttpServer();
 
     this.prismaService = moduleRef.get<PrismaService>(PrismaService);
-    const authService = moduleRef.get<AuthService>(AuthService);
+    this.authService = moduleRef.get<AuthService>(AuthService);
 
     const { uuid: userUuid } = await this.prismaService.user.findUnique({
       where: {
@@ -35,7 +37,7 @@ export class IntegrationTestManager {
       },
     });
 
-    const { accessToken } = await authService.signinLocalForTests(userUuid);
+    const { accessToken } = await this.authService.signinLocalForTests(userUuid);
     this.accessToken = accessToken;
   }
 
@@ -45,6 +47,10 @@ export class IntegrationTestManager {
 
   getPrismaService(): PrismaService {
     return this.prismaService;
+  }
+
+  getAuthService(): AuthService {
+    return this.authService;
   }
 
   getAccessToken(): string {

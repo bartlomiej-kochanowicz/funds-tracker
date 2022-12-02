@@ -4,6 +4,7 @@ import request from 'supertest-graphql';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
+import { logoutStub } from 'auth/tests/stubs/logout.stub';
 
 describe('logout', () => {
   const integrationTestManager = new IntegrationTestManager();
@@ -60,12 +61,18 @@ describe('logout', () => {
     let logout: Logout;
 
     beforeAll(async () => {
+      const { uuid } = await integrationTestManager.getAuthService().signupLocal(logoutStub);
+
+      const { accessToken } = await integrationTestManager
+        .getAuthService()
+        .signinLocalForTests(uuid);
+
       await integrationTestManager
         .getPrismaService()
-        .user.delete({ where: { email: testUser.email } });
+        .user.delete({ where: { email: logoutStub.email } });
 
       const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
-        .set('Cookie', `accessToken=${integrationTestManager.getAccessToken()}`)
+        .set('Cookie', `accessToken=${accessToken}`)
         .mutate(
           gql`
             mutation Logout {
