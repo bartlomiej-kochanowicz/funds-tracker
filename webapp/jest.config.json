@@ -5,7 +5,6 @@
     "^.+\\.tsx?$": "ts-jest"
   },
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
-  "collectCoverage": true,
   "collectCoverageFrom": [
     "src/components/**/*.{ts,tsx}",
     "src/helpers/**/*.{ts,tsx}",

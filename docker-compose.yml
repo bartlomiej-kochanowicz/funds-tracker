@@ -1,47 +1,57 @@
 version: "3.9"
 
 services:
-  database:
+  tests-database:
     image: postgres:14.5-alpine
-    container_name: database
+    restart: always
+    container_name: tests-database
+    ports:
+      - "${TESTS_POSTGRES_PORT}:5432"
+    environment:
+      - POSTGRES_USER=${TESTS_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${TESTS_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${TESTS_POSTGRES_DB}
+  development-database:
+    image: postgres:14.5-alpine
+    container_name: development-database
     restart: always
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${DEVELOPMENT_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DEVELOPMENT_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DEVELOPMENT_POSTGRES_DB}
+    env_file:
+      - ./webserver/.env.development
     ports:
-      - "5433:${POSTGRES_PORT}"
+      - "${DEVELOPMENT_POSTGRES_PORT}:5432"
     volumes:
-      - funds-tracker-database:/var/lib/postgresql/data
+      - development-database:/var/lib/postgresql/data
     networks:
-      - api
+      - webserver
 
-  api:
-    container_name: api
+  webserver:
+    container_name: webserver
     build:
       target: development
-      context: ./api
+      context: ./webserver
       dockerfile: Dockerfile
     networks:
-      - api
+      - webserver
       - webapp
     environment:
       - NODE_ENV=development
     volumes:
-      - ./api:/api
-      - /api/node_modules
+      - ./webserver:/webserver
+      - /webserver/node_modules
     tty: true
     stdin_open: true
     env_file:
-      - ./api/.env
-    command: npm run start:dev
+      - ./webserver/.env.development
     depends_on:
-      - database
+      - development-database
     links:
-      - database
+      - development-database
     ports:
-      - ${API_PORT}:${API_PORT}
-      - "9229:9229"
+      - ${WEBSERVER_PORT}:${WEBSERVER_PORT}
   webapp:
     container_name: webapp
     build:
@@ -50,24 +60,25 @@ services:
       dockerfile: Dockerfile
     networks:
       - webapp
-      - api
+      - webserver
     environment:
       - NODE_ENV=development
     volumes:
       - ./webapp:/webapp
     depends_on:
-      - api
+      - webserver
     tty: true
     stdin_open: true
     env_file:
-      - ./webapp/.env
+      - ./webapp/.env.development
     ports:
       - "${WEBAPP_PORT}:${WEBAPP_PORT}"
+      - "9229:9229"
 
 networks:
-  api:
+  webserver:
   webapp:
 
 volumes:
-  funds-tracker-database:
+  development-database:
     driver: local

@@ -21,20 +21,38 @@ jobs:
       - run: pnpm tsc:webapp
       - run: pnpm lint:webapp
       - run: pnpm test:webapp
-  api:
-    name: CI-api
+  webserver:
+    name: CI-webserver
     runs-on: ubuntu-20.04
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: ${{secrets.TESTS_POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.TESTS_POSTGRES_PASSWORD}}
+          POSTGRES_DB: ${{secrets.TESTS_POSTGRES_DB}}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache-dependency-path: api/pnpm-lock.yaml
+          cache-dependency-path: webserver/pnpm-lock.yaml
       - name: Setup
         uses: pnpm/action-setup@v2.2.4
         with:
           version: 7.x
-      - run: pnpm install:api
-      - run: pnpm tsc:api
-      - run: pnpm lint:api
-      - run: pnpm test:api
+      - run: pnpm install:webserver
+      - run: pnpm tsc:webserver
+      - run: pnpm lint:webserver
+      - run: pnpm test:webserver
+        env:
+          DATABASE_URL: ${{secrets.TESTS_DATABASE_URL}}
+          AT_SECRET: ${{secrets.TESTS_AT_SECRET}}
+          RT_SECRET: ${{secrets.TESTS_RT_SECRET}}

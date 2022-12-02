@@ -124,10 +124,10 @@ Start webapp only (bypass docker)
   $ pnpm start:webapp
 ```
 
-Start api only (bypass docker)
+Start webserver only (bypass docker)
 
 ```bash
-  $ pnpm start:api
+  $ pnpm start:webserver
 ```
 
 ### :triangular_flag_on_post: Deployment

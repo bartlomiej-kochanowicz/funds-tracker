@@ -1,0 +1,154 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Email {
+  """Email existence."""
+  exist: Boolean!
+}
+
+type Logout {
+  """Logout successful."""
+  success: Boolean!
+}
+
+type Refresh {
+  """Refresh successful."""
+  success: Boolean!
+}
+
+type User {
+  """User uuid."""
+  uuid: String!
+
+  """User date created."""
+  createdAt: DateTime!
+
+  """User email."""
+  email: String!
+
+  """User name."""
+  name: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CashAccount {
+  """Cash account uuid."""
+  uuid: String!
+
+  """Cash account name."""
+  name: String!
+
+  """Cash account currency."""
+  currency: Currency!
+}
+
+enum Currency {
+  CHF
+  EUR
+  GBP
+  USD
+  PLN
+}
+
+type Portfolio {
+  """Portfolio uuid."""
+  uuid: String!
+
+  """Portfolio name."""
+  name: String!
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean!
+}
+
+type Query {
+  emailExist(data: EmailInput!): Email!
+  user: User!
+  cashAccounts: [CashAccount!]!
+  cashAccount(uuid: String!): CashAccount!
+  portfolios: [Portfolio!]!
+  portfolio(uuid: String!): Portfolio!
+}
+
+input EmailInput {
+  """Email."""
+  email: String!
+
+  """Token."""
+  token: String!
+}
+
+type Mutation {
+  signupLocal(data: SignupInput!): User!
+  signinLocal(data: SigninInput!): User!
+  logout: Logout!
+  refreshToken: Refresh!
+  createCashAccount(data: CreateCashAccountInput!): CashAccount!
+  updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
+  deleteCashAccount(uuid: String!): CashAccount!
+  createPortfolio(data: CreatePortfolioInput!): Portfolio!
+  updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
+  deletePortfolio(uuid: String!): Portfolio!
+}
+
+input SignupInput {
+  """Email."""
+  email: String!
+
+  """Name."""
+  name: String!
+
+  """Password."""
+  password: String!
+
+  """Token."""
+  token: String!
+}
+
+input SigninInput {
+  """Email."""
+  email: String!
+
+  """Password."""
+  password: String!
+
+  """Token."""
+  token: String!
+}
+
+input CreateCashAccountInput {
+  """Cash account name."""
+  name: String!
+
+  """Cash account currency."""
+  currency: Currency!
+}
+
+input UpdateCashAccountInput {
+  """Cash account name."""
+  name: String
+
+  """Cash account currency."""
+  currency: Currency
+}
+
+input CreatePortfolioInput {
+  """Portfolio name."""
+  name: String!
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean!
+}
+
+input UpdatePortfolioInput {
+  """Portfolio name."""
+  name: String
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean
+}
