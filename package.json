@@ -14,7 +14,7 @@
     "tsc:webserver": "cd webserver && pnpm tsc",
     "tsc:webapp": "cd webapp && pnpm tsc",
     "tsc": "pnpm tsc:webserver && pnpm tsc:webapp",
-    "test:webserver": "cd webserver && pnpm test",
+    "test:webserver": "cd webserver && pnpm test:ci",
     "test:webapp": "cd webapp && pnpm test",
     "test": "pnpm test:webserver && pnpm test:webapp",
     "build:webserver": "cd webserver && pnpm build",

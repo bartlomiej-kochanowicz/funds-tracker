@@ -51,4 +51,4 @@ jobs:
       - run: pnpm lint:webserver
       - run: pnpm test:webserver
         env:
-          DATABASE_URL: ${{secrets.DATABASE_URL}}
+          DATABASE_URL: ${{secrets.TESTS_DATABASE_URL}}
