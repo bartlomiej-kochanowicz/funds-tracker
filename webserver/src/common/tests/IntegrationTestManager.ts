@@ -13,6 +13,8 @@ export class IntegrationTestManager {
 
   private accessToken: string;
 
+  private refreshToken: string;
+
   private prismaService: PrismaService;
 
   private authService: AuthService;
@@ -37,8 +39,9 @@ export class IntegrationTestManager {
       },
     });
 
-    const { accessToken } = await this.authService.signinLocalForTests(userUuid);
+    const { accessToken, refreshToken } = await this.authService.signinLocalForTests(userUuid);
     this.accessToken = accessToken;
+    this.refreshToken = refreshToken;
   }
 
   async afterAll(): Promise<void> {
@@ -55,5 +58,9 @@ export class IntegrationTestManager {
 
   getAccessToken(): string {
     return this.accessToken;
+  }
+
+  getRefreshToken(): string {
+    return this.refreshToken;
   }
 }

@@ -111,7 +111,7 @@ export class AuthService {
     return user;
   }
 
-  async signinLocalForTests(uuid: string): Promise<{ accessToken: string }> {
+  async signinLocalForTests(uuid: string): Promise<{ accessToken: string; refreshToken: string }> {
     const user = await this.prisma.user.findUnique({ where: { uuid } });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
@@ -120,6 +120,7 @@ export class AuthService {
 
     return {
       accessToken,
+      refreshToken,
     };
   }
 
