@@ -3,7 +3,6 @@ import request from 'supertest-graphql';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
 import { Refresh } from 'auth/entities';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
-import { testUser } from 'common/tests/stubs/testUser.stub';
 
 describe('refresh token', () => {
   const integrationTestManager = new IntegrationTestManager();
