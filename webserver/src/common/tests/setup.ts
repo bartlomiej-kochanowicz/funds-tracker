@@ -1,5 +1,4 @@
 import 'tsconfig-paths/register';
-import { CookieOptions, Response } from 'express';
 import { Test } from '@nestjs/testing';
 import { PrismaService } from 'prisma/prisma.service';
 import { AppModule } from 'app.module';
