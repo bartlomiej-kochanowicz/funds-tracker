@@ -12,15 +12,21 @@
     "test:watch": "jest --colors --runInBand --detectOpenHandles --watch",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ./src",
+    "codegen": "graphql-codegen --config ./src/config/codegen.ts",
+    "codegen:watc": "graphql-codegen -w --config ./src/config/codegen.ts"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
+    "@graphql-codegen/cli": "^2.15.0",
+    "@graphql-codegen/client-preset": "^1.2.1",
     "@hookform/resolvers": "2.9.10",
     "@reduxjs/toolkit": "1.8.6",
     "axios": "0.27.2",
     "babel-plugin-styled-components": "2.0.7",
     "color2k": "2.0.0",
     "framer-motion": "7.6.1",
+    "graphql": "^16.6.0",
     "i18next": "22.0.2",
     "i18next-browser-languagedetector": "6.1.8",
     "i18next-http-backend": "1.4.4",

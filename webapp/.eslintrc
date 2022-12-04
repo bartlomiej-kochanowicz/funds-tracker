@@ -23,6 +23,7 @@
       }
     }
   },
+  "ignorePatterns": ["vite.config.ts", "src/__generated__/*.ts"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/react-in-jsx-scope": "off",
