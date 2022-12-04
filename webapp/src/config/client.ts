@@ -1,7 +1,9 @@
-import axios from 'axios';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { API_URL, IS_DEVELOPMENT } from 'config/env';
 
-export const client = axios.create({
-  baseURL: IS_DEVELOPMENT ? API_URL : '/api',
-  timeout: 5000,
+const client = new ApolloClient({
+  uri: IS_DEVELOPMENT ? API_URL : '/api',
+  cache: new InMemoryCache(),
 });
+
+export default client;
