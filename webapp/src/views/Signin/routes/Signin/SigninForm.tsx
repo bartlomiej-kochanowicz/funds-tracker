@@ -3,17 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Loader } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
-import useRequest from 'hooks/useRequest';
-import { checkEmail, CheckEmailProps, CheckEmailResponse } from 'services/auth/checkEmail';
-import { signin, SigninProps } from 'services/auth/signin';
 import { ROUTES } from 'routes/paths';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'store';
-import { accountThunk } from 'store/thunks/account/accountThunk';
+import { EmailExist } from 'apollo/query';
+import { Email, EmailInput } from '__generated__/graphql';
+import { Signin } from 'apollo/mutations';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -36,8 +34,6 @@ export const SigninForm = () => {
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch<AppDispatch>();
-
   const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
     SigninStateMachine,
   );
@@ -54,42 +50,38 @@ export const SigninForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.password))),
   });
 
-  const { request: checkEmailRequest } = useRequest<CheckEmailProps, CheckEmailResponse>(
-    checkEmail,
-    {
-      successCallback: ({ data }) => {
-        if (data.exist) {
-          updateState(actions.CHANGE_TO_PASSWORD);
-        } else {
-          setError('userEmail', {
-            type: 'custom',
-            message: t('page.signin.account.does_not_exist'),
-          });
-        }
-      },
-    },
-  );
+  const [checkEmail, { data: checkEmailData }] = useLazyQuery<Email, EmailInput>(EmailExist);
 
-  const { request: signinRequest } = useRequest<SigninProps, undefined>(signin, {
-    successCallback: async () => {
-      await dispatch(accountThunk());
+  if (checkEmailData) {
+    if (checkEmailData.exist) {
+      updateState(actions.CHANGE_TO_PASSWORD);
+    } else {
+      setError('userEmail', {
+        type: 'custom',
+        message: t('page.signin.account.does_not_exist'),
+      });
+    }
+  }
 
-      navigate(ROUTES.DASHBOARD.HOME);
-    },
-    failureCallback: error => {
-      setError('userPassword', { type: 'custom', message: error.message });
-    },
-  });
+  const [signin, { data: signinData, error: signinError }] = useMutation(Signin);
+
+  if (signinData) {
+    navigate(ROUTES.DASHBOARD.HOME);
+  }
+
+  if (signinError) {
+    setError('userPassword', { type: 'custom', message: signinError.message });
+  }
 
   const onVerify = useCallback(setToken, [setToken]);
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.email)) {
-      await checkEmailRequest({ userEmail, token });
+      await checkEmail({ variables: { email: userEmail, token } });
     }
 
     if (compareState(states.password)) {
-      await signinRequest({ userEmail, userPassword, token });
+      await signin({ variables: { email: userEmail, password: userPassword, token } });
     }
 
     setRefreshReCaptcha(r => !r);
