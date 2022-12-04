@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { Root } from 'views/Root';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'styles/GlobalStyle';
-import { store } from 'store';
 import { FullscreenErrorContent } from 'components/organisms';
 import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
+import { ApolloProvider } from '@apollo/client';
+import client from 'config/client';
 
 const Content = () => {
   const { theme } = useColorThemeContext();
@@ -37,13 +37,13 @@ const Content = () => {
 };
 
 const App: FC = (): JSX.Element => (
-  <Provider store={store}>
-    <BrowserRouter>
+  <BrowserRouter>
+    <ApolloProvider client={client}>
       <ColorThemeProvider>
         <Content />
       </ColorThemeProvider>
-    </BrowserRouter>
-  </Provider>
+    </ApolloProvider>
+  </BrowserRouter>
 );
 
 export default App;
