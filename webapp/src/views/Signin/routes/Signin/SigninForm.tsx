@@ -12,6 +12,7 @@ import { ROUTES } from 'routes/paths';
 import { EmailExist } from 'apollo/query';
 import { Email, EmailInput, SigninInput, User } from '__generated__/graphql';
 import { Signin } from 'apollo/mutations';
+import { Variables } from 'types/service.type';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -50,38 +51,37 @@ export const SigninForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.password))),
   });
 
-  const [checkEmail, { data: checkEmailData }] = useLazyQuery<Email, EmailInput>(EmailExist);
+  const [checkEmail] = useLazyQuery<Email, Variables<EmailInput>>(EmailExist, {
+    onCompleted: data => {
+      if (data.exist) {
+        updateState(actions.CHANGE_TO_PASSWORD);
+      } else {
+        setError('userEmail', {
+          type: 'custom',
+          message: t('page.signin.account.does_not_exist'),
+        });
+      }
+    },
+  });
 
-  if (checkEmailData) {
-    if (checkEmailData.exist) {
-      updateState(actions.CHANGE_TO_PASSWORD);
-    } else {
-      setError('userEmail', {
-        type: 'custom',
-        message: t('page.signin.account.does_not_exist'),
-      });
-    }
-  }
-
-  const [signin, { data: signinData, error: signinError }] = useMutation<User, SigninInput>(Signin);
-
-  if (signinData) {
-    navigate(ROUTES.DASHBOARD.HOME);
-  }
-
-  if (signinError) {
-    setError('userPassword', { type: 'custom', message: signinError.message });
-  }
+  const [signin] = useMutation<User, Variables<SigninInput>>(Signin, {
+    onCompleted: () => {
+      navigate(ROUTES.DASHBOARD.HOME);
+    },
+    onError: error => {
+      setError('userPassword', { type: 'custom', message: error.message });
+    },
+  });
 
   const onVerify = useCallback(setToken, [setToken]);
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.email)) {
-      await checkEmail({ variables: { email: userEmail, token } });
+      await checkEmail({ variables: { data: { email: userEmail, token } } });
     }
 
     if (compareState(states.password)) {
-      await signin({ variables: { email: userEmail, password: userPassword, token } });
+      await signin({ variables: { data: { email: userEmail, password: userPassword, token } } });
     }
 
     setRefreshReCaptcha(r => !r);
