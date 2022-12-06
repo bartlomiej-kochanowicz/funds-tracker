@@ -1,21 +1,19 @@
-import { createContext, FC, useContext, useState } from 'react';
-import { User } from '__generated__/graphql';
+import { useLazyQuery } from '@apollo/client';
+import { GetUser } from 'apollo/query';
+import { createContext, FC, ReactNode, useContext } from 'react';
 
 type UserContextType = ReturnType<typeof useUser>;
 
 const UserContext = createContext<UserContextType | null>(null);
 
 const useUser = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [getUser, { loading, data }] = useLazyQuery(GetUser);
 
-  return {
-    user,
-    setUser,
-  };
+  return { loading, user: data, getUser };
 };
 
 type ProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const UserProvider: FC<ProviderProps> = ({ children }) => {
@@ -24,11 +22,15 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
-export const useUserContext = () => {
+export const useUserContext = ({ isProtected }: { isProtected?: boolean } = {}) => {
   const value = useContext(UserContext);
 
   if (!value) {
     throw new Error('useUserContext must be used inside UserProvider');
+  }
+
+  if (isProtected && !value.user && !value.loading) {
+    // value.getUser();
   }
 
   return value;

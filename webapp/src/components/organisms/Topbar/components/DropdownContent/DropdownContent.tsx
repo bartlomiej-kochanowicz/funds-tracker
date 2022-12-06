@@ -1,8 +1,5 @@
 import { forwardRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { AppDispatch } from 'store';
-import { logoutThunk } from 'store/thunks/account/logoutThunk';
 import { Menu } from 'components/atoms';
 
 interface DropdownContentProps {
@@ -13,10 +10,8 @@ export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProp
   ({ handleToggle, ...rest }, ref) => {
     const { t } = useTranslation();
 
-    const dispatch = useDispatch<AppDispatch>();
-
     const handleSignOut = () => {
-      dispatch(logoutThunk());
+      // logout
 
       handleToggle();
     };

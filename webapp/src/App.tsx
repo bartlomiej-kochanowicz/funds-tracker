@@ -9,6 +9,7 @@ import { GlobalStyle } from 'styles/GlobalStyle';
 import { FullscreenErrorContent } from 'components/organisms';
 import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
 import client from 'config/client';
+import { UserProvider } from 'contexts/UserContext';
 
 const Content = () => {
   const { theme } = useColorThemeContext();
@@ -40,7 +41,9 @@ const App: FC = (): JSX.Element => (
   <BrowserRouter>
     <ApolloProvider client={client}>
       <ColorThemeProvider>
-        <Content />
+        <UserProvider>
+          <Content />
+        </UserProvider>
       </ColorThemeProvider>
     </ApolloProvider>
   </BrowserRouter>

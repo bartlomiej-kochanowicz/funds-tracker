@@ -1,12 +1,11 @@
 import { Row } from 'simple-flexbox';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Spreader, Text, Avatar, Dropdown } from 'components/atoms';
-import { selectAccount } from 'store/selectors/account';
+import { useUserContext } from 'contexts/UserContext';
 import { DropdownContent } from '../DropdownContent';
 
 export const Profile = () => {
-  const { data } = useSelector(selectAccount);
+  const { user } = useUserContext();
 
   const { t } = useTranslation();
 
@@ -16,12 +15,12 @@ export const Profile = () => {
       placement="bottom-end"
     >
       <Row alignItems="center">
-        <Avatar name={data.name} />
+        <Avatar name={user.name} />
 
         <Spreader spread="tiny" />
 
         <Text fontWeight="700">
-          {t('common.hi')}, {data.name}!
+          {t('common.hi')}, {user.name}!
         </Text>
       </Row>
     </Dropdown>

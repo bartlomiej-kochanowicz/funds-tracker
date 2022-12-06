@@ -1,11 +1,9 @@
-import { TypedDocumentNode } from '@apollo/client';
-import { gql } from '__generated__/gql';
-import { Email, EmailInput } from '__generated__/graphql';
+import { gql } from '__generated__';
 
-export const EmailExist = gql(`
-  query EmailExist($data: EmailExistInput!) {
+export const EmailExist = gql(/* GraphQL */ `
+  query EmailExist($data: EmailInput!) {
     emailExist(data: $data) {
       exist
     }
   }
-`) as TypedDocumentNode<Email, EmailInput>;
+`);

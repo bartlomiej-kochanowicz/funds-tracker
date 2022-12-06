@@ -3,3 +3,5 @@ export type ErrorResponse = {
   status: number;
   name: string;
 };
+
+export type RequestState = 'IDLE' | 'PENDING' | 'FULFILLED' | 'REJECTED';

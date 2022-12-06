@@ -1,8 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { useSelector } from 'react-redux';
-import { selectAccount } from 'store/selectors/account';
-import { useStatus } from 'hooks/useStatus';
+import { useUserContext } from 'contexts/UserContext';
+import { Loader } from 'components/atoms';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
@@ -15,11 +14,13 @@ export const ProtectedRoute = ({
   to = ROUTES.SIGNIN,
   reverse = false,
 }: ProtectedRouteProps) => {
-  const { status } = useSelector(selectAccount);
+  const { user, loading } = useUserContext({ isProtected: true });
 
-  const { loaded, rejected } = useStatus(status);
+  const isAuthenticated = loading && user;
 
-  const isAuthenticated = loaded && !rejected;
+  if (loading) {
+    return <Loader />;
+  }
 
   if (reverse) return isAuthenticated ? <Navigate to={to} /> : children;
 
