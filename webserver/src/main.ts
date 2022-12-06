@@ -14,6 +14,7 @@ const bootstrap = async () => {
   app.enableCors({
     credentials: true,
     exposedHeaders: ['Set-cookie'],
+    origin: ['http://localhost:3000'],
   });
 
   app.use(cookieParser());

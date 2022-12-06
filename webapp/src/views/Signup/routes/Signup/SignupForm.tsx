@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Signup } from 'apollo/mutations/Signup';
 import { EmailExist } from 'apollo/query';
 import { Button, Loader, Spacer } from 'components/atoms';
+import { useUserContext } from 'contexts/UserContext';
 import { showErrorToast } from 'helpers/showToast';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { useCallback, useState } from 'react';
@@ -35,6 +36,8 @@ const SignupStateMachine = new StateMachine<FormStates, FormActions>(
 
 export const SignupForm = () => {
   const { t } = useTranslation();
+
+  const { getUser } = useUserContext();
 
   const [token, setToken] = useState<string>('');
   const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
@@ -73,7 +76,9 @@ export const SignupForm = () => {
   });
 
   const [signup] = useMutation<SignupMutation, SignupMutationVariables>(Signup, {
-    onCompleted: () => {
+    onCompleted: async () => {
+      await getUser();
+
       navigate(ROUTES.INTRODUCTION);
     },
     onError: () => {

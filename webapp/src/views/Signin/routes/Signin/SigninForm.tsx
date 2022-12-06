@@ -17,6 +17,7 @@ import {
   SigninMutation,
   SigninMutationVariables,
 } from '__generated__/graphql';
+import { useUserContext } from 'contexts/UserContext';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -33,6 +34,8 @@ const SigninStateMachine = new StateMachine<FormStates, FormActions>(
 
 export const SigninForm = () => {
   const { t } = useTranslation();
+
+  const { getUser } = useUserContext();
 
   const [token, setToken] = useState<string>('');
   const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
@@ -69,7 +72,9 @@ export const SigninForm = () => {
   });
 
   const [signin] = useMutation<SigninMutation, SigninMutationVariables>(Signin, {
-    onCompleted: () => {
+    onCompleted: async () => {
+      await getUser();
+
       navigate(ROUTES.DASHBOARD.HOME);
     },
     onError: error => {
