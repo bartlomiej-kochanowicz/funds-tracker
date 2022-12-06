@@ -10,9 +10,13 @@ import { useInput } from 'hooks/useInput';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import { ROUTES } from 'routes/paths';
 import { EmailExist } from 'apollo/query';
-import { Email, EmailInput, SigninInput, User } from '__generated__/graphql';
 import { Signin } from 'apollo/mutations';
-import { Variables } from 'types/service.type';
+import {
+  EmailExistQuery,
+  EmailExistQueryVariables,
+  SigninMutation,
+  SigninMutationVariables,
+} from '__generated__/graphql';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -51,9 +55,9 @@ export const SigninForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.password))),
   });
 
-  const [checkEmail] = useLazyQuery<Email, Variables<EmailInput>>(EmailExist, {
+  const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EmailExist, {
     onCompleted: data => {
-      if (data.exist) {
+      if (data.emailExist.exist) {
         updateState(actions.CHANGE_TO_PASSWORD);
       } else {
         setError('userEmail', {
@@ -64,7 +68,7 @@ export const SigninForm = () => {
     },
   });
 
-  const [signin] = useMutation<User, Variables<SigninInput>>(Signin, {
+  const [signin] = useMutation<SigninMutation, SigninMutationVariables>(Signin, {
     onCompleted: () => {
       navigate(ROUTES.DASHBOARD.HOME);
     },
@@ -77,7 +81,7 @@ export const SigninForm = () => {
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.email)) {
-      await checkEmail({ variables: { data: { email: userEmail, token } } });
+      await emailExist({ variables: { data: { email: userEmail, token } } });
     }
 
     if (compareState(states.password)) {

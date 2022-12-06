@@ -11,8 +11,12 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { Variables } from 'types/service.type';
-import { Email, EmailInput, SignupInput, User } from '__generated__/graphql';
+import {
+  EmailExistQuery,
+  EmailExistQueryVariables,
+  SignupMutation,
+  SignupMutationVariables,
+} from '__generated__/graphql';
 import { NameAndEmail } from './components/NameAndEmail';
 import { Passwords } from './components/Passwords';
 import { validationSchema } from './Signup.schema';
@@ -58,9 +62,9 @@ export const SignupForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.passwords))),
   });
 
-  const [checkEmail] = useLazyQuery<Email, Variables<EmailInput>>(EmailExist, {
+  const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EmailExist, {
     onCompleted: data => {
-      if (data.exist) {
+      if (data.emailExist.exist) {
         setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
       } else {
         updateState(actions.CHANGE_TO_PASSWORDS);
@@ -68,7 +72,7 @@ export const SignupForm = () => {
     },
   });
 
-  const [signup] = useMutation<User, Variables<SignupInput>>(Signup, {
+  const [signup] = useMutation<SignupMutation, SignupMutationVariables>(Signup, {
     onCompleted: () => {
       navigate(ROUTES.INTRODUCTION);
     },
@@ -85,7 +89,7 @@ export const SignupForm = () => {
 
   const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.nameAndEmail)) {
-      checkEmail({ variables: { data: { email: userEmail, token } } });
+      emailExist({ variables: { data: { email: userEmail, token } } });
     }
 
     if (compareState(states.passwords)) {
