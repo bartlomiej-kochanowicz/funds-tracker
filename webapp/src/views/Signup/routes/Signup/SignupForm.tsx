@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
+import { Variables } from 'types/service.type';
 import { Email, EmailInput, SignupInput, User } from '__generated__/graphql';
 import { NameAndEmail } from './components/NameAndEmail';
 import { Passwords } from './components/Passwords';
@@ -57,41 +58,40 @@ export const SignupForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.passwords))),
   });
 
-  const [checkEmail, { data: checkEmailData }] = useLazyQuery<Email, EmailInput>(EmailExist);
+  const [checkEmail] = useLazyQuery<Email, Variables<EmailInput>>(EmailExist, {
+    onCompleted: data => {
+      if (data.exist) {
+        setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
+      } else {
+        updateState(actions.CHANGE_TO_PASSWORDS);
+      }
+    },
+  });
 
-  if (checkEmailData) {
-    if (checkEmailData.exist) {
-      setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
-    } else {
-      updateState(actions.CHANGE_TO_PASSWORDS);
-    }
-  }
-
-  const [signup, { data: singupData, error: signupError }] = useMutation<User, SignupInput>(Signup);
-
-  if (singupData) {
-    navigate(ROUTES.INTRODUCTION);
-  }
-
-  if (signupError) {
-    setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
-    setError('userPasswordConfirmation', {
-      type: 'custom',
-      message: '',
-    });
-  }
+  const [signup] = useMutation<User, Variables<SignupInput>>(Signup, {
+    onCompleted: () => {
+      navigate(ROUTES.INTRODUCTION);
+    },
+    onError: () => {
+      setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
+      setError('userPasswordConfirmation', {
+        type: 'custom',
+        message: '',
+      });
+    },
+  });
 
   const onVerify = useCallback(setToken, [setToken]);
 
   const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.nameAndEmail)) {
-      checkEmail({ variables: { email: userEmail, token } });
+      checkEmail({ variables: { data: { email: userEmail, token } } });
     }
 
     if (compareState(states.passwords)) {
       try {
         await signup({
-          variables: { name: userName, email: userEmail, password: userPassword, token },
+          variables: { data: { name: userName, email: userEmail, password: userPassword, token } },
         });
       } catch {
         showErrorToast(t('service.unknown_error'));

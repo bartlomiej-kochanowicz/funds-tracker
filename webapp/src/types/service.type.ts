@@ -5,3 +5,7 @@ export type ErrorResponse = {
 };
 
 export type RequestState = 'IDLE' | 'PENDING' | 'FULFILLED' | 'REJECTED';
+
+export interface Variables<T> {
+  data: T;
+}
