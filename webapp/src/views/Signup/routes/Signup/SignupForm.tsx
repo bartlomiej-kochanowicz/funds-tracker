@@ -1,4 +1,7 @@
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Signup } from 'apollo/mutations/Signup';
+import { EmailExist } from 'apollo/query';
 import { Button, Loader, Spacer } from 'components/atoms';
 import { showErrorToast } from 'helpers/showToast';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
@@ -8,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
+import { Email, EmailInput, SignupInput, User } from '__generated__/graphql';
 import { NameAndEmail } from './components/NameAndEmail';
 import { Passwords } from './components/Passwords';
 import { validationSchema } from './Signup.schema';
@@ -53,44 +57,42 @@ export const SignupForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.passwords))),
   });
 
-  const { request: checkEmailRequest } = useRequest<CheckEmailProps, CheckEmailResponse>(
-    checkEmail,
-    {
-      successCallback: ({ data }) => {
-        if (data.exist) {
-          setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
-        } else {
-          updateState(actions.CHANGE_TO_PASSWORDS);
-        }
-      },
-    },
-  );
+  const [checkEmail, { data: checkEmailData }] = useLazyQuery<Email, EmailInput>(EmailExist);
 
-  const { request: signuplRequest } = useRequest<SignupProps, undefined>(signup, {
-    successCallback: async () => {
-      await dispatch(accountThunk());
+  if (checkEmailData) {
+    if (checkEmailData.exist) {
+      setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
+    } else {
+      updateState(actions.CHANGE_TO_PASSWORDS);
+    }
+  }
 
-      navigate(ROUTES.INTRODUCTION);
-    },
-    failureCallback: () => {
-      setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
-      setError('userPasswordConfirmation', {
-        type: 'custom',
-        message: '',
-      });
-    },
-  });
+  const [signup, { data: singupData, error: signupError }] = useMutation<User, SignupInput>(Signup);
+
+  if (singupData) {
+    navigate(ROUTES.INTRODUCTION);
+  }
+
+  if (signupError) {
+    setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
+    setError('userPasswordConfirmation', {
+      type: 'custom',
+      message: '',
+    });
+  }
 
   const onVerify = useCallback(setToken, [setToken]);
 
   const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.nameAndEmail)) {
-      checkEmailRequest({ userEmail, token });
+      checkEmail({ variables: { email: userEmail, token } });
     }
 
     if (compareState(states.passwords)) {
       try {
-        await signuplRequest({ userName, userEmail, userPassword, token });
+        await signup({
+          variables: { name: userName, email: userEmail, password: userPassword, token },
+        });
       } catch {
         showErrorToast(t('service.unknown_error'));
       }

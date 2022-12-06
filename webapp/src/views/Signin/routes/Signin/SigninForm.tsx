@@ -10,7 +10,7 @@ import { useInput } from 'hooks/useInput';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import { ROUTES } from 'routes/paths';
 import { EmailExist } from 'apollo/query';
-import { Email, EmailInput } from '__generated__/graphql';
+import { Email, EmailInput, SigninInput, User } from '__generated__/graphql';
 import { Signin } from 'apollo/mutations';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
@@ -63,7 +63,7 @@ export const SigninForm = () => {
     }
   }
 
-  const [signin, { data: signinData, error: signinError }] = useMutation(Signin);
+  const [signin, { data: signinData, error: signinError }] = useMutation<User, SigninInput>(Signin);
 
   if (signinData) {
     navigate(ROUTES.DASHBOARD.HOME);
