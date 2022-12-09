@@ -20,7 +20,7 @@ export const Profile = () => {
         fontWeight="700"
         fontSize="1.5"
       >
-        {t('common.hi')}, {data.name}!
+        {t('common.hi')}, {user.name}!
       </Text>
 
       <Spreader spread="tiny" />

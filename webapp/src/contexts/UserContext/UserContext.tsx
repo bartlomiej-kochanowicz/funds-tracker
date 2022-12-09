@@ -1,21 +1,25 @@
-import { useLazyQuery } from '@apollo/client';
+import { LazyQueryExecFunction, OperationVariables, useLazyQuery } from '@apollo/client';
 import { GET_USER } from 'apollo/query';
 import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
 import { createContext, FC, ReactNode, useContext } from 'react';
 import { GetUserQuery } from '__generated__/graphql';
 
-type UserContextType = ReturnType<typeof useUser>;
+type UserContextType = {
+  loading: boolean;
+  user: GetUserQuery['user'];
+  getUser: LazyQueryExecFunction<GetUserQuery, OperationVariables>;
+};
 
 const UserContext = createContext<UserContextType | null>(null);
 
-const useUser = () => {
+const useUser = (): UserContextType => {
   const [getUser, { loading, data }] = useLazyQuery<GetUserQuery>(GET_USER);
 
   if (isUserLoggedIn && !loading && !data) {
     getUser();
   }
 
-  return { loading, user: data?.user ?? null, getUser };
+  return { loading, user: data?.user ?? null, getUser } as UserContextType;
 };
 
 type ProviderProps = {
