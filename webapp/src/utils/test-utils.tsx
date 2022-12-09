@@ -6,7 +6,7 @@ import { MockedProvider, MockedResponse } from '@apollo/client/testing';
 import { theme } from 'styles/theme';
 import { ColorThemeProvider } from 'contexts/ColorThemeContext';
 import { UserContextProvider } from 'contexts/UserContext';
-import { GET_USER } from 'apollo/query';
+import { GET_USER } from 'graphql/query';
 import i18n from './i18nForTests';
 
 export const userMock = {
