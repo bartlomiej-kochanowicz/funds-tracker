@@ -1,18 +1,10 @@
+import { SIGNIN } from 'apollo/mutations';
+import { EMAIL_EXIST } from 'apollo/query';
+import { GraphQLError } from 'graphql';
 import { useEffect } from 'react';
 import { waitFor } from 'utils/test-utils';
-import { checkEmail } from 'services/auth/checkEmail';
-import { signin } from 'services/auth/signin';
-import { getAccount } from 'services/auth/account';
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
-
-jest.mock('services/auth/checkEmail', () => ({
-  checkEmail: jest.fn(),
-}));
-
-jest.mock('services/auth/signin', () => ({ signin: jest.fn() }));
-
-jest.mock('services/auth/account', () => ({ getAccount: jest.fn() }));
 
 jest.mock('react-google-recaptcha-v3', () => ({
   GoogleReCaptcha: ({
@@ -38,45 +30,56 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Signin tests', () => {
-  const pass = {
-    checkEmail: () => (checkEmail as jest.Mock).mockResolvedValue({ data: { exist: true } }),
-    getAccount: () =>
-      (getAccount as jest.Mock).mockResolvedValue({
-        data: { uuid: '', email: '', createdAt: new Date('07-12-2000').toString() },
-      }),
-  };
-
-  const fail = {
-    checkEmail: () => (checkEmail as jest.Mock).mockResolvedValue({ data: { exist: false } }),
-    signin: () =>
-      (signin as jest.Mock).mockRejectedValue({
-        response: { data: { message: 'Wrong password' } },
-      }),
-    getAccount: () =>
-      (getAccount as jest.Mock).mockResolvedValue({
-        data: { uuid: '', email: '', createdAt: new Date('07-12-2000').toString() },
-      }),
-  };
-
-  afterEach(() => {
-    (checkEmail as jest.Mock).mockReset();
-    (signin as jest.Mock).mockReset();
-    (getAccount as jest.Mock).mockReset();
-  });
-
   it('sign in properly', async () => {
-    pass.checkEmail();
-    pass.getAccount();
-
     // given
-    const signinPO = SigninPO.render(Signin, mockNavigate);
+    const mocks = [
+      {
+        request: {
+          query: EMAIL_EXIST,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            emailExist: {
+              exist: true,
+            },
+          },
+        },
+      },
+      {
+        request: {
+          query: SIGNIN,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              password: 'TestPassword1122',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            signinLocal: {
+              uuid: '78c3faea-0a04-4949-90b8-7589b6572d22',
+              name: 'test123',
+            },
+          },
+        },
+      },
+    ];
+
+    const signinPO = SigninPO.render(Signin, mocks);
 
     // when
     await signinPO.setEmail('test@email.xyz');
 
     // then
     signinPO.expectButtonHasProperText('Next');
-
     // when
     await signinPO.submitForm();
 
@@ -89,12 +92,12 @@ describe('Signin tests', () => {
     await signinPO.submitForm();
 
     // then
-    await waitFor(() => signinPO.expectSuccessCallback.toHaveBeenCalled());
+    await waitFor(() => signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalled());
   });
 
   it('shows error when email is invalid', async () => {
     // given
-    const signinPO = SigninPO.render(Signin, mockNavigate);
+    const signinPO = SigninPO.render(Signin);
 
     // when
     await signinPO.setEmail('test');
@@ -105,10 +108,29 @@ describe('Signin tests', () => {
   });
 
   it('shows error when email does not exist', async () => {
-    fail.checkEmail();
-
     // given
-    const signinPO = SigninPO.render(Signin, mockNavigate);
+    const mocks = [
+      {
+        request: {
+          query: EMAIL_EXIST,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            emailExist: {
+              exist: false,
+            },
+          },
+        },
+      },
+    ];
+
+    const signinPO = SigninPO.render(Signin, mocks);
 
     // when
     await signinPO.setEmail('test@email.xyz');
@@ -120,11 +142,44 @@ describe('Signin tests', () => {
   });
 
   it('shows error when password is wrond', async () => {
-    pass.checkEmail();
-    fail.signin();
-
     // given
-    const signinPO = SigninPO.render(Signin, mockNavigate);
+    const mocks = [
+      {
+        request: {
+          query: EMAIL_EXIST,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            emailExist: {
+              exist: true,
+            },
+          },
+        },
+      },
+      {
+        request: {
+          query: SIGNIN,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              password: 'TestPassword1122',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          errors: [new GraphQLError('Wrong password')],
+        },
+      },
+    ];
+
+    const signinPO = SigninPO.render(Signin, mocks);
 
     // when
     await signinPO.setEmail('test@email.xyz');

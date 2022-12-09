@@ -23,6 +23,7 @@
       }
     }
   },
+  "ignorePatterns": ["vite.config.ts", "src/__generated__/*.ts"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/react-in-jsx-scope": "off",
@@ -37,7 +38,9 @@
           "**/*.test.*",
           "**/*.po.*",
           "**/*/test-utils.tsx",
-          "**/*/config/tests/*"
+          "**/*/config/tests/*",
+          "**/__generated__/*",
+          "**/src/config/codegen.ts"
         ],
         "peerDependencies": true
       }
@@ -64,6 +67,7 @@
     "no-param-reassign": "off",
     "no-plusplus": "off",
     "no-await-in-loop": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "react/require-default-props": "off"
   }
 }

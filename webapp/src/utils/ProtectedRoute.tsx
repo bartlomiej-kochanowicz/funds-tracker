@@ -1,34 +1,23 @@
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { useSelector } from 'react-redux';
-import { selectAccount } from 'store/selectors/account';
-import { useStatus } from 'hooks/useStatus';
+import { useUserContext } from 'contexts/UserContext';
+import { Loader } from 'components/atoms';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
   to?: string;
-  reverse?: boolean;
 }
 
-export const ProtectedRoute = ({
-  children,
-  to = ROUTES.SIGNIN,
-  reverse = false,
-}: ProtectedRouteProps) => {
-  const { status } = useSelector(selectAccount);
+export const ProtectedRoute = ({ children, to = ROUTES.SIGNIN }: ProtectedRouteProps) => {
+  const { user, loading } = useUserContext();
 
-  const { loaded, rejected } = useStatus(status);
+  const isAuthenticated = !loading && user;
 
-  const isAuthenticated = loaded && !rejected;
-
-  if (reverse) return isAuthenticated ? <Navigate to={to} /> : children;
+  if (loading || !user) {
+    return <Loader />;
+  }
 
   return isAuthenticated ? children : <Navigate to={to} />;
 };
 
 ProtectedRoute.displayName = 'ProtectedRoute';
-
-ProtectedRoute.defaultProps = {
-  to: ROUTES.SIGNIN,
-  reverse: false,
-};

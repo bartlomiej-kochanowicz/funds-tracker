@@ -19,6 +19,10 @@ import { PortfoliosModule } from './portfolios/portfolios.module';
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       context: ({ req, res }) => ({ req, res }),
+      cors: {
+        origin: 'http://localhost:3000',
+        credentials: true,
+      },
     }),
     PrismaModule,
     AuthModule,

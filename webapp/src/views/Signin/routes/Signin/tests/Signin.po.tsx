@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { MockedResponse } from '@apollo/client/testing';
 import { findByText, getByTestId, queryByTestId, render, waitFor } from 'utils/test-utils';
 import { unsafeCast } from 'utils/unsafeCast';
 import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup';
@@ -28,7 +29,7 @@ export class SigninPO {
     };
   }
 
-  protected constructor(protected container: HTMLElement, protected mockNavigate: jest.Mock) {
+  protected constructor(protected container: HTMLElement) {
     this.elements = this.elementsByDataID(container);
     this.user = userEvent.setup();
   }
@@ -56,21 +57,22 @@ export class SigninPO {
     });
   }
 
-  get expectSuccessCallback() {
-    return expect(this.mockNavigate);
+  expectSuccessCallback(callback: jest.Mock) {
+    return expect(callback);
   }
 
   async expectTextDisplayed(text: string) {
     return findByText(this.container, text, { exact: false });
   }
 
-  static render(SigninComponent: FC, mockNavigate: jest.Mock) {
+  static render(SigninComponent: FC, mocks?: readonly MockedResponse<Record<string, any>>[]) {
     const { container } = render(
       <MemoryRouter>
         <SigninComponent />
       </MemoryRouter>,
+      { mocks },
     );
 
-    return new SigninPO(unsafeCast.ElementToHTMLElement(container), mockNavigate);
+    return new SigninPO(unsafeCast.ElementToHTMLElement(container));
   }
 }

@@ -1,19 +1,23 @@
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { SIGNUP } from 'apollo/mutations/Signup';
+import { EMAIL_EXIST } from 'apollo/query';
 import { Button, Loader, Spacer } from 'components/atoms';
+import { useUserContext } from 'contexts/UserContext';
 import { showErrorToast } from 'helpers/showToast';
-import useRequest from 'hooks/useRequest';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { useCallback, useState } from 'react';
 import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { checkEmail, CheckEmailProps, CheckEmailResponse } from 'services/auth/checkEmail';
-import { signup, SignupProps } from 'services/auth/signup';
-import { AppDispatch } from 'store';
-import { accountThunk } from 'store/thunks/account/accountThunk';
+import {
+  EmailExistQuery,
+  EmailExistQueryVariables,
+  SignupMutation,
+  SignupMutationVariables,
+} from '__generated__/graphql';
 import { NameAndEmail } from './components/NameAndEmail';
 import { Passwords } from './components/Passwords';
 import { validationSchema } from './Signup.schema';
@@ -33,14 +37,14 @@ const SignupStateMachine = new StateMachine<FormStates, FormActions>(
 export const SignupForm = () => {
   const { t } = useTranslation();
 
+  const { getUser } = useUserContext();
+
   const [token, setToken] = useState<string>('');
   const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
 
   const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
     SignupStateMachine,
   );
-
-  const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
 
@@ -61,26 +65,23 @@ export const SignupForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.passwords))),
   });
 
-  const { request: checkEmailRequest } = useRequest<CheckEmailProps, CheckEmailResponse>(
-    checkEmail,
-    {
-      successCallback: ({ data }) => {
-        if (data.exist) {
-          setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
-        } else {
-          updateState(actions.CHANGE_TO_PASSWORDS);
-        }
-      },
+  const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
+    onCompleted: data => {
+      if (data.emailExist.exist) {
+        setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
+      } else {
+        updateState(actions.CHANGE_TO_PASSWORDS);
+      }
     },
-  );
+  });
 
-  const { request: signuplRequest } = useRequest<SignupProps, undefined>(signup, {
-    successCallback: async () => {
-      await dispatch(accountThunk());
+  const [signup] = useMutation<SignupMutation, SignupMutationVariables>(SIGNUP, {
+    onCompleted: async () => {
+      await getUser();
 
       navigate(ROUTES.INTRODUCTION);
     },
-    failureCallback: () => {
+    onError: () => {
       setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
       setError('userPasswordConfirmation', {
         type: 'custom',
@@ -93,12 +94,14 @@ export const SignupForm = () => {
 
   const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
     if (compareState(states.nameAndEmail)) {
-      checkEmailRequest({ userEmail, token });
+      emailExist({ variables: { data: { email: userEmail, token } } });
     }
 
     if (compareState(states.passwords)) {
       try {
-        await signuplRequest({ userName, userEmail, userPassword, token });
+        await signup({
+          variables: { data: { name: userName, email: userEmail, password: userPassword, token } },
+        });
       } catch {
         showErrorToast(t('service.unknown_error'));
       }

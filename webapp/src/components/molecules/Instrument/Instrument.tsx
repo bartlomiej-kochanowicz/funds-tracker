@@ -1,10 +1,17 @@
+import { FC } from 'react';
 import { Column, Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
 import { InstrumentSymbol, Spreader, Text } from 'components/atoms';
-import { Instrument as InstrumentProps } from 'services/model-portfolio/instruments';
+import type { InstrumentType } from 'types/instrument.type';
 import { Wrapper } from './Instrument.styles';
 
-export const Instrument = ({ name, type, percentage }: InstrumentProps) => {
+interface InstrumentProps {
+  name: string;
+  type: InstrumentType;
+  percentage: number;
+}
+
+export const Instrument: FC<InstrumentProps> = ({ name, type, percentage }) => {
   const { t } = useTranslation();
 
   return (
