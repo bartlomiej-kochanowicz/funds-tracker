@@ -1,13 +1,9 @@
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/client';
 import { RetryLink } from '@apollo/client/link/retry';
 import { API_URL, IS_DEVELOPMENT } from 'config/env';
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: IS_DEVELOPMENT ? API_URL : '/api/graphql',
-    credentials: 'include',
-  }).concat(
+  link: ApolloLink.from([
     new RetryLink({
       delay: {
         initial: 300,
@@ -19,7 +15,13 @@ const client = new ApolloClient({
         retryIf: error => Boolean(error),
       },
     }),
-  ),
+    new HttpLink({
+      uri: IS_DEVELOPMENT ? API_URL : '/api/graphql',
+      credentials: 'include',
+    }),
+  ]),
+  cache: new InMemoryCache(),
+  connectToDevTools: IS_DEVELOPMENT,
 });
 
 client.onResetStore(async () => {
