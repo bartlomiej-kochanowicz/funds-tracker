@@ -1,5 +1,6 @@
 import { SIGNIN } from 'apollo/mutations';
 import { EMAIL_EXIST } from 'apollo/query';
+import { GraphQLError } from 'graphql';
 import { useEffect } from 'react';
 import { screen, waitFor } from 'utils/test-utils';
 import { Signin } from '../Signin';
@@ -29,7 +30,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Signin tests', () => {
-  it.only('sign in properly', async () => {
+  it('sign in properly', async () => {
     // given
     const mocks = [
       {
@@ -107,10 +108,29 @@ describe('Signin tests', () => {
   });
 
   it('shows error when email does not exist', async () => {
-    // fail.checkEmail();
-
     // given
-    const signinPO = SigninPO.render(Signin);
+    const mocks = [
+      {
+        request: {
+          query: EMAIL_EXIST,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            emailExist: {
+              exist: false,
+            },
+          },
+        },
+      },
+    ];
+
+    const signinPO = SigninPO.render(Signin, mocks);
 
     // when
     await signinPO.setEmail('test@email.xyz');
@@ -122,11 +142,44 @@ describe('Signin tests', () => {
   });
 
   it('shows error when password is wrond', async () => {
-    // pass.checkEmail();
-    // fail.signin();
-
     // given
-    const signinPO = SigninPO.render(Signin);
+    const mocks = [
+      {
+        request: {
+          query: EMAIL_EXIST,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            emailExist: {
+              exist: true,
+            },
+          },
+        },
+      },
+      {
+        request: {
+          query: SIGNIN,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              password: 'TestPassword1122',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          errors: [new GraphQLError('Wrong password')],
+        },
+      },
+    ];
+
+    const signinPO = SigninPO.render(Signin, mocks);
 
     // when
     await signinPO.setEmail('test@email.xyz');
@@ -147,6 +200,7 @@ describe('Signin tests', () => {
 
     // then
     await signinPO.expectLoaderDisappeared();
+    screen.debug(undefined, Infinity);
     await signinPO.expectTextDisplayed('Wrong password');
   });
 });
