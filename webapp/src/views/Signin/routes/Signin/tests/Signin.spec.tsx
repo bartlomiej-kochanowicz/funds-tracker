@@ -1,6 +1,7 @@
+import { SIGNIN } from 'apollo/mutations';
 import { EMAIL_EXIST } from 'apollo/query';
 import { useEffect } from 'react';
-import { waitFor } from 'utils/test-utils';
+import { screen, waitFor } from 'utils/test-utils';
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
 
@@ -28,14 +29,16 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Signin tests', () => {
-  const mocks = {
-    pass: [
+  it.only('sign in properly', async () => {
+    // given
+    const mocks = [
       {
         request: {
           query: EMAIL_EXIST,
           variables: {
             data: {
               email: 'test@email.xyz',
+              token: 'token',
             },
           },
         },
@@ -47,20 +50,35 @@ describe('Signin tests', () => {
           },
         },
       },
-    ],
-    fail: [],
-  };
+      {
+        request: {
+          query: SIGNIN,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              password: 'TestPassword1122',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            signinLocal: {
+              uuid: '78c3faea-0a04-4949-90b8-7589b6572d22',
+              name: 'test123',
+            },
+          },
+        },
+      },
+    ];
 
-  it.only('sign in properly', async () => {
-    // given
-    const signinPO = SigninPO.render(Signin, mocks.pass);
+    const signinPO = SigninPO.render(Signin, mocks);
 
     // when
     await signinPO.setEmail('test@email.xyz');
 
     // then
     signinPO.expectButtonHasProperText('Next');
-
     // when
     await signinPO.submitForm();
 
