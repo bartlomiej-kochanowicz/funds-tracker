@@ -13,7 +13,7 @@ export const ProtectedRoute = ({ children, to = ROUTES.SIGNIN }: ProtectedRouteP
 
   const isAuthenticated = !loading && user;
 
-  if (loading) {
+  if (loading || !user) {
     return <Loader />;
   }
 

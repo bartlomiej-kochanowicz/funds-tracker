@@ -1,18 +1,8 @@
+import { EMAIL_EXIST } from 'apollo/query';
 import { useEffect } from 'react';
 import { waitFor } from 'utils/test-utils';
-import { checkEmail } from 'services/auth/checkEmail';
-import { signin } from 'services/auth/signin';
-import { getAccount } from 'services/auth/account';
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
-
-jest.mock('services/auth/checkEmail', () => ({
-  checkEmail: jest.fn(),
-}));
-
-jest.mock('services/auth/signin', () => ({ signin: jest.fn() }));
-
-jest.mock('services/auth/account', () => ({ getAccount: jest.fn() }));
 
 jest.mock('react-google-recaptcha-v3', () => ({
   GoogleReCaptcha: ({
@@ -38,38 +28,32 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Signin tests', () => {
-  const pass = {
-    checkEmail: () => (checkEmail as jest.Mock).mockResolvedValue({ data: { exist: true } }),
-    getAccount: () =>
-      (getAccount as jest.Mock).mockResolvedValue({
-        data: { uuid: '', email: '', createdAt: new Date('07-12-2000').toString() },
-      }),
+  const mocks = {
+    pass: [
+      {
+        request: {
+          query: EMAIL_EXIST,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+            },
+          },
+        },
+        result: {
+          data: {
+            emailExist: {
+              exist: true,
+            },
+          },
+        },
+      },
+    ],
+    fail: [],
   };
 
-  const fail = {
-    checkEmail: () => (checkEmail as jest.Mock).mockResolvedValue({ data: { exist: false } }),
-    signin: () =>
-      (signin as jest.Mock).mockRejectedValue({
-        response: { data: { message: 'Wrong password' } },
-      }),
-    getAccount: () =>
-      (getAccount as jest.Mock).mockResolvedValue({
-        data: { uuid: '', email: '', createdAt: new Date('07-12-2000').toString() },
-      }),
-  };
-
-  afterEach(() => {
-    (checkEmail as jest.Mock).mockReset();
-    (signin as jest.Mock).mockReset();
-    (getAccount as jest.Mock).mockReset();
-  });
-
-  it('sign in properly', async () => {
-    pass.checkEmail();
-    pass.getAccount();
-
+  it.only('sign in properly', async () => {
     // given
-    const signinPO = SigninPO.render(Signin, mockNavigate);
+    const signinPO = SigninPO.render(Signin, mocks.pass);
 
     // when
     await signinPO.setEmail('test@email.xyz');
@@ -89,12 +73,12 @@ describe('Signin tests', () => {
     await signinPO.submitForm();
 
     // then
-    await waitFor(() => signinPO.expectSuccessCallback.toHaveBeenCalled());
+    await waitFor(() => signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalled());
   });
 
   it('shows error when email is invalid', async () => {
     // given
-    const signinPO = SigninPO.render(Signin, mockNavigate);
+    const signinPO = SigninPO.render(Signin);
 
     // when
     await signinPO.setEmail('test');
@@ -105,10 +89,10 @@ describe('Signin tests', () => {
   });
 
   it('shows error when email does not exist', async () => {
-    fail.checkEmail();
+    // fail.checkEmail();
 
     // given
-    const signinPO = SigninPO.render(Signin, mockNavigate);
+    const signinPO = SigninPO.render(Signin);
 
     // when
     await signinPO.setEmail('test@email.xyz');
@@ -120,11 +104,11 @@ describe('Signin tests', () => {
   });
 
   it('shows error when password is wrond', async () => {
-    pass.checkEmail();
-    fail.signin();
+    // pass.checkEmail();
+    // fail.signin();
 
     // given
-    const signinPO = SigninPO.render(Signin, mockNavigate);
+    const signinPO = SigninPO.render(Signin);
 
     // when
     await signinPO.setEmail('test@email.xyz');

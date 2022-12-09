@@ -1,7 +1,7 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Signup } from 'apollo/mutations/Signup';
-import { EmailExist } from 'apollo/query';
+import { SIGNUP } from 'apollo/mutations/Signup';
+import { EMAIL_EXIST } from 'apollo/query';
 import { Button, Loader, Spacer } from 'components/atoms';
 import { useUserContext } from 'contexts/UserContext';
 import { showErrorToast } from 'helpers/showToast';
@@ -65,7 +65,7 @@ export const SignupForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.passwords))),
   });
 
-  const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EmailExist, {
+  const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
     onCompleted: data => {
       if (data.emailExist.exist) {
         setError('userEmail', { type: 'custom', message: t('page.signup.email.already_in_use') });
@@ -75,7 +75,7 @@ export const SignupForm = () => {
     },
   });
 
-  const [signup] = useMutation<SignupMutation, SignupMutationVariables>(Signup, {
+  const [signup] = useMutation<SignupMutation, SignupMutationVariables>(SIGNUP, {
     onCompleted: async () => {
       await getUser();
 

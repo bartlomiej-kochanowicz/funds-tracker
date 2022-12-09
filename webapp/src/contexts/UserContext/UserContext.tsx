@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
-import { GetUser } from 'apollo/query';
+import { GET_USER } from 'apollo/query';
 import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
 import { createContext, FC, ReactNode, useContext } from 'react';
 import { GetUserQuery } from '__generated__/graphql';
@@ -9,7 +9,7 @@ type UserContextType = ReturnType<typeof useUser>;
 const UserContext = createContext<UserContextType | null>(null);
 
 const useUser = () => {
-  const [getUser, { loading, data }] = useLazyQuery<GetUserQuery>(GetUser);
+  const [getUser, { loading, data }] = useLazyQuery<GetUserQuery>(GET_USER);
 
   if (isUserLoggedIn && !loading && !data) {
     getUser();

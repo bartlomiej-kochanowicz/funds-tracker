@@ -38,7 +38,9 @@
           "**/*.test.*",
           "**/*.po.*",
           "**/*/test-utils.tsx",
-          "**/*/config/tests/*"
+          "**/*/config/tests/*",
+          "**/__generated__/*",
+          "**/src/config/codegen.ts"
         ],
         "peerDependencies": true
       }

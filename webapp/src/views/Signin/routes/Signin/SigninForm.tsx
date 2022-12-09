@@ -9,8 +9,8 @@ import { Button, Spacer, Input, Loader } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import { ROUTES } from 'routes/paths';
-import { EmailExist } from 'apollo/query';
-import { Signin } from 'apollo/mutations';
+import { EMAIL_EXIST } from 'apollo/query';
+import { SIGNIN } from 'apollo/mutations';
 import {
   EmailExistQuery,
   EmailExistQueryVariables,
@@ -58,7 +58,7 @@ export const SigninForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.password))),
   });
 
-  const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EmailExist, {
+  const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
     onCompleted: data => {
       if (data.emailExist.exist) {
         updateState(actions.CHANGE_TO_PASSWORD);
@@ -71,7 +71,7 @@ export const SigninForm = () => {
     },
   });
 
-  const [signin] = useMutation<SigninMutation, SigninMutationVariables>(Signin, {
+  const [signin] = useMutation<SigninMutation, SigninMutationVariables>(SIGNIN, {
     onCompleted: async () => {
       await getUser();
 
