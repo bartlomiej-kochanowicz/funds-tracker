@@ -12,7 +12,7 @@ interface ProtectedRouteProps {
 export const ProtectedRoute = ({ children, to = ROUTES.SIGNIN }: ProtectedRouteProps) => {
   const { user, loading } = useUserContext();
 
-  const isAuthenticated = !loading && user;
+  const isAuthenticated = Boolean(!loading && user);
 
   if (loading) {
     return (

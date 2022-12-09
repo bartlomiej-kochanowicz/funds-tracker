@@ -4,7 +4,7 @@ import { Menu } from 'components/atoms';
 import { useMutation } from '@apollo/client';
 import { LOGOUT } from 'graphql/mutations';
 import { LogoutMutation } from '__generated__/graphql';
-// import { useUserContext } from 'contexts/UserContext';
+import { useUserContext } from 'contexts/UserContext';
 
 interface DropdownContentProps {
   handleToggle: () => void;
@@ -14,9 +14,11 @@ export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProp
   ({ handleToggle, ...rest }, ref) => {
     const { t } = useTranslation();
 
-    // const { refetch } = useUserContext();
+    const { clearUser: onCompleted } = useUserContext();
 
-    const [logout] = useMutation<LogoutMutation>(LOGOUT);
+    const [logout] = useMutation<LogoutMutation>(LOGOUT, {
+      onCompleted,
+    });
 
     const handleSignOut = async () => {
       await logout();

@@ -22,4 +22,8 @@ const client = new ApolloClient({
   ),
 });
 
+client.onResetStore(async () => {
+  window.location.reload();
+});
+
 export default client;

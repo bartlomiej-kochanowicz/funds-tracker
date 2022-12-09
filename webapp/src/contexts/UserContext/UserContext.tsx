@@ -8,18 +8,23 @@ type UserContextType = {
   loading: boolean;
   user: GetUserQuery['user'];
   getUser: LazyQueryExecFunction<GetUserQuery, OperationVariables>;
+  clearUser: () => void;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
 
 const useUser = (): UserContextType => {
-  const [getUser, { loading, data, refetch }] = useLazyQuery<GetUserQuery>(GET_USER);
+  const [getUser, { loading, data, client }] = useLazyQuery<GetUserQuery>(GET_USER);
 
   if (isUserLoggedIn && !loading && !data) {
     getUser();
   }
 
-  return { loading, user: data?.user ?? null, getUser, refetch } as UserContextType;
+  const clearUser = () => {
+    client.resetStore();
+  };
+
+  return { loading, user: data?.user ?? null, getUser, clearUser } as UserContextType;
 };
 
 type ProviderProps = {
