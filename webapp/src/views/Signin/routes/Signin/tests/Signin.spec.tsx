@@ -2,7 +2,7 @@ import { SIGNIN } from 'apollo/mutations';
 import { EMAIL_EXIST } from 'apollo/query';
 import { GraphQLError } from 'graphql';
 import { useEffect } from 'react';
-import { screen, waitFor } from 'utils/test-utils';
+import { waitFor } from 'utils/test-utils';
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
 
@@ -200,7 +200,6 @@ describe('Signin tests', () => {
 
     // then
     await signinPO.expectLoaderDisappeared();
-    screen.debug(undefined, Infinity);
     await signinPO.expectTextDisplayed('Wrong password');
   });
 });
