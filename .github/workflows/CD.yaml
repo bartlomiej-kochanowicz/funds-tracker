@@ -7,22 +7,5 @@ jobs:
   merged_to_master:
     name: CD-app
     runs-on: self-hosted
-    env:
-      WEBSERVER_PORT: ${{ secrets.WEBSERVER_PORT }}
-      AT_SECRET: ${{ secrets.AT_SECRET }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      RT_SECRET: ${{ secrets.RT_SECRET }}
-      VITE_API_URL: ${{ secrets.VITE_API_URL }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-          cache: "pnpm"
-      - name: Setup
-        uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 7.x
-      - run: pnpm install:deployment
-      - run: pnpm prisma:generate
-      - run: pm2 restart webserver
+      - run: docker compose up -f docker-compose.production.yml -d
