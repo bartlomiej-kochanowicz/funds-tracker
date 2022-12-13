@@ -1,7 +1,7 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SIGNUP } from 'apollo/mutations/Signup';
-import { EMAIL_EXIST } from 'apollo/query';
+import { SIGNUP } from 'graphql/mutations';
+import { EMAIL_EXIST } from 'graphql/query';
 import { Button, Loader, Spacer } from 'components/atoms';
 import { useUserContext } from 'contexts/UserContext';
 import { showErrorToast } from 'helpers/showToast';

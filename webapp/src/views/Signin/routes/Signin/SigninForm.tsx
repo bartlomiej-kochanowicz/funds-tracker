@@ -9,8 +9,8 @@ import { Button, Spacer, Input, Loader } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import { ROUTES } from 'routes/paths';
-import { EMAIL_EXIST } from 'apollo/query';
-import { SIGNIN } from 'apollo/mutations';
+import { EMAIL_EXIST } from 'graphql/query';
+import { SIGNIN } from 'graphql/mutations';
 import {
   EmailExistQuery,
   EmailExistQueryVariables,

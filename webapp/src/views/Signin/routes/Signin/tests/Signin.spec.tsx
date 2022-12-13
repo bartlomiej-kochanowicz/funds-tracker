@@ -1,5 +1,5 @@
-import { SIGNIN } from 'apollo/mutations';
-import { EMAIL_EXIST } from 'apollo/query';
+import { SIGNIN } from 'graphql/mutations';
+import { EMAIL_EXIST } from 'graphql/query';
 import { GraphQLError } from 'graphql';
 import { useEffect } from 'react';
 import { waitFor } from 'utils/test-utils';

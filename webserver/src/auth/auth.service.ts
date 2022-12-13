@@ -246,7 +246,7 @@ export class AuthService {
       ),
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 60 * 24 * 7, secret: this.config.get('RT_SECRET') }, // 7 days
+        { expiresIn: 60 * 60 * 24 * 30, secret: this.config.get('RT_SECRET') }, // 30 days
       ),
     ]);
 
