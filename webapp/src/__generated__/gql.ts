@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation Logout {\n    logout {\n      success\n    }\n  }\n": types.LogoutDocument,
+    "\n  mutation RefreshToken {\n    refreshToken {\n      success\n    }\n  }\n": types.RefreshTokenDocument,
     "\n  mutation Signin($data: SigninInput!) {\n    signinLocal(data: $data) {\n      uuid\n      name\n    }\n  }\n": types.SigninDocument,
     "\n  mutation Signup($data: SignupInput!) {\n    signupLocal(data: $data) {\n      uuid\n      name\n    }\n  }\n": types.SignupDocument,
     "\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n": types.EmailExistDocument,
@@ -24,6 +25,10 @@ const documents = {
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation Logout {\n    logout {\n      success\n    }\n  }\n"): (typeof documents)["\n  mutation Logout {\n    logout {\n      success\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation RefreshToken {\n    refreshToken {\n      success\n    }\n  }\n"): (typeof documents)["\n  mutation RefreshToken {\n    refreshToken {\n      success\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
