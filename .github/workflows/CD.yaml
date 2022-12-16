@@ -8,4 +8,4 @@ jobs:
     name: CD-app
     runs-on: self-hosted
     steps:
-      - run: docker compose up -f docker-compose.production.yml -d
+      - run: docker compose -f docker-compose.production.yml up -d
