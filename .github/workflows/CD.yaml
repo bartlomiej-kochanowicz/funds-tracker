@@ -7,6 +7,14 @@ jobs:
   merged_to_master:
     name: CD-app
     runs-on: self-hosted
+    env:
+      WEBSERVER_PORT: ${{ secrets.WEBSERVER_PORT }}
+      AT_SECRET: ${{ secrets.AT_SECRET }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      RT_SECRET: ${{ secrets.RT_SECRET }}
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
     steps:
       - uses: actions/checkout@v3
-      - run: echo "Hello World"
+      - run: pnpm install:deployment
+      - run: pnpm prisma:generate
+      - run: pnpm build
