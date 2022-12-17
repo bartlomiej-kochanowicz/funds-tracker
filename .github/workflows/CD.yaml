@@ -14,3 +14,4 @@ jobs:
       - run: pnpm install:deployment
       - run: pnpm prisma:generate
       - run: pnpm build
+      - run: pm2 restart webserver
