@@ -1,6 +1,8 @@
 import { Logout } from 'auth/entities';
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
+import * as sinon from 'sinon';
+import * as bcrypt from 'bcrypt';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
@@ -22,7 +24,11 @@ describe('logout', () => {
 
     beforeAll(async () => {
       const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
-        .set('Cookie', `accessToken=${integrationTestManager.getAccessToken()}`)
+        .set(
+          'Cookie',
+          `accessToken=${integrationTestManager.getAccessToken()}; refreshToken=${integrationTestManager.getRefreshToken()}`,
+        )
+        .set('user-agent', 'main-user-session')
         .mutate(
           gql`
             mutation Logout {
@@ -44,16 +50,22 @@ describe('logout', () => {
     });
 
     it('should remove refresh token from database', async () => {
+      const refreshToken = await integrationTestManager.getRefreshToken();
+
       const user = await integrationTestManager.getPrismaService().user.findUnique({
         where: {
           email: testUser.email,
         },
         select: {
-          rtHash: true,
+          sessions: true,
         },
       });
 
-      expect(user.rtHash).toBeNull();
+      const sessions = user.sessions.find(
+        async ({ rtHash }) => await bcrypt.compare(refreshToken, rtHash),
+      );
+
+      expect(sessions).toBe(undefined);
     });
   });
 
@@ -61,18 +73,32 @@ describe('logout', () => {
     let logout: Logout;
 
     beforeAll(async () => {
-      const { uuid } = await integrationTestManager.getAuthService().signupLocal(logoutStub);
+      const res = sinon.stub().returns({
+        req: {
+          headers: {
+            'user-agent': 'logout-user-session',
+          },
+        },
+        cookie: sinon.stub(),
+      });
 
-      const { accessToken } = await integrationTestManager
+      const { uuid } = await integrationTestManager.getAuthService().signupLocal(logoutStub, res());
+
+      const { accessToken, refreshToken } = await integrationTestManager
         .getAuthService()
-        .signinLocalForTests(uuid);
+        .signinLocalForTests(uuid, '::ffff:127.0.0.1-logout-user-session');
+
+      await integrationTestManager
+        .getPrismaService()
+        .session.deleteMany({ where: { userUuid: uuid } });
 
       await integrationTestManager
         .getPrismaService()
         .user.delete({ where: { email: logoutStub.email } });
 
       const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
-        .set('Cookie', `accessToken=${accessToken}`)
+        .set('Cookie', `accessToken=${accessToken}; refreshToken=${refreshToken}`)
+        .set('user-agent', 'logout-user-session')
         .mutate(
           gql`
             mutation Logout {

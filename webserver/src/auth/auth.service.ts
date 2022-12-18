@@ -22,7 +22,7 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async signupLocal(signupInput: SignupInput, res?: Response): Promise<Omit<User, 'sessions'>> {
+  async signupLocal(signupInput: SignupInput, res: Response): Promise<Omit<User, 'sessions'>> {
     const { email, password, name, token } = signupInput;
 
     const isHuman = await this.validateHuman(token);
@@ -57,23 +57,21 @@ export class AuthService {
 
     await this.addSession(user.uuid, refreshToken, this.genereteIpName(res));
 
-    if (res?.cookie) {
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
+    res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+      maxAge: EXPIRES['15MIN'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
 
-      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['30days'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
+    res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+      maxAge: EXPIRES['30days'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
 
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['30days'],
-      });
-    }
+    res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+      maxAge: EXPIRES['30days'],
+    });
 
     return user;
   }
@@ -127,12 +125,15 @@ export class AuthService {
     return user;
   }
 
-  async signinLocalForTests(uuid: string): Promise<{ accessToken: string; refreshToken: string }> {
+  async signinLocalForTests(
+    uuid: string,
+    sessionName: string,
+  ): Promise<{ accessToken: string; refreshToken: string }> {
     const user = await this.prisma.user.findUnique({ where: { uuid } });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.addSession(user.uuid, refreshToken, 'test-session');
+    await this.addSession(user.uuid, refreshToken, sessionName);
 
     return {
       accessToken,

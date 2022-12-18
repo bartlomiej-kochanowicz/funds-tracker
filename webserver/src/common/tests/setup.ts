@@ -4,7 +4,6 @@ import { PrismaService } from 'prisma/prisma.service';
 import { AppModule } from 'app.module';
 import { testUser } from 'common/tests/stubs/testUser.stub';
 import { AuthService } from 'auth/auth.service';
-import { Response } from 'express';
 import * as sinon from 'sinon';
 
 export default async () => {
@@ -24,10 +23,11 @@ export default async () => {
   const res = sinon.stub().returns({
     req: {
       headers: {
-        'user-agent':
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
+        'user-agent': 'main-user-session',
       },
+      ip: '::ffff:127.0.0.1',
     },
+    cookie: sinon.stub(),
   });
 
   await authService.signupLocal(testUser, res());
