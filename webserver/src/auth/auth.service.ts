@@ -22,7 +22,7 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async signupLocal(signupInput: SignupInput, res?: Response): Promise<Omit<User, 'devices'>> {
+  async signupLocal(signupInput: SignupInput, res?: Response): Promise<Omit<User, 'sessions'>> {
     const { email, password, name, token } = signupInput;
 
     const isHuman = await this.validateHuman(token);
@@ -55,7 +55,7 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.addDevice(user.uuid, refreshToken, this.genereteIpName(res));
+    await this.addSession(user.uuid, refreshToken, this.genereteIpName(res));
 
     if (res) {
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
@@ -78,7 +78,7 @@ export class AuthService {
     return user;
   }
 
-  async signinLocal(signinInput: SigninInput, res: Response): Promise<Omit<User, 'devices'>> {
+  async signinLocal(signinInput: SigninInput, res: Response): Promise<Omit<User, 'sessions'>> {
     const { email, password, token } = signinInput;
 
     const isHuman = await this.validateHuman(token);
@@ -106,7 +106,7 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.addDevice(user.uuid, refreshToken, this.genereteIpName(res));
+    await this.addSession(user.uuid, refreshToken, this.genereteIpName(res));
 
     res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
       maxAge: EXPIRES['15MIN'],
@@ -132,7 +132,7 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.addDevice(user.uuid, refreshToken, 'test-device');
+    await this.addSession(user.uuid, refreshToken, 'test-session');
 
     return {
       accessToken,
@@ -164,7 +164,7 @@ export class AuthService {
         email: true,
         name: true,
         createdAt: true,
-        devices: {
+        sessions: {
           select: {
             name: true,
             rtHash: true,
@@ -179,16 +179,16 @@ export class AuthService {
 
   async logout(userId: string, res: Response): Promise<Logout> {
     try {
-      const userDevices = await this.prisma.device.findMany({
+      const userSessions = await this.prisma.session.findMany({
         where: { userUuid: userId },
       });
 
-      const device = userDevices.find(
+      const session = userSessions.find(
         async ({ rtHash }) => await bcrypt.compare(res.req.cookies.refreshToken, rtHash),
       );
 
-      await this.prisma.device.deleteMany({
-        where: { name: this.genereteIpName(res), rtHash: device.rtHash },
+      await this.prisma.session.deleteMany({
+        where: { name: this.genereteIpName(res), rtHash: session.rtHash },
       });
 
       res.clearCookie(COOKIE_NAMES.ACCESS_TOKEN, {
@@ -218,21 +218,21 @@ export class AuthService {
       const user = await this.prisma.user.findUnique({
         where: { uuid: userId },
         select: {
-          devices: true,
+          sessions: true,
           uuid: true,
           email: true,
         },
       });
 
-      if (!user || !user.devices.length) throw new ForbiddenException();
+      if (!user || !user.sessions.length) throw new ForbiddenException();
 
-      const rtMatch = user.devices.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
+      const rtMatch = user.sessions.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
 
       if (!rtMatch) throw new ForbiddenException();
 
       const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-      await this.updateDevice(user.uuid, refreshToken, rtMatch.rtHash);
+      await this.updateSession(user.uuid, refreshToken, rtMatch.rtHash);
 
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
         maxAge: EXPIRES['15MIN'],
@@ -275,33 +275,33 @@ export class AuthService {
     return `${ip}-${userAgentPropertiesExist ? name : parserResults.ua || 'unknown'}`;
   }
 
-  private async addDevice(userId: string, newRt: string, name?: string): Promise<void> {
-    const devicesLength = await this.prisma.device.count({ where: { userUuid: userId } });
+  private async addSession(userId: string, newRt: string, name?: string): Promise<void> {
+    const sessionsLength = await this.prisma.session.count({ where: { userUuid: userId } });
 
-    if (devicesLength >= 10) {
-      const oldestDevice = await this.prisma.device.findFirst({
+    if (sessionsLength >= 10) {
+      const oldestSession = await this.prisma.session.findFirst({
         where: { userUuid: userId },
         orderBy: { updatedAt: 'asc' },
       });
 
-      await this.prisma.device.deleteMany({
-        where: { rtHash: oldestDevice.rtHash },
+      await this.prisma.session.deleteMany({
+        where: { rtHash: oldestSession.rtHash },
       });
     }
 
-    const isDeviceExist = await this.prisma.device.findFirst({
+    const isSessionExist = await this.prisma.session.findFirst({
       where: { name, userUuid: userId },
     });
 
-    if (isDeviceExist) {
-      await this.updateDevice(userId, newRt, isDeviceExist.rtHash);
+    if (isSessionExist) {
+      await this.updateSession(userId, newRt, isSessionExist.rtHash);
 
       return;
     }
 
     const rtHash = await this.hashData(newRt);
 
-    await this.prisma.device.create({
+    await this.prisma.session.create({
       data: {
         User: {
           connect: {
@@ -314,10 +314,10 @@ export class AuthService {
     });
   }
 
-  private async updateDevice(userId: string, newRt: string, oldRtHash: string) {
+  private async updateSession(userId: string, newRt: string, oldRtHash: string) {
     const rtHash = await this.hashData(newRt);
 
-    await this.prisma.device.updateMany({
+    await this.prisma.session.updateMany({
       where: { rtHash: oldRtHash },
       data: {
         rtHash,

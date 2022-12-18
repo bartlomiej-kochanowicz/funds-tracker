@@ -13,12 +13,12 @@ model User {
   email        String        @unique
   name         String
   password     String
-  devices      Device[]
+  sessions     Session[]
   cashAccounts CashAccount[]
   portfolios   Portfolio[]
 }
 
-model Device {
+model Session {
   name      String
   rtHash    String   @unique
   updatedAt DateTime @default(now())
