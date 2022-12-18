@@ -57,7 +57,7 @@ export class AuthService {
 
     await this.addSession(user.uuid, refreshToken, this.genereteIpName(res));
 
-    if (res) {
+    if (res?.cookie) {
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
         maxAge: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,

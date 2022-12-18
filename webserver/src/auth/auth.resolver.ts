@@ -27,7 +27,7 @@ export class AuthResolver {
     @Args('data')
     signinInput: SigninInput,
     @Context('res') res: Response,
-  ): Promise<Omit<User, 'sesions'>> {
+  ): Promise<Omit<User, 'sessions'>> {
     return this.authService.signinLocal(signinInput, res);
   }
 

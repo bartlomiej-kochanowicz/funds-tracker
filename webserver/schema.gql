@@ -17,8 +17,8 @@ type Refresh {
   success: Boolean!
 }
 
-type Device {
-  """Device name."""
+type Session {
+  """Session name."""
   name: String!
 
   """Refresh token hash."""
@@ -46,8 +46,8 @@ type User {
   """User name."""
   name: String!
 
-  """Devices list."""
-  devices: [Device!]!
+  """Sessions list."""
+  sessions: [Session!]!
 }
 
 type CashAccount {
