@@ -19,7 +19,7 @@ model User {
 }
 
 model Device {
-  name      String   @unique
+  name      String
   rtHash    String   @unique
   updatedAt DateTime @default(now())
   User      User     @relation(fields: [userUuid], references: [uuid])

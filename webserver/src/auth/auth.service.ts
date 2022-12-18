@@ -22,7 +22,7 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async signupLocal(signupInput: SignupInput, res?: Response): Promise<User> {
+  async signupLocal(signupInput: SignupInput, res?: Response): Promise<Omit<User, 'devices'>> {
     const { email, password, name, token } = signupInput;
 
     const isHuman = await this.validateHuman(token);
@@ -50,13 +50,6 @@ export class AuthService {
         email: true,
         name: true,
         createdAt: true,
-        devices: {
-          select: {
-            name: true,
-            rtHash: true,
-            updatedAt: true,
-          },
-        },
       },
     });
 
@@ -85,7 +78,7 @@ export class AuthService {
     return user;
   }
 
-  async signinLocal(signinInput: SigninInput, res: Response): Promise<User> {
+  async signinLocal(signinInput: SigninInput, res: Response): Promise<Omit<User, 'devices'>> {
     const { email, password, token } = signinInput;
 
     const isHuman = await this.validateHuman(token);
@@ -101,18 +94,11 @@ export class AuthService {
         email: true,
         name: true,
         createdAt: true,
-        devices: {
-          select: {
-            name: true,
-            rtHash: true,
-            updatedAt: true,
-          },
-        },
         password: true,
       },
     });
 
-    if (!user) throw new ForbiddenException('Wrong credencials provided.');
+    if (!user) throw new ForbiddenException('User does not exist.');
 
     const isPasswordsMatches = await bcrypt.compare(password, user.password);
 
@@ -193,8 +179,16 @@ export class AuthService {
 
   async logout(userId: string, res: Response): Promise<Logout> {
     try {
+      const userDevices = await this.prisma.device.findMany({
+        where: { userUuid: userId },
+      });
+
+      const device = userDevices.find(
+        async ({ rtHash }) => await bcrypt.compare(res.req.cookies.refreshToken, rtHash),
+      );
+
       await this.prisma.device.deleteMany({
-        where: { name: this.genereteIpName(res), rtHash: res.req.cookies.refreshToken },
+        where: { name: this.genereteIpName(res), rtHash: device.rtHash },
       });
 
       res.clearCookie(COOKIE_NAMES.ACCESS_TOKEN, {
@@ -232,15 +226,13 @@ export class AuthService {
 
       if (!user || !user.devices.length) throw new ForbiddenException();
 
-      const isRtMatches = Boolean(
-        user.devices.filter(async ({ rtHash }) => await bcrypt.compare(rt, rtHash)),
-      );
+      const rtMatch = user.devices.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
 
-      if (!isRtMatches) throw new ForbiddenException();
+      if (!rtMatch) throw new ForbiddenException();
 
       const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-      await this.updateDevice(user.uuid, refreshToken, res.req.cookies.refreshToken);
+      await this.updateDevice(user.uuid, refreshToken, rtMatch.rtHash);
 
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
         maxAge: EXPIRES['15MIN'],
@@ -280,7 +272,7 @@ export class AuthService {
 
     const name = `${parserResults.os.name}-${parserResults.browser.name}`;
 
-    return `${ip}-${userAgentPropertiesExist ? name : parserResults.ua}`;
+    return `${ip}-${userAgentPropertiesExist ? name : parserResults.ua || 'unknown'}`;
   }
 
   private async addDevice(userId: string, newRt: string, name?: string): Promise<void> {
@@ -298,7 +290,7 @@ export class AuthService {
     }
 
     const isDeviceExist = await this.prisma.device.findFirst({
-      where: { name },
+      where: { name, userUuid: userId },
     });
 
     if (isDeviceExist) {

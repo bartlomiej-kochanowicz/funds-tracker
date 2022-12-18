@@ -17,7 +17,7 @@ export class AuthResolver {
     @Args('data')
     signupInput: SignupInput,
     @Context('res') res: Response,
-  ): Promise<User> {
+  ): Promise<Omit<User, 'devices'>> {
     return this.authService.signupLocal(signupInput, res);
   }
 
@@ -27,7 +27,7 @@ export class AuthResolver {
     @Args('data')
     signinInput: SigninInput,
     @Context('res') res: Response,
-  ): Promise<User> {
+  ): Promise<Omit<User, 'devices'>> {
     return this.authService.signinLocal(signinInput, res);
   }
 
