@@ -65,9 +65,7 @@ describe('logout', () => {
         async ({ rtHash }) => await bcrypt.compare(refreshToken, rtHash),
       );
 
-      console.log('END OF TEST', sessions);
-
-      // expect(sessions).toBe(undefined);
+      expect(sessions).toBe(undefined);
     });
   });
 
