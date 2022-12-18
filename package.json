@@ -26,6 +26,6 @@
     "prisma:generate": "cd webserver && pnpx prisma generate"
   },
   "devDependencies": {
-    "husky": "8.0.1"
+    "husky": "8.0.2"
   }
 }
