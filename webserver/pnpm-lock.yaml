@@ -24,6 +24,7 @@ specifiers:
   '@types/node': 18.11.3
   '@types/passport-jwt': 3.0.7
   '@types/supertest': 2.0.12
+  '@types/ua-parser-js': ^0.7.36
   '@typescript-eslint/eslint-plugin': 5.40.1
   '@typescript-eslint/parser': 5.40.1
   apollo-server-core: 3.11.1
@@ -59,6 +60,7 @@ specifiers:
   ts-node: 10.9.1
   tsconfig-paths: 4.1.0
   typescript: 4.8.4
+  ua-parser-js: ^1.0.32
   webpack: 5.74.0
 
 dependencies:
@@ -86,6 +88,7 @@ dependencies:
   reflect-metadata: 0.1.13
   rimraf: 3.0.2
   rxjs: 7.5.7
+  ua-parser-js: 1.0.32
 
 devDependencies:
   '@golevelup/ts-jest': 0.3.3
@@ -99,6 +102,7 @@ devDependencies:
   '@types/node': 18.11.3
   '@types/passport-jwt': 3.0.7
   '@types/supertest': 2.0.12
+  '@types/ua-parser-js': 0.7.36
   '@typescript-eslint/eslint-plugin': 5.40.1_c4zyna56jjjrggqkyejnaxjxfu
   '@typescript-eslint/parser': 5.40.1_wyqvi574yv7oiwfeinomdzmc3m
   eslint: 8.26.0
@@ -1827,6 +1831,10 @@ packages:
     resolution: {integrity: sha512-X3HPWTwXRerBZS7Mo1k6vMVR1Z6zmJcDVn5O/31whe0tnjE4te6ZJSJGq1RiqHPjzPdMTfjCFogDJmwng9xHaQ==}
     dependencies:
       '@types/superagent': 4.1.15
+    dev: true
+
+  /@types/ua-parser-js/0.7.36:
+    resolution: {integrity: sha512-N1rW+njavs70y2cApeIw1vLMYXRwfBy+7trgavGuuTfOd7j1Yh7QTRc/yqsPl6ncokt72ZXuxEU0PiCp9bSwNQ==}
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -6777,6 +6785,10 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
+
+  /ua-parser-js/1.0.32:
+    resolution: {integrity: sha512-dXVsz3M4j+5tTiovFVyVqssXBu5HM47//YSOeZ9fQkdDKkfzv2v3PP1jmH6FUyPW+yCSn7aBVK1fGGKNhowdDA==}
+    dev: false
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}

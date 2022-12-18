@@ -4,6 +4,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { AppModule } from 'app.module';
 import { testUser } from 'common/tests/stubs/testUser.stub';
 import { AuthService } from 'auth/auth.service';
+import { Response } from 'express';
 
 export default async () => {
   const moduleRef = await Test.createTestingModule({
@@ -19,7 +20,18 @@ export default async () => {
 
   await prismaService.cleanDatabase();
 
-  await authService.signupLocal(testUser);
+  const res = {} as Response;
+
+  res.req = {} as any;
+
+  res.req.headers = {
+    'user-agent': 'main-user-session',
+    ip: '::ffff:127.0.0.1',
+  };
+
+  res.cookie = (): any => {};
+
+  await authService.signupLocal(testUser, res);
 
   await app.close();
 };
