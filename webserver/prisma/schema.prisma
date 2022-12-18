@@ -13,7 +13,7 @@ model User {
   email        String         @unique
   name         String
   password     String
-  rtHash       RefreshToken[]
+  rtHashTable  RefreshToken[]
   cashAccounts CashAccount[]
   portfolios   Portfolio[]
 }
@@ -41,12 +41,12 @@ model Portfolio {
 }
 
 model RefreshToken {
-  name     String
-  token    String
+  name     String  @unique
+  rtHash   String
   User     User?   @relation(fields: [userUuid], references: [uuid])
   userUuid String?
 
-  @@unique([name, token])
+  @@unique([rtHash])
 }
 
 model Instrument {

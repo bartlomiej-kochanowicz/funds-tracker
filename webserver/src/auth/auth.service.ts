@@ -22,7 +22,7 @@ export class AuthService {
   ) {}
 
   async signupLocal(signupInput: SignupInput, res?: Response): Promise<User> {
-    const { email, password, name, token } = signupInput;
+    const { email, password, name, token, refreshTokenName } = signupInput;
 
     const isHuman = await this.validateHuman(token);
 
@@ -48,9 +48,9 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.updateRtHash(user.uuid, refreshToken);
+    const success = await this.addRtHash(user.uuid, refreshToken, refreshTokenName);
 
-    if (res) {
+    if (res && success) {
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
         maxAge: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,
@@ -68,11 +68,24 @@ export class AuthService {
       });
     }
 
-    return user;
+    // if refresh token is not added to db(max 10 devices), then 15min access token is set(one time login)
+    if (res && !success) {
+      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+        maxAge: EXPIRES['15MIN'],
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
+
+      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+        maxAge: EXPIRES['15MIN'],
+      });
+    }
+
+    return { ...user, addNewDeviceSuccess: success };
   }
 
   async signinLocal(signinInput: SigninInput, res: Response): Promise<User> {
-    const { email, password, token } = signinInput;
+    const { email, password, token, refreshTokenName } = signinInput;
 
     const isHuman = await this.validateHuman(token);
 
@@ -90,25 +103,39 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.updateRtHash(user.uuid, refreshToken);
+    const success = await this.addRtHash(user.uuid, refreshToken, refreshTokenName);
 
-    res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-      maxAge: EXPIRES['15MIN'],
-      secure: !IS_DEVELOPMENT,
-      httpOnly: true,
-    });
+    if (success) {
+      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+        maxAge: EXPIRES['15MIN'],
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
 
-    res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-      maxAge: EXPIRES['30days'],
-      secure: !IS_DEVELOPMENT,
-      httpOnly: true,
-    });
+      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+        maxAge: EXPIRES['30days'],
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
 
-    res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-      maxAge: EXPIRES['30days'],
-    });
+      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+        maxAge: EXPIRES['30days'],
+      });
+    }
 
-    return user;
+    if (!success) {
+      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+        maxAge: EXPIRES['15MIN'],
+        secure: !IS_DEVELOPMENT,
+        httpOnly: true,
+      });
+
+      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+        maxAge: EXPIRES['15MIN'],
+      });
+    }
+
+    return { ...user, addNewDeviceSuccess: success };
   }
 
   async signinLocalForTests(uuid: string): Promise<{ accessToken: string; refreshToken: string }> {
@@ -116,7 +143,7 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.updateRtHash(user.uuid, refreshToken);
+    await this.addRtHash(user.uuid, refreshToken, 'test-device');
 
     return {
       accessToken,
@@ -140,7 +167,7 @@ export class AuthService {
     };
   }
 
-  async getAccount(userId: string): Promise<User> {
+  async getAccount(userId: string): Promise<Omit<User, 'addNewDeviceSuccess'>> {
     const user = await this.prisma.user.findUnique({
       where: { uuid: userId },
     });
@@ -148,14 +175,16 @@ export class AuthService {
     return user;
   }
 
-  async logout(userId: string, res): Promise<Logout> {
+  async logout(userId: string, res: Response): Promise<Logout> {
     try {
       await this.prisma.user.update({
         where: {
           uuid: userId,
         },
         data: {
-          rtHash: null,
+          rtHashTable: {
+            update: { where: { rtHash: res.req.cookies.refreshToken }, data: null },
+          },
         },
       });
 
@@ -185,17 +214,24 @@ export class AuthService {
     try {
       const user = await this.prisma.user.findUnique({
         where: { uuid: userId },
+        select: {
+          rtHashTable: true,
+          uuid: true,
+          email: true,
+        },
       });
 
-      if (!user || !user.rtHash) throw new ForbiddenException();
+      if (!user || !user.rtHashTable.length) throw new ForbiddenException();
 
-      const isRtMatches = await bcrypt.compare(rt, user.rtHash);
+      const isRtMatches = Boolean(
+        user.rtHashTable.filter(async ({ rtHash }) => await bcrypt.compare(rt, rtHash)),
+      );
 
       if (!isRtMatches) throw new ForbiddenException();
 
       const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-      await this.updateRtHash(user.uuid, refreshToken);
+      await this.updateRtHash(user.uuid, refreshToken, res.req.cookies.refreshToken);
 
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
         maxAge: EXPIRES['15MIN'],
@@ -223,12 +259,29 @@ export class AuthService {
     }
   }
 
-  private async updateRtHash(userId: string, rt: string) {
-    const rtHash = await this.hashData(rt);
+  private async addRtHash(userId: string, newRt: string, rtName: string): Promise<boolean> {
+    const rtHashTableLength = await this.prisma.refreshToken.count({ where: { userUuid: userId } });
+
+    if (rtHashTableLength >= 10) {
+      return false;
+    }
+
+    const rtHash = await this.hashData(newRt);
 
     await this.prisma.user.update({
       where: { uuid: userId },
-      data: { rtHash },
+      data: { rtHashTable: { create: { rtHash, name: rtName } } },
+    });
+
+    return true;
+  }
+
+  private async updateRtHash(userId: string, newRt: string, oldRtHash: string) {
+    const rtHash = await this.hashData(newRt);
+
+    await this.prisma.user.update({
+      where: { uuid: userId },
+      data: { rtHashTable: { update: { where: { rtHash: oldRtHash }, data: { rtHash } } } },
     });
   }
 

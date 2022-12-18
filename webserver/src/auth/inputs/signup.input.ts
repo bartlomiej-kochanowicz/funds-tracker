@@ -27,4 +27,7 @@ export class SignupInput {
 
   @Field(() => String, { description: 'Token.' })
   token: string;
+
+  @Field(() => String, { description: 'Device name.' })
+  refreshTokenName: string;
 }

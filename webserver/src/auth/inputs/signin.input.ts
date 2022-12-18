@@ -12,4 +12,7 @@ export class SigninInput {
 
   @Field(() => String, { description: 'Token.' })
   token: string;
+
+  @Field(() => String, { description: 'Device name.' })
+  refreshTokenName: string;
 }
