@@ -13,9 +13,17 @@ model User {
   email        String        @unique
   name         String
   password     String
-  rtHash       String?
+  sessions     Session[]
   cashAccounts CashAccount[]
   portfolios   Portfolio[]
+}
+
+model Session {
+  name      String
+  rtHash    String   @unique
+  updatedAt DateTime @default(now())
+  User      User     @relation(fields: [userUuid], references: [uuid])
+  userUuid  String
 }
 
 model CashAccount {

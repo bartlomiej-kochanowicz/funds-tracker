@@ -39,7 +39,10 @@ export class IntegrationTestManager {
       },
     });
 
-    const { accessToken, refreshToken } = await this.authService.signinLocalForTests(userUuid);
+    const { accessToken, refreshToken } = await this.authService.signinLocalForTests(
+      userUuid,
+      '::ffff:127.0.0.1-main-user-session',
+    );
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
   }

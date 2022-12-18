@@ -4,9 +4,7 @@ import { IsEmail, MaxLength, MinLength } from 'class-validator';
 @InputType()
 export class SignupInput {
   @Field(() => String, { description: 'Email.' })
-  @IsEmail({
-    message: 'Email is not valid.',
-  })
+  @IsEmail({}, { message: 'Email is not valid' })
   email: string;
 
   @MinLength(4, {

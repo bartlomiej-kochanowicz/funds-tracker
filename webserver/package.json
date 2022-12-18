@@ -40,7 +40,8 @@
     "passport-jwt": "4.0.0",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
-    "rxjs": "7.5.7"
+    "rxjs": "7.5.7",
+    "ua-parser-js": "^1.0.32"
   },
   "devDependencies": {
     "@golevelup/ts-jest": "0.3.3",
@@ -54,6 +55,7 @@
     "@types/node": "18.11.3",
     "@types/passport-jwt": "3.0.7",
     "@types/supertest": "2.0.12",
+    "@types/ua-parser-js": "^0.7.36",
     "@typescript-eslint/eslint-plugin": "5.40.1",
     "@typescript-eslint/parser": "5.40.1",
     "eslint": "8.26.0",

@@ -4,6 +4,7 @@ import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import * as bcrypt from 'bcrypt';
+import * as UAParser from 'ua-parser-js';
 import { IS_DEVELOPMENT, IS_TEST } from 'common/config/env';
 import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
@@ -21,7 +22,7 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async signupLocal(signupInput: SignupInput, res?: Response): Promise<User> {
+  async signupLocal(signupInput: SignupInput, res: Response): Promise<User> {
     const { email, password, name, token } = signupInput;
 
     const isHuman = await this.validateHuman(token);
@@ -48,25 +49,23 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.updateRtHash(user.uuid, refreshToken);
+    await this.addSession(user.uuid, refreshToken, this.genereteIpName(res));
 
-    if (res) {
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
+    res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+      maxAge: EXPIRES['15MIN'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
 
-      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['30days'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
+    res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+      maxAge: EXPIRES['30days'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
 
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['30days'],
-      });
-    }
+    res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+      maxAge: EXPIRES['30days'],
+    });
 
     return user;
   }
@@ -90,7 +89,7 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.updateRtHash(user.uuid, refreshToken);
+    await this.addSession(user.uuid, refreshToken, this.genereteIpName(res));
 
     res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
       maxAge: EXPIRES['15MIN'],
@@ -111,12 +110,15 @@ export class AuthService {
     return user;
   }
 
-  async signinLocalForTests(uuid: string): Promise<{ accessToken: string; refreshToken: string }> {
+  async signinLocalForTests(
+    uuid: string,
+    sessionName: string,
+  ): Promise<{ accessToken: string; refreshToken: string }> {
     const user = await this.prisma.user.findUnique({ where: { uuid } });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.updateRtHash(user.uuid, refreshToken);
+    await this.addSession(user.uuid, refreshToken, sessionName);
 
     return {
       accessToken,
@@ -148,15 +150,18 @@ export class AuthService {
     return user;
   }
 
-  async logout(userId: string, res): Promise<Logout> {
+  async logout(userId: string, res: Response): Promise<Logout> {
     try {
-      await this.prisma.user.update({
-        where: {
-          uuid: userId,
-        },
-        data: {
-          rtHash: null,
-        },
+      const userSessions = await this.prisma.session.findMany({
+        where: { userUuid: userId },
+      });
+
+      const session = userSessions.find(
+        async ({ rtHash }) => await bcrypt.compare(res.req.cookies.refreshToken, rtHash),
+      );
+
+      await this.prisma.session.deleteMany({
+        where: { name: this.genereteIpName(res), rtHash: session.rtHash },
       });
 
       res.clearCookie(COOKIE_NAMES.ACCESS_TOKEN, {
@@ -185,17 +190,22 @@ export class AuthService {
     try {
       const user = await this.prisma.user.findUnique({
         where: { uuid: userId },
+        select: {
+          sessions: true,
+          uuid: true,
+          email: true,
+        },
       });
 
-      if (!user || !user.rtHash) throw new ForbiddenException();
+      if (!user || !user.sessions.length) throw new ForbiddenException();
 
-      const isRtMatches = await bcrypt.compare(rt, user.rtHash);
+      const rtMatch = user.sessions.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
 
-      if (!isRtMatches) throw new ForbiddenException();
+      if (!rtMatch) throw new ForbiddenException();
 
       const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-      await this.updateRtHash(user.uuid, refreshToken);
+      await this.updateSession(user.uuid, refreshToken, rtMatch.rtHash);
 
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
         maxAge: EXPIRES['15MIN'],
@@ -223,13 +233,69 @@ export class AuthService {
     }
   }
 
-  private async updateRtHash(userId: string, rt: string) {
-    const rtHash = await this.hashData(rt);
+  private async addSession(userId: string, newRt: string, name: string): Promise<void> {
+    const sessionsLength = await this.prisma.session.count({ where: { userUuid: userId } });
 
-    await this.prisma.user.update({
-      where: { uuid: userId },
-      data: { rtHash },
+    if (sessionsLength >= 10) {
+      const oldestSession = await this.prisma.session.findFirst({
+        where: { userUuid: userId },
+        orderBy: { updatedAt: 'asc' },
+      });
+
+      await this.prisma.session.deleteMany({
+        where: { rtHash: oldestSession.rtHash },
+      });
+    }
+
+    const isSessionExist = await this.prisma.session.findFirst({
+      where: { name, userUuid: userId },
     });
+
+    if (isSessionExist) {
+      await this.updateSession(userId, newRt, isSessionExist.rtHash);
+
+      return;
+    }
+
+    const rtHash = await this.hashData(newRt);
+
+    await this.prisma.session.create({
+      data: {
+        User: {
+          connect: {
+            uuid: userId,
+          },
+        },
+        name,
+        rtHash,
+      },
+    });
+  }
+
+  private async updateSession(userId: string, newRt: string, oldRtHash: string) {
+    const rtHash = await this.hashData(newRt);
+
+    await this.prisma.session.updateMany({
+      where: { rtHash: oldRtHash },
+      data: {
+        rtHash,
+      },
+    });
+  }
+
+  private genereteIpName(res: Response): string {
+    const userAgent = res.req.headers['user-agent'];
+    const parser = new UAParser(userAgent);
+
+    const parserResults = parser.getResult();
+
+    const { ip } = res.req;
+
+    const userAgentPropertiesExist = parserResults.os.name && parserResults.browser.name;
+
+    const name = `${parserResults.os.name}-${parserResults.browser.name}`;
+
+    return `${ip}-${userAgentPropertiesExist ? name : parserResults.ua || 'unknown'}`;
   }
 
   private async hashData(pwd: string): Promise<string> {
