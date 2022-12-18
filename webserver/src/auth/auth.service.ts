@@ -8,6 +8,7 @@ import { IS_DEVELOPMENT, IS_TEST } from 'common/config/env';
 import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
+import * as UAParser from 'ua-parser-js';
 import { Tokens } from './types';
 import { EmailInput, SigninInput, SignupInput } from './inputs';
 import { Email, Logout, Refresh, User } from './entities';
@@ -22,7 +23,7 @@ export class AuthService {
   ) {}
 
   async signupLocal(signupInput: SignupInput, res?: Response): Promise<User> {
-    const { email, password, name, token, refreshTokenName } = signupInput;
+    const { email, password, name, token } = signupInput;
 
     const isHuman = await this.validateHuman(token);
 
@@ -44,13 +45,26 @@ export class AuthService {
         name,
         password: hashedPwd,
       },
+      select: {
+        uuid: true,
+        email: true,
+        name: true,
+        createdAt: true,
+        devices: {
+          select: {
+            name: true,
+            rtHash: true,
+            updatedAt: true,
+          },
+        },
+      },
     });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    const success = await this.addRtHash(user.uuid, refreshToken, refreshTokenName);
+    await this.addDevice(user.uuid, refreshToken, this.genereteIpName(res));
 
-    if (res && success) {
+    if (res) {
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
         maxAge: EXPIRES['15MIN'],
         secure: !IS_DEVELOPMENT,
@@ -68,24 +82,11 @@ export class AuthService {
       });
     }
 
-    // if refresh token is not added to db(max 10 devices), then 15min access token is set(one time login)
-    if (res && !success) {
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['15MIN'],
-      });
-    }
-
-    return { ...user, addNewDeviceSuccess: success };
+    return user;
   }
 
   async signinLocal(signinInput: SigninInput, res: Response): Promise<User> {
-    const { email, password, token, refreshTokenName } = signinInput;
+    const { email, password, token } = signinInput;
 
     const isHuman = await this.validateHuman(token);
 
@@ -93,7 +94,23 @@ export class AuthService {
       throw new ForbiddenException('You are a robot!');
     }
 
-    const user = await this.prisma.user.findUnique({ where: { email } });
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+      select: {
+        uuid: true,
+        email: true,
+        name: true,
+        createdAt: true,
+        devices: {
+          select: {
+            name: true,
+            rtHash: true,
+            updatedAt: true,
+          },
+        },
+        password: true,
+      },
+    });
 
     if (!user) throw new ForbiddenException('Wrong credencials provided.');
 
@@ -103,39 +120,25 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    const success = await this.addRtHash(user.uuid, refreshToken, refreshTokenName);
+    await this.addDevice(user.uuid, refreshToken, this.genereteIpName(res));
 
-    if (success) {
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
+    res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+      maxAge: EXPIRES['15MIN'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
 
-      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['30days'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
+    res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+      maxAge: EXPIRES['30days'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
 
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['30days'],
-      });
-    }
+    res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+      maxAge: EXPIRES['30days'],
+    });
 
-    if (!success) {
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['15MIN'],
-      });
-    }
-
-    return { ...user, addNewDeviceSuccess: success };
+    return user;
   }
 
   async signinLocalForTests(uuid: string): Promise<{ accessToken: string; refreshToken: string }> {
@@ -143,7 +146,7 @@ export class AuthService {
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-    await this.addRtHash(user.uuid, refreshToken, 'test-device');
+    await this.addDevice(user.uuid, refreshToken, 'test-device');
 
     return {
       accessToken,
@@ -167,9 +170,22 @@ export class AuthService {
     };
   }
 
-  async getAccount(userId: string): Promise<Omit<User, 'addNewDeviceSuccess'>> {
+  async getAccount(userId: string): Promise<User> {
     const user = await this.prisma.user.findUnique({
       where: { uuid: userId },
+      select: {
+        uuid: true,
+        email: true,
+        name: true,
+        createdAt: true,
+        devices: {
+          select: {
+            name: true,
+            rtHash: true,
+            updatedAt: true,
+          },
+        },
+      },
     });
 
     return user;
@@ -177,15 +193,8 @@ export class AuthService {
 
   async logout(userId: string, res: Response): Promise<Logout> {
     try {
-      await this.prisma.user.update({
-        where: {
-          uuid: userId,
-        },
-        data: {
-          rtHashTable: {
-            update: { where: { rtHash: res.req.cookies.refreshToken }, data: null },
-          },
-        },
+      await this.prisma.device.deleteMany({
+        where: { name: this.genereteIpName(res), rtHash: res.req.cookies.refreshToken },
       });
 
       res.clearCookie(COOKIE_NAMES.ACCESS_TOKEN, {
@@ -215,23 +224,23 @@ export class AuthService {
       const user = await this.prisma.user.findUnique({
         where: { uuid: userId },
         select: {
-          rtHashTable: true,
+          devices: true,
           uuid: true,
           email: true,
         },
       });
 
-      if (!user || !user.rtHashTable.length) throw new ForbiddenException();
+      if (!user || !user.devices.length) throw new ForbiddenException();
 
       const isRtMatches = Boolean(
-        user.rtHashTable.filter(async ({ rtHash }) => await bcrypt.compare(rt, rtHash)),
+        user.devices.filter(async ({ rtHash }) => await bcrypt.compare(rt, rtHash)),
       );
 
       if (!isRtMatches) throw new ForbiddenException();
 
       const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
-      await this.updateRtHash(user.uuid, refreshToken, res.req.cookies.refreshToken);
+      await this.updateDevice(user.uuid, refreshToken, res.req.cookies.refreshToken);
 
       res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
         maxAge: EXPIRES['15MIN'],
@@ -259,29 +268,68 @@ export class AuthService {
     }
   }
 
-  private async addRtHash(userId: string, newRt: string, rtName: string): Promise<boolean> {
-    const rtHashTableLength = await this.prisma.refreshToken.count({ where: { userUuid: userId } });
+  private genereteIpName(res: Response): string {
+    const userAgent = res.req.headers['user-agent'];
+    const parser = new UAParser(userAgent);
 
-    if (rtHashTableLength >= 10) {
-      return false;
+    const parserResults = parser.getResult();
+
+    const { ip } = res.req;
+
+    const userAgentPropertiesExist = parserResults.os.name && parserResults.browser.name;
+
+    const name = `${parserResults.os.name}-${parserResults.browser.name}`;
+
+    return `${ip}-${userAgentPropertiesExist ? name : parserResults.ua}`;
+  }
+
+  private async addDevice(userId: string, newRt: string, name?: string): Promise<void> {
+    const devicesLength = await this.prisma.device.count({ where: { userUuid: userId } });
+
+    if (devicesLength >= 10) {
+      const oldestDevice = await this.prisma.device.findFirst({
+        where: { userUuid: userId },
+        orderBy: { updatedAt: 'asc' },
+      });
+
+      await this.prisma.device.deleteMany({
+        where: { rtHash: oldestDevice.rtHash },
+      });
+    }
+
+    const isDeviceExist = await this.prisma.device.findFirst({
+      where: { name },
+    });
+
+    if (isDeviceExist) {
+      await this.updateDevice(userId, newRt, isDeviceExist.rtHash);
+
+      return;
     }
 
     const rtHash = await this.hashData(newRt);
 
-    await this.prisma.user.update({
-      where: { uuid: userId },
-      data: { rtHashTable: { create: { rtHash, name: rtName } } },
+    await this.prisma.device.create({
+      data: {
+        User: {
+          connect: {
+            uuid: userId,
+          },
+        },
+        name,
+        rtHash,
+      },
     });
-
-    return true;
   }
 
-  private async updateRtHash(userId: string, newRt: string, oldRtHash: string) {
+  private async updateDevice(userId: string, newRt: string, oldRtHash: string) {
     const rtHash = await this.hashData(newRt);
 
-    await this.prisma.user.update({
-      where: { uuid: userId },
-      data: { rtHashTable: { update: { where: { rtHash: oldRtHash }, data: { rtHash } } } },
+    await this.prisma.device.updateMany({
+      where: { rtHash: oldRtHash },
+      data: {
+        rtHash,
+      },
     });
   }
 

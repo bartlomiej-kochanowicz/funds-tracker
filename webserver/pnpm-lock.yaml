@@ -24,6 +24,7 @@ specifiers:
   '@types/node': 18.11.3
   '@types/passport-jwt': 3.0.7
   '@types/supertest': 2.0.12
+  '@types/ua-parser-js': ^0.7.36
   '@typescript-eslint/eslint-plugin': 5.40.1
   '@typescript-eslint/parser': 5.40.1
   apollo-server-core: 3.11.1
@@ -59,6 +60,7 @@ specifiers:
   ts-node: 10.9.1
   tsconfig-paths: 4.1.0
   typescript: 4.8.4
+  ua-parser-js: ^1.0.32
   webpack: 5.74.0
 
 dependencies:
@@ -74,6 +76,7 @@ dependencies:
   '@nestjs/passport': 9.0.0_4vfrxop4mij4i3ho4wcuqotaby
   '@nestjs/platform-express': 9.1.5_oi7pl2drsvwscscw3d6lgmg6yu
   '@prisma/client': 4.5.0_prisma@4.5.0
+  '@types/ua-parser-js': 0.7.36
   apollo-server-core: 3.11.1_graphql@16.6.0
   apollo-server-express: 3.11.1_graphql@16.6.0
   bcrypt: 5.1.0
@@ -86,6 +89,7 @@ dependencies:
   reflect-metadata: 0.1.13
   rimraf: 3.0.2
   rxjs: 7.5.7
+  ua-parser-js: 1.0.32
 
 devDependencies:
   '@golevelup/ts-jest': 0.3.3
@@ -1828,6 +1832,10 @@ packages:
     dependencies:
       '@types/superagent': 4.1.15
     dev: true
+
+  /@types/ua-parser-js/0.7.36:
+    resolution: {integrity: sha512-N1rW+njavs70y2cApeIw1vLMYXRwfBy+7trgavGuuTfOd7j1Yh7QTRc/yqsPl6ncokt72ZXuxEU0PiCp9bSwNQ==}
+    dev: false
 
   /@types/yargs-parser/21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -6777,6 +6785,10 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
+
+  /ua-parser-js/1.0.32:
+    resolution: {integrity: sha512-dXVsz3M4j+5tTiovFVyVqssXBu5HM47//YSOeZ9fQkdDKkfzv2v3PP1jmH6FUyPW+yCSn7aBVK1fGGKNhowdDA==}
+    dev: false
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}

@@ -8,14 +8,22 @@ datasource db {
 }
 
 model User {
-  uuid         String         @id @default(uuid())
-  createdAt    DateTime       @default(now())
-  email        String         @unique
+  uuid         String        @id @default(uuid())
+  createdAt    DateTime      @default(now())
+  email        String        @unique
   name         String
   password     String
-  rtHashTable  RefreshToken[]
+  devices      Device[]
   cashAccounts CashAccount[]
   portfolios   Portfolio[]
+}
+
+model Device {
+  name      String   @unique
+  rtHash    String   @unique
+  updatedAt DateTime @default(now())
+  User      User     @relation(fields: [userUuid], references: [uuid])
+  userUuid  String
 }
 
 model CashAccount {
@@ -38,15 +46,6 @@ model Portfolio {
   userUuid           String
 
   @@unique([userUuid, uuid])
-}
-
-model RefreshToken {
-  name     String  @unique
-  rtHash   String
-  User     User?   @relation(fields: [userUuid], references: [uuid])
-  userUuid String?
-
-  @@unique([rtHash])
 }
 
 model Instrument {

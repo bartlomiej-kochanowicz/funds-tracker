@@ -1,4 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
+import { Device } from './device.entity';
 
 @ObjectType()
 export class User {
@@ -14,6 +15,6 @@ export class User {
   @Field(() => String, { description: 'User name.' })
   name: string;
 
-  @Field(() => Boolean, { description: 'Is new device added successfully.' })
-  addNewDeviceSuccess: boolean;
+  @Field(() => [Device], { description: 'Devices list.' })
+  devices: Device[];
 }
