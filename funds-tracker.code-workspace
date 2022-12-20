@@ -1,12 +1,12 @@
 {
   "folders": [
     {
-      "name": "root",
+      "name": "funds-tracker📈",
       "path": "."
     }
   ],
   "settings": {
-    "jest.disabledWorkspaceFolders": ["root"],
+    "jest.disabledWorkspaceFolders": ["funds-tracker📈"],
     "git.ignoreLimitWarning": true
   }
 }
