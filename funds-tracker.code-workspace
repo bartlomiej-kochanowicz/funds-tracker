@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "jest.disabledWorkspaceFolders": ["root"],
+    "git.ignoreLimitWarning": true
+  }
+}
