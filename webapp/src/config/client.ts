@@ -1,12 +1,15 @@
 /* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, Observable } from '@apollo/client';
+import { RetryLink } from '@apollo/client/link/retry';
 import { onError } from '@apollo/client/link/error';
 import { API_URL, IS_DEVELOPMENT } from 'config/env';
 import { REFRESH_TOKEN } from 'graphql/mutations';
 import { RefreshTokenMutation } from '__generated__/graphql';
 
 const refreshTokensLink = onError(({ graphQLErrors, operation, forward }) => {
+  if (!graphQLErrors) return;
+
   if (graphQLErrors?.[0]?.extensions?.code === 'UNAUTHENTICATED') {
     if (operation.operationName === 'RefreshToken') return;
 
@@ -35,13 +38,25 @@ const refreshTokensLink = onError(({ graphQLErrors, operation, forward }) => {
   }
 });
 
+const retryLink = new RetryLink({
+  delay: {
+    initial: 300,
+    max: Infinity,
+    jitter: true,
+  },
+  attempts: {
+    max: 3,
+    retryIf: error => !!error,
+  },
+});
+
 const httpLink = new HttpLink({
   uri: IS_DEVELOPMENT ? API_URL : '/api/graphql',
   credentials: 'include',
 });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([refreshTokensLink, httpLink]),
+  link: ApolloLink.from([retryLink, refreshTokensLink, httpLink]),
   cache: new InMemoryCache(),
   connectToDevTools: IS_DEVELOPMENT,
 });
