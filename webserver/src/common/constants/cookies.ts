@@ -1,6 +1,6 @@
 export const EXPIRES = {
-  '15MIN': 15 * 60 * 1000,
-  '30DAYS': 30 * 24 * 60 * 60 * 1000,
+  '15MIN': 5 * 60 * 1000,
+  '15DAYS': 15 * 24 * 60 * 60 * 1000,
 };
 
 export const COOKIE_NAMES = {

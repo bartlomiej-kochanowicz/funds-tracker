@@ -58,13 +58,13 @@ export class AuthService {
     });
 
     res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-      maxAge: EXPIRES['30days'],
+      maxAge: EXPIRES['15DAYS'],
       secure: !IS_DEVELOPMENT,
       httpOnly: true,
     });
 
     res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-      maxAge: EXPIRES['30days'],
+      maxAge: EXPIRES['15DAYS'],
     });
 
     return user;
@@ -98,13 +98,13 @@ export class AuthService {
     });
 
     res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-      maxAge: EXPIRES['30days'],
+      maxAge: EXPIRES['15DAYS'],
       secure: !IS_DEVELOPMENT,
       httpOnly: true,
     });
 
     res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-      maxAge: EXPIRES['30days'],
+      maxAge: EXPIRES['15DAYS'],
     });
 
     return user;
@@ -214,13 +214,13 @@ export class AuthService {
       });
 
       res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['30days'],
+        maxAge: EXPIRES['15DAYS'],
         secure: !IS_DEVELOPMENT,
         httpOnly: true,
       });
 
       res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['30days'],
+        maxAge: EXPIRES['15DAYS'],
       });
 
       return {
@@ -308,11 +308,11 @@ export class AuthService {
     const [at, rt] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 15, secret: this.config.get('AT_SECRET') }, // 15 minutes
+        { expiresIn: EXPIRES['15MIN'] / 1000, secret: this.config.get('AT_SECRET') },
       ),
       this.jwtService.signAsync(
         { sub: userId, email },
-        { expiresIn: 60 * 60 * 24 * 30, secret: this.config.get('RT_SECRET') }, // 30 days
+        { expiresIn: EXPIRES['15DAYS'] / 1000, secret: this.config.get('RT_SECRET') },
       ),
     ]);
 
