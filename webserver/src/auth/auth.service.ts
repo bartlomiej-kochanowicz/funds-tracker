@@ -9,6 +9,8 @@ import { IS_DEVELOPMENT, IS_TEST } from 'common/config/env';
 import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
+import { SendGridService } from 'send-grid/send-grid.service';
+import emailConfirmationHbs from 'common/handlebars/email-confirmation.hbs';
 import { Tokens } from './types';
 import { EmailInput, SigninInput, SignupInput } from './inputs';
 import { Email, Logout, Refresh, User } from './entities';
@@ -20,6 +22,7 @@ export class AuthService {
     private jwtService: JwtService,
     private readonly httpService: HttpService,
     private config: ConfigService,
+    private readonly sendgridService: SendGridService,
   ) {}
 
   async signupLocal(signupInput: SignupInput, res: Response): Promise<User> {
@@ -46,6 +49,15 @@ export class AuthService {
         password: hashedPwd,
       },
     });
+
+    const mail = {
+      to: email,
+      subject: 'Your Funds Tracker confirmation code',
+      from: 'noreply@funds-tracker.com',
+      html: this.sendgridService.getHtml(emailConfirmationHbs, { email, code: '123456' }),
+    };
+
+    await this.sendgridService.send(mail);
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
