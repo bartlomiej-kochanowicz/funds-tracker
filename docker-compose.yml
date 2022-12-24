@@ -1,6 +1,15 @@
 version: "3.9"
 
 services:
+  mailslurper:
+    container_name: mailslurper
+    image: marcopas/docker-mailslurper
+    ports:
+      - "2500:2500"
+      - "9000:8080"
+      - "8085:8085"
+    networks:
+      - webserver
   tests-database:
     image: postgres:14.5-alpine
     restart: always
@@ -37,6 +46,7 @@ services:
     networks:
       - webserver
       - webapp
+      - mailslurper
     environment:
       - NODE_ENV=development
     volumes:
@@ -78,6 +88,7 @@ services:
 networks:
   webserver:
   webapp:
+  mailslurper:
 
 volumes:
   development-database:

@@ -23,6 +23,7 @@ specifiers:
   '@types/express': 4.17.14
   '@types/jest': 29.2.0
   '@types/node': 18.11.3
+  '@types/nodemailer': ^6.4.7
   '@types/passport-jwt': 3.0.7
   '@types/supertest': 2.0.12
   '@types/ua-parser-js': ^0.7.36
@@ -46,6 +47,7 @@ specifiers:
   jest: 29.2.1
   jest-watch-typeahead: ^2.2.1
   madge: 5.0.1
+  nodemailer: ^6.8.0
   passport: 0.6.0
   passport-jwt: 4.0.0
   prettier: 2.7.1
@@ -87,6 +89,7 @@ dependencies:
   cookie-parser: 1.4.6
   graphql: 16.6.0
   handlebars: 4.7.7
+  nodemailer: 6.8.0
   passport: 0.6.0
   passport-jwt: 4.0.0
   reflect-metadata: 0.1.13
@@ -104,6 +107,7 @@ devDependencies:
   '@types/express': 4.17.14
   '@types/jest': 29.2.0
   '@types/node': 18.11.3
+  '@types/nodemailer': 6.4.7
   '@types/passport-jwt': 3.0.7
   '@types/supertest': 2.0.12
   '@types/ua-parser-js': 0.7.36
@@ -1801,6 +1805,12 @@ packages:
 
   /@types/node/18.11.3:
     resolution: {integrity: sha512-fNjDQzzOsZeKZu5NATgXUPsaFaTxeRgFXoosrHivTl8RGeV733OLawXsGfEk9a8/tySyZUyiZ6E8LcjPFZ2y1A==}
+
+  /@types/nodemailer/6.4.7:
+    resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
+    dependencies:
+      '@types/node': 18.11.3
+    dev: true
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -5508,6 +5518,11 @@ packages:
     dependencies:
       '@babel/parser': 7.18.13
     dev: true
+
+  /nodemailer/6.8.0:
+    resolution: {integrity: sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ==}
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   /nopt/5.0.0:
     resolution: {integrity: sha512-Tbj67rffqceeLpcRXrT7vKAN8CwfPeIBgM7E6iBkmKLV7bEMwpGgYLGv0jACUsECaa/vuxP0IjEont6umdMgtQ==}

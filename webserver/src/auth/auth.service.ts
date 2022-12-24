@@ -92,7 +92,9 @@ export class AuthService {
       throw new ForbiddenException('User already confirmed.');
     }
 
-    const isPasswordsMatches = await bcrypt.compare(code, user.confirmationCodeHash);
+    // allways pass for development
+    const isPasswordsMatches =
+      IS_DEVELOPMENT || (await bcrypt.compare(code, user.confirmationCodeHash));
 
     if (!isPasswordsMatches) {
       throw new ForbiddenException('Wrong confirmation code.');
