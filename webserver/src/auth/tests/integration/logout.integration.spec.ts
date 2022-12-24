@@ -85,7 +85,13 @@ describe('logout', () => {
 
       res.cookie = (): any => {};
 
-      const { uuid } = await integrationTestManager.getAuthService().signupLocal(logoutStub, res);
+      // sign up new user
+      await integrationTestManager.getAuthService().signupLocal(logoutStub);
+
+      // confirm user
+      const { uuid } = await integrationTestManager
+        .getAuthService()
+        .confirmSignup({ email: logoutStub.email, token: logoutStub.token, code: '123456' }, res);
 
       const { accessToken, refreshToken } = await integrationTestManager
         .getAuthService()
