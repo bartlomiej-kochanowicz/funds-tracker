@@ -66,10 +66,10 @@ export class AuthService {
       }),
     };
 
-    await this.sendgridService.send(mail);
+    const success = IS_TEST || (await this.sendgridService.send(mail));
 
     return {
-      success: true,
+      success,
     };
   }
 

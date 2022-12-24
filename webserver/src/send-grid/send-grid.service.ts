@@ -11,43 +11,51 @@ export class SendGridService {
     SendGrid.setApiKey(this.configService.get<string>('SEND_GRID_API_KEY'));
   }
 
-  async send(mail: SendGrid.MailDataRequired) {
-    if (IS_DEVELOPMENT) {
-      return this.sendEmailDevelopment(mail);
+  async send(mail: SendGrid.MailDataRequired): Promise<boolean> {
+    try {
+      if (IS_DEVELOPMENT) {
+        return this.sendEmailDevelopment(mail);
+      }
+
+      await SendGrid.send(mail);
+
+      return true;
+    } catch {
+      return false;
     }
-
-    const transporter = await SendGrid.send(mail);
-
-    return transporter;
-  }
-
-  async sendEmailDevelopment(mail: SendGrid.MailDataRequired) {
-    const transport = nodemailer.createTransport({
-      host: 'mailslurper',
-      port: 2500,
-      secure: false,
-    });
-
-    const { to, subject, from, html } = mail as {
-      to: string;
-      subject: string;
-      from: string;
-      html: string;
-    };
-
-    const transporter = await transport.sendMail({
-      to,
-      subject,
-      from,
-      html,
-    });
-
-    return transporter;
   }
 
   getHtml(template: string, variables: unknown) {
     const html = Handlebars.compile(template);
 
     return html(variables);
+  }
+
+  private async sendEmailDevelopment(mail: SendGrid.MailDataRequired): Promise<boolean> {
+    try {
+      const transport = nodemailer.createTransport({
+        host: 'mailslurper',
+        port: 2500,
+        secure: false,
+      });
+
+      const { to, subject, from, html } = mail as {
+        to: string;
+        subject: string;
+        from: string;
+        html: string;
+      };
+
+      await transport.sendMail({
+        to,
+        subject,
+        from,
+        html,
+      });
+
+      return true;
+    } catch {
+      return false;
+    }
   }
 }
