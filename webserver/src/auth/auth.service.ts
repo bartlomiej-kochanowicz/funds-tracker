@@ -12,7 +12,7 @@ import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { SendGridService } from 'send-grid/send-grid.service';
 import emailConfirmationHbs from 'common/handlebars/email-confirmation.hbs';
 import { Tokens } from './types';
-import { EmailInput, SigninInput, SignupInput } from './inputs';
+import { ConfirmSignupInput, EmailInput, SigninInput, SignupInput } from './inputs';
 import { Email, Logout, Refresh, Signup, User } from './entities';
 
 @Injectable()
@@ -73,8 +73,16 @@ export class AuthService {
     };
   }
 
-  async confirmRegistration(uuid: string, code: string, res: Response): Promise<User> {
-    const user = await this.prisma.user.findUnique({ where: { uuid } });
+  async confirmSignup(confirmSignupInput: ConfirmSignupInput, res: Response): Promise<User> {
+    const { code, email, token } = confirmSignupInput;
+
+    const isHuman = await this.validateHuman(token);
+
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
+    }
+
+    const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) {
       throw new ForbiddenException('User not found.');
@@ -90,7 +98,10 @@ export class AuthService {
       throw new ForbiddenException('Wrong confirmation code.');
     }
 
-    await this.prisma.user.update({ where: { uuid }, data: { confirmationCodeHash: null } });
+    await this.prisma.user.update({
+      where: { uuid: user.uuid },
+      data: { confirmationCodeHash: null },
+    });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 

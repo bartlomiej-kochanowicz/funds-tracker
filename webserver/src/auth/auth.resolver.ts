@@ -5,19 +5,29 @@ import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { Email, Logout, Refresh, Signup, User } from './entities';
-import { EmailInput, SigninInput, SignupInput } from './inputs';
+import { ConfirmSignupInput, EmailInput, SigninInput, SignupInput } from './inputs';
 
 @Resolver(() => User)
 export class AuthResolver {
   constructor(private authService: AuthService) {}
 
   @Public()
-  @Mutation(() => User)
+  @Mutation(() => Signup)
   signupLocal(
     @Args('data')
     signupInput: SignupInput,
   ): Promise<Signup> {
     return this.authService.signupLocal(signupInput);
+  }
+
+  @Public()
+  @Mutation(() => User)
+  confirmSignup(
+    @Args('data')
+    confirmSignupInput: ConfirmSignupInput,
+    @Context('res') res: Response,
+  ): Promise<User> {
+    return this.authService.confirmSignup(confirmSignupInput, res);
   }
 
   @Public()

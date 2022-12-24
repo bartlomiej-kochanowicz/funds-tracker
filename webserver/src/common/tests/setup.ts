@@ -32,7 +32,7 @@ export default async () => {
 
   res.cookie = (): any => {};
 
-  await authService.signupLocal(testUser, res);
+  await authService.signupLocal(testUser);
 
   await app.close();
 };

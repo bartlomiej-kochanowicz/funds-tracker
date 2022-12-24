@@ -17,6 +17,11 @@ type Refresh {
   success: Boolean!
 }
 
+type Signup {
+  """Signup successful."""
+  success: Boolean!
+}
+
 type User {
   """User uuid."""
   uuid: String!
@@ -84,7 +89,8 @@ input EmailInput {
 }
 
 type Mutation {
-  signupLocal(data: SignupInput!): User!
+  signupLocal(data: SignupInput!): Signup!
+  confirmSignup(data: ConfirmSignupInput!): User!
   signinLocal(data: SigninInput!): User!
   logout: Logout!
   refreshToken: Refresh!
@@ -105,6 +111,17 @@ input SignupInput {
 
   """Password."""
   password: String!
+
+  """Token."""
+  token: String!
+}
+
+input ConfirmSignupInput {
+  """Email."""
+  email: String!
+
+  """Code."""
+  code: String!
 
   """Token."""
   token: String!
