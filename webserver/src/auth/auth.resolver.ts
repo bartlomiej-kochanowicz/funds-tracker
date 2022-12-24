@@ -4,7 +4,7 @@ import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { Email, Logout, Refresh, User } from './entities';
+import { Email, Logout, Refresh, Signup, User } from './entities';
 import { EmailInput, SigninInput, SignupInput } from './inputs';
 
 @Resolver(() => User)
@@ -16,9 +16,8 @@ export class AuthResolver {
   signupLocal(
     @Args('data')
     signupInput: SignupInput,
-    @Context('res') res: Response,
-  ): Promise<User> {
-    return this.authService.signupLocal(signupInput, res);
+  ): Promise<Signup> {
+    return this.authService.signupLocal(signupInput);
   }
 
   @Public()
@@ -42,7 +41,7 @@ export class AuthResolver {
 
   @Query(() => User)
   user(@GetCurrentUserId() userId: string): Promise<User> {
-    return this.authService.getAccount(userId);
+    return this.authService.getUser(userId);
   }
 
   @Mutation(() => Logout)

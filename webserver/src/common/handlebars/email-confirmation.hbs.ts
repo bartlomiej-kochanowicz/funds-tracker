@@ -52,12 +52,12 @@
 
     .wrapper__image {
       margin: 0 auto;
-      width: 200px;
+      width: 400px;
       height: auto;
     }
 
     .header-image {
-      width: 200px;
+      width: 400px;
       height: auto;
       padding: 24px 0;
     }
@@ -171,9 +171,9 @@ export default `
 
   <body style="margin: 0;width: 100%;font-size: 16px;background-color: rgb(249, 249, 250);font-family: 'Roboto', sans-serif;color: rgb(52, 52, 52);">
     <div class="wrapper" style="margin: 0 auto;max-width: 550px;width: 90%;">
-      <div class="wrapper__image" style="margin: 0 auto;width: 200px;height: auto;">
+      <div class="wrapper__image" style="margin: 0 auto;width: 400px;height: auto;">
         <a href="https://funds-tracker.com/" style="margin: 0;">
-          <img class="header-image" src="https://lh3.googleusercontent.com/pw/AL9nZEXWjq-1-wrsUWjzijPQljCHYqk7pYZw-TdssgREjRV5brfGqV_hgcFnI3s9yHt7h1mT4fFZ-TThgwSqlKXMNpcrhgyPi3IgUvRTDElG_RC3ClJ5BuiAN6kFD0xQB8TrYqFl3Ck6dI2BiMipd7w1k4BvEg=w1800-h155-no?authuser=0" style="margin: 0;width: 200px;height: auto;padding: 24px 0;">
+          <img class="header-image" src="https://lh3.googleusercontent.com/pw/AL9nZEXWjq-1-wrsUWjzijPQljCHYqk7pYZw-TdssgREjRV5brfGqV_hgcFnI3s9yHt7h1mT4fFZ-TThgwSqlKXMNpcrhgyPi3IgUvRTDElG_RC3ClJ5BuiAN6kFD0xQB8TrYqFl3Ck6dI2BiMipd7w1k4BvEg=w1800-h155-no?authuser=0" style="margin: 0;width: 400px;height: auto;padding: 24px 0;">
         </a>
       </div>
 

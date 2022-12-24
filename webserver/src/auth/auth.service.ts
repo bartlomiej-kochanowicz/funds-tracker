@@ -13,7 +13,7 @@ import { SendGridService } from 'send-grid/send-grid.service';
 import emailConfirmationHbs from 'common/handlebars/email-confirmation.hbs';
 import { Tokens } from './types';
 import { EmailInput, SigninInput, SignupInput } from './inputs';
-import { Email, Logout, Refresh, User } from './entities';
+import { Email, Logout, Refresh, Signup, User } from './entities';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +25,7 @@ export class AuthService {
     private readonly sendgridService: SendGridService,
   ) {}
 
-  async signupLocal(signupInput: SignupInput, res: Response): Promise<User> {
+  async signupLocal(signupInput: SignupInput): Promise<Signup> {
     const { email, password, name, token } = signupInput;
 
     const isHuman = await this.validateHuman(token);
@@ -42,11 +42,16 @@ export class AuthService {
       throw new ForbiddenException('Email already in use.');
     }
 
-    const user = await this.prisma.user.create({
+    const confirmationCode = this.generateConfirmationCode();
+
+    const hashedConfirmationCode = await this.hashData(confirmationCode);
+
+    const { uuid } = await this.prisma.user.create({
       data: {
         email,
         name,
         password: hashedPwd,
+        confirmationCodeHash: hashedConfirmationCode,
       },
     });
 
@@ -54,10 +59,38 @@ export class AuthService {
       to: email,
       subject: 'Your Funds Tracker confirmation code',
       from: 'noreply@funds-tracker.com',
-      html: this.sendgridService.getHtml(emailConfirmationHbs, { email, code: '123456' }),
+      html: this.sendgridService.getHtml(emailConfirmationHbs, {
+        email,
+        code: confirmationCode,
+        uuid,
+      }),
     };
 
     await this.sendgridService.send(mail);
+
+    return {
+      success: true,
+    };
+  }
+
+  async confirmRegistration(uuid: string, code: string, res: Response): Promise<User> {
+    const user = await this.prisma.user.findUnique({ where: { uuid } });
+
+    if (!user) {
+      throw new ForbiddenException('User not found.');
+    }
+
+    if (!user.confirmationCodeHash) {
+      throw new ForbiddenException('User already confirmed.');
+    }
+
+    const isPasswordsMatches = await bcrypt.compare(code, user.confirmationCodeHash);
+
+    if (!isPasswordsMatches) {
+      throw new ForbiddenException('Wrong confirmation code.');
+    }
+
+    await this.prisma.user.update({ where: { uuid }, data: { confirmationCodeHash: null } });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
@@ -154,7 +187,7 @@ export class AuthService {
     };
   }
 
-  async getAccount(userId: string): Promise<User> {
+  async getUser(userId: string): Promise<User> {
     const user = await this.prisma.user.findUnique({
       where: { uuid: userId },
     });
@@ -310,10 +343,10 @@ export class AuthService {
     return `${ip}-${userAgentPropertiesExist ? name : parserResults.ua || 'unknown'}`;
   }
 
-  private async hashData(pwd: string): Promise<string> {
+  private async hashData(data: string): Promise<string> {
     const salt = await bcrypt.genSalt(10);
 
-    return bcrypt.hash(pwd, salt);
+    return bcrypt.hash(data, salt);
   }
 
   private async getTokens(userId: string, email: string): Promise<Tokens> {
@@ -332,6 +365,10 @@ export class AuthService {
       accessToken: at,
       refreshToken: rt,
     };
+  }
+
+  private generateConfirmationCode(): string {
+    return Math.floor(100000 + Math.random() * 900000).toString();
   }
 
   private async validateHuman(token: string): Promise<boolean> {
