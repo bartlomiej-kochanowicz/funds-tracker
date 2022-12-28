@@ -1,3 +1,4 @@
+import { Link as ReactRouterLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import {
   fontable,
@@ -8,16 +9,16 @@ import {
   PaddingMixinProps,
 } from 'styles/mixins';
 
-type LinkProps = {
-  href: string;
+type RouterLinkProps = {
+  to: string;
   display?: 'inline' | 'inline-block' | 'block';
 } & FontableProps &
   MarginMixinProps &
   PaddingMixinProps;
 
-export const Link = styled.a.withConfig({
+export const RouterLink = styled(ReactRouterLink).withConfig({
   shouldForwardProp: prop => !['fontColor'].includes(prop),
-})<LinkProps>`
+})<RouterLinkProps>`
   ${fontable}
   ${marginMixin}
   ${paddingMixin}
@@ -33,4 +34,4 @@ export const Link = styled.a.withConfig({
   }
 `;
 
-Link.displayName = 'Link';
+RouterLink.displayName = 'RouterLink';

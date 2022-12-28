@@ -7,6 +7,7 @@ export { Heading } from './Heading';
 export { Input } from './Input';
 export { InstrumentSymbol } from './InstrumentSymbol';
 export { Link } from './Link';
+export { RouterLink } from './RouterLink';
 export { Loader } from './Loader';
 export { Menu } from './Menu';
 export { Select } from './Select';

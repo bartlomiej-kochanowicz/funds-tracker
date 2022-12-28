@@ -80,5 +80,8 @@
   "add.portfolios.input.placeholder": "e.g. Passive, Active",
   "common.theme_switcher": "Theme switcher",
   "error.component.title": "Couldn’t load ",
-  "error.component.description": "If this issue continues, please contact support."
+  "error.component.description": "If this issue continues, please contact support.",
+  "common.sign_up_confirm": "Confirm your email",
+  "page.confirm.description": "We've sent a verification code to your email address - <bold>{{email}}</bold> Please enter it below to confirm your email address. (Don't forget to check your spam folder.)",
+  "page.confirm.support": "If you need help, please <support>contact us</support>"
 }

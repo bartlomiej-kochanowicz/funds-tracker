@@ -80,5 +80,7 @@
   "add.portfolios.input.placeholder": "np.Pasywny, Aktywny...",
   "common.theme_switcher": "Zmień motyw",
   "error.component.title": "Błąd ładowania",
-  "error.component.description": "Błąd się powtarza? Skontaktuj się z zespołem support."
+  "error.component.description": "Błąd się powtarza? Skontaktuj się z zespołem support.",
+  "common.sign_up_confirm": "Potwierdź rejestrację",
+  "page.confirm.description": "Wysłaliśmy kod weryfikacyjny na email <bold>{{email}}</bold>. Wpisz go poniżej, aby potwierdzić rejestrację. (Nie zapomnij sprawdzić folderu ze spamem.)"
 }

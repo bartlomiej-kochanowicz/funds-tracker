@@ -13,13 +13,27 @@ const Signup = lazy(() =>
   import('./Signup').then(({ Signup: component }) => ({ default: component })),
 );
 
+const Confirm = lazy(() =>
+  import('./Confirm').then(({ Confirm: component }) => ({ default: component })),
+);
+
 export const SignupRoutes = [
   {
-    path: ROUTES.SIGNUP,
+    path: ROUTES.SIGNUP.SIGNUP,
     element: (
       <UnprotectedRoute to={ROUTES.DASHBOARD.HOME}>
         <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
           <Signup />
+        </GoogleReCaptchaProvider>
+      </UnprotectedRoute>
+    ),
+  },
+  {
+    path: ROUTES.SIGNUP.CONFIRM,
+    element: (
+      <UnprotectedRoute to={ROUTES.DASHBOARD.HOME}>
+        <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+          <Confirm />
         </GoogleReCaptchaProvider>
       </UnprotectedRoute>
     ),

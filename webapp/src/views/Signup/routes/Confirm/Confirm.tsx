@@ -1,17 +1,16 @@
 import { Trans, useTranslation } from 'react-i18next';
-import { Heading, RouterLink, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { FullscreenClear } from 'layouts/FullscreenClear';
+import { Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { Column } from 'simple-flexbox';
 import { LangSelector } from 'components/molecules';
-import { ROUTES } from 'routes/paths';
-import { SignupForm } from './SignupForm';
+import { ConfirmForm } from './ConfirmForm';
 
-export const Signup = () => {
+export const Confirm = () => {
   const { t } = useTranslation();
 
   return (
     <FullscreenClear>
-      <Heading textAlign="center">{t('common.sign_up')}</Heading>
+      <Heading textAlign="center">{t('common.sign_up_confirm')}</Heading>
 
       <Spacer space="small" />
 
@@ -20,12 +19,27 @@ export const Signup = () => {
         fontColor="gray400"
         textAlign="center"
       >
-        {t('page.signup.description')}
+        <Trans
+          i18nKey="page.confirm.description"
+          components={{
+            bold: (
+              <Text
+                fontSize="0.875"
+                fontColor="gray400"
+                textAlign="center"
+                fontWeight="700"
+              />
+            ),
+          }}
+          values={{
+            email: 'dupa@gmail.com',
+          }}
+        />
       </Text>
 
       <Spacer space="large" />
 
-      <SignupForm />
+      <ConfirmForm />
 
       <Spacer />
 
@@ -35,11 +49,11 @@ export const Signup = () => {
         textAlign="center"
       >
         <Trans
-          i18nKey="page.signup.already_have_account"
+          i18nKey="page.confirm.support"
           components={{
-            signin: (
-              <RouterLink
-                to={ROUTES.SIGNIN}
+            support: (
+              <Link
+                href="mailto:support@funds-tracker.com"
                 fontColor="blue"
               />
             ),
