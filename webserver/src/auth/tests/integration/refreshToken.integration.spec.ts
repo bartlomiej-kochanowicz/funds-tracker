@@ -67,32 +67,6 @@ describe('refresh token', () => {
     });
   });
 
-  describe('when refresh mutation is executed and user does not exist', () => {
-    let resStatus: number;
-
-    beforeAll(async () => {
-      const { response } = await request<{ refreshToken: Refresh }>(
-        integrationTestManager.httpServer,
-      )
-        .set('Cookie', 'refreshToken=fakeRefreshToken')
-        .mutate(
-          gql`
-            mutation RefreshToken {
-              refreshToken {
-                success
-              }
-            }
-          `,
-        );
-
-      resStatus = getGqlErrorStatus(response);
-    });
-
-    it('should return 401 status', async () => {
-      expect(resStatus).toBe(401);
-    });
-  });
-
   describe('when refresh mutation is executed and user is not confirmed', () => {
     let resStatus: number;
 
