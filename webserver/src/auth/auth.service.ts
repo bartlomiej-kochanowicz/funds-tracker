@@ -144,6 +144,10 @@ export class AuthService {
 
     if (!isPasswordsMatches) throw new ForbiddenException('Wrong password.');
 
+    if (user.confirmationCodeHash) {
+      throw new ForbiddenException('User not confirmed.');
+    }
+
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
     await this.addSession(user.uuid, refreshToken, this.genereteIpName(res));
@@ -251,10 +255,15 @@ export class AuthService {
           sessions: true,
           uuid: true,
           email: true,
+          confirmationCodeHash: true,
         },
       });
 
       if (!user || !user.sessions.length) throw new ForbiddenException();
+
+      if (user.confirmationCodeHash) {
+        throw new ForbiddenException('User not confirmed.');
+      }
 
       const rtMatch = user.sessions.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
 

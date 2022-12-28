@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { Signup, User } from 'auth/entities';
+import { Signup } from 'auth/entities';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';

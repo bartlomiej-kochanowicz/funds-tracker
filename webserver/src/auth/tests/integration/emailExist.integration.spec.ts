@@ -4,7 +4,7 @@ import { Email } from 'auth/entities';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
 
-describe('signin local', () => {
+describe('exist email', () => {
   const integrationTestManager = new IntegrationTestManager();
 
   beforeAll(async () => {

@@ -4,7 +4,6 @@ import request from 'supertest-graphql';
 import * as bcrypt from 'bcrypt';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
-import { testUser } from 'common/tests/stubs/testUser.stub';
 import { logoutStub1, logoutStub2 } from 'auth/tests/stubs/logout.stub';
 import { Response } from 'express';
 
