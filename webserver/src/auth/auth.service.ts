@@ -218,7 +218,7 @@ export class AuthService {
       );
 
       await this.prisma.session.deleteMany({
-        where: { name: this.genereteIpName(res), rtHash: session.rtHash },
+        where: { rtHash: session.rtHash },
       });
 
       res.clearCookie(COOKIE_NAMES.ACCESS_TOKEN, {

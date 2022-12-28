@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
-import { logoutStub } from 'auth/tests/stubs/logout.stub';
+import { logoutStub1, logoutStub2 } from 'auth/tests/stubs/logout.stub';
 import { Response } from 'express';
 
 describe('logout', () => {
@@ -23,11 +23,32 @@ describe('logout', () => {
     let logout: Logout;
 
     beforeAll(async () => {
+      const res = {} as Response;
+
+      res.req = {} as any;
+
+      res.req.headers = {
+        'user-agent': 'user-to-logout-session',
+      };
+
+      res.req.ip = '::ffff:127.0.0.1';
+
+      res.cookie = (): any => {};
+
+      // sign up new user to have new user in database for logout
+      await integrationTestManager.getAuthService().signupLocal(logoutStub1);
+
+      // confirm user
+      const { uuid } = await integrationTestManager
+        .getAuthService()
+        .confirmSignup({ email: logoutStub1.email, token: logoutStub1.token, code: '123456' }, res);
+
+      const { accessToken, refreshToken } = await integrationTestManager
+        .getAuthService()
+        .signinLocalForTests(uuid, '::ffff:127.0.0.1-user-to-logout-session');
+
       const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
-        .set(
-          'Cookie',
-          `accessToken=${integrationTestManager.getAccessToken()}; refreshToken=${integrationTestManager.getRefreshToken()}`,
-        )
+        .set('Cookie', `accessToken=${accessToken}; refreshToken=${refreshToken}`)
         .set('user-agent', 'main-user-session')
         .mutate(
           gql`
@@ -54,7 +75,7 @@ describe('logout', () => {
 
       const user = await integrationTestManager.getPrismaService().user.findUnique({
         where: {
-          email: testUser.email,
+          email: logoutStub1.email,
         },
         select: {
           sessions: true,
@@ -85,13 +106,13 @@ describe('logout', () => {
 
       res.cookie = (): any => {};
 
-      // sign up new user
-      await integrationTestManager.getAuthService().signupLocal(logoutStub);
+      // sign up new user to have user in database
+      await integrationTestManager.getAuthService().signupLocal(logoutStub2);
 
       // confirm user
       const { uuid } = await integrationTestManager
         .getAuthService()
-        .confirmSignup({ email: logoutStub.email, token: logoutStub.token, code: '123456' }, res);
+        .confirmSignup({ email: logoutStub2.email, token: logoutStub2.token, code: '123456' }, res);
 
       const { accessToken, refreshToken } = await integrationTestManager
         .getAuthService()
@@ -103,7 +124,7 @@ describe('logout', () => {
 
       await integrationTestManager
         .getPrismaService()
-        .user.delete({ where: { email: logoutStub.email } });
+        .user.delete({ where: { email: logoutStub2.email } });
 
       const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
         .set('Cookie', `accessToken=${accessToken}; refreshToken=${refreshToken}`)
