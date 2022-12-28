@@ -4,6 +4,7 @@ import { User } from 'auth/entities';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
+import { signinUserStub } from 'auth/tests/stubs/signinLocal.stup';
 
 describe('signin local', () => {
   const integrationTestManager = new IntegrationTestManager();
@@ -49,6 +50,42 @@ describe('signin local', () => {
           name: testUser.name,
           email: testUser.email,
         });
+      });
+    });
+  });
+
+  describe('given the user exists but it is not confirmed', () => {
+    describe('when a signinLocal mutation is executed', () => {
+      let resStatus: number;
+
+      beforeAll(async () => {
+        // sign up new user to have new user in database for confirm action
+        await integrationTestManager.getAuthService().signupLocal(signinUserStub);
+
+        const { response } = await request<{ signinLocal: User }>(integrationTestManager.httpServer)
+          .mutate(
+            gql`
+              mutation SigninLocal($data: SigninInput!) {
+                signinLocal(data: $data) {
+                  email
+                  name
+                }
+              }
+            `,
+          )
+          .variables({
+            data: {
+              email: signinUserStub.email,
+              password: signinUserStub.password,
+              token: signinUserStub.token,
+            },
+          });
+
+        resStatus = getGqlErrorStatus(response);
+      });
+
+      it('should return 403 status', async () => {
+        expect(resStatus).toBe(403);
       });
     });
   });

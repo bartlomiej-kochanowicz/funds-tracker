@@ -38,13 +38,13 @@ describe('logout', () => {
       await integrationTestManager.getAuthService().signupLocal(logoutStub1);
 
       // confirm user
-      const { uuid } = await integrationTestManager
+      const { email } = await integrationTestManager
         .getAuthService()
         .confirmSignup({ email: logoutStub1.email, token: logoutStub1.token, code: '123456' }, res);
 
       const { accessToken, refreshToken } = await integrationTestManager
         .getAuthService()
-        .signinLocalForTests(uuid, '::ffff:127.0.0.1-user-to-logout-session');
+        .signinLocalForTests(email, '::ffff:127.0.0.1-user-to-logout-session');
 
       const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
         .set('Cookie', `accessToken=${accessToken}; refreshToken=${refreshToken}`)
@@ -109,13 +109,13 @@ describe('logout', () => {
       await integrationTestManager.getAuthService().signupLocal(logoutStub2);
 
       // confirm user
-      const { uuid } = await integrationTestManager
+      const { uuid, email } = await integrationTestManager
         .getAuthService()
         .confirmSignup({ email: logoutStub2.email, token: logoutStub2.token, code: '123456' }, res);
 
       const { accessToken, refreshToken } = await integrationTestManager
         .getAuthService()
-        .signinLocalForTests(uuid, '::ffff:127.0.0.1-logout-user-session');
+        .signinLocalForTests(email, '::ffff:127.0.0.1-logout-user-session');
 
       await integrationTestManager
         .getPrismaService()

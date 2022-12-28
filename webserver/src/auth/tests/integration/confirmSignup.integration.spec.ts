@@ -3,7 +3,6 @@ import request from 'supertest-graphql';
 import { User } from 'auth/entities';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
-import { Response } from 'express';
 import { signupUserStub, confirmUserStub } from 'auth/tests/stubs/confirmSignup.stub';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
 
@@ -12,21 +11,6 @@ describe('confirm signup', () => {
 
   beforeAll(async () => {
     await integrationTestManager.beforeAll();
-
-    const res = {} as Response;
-
-    res.req = {} as any;
-
-    res.req.headers = {
-      'user-agent': 'user-to-confirm-session',
-    };
-
-    res.req.ip = '::ffff:127.0.0.1';
-
-    res.cookie = (): any => {};
-
-    // sign up new user to have new user in database for confirm action
-    await integrationTestManager.getAuthService().signupLocal(signupUserStub);
   });
 
   afterAll(async () => {
@@ -38,6 +22,9 @@ describe('confirm signup', () => {
       let confirmedUser: User;
 
       beforeAll(async () => {
+        // sign up new user to have new user in database for confirm action
+        await integrationTestManager.getAuthService().signupLocal(signupUserStub);
+
         const response = await request<{ confirmSignup: User }>(integrationTestManager.httpServer)
           .mutate(
             gql`

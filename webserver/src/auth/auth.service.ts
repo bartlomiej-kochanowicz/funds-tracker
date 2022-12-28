@@ -172,10 +172,10 @@ export class AuthService {
   }
 
   async signinLocalForTests(
-    uuid: string,
+    email: string,
     sessionName: string,
   ): Promise<{ accessToken: string; refreshToken: string }> {
-    const user = await this.prisma.user.findUnique({ where: { uuid } });
+    const user = await this.prisma.user.findUnique({ where: { email } });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
@@ -248,55 +248,49 @@ export class AuthService {
   }
 
   async refreshToken(userId: string, rt: string, res: Response): Promise<Refresh> {
-    try {
-      const user = await this.prisma.user.findUnique({
-        where: { uuid: userId },
-        select: {
-          sessions: true,
-          uuid: true,
-          email: true,
-          confirmationCodeHash: true,
-        },
-      });
+    const user = await this.prisma.user.findUnique({
+      where: { uuid: userId },
+      select: {
+        sessions: true,
+        uuid: true,
+        email: true,
+        confirmationCodeHash: true,
+      },
+    });
 
-      if (!user || !user.sessions.length) throw new ForbiddenException();
+    if (!user || !user.sessions.length) throw new ForbiddenException();
 
-      if (user.confirmationCodeHash) {
-        throw new ForbiddenException('User not confirmed.');
-      }
-
-      const rtMatch = user.sessions.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
-
-      if (!rtMatch) throw new ForbiddenException();
-
-      const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
-
-      await this.updateSession(user.uuid, refreshToken, rtMatch.rtHash);
-
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['15DAYS'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['15DAYS'],
-      });
-
-      return {
-        success: true,
-      };
-    } catch {
-      return {
-        success: false,
-      };
+    if (user.confirmationCodeHash) {
+      throw new ForbiddenException('User not confirmed.');
     }
+
+    const rtMatch = user.sessions.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
+
+    if (!rtMatch) throw new ForbiddenException();
+
+    const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
+
+    await this.updateSession(user.uuid, refreshToken, rtMatch.rtHash);
+
+    res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+      maxAge: EXPIRES['15MIN'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
+
+    res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+      maxAge: EXPIRES['15DAYS'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
+
+    res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+      maxAge: EXPIRES['15DAYS'],
+    });
+
+    return {
+      success: true,
+    };
   }
 
   private async addSession(userId: string, newRt: string, name: string): Promise<void> {
