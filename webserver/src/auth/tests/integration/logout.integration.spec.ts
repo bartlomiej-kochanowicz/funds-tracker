@@ -167,7 +167,7 @@ describe('logout', () => {
       resStatus = getGqlErrorStatus(response);
     });
 
-    it('should return 401 status code', async () => {
+    it('should resolve with 401 status code', async () => {
       expect(resStatus).toBe(401);
     });
   });
