@@ -8,16 +8,20 @@ import {
   PaddingMixinProps,
 } from 'styles/mixins';
 
-type LinkProps = {
-  href?: string;
+type ButtonLinkProps = {
   display?: 'inline' | 'inline-block' | 'block';
 } & FontableProps &
   MarginMixinProps &
   PaddingMixinProps;
 
-export const Link = styled.a.withConfig({
+export const ButtonLink = styled.button.withConfig({
   shouldForwardProp: prop => !['fontColor'].includes(prop),
-})<LinkProps>`
+})<ButtonLinkProps>`
+  background: none;
+  border: none;
+  padding: unset;
+  margin: unset;
+
   ${fontable}
   ${marginMixin}
   ${paddingMixin}
@@ -30,7 +34,8 @@ export const Link = styled.a.withConfig({
 
   &:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 `;
 
-Link.displayName = 'Link';
+ButtonLink.displayName = 'ButtonLink';

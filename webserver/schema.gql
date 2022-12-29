@@ -41,6 +41,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type SendCode {
+  """Send code successful."""
+  success: Boolean!
+}
+
 type CashAccount {
   """Cash account uuid."""
   uuid: String!
@@ -90,6 +95,7 @@ input EmailInput {
 
 type Mutation {
   signupLocal(data: SignupInput!): Signup!
+  sendCode(data: SendCodeInput!): SendCode!
   confirmSignup(data: ConfirmSignupInput!): User!
   signinLocal(data: SigninInput!): User!
   logout: Logout!
@@ -111,6 +117,14 @@ input SignupInput {
 
   """Password."""
   password: String!
+
+  """Token."""
+  token: String!
+}
+
+input SendCodeInput {
+  """Email."""
+  email: String!
 
   """Token."""
   token: String!

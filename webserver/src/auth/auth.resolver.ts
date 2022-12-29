@@ -5,7 +5,8 @@ import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { Email, Logout, Refresh, Signup, User } from './entities';
-import { ConfirmSignupInput, EmailInput, SigninInput, SignupInput } from './inputs';
+import { SendCode } from './entities/sendCode.entity';
+import { ConfirmSignupInput, EmailInput, SendCodeInput, SigninInput, SignupInput } from './inputs';
 
 @Resolver(() => User)
 export class AuthResolver {
@@ -18,6 +19,15 @@ export class AuthResolver {
     signupInput: SignupInput,
   ): Promise<Signup> {
     return this.authService.signupLocal(signupInput);
+  }
+
+  @Public()
+  @Mutation(() => SendCode)
+  sendCode(
+    @Args('data')
+    sendCodeInput: SendCodeInput,
+  ): Promise<Signup> {
+    return this.authService.sendCode(sendCodeInput);
   }
 
   @Public()

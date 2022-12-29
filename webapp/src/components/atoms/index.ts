@@ -1,6 +1,7 @@
 export { Avatar } from './Avatar';
 export { Box } from './Box';
 export { Button } from './Button';
+export { ButtonLink } from './ButtonLink';
 export { Checkbox } from './Checkbox';
 export { Dropdown } from './Dropdown';
 export { Heading } from './Heading';

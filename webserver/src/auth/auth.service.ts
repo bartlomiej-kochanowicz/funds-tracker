@@ -12,7 +12,7 @@ import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { SendGridService } from 'send-grid/send-grid.service';
 import emailConfirmationHbs from 'common/handlebars/email-confirmation.hbs';
 import { Tokens } from './types';
-import { ConfirmSignupInput, EmailInput, SigninInput, SignupInput } from './inputs';
+import { ConfirmSignupInput, EmailInput, SendCodeInput, SigninInput, SignupInput } from './inputs';
 import { Email, Logout, Refresh, Signup, User } from './entities';
 
 @Injectable()
@@ -55,21 +55,39 @@ export class AuthService {
       },
     });
 
-    const mail = {
-      to: email,
-      subject: 'Your Funds Tracker confirmation code',
-      from: 'noreply@funds-tracker.com',
-      html: this.sendgridService.getHtml(emailConfirmationHbs, {
-        email,
-        code: confirmationCode,
-        uuid,
-      }),
-    };
-
-    const success = IS_TEST || (await this.sendgridService.send(mail));
+    if (!IS_TEST) {
+      await this.sendEmailWithConfirmCode(email, uuid, confirmationCode);
+    }
 
     return {
-      success,
+      success: true,
+    };
+  }
+
+  async sendCode(sendCode: SendCodeInput) {
+    const { email } = sendCode;
+
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      throw new ForbiddenException('User not found.');
+    }
+
+    const confirmationCode = this.generateConfirmationCode();
+
+    const hashedConfirmationCode = await this.hashData(confirmationCode);
+
+    await this.prisma.user.update({
+      where: { uuid: user.uuid },
+      data: { confirmationCodeHash: hashedConfirmationCode },
+    });
+
+    if (!IS_TEST) {
+      await this.sendEmailWithConfirmCode(email, user.uuid, confirmationCode);
+    }
+
+    return {
+      success: true,
     };
   }
 
@@ -291,6 +309,21 @@ export class AuthService {
     return {
       success: true,
     };
+  }
+
+  private async sendEmailWithConfirmCode(email, uuid, code): Promise<void> {
+    const mail = {
+      to: email,
+      subject: 'Your Funds Tracker confirmation code',
+      from: 'noreply@funds-tracker.com',
+      html: this.sendgridService.getHtml(emailConfirmationHbs, {
+        email,
+        code,
+        uuid,
+      }),
+    };
+
+    await this.sendgridService.send(mail);
   }
 
   private async addSession(userId: string, newRt: string, name: string): Promise<void> {

@@ -1,3 +1,4 @@
+export * from './ConfirmSignup';
 export * from './Logout';
 export * from './RefreshToken';
 export * from './Signin';

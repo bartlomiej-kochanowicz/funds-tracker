@@ -1,12 +1,30 @@
+import { useCallback } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import { useLocation, Navigate } from 'react-router-dom';
 import { FullscreenClear } from 'layouts/FullscreenClear';
-import { Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
+import { ButtonLink, Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { Column } from 'simple-flexbox';
 import { LangSelector } from 'components/molecules';
+import { ROUTES } from 'routes/paths';
 import { ConfirmForm } from './ConfirmForm';
 
 export const Confirm = () => {
   const { t } = useTranslation();
+
+  const { state } = useLocation();
+
+  const handleResendCode = useCallback(() => {
+    console.log(state?.email);
+  }, [state]);
+
+  if (!state?.email) {
+    return (
+      <Navigate
+        to={ROUTES.SIGNIN}
+        replace
+      />
+    );
+  }
 
   return (
     <FullscreenClear>
@@ -32,14 +50,14 @@ export const Confirm = () => {
             ),
           }}
           values={{
-            email: 'dupa@gmail.com',
+            email: state.email,
           }}
         />
       </Text>
 
       <Spacer space="large" />
 
-      <ConfirmForm />
+      <ConfirmForm email={state.email} />
 
       <Spacer />
 
@@ -54,6 +72,12 @@ export const Confirm = () => {
             support: (
               <Link
                 href="mailto:support@funds-tracker.com"
+                fontColor="blue"
+              />
+            ),
+            code: (
+              <ButtonLink
+                onClick={handleResendCode}
                 fontColor="blue"
               />
             ),

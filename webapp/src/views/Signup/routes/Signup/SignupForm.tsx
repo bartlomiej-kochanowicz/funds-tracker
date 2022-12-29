@@ -3,7 +3,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SIGNUP } from 'graphql/mutations';
 import { EMAIL_EXIST } from 'graphql/query';
 import { Button, Loader, Spacer } from 'components/atoms';
-import { useUserContext } from 'contexts/UserContext';
 import { showErrorToast } from 'helpers/showToast';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { useCallback, useState } from 'react';
@@ -37,8 +36,6 @@ const SignupStateMachine = new StateMachine<FormStates, FormActions>(
 export const SignupForm = () => {
   const { t } = useTranslation();
 
-  const { getUser } = useUserContext();
-
   const [token, setToken] = useState<string>('');
   const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
 
@@ -60,6 +57,7 @@ export const SignupForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
+    getValues,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema(compareState(states.passwords))),
@@ -73,13 +71,22 @@ export const SignupForm = () => {
         updateState(actions.CHANGE_TO_PASSWORDS);
       }
     },
+    onError: error => {
+      if (error?.message === 'Failed to fetch') {
+        showErrorToast(t('service.unknown_error'));
+      }
+    },
   });
 
   const [signup] = useMutation<SignupMutation, SignupMutationVariables>(SIGNUP, {
-    onCompleted: async () => {
-      await getUser();
+    onCompleted: async data => {
+      if (data.signupLocal.success) {
+        const { userEmail } = getValues();
 
-      navigate(ROUTES.INTRODUCTION);
+        navigate(ROUTES.SIGNUP.CONFIRM, { state: { email: userEmail } });
+      } else {
+        setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
+      }
     },
     onError: () => {
       setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
@@ -98,13 +105,9 @@ export const SignupForm = () => {
     }
 
     if (compareState(states.passwords)) {
-      try {
-        await signup({
-          variables: { data: { name: userName, email: userEmail, password: userPassword, token } },
-        });
-      } catch {
-        showErrorToast(t('service.unknown_error'));
-      }
+      await signup({
+        variables: { data: { name: userName, email: userEmail, password: userPassword, token } },
+      });
     }
 
     setRefreshReCaptcha(r => !r);
