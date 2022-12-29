@@ -13,10 +13,6 @@ import { SendCodeMutation, SendCodeMutationVariables } from '__generated__/graph
 import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { ConfirmForm } from './ConfirmForm';
 
-type LocationState = {
-  email: string;
-};
-
 export const Confirm = () => {
   const { t } = useTranslation();
 
@@ -27,16 +23,14 @@ export const Confirm = () => {
 
   const location = useLocation();
 
-  location.state = {};
-
-  const { email } = location.state as LocationState;
+  const email = location?.state?.email as string;
 
   const [sendCode] = useMutation<SendCodeMutation, SendCodeMutationVariables>(SEND_CODE, {
     onCompleted: async () => {
-      showSuccessToast('dupa');
+      showSuccessToast(t('toast.send_confirm_code.success'));
     },
     onError: () => {
-      showErrorToast('error elo');
+      showErrorToast(t('toast.send_confirm_code.failure'));
     },
   });
 

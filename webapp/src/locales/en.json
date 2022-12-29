@@ -88,5 +88,7 @@
   "form.field.required": "This field is required",
   "form.field.required.characters": "Must contain exactly {{quantity}} characters",
   "form.field.required.number": "Must be a number",
-  "form.button.submit": "Submit"
+  "form.button.submit": "Submit",
+  "toast.send_confirm_code.success": "Code sent successfully",
+  "toast.send_confirm_code.failure": "Code sending failed"
 }
