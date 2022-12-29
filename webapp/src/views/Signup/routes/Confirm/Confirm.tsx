@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, Navigate } from 'react-router-dom';
 import { FullscreenClear } from 'layouts/FullscreenClear';
@@ -6,18 +6,47 @@ import { ButtonLink, Heading, Link, Spacer, Text, ThemeSwitcher } from 'componen
 import { Column } from 'simple-flexbox';
 import { LangSelector } from 'components/molecules';
 import { ROUTES } from 'routes/paths';
+import { SEND_CODE } from 'graphql/mutations/SendCode';
+import { useMutation } from '@apollo/client';
+import { showErrorToast, showSuccessToast } from 'helpers/showToast';
+import { SendCodeMutation, SendCodeMutationVariables } from '__generated__/graphql';
+import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { ConfirmForm } from './ConfirmForm';
+
+type LocationState = {
+  email: string;
+};
 
 export const Confirm = () => {
   const { t } = useTranslation();
 
-  const { state } = useLocation();
+  const [token, setToken] = useState<string>('');
+  const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
 
-  const handleResendCode = useCallback(() => {
-    console.log(state?.email);
-  }, [state]);
+  const onVerify = useCallback(setToken, [setToken]);
 
-  if (!state?.email) {
+  const location = useLocation();
+
+  location.state = {};
+
+  const { email } = location.state as LocationState;
+
+  const [sendCode] = useMutation<SendCodeMutation, SendCodeMutationVariables>(SEND_CODE, {
+    onCompleted: async () => {
+      showSuccessToast('dupa');
+    },
+    onError: () => {
+      showErrorToast('error elo');
+    },
+  });
+
+  const handleResendCode = useCallback(async () => {
+    await sendCode({ variables: { data: { email, token } } });
+
+    setRefreshReCaptcha(r => !r);
+  }, [sendCode, email, token]);
+
+  if (!email) {
     return (
       <Navigate
         to={ROUTES.SIGNIN}
@@ -28,6 +57,11 @@ export const Confirm = () => {
 
   return (
     <FullscreenClear>
+      <GoogleReCaptcha
+        onVerify={onVerify}
+        refreshReCaptcha={refreshReCaptcha}
+      />
+
       <Heading textAlign="center">{t('common.sign_up_confirm')}</Heading>
 
       <Spacer space="small" />
@@ -50,14 +84,14 @@ export const Confirm = () => {
             ),
           }}
           values={{
-            email: state.email,
+            email,
           }}
         />
       </Text>
 
       <Spacer space="large" />
 
-      <ConfirmForm email={state.email} />
+      <ConfirmForm email={email} />
 
       <Spacer />
 
