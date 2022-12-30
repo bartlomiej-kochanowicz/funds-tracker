@@ -118,7 +118,7 @@
     <div class="wrapper">
       <div class="wrapper__image">
         <a href="https://funds-tracker.com/">
-          <img class="header-image" src="https://lh3.googleusercontent.com/pw/AL9nZEXWjq-1-wrsUWjzijPQljCHYqk7pYZw-TdssgREjRV5brfGqV_hgcFnI3s9yHt7h1mT4fFZ-TThgwSqlKXMNpcrhgyPi3IgUvRTDElG_RC3ClJ5BuiAN6kFD0xQB8TrYqFl3Ck6dI2BiMipd7w1k4BvEg=w1800-h155-no?authuser=0" />
+          <img class="header-image" src="https://lh3.googleusercontent.com/pw/AL9nZEXiwz6WYifZ5BySv6Gl1TS8189cgocc2HuM3_7nhDglK6aIHdsZ8Mb3UQIUAC_VuoZcml7HvfVfh5bF8dMsWs84HbXnFd5yLunGrg42kcFuhGsimwph7pfBG1yabWLGnFsIwqHsXquw-b1NkVAHSeu4Yw=w1800-h155-no?authuser=0" />
         </a>
       </div>
 
@@ -173,7 +173,7 @@ export default `
     <div class="wrapper" style="margin: 0 auto;max-width: 550px;width: 90%;">
       <div class="wrapper__image" style="margin: 0 auto;width: 400px;height: auto;">
         <a href="https://funds-tracker.com/" style="margin: 0;">
-          <img class="header-image" src="https://lh3.googleusercontent.com/pw/AL9nZEXWjq-1-wrsUWjzijPQljCHYqk7pYZw-TdssgREjRV5brfGqV_hgcFnI3s9yHt7h1mT4fFZ-TThgwSqlKXMNpcrhgyPi3IgUvRTDElG_RC3ClJ5BuiAN6kFD0xQB8TrYqFl3Ck6dI2BiMipd7w1k4BvEg=w1800-h155-no?authuser=0" style="margin: 0;width: 400px;height: auto;padding: 24px 0;">
+          <img class="header-image" src="https://lh3.googleusercontent.com/pw/AL9nZEXiwz6WYifZ5BySv6Gl1TS8189cgocc2HuM3_7nhDglK6aIHdsZ8Mb3UQIUAC_VuoZcml7HvfVfh5bF8dMsWs84HbXnFd5yLunGrg42kcFuhGsimwph7pfBG1yabWLGnFsIwqHsXquw-b1NkVAHSeu4Yw=w1800-h155-no?authuser=0" style="margin: 0;width: 400px;height: auto;padding: 24px 0;">
         </a>
       </div>
 
