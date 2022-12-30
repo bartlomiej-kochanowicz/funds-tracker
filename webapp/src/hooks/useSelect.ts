@@ -4,6 +4,7 @@ import {
   FieldValues,
   Path,
   PathValue,
+  UnPackAsyncDefaultValues,
   UseFormRegister,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,7 @@ import { get } from 'utils/get';
 
 interface UseSelectProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;
-  name: Path<Fields>;
+  name: Path<UnPackAsyncDefaultValues<Fields>>;
   defaultValues: Fields;
   errors: FieldErrorsImpl<DeepRequired<Fields>>;
 }
