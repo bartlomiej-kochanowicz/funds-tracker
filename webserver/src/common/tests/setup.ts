@@ -5,6 +5,7 @@ import { AppModule } from 'app.module';
 import { testUser } from 'common/tests/stubs/testUser.stub';
 import { AuthService } from 'auth/auth.service';
 import { Response } from 'express';
+import { ConfirmSignupInput } from 'auth/inputs';
 
 export default async () => {
   const moduleRef = await Test.createTestingModule({
@@ -32,7 +33,15 @@ export default async () => {
 
   res.cookie = (): any => {};
 
-  await authService.signupLocal(testUser, res);
+  await authService.signupLocal(testUser);
+
+  const confirmSignupInput: ConfirmSignupInput = {
+    email: testUser.email,
+    code: '123456',
+    token: testUser.token,
+  };
+
+  await authService.confirmSignup(confirmSignupInput, res);
 
   await app.close();
 };

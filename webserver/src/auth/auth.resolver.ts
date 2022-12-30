@@ -4,21 +4,40 @@ import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { Email, Logout, Refresh, User } from './entities';
-import { EmailInput, SigninInput, SignupInput } from './inputs';
+import { Email, Logout, Refresh, Signup, User } from './entities';
+import { SendCode } from './entities/sendCode.entity';
+import { ConfirmSignupInput, EmailInput, SendCodeInput, SigninInput, SignupInput } from './inputs';
 
 @Resolver(() => User)
 export class AuthResolver {
   constructor(private authService: AuthService) {}
 
   @Public()
-  @Mutation(() => User)
+  @Mutation(() => Signup)
   signupLocal(
     @Args('data')
     signupInput: SignupInput,
+  ): Promise<Signup> {
+    return this.authService.signupLocal(signupInput);
+  }
+
+  @Public()
+  @Mutation(() => SendCode)
+  sendCode(
+    @Args('data')
+    sendCodeInput: SendCodeInput,
+  ): Promise<Signup> {
+    return this.authService.sendCode(sendCodeInput);
+  }
+
+  @Public()
+  @Mutation(() => User)
+  confirmSignup(
+    @Args('data')
+    confirmSignupInput: ConfirmSignupInput,
     @Context('res') res: Response,
   ): Promise<User> {
-    return this.authService.signupLocal(signupInput, res);
+    return this.authService.confirmSignup(confirmSignupInput, res);
   }
 
   @Public()
@@ -42,7 +61,7 @@ export class AuthResolver {
 
   @Query(() => User)
   user(@GetCurrentUserId() userId: string): Promise<User> {
-    return this.authService.getAccount(userId);
+    return this.authService.getUser(userId);
   }
 
   @Mutation(() => Logout)

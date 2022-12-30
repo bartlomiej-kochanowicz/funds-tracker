@@ -1,12 +1,14 @@
 export { Avatar } from './Avatar';
 export { Box } from './Box';
 export { Button } from './Button';
+export { ButtonLink } from './ButtonLink';
 export { Checkbox } from './Checkbox';
 export { Dropdown } from './Dropdown';
 export { Heading } from './Heading';
 export { Input } from './Input';
 export { InstrumentSymbol } from './InstrumentSymbol';
 export { Link } from './Link';
+export { RouterLink } from './RouterLink';
 export { Loader } from './Loader';
 export { Menu } from './Menu';
 export { Select } from './Select';

@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
-import { Spacer, Heading, Text, Link, ThemeSwitcher } from 'components/atoms';
+import { Spacer, Heading, Text, RouterLink, ThemeSwitcher } from 'components/atoms';
 import { ROUTES } from 'routes/paths';
 import { LangSelector } from 'components/molecules';
 import { FullscreenClear } from 'layouts/FullscreenClear';
@@ -38,8 +38,8 @@ export const Signin = () => {
           i18nKey="page.signin.dont_have_account"
           components={{
             signup: (
-              <Link
-                to={ROUTES.SIGNUP}
+              <RouterLink
+                to={ROUTES.SIGNUP.SIGNUP}
                 fontColor="blue"
               />
             ),

@@ -80,5 +80,15 @@
   "add.portfolios.input.placeholder": "e.g. Passive, Active",
   "common.theme_switcher": "Theme switcher",
   "error.component.title": "Couldn’t load ",
-  "error.component.description": "If this issue continues, please contact support."
+  "error.component.description": "If this issue continues, please contact support.",
+  "common.sign_up_confirm": "Confirm your email",
+  "page.confirm.description": "We've sent a verification code to your email address - <bold>{{email}}</bold> Please enter it below to confirm your email address. (Don't forget to check your spam folder.)",
+  "page.confirm.support": "<code>Send code again</code> or if you need additional help, please <support>contact us</support>",
+  "page.confirm.input.placeholder": "Enter 6-digit code",
+  "form.field.required": "This field is required",
+  "form.field.required.characters": "Must contain exactly {{quantity}} characters",
+  "form.field.required.number": "Must be a number",
+  "form.button.submit": "Submit",
+  "toast.send_confirm_code.success": "Confirmation code has been sent to your email.",
+  "toast.send_confirm_code.failure": "Code sending failed. Please try again later."
 }

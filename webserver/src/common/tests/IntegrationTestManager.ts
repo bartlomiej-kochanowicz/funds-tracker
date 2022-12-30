@@ -33,14 +33,14 @@ export class IntegrationTestManager {
     this.prismaService = moduleRef.get<PrismaService>(PrismaService);
     this.authService = moduleRef.get<AuthService>(AuthService);
 
-    const { uuid: userUuid } = await this.prismaService.user.findUnique({
+    const { email } = await this.prismaService.user.findUnique({
       where: {
         email: testUser.email,
       },
     });
 
     const { accessToken, refreshToken } = await this.authService.signinLocalForTests(
-      userUuid,
+      email,
       '::ffff:127.0.0.1-main-user-session',
     );
     this.accessToken = accessToken;

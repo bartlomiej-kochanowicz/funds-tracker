@@ -14,10 +14,14 @@ import { SIGNIN } from 'graphql/mutations';
 import {
   EmailExistQuery,
   EmailExistQueryVariables,
+  SendCodeMutation,
+  SendCodeMutationVariables,
   SigninMutation,
   SigninMutationVariables,
 } from '__generated__/graphql';
 import { useUserContext } from 'contexts/UserContext';
+import { SEND_CODE } from 'graphql/mutations/SendCode';
+import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 
@@ -53,6 +57,7 @@ export const SigninForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
+    getValues,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema(compareState(states.password))),
@@ -71,14 +76,31 @@ export const SigninForm = () => {
     },
   });
 
+  const [sendCode] = useMutation<SendCodeMutation, SendCodeMutationVariables>(SEND_CODE, {
+    onCompleted: async () => {
+      showSuccessToast(t('toast.send_confirm_code.success'));
+    },
+    onError: () => {
+      showErrorToast(t('toast.send_confirm_code.failure'));
+    },
+  });
+
   const [signin] = useMutation<SigninMutation, SigninMutationVariables>(SIGNIN, {
     onCompleted: async () => {
       await getUser();
 
       navigate(ROUTES.DASHBOARD.HOME);
     },
-    onError: error => {
+    onError: async error => {
       setError('userPassword', { type: 'custom', message: error.message });
+
+      if (error.message === 'User not confirmed.') {
+        const { userEmail } = getValues();
+
+        await sendCode({ variables: { data: { email: userEmail, token } } });
+
+        navigate(ROUTES.SIGNUP.CONFIRM, { state: { email: userEmail } });
+      }
     },
   });
 
@@ -107,6 +129,8 @@ export const SigninForm = () => {
     name: 'userPassword',
     errors,
   });
+
+  const userNotConfirmed = errors.userPassword?.message === 'User not confirmed.';
 
   return (
     <Form
@@ -157,7 +181,12 @@ export const SigninForm = () => {
 
         {!isSubmitting && compareState(states.email) && t('common.next')}
 
-        {!isSubmitting && compareState(states.password) && t('common.sign_in')}
+        {!isSubmitting && compareState(states.password) && !userNotConfirmed && t('common.sign_in')}
+
+        {!isSubmitting &&
+          compareState(states.password) &&
+          userNotConfirmed &&
+          t('common.sign_up_confirm')}
       </Button>
     </Form>
   );

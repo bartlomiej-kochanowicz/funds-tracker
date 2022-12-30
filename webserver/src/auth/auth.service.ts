@@ -9,9 +9,11 @@ import { IS_DEVELOPMENT, IS_TEST } from 'common/config/env';
 import { catchError, firstValueFrom } from 'rxjs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
+import { SendGridService } from 'send-grid/send-grid.service';
+import emailConfirmationHbs from 'common/handlebars/email-confirmation.hbs';
 import { Tokens } from './types';
-import { EmailInput, SigninInput, SignupInput } from './inputs';
-import { Email, Logout, Refresh, User } from './entities';
+import { ConfirmSignupInput, EmailInput, SendCodeInput, SigninInput, SignupInput } from './inputs';
+import { Email, Logout, Refresh, Signup, User } from './entities';
 
 @Injectable()
 export class AuthService {
@@ -20,9 +22,10 @@ export class AuthService {
     private jwtService: JwtService,
     private readonly httpService: HttpService,
     private config: ConfigService,
+    private readonly sendgridService: SendGridService,
   ) {}
 
-  async signupLocal(signupInput: SignupInput, res: Response): Promise<User> {
+  async signupLocal(signupInput: SignupInput): Promise<Signup> {
     const { email, password, name, token } = signupInput;
 
     const isHuman = await this.validateHuman(token);
@@ -39,12 +42,94 @@ export class AuthService {
       throw new ForbiddenException('Email already in use.');
     }
 
-    const user = await this.prisma.user.create({
+    const confirmationCode = this.generateConfirmationCode();
+
+    const hashedConfirmationCode = await this.hashData(confirmationCode);
+
+    const { uuid } = await this.prisma.user.create({
       data: {
         email,
         name,
         password: hashedPwd,
+        confirmationCodeHash: hashedConfirmationCode,
       },
+    });
+
+    if (!IS_TEST) {
+      await this.sendEmailWithConfirmCode(email, uuid, confirmationCode);
+    }
+
+    return {
+      success: true,
+    };
+  }
+
+  async sendCode(sendCode: SendCodeInput) {
+    const { email, token } = sendCode;
+
+    const isHuman = await this.validateHuman(token);
+
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
+    }
+
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      throw new ForbiddenException('User not found.');
+    }
+
+    if (!user.confirmationCodeHash) {
+      throw new ForbiddenException('User already confirmed.');
+    }
+
+    const confirmationCode = this.generateConfirmationCode();
+
+    const hashedConfirmationCode = await this.hashData(confirmationCode);
+
+    await this.prisma.user.update({
+      where: { uuid: user.uuid },
+      data: { confirmationCodeHash: hashedConfirmationCode },
+    });
+
+    if (!IS_TEST) {
+      await this.sendEmailWithConfirmCode(email, user.uuid, confirmationCode);
+    }
+
+    return {
+      success: true,
+    };
+  }
+
+  async confirmSignup(confirmSignupInput: ConfirmSignupInput, res: Response): Promise<User> {
+    const { code, email, token } = confirmSignupInput;
+
+    const isHuman = await this.validateHuman(token);
+
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
+    }
+
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      throw new ForbiddenException('User not found.');
+    }
+
+    if (!user.confirmationCodeHash) {
+      throw new ForbiddenException('User already confirmed.');
+    }
+
+    // allways pass for tests enviroment
+    const isPasswordsMatches = IS_TEST || (await bcrypt.compare(code, user.confirmationCodeHash));
+
+    if (!isPasswordsMatches) {
+      throw new ForbiddenException('Wrong confirmation code.');
+    }
+
+    await this.prisma.user.update({
+      where: { uuid: user.uuid },
+      data: { confirmationCodeHash: null },
     });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
@@ -87,6 +172,10 @@ export class AuthService {
 
     if (!isPasswordsMatches) throw new ForbiddenException('Wrong password.');
 
+    if (user.confirmationCodeHash) {
+      throw new ForbiddenException('User not confirmed.');
+    }
+
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
     await this.addSession(user.uuid, refreshToken, this.genereteIpName(res));
@@ -111,10 +200,10 @@ export class AuthService {
   }
 
   async signinLocalForTests(
-    uuid: string,
+    email: string,
     sessionName: string,
   ): Promise<{ accessToken: string; refreshToken: string }> {
-    const user = await this.prisma.user.findUnique({ where: { uuid } });
+    const user = await this.prisma.user.findUnique({ where: { email } });
 
     const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
 
@@ -142,7 +231,7 @@ export class AuthService {
     };
   }
 
-  async getAccount(userId: string): Promise<User> {
+  async getUser(userId: string): Promise<User> {
     const user = await this.prisma.user.findUnique({
       where: { uuid: userId },
     });
@@ -161,7 +250,7 @@ export class AuthService {
       );
 
       await this.prisma.session.deleteMany({
-        where: { name: this.genereteIpName(res), rtHash: session.rtHash },
+        where: { rtHash: session.rtHash },
       });
 
       res.clearCookie(COOKIE_NAMES.ACCESS_TOKEN, {
@@ -187,50 +276,64 @@ export class AuthService {
   }
 
   async refreshToken(userId: string, rt: string, res: Response): Promise<Refresh> {
-    try {
-      const user = await this.prisma.user.findUnique({
-        where: { uuid: userId },
-        select: {
-          sessions: true,
-          uuid: true,
-          email: true,
-        },
-      });
+    const user = await this.prisma.user.findUnique({
+      where: { uuid: userId },
+      select: {
+        sessions: true,
+        uuid: true,
+        email: true,
+        confirmationCodeHash: true,
+      },
+    });
 
-      if (!user || !user.sessions.length) throw new ForbiddenException();
+    if (!user || !user.sessions.length) throw new ForbiddenException();
 
-      const rtMatch = user.sessions.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
-
-      if (!rtMatch) throw new ForbiddenException();
-
-      const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
-
-      await this.updateSession(user.uuid, refreshToken, rtMatch.rtHash);
-
-      res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
-        maxAge: EXPIRES['15MIN'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
-        maxAge: EXPIRES['15DAYS'],
-        secure: !IS_DEVELOPMENT,
-        httpOnly: true,
-      });
-
-      res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
-        maxAge: EXPIRES['15DAYS'],
-      });
-
-      return {
-        success: true,
-      };
-    } catch {
-      return {
-        success: false,
-      };
+    if (user.confirmationCodeHash) {
+      throw new ForbiddenException('User not confirmed.');
     }
+
+    const rtMatch = user.sessions.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));
+
+    if (!rtMatch) throw new ForbiddenException();
+
+    const { accessToken, refreshToken } = await this.getTokens(user.uuid, user.email);
+
+    await this.updateSession(user.uuid, refreshToken, rtMatch.rtHash);
+
+    res.cookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, {
+      maxAge: EXPIRES['15MIN'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
+
+    res.cookie(COOKIE_NAMES.REFRESH_TOKEN, refreshToken, {
+      maxAge: EXPIRES['15DAYS'],
+      secure: !IS_DEVELOPMENT,
+      httpOnly: true,
+    });
+
+    res.cookie(COOKIE_NAMES.IS_LOGGED_IN, true, {
+      maxAge: EXPIRES['15DAYS'],
+    });
+
+    return {
+      success: true,
+    };
+  }
+
+  private async sendEmailWithConfirmCode(email, uuid, code): Promise<void> {
+    const mail = {
+      to: email,
+      subject: 'Your Funds Tracker confirmation code',
+      from: 'noreply@funds-tracker.com',
+      html: this.sendgridService.getHtml(emailConfirmationHbs, {
+        email,
+        code,
+        uuid,
+      }),
+    };
+
+    await this.sendgridService.send(mail);
   }
 
   private async addSession(userId: string, newRt: string, name: string): Promise<void> {
@@ -298,10 +401,10 @@ export class AuthService {
     return `${ip}-${userAgentPropertiesExist ? name : parserResults.ua || 'unknown'}`;
   }
 
-  private async hashData(pwd: string): Promise<string> {
+  private async hashData(data: string): Promise<string> {
     const salt = await bcrypt.genSalt(10);
 
-    return bcrypt.hash(pwd, salt);
+    return bcrypt.hash(data, salt);
   }
 
   private async getTokens(userId: string, email: string): Promise<Tokens> {
@@ -320,6 +423,10 @@ export class AuthService {
       accessToken: at,
       refreshToken: rt,
     };
+  }
+
+  private generateConfirmationCode(): string {
+    return Math.floor(100000 + Math.random() * 900000).toString();
   }
 
   private async validateHuman(token: string): Promise<boolean> {

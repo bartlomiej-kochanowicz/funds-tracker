@@ -1,7 +1,10 @@
 export const ROUTES = {
   HOME: '/',
   SIGNIN: '/signin',
-  SIGNUP: '/signup',
+  SIGNUP: {
+    SIGNUP: '/signup',
+    CONFIRM: '/signup/confirm',
+  },
   INTRODUCTION: '/introduction',
   DASHBOARD: {
     HOME: '/dashboard',

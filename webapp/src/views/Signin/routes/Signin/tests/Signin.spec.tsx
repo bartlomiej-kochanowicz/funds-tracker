@@ -3,8 +3,14 @@ import { EMAIL_EXIST } from 'graphql/query';
 import { GraphQLError } from 'graphql';
 import { useEffect } from 'react';
 import { waitFor } from 'utils/test-utils';
+import { ROUTES } from 'routes/paths';
+import { SEND_CODE } from 'graphql/mutations/SendCode';
+import { showSuccessToast, showErrorToast } from 'helpers/showToast';
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
+
+const mockedShowSuccessToast = showSuccessToast as jest.MockedFunction<typeof showSuccessToast>;
+const mockedShowErrorToast = showErrorToast as jest.MockedFunction<typeof showErrorToast>;
 
 jest.mock('react-google-recaptcha-v3', () => ({
   GoogleReCaptcha: ({
@@ -28,6 +34,8 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
+
+jest.mock('helpers/showToast', () => ({ showErrorToast: jest.fn(), showSuccessToast: jest.fn() }));
 
 describe('Signin tests', () => {
   it('sign in properly', async () => {
@@ -92,7 +100,9 @@ describe('Signin tests', () => {
     await signinPO.submitForm();
 
     // then
-    await waitFor(() => signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalled());
+    await waitFor(() =>
+      signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalledWith(ROUTES.DASHBOARD.HOME),
+    );
   });
 
   it('shows error when email is invalid', async () => {
@@ -201,5 +211,183 @@ describe('Signin tests', () => {
     // then
     await signinPO.expectLoaderDisappeared();
     await signinPO.expectTextDisplayed('Wrong password');
+  });
+
+  it('send code and redirect when email is not confirmed', async () => {
+    // given
+    const mocks = [
+      {
+        request: {
+          query: EMAIL_EXIST,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            emailExist: {
+              exist: true,
+            },
+          },
+        },
+      },
+      {
+        request: {
+          query: SIGNIN,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              password: 'TestPassword1122',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          errors: [new GraphQLError('User not confirmed.')],
+        },
+      },
+      {
+        request: {
+          query: SEND_CODE,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            sendCode: {
+              success: true,
+            },
+          },
+        },
+      },
+    ];
+
+    const signinPO = SigninPO.render(Signin, mocks);
+
+    // when
+    await signinPO.setEmail('test@email.xyz');
+
+    // then
+    signinPO.expectButtonHasProperText('Next');
+
+    // when
+    await signinPO.submitForm();
+
+    // then
+    await signinPO.expectLoaderDisappeared();
+    signinPO.expectButtonHasProperText('Sign in');
+
+    // when
+    await signinPO.setPassword('TestPassword1122');
+    await signinPO.submitForm();
+
+    // then
+    await signinPO.expectLoaderDisappeared();
+    await signinPO.expectTextDisplayed('User not confirmed.');
+    await waitFor(() =>
+      signinPO
+        .expectSuccessCallback(mockNavigate)
+        .toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, { state: { email: 'test@email.xyz' } }),
+    );
+
+    await waitFor(() =>
+      expect(mockedShowSuccessToast).toHaveBeenCalledWith(
+        'Confirmation code has been sent to your email.',
+      ),
+    );
+  });
+
+  it('send code and redirect when email is not confirmed - sending failure', async () => {
+    // given
+    const mocks = [
+      {
+        request: {
+          query: EMAIL_EXIST,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            emailExist: {
+              exist: true,
+            },
+          },
+        },
+      },
+      {
+        request: {
+          query: SIGNIN,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              password: 'TestPassword1122',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          errors: [new GraphQLError('User not confirmed.')],
+        },
+      },
+      {
+        request: {
+          query: SEND_CODE,
+          variables: {
+            data: {
+              email: 'test@email.xyz',
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          errors: [new GraphQLError('Internal server error.')],
+        },
+      },
+    ];
+
+    const signinPO = SigninPO.render(Signin, mocks);
+
+    // when
+    await signinPO.setEmail('test@email.xyz');
+
+    // then
+    signinPO.expectButtonHasProperText('Next');
+
+    // when
+    await signinPO.submitForm();
+
+    // then
+    await signinPO.expectLoaderDisappeared();
+    signinPO.expectButtonHasProperText('Sign in');
+
+    // when
+    await signinPO.setPassword('TestPassword1122');
+    await signinPO.submitForm();
+
+    // then
+    await signinPO.expectLoaderDisappeared();
+    await signinPO.expectTextDisplayed('User not confirmed.');
+    await waitFor(() =>
+      signinPO
+        .expectSuccessCallback(mockNavigate)
+        .toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, { state: { email: 'test@email.xyz' } }),
+    );
+
+    await waitFor(() =>
+      expect(mockedShowErrorToast).toHaveBeenCalledWith(
+        'Code sending failed. Please try again later.',
+      ),
+    );
   });
 });

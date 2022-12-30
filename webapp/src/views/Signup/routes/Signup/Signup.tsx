@@ -1,5 +1,5 @@
 import { Trans, useTranslation } from 'react-i18next';
-import { Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
+import { Heading, RouterLink, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Column } from 'simple-flexbox';
 import { LangSelector } from 'components/molecules';
@@ -38,7 +38,7 @@ export const Signup = () => {
           i18nKey="page.signup.already_have_account"
           components={{
             signin: (
-              <Link
+              <RouterLink
                 to={ROUTES.SIGNIN}
                 fontColor="blue"
               />

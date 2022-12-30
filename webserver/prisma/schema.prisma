@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  uuid         String        @id @default(uuid())
-  createdAt    DateTime      @default(now())
-  email        String        @unique
-  name         String
-  password     String
-  sessions     Session[]
-  cashAccounts CashAccount[]
-  portfolios   Portfolio[]
+  uuid                 String        @id @default(uuid())
+  createdAt            DateTime      @default(now())
+  email                String        @unique
+  name                 String
+  password             String
+  confirmationCodeHash String?
+  sessions             Session[]
+  cashAccounts         CashAccount[]
+  portfolios           Portfolio[]
 }
 
 model Session {

@@ -33,7 +33,7 @@
   "page.signup.email.already_in_use": "Email jest zajęty",
   "page.signup.name.required": "Jak masz na imię?",
   "page.signup.password.confirm": "Potwierdź hasło",
-  "page.signup.password.confirm.required": "Podaj hasło potwierdzające",
+  "page.signup.password.confirm.required": "Powtórz hasło",
   "page.signup.password.do_not_match": "Hasła muszą być identyczne",
   "page.welcome.button": "Rozpocznij teraz",
   "page.welcome.release_info": "Już we wrześniu 2022...",
@@ -80,5 +80,15 @@
   "add.portfolios.input.placeholder": "np.Pasywny, Aktywny...",
   "common.theme_switcher": "Zmień motyw",
   "error.component.title": "Błąd ładowania",
-  "error.component.description": "Błąd się powtarza? Skontaktuj się z zespołem support."
+  "error.component.description": "Błąd się powtarza? Skontaktuj się z zespołem support.",
+  "common.sign_up_confirm": "Potwierdź email",
+  "page.confirm.description": "Wysłaliśmy kod weryfikacyjny na email <bold>{{email}}</bold>. Wpisz go poniżej, aby potwierdzić rejestrację. (Nie zapomnij sprawdzić folderu ze spamem.)",
+  "page.confirm.support": "<code>Wyślij kod ponownie</code>, jeśli potrzebujesz dodatkowej pomocy, <support>skontaktuj się z supportem</support>.",
+  "page.confirm.input.placeholder": "Wprowadź 6-cio cyfrowy kod",
+  "form.field.required": "To pole jest wymagane",
+  "form.field.required.characters": "Pole musi zawierać dokładnie {{quantity}} znaków",
+  "form.field.required.number": "Pole musi być liczbą",
+  "form.button.submit": "Zatwierdź",
+  "toast.send_confirm_code.success": "Kod został wysłany na Twój adres email",
+  "toast.send_confirm_code.failure": "Wystąpił błąd podczas wysyłania kodu. Spróbuj ponownie później."
 }
