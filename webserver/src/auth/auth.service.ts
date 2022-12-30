@@ -65,12 +65,22 @@ export class AuthService {
   }
 
   async sendCode(sendCode: SendCodeInput) {
-    const { email } = sendCode;
+    const { email, token } = sendCode;
+
+    const isHuman = await this.validateHuman(token);
+
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
+    }
 
     const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) {
       throw new ForbiddenException('User not found.');
+    }
+
+    if (!user.confirmationCodeHash) {
+      throw new ForbiddenException('User already confirmed.');
     }
 
     const confirmationCode = this.generateConfirmationCode();
