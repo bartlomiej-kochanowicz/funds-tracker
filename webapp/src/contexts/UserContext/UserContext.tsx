@@ -16,7 +16,13 @@ const UserContext = createContext<UserContextType | null>(null);
 const useUser = (): UserContextType => {
   const [getUser, { loading, data, client, error }] = useLazyQuery<GetUserQuery>(GET_USER);
 
-  if (isUserLoggedIn && !loading && !data && error?.message !== 'Failed to fetch') {
+  if (
+    isUserLoggedIn &&
+    !loading &&
+    !data &&
+    error?.message !== 'Failed to fetch' &&
+    error?.message !== 'Refresh token failed'
+  ) {
     getUser();
   }
 
