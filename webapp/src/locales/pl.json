@@ -33,7 +33,7 @@
   "page.signup.email.already_in_use": "Email jest zajęty",
   "page.signup.name.required": "Jak masz na imię?",
   "page.signup.password.confirm": "Potwierdź hasło",
-  "page.signup.password.confirm.required": "Powrórz hasło",
+  "page.signup.password.confirm.required": "Powtórz hasło",
   "page.signup.password.do_not_match": "Hasła muszą być identyczne",
   "page.welcome.button": "Rozpocznij teraz",
   "page.welcome.release_info": "Już we wrześniu 2022...",
