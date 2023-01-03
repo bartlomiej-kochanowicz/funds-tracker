@@ -65,7 +65,7 @@ export const SigninForm = () => {
 
   const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
     onCompleted: data => {
-      if (data.emailExist.exist) {
+      if (data?.emailExist?.exist) {
         updateState(actions.CHANGE_TO_PASSWORD);
       } else {
         setError('userEmail', {
@@ -73,6 +73,9 @@ export const SigninForm = () => {
           message: t('page.signin.account.does_not_exist'),
         });
       }
+    },
+    onError: () => {
+      showErrorToast(t('service.unknown_error'));
     },
   });
 
