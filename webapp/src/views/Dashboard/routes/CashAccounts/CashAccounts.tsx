@@ -1,9 +1,16 @@
-import { Grid, Heading, Spacer, Text } from 'components/atoms';
+import { useQuery } from '@apollo/client';
+import { Grid, Heading, Loader, Spacer, Text } from 'components/atoms';
+import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { useTranslation } from 'react-i18next';
+import { GetCashAccountQuery } from '__generated__/graphql';
 import { CashAccountsPanel } from './components/CashAccountsPanel';
 
 export const CashAccounts = () => {
   const { t } = useTranslation();
+
+  const { loading, error, data } = useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
+
+  console.log({ loading, error, data });
 
   return (
     <div>
@@ -13,21 +20,25 @@ export const CashAccounts = () => {
 
       <Spacer />
 
-      <Grid
-        columns={{
-          desktop: 3,
-          tablet: 2,
-          phone: 1,
-        }}
-      >
-        <CashAccountsPanel />
-        <CashAccountsPanel />
-        <CashAccountsPanel />
-        <CashAccountsPanel />
-        <CashAccountsPanel />
-        <CashAccountsPanel />
-        <CashAccountsPanel />
-      </Grid>
+      {loading && <Loader />}
+
+      {!loading && data && (
+        <Grid
+          columns={{
+            desktop: 3,
+            tablet: 2,
+            phone: 1,
+          }}
+        >
+          {data.cashAccounts.map(({ uuid, ...rest }) => (
+            <CashAccountsPanel
+              key={uuid}
+              uuid={uuid}
+              {...rest}
+            />
+          ))}
+        </Grid>
+      )}
     </div>
   );
 };

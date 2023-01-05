@@ -55,6 +55,9 @@ type CashAccount {
 
   """Cash account currency."""
   currency: Currency!
+
+  """Account balance."""
+  balance: Float!
 }
 
 enum Currency {
@@ -166,6 +169,9 @@ input UpdateCashAccountInput {
 
   """Cash account currency."""
   currency: Currency
+
+  """Account balance."""
+  balance: Float
 }
 
 input CreatePortfolioInput {

@@ -11,6 +11,9 @@ export class CashAccount {
 
   @Field(() => Currency, { description: 'Cash account currency.' })
   currency: Currency;
+
+  @Field(() => Number, { description: 'Account balance.' })
+  balance: number;
 }
 
 registerEnumType(Currency, {
