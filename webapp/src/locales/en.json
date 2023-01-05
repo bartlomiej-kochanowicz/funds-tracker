@@ -90,5 +90,6 @@
   "form.field.required.number": "Must be a number",
   "form.button.submit": "Submit",
   "toast.send_confirm_code.success": "Confirmation code has been sent to your email.",
-  "toast.send_confirm_code.failure": "Code sending failed. Please try again later."
+  "toast.send_confirm_code.failure": "Code sending failed. Please try again later.",
+  "page.cash_accounts.title.description": "Here you can manage your cash accounts. You can add new, edit or delete existing ones and check details."
 }

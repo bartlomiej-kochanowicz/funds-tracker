@@ -13,6 +13,8 @@ export type SpacerProps = {
 } & typeof defaultProps;
 
 const StyledSpacer = styled.span<SpacerProps>`
+  display: block;
+
   ${({ theme: { spacing }, space }) => css`
     padding: ${spacing[space]} 0;
   `}

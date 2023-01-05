@@ -34,9 +34,18 @@ export const theme = {
     text: Colors.Black,
   },
   breakpoints: {
-    desktop: customMediaQuery(breakpoints.desktop),
-    tablet: customMediaQuery(breakpoints.tablet),
-    phone: customMediaQuery(breakpoints.phone),
+    desktop: {
+      min: customMediaQuery(breakpoints.desktop),
+      max: customMediaQuery(breakpoints.desktop, 'max'),
+    },
+    tablet: {
+      min: customMediaQuery(breakpoints.tablet),
+      max: customMediaQuery(breakpoints.tablet, 'max'),
+    },
+    phone: {
+      min: customMediaQuery(breakpoints.phone),
+      max: customMediaQuery(breakpoints.phone, 'max'),
+    },
   },
   button: {
     size: {

@@ -90,5 +90,6 @@
   "form.field.required.number": "Pole musi być liczbą",
   "form.button.submit": "Zatwierdź",
   "toast.send_confirm_code.success": "Kod został wysłany na Twój adres email",
-  "toast.send_confirm_code.failure": "Wystąpił błąd podczas wysyłania kodu. Spróbuj ponownie później."
+  "toast.send_confirm_code.failure": "Wystąpił błąd podczas wysyłania kodu. Spróbuj ponownie później.",
+  "page.cash_accounts.title.description": "W tym miejscu możesz zarządzać swoimi kontami gotówkowymi. Dodaj nowe konta, usuń stare, zmień nazwy i podejrzyj szczegóły."
 }
