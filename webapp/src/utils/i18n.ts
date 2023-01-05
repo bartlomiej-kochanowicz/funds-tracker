@@ -12,10 +12,9 @@ i18next
     backend: {
       loadPath: '/locales/{{lng}}.json',
     },
-    fallbackLng: 'en',
+    fallbackLng: 'en-US',
     interpolation: {
       escapeValue: false,
     },
     debug: IS_DEVELOPMENT,
-    load: 'languageOnly',
   });

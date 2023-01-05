@@ -45,7 +45,7 @@
   "selectors.instruments.movables": "Ruchomości",
   "selectors.instruments.others": "Inne",
   "selectors.instruments.stocks": "Akcje",
-  "selectors.languages.en": "Angielski",
+  "selectors.languages.en-US": "English US",
   "selectors.languages.pl": "Polski",
   "service.unknown_error": "Wystapił nieznany błąd",
   "page.signup.name.too_long": "Maksimum 50 znaków",

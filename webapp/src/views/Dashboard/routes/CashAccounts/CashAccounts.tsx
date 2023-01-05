@@ -8,9 +8,7 @@ import { CashAccountsPanel } from './components/CashAccountsPanel';
 export const CashAccounts = () => {
   const { t } = useTranslation();
 
-  const { loading, error, data } = useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
-
-  console.log({ loading, error, data });
+  const { loading, data } = useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
 
   return (
     <div>

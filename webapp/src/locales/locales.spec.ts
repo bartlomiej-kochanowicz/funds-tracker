@@ -1,4 +1,4 @@
-import en from './en.json';
+import en from './en-US.json';
 import pl from './pl.json';
 
 describe('locales tests', () => {
