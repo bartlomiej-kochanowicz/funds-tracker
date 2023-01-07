@@ -14,8 +14,12 @@ export const Grid = styled.div<GridProps>`
   display: grid;
 
   ${({ theme, columns }) => css`
-    grid-template-columns: repeat(${columns?.desktop ?? 1}, 1fr);
     grid-gap: ${theme.spacing.medium};
+    grid-template-columns: repeat(${columns?.desktop ? columns.desktop + 1 : 1}, 1fr);
+
+    ${theme.breakpoints.desktop.max} {
+      grid-template-columns: repeat(${columns?.desktop ?? 1}, 1fr);
+    }
 
     ${theme.breakpoints.tablet.max} {
       grid-template-columns: repeat(${columns?.tablet ?? 1}, 1fr);

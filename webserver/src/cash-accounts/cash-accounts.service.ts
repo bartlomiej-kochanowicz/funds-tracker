@@ -21,7 +21,7 @@ export class CashAccountsService {
 
     const { name, currency } = createCashAccountInput;
 
-    if (cashAccounts > MAX_CASH_ACCOUNTS) {
+    if (cashAccounts >= MAX_CASH_ACCOUNTS) {
       throw new HttpException('Max accounts reached', HttpStatus.FORBIDDEN);
     }
 
