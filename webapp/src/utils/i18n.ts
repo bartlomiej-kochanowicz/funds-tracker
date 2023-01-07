@@ -17,4 +17,5 @@ i18next
       escapeValue: false,
     },
     debug: IS_DEVELOPMENT,
+    load: 'currentOnly',
   });
