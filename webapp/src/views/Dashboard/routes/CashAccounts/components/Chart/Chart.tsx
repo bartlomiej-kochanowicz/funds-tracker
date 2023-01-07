@@ -4,7 +4,7 @@ import { Colors } from 'styles/theme';
 import { CashAccountHistory } from '__generated__/graphql';
 
 interface ChartProps {
-  data: CashAccountHistory[];
+  data: Omit<CashAccountHistory, 'uuid'>[];
 }
 
 export const Chart: FC<ChartProps> = ({ data }) => {

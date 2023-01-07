@@ -1,12 +1,21 @@
 import { Row } from 'simple-flexbox';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CashAccount } from '__generated__/graphql';
+import { CashAccount, CashAccountHistory } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Text } from 'components/atoms';
 import { Chart } from 'views/Dashboard/routes/CashAccounts/components/Chart';
 
-export const CashAccountsPanel: FC<CashAccount> = ({ name, currency, balance, history }) => {
+interface CashAccountsPanelProps extends Omit<CashAccount, 'history'> {
+  history: Omit<CashAccountHistory, 'uuid'>[];
+}
+
+export const CashAccountsPanel: FC<CashAccountsPanelProps> = ({
+  name,
+  currency,
+  balance,
+  history,
+}) => {
   const { i18n } = useTranslation();
 
   const formatter = new Intl.NumberFormat(i18n.language, {
