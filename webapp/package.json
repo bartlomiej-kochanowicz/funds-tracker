@@ -39,7 +39,7 @@
     "react-laag": "2.0.4",
     "react-router-dom": "6.6.1",
     "react-toastify": "9.1.1",
-    "recharts": "^2.2.0",
+    "recharts": "2.2.0",
     "simple-flexbox": "2.3.3",
     "styled-components": "5.3.6",
     "yup": "0.32.11"
