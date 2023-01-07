@@ -2,7 +2,7 @@ import { Text } from 'components/atoms';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CashAccount } from '__generated__/graphql';
-import { Panel } from './CashAccountsPanel.styles';
+import { Panel } from 'components/molecules';
 
 export const CashAccountsPanel: FC<CashAccount> = ({ name, currency, balance }) => {
   const { i18n } = useTranslation();
