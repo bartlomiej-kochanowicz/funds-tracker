@@ -2,7 +2,7 @@ import { Text } from 'components/atoms';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CashAccount } from '__generated__/graphql';
-import { Footer, Wrapper } from './CashAccountsPanel.styles';
+import { Panel } from './CashAccountsPanel.styles';
 
 export const CashAccountsPanel: FC<CashAccount> = ({ name, currency, balance }) => {
   const { i18n } = useTranslation();
@@ -13,16 +13,17 @@ export const CashAccountsPanel: FC<CashAccount> = ({ name, currency, balance }) 
   });
 
   return (
-    <Wrapper>
-      {name}:
-      <Footer>
+    <Panel>
+      <Panel.Body>{name}</Panel.Body>
+
+      <Panel.Footer>
         <Text
           fontSize="1.25"
           fontWeight="700"
         >
           {formatter.format(balance)}
         </Text>
-      </Footer>
-    </Wrapper>
+      </Panel.Footer>
+    </Panel>
   );
 };
