@@ -20,7 +20,7 @@ const documents = {
     "\n  mutation Signin($data: SigninInput!) {\n    signinLocal(data: $data) {\n      uuid\n      name\n    }\n  }\n": types.SigninDocument,
     "\n  mutation Signup($data: SignupInput!) {\n    signupLocal(data: $data) {\n      success\n    }\n  }\n": types.SignupDocument,
     "\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n": types.EmailExistDocument,
-    "\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n": types.GetCashAccountDocument,
+    "\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n      history(first: 30) {\n        date\n        balance\n      }\n    }\n  }\n": types.GetCashAccountDocument,
     "\n  query GetUser {\n    user {\n      uuid\n      name\n      email\n      createdAt\n    }\n  }\n": types.GetUserDocument,
 };
 
@@ -55,7 +55,7 @@ export function gql(source: "\n  query EmailExist($data: EmailInput!) {\n    ema
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n"): (typeof documents)["\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n"];
+export function gql(source: "\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n      history(first: 30) {\n        date\n        balance\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n      history(first: 30) {\n        date\n        balance\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

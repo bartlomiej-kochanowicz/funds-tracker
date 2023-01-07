@@ -7,6 +7,10 @@ export const GET_CASH_ACCOUNTS = gql(/* GraphQL */ `
       name
       currency
       balance
+      history(first: 30) {
+        date
+        balance
+      }
     }
   }
 `);

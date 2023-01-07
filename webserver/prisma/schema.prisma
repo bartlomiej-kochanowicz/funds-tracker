@@ -28,14 +28,23 @@ model Session {
 }
 
 model CashAccount {
-  uuid     String   @id @default(uuid())
+  uuid     String               @id @default(uuid())
   name     String
-  balance  Float    @default(0)
+  balance  Float                @default(0)
   currency Currency
-  user     User     @relation(fields: [userUuid], references: [uuid])
+  user     User                 @relation(fields: [userUuid], references: [uuid])
   userUuid String
+  history  CashAccountHistory[] @relation()
 
   @@unique([userUuid, uuid])
+}
+
+model CashAccountHistory {
+  uuid            String      @id @default(uuid())
+  cashAccount     CashAccount @relation(fields: [cashAccountUuid], references: [uuid])
+  cashAccountUuid String
+  date            DateTime
+  balance         Float
 }
 
 model Portfolio {
