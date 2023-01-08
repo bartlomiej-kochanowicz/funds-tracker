@@ -27,8 +27,9 @@ export const Chart: FC<ChartProps> = ({ data }) => {
 
   return (
     <ResponsiveContainer
-      width="100%"
       height={150}
+      /* resizing chart fix */
+      width="99%"
     >
       <AreaChart data={data}>
         <defs>

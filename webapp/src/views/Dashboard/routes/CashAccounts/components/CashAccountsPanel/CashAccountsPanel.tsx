@@ -31,7 +31,12 @@ export const CashAccountsPanel: FC<CashAccountsPanelProps> = ({
 
       <Panel.Footer>
         <Row justifyContent="space-between">
-          <Text fontWeight="700">{name}</Text>
+          <Text
+            fontWeight="700"
+            maxWidth="150px"
+          >
+            {name}
+          </Text>
 
           <Text>{formatter.format(balance)}</Text>
         </Row>
