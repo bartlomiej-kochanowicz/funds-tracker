@@ -1,14 +1,8 @@
-import { FC, lazy } from 'react';
+import { ErrorChart } from 'components/atoms';
+import { FC } from 'react';
 import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 import { Colors } from 'styles/theme';
 import { CashAccountHistory } from '__generated__/graphql';
-import { EmptyView } from './Chart.styles';
-
-const EmptyChartSvg = lazy(() =>
-  import('assets/svgs/empty-chart.svg').then(({ ReactComponent: component }) => ({
-    default: component,
-  })),
-);
 
 interface ChartProps {
   data: Omit<CashAccountHistory, 'uuid'>[];
@@ -18,11 +12,7 @@ export const Chart: FC<ChartProps> = ({ data }) => {
   const id = 'balance';
 
   if (!data.length) {
-    return (
-      <EmptyView>
-        <EmptyChartSvg />
-      </EmptyView>
-    );
+    return <ErrorChart />;
   }
 
   return (

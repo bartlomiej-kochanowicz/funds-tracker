@@ -25,9 +25,9 @@ export const CashAccountsPanel: FC<CashAccountsPanelProps> = ({
 
   return (
     <Panel>
-      <Panel.Body>
+      <Panel.Chart>
         <Chart data={history} />
-      </Panel.Body>
+      </Panel.Chart>
 
       <Panel.Footer>
         <Row justifyContent="space-between">
