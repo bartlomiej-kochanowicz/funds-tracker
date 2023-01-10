@@ -1,7 +1,7 @@
 import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
 import { breakpoints } from 'constants/breakpoints';
-import { transparentize } from 'color2k';
+import { darken, transparentize } from 'color2k';
 
 export const Colors = {
   Green: '#7DCAC7',
@@ -136,9 +136,9 @@ export const theme = {
     },
   },
   shadows: {
-    dropdown: `0 10px 15px -3px ${transparentize(Colors.Black, 0.9)},
-    0 4px 6px -4px ${transparentize(Colors.Black, 0.9)}`,
-    box: `0 0 10px 0 ${transparentize(Colors.Black, 0.9)}`,
+    box: `0px 12px 17px 2px ${transparentize(Colors.Gray300, 0.86)},
+          0px 5px 22px 4px  ${transparentize(Colors.Gray300, 0.88)},
+		      0px 7px 8px -4px ${transparentize(Colors.Gray300, 0.8)}`,
   },
   gradients: {
     primary: `linear-gradient(to top left, #B0B0B0, #FAFBFC);`,
@@ -170,6 +170,11 @@ export const darkTheme = {
   ...JSON.parse(JSON.stringify(theme)),
   isDark: true,
   colors: darkColors,
+  shadows: {
+    box: `0px 16px 24px 2px ${transparentize(darken(Colors.Gray500, 0.15), 0.86)},
+		      0px 6px 30px 5px ${transparentize(darken(Colors.Gray500, 0.15), 0.88)},
+		      0px 8px 10px -5px ${transparentize(darken(Colors.Gray500, 0.15), 0.8)}`,
+  },
   button: {
     ...JSON.parse(JSON.stringify(theme.button)),
     color: {

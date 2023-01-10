@@ -24,7 +24,7 @@ const Footer = styled.div`
   ${({ theme: { padding, radius, colors } }) => css`
     background-color: ${colors.gray200};
     padding: ${padding.medium};
-    border-radius: ${radius.secondary};
+    border-radius: 0 0 ${radius.secondary} ${radius.secondary};
   `}
 `;
 

@@ -14,7 +14,7 @@ export const Grid = styled.div<GridProps>`
   display: grid;
 
   ${({ theme, columns }) => css`
-    grid-gap: ${theme.spacing.medium};
+    grid-gap: ${theme.spacing.large};
     grid-template-columns: repeat(${columns?.desktop ? columns.desktop + 1 : 1}, 1fr);
 
     ${theme.breakpoints.desktop.max} {

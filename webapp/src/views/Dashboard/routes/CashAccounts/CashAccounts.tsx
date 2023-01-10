@@ -4,6 +4,7 @@ import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { useTranslation } from 'react-i18next';
 import { GetCashAccountQuery } from '__generated__/graphql';
+import { AddCashAccount } from './components/AddCashAccount';
 import { CashAccountsPanel } from './components/CashAccountsPanel';
 
 const generateMockHistory = () => {
@@ -28,12 +29,15 @@ const generateMockHistory = () => {
 export const CashAccounts = () => {
   const { t } = useTranslation();
 
-  const { loading, data, error } = useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
+  const { loading, data, error /* , updateQuery */ } =
+    useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
 
   const processData = data?.cashAccounts.map(cashAccount => ({
     ...cashAccount,
     history: generateMockHistory(),
   }));
+
+  const renderAddCashAccountButton = Boolean(processData && processData.length < 10);
 
   return (
     <div>
@@ -62,6 +66,8 @@ export const CashAccounts = () => {
               {...rest}
             />
           ))}
+
+          {renderAddCashAccountButton && <AddCashAccount />}
         </Grid>
       )}
     </div>
