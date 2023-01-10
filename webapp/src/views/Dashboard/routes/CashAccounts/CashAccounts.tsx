@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { Grid, Heading, Loader, Spacer, Text } from 'components/atoms';
+import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { useTranslation } from 'react-i18next';
 import { GetCashAccountQuery } from '__generated__/graphql';
@@ -27,7 +28,7 @@ const generateMockHistory = () => {
 export const CashAccounts = () => {
   const { t } = useTranslation();
 
-  const { loading, data } = useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
+  const { loading, data, error } = useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
 
   const processData = data?.cashAccounts.map(cashAccount => ({
     ...cashAccount,
@@ -43,6 +44,8 @@ export const CashAccounts = () => {
       <Spacer />
 
       {loading && <Loader />}
+
+      {error && <ErrorContent />}
 
       {!loading && data && (
         <Grid

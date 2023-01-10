@@ -4,7 +4,6 @@ export { Button } from './Button';
 export { ButtonLink } from './ButtonLink';
 export { Checkbox } from './Checkbox';
 export { Dropdown } from './Dropdown';
-export { ErrorChart } from './ErrorChart';
 export { Grid } from './Grid';
 export { Heading } from './Heading';
 export { Input } from './Input';

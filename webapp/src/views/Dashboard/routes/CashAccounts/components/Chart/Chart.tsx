@@ -1,7 +1,7 @@
-import { ErrorChart } from 'components/atoms';
 import { FC } from 'react';
 import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 import { Colors } from 'styles/theme';
+import { ErrorChart } from 'components/molecules';
 import { CashAccountHistory } from '__generated__/graphql';
 
 interface ChartProps {
