@@ -47,6 +47,7 @@ specifiers:
   jest-styled-components: 7.1.1
   jest-watch-typeahead: 2.2.1
   js-cookie: 3.0.1
+  logrocket: ^3.0.1
   madge: 5.0.1
   mq-polyfill: 1.1.8
   prettier: 2.8.1
@@ -86,6 +87,7 @@ dependencies:
   i18next-browser-languagedetector: 7.0.1
   i18next-http-backend: 2.1.1
   js-cookie: 3.0.1
+  logrocket: 3.0.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 3.1.4_react@18.2.0
@@ -6277,6 +6279,10 @@ packages:
       slice-ansi: 4.0.0
       wrap-ansi: 6.2.0
     dev: true
+
+  /logrocket/3.0.1:
+    resolution: {integrity: sha512-jOWG+jEzobKVxGytzZ+4KGm2kiMQMRTHab2uDWQyVZcHfEF38BlCH1yjQVY4LCmuQUwZitP9biMzJZnyUQ0dtQ==}
+    dev: false
 
   /loose-envify/1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
