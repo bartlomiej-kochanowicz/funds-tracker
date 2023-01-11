@@ -1,4 +1,5 @@
 import { LazyQueryExecFunction, OperationVariables, useLazyQuery } from '@apollo/client';
+import { IS_DEVELOPMENT } from 'config/env';
 import { GET_USER } from 'graphql/query';
 import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
 import LogRocket from 'logrocket';
@@ -32,7 +33,7 @@ const useUser = (): UserContextType => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data && !IS_DEVELOPMENT) {
       const { uuid, name, email } = data.user;
 
       LogRocket.identify(uuid, {
