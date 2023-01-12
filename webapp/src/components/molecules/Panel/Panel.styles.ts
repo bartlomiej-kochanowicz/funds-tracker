@@ -2,7 +2,7 @@ import { darken } from 'color2k';
 import { Box } from 'components/atoms';
 import styled, { css } from 'styled-components';
 
-const PanelComponent = styled(Box)`
+export const PanelComponent = styled(Box)`
   height: 206px;
 
   ${({ theme: { isDark, colors, shadows, radius } }) => css`
@@ -12,13 +12,13 @@ const PanelComponent = styled(Box)`
   `}
 `;
 
-const Body = styled.div`
+export const Body = styled.div`
   ${({ theme: { padding } }) => css`
     padding: ${padding.medium};
   `}
 `;
 
-const BodyCentered = styled.div`
+export const BodyCentered = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,32 +30,14 @@ const BodyCentered = styled.div`
   `}
 `;
 
-const Chart = styled.div`
+export const Chart = styled.div`
   padding: 0.5rem 0.75rem;
 `;
 
-const Footer = styled.div`
+export const Footer = styled.div`
   ${({ theme: { padding, radius, colors } }) => css`
     background-color: ${colors.gray200};
     padding: ${padding.medium};
     border-radius: 0 0 ${radius.secondary} ${radius.secondary};
   `}
 `;
-
-interface IPanelComposition {
-  Body: typeof Body;
-  BodyCentered: typeof BodyCentered;
-  Footer: typeof Footer;
-  Chart: typeof Chart;
-}
-
-type PanelProps = typeof PanelComponent & IPanelComposition;
-
-const Panel: PanelProps = PanelComponent as PanelProps;
-
-Panel.Body = Body;
-Panel.BodyCentered = BodyCentered;
-Panel.Footer = Footer;
-Panel.Chart = Chart;
-
-export { Panel };

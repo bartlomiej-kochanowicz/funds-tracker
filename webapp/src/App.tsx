@@ -14,11 +14,11 @@ import { ModalsProvider, useModalsContext } from 'contexts/ModalsContext';
 
 const Content = () => {
   const { theme } = useColorThemeContext();
-  const { Modals } = useModalsContext();
+  const { modals, modalsVisible } = useModalsContext();
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
+      <GlobalStyle modalsVisible={modalsVisible} />
 
       <ToastContainer
         position="top-right"
@@ -33,7 +33,7 @@ const Content = () => {
       />
 
       <ErrorBoundary FallbackComponent={FullscreenErrorContent}>
-        <Modals />
+        {modals}
 
         <Root />
       </ErrorBoundary>
