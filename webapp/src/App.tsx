@@ -10,9 +10,11 @@ import { FullscreenErrorContent } from 'components/organisms';
 import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
 import { UserContextProvider } from 'contexts/UserContext';
 import client from 'config/client';
+import { ModalsProvider, useModalsContext } from 'contexts/ModalsContext';
 
 const Content = () => {
   const { theme } = useColorThemeContext();
+  const { Modals } = useModalsContext();
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,6 +33,8 @@ const Content = () => {
       />
 
       <ErrorBoundary FallbackComponent={FullscreenErrorContent}>
+        <Modals />
+
         <Root />
       </ErrorBoundary>
     </ThemeProvider>
@@ -42,7 +46,9 @@ const App: FC = (): JSX.Element => (
     <ApolloProvider client={client}>
       <ColorThemeProvider>
         <UserContextProvider>
-          <Content />
+          <ModalsProvider>
+            <Content />
+          </ModalsProvider>
         </UserContextProvider>
       </ColorThemeProvider>
     </ApolloProvider>

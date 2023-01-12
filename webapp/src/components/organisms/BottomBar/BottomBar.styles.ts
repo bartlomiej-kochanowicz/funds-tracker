@@ -1,4 +1,4 @@
-import { darken } from 'color2k';
+import { /* darken, */ transparentize } from 'color2k';
 import { Text } from 'components/atoms';
 import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
@@ -11,9 +11,11 @@ export const StyledNav = styled.nav`
 
   ${({ theme: { isDark, colors, padding, zIndex, shadows, spacing, radius } }) => css`
     padding: ${padding.medium};
-    background-color: ${isDark ? darken(colors.gray100, 0.03) : colors.white};
+    background: ${transparentize(colors.gray100, isDark ? 0.3 : 0.4)};
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
     z-index: ${zIndex.bottomBar};
-    box-shadow: ${shadows.box};
+    // box-shadow: ${shadows.box};
     bottom: ${spacing.large};
     border-radius: ${radius.primary};
   `}

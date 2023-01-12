@@ -3,6 +3,8 @@ import { Box } from 'components/atoms';
 import styled, { css } from 'styled-components';
 
 const PanelComponent = styled(Box)`
+  height: 206px;
+
   ${({ theme: { isDark, colors, shadows, radius } }) => css`
     background-color: ${isDark ? darken(colors.gray100, 0.03) : colors.white};
     box-shadow: ${shadows.box};
