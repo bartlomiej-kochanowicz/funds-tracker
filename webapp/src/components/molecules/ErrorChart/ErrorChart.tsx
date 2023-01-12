@@ -35,7 +35,7 @@ export const ErrorChart: FC = () => {
         <AreaChart data={data}>
           <defs>
             <linearGradient
-              id="balance"
+              id="balance-error"
               x1="0"
               y1="0"
               x2="0"
@@ -60,7 +60,7 @@ export const ErrorChart: FC = () => {
             dataKey="balance"
             stroke={Colors.Gray300}
             fillOpacity={Colors.Gray300}
-            fill="url(#balance)"
+            fill="url(#balance-error)"
             strokeWidth="2px"
             isAnimationActive={false}
           />

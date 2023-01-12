@@ -136,9 +136,9 @@ export const theme = {
     },
   },
   shadows: {
-    box: `0px 12px 17px 2px ${transparentize(Colors.Gray300, 0.86)},
-          0px 5px 22px 4px  ${transparentize(Colors.Gray300, 0.88)},
-		      0px 7px 8px -4px ${transparentize(Colors.Gray300, 0.8)}`,
+    box: `0px 6px 10px 0px ${transparentize(Colors.Gray300, 0.86)},
+          0px 1px 18px 0px  ${transparentize(Colors.Gray300, 0.88)},
+		      0px 3px 5px -1px ${transparentize(Colors.Gray300, 0.8)}`,
   },
   gradients: {
     primary: `linear-gradient(to top left, #B0B0B0, #FAFBFC);`,
@@ -171,9 +171,9 @@ export const darkTheme = {
   isDark: true,
   colors: darkColors,
   shadows: {
-    box: `0px 16px 24px 2px ${transparentize(darken(Colors.Gray500, 0.15), 0.86)},
-		      0px 6px 30px 5px ${transparentize(darken(Colors.Gray500, 0.15), 0.88)},
-		      0px 8px 10px -5px ${transparentize(darken(Colors.Gray500, 0.15), 0.8)}`,
+    box: `0px 6px 10px 0px ${transparentize(darken(Colors.Gray500, 0.15), 0.86)},
+          0px 1px 18px 0px ${transparentize(darken(Colors.Gray500, 0.15), 0.88)},
+		      0px 3px 5px -1px ${transparentize(darken(Colors.Gray500, 0.15), 0.8)}`,
   },
   button: {
     ...JSON.parse(JSON.stringify(theme.button)),
