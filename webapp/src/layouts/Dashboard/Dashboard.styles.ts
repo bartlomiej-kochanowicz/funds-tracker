@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 100%;
-  height: var(--doc-height);
+  min-height: 100%;
+  min-height: var(--doc-height);
 
   ${({ theme }) => css`
     background-color: ${theme.colors.gray100};
@@ -12,6 +12,10 @@ export const Wrapper = styled.div`
       margin-left: 270px;
       padding: ${theme.spacing.huge};
       padding-top: 98px;
+    }
+
+    ${theme.breakpoints.desktop.max} {
+      padding-bottom: 150px;
     }
   `}
 `;
