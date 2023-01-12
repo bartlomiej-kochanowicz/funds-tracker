@@ -21,4 +21,27 @@ export const ModalComponent = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  ${({ theme: { colors, radius, padding } }) => css`
+    background-color: ${colors.gray200};
+    border-radius: ${radius.secondary};
+    padding: ${padding.huge};
+    width: 95vw;
+    max-width: 900px;
+  `}
+`;
+
+export const CloseButton = styled.button`
+  border: 0;
+  background: none;
+
+  ${({ theme: { colors } }) => css`
+    svg {
+      color: ${colors.gray500};
+    }
+  `}
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

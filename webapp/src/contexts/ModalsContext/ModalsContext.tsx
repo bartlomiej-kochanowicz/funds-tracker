@@ -1,6 +1,8 @@
-import { createPortal } from 'react-dom';
-import { Modal } from 'components/molecules';
 import { createContext, FC, Suspense, useContext, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Row } from 'simple-flexbox';
+import { FaTimes } from 'react-icons/fa';
+import { Modal } from 'components/molecules';
 import { modals as modalsMap, Modals as TypeModalsMap } from 'modals';
 
 let modalRoot = document.getElementById('modals') as HTMLElement;
@@ -37,6 +39,12 @@ const useModals = () => {
           return (
             <Modal.Background key={name}>
               <Modal>
+                <Row justifyContent="flex-end">
+                  <Modal.CloseButton type="button">
+                    <FaTimes size="1.25rem" />
+                  </Modal.CloseButton>
+                </Row>
+
                 <Component {...rest} />
               </Modal>
             </Modal.Background>

@@ -80,8 +80,8 @@ export const theme = {
     large: `${rem(0.75)} ${rem(1.5)}`,
     largeX: `0 ${rem(1.5)}`,
     largeY: `${rem(0.75)} 0`,
-    huge: `${rem(1.75)} ${rem(3.5)}`,
-    hugeX: `0 ${rem(3.5)}`,
+    huge: `${rem(1.75)} ${rem(3)}`,
+    hugeX: `0 ${rem(3)}`,
     hugeY: `${rem(1.75)} 0`,
   },
   font: {
