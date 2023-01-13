@@ -1,9 +1,7 @@
 import { createContext, FC, Suspense, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Row } from 'simple-flexbox';
-import { FaTimes } from 'react-icons/fa';
 import { Modal } from 'components/molecules';
-import { modals as modalsMap, Modals as TypeModalsMap } from 'modals';
+import { Modals as TypeModalsMap } from 'modals';
 
 let modalRoot = document.getElementById('modals') as HTMLElement;
 
@@ -30,26 +28,21 @@ const useModals = () => {
     setModals(currentModals => [...currentModals, modal]);
   };
 
+  const closeModal = (name: TypeModalsMap) => {
+    setModals(currentModals => currentModals.filter(modal => modal.name !== name));
+  };
+
   const Modals = () => {
     return (
       <Suspense>
-        {modals.map(({ name, ...rest }) => {
-          const Component = modalsMap[name];
-
-          return (
-            <Modal.Background key={name}>
-              <Modal>
-                <Row justifyContent="flex-end">
-                  <Modal.CloseButton type="button">
-                    <FaTimes size="1.25rem" />
-                  </Modal.CloseButton>
-                </Row>
-
-                <Component {...rest} />
-              </Modal>
-            </Modal.Background>
-          );
-        })}
+        {modals.map(({ name, ...rest }) => (
+          <Modal
+            key={name}
+            name={name}
+            closeModal={closeModal}
+            {...rest}
+          />
+        ))}
       </Suspense>
     );
   };
