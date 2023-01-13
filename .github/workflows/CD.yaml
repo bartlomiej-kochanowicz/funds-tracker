@@ -14,4 +14,6 @@ jobs:
       - run: pnpm install:deployment
       - run: pnpm prisma:generate
       - run: pnpm build
+      - run: pnpm prisma:migrate:deploy
       - run: pm2 restart webserver
+      - run: cp ~/actions-runner/_work/funds-tracker/funds-tracker/webapp/dist ~/app/webapp -r
