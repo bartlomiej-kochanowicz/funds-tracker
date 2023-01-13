@@ -1,7 +1,9 @@
 import { LazyQueryExecFunction, OperationVariables, useLazyQuery } from '@apollo/client';
+import { IS_DEVELOPMENT } from 'config/env';
 import { GET_USER } from 'graphql/query';
 import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
-import { createContext, FC, ReactNode, useContext } from 'react';
+import LogRocket from 'logrocket';
+import { createContext, FC, ReactNode, useContext, useEffect } from 'react';
 import { GetUserQuery } from '__generated__/graphql';
 
 type UserContextType = {
@@ -29,6 +31,17 @@ const useUser = (): UserContextType => {
   const clearUser = () => {
     client.resetStore();
   };
+
+  useEffect(() => {
+    if (data && !IS_DEVELOPMENT) {
+      const { uuid, name, email } = data.user;
+
+      LogRocket.identify(uuid, {
+        name,
+        email,
+      });
+    }
+  }, [data]);
 
   return { loading, user: data?.user ?? null, getUser, clearUser } as UserContextType;
 };
