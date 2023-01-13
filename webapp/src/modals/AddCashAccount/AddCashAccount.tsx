@@ -3,17 +3,15 @@ import { Modal } from 'types/modal.type';
 
 export const AddCashAccountModal = 'AddCashAccount';
 
-export type AddCashAccountModalProps = {
-  testprops: string;
-};
+export type AddCashAccountModalProps = {};
 
-export const AddCashAccount: FC<Modal<AddCashAccountModalProps>> = ({ closeModal, testprops }) => (
+export const AddCashAccount: FC<Modal<AddCashAccountModalProps>> = ({ closeModal }) => (
   <div>
     <button
       type="button"
       onClick={closeModal}
     >
-      {testprops}
+      AddCashAccount
     </button>
   </div>
 );

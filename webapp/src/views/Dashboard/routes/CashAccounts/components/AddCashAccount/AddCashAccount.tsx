@@ -12,7 +12,7 @@ export const AddCashAccount: FC = () => {
   const { openModal } = useModalContext();
 
   const handleOpenModal = () => {
-    openModal<AddCashAccountModalProps>(AddCashAccountModal, { testprops: 'test' });
+    openModal<AddCashAccountModalProps>(AddCashAccountModal);
   };
 
   return (
