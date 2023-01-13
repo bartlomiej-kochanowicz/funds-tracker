@@ -56,3 +56,4 @@ jobs:
           DATABASE_URL: ${{secrets.TESTS_DATABASE_URL}}
           AT_SECRET: ${{secrets.TESTS_AT_SECRET}}
           RT_SECRET: ${{secrets.TESTS_RT_SECRET}}
+          SEND_GRID_API_KEY: ${{secrets.TESTS_SEND_GRID_API_KEY}}
