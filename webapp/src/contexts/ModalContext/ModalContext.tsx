@@ -15,17 +15,16 @@ if (!modalRoot) {
 
 type ModalContextType = ReturnType<typeof useModal>;
 
-type OpenModalType = {
-  name: ModalsNames;
-};
-
 const ModalContext = createContext<ModalContextType | null>(null);
 
 const useModal = () => {
-  const [modal, setModal] = useState<OpenModalType | null>(null);
+  const [modal, setModal] = useState<{ name: ModalsNames } | null>(null);
 
-  const openModal = <Props,>(newModal: OpenModalType & Props) => {
-    setModal(newModal);
+  const openModal = <Props,>(name: ModalsNames, props: Props) => {
+    setModal({
+      name,
+      ...props,
+    });
   };
 
   const closeModal = () => {

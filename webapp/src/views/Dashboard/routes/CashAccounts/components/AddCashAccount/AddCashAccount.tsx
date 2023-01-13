@@ -4,6 +4,7 @@ import { Panel } from 'components/molecules';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
+import { AddCashAccountModal, AddCashAccountModalProps } from 'modals/AddCashAccount';
 
 export const AddCashAccount: FC = () => {
   const { t } = useTranslation();
@@ -11,7 +12,7 @@ export const AddCashAccount: FC = () => {
   const { openModal } = useModalContext();
 
   const handleOpenModal = () => {
-    openModal({ name: 'AddCashAccount', testprop: 'test' });
+    openModal<AddCashAccountModalProps>(AddCashAccountModal, { testprops: 'test' });
   };
 
   return (
