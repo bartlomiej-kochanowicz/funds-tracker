@@ -10,4 +10,4 @@ export const modals = {
   AddCashAccount,
 };
 
-export type Modals = keyof typeof modals;
+export type ModalsNames = keyof typeof modals;

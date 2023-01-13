@@ -9,13 +9,12 @@ export const StyledNav = styled.nav`
   left: calc(50% - 135px);
   right: calc(50% - 135px);
 
-  ${({ theme: { isDark, colors, padding, zIndex, shadows, spacing, radius } }) => css`
+  ${({ theme: { isDark, colors, padding, zIndex, spacing, radius } }) => css`
     padding: ${padding.medium};
-    background: ${transparentize(colors.gray100, isDark ? 0.3 : 0.4)};
+    background: ${transparentize(colors.gray200, isDark ? 0.3 : 0.4)};
     border-radius: 16px;
     backdrop-filter: blur(10px);
     z-index: ${zIndex.bottomBar};
-    // box-shadow: ${shadows.box};
     bottom: ${spacing.large};
     border-radius: ${radius.primary};
   `}

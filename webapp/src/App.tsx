@@ -10,15 +10,15 @@ import { FullscreenErrorContent } from 'components/organisms';
 import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
 import { UserContextProvider } from 'contexts/UserContext';
 import client from 'config/client';
-import { ModalsProvider, useModalsContext } from 'contexts/ModalsContext';
+import { ModalProvider, useModalContext } from 'contexts/ModalContext';
 
 const Content = () => {
   const { theme } = useColorThemeContext();
-  const { modals, modalsVisible } = useModalsContext();
+  const { modal, modalVisible } = useModalContext();
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle modalsVisible={modalsVisible} />
+      <GlobalStyle modalVisible={modalVisible} />
 
       <ToastContainer
         position="top-right"
@@ -33,7 +33,7 @@ const Content = () => {
       />
 
       <ErrorBoundary FallbackComponent={FullscreenErrorContent}>
-        {modals}
+        {modal}
 
         <Root />
       </ErrorBoundary>
@@ -46,9 +46,9 @@ const App: FC = (): JSX.Element => (
     <ApolloProvider client={client}>
       <ColorThemeProvider>
         <UserContextProvider>
-          <ModalsProvider>
+          <ModalProvider>
             <Content />
-          </ModalsProvider>
+          </ModalProvider>
         </UserContextProvider>
       </ColorThemeProvider>
     </ApolloProvider>

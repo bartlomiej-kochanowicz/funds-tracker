@@ -1,7 +1,7 @@
 import * as styled from 'styled-components';
 
 interface GlobalStyleProps {
-  modalsVisible: boolean;
+  modalVisible: boolean;
 }
 
 export const GlobalStyle = styled.createGlobalStyle<GlobalStyleProps>`
@@ -36,8 +36,8 @@ export const GlobalStyle = styled.createGlobalStyle<GlobalStyleProps>`
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
 
-    ${({ modalsVisible }) =>
-      modalsVisible &&
+    ${({ modalVisible }) =>
+      modalVisible &&
       styled.css`
         overflow: hidden;
       `};

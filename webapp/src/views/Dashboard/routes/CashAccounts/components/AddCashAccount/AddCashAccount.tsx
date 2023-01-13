@@ -3,15 +3,15 @@ import { Button, Spacer, Spreader, Text } from 'components/atoms';
 import { Panel } from 'components/molecules';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { useModalsContext } from 'contexts/ModalsContext';
+import { useModalContext } from 'contexts/ModalContext';
 
 export const AddCashAccount: FC = () => {
   const { t } = useTranslation();
 
-  const { openModal } = useModalsContext();
+  const { openModal } = useModalContext();
 
   const handleOpenModal = () => {
-    openModal({ name: 'AddCashAccount' });
+    openModal({ name: 'AddCashAccount', testprop: 'test' });
   };
 
   return (

@@ -10,19 +10,21 @@ export const Background = styled.div`
   height: var(--doc-height);
   height: 100%;
 
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors, zIndex } }) => css`
     background: ${transparentize(colors.black, 0.5)};
     backdrop-filter: blur(5px);
+    z-index: ${zIndex.modal.background};
   `}
 `;
 
 export const ModalComponent = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  ${({ theme: { colors, radius, shadows, breakpoints } }) => css`
+  ${({ theme: { colors, radius, shadows, breakpoints, zIndex } }) => css`
+    z-index: ${zIndex.modal.modal};
     background-color: ${colors.gray100};
     border-radius: ${radius.secondary};
     box-shadow: ${shadows.box};
