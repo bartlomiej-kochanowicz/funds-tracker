@@ -45,8 +45,8 @@
   "selectors.instruments.movables": "Movables",
   "selectors.instruments.others": "Others",
   "selectors.instruments.stocks": "Stocks",
-  "selectors.languages.en": "English",
-  "selectors.languages.pl": "Polish",
+  "selectors.languages.en-US": "English US",
+  "selectors.languages.pl": "Polski",
   "service.unknown_error": "Unknown error",
   "page.signup.name.too_long": "Max 50 characters",
   "page.signup.name.too_short": "Min 4 characters",
@@ -79,8 +79,9 @@
   "add.portfolios.button.add": "Add portfolio",
   "add.portfolios.input.placeholder": "e.g. Passive, Active",
   "common.theme_switcher": "Theme switcher",
-  "error.component.title": "Couldn’t load ",
+  "error.component.title": "Couldn’t load",
   "error.component.description": "If this issue continues, please contact support.",
+  "error.failed_to_fetch": "Failed to fetch data",
   "common.sign_up_confirm": "Confirm your email",
   "page.confirm.description": "We've sent a verification code to your email address - <bold>{{email}}</bold> Please enter it below to confirm your email address. (Don't forget to check your spam folder.)",
   "page.confirm.support": "<code>Send code again</code> or if you need additional help, please <support>contact us</support>",
@@ -90,5 +91,8 @@
   "form.field.required.number": "Must be a number",
   "form.button.submit": "Submit",
   "toast.send_confirm_code.success": "Confirmation code has been sent to your email.",
-  "toast.send_confirm_code.failure": "Code sending failed. Please try again later."
+  "toast.send_confirm_code.failure": "Code sending failed. Please try again later.",
+  "page.cash_accounts.title.description": "Here you can manage your cash accounts. You can add new, edit or delete existing ones and check details.",
+  "page.cash_accounts.need.more": "Need more accounts?",
+  "page.cash_accounts.need.more.button": "Add new one here"
 }

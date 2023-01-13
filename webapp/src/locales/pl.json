@@ -45,7 +45,7 @@
   "selectors.instruments.movables": "Ruchomości",
   "selectors.instruments.others": "Inne",
   "selectors.instruments.stocks": "Akcje",
-  "selectors.languages.en": "Angielski",
+  "selectors.languages.en-US": "English US",
   "selectors.languages.pl": "Polski",
   "service.unknown_error": "Wystapił nieznany błąd",
   "page.signup.name.too_long": "Maksimum 50 znaków",
@@ -81,6 +81,7 @@
   "common.theme_switcher": "Zmień motyw",
   "error.component.title": "Błąd ładowania",
   "error.component.description": "Błąd się powtarza? Skontaktuj się z zespołem support.",
+  "error.failed_to_fetch": "Błąd ładowania danych",
   "common.sign_up_confirm": "Potwierdź email",
   "page.confirm.description": "Wysłaliśmy kod weryfikacyjny na email <bold>{{email}}</bold>. Wpisz go poniżej, aby potwierdzić rejestrację. (Nie zapomnij sprawdzić folderu ze spamem.)",
   "page.confirm.support": "<code>Wyślij kod ponownie</code>, jeśli potrzebujesz dodatkowej pomocy, <support>skontaktuj się z supportem</support>.",
@@ -90,5 +91,8 @@
   "form.field.required.number": "Pole musi być liczbą",
   "form.button.submit": "Zatwierdź",
   "toast.send_confirm_code.success": "Kod został wysłany na Twój adres email",
-  "toast.send_confirm_code.failure": "Wystąpił błąd podczas wysyłania kodu. Spróbuj ponownie później."
+  "toast.send_confirm_code.failure": "Wystąpił błąd podczas wysyłania kodu. Spróbuj ponownie później.",
+  "page.cash_accounts.title.description": "W tym miejscu możesz zarządzać swoimi kontami gotówkowymi. Dodaj nowe konta, usuń stare, zmień nazwy i podejrzyj szczegóły.",
+  "page.cash_accounts.need.more": "Potrzebujesz więcej kont?",
+  "page.cash_accounts.need.more.button": "Dodaj nowe konto tutaj"
 }

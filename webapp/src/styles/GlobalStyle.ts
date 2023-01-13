@@ -1,6 +1,10 @@
 import * as styled from 'styled-components';
 
-export const GlobalStyle = styled.createGlobalStyle`
+interface GlobalStyleProps {
+  modalVisible: boolean;
+}
+
+export const GlobalStyle = styled.createGlobalStyle<GlobalStyleProps>`
   :root {
     --doc-height: 100%;
   }
@@ -31,6 +35,12 @@ export const GlobalStyle = styled.createGlobalStyle`
   body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+
+    ${({ modalVisible }) =>
+      modalVisible &&
+      styled.css`
+        overflow: hidden;
+      `};
   }
 
   img,

@@ -3,6 +3,6 @@ import { GlobalStyle } from 'styles/GlobalStyle';
 
 describe('Styles/GlobalStyle tests', () => {
   it('renders properly', () => {
-    render(<GlobalStyle />);
+    render(<GlobalStyle modalVisible />);
   });
 });

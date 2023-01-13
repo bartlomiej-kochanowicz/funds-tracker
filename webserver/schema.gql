@@ -46,6 +46,17 @@ type SendCode {
   success: Boolean!
 }
 
+type CashAccountHistory {
+  """Transaction uuid."""
+  uuid: String!
+
+  """Date of the transaction."""
+  date: DateTime!
+
+  """Cash account balance."""
+  balance: Float!
+}
+
 type CashAccount {
   """Cash account uuid."""
   uuid: String!
@@ -55,6 +66,12 @@ type CashAccount {
 
   """Cash account currency."""
   currency: Currency!
+
+  """Account balance."""
+  balance: Float!
+
+  """Account balance history."""
+  history(first: Float): [CashAccountHistory!]!
 }
 
 enum Currency {
@@ -166,6 +183,9 @@ input UpdateCashAccountInput {
 
   """Cash account currency."""
   currency: Currency
+
+  """Account balance."""
+  balance: Float
 }
 
 input CreatePortfolioInput {

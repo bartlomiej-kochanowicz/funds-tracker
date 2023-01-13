@@ -14,7 +14,7 @@
     "lint:fix": "eslint --fix ./src",
     "format": "prettier --write ./src",
     "codegen": "graphql-codegen --config ./src/config/codegen.ts",
-    "codegen:watc": "graphql-codegen -w --config ./src/config/codegen.ts"
+    "codegen:watch": "graphql-codegen -w --config ./src/config/codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "3.7.3",
@@ -40,6 +40,7 @@
     "react-laag": "2.0.4",
     "react-router-dom": "6.6.1",
     "react-toastify": "9.1.1",
+    "recharts": "2.2.0",
     "simple-flexbox": "2.3.3",
     "styled-components": "5.3.6",
     "yup": "0.32.11"

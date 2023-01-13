@@ -13,6 +13,8 @@ export type SpreaderProps = {
 } & typeof defaultProps;
 
 const StyledSpreader = styled.span<SpreaderProps>`
+  display: block;
+
   ${({ theme: { spacing }, spread }) => css`
     padding: 0 ${spacing[spread]};
   `}

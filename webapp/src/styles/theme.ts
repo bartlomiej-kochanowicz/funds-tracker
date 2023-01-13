@@ -1,7 +1,7 @@
 import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
 import { breakpoints } from 'constants/breakpoints';
-import { transparentize } from 'color2k';
+import { darken, transparentize } from 'color2k';
 
 export const Colors = {
   Green: '#7DCAC7',
@@ -34,9 +34,18 @@ export const theme = {
     text: Colors.Black,
   },
   breakpoints: {
-    desktop: customMediaQuery(breakpoints.desktop),
-    tablet: customMediaQuery(breakpoints.tablet),
-    phone: customMediaQuery(breakpoints.phone),
+    desktop: {
+      min: customMediaQuery(breakpoints.desktop),
+      max: customMediaQuery(breakpoints.desktop, 'max'),
+    },
+    tablet: {
+      min: customMediaQuery(breakpoints.tablet),
+      max: customMediaQuery(breakpoints.tablet, 'max'),
+    },
+    phone: {
+      min: customMediaQuery(breakpoints.phone),
+      max: customMediaQuery(breakpoints.phone, 'max'),
+    },
   },
   button: {
     size: {
@@ -71,8 +80,8 @@ export const theme = {
     large: `${rem(0.75)} ${rem(1.5)}`,
     largeX: `0 ${rem(1.5)}`,
     largeY: `${rem(0.75)} 0`,
-    huge: `${rem(1.75)} ${rem(3.5)}`,
-    hugeX: `0 ${rem(3.5)}`,
+    huge: `${rem(1.75)} ${rem(3)}`,
+    hugeX: `0 ${rem(3)}`,
     hugeY: `${rem(1.75)} 0`,
   },
   font: {
@@ -127,9 +136,9 @@ export const theme = {
     },
   },
   shadows: {
-    dropdown: `0 10px 15px -3px ${transparentize(Colors.Black, 0.9)},
-    0 4px 6px -4px ${transparentize(Colors.Black, 0.9)}`,
-    box: `0 0 10px 0 ${transparentize(Colors.Black, 0.9)}`,
+    box: `0px 6px 10px 0px ${transparentize(Colors.Gray300, 0.86)},
+          0px 1px 18px 0px  ${transparentize(Colors.Gray300, 0.88)},
+		      0px 3px 5px -1px ${transparentize(Colors.Gray300, 0.8)}`,
   },
   gradients: {
     primary: `linear-gradient(to top left, #B0B0B0, #FAFBFC);`,
@@ -139,6 +148,10 @@ export const theme = {
     sidebar: 1,
     bottomBar: 1,
     topbar: 2,
+    modal: {
+      background: 100,
+      modal: 101,
+    },
   },
 };
 
@@ -161,6 +174,11 @@ export const darkTheme = {
   ...JSON.parse(JSON.stringify(theme)),
   isDark: true,
   colors: darkColors,
+  shadows: {
+    box: `0px 6px 10px 0px ${transparentize(darken(Colors.Gray500, 0.15), 0.86)},
+          0px 1px 18px 0px ${transparentize(darken(Colors.Gray500, 0.15), 0.88)},
+		      0px 3px 5px -1px ${transparentize(darken(Colors.Gray500, 0.15), 0.8)}`,
+  },
   button: {
     ...JSON.parse(JSON.stringify(theme.button)),
     color: {
