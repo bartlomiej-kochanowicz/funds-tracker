@@ -20,7 +20,7 @@ const ModalContext = createContext<ModalContextType | null>(null);
 const useModal = () => {
   const [modal, setModal] = useState<{ name: ModalsNames } | null>(null);
 
-  const openModal = <Props,>(name: ModalsNames, props: Props) => {
+  const openModal = <Props,>(name: ModalsNames, props?: Props) => {
     setModal({
       name,
       ...props,

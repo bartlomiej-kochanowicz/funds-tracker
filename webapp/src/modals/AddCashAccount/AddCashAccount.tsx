@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Modal } from 'types/modal.type';
 
-export const AddCashAccountModal = 'AddCashAccount';
+export const ADD_CASH_ACCOUNT = 'AddCashAccount';
 
 export type AddCashAccountModalProps = {};
 
