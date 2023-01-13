@@ -1,8 +1,7 @@
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
-import { CashAccount } from './entities';
-import { CashAccountHistory } from './entities/cash-account-history.entity';
+import { CashAccount, CashAccountHistory } from './entities';
 import { CreateCashAccountInput, UpdateCashAccountInput } from './inputs';
 
 @Resolver(() => CashAccount)
