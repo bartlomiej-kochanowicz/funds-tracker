@@ -33,13 +33,13 @@ export const CashAccountsField = ({
 
   const nameInputProps = useInput<DefaultValues>({
     register,
-    name: `accounts.${index}.name`,
+    name: `cashAccounts.${index}.name`,
     errors,
   });
 
   const currencySelectProps = useSelect<DefaultValues>({
     register,
-    name: `accounts.${index}.currency`,
+    name: `cashAccounts.${index}.currency`,
     errors,
     defaultValues: values,
   });

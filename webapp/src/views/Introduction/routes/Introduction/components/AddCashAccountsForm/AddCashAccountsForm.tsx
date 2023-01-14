@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
-import { MAX_CASH_ACCOUNTS } from 'constants/common';
+import { useLazyQuery } from '@apollo/client';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
+import { GetCashAccountIntroductionQuery } from '__generated__/graphql';
+import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
+import { GET_CASH_ACCOUNTS_INTRODUCTION } from 'graphql/query';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
 import type { DefaultValues } from './AddCashAccountsForm.type';
@@ -18,6 +21,9 @@ export const AddCashAccountsForm = () => {
 
   const { updateState, actions } = useIntroductionContext();
 
+  const [getCashAccounts, { loading /* error */ /* , updateQuery */ }] =
+    useLazyQuery<GetCashAccountIntroductionQuery>(GET_CASH_ACCOUNTS_INTRODUCTION);
+
   const onSubmit = async (values: DefaultValues) => {
     console.log(values);
 
@@ -28,8 +34,10 @@ export const AddCashAccountsForm = () => {
     updateState(actions.CHANGE_TO_ADD_PORTFOLIOS);
   };
 
-  const defaultValues = {
-    accounts: [],
+  const defaultValues = async () => {
+    const { data } = await getCashAccounts();
+
+    return data as GetCashAccountIntroductionQuery;
   };
 
   const {
@@ -46,16 +54,22 @@ export const AddCashAccountsForm = () => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'accounts',
+    name: 'cashAccounts',
   });
 
   const values = getValues();
+
+  console.log(values);
 
   const handleAppend = () =>
     append({
       name: '',
       currency: 'USD',
     });
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <motion.div
