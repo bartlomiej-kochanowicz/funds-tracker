@@ -27,19 +27,24 @@ type User {
   uuid: String!
 
   """User date created."""
-  createdAt: DateTime!
+  createdAt: Date!
 
   """User email."""
-  email: String!
+  email: EmailAddress!
 
   """User name."""
   name: String!
 }
 
 """
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
-scalar DateTime
+scalar Date
+
+"""
+A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
+"""
+scalar EmailAddress @specifiedBy(url: "https://www.w3.org/Protocols/rfc822/")
 
 type SendCode {
   """Send code successful."""
@@ -57,17 +62,12 @@ type CashAccountHistory {
   balance: Float!
 }
 
-"""
-A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
-"""
-scalar Date
-
 type CashAccount {
   """Cash account uuid."""
-  uuid: String!
+  uuid: ID!
 
   """Cash account name."""
-  name: String!
+  name: StringLenFrom2To50Type!
 
   """Cash account currency."""
   currency: Currency!
@@ -78,6 +78,9 @@ type CashAccount {
   """Account balance history."""
   history(first: Float): [CashAccountHistory!]!
 }
+
+"""String from 2 to 50 Chars"""
+scalar StringLenFrom2To50Type
 
 enum Currency {
   CHF
@@ -94,10 +97,10 @@ type CashAccounts {
 
 type Portfolio {
   """Portfolio uuid."""
-  uuid: String!
+  uuid: ID!
 
   """Portfolio name."""
-  name: String!
+  name: StringLenFrom2To50Type!
 
   """Is portfolio rebalancing enabled."""
   rebalancingEnabled: Boolean!
@@ -114,7 +117,7 @@ type Query {
 
 input EmailInput {
   """Email."""
-  email: String!
+  email: EmailAddress!
 
   """Token."""
   token: String!
@@ -138,21 +141,27 @@ type Mutation {
 
 input SignupInput {
   """Email."""
-  email: String!
+  email: EmailAddress!
 
   """Name."""
-  name: String!
+  name: StringLenFrom4To50Type!
 
   """Password."""
-  password: String!
+  password: StringLenFrom12To50Type!
 
   """Token."""
   token: String!
 }
 
+"""String from 4 to 50 Chars"""
+scalar StringLenFrom4To50Type
+
+"""String from 12 to 50 Chars"""
+scalar StringLenFrom12To50Type
+
 input SendCodeInput {
   """Email."""
-  email: String!
+  email: EmailAddress!
 
   """Token."""
   token: String!
@@ -160,7 +169,7 @@ input SendCodeInput {
 
 input ConfirmSignupInput {
   """Email."""
-  email: String!
+  email: EmailAddress!
 
   """Code."""
   code: String!
@@ -182,7 +191,7 @@ input SigninInput {
 
 input CreateCashAccountInput {
   """Cash account name."""
-  name: String!
+  name: StringLenFrom2To50Type!
 
   """Cash account currency."""
   currency: Currency!
@@ -195,7 +204,7 @@ input CreateCashAccountsInput {
 
 input UpdateCashAccountInput {
   """Cash account name."""
-  name: String
+  name: StringLenFrom2To50Type
 
   """Cash account currency."""
   currency: Currency
@@ -206,7 +215,7 @@ input UpdateCashAccountInput {
 
 input CreatePortfolioInput {
   """Portfolio name."""
-  name: String!
+  name: StringLenFrom2To50Type!
 
   """Is portfolio rebalancing enabled."""
   rebalancingEnabled: Boolean!
@@ -214,7 +223,7 @@ input CreatePortfolioInput {
 
 input UpdatePortfolioInput {
   """Portfolio name."""
-  name: String
+  name: StringLenFrom2To50Type
 
   """Is portfolio rebalancing enabled."""
   rebalancingEnabled: Boolean

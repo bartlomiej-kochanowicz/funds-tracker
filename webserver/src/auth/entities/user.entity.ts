@@ -1,14 +1,15 @@
 import { ObjectType, Field } from '@nestjs/graphql';
+import { DateResolver, EmailAddressResolver } from 'graphql-scalars';
 
 @ObjectType()
 export class User {
   @Field(() => String, { description: 'User uuid.' })
   uuid: string;
 
-  @Field(() => Date, { description: 'User date created.' })
+  @Field(() => DateResolver, { description: 'User date created.' })
   createdAt: Date;
 
-  @Field(() => String, { description: 'User email.' })
+  @Field(() => EmailAddressResolver, { description: 'User email.' })
   email: string;
 
   @Field(() => String, { description: 'User name.' })
