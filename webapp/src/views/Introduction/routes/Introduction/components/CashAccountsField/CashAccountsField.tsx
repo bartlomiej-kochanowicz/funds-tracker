@@ -15,6 +15,7 @@ import { Row } from 'simple-flexbox';
 import { GetCashAccountsIntroductionQuery } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import { DELETE_CASH_ACCOUNT } from 'graphql/mutations/DeleteCashAccount';
+import { showErrorToast } from 'helpers/showToast';
 
 interface CashAccountsFieldProps {
   register: UseFormRegister<GetCashAccountsIntroductionQuery>;
@@ -59,14 +60,19 @@ export const CashAccountsField = ({
 
   const customLabel = ({ value }: { value: string }) => value;
 
-  const [removeCashAccount, { loading }] = useMutation(DELETE_CASH_ACCOUNT);
+  const [removeCashAccount, { loading }] = useMutation(DELETE_CASH_ACCOUNT, {
+    onCompleted: () => {
+      remove(index);
+    },
+    onError: () => {
+      showErrorToast(t('service.unknown_error'));
+    },
+  });
 
   const handleRemoveField = async () => {
     if (uuid) {
       await removeCashAccount({ variables: { uuid } });
     }
-
-    remove(index);
   };
 
   return (
