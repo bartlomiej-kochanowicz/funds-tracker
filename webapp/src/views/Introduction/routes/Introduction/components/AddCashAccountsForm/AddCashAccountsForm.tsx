@@ -1,18 +1,24 @@
 import { motion } from 'framer-motion';
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
-import { GetCashAccountIntroductionQuery } from '__generated__/graphql';
+import {
+  CreateCashAccountsInput,
+  CreateCashAccountsMutation,
+  CreateCashAccountsMutationVariables,
+  Currency,
+  GetCashAccountIntroductionQuery,
+} from '__generated__/graphql';
 import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 import { GET_CASH_ACCOUNTS_INTRODUCTION } from 'graphql/query';
+import { CREATE_CASH_ACCOUNTS } from 'graphql/mutations';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
-import type { DefaultValues } from './AddCashAccountsForm.type';
 import { EmptyList } from '../EmptyList';
 import { CashAccountsField } from '../CashAccountsField';
 
@@ -21,14 +27,21 @@ export const AddCashAccountsForm = () => {
 
   const { updateState, actions } = useIntroductionContext();
 
-  const [getCashAccounts, { loading /* error */ /* , updateQuery */ }] =
-    useLazyQuery<GetCashAccountIntroductionQuery>(GET_CASH_ACCOUNTS_INTRODUCTION);
+  const [
+    getCashAccounts,
+    { loading: getCashAccountsLoginLoading /* error */ /* , updateQuery */ },
+  ] = useLazyQuery<GetCashAccountIntroductionQuery>(GET_CASH_ACCOUNTS_INTRODUCTION);
 
-  const onSubmit = async (values: DefaultValues) => {
-    console.log(values);
+  const [createCashAccounts] = useMutation<
+    CreateCashAccountsMutation,
+    CreateCashAccountsMutationVariables
+  >(CREATE_CASH_ACCOUNTS);
 
-    await new Promise(resolve => {
-      setTimeout(resolve, 3000);
+  const onSubmit = async (values: CreateCashAccountsInput) => {
+    createCashAccounts({
+      variables: {
+        data: values,
+      },
     });
 
     updateState(actions.CHANGE_TO_ADD_PORTFOLIOS);
@@ -37,7 +50,7 @@ export const AddCashAccountsForm = () => {
   const defaultValues = async () => {
     const { data } = await getCashAccounts();
 
-    return data as GetCashAccountIntroductionQuery;
+    return data as CreateCashAccountsInput;
   };
 
   const {
@@ -46,7 +59,7 @@ export const AddCashAccountsForm = () => {
     formState: { errors, isSubmitting, isValid, isDirty },
     control,
     getValues,
-  } = useForm<DefaultValues>({
+  } = useForm<CreateCashAccountsInput>({
     defaultValues,
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
@@ -64,10 +77,10 @@ export const AddCashAccountsForm = () => {
   const handleAppend = () =>
     append({
       name: '',
-      currency: 'USD',
+      currency: Currency.Usd,
     });
 
-  if (loading) {
+  if (getCashAccountsLoginLoading) {
     return <Loader />;
   }
 

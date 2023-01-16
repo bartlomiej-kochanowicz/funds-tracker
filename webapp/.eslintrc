@@ -68,6 +68,8 @@
     "no-plusplus": "off",
     "no-await-in-loop": "off",
     "class-methods-use-this": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn"
   }
 }

@@ -12,8 +12,16 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: any;
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: any;
+  /** A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/. */
+  EmailAddress: any;
+  /** String from 2 to 50 Chars */
+  StringLenFrom2To50Type: any;
+  /** String from 4 to 50 Chars */
+  StringLenFrom4To50Type: any;
+  /** String from 12 to 50 Chars */
+  StringLenFrom12To50Type: any;
 };
 
 export type CashAccount = {
@@ -25,9 +33,9 @@ export type CashAccount = {
   /** Account balance history. */
   history: Array<CashAccountHistory>;
   /** Cash account name. */
-  name: Scalars['String'];
+  name: Scalars['StringLenFrom2To50Type'];
   /** Cash account uuid. */
-  uuid: Scalars['String'];
+  uuid: Scalars['ID'];
 };
 
 
@@ -40,9 +48,9 @@ export type CashAccountHistory = {
   /** Cash account balance. */
   balance: Scalars['Float'];
   /** Date of the transaction. */
-  date: Scalars['DateTime'];
+  date: Scalars['Date'];
   /** Transaction uuid. */
-  uuid: Scalars['String'];
+  uuid: Scalars['ID'];
 };
 
 export type CashAccounts = {
@@ -55,7 +63,7 @@ export type ConfirmSignupInput = {
   /** Code. */
   code: Scalars['String'];
   /** Email. */
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   /** Token. */
   token: Scalars['String'];
 };
@@ -64,7 +72,7 @@ export type CreateCashAccountInput = {
   /** Cash account currency. */
   currency: Currency;
   /** Cash account name. */
-  name: Scalars['String'];
+  name: Scalars['StringLenFrom2To50Type'];
 };
 
 export type CreateCashAccountsInput = {
@@ -74,7 +82,7 @@ export type CreateCashAccountsInput = {
 
 export type CreatePortfolioInput = {
   /** Portfolio name. */
-  name: Scalars['String'];
+  name: Scalars['StringLenFrom2To50Type'];
   /** Is portfolio rebalancing enabled. */
   rebalancingEnabled: Scalars['Boolean'];
 };
@@ -95,7 +103,7 @@ export type Email = {
 
 export type EmailInput = {
   /** Email. */
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   /** Token. */
   token: Scalars['String'];
 };
@@ -183,11 +191,11 @@ export type MutationUpdatePortfolioArgs = {
 export type Portfolio = {
   __typename?: 'Portfolio';
   /** Portfolio name. */
-  name: Scalars['String'];
+  name: Scalars['StringLenFrom2To50Type'];
   /** Is portfolio rebalancing enabled. */
   rebalancingEnabled: Scalars['Boolean'];
   /** Portfolio uuid. */
-  uuid: Scalars['String'];
+  uuid: Scalars['ID'];
 };
 
 export type Query = {
@@ -229,7 +237,7 @@ export type SendCode = {
 
 export type SendCodeInput = {
   /** Email. */
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   /** Token. */
   token: Scalars['String'];
 };
@@ -251,11 +259,11 @@ export type Signup = {
 
 export type SignupInput = {
   /** Email. */
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   /** Name. */
-  name: Scalars['String'];
+  name: Scalars['StringLenFrom4To50Type'];
   /** Password. */
-  password: Scalars['String'];
+  password: Scalars['StringLenFrom12To50Type'];
   /** Token. */
   token: Scalars['String'];
 };
@@ -266,12 +274,12 @@ export type UpdateCashAccountInput = {
   /** Cash account currency. */
   currency?: InputMaybe<Currency>;
   /** Cash account name. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['StringLenFrom2To50Type']>;
 };
 
 export type UpdatePortfolioInput = {
   /** Portfolio name. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['StringLenFrom2To50Type']>;
   /** Is portfolio rebalancing enabled. */
   rebalancingEnabled?: InputMaybe<Scalars['Boolean']>;
 };
@@ -279,9 +287,9 @@ export type UpdatePortfolioInput = {
 export type User = {
   __typename?: 'User';
   /** User date created. */
-  createdAt: Scalars['DateTime'];
+  createdAt: Scalars['Date'];
   /** User email. */
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   /** User name. */
   name: Scalars['String'];
   /** User uuid. */
@@ -343,17 +351,17 @@ export type EmailExistQuery = { __typename?: 'Query', emailExist: { __typename?:
 export type GetCashAccountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCashAccountQuery = { __typename?: 'Query', cashAccounts: Array<{ __typename?: 'CashAccount', uuid: string, name: string, currency: Currency, balance: number, history: Array<{ __typename?: 'CashAccountHistory', date: any, balance: number }> }> };
+export type GetCashAccountQuery = { __typename?: 'Query', cashAccounts: Array<{ __typename?: 'CashAccount', uuid: string, name: any, currency: Currency, balance: number, history: Array<{ __typename?: 'CashAccountHistory', date: any, balance: number }> }> };
 
 export type GetCashAccountIntroductionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCashAccountIntroductionQuery = { __typename?: 'Query', cashAccounts: Array<{ __typename?: 'CashAccount', uuid: string, name: string, currency: Currency }> };
+export type GetCashAccountIntroductionQuery = { __typename?: 'Query', cashAccounts: Array<{ __typename?: 'CashAccount', uuid: string, name: any, currency: Currency }> };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', uuid: string, name: string, email: string, createdAt: any } };
+export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', uuid: string, name: string, email: any, createdAt: any } };
 
 
 export const ConfirmSignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ConfirmSignup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ConfirmSignupInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"confirmSignup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<ConfirmSignupMutation, ConfirmSignupMutationVariables>;
