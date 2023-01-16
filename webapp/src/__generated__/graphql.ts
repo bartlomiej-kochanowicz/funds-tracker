@@ -16,12 +16,6 @@ export type Scalars = {
   Date: any;
   /** A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/. */
   EmailAddress: any;
-  /** String from 2 to 50 Chars */
-  StringLenFrom2To50Type: any;
-  /** String from 4 to 50 Chars */
-  StringLenFrom4To50Type: any;
-  /** String from 12 to 50 Chars */
-  StringLenFrom12To50Type: any;
 };
 
 export type CashAccount = {
@@ -33,7 +27,7 @@ export type CashAccount = {
   /** Account balance history. */
   history: Array<CashAccountHistory>;
   /** Cash account name. */
-  name: Scalars['StringLenFrom2To50Type'];
+  name: Scalars['String'];
   /** Cash account uuid. */
   uuid: Scalars['ID'];
 };
@@ -72,7 +66,7 @@ export type CreateCashAccountInput = {
   /** Cash account currency. */
   currency: Currency;
   /** Cash account name. */
-  name: Scalars['StringLenFrom2To50Type'];
+  name: Scalars['String'];
 };
 
 export type CreateCashAccountsInput = {
@@ -82,7 +76,7 @@ export type CreateCashAccountsInput = {
 
 export type CreatePortfolioInput = {
   /** Portfolio name. */
-  name: Scalars['StringLenFrom2To50Type'];
+  name: Scalars['String'];
   /** Is portfolio rebalancing enabled. */
   rebalancingEnabled: Scalars['Boolean'];
 };
@@ -153,7 +147,7 @@ export type MutationCreatePortfolioArgs = {
 
 
 export type MutationDeleteCashAccountArgs = {
-  uuid: Scalars['String'];
+  uuid: Scalars['ID'];
 };
 
 
@@ -191,7 +185,7 @@ export type MutationUpdatePortfolioArgs = {
 export type Portfolio = {
   __typename?: 'Portfolio';
   /** Portfolio name. */
-  name: Scalars['StringLenFrom2To50Type'];
+  name: Scalars['String'];
   /** Is portfolio rebalancing enabled. */
   rebalancingEnabled: Scalars['Boolean'];
   /** Portfolio uuid. */
@@ -261,9 +255,9 @@ export type SignupInput = {
   /** Email. */
   email: Scalars['EmailAddress'];
   /** Name. */
-  name: Scalars['StringLenFrom4To50Type'];
+  name: Scalars['String'];
   /** Password. */
-  password: Scalars['StringLenFrom12To50Type'];
+  password: Scalars['String'];
   /** Token. */
   token: Scalars['String'];
 };
@@ -274,12 +268,12 @@ export type UpdateCashAccountInput = {
   /** Cash account currency. */
   currency?: InputMaybe<Currency>;
   /** Cash account name. */
-  name?: InputMaybe<Scalars['StringLenFrom2To50Type']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdatePortfolioInput = {
   /** Portfolio name. */
-  name?: InputMaybe<Scalars['StringLenFrom2To50Type']>;
+  name?: InputMaybe<Scalars['String']>;
   /** Is portfolio rebalancing enabled. */
   rebalancingEnabled?: InputMaybe<Scalars['Boolean']>;
 };
@@ -309,6 +303,13 @@ export type CreateCashAccountsMutationVariables = Exact<{
 
 
 export type CreateCashAccountsMutation = { __typename?: 'Mutation', createCashAccounts: { __typename?: 'CashAccounts', success: boolean } };
+
+export type DeleteCashAccountMutationVariables = Exact<{
+  uuid: Scalars['ID'];
+}>;
+
+
+export type DeleteCashAccountMutation = { __typename?: 'Mutation', deleteCashAccount: { __typename?: 'CashAccount', uuid: string, name: string, currency: Currency } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -351,12 +352,12 @@ export type EmailExistQuery = { __typename?: 'Query', emailExist: { __typename?:
 export type GetCashAccountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCashAccountQuery = { __typename?: 'Query', cashAccounts: Array<{ __typename?: 'CashAccount', uuid: string, name: any, currency: Currency, balance: number, history: Array<{ __typename?: 'CashAccountHistory', date: any, balance: number }> }> };
+export type GetCashAccountQuery = { __typename?: 'Query', cashAccounts: Array<{ __typename?: 'CashAccount', uuid: string, name: string, currency: Currency, balance: number, history: Array<{ __typename?: 'CashAccountHistory', date: any, balance: number }> }> };
 
-export type GetCashAccountIntroductionQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCashAccountsIntroductionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCashAccountIntroductionQuery = { __typename?: 'Query', cashAccounts: Array<{ __typename?: 'CashAccount', uuid: string, name: any, currency: Currency }> };
+export type GetCashAccountsIntroductionQuery = { __typename?: 'Query', cashAccounts: Array<{ __typename?: 'CashAccount', uuid: string, name: string, currency: Currency }> };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -366,6 +367,7 @@ export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', 
 
 export const ConfirmSignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ConfirmSignup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ConfirmSignupInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"confirmSignup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<ConfirmSignupMutation, ConfirmSignupMutationVariables>;
 export const CreateCashAccountsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateCashAccounts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateCashAccountsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createCashAccounts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<CreateCashAccountsMutation, CreateCashAccountsMutationVariables>;
+export const DeleteCashAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteCashAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteCashAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}}]}}]}}]} as unknown as DocumentNode<DeleteCashAccountMutation, DeleteCashAccountMutationVariables>;
 export const LogoutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>;
 export const RefreshTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RefreshToken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"refreshToken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<RefreshTokenMutation, RefreshTokenMutationVariables>;
 export const SendCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SendCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SendCodeInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sendCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<SendCodeMutation, SendCodeMutationVariables>;
@@ -373,5 +375,5 @@ export const SigninDocument = {"kind":"Document","definitions":[{"kind":"Operati
 export const SignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignupInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signupLocal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
 export const EmailExistDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmailExist"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emailExist"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"exist"}}]}}]}}]} as unknown as DocumentNode<EmailExistQuery, EmailExistQueryVariables>;
 export const GetCashAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCashAccount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"balance"}},{"kind":"Field","name":{"kind":"Name","value":"history"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"30"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"balance"}}]}}]}}]}}]} as unknown as DocumentNode<GetCashAccountQuery, GetCashAccountQueryVariables>;
-export const GetCashAccountIntroductionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCashAccountIntroduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}}]}}]}}]} as unknown as DocumentNode<GetCashAccountIntroductionQuery, GetCashAccountIntroductionQueryVariables>;
+export const GetCashAccountsIntroductionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCashAccountsIntroduction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}}]}}]}}]} as unknown as DocumentNode<GetCashAccountsIntroductionQuery, GetCashAccountsIntroductionQueryVariables>;
 export const GetUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;

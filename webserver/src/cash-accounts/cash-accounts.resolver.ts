@@ -1,4 +1,4 @@
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
 import { CashAccount, CashAccountHistory, CashAccounts } from './entities';
@@ -63,7 +63,7 @@ export class CashAccountsResolver {
   @Mutation(() => CashAccount)
   deleteCashAccount(
     @GetCurrentUserId() userId: string,
-    @Args('uuid', { type: () => String }) uuid: string,
+    @Args('uuid', { type: () => ID }) uuid: string,
   ) {
     return this.cashAccountsService.delete(userId, uuid);
   }

@@ -6,11 +6,11 @@ import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
 import {
-  CreateCashAccountsInput,
+  // CreateCashAccountsInput,
   CreateCashAccountsMutation,
   CreateCashAccountsMutationVariables,
   Currency,
-  GetCashAccountIntroductionQuery,
+  GetCashAccountsIntroductionQuery,
 } from '__generated__/graphql';
 import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
@@ -30,17 +30,23 @@ export const AddCashAccountsForm = () => {
   const [
     getCashAccounts,
     { loading: getCashAccountsLoginLoading /* error */ /* , updateQuery */ },
-  ] = useLazyQuery<GetCashAccountIntroductionQuery>(GET_CASH_ACCOUNTS_INTRODUCTION);
+  ] = useLazyQuery<GetCashAccountsIntroductionQuery>(GET_CASH_ACCOUNTS_INTRODUCTION);
 
   const [createCashAccounts] = useMutation<
     CreateCashAccountsMutation,
     CreateCashAccountsMutationVariables
   >(CREATE_CASH_ACCOUNTS);
 
-  const onSubmit = async (values: CreateCashAccountsInput) => {
+  const onSubmit = async (values: GetCashAccountsIntroductionQuery) => {
+    const cashAccounts = values.cashAccounts
+      .filter(({ uuid }) => !uuid)
+      .map(({ name, currency }) => ({ name, currency }));
+
     createCashAccounts({
       variables: {
-        data: values,
+        data: {
+          cashAccounts,
+        },
       },
     });
 
@@ -50,7 +56,7 @@ export const AddCashAccountsForm = () => {
   const defaultValues = async () => {
     const { data } = await getCashAccounts();
 
-    return data as CreateCashAccountsInput;
+    return data as GetCashAccountsIntroductionQuery;
   };
 
   const {
@@ -59,7 +65,7 @@ export const AddCashAccountsForm = () => {
     formState: { errors, isSubmitting, isValid, isDirty },
     control,
     getValues,
-  } = useForm<CreateCashAccountsInput>({
+  } = useForm<GetCashAccountsIntroductionQuery>({
     defaultValues,
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
@@ -72,10 +78,9 @@ export const AddCashAccountsForm = () => {
 
   const values = getValues();
 
-  console.log(values);
-
   const handleAppend = () =>
     append({
+      uuid: '',
       name: '',
       currency: Currency.Usd,
     });
@@ -83,6 +88,8 @@ export const AddCashAccountsForm = () => {
   if (getCashAccountsLoginLoading) {
     return <Loader />;
   }
+
+  console.log(values);
 
   return (
     <motion.div
@@ -141,6 +148,7 @@ export const AddCashAccountsForm = () => {
                   errors={errors}
                   values={values}
                   remove={remove}
+                  uuid={field.uuid}
                 />
               ))}
             </FieldsWrapper>

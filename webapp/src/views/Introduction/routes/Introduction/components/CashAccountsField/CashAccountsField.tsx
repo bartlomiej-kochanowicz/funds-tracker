@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Button, Input, Select, Spreader } from 'components/atoms';
+import { Button, Input, Loader, Select, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useInput } from 'hooks/useInput';
 import { useSelect } from 'hooks/useSelect';
@@ -12,14 +12,17 @@ import {
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
-import { CreateCashAccountsInput } from '__generated__/graphql';
+import { GetCashAccountsIntroductionQuery } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
+import { DELETE_CASH_ACCOUNT } from 'graphql/mutations/DeleteCashAccount';
 
 interface CashAccountsFieldProps {
-  register: UseFormRegister<CreateCashAccountsInput>;
-  errors: FieldErrorsImpl<DeepRequired<CreateCashAccountsInput>>;
+  register: UseFormRegister<GetCashAccountsIntroductionQuery>;
+  errors: FieldErrorsImpl<DeepRequired<GetCashAccountsIntroductionQuery>>;
   index: number;
-  values: CreateCashAccountsInput;
+  values: GetCashAccountsIntroductionQuery;
   remove: UseFieldArrayRemove;
+  uuid: string;
 }
 
 export const CashAccountsField = ({
@@ -28,16 +31,17 @@ export const CashAccountsField = ({
   index,
   values,
   remove,
+  uuid,
 }: CashAccountsFieldProps) => {
   const { t } = useTranslation();
 
-  const nameInputProps = useInput<CreateCashAccountsInput>({
+  const nameInputProps = useInput<GetCashAccountsIntroductionQuery>({
     register,
     name: `cashAccounts.${index}.name`,
     errors,
   });
 
-  const currencySelectProps = useSelect<CreateCashAccountsInput>({
+  const currencySelectProps = useSelect<GetCashAccountsIntroductionQuery>({
     register,
     name: `cashAccounts.${index}.currency`,
     errors,
@@ -55,7 +59,15 @@ export const CashAccountsField = ({
 
   const customLabel = ({ value }: { value: string }) => value;
 
-  const handleRemoveField = () => remove(index);
+  const [removeCashAccount, { loading }] = useMutation(DELETE_CASH_ACCOUNT);
+
+  const handleRemoveField = async () => {
+    if (uuid) {
+      await removeCashAccount({ variables: { uuid } });
+    }
+
+    remove(index);
+  };
 
   return (
     <Row>
@@ -80,9 +92,10 @@ export const CashAccountsField = ({
         borderRadius="secondary"
         color="secondary"
         onClick={handleRemoveField}
+        disabled={loading}
         boxShadow="none"
       >
-        <FaTrash />
+        {loading ? <Loader /> : <FaTrash />}
       </Button>
     </Row>
   );

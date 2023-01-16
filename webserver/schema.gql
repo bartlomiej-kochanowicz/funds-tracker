@@ -67,7 +67,7 @@ type CashAccount {
   uuid: ID!
 
   """Cash account name."""
-  name: StringLenFrom2To50Type!
+  name: String!
 
   """Cash account currency."""
   currency: Currency!
@@ -78,9 +78,6 @@ type CashAccount {
   """Account balance history."""
   history(first: Float): [CashAccountHistory!]!
 }
-
-"""String from 2 to 50 Chars"""
-scalar StringLenFrom2To50Type
 
 enum Currency {
   CHF
@@ -100,7 +97,7 @@ type Portfolio {
   uuid: ID!
 
   """Portfolio name."""
-  name: StringLenFrom2To50Type!
+  name: String!
 
   """Is portfolio rebalancing enabled."""
   rebalancingEnabled: Boolean!
@@ -133,7 +130,7 @@ type Mutation {
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   createCashAccounts(data: CreateCashAccountsInput!): CashAccounts!
   updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
-  deleteCashAccount(uuid: String!): CashAccount!
+  deleteCashAccount(uuid: ID!): CashAccount!
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
   deletePortfolio(uuid: String!): Portfolio!
@@ -144,20 +141,14 @@ input SignupInput {
   email: EmailAddress!
 
   """Name."""
-  name: StringLenFrom4To50Type!
+  name: String!
 
   """Password."""
-  password: StringLenFrom12To50Type!
+  password: String!
 
   """Token."""
   token: String!
 }
-
-"""String from 4 to 50 Chars"""
-scalar StringLenFrom4To50Type
-
-"""String from 12 to 50 Chars"""
-scalar StringLenFrom12To50Type
 
 input SendCodeInput {
   """Email."""
@@ -191,7 +182,7 @@ input SigninInput {
 
 input CreateCashAccountInput {
   """Cash account name."""
-  name: StringLenFrom2To50Type!
+  name: String!
 
   """Cash account currency."""
   currency: Currency!
@@ -204,7 +195,7 @@ input CreateCashAccountsInput {
 
 input UpdateCashAccountInput {
   """Cash account name."""
-  name: StringLenFrom2To50Type
+  name: String
 
   """Cash account currency."""
   currency: Currency
@@ -215,7 +206,7 @@ input UpdateCashAccountInput {
 
 input CreatePortfolioInput {
   """Portfolio name."""
-  name: StringLenFrom2To50Type!
+  name: String!
 
   """Is portfolio rebalancing enabled."""
   rebalancingEnabled: Boolean!
@@ -223,7 +214,7 @@ input CreatePortfolioInput {
 
 input UpdatePortfolioInput {
   """Portfolio name."""
-  name: StringLenFrom2To50Type
+  name: String
 
   """Is portfolio rebalancing enabled."""
   rebalancingEnabled: Boolean

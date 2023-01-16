@@ -16,7 +16,7 @@ export const GET_CASH_ACCOUNTS = gql(/* GraphQL */ `
 `);
 
 export const GET_CASH_ACCOUNTS_INTRODUCTION = gql(/* GraphQL */ `
-  query GetCashAccountIntroduction {
+  query GetCashAccountsIntroduction {
     cashAccounts {
       uuid
       name

@@ -1,12 +1,11 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { StringLenFrom2To50Type } from 'common/scalars';
 
 @ObjectType()
 export class Portfolio {
   @Field(() => ID, { description: 'Portfolio uuid.' })
   uuid: string;
 
-  @Field(() => StringLenFrom2To50Type, { description: 'Portfolio name.' })
+  @Field(() => String, { description: 'Portfolio name.' }) // 2,50
   name: string;
 
   @Field(() => Boolean, { description: 'Is portfolio rebalancing enabled.' })

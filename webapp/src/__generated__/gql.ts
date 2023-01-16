@@ -15,6 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  mutation ConfirmSignup($data: ConfirmSignupInput!) {\n    confirmSignup(data: $data) {\n      uuid\n      name\n    }\n  }\n": types.ConfirmSignupDocument,
     "\n  mutation CreateCashAccounts($data: CreateCashAccountsInput!) {\n    createCashAccounts(data: $data) {\n      success\n    }\n  }\n": types.CreateCashAccountsDocument,
+    "\n  mutation DeleteCashAccount($uuid: ID!) {\n    deleteCashAccount(uuid: $uuid) {\n      uuid\n      name\n      currency\n    }\n  }\n": types.DeleteCashAccountDocument,
     "\n  mutation Logout {\n    logout {\n      success\n    }\n  }\n": types.LogoutDocument,
     "\n  mutation RefreshToken {\n    refreshToken {\n      success\n    }\n  }\n": types.RefreshTokenDocument,
     "\n  mutation SendCode($data: SendCodeInput!) {\n    sendCode(data: $data) {\n      success\n    }\n  }\n": types.SendCodeDocument,
@@ -22,7 +23,7 @@ const documents = {
     "\n  mutation Signup($data: SignupInput!) {\n    signupLocal(data: $data) {\n      success\n    }\n  }\n": types.SignupDocument,
     "\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n": types.EmailExistDocument,
     "\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n      history(first: 30) {\n        date\n        balance\n      }\n    }\n  }\n": types.GetCashAccountDocument,
-    "\n  query GetCashAccountIntroduction {\n    cashAccounts {\n      uuid\n      name\n      currency\n    }\n  }\n": types.GetCashAccountIntroductionDocument,
+    "\n  query GetCashAccountsIntroduction {\n    cashAccounts {\n      uuid\n      name\n      currency\n    }\n  }\n": types.GetCashAccountsIntroductionDocument,
     "\n  query GetUser {\n    user {\n      uuid\n      name\n      email\n      createdAt\n    }\n  }\n": types.GetUserDocument,
 };
 
@@ -34,6 +35,10 @@ export function gql(source: "\n  mutation ConfirmSignup($data: ConfirmSignupInpu
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation CreateCashAccounts($data: CreateCashAccountsInput!) {\n    createCashAccounts(data: $data) {\n      success\n    }\n  }\n"): (typeof documents)["\n  mutation CreateCashAccounts($data: CreateCashAccountsInput!) {\n    createCashAccounts(data: $data) {\n      success\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteCashAccount($uuid: ID!) {\n    deleteCashAccount(uuid: $uuid) {\n      uuid\n      name\n      currency\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteCashAccount($uuid: ID!) {\n    deleteCashAccount(uuid: $uuid) {\n      uuid\n      name\n      currency\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -65,7 +70,7 @@ export function gql(source: "\n  query GetCashAccount {\n    cashAccounts {\n   
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCashAccountIntroduction {\n    cashAccounts {\n      uuid\n      name\n      currency\n    }\n  }\n"): (typeof documents)["\n  query GetCashAccountIntroduction {\n    cashAccounts {\n      uuid\n      name\n      currency\n    }\n  }\n"];
+export function gql(source: "\n  query GetCashAccountsIntroduction {\n    cashAccounts {\n      uuid\n      name\n      currency\n    }\n  }\n"): (typeof documents)["\n  query GetCashAccountsIntroduction {\n    cashAccounts {\n      uuid\n      name\n      currency\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,5 +1,4 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { Length } from 'common/scalars';
 import { EmailAddressResolver } from 'graphql-scalars';
 
 @InputType()
@@ -7,10 +6,10 @@ export class SignupInput {
   @Field(() => EmailAddressResolver, { description: 'Email.' })
   email: string;
 
-  @Field(() => Length(4, 50), { description: 'Name.' })
+  @Field(() => String, { description: 'Name.' }) // 4,50
   name: string;
 
-  @Field(() => Length(12, 50), { description: 'Password.' })
+  @Field(() => String, { description: 'Password.' }) // 12,50
   password: string;
 
   @Field(() => String, { description: 'Token.' })
