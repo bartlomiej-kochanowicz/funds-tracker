@@ -6,6 +6,8 @@ stop:
 	docker compose stop
 build:
 	docker compose build --no-cache
+init:
+	make build && make up && make prisma-generate && make prisma-migration-push
 restart:
 	docker compose restart
 prisma-generate:

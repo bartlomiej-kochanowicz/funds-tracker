@@ -51,7 +51,7 @@ jobs:
       - run: pnpm install:webserver
       - run: pnpm tsc:webserver
       - run: pnpm lint:webserver
-        # - run: pnpm test:webserver-ci temporarily disabled -nest js nasted entities error in single file tests
+      - run: pnpm test:webserver-ci
         env:
           DATABASE_URL: ${{secrets.TESTS_DATABASE_URL}}
           AT_SECRET: ${{secrets.TESTS_AT_SECRET}}
