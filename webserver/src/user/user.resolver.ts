@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'common/decorators';
-import { User, UpdateUser } from './entities';
+import { User } from './entities';
 import { UpdateUserInput } from './inputs';
 import { UserService } from './user.service';
 
@@ -13,7 +13,7 @@ export class UserResolver {
     return this.userService.getUser(userId);
   }
 
-  @Mutation(() => UpdateUser)
+  @Mutation(() => User)
   updateUser(
     @GetCurrentUserId() userId: string,
     @Args('data')
