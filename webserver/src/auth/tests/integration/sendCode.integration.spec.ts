@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { SendCode } from 'auth/entities/sendCode.entity';
+import { SendCode } from 'auth/entities/send-code.entity';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { sendCodeStub } from 'auth/tests/stubs/sendCode.stup';
 import { Response } from 'express';

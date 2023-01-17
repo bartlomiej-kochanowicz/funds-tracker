@@ -14,6 +14,7 @@ model User {
   name                 String
   password             String
   confirmationCodeHash String?
+  defaultCurrency      Currency         @default(USD)
   introductionStep     IntroductionStep @default(DefaultCurrency)
   sessions             Session[]
   cashAccounts         CashAccount[]

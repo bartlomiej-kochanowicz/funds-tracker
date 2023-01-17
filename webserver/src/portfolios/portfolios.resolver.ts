@@ -8,7 +8,7 @@ import {
 } from './inputs';
 import { PortfoliosService } from './portfolios.service';
 
-@Resolver(() => Portfolio)
+@Resolver()
 export class PortfoliosResolver {
   constructor(private readonly portfoliosService: PortfoliosService) {}
 

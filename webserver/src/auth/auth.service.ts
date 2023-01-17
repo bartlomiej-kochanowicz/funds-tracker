@@ -13,7 +13,15 @@ import { SendGridService } from 'send-grid/send-grid.service';
 import emailConfirmationHbs from 'common/handlebars/email-confirmation.hbs';
 import { Tokens } from './types';
 import { ConfirmSignupInput, EmailInput, SendCodeInput, SigninInput, SignupInput } from './inputs';
-import { Email, Logout, Refresh, Signup, User } from './entities';
+import {
+  ConfirmSignup,
+  Email,
+  Logout,
+  Refresh,
+  SigninLocal,
+  SignupLocal,
+  SendCode,
+} from './entities';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +33,7 @@ export class AuthService {
     private readonly sendgridService: SendGridService,
   ) {}
 
-  async signupLocal(signupInput: SignupInput): Promise<Signup> {
+  async signupLocal(signupInput: SignupInput): Promise<SignupLocal> {
     const { email, password, name, token } = signupInput;
 
     const isHuman = await this.validateHuman(token);
@@ -64,7 +72,7 @@ export class AuthService {
     };
   }
 
-  async sendCode(sendCode: SendCodeInput) {
+  async sendCode(sendCode: SendCodeInput): Promise<SendCode> {
     const { email, token } = sendCode;
 
     const isHuman = await this.validateHuman(token);
@@ -101,7 +109,10 @@ export class AuthService {
     };
   }
 
-  async confirmSignup(confirmSignupInput: ConfirmSignupInput, res: Response): Promise<User> {
+  async confirmSignup(
+    confirmSignupInput: ConfirmSignupInput,
+    res: Response,
+  ): Promise<ConfirmSignup> {
     const { code, email, token } = confirmSignupInput;
 
     const isHuman = await this.validateHuman(token);
@@ -152,10 +163,12 @@ export class AuthService {
       maxAge: EXPIRES['15DAYS'],
     });
 
-    return user;
+    return {
+      success: true,
+    };
   }
 
-  async signinLocal(signinInput: SigninInput, res: Response): Promise<User> {
+  async signinLocal(signinInput: SigninInput, res: Response): Promise<SigninLocal> {
     const { email, password, token } = signinInput;
 
     const isHuman = await this.validateHuman(token);
@@ -196,7 +209,9 @@ export class AuthService {
       maxAge: EXPIRES['15DAYS'],
     });
 
-    return user;
+    return {
+      success: true,
+    };
   }
 
   async signinLocalForTests(
@@ -229,14 +244,6 @@ export class AuthService {
     return {
       exist: Boolean(user),
     };
-  }
-
-  async getUser(userId: string): Promise<User> {
-    const user = await this.prisma.user.findUnique({
-      where: { uuid: userId },
-    });
-
-    return user;
   }
 
   async logout(userId: string, res: Response): Promise<Logout> {
