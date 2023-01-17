@@ -29,7 +29,7 @@ const IntroductionContent = () => {
     <FullscreenClear>
       <Suspense fallback={<Loading />}>
         <AnimatePresence>
-          {compareState(states.DefaultCurrency) && 'DefaultCurrency'}
+          {compareState(states.DefaultCurrency) && <div>DefaultCurrency</div>}
 
           {compareState(states.CashAccounts) && <AddCashAccountsForm />}
 

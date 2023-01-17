@@ -97,6 +97,11 @@ enum Currency {
   PLN
 }
 
+type IntroductionCashAccounts {
+  """Cash accounts created successfully."""
+  success: Boolean!
+}
+
 type Portfolio {
   """Portfolio uuid."""
   uuid: ID!
@@ -133,6 +138,7 @@ type Mutation {
   logout: Logout!
   refreshToken: Refresh!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
+  introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: ID!): CashAccount!
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
@@ -190,6 +196,10 @@ input CreateCashAccountInput {
 
   """Cash account currency."""
   currency: Currency!
+}
+
+input IntroductionCreateCashAccountsInput {
+  cashAccounts: [CreateCashAccountInput!]!
 }
 
 input UpdateCashAccountInput {
