@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { Signup } from 'auth/entities';
+import { SignupLocal } from 'auth/entities';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
@@ -19,10 +19,12 @@ describe('signup local', () => {
 
   describe('given does the user does not already signup', () => {
     describe('when a signinLocal mutation is executed', () => {
-      let signup: Signup;
+      let signup: SignupLocal;
 
       beforeAll(async () => {
-        const response = await request<{ signupLocal: Signup }>(integrationTestManager.httpServer)
+        const response = await request<{ signupLocal: SignupLocal }>(
+          integrationTestManager.httpServer,
+        )
           .mutate(
             gql`
               mutation SignupLocal($data: SignupInput!) {
@@ -63,7 +65,7 @@ describe('signup local', () => {
       let resStatus: number;
 
       beforeAll(async () => {
-        const { response } = await request<{ signupLocal: Signup }>(
+        const { response } = await request<{ signupLocal: SignupLocal }>(
           integrationTestManager.httpServer,
         )
           .mutate(

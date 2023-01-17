@@ -1,4 +1,4 @@
-import { User } from 'auth/entities';
+import { User } from 'user/entities';
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
