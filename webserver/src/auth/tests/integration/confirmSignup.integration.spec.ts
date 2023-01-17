@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { User } from 'auth/entities';
 import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
 import { testUser } from 'common/tests/stubs/testUser.stub';
 import { signupUserStub, confirmUserStub } from 'auth/tests/stubs/confirmSignup.stub';
 import { getGqlErrorStatus } from 'common/tests/gqlStatus';
+import { ConfirmSignup } from 'auth/entities';
 
 describe('confirm signup', () => {
   const integrationTestManager = new IntegrationTestManager();
@@ -19,18 +19,20 @@ describe('confirm signup', () => {
 
   describe('given the user exists', () => {
     describe('when a confirmSignup mutation is executed', () => {
-      let confirmedUser: User;
+      let confirmedUser: ConfirmSignup;
 
       beforeAll(async () => {
         // sign up new user to have new user in database for confirm action
         await integrationTestManager.getAuthService().signupLocal(signupUserStub);
 
-        const response = await request<{ confirmSignup: User }>(integrationTestManager.httpServer)
+        const response = await request<{ confirmSignup: ConfirmSignup }>(
+          integrationTestManager.httpServer,
+        )
           .mutate(
             gql`
               mutation ConfirmSignup($data: ConfirmSignupInput!) {
                 confirmSignup(data: $data) {
-                  email
+                  success
                 }
               }
             `,
@@ -45,7 +47,7 @@ describe('confirm signup', () => {
 
       it('should return user entity', async () => {
         expect(confirmedUser).toMatchObject({
-          email: signupUserStub.email,
+          success: true,
         });
       });
 
@@ -69,14 +71,14 @@ describe('confirm signup', () => {
       let resStatus: number;
 
       beforeAll(async () => {
-        const { response } = await request<{ confirmSignup: User }>(
+        const { response } = await request<{ confirmSignup: ConfirmSignup }>(
           integrationTestManager.httpServer,
         )
           .mutate(
             gql`
               mutation ConfirmSignup($data: ConfirmSignupInput!) {
                 confirmSignup(data: $data) {
-                  email
+                  success
                 }
               }
             `,
@@ -103,14 +105,14 @@ describe('confirm signup', () => {
       let resStatus: number;
 
       beforeAll(async () => {
-        const { response } = await request<{ confirmSignup: User }>(
+        const { response } = await request<{ confirmSignup: ConfirmSignup }>(
           integrationTestManager.httpServer,
         )
           .mutate(
             gql`
               mutation ConfirmSignup($data: ConfirmSignupInput!) {
                 confirmSignup(data: $data) {
-                  email
+                  success
                 }
               }
             `,

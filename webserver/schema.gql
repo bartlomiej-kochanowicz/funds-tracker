@@ -37,107 +37,8 @@ type SignupLocal {
   success: Boolean!
 }
 
-type CashAccountHistory {
-  """Transaction uuid."""
-  uuid: ID!
-
-  """Date of the transaction."""
-  date: Date!
-
-  """Cash account balance."""
-  balance: Float!
-}
-
-"""
-A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
-"""
-scalar Date
-
-type CashAccount {
-  """Cash account uuid."""
-  uuid: ID!
-
-  """Cash account name."""
-  name: String!
-
-  """Cash account currency."""
-  currency: Currency!
-
-  """Account balance."""
-  balance: Float!
-
-  """Account balance history."""
-  history(first: Float): [CashAccountHistory!]!
-}
-
-enum Currency {
-  CHF
-  EUR
-  GBP
-  USD
-  PLN
-}
-
-type IntroductionCashAccounts {
-  """Cash accounts created successfully."""
-  success: Boolean!
-}
-
-type Portfolio {
-  """Portfolio uuid."""
-  uuid: ID!
-
-  """Portfolio name."""
-  name: String!
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean!
-}
-
-type IntroductionPortfolios {
-  """Portfolios created successfully."""
-  success: Boolean!
-}
-
-type User {
-  """User uuid."""
-  uuid: String!
-
-  """User date created."""
-  createdAt: Date!
-
-  """User email."""
-  email: EmailAddress!
-
-  """User name."""
-  name: String!
-
-  """User introduction step."""
-  introductionStep: IntroductionStep!
-
-  """User default currency."""
-  defaultCurrency: Currency!
-}
-
-"""
-A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
-"""
-scalar EmailAddress @specifiedBy(url: "https://www.w3.org/Protocols/rfc822/")
-
-enum IntroductionStep {
-  DefaultCurrency
-  CashAccounts
-  Portfolios
-  Completed
-}
-
 type Query {
   emailExist(data: EmailInput!): Email!
-  cashAccounts: [CashAccount!]!
-  cashAccount(uuid: String!): CashAccount!
-  portfolios: [Portfolio!]!
-  portfolio(uuid: String!): Portfolio!
-  user: User!
 }
 
 input EmailInput {
@@ -148,6 +49,11 @@ input EmailInput {
   token: String!
 }
 
+"""
+A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
+"""
+scalar EmailAddress @specifiedBy(url: "https://www.w3.org/Protocols/rfc822/")
+
 type Mutation {
   signupLocal(data: SignupInput!): SignupLocal!
   sendCode(data: SendCodeInput!): SendCode!
@@ -155,14 +61,6 @@ type Mutation {
   signinLocal(data: SigninInput!): SigninLocal!
   logout: Logout!
   refreshToken: Refresh!
-  createCashAccount(data: CreateCashAccountInput!): CashAccount!
-  introductionCreateCashAccounts(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
-  updateCashAccount(uuid: String!, data: UpdateCashAccountInput!): CashAccount!
-  deleteCashAccount(uuid: ID!): CashAccount!
-  createPortfolio(data: CreatePortfolioInput!): Portfolio!
-  updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
-  deletePortfolio(uuid: String!): Portfolio!
-  updateUser(data: UpdateUserInput!): User!
 }
 
 input SignupInput {
@@ -207,55 +105,4 @@ input SigninInput {
 
   """Token."""
   token: String!
-}
-
-input CreateCashAccountInput {
-  """Cash account name."""
-  name: String!
-
-  """Cash account currency."""
-  currency: Currency!
-}
-
-input IntroductionCreatePortfoliosInput {
-  """Portfolios array."""
-  portfolios: [CreatePortfolioInput!]!
-}
-
-input CreatePortfolioInput {
-  """Portfolio name."""
-  name: String!
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean!
-}
-
-input UpdateCashAccountInput {
-  """Cash account name."""
-  name: String
-
-  """Cash account currency."""
-  currency: Currency
-
-  """Account balance."""
-  balance: Float
-}
-
-input UpdatePortfolioInput {
-  """Portfolio name."""
-  name: String
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean
-}
-
-input UpdateUserInput {
-  """New user email."""
-  email: EmailAddress
-
-  """New user name."""
-  name: String
-
-  """New user default currency."""
-  defaultCurrency: Currency
 }

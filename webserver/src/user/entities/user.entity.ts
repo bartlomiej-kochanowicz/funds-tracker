@@ -1,10 +1,10 @@
-import { ObjectType, Field, registerEnumType } from '@nestjs/graphql';
+import { ObjectType, Field, registerEnumType, ID } from '@nestjs/graphql';
 import { Currency, IntroductionStep } from '@prisma/client';
 import { DateResolver, EmailAddressResolver } from 'graphql-scalars';
 
 @ObjectType()
 export class User {
-  @Field(() => String, { description: 'User uuid.' })
+  @Field(() => ID, { description: 'User uuid.' })
   uuid: string;
 
   @Field(() => DateResolver, { description: 'User date created.' })
