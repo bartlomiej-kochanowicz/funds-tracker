@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  uuid                 String        @id @default(uuid())
-  createdAt            DateTime      @default(now())
-  email                String        @unique
+  uuid                 String           @id @default(uuid())
+  createdAt            DateTime         @default(now())
+  email                String           @unique
   name                 String
   password             String
   confirmationCodeHash String?
+  introductionStep     IntroductionStep @default(DefaultCurrency)
   sessions             Session[]
   cashAccounts         CashAccount[]
   portfolios           Portfolio[]
@@ -85,4 +86,11 @@ enum Currency {
   GBP
   USD
   PLN
+}
+
+enum IntroductionStep {
+  DefaultCurrency
+  CashAccounts
+  Portfolios
+  Completed
 }

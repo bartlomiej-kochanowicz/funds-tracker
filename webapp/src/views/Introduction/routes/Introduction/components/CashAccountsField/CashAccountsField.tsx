@@ -72,6 +72,8 @@ export const CashAccountsField = ({
   const handleRemoveField = async () => {
     if (uuid) {
       await removeCashAccount({ variables: { uuid } });
+    } else {
+      remove(index);
     }
   };
 

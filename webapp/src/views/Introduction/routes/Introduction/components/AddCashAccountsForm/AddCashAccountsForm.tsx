@@ -6,7 +6,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
 import {
-  // CreateCashAccountsInput,
   CreateCashAccountsMutation,
   CreateCashAccountsMutationVariables,
   Currency,
@@ -17,6 +16,7 @@ import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 import { GET_CASH_ACCOUNTS_INTRODUCTION } from 'graphql/query';
 import { CREATE_CASH_ACCOUNTS } from 'graphql/mutations';
+import { showErrorToast } from 'helpers/showToast';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
 import { EmptyList } from '../EmptyList';
@@ -27,30 +27,33 @@ export const AddCashAccountsForm = () => {
 
   const { updateState, actions } = useIntroductionContext();
 
-  const [
-    getCashAccounts,
-    { loading: getCashAccountsLoginLoading /* error */ /* , updateQuery */ },
-  ] = useLazyQuery<GetCashAccountsIntroductionQuery>(GET_CASH_ACCOUNTS_INTRODUCTION);
+  const [getCashAccounts, { loading: getCashAccountsLoginLoading }] =
+    useLazyQuery<GetCashAccountsIntroductionQuery>(GET_CASH_ACCOUNTS_INTRODUCTION);
 
   const [createCashAccounts] = useMutation<
     CreateCashAccountsMutation,
     CreateCashAccountsMutationVariables
-  >(CREATE_CASH_ACCOUNTS);
+  >(CREATE_CASH_ACCOUNTS, {
+    onCompleted: () => {
+      updateState(actions.CHANGE_TO_ADD_PORTFOLIOS);
+    },
+    onError: () => {
+      showErrorToast(t('service.unknown_error'));
+    },
+  });
 
   const onSubmit = async (values: GetCashAccountsIntroductionQuery) => {
     const cashAccounts = values.cashAccounts
       .filter(({ uuid }) => !uuid)
       .map(({ name, currency }) => ({ name, currency }));
 
-    createCashAccounts({
+    await createCashAccounts({
       variables: {
         data: {
           cashAccounts,
         },
       },
     });
-
-    updateState(actions.CHANGE_TO_ADD_PORTFOLIOS);
   };
 
   const defaultValues = async () => {

@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CashAccount, CashAccountHistory, CashAccounts } from './entities';
-import { CreateCashAccountInput, CreateCashAccountsInput, UpdateCashAccountInput } from './inputs';
+import { CashAccount, CashAccountHistory } from './entities';
+import { CreateCashAccountInput, UpdateCashAccountInput } from './inputs';
 
 @Injectable()
 export class CashAccountsService {
@@ -33,34 +33,6 @@ export class CashAccountsService {
     });
 
     return cashAccount;
-  }
-
-  async createMany(
-    userUuid: string,
-    createCashAccountsInput: CreateCashAccountsInput,
-  ): Promise<CashAccounts> {
-    const existedCashAccounts = await this.prisma.cashAccount.count({
-      where: {
-        userUuid,
-      },
-    });
-
-    const { cashAccounts } = createCashAccountsInput;
-
-    if (
-      existedCashAccounts >= MAX_CASH_ACCOUNTS ||
-      existedCashAccounts + cashAccounts.length >= MAX_CASH_ACCOUNTS
-    ) {
-      throw new HttpException('Max accounts reached', HttpStatus.FORBIDDEN);
-    }
-
-    await this.prisma.cashAccount.createMany({
-      data: cashAccounts.map(cashAccount => ({ ...cashAccount, userUuid })),
-    });
-
-    return {
-      success: true,
-    };
   }
 
   async findAll(userUuid: string): Promise<Omit<CashAccount, 'history'>[]> {
