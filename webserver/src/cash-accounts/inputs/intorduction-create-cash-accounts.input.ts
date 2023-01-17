@@ -3,6 +3,6 @@ import { CreateCashAccountInput } from './create-cash-account.input';
 
 @InputType()
 export class IntroductionCreateCashAccountsInput {
-  @Field(() => [CreateCashAccountInput])
+  @Field(() => [CreateCashAccountInput], { description: 'Cash accounts array.' })
   cashAccounts: CreateCashAccountInput[];
 }

@@ -1,7 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'common/decorators';
-import { Portfolio } from './entities';
-import { CreatePortfolioInput, UpdatePortfolioInput } from './inputs';
+import { IntroductionPortfolios, Portfolio } from './entities';
+import {
+  CreatePortfolioInput,
+  UpdatePortfolioInput,
+  IntroductionCreatePortfoliosInput,
+} from './inputs';
 import { PortfoliosService } from './portfolios.service';
 
 @Resolver(() => Portfolio)
@@ -15,6 +19,18 @@ export class PortfoliosResolver {
     createPortfolioInput: CreatePortfolioInput,
   ) {
     return this.portfoliosService.create(userId, createPortfolioInput);
+  }
+
+  @Mutation(() => IntroductionPortfolios)
+  introductionCreateCashAccounts(
+    @GetCurrentUserId() userId: string,
+    @Args('data')
+    introductionCreatePortfoliosInput: IntroductionCreatePortfoliosInput,
+  ) {
+    return this.portfoliosService.introductionCreatePortfolios(
+      userId,
+      introductionCreatePortfoliosInput,
+    );
   }
 
   @Query(() => [Portfolio])

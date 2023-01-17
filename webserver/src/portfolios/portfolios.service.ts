@@ -1,8 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { IntroductionStep } from '@prisma/client';
 import { MAX_PORTFOLIOS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { Portfolio } from './entities';
-import { CreatePortfolioInput, UpdatePortfolioInput } from './inputs';
+import { IntroductionPortfolios, Portfolio } from './entities';
+import {
+  CreatePortfolioInput,
+  IntroductionCreatePortfoliosInput,
+  UpdatePortfolioInput,
+} from './inputs';
 
 @Injectable()
 export class PortfoliosService {
@@ -30,6 +35,38 @@ export class PortfoliosService {
     });
 
     return portfolio;
+  }
+
+  async introductionCreatePortfolios(
+    userUuid: string,
+    introductionCreatePortfoliosInput: IntroductionCreatePortfoliosInput,
+  ): Promise<IntroductionPortfolios> {
+    const { introductionStep } = await this.prisma.user.findUnique({
+      where: { uuid: userUuid },
+      select: { introductionStep: true },
+    });
+
+    if (introductionStep !== IntroductionStep.Portfolios) {
+      throw new HttpException('Introduction step not valid', HttpStatus.FORBIDDEN);
+    }
+
+    await this.prisma.portfolio.createMany({
+      data: introductionCreatePortfoliosInput.portfolios.map(portfolio => ({
+        userUuid,
+        ...portfolio,
+      })),
+    });
+
+    await this.prisma.user.update({
+      where: { uuid: userUuid },
+      data: {
+        introductionStep: IntroductionStep.Completed,
+      },
+    });
+
+    return {
+      success: true,
+    };
   }
 
   async findAll(userUuid: string): Promise<Portfolio[]> {
