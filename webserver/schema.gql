@@ -99,11 +99,6 @@ type IntroductionPortfolios {
   success: Boolean!
 }
 
-type UpdateUser {
-  """Update user successful."""
-  success: Boolean!
-}
-
 type User {
   """User uuid."""
   uuid: String!
@@ -117,10 +112,10 @@ type User {
   """User name."""
   name: String!
 
-  """Introduction step."""
+  """User introduction step."""
   introductionStep: IntroductionStep!
 
-  """Default currency."""
+  """User default currency."""
   defaultCurrency: Currency!
 }
 
@@ -167,7 +162,7 @@ type Mutation {
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
   deletePortfolio(uuid: String!): Portfolio!
-  updateUser: UpdateUser!
+  updateUser(data: UpdateUserInput!): User!
 }
 
 input SignupInput {
@@ -252,4 +247,15 @@ input UpdatePortfolioInput {
 
   """Is portfolio rebalancing enabled."""
   rebalancingEnabled: Boolean
+}
+
+input UpdateUserInput {
+  """New user email."""
+  email: EmailAddress
+
+  """New user name."""
+  name: String
+
+  """New user default currency."""
+  defaultCurrency: Currency
 }
