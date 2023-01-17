@@ -1,5 +1,5 @@
 import { ObjectType, Field, registerEnumType } from '@nestjs/graphql';
-import { IntroductionStep } from '@prisma/client';
+import { Currency, IntroductionStep } from '@prisma/client';
 import { DateResolver, EmailAddressResolver } from 'graphql-scalars';
 
 @ObjectType()
@@ -18,8 +18,15 @@ export class User {
 
   @Field(() => IntroductionStep, { description: 'Introduction step.' })
   introductionStep: IntroductionStep;
+
+  @Field(() => Currency, { description: 'Default currency.' })
+  defaultCurrency: Currency;
 }
 
 registerEnumType(IntroductionStep, {
   name: 'IntroductionStep',
+});
+
+registerEnumType(Currency, {
+  name: 'Currency',
 });

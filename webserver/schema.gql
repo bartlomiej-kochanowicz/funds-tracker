@@ -114,6 +114,9 @@ type User {
 
   """Introduction step."""
   introductionStep: IntroductionStep!
+
+  """Default currency."""
+  defaultCurrency: Currency!
 }
 
 """
