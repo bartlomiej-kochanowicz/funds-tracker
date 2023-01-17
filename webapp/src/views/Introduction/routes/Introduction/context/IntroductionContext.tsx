@@ -1,45 +1,46 @@
 import { createContext, FC, useContext } from 'react';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
+import { useUserContext } from 'contexts/UserContext';
+import { IntroductionStep } from '__generated__/graphql';
 
 const AddModelPortfolioContext = createContext<AddModelPortfolioContextType | null>(null);
 
 type AddModelPortfolioContextType = ReturnType<typeof useIntroduction>;
 
-type IntroductionStates = 'addCashAccounts' | 'addPortfolios' | 'addInstrument' | 'formSuccess';
-
 type IntroductionActions =
   | 'CHANGE_TO_ADD_CASH_ACCOUNTS'
   | 'CHANGE_TO_ADD_PORTFOLIOS'
-  | 'CHANGE_TO_ADD_INSTRUMENT'
-  | 'CHANGE_TO_FORM_SUCCESS';
-
-const IntroductionStateMachine = new StateMachine<IntroductionStates, IntroductionActions>(
-  'addCashAccounts',
-  {
-    addCashAccounts: 'addCashAccounts',
-    addPortfolios: 'addPortfolios',
-    addInstrument: 'addInstrument',
-    formSuccess: 'formSuccess',
-  },
-  {
-    CHANGE_TO_ADD_CASH_ACCOUNTS: 'CHANGE_TO_ADD_CASH_ACCOUNTS',
-    CHANGE_TO_ADD_PORTFOLIOS: 'CHANGE_TO_ADD_PORTFOLIOS',
-    CHANGE_TO_ADD_INSTRUMENT: 'CHANGE_TO_ADD_INSTRUMENT',
-    CHANGE_TO_FORM_SUCCESS: 'CHANGE_TO_FORM_SUCCESS',
-  },
-  {
-    addCashAccounts: { CHANGE_TO_ADD_PORTFOLIOS: 'addPortfolios' },
-    addPortfolios: { CHANGE_TO_ADD_INSTRUMENT: 'addInstrument' },
-    addInstrument: {
-      CHANGE_TO_FORM_SUCCESS: 'formSuccess',
-      CHANGE_TO_ADD_CASH_ACCOUNTS: 'addCashAccounts',
-    },
-  },
-);
+  | 'CHANGE_TO_COMPLETED';
 
 const useIntroduction = () => {
+  const { user } = useUserContext();
+
+  const IntroductionStateMachine = new StateMachine<IntroductionStep, IntroductionActions>(
+    user.introductionStep,
+    {
+      [IntroductionStep.DefaultCurrency]: IntroductionStep.DefaultCurrency,
+      [IntroductionStep.CashAccounts]: IntroductionStep.CashAccounts,
+      [IntroductionStep.Portfolios]: IntroductionStep.Portfolios,
+      [IntroductionStep.Completed]: IntroductionStep.Completed,
+    },
+    {
+      CHANGE_TO_ADD_CASH_ACCOUNTS: 'CHANGE_TO_ADD_CASH_ACCOUNTS',
+      CHANGE_TO_ADD_PORTFOLIOS: 'CHANGE_TO_ADD_PORTFOLIOS',
+      CHANGE_TO_COMPLETED: 'CHANGE_TO_COMPLETED',
+    },
+    {
+      [IntroductionStep.DefaultCurrency]: {
+        CHANGE_TO_ADD_CASH_ACCOUNTS: IntroductionStep.CashAccounts,
+      },
+      [IntroductionStep.CashAccounts]: { CHANGE_TO_ADD_PORTFOLIOS: IntroductionStep.Portfolios },
+      [IntroductionStep.Portfolios]: {
+        CHANGE_TO_COMPLETED: IntroductionStep.Completed,
+      },
+    },
+  );
+
   const { states, actions, updateState, compareState } = useStateMachine<
-    IntroductionStates,
+    IntroductionStep,
     IntroductionActions
   >(IntroductionStateMachine);
 

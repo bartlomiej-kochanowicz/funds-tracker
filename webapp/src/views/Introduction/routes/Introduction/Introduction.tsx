@@ -16,14 +16,8 @@ const AddPortfoliosForm = lazy(() =>
   })),
 );
 
-const AddInstrumentForm = lazy(() =>
-  import('./components/AddInstrumentForm').then(({ AddInstrumentForm: component }) => ({
-    default: component,
-  })),
-);
-
-const FormSuccess = lazy(() =>
-  import('./components/FormSuccess').then(({ FormSuccess: component }) => ({
+const Completed = lazy(() =>
+  import('./components/Completed').then(({ Completed: component }) => ({
     default: component,
   })),
 );
@@ -35,13 +29,13 @@ const IntroductionContent = () => {
     <FullscreenClear>
       <Suspense fallback={<Loading />}>
         <AnimatePresence>
-          {compareState(states.addCashAccounts) && <AddCashAccountsForm />}
+          {compareState(states.DefaultCurrency) && 'DefaultCurrency'}
 
-          {compareState(states.addPortfolios) && <AddPortfoliosForm />}
+          {compareState(states.CashAccounts) && <AddCashAccountsForm />}
 
-          {compareState(states.addInstrument) && <AddInstrumentForm />}
+          {compareState(states.Portfolios) && <AddPortfoliosForm />}
 
-          {compareState(states.formSuccess) && <FormSuccess />}
+          {compareState(states.Completed) && <Completed />}
         </AnimatePresence>
       </Suspense>
     </FullscreenClear>

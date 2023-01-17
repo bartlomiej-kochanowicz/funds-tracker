@@ -4,7 +4,7 @@ import { Button, Heading, Spacer, Text, ThumbUp } from 'components/atoms';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 
-export const FormSuccess = () => {
+export const Completed = () => {
   const { t } = useTranslation();
 
   return (

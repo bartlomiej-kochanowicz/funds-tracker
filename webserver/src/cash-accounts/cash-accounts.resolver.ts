@@ -1,8 +1,12 @@
 import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
-import { CashAccount, CashAccountHistory } from './entities';
-import { CreateCashAccountInput, UpdateCashAccountInput } from './inputs';
+import { CashAccount, CashAccountHistory, IntroductionCashAccounts } from './entities';
+import {
+  CreateCashAccountInput,
+  IntroductionCreateCashAccountsInput,
+  UpdateCashAccountInput,
+} from './inputs';
 
 @Resolver(() => CashAccount)
 export class CashAccountsResolver {
@@ -15,6 +19,18 @@ export class CashAccountsResolver {
     createCashAccountInput: CreateCashAccountInput,
   ) {
     return this.cashAccountsService.create(userId, createCashAccountInput);
+  }
+
+  @Mutation(() => IntroductionCashAccounts)
+  introductionCreateCashAccounts(
+    @GetCurrentUserId() userId: string,
+    @Args('data')
+    introductionCreateCashAccountInput: IntroductionCreateCashAccountsInput,
+  ) {
+    return this.cashAccountsService.introductionCreateCashAccounts(
+      userId,
+      introductionCreateCashAccountInput,
+    );
   }
 
   @Query(() => [CashAccount])
