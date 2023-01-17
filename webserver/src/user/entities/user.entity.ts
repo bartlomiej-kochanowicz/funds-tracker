@@ -16,10 +16,10 @@ export class User {
   @Field(() => String, { description: 'User name.' })
   name: string;
 
-  @Field(() => IntroductionStep, { description: 'Introduction step.' })
+  @Field(() => IntroductionStep, { description: 'User introduction step.' })
   introductionStep: IntroductionStep;
 
-  @Field(() => Currency, { description: 'Default currency.' })
+  @Field(() => Currency, { description: 'User default currency.' })
   defaultCurrency: Currency;
 }
 

@@ -99,6 +99,11 @@ type IntroductionPortfolios {
   success: Boolean!
 }
 
+type UpdateUser {
+  """Update user successful."""
+  success: Boolean!
+}
+
 type User {
   """User uuid."""
   uuid: String!
@@ -162,6 +167,7 @@ type Mutation {
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
   deletePortfolio(uuid: String!): Portfolio!
+  updateUser: UpdateUser!
 }
 
 input SignupInput {
