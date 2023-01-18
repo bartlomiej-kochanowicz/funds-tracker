@@ -29,7 +29,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     CashAccountsModule,
     InstrumentsModule,
-    PortfoliosModule,
+    // PortfoliosModule,
     UserModule,
   ],
   controllers: [],

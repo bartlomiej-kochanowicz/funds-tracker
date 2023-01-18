@@ -83,22 +83,6 @@ type IntroductionCashAccounts {
   success: Boolean!
 }
 
-type Portfolio {
-  """Portfolio uuid."""
-  uuid: ID!
-
-  """Portfolio name."""
-  name: String!
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean!
-}
-
-type IntroductionPortfolios {
-  """Portfolios created successfully."""
-  success: Boolean!
-}
-
 type User {
   """User uuid."""
   uuid: ID!
@@ -135,8 +119,6 @@ type Query {
   emailExist(data: EmailInput!): Email!
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: ID!): CashAccount!
-  portfolios: [Portfolio!]!
-  portfolio(uuid: String!): Portfolio!
   user: User!
 }
 
@@ -156,12 +138,9 @@ type Mutation {
   logout: Logout!
   refreshToken: Refresh!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
-  introductionCreateCashAccounts(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
+  introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: ID!): CashAccount!
-  createPortfolio(data: CreatePortfolioInput!): Portfolio!
-  updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
-  deletePortfolio(uuid: String!): Portfolio!
   updateUser(data: UpdateUserInput!): User!
 }
 
@@ -217,17 +196,9 @@ input CreateCashAccountInput {
   currency: Currency!
 }
 
-input IntroductionCreatePortfoliosInput {
-  """Portfolios array."""
-  portfolios: [CreatePortfolioInput!]!
-}
-
-input CreatePortfolioInput {
-  """Portfolio name."""
-  name: String!
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean!
+input IntroductionCreateCashAccountsInput {
+  """Cash accounts array."""
+  cashAccounts: [CreateCashAccountInput!]!
 }
 
 input UpdateCashAccountInput {
@@ -239,14 +210,6 @@ input UpdateCashAccountInput {
 
   """Account balance."""
   balance: Float
-}
-
-input UpdatePortfolioInput {
-  """Portfolio name."""
-  name: String
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean
 }
 
 input UpdateUserInput {
