@@ -8,7 +8,7 @@ import {
 } from './inputs';
 import { PortfoliosService } from './portfolios.service';
 
-@Resolver()
+@Resolver(() => Portfolio)
 export class PortfoliosResolver {
   constructor(private readonly portfoliosService: PortfoliosService) {}
 
@@ -22,7 +22,7 @@ export class PortfoliosResolver {
   }
 
   @Mutation(() => IntroductionPortfolios)
-  introductionCreateCashAccounts(
+  introductionCreatePortfolios(
     @GetCurrentUserId() userId: string,
     @Args('data')
     introductionCreatePortfoliosInput: IntroductionCreatePortfoliosInput,

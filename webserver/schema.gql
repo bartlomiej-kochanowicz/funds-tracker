@@ -83,6 +83,22 @@ type IntroductionCashAccounts {
   success: Boolean!
 }
 
+type Portfolio {
+  """Portfolio uuid."""
+  uuid: ID!
+
+  """Portfolio name."""
+  name: String!
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean!
+}
+
+type IntroductionPortfolios {
+  """Portfolios created successfully."""
+  success: Boolean!
+}
+
 type User {
   """User uuid."""
   uuid: ID!
@@ -119,6 +135,8 @@ type Query {
   emailExist(data: EmailInput!): Email!
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: ID!): CashAccount!
+  portfolios: [Portfolio!]!
+  portfolio(uuid: String!): Portfolio!
   user: User!
 }
 
@@ -141,6 +159,10 @@ type Mutation {
   introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: ID!): CashAccount!
+  createPortfolio(data: CreatePortfolioInput!): Portfolio!
+  introductionCreatePortfolios(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
+  updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
+  deletePortfolio(uuid: String!): Portfolio!
   updateUser(data: UpdateUserInput!): User!
 }
 
@@ -210,6 +232,27 @@ input UpdateCashAccountInput {
 
   """Account balance."""
   balance: Float
+}
+
+input CreatePortfolioInput {
+  """Portfolio name."""
+  name: String!
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean!
+}
+
+input IntroductionCreatePortfoliosInput {
+  """Portfolios array."""
+  portfolios: [CreatePortfolioInput!]!
+}
+
+input UpdatePortfolioInput {
+  """Portfolio name."""
+  name: String
+
+  """Is portfolio rebalancing enabled."""
+  rebalancingEnabled: Boolean
 }
 
 input UpdateUserInput {
