@@ -19,7 +19,7 @@ const bootstrap = async () => {
 
   app.use(cookieParser());
 
-  app.useGlobalPipes(new ValidationPipe({ enableDebugMessages: true }));
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(WEBSERVER_PORT);
 };
