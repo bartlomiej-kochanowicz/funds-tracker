@@ -37,6 +37,52 @@ type SignupLocal {
   success: Boolean!
 }
 
+type CashAccountHistory {
+  """Transaction uuid."""
+  uuid: ID!
+
+  """Date of the transaction."""
+  date: Date!
+
+  """Cash account balance."""
+  balance: Float!
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+type CashAccount {
+  """Cash account uuid."""
+  uuid: ID!
+
+  """Cash account name."""
+  name: String!
+
+  """Cash account currency."""
+  currency: Currency!
+
+  """Account balance."""
+  balance: Float!
+
+  """Account balance history."""
+  history(first: Float): [CashAccountHistory!]!
+}
+
+enum Currency {
+  CHF
+  EUR
+  GBP
+  USD
+  PLN
+}
+
+type IntroductionCashAccounts {
+  """Cash accounts created successfully."""
+  success: Boolean!
+}
+
 type Portfolio {
   """Portfolio uuid."""
   uuid: ID!
@@ -74,11 +120,6 @@ type User {
 }
 
 """
-A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
-"""
-scalar Date
-
-"""
 A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
 """
 scalar EmailAddress @specifiedBy(url: "https://www.w3.org/Protocols/rfc822/")
@@ -90,16 +131,10 @@ enum IntroductionStep {
   Completed
 }
 
-enum Currency {
-  CHF
-  EUR
-  GBP
-  USD
-  PLN
-}
-
 type Query {
   emailExist(data: EmailInput!): Email!
+  cashAccounts: [CashAccount!]!
+  cashAccount(uuid: ID!): CashAccount!
   portfolios: [Portfolio!]!
   portfolio(uuid: String!): Portfolio!
   user: User!
@@ -120,8 +155,11 @@ type Mutation {
   signinLocal(data: SigninInput!): SigninLocal!
   logout: Logout!
   refreshToken: Refresh!
-  createPortfolio(data: CreatePortfolioInput!): Portfolio!
+  createCashAccount(data: CreateCashAccountInput!): CashAccount!
   introductionCreateCashAccounts(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
+  updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
+  deleteCashAccount(uuid: ID!): CashAccount!
+  createPortfolio(data: CreatePortfolioInput!): Portfolio!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
   deletePortfolio(uuid: String!): Portfolio!
   updateUser(data: UpdateUserInput!): User!
@@ -171,6 +209,19 @@ input SigninInput {
   token: String!
 }
 
+input CreateCashAccountInput {
+  """Cash account name."""
+  name: String!
+
+  """Cash account currency."""
+  currency: Currency!
+}
+
+input IntroductionCreatePortfoliosInput {
+  """Portfolios array."""
+  portfolios: [CreatePortfolioInput!]!
+}
+
 input CreatePortfolioInput {
   """Portfolio name."""
   name: String!
@@ -179,9 +230,15 @@ input CreatePortfolioInput {
   rebalancingEnabled: Boolean!
 }
 
-input IntroductionCreatePortfoliosInput {
-  """Portfolios array."""
-  portfolios: [CreatePortfolioInput!]!
+input UpdateCashAccountInput {
+  """Cash account name."""
+  name: String
+
+  """Cash account currency."""
+  currency: Currency
+
+  """Account balance."""
+  balance: Float
 }
 
 input UpdatePortfolioInput {

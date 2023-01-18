@@ -2,7 +2,7 @@ import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
 import { CashAccountHistory as CashAccountHistoryPrisma } from '@prisma/client';
 import { DateResolver } from 'graphql-scalars';
 
-@ObjectType()
+@ObjectType('CashAccountHistory')
 export class CashAccountHistory implements Omit<CashAccountHistoryPrisma, 'cashAccountUuid'> {
   @Field(() => ID, { description: 'Transaction uuid.' })
   uuid: string;

@@ -27,7 +27,7 @@ import { UserModule } from './user/user.module';
     }),
     PrismaModule,
     AuthModule,
-    // CashAccountsModule,
+    CashAccountsModule,
     InstrumentsModule,
     PortfoliosModule,
     UserModule,

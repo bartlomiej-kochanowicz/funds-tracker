@@ -39,10 +39,7 @@ export class CashAccountsResolver {
   }
 
   @Query(() => CashAccount)
-  cashAccount(
-    @GetCurrentUserId() userId: string,
-    @Args('uuid', { type: () => String }) uuid: string,
-  ) {
+  cashAccount(@GetCurrentUserId() userId: string, @Args('uuid', { type: () => ID }) uuid: string) {
     return this.cashAccountsService.findOne(userId, uuid);
   }
 
@@ -60,7 +57,7 @@ export class CashAccountsResolver {
   @Mutation(() => CashAccount)
   updateCashAccount(
     @GetCurrentUserId() userId: string,
-    @Args('uuid', { type: () => String }) uuid: string,
+    @Args('uuid', { type: () => ID }) uuid: string,
     @Args('data')
     updateCashAccountInput: UpdateCashAccountInput,
   ) {
