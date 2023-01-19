@@ -27,10 +27,12 @@ export class UserService {
       updateUserInput.defaultCurrency &&
       user.introductionStep === IntroductionStep.DefaultCurrency
     ) {
-      await this.prisma.user.update({
+      const updatedUser = await this.prisma.user.update({
         where: { uuid: userId },
         data: { introductionStep: IntroductionStep.CashAccounts },
       });
+
+      return updatedUser;
     }
 
     return user;

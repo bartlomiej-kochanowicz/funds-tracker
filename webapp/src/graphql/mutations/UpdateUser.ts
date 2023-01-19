@@ -8,6 +8,7 @@ export const UPDATE_USER = gql(/* GraphQL */ `
       email
       createdAt
       introductionStep
+      defaultCurrency
     }
   }
 `);

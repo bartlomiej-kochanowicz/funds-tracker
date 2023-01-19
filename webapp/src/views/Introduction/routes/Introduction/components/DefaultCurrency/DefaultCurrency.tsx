@@ -7,11 +7,18 @@ import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelect } from 'hooks/useSelect';
 import { Column } from 'simple-flexbox';
+import { useMutation } from '@apollo/client';
+import { UPDATE_USER } from 'graphql/mutations';
+import { UpdateUserMutation, UpdateUserMutationVariables } from '__generated__/graphql';
+import { showErrorToast } from 'helpers/showToast';
+import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 
 export const DefaultCurrency = () => {
   const { t } = useTranslation();
 
-  const { user } = useUserContext();
+  const { updateState, actions } = useIntroductionContext();
+
+  const { user, updateUser: updateUserGlobal } = useUserContext();
 
   const options = useMemo(
     () =>
@@ -41,8 +48,26 @@ export const DefaultCurrency = () => {
     errors,
   });
 
-  const onSubmit = async (values: typeof defaultValues) => {
-    console.log(values);
+  const [updateUser] = useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UPDATE_USER, {
+    onCompleted: data => {
+      updateUserGlobal({
+        defaultCurrency: data.updateUser.defaultCurrency,
+        introductionStep: data.updateUser.introductionStep,
+      });
+
+      updateState(actions.CHANGE_TO_ADD_CASH_ACCOUNTS);
+    },
+    onError: () => {
+      showErrorToast(t('service.unknown_error'));
+    },
+  });
+
+  const onSubmit = async (data: typeof defaultValues) => {
+    updateUser({
+      variables: {
+        data,
+      },
+    });
   };
 
   return (

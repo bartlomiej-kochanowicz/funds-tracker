@@ -4,19 +4,36 @@ import { GET_USER } from 'graphql/query';
 import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
 import LogRocket from 'logrocket';
 import { createContext, FC, ReactNode, useContext, useEffect } from 'react';
-import { GetUserQuery } from '__generated__/graphql';
+import { GetUserQuery, IntroductionStep, UpdateUserInput } from '__generated__/graphql';
+
+type UpdateLocalUserData = UpdateUserInput & { introductionStep?: IntroductionStep };
 
 type UserContextType = {
   loading: boolean;
   user: GetUserQuery['user'];
   getUser: LazyQueryExecFunction<GetUserQuery, OperationVariables>;
   clearUser: () => void;
+  updateUser: (data: UpdateLocalUserData) => void;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
 
 const useUser = (): UserContextType => {
-  const [getUser, { loading, data, client, error }] = useLazyQuery<GetUserQuery>(GET_USER);
+  const [getUser, { loading, data, client, error, updateQuery }] =
+    useLazyQuery<GetUserQuery>(GET_USER);
+
+  const updateUser = ({ defaultCurrency, email, name, introductionStep }: UpdateLocalUserData) => {
+    updateQuery(prev => ({
+      ...prev,
+      user: {
+        ...prev.user,
+        defaultCurrency: defaultCurrency ?? prev.user.defaultCurrency,
+        email: email ?? prev.user.email,
+        name: name ?? prev.user.name,
+        introductionStep: introductionStep ?? prev.user.introductionStep,
+      },
+    }));
+  };
 
   if (
     isUserLoggedIn &&
@@ -43,7 +60,13 @@ const useUser = (): UserContextType => {
     }
   }, [data]);
 
-  return { loading, user: data?.user ?? null, getUser, clearUser } as UserContextType;
+  return {
+    loading,
+    user: data?.user ?? null,
+    getUser,
+    clearUser,
+    updateUser,
+  } as UserContextType;
 };
 
 type ProviderProps = {
