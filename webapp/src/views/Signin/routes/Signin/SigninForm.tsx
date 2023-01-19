@@ -10,7 +10,7 @@ import { useInput } from 'hooks/useInput';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import { ROUTES } from 'routes/paths';
 import { EMAIL_EXIST } from 'graphql/query';
-import { SIGNIN } from 'graphql/mutations';
+import { SIGNIN, SEND_CODE } from 'graphql/mutations';
 import {
   EmailExistQuery,
   EmailExistQueryVariables,
@@ -20,7 +20,6 @@ import {
   SigninMutationVariables,
 } from '__generated__/graphql';
 import { useUserContext } from 'contexts/UserContext';
-import { SEND_CODE } from 'graphql/mutations/SendCode';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';

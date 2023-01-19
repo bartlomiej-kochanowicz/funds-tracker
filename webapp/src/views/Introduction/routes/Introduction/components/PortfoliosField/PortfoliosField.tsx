@@ -9,11 +9,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
-import { DefaultValues } from 'views/Introduction/routes/Introduction/components/AddPortfoliosForm/AddPortfoliosForm.type';
+import { IntroductionCreatePortfoliosInput } from '__generated__/graphql';
 
 interface PortfoliosFieldProps {
-  register: UseFormRegister<DefaultValues>;
-  errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
+  register: UseFormRegister<IntroductionCreatePortfoliosInput>;
+  errors: FieldErrorsImpl<DeepRequired<IntroductionCreatePortfoliosInput>>;
   index: number;
   remove: UseFieldArrayRemove;
 }
@@ -21,7 +21,7 @@ interface PortfoliosFieldProps {
 export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosFieldProps) => {
   const { t } = useTranslation();
 
-  const nameInputProps = useInput<DefaultValues>({
+  const nameInputProps = useInput<IntroductionCreatePortfoliosInput>({
     register,
     name: `portfolios.${index}.name`,
     errors,

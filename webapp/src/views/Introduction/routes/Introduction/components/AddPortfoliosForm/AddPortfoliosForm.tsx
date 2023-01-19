@@ -7,8 +7,17 @@ import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atom
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MAX_PORTFOLIOS } from 'constants/common';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
+import { useMutation } from '@apollo/client';
+import { useUserContext } from 'contexts/UserContext';
+import {
+  IntroductionCreatePortfoliosInput,
+  IntroductionCreatePortfoliosMutation,
+  IntroductionCreatePortfoliosMutationVariables,
+  IntroductionStep,
+} from '__generated__/graphql';
+import { INTRODUCTION_CREATE_PORTFOLIOS } from 'graphql/mutations';
+import { showErrorToast } from 'helpers/showToast';
 import { validationSchema } from './AddPortfoliosForm.schema';
-import type { DefaultValues } from './AddPortfoliosForm.type';
 import { EmptyList } from '../EmptyList';
 import { FieldsWrapper } from './AddPortfoliosForm.styles';
 import { PortfoliosField } from '../PortfoliosField';
@@ -18,26 +27,42 @@ export const AddPortfoliosForm = () => {
 
   const { updateState, actions } = useIntroductionContext();
 
-  const onSubmit = async (values: DefaultValues) => {
-    console.log(values);
+  const { updateUser: updateUserGlobal } = useUserContext();
 
-    await new Promise(resolve => {
-      setTimeout(resolve, 3000);
+  const [createPortfolios] = useMutation<
+    IntroductionCreatePortfoliosMutation,
+    IntroductionCreatePortfoliosMutationVariables
+  >(INTRODUCTION_CREATE_PORTFOLIOS, {
+    onCompleted: () => {
+      updateState(actions.CHANGE_TO_COMPLETED);
+
+      updateUserGlobal({
+        introductionStep: IntroductionStep.Completed,
+      });
+    },
+    onError: () => {
+      showErrorToast(t('service.unknown_error'));
+    },
+  });
+
+  const onSubmit = async (data: IntroductionCreatePortfoliosInput) => {
+    await createPortfolios({
+      variables: {
+        data,
+      },
     });
-
-    updateState(actions.CHANGE_TO_COMPLETED);
   };
 
   const defaultValues = {
     portfolios: [],
-  };
+  } satisfies IntroductionCreatePortfoliosInput;
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid, isDirty },
     control,
-  } = useForm<DefaultValues>({
+  } = useForm<IntroductionCreatePortfoliosInput>({
     defaultValues,
     resolver: yupResolver(validationSchema),
     mode: 'onChange',

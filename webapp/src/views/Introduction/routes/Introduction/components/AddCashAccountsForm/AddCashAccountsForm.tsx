@@ -15,7 +15,7 @@ import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atom
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 import { showErrorToast } from 'helpers/showToast';
-import { INTRODUCTION_CREATE_CASH_ACCOUNT } from 'graphql/mutations/IntroductionCreateCashAccounts';
+import { INTRODUCTION_CREATE_CASH_ACCOUNTS } from 'graphql/mutations';
 import { useUserContext } from 'contexts/UserContext';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
@@ -32,7 +32,7 @@ export const AddCashAccountsForm = () => {
   const [createCashAccounts] = useMutation<
     IntroductionCreateCashAccountsMutation,
     IntroductionCreateCashAccountsMutationVariables
-  >(INTRODUCTION_CREATE_CASH_ACCOUNT, {
+  >(INTRODUCTION_CREATE_CASH_ACCOUNTS, {
     onCompleted: () => {
       updateState(actions.CHANGE_TO_ADD_PORTFOLIOS);
     },

@@ -63,7 +63,7 @@ export const DefaultCurrency = () => {
   });
 
   const onSubmit = async (data: typeof defaultValues) => {
-    updateUser({
+    await updateUser({
       variables: {
         data,
       },
