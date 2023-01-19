@@ -1,9 +1,12 @@
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
-import { CashAccount } from './entities';
-import { CashAccountHistory } from './entities/cash-account-history.entity';
-import { CreateCashAccountInput, UpdateCashAccountInput } from './inputs';
+import { CashAccount, CashAccountHistory, IntroductionCashAccounts } from './entities';
+import {
+  CreateCashAccountInput,
+  IntroductionCreateCashAccountsInput,
+  UpdateCashAccountInput,
+} from './inputs';
 
 @Resolver(() => CashAccount)
 export class CashAccountsResolver {
@@ -18,16 +21,25 @@ export class CashAccountsResolver {
     return this.cashAccountsService.create(userId, createCashAccountInput);
   }
 
+  @Mutation(() => IntroductionCashAccounts)
+  introductionCreateCashAccounts(
+    @GetCurrentUserId() userId: string,
+    @Args('data')
+    introductionCreateCashAccountInput: IntroductionCreateCashAccountsInput,
+  ) {
+    return this.cashAccountsService.introductionCreateCashAccounts(
+      userId,
+      introductionCreateCashAccountInput,
+    );
+  }
+
   @Query(() => [CashAccount])
   cashAccounts(@GetCurrentUserId() userId: string) {
     return this.cashAccountsService.findAll(userId);
   }
 
   @Query(() => CashAccount)
-  cashAccount(
-    @GetCurrentUserId() userId: string,
-    @Args('uuid', { type: () => String }) uuid: string,
-  ) {
+  cashAccount(@GetCurrentUserId() userId: string, @Args('uuid', { type: () => ID }) uuid: string) {
     return this.cashAccountsService.findOne(userId, uuid);
   }
 
@@ -45,7 +57,7 @@ export class CashAccountsResolver {
   @Mutation(() => CashAccount)
   updateCashAccount(
     @GetCurrentUserId() userId: string,
-    @Args('uuid', { type: () => String }) uuid: string,
+    @Args('uuid', { type: () => ID }) uuid: string,
     @Args('data')
     updateCashAccountInput: UpdateCashAccountInput,
   ) {
@@ -55,7 +67,7 @@ export class CashAccountsResolver {
   @Mutation(() => CashAccount)
   deleteCashAccount(
     @GetCurrentUserId() userId: string,
-    @Args('uuid', { type: () => String }) uuid: string,
+    @Args('uuid', { type: () => ID }) uuid: string,
   ) {
     return this.cashAccountsService.delete(userId, uuid);
   }

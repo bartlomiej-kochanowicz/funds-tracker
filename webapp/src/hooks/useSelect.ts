@@ -6,22 +6,21 @@ import {
   PathValue,
   UnPackAsyncDefaultValues,
   UseFormRegister,
+  get,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { get } from 'utils/get';
 
 interface UseSelectProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;
   name: Path<UnPackAsyncDefaultValues<Fields>>;
-  defaultValues: Fields;
   errors: FieldErrorsImpl<DeepRequired<Fields>>;
 }
 
 export const useSelect = <Fields extends FieldValues>({
   register,
   name,
-  defaultValues,
   errors,
+  ...rest
 }: UseSelectProps<Fields>) => {
   const { onChange: registerOnChange, ref, onBlur } = register(name);
 
@@ -40,9 +39,9 @@ export const useSelect = <Fields extends FieldValues>({
 
   return {
     onChange,
-    defaultValue: get(defaultValues, name) as keyof Fields,
     error: t(get(errors, name)?.message) || undefined,
     ref,
     onBlur,
+    ...rest,
   };
 };

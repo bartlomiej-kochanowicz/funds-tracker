@@ -12,13 +12,13 @@ import {
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
-import { DefaultValues } from 'views/Introduction/routes/Introduction/components/AddCashAccountsForm/AddCashAccountsForm.type';
+import { Currency, IntroductionCreateCashAccountsInput } from '__generated__/graphql';
 
 interface CashAccountsFieldProps {
-  register: UseFormRegister<DefaultValues>;
-  errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
+  register: UseFormRegister<IntroductionCreateCashAccountsInput>;
+  errors: FieldErrorsImpl<DeepRequired<IntroductionCreateCashAccountsInput>>;
   index: number;
-  values: DefaultValues;
+  defaultValue: Currency;
   remove: UseFieldArrayRemove;
 }
 
@@ -26,22 +26,21 @@ export const CashAccountsField = ({
   register,
   errors,
   index,
-  values,
+  defaultValue,
   remove,
 }: CashAccountsFieldProps) => {
   const { t } = useTranslation();
 
-  const nameInputProps = useInput<DefaultValues>({
+  const nameInputProps = useInput<IntroductionCreateCashAccountsInput>({
     register,
-    name: `accounts.${index}.name`,
+    name: `cashAccounts.${index}.name`,
     errors,
   });
 
-  const currencySelectProps = useSelect<DefaultValues>({
+  const currencySelectProps = useSelect<IntroductionCreateCashAccountsInput>({
     register,
-    name: `accounts.${index}.currency`,
+    name: `cashAccounts.${index}.currency`,
     errors,
-    defaultValues: values,
   });
 
   const options = useMemo(
@@ -55,7 +54,9 @@ export const CashAccountsField = ({
 
   const customLabel = ({ value }: { value: string }) => value;
 
-  const handleRemoveField = () => remove(index);
+  const handleRemoveField = async () => {
+    remove(index);
+  };
 
   return (
     <Row>
@@ -71,6 +72,7 @@ export const CashAccountsField = ({
         width="130px"
         options={options}
         customLabel={customLabel}
+        defaultValue={defaultValue}
         {...currencySelectProps}
       />
 

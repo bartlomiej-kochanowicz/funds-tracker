@@ -25,7 +25,7 @@ export const AddPortfoliosForm = () => {
       setTimeout(resolve, 3000);
     });
 
-    updateState(actions.CHANGE_TO_ADD_INSTRUMENT);
+    updateState(actions.CHANGE_TO_COMPLETED);
   };
 
   const defaultValues = {
@@ -132,7 +132,7 @@ export const AddPortfoliosForm = () => {
               disabled={isSubmitting || !isValid || !isDirty}
               width="100%"
             >
-              {isSubmitting ? <Loader color="white" /> : t('add.cash.accounts.submit')}
+              {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
             </Button>
           </Column>
         </form>

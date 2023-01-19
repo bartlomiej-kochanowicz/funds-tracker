@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { CashAccountsModule } from './cash-accounts/cash-accounts.module';
 import { InstrumentsModule } from './instruments/instruments.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { PortfoliosModule } from './portfolios/portfolios.module';
     CashAccountsModule,
     InstrumentsModule,
     PortfoliosModule,
+    UserModule,
   ],
   controllers: [],
   providers: [

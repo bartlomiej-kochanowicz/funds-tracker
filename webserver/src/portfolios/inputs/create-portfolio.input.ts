@@ -1,16 +1,10 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { MaxLength, MinLength } from 'class-validator';
+import { Length } from 'class-validator';
 
 @InputType()
 export class CreatePortfolioInput {
-  @MinLength(2, {
-    message: 'Name is short',
-    context: 'name',
-  })
-  @MaxLength(50, {
-    message: 'Name is too long',
-  })
-  @Field(() => String, { description: 'Portfolio name.' })
+  @Length(2, 50, { message: 'Name must be between 2 and 50 characters.' })
+  @Field(() => String, { description: 'Portfolio name.' }) // 2,50
   name: string;
 
   @Field(() => Boolean, { description: 'Is portfolio rebalancing enabled.' })

@@ -1,4 +1,3 @@
-import { CURRENCIES } from 'constants/selectors/currencies';
-import { ValueOf } from 'types/mapped-types.type';
+import { Currency } from '__generated__/graphql';
 
-export type Currencies = ValueOf<typeof CURRENCIES>;
+export type Currencies = keyof typeof Currency;

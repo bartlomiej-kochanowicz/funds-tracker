@@ -1,15 +1,24 @@
 import { motion } from 'framer-motion';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
-import { MAX_CASH_ACCOUNTS } from 'constants/common';
+import { useMutation } from '@apollo/client';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
+import {
+  Currency,
+  IntroductionCreateCashAccountsInput,
+  IntroductionCreateCashAccountsMutation,
+  IntroductionCreateCashAccountsMutationVariables,
+} from '__generated__/graphql';
+import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
+import { showErrorToast } from 'helpers/showToast';
+import { INTRODUCTION_CREATE_CASH_ACCOUNT } from 'graphql/mutations/IntroductionCreateCashAccounts';
+import { useUserContext } from 'contexts/UserContext';
 import { validationSchema } from './AddCashAccountsForm.schema';
 import { FieldsWrapper } from './AddCashAccountsForm.styles';
-import type { DefaultValues } from './AddCashAccountsForm.type';
 import { EmptyList } from '../EmptyList';
 import { CashAccountsField } from '../CashAccountsField';
 
@@ -18,19 +27,36 @@ export const AddCashAccountsForm = () => {
 
   const { updateState, actions } = useIntroductionContext();
 
-  const onSubmit = async (values: DefaultValues) => {
-    console.log(values);
+  const { user } = useUserContext();
 
-    await new Promise(resolve => {
-      setTimeout(resolve, 3000);
+  const [createCashAccounts] = useMutation<
+    IntroductionCreateCashAccountsMutation,
+    IntroductionCreateCashAccountsMutationVariables
+  >(INTRODUCTION_CREATE_CASH_ACCOUNT, {
+    onCompleted: () => {
+      updateState(actions.CHANGE_TO_ADD_PORTFOLIOS);
+    },
+    onError: () => {
+      showErrorToast(t('service.unknown_error'));
+    },
+  });
+
+  const onSubmit = async (values: IntroductionCreateCashAccountsInput) => {
+    await createCashAccounts({
+      variables: {
+        data: values,
+      },
     });
-
-    updateState(actions.CHANGE_TO_ADD_PORTFOLIOS);
   };
 
   const defaultValues = {
-    accounts: [],
-  };
+    cashAccounts: [
+      {
+        name: '',
+        currency: user.defaultCurrency,
+      },
+    ],
+  } satisfies IntroductionCreateCashAccountsInput;
 
   const {
     register,
@@ -38,23 +64,23 @@ export const AddCashAccountsForm = () => {
     formState: { errors, isSubmitting, isValid, isDirty },
     control,
     getValues,
-  } = useForm<DefaultValues>({
+  } = useForm<IntroductionCreateCashAccountsInput>({
     defaultValues,
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
 
+  const values = getValues();
+
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'accounts',
+    name: 'cashAccounts',
   });
-
-  const values = getValues();
 
   const handleAppend = () =>
     append({
       name: '',
-      currency: 'USD',
+      currency: Currency.Usd,
     });
 
   return (
@@ -112,7 +138,7 @@ export const AddCashAccountsForm = () => {
                   index={index}
                   register={register}
                   errors={errors}
-                  values={values}
+                  defaultValue={values.cashAccounts[index].currency}
                   remove={remove}
                 />
               ))}
@@ -137,7 +163,7 @@ export const AddCashAccountsForm = () => {
               disabled={isSubmitting || !isValid || !isDirty}
               width="100%"
             >
-              {isSubmitting ? <Loader color="white" /> : t('add.cash.accounts.submit')}
+              {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
             </Button>
           </Column>
         </form>

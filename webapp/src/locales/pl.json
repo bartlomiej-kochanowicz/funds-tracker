@@ -61,7 +61,7 @@
   "add.cash.accounts.button.add": "Dodaj konto",
   "common.input.name.placeholder": "Nazwa",
   "common.welcome": "Witaj",
-  "add.cash.accounts.submit": "Następny krok",
+  "page.introduction.next.step.submit": "Następny krok",
   "page.welcome.description": "Kontroluj swoje inwestycje z jednego miejsca, prosto i czytelnie dzięki Funds Tracker.",
   "common.hi": "Cześć",
   "common.dashboard": "Kokpit",
@@ -94,5 +94,7 @@
   "toast.send_confirm_code.failure": "Wystąpił błąd podczas wysyłania kodu. Spróbuj ponownie później.",
   "page.cash_accounts.title.description": "W tym miejscu możesz zarządzać swoimi kontami gotówkowymi. Dodaj nowe konta, usuń stare, zmień nazwy i podejrzyj szczegóły.",
   "page.cash_accounts.need.more": "Potrzebujesz więcej kont?",
-  "page.cash_accounts.need.more.button": "Dodaj nowe konto tutaj"
+  "page.cash_accounts.need.more.button": "Dodaj nowe konto tutaj",
+  "page.introduction.default.currency.title": "Wybierz domyślną walutę",
+  "page.introduction.default.currency.description": "Wybierz domyślną walutę, w której chcesz wyświetlać swoje raporty finansowe. <bold>Możesz zmienić to później w ustawieniach.</bold>"
 }

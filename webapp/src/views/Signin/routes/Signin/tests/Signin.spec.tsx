@@ -73,8 +73,7 @@ describe('Signin tests', () => {
         result: {
           data: {
             signinLocal: {
-              uuid: '78c3faea-0a04-4949-90b8-7589b6572d22',
-              name: 'test123',
+              success: true,
             },
           },
         },

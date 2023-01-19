@@ -7,6 +7,8 @@ export const GET_USER = gql(/* GraphQL */ `
       name
       email
       createdAt
+      introductionStep
+      defaultCurrency
     }
   }
 `);

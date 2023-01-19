@@ -5,9 +5,9 @@ import {
   Path,
   UnPackAsyncDefaultValues,
   UseFormRegister,
+  get,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { get } from 'utils/get';
 
 interface UseInputProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;

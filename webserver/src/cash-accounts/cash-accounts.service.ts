@@ -1,9 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { IntroductionStep } from '@prisma/client';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CashAccount } from './entities';
-import { CashAccountHistory } from './entities/cash-account-history.entity';
-import { CreateCashAccountInput, UpdateCashAccountInput } from './inputs';
+import { CashAccount, CashAccountHistory, IntroductionCashAccounts } from './entities';
+import {
+  CreateCashAccountInput,
+  UpdateCashAccountInput,
+  IntroductionCreateCashAccountsInput,
+} from './inputs';
 
 @Injectable()
 export class CashAccountsService {
@@ -34,6 +38,38 @@ export class CashAccountsService {
     });
 
     return cashAccount;
+  }
+
+  async introductionCreateCashAccounts(
+    userUuid: string,
+    introductionCreateCashAccountInput: IntroductionCreateCashAccountsInput,
+  ): Promise<IntroductionCashAccounts> {
+    const { introductionStep } = await this.prisma.user.findUnique({
+      where: { uuid: userUuid },
+      select: { introductionStep: true },
+    });
+
+    if (introductionStep !== IntroductionStep.CashAccounts) {
+      throw new HttpException('Introduction step not valid', HttpStatus.FORBIDDEN);
+    }
+
+    await this.prisma.cashAccount.createMany({
+      data: introductionCreateCashAccountInput.cashAccounts.map(cashAccount => ({
+        userUuid,
+        ...cashAccount,
+      })),
+    });
+
+    await this.prisma.user.update({
+      where: { uuid: userUuid },
+      data: {
+        introductionStep: IntroductionStep.Portfolios,
+      },
+    });
+
+    return {
+      success: true,
+    };
   }
 
   async findAll(userUuid: string): Promise<Omit<CashAccount, 'history'>[]> {

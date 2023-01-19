@@ -3,8 +3,8 @@ import { IsEmail } from 'class-validator';
 
 @InputType()
 export class SigninInput {
-  @Field(() => String, { description: 'Email.' })
   @IsEmail()
+  @Field(() => String, { description: 'Email.' })
   email: string;
 
   @Field(() => String, { description: 'Password.' })

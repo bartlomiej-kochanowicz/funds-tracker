@@ -1,10 +1,11 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
+import { EmailAddressResolver } from 'graphql-scalars';
 
 @InputType()
 export class EmailInput {
-  @Field(() => String, { description: 'Email.' })
   @IsEmail()
+  @Field(() => EmailAddressResolver, { description: 'Email.' })
   email: string;
 
   @Field(() => String, { description: 'Token.' })
