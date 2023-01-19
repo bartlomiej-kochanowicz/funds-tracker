@@ -1,11 +1,12 @@
+import { Button, Heading, Loader, Select, Spacer, Text } from 'components/atoms';
 import { motion } from 'framer-motion';
-import { Select } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useUserContext } from 'contexts/UserContext';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelect } from 'hooks/useSelect';
+import { Column } from 'simple-flexbox';
 
 export const DefaultCurrency = () => {
   const { t } = useTranslation();
@@ -50,16 +51,55 @@ export const DefaultCurrency = () => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
     >
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <Select
-          options={options}
-          defaultValue={defaultValues.defaultCurrency}
-          {...defaultCurrencySelectProps}
-        />
-      </form>
+      <Column>
+        <Heading textAlign="center">{t('page.introduction.default.currency.title')}</Heading>
+
+        <Spacer space="small" />
+
+        <Text
+          fontSize="0.875"
+          fontColor="gray400"
+          textAlign="center"
+        >
+          <Trans
+            i18nKey="page.introduction.default.currency.description"
+            components={{
+              bold: (
+                <Text
+                  fontSize="0.875"
+                  fontColor="gray400"
+                  textAlign="center"
+                  fontWeight="700"
+                />
+              ),
+            }}
+          />
+        </Text>
+
+        <Spacer space="large" />
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
+          <Select
+            options={options}
+            defaultValue={defaultValues.defaultCurrency}
+            {...defaultCurrencySelectProps}
+          />
+
+          <Spacer space="large" />
+
+          <Button
+            size="large"
+            type="submit"
+            disabled={isSubmitting}
+            width="100%"
+          >
+            {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
+          </Button>
+        </form>
+      </Column>
     </motion.div>
   );
 };

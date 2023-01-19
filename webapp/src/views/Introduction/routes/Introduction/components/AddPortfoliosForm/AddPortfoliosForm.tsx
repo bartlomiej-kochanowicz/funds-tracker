@@ -132,7 +132,7 @@ export const AddPortfoliosForm = () => {
               disabled={isSubmitting || !isValid || !isDirty}
               width="100%"
             >
-              {isSubmitting ? <Loader color="white" /> : t('add.cash.accounts.submit')}
+              {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
             </Button>
           </Column>
         </form>
