@@ -1,15 +1,3 @@
-export const CHF = 'CHF';
-export const EUR = 'EUR';
-export const GBP = 'GBP';
-export const PLN = 'PLN';
-export const USD = 'USD';
+import { Currency } from '__generated__/graphql';
 
-export const CURRENCIES = {
-  CHF,
-  EUR,
-  GBP,
-  USD,
-  PLN,
-} as const;
-
-export const CURRENCIES_ARRAY = [CHF, EUR, GBP, USD, PLN] as const;
+export const CURRENCIES_ARRAY = Object.values(Currency);

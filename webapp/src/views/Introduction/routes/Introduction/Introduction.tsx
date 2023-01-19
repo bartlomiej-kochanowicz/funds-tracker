@@ -4,6 +4,12 @@ import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Loading } from 'layouts/Loading';
 import { IntroductionProvider, useIntroductionContext } from './context';
 
+const DefaultCurrency = lazy(() =>
+  import('./components/DefaultCurrency').then(({ DefaultCurrency: component }) => ({
+    default: component,
+  })),
+);
+
 const AddCashAccountsForm = lazy(() =>
   import('./components/AddCashAccountsForm').then(({ AddCashAccountsForm: component }) => ({
     default: component,
@@ -29,7 +35,7 @@ const IntroductionContent = () => {
     <FullscreenClear>
       <Suspense fallback={<Loading />}>
         <AnimatePresence>
-          {compareState(states.DefaultCurrency) && <div>DefaultCurrency</div>}
+          {compareState(states.DefaultCurrency) && <DefaultCurrency />}
 
           {compareState(states.CashAccounts) && <AddCashAccountsForm />}
 

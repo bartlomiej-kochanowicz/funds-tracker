@@ -25,7 +25,7 @@ export const AddPortfoliosForm = () => {
       setTimeout(resolve, 3000);
     });
 
-    updateState(actions.CHANGE_TO_ADD_INSTRUMENT);
+    updateState(actions.CHANGE_TO_COMPLETED);
   };
 
   const defaultValues = {
