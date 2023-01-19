@@ -7,6 +7,7 @@ import { theme } from 'styles/theme';
 import { ColorThemeProvider } from 'contexts/ColorThemeContext';
 import { UserContextProvider } from 'contexts/UserContext';
 import { GET_USER } from 'graphql/query';
+import { IntroductionStep, Currency } from '__generated__/graphql';
 import i18n from './i18nForTests';
 
 export const userMock = {
@@ -20,6 +21,8 @@ export const userMock = {
         name: 'test123',
         email: 'test123@test.xyz',
         createdAt: '2022-11-29T20:42:43.948Z',
+        introductionStep: IntroductionStep.DefaultCurrency,
+        defaultCurrency: Currency.Usd,
       },
     },
   },
