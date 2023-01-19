@@ -29,7 +29,6 @@ describe('create portfolio', () => {
               createPortfolio(data: $data) {
                 uuid
                 name
-                rebalancingEnabled
               }
             }
           `,
@@ -45,7 +44,6 @@ describe('create portfolio', () => {
     it('should return portfolio entity', async () => {
       expect(createdPortfolio).toMatchObject({
         name: createPortfolioStub.name,
-        rebalancingEnabled: createPortfolioStub.rebalancingEnabled,
       });
     });
 

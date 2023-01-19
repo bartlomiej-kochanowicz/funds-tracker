@@ -20,7 +20,7 @@ export class PortfoliosService {
       },
     });
 
-    const { name, rebalancingEnabled } = createPortfolioInput;
+    const { name } = createPortfolioInput;
 
     if (portfolios > MAX_PORTFOLIOS) {
       throw new HttpException('Max portfolios reached', HttpStatus.FORBIDDEN);
@@ -29,7 +29,6 @@ export class PortfoliosService {
     const portfolio = await this.prisma.portfolio.create({
       data: {
         name,
-        rebalancingEnabled,
         userUuid,
       },
     });
@@ -77,7 +76,6 @@ export class PortfoliosService {
       select: {
         uuid: true,
         name: true,
-        rebalancingEnabled: true,
       },
     });
 
@@ -95,7 +93,6 @@ export class PortfoliosService {
       select: {
         uuid: true,
         name: true,
-        rebalancingEnabled: true,
       },
     });
 

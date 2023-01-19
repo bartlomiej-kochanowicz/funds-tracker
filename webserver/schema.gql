@@ -89,9 +89,6 @@ type Portfolio {
 
   """Portfolio name."""
   name: String!
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean!
 }
 
 type IntroductionPortfolios {
@@ -237,9 +234,6 @@ input UpdateCashAccountInput {
 input CreatePortfolioInput {
   """Portfolio name."""
   name: String!
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean!
 }
 
 input IntroductionCreatePortfoliosInput {
@@ -250,9 +244,6 @@ input IntroductionCreatePortfoliosInput {
 input UpdatePortfolioInput {
   """Portfolio name."""
   name: String
-
-  """Is portfolio rebalancing enabled."""
-  rebalancingEnabled: Boolean
 }
 
 input UpdateUserInput {

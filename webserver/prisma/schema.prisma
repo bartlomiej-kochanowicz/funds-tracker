@@ -50,12 +50,11 @@ model CashAccountHistory {
 }
 
 model Portfolio {
-  uuid               String       @id @default(uuid())
-  name               String
-  rebalancingEnabled Boolean      @default(false)
-  instruments        Instrument[]
-  user               User         @relation(fields: [userUuid], references: [uuid])
-  userUuid           String
+  uuid        String       @id @default(uuid())
+  name        String
+  instruments Instrument[]
+  user        User         @relation(fields: [userUuid], references: [uuid])
+  userUuid    String
 
   @@unique([userUuid, uuid])
 }
