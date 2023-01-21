@@ -34,6 +34,10 @@ export const theme = {
     text: Colors.Black,
   },
   breakpoints: {
+    desktopPlus: {
+      min: customMediaQuery(breakpoints.desktopPlus),
+      max: customMediaQuery(breakpoints.desktopPlus, 'max'),
+    },
     desktop: {
       min: customMediaQuery(breakpoints.desktop),
       max: customMediaQuery(breakpoints.desktop, 'max'),
