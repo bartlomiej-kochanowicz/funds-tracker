@@ -1,10 +1,12 @@
 import { Row } from 'simple-flexbox';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { generatePath } from 'react-router-dom';
 import { CashAccount, CashAccountHistory } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Text } from 'components/atoms';
 import { Chart } from 'views/Dashboard/routes/CashAccounts/components/Chart';
+import { ROUTES } from 'routes/paths';
 
 interface CashAccountsPanelProps extends Omit<CashAccount, 'history'> {
   history: Omit<CashAccountHistory, 'uuid'>[];
@@ -15,6 +17,7 @@ export const CashAccountsPanel: FC<CashAccountsPanelProps> = ({
   currency,
   balance,
   history,
+  uuid,
 }) => {
   const { i18n } = useTranslation();
 
@@ -23,8 +26,12 @@ export const CashAccountsPanel: FC<CashAccountsPanelProps> = ({
     currency,
   });
 
+  const cashAccountPath = generatePath(ROUTES.DASHBOARD.CASH_ACCOUNT, {
+    uuid,
+  });
+
   return (
-    <Panel>
+    <Panel to={cashAccountPath}>
       <Panel.Chart>
         <Chart data={history} />
       </Panel.Chart>
@@ -33,7 +40,7 @@ export const CashAccountsPanel: FC<CashAccountsPanelProps> = ({
         <Row justifyContent="space-between">
           <Text
             fontWeight="700"
-            maxWidth="150px"
+            maxWidth="170px"
           >
             {name}
           </Text>

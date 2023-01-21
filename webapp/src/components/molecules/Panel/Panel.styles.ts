@@ -1,8 +1,9 @@
 import { darken } from 'color2k';
 import { Box } from 'components/atoms';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-export const PanelComponent = styled(Box)`
+export const PanelWrapper = styled(Box)`
   height: 206px;
 
   ${({ theme: { isDark, colors, shadows, radius } }) => css`
@@ -10,6 +11,15 @@ export const PanelComponent = styled(Box)`
     box-shadow: ${shadows.box};
     border-radius: ${radius.secondary};
   `}
+`;
+
+export const PanelLink = styled(Link)`
+  text-decoration: none;
+  cursor: pointer;
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const Body = styled.div`
