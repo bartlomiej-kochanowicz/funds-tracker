@@ -4,10 +4,11 @@ import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Column, Row } from 'simple-flexbox';
+import { Row } from 'simple-flexbox';
 import { GetCashAccountQuery } from '__generated__/graphql';
 import { CreateCashAccount } from './components/CreateCashAccount';
 import { CashAccountsPanel } from './components/CashAccountsPanel';
+import { CreateFirstCashAccount } from './components/CreateFirstCashAccount';
 
 const generateMockHistory = () => {
   const history = [
@@ -61,7 +62,7 @@ export const CashAccounts = () => {
 
       {!loading && cashAccountsExist && !error && (
         <Row justifyContent="center">
-          <CreateCashAccount />
+          <CreateFirstCashAccount />
         </Row>
       )}
 

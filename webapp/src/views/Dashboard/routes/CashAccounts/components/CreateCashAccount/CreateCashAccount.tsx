@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { Button, Spacer, Spreader, Text } from 'components/atoms';
+import { Button, Spacer, Spreader, Heading } from 'components/atoms';
 import { Panel } from 'components/molecules';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
-import { CREATE_CASH_ACCOUNT, CreateCashAccountModalProps } from 'modals/CreateCashAccount';
+import { MODAL_CREATE_CASH_ACCOUNT, CreateCashAccountModalProps } from 'modals/CreateCashAccount';
 
 export const CreateCashAccount: FC = () => {
   const { t } = useTranslation();
@@ -12,19 +12,18 @@ export const CreateCashAccount: FC = () => {
   const { openModal } = useModalContext();
 
   const handleOpenModal = () => {
-    openModal<CreateCashAccountModalProps>(CREATE_CASH_ACCOUNT);
+    openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT);
   };
 
   return (
     <Panel>
       <Panel.BodyCentered>
-        <Text
-          fontSize="1.25"
-          fontWeight="700"
+        <Heading
           textAlign="center"
+          level="h2"
         >
           {t('page.cash_accounts.need.more')}
-        </Text>
+        </Heading>
 
         <Spacer space="small" />
 

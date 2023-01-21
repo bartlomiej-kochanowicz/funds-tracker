@@ -96,5 +96,6 @@
   "page.cash_accounts.need.more": "Need more accounts?",
   "page.cash_accounts.need.more.button": "Add new one here",
   "page.introduction.default.currency.title": "Choose your default currency",
-  "page.introduction.default.currency.description": "Choose the default currency in which you want to display your financial reports. <bold>You can change this later in the settings.</bold>"
+  "page.introduction.default.currency.description": "Choose the default currency in which you want to display your financial reports. <bold>You can change this later in the settings.</bold>",
+  "page.cash_accounts.empty.list.title": "No cash accounts added"
 }
