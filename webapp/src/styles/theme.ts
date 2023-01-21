@@ -193,7 +193,7 @@ export const darkTheme = {
     color: {
       ...JSON.parse(JSON.stringify(theme.button.color)),
 
-      secondary: { background: Colors.White, font: Colors.Black },
+      black: { background: Colors.White, font: Colors.Black },
     },
   },
 } as typeof theme;
