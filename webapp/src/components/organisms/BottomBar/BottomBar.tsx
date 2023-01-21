@@ -34,14 +34,16 @@ export const BottomBar = () => {
     };
   }, [onScroll]);
 
+  const animation = {
+    initial: { opacity: 0, y: 90 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 90 },
+  };
+
   return (
     <AnimatePresence>
       {visible && (
-        <MotionNav
-          initial={{ opacity: 0, y: 90 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 90 }}
-        >
+        <MotionNav {...animation}>
           <List>
             {bottomBarNavigation.map(({ to, title, icon: Icon }) => (
               <ListItem key={title}>
