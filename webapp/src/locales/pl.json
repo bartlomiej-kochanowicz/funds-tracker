@@ -97,5 +97,6 @@
   "page.cash_accounts.need.more.button": "Dodaj nowe konto tutaj",
   "page.introduction.default.currency.title": "Wybierz domyślną walutę",
   "page.introduction.default.currency.description": "Wybierz domyślną walutę, w której chcesz wyświetlać swoje raporty finansowe. <bold>Możesz zmienić to później w ustawieniach.</bold>",
-  "page.cash_accounts.empty.list.title": "Nie posiadasz jeszcze żadnych kont gotówkowych."
+  "page.cash_accounts.empty.list.title": "Nie posiadasz jeszcze żadnych kont gotówkowych.",
+  "modal.name.CreateCashAccount": "Dodaj konto gotówkowe"
 }
