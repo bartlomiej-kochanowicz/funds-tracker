@@ -80,7 +80,7 @@ export const CashAccountsField = ({
 
       <Button
         borderRadius="secondary"
-        color="secondary"
+        color="black"
         onClick={handleRemoveField}
         boxShadow="none"
       >

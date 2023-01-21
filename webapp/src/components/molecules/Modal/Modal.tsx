@@ -5,6 +5,7 @@ import { modals, ModalsNames } from 'modals';
 import { Heading, Spacer, Spreader } from 'components/atoms';
 import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
 import { useTranslation } from 'react-i18next';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Modal } from './Modal.styles';
 
 interface ModalComponentProps {
@@ -21,6 +22,8 @@ export const ModalComponent: FC<ModalComponentProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
+  const isPhone = useBreakpoint('tablet', 'max');
+
   const { t } = useTranslation();
 
   const Component = modals[name];
@@ -36,14 +39,18 @@ export const ModalComponent: FC<ModalComponentProps> = ({
         ref={modalRef}
       >
         <Modal>
-          <Row justifyContent="flex-end">
+          <Row justifyContent="space-between">
             {showName && (
               <Fragment>
-                <Heading level="h2">{t(`modal.name.${name}`)}</Heading>
+                <Heading level="h2">{t(`modal.${name}.name`)}</Heading>
 
-                <Spreader spread="huge" />
+                {!isPhone && (
+                  <Fragment>
+                    <Spreader spread="huge" />
 
-                <Spreader spread="huge" />
+                    <Spreader spread="huge" />
+                  </Fragment>
+                )}
               </Fragment>
             )}
 

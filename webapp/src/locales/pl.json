@@ -20,6 +20,7 @@
   "common.password": "Hasło",
   "common.sign_in": "Zaloguj się",
   "common.sign_up": "Zarejestruj się",
+  "common.cancel": "Anuluj",
   "page.signin.account.does_not_exist": "Konto nie istnieje",
   "page.signin.description": "Witaj ponownie! Możesz kontynuować zarządzanie swoimi finansami",
   "page.signin.dont_have_account": "Nie masz jeszcze konta? <signup>Zarajestruj się tutaj</signup>",
@@ -56,7 +57,7 @@
   "currency.USD": "Dolar amerykański (USD)",
   "currency.PLN": "Polski złoty (PLN)",
   "add.cash.accounts.title": "Dodaj konta gotówkowe",
-  "add.cash.accounts.description": "Moższ tu podać wszystkie twoje konta 'gotówkowe' t.j konto na, które otrzymujesz wypłatę, nieoprocentowane konto oszczędnościowe lub realną gotówkę. <bold>Maksymalnie 10 kont, po 2 znaki długości każdy.</bold>",
+  "add.cash.accounts.description": "Moższ tu wprowadzić wszystkie twoje konta 'gotówkowe' t.j konto osobiste, konto oszczędnościowe lub realną gotówkę. <bold>Maksymalnie 10 kont.</bold>",
   "add.cash.accounts.empty": "Nie dodano kont. Dodaj nowe, klikając przycisk poniżej.",
   "add.cash.accounts.button.add": "Dodaj konto",
   "common.input.name.placeholder": "Nazwa",
@@ -98,5 +99,6 @@
   "page.introduction.default.currency.title": "Wybierz domyślną walutę",
   "page.introduction.default.currency.description": "Wybierz domyślną walutę, w której chcesz wyświetlać swoje raporty finansowe. <bold>Możesz zmienić to później w ustawieniach.</bold>",
   "page.cash_accounts.empty.list.title": "Nie posiadasz jeszcze żadnych kont gotówkowych.",
-  "modal.name.CreateCashAccount": "Dodaj konto gotówkowe"
+  "modal.CreateCashAccount.name": "Dodaj konto gotówkowe",
+  "modal.CreateCashAccount.description": "Moższ tu dodać twoje konto 'gotówkowe' t.j konto osobiste, konto oszczędnościowe lub realną gotówkę."
 }

@@ -28,7 +28,7 @@ export const Completed = () => {
       <Spacer space="large" />
 
       <Button
-        color="secondary"
+        color="black"
         width="100%"
         size="large"
         as={Link}

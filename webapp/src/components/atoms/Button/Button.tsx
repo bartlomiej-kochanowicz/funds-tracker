@@ -36,7 +36,7 @@ type ButtonProps = CommonProps &
       } & ReactRouterLinkProps)
   );
 
-export const Button = styled.div.withConfig({
+export const Button = styled.button.withConfig({
   shouldForwardProp: prop =>
     !['width', 'fontWeight', 'borderRadius', 'color', 'boxShadow'].includes(prop),
 })<ButtonProps>`
@@ -51,7 +51,7 @@ export const Button = styled.div.withConfig({
   ${({
     theme,
     size = 'medium',
-    color = 'primary',
+    color = 'blue',
     width = 'fit-content',
     fontWeight = '400',
     borderRadius = 'primary',
@@ -95,15 +95,3 @@ export const Button = styled.div.withConfig({
 `;
 
 Button.displayName = 'Button';
-
-Button.defaultProps = {
-  size: 'medium',
-  color: 'primary',
-  width: 'fit-content',
-  fontWeight: '500',
-  borderRadius: 'primary',
-  to: undefined,
-  as: 'button',
-  type: 'button',
-  boxShadow: 'default',
-};

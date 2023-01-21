@@ -20,6 +20,7 @@
   "common.password": "Password",
   "common.sign_in": "Sign in",
   "common.sign_up": "Sign up",
+  "common.cancel": "Cancel",
   "page.signin.account.does_not_exist": "Account does not exist",
   "page.signin.description": "Welcome back! You can continue to manage your investments",
   "page.signin.dont_have_account": "Don't have an account? <signup>Signup here</signup>",
@@ -56,7 +57,7 @@
   "currency.USD": "United States dollar (USD)",
   "currency.PLN": "Polish zloty (PLN)",
   "add.cash.accounts.title": "Add cash accounts",
-  "add.cash.accounts.description": "Here you can provide all your cash accounts e.g. daily account you receive your salary, interest-free savings account or real cash. <bold>Maximum 10 accounts, min. 2 characters length each.</bold>",
+  "add.cash.accounts.description": "Here you can provide all your cash accounts e.g. daily account you receive your salary, savings account or real cash. <bold>Maximum 10 accounts.</bold>",
   "add.cash.accounts.empty": "No accounts added. Add new by clicking button below.",
   "add.cash.accounts.button.add": "Add account",
   "common.input.name.placeholder": "Name",
@@ -98,5 +99,6 @@
   "page.introduction.default.currency.title": "Choose your default currency",
   "page.introduction.default.currency.description": "Choose the default currency in which you want to display your financial reports. <bold>You can change this later in the settings.</bold>",
   "page.cash_accounts.empty.list.title": "No cash accounts added",
-  "modal.name.CreateCashAccount": "Add new cash account"
+  "modal.name.CreateCashAccount": "Add new cash account",
+  "modal.CreateCashAccount.description": "Here you can provide your cash account e.g. daily account you receive your salary, savings account or real cash. <bold>Maximum 10 accounts.</bold>"
 }

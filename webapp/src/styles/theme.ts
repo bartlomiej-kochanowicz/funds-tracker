@@ -67,11 +67,12 @@ export const theme = {
       },
     },
     color: {
-      primary: {
+      blue: {
         background: Colors.Blue,
         font: Colors.White,
       },
-      secondary: { background: Colors.Black, font: Colors.White },
+      black: { background: Colors.Black, font: Colors.White },
+      gray200: { background: Colors.Gray300, font: Colors.White },
     },
   },
   padding: {

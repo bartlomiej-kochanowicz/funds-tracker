@@ -142,7 +142,7 @@ export const CreatePortfoliosForm = () => {
 
             {fields.length > 0 && fields.length < MAX_PORTFOLIOS ? (
               <Button
-                color="secondary"
+                color="black"
                 onClick={handleAppend}
               >
                 {t('add.portfolios.button.add')} <Spreader spread="tiny" /> <FaPlus />

@@ -1,8 +1,10 @@
-import { Input, Select, Spreader } from 'components/atoms';
+import { Button, Input, Select, Spacer, Spreader, Text } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useUserContext } from 'contexts/UserContext';
-import { FC, useMemo } from 'react';
+import { useBreakpoint } from 'hooks/useBreakpoint';
+import { FC, Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaPlus } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 import { Modal } from 'types/modal.type';
 
@@ -26,21 +28,57 @@ export const CreateCashAccount: FC<Modal<CreateCashAccountModalProps>> = ({ clos
     [t],
   );
 
+  const isPhone = useBreakpoint('tablet', 'max');
+
   return (
-    <Row>
-      <Input
-        placeholder={t('common.input.name.placeholder')}
-        flexGrow={1}
-      />
+    <Fragment>
+      <Spacer space="small" />
 
-      <Spreader spread="tiny" />
+      <Text
+        fontSize="0.875"
+        fontColor="gray400"
+        display="block"
+        maxWidth={isPhone ? '300px' : '100%'}
+        breakLine
+      >
+        {t('modal.CreateCashAccount.description')}
+      </Text>
 
-      <Select
-        width="130px"
-        options={options}
-        customLabel={customLabel}
-        defaultValue={user.defaultCurrency}
-      />
-    </Row>
+      <Spacer space="small" />
+
+      <Row alignItems="end">
+        <Input
+          placeholder={t('common.input.name.placeholder')}
+          flexGrow={1}
+        />
+
+        <Spreader spread="tiny" />
+
+        <Select
+          width="130px"
+          options={options}
+          customLabel={customLabel}
+          defaultValue={user.defaultCurrency}
+        />
+      </Row>
+
+      <Spacer />
+
+      <Row justifyContent="flex-end">
+        <Button
+          color="gray200"
+          borderRadius="secondary"
+          onClick={closeModal}
+        >
+          {t('common.cancel')}
+        </Button>
+
+        <Spreader spread="small" />
+
+        <Button borderRadius="secondary">
+          {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />
+        </Button>
+      </Row>
+    </Fragment>
   );
 };
