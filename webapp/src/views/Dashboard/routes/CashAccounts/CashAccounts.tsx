@@ -4,8 +4,8 @@ import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Row } from 'simple-flexbox';
 import { GetCashAccountQuery } from '__generated__/graphql';
+import { Dashboard } from 'layouts/Dashboard';
 import { CreateCashAccount } from './components/CreateCashAccount';
 import { CashAccountsPanel } from './components/CashAccountsPanel';
 import { CreateFirstCashAccount } from './components/CreateFirstCashAccount';
@@ -53,20 +53,24 @@ export const CashAccounts = () => {
       <Spacer />
 
       {loading && (
-        <Row justifyContent="center">
+        <Dashboard.Center>
           <Loader size="large" />
-        </Row>
+        </Dashboard.Center>
       )}
 
-      {!loading && error && <ErrorContent />}
-
-      {!loading && cashAccountsExist && !error && (
-        <Row justifyContent="center">
-          <CreateFirstCashAccount />
-        </Row>
+      {!loading && error && (
+        <Dashboard.Center>
+          <ErrorContent />
+        </Dashboard.Center>
       )}
 
       {!loading && !cashAccountsExist && !error && (
+        <Dashboard.Center>
+          <CreateFirstCashAccount />
+        </Dashboard.Center>
+      )}
+
+      {!loading && cashAccountsExist && !error && (
         <Grid
           columns={{
             desktop: 3,
