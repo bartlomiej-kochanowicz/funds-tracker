@@ -1,4 +1,5 @@
 export * from './ConfirmSignup';
+export * from './CreateCashAccount';
 export * from './DeleteCashAccount';
 export * from './IntroductionCreateCashAccounts';
 export * from './IntroductionCreatePortfolios';

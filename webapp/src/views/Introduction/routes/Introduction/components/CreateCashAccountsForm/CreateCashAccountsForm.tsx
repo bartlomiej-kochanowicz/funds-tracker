@@ -17,12 +17,12 @@ import { useIntroductionContext } from 'views/Introduction/routes/Introduction/c
 import { showErrorToast } from 'helpers/showToast';
 import { INTRODUCTION_CREATE_CASH_ACCOUNTS } from 'graphql/mutations';
 import { useUserContext } from 'contexts/UserContext';
-import { validationSchema } from './AddCashAccountsForm.schema';
-import { FieldsWrapper } from './AddCashAccountsForm.styles';
+import { validationSchema } from './CreateCashAccountsForm.schema';
+import { FieldsWrapper } from './CreateCashAccountsForm.styles';
 import { EmptyList } from '../EmptyList';
 import { CashAccountsField } from '../CashAccountsField';
 
-export const AddCashAccountsForm = () => {
+export const CreateCashAccountsForm = () => {
   const { t } = useTranslation();
 
   const { updateState, actions } = useIntroductionContext();
@@ -172,4 +172,4 @@ export const AddCashAccountsForm = () => {
   );
 };
 
-AddCashAccountsForm.displayName = 'IntroductionAddCashAccountsForm';
+CreateCashAccountsForm.displayName = 'IntroductionCreateCashAccountsForm';

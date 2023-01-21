@@ -11,8 +11,8 @@ export const Background = styled.div`
   height: 100%;
 
   ${({ theme: { colors, zIndex } }) => css`
-    background: ${transparentize(colors.black, 0.5)};
-    backdrop-filter: blur(5px);
+    background: ${transparentize(colors.black, 0.25)};
+    backdrop-filter: blur(10px);
     z-index: ${zIndex.modal.background};
   `}
 `;

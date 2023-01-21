@@ -30,4 +30,4 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
   </Column>
 );
 
-EmptyList.displayName = 'AddCashAccountsEmptyList';
+EmptyList.displayName = 'CreateCashAccountsEmptyList';

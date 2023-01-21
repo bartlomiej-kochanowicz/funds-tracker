@@ -16,6 +16,8 @@ export type FontableProps = {
   lineHeight?: `${string}rem`;
   textShadow?: boolean;
   textAlign?: 'left' | 'center' | 'right' | 'justify';
+  maxWidth?: `${string}px` | `${string}%`;
+  breakLine?: boolean;
 };
 
 export const fontable = css<FontableProps>`
@@ -55,6 +57,21 @@ export const fontable = css<FontableProps>`
     textAlign &&
     css`
       text-align: ${textAlign};
+    `}
+
+    ${({ maxWidth }) =>
+    maxWidth &&
+    css`
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: ${maxWidth};
+      white-space: nowrap;
+    `}
+
+  ${({ breakLine = false }) =>
+    breakLine &&
+    css`
+      white-space: normal;
     `}
 `;
 

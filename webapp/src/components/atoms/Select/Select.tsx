@@ -34,7 +34,7 @@ interface SelectProps<ValueType> {
   flexGrow?: number;
 }
 
-const SelectInner = <ValueType extends unknown>(
+const SelectInner = <ValueType,>(
   {
     options,
     defaultValue,
@@ -61,12 +61,17 @@ const SelectInner = <ValueType extends unknown>(
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  const isInModal = Boolean(buttonRef.current?.closest('[data-modal="true"]'));
+
   useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement);
 
   const { renderLayer, triggerProps, layerProps } = useLayer({
     isOpen,
     placement: 'bottom-center',
     auto: true,
+    container: isInModal
+      ? (document.querySelector('[data-modal="true"]') as HTMLElement)
+      : undefined,
     possiblePlacements: ['bottom-center', 'top-center'],
     triggerOffset: 5,
     onDisappear: disappearType => {
@@ -119,6 +124,7 @@ const SelectInner = <ValueType extends unknown>(
         renderLayer(
           <Menu
             minMenuWidth={minMenuWidth}
+            isInModal={isInModal}
             {...layerProps}
           >
             {options.map(({ value, label, ...rest }) => {
@@ -144,7 +150,7 @@ const SelectInner = <ValueType extends unknown>(
   );
 };
 
-export const Select = forwardRef(SelectInner) as (<ValueType extends unknown>(
+export const Select = forwardRef(SelectInner) as (<ValueType>(
   props: SelectProps<ValueType> & {
     ref?: React.ForwardedRef<HTMLButtonElement>;
   },

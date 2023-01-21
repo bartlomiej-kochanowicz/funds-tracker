@@ -1,8 +1,13 @@
-import { FC } from 'react';
+import { FC, lazy } from 'react';
 import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 import { Colors } from 'styles/theme';
-import { ErrorChart } from 'components/molecules';
 import { CashAccountHistory } from '__generated__/graphql';
+
+const ErrorChart = lazy(() =>
+  import('components/molecules').then(({ ErrorChart: component }) => ({
+    default: component,
+  })),
+);
 
 interface ChartProps {
   data: Omit<CashAccountHistory, 'uuid'>[];

@@ -1,6 +1,7 @@
+import { Column } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Content = styled(Column)`
   min-height: 100%;
   min-height: var(--doc-height);
 
@@ -18,4 +19,10 @@ export const Wrapper = styled.div`
       padding-bottom: 150px;
     }
   `}
+`;
+
+export const Center = styled(Column).attrs({
+  justifyContent: 'center',
+})`
+  flex-grow: 1;
 `;

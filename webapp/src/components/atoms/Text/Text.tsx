@@ -10,7 +10,6 @@ import {
 
 type TextProps = {
   display?: 'inline' | 'inline-block' | 'block';
-  maxWidth?: `${string}px`;
 } & FontableProps &
   MarginMixinProps &
   PaddingMixinProps;
@@ -23,15 +22,6 @@ export const Text = styled.span<TextProps>`
   ${({ display = 'inline' }) => css`
     display: ${display};
   `}
-
-  ${({ maxWidth }) =>
-    maxWidth &&
-    css`
-      text-overflow: ellipsis;
-      overflow: hidden;
-      width: ${maxWidth};
-      white-space: nowrap;
-    `}
 `;
 
 Text.displayName = 'Text';

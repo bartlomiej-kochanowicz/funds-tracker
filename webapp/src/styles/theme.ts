@@ -72,6 +72,7 @@ export const theme = {
         font: Colors.White,
       },
       secondary: { background: Colors.Black, font: Colors.White },
+      tertiary: { background: Colors.Gray300, font: Colors.White },
     },
   },
   padding: {
@@ -152,6 +153,10 @@ export const theme = {
     sidebar: 1,
     bottomBar: 1,
     topbar: 2,
+    menu: {
+      default: 3,
+      modal: 101,
+    },
     modal: {
       background: 100,
       modal: 101,

@@ -12,12 +12,13 @@ import {
 type RouterLinkProps = {
   to: string;
   display?: 'inline' | 'inline-block' | 'block';
+  textDecoration?: 'none' | 'underline';
 } & FontableProps &
   MarginMixinProps &
   PaddingMixinProps;
 
 export const RouterLink = styled(ReactRouterLink).withConfig({
-  shouldForwardProp: prop => !['fontColor'].includes(prop),
+  shouldForwardProp: prop => !['fontColor', 'maxWidth', 'textDecoration'].includes(prop),
 })<RouterLinkProps>`
   ${fontable}
   ${marginMixin}
@@ -28,9 +29,12 @@ export const RouterLink = styled(ReactRouterLink).withConfig({
   `}
 
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
-    text-decoration: underline;
+    ${({ textDecoration = 'underline' }) => css`
+      text-decoration: ${textDecoration};
+    `}
   }
 `;
 

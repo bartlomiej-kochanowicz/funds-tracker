@@ -2,10 +2,13 @@ import { useQuery } from '@apollo/client';
 import { Grid, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { GetCashAccountQuery } from '__generated__/graphql';
-import { AddCashAccount } from './components/AddCashAccount';
+import { CreateCashAccountMutation, GetCashAccountQuery } from '__generated__/graphql';
+import { Dashboard } from 'layouts/Dashboard';
+import { CreateCashAccount } from './components/CreateCashAccount';
 import { CashAccountsPanel } from './components/CashAccountsPanel';
+import { CreateFirstCashAccount } from './components/CreateFirstCashAccount';
 
 const generateMockHistory = () => {
   const history = [
@@ -29,29 +32,57 @@ const generateMockHistory = () => {
 export const CashAccounts = () => {
   const { t } = useTranslation();
 
-  const { loading, data, error /* , updateQuery */ } =
-    useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
+  const { loading, data, error, updateQuery } = useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
 
   const processData = data?.cashAccounts.map(cashAccount => ({
     ...cashAccount,
     history: generateMockHistory(),
   }));
 
-  const renderAddCashAccountButton = Boolean(processData && processData.length < 10);
+  const cashAccountsExist = Boolean(processData && processData.length > 0);
+
+  const renderCreateCashAccountButton = Boolean(processData && processData.length < 10);
+
+  const addCashAccountToList = (newCashAccountData: CreateCashAccountMutation) => {
+    updateQuery(prev => {
+      const newCashAccount = {
+        ...newCashAccountData.createCashAccount,
+        history: generateMockHistory(),
+      };
+
+      return {
+        cashAccounts: [...prev.cashAccounts, newCashAccount],
+      };
+    });
+  };
 
   return (
-    <div>
+    <Fragment>
       <Heading>{t('navigation.cash_accounts')}</Heading>
 
       <Text>{t('page.cash_accounts.title.description')}</Text>
 
       <Spacer />
 
-      {loading && <Loader />}
+      {loading && (
+        <Dashboard.Center>
+          <Loader size="large" />
+        </Dashboard.Center>
+      )}
 
-      {error && <ErrorContent />}
+      {!loading && error && (
+        <Dashboard.Center>
+          <ErrorContent />
+        </Dashboard.Center>
+      )}
 
-      {!loading && data && (
+      {!loading && !cashAccountsExist && !error && (
+        <Dashboard.Center>
+          <CreateFirstCashAccount callback={addCashAccountToList} />
+        </Dashboard.Center>
+      )}
+
+      {!loading && cashAccountsExist && !error && (
         <Grid
           columns={{
             desktop: 3,
@@ -67,9 +98,9 @@ export const CashAccounts = () => {
             />
           ))}
 
-          {renderAddCashAccountButton && <AddCashAccount />}
+          {renderCreateCashAccountButton && <CreateCashAccount callback={addCashAccountToList} />}
         </Grid>
       )}
-    </div>
+    </Fragment>
   );
 };

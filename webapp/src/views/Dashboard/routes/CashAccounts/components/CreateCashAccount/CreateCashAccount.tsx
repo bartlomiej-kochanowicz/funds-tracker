@@ -1,30 +1,34 @@
 import { FC } from 'react';
-import { Button, Spacer, Spreader, Text } from 'components/atoms';
+import { Button, Spacer, Spreader, Heading } from 'components/atoms';
 import { Panel } from 'components/molecules';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
-import { ADD_CASH_ACCOUNT, AddCashAccountModalProps } from 'modals/AddCashAccount';
+import { MODAL_CREATE_CASH_ACCOUNT, CreateCashAccountModalProps } from 'modals/CreateCashAccount';
+import { CreateCashAccountMutation } from '__generated__/graphql';
 
-export const AddCashAccount: FC = () => {
+interface CreateCashAccountProps {
+  callback: (data: CreateCashAccountMutation) => void;
+}
+
+export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
   const { t } = useTranslation();
 
   const { openModal } = useModalContext();
 
   const handleOpenModal = () => {
-    openModal<AddCashAccountModalProps>(ADD_CASH_ACCOUNT);
+    openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT, { callback });
   };
 
   return (
     <Panel>
       <Panel.BodyCentered>
-        <Text
-          fontSize="1.25"
-          fontWeight="700"
+        <Heading
           textAlign="center"
+          level="h2"
         >
           {t('page.cash_accounts.need.more')}
-        </Text>
+        </Heading>
 
         <Spacer space="small" />
 
