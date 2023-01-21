@@ -69,6 +69,9 @@ const SelectInner = <ValueType extends unknown>(
     isOpen,
     placement: 'bottom-center',
     auto: true,
+    container: isInModal
+      ? (document.querySelector('[data-modal="true"]') as HTMLElement)
+      : undefined,
     possiblePlacements: ['bottom-center', 'top-center'],
     triggerOffset: 5,
     onDisappear: disappearType => {

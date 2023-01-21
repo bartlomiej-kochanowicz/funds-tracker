@@ -31,33 +31,35 @@ export const ModalComponent: FC<ModalComponentProps> = ({
     <Fragment>
       <Modal.Background />
 
-      <Modal
-        ref={modalRef}
+      <div
         data-modal="true"
+        ref={modalRef}
       >
-        <Row justifyContent="flex-end">
-          {showName && (
-            <Fragment>
-              <Heading level="h2">{t(`modal.name.${name}`)}</Heading>
+        <Modal>
+          <Row justifyContent="flex-end">
+            {showName && (
+              <Fragment>
+                <Heading level="h2">{t(`modal.name.${name}`)}</Heading>
 
-              <Spreader spread="huge" />
+                <Spreader spread="huge" />
 
-              <Spreader spread="huge" />
-            </Fragment>
-          )}
+                <Spreader spread="huge" />
+              </Fragment>
+            )}
 
-          <Modal.CloseButton onClick={closeModal}>
-            <FaTimes size="1.25rem" />
-          </Modal.CloseButton>
-        </Row>
+            <Modal.CloseButton onClick={closeModal}>
+              <FaTimes size="1.25rem" />
+            </Modal.CloseButton>
+          </Row>
 
-        <Spacer space="small" />
+          <Spacer space="small" />
 
-        <Component
-          closeModal={closeModal}
-          {...rest}
-        />
-      </Modal>
+          <Component
+            closeModal={closeModal}
+            {...rest}
+          />
+        </Modal>
+      </div>
     </Fragment>
   );
 };
