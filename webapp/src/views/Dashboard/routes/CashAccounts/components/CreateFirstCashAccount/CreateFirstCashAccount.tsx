@@ -1,17 +1,23 @@
 import { Button, Heading, Spacer, Spreader } from 'components/atoms';
 import { useModalContext } from 'contexts/ModalContext';
 import { CreateCashAccountModalProps, MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
+import { CreateCashAccountMutation } from '__generated__/graphql';
 
-export const CreateFirstCashAccount = () => {
+interface CreateFirstCashAccountProps {
+  callback: (data: CreateCashAccountMutation) => void;
+}
+
+export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callback }) => {
   const { t } = useTranslation();
 
   const { openModal } = useModalContext();
 
   const handleOpenModal = () => {
-    openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT);
+    openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT, { callback });
   };
 
   return (

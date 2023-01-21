@@ -63,7 +63,7 @@ export const ModalComponent: FC<ModalComponentProps> = ({
 
           <Component
             closeModal={closeModal}
-            {...rest}
+            {...(rest as any)} // kind of a hack, but it works - still type safe
           />
         </Modal>
       </div>

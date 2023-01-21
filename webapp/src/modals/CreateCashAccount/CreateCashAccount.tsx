@@ -4,13 +4,19 @@ import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Modal } from 'types/modal.type';
+import { CreateCashAccountMutation } from '__generated__/graphql';
 import { CreateCashAccountForm } from './CreateCashAccountForm';
 
 export const MODAL_CREATE_CASH_ACCOUNT = 'CreateCashAccount';
 
-export type CreateCashAccountModalProps = {};
+export type CreateCashAccountModalProps = {
+  callback: (data: CreateCashAccountMutation) => void;
+};
 
-export const CreateCashAccount: FC<Modal<CreateCashAccountModalProps>> = ({ closeModal }) => {
+export const CreateCashAccount: FC<Modal<CreateCashAccountModalProps>> = ({
+  closeModal,
+  callback,
+}) => {
   const { t } = useTranslation();
 
   const isPhone = useBreakpoint('tablet', 'max');
@@ -31,7 +37,10 @@ export const CreateCashAccount: FC<Modal<CreateCashAccountModalProps>> = ({ clos
 
       <Spacer space="small" />
 
-      <CreateCashAccountForm closeModal={closeModal} />
+      <CreateCashAccountForm
+        closeModal={closeModal}
+        callback={callback}
+      />
     </Fragment>
   );
 };

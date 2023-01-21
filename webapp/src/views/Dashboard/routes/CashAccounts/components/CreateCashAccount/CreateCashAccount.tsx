@@ -5,14 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
 import { MODAL_CREATE_CASH_ACCOUNT, CreateCashAccountModalProps } from 'modals/CreateCashAccount';
+import { CreateCashAccountMutation } from '__generated__/graphql';
 
-export const CreateCashAccount: FC = () => {
+interface CreateCashAccountProps {
+  callback: (data: CreateCashAccountMutation) => void;
+}
+
+export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
   const { t } = useTranslation();
 
   const { openModal } = useModalContext();
 
   const handleOpenModal = () => {
-    openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT);
+    openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT, { callback });
   };
 
   return (

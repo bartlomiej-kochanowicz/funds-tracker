@@ -21,9 +21,10 @@ import { validationSchema } from './CreateCashAccountForm.schema';
 
 interface CreateCashAccountFormProps {
   closeModal: () => void;
+  callback: (data: CreateCashAccountMutation) => void;
 }
 
-export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeModal }) => {
+export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeModal, callback }) => {
   const { t } = useTranslation();
 
   const { user } = useUserContext();
@@ -47,8 +48,10 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
     CreateCashAccountMutation,
     CreateCashAccountMutationVariables
   >(CREATE_CASH_ACCOUNT, {
-    onCompleted: () => {
+    onCompleted: data => {
       closeModal();
+
+      callback(data);
     },
     onError: () => {
       showErrorToast(t('service.unknown_error'));

@@ -4,7 +4,7 @@ import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { GetCashAccountQuery } from '__generated__/graphql';
+import { CreateCashAccountMutation, GetCashAccountQuery } from '__generated__/graphql';
 import { Dashboard } from 'layouts/Dashboard';
 import { CreateCashAccount } from './components/CreateCashAccount';
 import { CashAccountsPanel } from './components/CashAccountsPanel';
@@ -32,8 +32,7 @@ const generateMockHistory = () => {
 export const CashAccounts = () => {
   const { t } = useTranslation();
 
-  const { loading, data, error /* , updateQuery */ } =
-    useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
+  const { loading, data, error, updateQuery } = useQuery<GetCashAccountQuery>(GET_CASH_ACCOUNTS);
 
   const processData = data?.cashAccounts.map(cashAccount => ({
     ...cashAccount,
@@ -43,6 +42,19 @@ export const CashAccounts = () => {
   const cashAccountsExist = Boolean(processData && processData.length > 0);
 
   const renderCreateCashAccountButton = Boolean(processData && processData.length < 10);
+
+  const addCashAccountToList = (newCashAccountData: CreateCashAccountMutation) => {
+    updateQuery(prev => {
+      const newCashAccount = {
+        ...newCashAccountData.createCashAccount,
+        history: generateMockHistory(),
+      };
+
+      return {
+        cashAccounts: [...prev.cashAccounts, newCashAccount],
+      };
+    });
+  };
 
   return (
     <Fragment>
@@ -66,7 +78,7 @@ export const CashAccounts = () => {
 
       {!loading && !cashAccountsExist && !error && (
         <Dashboard.Center>
-          <CreateFirstCashAccount />
+          <CreateFirstCashAccount callback={addCashAccountToList} />
         </Dashboard.Center>
       )}
 
@@ -86,7 +98,7 @@ export const CashAccounts = () => {
             />
           ))}
 
-          {renderCreateCashAccountButton && <CreateCashAccount />}
+          {renderCreateCashAccountButton && <CreateCashAccount callback={addCashAccountToList} />}
         </Grid>
       )}
     </Fragment>
