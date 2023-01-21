@@ -8,7 +8,7 @@ export const Dashboard = () => (
     <Spacer />
 
     <Button
-      color="black"
+      color="secondary"
       size="large"
     >
       test

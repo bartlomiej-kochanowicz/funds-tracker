@@ -51,7 +51,7 @@ export const Button = styled.button.withConfig({
   ${({
     theme,
     size = 'medium',
-    color = 'blue',
+    color = 'primary',
     width = 'fit-content',
     fontWeight = '400',
     borderRadius = 'primary',

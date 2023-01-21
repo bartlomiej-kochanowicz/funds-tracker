@@ -34,7 +34,7 @@ interface SelectProps<ValueType> {
   flexGrow?: number;
 }
 
-const SelectInner = <ValueType extends unknown>(
+const SelectInner = <ValueType,>(
   {
     options,
     defaultValue,
@@ -150,7 +150,7 @@ const SelectInner = <ValueType extends unknown>(
   );
 };
 
-export const Select = forwardRef(SelectInner) as (<ValueType extends unknown>(
+export const Select = forwardRef(SelectInner) as (<ValueType>(
   props: SelectProps<ValueType> & {
     ref?: React.ForwardedRef<HTMLButtonElement>;
   },

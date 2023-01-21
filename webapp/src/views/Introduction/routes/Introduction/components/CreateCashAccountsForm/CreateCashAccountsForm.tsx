@@ -148,7 +148,7 @@ export const CreateCashAccountsForm = () => {
 
             {fields.length > 0 && fields.length < MAX_CASH_ACCOUNTS ? (
               <Button
-                color="black"
+                color="secondary"
                 onClick={handleAppend}
               >
                 {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />

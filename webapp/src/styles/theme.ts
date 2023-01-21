@@ -67,12 +67,12 @@ export const theme = {
       },
     },
     color: {
-      blue: {
+      primary: {
         background: Colors.Blue,
         font: Colors.White,
       },
-      black: { background: Colors.Black, font: Colors.White },
-      gray200: { background: Colors.Gray300, font: Colors.White },
+      secondary: { background: Colors.Black, font: Colors.White },
+      tertiary: { background: Colors.Gray300, font: Colors.White },
     },
   },
   padding: {
@@ -193,7 +193,7 @@ export const darkTheme = {
     color: {
       ...JSON.parse(JSON.stringify(theme.button.color)),
 
-      black: { background: Colors.White, font: Colors.Black },
+      secondary: { background: Colors.White, font: Colors.Black },
     },
   },
 } as typeof theme;

@@ -22,7 +22,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
     <Spacer space="tiny" />
 
     <Button
-      color="black"
+      color="secondary"
       onClick={handleAppend}
     >
       {i18n.button} <Spreader spread="tiny" /> <FaPlus />

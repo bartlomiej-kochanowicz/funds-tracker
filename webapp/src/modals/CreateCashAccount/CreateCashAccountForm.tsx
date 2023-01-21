@@ -116,7 +116,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
 
       <Row justifyContent="flex-end">
         <Button
-          color="gray200"
+          color="tertiary"
           borderRadius="secondary"
           onClick={closeModal}
         >
