@@ -16,8 +16,8 @@ const CreateCashAccountsForm = lazy(() =>
   })),
 );
 
-const AddPortfoliosForm = lazy(() =>
-  import('./components/AddPortfoliosForm').then(({ AddPortfoliosForm: component }) => ({
+const CreatePortfoliosForm = lazy(() =>
+  import('./components/CreatePortfoliosForm').then(({ CreatePortfoliosForm: component }) => ({
     default: component,
   })),
 );
@@ -39,7 +39,7 @@ const IntroductionContent = () => {
 
           {compareState(states.CashAccounts) && <CreateCashAccountsForm />}
 
-          {compareState(states.Portfolios) && <AddPortfoliosForm />}
+          {compareState(states.Portfolios) && <CreatePortfoliosForm />}
 
           {compareState(states.Completed) && <Completed />}
         </AnimatePresence>

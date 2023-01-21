@@ -17,12 +17,12 @@ import {
 } from '__generated__/graphql';
 import { INTRODUCTION_CREATE_PORTFOLIOS } from 'graphql/mutations';
 import { showErrorToast } from 'helpers/showToast';
-import { validationSchema } from './AddPortfoliosForm.schema';
+import { validationSchema } from './CreatePortfoliosForm.schema';
 import { EmptyList } from '../EmptyList';
-import { FieldsWrapper } from './AddPortfoliosForm.styles';
+import { FieldsWrapper } from './CreatePortfoliosForm.styles';
 import { PortfoliosField } from '../PortfoliosField';
 
-export const AddPortfoliosForm = () => {
+export const CreatePortfoliosForm = () => {
   const { t } = useTranslation();
 
   const { updateState, actions } = useIntroductionContext();
@@ -166,4 +166,4 @@ export const AddPortfoliosForm = () => {
   );
 };
 
-AddPortfoliosForm.displayName = 'IntroductionAddPortfoliosForm';
+CreatePortfoliosForm.displayName = 'IntroductionCreatePortfoliosForm';
