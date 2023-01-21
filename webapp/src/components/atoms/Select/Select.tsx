@@ -61,6 +61,8 @@ const SelectInner = <ValueType extends unknown>(
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  const isInModal = Boolean(buttonRef.current?.closest('[data-modal="true"]'));
+
   useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement);
 
   const { renderLayer, triggerProps, layerProps } = useLayer({
@@ -119,6 +121,7 @@ const SelectInner = <ValueType extends unknown>(
         renderLayer(
           <Menu
             minMenuWidth={minMenuWidth}
+            isInModal={isInModal}
             {...layerProps}
           >
             {options.map(({ value, label, ...rest }) => {

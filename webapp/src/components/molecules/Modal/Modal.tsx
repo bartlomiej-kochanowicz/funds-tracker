@@ -31,7 +31,10 @@ export const ModalComponent: FC<ModalComponentProps> = ({
     <Fragment>
       <Modal.Background />
 
-      <Modal ref={modalRef}>
+      <Modal
+        ref={modalRef}
+        data-modal="true"
+      >
         <Row justifyContent="flex-end">
           {showName && (
             <Fragment>

@@ -152,6 +152,10 @@ export const theme = {
     sidebar: 1,
     bottomBar: 1,
     topbar: 2,
+    menu: {
+      default: 3,
+      modal: 101,
+    },
     modal: {
       background: 100,
       modal: 101,

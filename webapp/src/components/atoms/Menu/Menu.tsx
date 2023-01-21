@@ -4,13 +4,15 @@ import styled, { css } from 'styled-components';
 export interface MenuProps {
   children: ReactNode;
   minMenuWidth?: `${number}${'px' | 'rem'}`;
+  isInModal?: boolean;
 }
 
 const StyledUl = styled.ul<MenuProps>`
   max-height: 14rem;
   overflow-y: auto;
 
-  ${({ theme, minMenuWidth }) => css`
+  ${({ theme, minMenuWidth, isInModal }) => css`
+    z-index: ${isInModal ? theme.zIndex.menu.modal : theme.zIndex.menu.default};
     border-radius: ${theme.radius.secondary};
     background-color: ${theme.colors.gray200};
     padding: ${theme.padding.mediumY};
