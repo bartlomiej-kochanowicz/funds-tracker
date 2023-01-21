@@ -2,9 +2,11 @@ import { useQuery } from '@apollo/client';
 import { Grid, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Column, Row } from 'simple-flexbox';
 import { GetCashAccountQuery } from '__generated__/graphql';
-import { AddCashAccount } from './components/AddCashAccount';
+import { CreateCashAccount } from './components/CreateCashAccount';
 import { CashAccountsPanel } from './components/CashAccountsPanel';
 
 const generateMockHistory = () => {
@@ -37,21 +39,33 @@ export const CashAccounts = () => {
     history: generateMockHistory(),
   }));
 
-  const renderAddCashAccountButton = Boolean(processData && processData.length < 10);
+  const cashAccountsExist = Boolean(processData && processData.length > 0);
+
+  const renderCreateCashAccountButton = Boolean(processData && processData.length < 10);
 
   return (
-    <div>
+    <Fragment>
       <Heading>{t('navigation.cash_accounts')}</Heading>
 
       <Text>{t('page.cash_accounts.title.description')}</Text>
 
       <Spacer />
 
-      {loading && <Loader />}
+      {loading && (
+        <Row justifyContent="center">
+          <Loader size="large" />
+        </Row>
+      )}
 
-      {error && <ErrorContent />}
+      {!loading && error && <ErrorContent />}
 
-      {!loading && data && (
+      {!loading && cashAccountsExist && !error && (
+        <Row justifyContent="center">
+          <CreateCashAccount />
+        </Row>
+      )}
+
+      {!loading && !cashAccountsExist && !error && (
         <Grid
           columns={{
             desktop: 3,
@@ -67,9 +81,9 @@ export const CashAccounts = () => {
             />
           ))}
 
-          {renderAddCashAccountButton && <AddCashAccount />}
+          {renderCreateCashAccountButton && <CreateCashAccount />}
         </Grid>
       )}
-    </div>
+    </Fragment>
   );
 };

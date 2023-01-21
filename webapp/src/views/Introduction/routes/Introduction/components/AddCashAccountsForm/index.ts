@@ -1,1 +1,1 @@
-export * from './AddCashAccountsForm';
+export * from './CreateCashAccountsForm';

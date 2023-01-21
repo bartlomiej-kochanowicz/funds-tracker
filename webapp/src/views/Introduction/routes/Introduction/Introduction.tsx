@@ -10,8 +10,8 @@ const DefaultCurrency = lazy(() =>
   })),
 );
 
-const AddCashAccountsForm = lazy(() =>
-  import('./components/AddCashAccountsForm').then(({ AddCashAccountsForm: component }) => ({
+const CreateCashAccountsForm = lazy(() =>
+  import('./components/CreateCashAccountsForm').then(({ CreateCashAccountsForm: component }) => ({
     default: component,
   })),
 );
@@ -37,7 +37,7 @@ const IntroductionContent = () => {
         <AnimatePresence>
           {compareState(states.DefaultCurrency) && <DefaultCurrency />}
 
-          {compareState(states.CashAccounts) && <AddCashAccountsForm />}
+          {compareState(states.CashAccounts) && <CreateCashAccountsForm />}
 
           {compareState(states.Portfolios) && <AddPortfoliosForm />}
 
