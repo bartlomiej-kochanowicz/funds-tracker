@@ -9,6 +9,8 @@ export interface MenuItemProps {
 }
 
 const StyledButton = styled.button<{ isSelected: boolean; padding: keyof DefaultTheme['padding'] }>`
+  display: flex;
+  align-items: center;
   border: none;
   width: 100%;
   background-color: transparent;

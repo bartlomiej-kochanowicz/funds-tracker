@@ -1,10 +1,11 @@
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Menu } from 'components/atoms';
+import { Menu, Spreader } from 'components/atoms';
 import { useMutation } from '@apollo/client';
 import { LOGOUT } from 'graphql/mutations';
 import { LogoutMutation } from '__generated__/graphql';
 import { useUserContext } from 'contexts/UserContext';
+import { FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 
 interface DropdownContentProps {
   handleToggle: () => void;
@@ -32,7 +33,13 @@ export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProp
         ref={ref}
         {...rest}
       >
-        <Menu.Item padding="medium">{t('navigation.my_profile')}</Menu.Item>
+        <Menu.Item padding="medium">
+          <FaUserAlt />
+
+          <Spreader spread="small" />
+
+          {t('navigation.my_profile')}
+        </Menu.Item>
 
         <Menu.Divider width="85%" />
 
@@ -40,6 +47,10 @@ export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProp
           padding="medium"
           onClick={handleSignOut}
         >
+          <FaSignOutAlt />
+
+          <Spreader spread="small" />
+
           {t('common.sign_out')}
         </Menu.Item>
       </Menu>
