@@ -17,7 +17,7 @@ export const BottomBar = () => {
   const onScroll = useCallback(() => {
     const currentScrollPos = window.pageYOffset;
 
-    if (prevScrollpos > currentScrollPos) {
+    if (prevScrollpos > currentScrollPos || currentScrollPos < 100) {
       setVisible(true);
     } else {
       setVisible(false);

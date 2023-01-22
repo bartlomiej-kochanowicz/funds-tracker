@@ -2,6 +2,7 @@ import { FC, Fragment, lazy, useCallback, useEffect, useState } from 'react';
 import { FaCog } from 'react-icons/fa';
 import { Profile } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
+import { Colors } from 'styles/theme';
 import { Wrapper } from './MobileTopbar.styles';
 
 const LogoNameHorizontal = lazy(() =>
@@ -59,7 +60,10 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
 
       {isHub && (
         <Fragment>
-          <FaCog size="1.5rem" />
+          <FaCog
+            size="1.5rem"
+            color={isDark ? Colors.Gray200 : Colors.Gray400}
+          />
 
           <Profile />
         </Fragment>

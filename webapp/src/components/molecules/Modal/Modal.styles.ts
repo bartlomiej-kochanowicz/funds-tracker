@@ -1,5 +1,6 @@
 import { transparentize } from 'color2k';
 import styled, { css } from 'styled-components';
+import { theme } from 'styles/theme';
 
 export const Background = styled.div`
   position: fixed;
@@ -42,9 +43,10 @@ export const CloseButton = styled.button`
   border: 0;
   background: none;
 
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors, font } }) => css`
     svg {
       color: ${colors.gray500};
+      font-size: ${font.size['1.25']};
     }
   `}
 

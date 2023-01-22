@@ -5,6 +5,7 @@ import { modals, ModalsNames } from 'modals';
 import { Heading, Spacer } from 'components/atoms';
 import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
 import { useTranslation } from 'react-i18next';
+import { theme } from 'styles/theme';
 import { Modal } from './Modal.styles';
 
 interface ModalComponentProps {
@@ -40,7 +41,7 @@ export const ModalComponent: FC<ModalComponentProps> = ({
             {showName && <Heading level="h2">{t(`modal.${name}.name`)}</Heading>}
 
             <Modal.CloseButton onClick={closeModal}>
-              <FaTimes size="1.25rem" />
+              <FaTimes size={theme.font.size['1.25']} />
             </Modal.CloseButton>
           </Row>
 

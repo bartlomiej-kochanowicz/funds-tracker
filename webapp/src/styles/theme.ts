@@ -32,7 +32,7 @@ export const theme = {
     gray200: Colors.Gray200,
     gray100: Colors.Gray100,
     text: Colors.Black,
-    mobileTransparent: transparentize(Colors.Gray100, 0.4),
+    mobileTransparent: transparentize(Colors.Gray200, 0.4),
   },
   breakpoints: {
     desktopPlus: {
@@ -147,8 +147,7 @@ export const theme = {
 		      0px 3px 5px -1px ${transparentize(Colors.Gray300, 0.8)}`,
   },
   gradients: {
-    primary: `linear-gradient(to top left, #B0B0B0, #FAFBFC);`,
-    secondary: `linear-gradient(to top, #2a2a2a , #333333)`,
+    blue: `linear-gradient(133deg, ${darken(Colors.Blue, 0.15)} 0%, ${Colors.Blue} 75%)`,
   },
   zIndex: {
     sidebar: 1,

@@ -7,7 +7,7 @@ export { Dropdown } from './Dropdown';
 export { Grid } from './Grid';
 export { Heading } from './Heading';
 export { Input } from './Input';
-export { InstrumentSymbol } from './InstrumentSymbol';
+export { Tile } from './Tile';
 export { Link } from './Link';
 export { RouterLink } from './RouterLink';
 export { Loader } from './Loader';

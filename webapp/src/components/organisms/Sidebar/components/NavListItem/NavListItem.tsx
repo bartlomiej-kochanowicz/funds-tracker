@@ -5,7 +5,7 @@ import { IconType } from 'react-icons';
 import { useLocation } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 import { Row } from 'simple-flexbox';
-import { Colors } from 'styles/theme';
+import { Colors, theme } from 'styles/theme';
 import { Bar } from './NavListItem.styles';
 
 interface NavListItemProps {
@@ -33,7 +33,7 @@ export const NavListItem: FC<NavListItemProps> = ({
     <Fragment>
       <Row>
         <Icon
-          size="1.25rem"
+          size={theme.font.size['1.25']}
           color={isActive ? Colors.Blue : undefined}
         />
 
