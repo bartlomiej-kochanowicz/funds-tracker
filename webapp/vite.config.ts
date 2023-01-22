@@ -37,7 +37,7 @@ export default defineConfig({
         },
       ],
     }),
-    VitePWA({ registerType: 'autoUpdate' }),
+    VitePWA({ registerType: 'autoUpdate', injectRegister: 'auto' }),
   ],
   build: {
     outDir: './dist',
