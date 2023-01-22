@@ -17,6 +17,7 @@ type CommonProps = {
   borderRadius?: keyof DefaultTheme['radius'];
   to?: string;
   boxShadow?: 'default' | 'none';
+  flexGrow?: number;
 };
 
 type NativeButtonProps = Omit<
@@ -56,6 +57,7 @@ export const Button = styled.button.withConfig({
     fontWeight = '400',
     borderRadius = 'primary',
     boxShadow = 'default',
+    flexGrow = 0,
   }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
@@ -74,6 +76,11 @@ export const Button = styled.button.withConfig({
             return 'none';
         }
       }};
+
+      ${flexGrow &&
+      css`
+        flex-grow: ${flexGrow};
+      `}
 
       &:hover {
         cursor: pointer;
