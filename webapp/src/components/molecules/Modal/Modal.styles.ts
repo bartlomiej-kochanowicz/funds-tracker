@@ -1,6 +1,5 @@
 import { transparentize } from 'color2k';
 import styled, { css } from 'styled-components';
-import { theme } from 'styles/theme';
 
 export const Background = styled.div`
   position: fixed;

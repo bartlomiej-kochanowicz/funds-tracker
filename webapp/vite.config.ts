@@ -4,6 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import eslint from 'vite-plugin-eslint';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,6 +37,7 @@ export default defineConfig({
         },
       ],
     }),
+    VitePWA({ registerType: 'autoUpdate' }),
   ],
   build: {
     outDir: './dist',
