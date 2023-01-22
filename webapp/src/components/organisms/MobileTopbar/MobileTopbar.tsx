@@ -62,7 +62,7 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
         <Fragment>
           <FaCog
             size="1.5rem"
-            color={Colors.Gray400}
+            color={isDark ? Colors.Gray200 : Colors.Gray400}
           />
 
           <Profile />

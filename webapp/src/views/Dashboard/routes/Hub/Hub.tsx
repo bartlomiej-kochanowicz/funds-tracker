@@ -30,16 +30,17 @@ export const Hub = () => {
         Essensials
       </Heading>
 
-      <Spacer space="tiny" />
+      <Spacer space="small" />
 
       <Grid>
-        {hubNavigation.essentials.map(({ icon, title }) => {
+        {hubNavigation.essentials.map(({ icon, title, to }) => {
           const Icon = icon;
 
           return (
             <Tile
               key={title}
               title={t(title)}
+              to={to}
             >
               <Icon />
             </Tile>

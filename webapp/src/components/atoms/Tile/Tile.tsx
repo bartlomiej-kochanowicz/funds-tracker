@@ -2,14 +2,16 @@ import { FC, ReactNode } from 'react';
 import { Column } from 'simple-flexbox';
 import { Text } from 'components/atoms/Text';
 import { Wrapper } from './Tile.styles';
+import { RouterLink } from '../RouterLink';
 
 interface TilelProps {
   children: ReactNode;
   title?: string;
+  to?: string;
 }
 
-export const Tile: FC<TilelProps> = ({ children, title }) => {
-  return (
+export const Tile: FC<TilelProps> = ({ children, title, to }) => {
+  const content = (
     <Column>
       <Wrapper>{children}</Wrapper>
 
@@ -25,4 +27,10 @@ export const Tile: FC<TilelProps> = ({ children, title }) => {
       )}
     </Column>
   );
+
+  if (to) {
+    return <RouterLink to={to}>{content}</RouterLink>;
+  }
+
+  return content;
 };

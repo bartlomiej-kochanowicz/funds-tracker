@@ -12,12 +12,10 @@ export const Wrapper = styled(Row).withConfig({
   ${({ theme: { colors, spacing, zIndex }, hasBackground }) => css`
     padding: ${spacing.medium};
     z-index: ${zIndex.bottomBar};
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease-in-out;
 
     ${hasBackground &&
     css`
-      background: ${colors.mobileTransparent};
+      background-color: ${colors.gray100};
       border-bottom: 1px solid ${colors.gray200};
     `}
   `}
