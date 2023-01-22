@@ -42,6 +42,7 @@ export const ModalComponent = styled.div`
 export const CloseButton = styled.button`
   border: 0;
   background: none;
+  padding: 0;
 
   ${({ theme: { colors, font } }) => css`
     svg {
