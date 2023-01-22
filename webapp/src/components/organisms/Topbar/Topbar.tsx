@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
-import { Profile } from './components/Profile';
+import { Profile } from 'components/molecules';
 import { StyledRow } from './Topbar.styles';
 
 const LogoNameVertical = lazy(() =>
@@ -24,7 +24,7 @@ export const Topbar = () => {
         {isDark ? <LogoNameVertical width="135px" /> : <LogoNameVerticalDark width="135px" />}
       </Suspense>
 
-      <Profile />
+      <Profile withName />
     </StyledRow>
   );
 };
