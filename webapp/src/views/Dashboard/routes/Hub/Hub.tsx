@@ -3,9 +3,8 @@ import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { Column } from 'simple-flexbox';
 import { hubNavigation } from './constants';
-import { Grid } from './Hub.styles';
+import { Grid, Wrapper } from './Hub.styles';
 
 export const Hub = () => {
   const isDesktop = useBreakpoint('desktop', 'min');
@@ -22,7 +21,7 @@ export const Hub = () => {
   }
 
   return (
-    <Column>
+    <Wrapper>
       <Heading
         level="h3"
         fontColor="gray400"
@@ -47,7 +46,7 @@ export const Hub = () => {
           );
         })}
       </Grid>
-    </Column>
+    </Wrapper>
   );
 };
 
