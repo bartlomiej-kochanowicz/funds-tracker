@@ -1,11 +1,11 @@
 import { Column } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
-export const Content = styled(Column)`
+export const Content = styled(Column)<{ isHub: boolean }>`
   min-height: 100%;
   min-height: var(--doc-height);
 
-  ${({ theme }) => css`
+  ${({ theme, isHub = false }) => css`
     background-color: ${theme.colors.gray100};
     padding: ${theme.spacing.large};
 
@@ -16,7 +16,7 @@ export const Content = styled(Column)`
     }
 
     ${theme.breakpoints.desktop.max} {
-      padding-top: 90px; // height of the hub header
+      padding-top: ${isHub ? '90px' : '70px'}; // height of the hub header and other views header
       padding-bottom: 150px; // some space for the footer
     }
   `}

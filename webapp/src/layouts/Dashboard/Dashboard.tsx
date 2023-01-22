@@ -3,6 +3,8 @@ import { Sidebar, BottomBar, Topbar } from 'components/organisms';
 import { MobileTopbar } from 'components/organisms/MobileTopbar';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment, ReactNode, Suspense } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ROUTES } from 'routes/paths';
 import { Content, Center } from './Dashboard.styles';
 
 interface DashboardProps {
@@ -11,6 +13,10 @@ interface DashboardProps {
 
 export const Dashboard = ({ children }: DashboardProps) => {
   const isDesktop = useBreakpoint('desktop', 'min');
+
+  const location = useLocation();
+
+  const isHub = location.pathname === ROUTES.DASHBOARD.HUB;
 
   return (
     <Fragment>
@@ -24,13 +30,13 @@ export const Dashboard = ({ children }: DashboardProps) => {
 
       {!isDesktop && (
         <Fragment>
-          <MobileTopbar />
+          <MobileTopbar isHub={isHub} />
 
           <BottomBar />
         </Fragment>
       )}
 
-      <Content>
+      <Content isHub={isHub}>
         <Suspense
           fallback={
             <Center>
