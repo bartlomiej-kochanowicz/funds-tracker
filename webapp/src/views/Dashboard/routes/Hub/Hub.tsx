@@ -26,7 +26,7 @@ export const Hub = () => {
         level="h3"
         fontColor="gray400"
       >
-        Essensials
+        {t('common.dashboard')}
       </Heading>
 
       <Spacer space="small" />
