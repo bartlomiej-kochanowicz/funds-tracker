@@ -30,6 +30,7 @@ export const RouterLink = styled(ReactRouterLink).withConfig({
 
   text-decoration: none;
   cursor: pointer;
+  width: fit-content;
 
   &:hover {
     ${({ textDecoration = 'underline' }) => css`
