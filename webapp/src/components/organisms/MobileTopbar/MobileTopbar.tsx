@@ -1,8 +1,8 @@
 import { FaCog } from 'react-icons/fa';
 import { Profile } from 'components/molecules';
-import { Wrapper } from './Header.styles';
+import { Wrapper } from './MobileTopbar.styles';
 
-export const Header = () => {
+export const MobileTopbar = () => {
   return (
     <Wrapper
       justifyContent="space-between"
@@ -15,4 +15,4 @@ export const Header = () => {
   );
 };
 
-Header.displayName = 'HubHeader';
+MobileTopbar.displayName = 'MobileTopbar';

@@ -1,5 +1,6 @@
 import { Loader } from 'components/atoms';
 import { Sidebar, BottomBar, Topbar } from 'components/organisms';
+import { MobileTopbar } from 'components/organisms/MobileTopbar';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment, ReactNode, Suspense } from 'react';
 import { Content, Center } from './Dashboard.styles';
@@ -13,11 +14,21 @@ export const Dashboard = ({ children }: DashboardProps) => {
 
   return (
     <Fragment>
-      {isDesktop && <Topbar />}
+      {isDesktop && (
+        <Fragment>
+          <Topbar />
 
-      {isDesktop && <Sidebar />}
+          <Sidebar />
+        </Fragment>
+      )}
 
-      {!isDesktop && <BottomBar />}
+      {!isDesktop && (
+        <Fragment>
+          <MobileTopbar />
+
+          <BottomBar />
+        </Fragment>
+      )}
 
       <Content>
         <Suspense
