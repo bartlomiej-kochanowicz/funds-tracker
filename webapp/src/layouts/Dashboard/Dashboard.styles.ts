@@ -16,7 +16,8 @@ export const Content = styled(Column)`
     }
 
     ${theme.breakpoints.desktop.max} {
-      padding-bottom: 150px;
+      padding-top: 90px; // height of the hub header
+      padding-bottom: 150px; // some space for the footer
     }
   `}
 `;

@@ -1,4 +1,6 @@
+import { Heading } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { Fragment } from 'react';
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 import { Column } from 'simple-flexbox';
@@ -17,9 +19,13 @@ export const Hub = () => {
   }
 
   return (
-    <Column>
+    <Fragment>
       <Header />
-    </Column>
+
+      <Column>
+        <Heading level="h3">test</Heading>
+      </Column>
+    </Fragment>
   );
 };
 
