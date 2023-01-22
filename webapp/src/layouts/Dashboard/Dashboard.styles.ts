@@ -1,7 +1,9 @@
 import { Column } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
-export const Content = styled(Column)<{ isHub: boolean }>`
+export const Content = styled(Column).withConfig({
+  shouldForwardProp: prop => !['isHub'].includes(prop),
+})<{ isHub: boolean }>`
   min-height: 100%;
   min-height: var(--doc-height);
 

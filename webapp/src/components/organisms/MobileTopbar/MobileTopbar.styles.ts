@@ -1,7 +1,9 @@
 import { Row } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled(Row)<{ hasBackground: boolean }>`
+export const Wrapper = styled(Row).withConfig({
+  shouldForwardProp: prop => !['hasBackground'].includes(prop),
+})<{ hasBackground: boolean }>`
   position: fixed;
   top: 0;
   left: 0;

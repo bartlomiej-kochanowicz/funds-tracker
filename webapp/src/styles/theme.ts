@@ -32,7 +32,7 @@ export const theme = {
     gray200: Colors.Gray200,
     gray100: Colors.Gray100,
     text: Colors.Black,
-    mobileTransparent: transparentize(Colors.Gray100, 0.4),
+    mobileTransparent: transparentize(Colors.Gray200, 0.4),
   },
   breakpoints: {
     desktopPlus: {
