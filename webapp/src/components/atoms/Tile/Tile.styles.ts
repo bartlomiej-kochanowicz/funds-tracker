@@ -8,8 +8,10 @@ export const Wrapper = styled.div`
   justify-content: center;
 
   ${({ theme }) => css`
-    background-color: ${theme.colors.blue};
+    background: ${theme.colors.blue};
+    background: ${theme.gradients.blue}};
     border-radius: ${theme.radius.tertiary};
+    box-shadow: ${theme.shadows.box};
 
     svg {
       fill: ${theme.colors.white};

@@ -8,6 +8,7 @@ export const Circle = styled(Row)`
 
   ${({ theme }) => css`
     box-shadow: ${theme.shadows.box};
-    background-color: ${theme.colors.blue};
+    background: ${theme.colors.blue};
+    background: ${theme.gradients.blue}};
   `}
 `;
