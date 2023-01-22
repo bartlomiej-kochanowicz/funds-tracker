@@ -7,7 +7,6 @@ export const Circle = styled(Row)`
   border-radius: 50%;
 
   ${({ theme }) => css`
-    box-shadow: ${theme.shadows.box};
     background: ${theme.colors.blue};
     background: ${theme.gradients.blue}};
   `}
