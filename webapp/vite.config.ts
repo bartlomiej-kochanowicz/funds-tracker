@@ -44,7 +44,7 @@ export default defineConfig({
         name: 'Funds Tracker',
         short_name: 'FT',
         description: 'Manage your investments as simple as possible',
-        theme_color: '#ffffff',
+        theme_color: '#F9F9FA',
         start_url: '/',
         icons: [
           {

@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import { Row } from 'simple-flexbox';
 import { useTranslation } from 'react-i18next';
-import { Spreader, Text, Avatar } from 'components/atoms';
+import { Spreader, Text, Avatar, Dropdown } from 'components/atoms';
 import { useUserContext } from 'contexts/UserContext';
 import { DropdownContent } from './components/DropdownContent';
-import { StyledDropdown } from './Profile.styles';
 
 interface ProfileProps {
   withName?: boolean;
@@ -16,7 +15,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
   const { t } = useTranslation();
 
   return (
-    <StyledDropdown
+    <Dropdown
       content={DropdownContent}
       placement="bottom-end"
     >
@@ -33,6 +32,6 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
       )}
 
       {!withName && <Avatar name={user.name} />}
-    </StyledDropdown>
+    </Dropdown>
   );
 };
