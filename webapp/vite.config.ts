@@ -42,7 +42,7 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
         name: 'Funds Tracker',
-        short_name: 'FT',
+        short_name: 'Funds Tracker',
         description: 'Manage your investments as simple as possible',
         theme_color: '#F9F9FA',
         start_url: '/',
