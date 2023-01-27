@@ -11,7 +11,7 @@ export const StyledRow = styled(Row).withConfig({
 
   ${({ theme, hasBorder }) => css`
     z-index: ${theme.zIndex.topbar};
-    padding: ${theme.spacing.large} ${theme.spacing.huge};
+    padding: calc(${theme.spacing.large} - ${theme.spacing.medium} / 2) ${theme.spacing.huge};
     background-color: ${theme.colors.gray100};
 
     ${hasBorder &&
