@@ -3,6 +3,7 @@ import { FaCog } from 'react-icons/fa';
 import { Profile } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { Colors } from 'styles/theme';
+import { debounce } from 'helpers/debounce';
 import { Wrapper } from './MobileTopbar.styles';
 
 const LogoNameHorizontal = lazy(() =>
@@ -26,15 +27,18 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
 
   const [visible, setVisible] = useState(window.pageYOffset !== 0);
 
-  const onScroll = useCallback(() => {
-    const currentScrollPos = window.pageYOffset;
+  const onScroll = debounce(
+    useCallback(() => {
+      const currentScrollPos = window.pageYOffset;
 
-    if (currentScrollPos > 0) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-  }, []);
+      if (currentScrollPos > 0) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    }, []),
+    250,
+  );
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
