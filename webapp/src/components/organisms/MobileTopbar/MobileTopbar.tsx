@@ -4,6 +4,8 @@ import { Profile } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { Colors } from 'styles/theme';
 import { debounce } from 'helpers/debounce';
+import { Column } from 'simple-flexbox';
+import { Spacer } from 'components/atoms';
 import { Wrapper } from './MobileTopbar.styles';
 
 const LogoNameHorizontal = lazy(() =>
@@ -55,11 +57,13 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
       hasBorder={visible}
     >
       {!isHub && (
-        <Fragment>
+        <Column>
+          <Spacer space="tiny" />
           {isDark && <LogoNameHorizontal height="18px" />}
 
           {!isDark && <LogoNameHorizontalDark height="18px" />}
-        </Fragment>
+          <Spacer space="tiny" />
+        </Column>
       )}
 
       {isHub && (

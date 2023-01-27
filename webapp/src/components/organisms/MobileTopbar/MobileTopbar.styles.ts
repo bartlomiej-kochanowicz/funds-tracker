@@ -10,7 +10,7 @@ export const Wrapper = styled(Row).withConfig({
   right: 0;
 
   ${({ theme: { colors, spacing, zIndex }, hasBorder }) => css`
-    padding: ${spacing.medium};
+    padding: calc(${spacing.medium} - ${spacing.medium} / 2) ${spacing.medium};
     z-index: ${zIndex.bottomBar};
     background-color: ${colors.gray100};
 
