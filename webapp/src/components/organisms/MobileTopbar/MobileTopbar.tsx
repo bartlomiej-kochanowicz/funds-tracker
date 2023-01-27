@@ -37,7 +37,7 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
         setVisible(false);
       }
     }, []),
-    250,
+    100,
   );
 
   useEffect(() => {

@@ -16,7 +16,7 @@ export const Topbar = () => {
         setVisible(false);
       }
     }, []),
-    250,
+    100,
   );
 
   useEffect(() => {
