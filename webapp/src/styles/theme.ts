@@ -177,7 +177,7 @@ const darkColors = {
   gray200: Colors.Gray400,
   gray100: Colors.Gray500,
   text: Colors.White,
-  mobileTransparent: transparentize(Colors.Gray500, 0.3),
+  mobileTransparent: transparentize(Colors.Gray400, 0.3),
 };
 
 export const darkTheme = {
