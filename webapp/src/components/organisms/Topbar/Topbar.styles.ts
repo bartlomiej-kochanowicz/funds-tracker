@@ -10,5 +10,6 @@ export const StyledRow = styled(Row)`
   ${({ theme }) => css`
     z-index: ${theme.zIndex.topbar};
     padding: ${theme.padding.huge};
+    background-color: ${theme.colors.gray100};
   `}
 `;

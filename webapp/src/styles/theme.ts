@@ -150,9 +150,9 @@ export const theme = {
     blue: `linear-gradient(133deg, ${darken(Colors.Blue, 0.15)} 0%, ${Colors.Blue} 75%)`,
   },
   zIndex: {
-    sidebar: 1,
+    sidebar: 2,
     bottomBar: 1,
-    topbar: 2,
+    topbar: 1,
     menu: {
       default: 3,
       modal: 101,
