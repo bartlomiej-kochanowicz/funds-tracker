@@ -14,7 +14,7 @@ export const Content = styled(Column).withConfig({
     ${theme.breakpoints.desktop.min} {
       margin-left: 270px;
       padding: ${theme.spacing.huge};
-      padding-top: 98px;
+      padding-top: 90px;
     }
 
     ${theme.breakpoints.desktop.max} {

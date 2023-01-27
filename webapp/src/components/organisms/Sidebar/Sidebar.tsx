@@ -49,7 +49,7 @@ export const Sidebar = () => {
 
         <Spacer space="large" />
 
-        <Spacer space="large" />
+        <Spacer />
 
         <Heading
           level="h2"

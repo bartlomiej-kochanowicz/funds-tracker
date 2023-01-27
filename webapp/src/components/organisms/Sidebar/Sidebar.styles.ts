@@ -12,8 +12,7 @@ export const StyledColumn = styled(Column)`
   ${({ theme: { isDark, colors, zIndex, shadows, spacing } }) => css`
     background-color: ${isDark ? darken(colors.gray100, 0.03) : colors.white};
     z-index: ${zIndex.sidebar};
-    padding: ${spacing.huge} 0 ${spacing.huge} ${spacing.huge};
+    padding: ${spacing.large} 0 ${spacing.huge} ${spacing.huge};
     box-shadow: ${shadows.box};
-    border-right: 1px solid ${colors.gray200};
   `}
 `;

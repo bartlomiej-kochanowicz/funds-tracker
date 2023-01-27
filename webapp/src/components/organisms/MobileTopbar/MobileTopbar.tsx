@@ -48,7 +48,7 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
     <Wrapper
       justifyContent={isHub ? 'space-between' : 'center'}
       alignItems="center"
-      hasBackground={visible}
+      hasBorder={visible}
     >
       {!isHub && (
         <Fragment>
