@@ -20,10 +20,10 @@ const LogoNameHorizontalDark = lazy(() =>
 );
 
 interface MobileTopbarProps {
-  isHub: boolean;
+  isDashboard: boolean;
 }
 
-export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
+export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
   const { isDark } = useColorThemeContext();
 
   const [visible, setVisible] = useState(window.pageYOffset !== 0);
@@ -51,11 +51,11 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
 
   return (
     <Wrapper
-      justifyContent={isHub ? 'space-between' : 'center'}
+      justifyContent={isDashboard ? 'center' : 'space-between'}
       alignItems="center"
       hasBorder={visible}
     >
-      {!isHub && (
+      {isDashboard && (
         <Column>
           <Spacer space="tiny" />
           {isDark && <LogoNameHorizontal height="18px" />}
@@ -65,7 +65,7 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
         </Column>
       )}
 
-      {isHub && (
+      {!isDashboard && (
         <Fragment>
           <SettingsDropdown />
 

@@ -2,12 +2,12 @@ import { Column } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
 export const Content = styled(Column).withConfig({
-  shouldForwardProp: prop => !['isHub'].includes(prop),
-})<{ isHub: boolean }>`
+  shouldForwardProp: prop => !['isDashboard'].includes(prop),
+})<{ isDashboard: boolean }>`
   min-height: 100%;
   min-height: var(--doc-height);
 
-  ${({ theme, isHub = false }) => css`
+  ${({ theme, isDashboard }) => css`
     background-color: ${theme.colors.gray100};
     padding: ${theme.spacing.large};
 
@@ -18,7 +18,7 @@ export const Content = styled(Column).withConfig({
     }
 
     ${theme.breakpoints.desktop.max} {
-      padding-top: ${isHub ? '90px' : '50px'}; // height of the hub header and other views header
+      padding-top: ${isDashboard ? '50px' : '90px'};
       padding-bottom: 150px; // some space for the footer
     }
   `}

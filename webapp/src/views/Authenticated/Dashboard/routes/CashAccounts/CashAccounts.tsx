@@ -5,7 +5,6 @@ import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CreateCashAccountMutation, GetCashAccountQuery } from '__generated__/graphql';
-import { Dashboard } from 'layouts/Dashboard';
 import { CreateCashAccount } from './components/CreateCashAccount';
 import { CashAccountsPanel } from './components/CashAccountsPanel';
 import { CreateFirstCashAccount } from './components/CreateFirstCashAccount';
@@ -64,22 +63,12 @@ export const CashAccounts = () => {
 
       <Spacer />
 
-      {loading && (
-        <Dashboard.Center>
-          <Loader size="large" />
-        </Dashboard.Center>
-      )}
+      {loading && <Loader size="large" />}
 
-      {!loading && error && (
-        <Dashboard.Center>
-          <ErrorContent />
-        </Dashboard.Center>
-      )}
+      {!loading && error && <ErrorContent />}
 
       {!loading && !cashAccountsExist && !error && (
-        <Dashboard.Center>
-          <CreateFirstCashAccount callback={addCashAccountToList} />
-        </Dashboard.Center>
+        <CreateFirstCashAccount callback={addCashAccountToList} />
       )}
 
       {!loading && cashAccountsExist && !error && (

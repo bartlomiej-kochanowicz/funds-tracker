@@ -5,8 +5,8 @@ import { generatePath } from 'react-router-dom';
 import { CashAccount, CashAccountHistory } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Text } from 'components/atoms';
-import { Chart } from 'views/Dashboard/routes/CashAccounts/components/Chart';
 import { ROUTES } from 'routes/paths';
+import { Chart } from '../Chart';
 
 interface CashAccountsPanelProps extends Omit<CashAccount, 'history'> {
   history: Omit<CashAccountHistory, 'uuid'>[];

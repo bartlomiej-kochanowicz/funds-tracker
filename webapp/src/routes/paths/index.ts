@@ -13,11 +13,11 @@ export const ROUTES = {
     CASH_ACCOUNT: '/dashboard/cash-accounts/:uuid',
     TRANSACTIONS: '/dashboard/transactions',
     HISTORY: '/dashboard/history',
-    HUB: '/dashboard/hub',
   },
+  HUB: '/hub',
   SETTINGS: {
     SETTINGS: '/settings',
-    MY_PROFILE: '/settings/account',
+    MY_PROFILE: '/settings/my-profile',
   },
   ANY: '*',
 };
