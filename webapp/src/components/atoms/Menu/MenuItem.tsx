@@ -38,7 +38,7 @@ export const MenuItem: FC<MenuItemProps> = ({
   children,
   onClick,
   isSelected = false,
-  padding = 'small',
+  padding = 'medium',
 }) => (
   <li>
     <StyledButton
@@ -53,9 +53,3 @@ export const MenuItem: FC<MenuItemProps> = ({
 );
 
 MenuItem.displayName = 'MenuItem';
-
-MenuItem.defaultProps = {
-  onClick: () => null,
-  isSelected: false,
-  padding: 'small',
-};

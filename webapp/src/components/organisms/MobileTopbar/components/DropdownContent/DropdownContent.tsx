@@ -13,6 +13,12 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
       minMenuWidth="270px"
       {...rest}
     >
+      <Menu.Item>test</Menu.Item>
+
+      <Menu.Item>aaa</Menu.Item>
+
+      <Menu.Divider />
+
       <ApperienceWrapper>
         <Text>Apperience</Text>
 
