@@ -13,7 +13,7 @@ export const StyledNav = styled.nav`
     background: ${colors.mobileTransparent};
     border-radius: 16px;
     backdrop-filter: blur(10px);
-    z-index: ${zIndex.bottomBar};
+    z-index: ${zIndex.mobileNavigation};
     bottom: ${spacing.large};
     border-radius: ${radius.primary};
   `}

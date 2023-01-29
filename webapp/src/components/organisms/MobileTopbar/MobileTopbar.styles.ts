@@ -2,20 +2,20 @@ import { Row } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled(Row).withConfig({
-  shouldForwardProp: prop => !['hasBackground'].includes(prop),
-})<{ hasBackground: boolean }>`
+  shouldForwardProp: prop => !['hasBorder'].includes(prop),
+})<{ hasBorder: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
 
-  ${({ theme: { colors, spacing, zIndex }, hasBackground }) => css`
-    padding: ${spacing.medium};
-    z-index: ${zIndex.bottomBar};
+  ${({ theme: { colors, spacing, zIndex }, hasBorder }) => css`
+    padding: calc(${spacing.medium} - ${spacing.medium} / 2) ${spacing.medium};
+    z-index: ${zIndex.mobileNavigation};
+    background-color: ${colors.gray100};
 
-    ${hasBackground &&
+    ${hasBorder &&
     css`
-      background-color: ${colors.gray100};
       border-bottom: 1px solid ${colors.gray200};
     `}
   `}

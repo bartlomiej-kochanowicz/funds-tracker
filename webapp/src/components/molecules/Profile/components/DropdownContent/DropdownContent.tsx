@@ -11,7 +11,7 @@ interface DropdownContentProps {
   handleToggle: () => void;
 }
 
-export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProps>(
+export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps>(
   ({ handleToggle, ...rest }, ref) => {
     const { t } = useTranslation();
 
@@ -33,7 +33,7 @@ export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProp
         ref={ref}
         {...rest}
       >
-        <Menu.Item padding="medium">
+        <Menu.Item>
           <FaUserAlt />
 
           <Spreader spread="small" />
@@ -41,12 +41,9 @@ export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProp
           {t('navigation.my_profile')}
         </Menu.Item>
 
-        <Menu.Divider width="85%" />
+        <Menu.Divider />
 
-        <Menu.Item
-          padding="medium"
-          onClick={handleSignOut}
-        >
+        <Menu.Item onClick={handleSignOut}>
           <FaSignOutAlt />
 
           <Spreader spread="small" />

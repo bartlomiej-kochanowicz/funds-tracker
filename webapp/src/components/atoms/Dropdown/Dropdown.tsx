@@ -8,12 +8,12 @@ interface DropdownProps {
   placement?: PlacementType;
   children: React.ReactNode;
   content: ForwardRefExoticComponent<
-    { handleToggle: () => void } & RefAttributes<HTMLButtonElement>
+    { handleToggle: () => void } & RefAttributes<HTMLUListElement>
   >;
 }
 
 export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
-  ({ placement, children, content: Content, ...rest }, ref) => {
+  ({ placement = 'bottom-center', children, content: Content, ...rest }, ref) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
@@ -57,7 +57,3 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
 );
 
 Dropdown.displayName = 'Dropdown';
-
-Dropdown.defaultProps = {
-  placement: 'bottom-center',
-};

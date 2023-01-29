@@ -116,11 +116,6 @@ export const theme = {
       medium: rem(1.5),
       large: rem(2),
     },
-    colors: {
-      white: Colors.White,
-      black: Colors.Black,
-      blue: Colors.Blue,
-    },
   },
   spacing: {
     tiny: rem(0.25),
@@ -150,9 +145,9 @@ export const theme = {
     blue: `linear-gradient(133deg, ${darken(Colors.Blue, 0.15)} 0%, ${Colors.Blue} 75%)`,
   },
   zIndex: {
-    sidebar: 1,
-    bottomBar: 1,
-    topbar: 2,
+    sidebar: 2,
+    mobileNavigation: 1,
+    topbar: 1,
     menu: {
       default: 3,
       modal: 101,
@@ -177,7 +172,7 @@ const darkColors = {
   gray200: Colors.Gray400,
   gray100: Colors.Gray500,
   text: Colors.White,
-  mobileTransparent: transparentize(Colors.Gray500, 0.3),
+  mobileTransparent: transparentize(Colors.Gray400, 0.3),
 };
 
 export const darkTheme = {

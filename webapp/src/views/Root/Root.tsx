@@ -5,8 +5,8 @@ import { HomeRoutes } from 'views/Home';
 import { SinginRoutes } from 'views/Signin';
 import { SignupRoutes } from 'views/Signup';
 import { IntroductionRoutes } from 'views/Introduction';
-import { DashboardRoutes } from 'views/Dashboard';
 import { NotFoundRoutes } from 'views/NotFound';
+import { Authenticated } from 'views/Authenticated';
 
 export const Root: FC = () => {
   const views = useRoutes([
@@ -14,9 +14,8 @@ export const Root: FC = () => {
     ...SinginRoutes,
     ...SignupRoutes,
     ...IntroductionRoutes,
-    ...DashboardRoutes,
     ...NotFoundRoutes,
   ]);
 
-  return <Suspense fallback={<Loading />}>{views}</Suspense>;
+  return <Suspense fallback={<Loading />}>{Authenticated() || views}</Suspense>;
 };

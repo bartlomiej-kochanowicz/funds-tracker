@@ -16,7 +16,7 @@ interface InputProps
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ error, unit, width, flexGrow, label, ...rest }, ref) => (
+  ({ error, unit, width = 'auto', flexGrow, label, ...rest }, ref) => (
     <Wrapper
       width={width}
       flexGrow={flexGrow}
@@ -45,11 +45,3 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = 'Input';
-
-Input.defaultProps = {
-  error: undefined,
-  type: 'text',
-  unit: undefined,
-  width: 'auto',
-  flexGrow: undefined,
-};

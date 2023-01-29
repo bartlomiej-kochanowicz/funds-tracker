@@ -14,8 +14,3 @@ export const Box = ({ children, ...rest }: BoxProps) => (
 );
 
 Box.displayName = 'Box';
-
-Box.defaultProps = {
-  backgroundColor: undefined,
-  borderRadius: undefined,
-};

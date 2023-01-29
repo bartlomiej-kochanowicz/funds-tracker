@@ -43,7 +43,7 @@ const SelectInner = <ValueType,>(
     onBlur,
     customLabel,
     error,
-    width,
+    width = 'auto',
     flexGrow,
   }: SelectProps<ValueType>,
   ref: ForwardedRef<HTMLButtonElement>,
@@ -160,14 +160,3 @@ export const Select = forwardRef(SelectInner) as (<ValueType>(
 };
 
 Select.displayName = 'Select';
-
-Select.defaultProps = {
-  placeholder: undefined,
-  defaultValue: undefined,
-  onChange: () => {},
-  onBlur: () => {},
-  customLabel: undefined,
-  error: undefined,
-  width: 'auto',
-  flexGrow: undefined,
-};

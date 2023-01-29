@@ -44,7 +44,3 @@ export const Menu = forwardRef<HTMLUListElement, MenuProps>(({ children, ...rest
 ));
 
 Menu.displayName = 'Menu';
-
-Menu.defaultProps = {
-  minMenuWidth: undefined,
-};

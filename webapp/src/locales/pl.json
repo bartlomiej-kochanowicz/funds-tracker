@@ -100,5 +100,6 @@
   "page.introduction.default.currency.description": "Wybierz domyślną walutę, w której chcesz wyświetlać swoje raporty finansowe. <bold>Możesz zmienić to później w ustawieniach.</bold>",
   "page.cash_accounts.empty.list.title": "Nie posiadasz jeszcze żadnych kont gotówkowych.",
   "modal.CreateCashAccount.name": "Dodaj konto gotówkowe",
-  "modal.CreateCashAccount.description": "Moższ tu dodać twoje konto 'gotówkowe' t.j konto osobiste, konto oszczędnościowe lub realną gotówkę."
+  "modal.CreateCashAccount.description": "Moższ tu dodać twoje konto 'gotówkowe' t.j konto osobiste, konto oszczędnościowe lub realną gotówkę.",
+  "common.apperience": "Wygląd"
 }

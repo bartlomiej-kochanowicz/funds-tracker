@@ -2,25 +2,20 @@ import styled, { css, DefaultTheme } from 'styled-components';
 
 export type Space = keyof DefaultTheme['spacing'];
 
-const defaultProps = {
-  space: 'medium' as Space,
-  'data-testid': 'spacer',
-};
-
 export type SpacerProps = {
   space?: Space;
   'data-testid'?: string;
-} & typeof defaultProps;
+};
 
 const StyledSpacer = styled.span<SpacerProps>`
   display: block;
 
-  ${({ theme: { spacing }, space }) => css`
+  ${({ theme: { spacing }, space = 'medium' }) => css`
     padding: ${spacing[space]} 0;
   `}
 `;
 
-export const Spacer = ({ space, 'data-testid': dataTestId }: SpacerProps) => (
+export const Spacer = ({ space, 'data-testid': dataTestId = 'spacer' }: SpacerProps) => (
   <StyledSpacer
     space={space}
     data-testid={dataTestId}
@@ -28,5 +23,3 @@ export const Spacer = ({ space, 'data-testid': dataTestId }: SpacerProps) => (
 );
 
 Spacer.displayName = 'Spacer';
-
-Spacer.defaultProps = defaultProps;

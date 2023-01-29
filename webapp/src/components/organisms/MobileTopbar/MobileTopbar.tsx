@@ -1,9 +1,11 @@
 import { FC, Fragment, lazy, useCallback, useEffect, useState } from 'react';
-import { FaCog } from 'react-icons/fa';
 import { Profile } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
-import { Colors } from 'styles/theme';
+import { debounce } from 'helpers/debounce';
+import { Column } from 'simple-flexbox';
+import { Spacer } from 'components/atoms';
 import { Wrapper } from './MobileTopbar.styles';
+import { SettingsDropdown } from './components/SettingsDropdown';
 
 const LogoNameHorizontal = lazy(() =>
   import('assets/logo/logo-name-horizontal.svg').then(({ ReactComponent: component }) => ({
@@ -18,23 +20,26 @@ const LogoNameHorizontalDark = lazy(() =>
 );
 
 interface MobileTopbarProps {
-  isHub: boolean;
+  isDashboard: boolean;
 }
 
-export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
+export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
   const { isDark } = useColorThemeContext();
 
   const [visible, setVisible] = useState(window.pageYOffset !== 0);
 
-  const onScroll = useCallback(() => {
-    const currentScrollPos = window.pageYOffset;
+  const onScroll = debounce(
+    useCallback(() => {
+      const currentScrollPos = window.pageYOffset;
 
-    if (currentScrollPos > 0) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-  }, []);
+      if (currentScrollPos > 0) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    }, []),
+    100,
+  );
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
@@ -46,24 +51,23 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
 
   return (
     <Wrapper
-      justifyContent={isHub ? 'space-between' : 'center'}
+      justifyContent={isDashboard ? 'center' : 'space-between'}
       alignItems="center"
-      hasBackground={visible}
+      hasBorder={visible}
     >
-      {!isHub && (
-        <Fragment>
+      {isDashboard && (
+        <Column>
+          <Spacer space="tiny" />
           {isDark && <LogoNameHorizontal height="18px" />}
 
           {!isDark && <LogoNameHorizontalDark height="18px" />}
-        </Fragment>
+          <Spacer space="tiny" />
+        </Column>
       )}
 
-      {isHub && (
+      {!isDashboard && (
         <Fragment>
-          <FaCog
-            size="1.5rem"
-            color={isDark ? Colors.Gray200 : Colors.Gray400}
-          />
+          <SettingsDropdown />
 
           <Profile />
         </Fragment>
