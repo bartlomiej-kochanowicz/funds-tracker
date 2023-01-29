@@ -8,7 +8,7 @@ interface DropdownProps {
   placement?: PlacementType;
   children: React.ReactNode;
   content: ForwardRefExoticComponent<
-    { handleToggle: () => void } & RefAttributes<HTMLButtonElement>
+    { handleToggle: () => void } & RefAttributes<HTMLUListElement>
   >;
 }
 

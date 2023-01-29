@@ -5,7 +5,7 @@ import { MenuItem, MenuItemProps } from './MenuItem';
 import { MenuDivider, MenuDividerProps } from './MenuDivider';
 
 interface IMenu
-  extends React.ForwardRefExoticComponent<MenuProps & React.RefAttributes<HTMLButtonElement>> {
+  extends React.ForwardRefExoticComponent<MenuProps & React.RefAttributes<HTMLUListElement>> {
   Item: FC<MenuItemProps>;
   Divider: StyledComponent<'hr', DefaultTheme, MenuDividerProps, never>;
 }

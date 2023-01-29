@@ -1,12 +1,11 @@
 import { FC, Fragment, lazy, useCallback, useEffect, useState } from 'react';
-import { FaCog } from 'react-icons/fa';
 import { Profile } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
-import { Colors } from 'styles/theme';
 import { debounce } from 'helpers/debounce';
 import { Column } from 'simple-flexbox';
 import { Spacer } from 'components/atoms';
 import { Wrapper } from './MobileTopbar.styles';
+import { SettingsDropdown } from './components/SettingsDropdown';
 
 const LogoNameHorizontal = lazy(() =>
   import('assets/logo/logo-name-horizontal.svg').then(({ ReactComponent: component }) => ({
@@ -68,10 +67,7 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isHub }) => {
 
       {isHub && (
         <Fragment>
-          <FaCog
-            size="1.5rem"
-            color={isDark ? Colors.Gray200 : Colors.Gray400}
-          />
+          <SettingsDropdown />
 
           <Profile />
         </Fragment>

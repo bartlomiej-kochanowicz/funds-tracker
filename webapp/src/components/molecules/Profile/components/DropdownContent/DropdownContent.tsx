@@ -11,7 +11,7 @@ interface DropdownContentProps {
   handleToggle: () => void;
 }
 
-export const DropdownContent = forwardRef<HTMLButtonElement, DropdownContentProps>(
+export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps>(
   ({ handleToggle, ...rest }, ref) => {
     const { t } = useTranslation();
 
