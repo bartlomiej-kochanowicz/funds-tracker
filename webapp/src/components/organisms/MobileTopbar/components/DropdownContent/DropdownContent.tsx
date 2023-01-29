@@ -1,5 +1,6 @@
 import { Menu, Text, ThemeSwitcher } from 'components/atoms';
 import { forwardRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ApperienceWrapper } from './DropdownContent.styles';
 
 interface DropdownContentProps {
@@ -7,23 +8,27 @@ interface DropdownContentProps {
 }
 
 export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps>(
-  ({ handleToggle, ...rest }, ref) => (
-    <Menu
-      ref={ref}
-      minMenuWidth="270px"
-      {...rest}
-    >
-      <Menu.Item>test</Menu.Item>
+  ({ handleToggle, ...rest }, ref) => {
+    const { t } = useTranslation();
 
-      <Menu.Item>aaa</Menu.Item>
+    return (
+      <Menu
+        ref={ref}
+        minMenuWidth="270px"
+        {...rest}
+      >
+        <Menu.Item>test</Menu.Item>
 
-      <Menu.Divider />
+        <Menu.Item>aaa</Menu.Item>
 
-      <ApperienceWrapper>
-        <Text>Apperience</Text>
+        <Menu.Divider />
 
-        <ThemeSwitcher />
-      </ApperienceWrapper>
-    </Menu>
-  ),
+        <ApperienceWrapper>
+          <Text>{t('common.apperience')}</Text>
+
+          <ThemeSwitcher />
+        </ApperienceWrapper>
+      </Menu>
+    );
+  },
 );

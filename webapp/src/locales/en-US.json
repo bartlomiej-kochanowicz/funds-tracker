@@ -100,5 +100,6 @@
   "page.introduction.default.currency.description": "Choose the default currency in which you want to display your financial reports. <bold>You can change this later in the settings.</bold>",
   "page.cash_accounts.empty.list.title": "No cash accounts added",
   "modal.CreateCashAccount.name": "Add new cash account",
-  "modal.CreateCashAccount.description": "Here you can provide your cash account e.g. daily account you receive your salary, savings account or real cash."
+  "modal.CreateCashAccount.description": "Here you can provide your cash account e.g. daily account you receive your salary, savings account or real cash.",
+  "common.apperience": "Apperience"
 }
