@@ -116,11 +116,6 @@ export const theme = {
       medium: rem(1.5),
       large: rem(2),
     },
-    colors: {
-      white: Colors.White,
-      black: Colors.Black,
-      blue: Colors.Blue,
-    },
   },
   spacing: {
     tiny: rem(0.25),

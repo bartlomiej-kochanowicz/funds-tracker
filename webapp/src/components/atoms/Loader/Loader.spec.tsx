@@ -1,11 +1,12 @@
 import { render } from 'utils/test-utils';
-import { Loader, Size, LoaderColors } from 'components/atoms/Loader';
+import { Loader } from 'components/atoms/Loader';
+import { DefaultTheme } from 'styled-components';
 
 describe('Atoms/Loader tests', () => {
   it.each([
-    ['small' as Size, '1rem'],
-    ['medium' as Size, '1.5rem'],
-    ['large' as Size, '2rem'],
+    ['small' as keyof DefaultTheme['loader']['size'], '1rem'],
+    ['medium' as keyof DefaultTheme['loader']['size'], '1.5rem'],
+    ['large' as keyof DefaultTheme['loader']['size'], '2rem'],
   ])('has correct size for %s', (size, expected) => {
     const { getByTestId } = render(
       <Loader
@@ -19,9 +20,9 @@ describe('Atoms/Loader tests', () => {
   });
 
   it.each([
-    ['white' as LoaderColors, '3px solid #ffffff'],
-    ['black' as LoaderColors, '3px solid #333333'],
-    ['blue' as LoaderColors, '3px solid #3F8CFF'],
+    ['white' as keyof DefaultTheme['colors'], '3px solid #ffffff'],
+    ['black' as keyof DefaultTheme['colors'], '3px solid #333333'],
+    ['blue' as keyof DefaultTheme['colors'], '3px solid #3F8CFF'],
   ])('has correct color for %s', (color, expected) => {
     const { getByTestId } = render(
       <Loader

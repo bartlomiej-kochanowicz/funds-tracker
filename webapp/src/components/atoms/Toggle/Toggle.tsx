@@ -30,8 +30,3 @@ export const Toggle = ({ defaultValue = false, onChange }: ToggleProps) => {
 };
 
 Toggle.displayName = 'Toggle';
-
-Toggle.defaultProps = {
-  defaultValue: false,
-  onChange: () => {},
-};
