@@ -3,28 +3,32 @@ import { Column } from 'simple-flexbox';
 import { Spacer } from 'components/atoms';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
-import { bottomBarNavigation } from './constants';
-import { List, ListItem, StyledNav, StyledNavLink, Title } from './BottomBar.styles';
+import { throttle } from 'helpers/throttle';
+import { mobileNavigationNavigation } from './constants';
+import { List, ListItem, StyledNav, StyledNavLink, Title } from './MobileNavigation.styles';
 
 const MotionNav = motion(StyledNav);
 
-export const BottomBar = () => {
+export const MobileNavigation = () => {
   const { t } = useTranslation();
 
   const [prevScrollpos, setPrevScrollpos] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
 
-  const onScroll = useCallback(() => {
-    const currentScrollPos = window.pageYOffset;
+  const onScroll = throttle(
+    useCallback(() => {
+      const currentScrollPos = window.pageYOffset;
 
-    if (prevScrollpos > currentScrollPos || currentScrollPos < 100) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
+      if (prevScrollpos > currentScrollPos || currentScrollPos < 100) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
 
-    setPrevScrollpos(currentScrollPos);
-  }, [prevScrollpos]);
+      setPrevScrollpos(currentScrollPos);
+    }, [prevScrollpos]),
+    500,
+  );
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
@@ -45,7 +49,7 @@ export const BottomBar = () => {
       {visible && (
         <MotionNav {...animation}>
           <List>
-            {bottomBarNavigation.map(({ to, title, icon: Icon }) => (
+            {mobileNavigationNavigation.map(({ to, title, icon: Icon }) => (
               <ListItem key={title}>
                 <StyledNavLink
                   to={to}

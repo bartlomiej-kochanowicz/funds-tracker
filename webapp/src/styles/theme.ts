@@ -146,7 +146,7 @@ export const theme = {
   },
   zIndex: {
     sidebar: 2,
-    bottomBar: 1,
+    mobileNavigation: 1,
     topbar: 1,
     menu: {
       default: 3,

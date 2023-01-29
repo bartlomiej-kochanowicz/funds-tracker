@@ -1,5 +1,5 @@
 import { Loader } from 'components/atoms';
-import { Sidebar, BottomBar, Topbar } from 'components/organisms';
+import { Sidebar, MobileNavigation, Topbar } from 'components/organisms';
 import { MobileTopbar } from 'components/organisms/MobileTopbar';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment, ReactNode, Suspense } from 'react';
@@ -32,7 +32,7 @@ export const Dashboard = ({ children }: DashboardProps) => {
         <Fragment>
           <MobileTopbar isHub={isHub} />
 
-          <BottomBar />
+          <MobileNavigation />
         </Fragment>
       )}
 
