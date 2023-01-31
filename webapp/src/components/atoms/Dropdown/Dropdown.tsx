@@ -1,4 +1,5 @@
 import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
+import { dropdownAnimation } from 'helpers/dropdownAnimation';
 import { forwardRef, ForwardRefExoticComponent, Fragment, useState } from 'react';
 import { useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
@@ -19,7 +20,7 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
   ) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const { renderLayer, triggerProps, layerProps } = useLayer({
+    const { renderLayer, triggerProps, layerProps, layerSide } = useLayer({
       isOpen,
       placement,
       auto: true,
@@ -42,6 +43,8 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
 
     const handleToggle = () => setIsOpen(prev => !prev);
 
+    const anmimationDirection = layerSide.includes('top') ? 5 : -5;
+
     return (
       <Fragment>
         <Trigger
@@ -60,10 +63,7 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
               <Content
                 {...layerProps}
                 handleToggle={handleToggle}
-                initial={{ opacity: 0.5, y: -5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -5 }}
-                transition={{ bounce: 0, duration: 0.1 }}
+                {...dropdownAnimation(anmimationDirection)}
               />
             )}
           </AnimatePresence>,

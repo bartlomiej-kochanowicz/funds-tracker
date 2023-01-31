@@ -16,6 +16,8 @@ import { Menu } from 'components/atoms/Menu';
 import { composeRefs } from 'utils/composeRefs';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { PlacementType } from 'react-laag/dist/PlacementType';
+import { AnimatePresence } from 'framer-motion';
+import { dropdownAnimation } from 'helpers/dropdownAnimation';
 import { Error, StyledButton, StyledContent, Wrapper } from './Select.styles';
 
 type Item<ValueType> = {
@@ -70,7 +72,7 @@ const SelectInner = <ValueType,>(
 
   useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement);
 
-  const { renderLayer, triggerProps, layerProps } = useLayer({
+  const { renderLayer, triggerProps, layerProps, layerSide } = useLayer({
     isOpen,
     placement,
     auto: true,
@@ -99,6 +101,8 @@ const SelectInner = <ValueType,>(
   const minMenuWidth = (
     buttonRef.current?.offsetWidth ? `${Number(buttonRef.current?.offsetWidth)}px` : undefined
   ) as `${number}px`;
+
+  const anmimationDirection = layerSide.includes('top') ? 5 : -5;
 
   return (
     <Fragment>
@@ -132,32 +136,36 @@ const SelectInner = <ValueType,>(
         {error && <Error>{error}</Error>}
       </Wrapper>
 
-      {isOpen &&
-        renderLayer(
-          <Menu
-            minMenuWidth={minMenuWidth}
-            isInModal={isInModal}
-            {...layerProps}
-          >
-            {options.map(({ value, label, ...rest }) => {
-              const handleSelect = () => {
-                setSelected({ value, label, ...rest });
+      {renderLayer(
+        <AnimatePresence>
+          {isOpen && (
+            <Menu
+              minMenuWidth={minMenuWidth}
+              isInModal={isInModal}
+              {...layerProps}
+              {...dropdownAnimation(anmimationDirection)}
+            >
+              {options.map(({ value, label, ...rest }) => {
+                const handleSelect = () => {
+                  setSelected({ value, label, ...rest });
 
-                setIsOpen(false);
-              };
+                  setIsOpen(false);
+                };
 
-              return (
-                <Menu.Item
-                  onClick={handleSelect}
-                  isSelected={selected?.value === value}
-                  key={value as Key}
-                >
-                  {label}
-                </Menu.Item>
-              );
-            })}
-          </Menu>,
-        )}
+                return (
+                  <Menu.Item
+                    onClick={handleSelect}
+                    isSelected={selected?.value === value}
+                    key={value as Key}
+                  >
+                    {label}
+                  </Menu.Item>
+                );
+              })}
+            </Menu>
+          )}
+        </AnimatePresence>,
+      )}
     </Fragment>
   );
 };
