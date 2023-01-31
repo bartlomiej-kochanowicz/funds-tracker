@@ -1,5 +1,11 @@
+import { lazy } from 'react';
 import { ROUTES } from 'routes/paths';
-import { Hub } from './Hub';
+
+const Hub = lazy(() =>
+  import('./Hub').then(({ Hub: component }) => ({
+    default: component,
+  })),
+);
 
 export const HubRoutes = [
   {
