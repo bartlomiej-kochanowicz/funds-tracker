@@ -108,6 +108,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
           options={options}
           customLabel={customLabel}
           defaultValue={user.defaultCurrency}
+          placement="bottom-end"
           {...currencySelectProps}
         />
       </Row>

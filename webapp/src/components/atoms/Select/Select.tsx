@@ -15,6 +15,7 @@ import { Spreader } from 'components/atoms/Spreader';
 import { Menu } from 'components/atoms/Menu';
 import { composeRefs } from 'utils/composeRefs';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
+import { PlacementType } from 'react-laag/dist/PlacementType';
 import { Error, StyledButton, StyledContent, Wrapper } from './Select.styles';
 
 type Item<ValueType> = {
@@ -33,6 +34,7 @@ interface SelectProps<ValueType> {
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   flexGrow?: number;
   triggerOffset?: number;
+  placement?: PlacementType;
 }
 
 const SelectInner = <ValueType,>(
@@ -47,6 +49,7 @@ const SelectInner = <ValueType,>(
     width = 'auto',
     flexGrow,
     triggerOffset = 5,
+    placement = 'bottom-center',
   }: SelectProps<ValueType>,
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
@@ -69,12 +72,19 @@ const SelectInner = <ValueType,>(
 
   const { renderLayer, triggerProps, layerProps } = useLayer({
     isOpen,
-    placement: 'bottom-center',
+    placement,
     auto: true,
     container: isInModal
       ? (document.querySelector('[data-modal="true"]') as HTMLElement)
       : undefined,
-    possiblePlacements: ['bottom-center', 'top-center'],
+    possiblePlacements: [
+      'top-start',
+      'top-center',
+      'top-end',
+      'bottom-start',
+      'bottom-center',
+      'bottom-end',
+    ],
     triggerOffset,
     onDisappear: disappearType => {
       if (disappearType === 'full') {
