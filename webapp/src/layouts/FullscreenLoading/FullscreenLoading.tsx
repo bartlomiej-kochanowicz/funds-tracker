@@ -8,7 +8,7 @@ const Wrapper = styled(Row)`
   height: var(--doc-height);
 `;
 
-export const Loading: FC = () => (
+export const FullscreenLoading: FC = () => (
   <Wrapper
     justifyContent="center"
     alignItems="center"
@@ -17,4 +17,4 @@ export const Loading: FC = () => (
   </Wrapper>
 );
 
-Loading.displayName = 'LayoutLoading';
+FullscreenLoading.displayName = 'FullscreenLoading';

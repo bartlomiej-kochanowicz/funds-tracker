@@ -1,6 +1,6 @@
 import { FC, Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { Loading } from 'layouts/Loading';
+import { FullscreenLoading } from 'layouts/FullscreenLoading';
 import { HomeRoutes } from 'views/Home';
 import { SinginRoutes } from 'views/Signin';
 import { SignupRoutes } from 'views/Signup';
@@ -17,5 +17,5 @@ export const Root: FC = () => {
     ...NotFoundRoutes,
   ]);
 
-  return <Suspense fallback={<Loading />}>{Authenticated() || views}</Suspense>;
+  return <Suspense fallback={<FullscreenLoading />}>{Authenticated() || views}</Suspense>;
 };

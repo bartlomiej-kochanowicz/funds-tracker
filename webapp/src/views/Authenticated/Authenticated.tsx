@@ -5,11 +5,11 @@ import { useLocation, useRoutes } from 'react-router-dom';
 import { Sidebar, MobileNavigation, Topbar, MobileTopbar } from 'components/organisms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { ROUTES } from 'routes/paths';
-import { Loader } from 'components/atoms';
+import { FullscreenLoading } from 'layouts/FullscreenLoading';
 import { DashboardRoutes } from './Dashboard';
 import { HubRoutes } from './Hub';
 import { SettingsRoutes } from './Settings';
-import { Center, Content } from './Authenticated.styles';
+import { Content } from './Authenticated.styles';
 
 const ProtectedRoute = lazy(() =>
   import('utils/ProtectedRoute').then(({ ProtectedRoute: component }) => ({ default: component })),
@@ -43,19 +43,11 @@ export const Authenticated = () => {
             </Fragment>
           )}
 
-          <ErrorBoundary FallbackComponent={ErrorContent}>
+          <Suspense fallback={<FullscreenLoading />}>
             <Content isDashboard={isDashboard}>
-              <Suspense
-                fallback={
-                  <Center>
-                    <Loader size="large" />
-                  </Center>
-                }
-              >
-                {views}
-              </Suspense>
+              <ErrorBoundary FallbackComponent={ErrorContent}>{views}</ErrorBoundary>
             </Content>
-          </ErrorBoundary>
+          </Suspense>
         </Fragment>
       </ProtectedRoute>
     );

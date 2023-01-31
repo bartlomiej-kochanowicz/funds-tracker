@@ -23,9 +23,3 @@ export const Content = styled(Column).withConfig({
     }
   `}
 `;
-
-export const Center = styled(Column).attrs({
-  justifyContent: 'center',
-})`
-  flex-grow: 1;
-`;

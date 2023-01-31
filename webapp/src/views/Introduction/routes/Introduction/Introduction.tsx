@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { FullscreenClear } from 'layouts/FullscreenClear';
-import { Loading } from 'layouts/Loading';
+import { FullscreenLoading } from 'layouts/FullscreenLoading';
 import { IntroductionProvider, useIntroductionContext } from './context';
 
 const DefaultCurrency = lazy(() =>
@@ -33,7 +33,7 @@ const IntroductionContent = () => {
 
   return (
     <FullscreenClear>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<FullscreenLoading />}>
         <AnimatePresence>
           {compareState(states.DefaultCurrency) && <DefaultCurrency />}
 
