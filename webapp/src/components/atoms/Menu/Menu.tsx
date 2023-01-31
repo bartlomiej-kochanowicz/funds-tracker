@@ -1,4 +1,5 @@
-import { ReactNode, forwardRef } from 'react';
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 export interface MenuProps {
@@ -7,7 +8,7 @@ export interface MenuProps {
   isInModal?: boolean;
 }
 
-const StyledUl = styled.ul<MenuProps>`
+export const Menu = styled(motion.ul)<MenuProps>`
   max-height: 14rem;
   overflow-y: auto;
 
@@ -32,15 +33,5 @@ const StyledUl = styled.ul<MenuProps>`
     }
   `}
 `;
-
-export const Menu = forwardRef<HTMLUListElement, MenuProps>(({ children, ...rest }, ref) => (
-  <StyledUl
-    role="menu"
-    ref={ref}
-    {...rest}
-  >
-    {children}
-  </StyledUl>
-));
 
 Menu.displayName = 'Menu';

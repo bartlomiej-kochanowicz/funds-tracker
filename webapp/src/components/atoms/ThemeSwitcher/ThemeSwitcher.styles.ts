@@ -56,5 +56,5 @@ export const StyledBiSun = styled(BiSun)`
 export const spring = {
   type: 'spring',
   stiffness: 700,
-  damping: 30,
+  damping: 40,
 } satisfies Transition;

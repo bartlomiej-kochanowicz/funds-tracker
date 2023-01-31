@@ -1,4 +1,5 @@
-import { forwardRef, ForwardRefExoticComponent, Fragment, RefAttributes, useState } from 'react';
+import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
+import { forwardRef, ForwardRefExoticComponent, Fragment, useState } from 'react';
 import { useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 import { composeRefs } from 'utils/composeRefs';
@@ -7,9 +8,7 @@ import { Trigger } from './Dropdown.styles';
 interface DropdownProps {
   placement?: PlacementType;
   children: React.ReactNode;
-  content: ForwardRefExoticComponent<
-    { handleToggle: () => void } & RefAttributes<HTMLUListElement>
-  >;
+  content: ForwardRefExoticComponent<{ handleToggle: () => void } & HTMLMotionProps<'ul'>>;
   triggerOffset?: number;
 }
 
@@ -55,13 +54,20 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
           {children}
         </Trigger>
 
-        {isOpen &&
-          renderLayer(
-            <Content
-              {...layerProps}
-              handleToggle={handleToggle}
-            />,
-          )}
+        {renderLayer(
+          <AnimatePresence>
+            {isOpen && (
+              <Content
+                {...layerProps}
+                handleToggle={handleToggle}
+                initial={{ opacity: 0.5, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ bounce: 0, duration: 0.1 }}
+              />
+            )}
+          </AnimatePresence>,
+        )}
       </Fragment>
     );
   },
