@@ -16,8 +16,9 @@ export const ThemeSwitcher = () => {
       {isDark && <StyledBiMoon />}
 
       <Handle
-        layout
         transition={spring}
+        initial={{ x: isDark ? 30 : 0 }}
+        animate={{ x: isDark ? 30 : 0 }}
       />
 
       {!isDark && <StyledBiSun />}

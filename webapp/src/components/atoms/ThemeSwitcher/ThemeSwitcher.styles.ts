@@ -21,7 +21,6 @@ export const StyledButton = styled.button`
 
     ${isDark &&
     css`
-      justify-content: flex-end;
       background-color: ${colors.white};
     `}
   `}
