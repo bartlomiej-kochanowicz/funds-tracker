@@ -18,6 +18,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
     <Dropdown
       content={DropdownContent}
       placement="bottom-end"
+      triggerOffset={0}
     >
       {withName && (
         <Row alignItems="center">

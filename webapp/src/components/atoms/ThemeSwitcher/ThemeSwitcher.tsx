@@ -12,7 +12,6 @@ export const ThemeSwitcher = () => {
       onClick={toggleTheme}
       type="button"
       aria-label={t('common.theme_switcher')}
-      tabIndex={0}
     >
       {isDark && <StyledBiMoon />}
 

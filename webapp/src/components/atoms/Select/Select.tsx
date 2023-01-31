@@ -32,6 +32,7 @@ interface SelectProps<ValueType> {
   error?: string;
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   flexGrow?: number;
+  triggerOffset?: number;
 }
 
 const SelectInner = <ValueType,>(
@@ -45,6 +46,7 @@ const SelectInner = <ValueType,>(
     error,
     width = 'auto',
     flexGrow,
+    triggerOffset = 5,
   }: SelectProps<ValueType>,
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
@@ -73,7 +75,7 @@ const SelectInner = <ValueType,>(
       ? (document.querySelector('[data-modal="true"]') as HTMLElement)
       : undefined,
     possiblePlacements: ['bottom-center', 'top-center'],
-    triggerOffset: 5,
+    triggerOffset,
     onDisappear: disappearType => {
       if (disappearType === 'full') {
         setIsOpen(false);

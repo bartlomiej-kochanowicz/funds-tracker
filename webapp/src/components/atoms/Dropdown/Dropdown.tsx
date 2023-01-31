@@ -10,18 +10,29 @@ interface DropdownProps {
   content: ForwardRefExoticComponent<
     { handleToggle: () => void } & RefAttributes<HTMLUListElement>
   >;
+  triggerOffset?: number;
 }
 
 export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
-  ({ placement = 'bottom-center', children, content: Content, ...rest }, ref) => {
+  (
+    { placement = 'bottom-center', children, content: Content, triggerOffset = 5, ...rest },
+    ref,
+  ) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
       placement,
       auto: true,
-      possiblePlacements: ['bottom-center', 'top-center'],
-      triggerOffset: 5,
+      possiblePlacements: [
+        'top-start',
+        'top-center',
+        'top-end',
+        'bottom-start',
+        'bottom-center',
+        'bottom-end',
+      ],
+      triggerOffset,
       onDisappear: disappearType => {
         if (disappearType === 'full') {
           setIsOpen(false);

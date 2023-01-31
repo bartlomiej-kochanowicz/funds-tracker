@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, Transition } from 'framer-motion';
 import { BiMoon, BiSun } from 'react-icons/bi';
 
 export const StyledButton = styled.button`
@@ -57,4 +57,4 @@ export const spring = {
   type: 'spring',
   stiffness: 700,
   damping: 30,
-};
+} satisfies Transition;
