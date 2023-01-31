@@ -48,6 +48,7 @@ export const Button = styled.button.withConfig({
   position: relative;
   transition: 0.2s all;
   text-decoration: none;
+  cursor: pointer;
 
   ${({
     theme,
@@ -83,7 +84,6 @@ export const Button = styled.button.withConfig({
       `}
 
       &:hover {
-        cursor: pointer;
         transition-duration: 0.1s;
         background-color: ${darken(theme.button.color[color].background, 0.05)};
       }
