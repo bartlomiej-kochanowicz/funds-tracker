@@ -1,4 +1,4 @@
-import { Fragment, lazy, useCallback, useState } from 'react';
+import { Fragment, lazy, Suspense, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -144,10 +144,12 @@ export const SigninForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
-      <GoogleReCaptcha
-        onVerify={onVerify}
-        refreshReCaptcha={refreshReCaptcha}
-      />
+      <Suspense>
+        <GoogleReCaptcha
+          onVerify={onVerify}
+          refreshReCaptcha={refreshReCaptcha}
+        />
+      </Suspense>
 
       <Input
         placeholder={t('common.email')}

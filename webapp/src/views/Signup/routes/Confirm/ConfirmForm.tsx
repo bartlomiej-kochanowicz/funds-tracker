@@ -1,4 +1,4 @@
-import { FC, lazy, useCallback, useState } from 'react';
+import { FC, lazy, Suspense, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input, Spacer } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
@@ -79,10 +79,12 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
-      <GoogleReCaptcha
-        onVerify={onVerify}
-        refreshReCaptcha={refreshReCaptcha}
-      />
+      <Suspense>
+        <GoogleReCaptcha
+          onVerify={onVerify}
+          refreshReCaptcha={refreshReCaptcha}
+        />
+      </Suspense>
 
       <Input
         placeholder={t('page.confirm.input.placeholder')}

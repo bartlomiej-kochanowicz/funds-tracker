@@ -1,4 +1,4 @@
-import { lazy, useCallback, useState } from 'react';
+import { lazy, Suspense, useCallback, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, Navigate } from 'react-router-dom';
 import { FullscreenClear } from 'layouts/FullscreenClear';
@@ -56,10 +56,12 @@ export const Confirm = () => {
 
   return (
     <FullscreenClear>
-      <GoogleReCaptcha
-        onVerify={onVerify}
-        refreshReCaptcha={refreshReCaptcha}
-      />
+      <Suspense>
+        <GoogleReCaptcha
+          onVerify={onVerify}
+          refreshReCaptcha={refreshReCaptcha}
+        />
+      </Suspense>
 
       <Heading textAlign="center">{t('common.sign_up_confirm')}</Heading>
 

@@ -5,7 +5,7 @@ import { EMAIL_EXIST } from 'graphql/query';
 import { Button, Loader, Spacer } from 'components/atoms';
 import { showErrorToast } from 'helpers/showToast';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
-import { lazy, useCallback, useState } from 'react';
+import { lazy, Suspense, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -123,10 +123,12 @@ export const SignupForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
-      <GoogleReCaptcha
-        onVerify={onVerify}
-        refreshReCaptcha={refreshReCaptcha}
-      />
+      <Suspense>
+        <GoogleReCaptcha
+          onVerify={onVerify}
+          refreshReCaptcha={refreshReCaptcha}
+        />
+      </Suspense>
 
       {compareState(states.nameAndEmail) && (
         <NameAndEmail
