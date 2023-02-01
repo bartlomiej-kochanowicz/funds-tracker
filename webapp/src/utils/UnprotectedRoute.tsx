@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 import { useUserContext } from 'contexts/UserContext';
+import { FullscreenLoading } from 'layouts/FullscreenLoading';
 
 interface UnprotectedRouteProps {
   children: JSX.Element;
@@ -11,6 +12,10 @@ export const UnprotectedRoute = ({ children, to = ROUTES.SIGNIN }: UnprotectedRo
   const { user, loading } = useUserContext();
 
   const isAuthenticated = !loading && user;
+
+  if (loading) {
+    return <FullscreenLoading />;
+  }
 
   return isAuthenticated ? <Navigate to={to} /> : children;
 };
