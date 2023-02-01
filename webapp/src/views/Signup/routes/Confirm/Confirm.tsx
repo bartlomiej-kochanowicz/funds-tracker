@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { lazy, useCallback, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, Navigate } from 'react-router-dom';
 import { FullscreenClear } from 'layouts/FullscreenClear';
@@ -10,8 +10,13 @@ import { SEND_CODE } from 'graphql/mutations/SendCode';
 import { useMutation } from '@apollo/client';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { SendCodeMutation, SendCodeMutationVariables } from '__generated__/graphql';
-import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { ConfirmForm } from './ConfirmForm';
+
+const GoogleReCaptcha = lazy(() =>
+  import('react-google-recaptcha-v3').then(({ GoogleReCaptcha: component }) => ({
+    default: component,
+  })),
+);
 
 export const Confirm = () => {
   const { t } = useTranslation();

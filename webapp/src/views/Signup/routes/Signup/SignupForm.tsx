@@ -5,8 +5,7 @@ import { EMAIL_EXIST } from 'graphql/query';
 import { Button, Loader, Spacer } from 'components/atoms';
 import { showErrorToast } from 'helpers/showToast';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
-import { useCallback, useState } from 'react';
-import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { lazy, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +20,12 @@ import { NameAndEmail } from './components/NameAndEmail';
 import { Passwords } from './components/Passwords';
 import { validationSchema } from './Signup.schema';
 import { Form } from './Signup.styles';
+
+const GoogleReCaptcha = lazy(() =>
+  import('react-google-recaptcha-v3').then(({ GoogleReCaptcha: component }) => ({
+    default: component,
+  })),
+);
 
 type FormStates = 'nameAndEmail' | 'passwords';
 

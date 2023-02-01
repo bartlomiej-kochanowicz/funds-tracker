@@ -1,7 +1,12 @@
 import { lazy } from 'react';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { RECAPTCHA_SITE_KEY } from 'config/env';
 import { ROUTES } from 'routes/paths';
+
+const GoogleReCaptchaProvider = lazy(() =>
+  import('react-google-recaptcha-v3').then(({ GoogleReCaptchaProvider: component }) => ({
+    default: component,
+  })),
+);
 
 const UnprotectedRoute = lazy(() =>
   import('utils/UnprotectedRoute').then(({ UnprotectedRoute: component }) => ({

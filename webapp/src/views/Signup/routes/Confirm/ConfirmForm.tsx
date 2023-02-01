@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, lazy, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input, Spacer } from 'components/atoms';
 import { useInput } from 'hooks/useInput';
@@ -10,9 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { CONFIRM_SIGNUP } from 'graphql/mutations';
 import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from '__generated__/graphql';
 import { ROUTES } from 'routes/paths';
-import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { validationSchema } from './Confirm.schema';
 import { Form } from './Confirm.styles';
+
+const GoogleReCaptcha = lazy(() =>
+  import('react-google-recaptcha-v3').then(({ GoogleReCaptcha: component }) => ({
+    default: component,
+  })),
+);
 
 interface ConfirmFormProps {
   email: string;

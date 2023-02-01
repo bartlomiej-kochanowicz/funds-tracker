@@ -1,7 +1,6 @@
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, lazy, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
@@ -23,6 +22,12 @@ import { useUserContext } from 'contexts/UserContext';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
+
+const GoogleReCaptcha = lazy(() =>
+  import('react-google-recaptcha-v3').then(({ GoogleReCaptcha: component }) => ({
+    default: component,
+  })),
+);
 
 type FormStates = 'email' | 'password';
 
