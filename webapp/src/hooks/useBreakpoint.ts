@@ -25,9 +25,11 @@ export const useBreakpoint = (name: keyof typeof breakpoints, type: Media) => {
 
     const matcher = window.matchMedia(matchMediaQuery);
 
-    matcher.addListener(onMatch);
+    matcher.addEventListener('change', onMatch);
 
-    return () => matcher.removeListener(onMatch);
+    return () => {
+      matcher.removeEventListener('change', onMatch);
+    };
   }, [pixels, matchMediaQuery]);
 
   return match;

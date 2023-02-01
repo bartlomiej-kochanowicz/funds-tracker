@@ -35,6 +35,8 @@ export const Sidebar = () => {
               height="35px"
               style={{
                 width: 'fit-content',
+                maxWidth: '140px',
+                display: 'block',
               }}
             />
           ) : (
@@ -42,6 +44,7 @@ export const Sidebar = () => {
               height="35px"
               style={{
                 width: 'fit-content',
+                maxWidth: '140px',
               }}
             />
           )}

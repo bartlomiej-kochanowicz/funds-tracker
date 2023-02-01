@@ -14,11 +14,11 @@ export const Content = styled(Column).withConfig({
     ${theme.breakpoints.desktop.min} {
       margin-left: 270px;
       padding: ${theme.spacing.huge};
-      padding-top: 90px;
+      padding-top: 95px;
     }
 
     ${theme.breakpoints.desktop.max} {
-      padding-top: ${isDashboard ? '50px' : '90px'};
+      padding-top: ${isDashboard ? '55px' : '95px'};
       padding-bottom: 150px; // some space for the footer
     }
   `}
