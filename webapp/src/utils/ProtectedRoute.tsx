@@ -1,9 +1,8 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 import { useUserContext } from 'contexts/UserContext';
-import { Loader } from 'components/atoms';
-import { FullscreenClear } from 'layouts/FullscreenClear';
 import { IntroductionStep } from '__generated__/graphql';
+import { FullscreenLoading } from 'layouts/FullscreenLoading';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
@@ -18,11 +17,7 @@ export const ProtectedRoute = ({ children, to = ROUTES.SIGNIN }: ProtectedRouteP
   const isAuthenticated = Boolean(!loading && user);
 
   if (loading) {
-    return (
-      <FullscreenClear>
-        <Loader />
-      </FullscreenClear>
-    );
+    return <FullscreenLoading />;
   }
 
   if (
