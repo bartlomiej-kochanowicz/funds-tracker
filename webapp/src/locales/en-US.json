@@ -103,5 +103,11 @@
   "modal.CreateCashAccount.description": "Here you can provide your cash account e.g. daily account you receive your salary, savings account or real cash.",
   "common.apperience": "Apperience",
   "page.signin.forgot_password": "Forgot password?",
-  "page.forgot_password.description": "Don't worry. Resetting your password is easy, just tell us the email address you registered with Funds tracker."
+  "page.forgot_password.enter_email.description": "Don't worry. Resetting your password is easy, just tell us the email address you registered with Funds tracker.",
+  "page.forgot_password.enter_email.submit.button": "Send reset link",
+  "page.forgot_password.enter_password.title": "Reset your password",
+  "page.forgot_password.enter_password.description": "Hi {{name}}, please set your new password for login.",
+  "toast.send_reset_password_link.success": "Reset password link has been sent to your email.",
+  "toast.send_reset_password_link.failure": "Reset password link sending failed. Please try again later.",
+  "page.forgot_password.enter_email.submit.success": "Reset password link has been sent to your email. Please check your inbox."
 }

@@ -358,7 +358,7 @@ export class AuthService {
         },
       })
       .catch(() => {
-        throw new ForbiddenException('User not found.');
+        throw new ForbiddenException('Email not found.');
       });
 
     const resetPasswordLink = `${WEBAPP_URL}/reset-password/${resetPasswordToken}`;

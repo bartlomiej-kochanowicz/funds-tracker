@@ -5,6 +5,7 @@ export * from './IntroductionCreateCashAccounts';
 export * from './IntroductionCreatePortfolios';
 export * from './Logout';
 export * from './RefreshToken';
+export * from './ResetPassword';
 export * from './SendCode';
 export * from './Signin';
 export * from './Signup';

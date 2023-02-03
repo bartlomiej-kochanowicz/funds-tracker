@@ -11,14 +11,14 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
 
   return (
     <Fragment>
-      <Heading textAlign="center">Reset Your Password</Heading>
+      <Heading textAlign="center">{t('page.forgot_password.enter_password.title')}</Heading>
       <Spacer space="small" />
       <Text
         fontSize="0.875"
         fontColor="gray400"
         textAlign="center"
       >
-        Hi Bartłomiej Kochanowicz, please set your new password for login.
+        {t('page.forgot_password.enter_password.description')}
       </Text>
       <Spacer space="large" />
       form
