@@ -20,7 +20,9 @@ const documents = {
     "\n  mutation IntroductionCreateCashAccounts($data: IntroductionCreateCashAccountsInput!) {\n    introductionCreateCashAccounts(data: $data) {\n      success\n    }\n  }\n": types.IntroductionCreateCashAccountsDocument,
     "\n  mutation Logout {\n    logout {\n      success\n    }\n  }\n": types.LogoutDocument,
     "\n  mutation RefreshToken {\n    refreshToken {\n      success\n    }\n  }\n": types.RefreshTokenDocument,
+    "\n  mutation ResetPassword($data: ResetPasswordInput!) {\n    resetPassword(data: $data) {\n      success\n    }\n  }\n": types.ResetPasswordDocument,
     "\n  mutation SendCode($data: SendCodeInput!) {\n    sendCode(data: $data) {\n      success\n    }\n  }\n": types.SendCodeDocument,
+    "\n  mutation SetNewPassword($data: SetNewPasswordInput!) {\n    setNewPassword(data: $data) {\n      success\n    }\n  }\n": types.SetNewPasswordDocument,
     "\n  mutation Signin($data: SigninInput!) {\n    signinLocal(data: $data) {\n      success\n    }\n  }\n": types.SigninDocument,
     "\n  mutation Signup($data: SignupInput!) {\n    signupLocal(data: $data) {\n      success\n    }\n  }\n": types.SignupDocument,
     "\n  mutation UpdateUser($data: UpdateUserInput!) {\n    updateUser(data: $data) {\n      uuid\n      name\n      email\n      createdAt\n      introductionStep\n      defaultCurrency\n    }\n  }\n": types.UpdateUserDocument,
@@ -60,7 +62,15 @@ export function gql(source: "\n  mutation RefreshToken {\n    refreshToken {\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  mutation ResetPassword($data: ResetPasswordInput!) {\n    resetPassword(data: $data) {\n      success\n    }\n  }\n"): (typeof documents)["\n  mutation ResetPassword($data: ResetPasswordInput!) {\n    resetPassword(data: $data) {\n      success\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  mutation SendCode($data: SendCodeInput!) {\n    sendCode(data: $data) {\n      success\n    }\n  }\n"): (typeof documents)["\n  mutation SendCode($data: SendCodeInput!) {\n    sendCode(data: $data) {\n      success\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation SetNewPassword($data: SetNewPasswordInput!) {\n    setNewPassword(data: $data) {\n      success\n    }\n  }\n"): (typeof documents)["\n  mutation SetNewPassword($data: SetNewPasswordInput!) {\n    setNewPassword(data: $data) {\n      success\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

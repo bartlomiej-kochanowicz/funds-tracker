@@ -5,6 +5,7 @@ export const ROUTES = {
     SIGNUP: '/signup',
     CONFIRM: '/signup/confirm',
   },
+  RESET_PASSWORD: '/reset-password',
   INTRODUCTION: '/introduction',
   DASHBOARD: {
     HOME: '/dashboard',

@@ -37,6 +37,7 @@ export class SendGridService {
         host: 'mailslurper',
         port: 2500,
         secure: false,
+        encoding: 'utf-8',
       });
 
       const { to, subject, from, html } = mail as {

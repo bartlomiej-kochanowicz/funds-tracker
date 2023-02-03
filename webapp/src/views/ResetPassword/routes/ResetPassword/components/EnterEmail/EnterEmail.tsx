@@ -1,17 +1,15 @@
+import { Heading, RouterLink, Spacer, Text } from 'components/atoms';
+import { Fragment } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { Heading, RouterLink, Spacer, Text, ThemeSwitcher } from 'components/atoms';
-import { FullscreenClear } from 'layouts/FullscreenClear';
-import { Column } from 'simple-flexbox';
-import { LangSelector } from 'components/molecules';
 import { ROUTES } from 'routes/paths';
-import { SignupForm } from './SignupForm';
+import { EnterEmailForm } from './EnterEmailForm';
 
-export const Signup = () => {
+export const EnterEmail = () => {
   const { t } = useTranslation();
 
   return (
-    <FullscreenClear>
-      <Heading textAlign="center">{t('common.sign_up')}</Heading>
+    <Fragment>
+      <Heading textAlign="center">{t('page.signin.forgot_password')}</Heading>
 
       <Spacer space="small" />
 
@@ -20,12 +18,12 @@ export const Signup = () => {
         fontColor="gray400"
         textAlign="center"
       >
-        {t('page.signup.description')}
+        {t('page.forgot_password.enter_email.description')}
       </Text>
 
       <Spacer space="large" />
 
-      <SignupForm />
+      <EnterEmailForm />
 
       <Spacer />
 
@@ -46,18 +44,8 @@ export const Signup = () => {
           }}
         />
       </Text>
-
-      <Spacer space="large" />
-
-      <Spacer space="large" />
-
-      <Column alignItems="center">
-        <LangSelector />
-
-        <Spacer />
-
-        <ThemeSwitcher />
-      </Column>
-    </FullscreenClear>
+    </Fragment>
   );
 };
+
+EnterEmail.displayName = 'EnterEmail';

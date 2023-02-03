@@ -4,9 +4,26 @@ import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
 import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { ConfirmSignup, Email, Logout, Refresh, SigninLocal, SignupLocal } from './entities';
+import {
+  ConfirmSignup,
+  Email,
+  Logout,
+  Refresh,
+  ResetPassword,
+  SetNewPassword,
+  SigninLocal,
+  SignupLocal,
+} from './entities';
 import { SendCode } from './entities/send-code.entity';
-import { ConfirmSignupInput, EmailInput, SendCodeInput, SigninInput, SignupInput } from './inputs';
+import {
+  ConfirmSignupInput,
+  EmailInput,
+  ResetPasswordInput,
+  SendCodeInput,
+  SetNewPasswordInput,
+  SigninInput,
+  SignupInput,
+} from './inputs';
 
 @Resolver()
 export class AuthResolver {
@@ -73,5 +90,23 @@ export class AuthResolver {
     @Context('res') res: Response,
   ): Promise<Refresh> {
     return this.authService.refreshToken(userId, refreshToken, res);
+  }
+
+  @Public()
+  @Mutation(() => ResetPassword)
+  resetPassword(
+    @Args('data')
+    resetPasswordInput: ResetPasswordInput,
+  ) {
+    return this.authService.resetPassword(resetPasswordInput);
+  }
+
+  @Public()
+  @Mutation(() => SetNewPassword)
+  setNewPassword(
+    @Args('data')
+    setNewPasswordInput: SetNewPasswordInput,
+  ) {
+    return this.authService.setNewPassword(setNewPasswordInput);
   }
 }
