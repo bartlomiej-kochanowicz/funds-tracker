@@ -1,8 +1,12 @@
 import { Heading, Spacer, Text } from 'components/atoms';
-import { Fragment } from 'react';
+import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const EnterPassword = () => {
+interface EnterPasswordProps {
+  token: string;
+}
+
+export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
   const { t } = useTranslation();
 
   return (
@@ -22,4 +26,4 @@ export const EnterPassword = () => {
   );
 };
 
-EnterEmail.displayName = 'EnterEmail';
+EnterPassword.displayName = 'EnterEmail';

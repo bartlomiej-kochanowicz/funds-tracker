@@ -1,5 +1,5 @@
 import { Trans, useTranslation } from 'react-i18next';
-import { Column } from 'simple-flexbox';
+import { Column, Row } from 'simple-flexbox';
 import { Spacer, Heading, Text, RouterLink, ThemeSwitcher } from 'components/atoms';
 import { ROUTES } from 'routes/paths';
 import { LangSelector } from 'components/molecules';
@@ -46,6 +46,18 @@ export const Signin = () => {
           }}
         />
       </Text>
+
+      <Spacer space="small" />
+
+      <Row justifyContent="center">
+        <RouterLink
+          to={ROUTES.RESET_PASSWORD}
+          fontColor="blue"
+          fontSize="0.875"
+        >
+          {t('page.signin.forgot_password')}
+        </RouterLink>
+      </Row>
 
       <Spacer space="large" />
 

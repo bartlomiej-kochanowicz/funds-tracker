@@ -101,5 +101,6 @@
   "page.cash_accounts.empty.list.title": "Nie posiadasz jeszcze żadnych kont gotówkowych.",
   "modal.CreateCashAccount.name": "Dodaj konto gotówkowe",
   "modal.CreateCashAccount.description": "Moższ tu dodać twoje konto 'gotówkowe' t.j konto osobiste, konto oszczędnościowe lub realną gotówkę.",
-  "common.apperience": "Wygląd"
+  "common.apperience": "Wygląd",
+  "page.signin.forgot_password": "Nie pamiętasz hasła?"
 }

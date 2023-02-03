@@ -7,7 +7,7 @@ import { SignupRoutes } from 'views/Signup';
 import { IntroductionRoutes } from 'views/Introduction';
 import { NotFoundRoutes } from 'views/NotFound';
 import { Authenticated } from 'views/Authenticated';
-import { ResetPasswordRoutes } from 'views/ResetPassword/routes';
+import { ResetPasswordRoutes } from 'views/ResetPassword';
 
 export const Root: FC = () => {
   const views = useRoutes([

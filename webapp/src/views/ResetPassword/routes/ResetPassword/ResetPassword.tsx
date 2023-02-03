@@ -9,11 +9,11 @@ import { EnterPassword } from './components/EnterPassword';
 export const ResetPassword = () => {
   const [searchParams] = useSearchParams();
 
-  console.log(searchParams);
+  const token = searchParams.get('token');
 
   return (
     <FullscreenClear>
-      {/* {token ? <EnterPassword /> : <EnterEmail />} */}
+      {token ? <EnterPassword token={token} /> : <EnterEmail />}
 
       <Spacer space="large" />
 
