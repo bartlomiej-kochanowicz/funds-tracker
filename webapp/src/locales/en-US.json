@@ -110,5 +110,6 @@
   "toast.send_reset_password_link.success": "Reset password link has been sent to your email.",
   "toast.send_reset_password_link.failure": "Reset password link sending failed. Please try again later.",
   "page.forgot_password.enter_email.submit.success": "Reset password link has been sent to your email. Please check your inbox.",
-  "common.save": "Save"
+  "common.save": "Save",
+  "page.forgot_password.enter_password.submit.success": "Your password has been changed. <signin>You can now log in with your new password.</signin>"
 }

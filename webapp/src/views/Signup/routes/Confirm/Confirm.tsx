@@ -124,8 +124,6 @@ export const Confirm = () => {
 
       <Spacer space="large" />
 
-      <Spacer space="large" />
-
       <Column alignItems="center">
         <LangSelector />
 

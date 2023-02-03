@@ -381,6 +381,15 @@ export class AuthService {
       throw new ForbiddenException('You are a robot!');
     }
 
+    const { password: hashedPassword } = await this.prisma.user.findUnique({
+      where: { resetPasswordToken: resetToken },
+    });
+
+    const isPasswordsMatches = await bcrypt.compare(password, hashedPassword);
+
+    if (isPasswordsMatches)
+      throw new ForbiddenException('The new password must be different from the previous one.');
+
     await this.prisma.user
       .update({
         where: {

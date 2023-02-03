@@ -91,14 +91,22 @@ export const SignupForm = () => {
         navigate(ROUTES.SIGNUP.CONFIRM, { state: { email: userEmail } });
       } else {
         setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
+        setError('userPasswordConfirmation', {
+          type: 'custom',
+          message: '‎',
+        });
       }
     },
-    onError: () => {
-      setError('userPassword', { type: 'custom', message: t('service.unknown_error') });
+    onError: error => {
+      const message = error?.message || t('service.unknown_error');
+
+      setError('userPassword', { type: 'custom', message });
       setError('userPasswordConfirmation', {
         type: 'custom',
-        message: '',
+        message: '‎',
       });
+
+      showErrorToast(message);
     },
   });
 

@@ -51,8 +51,6 @@ export const Signup = () => {
 
       <Spacer space="large" />
 
-      <Spacer space="large" />
-
       <Column alignItems="center">
         <LangSelector />
 
