@@ -5,22 +5,22 @@ import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import {
-  CheckResetToken,
   ConfirmSignup,
   Email,
   Logout,
   Refresh,
   ResetPassword,
+  SetNewPassword,
   SigninLocal,
   SignupLocal,
 } from './entities';
 import { SendCode } from './entities/send-code.entity';
 import {
-  CheckResetTokenInput,
   ConfirmSignupInput,
   EmailInput,
   ResetPasswordInput,
   SendCodeInput,
+  SetNewPasswordInput,
   SigninInput,
   SignupInput,
 } from './inputs';
@@ -102,11 +102,11 @@ export class AuthResolver {
   }
 
   @Public()
-  @Query(() => CheckResetToken)
-  checkResetToken(
+  @Mutation(() => SetNewPassword)
+  setNewPassword(
     @Args('data')
-    checkResetTokenInput: CheckResetTokenInput,
+    setNewPasswordInput: SetNewPasswordInput,
   ) {
-    return this.authService.checkResetToken(checkResetTokenInput);
+    return this.authService.setNewPassword(setNewPasswordInput);
   }
 }

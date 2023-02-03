@@ -2,11 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CheckResetToken {
-  """Name of the user."""
-  name: String!
-}
-
 type ConfirmSignup {
   """Confirmatiopn signup successful."""
   success: Boolean!
@@ -34,6 +29,11 @@ type ResetPassword {
 
 type SendCode {
   """Send code successful."""
+  success: Boolean!
+}
+
+type SetNewPassword {
+  """Name of the user."""
   success: Boolean!
 }
 
@@ -140,7 +140,6 @@ enum IntroductionStep {
 
 type Query {
   emailExist(data: EmailInput!): Email!
-  checkResetToken(data: CheckResetTokenInput!): CheckResetToken!
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: ID!): CashAccount!
   portfolios: [Portfolio!]!
@@ -156,14 +155,6 @@ input EmailInput {
   token: String!
 }
 
-input CheckResetTokenInput {
-  """Reset token."""
-  resetToken: String!
-
-  """Token."""
-  token: String!
-}
-
 type Mutation {
   signupLocal(data: SignupInput!): SignupLocal!
   sendCode(data: SendCodeInput!): SendCode!
@@ -172,6 +163,7 @@ type Mutation {
   logout: Logout!
   refreshToken: Refresh!
   resetPassword(data: ResetPasswordInput!): ResetPassword!
+  setNewPassword(data: SetNewPasswordInput!): SetNewPassword!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
@@ -230,6 +222,17 @@ input SigninInput {
 input ResetPasswordInput {
   """Email."""
   email: EmailAddress!
+
+  """Token."""
+  token: String!
+}
+
+input SetNewPasswordInput {
+  """Password."""
+  password: String!
+
+  """Reset token."""
+  resetToken: String!
 
   """Token."""
   token: String!

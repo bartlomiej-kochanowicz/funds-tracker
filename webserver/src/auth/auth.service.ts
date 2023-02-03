@@ -16,11 +16,11 @@ import { WEBAPP_URL } from 'common/constants/common';
 import resetPasswordHbs from 'common/handlebars/reset-password.hbs';
 import { Tokens } from './types';
 import {
-  CheckResetTokenInput,
   ConfirmSignupInput,
   EmailInput,
   ResetPasswordInput,
   SendCodeInput,
+  SetNewPasswordInput,
   SigninInput,
   SignupInput,
 } from './inputs';
@@ -33,7 +33,7 @@ import {
   SignupLocal,
   SendCode,
   ResetPassword,
-  CheckResetToken,
+  SetNewPassword,
 } from './entities';
 
 @Injectable()
@@ -372,8 +372,8 @@ export class AuthService {
     };
   }
 
-  async checkResetToken(checkResetTokenInput: CheckResetTokenInput): Promise<CheckResetToken> {
-    const { resetToken, token } = checkResetTokenInput;
+  async setNewPassword(setNewPasswordInput: SetNewPasswordInput): Promise<SetNewPassword> {
+    const { resetToken, token, password } = setNewPasswordInput;
 
     const isHuman = await this.validateHuman(token);
 
@@ -381,21 +381,22 @@ export class AuthService {
       throw new ForbiddenException('You are a robot!');
     }
 
-    const user = await this.prisma.user.findUnique({
-      where: {
-        resetPasswordToken: resetToken,
-      },
-      select: {
-        name: true,
-      },
-    });
-
-    if (!user) {
-      throw new ForbiddenException('Token not found.');
-    }
+    await this.prisma.user
+      .update({
+        where: {
+          resetPasswordToken: resetToken,
+        },
+        data: {
+          password: await this.hashData(password),
+          resetPasswordToken: null,
+        },
+      })
+      .catch(() => {
+        throw new ForbiddenException('Invalid token.');
+      });
 
     return {
-      name: user.name,
+      success: true,
     };
   }
 
