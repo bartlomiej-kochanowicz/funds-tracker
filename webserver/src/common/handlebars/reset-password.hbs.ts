@@ -70,7 +70,6 @@
       text-align: center;
       background-color: rgb(52, 52, 52);
       border-radius: 6px;
-      width: 100%;
       margin-bottom: 4px;
     }
 
@@ -79,7 +78,6 @@
       padding: 24px;
       background-color: rgb(255, 255, 255);
       border-radius: 6px;
-      width: 100%;
     }
 
     .content-wrapper__paragraph {
@@ -198,9 +196,9 @@ export default `
         </a>
       </div>
 
-      <div class="wrapper__heading" style="margin: 0;display: block;color: rgb(255, 255, 255);font-size: 20px;padding: 24px;text-align: center;background-color: rgb(52, 52, 52);border-radius: 6px;width: 100%;margin-bottom: 4px;">Reset pasword</div>
+      <div class="wrapper__heading" style="margin: 0;display: block;color: rgb(255, 255, 255);font-size: 20px;padding: 24px;text-align: center;background-color: rgb(52, 52, 52);border-radius: 6px;margin-bottom: 4px;">Reset pasword</div>
 
-      <div class="content-wrapper" style="margin: 0;margin-top: 4px;padding: 24px;background-color: rgb(255, 255, 255);border-radius: 6px;width: 100%;">
+      <div class="content-wrapper" style="margin: 0;margin-top: 4px;padding: 24px;background-color: rgb(255, 255, 255);border-radius: 6px;">
         <p class="content-wrapper__paragraph" style="margin: 0;display: block;text-align: center;font-size: 14px;">
           <b style="margin: 0;">Hello {{name}}</b>
 
