@@ -16,6 +16,7 @@ import { WEBAPP_URL } from 'common/constants/common';
 import resetPasswordHbs from 'common/handlebars/reset-password.hbs';
 import { Tokens } from './types';
 import {
+  CheckResetTokenInput,
   ConfirmSignupInput,
   EmailInput,
   ResetPasswordInput,
@@ -32,6 +33,7 @@ import {
   SignupLocal,
   SendCode,
   ResetPassword,
+  CheckResetToken,
 } from './entities';
 
 @Injectable()
@@ -361,12 +363,39 @@ export class AuthService {
         throw new ForbiddenException('Email not found.');
       });
 
-    const resetPasswordLink = `${WEBAPP_URL}/reset-password/${resetPasswordToken}`;
+    const resetPasswordLink = `${WEBAPP_URL}/reset-password?token=${resetPasswordToken}`;
 
     await this.sendEmailWithResetPasswordLink(email, name, resetPasswordLink);
 
     return {
       success: true,
+    };
+  }
+
+  async checkResetToken(checkResetTokenInput: CheckResetTokenInput): Promise<CheckResetToken> {
+    const { resetToken, token } = checkResetTokenInput;
+
+    const isHuman = await this.validateHuman(token);
+
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
+    }
+
+    const user = await this.prisma.user.findUnique({
+      where: {
+        resetPasswordToken: resetToken,
+      },
+      select: {
+        name: true,
+      },
+    });
+
+    if (!user) {
+      throw new ForbiddenException('Token not found.');
+    }
+
+    return {
+      name: user.name,
     };
   }
 

@@ -1,3 +1,4 @@
+export * from './check-reset-token.entity';
 export * from './confirm-signup.entity';
 export * from './email.entity';
 export * from './logout.entity';

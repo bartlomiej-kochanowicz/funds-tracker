@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CheckResetToken {
+  """Name of the user."""
+  name: String!
+}
+
 type ConfirmSignup {
   """Confirmatiopn signup successful."""
   success: Boolean!
@@ -135,6 +140,7 @@ enum IntroductionStep {
 
 type Query {
   emailExist(data: EmailInput!): Email!
+  checkResetToken(data: CheckResetTokenInput!): CheckResetToken!
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: ID!): CashAccount!
   portfolios: [Portfolio!]!
@@ -145,6 +151,14 @@ type Query {
 input EmailInput {
   """Email."""
   email: EmailAddress!
+
+  """Token."""
+  token: String!
+}
+
+input CheckResetTokenInput {
+  """Reset token."""
+  resetToken: String!
 
   """Token."""
   token: String!

@@ -5,6 +5,7 @@ import { RtGuard } from 'common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import {
+  CheckResetToken,
   ConfirmSignup,
   Email,
   Logout,
@@ -15,6 +16,7 @@ import {
 } from './entities';
 import { SendCode } from './entities/send-code.entity';
 import {
+  CheckResetTokenInput,
   ConfirmSignupInput,
   EmailInput,
   ResetPasswordInput,
@@ -97,5 +99,14 @@ export class AuthResolver {
     resetPasswordInput: ResetPasswordInput,
   ) {
     return this.authService.resetPassword(resetPasswordInput);
+  }
+
+  @Public()
+  @Query(() => CheckResetToken)
+  checkResetToken(
+    @Args('data')
+    checkResetTokenInput: CheckResetTokenInput,
+  ) {
+    return this.authService.checkResetToken(checkResetTokenInput);
   }
 }
