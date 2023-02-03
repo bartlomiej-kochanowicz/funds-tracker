@@ -7,6 +7,7 @@ import { SignupRoutes } from 'views/Signup';
 import { IntroductionRoutes } from 'views/Introduction';
 import { NotFoundRoutes } from 'views/NotFound';
 import { Authenticated } from 'views/Authenticated';
+import { ResetPasswordRoutes } from 'views/ResetPassword/routes';
 
 export const Root: FC = () => {
   const views = useRoutes([
@@ -14,6 +15,7 @@ export const Root: FC = () => {
     ...SinginRoutes,
     ...SignupRoutes,
     ...IntroductionRoutes,
+    ...ResetPasswordRoutes,
     ...NotFoundRoutes,
   ]);
 

@@ -4,6 +4,7 @@ import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import * as bcrypt from 'bcrypt';
+import * as crypto from 'crypto';
 import * as UAParser from 'ua-parser-js';
 import { IS_DEVELOPMENT, IS_TEST } from 'common/config/env';
 import { catchError, firstValueFrom } from 'rxjs';
@@ -11,8 +12,17 @@ import { PrismaService } from 'prisma/prisma.service';
 import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
 import { SendGridService } from 'send-grid/send-grid.service';
 import emailConfirmationHbs from 'common/handlebars/email-confirmation.hbs';
+import { WEBAPP_URL } from 'common/constants/common';
+import resetPasswordHbs from 'common/handlebars/reset-password.hbs';
 import { Tokens } from './types';
-import { ConfirmSignupInput, EmailInput, SendCodeInput, SigninInput, SignupInput } from './inputs';
+import {
+  ConfirmSignupInput,
+  EmailInput,
+  ResetPasswordInput,
+  SendCodeInput,
+  SigninInput,
+  SignupInput,
+} from './inputs';
 import {
   ConfirmSignup,
   Email,
@@ -21,6 +31,7 @@ import {
   SigninLocal,
   SignupLocal,
   SendCode,
+  ResetPassword,
 } from './entities';
 
 @Injectable()
@@ -328,7 +339,34 @@ export class AuthService {
     };
   }
 
-  private async sendEmailWithConfirmCode(email, uuid, code): Promise<void> {
+  async resetPassword(resetPasswordInput: ResetPasswordInput): Promise<ResetPassword> {
+    const { email, token } = resetPasswordInput;
+
+    const isHuman = await this.validateHuman(token);
+
+    if (!isHuman) {
+      throw new ForbiddenException('You are a robot!');
+    }
+
+    const resetPasswordToken = crypto.randomBytes(32).toString('hex');
+
+    const { name } = await this.prisma.user.update({
+      where: { email },
+      data: {
+        resetPasswordToken,
+      },
+    });
+
+    const resetPasswordLink = `${WEBAPP_URL}/reset-password/${resetPasswordToken}`;
+
+    await this.sendEmailWithResetPasswordLink(email, name, resetPasswordLink);
+
+    return {
+      success: true,
+    };
+  }
+
+  private async sendEmailWithConfirmCode(email: string, uuid: string, code: string): Promise<void> {
     const mail = {
       to: email,
       subject: 'Your Funds Tracker confirmation code',
@@ -337,6 +375,25 @@ export class AuthService {
         email,
         code,
         uuid,
+      }),
+    };
+
+    await this.sendgridService.send(mail);
+  }
+
+  private async sendEmailWithResetPasswordLink(
+    email: string,
+    name: string,
+    resetPasswordLink: string,
+  ): Promise<void> {
+    const mail = {
+      to: email,
+      subject: 'Funds Tracker - reset password',
+      from: 'noreply@funds-tracker.com',
+      html: this.sendgridService.getHtml(resetPasswordHbs, {
+        name,
+        email,
+        resetPasswordLink,
       }),
     };
 

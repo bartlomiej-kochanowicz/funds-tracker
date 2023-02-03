@@ -22,6 +22,11 @@ type Refresh {
   success: Boolean!
 }
 
+type ResetPassword {
+  """Send reset password successful."""
+  success: Boolean!
+}
+
 type SendCode {
   """Send code successful."""
   success: Boolean!
@@ -152,6 +157,7 @@ type Mutation {
   signinLocal(data: SigninInput!): SigninLocal!
   logout: Logout!
   refreshToken: Refresh!
+  resetPassword(data: ResetPasswordInput!): ResetPassword!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
@@ -202,6 +208,14 @@ input SigninInput {
 
   """Password."""
   password: String!
+
+  """Token."""
+  token: String!
+}
+
+input ResetPasswordInput {
+  """Email."""
+  email: EmailAddress!
 
   """Token."""
   token: String!
