@@ -109,5 +109,6 @@
   "page.forgot_password.enter_password.description": "Cześć, proszę podaj nowe hasło do logowania.",
   "toast.send_reset_password_link.success": "Link do resetowania hasła został wysłany na Twój adres email",
   "toast.send_reset_password_link.failure": "Wystąpił błąd podczas wysyłania linku do resetowania hasła. Spróbuj ponownie później.",
-  "page.forgot_password.enter_email.submit.success": "Link do resetowania hasła został wysłany na Twój adres email. Sprawdź skrzynkę odbiorczą i spam."
+  "page.forgot_password.enter_email.submit.success": "Link do resetowania hasła został wysłany na Twój adres email. Sprawdź skrzynkę odbiorczą i spam.",
+  "common.save": "Zapisz"
 }
