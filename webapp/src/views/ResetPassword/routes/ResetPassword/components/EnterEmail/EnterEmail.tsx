@@ -8,15 +8,14 @@ export const EnterEmail = () => {
 
   return (
     <Fragment>
-      <Heading textAlign="center">Forgot Password?</Heading>
+      <Heading textAlign="center">{t('page.signin.forgot_password')}</Heading>
       <Spacer space="small" />
       <Text
         fontSize="0.875"
         fontColor="gray400"
         textAlign="center"
       >
-        Don&apos;t worry. Resetting your password is easy, just tell us the email address you
-        registered with Funds tracker.
+        {t('page.forgot_password.description')}
       </Text>
       <Spacer space="large" />
       form

@@ -102,5 +102,6 @@
   "modal.CreateCashAccount.name": "Dodaj konto gotówkowe",
   "modal.CreateCashAccount.description": "Moższ tu dodać twoje konto 'gotówkowe' t.j konto osobiste, konto oszczędnościowe lub realną gotówkę.",
   "common.apperience": "Wygląd",
-  "page.signin.forgot_password": "Nie pamiętasz hasła?"
+  "page.signin.forgot_password": "Nie pamiętasz hasła?",
+  "page.forgot_password.description": "Nie martw się. Resetowanie hasła jest proste, po prostu powiedz nam jakim emailem zarejestrowałeś się w Funds Tracker."
 }

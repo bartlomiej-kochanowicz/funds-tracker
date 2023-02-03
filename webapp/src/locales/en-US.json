@@ -102,5 +102,6 @@
   "modal.CreateCashAccount.name": "Add new cash account",
   "modal.CreateCashAccount.description": "Here you can provide your cash account e.g. daily account you receive your salary, savings account or real cash.",
   "common.apperience": "Apperience",
-  "page.signin.forgot_password": "Forgot password?"
+  "page.signin.forgot_password": "Forgot password?",
+  "page.forgot_password.description": "Don't worry. Resetting your password is easy, just tell us the email address you registered with Funds tracker."
 }

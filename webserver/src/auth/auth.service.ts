@@ -350,12 +350,16 @@ export class AuthService {
 
     const resetPasswordToken = crypto.randomBytes(32).toString('hex');
 
-    const { name } = await this.prisma.user.update({
-      where: { email },
-      data: {
-        resetPasswordToken,
-      },
-    });
+    const { name } = await this.prisma.user
+      .update({
+        where: { email },
+        data: {
+          resetPasswordToken,
+        },
+      })
+      .catch(() => {
+        throw new ForbiddenException('User not found.');
+      });
 
     const resetPasswordLink = `${WEBAPP_URL}/reset-password/${resetPasswordToken}`;
 
