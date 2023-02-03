@@ -150,7 +150,7 @@
         </p>
 
         <span class="content-wrapper__code">
-          <a herf="{{resetPasswordLink}}" class="content-wrapper__button">
+          <a href="{{resetPasswordLink}}" class="content-wrapper__button">
             Click here to change your password
           </a>
         </span>
@@ -159,7 +159,7 @@
           If the button above isn’t working, paste the link below into your browser:
         </p>
 
-        <a herf="{{resetPasswordLink}}" class="content-wrapper__paragraph margin-bottom color-blue">
+        <a href="{{resetPasswordLink}}" class="content-wrapper__paragraph margin-bottom color-blue">
           {{resetPasswordLink}}
         </a>
 
@@ -209,7 +209,7 @@ export default `
         </p>
 
         <span class="content-wrapper__code" style="margin: 32px 0;display: block;width: 100%;padding: 24px;background-color: rgb(222, 225, 227);border-radius: 6px;font-weight: 600;font-size: 36px;text-align: center;box-sizing: border-box;">
-          <a herf="{{resetPasswordLink}}" class="content-wrapper__button" style="margin: 0;display: block;border: none;text-decoration: none;cursor: pointer;font-size: 1rem;background-color: #3F8CFF;color: #ffffff;padding: 0.5rem 1.25rem;font-weight: 400;border-radius: 6.25rem;">
+          <a href="{{resetPasswordLink}}" class="content-wrapper__button" style="margin: 0;display: block;border: none;text-decoration: none;cursor: pointer;font-size: 1rem;background-color: #3F8CFF;color: #ffffff;padding: 0.5rem 1.25rem;font-weight: 400;border-radius: 6.25rem;">
             Click here to change your password
           </a>
         </span>
@@ -218,7 +218,7 @@ export default `
           If the button above isn’t working, paste the link below into your browser:
         </p>
 
-        <a herf="{{resetPasswordLink}}" class="content-wrapper__paragraph margin-bottom color-blue" style="margin: 0;display: block;text-align: center;font-size: 14px;margin-bottom: 8px;color: #3F8CFF;">
+        <a href="{{resetPasswordLink}}" class="content-wrapper__paragraph margin-bottom color-blue" style="margin: 0;display: block;text-align: center;font-size: 14px;margin-bottom: 8px;color: #3F8CFF;">
           {{resetPasswordLink}}
         </a>
 
