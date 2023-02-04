@@ -11,7 +11,6 @@ export const ROUTES = {
     HOME: '/dashboard',
     PORTFOLIO: '/dashboard/portfolios',
     CASH_ACCOUNTS: '/dashboard/cash-accounts',
-    CASH_ACCOUNT: '/dashboard/cash-accounts/:uuid',
     TRANSACTIONS: '/dashboard/transactions',
     HISTORY: '/dashboard/history',
   },

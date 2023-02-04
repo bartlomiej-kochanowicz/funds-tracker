@@ -1,24 +1,12 @@
 import { Row } from 'simple-flexbox';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath } from 'react-router-dom';
-import { CashAccount, CashAccountHistory } from '__generated__/graphql';
+import { CashAccount } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
-import { Text } from 'components/atoms';
-import { ROUTES } from 'routes/paths';
-import { Chart } from '../Chart';
+import { Button, Spacer, Spreader, Text } from 'components/atoms';
+import { FaChartLine, FaListAlt, FaPlus } from 'react-icons/fa';
 
-interface CashAccountsPanelProps extends Omit<CashAccount, 'history'> {
-  history: Omit<CashAccountHistory, 'uuid'>[];
-}
-
-export const CashAccountsPanel: FC<CashAccountsPanelProps> = ({
-  name,
-  currency,
-  balance,
-  history,
-  uuid,
-}) => {
+export const CashAccountsPanel: FC<CashAccount> = ({ name, currency, balance, uuid }) => {
   const { i18n } = useTranslation();
 
   const formatter = new Intl.NumberFormat(i18n.language, {
@@ -26,15 +14,39 @@ export const CashAccountsPanel: FC<CashAccountsPanelProps> = ({
     currency,
   });
 
-  const cashAccountPath = generatePath(ROUTES.DASHBOARD.CASH_ACCOUNT, {
-    uuid,
-  });
-
   return (
-    <Panel to={cashAccountPath}>
-      <Panel.Chart>
-        <Chart data={history} />
-      </Panel.Chart>
+    <Panel>
+      <Panel.Body>
+        <Row>
+          <Button
+            borderRadius="secondary"
+            flexGrow={1}
+          >
+            Add money <Spreader spread="tiny" /> <FaPlus />
+          </Button>
+
+          <Spreader />
+
+          <Button
+            borderRadius="secondary"
+            flexGrow={1}
+          >
+            Operations <Spreader spread="tiny" /> <FaListAlt />
+          </Button>
+        </Row>
+
+        <Spacer space="small" />
+
+        <Row>
+          <Button
+            width="auto"
+            borderRadius="secondary"
+            flexGrow={1}
+          >
+            Invest <Spreader spread="tiny" /> <FaChartLine />
+          </Button>
+        </Row>
+      </Panel.Body>
 
       <Panel.Footer>
         <Row justifyContent="space-between">
