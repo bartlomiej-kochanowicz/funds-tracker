@@ -47,7 +47,7 @@ type SignupLocal {
   success: Boolean!
 }
 
-type CashAccountHistory {
+type CashAccountOperation {
   """Transaction uuid."""
   uuid: ID!
 
@@ -55,13 +55,22 @@ type CashAccountHistory {
   date: Date!
 
   """Cash account balance."""
-  balance: Float!
+  amount: Float!
+
+  """Cash account oparation type."""
+  type: CashAccountOperationType!
 }
 
 """
 A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar Date
+
+enum CashAccountOperationType {
+  deposit
+  withdrawal
+  transfer
+}
 
 type CashAccount {
   """Cash account uuid."""
@@ -77,7 +86,7 @@ type CashAccount {
   balance: Float!
 
   """Account balance history."""
-  history(first: Float): [CashAccountHistory!]!
+  operations(first: Float): [CashAccountOperation!]!
 }
 
 enum Currency {

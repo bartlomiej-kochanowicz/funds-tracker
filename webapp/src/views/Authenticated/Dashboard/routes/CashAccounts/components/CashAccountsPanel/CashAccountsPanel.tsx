@@ -1,12 +1,17 @@
 import { Row } from 'simple-flexbox';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CashAccount } from '__generated__/graphql';
+import { GetCashAccountsQuery } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Button, Spacer, Spreader, Text } from 'components/atoms';
 import { FaChartLine } from 'react-icons/fa';
 
-export const CashAccountsPanel: FC<CashAccount> = ({ name, currency, balance, uuid }) => {
+export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
+  name,
+  currency,
+  balance,
+  uuid,
+}) => {
   const { i18n } = useTranslation();
 
   const formatter = new Intl.NumberFormat(i18n.language, {
