@@ -111,5 +111,8 @@
   "toast.send_reset_password_link.failure": "Wystąpił błąd podczas wysyłania linku do resetowania hasła. Spróbuj ponownie później.",
   "page.forgot_password.enter_email.submit.success": "Link do resetowania hasła został wysłany na Twój adres email. Sprawdź skrzynkę odbiorczą i spam.",
   "common.save": "Zapisz",
-  "page.forgot_password.enter_password.submit.success": "Hasło zostało zresetowane. <signin>Możesz teraz zalogować się nowym hasłem.</signin>"
+  "page.forgot_password.enter_password.submit.success": "Hasło zostało zresetowane. <signin>Możesz teraz zalogować się nowym hasłem.</signin>",
+  "page.cash_accounts.button.add_money": "Dodaj środki",
+  "page.cash_accounts.button.operations": "Operacje",
+  "page.cash_accounts.button.invest": "Inwestuj"
 }

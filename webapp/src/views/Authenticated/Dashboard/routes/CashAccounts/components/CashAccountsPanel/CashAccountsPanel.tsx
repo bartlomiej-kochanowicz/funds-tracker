@@ -10,9 +10,9 @@ export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
   name,
   currency,
   balance,
-  uuid,
+  // uuid,
 }) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const formatter = new Intl.NumberFormat(i18n.language, {
     style: 'currency',
@@ -23,23 +23,21 @@ export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
     <Panel>
       <Panel.Body>
         <Row>
-          <Button flexGrow={1}>Add money</Button>
+          <Button width="50%">{t('page.cash_accounts.button.add_money')}</Button>
 
           <Spreader />
 
-          <Button flexGrow={1}>Operations</Button>
+          <Button width="50%">{t('page.cash_accounts.button.operations')}</Button>
         </Row>
 
         <Spacer space="small" />
 
-        <Row>
-          <Button
-            width="auto"
-            flexGrow={1}
-          >
-            Invest <Spreader spread="tiny" /> <FaChartLine />
-          </Button>
-        </Row>
+        <Button
+          width="100%"
+          flexGrow={1}
+        >
+          {t('page.cash_accounts.button.invest')} <Spreader spread="tiny" /> <FaChartLine />
+        </Button>
       </Panel.Body>
 
       <Panel.Footer>

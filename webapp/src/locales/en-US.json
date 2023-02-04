@@ -111,5 +111,8 @@
   "toast.send_reset_password_link.failure": "Reset password link sending failed. Please try again later.",
   "page.forgot_password.enter_email.submit.success": "Reset password link has been sent to your email. Please check your inbox.",
   "common.save": "Save",
-  "page.forgot_password.enter_password.submit.success": "Your password has been changed. <signin>You can now log in with your new password.</signin>"
+  "page.forgot_password.enter_password.submit.success": "Your password has been changed. <signin>You can now log in with your new password.</signin>",
+  "page.cash_accounts.button.add_money": "Add money",
+  "page.cash_accounts.button.operations": "Operations",
+  "page.cash_accounts.button.invest": "Invest"
 }
