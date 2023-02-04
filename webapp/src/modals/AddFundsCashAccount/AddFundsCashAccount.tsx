@@ -30,7 +30,7 @@ export const AddFundsCashAccount: FC<Modal<AddFundsCashAccountProps>> = ({
         maxWidth={isPhone ? '300px' : '100%'}
         breakLine
       >
-        {t('modal.CreateCashAccount.description')}
+        {t('modal.AddFundsCashAccount.description')}
       </Text>
 
       <Spacer space="small" />

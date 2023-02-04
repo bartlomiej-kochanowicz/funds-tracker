@@ -115,5 +115,6 @@
   "page.cash_accounts.button.add_funds": "Dodaj środki",
   "page.cash_accounts.button.operations": "Operacje",
   "page.cash_accounts.button.invest": "Inwestuj",
-  "modal.AddFundsCashAccount.name": "Dodaj środki do konta gotówkowego"
+  "modal.AddFundsCashAccount.name": "Dodaj środki do konta gotówkowego",
+  "modal.AddFundsCashAccount.description": "Wpisz kwotę, którą chcesz dodać do konta gotówkowego."
 }
