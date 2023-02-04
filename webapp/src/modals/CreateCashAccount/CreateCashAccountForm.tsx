@@ -118,7 +118,6 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
       <Row justifyContent="flex-end">
         <Button
           color="tertiary"
-          borderRadius="secondary"
           onClick={closeModal}
           flexGrow={1}
         >
@@ -128,7 +127,6 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
         <Spreader spread="small" />
 
         <Button
-          borderRadius="secondary"
           disabled={isSubmitting || !isValid || !isDirty}
           flexGrow={1}
         >

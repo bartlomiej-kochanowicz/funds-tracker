@@ -7,7 +7,7 @@ export const PanelWrapper = styled(Box)`
   ${({ theme: { isDark, colors, shadows, radius } }) => css`
     background-color: ${isDark ? darken(colors.gray100, 0.03) : colors.white};
     box-shadow: ${shadows.box};
-    border-radius: ${radius.secondary};
+    border-radius: ${radius.primary};
   `}
 `;
 
@@ -46,6 +46,6 @@ export const Footer = styled.div`
   ${({ theme: { radius, colors, spacing } }) => css`
     background-color: ${colors.gray200};
     padding: ${spacing.small} ${spacing.large};
-    border-radius: 0 0 ${radius.secondary} ${radius.secondary};
+    border-radius: 0 0 ${radius.primary} ${radius.primary};
   `}
 `;

@@ -18,19 +18,13 @@ export const CashAccountsPanel: FC<CashAccount> = ({ name, currency, balance, uu
     <Panel>
       <Panel.Body>
         <Row>
-          <Button
-            borderRadius="secondary"
-            flexGrow={1}
-          >
+          <Button flexGrow={1}>
             Add money <Spreader spread="tiny" /> <FaPlus />
           </Button>
 
           <Spreader />
 
-          <Button
-            borderRadius="secondary"
-            flexGrow={1}
-          >
+          <Button flexGrow={1}>
             Operations <Spreader spread="tiny" /> <FaListAlt />
           </Button>
         </Row>
@@ -40,7 +34,6 @@ export const CashAccountsPanel: FC<CashAccount> = ({ name, currency, balance, uu
         <Row>
           <Button
             width="auto"
-            borderRadius="secondary"
             flexGrow={1}
           >
             Invest <Spreader spread="tiny" /> <FaChartLine />

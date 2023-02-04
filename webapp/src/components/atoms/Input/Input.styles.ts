@@ -8,7 +8,7 @@ export const StyledInput = styled.input.withConfig({
   width: 100%;
 
   ${({ theme, error, hasUnit }) => css`
-    border-radius: ${theme.radius.secondary};
+    border-radius: ${theme.radius.primary};
     padding: ${hasUnit ? '0.5rem 2.5rem 0.5rem 1.25rem' : '0.5rem 1.25rem'};
     outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
