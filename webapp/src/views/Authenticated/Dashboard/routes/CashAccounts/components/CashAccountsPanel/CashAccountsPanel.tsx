@@ -5,6 +5,8 @@ import { GetCashAccountsQuery } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Button, Spacer, Spreader, Text } from 'components/atoms';
 import { FaChartLine } from 'react-icons/fa';
+import { useModalContext } from 'contexts/ModalContext';
+import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 
 export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
   name,
@@ -19,11 +21,24 @@ export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
     currency,
   });
 
+  const { openModal } = useModalContext();
+
+  const callback = () => {};
+
+  const handleOpenAddFundsCashAccountModal = () => {
+    openModal<AddFundsCashAccountProps>(MODAL_ADD_FUNDS_CASH_ACCOUNT, { callback });
+  };
+
   return (
     <Panel>
       <Panel.Body>
         <Row>
-          <Button width="50%">{t('page.cash_accounts.button.add_money')}</Button>
+          <Button
+            width="50%"
+            onClick={handleOpenAddFundsCashAccountModal}
+          >
+            {t('page.cash_accounts.button.add_funds')}
+          </Button>
 
           <Spreader />
 

@@ -6,8 +6,15 @@ const CreateCashAccount = lazy(() =>
   })),
 );
 
+const AddFundsCashAccount = lazy(() =>
+  import('./AddFundsCashAccount').then(({ AddFundsCashAccount: component }) => ({
+    default: component,
+  })),
+);
+
 export const modals = {
   CreateCashAccount,
+  AddFundsCashAccount,
 };
 
 export type ModalsNames = keyof typeof modals;

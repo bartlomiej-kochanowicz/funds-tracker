@@ -112,7 +112,8 @@
   "page.forgot_password.enter_email.submit.success": "Reset password link has been sent to your email. Please check your inbox.",
   "common.save": "Save",
   "page.forgot_password.enter_password.submit.success": "Your password has been changed. <signin>You can now log in with your new password.</signin>",
-  "page.cash_accounts.button.add_money": "Add money",
+  "page.cash_accounts.button.add_funds": "Add funds",
   "page.cash_accounts.button.operations": "Operations",
-  "page.cash_accounts.button.invest": "Invest"
+  "page.cash_accounts.button.invest": "Invest",
+  "modal.AddFundsCashAccount.name": "Add funds to cash account"
 }
