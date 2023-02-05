@@ -1,5 +1,5 @@
 import { FC, Fragment } from 'react';
-import { Button, CurrencyInput, Input, Loader, Spacer, Spreader } from 'components/atoms';
+import { Button, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { FaPlus } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 import { useForm } from 'react-hook-form';
@@ -38,7 +38,9 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
     mode: 'onChange',
   });
 
-  const onSubmit = async (data: typeof defaultValues) => {};
+  const onSubmit = async (data: typeof defaultValues) => {
+    console.log(data);
+  };
 
   const amountInputProps = useInput<typeof defaultValues>({
     register,
@@ -50,7 +52,12 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
       noValidate
       onSubmit={handleSubmit(onSubmit)}
     >
-      <CurrencyInput currency={currency} />
+      <Input
+        type="currency"
+        currency={currency}
+        defaultValue={defaultValues.amount}
+        {...amountInputProps}
+      />
 
       <Spacer />
 

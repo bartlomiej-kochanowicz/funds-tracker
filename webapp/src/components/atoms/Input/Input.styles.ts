@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
+import CurrencyInput from 'react-currency-input-field';
 
-export const StyledInput = styled.input.withConfig({
-  shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit'].includes(prop),
-})<{ error: boolean; hasUnit: boolean }>`
+const inputStyles = css<{ error?: boolean; hasUnit?: boolean }>`
   border: none;
   width: 100%;
 
@@ -43,6 +42,18 @@ export const StyledInput = styled.input.withConfig({
     appearance: none;
     margin: 0;
   }
+`;
+
+export const StyledInput = styled.input.withConfig({
+  shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit'].includes(prop),
+})<{ error: boolean; hasUnit: boolean }>`
+  ${inputStyles}
+`;
+
+export const StyledCurrencyInput = styled(CurrencyInput).withConfig({
+  shouldForwardProp: prop => !['flexGrow', 'error'].includes(prop),
+})<{ error?: boolean }>`
+  ${inputStyles}
 `;
 
 export const Wrapper = styled.div.withConfig({

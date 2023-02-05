@@ -1,5 +1,7 @@
-import { object, number } from 'yup';
+import { object, string } from 'yup';
 
 export const validationSchema = object().shape({
-  amount: number().required('form.field.required'),
+  amount: string()
+    .matches(/^[0-9]+$/, 'form.field.required.number')
+    .required('form.field.required'),
 });

@@ -3,7 +3,6 @@ export { Box } from './Box';
 export { Button } from './Button';
 export { ButtonLink } from './ButtonLink';
 export { Checkbox } from './Checkbox';
-export { CurrencyInput } from './CurrencyInput';
 export { Dropdown } from './Dropdown';
 export { Grid } from './Grid';
 export { Heading } from './Heading';
