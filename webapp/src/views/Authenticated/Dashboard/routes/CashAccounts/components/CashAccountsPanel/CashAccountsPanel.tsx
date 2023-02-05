@@ -12,7 +12,7 @@ export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
   name,
   currency,
   balance,
-  // uuid,
+  uuid,
 }) => {
   const { i18n, t } = useTranslation();
 
@@ -26,7 +26,7 @@ export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
   const callback = () => {};
 
   const handleOpenAddFundsCashAccountModal = () => {
-    openModal<AddFundsCashAccountProps>(MODAL_ADD_FUNDS_CASH_ACCOUNT, { callback });
+    openModal<AddFundsCashAccountProps>(MODAL_ADD_FUNDS_CASH_ACCOUNT, { callback, uuid, currency });
   };
 
   return (

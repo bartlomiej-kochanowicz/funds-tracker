@@ -53,6 +53,7 @@ specifiers:
   mq-polyfill: 1.1.8
   prettier: 2.8.1
   react: 18.2.0
+  react-currency-input-field: ^3.6.10
   react-dom: 18.2.0
   react-error-boundary: 3.1.4
   react-google-recaptcha-v3: 1.10.1
@@ -92,6 +93,7 @@ dependencies:
   js-cookie: 3.0.1
   logrocket: 3.0.1
   react: 18.2.0
+  react-currency-input-field: 3.6.10_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 3.1.4_react@18.2.0
   react-google-recaptcha-v3: 1.10.1_biqbaboplfbrettd7655fr4n2y
@@ -7948,6 +7950,14 @@ packages:
       minimist: 1.2.7
       strip-json-comments: 2.0.1
     dev: true
+
+  /react-currency-input-field/3.6.10_react@18.2.0:
+    resolution: {integrity: sha512-KRAJJaLujarBTLlEVbznsUxQ56+Qyqwoe5w9DnGxmsGnHv4ycQRpRkuuCDfF9BcXHmegzsOXesfIGpW7Cw9mTQ==}
+    peerDependencies:
+      react: ^16.9.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}

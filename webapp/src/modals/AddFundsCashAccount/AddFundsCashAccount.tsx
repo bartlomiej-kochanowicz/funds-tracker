@@ -2,18 +2,24 @@ import { Spacer, Text } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Currency } from '__generated__/graphql';
 
 import { Modal } from 'types/modal.type';
+import { AddFundsCashAccountForm } from './AddFundsCashAccountForm';
 
 export const MODAL_ADD_FUNDS_CASH_ACCOUNT = 'AddFundsCashAccount';
 
 export type AddFundsCashAccountProps = {
   callback: () => void;
+  uuid: string;
+  currency: Currency;
 };
 
 export const AddFundsCashAccount: FC<Modal<AddFundsCashAccountProps>> = ({
   closeModal,
   callback,
+  uuid,
+  currency,
 }) => {
   const { t } = useTranslation();
 
@@ -35,7 +41,12 @@ export const AddFundsCashAccount: FC<Modal<AddFundsCashAccountProps>> = ({
 
       <Spacer space="small" />
 
-      <div>form</div>
+      <AddFundsCashAccountForm
+        closeModal={closeModal}
+        callback={callback}
+        uuid={uuid}
+        currency={currency}
+      />
     </Fragment>
   );
 };

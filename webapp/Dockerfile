@@ -14,7 +14,7 @@ RUN corepack enable && corepack prepare pnpm@7.9.0 --activate
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN npm install -g npm
+RUN npm install -g pnpm --force
 RUN pnpm install
 
 COPY . .
