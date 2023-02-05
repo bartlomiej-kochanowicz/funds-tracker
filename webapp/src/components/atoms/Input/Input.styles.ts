@@ -67,6 +67,10 @@ export const Wrapper = styled.div.withConfig({
     css`
       flex-grow: ${flexGrow};
     `}
+
+  .hidden-input {
+    display: none;
+  }
 `;
 
 export const Error = styled.span`

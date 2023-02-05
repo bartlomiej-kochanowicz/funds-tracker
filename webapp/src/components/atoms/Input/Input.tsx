@@ -1,9 +1,9 @@
-import { ChangeEvent, forwardRef, HTMLProps, MutableRefObject, ReactNode, useRef } from 'react';
+import { forwardRef, HTMLProps, MutableRefObject, ReactNode, useRef } from 'react';
+import { mergeRefs } from 'react-laag';
 import { Text } from 'components/atoms/Text';
 import { Currency } from '__generated__/graphql';
 import { CurrencyInputProps as CurrencyInputFieldProps } from 'react-currency-input-field';
 import { useTranslation } from 'react-i18next';
-import { composeRefs } from 'utils/composeRefs';
 import { StyledInput, Wrapper, Error, Unit, StyledCurrencyInput } from './Input.styles';
 
 interface InputCommonProps {
@@ -12,6 +12,7 @@ interface InputCommonProps {
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   flexGrow?: number;
   label?: string | ReactNode;
+  defaultValue?: string | number;
 }
 
 interface DefaultInputProps
@@ -39,24 +40,38 @@ interface CurrencyInputProps extends InputCommonProps, Omit<CurrencyInputFieldPr
 type CtaInputProps = DefaultInputProps | CurrencyInputProps;
 
 export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
-  ({ error, unit, width = 'auto', flexGrow, label, type, onChange, ...rest }, ref) => {
+  ({ error, unit, width = 'auto', flexGrow, label, type, ...rest }, ref) => {
     const { i18n } = useTranslation();
 
-    const curencyInputRef = useRef() as MutableRefObject<HTMLInputElement>;
+    const curencyInputRef = useRef() as MutableRefObject<HTMLInputElement> & {
+      current: {
+        _valueTracker: {
+          setValue: (value: string) => void;
+        };
+      };
+    };
 
     if (type === 'currency') {
       const { currency } = rest as CurrencyInputProps;
 
+      // special handling for currency input liblary
       const handleValueChange = (value?: string) => {
-        if (onChange) {
-          const target = curencyInputRef.current;
+        curencyInputRef.current.setAttribute('value', value || '');
 
-          target.value = value || '0';
+        const lastValue = curencyInputRef.current.value;
 
-          onChange({
-            target,
-          } as ChangeEvent<HTMLInputElement>);
+        curencyInputRef.current.value = value || '';
+
+        const event = new Event('input', { bubbles: true });
+
+        // eslint-disable-next-line no-underscore-dangle
+        const tracker = curencyInputRef.current._valueTracker;
+
+        if (tracker) {
+          tracker.setValue(lastValue);
         }
+
+        curencyInputRef.current.dispatchEvent(event);
       };
 
       return (
@@ -64,6 +79,12 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
           width={width}
           flexGrow={flexGrow}
         >
+          <input
+            className="hidden-input"
+            ref={mergeRefs(ref, curencyInputRef)}
+            {...rest}
+          />
+
           {label && (
             <Text
               fontSize="0.875"
@@ -75,10 +96,9 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
 
           <StyledCurrencyInput
             error={Boolean(error)}
-            ref={composeRefs(ref, curencyInputRef)}
             intlConfig={{ locale: i18n.language, currency }}
             onValueChange={handleValueChange}
-            {...rest}
+            defaultValue={rest.defaultValue}
           />
 
           {error && <Error>{error}</Error>}
@@ -107,7 +127,6 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
           ref={ref}
           hasUnit={Boolean(unit)}
           type={type}
-          onChange={onChange}
           {...rest}
         />
 
