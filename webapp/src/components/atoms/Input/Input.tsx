@@ -1,8 +1,9 @@
-import { ChangeEvent, forwardRef, HTMLProps, ReactNode } from 'react';
+import { ChangeEvent, forwardRef, HTMLProps, MutableRefObject, ReactNode, useRef } from 'react';
 import { Text } from 'components/atoms/Text';
 import { Currency } from '__generated__/graphql';
 import { CurrencyInputProps as CurrencyInputFieldProps } from 'react-currency-input-field';
 import { useTranslation } from 'react-i18next';
+import { composeRefs } from 'utils/composeRefs';
 import { StyledInput, Wrapper, Error, Unit, StyledCurrencyInput } from './Input.styles';
 
 interface InputCommonProps {
@@ -41,13 +42,21 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
   ({ error, unit, width = 'auto', flexGrow, label, type, onChange, ...rest }, ref) => {
     const { i18n } = useTranslation();
 
+    const curencyInputRef = useRef() as MutableRefObject<HTMLInputElement>;
+
     if (type === 'currency') {
       const { currency } = rest as CurrencyInputProps;
 
-      const onValueChange = (value: string | undefined) => {
-        onChange?.({
-          target: { value: value || '0', name: rest.name },
-        } as ChangeEvent<HTMLInputElement>);
+      const handleValueChange = (value?: string) => {
+        if (onChange) {
+          const target = curencyInputRef.current;
+
+          target.value = value || '0';
+
+          onChange({
+            target,
+          } as ChangeEvent<HTMLInputElement>);
+        }
       };
 
       return (
@@ -66,10 +75,10 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
 
           <StyledCurrencyInput
             error={Boolean(error)}
-            ref={ref}
+            ref={composeRefs(ref, curencyInputRef)}
             intlConfig={{ locale: i18n.language, currency }}
+            onValueChange={handleValueChange}
             {...rest}
-            onValueChange={onValueChange}
           />
 
           {error && <Error>{error}</Error>}

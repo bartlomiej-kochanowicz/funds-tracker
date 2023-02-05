@@ -30,7 +30,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 
   const {
     handleSubmit,
-    formState: { errors, isSubmitting, isValid, isDirty },
+    formState: { isSubmitting, isValid, isDirty },
     register,
   } = useForm<typeof defaultValues>({
     defaultValues,
@@ -38,8 +38,8 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
     mode: 'onChange',
   });
 
-  const onSubmit = async (data: typeof defaultValues) => {
-    console.log(data);
+  const onSubmit = (data: typeof defaultValues) => {
+    console.log('@@@@@', data);
   };
 
   const amountInputProps = useInput<typeof defaultValues>({
@@ -56,6 +56,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
         type="currency"
         currency={currency}
         defaultValue={defaultValues.amount}
+        placeholder={t('modal.AddFundsCashAccount.input.placeholder')}
         {...amountInputProps}
       />
 
@@ -75,6 +76,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
         <Button
           disabled={isSubmitting || !isValid || !isDirty}
           flexGrow={1}
+          type="submit"
         >
           {isSubmitting && <Loader color="white" />}
 

@@ -129,6 +129,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
         <Button
           disabled={isSubmitting || !isValid || !isDirty}
           flexGrow={1}
+          type="submit"
         >
           {isSubmitting && <Loader color="white" />}
 
