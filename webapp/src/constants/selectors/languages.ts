@@ -1,4 +1,4 @@
 export default [
-  { value: 'pl', label: 'selectors.languages.pl' },
+  { value: 'pl-PL', label: 'selectors.languages.pl-PL' },
   { value: 'en-US', label: 'selectors.languages.en-US' },
 ];

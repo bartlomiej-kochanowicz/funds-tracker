@@ -79,7 +79,6 @@ export const CashAccountsField = ({
       <Spreader spread="tiny" />
 
       <Button
-        borderRadius="secondary"
         color="secondary"
         onClick={handleRemoveField}
         boxShadow="none"

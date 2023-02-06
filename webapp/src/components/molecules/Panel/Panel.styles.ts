@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const PanelWrapper = styled(Box)`
-  height: 206px;
-
   ${({ theme: { isDark, colors, shadows, radius } }) => css`
     background-color: ${isDark ? darken(colors.gray100, 0.03) : colors.white};
     box-shadow: ${shadows.box};
-    border-radius: ${radius.secondary};
+    border-radius: ${radius.primary};
   `}
 `;
 
@@ -24,7 +22,7 @@ export const PanelLink = styled(Link)`
 
 export const Body = styled.div`
   ${({ theme: { padding } }) => css`
-    padding: ${padding.medium};
+    padding: ${padding.large};
   `}
 `;
 
@@ -36,7 +34,7 @@ export const BodyCentered = styled.div`
   height: 100%;
 
   ${({ theme: { padding } }) => css`
-    padding: ${padding.medium};
+    padding: ${padding.large};
   `}
 `;
 
@@ -45,9 +43,9 @@ export const Chart = styled.div`
 `;
 
 export const Footer = styled.div`
-  ${({ theme: { padding, radius, colors } }) => css`
+  ${({ theme: { radius, colors, spacing } }) => css`
     background-color: ${colors.gray200};
-    padding: ${padding.medium};
-    border-radius: 0 0 ${radius.secondary} ${radius.secondary};
+    padding: ${spacing.small} ${spacing.large};
+    border-radius: 0 0 ${radius.primary} ${radius.primary};
   `}
 `;

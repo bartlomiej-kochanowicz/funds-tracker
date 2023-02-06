@@ -30,7 +30,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
           {t('page.cash_accounts.need.more')}
         </Heading>
 
-        <Spacer space="small" />
+        <Spacer />
 
         <Button onClick={handleOpenModal}>
           {t('page.cash_accounts.need.more.button')} <Spreader spread="tiny" /> <FaPlus />

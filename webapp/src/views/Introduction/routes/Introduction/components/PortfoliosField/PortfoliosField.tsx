@@ -40,7 +40,6 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
       <Spreader spread="tiny" />
 
       <Button
-        borderRadius="secondary"
         color="secondary"
         onClick={handleRemoveField}
         boxShadow="none"

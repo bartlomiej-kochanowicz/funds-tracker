@@ -1,12 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { IntroductionStep } from '@prisma/client';
+import { CashAccountOperationType, IntroductionStep } from '@prisma/client';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CashAccount, CashAccountHistory, IntroductionCashAccounts } from './entities';
+import { CashAccount, CashAccountOperation, IntroductionCashAccounts } from './entities';
 import {
   CreateCashAccountInput,
   UpdateCashAccountInput,
   IntroductionCreateCashAccountsInput,
+  AddFundsToCashAccountInput,
 } from './inputs';
 
 @Injectable()
@@ -16,7 +17,7 @@ export class CashAccountsService {
   async create(
     userUuid: string,
     createCashAccountInput: CreateCashAccountInput,
-  ): Promise<Omit<CashAccount, 'history'>> {
+  ): Promise<Omit<CashAccount, 'operations'>> {
     const cashAccounts = await this.prisma.cashAccount.count({
       where: {
         userUuid,
@@ -72,7 +73,7 @@ export class CashAccountsService {
     };
   }
 
-  async findAll(userUuid: string): Promise<Omit<CashAccount, 'history'>[]> {
+  async findAll(userUuid: string): Promise<Omit<CashAccount, 'operations'>[]> {
     const cashAccounts = await this.prisma.cashAccount.findMany({
       where: {
         userUuid,
@@ -82,7 +83,7 @@ export class CashAccountsService {
     return cashAccounts;
   }
 
-  async findOne(userUuid: string, uuid: string): Promise<Omit<CashAccount, 'history'>> {
+  async findOne(userUuid: string, uuid: string): Promise<Omit<CashAccount, 'operations'>> {
     const cashAccount = await this.prisma.cashAccount.findUnique({
       where: {
         userUuid_uuid: {
@@ -99,10 +100,10 @@ export class CashAccountsService {
     return cashAccount;
   }
 
-  async findHistory(uuid: string, first: number): Promise<CashAccountHistory[]> {
-    const cashAccountHistory = await this.prisma.cashAccountHistory.findMany({
+  async findOperations(uuid: string, first: number): Promise<CashAccountOperation[]> {
+    const cashAccountHistory = await this.prisma.cashAccountOperation.findMany({
       where: {
-        uuid,
+        cashAccountUuid: uuid,
       },
       orderBy: { date: 'asc' },
       take: first,
@@ -119,7 +120,7 @@ export class CashAccountsService {
     userUuid: string,
     uuid: string,
     updateCashAccountInput: UpdateCashAccountInput,
-  ): Promise<Omit<CashAccount, 'history'>> {
+  ): Promise<Omit<CashAccount, 'operations'>> {
     try {
       const cashAccount = await this.prisma.cashAccount.update({
         where: {
@@ -145,6 +146,41 @@ export class CashAccountsService {
             userUuid,
             uuid,
           },
+        },
+      });
+
+      return cashAccount;
+    } catch {
+      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  async addFundsToCashAccountInput(
+    userUuid: string,
+    addFundsToCashAccountInput: AddFundsToCashAccountInput,
+  ): Promise<Omit<CashAccount, 'operations'>> {
+    const { uuid, amount } = addFundsToCashAccountInput;
+
+    try {
+      const cashAccount = await this.prisma.cashAccount.update({
+        where: {
+          userUuid_uuid: {
+            userUuid,
+            uuid,
+          },
+        },
+        data: {
+          balance: {
+            increment: amount,
+          },
+        },
+      });
+
+      await this.prisma.cashAccountOperation.create({
+        data: {
+          cashAccountUuid: uuid,
+          amount,
+          type: CashAccountOperationType.deposit,
         },
       });
 

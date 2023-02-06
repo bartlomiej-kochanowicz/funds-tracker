@@ -78,15 +78,15 @@ export const Button = styled.button.withConfig({
         }
       }};
 
-      ${flexGrow &&
-      css`
-        flex-grow: ${flexGrow};
-      `}
-
       &:hover {
         transition-duration: 0.1s;
         background-color: ${darken(theme.button.color[color].background, 0.05)};
       }
+
+      ${flexGrow &&
+      css`
+        flex-grow: ${flexGrow};
+      `}
 
       &:active:not(&:disabled) {
         transform: scale(0.98);

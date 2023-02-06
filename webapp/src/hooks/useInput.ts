@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 interface UseInputProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;
   name: Path<UnPackAsyncDefaultValues<Fields>>;
-  errors: FieldErrorsImpl<DeepRequired<Fields>>;
+  errors?: FieldErrorsImpl<DeepRequired<Fields>>;
 }
 
 export const useInput = <Fields extends FieldValues>({

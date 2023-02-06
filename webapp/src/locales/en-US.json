@@ -47,7 +47,7 @@
   "selectors.instruments.others": "Others",
   "selectors.instruments.stocks": "Stocks",
   "selectors.languages.en-US": "English US",
-  "selectors.languages.pl": "Polski",
+  "selectors.languages.pl-PL": "Polski",
   "service.unknown_error": "Unknown error",
   "page.signup.name.too_long": "Max 50 characters",
   "page.signup.name.too_short": "Min 4 characters",
@@ -111,5 +111,12 @@
   "toast.send_reset_password_link.failure": "Reset password link sending failed. Please try again later.",
   "page.forgot_password.enter_email.submit.success": "Reset password link has been sent to your email. Please check your inbox.",
   "common.save": "Save",
-  "page.forgot_password.enter_password.submit.success": "Your password has been changed. <signin>You can now log in with your new password.</signin>"
+  "page.forgot_password.enter_password.submit.success": "Your password has been changed. <signin>You can now log in with your new password.</signin>",
+  "page.cash_accounts.button.add_funds": "Add funds",
+  "page.cash_accounts.button.operations": "Operations",
+  "page.cash_accounts.button.invest": "Invest",
+  "modal.AddFundsCashAccount.name": "Add funds to cash account",
+  "modal.AddFundsCashAccount.description": "Enter the amount you want to add to your cash account.",
+  "modal.AddFundsCashAccount.input.placeholder": "Enter amount",
+  "toast.add_funds.success": "Funds have been added to your cash account."
 }

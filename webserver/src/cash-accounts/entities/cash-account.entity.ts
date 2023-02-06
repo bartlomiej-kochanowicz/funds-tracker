@@ -1,6 +1,6 @@
 import { ObjectType, Field, registerEnumType, ID, Float } from '@nestjs/graphql';
 import { Currency } from '@prisma/client';
-import { CashAccountHistory } from './cash-account-history.entity';
+import { CashAccountOperation } from './cash-account-operation.entity';
 
 @ObjectType()
 export class CashAccount {
@@ -16,8 +16,8 @@ export class CashAccount {
   @Field(() => Float, { description: 'Account balance.' })
   balance: number;
 
-  @Field(() => [CashAccountHistory], { description: 'Account balance history.' })
-  history: CashAccountHistory[];
+  @Field(() => [CashAccountOperation], { description: 'Account opeartions.' })
+  operations: CashAccountOperation[];
 }
 
 registerEnumType(Currency, {

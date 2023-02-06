@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
+import CurrencyInput from 'react-currency-input-field';
 
-export const StyledInput = styled.input.withConfig({
-  shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit'].includes(prop),
-})<{ error: boolean; hasUnit: boolean }>`
+const inputStyles = css<{ error?: boolean; hasUnit?: boolean }>`
   border: none;
   width: 100%;
 
   ${({ theme, error, hasUnit }) => css`
-    border-radius: ${theme.radius.secondary};
+    border-radius: ${theme.radius.primary};
     padding: ${hasUnit ? '0.5rem 2.5rem 0.5rem 1.25rem' : '0.5rem 1.25rem'};
     outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
@@ -45,6 +44,18 @@ export const StyledInput = styled.input.withConfig({
   }
 `;
 
+export const StyledInput = styled.input.withConfig({
+  shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit'].includes(prop),
+})<{ error: boolean; hasUnit: boolean }>`
+  ${inputStyles}
+`;
+
+export const StyledCurrencyInput = styled(CurrencyInput).withConfig({
+  shouldForwardProp: prop => !['flexGrow', 'error'].includes(prop),
+})<{ error?: boolean }>`
+  ${inputStyles}
+`;
+
 export const Wrapper = styled.div.withConfig({
   shouldForwardProp: prop => !['width', 'flexGrow'].includes(prop),
 })<{ width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`; flexGrow?: number }>`
@@ -56,6 +67,10 @@ export const Wrapper = styled.div.withConfig({
     css`
       flex-grow: ${flexGrow};
     `}
+
+  .hidden-input {
+    display: none;
+  }
 `;
 
 export const Error = styled.span`

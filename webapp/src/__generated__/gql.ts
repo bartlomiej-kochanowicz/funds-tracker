@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "\n  mutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n    addFundsToCashAccount(data: $data) {\n      balance\n    }\n  }\n": types.AddFundsToCashAccountDocument,
     "\n  mutation ConfirmSignup($data: ConfirmSignupInput!) {\n    confirmSignup(data: $data) {\n      success\n    }\n  }\n": types.ConfirmSignupDocument,
     "\n  mutation CreateCashAccount($data: CreateCashAccountInput!) {\n    createCashAccount(data: $data) {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n": types.CreateCashAccountDocument,
     "\n  mutation DeleteCashAccount($uuid: ID!) {\n    deleteCashAccount(uuid: $uuid) {\n      uuid\n      name\n      currency\n    }\n  }\n": types.DeleteCashAccountDocument,
@@ -27,10 +28,14 @@ const documents = {
     "\n  mutation Signup($data: SignupInput!) {\n    signupLocal(data: $data) {\n      success\n    }\n  }\n": types.SignupDocument,
     "\n  mutation UpdateUser($data: UpdateUserInput!) {\n    updateUser(data: $data) {\n      uuid\n      name\n      email\n      createdAt\n      introductionStep\n      defaultCurrency\n    }\n  }\n": types.UpdateUserDocument,
     "\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n": types.EmailExistDocument,
-    "\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n      history(first: 30) {\n        date\n        balance\n      }\n    }\n  }\n": types.GetCashAccountDocument,
+    "\n  query GetCashAccounts {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n": types.GetCashAccountsDocument,
     "\n  query GetUser {\n    user {\n      uuid\n      name\n      email\n      createdAt\n      introductionStep\n      defaultCurrency\n    }\n  }\n": types.GetUserDocument,
 };
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n    addFundsToCashAccount(data: $data) {\n      balance\n    }\n  }\n"): (typeof documents)["\n  mutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n    addFundsToCashAccount(data: $data) {\n      balance\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -90,7 +95,7 @@ export function gql(source: "\n  query EmailExist($data: EmailInput!) {\n    ema
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n      history(first: 30) {\n        date\n        balance\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCashAccount {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n      history(first: 30) {\n        date\n        balance\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetCashAccounts {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n"): (typeof documents)["\n  query GetCashAccounts {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

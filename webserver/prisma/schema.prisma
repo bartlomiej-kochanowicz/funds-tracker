@@ -31,23 +31,24 @@ model Session {
 }
 
 model CashAccount {
-  uuid     String               @id @default(uuid())
-  name     String
-  balance  Float                @default(0)
-  currency Currency
-  user     User                 @relation(fields: [userUuid], references: [uuid])
-  userUuid String
-  history  CashAccountHistory[] @relation()
+  uuid       String                 @id @default(uuid())
+  name       String
+  balance    Float                  @default(0)
+  currency   Currency
+  user       User                   @relation(fields: [userUuid], references: [uuid])
+  userUuid   String
+  operations CashAccountOperation[] @relation()
 
   @@unique([userUuid, uuid])
 }
 
-model CashAccountHistory {
-  uuid            String      @id @default(uuid())
-  cashAccount     CashAccount @relation(fields: [cashAccountUuid], references: [uuid])
+model CashAccountOperation {
+  uuid            String                   @id @default(uuid())
+  cashAccount     CashAccount              @relation(fields: [cashAccountUuid], references: [uuid])
   cashAccountUuid String
-  date            DateTime
-  balance         Float
+  date            DateTime                 @default(now())
+  type            CashAccountOperationType
+  amount          Float
 }
 
 model Portfolio {
@@ -69,6 +70,12 @@ model Instrument {
   portfolioUuid         String
 
   @@unique([portfolioUuid, uuid])
+}
+
+enum CashAccountOperationType {
+  deposit
+  withdrawal
+  transfer
 }
 
 enum InstrumentType {
