@@ -6,12 +6,19 @@ import { useForm } from 'react-hook-form';
 import { useInput } from 'hooks/useInput';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Currency } from '__generated__/graphql';
+import {
+  AddFundsToCashAccountMutation,
+  AddFundsToCashAccountMutationVariables,
+  Currency,
+} from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
+import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations';
+import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { validationSchema } from './AddFundsCashAccountForm.schema';
 
 interface AddFundsCashAccountFormProps {
   closeModal: () => void;
-  callback: () => void;
+  callback: ({ balance, uuid }: { balance: number; uuid: string }) => void;
   uuid: string;
   currency: Currency;
 }
@@ -38,8 +45,36 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
     mode: 'onChange',
   });
 
-  const onSubmit = (data: typeof defaultValues) => {
-    console.log('@@@@@', data);
+  const [addFundsToCashAcount] = useMutation<
+    AddFundsToCashAccountMutation,
+    AddFundsToCashAccountMutationVariables
+  >(ADD_FUNDS_TO_CASH_ACCOUNT, {
+    onCompleted: data => {
+      callback({
+        balance: data.addFundsToCashAccount.balance,
+        uuid,
+      });
+
+      closeModal();
+
+      showSuccessToast(t('toast.add_funds.success'));
+    },
+    onError: () => {
+      closeModal();
+
+      showErrorToast(t('service.unknown_error'));
+    },
+  });
+
+  const onSubmit = async (data: typeof defaultValues) => {
+    await addFundsToCashAcount({
+      variables: {
+        data: {
+          amount: Number(data.amount),
+          uuid,
+        },
+      },
+    });
   };
 
   const amountInputProps = useInput<typeof defaultValues>({

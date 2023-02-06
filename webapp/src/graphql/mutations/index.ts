@@ -1,3 +1,4 @@
+export * from './AddFundsToCashAccount';
 export * from './ConfirmSignup';
 export * from './CreateCashAccount';
 export * from './DeleteCashAccount';

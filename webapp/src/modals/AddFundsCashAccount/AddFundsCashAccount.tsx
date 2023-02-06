@@ -10,7 +10,7 @@ import { AddFundsCashAccountForm } from './AddFundsCashAccountForm';
 export const MODAL_ADD_FUNDS_CASH_ACCOUNT = 'AddFundsCashAccount';
 
 export type AddFundsCashAccountProps = {
-  callback: () => void;
+  callback: ({ balance, uuid }: { balance: number; uuid: string }) => void;
   uuid: string;
   currency: Currency;
 };

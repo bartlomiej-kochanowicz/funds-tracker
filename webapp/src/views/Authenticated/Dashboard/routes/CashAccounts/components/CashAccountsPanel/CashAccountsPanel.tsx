@@ -8,12 +8,13 @@ import { FaChartLine } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
 import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 
-export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
-  name,
-  currency,
-  balance,
-  uuid,
-}) => {
+interface CashAccountsPanelProps {
+  updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
+}
+
+export const CashAccountsPanel: FC<
+  GetCashAccountsQuery['cashAccounts'][0] & CashAccountsPanelProps
+> = ({ name, currency, balance, uuid, updateCashAccountBalance }) => {
   const { i18n, t } = useTranslation();
 
   const formatter = new Intl.NumberFormat(i18n.language, {
@@ -23,10 +24,12 @@ export const CashAccountsPanel: FC<GetCashAccountsQuery['cashAccounts'][0]> = ({
 
   const { openModal } = useModalContext();
 
-  const callback = () => {};
-
   const handleOpenAddFundsCashAccountModal = () => {
-    openModal<AddFundsCashAccountProps>(MODAL_ADD_FUNDS_CASH_ACCOUNT, { callback, uuid, currency });
+    openModal<AddFundsCashAccountProps>(MODAL_ADD_FUNDS_CASH_ACCOUNT, {
+      callback: updateCashAccountBalance,
+      uuid,
+      currency,
+    });
   };
 
   return (

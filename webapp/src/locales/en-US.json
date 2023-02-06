@@ -117,5 +117,6 @@
   "page.cash_accounts.button.invest": "Invest",
   "modal.AddFundsCashAccount.name": "Add funds to cash account",
   "modal.AddFundsCashAccount.description": "Enter the amount you want to add to your cash account.",
-  "modal.AddFundsCashAccount.input.placeholder": "Enter amount"
+  "modal.AddFundsCashAccount.input.placeholder": "Enter amount",
+  "toast.add_funds.success": "Funds have been added to your cash account."
 }
