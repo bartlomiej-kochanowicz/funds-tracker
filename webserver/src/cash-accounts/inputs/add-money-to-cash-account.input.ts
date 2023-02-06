@@ -1,5 +1,5 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
-import { IsNumber } from 'class-validator';
+import { IsNumber, IsPositive } from 'class-validator';
 
 @InputType()
 export class AddMoneyToCashAccountInput {
@@ -8,5 +8,6 @@ export class AddMoneyToCashAccountInput {
 
   @Field(() => Number, { description: 'Cash amount.' })
   @IsNumber()
+  @IsPositive()
   amount: number;
 }
