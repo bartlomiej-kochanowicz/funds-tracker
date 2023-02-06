@@ -16,7 +16,7 @@ export class CashAccount {
   @Field(() => Float, { description: 'Account balance.' })
   balance: number;
 
-  @Field(() => [CashAccountOperation], { description: 'Account balance history.' })
+  @Field(() => [CashAccountOperation], { description: 'Account opeartions.' })
   operations: CashAccountOperation[];
 }
 

@@ -3,6 +3,7 @@ import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
 import { CashAccount, CashAccountOperation, IntroductionCashAccounts } from './entities';
 import {
+  AddMoneyToCashAccountInput,
   CreateCashAccountInput,
   IntroductionCreateCashAccountsInput,
   UpdateCashAccountInput,
@@ -70,5 +71,14 @@ export class CashAccountsResolver {
     @Args('uuid', { type: () => ID }) uuid: string,
   ) {
     return this.cashAccountsService.delete(userId, uuid);
+  }
+
+  @Mutation(() => CashAccount)
+  addMoneyToCashAccount(
+    @GetCurrentUserId() userId: string,
+    @Args('data')
+    addMoneyToCashAccountInput: AddMoneyToCashAccountInput,
+  ) {
+    return this.cashAccountsService.addMoneyToCashAccountInput(userId, addMoneyToCashAccountInput);
   }
 }

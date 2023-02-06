@@ -46,7 +46,7 @@ model CashAccountOperation {
   uuid            String                   @id @default(uuid())
   cashAccount     CashAccount              @relation(fields: [cashAccountUuid], references: [uuid])
   cashAccountUuid String
-  date            DateTime
+  date            DateTime                 @default(now())
   type            CashAccountOperationType
   amount          Float
 }

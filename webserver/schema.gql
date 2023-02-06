@@ -85,7 +85,7 @@ type CashAccount {
   """Account balance."""
   balance: Float!
 
-  """Account balance history."""
+  """Account opeartions."""
   operations(first: Float): [CashAccountOperation!]!
 }
 
@@ -177,6 +177,7 @@ type Mutation {
   introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: ID!): CashAccount!
+  addMoneyToCashAccount(data: AddMoneyToCashAccountInput!): CashAccount!
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   introductionCreatePortfolios(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
@@ -269,6 +270,14 @@ input UpdateCashAccountInput {
 
   """Account balance."""
   balance: Float
+}
+
+input AddMoneyToCashAccountInput {
+  """Account uuid."""
+  uuid: ID!
+
+  """Cash amount."""
+  amount: Float!
 }
 
 input CreatePortfolioInput {

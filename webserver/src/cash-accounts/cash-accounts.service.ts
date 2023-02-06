@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { IntroductionStep } from '@prisma/client';
+import { CashAccountOperationType, IntroductionStep } from '@prisma/client';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { CashAccount, CashAccountOperation, IntroductionCashAccounts } from './entities';
@@ -7,6 +7,7 @@ import {
   CreateCashAccountInput,
   UpdateCashAccountInput,
   IntroductionCreateCashAccountsInput,
+  AddMoneyToCashAccountInput,
 } from './inputs';
 
 @Injectable()
@@ -102,7 +103,7 @@ export class CashAccountsService {
   async findOperations(uuid: string, first: number): Promise<CashAccountOperation[]> {
     const cashAccountHistory = await this.prisma.cashAccountOperation.findMany({
       where: {
-        uuid,
+        cashAccountUuid: uuid,
       },
       orderBy: { date: 'asc' },
       take: first,
@@ -145,6 +146,41 @@ export class CashAccountsService {
             userUuid,
             uuid,
           },
+        },
+      });
+
+      return cashAccount;
+    } catch {
+      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  async addMoneyToCashAccountInput(
+    userUuid: string,
+    addMoneyToCashAccountInput: AddMoneyToCashAccountInput,
+  ): Promise<Omit<CashAccount, 'operations'>> {
+    const { uuid, amount } = addMoneyToCashAccountInput;
+
+    try {
+      const cashAccount = await this.prisma.cashAccount.update({
+        where: {
+          userUuid_uuid: {
+            userUuid,
+            uuid,
+          },
+        },
+        data: {
+          balance: {
+            increment: amount,
+          },
+        },
+      });
+
+      await this.prisma.cashAccountOperation.create({
+        data: {
+          cashAccountUuid: uuid,
+          amount,
+          type: CashAccountOperationType.deposit,
         },
       });
 
