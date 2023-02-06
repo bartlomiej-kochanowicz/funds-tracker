@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "\n  mutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n    addFundsToCashAccount(data: $data) {\n      balance\n    }\n  }\n": types.AddFundsToCashAccountDocument,
     "\n  mutation ConfirmSignup($data: ConfirmSignupInput!) {\n    confirmSignup(data: $data) {\n      success\n    }\n  }\n": types.ConfirmSignupDocument,
     "\n  mutation CreateCashAccount($data: CreateCashAccountInput!) {\n    createCashAccount(data: $data) {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n": types.CreateCashAccountDocument,
     "\n  mutation DeleteCashAccount($uuid: ID!) {\n    deleteCashAccount(uuid: $uuid) {\n      uuid\n      name\n      currency\n    }\n  }\n": types.DeleteCashAccountDocument,
@@ -31,6 +32,10 @@ const documents = {
     "\n  query GetUser {\n    user {\n      uuid\n      name\n      email\n      createdAt\n      introductionStep\n      defaultCurrency\n    }\n  }\n": types.GetUserDocument,
 };
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n    addFundsToCashAccount(data: $data) {\n      balance\n    }\n  }\n"): (typeof documents)["\n  mutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n    addFundsToCashAccount(data: $data) {\n      balance\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

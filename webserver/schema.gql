@@ -177,7 +177,7 @@ type Mutation {
   introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: ID!): CashAccount!
-  addMoneyToCashAccount(data: AddMoneyToCashAccountInput!): CashAccount!
+  addFundsToCashAccount(data: AddFundsToCashAccountInput!): CashAccount!
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   introductionCreatePortfolios(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
@@ -272,7 +272,7 @@ input UpdateCashAccountInput {
   balance: Float
 }
 
-input AddMoneyToCashAccountInput {
+input AddFundsToCashAccountInput {
   """Account uuid."""
   uuid: ID!
 
