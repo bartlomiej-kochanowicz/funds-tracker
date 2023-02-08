@@ -53,6 +53,14 @@ export const EnterEmailForm = () => {
   );
 
   const onSubmit = async ({ userEmail }: typeof defaultValues) => {
+    if (!token) {
+      setRefreshReCaptcha(r => !r);
+
+      onSubmit({ userEmail } as typeof defaultValues);
+
+      return;
+    }
+
     await resetPassword({
       variables: {
         data: {

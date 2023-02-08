@@ -114,6 +114,14 @@ export const SigninForm = () => {
   const onVerify = useCallback(setToken, [setToken]);
 
   const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
+    if (!token) {
+      setRefreshReCaptcha(r => !r);
+
+      onSubmit({ userEmail, userPassword });
+
+      return;
+    }
+
     if (compareState(states.email)) {
       await emailExist({ variables: { data: { email: userEmail, token } } });
     }

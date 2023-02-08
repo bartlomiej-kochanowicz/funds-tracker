@@ -76,6 +76,14 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
   });
 
   const onSubmit = async ({ userPassword }: typeof defaultValues) => {
+    if (!token) {
+      setRefreshReCaptcha(r => !r);
+
+      onSubmit({ userPassword } as typeof defaultValues);
+
+      return;
+    }
+
     await setNewPasswordMutation({
       variables: {
         data: {
