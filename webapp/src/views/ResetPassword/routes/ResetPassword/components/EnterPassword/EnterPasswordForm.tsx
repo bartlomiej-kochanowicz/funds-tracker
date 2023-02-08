@@ -66,8 +66,8 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
     onCompleted: () => {
       setNewPasswordSuccess(true);
     },
-    onError: error => {
-      const message = error?.message || t('service.unknown_error');
+    onError: () => {
+      const message = t('service.unknown_error');
 
       setError('userPassword', { type: 'custom', message });
       setError('userPasswordConfirmation', { type: 'custom', message: '‎' });

@@ -76,10 +76,8 @@ export const SignupForm = () => {
         updateState(actions.CHANGE_TO_PASSWORDS);
       }
     },
-    onError: error => {
-      if (error?.message === 'Failed to fetch') {
-        showErrorToast(t('service.unknown_error'));
-      }
+    onError: () => {
+      showErrorToast(t('service.unknown_error'));
     },
   });
 
@@ -97,8 +95,8 @@ export const SignupForm = () => {
         });
       }
     },
-    onError: error => {
-      const message = error?.message || t('service.unknown_error');
+    onError: () => {
+      const message = t('service.unknown_error');
 
       setError('userPassword', { type: 'custom', message });
       setError('userPasswordConfirmation', {

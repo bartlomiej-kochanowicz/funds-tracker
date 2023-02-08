@@ -46,8 +46,8 @@ export const EnterEmailForm = () => {
 
         setSendEmailSuccess(true);
       },
-      onError: error => {
-        showErrorToast(error?.message ?? t('toast.send_reset_password_link.failure'));
+      onError: () => {
+        showErrorToast(t('toast.send_reset_password_link.failure'));
       },
     },
   );
