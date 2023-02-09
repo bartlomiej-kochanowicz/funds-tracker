@@ -67,6 +67,10 @@ export const SigninForm = () => {
     resolver: yupResolver(validationSchema(compareState(states.password))),
   });
 
+  const values = getValues();
+
+  console.log('@@@@@', values);
+
   const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
     onCompleted: data => {
       if (data?.emailExist?.exist) {
