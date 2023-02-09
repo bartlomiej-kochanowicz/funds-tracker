@@ -3,7 +3,6 @@ import {
   FieldErrorsImpl,
   FieldValues,
   Path,
-  UnPackAsyncDefaultValues,
   UseFormRegister,
   get,
 } from 'react-hook-form';
@@ -11,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 interface UseInputProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;
-  name: Path<UnPackAsyncDefaultValues<Fields>>;
+  name: Path<Fields>;
   errors?: FieldErrorsImpl<DeepRequired<Fields>>;
 }
 
