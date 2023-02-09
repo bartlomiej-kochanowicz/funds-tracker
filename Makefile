@@ -1,5 +1,7 @@
 up:
 	docker compose up -d
+start-webapp:
+	pnpm start --port 4000 --host
 down:
 	docker compose down --remove-orphans -v
 stop:

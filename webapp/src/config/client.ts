@@ -3,7 +3,7 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, Observable } from '@apollo/client';
 import { RetryLink } from '@apollo/client/link/retry';
 import { onError } from '@apollo/client/link/error';
-import { API_URL, IS_DEVELOPMENT } from 'config/env';
+import { IS_DEVELOPMENT } from 'config/env';
 import { REFRESH_TOKEN } from 'graphql/mutations';
 import { RefreshTokenMutation } from '__generated__/graphql';
 
@@ -51,7 +51,7 @@ const retryLink = new RetryLink({
 });
 
 const httpLink = new HttpLink({
-  uri: IS_DEVELOPMENT ? API_URL : '/api/graphql',
+  uri: '/api/graphql',
   credentials: 'include',
 });
 

@@ -6,11 +6,20 @@ import eslint from 'vite-plugin-eslint';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+
+console.log('IS_DEVELOPMENT', IS_DEVELOPMENT);
+
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    host: '0.0.0.0',
     port: 3000,
+    proxy: {
+      '/api/graphql': {
+        rewrite: path => (IS_DEVELOPMENT ? path.replace(/^\/api/, '') : path),
+        target: 'http://localhost:3001/graphql',
+      },
+    },
   },
   plugins: [
     react({
