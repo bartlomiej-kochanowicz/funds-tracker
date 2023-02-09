@@ -1,7 +1,6 @@
 import { Input, Spacer } from 'components/atoms';
-import { useInput } from 'hooks/useInput';
-import { Fragment } from 'react';
-import { DeepRequired, FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
+import { ChangeEvent, Fragment } from 'react';
+import { DeepRequired, FieldErrorsImpl, UseFormSetValue } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 type DefaultValues = {
@@ -12,24 +11,12 @@ type DefaultValues = {
 };
 
 interface PasswordsProps {
-  register: UseFormRegister<DefaultValues>;
+  setValue: UseFormSetValue<DefaultValues>;
   errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
 }
 
-export const Passwords = ({ register, errors }: PasswordsProps) => {
+export const Passwords = ({ setValue, errors }: PasswordsProps) => {
   const { t } = useTranslation();
-
-  const userPasswordProps = useInput<DefaultValues>({
-    register,
-    name: 'userPassword',
-    errors,
-  });
-
-  const userPasswordConfirmationProps = useInput<DefaultValues>({
-    register,
-    name: 'userPasswordConfirmation',
-    errors,
-  });
 
   return (
     <Fragment>
@@ -37,7 +24,8 @@ export const Passwords = ({ register, errors }: PasswordsProps) => {
         placeholder={t('common.password')}
         type="password"
         autoFocus
-        {...userPasswordProps}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setValue('userPassword', e.target.value)}
+        error={errors.userPassword?.message}
       />
 
       <Spacer />
@@ -45,7 +33,10 @@ export const Passwords = ({ register, errors }: PasswordsProps) => {
       <Input
         placeholder={t('page.signup.password.confirm')}
         type="password"
-        {...userPasswordConfirmationProps}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setValue('userPasswordConfirmation', e.target.value)
+        }
+        error={errors.userPasswordConfirmation?.message}
       />
     </Fragment>
   );

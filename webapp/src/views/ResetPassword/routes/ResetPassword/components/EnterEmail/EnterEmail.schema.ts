@@ -1,5 +1,8 @@
 import { object, string } from 'yup';
+import i18n from 'utils/i18n';
 
 export const validationSchema = object().shape({
-  userEmail: string().email('page.signin.email.invalid').required('page.signin.email.required'),
+  userEmail: string()
+    .email(i18n.t('page.signin.email.invalid'))
+    .required(i18n.t('page.signin.email.required')),
 });

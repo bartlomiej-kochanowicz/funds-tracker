@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { Button, Input, Select, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
-import { useInput } from 'hooks/useInput';
 import { useSelect } from 'hooks/useSelect';
 import {
   DeepRequired,
@@ -31,12 +30,6 @@ export const CashAccountsField = ({
 }: CashAccountsFieldProps) => {
   const { t } = useTranslation();
 
-  const nameInputProps = useInput<IntroductionCreateCashAccountsInput>({
-    register,
-    name: `cashAccounts.${index}.name`,
-    errors,
-  });
-
   const currencySelectProps = useSelect<IntroductionCreateCashAccountsInput>({
     register,
     name: `cashAccounts.${index}.currency`,
@@ -63,7 +56,8 @@ export const CashAccountsField = ({
       <Input
         placeholder={t('common.input.name.placeholder')}
         flexGrow={1}
-        {...nameInputProps}
+        {...register(`cashAccounts.${index}.name`)}
+        error={errors.cashAccounts?.[index]?.name?.message}
       />
 
       <Spreader spread="tiny" />

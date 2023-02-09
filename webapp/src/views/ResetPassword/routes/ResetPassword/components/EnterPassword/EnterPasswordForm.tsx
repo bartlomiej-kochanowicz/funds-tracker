@@ -1,9 +1,8 @@
 import { Button, Input, Loader, RouterLink, Spacer, Text } from 'components/atoms';
-import { FC, lazy, Suspense, useCallback, useState } from 'react';
+import { ChangeEvent, FC, lazy, Suspense, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useInput } from 'hooks/useInput';
 import { useMutation } from '@apollo/client';
 import { SET_NEW_PASSWORD } from 'graphql/mutations';
 import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from '__generated__/graphql';
@@ -38,25 +37,13 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
   };
 
   const {
-    register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
+    setValue,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
-  });
-
-  const userPasswordProps = useInput<typeof defaultValues>({
-    register,
-    name: 'userPassword',
-    errors,
-  });
-
-  const userPasswordConfirmationProps = useInput<typeof defaultValues>({
-    register,
-    name: 'userPasswordConfirmation',
-    errors,
   });
 
   const [setNewPasswordMutation] = useMutation<
@@ -135,7 +122,8 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
         placeholder={t('common.password')}
         type="password"
         autoFocus
-        {...userPasswordProps}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setValue('userPassword', e.target.value)}
+        error={errors.userPassword?.message}
       />
 
       <Spacer />
@@ -143,7 +131,10 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
       <Input
         placeholder={t('page.signup.password.confirm')}
         type="password"
-        {...userPasswordConfirmationProps}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setValue('userPasswordConfirmation', e.target.value)
+        }
+        error={errors.userPasswordConfirmation?.message}
       />
 
       <Spacer />

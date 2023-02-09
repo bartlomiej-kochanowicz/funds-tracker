@@ -3,8 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Loader, Spacer, Text } from 'components/atoms';
 import { RESET_PASSWORD } from 'graphql/mutations';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
-import { useInput } from 'hooks/useInput';
-import { lazy, Suspense, useCallback, useState } from 'react';
+import { ChangeEvent, lazy, Suspense, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ResetPasswordMutation, ResetPasswordMutationVariables } from '__generated__/graphql';
@@ -30,9 +29,9 @@ export const EnterEmailForm = () => {
   const defaultValues = { userEmail: '' };
 
   const {
-    register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
@@ -73,12 +72,6 @@ export const EnterEmailForm = () => {
     setRefreshReCaptcha(r => !r);
   };
 
-  const userEmailProps = useInput<typeof defaultValues>({
-    register,
-    name: 'userEmail',
-    errors,
-  });
-
   if (sendEmailSuccess) {
     return (
       <Text
@@ -107,7 +100,8 @@ export const EnterEmailForm = () => {
         placeholder={t('common.email')}
         type="email"
         data-testid="email-input"
-        {...userEmailProps}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setValue('userEmail', e.target.value)}
+        error={errors.userEmail?.message}
       />
 
       <Spacer />

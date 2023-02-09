@@ -5,7 +5,6 @@ import { Row } from 'simple-flexbox';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useUserContext } from 'contexts/UserContext';
 import { useForm } from 'react-hook-form';
-import { useInput } from 'hooks/useInput';
 import { useSelect } from 'hooks/useSelect';
 import {
   CreateCashAccountInput,
@@ -66,12 +65,6 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
     });
   };
 
-  const nameInputProps = useInput<CreateCashAccountInput>({
-    register,
-    name: 'name',
-    errors,
-  });
-
   const currencySelectProps = useSelect<CreateCashAccountInput>({
     register,
     name: 'currency',
@@ -98,7 +91,8 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
         <Input
           placeholder={t('common.input.name.placeholder')}
           flexGrow={1}
-          {...nameInputProps}
+          error={errors.name?.message}
+          {...register('name')}
         />
 
         <Spreader spread="tiny" />

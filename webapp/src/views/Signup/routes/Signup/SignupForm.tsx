@@ -58,7 +58,7 @@ export const SignupForm = () => {
   };
 
   const {
-    register,
+    setValue,
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
@@ -146,14 +146,14 @@ export const SignupForm = () => {
 
       {compareState(states.nameAndEmail) && (
         <NameAndEmail
-          register={register}
+          setValue={setValue}
           errors={errors}
         />
       )}
 
       {compareState(states.passwords) && (
         <Passwords
-          register={register}
+          setValue={setValue}
           errors={errors}
         />
       )}

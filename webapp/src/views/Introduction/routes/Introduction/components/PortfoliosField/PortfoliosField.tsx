@@ -1,5 +1,4 @@
 import { Button, Input, Spreader } from 'components/atoms';
-import { useInput } from 'hooks/useInput';
 import {
   DeepRequired,
   FieldErrorsImpl,
@@ -21,12 +20,6 @@ interface PortfoliosFieldProps {
 export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosFieldProps) => {
   const { t } = useTranslation();
 
-  const nameInputProps = useInput<IntroductionCreatePortfoliosInput>({
-    register,
-    name: `portfolios.${index}.name`,
-    errors,
-  });
-
   const handleRemoveField = () => remove(index);
 
   return (
@@ -34,7 +27,8 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
       <Input
         placeholder={t('add.portfolios.input.placeholder')}
         flexGrow={1}
-        {...nameInputProps}
+        {...register(`portfolios.${index}.name`)}
+        error={errors.portfolios?.[index]?.name?.message}
       />
 
       <Spreader spread="tiny" />

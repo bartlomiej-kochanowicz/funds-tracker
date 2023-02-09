@@ -19,3 +19,5 @@ i18next
     debug: IS_DEVELOPMENT,
     load: 'currentOnly',
   });
+
+export default i18next;

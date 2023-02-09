@@ -7,7 +7,6 @@ import {
   UseFormRegister,
   get,
 } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 
 interface UseSelectProps<Fields extends FieldValues> {
   register: UseFormRegister<Fields>;
@@ -34,11 +33,9 @@ export const useSelect = <Fields extends FieldValues>({
     registerOnChange(e);
   };
 
-  const { t } = useTranslation();
-
   return {
     onChange,
-    error: t(get(errors, name)?.message) || undefined,
+    error: get(errors, name)?.message || undefined,
     ref,
     onBlur,
     ...rest,

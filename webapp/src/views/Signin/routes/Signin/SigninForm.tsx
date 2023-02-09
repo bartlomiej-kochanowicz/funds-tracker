@@ -1,11 +1,10 @@
-import { Fragment, lazy, Suspense, useCallback, useState } from 'react';
+import { ChangeEvent, Fragment, lazy, Suspense, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { Button, Spacer, Input, Loader } from 'components/atoms';
-import { useInput } from 'hooks/useInput';
 import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
 import { ROUTES } from 'routes/paths';
 import { EMAIL_EXIST } from 'graphql/query';
@@ -62,14 +61,11 @@ export const SigninForm = () => {
     formState: { errors, isSubmitting },
     setError,
     getValues,
+    setValue,
   } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema(compareState(states.password))),
   });
-
-  const values = getValues();
-
-  console.log('@@@@@', values);
 
   const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
     onCompleted: data => {
@@ -137,18 +133,6 @@ export const SigninForm = () => {
     setRefreshReCaptcha(r => !r);
   };
 
-  const userEmailProps = useInput<typeof defaultValues>({
-    register,
-    name: 'userEmail',
-    errors,
-  });
-
-  const userPasswordProps = useInput<typeof defaultValues>({
-    register,
-    name: 'userPassword',
-    errors,
-  });
-
   const userNotConfirmed = errors.userPassword?.message === 'User not confirmed.';
 
   return (
@@ -168,7 +152,9 @@ export const SigninForm = () => {
         type="email"
         disabled={compareState(states.password)}
         data-testid="email-input"
-        {...userEmailProps}
+        error={errors.userEmail?.message}
+        // react-hook-form doesn't support browser autofill
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setValue('userEmail', e.target.value)}
       />
 
       {compareState(states.password) && (
@@ -180,7 +166,8 @@ export const SigninForm = () => {
             type="password"
             autoFocus
             data-testid="password-input"
-            {...userPasswordProps}
+            error={errors.userPassword?.message}
+            {...register('userPassword')}
           />
         </Fragment>
       )}

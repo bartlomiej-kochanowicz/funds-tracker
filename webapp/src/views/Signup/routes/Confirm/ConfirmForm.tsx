@@ -1,7 +1,6 @@
 import { FC, lazy, Suspense, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input, Spacer } from 'components/atoms';
-import { useInput } from 'hooks/useInput';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUserContext } from 'contexts/UserContext';
@@ -68,12 +67,6 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
     setRefreshReCaptcha(r => !r);
   };
 
-  const codeInputProps = useInput<typeof defaultValues>({
-    register,
-    name: 'code',
-    errors,
-  });
-
   return (
     <Form
       onSubmit={handleSubmit(onSubmit)}
@@ -88,7 +81,8 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 
       <Input
         placeholder={t('page.confirm.input.placeholder')}
-        {...codeInputProps}
+        {...register('code')}
+        error={errors.code?.message}
       />
 
       <Spacer />

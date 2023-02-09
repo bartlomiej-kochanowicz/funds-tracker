@@ -3,7 +3,6 @@ import { Button, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { FaPlus } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 import { useForm } from 'react-hook-form';
-import { useInput } from 'hooks/useInput';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -77,11 +76,6 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
     });
   };
 
-  const amountInputProps = useInput<typeof defaultValues>({
-    register,
-    name: 'amount',
-  });
-
   return (
     <form
       noValidate
@@ -92,7 +86,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
         currency={currency}
         defaultValue={defaultValues.amount}
         placeholder={t('modal.AddFundsCashAccount.input.placeholder')}
-        {...amountInputProps}
+        {...register('amount')}
       />
 
       <Spacer />
