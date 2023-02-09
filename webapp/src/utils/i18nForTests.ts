@@ -9,7 +9,7 @@ i18next.use(initReactI18next).init({
     escapeValue: false,
   },
   load: 'languageOnly',
-  resources: { en: { translation: en } },
+  resources: { 'en-US': { translation: en } },
 });
 
 export default i18next;

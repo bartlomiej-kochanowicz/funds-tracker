@@ -4,6 +4,7 @@ import matchMediaPolyfill from 'mq-polyfill';
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
 import 'jest-styled-components';
+import i18nForTests from 'utils/i18nForTests';
 
 const originalError = console.error;
 
@@ -13,6 +14,8 @@ jest.mock('config/env', () => ({
   API_URL: '',
   WEBAPP_PORT: '',
 }));
+
+jest.mock('utils/i18n', () => i18nForTests);
 
 /**
  * Define the window.matchMedia
