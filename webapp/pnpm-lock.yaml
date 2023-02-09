@@ -57,7 +57,7 @@ specifiers:
   react-dom: 18.2.0
   react-error-boundary: 3.1.4
   react-google-recaptcha-v3: 1.10.1
-  react-hook-form: 7.41.2
+  react-hook-form: 7.43.1
   react-i18next: 12.1.1
   react-icons: 4.7.1
   react-is: 18.2.0
@@ -82,7 +82,7 @@ specifiers:
 dependencies:
   '@apollo/client': 3.7.3_gdcq4dv6opitr3wbfwyjmanyra
   '@graphql-codegen/client-preset': 1.2.4_graphql@16.6.0
-  '@hookform/resolvers': 2.9.10_react-hook-form@7.41.2
+  '@hookform/resolvers': 2.9.10_react-hook-form@7.43.1
   babel-plugin-styled-components: 2.0.7_styled-components@5.3.6
   color2k: 2.0.0
   framer-motion: 8.0.2_biqbaboplfbrettd7655fr4n2y
@@ -97,7 +97,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 3.1.4_react@18.2.0
   react-google-recaptcha-v3: 1.10.1_biqbaboplfbrettd7655fr4n2y
-  react-hook-form: 7.41.2_react@18.2.0
+  react-hook-form: 7.43.1_react@18.2.0
   react-i18next: 12.1.1_6vygckh2jgtx4nucc3no6lnm3y
   react-icons: 4.7.1_react@18.2.0
   react-is: 18.2.0
@@ -2320,12 +2320,12 @@ packages:
     dependencies:
       graphql: 16.6.0
 
-  /@hookform/resolvers/2.9.10_react-hook-form@7.41.2:
+  /@hookform/resolvers/2.9.10_react-hook-form@7.43.1:
     resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.41.2_react@18.2.0
+      react-hook-form: 7.43.1_react@18.2.0
     dev: false
 
   /@humanwhocodes/config-array/0.11.8:
@@ -7988,8 +7988,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /react-hook-form/7.41.2_react@18.2.0:
-    resolution: {integrity: sha512-Uz5kNlfkEZve0sr5y2LsxPDGN3eNDjjKb1XJgand1E5Ay0S3zWo8YcJQNGu88/Zs6JaFnrJqTXbSr6B2q7wllA==}
+  /react-hook-form/7.43.1_react@18.2.0:
+    resolution: {integrity: sha512-+s3+s8LLytRMriwwuSqeLStVjRXFGxgjjx2jED7Z+wz1J/88vpxieRQGvJVvzrzVxshZ0BRuocFERb779m2kNg==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
