@@ -62,12 +62,17 @@ export const CashAccountsPanel: FC<
         <Row justifyContent="space-between">
           <Text
             fontWeight="700"
-            maxWidth="170px"
+            maxWidth="120px"
           >
             {name}
           </Text>
 
-          <Text>{formatter.format(balance)}</Text>
+          <Text
+            maxWidth="120px"
+            textAlign="right"
+          >
+            {formatter.format(balance)}
+          </Text>
         </Row>
       </Panel.Footer>
     </Panel>
