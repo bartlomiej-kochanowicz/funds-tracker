@@ -1,7 +1,7 @@
 import { Button, Spreader } from 'components/atoms';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import { Column, Row } from 'simple-flexbox';
 
 export const MODAL_MANAGE_CASH_ACCOUNT = 'ManageCashAccount';

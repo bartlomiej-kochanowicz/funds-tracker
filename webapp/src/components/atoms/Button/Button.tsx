@@ -127,8 +127,9 @@ export const Button = styled.button.withConfig({
 
         &:disabled {
           cursor: not-allowed;
-          background-color: ${transparentize(theme.button.color[color].background, 0.5)};
-          color: ${transparentize(theme.button.color[color].font, 0.5)};
+          border: 3px solid ${transparentize(theme.button.color[color].background, 0.5)};
+          color: ${transparentize(theme.button.color[color].background, 0.5)};
+          background-color: transparent;
         }
       `}
     `}
