@@ -113,7 +113,7 @@
   "common.save": "Zapisz",
   "page.forgot_password.enter_password.submit.success": "Hasło zostało zresetowane. <signin>Możesz teraz zalogować się nowym hasłem.</signin>",
   "page.cash_accounts.button.add_funds": "Dodaj środki",
-  "page.cash_accounts.button.operations": "Operacje",
+  "page.cash_accounts.button.manage": "Zarządzaj",
   "page.cash_accounts.button.invest": "Inwestuj",
   "modal.AddFundsCashAccount.name": "Dodaj środki do konta gotówkowego",
   "modal.AddFundsCashAccount.description": "Wpisz kwotę, którą chcesz dodać do konta gotówkowego.",

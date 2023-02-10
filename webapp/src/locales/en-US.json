@@ -113,7 +113,7 @@
   "common.save": "Save",
   "page.forgot_password.enter_password.submit.success": "Your password has been changed. <signin>You can now log in with your new password.</signin>",
   "page.cash_accounts.button.add_funds": "Add funds",
-  "page.cash_accounts.button.operations": "Operations",
+  "page.cash_accounts.button.manage": "Manage",
   "page.cash_accounts.button.invest": "Invest",
   "modal.AddFundsCashAccount.name": "Add funds to cash account",
   "modal.AddFundsCashAccount.description": "Enter the amount you want to add to your cash account.",

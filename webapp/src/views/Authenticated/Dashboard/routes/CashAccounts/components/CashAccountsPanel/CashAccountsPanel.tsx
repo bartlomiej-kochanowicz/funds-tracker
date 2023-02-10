@@ -45,7 +45,7 @@ export const CashAccountsPanel: FC<
 
           <Spreader />
 
-          <Button width="50%">{t('page.cash_accounts.button.operations')}</Button>
+          <Button width="50%">{t('page.cash_accounts.button.manage')}</Button>
         </Row>
 
         <Spacer space="small" />
