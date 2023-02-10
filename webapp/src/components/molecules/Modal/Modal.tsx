@@ -9,13 +9,13 @@ import { theme } from 'styles/theme';
 import { Modal } from './Modal.styles';
 
 interface ModalComponentProps {
-  name: ModalsNames;
+  modalName: ModalsNames;
   closeModal: () => void;
   showName?: boolean;
 }
 
 export const ModalComponent: FC<ModalComponentProps> = ({
-  name,
+  modalName,
   closeModal,
   showName = true,
   ...rest
@@ -24,7 +24,7 @@ export const ModalComponent: FC<ModalComponentProps> = ({
 
   const { t } = useTranslation();
 
-  const Component = modals[name];
+  const Component = modals[modalName];
 
   useDetectOutsideClick<HTMLDivElement>(modalRef, closeModal);
 
@@ -38,7 +38,7 @@ export const ModalComponent: FC<ModalComponentProps> = ({
       >
         <Modal>
           <Row justifyContent={showName ? 'space-between' : 'flex-end'}>
-            {showName && <Heading level="h2">{t(`modal.${name}.name`)}</Heading>}
+            {showName && <Heading level="h2">{t(`modal.${modalName}.name`)}</Heading>}
 
             <Spreader />
 

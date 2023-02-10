@@ -121,5 +121,7 @@
   "toast.add_funds.success": "Funds have been added to your cash account.",
   "modal.ManageCashAccount.name": "Manage cash account",
   "common.rename": "Rename",
-  "common.delete": "Delete"
+  "common.delete": "Delete",
+  "modal.ManageCashAccount.button.remove": "Remove cash account",
+  "modal.RenameCashAccount.name": "Rename cash account"
 }

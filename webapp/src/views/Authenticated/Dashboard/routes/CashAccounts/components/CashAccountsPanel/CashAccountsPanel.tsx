@@ -8,6 +8,7 @@ import { FaChartLine, FaEdit, FaListUl, FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
 import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { ManageCashAccountProps, MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
+import { RenameCashAccountProps, MODAL_RENAME_CASH_ACCOUNT_MODAL } from 'modals/RenameCashAccount';
 
 interface CashAccountsPanelProps {
   updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
@@ -33,7 +34,14 @@ export const CashAccountsPanel: FC<
     });
   };
 
-  const handleOpenMamageCashAccountModal = () => {
+  const handleOpenRenameModal = () => {
+    openModal<RenameCashAccountProps>(MODAL_RENAME_CASH_ACCOUNT_MODAL, {
+      uuid,
+      name,
+    });
+  };
+
+  const handleOpenManageCashAccountModal = () => {
     openModal<ManageCashAccountProps>(MODAL_MANAGE_CASH_ACCOUNT, {});
   };
 
@@ -50,7 +58,10 @@ export const CashAccountsPanel: FC<
 
           <Spreader />
 
-          <Button flexGrow={1}>
+          <Button
+            flexGrow={1}
+            onClick={handleOpenRenameModal}
+          >
             <FaEdit />
           </Button>
 
@@ -58,7 +69,7 @@ export const CashAccountsPanel: FC<
 
           <Button
             flexGrow={1}
-            onClick={handleOpenMamageCashAccountModal}
+            onClick={handleOpenManageCashAccountModal}
           >
             <FaListUl />
           </Button>

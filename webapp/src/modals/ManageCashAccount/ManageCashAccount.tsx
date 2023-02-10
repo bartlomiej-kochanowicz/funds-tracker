@@ -1,4 +1,4 @@
-import { Button, Spreader } from 'components/atoms';
+import { Button, Spacer, Spreader } from 'components/atoms';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
@@ -13,12 +13,16 @@ export const ManageCashAccount: FC<ManageCashAccountProps> = () => {
 
   return (
     <Column>
+      <Column>List with operations...</Column>
+
+      <Spacer />
+
       <Row justifyContent="flex-end">
         <Button
           color="error"
           outline
         >
-          {t('common.delete')} <Spreader spread="small" /> <FaTrash />
+          {t('modal.ManageCashAccount.button.remove')} <Spreader spread="small" /> <FaTrash />
         </Button>
       </Row>
     </Column>

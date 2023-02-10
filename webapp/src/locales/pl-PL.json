@@ -121,5 +121,7 @@
   "toast.add_funds.success": "Środki zostały pomyślnie dodane do konta gotówkowego",
   "modal.ManageCashAccount.name": "Zarządzaj kontem gotówkowym",
   "common.rename": "Zmień nazwę",
-  "common.delete": "Usuń"
+  "common.delete": "Usuń",
+  "modal.ManageCashAccount.button.remove": "Usuń konto gotówkowe",
+  "modal.RenameCashAccount.name": "Zmień nazwę konta gotówkowego"
 }
