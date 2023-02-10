@@ -7,6 +7,7 @@ import { Button, Spacer, Spreader, Text } from 'components/atoms';
 import { FaChartLine } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
 import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
+import { ManageCashAccountProps, MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
 
 interface CashAccountsPanelProps {
   updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
@@ -32,6 +33,10 @@ export const CashAccountsPanel: FC<
     });
   };
 
+  const handleOpenMamageCashAccountModal = () => {
+    openModal<ManageCashAccountProps>(MODAL_MANAGE_CASH_ACCOUNT, {});
+  };
+
   return (
     <Panel>
       <Panel.Body>
@@ -45,7 +50,12 @@ export const CashAccountsPanel: FC<
 
           <Spreader />
 
-          <Button width="50%">{t('page.cash_accounts.button.manage')}</Button>
+          <Button
+            width="50%"
+            onClick={handleOpenMamageCashAccountModal}
+          >
+            {t('page.cash_accounts.button.manage')}
+          </Button>
         </Row>
 
         <Spacer space="small" />
