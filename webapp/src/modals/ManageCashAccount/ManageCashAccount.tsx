@@ -13,14 +13,11 @@ export const ManageCashAccount: FC<ManageCashAccountProps> = () => {
 
   return (
     <Column>
-      <Row>
-        <Button width="50%">
-          {t('common.rename')} <Spreader spread="small" /> <FaEdit />
-        </Button>
-
-        <Spreader />
-
-        <Button width="50%">
+      <Row justifyContent="flex-end">
+        <Button
+          color="error"
+          outline
+        >
           {t('common.delete')} <Spreader spread="small" /> <FaTrash />
         </Button>
       </Row>

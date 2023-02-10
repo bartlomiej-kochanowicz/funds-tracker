@@ -18,6 +18,7 @@ type CommonProps = {
   to?: string;
   boxShadow?: 'default' | 'none';
   flexGrow?: number;
+  outline?: boolean;
 };
 
 type NativeButtonProps = Omit<
@@ -39,7 +40,9 @@ type ButtonProps = CommonProps &
 
 export const Button = styled.button.withConfig({
   shouldForwardProp: prop =>
-    !['width', 'fontWeight', 'borderRadius', 'color', 'boxShadow', 'flexGrow'].includes(prop),
+    !['width', 'fontWeight', 'borderRadius', 'color', 'boxShadow', 'flexGrow', 'outline'].includes(
+      prop,
+    ),
 })<ButtonProps>`
   display: flex;
   align-items: center;
@@ -59,6 +62,7 @@ export const Button = styled.button.withConfig({
     borderRadius = 'primary',
     boxShadow = 'default',
     flexGrow = 0,
+    outline = false,
   }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
@@ -78,19 +82,22 @@ export const Button = styled.button.withConfig({
         }
       }};
 
+      &:active:not(&:disabled) {
+        transform: scale(0.98);
+        box-shadow: ${() => {
+          switch (boxShadow) {
+            case 'default':
+              return css`3px 2px 22px 1px ${transparentize(theme.colors.black, 0.76)}`;
+            case 'none':
+            default:
+              return 'none';
+          }
+        }};
+      }
+
       &:hover {
         transition-duration: 0.1s;
         background-color: ${darken(theme.button.color[color].background, 0.05)};
-      }
-
-      ${flexGrow &&
-      css`
-        flex-grow: ${flexGrow};
-      `}
-
-      &:active:not(&:disabled) {
-        transform: scale(0.98);
-        box-shadow: 3px 2px 22px 1px ${transparentize(theme.button.color[color].background, 0.76)};
       }
 
       &:disabled {
@@ -98,6 +105,32 @@ export const Button = styled.button.withConfig({
         background-color: ${transparentize(theme.button.color[color].background, 0.5)};
         color: ${transparentize(theme.button.color[color].font, 0.5)};
       }
+
+      ${Boolean(flexGrow) &&
+      css`
+        flex-grow: ${flexGrow};
+      `}
+
+      ${Boolean(outline) &&
+      css`
+        border: 3px solid ${theme.button.color[color].background};
+        color: ${theme.button.color[color].background};
+        background-color: transparent;
+
+        &:hover {
+          background-color: ${transparentize(theme.button.color[color].background, 0.95)};
+        }
+
+        &:active:not(&:disabled) {
+          transform: scale(0.98);
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+          background-color: ${transparentize(theme.button.color[color].background, 0.5)};
+          color: ${transparentize(theme.button.color[color].font, 0.5)};
+        }
+      `}
     `}
 `;
 

@@ -74,6 +74,14 @@ export const theme = {
       },
       secondary: { background: Colors.Black, font: Colors.White },
       tertiary: { background: Colors.Gray300, font: Colors.White },
+      error: {
+        background: Colors.Error,
+        font: Colors.White,
+      },
+      success: {
+        background: Colors.Success,
+        font: Colors.White,
+      },
     },
   },
   padding: {
