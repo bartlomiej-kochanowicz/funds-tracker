@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { GetCashAccountsQuery } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Button, Spacer, Spreader, Text } from 'components/atoms';
-import { FaChartLine } from 'react-icons/fa';
+import { FaChartLine, FaEdit, FaListUl, FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
 import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { ManageCashAccountProps, MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
@@ -42,19 +42,25 @@ export const CashAccountsPanel: FC<
       <Panel.Body>
         <Row>
           <Button
-            width="50%"
+            flexGrow={1}
             onClick={handleOpenAddFundsCashAccountModal}
           >
-            {t('page.cash_accounts.button.add_funds')}
+            <FaPlus />
+          </Button>
+
+          <Spreader />
+
+          <Button flexGrow={1}>
+            <FaEdit />
           </Button>
 
           <Spreader />
 
           <Button
-            width="50%"
+            flexGrow={1}
             onClick={handleOpenMamageCashAccountModal}
           >
-            {t('page.cash_accounts.button.manage')}
+            <FaListUl />
           </Button>
         </Row>
 

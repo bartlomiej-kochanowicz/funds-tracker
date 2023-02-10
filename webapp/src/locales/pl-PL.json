@@ -118,5 +118,8 @@
   "modal.AddFundsCashAccount.name": "Dodaj środki do konta gotówkowego",
   "modal.AddFundsCashAccount.description": "Wpisz kwotę, którą chcesz dodać do konta gotówkowego.",
   "modal.AddFundsCashAccount.input.placeholder": "Wpisz kwotę",
-  "toast.add_funds.success": "Środki zostały pomyślnie dodane do konta gotówkowego"
+  "toast.add_funds.success": "Środki zostały pomyślnie dodane do konta gotówkowego",
+  "modal.ManageCashAccount.name": "Zarządzaj kontem gotówkowym",
+  "common.rename": "Zmień nazwę",
+  "common.delete": "Usuń"
 }

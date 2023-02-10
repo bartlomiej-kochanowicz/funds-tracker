@@ -118,5 +118,8 @@
   "modal.AddFundsCashAccount.name": "Add funds to cash account",
   "modal.AddFundsCashAccount.description": "Enter the amount you want to add to your cash account.",
   "modal.AddFundsCashAccount.input.placeholder": "Enter amount",
-  "toast.add_funds.success": "Funds have been added to your cash account."
+  "toast.add_funds.success": "Funds have been added to your cash account.",
+  "modal.ManageCashAccount.name": "Manage cash account",
+  "common.rename": "Rename",
+  "common.delete": "Delete"
 }
