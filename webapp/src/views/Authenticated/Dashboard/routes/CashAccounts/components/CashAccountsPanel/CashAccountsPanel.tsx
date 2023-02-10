@@ -12,11 +12,12 @@ import { RenameCashAccountProps, MODAL_RENAME_CASH_ACCOUNT_MODAL } from 'modals/
 
 interface CashAccountsPanelProps {
   updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
+  updateCashAccountName: (data: { name: string; uuid: string }) => void;
 }
 
 export const CashAccountsPanel: FC<
   GetCashAccountsQuery['cashAccounts'][0] & CashAccountsPanelProps
-> = ({ name, currency, balance, uuid, updateCashAccountBalance }) => {
+> = ({ name, currency, balance, uuid, updateCashAccountBalance, updateCashAccountName }) => {
   const { i18n, t } = useTranslation();
 
   const formatter = new Intl.NumberFormat(i18n.language, {
@@ -38,6 +39,7 @@ export const CashAccountsPanel: FC<
     openModal<RenameCashAccountProps>(MODAL_RENAME_CASH_ACCOUNT_MODAL, {
       uuid,
       name,
+      callback: updateCashAccountName,
     });
   };
 
