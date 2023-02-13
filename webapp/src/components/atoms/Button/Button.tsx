@@ -19,6 +19,7 @@ type CommonProps = {
   boxShadow?: 'default' | 'none';
   flexGrow?: number;
   outline?: boolean;
+  minWidth?: `${number}px`;
 };
 
 type NativeButtonProps = Omit<
@@ -63,6 +64,7 @@ export const Button = styled.button.withConfig({
     boxShadow = 'default',
     flexGrow = 0,
     outline = false,
+    minWidth,
   }) =>
     css`
       font-size: ${theme.button.size[size].fontSize};
@@ -81,6 +83,8 @@ export const Button = styled.button.withConfig({
             return 'none';
         }
       }};
+
+      ${minWidth && `min-width: ${minWidth};`}
 
       &:active:not(&:disabled) {
         transform: scale(0.98);

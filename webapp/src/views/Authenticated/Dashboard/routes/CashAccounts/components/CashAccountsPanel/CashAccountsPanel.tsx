@@ -9,6 +9,7 @@ import { useModalContext } from 'contexts/ModalContext';
 import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { ManageCashAccountProps, MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
 import { RenameCashAccountProps, MODAL_RENAME_CASH_ACCOUNT_MODAL } from 'modals/RenameCashAccount';
+import { RenameButton } from './CashAccountPanel.styles';
 
 interface CashAccountsPanelProps {
   updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
@@ -50,29 +51,31 @@ export const CashAccountsPanel: FC<
   return (
     <Panel>
       <Panel.Body>
-        <Button
-          width="100%"
-          onClick={handleOpenAddFundsCashAccountModal}
-        >
-          {t('page.cash_accounts.button.add_funds')}
+        <Row>
+          <Button
+            width="50%"
+            onClick={handleOpenAddFundsCashAccountModal}
+          >
+            {t('page.cash_accounts.button.add_funds')}
 
-          <Spreader spread="tiny" />
+            <Spreader spread="tiny" />
 
-          <Icon icon={FaPlus} />
-        </Button>
+            <Icon icon={FaPlus} />
+          </Button>
 
-        <Spacer space="small" />
+          <Spreader spread="small" />
 
-        <Button
-          width="100%"
-          onClick={handleOpenManageCashAccountModal}
-        >
-          {t('page.cash_accounts.button.manage')}
+          <Button
+            width="50%"
+            onClick={handleOpenManageCashAccountModal}
+          >
+            {t('page.cash_accounts.button.manage')}
 
-          <Spreader spread="tiny" />
+            <Spreader spread="tiny" />
 
-          <Icon icon={FaDonate} />
-        </Button>
+            <Icon icon={FaDonate} />
+          </Button>
+        </Row>
 
         <Spacer space="small" />
 
@@ -90,12 +93,12 @@ export const CashAccountsPanel: FC<
 
       <Panel.Footer>
         <Row justifyContent="space-between">
-          <Text
-            fontWeight="700"
-            maxWidth="120px"
+          <RenameButton
+            onClick={handleOpenRenameModal}
+            type="button"
           >
             {name}
-          </Text>
+          </RenameButton>
 
           <Text
             maxWidth="120px"
