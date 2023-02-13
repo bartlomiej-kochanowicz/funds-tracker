@@ -6,6 +6,7 @@ export { Checkbox } from './Checkbox';
 export { Dropdown } from './Dropdown';
 export { Grid } from './Grid';
 export { Heading } from './Heading';
+export { Icon } from './Icon';
 export { Input } from './Input';
 export { Tile } from './Tile';
 export { Link } from './Link';

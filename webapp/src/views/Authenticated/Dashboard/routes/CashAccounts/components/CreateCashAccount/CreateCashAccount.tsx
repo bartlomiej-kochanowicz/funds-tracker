@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, Spacer, Spreader, Heading } from 'components/atoms';
+import { Button, Spacer, Spreader, Heading, Icon } from 'components/atoms';
 import { Panel } from 'components/molecules';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
@@ -33,7 +33,11 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
         <Spacer />
 
         <Button onClick={handleOpenModal}>
-          {t('page.cash_accounts.need.more.button')} <Spreader spread="tiny" /> <FaPlus />
+          {t('page.cash_accounts.need.more.button')}
+
+          <Spreader spread="tiny" />
+
+          <Icon icon={FaPlus} />
         </Button>
       </Panel.BodyCentered>
     </Panel>

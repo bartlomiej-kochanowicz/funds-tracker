@@ -1,4 +1,4 @@
-import { Button, Input, Spreader } from 'components/atoms';
+import { Button, Icon, Input, Spreader } from 'components/atoms';
 import {
   DeepRequired,
   FieldErrorsImpl,
@@ -38,7 +38,7 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
         onClick={handleRemoveField}
         boxShadow="none"
       >
-        <FaTrash />
+        <Icon icon={FaTrash} />
       </Button>
     </Row>
   );

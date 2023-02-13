@@ -1,4 +1,4 @@
-import { Button, Spacer, Spreader, Text } from 'components/atoms';
+import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
 
@@ -25,7 +25,11 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
       color="secondary"
       onClick={handleAppend}
     >
-      {i18n.button} <Spreader spread="tiny" /> <FaPlus />
+      {i18n.button}
+
+      <Spreader spread="tiny" />
+
+      <Icon icon={FaPlus} />
     </Button>
   </Column>
 );

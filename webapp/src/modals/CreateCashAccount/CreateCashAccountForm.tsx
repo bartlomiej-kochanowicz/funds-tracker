@@ -1,5 +1,5 @@
 import { FC, Fragment, useMemo } from 'react';
-import { Button, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
+import { Button, Icon, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
 import { FaPlus } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
@@ -129,7 +129,11 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeMod
 
           {!isSubmitting && (
             <Fragment>
-              {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />
+              {t('add.cash.accounts.button.add')}
+
+              <Spreader spread="tiny" />
+
+              <Icon icon={FaPlus} />
             </Fragment>
           )}
         </Button>

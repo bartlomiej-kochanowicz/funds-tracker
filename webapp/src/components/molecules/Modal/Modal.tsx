@@ -2,10 +2,9 @@ import { FC, Fragment, useRef } from 'react';
 import { Row } from 'simple-flexbox';
 import { FaTimes } from 'react-icons/fa';
 import { modals, ModalsNames } from 'modals';
-import { Heading, Spacer, Spreader } from 'components/atoms';
+import { Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
 import { useTranslation } from 'react-i18next';
-import { theme } from 'styles/theme';
 import { Modal } from './Modal.styles';
 
 interface ModalComponentProps {
@@ -43,7 +42,10 @@ export const ModalComponent: FC<ModalComponentProps> = ({
             <Spreader />
 
             <Modal.CloseButton onClick={closeModal}>
-              <FaTimes size={theme.font.size['1.25']} />
+              <Icon
+                icon={FaTimes}
+                size="1.25"
+              />
             </Modal.CloseButton>
           </Row>
 

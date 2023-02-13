@@ -12,6 +12,7 @@ import { useLayer } from 'react-laag';
 import { ChangeHandler } from 'react-hook-form';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Spreader } from 'components/atoms/Spreader';
+import { Icon } from 'components/atoms/Icon';
 import { Menu } from 'components/atoms/Menu';
 import { composeRefs } from 'utils/composeRefs';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
@@ -130,7 +131,7 @@ const SelectInner = <ValueType,>(
 
           <Spreader spread="small" />
 
-          {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+          <Icon icon={isOpen ? FaChevronUp : FaChevronDown} />
         </StyledButton>
 
         {error && <Error>{error}</Error>}

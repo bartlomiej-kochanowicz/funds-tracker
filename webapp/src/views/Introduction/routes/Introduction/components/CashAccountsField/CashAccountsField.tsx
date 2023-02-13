@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Button, Input, Select, Spreader } from 'components/atoms';
+import { Button, Icon, Input, Select, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useSelect } from 'hooks/useSelect';
 import {
@@ -77,7 +77,7 @@ export const CashAccountsField = ({
         onClick={handleRemoveField}
         boxShadow="none"
       >
-        <FaTrash />
+        <Icon icon={FaTrash} />
       </Button>
     </Row>
   );

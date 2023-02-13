@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GetCashAccountsQuery } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
-import { Button, Spacer, Spreader, Text } from 'components/atoms';
-import { FaChartLine, FaEdit, FaListUl, FaPlus } from 'react-icons/fa';
+import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
+import { FaChartLine, FaDonate, FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
 import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { ManageCashAccountProps, MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
@@ -50,40 +50,41 @@ export const CashAccountsPanel: FC<
   return (
     <Panel>
       <Panel.Body>
-        <Row>
-          <Button
-            flexGrow={1}
-            onClick={handleOpenAddFundsCashAccountModal}
-          >
-            <FaPlus />
-          </Button>
+        <Button
+          width="100%"
+          onClick={handleOpenAddFundsCashAccountModal}
+        >
+          {t('page.cash_accounts.button.add_funds')}
 
-          <Spreader />
+          <Spreader spread="tiny" />
 
-          <Button
-            flexGrow={1}
-            onClick={handleOpenRenameModal}
-          >
-            <FaEdit />
-          </Button>
-
-          <Spreader />
-
-          <Button
-            flexGrow={1}
-            onClick={handleOpenManageCashAccountModal}
-          >
-            <FaListUl />
-          </Button>
-        </Row>
+          <Icon icon={FaPlus} />
+        </Button>
 
         <Spacer space="small" />
 
         <Button
           width="100%"
-          flexGrow={1}
+          onClick={handleOpenManageCashAccountModal}
         >
-          {t('page.cash_accounts.button.invest')} <Spreader spread="tiny" /> <FaChartLine />
+          {t('page.cash_accounts.button.manage')}
+
+          <Spreader spread="tiny" />
+
+          <Icon icon={FaDonate} />
+        </Button>
+
+        <Spacer space="small" />
+
+        <Button width="100%">
+          {t('page.cash_accounts.button.invest')}
+
+          <Spreader spread="tiny" />
+
+          <Icon
+            icon={FaChartLine}
+            size="1.25"
+          />
         </Button>
       </Panel.Body>
 

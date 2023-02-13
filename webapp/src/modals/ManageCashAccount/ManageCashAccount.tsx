@@ -1,4 +1,4 @@
-import { Button, Spacer, Spreader } from 'components/atoms';
+import { Button, Icon, Spacer, Spreader } from 'components/atoms';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
@@ -22,7 +22,11 @@ export const ManageCashAccount: FC<ManageCashAccountProps> = () => {
           color="error"
           outline
         >
-          {t('modal.ManageCashAccount.button.remove')} <Spreader spread="small" /> <FaTrash />
+          {t('modal.ManageCashAccount.button.remove')}
+
+          <Spreader spread="tiny" />
+
+          <Icon icon={FaTrash} />
         </Button>
       </Row>
     </Column>

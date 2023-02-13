@@ -11,7 +11,7 @@ import {
   IntroductionCreateCashAccountsMutation,
   IntroductionCreateCashAccountsMutationVariables,
 } from '__generated__/graphql';
-import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { Button, Heading, Icon, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 import { showErrorToast } from 'helpers/showToast';
@@ -151,7 +151,11 @@ export const CreateCashAccountsForm = () => {
                 color="secondary"
                 onClick={handleAppend}
               >
-                {t('add.cash.accounts.button.add')} <Spreader spread="tiny" /> <FaPlus />
+                {t('add.cash.accounts.button.add')}
+
+                <Spreader spread="tiny" />
+
+                <Icon icon={FaPlus} />
               </Button>
             ) : null}
 
