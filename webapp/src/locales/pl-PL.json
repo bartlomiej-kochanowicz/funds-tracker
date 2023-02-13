@@ -113,10 +113,15 @@
   "common.save": "Zapisz",
   "page.forgot_password.enter_password.submit.success": "Hasło zostało zresetowane. <signin>Możesz teraz zalogować się nowym hasłem.</signin>",
   "page.cash_accounts.button.add_funds": "Dodaj środki",
-  "page.cash_accounts.button.operations": "Operacje",
+  "page.cash_accounts.button.manage": "Zarządzaj",
   "page.cash_accounts.button.invest": "Inwestuj",
   "modal.AddFundsCashAccount.name": "Dodaj środki do konta gotówkowego",
   "modal.AddFundsCashAccount.description": "Wpisz kwotę, którą chcesz dodać do konta gotówkowego.",
   "modal.AddFundsCashAccount.input.placeholder": "Wpisz kwotę",
-  "toast.add_funds.success": "Środki zostały pomyślnie dodane do konta gotówkowego"
+  "toast.add_funds.success": "Środki zostały pomyślnie dodane do konta gotówkowego",
+  "modal.ManageCashAccount.name": "Zarządzaj kontem gotówkowym",
+  "common.rename": "Zmień nazwę",
+  "common.delete": "Usuń",
+  "modal.ManageCashAccount.button.remove": "Usuń konto gotówkowe",
+  "modal.RenameCashAccount.name": "Zmień nazwę konta gotówkowego"
 }

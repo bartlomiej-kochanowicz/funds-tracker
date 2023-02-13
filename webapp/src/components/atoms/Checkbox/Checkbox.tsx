@@ -1,5 +1,6 @@
 import { FC, ReactNode, HTMLProps, forwardRef } from 'react';
 import { Text } from 'components/atoms/Text';
+import { Icon } from 'components/atoms/Icon';
 import { FaCheck } from 'react-icons/fa';
 import { Container, Input, Marker } from './Checkbox.styles';
 
@@ -24,7 +25,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         />
 
         <Marker>
-          <FaCheck />
+          <Icon icon={FaCheck} />
         </Marker>
 
         {isLabelString ? <Label>{label}</Label> : label}

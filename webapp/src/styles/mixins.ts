@@ -64,7 +64,7 @@ export const fontable = css<FontableProps>`
     css`
       text-overflow: ellipsis;
       overflow: hidden;
-      width: ${maxWidth};
+      max-width: ${maxWidth};
       white-space: nowrap;
     `}
 

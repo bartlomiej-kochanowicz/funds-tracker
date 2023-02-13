@@ -1,4 +1,4 @@
-import { Button, Heading, Spacer, Spreader } from 'components/atoms';
+import { Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { useModalContext } from 'contexts/ModalContext';
 import { CreateCashAccountModalProps, MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
 import { FC } from 'react';
@@ -32,7 +32,11 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
       <Spacer space="small" />
 
       <Button onClick={handleOpenModal}>
-        {t('page.cash_accounts.need.more.button')} <Spreader spread="tiny" /> <FaPlus />
+        {t('page.cash_accounts.need.more.button')}
+
+        <Spreader spread="tiny" />
+
+        <Icon icon={FaPlus} />
       </Button>
     </Column>
   );

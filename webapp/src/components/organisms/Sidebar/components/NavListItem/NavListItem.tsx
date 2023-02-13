@@ -1,4 +1,4 @@
-import { Spreader, Text } from 'components/atoms';
+import { Icon, Spreader, Text } from 'components/atoms';
 import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
@@ -18,7 +18,7 @@ interface NavListItemProps {
 export const NavListItem: FC<NavListItemProps> = ({
   isActive: routerIsActive,
   title,
-  icon: Icon,
+  icon: IconComponent,
   to,
 }) => {
   const { t } = useTranslation();
@@ -33,8 +33,9 @@ export const NavListItem: FC<NavListItemProps> = ({
     <Fragment>
       <Row>
         <Icon
-          size={theme.font.size['1.25']}
-          color={isActive ? Colors.Blue : undefined}
+          icon={IconComponent}
+          size="1.25"
+          color={isActive ? 'blue' : undefined}
         />
 
         <Spreader spread="small" />

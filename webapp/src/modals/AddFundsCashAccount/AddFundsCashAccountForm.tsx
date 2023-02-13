@@ -1,5 +1,5 @@
 import { FC, Fragment } from 'react';
-import { Button, Input, Loader, Spacer, Spreader } from 'components/atoms';
+import { Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { FaPlus } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 import { useForm } from 'react-hook-form';
@@ -95,6 +95,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
         <Button
           color="tertiary"
           onClick={closeModal}
+          minWidth="130px"
           flexGrow={1}
         >
           {t('common.cancel')}
@@ -105,13 +106,18 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
         <Button
           disabled={isSubmitting || !isValid || !isDirty}
           flexGrow={1}
+          minWidth="130px"
           type="submit"
         >
           {isSubmitting && <Loader color="white" />}
 
           {!isSubmitting && (
             <Fragment>
-              {t('page.cash_accounts.button.add_funds')} <Spreader spread="tiny" /> <FaPlus />
+              {t('page.cash_accounts.button.add_funds')}
+
+              <Spreader spread="tiny" />
+
+              <Icon icon={FaPlus} />
             </Fragment>
           )}
         </Button>

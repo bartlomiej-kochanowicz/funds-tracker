@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Menu, Spreader } from 'components/atoms';
+import { Icon, Menu, Spreader } from 'components/atoms';
 import { useMutation } from '@apollo/client';
 import { LOGOUT } from 'graphql/mutations';
 import { LogoutMutation } from '__generated__/graphql';
@@ -34,7 +34,7 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         {...rest}
       >
         <Menu.Item>
-          <FaUserAlt />
+          <Icon icon={FaUserAlt} />
 
           <Spreader spread="small" />
 
@@ -44,7 +44,7 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         <Menu.Divider />
 
         <Menu.Item onClick={handleSignOut}>
-          <FaSignOutAlt />
+          <Icon icon={FaSignOutAlt} />
 
           <Spreader spread="small" />
 

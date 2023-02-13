@@ -39,6 +39,21 @@ export const CashAccounts = () => {
     }));
   };
 
+  const updateCashAccountName = ({ name, uuid }: { name: string; uuid: string }) => {
+    updateQuery(prev => ({
+      cashAccounts: prev.cashAccounts.map(cashAccount => {
+        if (cashAccount.uuid === uuid) {
+          return {
+            ...cashAccount,
+            name,
+          };
+        }
+
+        return cashAccount;
+      }),
+    }));
+  };
+
   return (
     <Fragment>
       <Heading>{t('navigation.cash_accounts')}</Heading>
@@ -68,6 +83,7 @@ export const CashAccounts = () => {
               key={uuid}
               uuid={uuid}
               updateCashAccountBalance={updateCashAccountBalance}
+              updateCashAccountName={updateCashAccountName}
               {...rest}
             />
           ))}

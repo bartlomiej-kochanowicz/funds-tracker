@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Row } from 'simple-flexbox';
 import languages from 'constants/selectors/languages';
-import { Select, Spreader } from 'components/atoms';
+import { Icon, Select, Spreader } from 'components/atoms';
 import { FaGlobeEurope } from 'react-icons/fa';
 
 export const LangSelector = () => {
@@ -23,7 +23,7 @@ export const LangSelector = () => {
 
   const customLabel = ({ value }: { value: string }) => (
     <Row alignItems="center">
-      <FaGlobeEurope />
+      <Icon icon={FaGlobeEurope} />
 
       <Spreader spread="small" />
 

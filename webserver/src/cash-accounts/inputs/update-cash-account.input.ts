@@ -1,8 +1,9 @@
-import { Field, Float, InputType, PartialType } from '@nestjs/graphql';
-import { CreateCashAccountInput } from './create-cash-account.input';
+import { Field, InputType } from '@nestjs/graphql';
+import { Length } from 'class-validator';
 
 @InputType()
-export class UpdateCashAccountInput extends PartialType(CreateCashAccountInput) {
-  @Field(() => Float, { description: 'Account balance.', nullable: true })
-  balance?: number;
+export class UpdateCashAccountInput {
+  @Length(2, 50, { message: 'Name must be between 2 and 50 characters.' })
+  @Field(() => String, { description: 'Cash account name.' })
+  name: string;
 }

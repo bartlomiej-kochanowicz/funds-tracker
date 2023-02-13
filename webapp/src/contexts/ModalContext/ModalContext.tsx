@@ -18,11 +18,11 @@ type ModalContextType = ReturnType<typeof useModal>;
 const ModalContext = createContext<ModalContextType | null>(null);
 
 const useModal = () => {
-  const [modal, setModal] = useState<{ name: ModalsNames } | null>(null);
+  const [modal, setModal] = useState<{ modalName: ModalsNames } | null>(null);
 
-  const openModal = <Props,>(name: ModalsNames, props?: Props) => {
+  const openModal = <Props,>(modalName: ModalsNames, props?: Props) => {
     setModal({
-      name,
+      modalName,
       ...props,
     });
   };
@@ -36,13 +36,13 @@ const useModal = () => {
       return null;
     }
 
-    const { name, ...rest } = modal;
+    const { modalName, ...rest } = modal;
 
     return (
       <Suspense>
         <Modal
-          key={name}
-          name={name}
+          key={modalName}
+          modalName={modalName}
           closeModal={closeModal}
           {...rest}
         />

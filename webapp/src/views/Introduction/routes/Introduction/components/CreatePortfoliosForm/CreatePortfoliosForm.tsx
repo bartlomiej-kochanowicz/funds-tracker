@@ -3,7 +3,7 @@ import { Column } from 'simple-flexbox';
 import { Trans, useTranslation } from 'react-i18next';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
-import { Button, Heading, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { Button, Heading, Icon, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MAX_PORTFOLIOS } from 'constants/common';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
@@ -145,7 +145,11 @@ export const CreatePortfoliosForm = () => {
                 color="secondary"
                 onClick={handleAppend}
               >
-                {t('add.portfolios.button.add')} <Spreader spread="tiny" /> <FaPlus />
+                {t('add.portfolios.button.add')}
+
+                <Spreader spread="tiny" />
+
+                <Icon icon={FaPlus} />
               </Button>
             ) : null}
 

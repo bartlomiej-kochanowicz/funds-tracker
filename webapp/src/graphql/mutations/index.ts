@@ -11,4 +11,5 @@ export * from './SendCode';
 export * from './SetNewPassword';
 export * from './Signin';
 export * from './Signup';
+export * from './UpdateCashAccount';
 export * from './UpdateUser';

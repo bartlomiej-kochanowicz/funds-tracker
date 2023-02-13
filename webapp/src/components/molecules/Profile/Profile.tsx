@@ -26,7 +26,10 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
           <Spreader spread="tiny" />
 
-          <Text fontWeight="700">
+          <Text
+            fontWeight="700"
+            maxWidth="250px"
+          >
             {t('common.hi')}, {user.name}!
           </Text>
         </Row>

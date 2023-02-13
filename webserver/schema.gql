@@ -263,13 +263,7 @@ input IntroductionCreateCashAccountsInput {
 
 input UpdateCashAccountInput {
   """Cash account name."""
-  name: String
-
-  """Cash account currency."""
-  currency: Currency
-
-  """Account balance."""
-  balance: Float
+  name: String!
 }
 
 input AddFundsToCashAccountInput {

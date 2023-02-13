@@ -99,6 +99,7 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
             intlConfig={{ locale: i18n.language, currency }}
             onValueChange={handleValueChange}
             defaultValue={rest.defaultValue}
+            placeholder={rest.placeholder}
           />
 
           {error && <Error>{error}</Error>}
