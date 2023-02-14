@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { GetCashAccountsQuery } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
-import { FaChartLine, FaColumns, FaDonate, FaListUl, FaPlus } from 'react-icons/fa';
+import { FaChartLine, FaListUl, FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
 import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { ManageCashAccountProps, MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';

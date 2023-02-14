@@ -44,6 +44,9 @@ export const CloseButton = styled.button`
   padding: 0;
 
   ${({ theme: { colors, font } }) => css`
+    width: ${font.size['1.25']};
+    height: ${font.size['1.25']};
+
     svg {
       color: ${colors.gray500};
       font-size: ${font.size['1.25']};
