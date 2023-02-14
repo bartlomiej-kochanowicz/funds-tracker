@@ -75,8 +75,8 @@ export const RenameCashAccount: FC<Modal<RenameCashAccountProps>> = ({
         <Button
           color="tertiary"
           onClick={closeModal}
-          minWidth="130px"
           flexGrow={1}
+          minWidth="140px"
         >
           {t('common.cancel')}
         </Button>
@@ -86,7 +86,7 @@ export const RenameCashAccount: FC<Modal<RenameCashAccountProps>> = ({
         <Button
           disabled={isSubmitting || !isValid || !isDirty}
           flexGrow={1}
-          minWidth="130px"
+          minWidth="140px"
           type="submit"
         >
           {isSubmitting && <Loader color="white" />}

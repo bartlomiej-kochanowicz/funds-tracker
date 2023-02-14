@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { GetCashAccountsQuery } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
-import { FaChartLine, FaDonate, FaPlus } from 'react-icons/fa';
+import { FaChartLine, FaColumns, FaDonate, FaListUl, FaPlus } from 'react-icons/fa';
 import { useModalContext } from 'contexts/ModalContext';
 import { AddFundsCashAccountProps, MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { ManageCashAccountProps, MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
@@ -51,31 +51,29 @@ export const CashAccountsPanel: FC<
   return (
     <Panel>
       <Panel.Body>
-        <Row>
-          <Button
-            width="50%"
-            onClick={handleOpenAddFundsCashAccountModal}
-          >
-            {t('page.cash_accounts.button.add_funds')}
+        <Button
+          width="100%"
+          onClick={handleOpenAddFundsCashAccountModal}
+        >
+          {t('page.cash_accounts.button.add_funds')}
 
-            <Spreader spread="tiny" />
+          <Spreader spread="tiny" />
 
-            <Icon icon={FaPlus} />
-          </Button>
+          <Icon icon={FaPlus} />
+        </Button>
 
-          <Spreader spread="small" />
+        <Spacer space="small" />
 
-          <Button
-            width="50%"
-            onClick={handleOpenManageCashAccountModal}
-          >
-            {t('page.cash_accounts.button.manage')}
+        <Button
+          width="100%"
+          onClick={handleOpenManageCashAccountModal}
+        >
+          {t('page.cash_accounts.button.manage')}
 
-            <Spreader spread="tiny" />
+          <Spreader spread="tiny" />
 
-            <Icon icon={FaDonate} />
-          </Button>
-        </Row>
+          <Icon icon={FaListUl} />
+        </Button>
 
         <Spacer space="small" />
 

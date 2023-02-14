@@ -20,6 +20,7 @@ export const ManageCashAccount: FC<ManageCashAccountProps> = () => {
       <Row justifyContent="flex-end">
         <Button
           color="error"
+          minWidth="240px"
           outline
         >
           {t('modal.ManageCashAccount.button.remove')}

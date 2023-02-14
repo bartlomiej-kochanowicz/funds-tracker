@@ -41,9 +41,16 @@ type ButtonProps = CommonProps &
 
 export const Button = styled.button.withConfig({
   shouldForwardProp: prop =>
-    !['width', 'fontWeight', 'borderRadius', 'color', 'boxShadow', 'flexGrow', 'outline'].includes(
-      prop,
-    ),
+    ![
+      'width',
+      'fontWeight',
+      'borderRadius',
+      'color',
+      'boxShadow',
+      'flexGrow',
+      'outline',
+      'minWidth',
+    ].includes(prop),
 })<ButtonProps>`
   display: flex;
   align-items: center;
