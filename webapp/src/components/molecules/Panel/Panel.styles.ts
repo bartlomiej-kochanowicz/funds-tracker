@@ -26,15 +26,17 @@ export const Body = styled.div`
   `}
 `;
 
-export const BodyCentered = styled.div`
+export const BodyCentered = styled.div<{ minHeight?: `${number}px` }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
 
-  ${({ theme: { padding } }) => css`
+  ${({ theme: { padding }, minHeight }) => css`
     padding: ${padding.large};
+
+    ${minHeight && `min-height: ${minHeight};`}
   `}
 `;
 

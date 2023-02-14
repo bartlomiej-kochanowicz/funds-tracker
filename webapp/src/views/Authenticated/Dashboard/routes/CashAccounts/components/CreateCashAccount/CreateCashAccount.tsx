@@ -22,7 +22,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
 
   return (
     <Panel>
-      <Panel.BodyCentered>
+      <Panel.BodyCentered minHeight="216px">
         <Heading
           textAlign="center"
           level="h2"
