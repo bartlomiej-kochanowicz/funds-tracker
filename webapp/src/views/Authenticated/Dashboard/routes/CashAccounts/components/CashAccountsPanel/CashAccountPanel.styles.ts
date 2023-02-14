@@ -9,6 +9,7 @@ export const RenameButton = styled.button`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: ${({ theme }) => theme.font.weight['700']};
+  color: ${({ theme }) => theme.colors.text};
 
   &:hover {
     cursor: pointer;
