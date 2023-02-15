@@ -47,12 +47,17 @@ type SignupLocal {
   success: Boolean!
 }
 
+type CashAccountDelete {
+  """Confirmatiopn delete cash account."""
+  success: Boolean!
+}
+
 type CashAccountOperation {
   """Transaction uuid."""
   uuid: ID!
 
   """Date of the transaction."""
-  date: Date!
+  date: String!
 
   """Cash account balance."""
   amount: Float!
@@ -60,11 +65,6 @@ type CashAccountOperation {
   """Cash account oparation type."""
   type: CashAccountOperationType!
 }
-
-"""
-A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
-"""
-scalar Date
 
 enum CashAccountOperationType {
   deposit
@@ -86,7 +86,7 @@ type CashAccount {
   balance: Float!
 
   """Account opeartions."""
-  operations(first: Float): [CashAccountOperation!]!
+  operations(first: Float, skip: Float): [CashAccountOperation!]!
 }
 
 enum Currency {
@@ -136,6 +136,11 @@ type User {
 }
 
 """
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""
 A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
 """
 scalar EmailAddress @specifiedBy(url: "https://www.w3.org/Protocols/rfc822/")
@@ -176,7 +181,7 @@ type Mutation {
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
-  deleteCashAccount(uuid: ID!): CashAccount!
+  deleteCashAccount(uuid: ID!): CashAccountDelete!
   addFundsToCashAccount(data: AddFundsToCashAccountInput!): CashAccount!
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   introductionCreatePortfolios(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!

@@ -3,15 +3,16 @@ import {
   CashAccountOperation as ICashAccountOperation,
   CashAccountOperationType,
 } from '@prisma/client';
-import { DateResolver } from 'graphql-scalars';
 
 @ObjectType()
-export class CashAccountOperation implements Omit<ICashAccountOperation, 'cashAccountUuid'> {
+export class CashAccountOperation
+  implements Omit<ICashAccountOperation, 'cashAccountUuid' | 'date'>
+{
   @Field(() => ID, { description: 'Transaction uuid.' })
   uuid: string;
 
-  @Field(() => DateResolver, { description: 'Date of the transaction.' })
-  date: Date;
+  @Field(() => String, { description: 'Date of the transaction.' })
+  date: string;
 
   @Field(() => Float, { description: 'Cash account balance.' })
   amount: number;

@@ -2,7 +2,12 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CashAccountOperationType, IntroductionStep } from '@prisma/client';
 import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CashAccount, CashAccountOperation, IntroductionCashAccounts } from './entities';
+import {
+  CashAccount,
+  CashAccountDelete,
+  CashAccountOperation,
+  IntroductionCashAccounts,
+} from './entities';
 import {
   CreateCashAccountInput,
   UpdateCashAccountInput,
@@ -100,20 +105,24 @@ export class CashAccountsService {
     return cashAccount;
   }
 
-  async findOperations(uuid: string, first: number): Promise<CashAccountOperation[]> {
-    const cashAccountHistory = await this.prisma.cashAccountOperation.findMany({
+  async findOperations(uuid: string, first: number, skip: number): Promise<CashAccountOperation[]> {
+    const cashAccountOperations = await this.prisma.cashAccountOperation.findMany({
       where: {
         cashAccountUuid: uuid,
       },
       orderBy: { date: 'asc' },
       take: first,
+      skip,
     });
 
-    if (!cashAccountHistory) {
+    if (!cashAccountOperations) {
       throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
     }
 
-    return cashAccountHistory;
+    return cashAccountOperations.map(({ date, ...rest }) => ({
+      ...rest,
+      date: date.toISOString(),
+    }));
   }
 
   async update(
@@ -138,21 +147,29 @@ export class CashAccountsService {
     }
   }
 
-  async delete(userUuid: string, uuid: string) {
-    try {
-      const cashAccount = await this.prisma.cashAccount.delete({
+  async delete(userUuid: string, uuid: string): Promise<CashAccountDelete> {
+    await this.prisma.cashAccountOperation.deleteMany({
+      where: {
+        cashAccountUuid: uuid,
+      },
+    });
+
+    await this.prisma.cashAccount
+      .delete({
         where: {
           userUuid_uuid: {
             userUuid,
             uuid,
           },
         },
+      })
+      .catch(() => {
+        throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
       });
 
-      return cashAccount;
-    } catch {
-      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
-    }
+    return {
+      success: true,
+    };
   }
 
   async addFundsToCashAccountInput(

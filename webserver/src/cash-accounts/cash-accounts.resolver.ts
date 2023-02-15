@@ -1,7 +1,12 @@
 import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
-import { CashAccount, CashAccountOperation, IntroductionCashAccounts } from './entities';
+import {
+  CashAccount,
+  CashAccountDelete,
+  CashAccountOperation,
+  IntroductionCashAccounts,
+} from './entities';
 import {
   AddFundsToCashAccountInput,
   CreateCashAccountInput,
@@ -49,10 +54,12 @@ export class CashAccountsResolver {
     @Parent() cashAccount: CashAccount,
     @Args('first', { type: () => Number, nullable: true })
     first?: number,
+    @Args('skip', { type: () => Number, nullable: true })
+    skip?: number,
   ) {
     const { uuid } = cashAccount;
 
-    return this.cashAccountsService.findOperations(uuid, first);
+    return this.cashAccountsService.findOperations(uuid, first, skip);
   }
 
   @Mutation(() => CashAccount)
@@ -65,11 +72,11 @@ export class CashAccountsResolver {
     return this.cashAccountsService.update(userId, uuid, updateCashAccountInput);
   }
 
-  @Mutation(() => CashAccount)
+  @Mutation(() => CashAccountDelete)
   deleteCashAccount(
     @GetCurrentUserId() userId: string,
     @Args('uuid', { type: () => ID }) uuid: string,
-  ) {
+  ): Promise<CashAccountDelete> {
     return this.cashAccountsService.delete(userId, uuid);
   }
 
