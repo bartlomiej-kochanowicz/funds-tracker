@@ -123,5 +123,7 @@
   "common.rename": "Rename",
   "common.delete": "Delete",
   "modal.ManageCashAccount.button.delete": "Delete cash account",
-  "modal.RenameCashAccount.name": "Rename cash account"
+  "modal.RenameCashAccount.name": "Rename cash account",
+  "modal.ConfirmDeleteCashAccount.name": "Delete cash account",
+  "modal.ConfirmDeleteCashAccount.description": "Are you sure you want to delete <bold>{{name}}</bold> cash account? <bold>This action cannot be undone.</bold>"
 }

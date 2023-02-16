@@ -1,6 +1,8 @@
 import { Button, Icon, Spacer, Spreader } from 'components/atoms';
-import { DELETE_CASH_ACCOUNT } from 'graphql/mutations';
-import { MODAL_CONFIRM_DELETE_CASH_ACCOUNT } from 'modals/ConfirmDeleteCashAccount';
+import {
+  ConfirmDeleteCashAccountProps,
+  MODAL_CONFIRM_DELETE_CASH_ACCOUNT,
+} from 'modals/ConfirmDeleteCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
@@ -9,13 +11,15 @@ import { Modal } from 'types/modal.type';
 
 export const MODAL_MANAGE_CASH_ACCOUNT = 'ManageCashAccount';
 
-export interface ManageCashAccountProps {}
+export interface ManageCashAccountProps {
+  name: string;
+}
 
-export const ManageCashAccount: FC<Modal<ManageCashAccountProps>> = ({ openModal }) => {
+export const ManageCashAccount: FC<Modal<ManageCashAccountProps>> = ({ openModal, name }) => {
   const { t } = useTranslation();
 
   const handleDelete = () => {
-    openModal<{}>(MODAL_CONFIRM_DELETE_CASH_ACCOUNT);
+    openModal<ConfirmDeleteCashAccountProps>(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, { name });
   };
 
   return (

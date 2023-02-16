@@ -45,7 +45,7 @@ export const CashAccountsPanel: FC<
   };
 
   const handleOpenManageCashAccountModal = () => {
-    openModal<ManageCashAccountProps>(MODAL_MANAGE_CASH_ACCOUNT, {});
+    openModal<ManageCashAccountProps>(MODAL_MANAGE_CASH_ACCOUNT, { name });
   };
 
   return (
