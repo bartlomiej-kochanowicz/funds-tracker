@@ -125,5 +125,7 @@
   "modal.ManageCashAccount.button.delete": "Usuń konto gotówkowe",
   "modal.RenameCashAccount.name": "Zmień nazwę konta gotówkowego",
   "modal.ConfirmDeleteCashAccount.name": "Usuń konto gotówkowe",
-  "modal.ConfirmDeleteCashAccount.description": "Czy na pewno chcesz usunąć konto gotówkowe <bold>{{name}}</bold>? Tej operacji nie można cofnąć."
+  "modal.ConfirmDeleteCashAccount.description": "Czy na pewno chcesz usunąć konto gotówkowe <bold>{{name}}</bold>? Tej operacji nie można cofnąć.",
+  "common.yes": "Tak",
+  "common.no": "Nie"
 }
