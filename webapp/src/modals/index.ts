@@ -1,13 +1,19 @@
 import { lazy } from 'react';
 
-const CreateCashAccount = lazy(() =>
-  import('./CreateCashAccount').then(({ CreateCashAccount: component }) => ({
+const AddFundsCashAccount = lazy(() =>
+  import('./AddFundsCashAccount').then(({ AddFundsCashAccount: component }) => ({
     default: component,
   })),
 );
 
-const AddFundsCashAccount = lazy(() =>
-  import('./AddFundsCashAccount').then(({ AddFundsCashAccount: component }) => ({
+const ConfirmDeleteCashAccount = lazy(() =>
+  import('./ConfirmDeleteCashAccount').then(({ ConfirmDeleteCashAccount: component }) => ({
+    default: component,
+  })),
+);
+
+const CreateCashAccount = lazy(() =>
+  import('./CreateCashAccount').then(({ CreateCashAccount: component }) => ({
     default: component,
   })),
 );
@@ -25,10 +31,9 @@ const RenameCashAccount = lazy(() =>
 );
 
 export const modals = {
-  CreateCashAccount,
   AddFundsCashAccount,
+  ConfirmDeleteCashAccount,
+  CreateCashAccount,
   ManageCashAccount,
   RenameCashAccount,
 };
-
-export type ModalsNames = keyof typeof modals;

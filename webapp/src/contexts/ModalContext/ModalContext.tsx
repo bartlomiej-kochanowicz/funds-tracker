@@ -1,7 +1,7 @@
 import { createContext, FC, Suspense, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Modal } from 'components/molecules';
-import { ModalsNames } from 'modals';
+import { ModalsNames } from 'types/modal.type';
 
 let modalRoot = document.getElementById('modal') as HTMLElement;
 
@@ -44,6 +44,7 @@ const useModal = () => {
           key={modalName}
           modalName={modalName}
           closeModal={closeModal}
+          openModal={openModal}
           {...rest}
         />
       </Suspense>

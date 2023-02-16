@@ -122,6 +122,6 @@
   "modal.ManageCashAccount.name": "Zarządzaj kontem gotówkowym",
   "common.rename": "Zmień nazwę",
   "common.delete": "Usuń",
-  "modal.ManageCashAccount.button.remove": "Usuń konto gotówkowe",
+  "modal.ManageCashAccount.button.delete": "Usuń konto gotówkowe",
   "modal.RenameCashAccount.name": "Zmień nazwę konta gotówkowego"
 }
