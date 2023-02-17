@@ -12,14 +12,21 @@ import { Modal } from 'types/modal.type';
 export const MODAL_MANAGE_CASH_ACCOUNT = 'ManageCashAccount';
 
 export interface ManageCashAccountProps {
-  name: string;
+  deleteModalProps: {
+    name: string;
+    uuid: string;
+    callback: (data: { uuid: string }) => void;
+  };
 }
 
-export const ManageCashAccount: FC<Modal<ManageCashAccountProps>> = ({ openModal, name }) => {
+export const ManageCashAccount: FC<Modal<ManageCashAccountProps>> = ({
+  openModal,
+  deleteModalProps,
+}) => {
   const { t } = useTranslation();
 
   const handleDelete = () => {
-    openModal<ConfirmDeleteCashAccountProps>(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, { name });
+    openModal<ConfirmDeleteCashAccountProps>(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, deleteModalProps);
   };
 
   return (

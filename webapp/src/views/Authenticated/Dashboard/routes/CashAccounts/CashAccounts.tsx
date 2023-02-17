@@ -54,6 +54,12 @@ export const CashAccounts = () => {
     }));
   };
 
+  const updateCashAccountList = ({ uuid }: { uuid: string }) => {
+    updateQuery(prev => ({
+      cashAccounts: prev.cashAccounts.filter(cashAccount => cashAccount.uuid !== uuid),
+    }));
+  };
+
   return (
     <Fragment>
       <Heading>{t('navigation.cash_accounts')}</Heading>
@@ -84,6 +90,7 @@ export const CashAccounts = () => {
               uuid={uuid}
               updateCashAccountBalance={updateCashAccountBalance}
               updateCashAccountName={updateCashAccountName}
+              updateCashAccountList={updateCashAccountList}
               {...rest}
             />
           ))}

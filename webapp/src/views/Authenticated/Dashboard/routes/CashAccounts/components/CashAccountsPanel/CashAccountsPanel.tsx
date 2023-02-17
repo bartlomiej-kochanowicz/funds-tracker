@@ -14,11 +14,20 @@ import { RenameButton } from './CashAccountPanel.styles';
 interface CashAccountsPanelProps {
   updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
   updateCashAccountName: (data: { name: string; uuid: string }) => void;
+  updateCashAccountList: (data: { uuid: string }) => void;
 }
 
 export const CashAccountsPanel: FC<
   GetCashAccountsQuery['cashAccounts'][0] & CashAccountsPanelProps
-> = ({ name, currency, balance, uuid, updateCashAccountBalance, updateCashAccountName }) => {
+> = ({
+  name,
+  currency,
+  balance,
+  uuid,
+  updateCashAccountBalance,
+  updateCashAccountName,
+  updateCashAccountList,
+}) => {
   const { i18n, t } = useTranslation();
 
   const formatter = new Intl.NumberFormat(i18n.language, {
@@ -45,7 +54,9 @@ export const CashAccountsPanel: FC<
   };
 
   const handleOpenManageCashAccountModal = () => {
-    openModal<ManageCashAccountProps>(MODAL_MANAGE_CASH_ACCOUNT, { name });
+    openModal<ManageCashAccountProps>(MODAL_MANAGE_CASH_ACCOUNT, {
+      deleteModalProps: { name, uuid, callback: updateCashAccountList },
+    });
   };
 
   return (
