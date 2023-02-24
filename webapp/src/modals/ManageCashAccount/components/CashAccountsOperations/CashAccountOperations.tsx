@@ -12,7 +12,7 @@ interface CashAccountOperationsProps {
 }
 
 export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid }) => {
-  const { loading, data } = useQuery<
+  const { loading } = useQuery<
     GetCashAccountOperationsQuery,
     GetCashAccountOperationsQueryVariables
   >(GET_CASH_ACCOUNT_OPERATIONS, { variables: { uuid } });
@@ -20,8 +20,6 @@ export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid }) 
   if (loading) {
     return <Loader />;
   }
-
-  console.log(data);
 
   return null;
 };
