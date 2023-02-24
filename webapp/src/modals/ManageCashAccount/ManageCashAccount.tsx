@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Column, Row } from 'simple-flexbox';
 import { Modal } from 'types/modal.type';
+import { CashAccountOperations } from './components/CashAccountsOperations';
 
 export const MODAL_MANAGE_CASH_ACCOUNT = 'ManageCashAccount';
 
@@ -31,7 +32,7 @@ export const ManageCashAccount: FC<Modal<ManageCashAccountProps>> = ({
 
   return (
     <Column>
-      <Column>List with operations...</Column>
+      <CashAccountOperations uuid={deleteModalProps.uuid} />
 
       <Spacer />
 

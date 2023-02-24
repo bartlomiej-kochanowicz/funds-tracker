@@ -29,6 +29,7 @@ const documents = {
     "\n  mutation UpdateCashAccount($uuid: ID!, $data: UpdateCashAccountInput!) {\n    updateCashAccount(uuid: $uuid, data: $data) {\n      uuid\n      name\n    }\n  }\n": types.UpdateCashAccountDocument,
     "\n  mutation UpdateUser($data: UpdateUserInput!) {\n    updateUser(data: $data) {\n      uuid\n      name\n      email\n      createdAt\n      introductionStep\n      defaultCurrency\n    }\n  }\n": types.UpdateUserDocument,
     "\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n": types.EmailExistDocument,
+    "\n  query GetCashAccountOperations($uuid: ID!) {\n    cashAccount(uuid: $uuid) {\n      operations {\n        uuid\n        type\n        amount\n        date\n      }\n    }\n  }\n": types.GetCashAccountOperationsDocument,
     "\n  query GetCashAccounts {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n": types.GetCashAccountsDocument,
     "\n  query GetUser {\n    user {\n      uuid\n      name\n      email\n      createdAt\n      introductionStep\n      defaultCurrency\n    }\n  }\n": types.GetUserDocument,
 };
@@ -111,6 +112,10 @@ export function gql(source: "\n  mutation UpdateUser($data: UpdateUserInput!) {\
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n"): (typeof documents)["\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetCashAccountOperations($uuid: ID!) {\n    cashAccount(uuid: $uuid) {\n      operations {\n        uuid\n        type\n        amount\n        date\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCashAccountOperations($uuid: ID!) {\n    cashAccount(uuid: $uuid) {\n      operations {\n        uuid\n        type\n        amount\n        date\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
