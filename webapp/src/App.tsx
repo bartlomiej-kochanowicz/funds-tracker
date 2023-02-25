@@ -15,6 +15,8 @@ import { Root } from 'views/Root';
 const Content = () => {
   const { theme } = useColorThemeContext();
 
+  console.log(NiceModal);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle modalVisible={false} />

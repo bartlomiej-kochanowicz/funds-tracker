@@ -6,6 +6,7 @@ export const DeleteAction = () => {
     <Button
       size="small"
       color="secondary"
+      boxShadow="none"
     >
       <Icon
         icon={FaTrash}

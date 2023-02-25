@@ -9,7 +9,6 @@ export const Wrapper = styled.div<{ gridTemplateColumns: string }>`
 
     & > div {
       border-bottom: 1px solid ${theme.colors.gray200};
-      border-right: 1px solid ${theme.colors.gray200};
     }
 
     & > div:last-child {

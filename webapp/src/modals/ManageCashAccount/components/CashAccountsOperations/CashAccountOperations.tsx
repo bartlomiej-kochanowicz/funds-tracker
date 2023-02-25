@@ -36,10 +36,11 @@ export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid, cu
 
   if (!loading && cashAccountsOperationsExist) {
     const processedData =
-      data?.cashAccount.operations.map(({ date, amount, ...rest }) => ({
+      data?.cashAccount.operations.map(({ date, amount, uuid: dataUuid, ...rest }) => ({
         ...rest,
         date: formatDate(date),
         amount: formatCurrency(amount, currency),
+        identifier: dataUuid,
       })) || [];
 
     return (

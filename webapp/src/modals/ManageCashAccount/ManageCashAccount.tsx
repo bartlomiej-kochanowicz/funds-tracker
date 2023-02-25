@@ -25,6 +25,8 @@ export const ManageCashAccount = NiceModal.create<ManageCashAccountProps>(
     const modal = useModal();
 
     const handleDelete = () => {
+      modal.remove();
+
       NiceModal.show(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, deleteModalProps);
     };
 

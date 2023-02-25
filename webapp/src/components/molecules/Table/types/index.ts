@@ -4,7 +4,11 @@ type Width = `${number}px` | `${number}%`;
 
 type Identifier = string | number;
 
-export interface ColumnAccessor<Item> {
+export interface ItemBase {
+  identifier: Identifier;
+}
+
+export interface ColumnAccessor<Item extends ItemBase> {
   identifier: Identifier;
   accessor: keyof Item;
   header: string;
@@ -12,7 +16,7 @@ export interface ColumnAccessor<Item> {
   center?: boolean;
 }
 
-export interface CustomColumn<Item> {
+export interface CustomColumn<Item extends ItemBase> {
   identifier: Identifier;
   render: (item: Item) => ReactNode;
   header?: string;
@@ -20,23 +24,23 @@ export interface CustomColumn<Item> {
   center?: boolean;
 }
 
-export type Column<Item> = ColumnAccessor<Item> | CustomColumn<Item>;
+export type Column<Item extends ItemBase> = ColumnAccessor<Item> | CustomColumn<Item>;
 
-export interface TableProps<Item> {
+export interface TableProps<Item extends ItemBase> {
   data: Item[];
   columns: Column<Item>[];
 }
 
-export interface HeaderProps<Item> {
+export interface HeaderProps<Item extends ItemBase> {
   columns: Column<Item>[];
 }
 
-export interface BodyProps<Item> {
+export interface BodyProps<Item extends ItemBase> {
   columns: Column<Item>[];
   data: Item[];
 }
 
-export interface RowProps<Item> {
+export interface RowProps<Item extends ItemBase> {
   columns: Column<Item>[];
   data: Item;
 }

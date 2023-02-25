@@ -1,11 +1,11 @@
 import { Text } from 'components/atoms';
 import { ReactNode } from 'react';
 
-import { ColumnAccessor, CustomColumn, RowProps } from '../../types';
+import { ColumnAccessor, CustomColumn, ItemBase, RowProps } from '../../types';
 import { Cell } from '../Cell';
 import { Wrapper } from './Row.styles';
 
-export const Row = <Item extends unknown>({ data, columns }: RowProps<Item>) => {
+export const Row = <Item extends ItemBase>({ data, columns }: RowProps<Item>) => {
   const gridTemplateColumns = columns.reduce((acc, { width }) => `${acc} ${width || '1fr'}`, '');
 
   return (
@@ -13,7 +13,10 @@ export const Row = <Item extends unknown>({ data, columns }: RowProps<Item>) => 
       {columns.map(column => {
         if ((column as ColumnAccessor<Item>).accessor) {
           return (
-            <Cell center={column.center}>
+            <Cell
+              center={column.center}
+              key={column.identifier}
+            >
               <Text
                 fontColor="gray400"
                 maxWidth={column.width}
@@ -24,7 +27,14 @@ export const Row = <Item extends unknown>({ data, columns }: RowProps<Item>) => 
           );
         }
 
-        return <Cell center={column.center}>{(column as CustomColumn<Item>).render(data)}</Cell>;
+        return (
+          <Cell
+            center={column.center}
+            key={column.identifier}
+          >
+            {(column as CustomColumn<Item>).render(data)}
+          </Cell>
+        );
       })}
     </Wrapper>
   );
