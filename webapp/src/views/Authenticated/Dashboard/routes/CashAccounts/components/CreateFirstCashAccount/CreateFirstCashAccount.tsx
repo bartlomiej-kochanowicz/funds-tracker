@@ -1,5 +1,4 @@
 import { Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
-import { useModalContext } from 'contexts/ModalContext';
 import { CreateCashAccountModalProps, MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,11 +13,11 @@ interface CreateFirstCashAccountProps {
 export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callback }) => {
   const { t } = useTranslation();
 
-  const { openModal } = useModalContext();
+  const handleOpenModal = () => {};
 
-  const handleOpenModal = () => {
+  /* const handleOpenModal = () => {
     openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT, { callback });
-  };
+  }; */
 
   return (
     <Column alignItems="center">

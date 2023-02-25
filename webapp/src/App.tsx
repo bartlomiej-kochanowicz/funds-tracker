@@ -4,21 +4,20 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { ApolloProvider } from '@apollo/client';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from 'styled-components';
+import NiceModal from '@ebay/nice-modal-react';
 import { Root } from 'views/Root';
 import { GlobalStyle } from 'styles/GlobalStyle';
 import { FullscreenErrorContent } from 'components/organisms';
 import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
 import { UserContextProvider } from 'contexts/UserContext';
 import client from 'config/client';
-import { ModalProvider, useModalContext } from 'contexts/ModalContext';
 
 const Content = () => {
   const { theme } = useColorThemeContext();
-  const { modal, modalVisible } = useModalContext();
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle modalVisible={modalVisible} />
+      <GlobalStyle modalVisible={false} />
 
       <ToastContainer
         position="top-right"
@@ -33,9 +32,9 @@ const Content = () => {
       />
 
       <ErrorBoundary FallbackComponent={FullscreenErrorContent}>
-        {modal}
-
-        <Root />
+        <NiceModal.Provider>
+          <Root />
+        </NiceModal.Provider>
       </ErrorBoundary>
     </ThemeProvider>
   );
@@ -46,9 +45,7 @@ const App: FC = (): JSX.Element => (
     <ApolloProvider client={client}>
       <ColorThemeProvider>
         <UserContextProvider>
-          <ModalProvider>
-            <Content />
-          </ModalProvider>
+          <Content />
         </UserContextProvider>
       </ColorThemeProvider>
     </ApolloProvider>

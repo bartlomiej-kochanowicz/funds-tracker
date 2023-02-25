@@ -1,65 +1,47 @@
-import { FC, Fragment, useRef } from 'react';
+import { FC, Fragment, ReactNode, useRef } from 'react';
 import { Row } from 'simple-flexbox';
 import { FaTimes } from 'react-icons/fa';
-import { modals } from 'modals';
 import { Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
-import { useTranslation } from 'react-i18next';
-import { ModalsNames } from 'types/modal.type';
-import { Modal } from './Modal.styles';
+import { ModalComponent, Background, CloseButton } from './Modal.styles';
 
 interface ModalComponentProps {
-  modalName: ModalsNames;
   closeModal: () => void;
-  openModal: <OpenModalProps>(name: ModalsNames, props?: OpenModalProps) => void;
-  showName?: boolean;
+  modalName: string;
+  children: ReactNode;
 }
 
-export const ModalComponent: FC<ModalComponentProps> = ({
-  modalName,
-  closeModal,
-  openModal,
-  showName = true,
-  ...rest
-}) => {
+export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-
-  const { t } = useTranslation();
-
-  const Component = modals[modalName];
 
   useDetectOutsideClick<HTMLDivElement>(modalRef, closeModal);
 
   return (
     <Fragment>
-      <Modal.Background />
+      <Background />
 
       <div
         data-modal="true"
         ref={modalRef}
       >
-        <Modal>
-          <Row justifyContent={showName ? 'space-between' : 'flex-end'}>
-            {showName && <Heading level="h2">{t(`modal.${modalName}.name`)}</Heading>}
+        <ModalComponent>
+          <Row justifyContent={modalName ? 'space-between' : 'flex-end'}>
+            {modalName && <Heading level="h2">{modalName}</Heading>}
 
             <Spreader />
 
-            <Modal.CloseButton onClick={closeModal}>
+            <CloseButton onClick={closeModal}>
               <Icon
                 icon={FaTimes}
                 size="1.25"
               />
-            </Modal.CloseButton>
+            </CloseButton>
           </Row>
 
           <Spacer space="small" />
 
-          <Component
-            closeModal={closeModal}
-            openModal={openModal}
-            {...(rest as any)} // kind of a hack, but it works - still type safe
-          />
-        </Modal>
+          {children}
+        </ModalComponent>
       </div>
     </Fragment>
   );

@@ -1,13 +1,11 @@
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Spacer, Text } from 'components/atoms';
+import { Modal } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
-import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Currency } from '__generated__/graphql';
 
-import { Modal } from 'types/modal.type';
 import { AddFundsCashAccountForm } from './AddFundsCashAccountForm';
-
-export const MODAL_ADD_FUNDS_CASH_ACCOUNT = 'AddFundsCashAccount';
 
 export type AddFundsCashAccountProps = {
   callback: ({ balance, uuid }: { balance: number; uuid: string }) => void;
@@ -15,38 +13,39 @@ export type AddFundsCashAccountProps = {
   currency: Currency;
 };
 
-export const AddFundsCashAccount: FC<Modal<AddFundsCashAccountProps>> = ({
-  closeModal,
-  callback,
-  uuid,
-  currency,
-}) => {
-  const { t } = useTranslation();
+export const AddFundsCashAccount = NiceModal.create<AddFundsCashAccountProps>(
+  ({ callback, uuid, currency }) => {
+    const { t } = useTranslation();
 
-  const isPhone = useBreakpoint('tablet', 'max');
+    const isPhone = useBreakpoint('tablet', 'max');
 
-  return (
-    <Fragment>
-      <Spacer space="small" />
+    const modal = useModal();
 
-      <Text
-        fontSize="0.875"
-        fontColor="gray400"
-        display="block"
-        maxWidth={isPhone ? '300px' : '100%'}
-        breakLine
+    return (
+      <Modal
+        closeModal={modal.remove}
+        modalName={t('modal.AddFundsCashAccount.name')}
       >
-        {t('modal.AddFundsCashAccount.description')}
-      </Text>
+        <Spacer space="small" />
 
-      <Spacer space="small" />
+        <Text
+          fontSize="0.875"
+          fontColor="gray400"
+          display="block"
+          maxWidth={isPhone ? '300px' : '100%'}
+          breakLine
+        >
+          {t('modal.AddFundsCashAccount.description')}
+        </Text>
 
-      <AddFundsCashAccountForm
-        closeModal={closeModal}
-        callback={callback}
-        uuid={uuid}
-        currency={currency}
-      />
-    </Fragment>
-  );
-};
+        <Spacer space="small" />
+
+        <AddFundsCashAccountForm
+          callback={callback}
+          uuid={uuid}
+          currency={currency}
+        />
+      </Modal>
+    );
+  },
+);

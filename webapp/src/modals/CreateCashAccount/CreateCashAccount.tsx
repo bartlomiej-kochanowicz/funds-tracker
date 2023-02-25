@@ -1,28 +1,28 @@
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Spacer, Text } from 'components/atoms';
+import { Modal } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
-import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Modal } from 'types/modal.type';
 import { CreateCashAccountMutation } from '__generated__/graphql';
 import { CreateCashAccountForm } from './CreateCashAccountForm';
 
-export const MODAL_CREATE_CASH_ACCOUNT = 'CreateCashAccount';
-
-export type CreateCashAccountModalProps = {
+export type CreateCashAccountProps = {
   callback: (data: CreateCashAccountMutation) => void;
 };
 
-export const CreateCashAccount: FC<Modal<CreateCashAccountModalProps>> = ({
-  closeModal,
-  callback,
-}) => {
+export const CreateCashAccount = NiceModal.create<CreateCashAccountProps>(({ callback }) => {
   const { t } = useTranslation();
 
   const isPhone = useBreakpoint('tablet', 'max');
 
+  const modal = useModal();
+
   return (
-    <Fragment>
+    <Modal
+      modalName={t('modal.CreateCashAccount.name')}
+      closeModal={modal.remove}
+    >
       <Spacer space="small" />
 
       <Text
@@ -37,10 +37,7 @@ export const CreateCashAccount: FC<Modal<CreateCashAccountModalProps>> = ({
 
       <Spacer space="small" />
 
-      <CreateCashAccountForm
-        closeModal={closeModal}
-        callback={callback}
-      />
-    </Fragment>
+      <CreateCashAccountForm callback={callback} />
+    </Modal>
   );
-};
+});

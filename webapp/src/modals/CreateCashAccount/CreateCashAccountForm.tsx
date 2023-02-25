@@ -16,17 +16,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@apollo/client';
 import { CREATE_CASH_ACCOUNT } from 'graphql/mutations';
 import { showErrorToast } from 'helpers/showToast';
+import { useModal } from '@ebay/nice-modal-react';
 import { validationSchema } from './CreateCashAccountForm.schema';
 
 interface CreateCashAccountFormProps {
-  closeModal: () => void;
   callback: (data: CreateCashAccountMutation) => void;
 }
 
-export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ closeModal, callback }) => {
+export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback }) => {
   const { t } = useTranslation();
 
   const { user } = useUserContext();
+
+  const modal = useModal();
+
+  const closeModal = modal.remove;
 
   const defaultValues = {
     name: '',

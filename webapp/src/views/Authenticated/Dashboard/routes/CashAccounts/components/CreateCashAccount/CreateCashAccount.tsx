@@ -3,9 +3,9 @@ import { Button, Spacer, Spreader, Heading, Icon } from 'components/atoms';
 import { Panel } from 'components/molecules';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { useModalContext } from 'contexts/ModalContext';
-import { MODAL_CREATE_CASH_ACCOUNT, CreateCashAccountModalProps } from 'modals/CreateCashAccount';
+import { MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
 import { CreateCashAccountMutation } from '__generated__/graphql';
+import NiceModal from '@ebay/nice-modal-react';
 
 interface CreateCashAccountProps {
   callback: (data: CreateCashAccountMutation) => void;
@@ -14,11 +14,7 @@ interface CreateCashAccountProps {
 export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
   const { t } = useTranslation();
 
-  const { openModal } = useModalContext();
-
-  const handleOpenModal = () => {
-    openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT, { callback });
-  };
+  const handleOpenModal = () => NiceModal.show(MODAL_CREATE_CASH_ACCOUNT, { callback });
 
   return (
     <Panel>

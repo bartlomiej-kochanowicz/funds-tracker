@@ -13,22 +13,25 @@ import {
 import { useMutation } from '@apollo/client';
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
+import { useModal } from '@ebay/nice-modal-react';
 import { validationSchema } from './AddFundsCashAccountForm.schema';
 
 interface AddFundsCashAccountFormProps {
-  closeModal: () => void;
   callback: ({ balance, uuid }: { balance: number; uuid: string }) => void;
   uuid: string;
   currency: Currency;
 }
 
 export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
-  closeModal,
   callback,
   currency,
   uuid,
 }) => {
   const { t } = useTranslation();
+
+  const modal = useModal();
+
+  const closeModal = modal.remove;
 
   const defaultValues = {
     amount: 0,

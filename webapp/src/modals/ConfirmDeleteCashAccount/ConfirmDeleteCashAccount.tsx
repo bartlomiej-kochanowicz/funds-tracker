@@ -1,17 +1,15 @@
 import { useMutation } from '@apollo/client';
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { Modal } from 'components/molecules';
 import { DELETE_CASH_ACCOUNT } from 'graphql/mutations';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
-import { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Column, Row } from 'simple-flexbox';
-import { Modal } from 'types/modal.type';
 import {
   DeleteCashAccountMutation,
   DeleteCashAccountMutationVariables,
 } from '__generated__/graphql';
-
-export const MODAL_CONFIRM_DELETE_CASH_ACCOUNT = 'ConfirmDeleteCashAccount';
 
 export interface ConfirmDeleteCashAccountProps {
   name: string;
@@ -19,87 +17,91 @@ export interface ConfirmDeleteCashAccountProps {
   callback: (data: { uuid: string }) => void;
 }
 
-export const ConfirmDeleteCashAccount: FC<Modal<ConfirmDeleteCashAccountProps>> = ({
-  name,
-  uuid,
-  callback,
-  closeModal,
-}) => {
-  const { t } = useTranslation();
+export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccountProps>(
+  ({ name, uuid, callback }) => {
+    const { t } = useTranslation();
 
-  const [deleteCashAccount, { loading }] = useMutation<
-    DeleteCashAccountMutation,
-    DeleteCashAccountMutationVariables
-  >(DELETE_CASH_ACCOUNT, {
-    onCompleted: () => {
-      showSuccessToast(t('modal.ConfirmDeleteCashAccount.toast.success'));
+    const modal = useModal();
 
-      callback({ uuid });
+    const [deleteCashAccount, { loading }] = useMutation<
+      DeleteCashAccountMutation,
+      DeleteCashAccountMutationVariables
+    >(DELETE_CASH_ACCOUNT, {
+      onCompleted: () => {
+        showSuccessToast(t('modal.ConfirmDeleteCashAccount.toast.success'));
 
-      closeModal();
-    },
-    onError: () => {
-      showErrorToast(t('modal.ConfirmDeleteCashAccount.toast.failure'));
+        callback({ uuid });
 
-      closeModal();
-    },
-  });
+        modal.remove();
+      },
+      onError: () => {
+        showErrorToast(t('modal.ConfirmDeleteCashAccount.toast.failure'));
 
-  const handleDelete = async () => {
-    await deleteCashAccount({
-      variables: {
-        uuid,
+        modal.remove();
       },
     });
 
-    closeModal();
-  };
+    const handleDelete = async () => {
+      await deleteCashAccount({
+        variables: {
+          uuid,
+        },
+      });
 
-  return (
-    <Column>
-      <Text
-        fontSize="0.875"
-        fontColor="gray400"
+      modal.remove();
+    };
+
+    return (
+      <Modal
+        closeModal={modal.remove}
+        modalName={t('modal.ConfirmDeleteCashAccount.name')}
       >
-        <Trans
-          i18nKey="modal.ConfirmDeleteCashAccount.description"
-          values={{ name }}
-          components={{
-            bold: (
-              <Text
-                fontSize="0.875"
-                fontColor="gray400"
-                textAlign="center"
-                fontWeight="700"
-              />
-            ),
-          }}
-        />
-      </Text>
+        <Column>
+          <Text
+            fontSize="0.875"
+            fontColor="gray400"
+          >
+            <Trans
+              i18nKey="modal.ConfirmDeleteCashAccount.description"
+              values={{ name }}
+              components={{
+                bold: (
+                  <Text
+                    fontSize="0.875"
+                    fontColor="gray400"
+                    textAlign="center"
+                    fontWeight="700"
+                  />
+                ),
+              }}
+            />
+          </Text>
 
-      <Spacer />
+          <Spacer />
 
-      <Row>
-        <Button
-          color="tertiary"
-          onClick={closeModal}
-          width="50%"
-        >
-          {t('common.no')}
-        </Button>
+          <Row>
+            <Button
+              color="tertiary"
+              onClick={modal.remove}
+              width="50%"
+            >
+              {t('common.no')}
+            </Button>
 
-        <Spreader spread="small" />
+            <Spreader spread="small" />
 
-        <Button
-          width="50%"
-          disabled={loading}
-          onClick={handleDelete}
-        >
-          {loading && <Loader color="white" />}
+            <Button
+              width="50%"
+              disabled={loading}
+              onClick={handleDelete}
+            >
+              {loading && <Loader color="white" />}
 
-          {!loading && t('common.yes')}
-        </Button>
-      </Row>
-    </Column>
-  );
-};
+              {!loading && t('common.yes')}
+            </Button>
+          </Row>
+        </Column>
+      </Modal>
+    );
+  },
+);
