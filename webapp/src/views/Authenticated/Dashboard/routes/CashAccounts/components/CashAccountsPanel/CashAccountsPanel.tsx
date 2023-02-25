@@ -5,8 +5,8 @@ import { GetCashAccountsQuery } from '__generated__/graphql';
 import { Panel } from 'components/molecules';
 import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
 import { FaChartLine, FaListUl, FaPlus } from 'react-icons/fa';
-import { ManageCashAccountProps, MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
-import { RenameCashAccountProps, MODAL_RENAME_CASH_ACCOUNT_MODAL } from 'modals/RenameCashAccount';
+import { MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
+import { MODAL_RENAME_CASH_ACCOUNT } from 'modals/RenameCashAccount';
 import NiceModal from '@ebay/nice-modal-react';
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { RenameButton } from './CashAccountPanel.styles';
@@ -43,16 +43,17 @@ export const CashAccountsPanel: FC<
     });
   };
 
-  const handleOpenRenameModal = () => {};
-  const handleOpenManageCashAccountModal = () => {};
-
-  /* const handleOpenRenameModal = () => {
-    openModal<RenameCashAccountProps>(MODAL_RENAME_CASH_ACCOUNT_MODAL, {
+  const handleOpenRenameModal = () => {
+    NiceModal.show(MODAL_RENAME_CASH_ACCOUNT, {
       uuid,
       name,
       callback: updateCashAccountName,
     });
   };
+
+  const handleOpenManageCashAccountModal = () => {};
+
+  /*
 
   const handleOpenManageCashAccountModal = () => {
     openModal<ManageCashAccountProps>(MODAL_MANAGE_CASH_ACCOUNT, {

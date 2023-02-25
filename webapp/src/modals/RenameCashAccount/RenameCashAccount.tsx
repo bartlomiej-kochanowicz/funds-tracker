@@ -1,20 +1,18 @@
 import { useMutation } from '@apollo/client';
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Loader, Spacer, Spreader } from 'components/atoms';
+import { Modal } from 'components/molecules';
 import { UPDATE_CASH_ACCOUNT } from 'graphql/mutations';
 import { showErrorToast } from 'helpers/showToast';
-import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Row } from 'simple-flexbox';
-import { Modal } from 'types/modal.type';
 import {
   UpdateCashAccountMutation,
   UpdateCashAccountMutationVariables,
 } from '__generated__/graphql';
 import { validationSchema } from './RenameCashAccount.schema';
-
-export const MODAL_RENAME_CASH_ACCOUNT_MODAL = 'RenameCashAccount';
 
 export interface RenameCashAccountProps {
   uuid: string;
@@ -22,78 +20,82 @@ export interface RenameCashAccountProps {
   callback: (data: { name: string; uuid: string }) => void;
 }
 
-export const RenameCashAccount: FC<Modal<RenameCashAccountProps>> = ({
-  uuid,
-  name,
-  callback,
-  closeModal,
-}) => {
-  const { t } = useTranslation();
+export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
+  ({ uuid, name, callback }) => {
+    const { t } = useTranslation();
 
-  const defaultValues = {
-    name,
-  };
+    const modal = useModal();
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting, isValid, isDirty, errors },
-    register,
-  } = useForm({ defaultValues, resolver: yupResolver(validationSchema), mode: 'onChange' });
+    const defaultValues = {
+      name,
+    };
 
-  const [updateCashAccount] = useMutation<
-    UpdateCashAccountMutation,
-    UpdateCashAccountMutationVariables
-  >(UPDATE_CASH_ACCOUNT, {
-    onCompleted: ({ updateCashAccount: { name: newName } }) => {
-      callback({ name: newName, uuid });
+    const {
+      handleSubmit,
+      formState: { isSubmitting, isValid, isDirty, errors },
+      register,
+    } = useForm({ defaultValues, resolver: yupResolver(validationSchema), mode: 'onChange' });
 
-      closeModal();
-    },
-    onError: () => {
-      closeModal();
+    const [updateCashAccount] = useMutation<
+      UpdateCashAccountMutation,
+      UpdateCashAccountMutationVariables
+    >(UPDATE_CASH_ACCOUNT, {
+      onCompleted: ({ updateCashAccount: { name: newName } }) => {
+        callback({ name: newName, uuid });
 
-      showErrorToast(t('service.unknown_error'));
-    },
-  });
+        modal.remove();
+      },
+      onError: () => {
+        modal.remove();
 
-  const onSubmit = async ({ name: newName }: typeof defaultValues) => {
-    await updateCashAccount({ variables: { data: { name: newName }, uuid } });
-  };
+        showErrorToast(t('service.unknown_error'));
+      },
+    });
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        defaultValue={defaultValues.name}
-        placeholder={t('common.input.name.placeholder')}
-        {...register('name')}
-        error={errors.name?.message}
-      />
+    const onSubmit = async ({ name: newName }: typeof defaultValues) => {
+      await updateCashAccount({ variables: { data: { name: newName }, uuid } });
+    };
 
-      <Spacer />
+    return (
+      <Modal
+        closeModal={modal.remove}
+        modalName={t('modal.RenameCashAccount.name')}
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            defaultValue={defaultValues.name}
+            placeholder={t('common.input.name.placeholder')}
+            {...register('name')}
+            error={errors.name?.message}
+          />
 
-      <Row justifyContent="flex-end">
-        <Button
-          color="tertiary"
-          onClick={closeModal}
-          flexGrow={1}
-          minWidth="140px"
-        >
-          {t('common.cancel')}
-        </Button>
+          <Spacer />
 
-        <Spreader spread="small" />
+          <Row justifyContent="flex-end">
+            <Button
+              color="tertiary"
+              onClick={modal.remove}
+              flexGrow={1}
+              minWidth="140px"
+            >
+              {t('common.cancel')}
+            </Button>
 
-        <Button
-          disabled={isSubmitting || !isValid || !isDirty}
-          flexGrow={1}
-          minWidth="140px"
-          type="submit"
-        >
-          {isSubmitting && <Loader color="white" />}
+            <Spreader spread="small" />
 
-          {!isSubmitting && t('common.save')}
-        </Button>
-      </Row>
-    </form>
-  );
-};
+            <Button
+              disabled={isSubmitting || !isValid || !isDirty}
+              flexGrow={1}
+              minWidth="140px"
+              type="submit"
+            >
+              {isSubmitting && <Loader color="white" />}
+
+              {!isSubmitting && t('common.save')}
+            </Button>
+          </Row>
+        </form>
+      </Modal>
+    );
+  },
+);
