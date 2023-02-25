@@ -125,9 +125,17 @@
   "modal.ManageCashAccount.button.delete": "Delete cash account",
   "modal.RenameCashAccount.name": "Rename cash account",
   "modal.ConfirmDeleteCashAccount.name": "Delete cash account",
+  "modal.RenameCashAccount.operations.empty": "There are no operations for this cash account.",
   "modal.ConfirmDeleteCashAccount.description": "Are you sure you want to delete <bold>{{name}}</bold> cash account? <bold>This action cannot be undone.</bold>",
   "common.yes": "Yes",
   "common.no": "No",
   "modal.ConfirmDeleteCashAccount.toast.success": "Cash account has been deleted.",
-  "modal.ConfirmDeleteCashAccount.toast.failure": "Cash account deletion failed. Please try again later."
+  "modal.ConfirmDeleteCashAccount.toast.failure": "Cash account deletion failed. Please try again later.",
+  "common.amount": "Amount",
+  "common.date": "Date",
+  "common.type": "Type",
+  "common.action": "Action",
+  "cashAccount.operation.type.deposit": "Deposit",
+  "cashAccount.operation.type.withdrawal": "Withdrawal",
+  "cashAccount.operation.type.transfer": "Transfer"
 }

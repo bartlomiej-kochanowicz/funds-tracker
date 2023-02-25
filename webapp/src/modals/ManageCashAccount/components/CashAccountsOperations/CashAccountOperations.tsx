@@ -4,12 +4,13 @@ import {
   GetCashAccountOperationsQueryVariables,
 } from '__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { Loader } from 'components/atoms';
+import { Loader, Text } from 'components/atoms';
 import { Table } from 'components/molecules';
 import { GET_CASH_ACCOUNT_OPERATIONS } from 'graphql/query/GetCashAccountOperations';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { formatDate } from 'helpers/formatDate';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { columns } from './columns';
 
@@ -19,6 +20,8 @@ interface CashAccountOperationsProps {
 }
 
 export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid, currency }) => {
+  const { t } = useTranslation();
+
   const { loading, data } = useQuery<
     GetCashAccountOperationsQuery,
     GetCashAccountOperationsQueryVariables
@@ -31,16 +34,17 @@ export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid, cu
   }
 
   if (!loading && !cashAccountsOperationsExist) {
-    return <div>There are no operations for this cash account.</div>;
+    return <Text fontWeight="700">{t('modal.RenameCashAccount.operations.empty')}</Text>;
   }
 
   if (!loading && cashAccountsOperationsExist) {
     const processedData =
-      data?.cashAccount.operations.map(({ date, amount, uuid: dataUuid, ...rest }) => ({
+      data?.cashAccount.operations.map(({ date, amount, uuid: dataUuid, type, ...rest }) => ({
         ...rest,
         date: formatDate(date),
         amount: formatCurrency(amount, currency),
         identifier: dataUuid,
+        type: t(`cashAccount.operation.type.${type}`),
       })) || [];
 
     return (
