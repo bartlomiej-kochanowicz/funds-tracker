@@ -9,13 +9,15 @@ export interface ColumnAccessor<Item> {
   accessor: keyof Item;
   header: string;
   width?: Width;
+  center?: boolean;
 }
 
 export interface CustomColumn<Item> {
   identifier: Identifier;
   render: (item: Item) => ReactNode;
-  width?: Width;
   header?: string;
+  width?: Width;
+  center?: boolean;
 }
 
 export type Column<Item> = ColumnAccessor<Item> | CustomColumn<Item>;

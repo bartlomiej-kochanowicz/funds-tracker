@@ -1,6 +1,7 @@
 import { Text } from 'components/atoms';
 
 import { HeaderProps } from '../../types';
+import { Cell } from '../Cell';
 import { Wrapper } from './Header.styles';
 
 export const Header = <Item extends unknown>({ columns }: HeaderProps<Item>) => {
@@ -8,13 +9,16 @@ export const Header = <Item extends unknown>({ columns }: HeaderProps<Item>) => 
 
   return (
     <Wrapper gridTemplateColumns={gridTemplateColumns}>
-      {columns.map(({ header, identifier }) => (
-        <Text
-          key={identifier}
-          fontWeight="700"
-        >
-          {header}
-        </Text>
+      {columns.map(({ header, identifier, center }) => (
+        <Cell center={center}>
+          <Text
+            key={identifier}
+            fontWeight="700"
+            fontColor="gray300"
+          >
+            {header}
+          </Text>
+        </Cell>
       ))}
     </Wrapper>
   );

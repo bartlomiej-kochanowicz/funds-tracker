@@ -2,6 +2,7 @@ import { GetCashAccountsQuery } from '__generated__/graphql';
 import NiceModal from '@ebay/nice-modal-react';
 import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
 import { Panel } from 'components/molecules';
+import { formatCurrency } from 'helpers/formatCurrency';
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
 import { MODAL_RENAME_CASH_ACCOUNT } from 'modals/RenameCashAccount';
@@ -29,12 +30,7 @@ export const CashAccountsPanel: FC<
   updateCashAccountName,
   updateCashAccountList,
 }) => {
-  const { i18n, t } = useTranslation();
-
-  const formatter = new Intl.NumberFormat(i18n.language, {
-    style: 'currency',
-    currency,
-  });
+  const { t } = useTranslation();
 
   const handleOpenAddFundsCashAccountModal = () => {
     NiceModal.show(MODAL_ADD_FUNDS_CASH_ACCOUNT, {
@@ -55,6 +51,7 @@ export const CashAccountsPanel: FC<
   const handleOpenManageCashAccountModal = () => {
     NiceModal.show(MODAL_MANAGE_CASH_ACCOUNT, {
       deleteModalProps: { name, uuid, callback: updateCashAccountList },
+      currency,
     });
   };
 
@@ -112,7 +109,7 @@ export const CashAccountsPanel: FC<
             maxWidth="120px"
             textAlign="right"
           >
-            {formatter.format(balance)}
+            {formatCurrency(balance, currency)}
           </Text>
         </Row>
       </Panel.Footer>

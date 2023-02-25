@@ -1,19 +1,24 @@
 import {
-  CashAccountOperation,
+  Currency,
   GetCashAccountOperationsQuery,
   GetCashAccountOperationsQueryVariables,
 } from '__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Loader } from 'components/atoms';
-import { Column, Table } from 'components/molecules';
+import { Table } from 'components/molecules';
 import { GET_CASH_ACCOUNT_OPERATIONS } from 'graphql/query/GetCashAccountOperations';
+import { formatCurrency } from 'helpers/formatCurrency';
+import { formatDate } from 'helpers/formatDate';
 import { FC } from 'react';
+
+import { columns } from './columns';
 
 interface CashAccountOperationsProps {
   uuid: string;
+  currency: Currency;
 }
 
-export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid }) => {
+export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid, currency }) => {
   const { loading, data } = useQuery<
     GetCashAccountOperationsQuery,
     GetCashAccountOperationsQueryVariables
@@ -30,16 +35,17 @@ export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid }) 
   }
 
   if (!loading && cashAccountsOperationsExist) {
-    const columns = [
-      { identifier: 'amount', accessor: 'amount', header: 'Amount' },
-      { identifier: 'type', accessor: 'type', header: 'Type' },
-      { identifier: 'date', accessor: 'date', header: 'Data' },
-    ] satisfies Column<CashAccountOperation>[];
+    const processedData =
+      data?.cashAccount.operations.map(({ date, amount, ...rest }) => ({
+        ...rest,
+        date: formatDate(date),
+        amount: formatCurrency(amount, currency),
+      })) || [];
 
     return (
       <Table
         columns={columns}
-        data={data?.cashAccount.operations || []}
+        data={processedData}
       />
     );
   }

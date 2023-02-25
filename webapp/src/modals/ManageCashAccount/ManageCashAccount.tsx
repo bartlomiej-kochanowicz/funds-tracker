@@ -1,3 +1,4 @@
+import { Currency } from '__generated__/graphql';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Button, Icon, Spacer, Spreader } from 'components/atoms';
 import { Modal } from 'components/molecules';
@@ -14,10 +15,11 @@ export interface ManageCashAccountProps {
     uuid: string;
     callback: (data: { uuid: string }) => void;
   };
+  currency: Currency;
 }
 
 export const ManageCashAccount = NiceModal.create<ManageCashAccountProps>(
-  ({ deleteModalProps }) => {
+  ({ deleteModalProps, currency }) => {
     const { t } = useTranslation();
 
     const modal = useModal();
@@ -32,7 +34,10 @@ export const ManageCashAccount = NiceModal.create<ManageCashAccountProps>(
         closeModal={modal.remove}
       >
         <Column>
-          <CashAccountOperations uuid={deleteModalProps.uuid} />
+          <CashAccountOperations
+            uuid={deleteModalProps.uuid}
+            currency={currency}
+          />
 
           <Spacer />
 
