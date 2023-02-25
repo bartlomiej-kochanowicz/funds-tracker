@@ -15,29 +15,27 @@ import { Root } from 'views/Root';
 const Content = () => {
   const { theme } = useColorThemeContext();
 
-  console.log(NiceModal);
-
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle modalVisible={false} />
+      <NiceModal.Provider>
+        <GlobalStyle />
 
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
 
-      <ErrorBoundary FallbackComponent={FullscreenErrorContent}>
-        <NiceModal.Provider>
+        <ErrorBoundary FallbackComponent={FullscreenErrorContent}>
           <Root />
-        </NiceModal.Provider>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </NiceModal.Provider>
     </ThemeProvider>
   );
 };

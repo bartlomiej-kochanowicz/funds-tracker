@@ -1,16 +1,10 @@
 import { Body } from './components/Body';
 import { Header } from './components/Header';
-import { TableWrapper } from './Table.styles';
+import { TableWrapper, Wrapper } from './Table.styles';
 import { ItemBase, TableProps } from './types';
 
 export const Table = <Item extends ItemBase>({ columns, data }: TableProps<Item>) => (
-  <div
-    style={{
-      overflowX: 'auto',
-      overflowY: 'auto',
-      width: '100%',
-    }}
-  >
+  <Wrapper>
     <TableWrapper>
       <Header columns={columns} />
 
@@ -19,5 +13,5 @@ export const Table = <Item extends ItemBase>({ columns, data }: TableProps<Item>
         data={data}
       />
     </TableWrapper>
-  </div>
+  </Wrapper>
 );

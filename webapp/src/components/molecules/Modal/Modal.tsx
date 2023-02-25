@@ -4,7 +4,7 @@ import { FC, Fragment, ReactNode, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 
-import { Background, CloseButton, ModalComponent } from './Modal.styles';
+import { Background, CloseButton, GlobalStyle, ModalComponent } from './Modal.styles';
 
 interface ModalComponentProps {
   closeModal: () => void;
@@ -20,6 +20,8 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
   return (
     <Fragment>
       <Background />
+
+      <GlobalStyle />
 
       <div
         data-modal="true"
