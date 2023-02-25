@@ -7,13 +7,13 @@ type Identifier = string | number;
 export interface ColumnAccessor<Item> {
   identifier: Identifier;
   accessor: keyof Item;
+  header: string;
   width?: Width;
-  header?: string;
 }
 
 export interface CustomColumn<Item> {
   identifier: Identifier;
-  render: (item: Item, handleRefresh: () => void) => ReactNode;
+  render: (item: Item) => ReactNode;
   width?: Width;
   header?: string;
 }
