@@ -51,15 +51,11 @@ export const CashAccountsPanel: FC<
     });
   };
 
-  const handleOpenManageCashAccountModal = () => {};
-
-  /*
-
   const handleOpenManageCashAccountModal = () => {
-    openModal<ManageCashAccountProps>(MODAL_MANAGE_CASH_ACCOUNT, {
+    NiceModal.show(MODAL_MANAGE_CASH_ACCOUNT, {
       deleteModalProps: { name, uuid, callback: updateCashAccountList },
     });
-  }; */
+  };
 
   return (
     <Panel>

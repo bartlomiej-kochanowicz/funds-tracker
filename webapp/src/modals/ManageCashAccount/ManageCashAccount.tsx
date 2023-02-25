@@ -1,16 +1,11 @@
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Button, Icon, Spacer, Spreader } from 'components/atoms';
-import {
-  ConfirmDeleteCashAccountProps,
-  MODAL_CONFIRM_DELETE_CASH_ACCOUNT,
-} from 'modals/ConfirmDeleteCashAccount';
-import { FC } from 'react';
+import { Modal } from 'components/molecules';
+import { MODAL_CONFIRM_DELETE_CASH_ACCOUNT } from 'modals/ConfirmDeleteCashAccount';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Column, Row } from 'simple-flexbox';
-import { Modal } from 'types/modal.type';
 import { CashAccountOperations } from './components/CashAccountsOperations';
-
-export const MODAL_MANAGE_CASH_ACCOUNT = 'ManageCashAccount';
 
 export interface ManageCashAccountProps {
   deleteModalProps: {
@@ -20,36 +15,42 @@ export interface ManageCashAccountProps {
   };
 }
 
-export const ManageCashAccount: FC<Modal<ManageCashAccountProps>> = ({
-  openModal,
-  deleteModalProps,
-}) => {
-  const { t } = useTranslation();
+export const ManageCashAccount = NiceModal.create<ManageCashAccountProps>(
+  ({ deleteModalProps }) => {
+    const { t } = useTranslation();
 
-  const handleDelete = () => {
-    openModal<ConfirmDeleteCashAccountProps>(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, deleteModalProps);
-  };
+    const modal = useModal();
 
-  return (
-    <Column>
-      <CashAccountOperations uuid={deleteModalProps.uuid} />
+    const handleDelete = () => {
+      NiceModal.show(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, deleteModalProps);
+    };
 
-      <Spacer />
+    return (
+      <Modal
+        modalName={t('modal.ManageCashAccount.name')}
+        closeModal={modal.remove}
+      >
+        <Column>
+          <CashAccountOperations uuid={deleteModalProps.uuid} />
 
-      <Row justifyContent="flex-end">
-        <Button
-          color="error"
-          minWidth="240px"
-          onClick={handleDelete}
-          outline
-        >
-          {t('modal.ManageCashAccount.button.delete')}
+          <Spacer />
 
-          <Spreader spread="tiny" />
+          <Row justifyContent="flex-end">
+            <Button
+              color="error"
+              minWidth="240px"
+              onClick={handleDelete}
+              outline
+            >
+              {t('modal.ManageCashAccount.button.delete')}
 
-          <Icon icon={FaTrash} />
-        </Button>
-      </Row>
-    </Column>
-  );
-};
+              <Spreader spread="tiny" />
+
+              <Icon icon={FaTrash} />
+            </Button>
+          </Row>
+        </Column>
+      </Modal>
+    );
+  },
+);

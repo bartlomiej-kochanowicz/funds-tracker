@@ -1,5 +1,6 @@
+import NiceModal from '@ebay/nice-modal-react';
 import { Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
-import { CreateCashAccountModalProps, MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
+import { MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
@@ -13,11 +14,9 @@ interface CreateFirstCashAccountProps {
 export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callback }) => {
   const { t } = useTranslation();
 
-  const handleOpenModal = () => {};
-
-  /* const handleOpenModal = () => {
-    openModal<CreateCashAccountModalProps>(MODAL_CREATE_CASH_ACCOUNT, { callback });
-  }; */
+  const handleOpenModal = () => {
+    NiceModal.show(MODAL_CREATE_CASH_ACCOUNT, { callback });
+  };
 
   return (
     <Column alignItems="center">
