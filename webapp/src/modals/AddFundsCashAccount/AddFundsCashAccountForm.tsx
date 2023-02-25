@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
+import { cache } from 'config/client';
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { FC, Fragment } from 'react';
@@ -57,6 +58,9 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
         balance: data.addFundsToCashAccount.balance,
         uuid,
       });
+
+      cache.evict({ id: 'ROOT_QUERY', fieldName: `cashAccount({"uuid":"${uuid}"})` });
+      cache.gc();
 
       closeModal();
 
