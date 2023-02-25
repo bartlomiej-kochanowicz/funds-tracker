@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import { createRef, Ref, RefObject } from 'react';
+
 import { composeRefs } from './composeRefs';
 
 describe('composeRefs', () => {

@@ -1,8 +1,8 @@
-import { Column } from 'simple-flexbox';
-import { useTranslation } from 'react-i18next';
 import { Button, Heading, Spacer, Text, ThumbUp } from 'components/atoms';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
+import { Column } from 'simple-flexbox';
 
 export const Completed = () => {
   const { t } = useTranslation();

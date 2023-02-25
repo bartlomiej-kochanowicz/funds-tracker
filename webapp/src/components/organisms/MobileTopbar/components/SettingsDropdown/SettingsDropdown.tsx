@@ -1,6 +1,7 @@
+import { Dropdown, Icon } from 'components/atoms';
 import { FC } from 'react';
 import { FaCog } from 'react-icons/fa';
-import { Dropdown, Icon } from 'components/atoms';
+
 import { DropdownContent } from '../DropdownContent';
 
 export const SettingsDropdown: FC = () => (

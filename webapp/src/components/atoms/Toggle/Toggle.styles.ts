@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import styled, { css } from 'styled-components';
 
 export const StyledButton = styled.button<{ isToggled: boolean }>`
   width: 50px;

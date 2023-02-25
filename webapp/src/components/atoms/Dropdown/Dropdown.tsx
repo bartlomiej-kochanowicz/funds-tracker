@@ -4,6 +4,7 @@ import { forwardRef, ForwardRefExoticComponent, Fragment, useState } from 'react
 import { useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 import { composeRefs } from 'utils/composeRefs';
+
 import { Trigger } from './Dropdown.styles';
 
 interface DropdownProps {

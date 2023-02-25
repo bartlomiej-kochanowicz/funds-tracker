@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import { InnerWrapper, Wrapper } from './FullscreenClear.styles';
 
 interface FullscreenClearProps {

@@ -1,13 +1,14 @@
+import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Loader, RouterLink, Spacer, Text } from 'components/atoms';
+import { SET_NEW_PASSWORD } from 'graphql/mutations';
+import { showErrorToast } from 'helpers/showToast';
 import { ChangeEvent, FC, lazy, Suspense, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useMutation } from '@apollo/client';
-import { SET_NEW_PASSWORD } from 'graphql/mutations';
-import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from '__generated__/graphql';
-import { showErrorToast } from 'helpers/showToast';
 import { ROUTES } from 'routes/paths';
+
 import { validationSchema } from './EnterPassword.schema';
 import { Form } from './EnterPassword.styles';
 

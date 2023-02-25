@@ -1,7 +1,9 @@
+import 'base';
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+
 import App from './App';
-import 'base';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);

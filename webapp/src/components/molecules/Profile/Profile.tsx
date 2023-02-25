@@ -1,8 +1,9 @@
-import { FC } from 'react';
-import { Row } from 'simple-flexbox';
-import { useTranslation } from 'react-i18next';
-import { Spreader, Text, Avatar, Dropdown } from 'components/atoms';
+import { Avatar, Dropdown, Spreader, Text } from 'components/atoms';
 import { useUserContext } from 'contexts/UserContext';
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Row } from 'simple-flexbox';
+
 import { DropdownContent } from './components/DropdownContent';
 
 interface ProfileProps {

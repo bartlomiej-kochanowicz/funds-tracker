@@ -1,5 +1,6 @@
-import { IconType } from 'react-icons';
 import { NavListItem } from 'components/organisms/Sidebar/components/NavListItem';
+import { IconType } from 'react-icons';
+
 import { List, ListItem, StyledNavLink } from './NavList.styles';
 
 interface NavListProps {

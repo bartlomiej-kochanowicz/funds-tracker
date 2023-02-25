@@ -1,5 +1,5 @@
-import { lazy } from 'react';
 import { RECAPTCHA_SITE_KEY } from 'config/env';
+import { lazy } from 'react';
 import { ROUTES } from 'routes/paths';
 
 const UnprotectedRoute = lazy(() =>

@@ -1,14 +1,3 @@
-import { ChangeEvent, Fragment, lazy, Suspense, useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useLazyQuery, useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
-import { Button, Spacer, Input, Loader } from 'components/atoms';
-import { useStateMachine, StateMachine } from 'hooks/useStateMachine';
-import { ROUTES } from 'routes/paths';
-import { EMAIL_EXIST } from 'graphql/query';
-import { SIGNIN, SEND_CODE } from 'graphql/mutations';
 import {
   EmailExistQuery,
   EmailExistQueryVariables,
@@ -17,8 +6,20 @@ import {
   SigninMutation,
   SigninMutationVariables,
 } from '__generated__/graphql';
+import { useLazyQuery, useMutation } from '@apollo/client';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Input, Loader, Spacer } from 'components/atoms';
 import { useUserContext } from 'contexts/UserContext';
+import { SEND_CODE, SIGNIN } from 'graphql/mutations';
+import { EMAIL_EXIST } from 'graphql/query';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
+import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
+import { ChangeEvent, Fragment, lazy, Suspense, useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from 'routes/paths';
+
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
 

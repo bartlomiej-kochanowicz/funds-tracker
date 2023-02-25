@@ -1,6 +1,6 @@
-import { render } from 'utils/test-utils';
 import { Loader } from 'components/atoms/Loader';
 import { DefaultTheme } from 'styled-components';
+import { render } from 'utils/test-utils';
 
 describe('Atoms/Loader tests', () => {
   it.each([

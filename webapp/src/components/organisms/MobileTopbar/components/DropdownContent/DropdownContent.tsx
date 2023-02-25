@@ -1,6 +1,7 @@
 import { Menu, Text, ThemeSwitcher } from 'components/atoms';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { ApperienceWrapper } from './DropdownContent.styles';
 
 interface DropdownContentProps {

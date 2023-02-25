@@ -1,14 +1,15 @@
-import { FC, lazy, Suspense, useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Button, Input, Spacer } from 'components/atoms';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useUserContext } from 'contexts/UserContext';
-import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
-import { CONFIRM_SIGNUP } from 'graphql/mutations';
 import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Input, Spacer } from 'components/atoms';
+import { useUserContext } from 'contexts/UserContext';
+import { CONFIRM_SIGNUP } from 'graphql/mutations';
+import { FC, lazy, Suspense, useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
+
 import { validationSchema } from './Confirm.schema';
 import { Form } from './Confirm.styles';
 

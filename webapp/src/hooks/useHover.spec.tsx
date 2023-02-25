@@ -1,7 +1,7 @@
-import userEvent from '@testing-library/user-event';
-import { render } from 'utils/test-utils';
-import { useHover } from 'hooks/useHover';
 import { renderHook } from '@testing-library/react-hooks';
+import userEvent from '@testing-library/user-event';
+import { useHover } from 'hooks/useHover';
+import { render } from 'utils/test-utils';
 
 describe('useHover tests', () => {
   it('set isHover on true when mouse over', async () => {

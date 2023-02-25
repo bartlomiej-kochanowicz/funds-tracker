@@ -1,15 +1,16 @@
 import { ErrorContent } from 'components/molecules';
+import { MobileNavigation, MobileTopbar, Sidebar, Topbar } from 'components/organisms';
+import { useBreakpoint } from 'hooks/useBreakpoint';
+import { FullscreenLoading } from 'layouts/FullscreenLoading';
 import { Fragment, lazy, Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useLocation, useRoutes } from 'react-router-dom';
-import { Sidebar, MobileNavigation, Topbar, MobileTopbar } from 'components/organisms';
-import { useBreakpoint } from 'hooks/useBreakpoint';
 import { ROUTES } from 'routes/paths';
-import { FullscreenLoading } from 'layouts/FullscreenLoading';
+
+import { Content } from './Authenticated.styles';
 import { DashboardRoutes } from './Dashboard';
 import { HubRoutes } from './Hub';
 import { SettingsRoutes } from './Settings';
-import { Content } from './Authenticated.styles';
 
 const ProtectedRoute = lazy(() =>
   import('utils/ProtectedRoute').then(({ ProtectedRoute: component }) => ({ default: component })),

@@ -1,6 +1,6 @@
-import { render } from 'utils/test-utils';
 import type { ButtonColors } from 'components/atoms/Button';
 import { Button, Size } from 'components/atoms/Button';
+import { render } from 'utils/test-utils';
 
 describe('Atoms/Button tests', () => {
   it('renders properly', () => {

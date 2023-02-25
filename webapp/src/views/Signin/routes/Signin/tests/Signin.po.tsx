@@ -1,10 +1,10 @@
+import { MockedResponse } from '@apollo/client/testing';
+import userEvent from '@testing-library/user-event';
+import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup';
 import { FC } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-import { MockedResponse } from '@apollo/client/testing';
 import { findByText, getByTestId, queryByTestId, render, waitFor } from 'utils/test-utils';
 import { unsafeCast } from 'utils/unsafeCast';
-import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup';
 
 export class SigninPO {
   private elements: {

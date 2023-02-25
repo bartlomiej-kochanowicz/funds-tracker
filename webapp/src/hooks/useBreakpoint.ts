@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { breakpoints } from 'constants/breakpoints';
+import { useEffect, useState } from 'react';
 
 type Media = 'min' | 'max';
 

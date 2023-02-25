@@ -1,5 +1,5 @@
-import { object, string } from 'yup';
 import i18n from 'utils/i18n';
+import { object, string } from 'yup';
 
 export const validationSchema = object().shape({
   userEmail: string()

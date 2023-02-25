@@ -1,4 +1,5 @@
 import { FC, lazy, Suspense } from 'react';
+
 import type { CreateCashAccountProps } from './CreateCashAccount';
 
 const CreateCashAccount = lazy(() =>

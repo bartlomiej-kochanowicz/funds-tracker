@@ -1,3 +1,7 @@
+import {
+  DeleteCashAccountMutation,
+  DeleteCashAccountMutationVariables,
+} from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
@@ -6,10 +10,6 @@ import { DELETE_CASH_ACCOUNT } from 'graphql/mutations';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { Trans, useTranslation } from 'react-i18next';
 import { Column, Row } from 'simple-flexbox';
-import {
-  DeleteCashAccountMutation,
-  DeleteCashAccountMutationVariables,
-} from '__generated__/graphql';
 
 export interface ConfirmDeleteCashAccountProps {
   name: string;

@@ -1,4 +1,4 @@
-import { FaHistory, FaExchangeAlt } from 'react-icons/fa';
+import { FaExchangeAlt, FaHistory } from 'react-icons/fa';
 import { MdAccountBalance } from 'react-icons/md';
 import { ROUTES } from 'routes/paths';
 

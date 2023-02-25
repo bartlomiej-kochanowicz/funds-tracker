@@ -1,13 +1,14 @@
-import { ReactNode, ReactElement, ComponentType } from 'react';
-import { I18nextProvider } from 'react-i18next';
-import { ThemeProvider } from 'styled-components';
-import { render as rtlRender, RenderOptions } from '@testing-library/react';
+import { Currency, IntroductionStep } from '__generated__/graphql';
 import { MockedProvider, MockedResponse } from '@apollo/client/testing';
-import { theme } from 'styles/theme';
+import { render as rtlRender, RenderOptions } from '@testing-library/react';
 import { ColorThemeProvider } from 'contexts/ColorThemeContext';
 import { UserContextProvider } from 'contexts/UserContext';
 import { GET_USER } from 'graphql/query';
-import { IntroductionStep, Currency } from '__generated__/graphql';
+import { ComponentType, ReactElement, ReactNode } from 'react';
+import { I18nextProvider } from 'react-i18next';
+import { ThemeProvider } from 'styled-components';
+import { theme } from 'styles/theme';
+
 import i18n from './i18nForTests';
 
 export const userMock = {

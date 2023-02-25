@@ -1,5 +1,5 @@
-import { Column } from 'simple-flexbox';
 import { Button, Spacer, Toggle } from 'components/atoms';
+import { Column } from 'simple-flexbox';
 
 export const Dashboard = () => (
   <Column>

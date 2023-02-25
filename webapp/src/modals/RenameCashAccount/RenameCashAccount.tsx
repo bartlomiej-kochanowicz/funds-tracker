@@ -1,3 +1,7 @@
+import {
+  UpdateCashAccountMutation,
+  UpdateCashAccountMutationVariables,
+} from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,10 +12,7 @@ import { showErrorToast } from 'helpers/showToast';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Row } from 'simple-flexbox';
-import {
-  UpdateCashAccountMutation,
-  UpdateCashAccountMutationVariables,
-} from '__generated__/graphql';
+
 import { validationSchema } from './RenameCashAccount.schema';
 
 export interface RenameCashAccountProps {

@@ -1,9 +1,10 @@
-import { FC, Fragment, ReactNode, useRef } from 'react';
-import { Row } from 'simple-flexbox';
-import { FaTimes } from 'react-icons/fa';
 import { Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
-import { ModalComponent, Background, CloseButton } from './Modal.styles';
+import { FC, Fragment, ReactNode, useRef } from 'react';
+import { FaTimes } from 'react-icons/fa';
+import { Row } from 'simple-flexbox';
+
+import { Background, CloseButton, ModalComponent } from './Modal.styles';
 
 interface ModalComponentProps {
   closeModal: () => void;

@@ -3,6 +3,7 @@ import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
+
 import { hubNavigation } from './constants';
 import { Grid, Wrapper } from './Hub.styles';
 

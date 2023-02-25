@@ -1,26 +1,27 @@
-import { motion } from 'framer-motion';
-import { useMutation } from '@apollo/client';
-import { useFieldArray, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Trans, useTranslation } from 'react-i18next';
-import { FaPlus } from 'react-icons/fa';
-import { Column } from 'simple-flexbox';
 import {
   Currency,
   IntroductionCreateCashAccountsInput,
   IntroductionCreateCashAccountsMutation,
   IntroductionCreateCashAccountsMutationVariables,
 } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Heading, Icon, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
-import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
-import { showErrorToast } from 'helpers/showToast';
-import { INTRODUCTION_CREATE_CASH_ACCOUNTS } from 'graphql/mutations';
 import { useUserContext } from 'contexts/UserContext';
+import { motion } from 'framer-motion';
+import { INTRODUCTION_CREATE_CASH_ACCOUNTS } from 'graphql/mutations';
+import { showErrorToast } from 'helpers/showToast';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { Trans, useTranslation } from 'react-i18next';
+import { FaPlus } from 'react-icons/fa';
+import { Column } from 'simple-flexbox';
+import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
+
+import { CashAccountsField } from '../CashAccountsField';
+import { EmptyList } from '../EmptyList';
 import { validationSchema } from './CreateCashAccountsForm.schema';
 import { FieldsWrapper } from './CreateCashAccountsForm.styles';
-import { EmptyList } from '../EmptyList';
-import { CashAccountsField } from '../CashAccountsField';
 
 export const CreateCashAccountsForm = () => {
   const { t } = useTranslation();

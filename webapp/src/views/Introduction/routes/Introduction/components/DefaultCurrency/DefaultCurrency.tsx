@@ -1,16 +1,16 @@
+import { UpdateUserMutation, UpdateUserMutationVariables } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
 import { Button, Heading, Loader, Select, Spacer, Text } from 'components/atoms';
-import { motion } from 'framer-motion';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
-import { Trans, useTranslation } from 'react-i18next';
 import { useUserContext } from 'contexts/UserContext';
+import { motion } from 'framer-motion';
+import { UPDATE_USER } from 'graphql/mutations';
+import { showErrorToast } from 'helpers/showToast';
+import { useSelect } from 'hooks/useSelect';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelect } from 'hooks/useSelect';
+import { Trans, useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
-import { useMutation } from '@apollo/client';
-import { UPDATE_USER } from 'graphql/mutations';
-import { UpdateUserMutation, UpdateUserMutationVariables } from '__generated__/graphql';
-import { showErrorToast } from 'helpers/showToast';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 
 export const DefaultCurrency = () => {

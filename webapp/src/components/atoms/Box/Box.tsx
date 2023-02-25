@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-import { Colors, Radius } from 'styles/styled';
 import { PaddingMixinProps } from 'styles/mixins';
+import { Colors, Radius } from 'styles/styled';
+
 import { StyledWrapper } from './Box.styled';
 
 interface BoxProps extends PaddingMixinProps {

@@ -1,5 +1,5 @@
+import { Spread, Spreader } from 'components/atoms/Spreader';
 import { render } from 'utils/test-utils';
-import { Spreader, Spread } from 'components/atoms/Spreader';
 
 describe('Atoms/Spreader tests', () => {
   it('renders properly', () => {

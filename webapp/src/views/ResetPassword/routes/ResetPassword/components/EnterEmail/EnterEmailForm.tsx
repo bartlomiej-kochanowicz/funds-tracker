@@ -1,3 +1,4 @@
+import { ResetPasswordMutation, ResetPasswordMutationVariables } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Loader, Spacer, Text } from 'components/atoms';
@@ -6,7 +7,7 @@ import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { ChangeEvent, lazy, Suspense, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { ResetPasswordMutation, ResetPasswordMutationVariables } from '__generated__/graphql';
+
 import { validationSchema } from './EnterEmail.schema';
 import { Form } from './EnterEmail.styles';
 

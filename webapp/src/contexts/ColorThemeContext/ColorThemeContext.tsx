@@ -1,8 +1,8 @@
-import { createContext, FC, useContext, useState } from 'react';
-import { theme, darkTheme } from 'styles/theme';
 import { COLOR_THEME, ColorThemeType } from 'constants/common';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { getLocalColorTheme, setLocalColorTheme } from 'helpers/localColorTheme';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
+import { createContext, FC, useContext, useState } from 'react';
+import { darkTheme, theme } from 'styles/theme';
 
 type ColorThemeContextType = ReturnType<typeof useColorTheme>;
 

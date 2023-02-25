@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
-import { PanelWrapper, PanelLink } from './Panel.styles';
+
+import { PanelLink, PanelWrapper } from './Panel.styles';
 
 interface PanelcomponentProps {
   children: ReactNode;

@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@apollo/client': 3.7.7
   '@babel/core': 7.20.12
-  '@ebay/nice-modal-react': ^1.2.8
+  '@ebay/nice-modal-react': 1.2.8
   '@graphql-codegen/cli': 3.0.0
   '@graphql-codegen/client-preset': 2.0.0
   '@graphql-codegen/typed-document-node': 3.0.0
@@ -38,6 +38,7 @@ specifiers:
   eslint-plugin-prettier: 4.2.1
   eslint-plugin-react: 7.32.2
   eslint-plugin-react-hooks: 4.6.0
+  eslint-plugin-simple-import-sort: ^10.0.0
   eslint-plugin-testing-library: 5.10.1
   framer-motion: 9.0.2
   graphql: 16.6.0
@@ -143,6 +144,7 @@ devDependencies:
   eslint-plugin-prettier: 4.2.1_qa2thblfovmfepmgrc7z2owbo4
   eslint-plugin-react: 7.32.2_eslint@8.33.0
   eslint-plugin-react-hooks: 4.6.0_eslint@8.33.0
+  eslint-plugin-simple-import-sort: 10.0.0_eslint@8.33.0
   eslint-plugin-testing-library: 5.10.1_4vsywjlpuriuw3tl5oq6zy5a64
   jest: 29.4.2_@types+node@18.13.0
   jest-environment-jsdom: 29.4.2
@@ -5314,6 +5316,14 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
+    dev: true
+
+  /eslint-plugin-simple-import-sort/10.0.0_eslint@8.33.0:
+    resolution: {integrity: sha512-AeTvO9UCMSNzIHRkg8S6c3RPy5YEwKWSQPx3DYghLedo2ZQxowPFLGDN1AZ2evfg6r6mjBSZSLxLFsWSu3acsw==}
+    peerDependencies:
+      eslint: '>=5.0.0'
+    dependencies:
+      eslint: 8.33.0
     dev: true
 
   /eslint-plugin-testing-library/5.10.1_4vsywjlpuriuw3tl5oq6zy5a64:

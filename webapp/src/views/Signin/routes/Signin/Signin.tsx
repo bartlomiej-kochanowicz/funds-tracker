@@ -1,9 +1,10 @@
-import { Trans, useTranslation } from 'react-i18next';
-import { Column, Row } from 'simple-flexbox';
-import { Spacer, Heading, Text, RouterLink, ThemeSwitcher } from 'components/atoms';
-import { ROUTES } from 'routes/paths';
+import { Heading, RouterLink, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
 import { FullscreenClear } from 'layouts/FullscreenClear';
+import { Trans, useTranslation } from 'react-i18next';
+import { ROUTES } from 'routes/paths';
+import { Column, Row } from 'simple-flexbox';
+
 import { SigninForm } from './SigninForm';
 
 export const Signin = () => {

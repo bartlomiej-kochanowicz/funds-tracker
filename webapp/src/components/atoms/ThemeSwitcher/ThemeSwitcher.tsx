@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
+import { useTranslation } from 'react-i18next';
+
 import { Handle, spring, StyledBiMoon, StyledBiSun, StyledButton } from './ThemeSwitcher.styles';
 
 export const ThemeSwitcher = () => {

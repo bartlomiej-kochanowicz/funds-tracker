@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import ResizeObserver from 'resize-observer-polyfill';
-import matchMediaPolyfill from 'mq-polyfill';
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
 import 'jest-styled-components';
+
+import matchMediaPolyfill from 'mq-polyfill';
+import ResizeObserver from 'resize-observer-polyfill';
 import i18nForTests from 'utils/i18nForTests';
 
 const originalError = console.error;

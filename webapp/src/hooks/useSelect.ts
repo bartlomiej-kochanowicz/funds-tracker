@@ -2,10 +2,10 @@ import {
   DeepRequired,
   FieldErrorsImpl,
   FieldValues,
+  get,
   Path,
   PathValue,
   UseFormRegister,
-  get,
 } from 'react-hook-form';
 
 interface UseSelectProps<Fields extends FieldValues> {

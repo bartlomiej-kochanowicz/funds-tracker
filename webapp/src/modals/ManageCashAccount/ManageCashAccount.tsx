@@ -5,6 +5,7 @@ import { MODAL_CONFIRM_DELETE_CASH_ACCOUNT } from 'modals/ConfirmDeleteCashAccou
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Column, Row } from 'simple-flexbox';
+
 import { CashAccountOperations } from './components/CashAccountsOperations';
 
 export interface ManageCashAccountProps {

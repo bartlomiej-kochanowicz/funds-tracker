@@ -1,11 +1,12 @@
-import { FC, Fragment, lazy, useCallback, useEffect, useState } from 'react';
+import { Spacer } from 'components/atoms';
 import { Profile } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { debounce } from 'helpers/debounce';
+import { FC, Fragment, lazy, useCallback, useEffect, useState } from 'react';
 import { Column } from 'simple-flexbox';
-import { Spacer } from 'components/atoms';
-import { Wrapper } from './MobileTopbar.styles';
+
 import { SettingsDropdown } from './components/SettingsDropdown';
+import { Wrapper } from './MobileTopbar.styles';
 
 const LogoNameHorizontal = lazy(() =>
   import('assets/logo/logo-name-horizontal.svg').then(({ ReactComponent: component }) => ({

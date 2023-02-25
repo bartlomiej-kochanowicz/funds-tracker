@@ -1,12 +1,13 @@
+import { CreateCashAccountMutation, GetCashAccountsQuery } from '__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Grid, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CreateCashAccountMutation, GetCashAccountsQuery } from '__generated__/graphql';
-import { CreateCashAccount } from './components/CreateCashAccount';
+
 import { CashAccountsPanel } from './components/CashAccountsPanel';
+import { CreateCashAccount } from './components/CreateCashAccount';
 import { CreateFirstCashAccount } from './components/CreateFirstCashAccount';
 
 export const CashAccounts = () => {

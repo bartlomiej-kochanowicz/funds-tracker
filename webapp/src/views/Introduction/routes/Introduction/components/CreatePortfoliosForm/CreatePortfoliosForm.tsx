@@ -1,26 +1,27 @@
-import { motion } from 'framer-motion';
-import { Column } from 'simple-flexbox';
-import { Trans, useTranslation } from 'react-i18next';
-import { useFieldArray, useForm } from 'react-hook-form';
-import { FaPlus } from 'react-icons/fa';
-import { Button, Heading, Icon, Loader, Spacer, Spreader, Text } from 'components/atoms';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { MAX_PORTFOLIOS } from 'constants/common';
-import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
-import { useMutation } from '@apollo/client';
-import { useUserContext } from 'contexts/UserContext';
 import {
   IntroductionCreatePortfoliosInput,
   IntroductionCreatePortfoliosMutation,
   IntroductionCreatePortfoliosMutationVariables,
   IntroductionStep,
 } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Heading, Icon, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { MAX_PORTFOLIOS } from 'constants/common';
+import { useUserContext } from 'contexts/UserContext';
+import { motion } from 'framer-motion';
 import { INTRODUCTION_CREATE_PORTFOLIOS } from 'graphql/mutations';
 import { showErrorToast } from 'helpers/showToast';
-import { validationSchema } from './CreatePortfoliosForm.schema';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { Trans, useTranslation } from 'react-i18next';
+import { FaPlus } from 'react-icons/fa';
+import { Column } from 'simple-flexbox';
+import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
+
 import { EmptyList } from '../EmptyList';
-import { FieldsWrapper } from './CreatePortfoliosForm.styles';
 import { PortfoliosField } from '../PortfoliosField';
+import { validationSchema } from './CreatePortfoliosForm.schema';
+import { FieldsWrapper } from './CreatePortfoliosForm.styles';
 
 export const CreatePortfoliosForm = () => {
   const { t } = useTranslation();

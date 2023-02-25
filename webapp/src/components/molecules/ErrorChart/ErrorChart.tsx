@@ -1,9 +1,9 @@
+import { Text } from 'components/atoms';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 import { Column } from 'simple-flexbox';
 import { Colors } from 'styles/theme';
-import { Text } from 'components/atoms';
 
 const data = [
   { uuid: '1', date: '1', balance: 0 },

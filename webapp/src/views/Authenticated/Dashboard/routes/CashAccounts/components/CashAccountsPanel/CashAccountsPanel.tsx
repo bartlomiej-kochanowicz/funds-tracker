@@ -1,14 +1,15 @@
-import { Row } from 'simple-flexbox';
-import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import { GetCashAccountsQuery } from '__generated__/graphql';
-import { Panel } from 'components/molecules';
+import NiceModal from '@ebay/nice-modal-react';
 import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
-import { FaChartLine, FaListUl, FaPlus } from 'react-icons/fa';
+import { Panel } from 'components/molecules';
+import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
 import { MODAL_RENAME_CASH_ACCOUNT } from 'modals/RenameCashAccount';
-import NiceModal from '@ebay/nice-modal-react';
-import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FaChartLine, FaListUl, FaPlus } from 'react-icons/fa';
+import { Row } from 'simple-flexbox';
+
 import { RenameButton } from './CashAccountPanel.styles';
 
 interface CashAccountsPanelProps {

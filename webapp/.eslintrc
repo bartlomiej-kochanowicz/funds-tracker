@@ -15,7 +15,7 @@
     "sourceType": "module",
     "project": ["./tsconfig.json", "./webapp/tsconfig.json"]
   },
-  "plugins": ["react", "@typescript-eslint", "jest-dom", "testing-library"],
+  "plugins": ["react", "@typescript-eslint", "jest-dom", "testing-library", "simple-import-sort"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -25,6 +25,8 @@
   },
   "ignorePatterns": ["vite.config.ts", "src/__generated__/*.ts"],
   "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": "off",

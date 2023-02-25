@@ -1,13 +1,13 @@
+import { FullscreenLoading } from 'layouts/FullscreenLoading';
 import { FC, Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { FullscreenLoading } from 'layouts/FullscreenLoading';
+import { Authenticated } from 'views/Authenticated';
 import { HomeRoutes } from 'views/Home';
-import { SinginRoutes } from 'views/Signin';
-import { SignupRoutes } from 'views/Signup';
 import { IntroductionRoutes } from 'views/Introduction';
 import { NotFoundRoutes } from 'views/NotFound';
-import { Authenticated } from 'views/Authenticated';
 import { ResetPasswordRoutes } from 'views/ResetPassword';
+import { SinginRoutes } from 'views/Signin';
+import { SignupRoutes } from 'views/Signup';
 
 export const Root: FC = () => {
   const views = useRoutes([

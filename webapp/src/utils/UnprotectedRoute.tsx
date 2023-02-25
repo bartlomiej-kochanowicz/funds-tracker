@@ -1,7 +1,7 @@
-import { Navigate } from 'react-router-dom';
-import { ROUTES } from 'routes/paths';
 import { useUserContext } from 'contexts/UserContext';
 import { FullscreenLoading } from 'layouts/FullscreenLoading';
+import { Navigate } from 'react-router-dom';
+import { ROUTES } from 'routes/paths';
 
 interface UnprotectedRouteProps {
   children: JSX.Element;

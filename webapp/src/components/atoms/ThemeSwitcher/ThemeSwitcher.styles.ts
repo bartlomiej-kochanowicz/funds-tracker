@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
 import { motion, Transition } from 'framer-motion';
 import { BiMoon, BiSun } from 'react-icons/bi';
+import styled, { css } from 'styled-components';
 
 export const StyledButton = styled.button`
   position: relative;

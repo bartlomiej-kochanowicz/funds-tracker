@@ -1,6 +1,7 @@
 import { Profile } from 'components/molecules';
 import { debounce } from 'helpers/debounce';
 import { useCallback, useEffect, useState } from 'react';
+
 import { StyledRow } from './Topbar.styles';
 
 export const Topbar = () => {

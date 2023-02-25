@@ -1,3 +1,9 @@
+import { Icon } from 'components/atoms/Icon';
+import { Menu } from 'components/atoms/Menu';
+import { Spreader } from 'components/atoms/Spreader';
+import { AnimatePresence } from 'framer-motion';
+import { dropdownAnimation } from 'helpers/dropdownAnimation';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import {
   ForwardedRef,
   forwardRef,
@@ -8,17 +14,12 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useLayer } from 'react-laag';
 import { ChangeHandler } from 'react-hook-form';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { Spreader } from 'components/atoms/Spreader';
-import { Icon } from 'components/atoms/Icon';
-import { Menu } from 'components/atoms/Menu';
-import { composeRefs } from 'utils/composeRefs';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
+import { useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
-import { AnimatePresence } from 'framer-motion';
-import { dropdownAnimation } from 'helpers/dropdownAnimation';
+import { composeRefs } from 'utils/composeRefs';
+
 import { Error, StyledButton, StyledContent, Wrapper } from './Select.styles';
 
 type Item<ValueType> = {

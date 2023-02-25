@@ -1,7 +1,8 @@
-import { FC, ReactNode, HTMLProps, forwardRef } from 'react';
-import { Text } from 'components/atoms/Text';
 import { Icon } from 'components/atoms/Icon';
+import { Text } from 'components/atoms/Text';
+import { FC, forwardRef, HTMLProps, ReactNode } from 'react';
 import { FaCheck } from 'react-icons/fa';
+
 import { Container, Input, Marker } from './Checkbox.styles';
 
 interface CheckboxProps extends Pick<HTMLProps<HTMLInputElement>, 'onChange' | 'id' | 'name'> {

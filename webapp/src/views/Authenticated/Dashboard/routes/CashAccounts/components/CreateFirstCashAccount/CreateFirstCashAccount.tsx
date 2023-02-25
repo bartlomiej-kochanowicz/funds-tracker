@@ -1,3 +1,4 @@
+import { CreateCashAccountMutation } from '__generated__/graphql';
 import NiceModal from '@ebay/nice-modal-react';
 import { Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
@@ -5,7 +6,6 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
 import { Column } from 'simple-flexbox';
-import { CreateCashAccountMutation } from '__generated__/graphql';
 
 interface CreateFirstCashAccountProps {
   callback: (data: CreateCashAccountMutation) => void;

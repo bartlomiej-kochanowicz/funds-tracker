@@ -1,9 +1,10 @@
+import { ForwardRefComponent, HTMLMotionProps } from 'framer-motion';
 import { FC } from 'react';
 import { DefaultTheme, StyledComponent, StyledComponentBase } from 'styled-components';
-import { ForwardRefComponent, HTMLMotionProps } from 'framer-motion';
+
 import { Menu as MenuComponent, MenuProps } from './Menu';
-import { MenuItem, MenuItemProps } from './MenuItem';
 import { MenuDivider, MenuDividerProps } from './MenuDivider';
+import { MenuItem, MenuItemProps } from './MenuItem';
 
 interface IMenu
   extends StyledComponentBase<

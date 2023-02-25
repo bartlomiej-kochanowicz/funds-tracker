@@ -1,6 +1,7 @@
 import { Heading, Spacer, Text } from 'components/atoms';
 import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { EnterPasswordForm } from './EnterPasswordForm';
 
 interface EnterPasswordProps {

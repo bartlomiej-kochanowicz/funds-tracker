@@ -1,9 +1,10 @@
+import { RouterLink } from 'components/atoms/RouterLink';
+import { Text } from 'components/atoms/Text';
 import { FC, ReactNode } from 'react';
 import { Column } from 'simple-flexbox';
-import { Text } from 'components/atoms/Text';
-import { RouterLink } from 'components/atoms/RouterLink';
-import { Wrapper } from './Tile.styles';
+
 import { Spacer } from '../Spacer';
+import { Wrapper } from './Tile.styles';
 
 interface TilelProps {
   children: ReactNode;

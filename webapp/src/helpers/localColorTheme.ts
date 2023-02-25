@@ -1,5 +1,5 @@
-import { saveStore, loadStore, removeStore } from 'utils/localStorage';
 import type { ColorThemeType } from 'constants/common';
+import { loadStore, removeStore, saveStore } from 'utils/localStorage';
 
 export const setLocalColorTheme = (colorTheme: ColorThemeType) =>
   saveStore(colorTheme, 'colorTheme');

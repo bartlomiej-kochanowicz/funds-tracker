@@ -1,10 +1,10 @@
+import { LogoutMutation } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
+import { Icon, Menu, Spreader } from 'components/atoms';
+import { useUserContext } from 'contexts/UserContext';
+import { LOGOUT } from 'graphql/mutations';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Icon, Menu, Spreader } from 'components/atoms';
-import { useMutation } from '@apollo/client';
-import { LOGOUT } from 'graphql/mutations';
-import { LogoutMutation } from '__generated__/graphql';
-import { useUserContext } from 'contexts/UserContext';
 import { FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 
 interface DropdownContentProps {

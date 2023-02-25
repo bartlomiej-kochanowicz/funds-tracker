@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
 import { Column } from 'simple-flexbox';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled(Column)`
   width: 100%;

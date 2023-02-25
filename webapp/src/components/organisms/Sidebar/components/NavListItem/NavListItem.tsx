@@ -5,6 +5,7 @@ import { IconType } from 'react-icons';
 import { useLocation } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 import { Row } from 'simple-flexbox';
+
 import { Bar } from './NavListItem.styles';
 
 interface NavListItemProps {

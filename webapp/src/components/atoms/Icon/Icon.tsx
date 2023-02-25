@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { IconType } from 'react-icons';
 import { DefaultTheme } from 'styled-components';
+
 import { StyledIcon } from './Icon.styles';
 
 interface IconProps {

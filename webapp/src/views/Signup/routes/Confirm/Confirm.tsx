@@ -1,15 +1,16 @@
+import { SendCodeMutation, SendCodeMutationVariables } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
+import { ButtonLink, Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
+import { LangSelector } from 'components/molecules';
+import { SEND_CODE } from 'graphql/mutations/SendCode';
+import { showErrorToast, showSuccessToast } from 'helpers/showToast';
+import { FullscreenClear } from 'layouts/FullscreenClear';
 import { lazy, Suspense, useCallback, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { useLocation, Navigate } from 'react-router-dom';
-import { FullscreenClear } from 'layouts/FullscreenClear';
-import { ButtonLink, Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
-import { Column } from 'simple-flexbox';
-import { LangSelector } from 'components/molecules';
+import { Navigate, useLocation } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { SEND_CODE } from 'graphql/mutations/SendCode';
-import { useMutation } from '@apollo/client';
-import { showErrorToast, showSuccessToast } from 'helpers/showToast';
-import { SendCodeMutation, SendCodeMutationVariables } from '__generated__/graphql';
+import { Column } from 'simple-flexbox';
+
 import { ConfirmForm } from './ConfirmForm';
 
 const GoogleReCaptcha = lazy(() =>

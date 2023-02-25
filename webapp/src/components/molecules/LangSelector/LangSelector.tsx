@@ -1,9 +1,9 @@
+import { Icon, Select, Spreader } from 'components/atoms';
+import languages from 'constants/selectors/languages';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Row } from 'simple-flexbox';
-import languages from 'constants/selectors/languages';
-import { Icon, Select, Spreader } from 'components/atoms';
 import { FaGlobeEurope } from 'react-icons/fa';
+import { Row } from 'simple-flexbox';
 
 export const LangSelector = () => {
   const { t, i18n } = useTranslation();

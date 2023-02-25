@@ -1,8 +1,8 @@
-import { HTMLProps, ReactNode, ComponentProps } from 'react';
+import { darken, transparentize } from 'color2k';
+import { ComponentProps, HTMLProps, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import type { DefaultTheme } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { darken, transparentize } from 'color2k';
-import { Link } from 'react-router-dom';
 
 export type Size = 'small' | 'medium' | 'large';
 

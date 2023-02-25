@@ -1,4 +1,4 @@
-import { FaHome, FaWallet, FaShapes } from 'react-icons/fa';
+import { FaHome, FaShapes, FaWallet } from 'react-icons/fa';
 import { ROUTES } from 'routes/paths';
 
 export const mobileNavigationNavigation = [

@@ -1,19 +1,20 @@
-import { FC, Fragment } from 'react';
-import { Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
-import { FaPlus } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { yupResolver } from '@hookform/resolvers/yup';
 import {
   AddFundsToCashAccountMutation,
   AddFundsToCashAccountMutationVariables,
   Currency,
 } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
+import { useModal } from '@ebay/nice-modal-react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
-import { useModal } from '@ebay/nice-modal-react';
+import { FC, Fragment } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { FaPlus } from 'react-icons/fa';
+import { Row } from 'simple-flexbox';
+
 import { validationSchema } from './AddFundsCashAccountForm.schema';
 
 interface AddFundsCashAccountFormProps {

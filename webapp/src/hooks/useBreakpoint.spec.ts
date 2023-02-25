@@ -1,6 +1,6 @@
-import { useBreakpoint } from 'hooks/useBreakpoint';
 import { renderHook } from '@testing-library/react-hooks';
 import { breakpoints } from 'constants/breakpoints';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { act } from 'react-dom/test-utils';
 
 const HEIGHT = 100;

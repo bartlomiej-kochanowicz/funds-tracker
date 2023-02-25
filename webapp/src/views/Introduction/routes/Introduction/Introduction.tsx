@@ -1,7 +1,8 @@
-import { lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { FullscreenLoading } from 'layouts/FullscreenLoading';
+import { lazy, Suspense } from 'react';
+
 import { IntroductionProvider, useIntroductionContext } from './context';
 
 const DefaultCurrency = lazy(() =>

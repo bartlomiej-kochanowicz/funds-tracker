@@ -1,8 +1,14 @@
+import {
+  EmailExistQuery,
+  EmailExistQueryVariables,
+  SignupMutation,
+  SignupMutationVariables,
+} from '__generated__/graphql';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Loader, Spacer } from 'components/atoms';
 import { SIGNUP } from 'graphql/mutations';
 import { EMAIL_EXIST } from 'graphql/query';
-import { Button, Loader, Spacer } from 'components/atoms';
 import { showErrorToast } from 'helpers/showToast';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { lazy, Suspense, useCallback, useState } from 'react';
@@ -10,12 +16,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import {
-  EmailExistQuery,
-  EmailExistQueryVariables,
-  SignupMutation,
-  SignupMutationVariables,
-} from '__generated__/graphql';
+
 import { NameAndEmail } from './components/NameAndEmail';
 import { Passwords } from './components/Passwords';
 import { validationSchema } from './Signup.schema';

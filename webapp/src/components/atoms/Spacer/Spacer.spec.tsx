@@ -1,5 +1,5 @@
+import { Space, Spacer } from 'components/atoms/Spacer';
 import { render } from 'utils/test-utils';
-import { Spacer, Space } from 'components/atoms/Spacer';
 
 describe('Atoms/Spacer tests', () => {
   it('renders properly', () => {

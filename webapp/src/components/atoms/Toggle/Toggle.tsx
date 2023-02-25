@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { Handle, spring, StyledButton } from './Toggle.styles';
 
 interface ToggleProps {

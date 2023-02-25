@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
 import { darken, transparentize } from 'color2k';
 import CurrencyInput from 'react-currency-input-field';
+import styled, { css } from 'styled-components';
 
 const inputStyles = css<{ error?: boolean; hasUnit?: boolean }>`
   border: none;

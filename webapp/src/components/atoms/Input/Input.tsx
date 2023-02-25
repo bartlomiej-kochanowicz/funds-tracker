@@ -1,10 +1,11 @@
-import { forwardRef, HTMLProps, MutableRefObject, ReactNode, useRef } from 'react';
-import { mergeRefs } from 'react-laag';
-import { Text } from 'components/atoms/Text';
 import { Currency } from '__generated__/graphql';
+import { Text } from 'components/atoms/Text';
+import { forwardRef, HTMLProps, MutableRefObject, ReactNode, useRef } from 'react';
 import { CurrencyInputProps as CurrencyInputFieldProps } from 'react-currency-input-field';
 import { useTranslation } from 'react-i18next';
-import { StyledInput, Wrapper, Error, Unit, StyledCurrencyInput } from './Input.styles';
+import { mergeRefs } from 'react-laag';
+
+import { Error, StyledCurrencyInput, StyledInput, Unit, Wrapper } from './Input.styles';
 
 interface InputCommonProps {
   error?: string;

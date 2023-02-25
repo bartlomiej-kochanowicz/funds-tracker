@@ -1,3 +1,4 @@
+import { IntroductionCreatePortfoliosInput } from '__generated__/graphql';
 import { Button, Icon, Input, Spreader } from 'components/atoms';
 import {
   DeepRequired,
@@ -8,7 +9,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
-import { IntroductionCreatePortfoliosInput } from '__generated__/graphql';
 
 interface PortfoliosFieldProps {
   register: UseFormRegister<IntroductionCreatePortfoliosInput>;

@@ -1,5 +1,5 @@
-import { render } from 'utils/test-utils';
 import { Text } from 'components/atoms/Text';
+import { render } from 'utils/test-utils';
 
 describe('Atoms/Text tests', () => {
   it('renders properly', () => {

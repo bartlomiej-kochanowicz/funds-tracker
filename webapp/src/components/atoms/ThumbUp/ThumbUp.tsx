@@ -1,4 +1,4 @@
-import { Center, CircleLg, CircleWrapper, Thumb, DotsWrapper, Dot } from './ThumbUp.styles';
+import { Center, CircleLg, CircleWrapper, Dot, DotsWrapper, Thumb } from './ThumbUp.styles';
 
 export const ThumbUp = () => (
   <Center>

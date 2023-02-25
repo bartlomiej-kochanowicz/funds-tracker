@@ -1,6 +1,6 @@
+import { darken } from 'color2k';
 import { HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
-import { darken } from 'color2k';
 
 export const StyledButton = styled.button<
   HTMLProps<Omit<HTMLButtonElement, 'error'>> & { error: boolean }

@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
 import { Text } from 'components/atoms/Text';
 import { Initials } from 'helpers/Initials';
+import { useMemo } from 'react';
+
 import { Circle } from './Avatar.styles';
 
 interface AvatarProps {

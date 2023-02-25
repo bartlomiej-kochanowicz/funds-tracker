@@ -1,5 +1,5 @@
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
-import { object, array, string } from 'yup';
+import { array, object, string } from 'yup';
 
 export const validationSchema = object().shape({
   cashAccounts: array()

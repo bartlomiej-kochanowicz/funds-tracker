@@ -1,11 +1,11 @@
-import { FC } from 'react';
-import { Button, Spacer, Spreader, Heading, Icon } from 'components/atoms';
-import { Panel } from 'components/molecules';
-import { useTranslation } from 'react-i18next';
-import { FaPlus } from 'react-icons/fa';
-import { MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
 import { CreateCashAccountMutation } from '__generated__/graphql';
 import NiceModal from '@ebay/nice-modal-react';
+import { Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
+import { Panel } from 'components/molecules';
+import { MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FaPlus } from 'react-icons/fa';
 
 interface CreateCashAccountProps {
   callback: (data: CreateCashAccountMutation) => void;

@@ -1,4 +1,5 @@
 import { FC, lazy, Suspense } from 'react';
+
 import type { RenameCashAccountProps } from './RenameCashAccount';
 
 const RenameCashAccount = lazy(() =>

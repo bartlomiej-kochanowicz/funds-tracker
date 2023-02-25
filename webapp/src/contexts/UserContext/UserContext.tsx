@@ -1,10 +1,10 @@
+import { GetUserQuery, IntroductionStep, UpdateUserInput } from '__generated__/graphql';
 import { LazyQueryExecFunction, OperationVariables, useLazyQuery } from '@apollo/client';
 import { IS_DEVELOPMENT } from 'config/env';
 import { GET_USER } from 'graphql/query';
 import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
 import LogRocket from 'logrocket';
 import { createContext, FC, ReactNode, useContext, useEffect } from 'react';
-import { GetUserQuery, IntroductionStep, UpdateUserInput } from '__generated__/graphql';
 
 type UpdateLocalUserData = UpdateUserInput & { introductionStep?: IntroductionStep };
 

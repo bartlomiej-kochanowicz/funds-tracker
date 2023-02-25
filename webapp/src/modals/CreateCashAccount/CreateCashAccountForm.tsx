@@ -1,22 +1,23 @@
-import { FC, Fragment, useMemo } from 'react';
-import { Button, Icon, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
-import { FaPlus } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
-import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
-import { useUserContext } from 'contexts/UserContext';
-import { useForm } from 'react-hook-form';
-import { useSelect } from 'hooks/useSelect';
 import {
   CreateCashAccountInput,
   CreateCashAccountMutation,
   CreateCashAccountMutationVariables,
 } from '__generated__/graphql';
-import { useTranslation } from 'react-i18next';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@apollo/client';
+import { useModal } from '@ebay/nice-modal-react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Icon, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
+import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
+import { useUserContext } from 'contexts/UserContext';
 import { CREATE_CASH_ACCOUNT } from 'graphql/mutations';
 import { showErrorToast } from 'helpers/showToast';
-import { useModal } from '@ebay/nice-modal-react';
+import { useSelect } from 'hooks/useSelect';
+import { FC, Fragment, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { FaPlus } from 'react-icons/fa';
+import { Row } from 'simple-flexbox';
+
 import { validationSchema } from './CreateCashAccountForm.schema';
 
 interface CreateCashAccountFormProps {

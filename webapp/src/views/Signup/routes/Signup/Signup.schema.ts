@@ -1,5 +1,5 @@
-import { object, ref, string } from 'yup';
 import i18n from 'utils/i18n';
+import { object, ref, string } from 'yup';
 
 export const validationSchema = (isPasswordsStep: boolean) =>
   object().shape({

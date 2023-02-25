@@ -1,5 +1,5 @@
 import { PanelComponent } from './Panel';
-import { Body, BodyCentered, Footer, Chart } from './Panel.styles';
+import { Body, BodyCentered, Chart, Footer } from './Panel.styles';
 
 interface IPanelComposition {
   Body: typeof Body;

@@ -1,5 +1,5 @@
-import { render } from 'utils/test-utils';
 import { Heading } from 'components/atoms/Heading';
+import { render } from 'utils/test-utils';
 
 describe('Atoms/Heading tests', () => {
   it('renders properly', () => {

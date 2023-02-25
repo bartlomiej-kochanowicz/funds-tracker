@@ -1,9 +1,10 @@
-import { useTranslation } from 'react-i18next';
-import { Column } from 'simple-flexbox';
 import { Spacer } from 'components/atoms';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useCallback, useEffect, useState } from 'react';
 import { throttle } from 'helpers/throttle';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Column } from 'simple-flexbox';
+
 import { mobileNavigationNavigation } from './constants';
 import { List, ListItem, StyledNav, StyledNavLink, Title } from './MobileNavigation.styles';
 

@@ -1,6 +1,6 @@
 import { createElement, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
-import { resolveProps, fontable, FontableProps } from 'styles/mixins';
+import { fontable, FontableProps, resolveProps } from 'styles/mixins';
 
 type Level = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 

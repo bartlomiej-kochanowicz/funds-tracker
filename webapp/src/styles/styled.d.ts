@@ -1,4 +1,5 @@
 import 'styled-components';
+
 import { theme } from 'styles/theme';
 
 export type Colors = keyof typeof theme.colors;

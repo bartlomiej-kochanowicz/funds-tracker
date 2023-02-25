@@ -1,7 +1,7 @@
+import { darken, transparentize } from 'color2k';
+import { breakpoints } from 'constants/breakpoints';
 import { customMediaQuery } from 'helpers/customMediaQuery';
 import { rem } from 'helpers/units';
-import { breakpoints } from 'constants/breakpoints';
-import { darken, transparentize } from 'color2k';
 
 export const Colors = {
   Green: '#7DCAC7',

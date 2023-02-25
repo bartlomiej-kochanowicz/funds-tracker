@@ -1,6 +1,6 @@
-import { FC } from 'react';
 import { Heading, Spacer, Text } from 'components/atoms';
 import { FullscreenClear } from 'layouts/FullscreenClear';
+import { FC } from 'react';
 
 export const NotFound: FC = () => (
   <FullscreenClear>

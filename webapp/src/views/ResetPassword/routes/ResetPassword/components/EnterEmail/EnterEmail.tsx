@@ -2,6 +2,7 @@ import { Heading, RouterLink, Spacer, Text } from 'components/atoms';
 import { Fragment } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { ROUTES } from 'routes/paths';
+
 import { EnterEmailForm } from './EnterEmailForm';
 
 export const EnterEmail = () => {

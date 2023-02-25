@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { Currency, IntroductionCreateCashAccountsInput } from '__generated__/graphql';
 import { Button, Icon, Input, Select, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useSelect } from 'hooks/useSelect';
+import { useMemo } from 'react';
 import {
   DeepRequired,
   FieldErrorsImpl,
@@ -11,7 +12,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
-import { Currency, IntroductionCreateCashAccountsInput } from '__generated__/graphql';
 
 interface CashAccountsFieldProps {
   register: UseFormRegister<IntroductionCreateCashAccountsInput>;

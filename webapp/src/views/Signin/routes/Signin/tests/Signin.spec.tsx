@@ -1,11 +1,12 @@
-import { SIGNIN } from 'graphql/mutations';
-import { EMAIL_EXIST } from 'graphql/query';
 import { GraphQLError } from 'graphql';
-import { useEffect } from 'react';
-import { waitFor } from 'utils/test-utils';
-import { ROUTES } from 'routes/paths';
+import { SIGNIN } from 'graphql/mutations';
 import { SEND_CODE } from 'graphql/mutations/SendCode';
-import { showSuccessToast, showErrorToast } from 'helpers/showToast';
+import { EMAIL_EXIST } from 'graphql/query';
+import { showErrorToast, showSuccessToast } from 'helpers/showToast';
+import { useEffect } from 'react';
+import { ROUTES } from 'routes/paths';
+import { waitFor } from 'utils/test-utils';
+
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
 

@@ -1,12 +1,12 @@
-import { FC } from 'react';
-import { useQuery } from '@apollo/client';
-import { Loader } from 'components/atoms';
-import { Table } from 'components/molecules';
-import { GET_CASH_ACCOUNT_OPERATIONS } from 'graphql/query/GetCashAccountOperations';
 import {
   GetCashAccountOperationsQuery,
   GetCashAccountOperationsQueryVariables,
 } from '__generated__/graphql';
+import { useQuery } from '@apollo/client';
+import { Loader } from 'components/atoms';
+import { Table } from 'components/molecules';
+import { GET_CASH_ACCOUNT_OPERATIONS } from 'graphql/query/GetCashAccountOperations';
+import { FC } from 'react';
 
 interface CashAccountOperationsProps {
   uuid: string;
