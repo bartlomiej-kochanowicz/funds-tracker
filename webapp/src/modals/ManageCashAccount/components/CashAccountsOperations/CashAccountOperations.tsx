@@ -1,8 +1,8 @@
+import { FC } from 'react';
 import { useQuery } from '@apollo/client';
 import { Loader } from 'components/atoms';
+import { Table } from 'components/molecules';
 import { GET_CASH_ACCOUNT_OPERATIONS } from 'graphql/query/GetCashAccountOperations';
-import { formatDate } from 'helpers/formatDate';
-import { FC } from 'react';
 import {
   GetCashAccountOperationsQuery,
   GetCashAccountOperationsQueryVariables,
@@ -18,23 +18,24 @@ export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid }) 
     GetCashAccountOperationsQueryVariables
   >(GET_CASH_ACCOUNT_OPERATIONS, { variables: { uuid } });
 
+  const cashAccountsOperationsExist = Boolean(data && data.cashAccount.operations.length > 0);
+
   if (loading) {
     return <Loader />;
   }
 
-  if (!loading && !data?.cashAccount.operations.length) {
+  if (!loading && !cashAccountsOperationsExist) {
     return <div>There are no operations for this cash account.</div>;
   }
 
-  return (
-    <div>
-      {data?.cashAccount.operations.map(operation => {
-        return (
-          <div key={operation.uuid}>
-            {operation.type} {operation.amount} {formatDate(operation.date)}
-          </div>
-        );
-      })}
-    </div>
-  );
+  if (!loading && cashAccountsOperationsExist) {
+    return (
+      <Table
+        columns={[]}
+        data={data?.cashAccount.operations || []}
+      />
+    );
+  }
+
+  return null;
 };
