@@ -20,11 +20,16 @@ export const StyledNavLink = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   width: 214px;
+  transition: 0.3s;
 
   ${({ theme }) => css`
     color: ${theme.colors.gray400};
     outline-color: ${theme.colors.blue};
     padding: ${theme.padding.large};
     border-radius: ${theme.radius.primary};
+
+    &:hover:not(.active) {
+      background-color: ${theme.colors.gray200};
+    }
   `}
 `;

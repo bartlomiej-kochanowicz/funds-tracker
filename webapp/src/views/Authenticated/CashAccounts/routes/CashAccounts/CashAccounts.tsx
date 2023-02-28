@@ -1,6 +1,6 @@
 import { CreateCashAccountMutation, GetCashAccountsQuery } from '__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { Grid, Heading, Loader, Spacer, Text } from 'components/atoms';
+import { Box, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { Fragment } from 'react';
@@ -78,12 +78,9 @@ export const CashAccounts = () => {
       )}
 
       {!loading && cashAccountsExist && !error && (
-        <Grid
-          columns={{
-            desktop: 3,
-            tablet: 2,
-            phone: 1,
-          }}
+        <Box
+          borderRadius="primary"
+          backgroundColor="white"
         >
           {data?.cashAccounts.map(({ uuid, ...rest }) => (
             <CashAccountsPanel
@@ -97,7 +94,7 @@ export const CashAccounts = () => {
           ))}
 
           {renderCreateCashAccountButton && <CreateCashAccount callback={addCashAccountToList} />}
-        </Grid>
+        </Box>
       )}
     </Fragment>
   );

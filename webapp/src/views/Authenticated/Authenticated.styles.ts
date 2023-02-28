@@ -12,8 +12,8 @@ export const Content = styled(Column).withConfig({
     padding: ${theme.spacing.large};
 
     ${theme.breakpoints.desktop.min} {
-      margin-left: 270px;
-      padding: ${theme.spacing.huge};
+      margin-left: 230px;
+      padding: calc(5 * ${theme.spacing.huge});
       padding-top: 95px;
     }
 

@@ -15,6 +15,7 @@ export const Colors = {
   Gray300: '#98a1a8',
   Gray200: '#dee1e3',
   Gray100: '#f9f9fa',
+  Transparent: 'transparent',
 };
 
 export const theme = {
@@ -32,6 +33,7 @@ export const theme = {
     gray200: Colors.Gray200,
     gray100: Colors.Gray100,
     text: Colors.Black,
+    transparent: Colors.Transparent,
     mobileTransparent: transparentize(Colors.Gray200, 0.4),
   },
   breakpoints: {
@@ -180,6 +182,7 @@ const darkColors = {
   gray200: Colors.Gray400,
   gray100: Colors.Gray500,
   text: Colors.White,
+  transparent: Colors.Transparent,
   mobileTransparent: transparentize(Colors.Gray400, 0.3),
 };
 

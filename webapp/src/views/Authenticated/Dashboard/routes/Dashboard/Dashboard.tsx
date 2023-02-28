@@ -7,9 +7,21 @@ export const Dashboard = () => (
 
     <Spacer />
 
+    <Button>test</Button>
+
+    <Spacer />
+
+    <Button outline>test</Button>
+
+    <Spacer />
+
+    <Button color="secondary">test</Button>
+
+    <Spacer />
+
     <Button
       color="secondary"
-      size="large"
+      outline
     >
       test
     </Button>

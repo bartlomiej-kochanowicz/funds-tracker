@@ -1,11 +1,11 @@
 import { CreateCashAccountMutation } from '__generated__/graphql';
 import NiceModal from '@ebay/nice-modal-react';
 import { Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
-import { Panel } from 'components/molecules';
 import { MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
+import { Column } from 'simple-flexbox';
 
 interface CreateCashAccountProps {
   callback: (data: CreateCashAccountMutation) => void;
@@ -17,28 +17,26 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
   const handleOpenModal = () => NiceModal.show(MODAL_CREATE_CASH_ACCOUNT, { callback });
 
   return (
-    <Panel>
-      <Panel.BodyCentered minHeight="216px">
-        <Heading
-          textAlign="center"
-          level="h2"
-        >
-          {t('page.cash_accounts.need.more')}
-        </Heading>
+    <Column alignItems="center">
+      <Heading
+        textAlign="center"
+        level="h2"
+      >
+        {t('page.cash_accounts.need.more')}
+      </Heading>
 
-        <Spacer />
+      <Spacer space="small" />
 
-        <Button
-          onClick={handleOpenModal}
-          outline
-        >
-          {t('page.cash_accounts.need.more.button')}
+      <Button
+        onClick={handleOpenModal}
+        outline
+      >
+        {t('page.cash_accounts.need.more.button')}
 
-          <Spreader spread="tiny" />
+        <Spreader spread="tiny" />
 
-          <Icon icon={FaPlus} />
-        </Button>
-      </Panel.BodyCentered>
-    </Panel>
+        <Icon icon={FaPlus} />
+      </Button>
+    </Column>
   );
 };
