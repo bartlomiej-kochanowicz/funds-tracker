@@ -26,7 +26,7 @@ export const SignupRoutes = [
   {
     path: ROUTES.SIGNUP.SIGNUP,
     element: (
-      <UnprotectedRoute to={ROUTES.DASHBOARD.HOME}>
+      <UnprotectedRoute to={ROUTES.DASHBOARD}>
         <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
           <Signup />
         </GoogleReCaptchaProvider>
@@ -36,7 +36,7 @@ export const SignupRoutes = [
   {
     path: ROUTES.SIGNUP.CONFIRM,
     element: (
-      <UnprotectedRoute to={ROUTES.DASHBOARD.HOME}>
+      <UnprotectedRoute to={ROUTES.DASHBOARD}>
         <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
           <Confirm />
         </GoogleReCaptchaProvider>

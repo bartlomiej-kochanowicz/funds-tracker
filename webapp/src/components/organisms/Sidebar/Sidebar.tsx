@@ -1,8 +1,7 @@
-import { Heading, Spacer, ThemeSwitcher } from 'components/atoms';
+import { Spacer, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { lazy, Suspense } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Column } from 'simple-flexbox';
 
 import { LogoFallback } from './components/LogoFallback';
@@ -23,8 +22,6 @@ const LogoNameVerticalDark = lazy(() =>
 );
 
 export const Sidebar = () => {
-  const { t } = useTranslation();
-
   const { isDark } = useColorThemeContext();
 
   return (
@@ -38,6 +35,7 @@ export const Sidebar = () => {
                 width: 'fit-content',
                 maxWidth: '140px',
                 display: 'block',
+                marginLeft: '20px',
               }}
             />
           ) : (
@@ -46,6 +44,8 @@ export const Sidebar = () => {
               style={{
                 width: 'fit-content',
                 maxWidth: '140px',
+                display: 'block',
+                marginLeft: '20px',
               }}
             />
           )}
@@ -54,15 +54,6 @@ export const Sidebar = () => {
         <Spacer space="large" />
 
         <Spacer />
-
-        <Heading
-          level="h2"
-          fontSize="1.25"
-        >
-          {t('common.dashboard')}
-        </Heading>
-
-        <Spacer space="small" />
 
         <NavList navigation={sidebarNavigation} />
       </Column>

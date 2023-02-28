@@ -15,7 +15,7 @@ export const Hub = () => {
   if (isDesktop) {
     return (
       <Navigate
-        to={ROUTES.DASHBOARD.HOME}
+        to={ROUTES.DASHBOARD}
         replace
       />
     );

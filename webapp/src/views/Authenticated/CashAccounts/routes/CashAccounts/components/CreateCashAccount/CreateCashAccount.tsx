@@ -28,7 +28,10 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
 
         <Spacer />
 
-        <Button onClick={handleOpenModal}>
+        <Button
+          onClick={handleOpenModal}
+          outline
+        >
           {t('page.cash_accounts.need.more.button')}
 
           <Spreader spread="tiny" />

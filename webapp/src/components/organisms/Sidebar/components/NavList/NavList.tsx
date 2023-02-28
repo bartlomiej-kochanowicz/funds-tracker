@@ -18,7 +18,6 @@ export const NavList = ({ navigation }: NavListProps) => (
                 title={title}
                 icon={icon}
                 isActive={isActive}
-                to={to}
               />
             )}
           </StyledNavLink>

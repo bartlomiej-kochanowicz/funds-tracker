@@ -58,7 +58,7 @@ export const CashAccountsPanel: FC<
   return (
     <Panel>
       <Panel.Body>
-        <Button
+        {/* <Button
           width="100%"
           onClick={handleOpenAddFundsCashAccountModal}
         >
@@ -93,10 +93,8 @@ export const CashAccountsPanel: FC<
             icon={FaChartLine}
             size="1.25"
           />
-        </Button>
-      </Panel.Body>
+        </Button> */}
 
-      <Panel.Footer>
         <Row justifyContent="space-between">
           <RenameButton
             onClick={handleOpenRenameModal}
@@ -112,7 +110,7 @@ export const CashAccountsPanel: FC<
             {formatCurrency(balance, currency)}
           </Text>
         </Row>
-      </Panel.Footer>
+      </Panel.Body>
     </Panel>
   );
 };

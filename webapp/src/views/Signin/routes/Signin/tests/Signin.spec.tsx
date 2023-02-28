@@ -101,7 +101,7 @@ describe('Signin tests', () => {
 
     // then
     await waitFor(() =>
-      signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalledWith(ROUTES.DASHBOARD.HOME),
+      signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalledWith(ROUTES.DASHBOARD),
     );
   });
 

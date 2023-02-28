@@ -8,7 +8,8 @@ import { useLocation, useRoutes } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 
 import { Content } from './Authenticated.styles';
-import { DashboardRoutes } from './Dashboard';
+import { CashAccountsRoutes } from './CashAccounts';
+import { DashboardRoutes } from './Dashboard/routes/Routes';
 import { HubRoutes } from './Hub';
 import { SettingsRoutes } from './Settings';
 
@@ -17,12 +18,17 @@ const ProtectedRoute = lazy(() =>
 );
 
 export const Authenticated = () => {
-  const views = useRoutes([...DashboardRoutes, ...SettingsRoutes, ...HubRoutes]);
+  const views = useRoutes([
+    ...DashboardRoutes,
+    ...CashAccountsRoutes,
+    ...SettingsRoutes,
+    ...HubRoutes,
+  ]);
   const isDesktop = useBreakpoint('desktop', 'min');
 
   const location = useLocation();
 
-  const isDashboard = location.pathname.includes(ROUTES.DASHBOARD.HOME);
+  const isHub = location.pathname === ROUTES.HUB;
 
   if (views) {
     return (
@@ -38,14 +44,14 @@ export const Authenticated = () => {
 
           {!isDesktop && (
             <Fragment>
-              <MobileTopbar isDashboard={isDashboard} />
+              <MobileTopbar isDashboard={!isHub} />
 
               <MobileNavigation />
             </Fragment>
           )}
 
           <Suspense fallback={<FullscreenLoading />}>
-            <Content isDashboard={isDashboard}>
+            <Content isDashboard={!isHub}>
               <ErrorBoundary FallbackComponent={ErrorContent}>{views}</ErrorBoundary>
             </Content>
           </Suspense>

@@ -124,7 +124,7 @@ export const Button = styled.button.withConfig({
 
       ${Boolean(outline) &&
       css`
-        border: 3px solid ${theme.button.color[color].background};
+        border: 2px solid ${theme.button.color[color].background};
         color: ${theme.button.color[color].background};
         background-color: transparent;
 

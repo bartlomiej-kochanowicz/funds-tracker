@@ -5,11 +5,11 @@ import { ROUTES } from 'routes/paths';
 export const hubNavigation = {
   essentials: [
     {
-      to: ROUTES.DASHBOARD.CASH_ACCOUNTS,
+      to: ROUTES.CASH_ACCOUNTS,
       title: 'navigation.cash_accounts',
       icon: MdAccountBalance,
     },
-    { to: ROUTES.DASHBOARD.TRANSACTIONS, title: 'navigation.transactions', icon: FaExchangeAlt },
-    { to: ROUTES.DASHBOARD.HISTORY, title: 'navigation.history', icon: FaHistory },
+    { to: ROUTES.TRANSACTIONS, title: 'navigation.transactions', icon: FaExchangeAlt },
+    { to: ROUTES.HISTORY, title: 'navigation.history', icon: FaHistory },
   ],
 };

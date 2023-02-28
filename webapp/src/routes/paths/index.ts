@@ -7,13 +7,11 @@ export const ROUTES = {
   },
   RESET_PASSWORD: '/reset-password',
   INTRODUCTION: '/introduction',
-  DASHBOARD: {
-    HOME: '/dashboard',
-    PORTFOLIO: '/dashboard/portfolios',
-    CASH_ACCOUNTS: '/dashboard/cash-accounts',
-    TRANSACTIONS: '/dashboard/transactions',
-    HISTORY: '/dashboard/history',
-  },
+  DASHBOARD: '/dashboard',
+  PORTFOLIO: '/portfolios',
+  CASH_ACCOUNTS: '/cash-accounts',
+  TRANSACTIONS: '/transactions',
+  HISTORY: '/history',
   HUB: '/hub',
   SETTINGS: {
     SETTINGS: '/settings',

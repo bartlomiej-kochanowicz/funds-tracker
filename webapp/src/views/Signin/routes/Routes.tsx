@@ -22,7 +22,7 @@ export const SinginRoutes = [
   {
     path: ROUTES.SIGNIN,
     element: (
-      <UnprotectedRoute to={ROUTES.DASHBOARD.HOME}>
+      <UnprotectedRoute to={ROUTES.DASHBOARD}>
         <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
           <Signin />
         </GoogleReCaptchaProvider>

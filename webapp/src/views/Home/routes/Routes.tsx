@@ -13,7 +13,7 @@ export const HomeRoutes = [
   {
     path: ROUTES.HOME,
     element: (
-      <UnprotectedRoute to={ROUTES.DASHBOARD.HOME}>
+      <UnprotectedRoute to={ROUTES.DASHBOARD}>
         <Home />
       </UnprotectedRoute>
     ),

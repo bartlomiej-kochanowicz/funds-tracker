@@ -114,7 +114,7 @@ export const theme = {
     },
   },
   radius: {
-    primary: rem(0.4),
+    primary: rem(0.7),
     secondary: rem(6.25),
     tertiary: rem(1.25),
   },

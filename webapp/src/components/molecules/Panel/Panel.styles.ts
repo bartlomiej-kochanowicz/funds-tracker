@@ -1,13 +1,11 @@
-import { darken } from 'color2k';
 import { Box } from 'components/atoms';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const PanelWrapper = styled(Box)`
-  ${({ theme: { isDark, colors, shadows, radius } }) => css`
-    background-color: ${isDark ? darken(colors.gray100, 0.03) : colors.white};
-    box-shadow: ${shadows.box};
+  ${({ theme: { colors, radius } }) => css`
     border-radius: ${radius.primary};
+    border: 2px solid ${colors.gray200};
   `}
 `;
 
