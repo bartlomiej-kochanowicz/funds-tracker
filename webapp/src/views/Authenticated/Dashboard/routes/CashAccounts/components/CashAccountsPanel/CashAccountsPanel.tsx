@@ -4,7 +4,7 @@ import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
 import { Panel } from 'components/molecules';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
-import { MODAL_MANAGE_CASH_ACCOUNT } from 'modals/ManageCashAccount';
+import { MODAL_CASH_ACCOUNT_OPERATIONS } from 'modals/CashAccountOperations';
 import { MODAL_RENAME_CASH_ACCOUNT } from 'modals/RenameCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -48,8 +48,8 @@ export const CashAccountsPanel: FC<
     });
   };
 
-  const handleOpenManageCashAccountModal = () => {
-    NiceModal.show(MODAL_MANAGE_CASH_ACCOUNT, {
+  const handleOpenCashAccountOperationsModal = () => {
+    NiceModal.show(MODAL_CASH_ACCOUNT_OPERATIONS, {
       deleteModalProps: { name, uuid, callback: updateCashAccountList },
       currency,
     });
@@ -73,9 +73,9 @@ export const CashAccountsPanel: FC<
 
         <Button
           width="100%"
-          onClick={handleOpenManageCashAccountModal}
+          onClick={handleOpenCashAccountOperationsModal}
         >
-          {t('page.cash_accounts.button.manage')}
+          {t('page.cash_accounts.button.operations')}
 
           <Spreader spread="tiny" />
 

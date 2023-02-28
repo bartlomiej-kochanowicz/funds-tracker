@@ -14,12 +14,12 @@ import { useTranslation } from 'react-i18next';
 
 import { columns } from './columns';
 
-interface CashAccountOperationsProps {
+interface OperationsTableProps {
   uuid: string;
   currency: Currency;
 }
 
-export const CashAccountOperations: FC<CashAccountOperationsProps> = ({ uuid, currency }) => {
+export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) => {
   const { t } = useTranslation();
 
   const { loading, data } = useQuery<

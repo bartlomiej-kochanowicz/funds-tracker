@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
 import { Column, Row } from 'simple-flexbox';
 
-import { CashAccountOperations } from './components/CashAccountsOperations';
+import { OperationsTable } from './components/OperationsTable';
 
-export interface ManageCashAccountProps {
+export interface CashAccountOperationsProps {
   deleteModalProps: {
     name: string;
     uuid: string;
@@ -18,7 +18,7 @@ export interface ManageCashAccountProps {
   currency: Currency;
 }
 
-export const ManageCashAccount = NiceModal.create<ManageCashAccountProps>(
+export const CashAccountOperations = NiceModal.create<CashAccountOperationsProps>(
   ({ deleteModalProps, currency }) => {
     const { t } = useTranslation();
 
@@ -32,11 +32,11 @@ export const ManageCashAccount = NiceModal.create<ManageCashAccountProps>(
 
     return (
       <Modal
-        modalName={t('modal.ManageCashAccount.name')}
+        modalName={t('modal.CashAccountOperations.name')}
         closeModal={modal.remove}
       >
         <Column>
-          <CashAccountOperations
+          <OperationsTable
             uuid={deleteModalProps.uuid}
             currency={currency}
           />
@@ -50,7 +50,7 @@ export const ManageCashAccount = NiceModal.create<ManageCashAccountProps>(
               onClick={handleDelete}
               outline
             >
-              {t('modal.ManageCashAccount.button.delete')}
+              {t('modal.CashAccountOperations.button.delete')}
 
               <Spreader spread="tiny" />
 
