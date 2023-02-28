@@ -68,7 +68,6 @@ export const Button = styled.button.withConfig({
     width = 'fit-content',
     fontWeight = '400',
     borderRadius = 'primary',
-    boxShadow = 'default',
     flexGrow = 0,
     outline = false,
     minWidth,
@@ -81,29 +80,11 @@ export const Button = styled.button.withConfig({
       font-weight: ${fontWeight};
       border-radius: ${theme.radius[borderRadius]};
       width: ${width};
-      box-shadow: ${() => {
-        switch (boxShadow) {
-          case 'default':
-            return css`7px 6px 28px 1px ${transparentize(theme.colors.black, 0.76)}`;
-          case 'none':
-          default:
-            return 'none';
-        }
-      }};
 
       ${minWidth && `min-width: ${minWidth};`}
 
       &:active:not(&:disabled) {
         transform: scale(0.98);
-        box-shadow: ${() => {
-          switch (boxShadow) {
-            case 'default':
-              return css`3px 2px 22px 1px ${transparentize(theme.colors.black, 0.76)}`;
-            case 'none':
-            default:
-              return 'none';
-          }
-        }};
       }
 
       &:hover {
@@ -124,12 +105,11 @@ export const Button = styled.button.withConfig({
 
       ${Boolean(outline) &&
       css`
-        border: 2px solid ${theme.button.color[color].background};
         color: ${theme.button.color[color].background};
-        background-color: transparent;
+        background-color: ${transparentize(theme.button.color[color].background, 0.9)};
 
         &:hover {
-          background-color: ${transparentize(theme.button.color[color].background, 0.95)};
+          background-color: ${transparentize(theme.button.color[color].background, 0.85)};
         }
 
         &:active:not(&:disabled) {
@@ -138,7 +118,7 @@ export const Button = styled.button.withConfig({
 
         &:disabled {
           cursor: not-allowed;
-          border: 3px solid ${transparentize(theme.button.color[color].background, 0.5)};
+          border: 2px solid ${transparentize(theme.button.color[color].background, 0.5)};
           color: ${transparentize(theme.button.color[color].background, 0.5)};
           background-color: transparent;
         }

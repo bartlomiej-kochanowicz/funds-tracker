@@ -1,4 +1,5 @@
 import { Icon, Spreader, Text } from 'components/atoms';
+import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
@@ -12,6 +13,12 @@ interface NavListItemProps {
 export const NavListItem: FC<NavListItemProps> = ({ isActive, title, icon: IconComponent }) => {
   const { t } = useTranslation();
 
+  const { isDark } = useColorThemeContext();
+
+  const activeColor = isDark ? 'white' : 'black';
+
+  const fontColor = isActive ? activeColor : 'gray400';
+
   return (
     <Fragment>
       <Icon
@@ -23,7 +30,7 @@ export const NavListItem: FC<NavListItemProps> = ({ isActive, title, icon: IconC
       <Spreader spread="small" />
 
       <Text
-        fontColor={isActive ? 'blue' : 'gray400'}
+        fontColor={fontColor}
         fontWeight={isActive ? '700' : '500'}
       >
         {t(title)}

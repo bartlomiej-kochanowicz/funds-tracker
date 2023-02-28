@@ -10,7 +10,7 @@ export const ListItem = styled.li`
   list-style: none;
 
   .active {
-    background-color: ${({ theme }) => transparentize(theme.colors.blue, 0.85)};
+    background-color: ${({ theme }) => transparentize(theme.colors.blue, 0.9)};
   }
 `;
 
@@ -24,7 +24,7 @@ export const StyledNavLink = styled(NavLink)`
   ${({ theme }) => css`
     color: ${theme.colors.gray400};
     outline-color: ${theme.colors.blue};
-    padding: ${theme.padding.medium};
+    padding: ${theme.padding.large};
     border-radius: ${theme.radius.primary};
   `}
 `;
