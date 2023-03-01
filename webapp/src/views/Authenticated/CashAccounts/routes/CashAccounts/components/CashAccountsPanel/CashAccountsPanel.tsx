@@ -54,7 +54,7 @@ export const CashAccountsPanel: FC<
   };
 
   return (
-    <Box>
+    <Box p="large">
       <Row justifyContent="space-between">
         <RenameButton
           onClick={handleOpenRenameModal}

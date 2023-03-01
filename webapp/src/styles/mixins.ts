@@ -75,115 +75,26 @@ export const fontable = css<FontableProps>`
     `}
 `;
 
-const offset = 0.25;
-
-export type PaddingMixinProps = {
-  p?: number;
-  px?: number;
-  py?: number;
-  pt?: number;
-  pb?: number;
-  pl?: number;
-  pr?: number;
-};
+export interface PaddingMixinProps {
+  p?: keyof DefaultTheme['padding'];
+}
 
 export const paddingMixin = css<PaddingMixinProps>`
-  ${({ p }) =>
+  ${({ p, theme }) =>
     p &&
     css`
-      padding: ${p * offset}rem;
-    `}
-
-  ${({ px }) =>
-    px &&
-    css`
-      padding-left: ${px * offset}rem;
-      padding-right: ${px * offset}rem;
-    `}
-
-		${({ py }) =>
-    py &&
-    css`
-      padding-top: ${py * offset}rem;
-      padding-bottom: ${py * offset}rem;
-    `}
-
-		${({ pt }) =>
-    pt &&
-    css`
-      padding-top: ${pt * offset}rem;
-    `}
-		${({ pb }) =>
-    pb &&
-    css`
-      padding-bottom: ${pb * offset}rem;
-    `}
-
-		${({ pl }) =>
-    pl &&
-    css`
-      padding-left: ${pl * offset}rem;
-    `}
-
-		${({ pr }) =>
-    pr &&
-    css`
-      padding-right: ${pr * offset}rem;
+      padding: ${theme.padding[p]};
     `}
 `;
 
 export type MarginMixinProps = {
-  m?: number;
-  mx?: number;
-  my?: number;
-  mt?: number;
-  mb?: number;
-  ml?: number;
-  mr?: number;
+  m?: keyof DefaultTheme['padding'];
 };
 
 export const marginMixin = css<MarginMixinProps>`
-  ${({ m }) =>
+  ${({ m, theme }) =>
     m &&
     css`
-      margin: ${m * offset}rem;
-    `}
-
-  ${({ mx }) =>
-    mx &&
-    css`
-      margin-left: ${mx * offset}rem;
-      margin-right: ${mx * offset}rem;
-    `}
-
-		${({ my }) =>
-    my &&
-    css`
-      margin-top: ${my * offset}rem;
-      margin-bottom: ${my * offset}rem;
-    `}
-
-		${({ mt }) =>
-    mt &&
-    css`
-      margin-top: ${mt * offset}rem;
-    `}
-
-		${({ mb }) =>
-    mb &&
-    css`
-      margin-bottom: ${mb * offset}rem;
-    `}
-
-		${({ ml }) =>
-    ml &&
-    css`
-      margin-left: ${ml * offset}rem;
-    `}
-
-		${({ mr }) =>
-    mr &&
-    css`
-      margin-right: ${mr * offset}rem;
+      padding: ${theme.padding[m]};
     `}
 `;

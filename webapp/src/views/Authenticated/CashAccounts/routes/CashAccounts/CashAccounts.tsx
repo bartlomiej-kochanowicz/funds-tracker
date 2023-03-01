@@ -81,6 +81,7 @@ export const CashAccounts = () => {
         <Box
           borderRadius="primary"
           backgroundColor="white"
+          p="large"
         >
           {data?.cashAccounts.map(({ uuid, ...rest }) => (
             <CashAccountsPanel
@@ -92,6 +93,8 @@ export const CashAccounts = () => {
               {...rest}
             />
           ))}
+
+          <Spacer />
 
           {renderCreateCashAccountButton && <CreateCashAccount callback={addCashAccountToList} />}
         </Box>
