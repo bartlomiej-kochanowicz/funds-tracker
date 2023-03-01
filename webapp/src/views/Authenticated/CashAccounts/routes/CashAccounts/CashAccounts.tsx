@@ -80,7 +80,6 @@ export const CashAccounts = () => {
       {!loading && cashAccountsExist && !error && (
         <Box
           borderRadius="primary"
-          backgroundColor="white"
           p="large"
         >
           {data?.cashAccounts.map(({ uuid, ...rest }) => (

@@ -8,6 +8,7 @@ export const RenameButton = styled.button`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: left;
   font-weight: ${({ theme }) => theme.font.weight['700']};
   color: ${({ theme }) => theme.colors.text};
 

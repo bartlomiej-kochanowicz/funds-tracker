@@ -77,6 +77,7 @@ export const fontable = css<FontableProps>`
 
 export interface PaddingMixinProps {
   p?: keyof DefaultTheme['padding'];
+  adjustMobile?: boolean;
 }
 
 export const paddingMixin = css<PaddingMixinProps>`

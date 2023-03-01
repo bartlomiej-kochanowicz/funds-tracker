@@ -13,7 +13,7 @@ export const MenuDivider = styled.hr<MenuDividerProps>`
     color: ${theme.colors.gray300};
     border-color: ${theme.colors.gray300};
     background-color: ${theme.colors.gray300};
-    border: 1px solid ${theme.colors.gray300};
+    border: 0.5px solid ${theme.colors.gray300};
     margin: ${theme.padding.mediumY};
   `}
 `;

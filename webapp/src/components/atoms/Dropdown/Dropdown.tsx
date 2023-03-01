@@ -1,6 +1,6 @@
 import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
 import { dropdownAnimation } from 'helpers/dropdownAnimation';
-import { forwardRef, ForwardRefExoticComponent, Fragment, useState } from 'react';
+import { forwardRef, ForwardRefExoticComponent, Fragment, ReactNode, useState } from 'react';
 import { useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 import { composeRefs } from 'utils/composeRefs';
@@ -9,7 +9,7 @@ import { Trigger } from './Dropdown.styles';
 
 interface DropdownProps {
   placement?: PlacementType;
-  children: React.ReactNode;
+  children: ReactNode | (({ isOpen }: { isOpen?: boolean }) => ReactNode);
   content: ForwardRefExoticComponent<{ handleToggle: () => void } & HTMLMotionProps<'ul'>>;
   triggerOffset?: number;
 }
@@ -55,7 +55,9 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
           ref={composeRefs(ref, triggerProps.ref)}
           type="button"
         >
-          {children}
+          {typeof children === 'function' && children({ isOpen })}
+
+          {typeof children !== 'function' && children}
         </Trigger>
 
         {renderLayer(

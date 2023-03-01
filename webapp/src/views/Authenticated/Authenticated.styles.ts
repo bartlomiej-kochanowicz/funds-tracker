@@ -8,8 +8,7 @@ export const Content = styled(Column).withConfig({
   min-height: var(--doc-height);
 
   ${({ theme, isDashboard }) => css`
-    background-color: ${theme.colors.gray100};
-    padding: ${theme.spacing.large};
+    padding: ${theme.spacing.medium};
 
     ${theme.breakpoints.desktop.min} {
       margin-left: 230px;

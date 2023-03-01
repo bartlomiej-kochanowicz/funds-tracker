@@ -1,13 +1,14 @@
 import { GetCashAccountsQuery } from '__generated__/graphql';
 import NiceModal from '@ebay/nice-modal-react';
-import { Box, Text } from 'components/atoms';
+import { Box, Button, Icon, Text } from 'components/atoms';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { MODAL_CASH_ACCOUNT_OPERATIONS } from 'modals/CashAccountOperations';
 import { MODAL_RENAME_CASH_ACCOUNT } from 'modals/RenameCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Row } from 'simple-flexbox';
+import { FaEllipsisV } from 'react-icons/fa';
+import { Column, Row } from 'simple-flexbox';
 
 import { RenameButton } from './CashAccountPanel.styles';
 
@@ -56,19 +57,18 @@ export const CashAccountsPanel: FC<
   return (
     <Box p="large">
       <Row justifyContent="space-between">
-        <RenameButton
-          onClick={handleOpenRenameModal}
-          type="button"
-        >
-          {name}
-        </RenameButton>
+        <Column>
+          <Text fontWeight="700">{name}</Text>
 
-        <Text
-          maxWidth="120px"
-          textAlign="right"
+          <Text>{formatCurrency(balance, currency)}</Text>
+        </Column>
+
+        <Button
+          outline
+          size="small"
         >
-          {formatCurrency(balance, currency)}
-        </Text>
+          <Icon icon={FaEllipsisV} />
+        </Button>
       </Row>
     </Box>
   );
