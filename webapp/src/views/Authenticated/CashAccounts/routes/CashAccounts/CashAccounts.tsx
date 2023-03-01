@@ -2,6 +2,7 @@ import { CreateCashAccountMutation, GetCashAccountsQuery } from '__generated__/g
 import { useQuery } from '@apollo/client';
 import { Box, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
+import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +13,8 @@ import { CreateFirstCashAccount } from './components/CreateFirstCashAccount';
 
 export const CashAccounts = () => {
   const { t } = useTranslation();
+
+  const { isDark } = useColorThemeContext();
 
   const { loading, data, error, updateQuery } = useQuery<GetCashAccountsQuery>(GET_CASH_ACCOUNTS);
 
@@ -80,6 +83,7 @@ export const CashAccounts = () => {
       {!loading && cashAccountsExist && !error && (
         <Box
           borderRadius="primary"
+          backgroundColor={isDark ? 'gray100' : 'white'}
           p="large"
         >
           {data?.cashAccounts.map(({ uuid, ...rest }) => (
