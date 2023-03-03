@@ -1,11 +1,16 @@
-import { FC, ReactNode } from 'react';
+import { Icon } from 'components/atoms/Icon';
+import { FC, Fragment, ReactNode } from 'react';
+import { IconType } from 'react-icons';
 import styled, { css, DefaultTheme } from 'styled-components';
+
+import { Spreader } from '../Spreader';
 
 export interface MenuItemProps {
   children: ReactNode;
   onClick?: () => void;
   isSelected?: boolean;
   padding?: keyof DefaultTheme['padding'];
+  icon?: IconType;
 }
 
 const StyledButton = styled.button<{ isSelected: boolean; padding: keyof DefaultTheme['padding'] }>`
@@ -39,6 +44,7 @@ export const MenuItem: FC<MenuItemProps> = ({
   onClick,
   isSelected = false,
   padding = 'medium',
+  icon,
 }) => (
   <li>
     <StyledButton
@@ -47,6 +53,14 @@ export const MenuItem: FC<MenuItemProps> = ({
       isSelected={isSelected}
       padding={padding}
     >
+      {icon && (
+        <Fragment>
+          <Icon icon={icon} />
+
+          <Spreader spread="tiny" />
+        </Fragment>
+      )}
+
       {children}
     </StyledButton>
   </li>

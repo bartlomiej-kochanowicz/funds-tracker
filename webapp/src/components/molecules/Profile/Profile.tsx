@@ -4,7 +4,6 @@ import { useUserContext } from 'contexts/UserContext';
 import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 import { DropdownContent } from './components/DropdownContent';
 import { ProfileContainer } from './Profile.styles';

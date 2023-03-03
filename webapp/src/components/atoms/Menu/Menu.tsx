@@ -9,7 +9,7 @@ export interface MenuProps {
 }
 
 export const Menu = styled(motion.ul)<MenuProps>`
-  max-height: 14rem;
+  max-height: 16rem;
   overflow-y: auto;
 
   ${({ theme, minMenuWidth, isInModal }) => css`

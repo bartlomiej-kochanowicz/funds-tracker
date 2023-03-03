@@ -3,9 +3,11 @@ import NiceModal from '@ebay/nice-modal-react';
 import { Menu } from 'components/atoms';
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { MODAL_CASH_ACCOUNT_OPERATIONS } from 'modals/CashAccountOperations';
+import { MODAL_CONFIRM_DELETE_CASH_ACCOUNT } from 'modals/ConfirmDeleteCashAccount';
 import { MODAL_RENAME_CASH_ACCOUNT } from 'modals/RenameCashAccount';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaChartLine, FaListUl, FaPen, FaPlus, FaTrash } from 'react-icons/fa';
 
 interface DropdownContentProps {
   handleToggle: () => void;
@@ -39,6 +41,8 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         uuid,
         currency,
       });
+
+      handleToggle();
     };
 
     const handleOpenRenameModal = () => {
@@ -47,6 +51,8 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         name,
         callback: updateCashAccountName,
       });
+
+      handleToggle();
     };
 
     const handleOpenCashAccountOperationsModal = () => {
@@ -54,6 +60,14 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         deleteModalProps: { name, uuid, callback: updateCashAccountList },
         currency,
       });
+
+      handleToggle();
+    };
+
+    const handleOpenDeleteCashAccountModal = () => {
+      NiceModal.show(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, { name, uuid });
+
+      handleToggle();
     };
 
     return (
@@ -62,9 +76,37 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         minMenuWidth="270px"
         {...rest}
       >
-        <Menu.Item>test</Menu.Item>
+        <Menu.Item icon={FaChartLine}>{t('page.cash_accounts.button.invest')}</Menu.Item>
 
-        <Menu.Item>aaa</Menu.Item>
+        <Menu.Item
+          icon={FaListUl}
+          onClick={handleOpenCashAccountOperationsModal}
+        >
+          {t('page.cash_accounts.button.operations')}
+        </Menu.Item>
+
+        <Menu.Item
+          icon={FaPlus}
+          onClick={handleOpenAddFundsCashAccountModal}
+        >
+          {t('page.cash_accounts.button.add_funds')}
+        </Menu.Item>
+
+        <Menu.Divider />
+
+        <Menu.Item
+          icon={FaPen}
+          onClick={handleOpenRenameModal}
+        >
+          {t('common.rename')}
+        </Menu.Item>
+
+        <Menu.Item
+          icon={FaTrash}
+          onClick={handleOpenDeleteCashAccountModal}
+        >
+          {t('common.delete')}
+        </Menu.Item>
       </Menu>
     );
   },

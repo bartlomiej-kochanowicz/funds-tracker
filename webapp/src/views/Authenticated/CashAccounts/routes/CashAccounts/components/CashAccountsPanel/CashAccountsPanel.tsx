@@ -4,7 +4,6 @@ import { ContentProps } from 'components/atoms/Dropdown';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import { FaEllipsisV } from 'react-icons/fa';
 import { Column, Row } from 'simple-flexbox';
 
@@ -27,8 +26,6 @@ export const CashAccountsPanel: FC<
   updateCashAccountName,
   updateCashAccountList,
 }) => {
-  const { t } = useTranslation();
-
   const isPhone = useBreakpoint('phone', 'max');
 
   const content = (props: ContentProps) => (
