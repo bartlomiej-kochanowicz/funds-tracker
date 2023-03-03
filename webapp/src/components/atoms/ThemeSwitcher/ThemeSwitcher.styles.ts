@@ -11,13 +11,13 @@ export const StyledButton = styled.button`
   border-radius: 22px;
   padding: 3px;
   cursor: pointer;
-  transition: background-color 250ms ease;
   border: 0;
 
-  ${({ theme: { isDark, colors, shadows } }) => css`
+  ${({ theme: { isDark, colors, shadows, transition } }) => css`
     background-color: ${colors.black};
     outline-color: ${colors.blue};
     box-shadow: ${shadows.box};
+    transition: background-color ${transition.primary} ease;
 
     ${isDark &&
     css`

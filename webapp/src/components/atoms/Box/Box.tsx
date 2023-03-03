@@ -8,6 +8,7 @@ interface BoxProps extends PaddingMixinProps {
   children: ReactNode;
   backgroundColor?: Colors;
   borderRadius?: Radius;
+  hoverBackgroundColor?: Colors;
 }
 
 export const Box = ({ children, ...rest }: BoxProps) => (

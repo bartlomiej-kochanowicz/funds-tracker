@@ -20,9 +20,9 @@ export const StyledNavLink = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   width: 214px;
-  transition: 0.3s;
 
   ${({ theme }) => css`
+    transition: ${theme.transition.primary};
     color: ${theme.colors.gray400};
     outline-color: ${theme.colors.blue};
     padding: ${theme.padding.large};

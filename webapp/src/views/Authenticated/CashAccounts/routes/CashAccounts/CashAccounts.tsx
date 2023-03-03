@@ -4,6 +4,7 @@ import { Box, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -15,6 +16,8 @@ export const CashAccounts = () => {
   const { t } = useTranslation();
 
   const { isDark } = useColorThemeContext();
+
+  const isPhone = useBreakpoint('phone', 'max');
 
   const { loading, data, error, updateQuery } = useQuery<GetCashAccountsQuery>(GET_CASH_ACCOUNTS);
 
@@ -84,7 +87,7 @@ export const CashAccounts = () => {
         <Box
           borderRadius="primary"
           backgroundColor={isDark ? 'gray100' : 'white'}
-          p="large"
+          p={isPhone ? 'small' : 'large'}
         >
           {data?.cashAccounts.map(({ uuid, ...rest }) => (
             <CashAccountsPanel
@@ -96,12 +99,12 @@ export const CashAccounts = () => {
               {...rest}
             />
           ))}
-
-          <Spacer />
-
-          {renderCreateCashAccountButton && <CreateCashAccount callback={addCashAccountToList} />}
         </Box>
       )}
+
+      <Spacer />
+
+      {renderCreateCashAccountButton && <CreateCashAccount callback={addCashAccountToList} />}
     </Fragment>
   );
 };

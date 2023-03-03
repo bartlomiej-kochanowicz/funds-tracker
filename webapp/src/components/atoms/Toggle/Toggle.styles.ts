@@ -9,13 +9,13 @@ export const StyledButton = styled.button<{ isToggled: boolean }>`
   border-radius: 22px;
   padding: 3px;
   cursor: pointer;
-  transition: background-color 250ms ease;
   border: 0;
 
   ${({ theme, isToggled }) => css`
     background-color: ${theme.colors.gray300};
     outline-color: ${theme.colors.blue};
     box-shadow: ${theme.shadows.box};
+    transition: background-color ${theme.transition.primary} ease;
 
     ${isToggled &&
     css`

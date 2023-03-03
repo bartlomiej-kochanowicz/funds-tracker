@@ -57,7 +57,6 @@ export const Button = styled.button.withConfig({
   justify-content: center;
   border: none;
   position: relative;
-  transition: 0.2s all;
   text-decoration: none;
   cursor: pointer;
 
@@ -80,6 +79,7 @@ export const Button = styled.button.withConfig({
       font-weight: ${fontWeight};
       border-radius: ${theme.radius[borderRadius]};
       width: ${width};
+      transition: ${theme.transition.primary} all;
 
       ${minWidth && `min-width: ${minWidth};`}
 

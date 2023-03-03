@@ -169,6 +169,9 @@ export const theme = {
       modal: 101,
     },
   },
+  transition: {
+    primary: '0.3s ease-in-out',
+  },
 };
 
 const darkColors = {
