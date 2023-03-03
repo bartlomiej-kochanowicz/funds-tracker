@@ -1,12 +1,13 @@
 import { Avatar, Dropdown, Icon, Spreader, Text } from 'components/atoms';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { useUserContext } from 'contexts/UserContext';
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 
 import { DropdownContent } from './components/DropdownContent';
+import { ProfileContainer } from './Profile.styles';
 
 interface ProfileProps {
   withName?: boolean;
@@ -25,10 +26,10 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
       placement="bottom-end"
       triggerOffset={0}
     >
-      {({ isOpen }) => (
-        <Row alignItems="center">
+      {({ isOpen, ...rest }) => (
+        <ProfileContainer {...rest}>
           {withName && (
-            <Row alignItems="center">
+            <Fragment>
               <Avatar name={user.name} />
 
               <Spreader spread="tiny" />
@@ -39,7 +40,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
               >
                 {t('common.hi')}, {user.name}!
               </Text>
-            </Row>
+            </Fragment>
           )}
 
           {!withName && <Avatar name={user.name} />}
@@ -51,7 +52,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
             size="0.875"
             color={isDark ? 'white' : 'black'}
           />
-        </Row>
+        </ProfileContainer>
       )}
     </Dropdown>
   );

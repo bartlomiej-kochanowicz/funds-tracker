@@ -1,24 +1,31 @@
 import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
 import { dropdownAnimation } from 'helpers/dropdownAnimation';
-import { forwardRef, ForwardRefExoticComponent, Fragment, ReactNode, useState } from 'react';
-import { useLayer } from 'react-laag';
+import { forwardRef, ForwardRefExoticComponent, Fragment, ReactNode, Ref, useState } from 'react';
+import { LayerProps, TriggerProps, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 import { composeRefs } from 'utils/composeRefs';
 
 import { Trigger } from './Dropdown.styles';
 
+export type ContentProps = LayerProps & TriggerProps & { handleToggle: () => void };
+
 interface DropdownProps {
   placement?: PlacementType;
-  children: ReactNode | (({ isOpen }: { isOpen?: boolean }) => ReactNode);
-  content: ForwardRefExoticComponent<{ handleToggle: () => void } & HTMLMotionProps<'ul'>>;
+  children:
+    | ReactNode
+    | ((props: {
+        isOpen?: boolean;
+        onClick: () => void;
+        ref: Ref<HTMLButtonElement>;
+      }) => ReactNode);
+  content:
+    | ForwardRefExoticComponent<{ handleToggle: () => void } & HTMLMotionProps<'ul'>>
+    | ((props: ContentProps) => ReactNode);
   triggerOffset?: number;
 }
 
 export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
-  (
-    { placement = 'bottom-center', children, content: Content, triggerOffset = 5, ...rest },
-    ref,
-  ) => {
+  ({ placement = 'bottom-center', children, content, triggerOffset = 5, ...rest }, ref) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const { renderLayer, triggerProps, layerProps, layerSide } = useLayer({
@@ -46,28 +53,52 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
 
     const anmimationDirection = layerSide.includes('top') ? 5 : -5;
 
+    const Content = content as ForwardRefExoticComponent<
+      { handleToggle: () => void } & HTMLMotionProps<'ul'>
+    >;
+
     return (
       <Fragment>
-        <Trigger
-          {...rest}
-          {...triggerProps}
-          onClick={handleToggle}
-          ref={composeRefs(ref, triggerProps.ref)}
-          type="button"
-        >
-          {typeof children === 'function' && children({ isOpen })}
+        {typeof children === 'function' &&
+          children({
+            isOpen,
+            ...rest,
+            ...triggerProps,
+            onClick: handleToggle,
+            ref: composeRefs(ref, triggerProps.ref),
+          })}
 
-          {typeof children !== 'function' && children}
-        </Trigger>
+        {typeof children !== 'function' && (
+          <Trigger
+            {...rest}
+            {...triggerProps}
+            onClick={handleToggle}
+            ref={composeRefs(ref, triggerProps.ref)}
+            type="button"
+          >
+            {children}
+          </Trigger>
+        )}
 
         {renderLayer(
           <AnimatePresence>
             {isOpen && (
-              <Content
-                {...layerProps}
-                handleToggle={handleToggle}
-                {...dropdownAnimation(anmimationDirection)}
-              />
+              <Fragment>
+                {typeof content === 'function' &&
+                  content({
+                    ...layerProps,
+                    handleToggle,
+                    ...dropdownAnimation(anmimationDirection),
+                  })}
+
+                {typeof content !== 'function' && (
+                  <Content
+                    {...layerProps}
+                    handleToggle={handleToggle}
+                    {...dropdownAnimation(anmimationDirection)}
+                  />
+                )}
+              </Fragment>
             )}
           </AnimatePresence>,
         )}
