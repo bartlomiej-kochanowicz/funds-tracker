@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
     background: ${theme.colors.blue};
     background: ${theme.gradients.blue}};
     border-radius: ${theme.radius.tertiary};
-    box-shadow: ${theme.shadows.box};
 
     svg {
       fill: ${theme.colors.white};

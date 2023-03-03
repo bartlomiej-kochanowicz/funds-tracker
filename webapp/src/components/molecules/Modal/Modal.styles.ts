@@ -29,11 +29,10 @@ export const ModalComponent = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  ${({ theme: { colors, radius, shadows, breakpoints, zIndex } }) => css`
+  ${({ theme: { colors, radius, breakpoints, zIndex } }) => css`
     z-index: ${zIndex.modal.modal};
     background-color: ${colors.gray100};
     border-radius: ${radius.primary};
-    box-shadow: ${shadows.box};
     padding: 1.75rem 2.5rem;
     max-width: 900px;
     max-height: 85vh;

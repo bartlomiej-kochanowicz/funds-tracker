@@ -19,7 +19,6 @@ export const Menu = styled(motion.ul)<MenuProps>`
     padding: ${theme.padding.mediumY};
     outline-color: ${theme.colors.blue};
     color: ${theme.colors.black};
-    box-shadow: ${theme.shadows.box};
     display: flex;
     flex-direction: column;
 

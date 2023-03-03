@@ -71,7 +71,12 @@ export const CashAccounts = () => {
     <Fragment>
       <Heading>{t('navigation.cash_accounts')}</Heading>
 
-      <Text>{t('page.cash_accounts.title.description')}</Text>
+      <Text
+        fontSize="0.875"
+        fontColor="gray400"
+      >
+        {t('page.cash_accounts.title.description')}
+      </Text>
 
       <Spacer />
 

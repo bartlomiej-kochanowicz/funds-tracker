@@ -61,7 +61,7 @@ export const CashAccountsPanel: FC<
   return (
     <Box
       p={isPhone ? 'medium' : 'large'}
-      hoverBackgroundColor={isDark ? 'gray200' : 'gray100'}
+      hoverBackgroundColor="gray200"
       borderRadius="primary"
     >
       <Row justifyContent="space-between">

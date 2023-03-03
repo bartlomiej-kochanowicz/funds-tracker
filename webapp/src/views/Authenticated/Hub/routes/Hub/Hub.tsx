@@ -27,7 +27,7 @@ export const Hub = () => {
         level="h3"
         fontColor="gray400"
       >
-        {t('common.dashboard')}
+        {t('navigation.dashboard')}
       </Heading>
 
       <Spacer space="small" />

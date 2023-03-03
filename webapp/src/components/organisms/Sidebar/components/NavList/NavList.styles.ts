@@ -1,4 +1,3 @@
-import { transparentize } from 'color2k';
 import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -10,7 +9,7 @@ export const ListItem = styled.li`
   list-style: none;
 
   .active {
-    background-color: ${({ theme }) => transparentize(theme.colors.blue, 0.9)};
+    background-color: ${({ theme }) => theme.colors.gray200};
   }
 `;
 

@@ -14,7 +14,6 @@ export const StyledButton = styled.button<{ isToggled: boolean }>`
   ${({ theme, isToggled }) => css`
     background-color: ${theme.colors.gray300};
     outline-color: ${theme.colors.blue};
-    box-shadow: ${theme.shadows.box};
     transition: background-color ${theme.transition.primary} ease;
 
     ${isToggled &&

@@ -1,6 +1,7 @@
 import { Icon } from 'components/atoms/Icon';
+import { Spreader } from 'components/atoms/Spreader';
 import { Text } from 'components/atoms/Text';
-import { FC, forwardRef, HTMLProps, ReactNode } from 'react';
+import { FC, forwardRef, Fragment, HTMLProps, ReactNode } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 import { Container, Input, Marker } from './Checkbox.styles';
@@ -9,7 +10,7 @@ interface CheckboxProps extends Pick<HTMLProps<HTMLInputElement>, 'onChange' | '
   label: string | ReactNode;
 }
 
-const Label: FC<{ children: ReactNode }> = ({ children }) => <Text ml={2}>{children}</Text>;
+const Label: FC<{ children: ReactNode }> = ({ children }) => <Text>{children}</Text>;
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ id, name, label, onChange }, ref) => {
@@ -29,7 +30,15 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <Icon icon={FaCheck} />
         </Marker>
 
-        {isLabelString ? <Label>{label}</Label> : label}
+        {isLabelString ? (
+          <Fragment>
+            <Spreader spread="tiny" />
+
+            <Label>{label}</Label>
+          </Fragment>
+        ) : (
+          label
+        )}
       </Container>
     );
   },

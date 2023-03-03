@@ -13,10 +13,9 @@ export const StyledButton = styled.button`
   cursor: pointer;
   border: 0;
 
-  ${({ theme: { isDark, colors, shadows, transition } }) => css`
+  ${({ theme: { isDark, colors, transition } }) => css`
     background-color: ${colors.black};
     outline-color: ${colors.blue};
-    box-shadow: ${shadows.box};
     transition: background-color ${transition.primary} ease;
 
     ${isDark &&
