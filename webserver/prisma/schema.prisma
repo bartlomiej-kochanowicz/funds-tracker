@@ -20,6 +20,7 @@ model User {
   sessions             Session[]
   cashAccounts         CashAccount[]
   portfolios           Portfolio[]
+  subscription         Subscription     @default(FREE)
 }
 
 model Session {
@@ -70,6 +71,13 @@ model Instrument {
   portfolioUuid         String
 
   @@unique([portfolioUuid, uuid])
+}
+
+enum Subscription {
+  FREE
+  LITE
+  PROFESSIONAL
+  EXPERT
 }
 
 enum CashAccountOperationType {
