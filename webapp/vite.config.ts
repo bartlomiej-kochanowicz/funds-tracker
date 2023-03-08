@@ -7,14 +7,16 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { VitePWA } from 'vite-plugin-pwa';
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+const IS_DOCKER = process.env.DOCKER === 'true';
 
 export default defineConfig({
   server: {
     port: 3000,
+    host: true,
     proxy: {
       '/api/graphql': {
         rewrite: path => (IS_DEVELOPMENT ? path.replace(/^\/api/, '') : path),
-        target: 'http://localhost:3001/graphql',
+        target: `http://${IS_DOCKER ? 'webserver' : 'localhost'}:3001/graphql`,
       },
     },
   },

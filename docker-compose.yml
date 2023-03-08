@@ -86,6 +86,7 @@ services:
       - webserver
     environment:
       - NODE_ENV=development
+      - DOCKER=true
     volumes:
       - ./webapp:/webapp
     depends_on:
