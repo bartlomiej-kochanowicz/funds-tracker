@@ -1,6 +1,16 @@
 version: "3.9"
 
 services:
+  development-redis:
+    container_name: development-redis
+    image: redis
+    ports:
+      - 2137:6379
+    volumes:
+      - development-redis:/data
+    networks:
+      - webserver
+
   mailslurper:
     container_name: mailslurper
     image: marcopas/docker-mailslurper
@@ -10,6 +20,7 @@ services:
       - "8085:8085"
     networks:
       - webserver
+
   tests-database:
     image: postgres:14.5-alpine
     restart: always
@@ -20,6 +31,7 @@ services:
       - POSTGRES_USER=${TESTS_POSTGRES_USER}
       - POSTGRES_PASSWORD=${TESTS_POSTGRES_PASSWORD}
       - POSTGRES_DB=${TESTS_POSTGRES_DB}
+
   development-database:
     image: postgres:14.5-alpine
     container_name: development-database
@@ -62,6 +74,7 @@ services:
       - development-database
     ports:
       - ${WEBSERVER_PORT}:${WEBSERVER_PORT}
+
   webapp:
     container_name: webapp
     build:
@@ -92,4 +105,6 @@ networks:
 
 volumes:
   development-database:
+    driver: local
+  development-redis:
     driver: local
