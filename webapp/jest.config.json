@@ -13,7 +13,8 @@
     "src/utlis/**/*.{ts,tsx}",
     "src/views/**/*.{ts,tsx}",
     "!src/**/index.{ts,tsx}",
-    "!src/**/*.po.{ts,tsx}"
+    "!src/**/*.po.{ts,tsx}",
+    "!src/views/**/Routes.{ts,tsx}"
   ],
   "coveragePathIgnorePatterns": [".stories.ts", ".stories.tsx"],
   "watchPlugins": ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
