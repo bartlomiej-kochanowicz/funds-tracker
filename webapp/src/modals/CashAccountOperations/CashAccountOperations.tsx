@@ -9,7 +9,6 @@ export interface CashAccountOperationsProps {
   deleteModalProps: {
     name: string;
     uuid: string;
-    callback: (data: { uuid: string }) => void;
   };
   currency: Currency;
 }
