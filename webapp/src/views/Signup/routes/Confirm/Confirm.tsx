@@ -115,6 +115,7 @@ export const Confirm = () => {
               <ButtonLink
                 onClick={handleResendCode}
                 fontColor="blue"
+                data-testid="resend-code-button"
               />
             ),
           }}

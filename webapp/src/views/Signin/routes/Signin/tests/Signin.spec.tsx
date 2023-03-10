@@ -39,6 +39,8 @@ jest.mock('react-router-dom', () => ({
 jest.mock('helpers/showToast', () => ({ showErrorToast: jest.fn(), showSuccessToast: jest.fn() }));
 
 describe('Signin tests', () => {
+  afterAll(jest.clearAllMocks);
+
   it('sign in properly', async () => {
     // given
     const mocks = [

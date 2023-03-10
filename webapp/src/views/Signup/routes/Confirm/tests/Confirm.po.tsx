@@ -12,6 +12,7 @@ export class ConfirmPO {
   private elements: {
     chooseCodeInput: HTMLElement;
     chooseSubmitButton: HTMLElement;
+    chooseResendCodeButton: HTMLElement;
   };
 
   private user: UserEvent;
@@ -23,6 +24,9 @@ export class ConfirmPO {
       },
       get chooseSubmitButton() {
         return getByTestId(container, 'submit-button');
+      },
+      get chooseResendCodeButton() {
+        return getByTestId(container, 'resend-code-button');
       },
     };
   }
@@ -38,6 +42,10 @@ export class ConfirmPO {
 
   async submitForm() {
     await this.user.click(this.elements.chooseSubmitButton);
+  }
+
+  async clickResendCodeButton() {
+    await this.user.click(this.elements.chooseResendCodeButton);
   }
 
   expectSuccessCallback(callback: jest.Mock) {

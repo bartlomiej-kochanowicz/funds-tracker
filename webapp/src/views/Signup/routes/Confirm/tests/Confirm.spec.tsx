@@ -1,10 +1,15 @@
 import { waitFor } from '@testing-library/react';
+import { GraphQLError } from 'graphql';
 import { CONFIRM_SIGNUP, SEND_CODE } from 'graphql/mutations';
+import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { Confirm } from '../Confirm';
 import { ConfirmPO } from './Confirm.po';
+
+const mockedShowSuccessToast = showSuccessToast as jest.MockedFunction<typeof showSuccessToast>;
+const mockedShowErrorToast = showErrorToast as jest.MockedFunction<typeof showErrorToast>;
 
 jest.mock('react-google-recaptcha-v3', () => ({
   GoogleReCaptcha: ({
@@ -22,6 +27,8 @@ jest.mock('react-google-recaptcha-v3', () => ({
   },
 }));
 
+jest.mock('helpers/showToast', () => ({ showErrorToast: jest.fn(), showSuccessToast: jest.fn() }));
+
 const mockUseNavigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
@@ -37,6 +44,8 @@ jest.mock('contexts/UserContext', () => ({
 }));
 
 describe('Confirm password tests', () => {
+  afterAll(jest.clearAllMocks);
+
   it('navigates to signin when emain not exist', () => {
     const mocks = [
       {
@@ -115,7 +124,7 @@ describe('Confirm password tests', () => {
       },
     ];
 
-    const confirmPO = await ConfirmPO.render(Confirm, mocks);
+    const confirmPO = ConfirmPO.render(Confirm, mocks);
 
     // when
     await confirmPO.setCode('123456');
@@ -127,5 +136,71 @@ describe('Confirm password tests', () => {
     await waitFor(async () => {
       await confirmPO.expectSuccessCallback(mockUseNavigate).toBeCalledWith('/introduction');
     });
+  });
+
+  it('send code properly', async () => {
+    const email = 'test@email.xyz';
+
+    const mocks = [
+      {
+        request: {
+          query: SEND_CODE,
+          variables: {
+            data: {
+              email,
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          data: {
+            sendCode: {
+              success: true,
+            },
+          },
+        },
+      },
+    ];
+
+    const confirmPO = ConfirmPO.render(Confirm, mocks);
+
+    await confirmPO.clickResendCodeButton();
+
+    await waitFor(() =>
+      expect(mockedShowSuccessToast).toHaveBeenCalledWith(
+        'Confirmation code has been sent to your email.',
+      ),
+    );
+  });
+
+  it('send code failure', async () => {
+    const email = 'test@email.xyz';
+
+    const mocks = [
+      {
+        request: {
+          query: SEND_CODE,
+          variables: {
+            data: {
+              email,
+              token: 'token',
+            },
+          },
+        },
+        result: {
+          errors: [new GraphQLError('Wrong email!')],
+        },
+      },
+    ];
+
+    const confirmPO = ConfirmPO.render(Confirm, mocks);
+
+    await confirmPO.clickResendCodeButton();
+
+    await waitFor(() =>
+      expect(mockedShowErrorToast).toHaveBeenCalledWith(
+        'Code sending failed. Please try again later.',
+      ),
+    );
   });
 });
