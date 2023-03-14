@@ -2,9 +2,15 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true
+    "vitest-globals/env": true
   },
-  "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "plugin:prettier/recommended"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:prettier/recommended",
+    "plugin:vitest-globals/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -40,7 +46,7 @@
           "**/*.test.*",
           "**/*.po.*",
           "**/*/test-utils.tsx",
-          "**/*/config/tests/*",
+          "**/*/setupTests.ts",
           "**/__generated__/*",
           "**/src/config/codegen.ts"
         ],

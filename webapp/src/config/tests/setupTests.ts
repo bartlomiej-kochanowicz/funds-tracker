@@ -9,14 +9,14 @@ import i18nForTests from 'utils/i18nForTests';
 
 const originalError = console.error;
 
-jest.mock('config/env', () => ({
+vi.mock('config/env', () => ({
   ENVIROMENT: 'dev',
   IS_DEVELOPMENT: true,
   API_URL: '',
   WEBAPP_PORT: '',
 }));
 
-jest.mock('utils/i18n', () => i18nForTests);
+vi.mock('utils/i18n', () => ({ default: i18nForTests }));
 
 /**
  * Define the window.matchMedia
@@ -51,5 +51,5 @@ beforeAll(() => {
 afterAll(() => {
   console.error = originalError;
 
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });

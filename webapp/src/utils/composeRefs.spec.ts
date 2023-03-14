@@ -44,12 +44,12 @@ describe('composeRefs', () => {
   });
 
   it('should correctly combine and cache ref callbacks', () => {
-    const firstRefs: [Ref<unknown>, Ref<unknown>] = [jest.fn(), jest.fn()];
+    const firstRefs: [Ref<unknown>, Ref<unknown>] = [vi.fn(), vi.fn()];
     const secondRefs: [Ref<unknown>, Ref<unknown>, Ref<unknown>, Ref<unknown>] = [
-      jest.fn(),
-      jest.fn(),
-      jest.fn(),
-      jest.fn(),
+      vi.fn(),
+      vi.fn(),
+      vi.fn(),
+      vi.fn(),
     ];
 
     const firstRef = composeRefs(...firstRefs);
@@ -83,21 +83,21 @@ describe('composeRefs', () => {
     const value = Object.freeze({});
 
     const refs: [Ref<unknown>, Ref<unknown>, ...Array<Ref<unknown>>] = [
-      jest.fn(() => {
+      vi.fn(() => {
         expect((refs[1] as RefObject<unknown>).current).toBeNull();
         expect(refs[2]).not.toHaveBeenCalled();
         expect(refs[3]).not.toHaveBeenCalled();
         expect((refs[4] as RefObject<unknown>).current).toBeNull();
       }),
       createRef(),
-      jest.fn(() => {
+      vi.fn(() => {
         expect(refs[0]).toHaveBeenCalledTimes(1);
         expect(refs[0]).toHaveBeenCalledWith(value);
         expect((refs[1] as RefObject<unknown>).current).toBe(value);
         expect(refs[3]).not.toHaveBeenCalled();
         expect((refs[4] as RefObject<unknown>).current).toBeNull();
       }),
-      jest.fn(() => {
+      vi.fn(() => {
         expect(refs[0]).toHaveBeenCalledTimes(1);
         expect(refs[0]).toHaveBeenCalledWith(value);
         expect((refs[1] as RefObject<unknown>).current).toBe(value);
@@ -120,7 +120,7 @@ describe('composeRefs', () => {
 
     expect(composeRefs(null, nonNullRef, null, null)).toBe(nonNullRef);
 
-    const nonNullRefCallback = jest.fn();
+    const nonNullRefCallback = vi.fn();
 
     expect(composeRefs(null, nonNullRefCallback)).toBe(nonNullRefCallback);
     expect(composeRefs(nonNullRefCallback, null)).toBe(nonNullRefCallback);
@@ -128,13 +128,13 @@ describe('composeRefs', () => {
 
   it('should correctly combine and cache combinations of ref objects, callbacks, and nulls', () => {
     const refs: [Ref<unknown>, Ref<unknown>, ...Array<Ref<unknown>>] = [
-      jest.fn(),
+      vi.fn(),
       null,
       createRef(),
-      jest.fn(),
+      vi.fn(),
       null,
       null,
-      jest.fn(),
+      vi.fn(),
     ];
 
     const combinedRef = composeRefs(...refs) as (instance: unknown) => void;
@@ -152,13 +152,13 @@ describe('composeRefs', () => {
   });
 
   it('should micro-optimize composing only two refs', () => {
-    jest.spyOn(Array.prototype, 'reduce' as any).mockImplementation(() => {
+    vi.spyOn(Array.prototype, 'reduce' as any).mockImplementation(() => {
       throw new Error('This should have been micro-optimized');
     });
 
     composeRefs(createRef(), createRef());
-    composeRefs(createRef(), jest.fn());
-    composeRefs(null, jest.fn());
+    composeRefs(createRef(), vi.fn());
+    composeRefs(null, vi.fn());
     composeRefs(null, null);
   });
 
@@ -168,6 +168,6 @@ describe('composeRefs', () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 });

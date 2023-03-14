@@ -11,6 +11,16 @@ services:
     networks:
       - webserver
 
+  tests-redis:
+    container_name: tests-redis
+    image: redis
+    ports:
+      - 7312:6379
+    volumes:
+      - development-redis:/data
+    networks:
+      - webserver
+
   mailslurper:
     container_name: mailslurper
     image: marcopas/docker-mailslurper

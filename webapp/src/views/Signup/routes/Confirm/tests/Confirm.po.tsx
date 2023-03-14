@@ -48,7 +48,7 @@ export class ConfirmPO {
     await this.user.click(this.elements.chooseResendCodeButton);
   }
 
-  expectSuccessCallback(callback: jest.Mock) {
+  expectSuccessCallback(callback: vi.Mock) {
     return expect(callback);
   }
 

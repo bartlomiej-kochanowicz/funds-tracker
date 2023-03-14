@@ -4,14 +4,12 @@ import { CONFIRM_SIGNUP, SEND_CODE } from 'graphql/mutations';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { Mock } from 'vitest';
 
 import { Confirm } from '../Confirm';
 import { ConfirmPO } from './Confirm.po';
 
-const mockedShowSuccessToast = showSuccessToast as jest.MockedFunction<typeof showSuccessToast>;
-const mockedShowErrorToast = showErrorToast as jest.MockedFunction<typeof showErrorToast>;
-
-jest.mock('react-google-recaptcha-v3', () => ({
+vi.mock('react-google-recaptcha-v3', () => ({
   GoogleReCaptcha: ({
     onVerify,
     refreshReCaptcha,
@@ -27,24 +25,24 @@ jest.mock('react-google-recaptcha-v3', () => ({
   },
 }));
 
-jest.mock('helpers/showToast', () => ({ showErrorToast: jest.fn(), showSuccessToast: jest.fn() }));
+vi.mock('helpers/showToast', () => ({ showErrorToast: vi.fn(), showSuccessToast: vi.fn() }));
 
-const mockUseNavigate = jest.fn();
+const mockUseNavigate = vi.fn();
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+vi.mock('react-router-dom', async () => ({
+  ...((await vi.importActual('react-router-dom')) as typeof import('react-router-dom')),
   useNavigate: () => mockUseNavigate,
-  Navigate: jest.fn(),
-  useLocation: jest.fn(),
+  Navigate: vi.fn(),
+  useLocation: vi.fn(),
 }));
 
-jest.mock('contexts/UserContext', () => ({
-  ...jest.requireActual('contexts/UserContext'),
-  useUserContext: jest.fn().mockReturnValue({ getUser: jest.fn() }),
+vi.mock('contexts/UserContext', async () => ({
+  ...((await vi.importActual('contexts/UserContext')) as typeof import('contexts/UserContext')),
+  useUserContext: vi.fn().mockReturnValue({ getUser: vi.fn() }),
 }));
 
 describe('Confirm password tests', () => {
-  afterAll(jest.clearAllMocks);
+  afterAll(vi.clearAllMocks);
 
   it('navigates to signin when emain not exist', () => {
     const mocks = [
@@ -76,7 +74,7 @@ describe('Confirm password tests', () => {
   it('navigates to introduction page on success confirmation', async () => {
     const email = 'test@email.xyz';
 
-    const mockUseLocation = useLocation as jest.Mock;
+    const mockUseLocation = useLocation as Mock;
 
     mockUseLocation.mockReturnValue({
       state: {
@@ -167,7 +165,7 @@ describe('Confirm password tests', () => {
     await confirmPO.clickResendCodeButton();
 
     await waitFor(() =>
-      expect(mockedShowSuccessToast).toHaveBeenCalledWith(
+      expect(showSuccessToast).toHaveBeenCalledWith(
         'Confirmation code has been sent to your email.',
       ),
     );
@@ -198,9 +196,7 @@ describe('Confirm password tests', () => {
     await confirmPO.clickResendCodeButton();
 
     await waitFor(() =>
-      expect(mockedShowErrorToast).toHaveBeenCalledWith(
-        'Code sending failed. Please try again later.',
-      ),
+      expect(showErrorToast).toHaveBeenCalledWith('Code sending failed. Please try again later.'),
     );
   });
 });

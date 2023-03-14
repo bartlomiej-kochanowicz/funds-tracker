@@ -10,10 +10,7 @@ import { waitFor } from 'utils/test-utils';
 import { Signin } from '../Signin';
 import { SigninPO } from './Signin.po';
 
-const mockedShowSuccessToast = showSuccessToast as jest.MockedFunction<typeof showSuccessToast>;
-const mockedShowErrorToast = showErrorToast as jest.MockedFunction<typeof showErrorToast>;
-
-jest.mock('react-google-recaptcha-v3', () => ({
+vi.mock('react-google-recaptcha-v3', () => ({
   GoogleReCaptcha: ({
     onVerify,
     refreshReCaptcha,
@@ -29,17 +26,17 @@ jest.mock('react-google-recaptcha-v3', () => ({
   },
 }));
 
-const mockNavigate = jest.fn();
+const mockNavigate = vi.fn();
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+vi.mock('react-router-dom', async () => ({
+  ...((await vi.importActual('react-router-dom')) as typeof import('react-router-dom')),
   useNavigate: () => mockNavigate,
 }));
 
-jest.mock('helpers/showToast', () => ({ showErrorToast: jest.fn(), showSuccessToast: jest.fn() }));
+vi.mock('helpers/showToast', () => ({ showErrorToast: vi.fn(), showSuccessToast: vi.fn() }));
 
 describe('Signin tests', () => {
-  afterAll(jest.clearAllMocks);
+  afterAll(vi.clearAllMocks);
 
   it('sign in properly', async () => {
     // given
@@ -300,7 +297,7 @@ describe('Signin tests', () => {
     );
 
     await waitFor(() =>
-      expect(mockedShowSuccessToast).toHaveBeenCalledWith(
+      expect(showSuccessToast).toHaveBeenCalledWith(
         'Confirmation code has been sent to your email.',
       ),
     );
@@ -387,9 +384,7 @@ describe('Signin tests', () => {
     );
 
     await waitFor(() =>
-      expect(mockedShowErrorToast).toHaveBeenCalledWith(
-        'Code sending failed. Please try again later.',
-      ),
+      expect(showErrorToast).toHaveBeenCalledWith('Code sending failed. Please try again later.'),
     );
   });
 });
