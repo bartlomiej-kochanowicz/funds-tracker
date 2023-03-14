@@ -1,9 +1,11 @@
 import { APP_GUARD } from '@nestjs/core';
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AtGuard } from 'common/guards';
+import * as redisStore from 'cache-manager-redis-store';
+import { REDIS_PORT, REDIS_URL } from 'common/config/env';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { CashAccountsModule } from './cash-accounts/cash-accounts.module';
@@ -13,6 +15,12 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    CacheModule.register({
+      isGlobal: true,
+      store: redisStore,
+      host: REDIS_URL,
+      port: REDIS_PORT,
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -21,7 +29,6 @@ import { UserModule } from './user/user.module';
       autoSchemaFile: 'schema.gql',
       context: ({ req, res }) => ({ req, res }),
       cors: {
-        origin: 'http://localhost:3000',
         credentials: true,
       },
     }),

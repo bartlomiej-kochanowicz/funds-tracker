@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 describe('useDetectOutsideClick tests', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
   it('call callback function on click document', () => {
     const {
@@ -14,7 +14,7 @@ describe('useDetectOutsideClick tests', () => {
 
     render(<div ref={ref} />);
 
-    const mockHandler = jest.fn();
+    const mockHandler = vi.fn();
 
     renderHook(() => useDetectOutsideClick(ref, mockHandler));
 
@@ -35,7 +35,7 @@ describe('useDetectOutsideClick tests', () => {
       />,
     );
 
-    const mockHandler = jest.fn();
+    const mockHandler = vi.fn();
 
     renderHook(() => useDetectOutsideClick(ref, mockHandler));
 

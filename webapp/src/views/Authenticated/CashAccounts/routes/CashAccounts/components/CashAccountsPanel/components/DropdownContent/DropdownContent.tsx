@@ -57,7 +57,7 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
 
     const handleOpenCashAccountOperationsModal = () => {
       NiceModal.show(MODAL_CASH_ACCOUNT_OPERATIONS, {
-        deleteModalProps: { name, uuid, callback: updateCashAccountList },
+        deleteModalProps: { name, uuid },
         currency,
       });
 
@@ -65,7 +65,11 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
     };
 
     const handleOpenDeleteCashAccountModal = () => {
-      NiceModal.show(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, { name, uuid });
+      NiceModal.show(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, {
+        name,
+        uuid,
+        callback: updateCashAccountList,
+      });
 
       handleToggle();
     };

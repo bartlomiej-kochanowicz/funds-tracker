@@ -50,6 +50,7 @@ export const Button = styled.button.withConfig({
       'flexGrow',
       'outline',
       'minWidth',
+      'isOpen',
     ].includes(prop),
 })<ButtonProps>`
   display: flex;

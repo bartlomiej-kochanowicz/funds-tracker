@@ -82,6 +82,7 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 
       <Input
         placeholder={t('page.confirm.input.placeholder')}
+        data-testid="code-input"
         {...register('code')}
         error={errors.code?.message}
       />

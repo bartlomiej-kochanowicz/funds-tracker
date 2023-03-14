@@ -32,7 +32,7 @@ export const Confirm = () => {
   const email = location?.state?.email as string;
 
   const [sendCode] = useMutation<SendCodeMutation, SendCodeMutationVariables>(SEND_CODE, {
-    onCompleted: async () => {
+    onCompleted: () => {
       showSuccessToast(t('toast.send_confirm_code.success'));
     },
     onError: () => {
@@ -115,6 +115,7 @@ export const Confirm = () => {
               <ButtonLink
                 onClick={handleResendCode}
                 fontColor="blue"
+                data-testid="resend-code-button"
               />
             ),
           }}

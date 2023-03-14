@@ -1,22 +1,33 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import eslint from 'vite-plugin-eslint';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { VitePWA } from 'vite-plugin-pwa';
+import { defineConfig } from 'vitest/config';
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+const IS_DOCKER = process.env.DOCKER === 'true';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   server: {
     port: 3000,
+    host: true,
     proxy: {
       '/api/graphql': {
         rewrite: path => (IS_DEVELOPMENT ? path.replace(/^\/api/, '') : path),
-        target: 'http://localhost:3001/graphql',
+        target: `http://${IS_DOCKER ? 'webserver' : 'localhost'}:3001/graphql`,
       },
+    },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/config/tests/setupTests.ts',
+    coverage: {
+      provider: 'c8',
+      reporter: ['text', 'html'],
+      exclude: ['node_modules/', 'src/utils/test-utils.tsx', 'src/config/tests/'],
     },
   },
   plugins: [
