@@ -57,7 +57,6 @@ specifiers:
   passport-jwt: 4.0.1
   prettier: 2.8.2
   prisma: 4.8.1
-  redis: ^4.6.5
   reflect-metadata: 0.1.13
   rimraf: 4.0.4
   rxjs: 7.8.0
@@ -101,7 +100,6 @@ dependencies:
   nodemailer: 6.9.0
   passport: 0.6.0
   passport-jwt: 4.0.1
-  redis: 4.6.5
   reflect-metadata: 0.1.13
   rimraf: 4.0.4
   rxjs: 7.8.0
