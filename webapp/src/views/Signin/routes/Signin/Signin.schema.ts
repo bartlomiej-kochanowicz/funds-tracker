@@ -8,6 +8,6 @@ export const validationSchema = (isPasswordStep: boolean) =>
       .required(i18n.t('page.signin.email.required')),
     userPassword: string().when('userEmail', {
       is: () => isPasswordStep,
-      then: string().required(i18n.t('page.signin.password.required')),
+      then: () => string().required(i18n.t('page.signin.password.required')),
     }),
   });

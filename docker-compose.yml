@@ -3,7 +3,7 @@ version: "3.9"
 services:
   development-redis:
     container_name: development-redis
-    image: redis
+    image: redis:7.0.9-alpine
     ports:
       - 2137:6379
     volumes:
@@ -13,7 +13,7 @@ services:
 
   tests-redis:
     container_name: tests-redis
-    image: redis
+    image: redis:7.0.9-alpine
     ports:
       - 7312:6379
     volumes:
