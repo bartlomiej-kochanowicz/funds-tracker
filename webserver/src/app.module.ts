@@ -2,7 +2,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { Module, CacheModule } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ApolloDriver } from '@nestjs/apollo';
 import { AtGuard } from 'common/guards';
 import * as redisStore from 'cache-manager-redis-store';
 import { REDIS_PORT, REDIS_URL } from 'common/config/env';
@@ -24,7 +24,7 @@ import { UserModule } from './user/user.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRoot({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       context: ({ req, res }) => ({ req, res }),
