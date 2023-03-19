@@ -3,17 +3,17 @@ import { JwtService } from '@nestjs/jwt';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
-import * as bcrypt from 'bcrypt';
-import * as crypto from 'crypto';
-import * as UAParser from 'ua-parser-js';
-import { IS_DEVELOPMENT, IS_TEST } from 'common/config/env';
+import bcrypt from 'bcrypt';
+import crypto from 'crypto';
+import UAParser from 'ua-parser-js';
+import { IS_DEVELOPMENT, IS_TEST } from '@common/config/env';
 import { catchError, firstValueFrom } from 'rxjs';
-import { PrismaService } from 'prisma/prisma.service';
-import { EXPIRES, COOKIE_NAMES } from 'common/constants/cookies';
-import { SendGridService } from 'send-grid/send-grid.service';
-import emailConfirmationHbs from 'common/handlebars/email-confirmation.hbs';
-import { WEBAPP_URL } from 'common/constants/common';
-import resetPasswordHbs from 'common/handlebars/reset-password.hbs';
+import { PrismaService } from '@app/prisma/prisma.service';
+import { EXPIRES, COOKIE_NAMES } from '@common/constants/cookies';
+import { SendGridService } from '@app/send-grid/send-grid.service';
+import emailConfirmationHbs from '@common/handlebars/email-confirmation.hbs';
+import { WEBAPP_URL } from '@common/constants/common';
+import resetPasswordHbs from '@common/handlebars/reset-password.hbs';
 import { Tokens } from './types';
 import {
   ConfirmSignupInput,

@@ -1,11 +1,11 @@
 import 'tsconfig-paths/register';
 import { Test } from '@nestjs/testing';
-import { PrismaService } from 'prisma/prisma.service';
-import { AppModule } from 'app.module';
-import { testUser } from 'common/tests/stubs/testUser.stub';
-import { AuthService } from 'auth/auth.service';
+import { PrismaService } from '@app/prisma/prisma.service';
+import { AppModule } from '@app/app.module';
+import { testUser } from '@common/tests/stubs/testUser.stub';
+import { AuthService } from '@app/auth/auth.service';
 import { Response } from 'express';
-import { ConfirmSignupInput } from 'auth/inputs';
+import { ConfirmSignupInput } from '@app/auth/inputs';
 
 export default async () => {
   const moduleRef = await Test.createTestingModule({

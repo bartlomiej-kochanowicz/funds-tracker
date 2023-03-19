@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as SendGrid from '@sendgrid/mail';
-import { IS_DEVELOPMENT } from 'common/config/env';
-import * as Handlebars from 'handlebars';
-import * as nodemailer from 'nodemailer';
+import SendGrid from '@sendgrid/mail';
+import { IS_DEVELOPMENT } from '@common/config/env';
+import Handlebars from 'handlebars';
+import nodemailer from 'nodemailer';
 
 @Injectable()
 export class SendGridService {

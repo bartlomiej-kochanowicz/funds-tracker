@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import * as cookieParser from 'cookie-parser';
-import { WEBSERVER_PORT } from 'common/config/env';
-import { PrismaService } from 'prisma/prisma.service';
+import cookieParser from 'cookie-parser';
+import { WEBSERVER_PORT } from '@common/config/env';
+import { PrismaService } from '@app/prisma/prisma.service';
 import { AppModule } from './app.module';
 
 const bootstrap = async () => {

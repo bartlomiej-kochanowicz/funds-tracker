@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { IntroductionStep } from '@prisma/client';
-import { MAX_PORTFOLIOS } from 'common/constants/common';
-import { PrismaService } from 'prisma/prisma.service';
+import { MAX_PORTFOLIOS } from '@common/constants/common';
+import { PrismaService } from '@app/prisma/prisma.service';
 import { IntroductionPortfolios, Portfolio } from './entities';
 import {
   CreatePortfolioInput,

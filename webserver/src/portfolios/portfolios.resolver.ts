@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { GetCurrentUserId } from 'common/decorators';
+import { GetCurrentUserId } from '@common/decorators';
 import { IntroductionPortfolios, Portfolio } from './entities';
 import {
   CreatePortfolioInput,

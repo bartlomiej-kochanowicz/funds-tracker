@@ -1,10 +1,10 @@
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import * as cookieParser from 'cookie-parser';
-import { PrismaService } from 'prisma/prisma.service';
-import { testUser } from 'common/tests/stubs/testUser.stub';
-import { AuthService } from 'auth/auth.service';
-import { AppModule } from 'app.module';
+import cookieParser from 'cookie-parser';
+import { PrismaService } from '@app/prisma/prisma.service';
+import { testUser } from '@common/tests/stubs/testUser.stub';
+import { AuthService } from '@app/auth/auth.service';
+import { AppModule } from '@app/app.module';
 
 export class IntegrationTestManager {
   public httpServer: any;

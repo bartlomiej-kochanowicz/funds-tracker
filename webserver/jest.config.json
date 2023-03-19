@@ -11,5 +11,8 @@
   "collectCoverageFrom": ["**/*.(t|j)s", "!**/*/index.ts", "!src/**/*.type.ts", "!main.ts"],
   "watchPlugins": ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
   "coverageDirectory": "../coverage",
-  "testEnvironment": "node"
+  "testEnvironment": "node",
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/../src/$1"
+  }
 }

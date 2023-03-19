@@ -1,5 +1,5 @@
 import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { GetCurrentUserId } from 'common/decorators';
+import { GetCurrentUserId } from '@common/decorators';
 import { CashAccountsService } from './cash-accounts.service';
 import {
   CashAccount,

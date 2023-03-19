@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { SignupLocal } from 'auth/entities';
-import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
-import { testUser } from 'common/tests/stubs/testUser.stub';
-import { getGqlErrorStatus } from 'common/tests/gqlStatus';
+import { SignupLocal } from '@app/auth/entities';
+import { IntegrationTestManager } from '@common/tests/IntegrationTestManager';
+import { testUser } from '@common/tests/stubs/testUser.stub';
+import { getGqlErrorStatus } from '@common/tests/gqlStatus';
 import { signupUserStub } from '../stubs/signup.stub';
 
 describe('signup local', () => {

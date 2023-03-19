@@ -1,4 +1,4 @@
-import { SignupInput } from 'auth/inputs';
+import { SignupInput } from '@app/auth/inputs';
 
 export const refreshTokenStub: SignupInput = {
   email: 'testlogoutuser@test.com',

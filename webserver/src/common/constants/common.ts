@@ -1,4 +1,4 @@
-import { IS_DEVELOPMENT } from 'common/config/env';
+import { IS_DEVELOPMENT } from '@common/config/env';
 
 export const MAX_CASH_ACCOUNTS = 10;
 export const MAX_PORTFOLIOS = 10;

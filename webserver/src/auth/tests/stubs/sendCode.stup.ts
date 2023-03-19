@@ -1,4 +1,4 @@
-import { SignupInput } from 'auth/inputs';
+import { SignupInput } from '@app/auth/inputs';
 
 export const sendCodeStub: SignupInput = {
   email: 'sendCode@test.com',

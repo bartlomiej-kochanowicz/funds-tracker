@@ -5,7 +5,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
+  plugins: ['@typescript-eslint'],
   extends: [
     'airbnb-base',
     'airbnb-typescript/base',
@@ -20,9 +20,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   settings: {
     'import/resolver': {
-      node: {
-        paths: ['src'],
-      },
+      typescript: {},
     },
   },
   rules: {

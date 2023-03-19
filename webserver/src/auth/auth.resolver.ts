@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { GetCurrentUser, GetCurrentUserId, Public } from 'common/decorators';
-import { RtGuard } from 'common/guards';
+import { GetCurrentUser, GetCurrentUserId, Public } from '@common/decorators';
+import { RtGuard } from '@common/guards';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import {

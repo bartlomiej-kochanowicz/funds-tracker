@@ -1,10 +1,10 @@
-import { Logout } from 'auth/entities';
+import { Logout } from '@app/auth/entities';
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import * as bcrypt from 'bcrypt';
-import { getGqlErrorStatus } from 'common/tests/gqlStatus';
-import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
-import { logoutStub1, logoutStub2 } from 'auth/tests/stubs/logout.stub';
+import bcrypt from 'bcrypt';
+import { getGqlErrorStatus } from '@common/tests/gqlStatus';
+import { IntegrationTestManager } from '@common/tests/IntegrationTestManager';
+import { logoutStub1, logoutStub2 } from '@app/auth/tests/stubs/logout.stub';
 import { Response } from 'express';
 
 describe('logout', () => {

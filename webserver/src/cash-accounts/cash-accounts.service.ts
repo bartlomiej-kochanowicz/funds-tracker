@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CashAccountOperationType, IntroductionStep } from '@prisma/client';
-import { MAX_CASH_ACCOUNTS } from 'common/constants/common';
-import { PrismaService } from 'prisma/prisma.service';
+import { MAX_CASH_ACCOUNTS } from '@common/constants/common';
+import { PrismaService } from '@app/prisma/prisma.service';
 import {
   CashAccount,
   CashAccountDelete,

@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { SigninLocal } from 'auth/entities';
-import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
-import { testUser } from 'common/tests/stubs/testUser.stub';
-import { getGqlErrorStatus } from 'common/tests/gqlStatus';
-import { signinUserStub } from 'auth/tests/stubs/signinLocal.stup';
+import { SigninLocal } from '@app/auth/entities';
+import { IntegrationTestManager } from '@common/tests/IntegrationTestManager';
+import { testUser } from '@common/tests/stubs/testUser.stub';
+import { getGqlErrorStatus } from '@common/tests/gqlStatus';
+import { signinUserStub } from '@app/auth/tests/stubs/signinLocal.stup';
 
 describe('signin local', () => {
   const integrationTestManager = new IntegrationTestManager();

@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { IntegrationTestManager } from 'common/tests/IntegrationTestManager';
-import { testUser } from 'common/tests/stubs/testUser.stub';
-import { signupUserStub, confirmUserStub } from 'auth/tests/stubs/confirmSignup.stub';
-import { getGqlErrorStatus } from 'common/tests/gqlStatus';
-import { ConfirmSignup } from 'auth/entities';
+import { IntegrationTestManager } from '@common/tests/IntegrationTestManager';
+import { testUser } from '@common/tests/stubs/testUser.stub';
+import { signupUserStub, confirmUserStub } from '@app/auth/tests/stubs/confirmSignup.stub';
+import { getGqlErrorStatus } from '@common/tests/gqlStatus';
+import { ConfirmSignup } from '@app/auth/entities';
 
 describe('confirm signup', () => {
   const integrationTestManager = new IntegrationTestManager();
