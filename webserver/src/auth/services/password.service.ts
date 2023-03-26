@@ -1,11 +1,11 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import crypto from 'crypto';
-import { WEBAPP_URL } from '@common/constants/common';
 import { PrismaService } from '@app/prisma/prisma.service';
 import bcrypt from 'bcrypt';
 import { InjectRedis } from '@liaoliaots/nestjs-redis';
 import Redis from 'ioredis';
 import { ttl24h } from '@common/constants/redis';
+import { ConfigService } from '@nestjs/config';
 import { AuthService } from '../auth.service';
 import { ResetPassword, SetNewPassword } from '../entities';
 import { ResetPasswordInput, SetNewPasswordInput } from '../inputs';
@@ -15,6 +15,7 @@ export class PasswordService {
   constructor(
     private authService: AuthService,
     private prisma: PrismaService,
+    private readonly configService: ConfigService,
     @InjectRedis() private readonly redis: Redis,
   ) {}
 
@@ -35,7 +36,9 @@ export class PasswordService {
 
     this.redis.set(resetPasswordToken, uuid, 'EX', ttl24h);
 
-    const resetPasswordLink = `${WEBAPP_URL}/reset-password?token=${resetPasswordToken}`;
+    const resetPasswordLink = `${this.configService.get<string>(
+      'WEBAPP_URL',
+    )}/reset-password?token=${resetPasswordToken}`;
 
     await this.authService.sendEmailWithResetPasswordLink(email, name, resetPasswordLink);
 
