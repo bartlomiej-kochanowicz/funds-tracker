@@ -23,7 +23,7 @@ describe('confirm signup', () => {
 
       beforeAll(async () => {
         // sign up new user to have new user in database for confirm action
-        await integrationTestManager.getAuthService().signupLocal(signupUserStub);
+        await integrationTestManager.getSignupService().signupLocal(signupUserStub);
 
         const response = await request<{ confirmSignup: ConfirmSignup }>(
           integrationTestManager.httpServer,

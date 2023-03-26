@@ -38,6 +38,15 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -57,3 +66,5 @@ jobs:
           AT_SECRET: ${{secrets.TESTS_AT_SECRET}}
           RT_SECRET: ${{secrets.TESTS_RT_SECRET}}
           SEND_GRID_API_KEY: ${{secrets.TESTS_SEND_GRID_API_KEY}}
+          REDIS_URL: ${{secrets.TESTS_REDIS_URL}}
+          REDIS_PORT: ${{secrets.TESTS_REDIS_PORT}}

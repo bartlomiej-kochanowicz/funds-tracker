@@ -14,7 +14,6 @@ model User {
   name                 String
   password             String
   confirmationCodeHash String?          @unique
-  resetPasswordToken   String?          @unique
   defaultCurrency      Currency         @default(USD)
   introductionStep     IntroductionStep @default(DefaultCurrency)
   sessions             Session[]

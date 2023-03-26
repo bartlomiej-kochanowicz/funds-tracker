@@ -72,10 +72,10 @@ describe('refresh token', () => {
 
     beforeAll(async () => {
       // sign up new user to have new user in database for confirm action
-      await integrationTestManager.getAuthService().signupLocal(refreshTokenStub);
+      await integrationTestManager.getSignupService().signupLocal(refreshTokenStub);
 
       const { refreshToken } = await integrationTestManager
-        .getAuthService()
+        .getSigninService()
         .signinLocalForTests(refreshTokenStub.email, 'refresh-session');
 
       const { response } = await request<{ refreshToken: Refresh }>(

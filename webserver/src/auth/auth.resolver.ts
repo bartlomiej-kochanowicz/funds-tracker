@@ -3,7 +3,6 @@ import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GetCurrentUser, GetCurrentUserId, Public } from '@common/decorators';
 import { RtGuard } from '@common/guards';
 import { Response } from 'express';
-import { AuthService } from './auth.service';
 import {
   ConfirmSignup,
   Email,
@@ -24,10 +23,21 @@ import {
   SigninInput,
   SignupInput,
 } from './inputs';
+import { SignupService } from './services/signup.service';
+import { SigninService } from './services/signin.service';
+import { LogoutService } from './services/logout.service';
+import { PasswordService } from './services/password.service';
+import { TokenService } from './services/token.service';
 
 @Resolver()
 export class AuthResolver {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private signupService: SignupService,
+    private signinService: SigninService,
+    private logoutService: LogoutService,
+    private passwordService: PasswordService,
+    private tokenService: TokenService,
+  ) {}
 
   @Public()
   @Mutation(() => SignupLocal)
@@ -35,16 +45,7 @@ export class AuthResolver {
     @Args('data')
     signupInput: SignupInput,
   ) {
-    return this.authService.signupLocal(signupInput);
-  }
-
-  @Public()
-  @Mutation(() => SendCode)
-  sendCode(
-    @Args('data')
-    sendCodeInput: SendCodeInput,
-  ) {
-    return this.authService.sendCode(sendCodeInput);
+    return this.signupService.signupLocal(signupInput);
   }
 
   @Public()
@@ -54,7 +55,16 @@ export class AuthResolver {
     confirmSignupInput: ConfirmSignupInput,
     @Context('res') res: Response,
   ) {
-    return this.authService.confirmSignup(confirmSignupInput, res);
+    return this.signupService.confirmSignup(confirmSignupInput, res);
+  }
+
+  @Public()
+  @Mutation(() => SendCode)
+  sendCode(
+    @Args('data')
+    sendCodeInput: SendCodeInput,
+  ) {
+    return this.signupService.sendCode(sendCodeInput);
   }
 
   @Public()
@@ -64,7 +74,7 @@ export class AuthResolver {
     signinInput: SigninInput,
     @Context('res') res: Response,
   ) {
-    return this.authService.signinLocal(signinInput, res);
+    return this.signinService.signinLocal(signinInput, res);
   }
 
   @Public()
@@ -73,12 +83,30 @@ export class AuthResolver {
     @Args('data')
     emailInput: EmailInput,
   ): Promise<Email> {
-    return this.authService.checkEmail(emailInput);
+    return this.signinService.checkEmail(emailInput);
   }
 
   @Mutation(() => Logout)
   logout(@GetCurrentUserId() userId: string, @Context('res') res: Response): Promise<Logout> {
-    return this.authService.logout(userId, res);
+    return this.logoutService.logout(userId, res);
+  }
+
+  @Public()
+  @Mutation(() => ResetPassword)
+  resetPassword(
+    @Args('data')
+    resetPasswordInput: ResetPasswordInput,
+  ) {
+    return this.passwordService.resetPassword(resetPasswordInput);
+  }
+
+  @Public()
+  @Mutation(() => SetNewPassword)
+  setNewPassword(
+    @Args('data')
+    setNewPasswordInput: SetNewPasswordInput,
+  ) {
+    return this.passwordService.setNewPassword(setNewPasswordInput);
   }
 
   @Public()
@@ -89,24 +117,6 @@ export class AuthResolver {
     @GetCurrentUser('refreshToken') refreshToken: string,
     @Context('res') res: Response,
   ): Promise<Refresh> {
-    return this.authService.refreshToken(userId, refreshToken, res);
-  }
-
-  @Public()
-  @Mutation(() => ResetPassword)
-  resetPassword(
-    @Args('data')
-    resetPasswordInput: ResetPasswordInput,
-  ) {
-    return this.authService.resetPassword(resetPasswordInput);
-  }
-
-  @Public()
-  @Mutation(() => SetNewPassword)
-  setNewPassword(
-    @Args('data')
-    setNewPasswordInput: SetNewPasswordInput,
-  ) {
-    return this.authService.setNewPassword(setNewPasswordInput);
+    return this.tokenService.refreshToken(userId, refreshToken, res);
   }
 }
