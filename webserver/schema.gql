@@ -171,13 +171,13 @@ input EmailInput {
 
 type Mutation {
   signupLocal(data: SignupInput!): SignupLocal!
-  sendCode(data: SendCodeInput!): SendCode!
   confirmSignup(data: ConfirmSignupInput!): ConfirmSignup!
+  sendCode(data: SendCodeInput!): SendCode!
   signinLocal(data: SigninInput!): SigninLocal!
   logout: Logout!
-  refreshToken: Refresh!
   resetPassword(data: ResetPasswordInput!): ResetPassword!
   setNewPassword(data: SetNewPasswordInput!): SetNewPassword!
+  refreshToken: Refresh!
   createCashAccount(data: CreateCashAccountInput!): CashAccount!
   introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
@@ -204,20 +204,20 @@ input SignupInput {
   token: String!
 }
 
-input SendCodeInput {
-  """Email."""
-  email: EmailAddress!
-
-  """Token."""
-  token: String!
-}
-
 input ConfirmSignupInput {
   """Email."""
   email: EmailAddress!
 
   """Code."""
   code: String!
+
+  """Token."""
+  token: String!
+}
+
+input SendCodeInput {
+  """Email."""
+  email: EmailAddress!
 
   """Token."""
   token: String!

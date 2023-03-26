@@ -60,7 +60,7 @@ describe('signin local', () => {
 
       beforeAll(async () => {
         // sign up new user to have new user in database for confirm action
-        await integrationTestManager.getAuthService().signupLocal(signinUserStub);
+        await integrationTestManager.getSignupService().signupLocal(signinUserStub);
 
         const { response } = await request<{ signinLocal: SigninLocal }>(
           integrationTestManager.httpServer,

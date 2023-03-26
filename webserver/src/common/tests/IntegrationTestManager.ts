@@ -3,8 +3,9 @@ import { Test } from '@nestjs/testing';
 import cookieParser from 'cookie-parser';
 import { PrismaService } from '@app/prisma/prisma.service';
 import { testUser } from '@common/tests/stubs/testUser.stub';
-import { AuthService } from '@app/auth/auth.service';
 import { AppModule } from '@app/app.module';
+import { SigninService } from '@app/auth/services/signin.service';
+import { SignupService } from '@app/auth/services/signup.service';
 
 export class IntegrationTestManager {
   public httpServer: any;
@@ -17,7 +18,9 @@ export class IntegrationTestManager {
 
   private prismaService: PrismaService;
 
-  private authService: AuthService;
+  private signinService: SigninService;
+
+  private signupService: SignupService;
 
   async beforeAll(): Promise<void> {
     const moduleRef = await Test.createTestingModule({
@@ -31,7 +34,8 @@ export class IntegrationTestManager {
     this.httpServer = this.app.getHttpServer();
 
     this.prismaService = moduleRef.get<PrismaService>(PrismaService);
-    this.authService = moduleRef.get<AuthService>(AuthService);
+    this.signinService = moduleRef.get<SigninService>(SigninService);
+    this.signupService = moduleRef.get<SignupService>(SignupService);
 
     const { email } = await this.prismaService.user.findUnique({
       where: {
@@ -39,7 +43,7 @@ export class IntegrationTestManager {
       },
     });
 
-    const { accessToken, refreshToken } = await this.authService.signinLocalForTests(
+    const { accessToken, refreshToken } = await this.signinService.signinLocalForTests(
       email,
       '::ffff:127.0.0.1-main-user-session',
     );
@@ -55,8 +59,12 @@ export class IntegrationTestManager {
     return this.prismaService;
   }
 
-  getAuthService(): AuthService {
-    return this.authService;
+  getSigninService(): SigninService {
+    return this.signinService;
+  }
+
+  getSignupService(): SignupService {
+    return this.signupService;
   }
 
   getAccessToken(): string {
