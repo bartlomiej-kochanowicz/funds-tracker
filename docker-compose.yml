@@ -41,6 +41,8 @@ services:
       - POSTGRES_USER=${TESTS_POSTGRES_USER}
       - POSTGRES_PASSWORD=${TESTS_POSTGRES_PASSWORD}
       - POSTGRES_DB=${TESTS_POSTGRES_DB}
+    networks:
+      - webserver
 
   development-database:
     image: postgres:14.5-alpine
@@ -68,7 +70,6 @@ services:
     networks:
       - webserver
       - webapp
-      - mailslurper
     environment:
       - NODE_ENV=development
     volumes:
@@ -112,7 +113,6 @@ services:
 networks:
   webserver:
   webapp:
-  mailslurper:
 
 volumes:
   development-database:

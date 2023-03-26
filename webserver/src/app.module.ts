@@ -1,9 +1,9 @@
 import { APP_GUARD } from '@nestjs/core';
-import { Module, CacheModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { ApolloDriver } from '@nestjs/apollo';
-import redisStore from 'cache-manager-redis-store';
+import { RedisModule } from '@liaoliaots/nestjs-redis';
 import { REDIS_PORT, REDIS_URL } from '@common/config/env';
 import { AtGuard } from '@common/guards';
 import { PrismaModule } from './prisma/prisma.module';
@@ -15,11 +15,11 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    CacheModule.register({
-      isGlobal: true,
-      store: redisStore,
-      host: REDIS_URL,
-      port: REDIS_PORT,
+    RedisModule.forRoot({
+      config: {
+        host: REDIS_URL,
+        port: Number(REDIS_PORT),
+      },
     }),
     ConfigModule.forRoot({
       isGlobal: true,

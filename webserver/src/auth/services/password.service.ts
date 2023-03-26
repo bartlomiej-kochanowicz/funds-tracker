@@ -3,13 +3,20 @@ import crypto from 'crypto';
 import { WEBAPP_URL } from '@common/constants/common';
 import { PrismaService } from '@app/prisma/prisma.service';
 import bcrypt from 'bcrypt';
+import { InjectRedis } from '@liaoliaots/nestjs-redis';
+import Redis from 'ioredis';
+import { ttl24h } from '@common/constants/redis';
 import { AuthService } from '../auth.service';
 import { ResetPassword, SetNewPassword } from '../entities';
 import { ResetPasswordInput, SetNewPasswordInput } from '../inputs';
 
 @Injectable()
 export class PasswordService {
-  constructor(private authService: AuthService, private prisma: PrismaService) {}
+  constructor(
+    private authService: AuthService,
+    private prisma: PrismaService,
+    @InjectRedis() private readonly redis: Redis,
+  ) {}
 
   async resetPassword(resetPasswordInput: ResetPasswordInput): Promise<ResetPassword> {
     const { email, token } = resetPasswordInput;
@@ -22,16 +29,11 @@ export class PasswordService {
 
     const resetPasswordToken = crypto.randomBytes(32).toString('hex');
 
-    const { name } = await this.prisma.user
-      .update({
-        where: { email },
-        data: {
-          resetPasswordToken,
-        },
-      })
-      .catch(() => {
-        throw new ForbiddenException('Email not found.');
-      });
+    const { uuid, name } = await this.prisma.user.findUniqueOrThrow({
+      where: { email },
+    });
+
+    this.redis.set(resetPasswordToken, uuid, 'EX', ttl24h);
 
     const resetPasswordLink = `${WEBAPP_URL}/reset-password?token=${resetPasswordToken}`;
 
@@ -43,7 +45,7 @@ export class PasswordService {
   }
 
   async setNewPassword(setNewPasswordInput: SetNewPasswordInput): Promise<SetNewPassword> {
-    const { resetToken, token, password } = setNewPasswordInput;
+    const { resetToken, token, password: newPassword } = setNewPasswordInput;
 
     const isHuman = await this.authService.validateHuman(token);
 
@@ -51,28 +53,29 @@ export class PasswordService {
       throw new ForbiddenException('You are a robot!');
     }
 
-    const { password: hashedPassword } = await this.prisma.user.findUnique({
-      where: { resetPasswordToken: resetToken },
+    const uuid = await this.redis.get(resetToken);
+
+    const { password: currentPassword } = await this.prisma.user.findUniqueOrThrow({
+      where: {
+        uuid,
+      },
     });
 
-    const isPasswordsMatches = await bcrypt.compare(password, hashedPassword);
+    const isPasswordsMatches = await bcrypt.compare(newPassword, currentPassword);
 
     if (isPasswordsMatches)
       throw new ForbiddenException('The new password must be different from the previous one.');
 
-    await this.prisma.user
-      .update({
-        where: {
-          resetPasswordToken: resetToken,
-        },
-        data: {
-          password: await this.authService.hashData(password),
-          resetPasswordToken: null,
-        },
-      })
-      .catch(() => {
-        throw new ForbiddenException('Invalid token.');
-      });
+    await this.redis.del(resetToken);
+
+    await this.prisma.user.update({
+      where: {
+        uuid,
+      },
+      data: {
+        password: await this.authService.hashData(newPassword),
+      },
+    });
 
     return {
       success: true,
