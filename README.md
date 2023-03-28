@@ -1,12 +1,8 @@
 <div align='center'>
     <img src="webapp/src/assets/logo/logo-name-vertical.svg" alt="logo" width="400" height="auto" />
 
-  <h1>
-    Funds Tracker
-  </h1>
-
   <h3>
-    Manage all your investments in one place as simple as possible
+    Manage all your investments in one place
   </h3>
 
   <h4>
@@ -25,7 +21,7 @@
 # :notebook_with_decorative_cover: Table of Contents
 
 - [💸 About the Project](#-about-the-project)
-  - [📄 Project board](#project-board) 
+  - [📄 Project board](#-project-board) 
   - [🧨 Tech Stack](#-tech-stack)
   - [🪨 Milestones](#-milestones)
 - [🛠 Getting Started](#-getting-started)
@@ -83,7 +79,7 @@ deviation from the model you provide before, tells you how to rebalance the inst
 <summary>DevOps</summary>
   <ul>
     <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://aws.amazon.com/">AWS</a></li>
+    <li><a href="https://www.ovhcloud.com/">OVH Cloud</a></li>
     <li><a href="https://github.com/features/actions">Github Actions</a></li>
   </ul>
 </details>
@@ -117,7 +113,7 @@ Install funds-tracker with pnpm
 
 ### 🧷 Environment Variables
 
-Duplicate .env.example file for each <strong>root, webapp and webserver</strong> catalogs and fill keys with given values
+Duplicate .env.example file for each <strong>root, webapp and webserver</strong> catalog and fill keys with given values
 
 ### 🏃 Run Locally
 
@@ -125,18 +121,14 @@ Start monorepo
 
 ```bash
   $ make up
+  $ make prisma-generate
+  $ make prisma-migration-push
 ```
 
-Start webapp only (bypass docker)
+Start webapp (bypass docker)
 
 ```bash
   $ pnpm start:webapp
-```
-
-Start webserver only (bypass docker)
-
-```bash
-  $ pnpm start:webserver
 ```
 
 ### 💥 Deployment
