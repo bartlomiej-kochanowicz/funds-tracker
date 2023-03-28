@@ -24,20 +24,23 @@
 
 # :notebook_with_decorative_cover: Table of Contents
 
-- [About the Project](#💸-About-the-Project)
-  - [Tech Stack](#🧨-Tech-Stack)
-  - [Milestones](#🪨-Milestones)
-- [Getting Started](#🛠-Getting-Started)
-  - [Prerequisites](#🧰-Prerequisites)
-  - [Installation](#⚙️-Installation)
-  - [Running Tests](#test_tube-running-tests)
-  - [Run Locally](#running-run-locally)
-  - [Deployment](#triangular_flag_on_post-deployment)
+- [💸 About the Project](#-about-the-project)
+  - [📄 Project board](#project-board) 
+  - [🧨 Tech Stack](#-tech-stack)
+  - [🪨 Milestones](#-milestones)
+- [🛠 Getting Started](#-getting-started)
+  - [🧰 Prerequisites](#-prerequisites)
+  - [⚙ Installation](#%EF%B8%8F-installation)
+  - [🧷 Environment Variables](#-environment-variables)
+  - [🏃 Run Locally](#-run-locally)
+  - [💥 Deployment](#-deployment)
 
 ## 💸 About the Project
 
 <p>In the application you can create your custom investment model portfolio, add your financial instruments like: <strong>stocks, bonds, crypto, deposits and saving acconuts</strong>, select the interval you want to update instruments worth and provide a new values. The algorithm calculates
 deviation from the model you provide before, tells you how to rebalance the instruments of the portfolio and shows summary. <strong>You can admire how your savings grow 📈</strong></p>
+
+### [📄 Project board](https://github.com/users/bartlomiej-kochanowicz/projects/3)
 
 ### 🧨 Tech Stack
 
@@ -60,6 +63,10 @@ deviation from the model you provide before, tells you how to rebalance the inst
   <ul>
     <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
     <li><a href="https://nestjs.com/">Nest.js</a></li>
+    <li><a href="https://www.apollographql.com/">Apollo</a></li>
+    <li><a href="https://jwt.io/introduction">JWT</a></li>
+    <li><a href="https://sendgrid.com/">Sendgrid</a></li>
+    <li><a href="https://graphql.org/">GraphQL</a></li>
   </ul>
 </details>
 
@@ -68,6 +75,7 @@ deviation from the model you provide before, tells you how to rebalance the inst
   <ul>
     <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
     <li><a href="https://www.prisma.io/">Prisma</a></li>
+    <li><a href="https://redis.io/">Redis</a></li>
   </ul>
 </details>
 
@@ -80,20 +88,17 @@ deviation from the model you provide before, tells you how to rebalance the inst
   </ul>
 </details>
 
-### 🫡 To do
-
-- [x] introduction client (add money account and first instrument)
-- [ ] introduction api (add money account and first instrument)
-- [ ] summary page
-- [x] add redux
-- [x] add toasts
-
 ### 🪨 Milestones
 
-- [x] Create monorepo
-- [x] CI for webapp
-- [ ] Setup production deploy
-- [x] Dashboard
+- [x] Setup app/deployment
+- [x] Signin, Signup, Authentication
+- [x] Cash accounts page
+- [x] Mobile hub
+- [ ] Portfolio page
+- [ ] History page
+- [ ] Dashboard page
+- [ ] Transactions page
+- [ ] My profile/Settings page
 
 ## 🛠 Getting Started
 
@@ -110,7 +115,11 @@ Install funds-tracker with pnpm
   $ make build
 ```
 
-### :running: Run Locally
+### 🧷 Environment Variables
+
+Duplicate .env.example file for each <strong>root, webapp and webserver</strong> catalogs and fill keys with given values
+
+### 🏃 Run Locally
 
 Start monorepo
 
@@ -130,6 +139,6 @@ Start webserver only (bypass docker)
   $ pnpm start:webserver
 ```
 
-### :triangular_flag_on_post: Deployment
+### 💥 Deployment
 
 To deploy this project just push the changes to your remote branch, create Pull Request, wait for CI/CD to be done and merge to master.
