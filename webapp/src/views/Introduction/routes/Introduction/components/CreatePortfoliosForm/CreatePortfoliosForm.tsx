@@ -146,7 +146,7 @@ export const CreatePortfoliosForm = () => {
                 color="secondary"
                 onClick={handleAppend}
               >
-                {t('add.portfolios.button.add')}
+                {t('add.portfolios.button.add.one.more')}
 
                 <Spreader spread="tiny" />
 

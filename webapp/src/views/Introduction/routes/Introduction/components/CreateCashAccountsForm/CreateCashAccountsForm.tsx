@@ -152,7 +152,7 @@ export const CreateCashAccountsForm = () => {
                 color="secondary"
                 onClick={handleAppend}
               >
-                {t('add.cash.accounts.button.add')}
+                {t('add.cash.accounts.button.add.one.more')}
 
                 <Spreader spread="tiny" />
 

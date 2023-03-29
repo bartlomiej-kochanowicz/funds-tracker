@@ -60,6 +60,7 @@
   "add.cash.accounts.description": "Moższ tu wprowadzić wszystkie twoje konta 'gotówkowe' t.j konto osobiste, konto oszczędnościowe lub realną gotówkę. <bold>Maksymalnie 10 kont.</bold>",
   "add.cash.accounts.empty": "Nie dodano kont. Dodaj nowe, klikając przycisk poniżej.",
   "add.cash.accounts.button.add": "Dodaj konto",
+  "add.cash.accounts.button.add.one.more": "Dodaj kolejne konto",
   "common.input.name.placeholder": "Nazwa",
   "common.welcome": "Witaj",
   "page.introduction.next.step.submit": "Następny krok",
@@ -77,6 +78,7 @@
   "add.portfolios.description": "Nie ograniczaj się do jednej strategii, podziel swoje inwestycje na <bold>nieżalene portfele</bold>. Dla przykładu możesz rozdzielić swoje pasywnie i aktywnie zarządzane portfele. <bold>Maksymalnie 10 portfeli.</bold>",
   "add.portfolios.empty": "Nie dodano portfeli. Dodaj nowe, klikając przycisk poniżej.",
   "add.portfolios.button.add": "Dodaj portfel",
+  "add.portfolios.button.add.one.more": "Dodaj kolejny portfel",
   "add.portfolios.input.placeholder": "np.Pasywny, Aktywny...",
   "common.theme_switcher": "Zmień motyw",
   "error.component.title": "Błąd ładowania",
@@ -136,5 +138,6 @@
   "common.action": "Akcja",
   "cashAccount.operation.type.deposit": "Wpłata",
   "cashAccount.operation.type.withdrawal": "Wypłata",
-  "cashAccount.operation.type.transfer": "Przelew"
+  "cashAccount.operation.type.transfer": "Przelew",
+  "page.portfolios.title.description": "W tym miejscu możesz zarządzać swoimi portfelami inwestycyjnymi. Dodaj nowe portfele, usuń stare, zmień nazwy i podejrzyj szczegóły."
 }
