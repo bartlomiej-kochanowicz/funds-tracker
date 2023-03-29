@@ -11,6 +11,7 @@ import { Content } from './Authenticated.styles';
 import { CashAccountsRoutes } from './CashAccounts';
 import { DashboardRoutes } from './Dashboard/routes/Routes';
 import { HubRoutes } from './Hub';
+import { PortfoliosRoutes } from './Portfolios';
 import { SettingsRoutes } from './Settings';
 
 const ProtectedRoute = lazy(() =>
@@ -20,6 +21,7 @@ const ProtectedRoute = lazy(() =>
 export const Authenticated = () => {
   const views = useRoutes([
     ...DashboardRoutes,
+    ...PortfoliosRoutes,
     ...CashAccountsRoutes,
     ...SettingsRoutes,
     ...HubRoutes,
