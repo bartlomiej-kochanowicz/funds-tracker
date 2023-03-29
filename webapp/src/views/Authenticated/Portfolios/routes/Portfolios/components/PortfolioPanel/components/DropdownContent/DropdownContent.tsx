@@ -4,7 +4,7 @@ import { Menu } from 'components/atoms';
 import { MODAL_RENAME_PORTFOLIO } from 'modals/RenamePortfolio'; */
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaChartLine, FaPen, FaPlus, FaTrash } from 'react-icons/fa';
+import { FaChartPie, FaPen, FaTrash } from 'react-icons/fa';
 
 interface DropdownContentProps {
   handleToggle: () => void;
@@ -17,16 +17,6 @@ interface DropdownContentProps {
 export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps>(
   ({ handleToggle, uuid, name, updatePortfolioName, updatePortfolioList, ...rest }, ref) => {
     const { t } = useTranslation();
-
-    const handleOpenAddFundsPortfolioModal = () => {
-      /* NiceModal.show(MODAL_ADD_FUNDS_CASH_ACCOUNT, {
-        callback: updatePortfolioBalance,
-        uuid,
-        currency,
-      }); */
-
-      handleToggle();
-    };
 
     const handleOpenRenameModal = () => {
       /* NiceModal.show(MODAL_RENAME_PORTFOLIO, {
@@ -54,14 +44,7 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         minMenuWidth="270px"
         {...rest}
       >
-        <Menu.Item icon={FaChartLine}>{t('page.cash_accounts.button.invest')}</Menu.Item>
-
-        <Menu.Item
-          icon={FaPlus}
-          onClick={handleOpenAddFundsPortfolioModal}
-        >
-          {t('page.cash_accounts.button.add_funds')}
-        </Menu.Item>
+        <Menu.Item icon={FaChartPie}>{t('common.manage')}</Menu.Item>
 
         <Menu.Divider />
 
