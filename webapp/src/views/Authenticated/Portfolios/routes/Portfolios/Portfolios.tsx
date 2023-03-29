@@ -34,7 +34,20 @@ export const Portfolios = () => {
     }));
   };
 
-  const updatePortfolioName = () => {};
+  const updatePortfolioName = ({ name, uuid }: { name: string; uuid: string }) => {
+    updateQuery(prev => ({
+      portfolios: prev.portfolios.map(portfolio => {
+        if (portfolio.uuid === uuid) {
+          return {
+            ...portfolio,
+            name,
+          };
+        }
+
+        return portfolio;
+      }),
+    }));
+  };
   const updatePortfolioList = () => {};
 
   return (
