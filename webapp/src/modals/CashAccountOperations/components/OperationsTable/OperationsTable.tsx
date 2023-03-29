@@ -6,7 +6,7 @@ import {
 import { useQuery } from '@apollo/client';
 import { Loader, Text } from 'components/atoms';
 import { Table } from 'components/molecules';
-import { GET_CASH_ACCOUNT_OPERATIONS } from 'graphql/query/GetCashAccountOperations';
+import { GET_CASH_ACCOUNT_OPERATIONS } from 'graphql/query/cashAccounts/GetCashAccountOperations';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { formatDate } from 'helpers/formatDate';
 import { FC } from 'react';

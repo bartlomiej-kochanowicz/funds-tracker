@@ -2,8 +2,9 @@ import { CreateCashAccountMutation, GetCashAccountsQuery } from '__generated__/g
 import { useQuery } from '@apollo/client';
 import { Box, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
+import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
-import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
+import { GET_CASH_ACCOUNTS } from 'graphql/query/cashAccounts/GetCashAccounts';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +24,9 @@ export const CashAccounts = () => {
 
   const cashAccountsExist = Boolean(data && data.cashAccounts.length > 0);
 
-  const renderCreateCashAccountButton = Boolean(data && data.cashAccounts.length < 10);
+  const renderCreateCashAccountButton = Boolean(
+    data && data.cashAccounts.length < MAX_CASH_ACCOUNTS && data.cashAccounts.length > 0,
+  );
 
   const addCashAccountToList = (newCashAccountData: CreateCashAccountMutation) => {
     updateQuery(prev => ({

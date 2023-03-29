@@ -7,8 +7,8 @@ import {
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Loader, Spacer } from 'components/atoms';
-import { SIGNUP } from 'graphql/mutations';
-import { EMAIL_EXIST } from 'graphql/query';
+import { SIGNUP } from 'graphql/mutations/authentication/Signup';
+import { EMAIL_EXIST } from 'graphql/query/common/EmailExist';
 import { showErrorToast } from 'helpers/showToast';
 import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
 import { lazy, Suspense, useCallback, useState } from 'react';

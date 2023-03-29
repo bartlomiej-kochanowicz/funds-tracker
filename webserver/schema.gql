@@ -102,17 +102,22 @@ type IntroductionCashAccounts {
   success: Boolean!
 }
 
+type IntroductionPortfolios {
+  """Portfolios created successfully."""
+  success: Boolean!
+}
+
+type PortfolioDelete {
+  """Confirmatiopn delete portfolio."""
+  success: Boolean!
+}
+
 type Portfolio {
   """Portfolio uuid."""
   uuid: ID!
 
   """Portfolio name."""
   name: String!
-}
-
-type IntroductionPortfolios {
-  """Portfolios created successfully."""
-  success: Boolean!
 }
 
 type User {
@@ -186,7 +191,7 @@ type Mutation {
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   introductionCreatePortfolios(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
-  deletePortfolio(uuid: String!): Portfolio!
+  deletePortfolio(uuid: String!): PortfolioDelete!
   updateUser(data: UpdateUserInput!): User!
 }
 

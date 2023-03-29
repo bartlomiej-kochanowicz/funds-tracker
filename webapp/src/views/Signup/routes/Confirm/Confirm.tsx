@@ -2,7 +2,7 @@ import { SendCodeMutation, SendCodeMutationVariables } from '__generated__/graph
 import { useMutation } from '@apollo/client';
 import { ButtonLink, Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
-import { SEND_CODE } from 'graphql/mutations/SendCode';
+import { SEND_CODE } from 'graphql/mutations/authentication/SendCode';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { lazy, Suspense, useCallback, useState } from 'react';

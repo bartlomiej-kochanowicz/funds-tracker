@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { IntroductionStep } from '@prisma/client';
 import { MAX_PORTFOLIOS } from '@common/constants/common';
 import { PrismaService } from '@app/prisma/prisma.service';
-import { IntroductionPortfolios, Portfolio } from './entities';
+import { IntroductionPortfolios, Portfolio, PortfolioDelete } from './entities';
 import {
   CreatePortfolioInput,
   IntroductionCreatePortfoliosInput,
@@ -125,9 +125,9 @@ export class PortfoliosService {
     }
   }
 
-  async delete(userUuid: string, uuid: string): Promise<Portfolio> {
+  async delete(userUuid: string, uuid: string): Promise<PortfolioDelete> {
     try {
-      const portfolio = await this.prisma.portfolio.delete({
+      await this.prisma.portfolio.delete({
         where: {
           userUuid_uuid: {
             userUuid,
@@ -136,7 +136,9 @@ export class PortfoliosService {
         },
       });
 
-      return portfolio;
+      return {
+        success: true,
+      };
     } catch {
       throw new HttpException('Portfolio not found', HttpStatus.NOT_FOUND);
     }

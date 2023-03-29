@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { Modal } from 'components/molecules';
-import { DELETE_CASH_ACCOUNT } from 'graphql/mutations';
+import { DELETE_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/DeleteCashAccount';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { Trans, useTranslation } from 'react-i18next';
 import { Column, Row } from 'simple-flexbox';

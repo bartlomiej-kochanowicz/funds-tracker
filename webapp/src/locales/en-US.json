@@ -60,6 +60,7 @@
   "add.cash.accounts.description": "Here you can provide all your cash accounts e.g. daily account you receive your salary, savings account or real cash. <bold>Maximum 10 accounts.</bold>",
   "add.cash.accounts.empty": "No accounts added. Add new by clicking button below.",
   "add.cash.accounts.button.add": "Add account",
+  "add.cash.accounts.button.add.one.more": "Add one more account",
   "common.input.name.placeholder": "Name",
   "common.welcome": "Welcome",
   "page.introduction.next.step.submit": "Confirm and go to next step",
@@ -77,6 +78,7 @@
   "add.portfolios.description": "Don't be limited to one strategy, divide your investments into <bold>independent portfolios</bold>. For example, you can separate your passively and actively managed portfolios. <bold>Maximum 10 portfolios.</bold>",
   "add.portfolios.empty": "No portfolios added. Add new by clicking button below.",
   "add.portfolios.button.add": "Add portfolio",
+  "add.portfolios.button.add.one.more": "Add one more portfolio",
   "add.portfolios.input.placeholder": "e.g. Passive, Active",
   "common.theme_switcher": "Theme switcher",
   "error.component.title": "Couldn’t load",
@@ -136,5 +138,15 @@
   "common.action": "Action",
   "cashAccount.operation.type.deposit": "Deposit",
   "cashAccount.operation.type.withdrawal": "Withdrawal",
-  "cashAccount.operation.type.transfer": "Transfer"
+  "cashAccount.operation.type.transfer": "Transfer",
+  "page.portfolios.title.description": "Here you can manage your portfolios. You can add new, edit or delete existing ones and check details.",
+  "page.portfolios.empty.list.title": "No portfolios added",
+  "page.portfolios.need.more": "Need more portfolios?",
+  "page.portfolios.need.more.button": "Add new one here",
+  "modal.CreatePortfolio.name": "Add new portfolio",
+  "modal.CreatePortfolio.description": "Here you can create your new portfolio e.g. passive, active, real estate, etc. An investment portfolio is a collection of assets that you want to invest.",
+  "common.manage": "Manage",
+  "modal.RenamePortfolio.name": "Rename portfolio",
+  "modal.ConfirmDeletePortfolio.name": "Delete portfolio",
+  "modal.ConfirmDeletePortfolio.description": "Are you sure you want to delete <bold>{{name}}</bold> portfolio? <bold>This action cannot be undone.</bold>"
 }

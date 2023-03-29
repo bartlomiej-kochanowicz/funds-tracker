@@ -5,7 +5,7 @@ import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, Observable } from '@
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
 import { IS_DEVELOPMENT } from 'config/env';
-import { REFRESH_TOKEN } from 'graphql/mutations';
+import { REFRESH_TOKEN } from 'graphql/mutations/authentication/RefreshToken';
 
 const refreshTokensLink = onError(({ graphQLErrors, operation, forward }) => {
   if (!graphQLErrors) return;

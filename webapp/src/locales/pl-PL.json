@@ -60,6 +60,7 @@
   "add.cash.accounts.description": "Moższ tu wprowadzić wszystkie twoje konta 'gotówkowe' t.j konto osobiste, konto oszczędnościowe lub realną gotówkę. <bold>Maksymalnie 10 kont.</bold>",
   "add.cash.accounts.empty": "Nie dodano kont. Dodaj nowe, klikając przycisk poniżej.",
   "add.cash.accounts.button.add": "Dodaj konto",
+  "add.cash.accounts.button.add.one.more": "Dodaj kolejne konto",
   "common.input.name.placeholder": "Nazwa",
   "common.welcome": "Witaj",
   "page.introduction.next.step.submit": "Następny krok",
@@ -77,6 +78,7 @@
   "add.portfolios.description": "Nie ograniczaj się do jednej strategii, podziel swoje inwestycje na <bold>nieżalene portfele</bold>. Dla przykładu możesz rozdzielić swoje pasywnie i aktywnie zarządzane portfele. <bold>Maksymalnie 10 portfeli.</bold>",
   "add.portfolios.empty": "Nie dodano portfeli. Dodaj nowe, klikając przycisk poniżej.",
   "add.portfolios.button.add": "Dodaj portfel",
+  "add.portfolios.button.add.one.more": "Dodaj kolejny portfel",
   "add.portfolios.input.placeholder": "np.Pasywny, Aktywny...",
   "common.theme_switcher": "Zmień motyw",
   "error.component.title": "Błąd ładowania",
@@ -136,5 +138,15 @@
   "common.action": "Akcja",
   "cashAccount.operation.type.deposit": "Wpłata",
   "cashAccount.operation.type.withdrawal": "Wypłata",
-  "cashAccount.operation.type.transfer": "Przelew"
+  "cashAccount.operation.type.transfer": "Przelew",
+  "page.portfolios.title.description": "W tym miejscu możesz zarządzać swoimi portfelami inwestycyjnymi. Dodaj nowe portfele, usuń stare, zmień nazwy i podejrzyj szczegóły.",
+  "page.portfolios.empty.list.title": "Nie posiadasz jeszcze żadnych portfeli inwestycyjnych.",
+  "page.portfolios.need.more": "Potrzebujesz więcej portfeli?",
+  "page.portfolios.need.more.button": "Dodaj nowy portfel tutaj",
+  "modal.CreatePortfolio.name": "Dodaj portfel inwestycyjny",
+  "modal.CreatePortfolio.description": "Możesz tutaj dodać nowy portfel inwestycyjny np. pasywny, aktywny, nieruchomościowy. Portfel inwestycyjny to zbiór aktywóww w które chcesz inwestować.",
+  "common.manage": "Zarządzaj",
+  "modal.RenamePortfolio.name": "Zmień nazwę portfela inwestycyjnego",
+  "modal.ConfirmDeletePortfolio.name": "Usuń portfel inwestycyjny",
+  "modal.ConfirmDeletePortfolio.description": "Czy na pewno chcesz usunąć portfel inwestycyjny <bold>{{name}}</bold>? <bold>Tej operacji nie można cofnąć.</bold>"
 }

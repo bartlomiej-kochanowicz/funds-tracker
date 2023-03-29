@@ -1,7 +1,7 @@
 import { GraphQLError } from 'graphql';
-import { SIGNIN } from 'graphql/mutations';
-import { SEND_CODE } from 'graphql/mutations/SendCode';
-import { EMAIL_EXIST } from 'graphql/query';
+import { SEND_CODE } from 'graphql/mutations/authentication/SendCode';
+import { SIGNIN } from 'graphql/mutations/authentication/Signin';
+import { EMAIL_EXIST } from 'graphql/query/common/EmailExist';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { useEffect } from 'react';
 import { ROUTES } from 'routes/paths';
