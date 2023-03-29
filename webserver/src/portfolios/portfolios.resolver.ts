@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GetCurrentUserId } from '@common/decorators';
-import { IntroductionPortfolios, Portfolio } from './entities';
+import { IntroductionPortfolios, Portfolio, PortfolioDelete } from './entities';
 import {
   CreatePortfolioInput,
   UpdatePortfolioInput,
@@ -56,7 +56,7 @@ export class PortfoliosResolver {
     return this.portfoliosService.update(userId, uuid, updatePortfolioInput);
   }
 
-  @Mutation(() => Portfolio)
+  @Mutation(() => PortfolioDelete)
   deletePortfolio(
     @GetCurrentUserId() userId: string,
     @Args('uuid', { type: () => String }) uuid: string,
