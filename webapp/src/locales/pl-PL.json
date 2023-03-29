@@ -146,5 +146,7 @@
   "modal.CreatePortfolio.name": "Dodaj portfel inwestycyjny",
   "modal.CreatePortfolio.description": "Możesz tutaj dodać nowy portfel inwestycyjny np. pasywny, aktywny, nieruchomościowy. Portfel inwestycyjny to zbiór aktywóww w które chcesz inwestować.",
   "common.manage": "Zarządzaj",
-  "modal.RenamePortfolio.name": "Zmień nazwę portfela inwestycyjnego"
+  "modal.RenamePortfolio.name": "Zmień nazwę portfela inwestycyjnego",
+  "modal.ConfirmDeletePortfolio.name": "Usuń portfel inwestycyjny",
+  "modal.ConfirmDeletePortfolio.description": "Czy na pewno chcesz usunąć portfel inwestycyjny <bold>{{name}}</bold>? <bold>Tej operacji nie można cofnąć.</bold>"
 }

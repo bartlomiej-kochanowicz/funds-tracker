@@ -1,8 +1,7 @@
 import NiceModal from '@ebay/nice-modal-react';
 import { Menu } from 'components/atoms';
+import { MODAL_CONFIRM_DELETE_PORTFOLIO } from 'modals/ConfirmDeletePortfolio';
 import { MODAL_RENAME_PORTFOLIO } from 'modals/RenamePortfolio';
-/* import { MODAL_CONFIRM_DELETE_PORTFOLIO } from 'modals/ConfirmDeletePortfolio';
- */
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChartPie, FaPen, FaTrash } from 'react-icons/fa';
@@ -30,11 +29,11 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
     };
 
     const handleOpenDeletePortfolioModal = () => {
-      /* NiceModal.show(MODAL_CONFIRM_DELETE_PORTFOLIO, {
+      NiceModal.show(MODAL_CONFIRM_DELETE_PORTFOLIO, {
         name,
         uuid,
         callback: updatePortfolioList,
-      }); */
+      });
 
       handleToggle();
     };

@@ -48,7 +48,11 @@ export const Portfolios = () => {
       }),
     }));
   };
-  const updatePortfolioList = () => {};
+  const updatePortfolioList = ({ uuid }: { uuid: string }) => {
+    updateQuery(prev => ({
+      portfolios: prev.portfolios.filter(portfolio => portfolio.uuid !== uuid),
+    }));
+  };
 
   return (
     <Fragment>
