@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Icon, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useUserContext } from 'contexts/UserContext';
-import { CREATE_CASH_ACCOUNT } from 'graphql/mutations';
+import { CREATE_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/CreateCashAccount';
 import { showErrorToast } from 'helpers/showToast';
 import { useSelect } from 'hooks/useSelect';
 import { FC, Fragment, useMemo } from 'react';

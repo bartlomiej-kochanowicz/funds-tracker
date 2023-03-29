@@ -8,7 +8,7 @@ import { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { cache } from 'config/client';
-import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations';
+import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/AddFundsToCashAccount';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { FC, Fragment } from 'react';
 import { useForm } from 'react-hook-form';

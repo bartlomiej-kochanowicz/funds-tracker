@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { Box, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
-import { GET_CASH_ACCOUNTS } from 'graphql/query/GetCashAccounts';
+import { GET_CASH_ACCOUNTS } from 'graphql/query/cashAccounts/GetCashAccounts';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -4,7 +4,7 @@ import { Button, Heading, Loader, Select, Spacer, Text } from 'components/atoms'
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useUserContext } from 'contexts/UserContext';
 import { motion } from 'framer-motion';
-import { UPDATE_USER } from 'graphql/mutations';
+import { UPDATE_USER } from 'graphql/mutations/common/UpdateUser';
 import { showErrorToast } from 'helpers/showToast';
 import { useSelect } from 'hooks/useSelect';
 import { useMemo } from 'react';

@@ -3,7 +3,7 @@ import { MockedProvider, MockedResponse } from '@apollo/client/testing';
 import { render as rtlRender, RenderOptions } from '@testing-library/react';
 import { ColorThemeProvider } from 'contexts/ColorThemeContext';
 import { UserContextProvider } from 'contexts/UserContext';
-import { GET_USER } from 'graphql/query';
+import { GET_USER } from 'graphql/query/common/GetUser';
 import { ComponentType, ReactElement, ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { ThemeProvider } from 'styled-components';

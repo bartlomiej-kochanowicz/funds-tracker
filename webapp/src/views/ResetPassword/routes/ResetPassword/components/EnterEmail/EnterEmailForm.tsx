@@ -2,7 +2,7 @@ import { ResetPasswordMutation, ResetPasswordMutationVariables } from '__generat
 import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Loader, Spacer, Text } from 'components/atoms';
-import { RESET_PASSWORD } from 'graphql/mutations';
+import { RESET_PASSWORD } from 'graphql/mutations/authentication/ResetPassword';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { ChangeEvent, lazy, Suspense, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';

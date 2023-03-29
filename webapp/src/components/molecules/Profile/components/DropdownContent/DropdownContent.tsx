@@ -2,7 +2,7 @@ import { LogoutMutation } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import { Icon, Menu, Spreader } from 'components/atoms';
 import { useUserContext } from 'contexts/UserContext';
-import { LOGOUT } from 'graphql/mutations';
+import { LOGOUT } from 'graphql/mutations/authentication/Logout';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaSignOutAlt, FaUserAlt } from 'react-icons/fa';

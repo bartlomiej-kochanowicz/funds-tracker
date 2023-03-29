@@ -1,6 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import { GraphQLError } from 'graphql';
-import { CONFIRM_SIGNUP, SEND_CODE } from 'graphql/mutations';
+import { CONFIRM_SIGNUP } from 'graphql/mutations/authentication/ConfirmSignup';
+import { SEND_CODE } from 'graphql/mutations/authentication/SendCode';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';

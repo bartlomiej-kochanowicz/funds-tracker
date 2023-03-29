@@ -7,7 +7,7 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { Modal } from 'components/molecules';
-import { UPDATE_CASH_ACCOUNT } from 'graphql/mutations';
+import { UPDATE_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/UpdateCashAccount';
 import { showErrorToast } from 'helpers/showToast';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

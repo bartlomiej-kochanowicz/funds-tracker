@@ -10,7 +10,7 @@ import { Button, Heading, Icon, Loader, Spacer, Spreader, Text } from 'component
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useUserContext } from 'contexts/UserContext';
 import { motion } from 'framer-motion';
-import { INTRODUCTION_CREATE_CASH_ACCOUNTS } from 'graphql/mutations';
+import { INTRODUCTION_CREATE_CASH_ACCOUNTS } from 'graphql/mutations/introduction/IntroductionCreateCashAccounts';
 import { showErrorToast } from 'helpers/showToast';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';

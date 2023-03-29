@@ -1,7 +1,7 @@
 import { GetUserQuery, IntroductionStep, UpdateUserInput } from '__generated__/graphql';
 import { LazyQueryExecFunction, OperationVariables, useLazyQuery } from '@apollo/client';
 import { IS_DEVELOPMENT } from 'config/env';
-import { GET_USER } from 'graphql/query';
+import { GET_USER } from 'graphql/query/common/GetUser';
 import { isUserLoggedIn } from 'helpers/isUserLoggedIn';
 import LogRocket from 'logrocket';
 import { createContext, FC, ReactNode, useContext, useEffect } from 'react';
