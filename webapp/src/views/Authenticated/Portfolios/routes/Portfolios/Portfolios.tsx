@@ -1,4 +1,4 @@
-import { GetPortfoliosQuery } from '__generated__/graphql';
+import { CreatePortfolioMutation, GetPortfoliosQuery } from '__generated__/graphql';
 import { useQuery } from '@apollo/client';
 import { Box, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
@@ -28,7 +28,12 @@ export const Portfolios = () => {
     data && data.portfolios.length < MAX_PORTFOLIOS && data.portfolios.length > 0,
   );
 
-  const addCashAccountToList = () => {};
+  const addCashAccountToList = (newPortfoliotData: CreatePortfolioMutation) => {
+    updateQuery(prev => ({
+      portfolios: [...prev.portfolios, newPortfoliotData.createPortfolio],
+    }));
+  };
+
   const updatePortfolioName = () => {};
   const updatePortfolioList = () => {};
 

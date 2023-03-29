@@ -30,7 +30,7 @@ const documents = {
     "\n  mutation IntroductionCreatePortfolios($data: IntroductionCreatePortfoliosInput!) {\n    introductionCreatePortfolios(data: $data) {\n      success\n    }\n  }\n": types.IntroductionCreatePortfoliosDocument,
     "\n  mutation CreatePortfolio($data: CreatePortfolioInput!) {\n    createPortfolio(data: $data) {\n      uuid\n      name\n    }\n  }\n": types.CreatePortfolioDocument,
     "\n  mutation DeletePortfolio($uuid: String!) {\n    deletePortfolio(uuid: $uuid) {\n      success\n    }\n  }\n": types.DeletePortfolioDocument,
-    "\n  mutation UpdatePortfolio($uuid: String!, $name: String!) {\n    updatePortfolio(uuid: $uuid, data: { name: $name }) {\n      uuid\n      name\n    }\n  }\n": types.UpdatePortfolioDocument,
+    "\n  mutation UpdatePortfolio($uuid: String!, $data: UpdatePortfolioInput!) {\n    updatePortfolio(uuid: $uuid, data: $data) {\n      uuid\n      name\n    }\n  }\n": types.UpdatePortfolioDocument,
     "\n  query GetCashAccountOperations($uuid: ID!) {\n    cashAccount(uuid: $uuid) {\n      operations {\n        uuid\n        type\n        amount\n        date\n      }\n    }\n  }\n": types.GetCashAccountOperationsDocument,
     "\n  query GetCashAccounts {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n": types.GetCashAccountsDocument,
     "\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n": types.EmailExistDocument,
@@ -123,7 +123,7 @@ export function gql(source: "\n  mutation DeletePortfolio($uuid: String!) {\n   
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation UpdatePortfolio($uuid: String!, $name: String!) {\n    updatePortfolio(uuid: $uuid, data: { name: $name }) {\n      uuid\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation UpdatePortfolio($uuid: String!, $name: String!) {\n    updatePortfolio(uuid: $uuid, data: { name: $name }) {\n      uuid\n      name\n    }\n  }\n"];
+export function gql(source: "\n  mutation UpdatePortfolio($uuid: String!, $data: UpdatePortfolioInput!) {\n    updatePortfolio(uuid: $uuid, data: $data) {\n      uuid\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation UpdatePortfolio($uuid: String!, $data: UpdatePortfolioInput!) {\n    updatePortfolio(uuid: $uuid, data: $data) {\n      uuid\n      name\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
