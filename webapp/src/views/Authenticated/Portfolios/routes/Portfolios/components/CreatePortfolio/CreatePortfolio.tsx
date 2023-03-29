@@ -22,7 +22,7 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
         textAlign="center"
         level="h2"
       >
-        {t('page.cash_accounts.need.more')}
+        {t('page.portfolios.need.more')}
       </Heading>
 
       <Spacer space="small" />

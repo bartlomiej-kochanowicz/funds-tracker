@@ -1,17 +1,24 @@
 import { GetPortfoliosQuery } from '__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { Heading, Loader, Spacer, Text } from 'components/atoms';
+import { Box, Heading, Loader, Spacer, Text } from 'components/atoms';
 import { ErrorContent } from 'components/molecules';
 import { MAX_PORTFOLIOS } from 'constants/common';
+import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { GET_PORTFOLIOS } from 'graphql/query/portfolios/GetPortfolios';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CreateFirstPortfolio } from './components/CreateFirstPortfolio';
 import { CreatePortfolio } from './components/CreatePortfolio';
+import { PortfolioPanel } from './components/PortfolioPanel';
 
 export const Portfolios = () => {
   const { t } = useTranslation();
+
+  const { isDark } = useColorThemeContext();
+
+  const isPhone = useBreakpoint('phone', 'max');
 
   const { loading, data, error, updateQuery } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
 
@@ -22,6 +29,8 @@ export const Portfolios = () => {
   );
 
   const addCashAccountToList = () => {};
+  const updatePortfolioName = () => {};
+  const updatePortfolioList = () => {};
 
   return (
     <Fragment>
@@ -43,6 +52,26 @@ export const Portfolios = () => {
       {!loading && !portfoliosExist && !error && (
         <CreateFirstPortfolio callback={addCashAccountToList} />
       )}
+
+      {!loading && portfoliosExist && !error && (
+        <Box
+          borderRadius="primary"
+          backgroundColor={isDark ? 'gray100' : 'white'}
+          p={isPhone ? 'small' : 'large'}
+        >
+          {data?.portfolios.map(({ uuid, ...rest }) => (
+            <PortfolioPanel
+              key={uuid}
+              uuid={uuid}
+              updatePortfolioName={updatePortfolioName}
+              updatePortfolioList={updatePortfolioList}
+              {...rest}
+            />
+          ))}
+        </Box>
+      )}
+
+      <Spacer />
 
       {renderCreatePortfolioButton && <CreatePortfolio callback={addCashAccountToList} />}
     </Fragment>
