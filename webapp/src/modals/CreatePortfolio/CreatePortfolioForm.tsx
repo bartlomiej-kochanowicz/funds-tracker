@@ -102,7 +102,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 
           {!isSubmitting && (
             <Fragment>
-              {t('add.cash.accounts.button.add')}
+              {t('add.portfolios.button.add')}
 
               <Spreader spread="tiny" />
 

@@ -141,7 +141,8 @@
   "cashAccount.operation.type.transfer": "Przelew",
   "page.portfolios.title.description": "W tym miejscu możesz zarządzać swoimi portfelami inwestycyjnymi. Dodaj nowe portfele, usuń stare, zmień nazwy i podejrzyj szczegóły.",
   "page.portfolios.empty.list.title": "Nie posiadasz jeszcze żadnych portfeli inwestycyjnych.",
+  "page.portfolios.need.more": "Potrzebujesz więcej portfeli?",
   "page.portfolios.need.more.button": "Dodaj nowy portfel tutaj",
   "modal.CreatePortfolio.name": "Dodaj portfel inwestycyjny",
-  "modal.CreatePortfolio.description": "Możesz tutaj dodać nowy portfel inwestycyjny. Portfel inwestycyjny to zbiór aktywów, które chcesz inwestować."
+  "modal.CreatePortfolio.description": "Możesz tutaj dodać nowy portfel inwestycyjny np. pasywny, aktywny, nieruchomościowy. Portfel inwestycyjny to zbiór aktywóww w które chcesz inwestować."
 }

@@ -31,7 +31,7 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
         onClick={handleOpenModal}
         outline
       >
-        {t('page.cash_accounts.need.more.button')}
+        {t('page.portfolios.need.more.button')}
 
         <Spreader spread="tiny" />
 
