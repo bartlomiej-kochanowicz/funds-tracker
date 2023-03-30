@@ -1,18 +1,19 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom } from 'rxjs';
-import { Instrument, InstrumentHistory, SearchInstrumentCollection } from './types/instrument.type';
+import { InstrumentDetailsInput, InstrumentHistoryInput, SearchInstrumentsInput } from './inputs';
+import { InstrumentDetails, InstrumentHistory, SearchInstruments } from './entities';
 
 @Injectable()
 export class InstrumentsService {
   constructor(private readonly httpService: HttpService) {}
 
-  async search(q): Promise<SearchInstrumentCollection> {
+  async search(searchInstrumentsInput: SearchInstrumentsInput): Promise<SearchInstruments[]> {
     const { data } = await firstValueFrom(
       this.httpService
         .get('https://query2.finance.yahoo.com/v1/finance/search', {
           params: {
-            q,
+            q: searchInstrumentsInput.name,
           },
         })
         .pipe(
@@ -22,25 +23,22 @@ export class InstrumentsService {
         ),
     );
 
-    const collection = data.quotes.map(({ quoteType, symbol, score, longname, exchange }) => ({
-      quoteType,
-      symbol,
-      score,
-      longname,
-      exchange,
-    }));
+    const collection = data.quotes.map(({ quoteType, symbol, longname, exchange }) => ({
+      quoteType: quoteType || '',
+      symbol: symbol || '',
+      longname: longname || '',
+      exchange: exchange || '',
+    })) as SearchInstruments[];
 
-    return {
-      collection,
-    };
+    return collection;
   }
 
-  async findOne(paramSymbol: string): Promise<Instrument> {
+  async findOne(instrumentInput: InstrumentDetailsInput): Promise<InstrumentDetails> {
     const { data } = await firstValueFrom(
       this.httpService
         .get('https://query2.finance.yahoo.com/v7/finance/quote', {
           params: {
-            symbols: paramSymbol,
+            symbols: instrumentInput.symbol,
           },
         })
         .pipe(
@@ -68,34 +66,32 @@ export class InstrumentsService {
     } = data.quoteResponse.result[0];
 
     return {
-      currency,
-      exchange,
-      exchangeTimezoneName,
-      fiftyTwoWeekRange,
-      language,
-      longName,
-      quoteSourceName,
-      quoteType,
-      region,
-      regularMarketDayRange,
-      regularMarketPreviousClose,
-      regularMarketPrice,
-      symbol,
-      ytdReturn,
+      currency: currency || '',
+      exchange: exchange || '',
+      exchangeTimezoneName: exchangeTimezoneName || '',
+      fiftyTwoWeekRange: fiftyTwoWeekRange || '',
+      language: language || '',
+      longName: longName || '',
+      quoteSourceName: quoteSourceName || '',
+      quoteType: quoteType || '',
+      region: region || '',
+      regularMarketDayRange: regularMarketDayRange || '',
+      regularMarketPreviousClose: regularMarketPreviousClose || 0,
+      regularMarketPrice: regularMarketPrice || 0,
+      symbol: symbol || '',
+      ytdReturn: ytdReturn || 0,
     };
   }
 
-  async findHistoryOne(
-    paramSymbol: string,
-    interval: '1d' | '1wk' | '1mo',
-    from: `${string}-${string}-${string}`,
-  ): Promise<InstrumentHistory> {
+  async findHistoryOne(instrumentHistoryInput: InstrumentHistoryInput): Promise<InstrumentHistory> {
+    const { symbol, from, interval } = instrumentHistoryInput;
+
     const period1 = Math.round(new Date(from).getTime() / 1000);
     const period2 = Math.round(new Date().getTime() / 1000);
 
     const { data } = await firstValueFrom(
       this.httpService
-        .get(`https://query2.finance.yahoo.com/v7/finance/download/${paramSymbol}`, {
+        .get(`https://query2.finance.yahoo.com/v7/finance/download/${symbol}`, {
           responseType: 'blob',
           params: {
             events: 'history',
@@ -112,16 +108,17 @@ export class InstrumentsService {
         ),
     );
 
-    return {
-      symbol: paramSymbol,
-      collection: this.csvJSON(data).map(({ Date, Open, Close, High, Low }) => ({
-        date: Date,
-        open: this.parseNumber(Open),
-        close: this.parseNumber(Close),
-        high: this.parseNumber(High),
-        low: this.parseNumber(Low),
-      })),
-    };
+    const a = this.csvJSON(data).map(({ Date, Open, Close, High, Low }) => ({
+      date: Date || '',
+      open: this.parseNumber(Open) || 0,
+      close: this.parseNumber(Close) || 0,
+      high: this.parseNumber(High) || 0,
+      low: this.parseNumber(Low) || 0,
+    })) as unknown as InstrumentHistory;
+
+    console.log(a);
+
+    return a;
   }
 
   csvJSON(csvStr: string): {
