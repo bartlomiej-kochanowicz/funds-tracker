@@ -108,17 +108,13 @@ export class InstrumentsService {
         ),
     );
 
-    const a = this.csvJSON(data).map(({ Date, Open, Close, High, Low }) => ({
+    return this.csvJSON(data).map(({ Date, Open, Close, High, Low }) => ({
       date: Date || '',
       open: this.parseNumber(Open) || 0,
       close: this.parseNumber(Close) || 0,
       high: this.parseNumber(High) || 0,
       low: this.parseNumber(Low) || 0,
     })) as unknown as InstrumentHistory;
-
-    console.log(a);
-
-    return a;
   }
 
   csvJSON(csvStr: string): {
