@@ -5,6 +5,8 @@ import { MODAL_RENAME_PORTFOLIO } from 'modals/RenamePortfolio';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChartPie, FaPen, FaTrash } from 'react-icons/fa';
+import { generatePath } from 'react-router-dom';
+import { ROUTES } from 'routes/paths';
 
 interface DropdownContentProps {
   handleToggle: () => void;
@@ -17,6 +19,8 @@ interface DropdownContentProps {
 export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps>(
   ({ handleToggle, uuid, name, updatePortfolioName, updatePortfolioList, ...rest }, ref) => {
     const { t } = useTranslation();
+
+    const pathToPortfolio = generatePath(ROUTES.PORTFOLIOS.PORTFOLIO, { uuid });
 
     const handleOpenRenameModal = () => {
       NiceModal.show(MODAL_RENAME_PORTFOLIO, {
@@ -44,7 +48,12 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         minMenuWidth="270px"
         {...rest}
       >
-        <Menu.Item icon={FaChartPie}>{t('common.manage')}</Menu.Item>
+        <Menu.Item
+          icon={FaChartPie}
+          to={pathToPortfolio}
+        >
+          {t('common.manage')}
+        </Menu.Item>
 
         <Menu.Divider />
 
