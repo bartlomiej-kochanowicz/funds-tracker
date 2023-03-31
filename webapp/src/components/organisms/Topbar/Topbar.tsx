@@ -4,7 +4,8 @@ import { debounce } from 'helpers/debounce';
 import { useMatches } from 'hooks/useMatches';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaAngleLeft } from 'react-icons/fa';
+import { FaChevronLeft } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 
 import { BackButton, StyledRow } from './Topbar.styles';
@@ -17,6 +18,10 @@ export const Topbar = () => {
   const [visible, setVisible] = useState(window.pageYOffset !== 0);
 
   const rendreBackButton = useMatches(withBackButton);
+
+  const navigate = useNavigate();
+
+  const handleBackToPreviousPage = () => navigate(-1);
 
   const onScroll = debounce(
     useCallback(() => {
@@ -41,17 +46,19 @@ export const Topbar = () => {
 
   return (
     <StyledRow
-      justifyContent="flex-end"
+      justifyContent={rendreBackButton ? 'space-between' : 'flex-end'}
       alignItems="center"
       hasBorder={visible}
+      leftPadding={rendreBackButton}
     >
       {rendreBackButton ? (
-        <BackButton to="..">
+        <BackButton onClick={handleBackToPreviousPage}>
           <Icon
-            icon={FaAngleLeft}
+            icon={FaChevronLeft}
             size="1.5"
           />
-          <Spreader spread="0.25" />
+
+          <Spreader spread="0.1" />
 
           {t('common.back')}
         </BackButton>

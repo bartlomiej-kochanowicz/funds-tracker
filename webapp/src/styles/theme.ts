@@ -130,6 +130,7 @@ export const theme = {
     },
   },
   spacing: {
+    '0.1': rem(0.1),
     '0.25': rem(0.25),
     '0.5': rem(0.5),
     '1': rem(1),
