@@ -1,11 +1,9 @@
 import { CreatePortfolioMutation, GetPortfoliosQuery } from '__generated__/graphql';
 import { useQuery } from '@apollo/client';
-import { Box, Heading, Loader, Spacer, Text } from 'components/atoms';
-import { ErrorContent } from 'components/molecules';
+import { Heading, Loader, Spacer, Text } from 'components/atoms';
+import { ErrorContent, Panel } from 'components/molecules';
 import { MAX_PORTFOLIOS } from 'constants/common';
-import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { GET_PORTFOLIOS } from 'graphql/query/portfolios/GetPortfolios';
-import { useBreakpoint } from 'hooks/useBreakpoint';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -15,10 +13,6 @@ import { PortfolioPanel } from './components/PortfolioPanel';
 
 export const Portfolios = () => {
   const { t } = useTranslation();
-
-  const { isDark } = useColorThemeContext();
-
-  const isPhone = useBreakpoint('phone', 'max');
 
   const { loading, data, error, updateQuery } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
 
@@ -76,11 +70,7 @@ export const Portfolios = () => {
       )}
 
       {!loading && portfoliosExist && !error && (
-        <Box
-          borderRadius="primary"
-          backgroundColor={isDark ? 'gray100' : 'white'}
-          p={isPhone ? 'small' : 'large'}
-        >
+        <Panel>
           {data?.portfolios.map(({ uuid, ...rest }) => (
             <PortfolioPanel
               key={uuid}
@@ -90,7 +80,7 @@ export const Portfolios = () => {
               {...rest}
             />
           ))}
-        </Box>
+        </Panel>
       )}
 
       <Spacer />

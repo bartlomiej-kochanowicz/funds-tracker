@@ -8,7 +8,10 @@ export const ROUTES = {
   RESET_PASSWORD: '/reset-password',
   INTRODUCTION: '/introduction',
   DASHBOARD: '/dashboard',
-  PORTFOLIOS: '/portfolios',
+  PORTFOLIOS: {
+    PORTFOLIOS: '/portfolios',
+    PORTFOLIO: '/portfolios/:uuid',
+  },
   CASH_ACCOUNTS: '/cash-accounts',
   TRANSACTIONS: '/transactions',
   HISTORY: '/history',

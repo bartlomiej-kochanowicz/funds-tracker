@@ -7,9 +7,19 @@ const Portfolios = lazy(() =>
   })),
 );
 
+const Portfolio = lazy(() =>
+  import('./Portfolio').then(({ Portfolio: component }) => ({
+    default: component,
+  })),
+);
+
 export const PortfoliosRoutes = [
   {
-    path: ROUTES.PORTFOLIOS,
+    path: ROUTES.PORTFOLIOS.PORTFOLIOS,
     element: <Portfolios />,
+  },
+  {
+    path: ROUTES.PORTFOLIOS.PORTFOLIO,
+    element: <Portfolio />,
   },
 ];
