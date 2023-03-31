@@ -14,7 +14,7 @@ export const StyledNav = styled.nav`
     border-radius: 16px;
     backdrop-filter: blur(10px);
     z-index: ${zIndex.mobileNavigation};
-    bottom: ${spacing.large};
+    bottom: ${spacing['1.5']};
     border-radius: ${radius.secondary};
   `}
 `;

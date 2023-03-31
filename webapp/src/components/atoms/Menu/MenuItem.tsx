@@ -35,7 +35,7 @@ export const MenuItem: FC<MenuItemProps> = ({
           <Fragment>
             <Icon icon={icon} />
 
-            <Spreader spread="tiny" />
+            <Spreader spread="0.25" />
           </Fragment>
         )}
 
@@ -52,7 +52,7 @@ export const MenuItem: FC<MenuItemProps> = ({
           <Fragment>
             <Icon icon={icon} />
 
-            <Spreader spread="tiny" />
+            <Spreader spread="0.25" />
           </Fragment>
         )}
 

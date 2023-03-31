@@ -66,7 +66,7 @@ export const Confirm = () => {
 
       <Heading textAlign="center">{t('common.sign_up_confirm')}</Heading>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Text
         fontSize="0.875"
@@ -91,7 +91,7 @@ export const Confirm = () => {
         />
       </Text>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <ConfirmForm email={email} />
 
@@ -122,9 +122,9 @@ export const Confirm = () => {
         />
       </Text>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <Column alignItems="center">
         <LangSelector />

@@ -10,6 +10,6 @@ export const StyledColumn = styled(Column)`
 
   ${({ theme: { zIndex, spacing } }) => css`
     z-index: ${zIndex.sidebar};
-    padding: ${spacing.large} 0 ${spacing.huge} ${spacing.medium};
+    padding: ${spacing['1.5']} 0 ${spacing['3.5']} ${spacing['1']};
   `}
 `;

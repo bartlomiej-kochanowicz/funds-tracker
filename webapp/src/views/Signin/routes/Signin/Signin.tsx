@@ -14,7 +14,7 @@ export const Signin = () => {
     <FullscreenClear>
       <Heading textAlign="center">{t('common.sign_in')}</Heading>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Text
         fontSize="0.875"
@@ -24,7 +24,7 @@ export const Signin = () => {
         {t('page.signin.description')}
       </Text>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <SigninForm />
 
@@ -48,7 +48,7 @@ export const Signin = () => {
         />
       </Text>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Row justifyContent="center">
         <RouterLink
@@ -60,9 +60,9 @@ export const Signin = () => {
         </RouterLink>
       </Row>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <Column alignItems="center">
         <LangSelector />

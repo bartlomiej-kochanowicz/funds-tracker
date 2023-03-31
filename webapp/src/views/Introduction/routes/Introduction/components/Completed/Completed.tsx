@@ -11,11 +11,11 @@ export const Completed = () => {
     <Column alignItems="center">
       <ThumbUp />
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <Heading>{t('add.instrument.success.title')}</Heading>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Text
         fontSize="0.875"
@@ -25,7 +25,7 @@ export const Completed = () => {
         {t('add.instrument.success.description')}
       </Text>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <Button
         color="secondary"

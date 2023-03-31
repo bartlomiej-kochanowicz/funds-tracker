@@ -79,7 +79,7 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
               {t('common.cancel')}
             </Button>
 
-            <Spreader spread="small" />
+            <Spreader spread="0.5" />
 
             <Button
               disabled={isSubmitting || !isValid || !isDirty}

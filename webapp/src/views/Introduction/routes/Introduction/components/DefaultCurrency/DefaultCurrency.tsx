@@ -79,7 +79,7 @@ export const DefaultCurrency = () => {
       <Column>
         <Heading textAlign="center">{t('page.introduction.default.currency.title')}</Heading>
 
-        <Spacer space="small" />
+        <Spacer space="0.5" />
 
         <Text
           fontSize="0.875"
@@ -101,7 +101,7 @@ export const DefaultCurrency = () => {
           />
         </Text>
 
-        <Spacer space="large" />
+        <Spacer space="1.5" />
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -113,7 +113,7 @@ export const DefaultCurrency = () => {
             {...defaultCurrencySelectProps}
           />
 
-          <Spacer space="large" />
+          <Spacer space="1.5" />
 
           <Button
             size="large"

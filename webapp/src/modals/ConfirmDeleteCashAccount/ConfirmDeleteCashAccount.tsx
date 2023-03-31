@@ -88,7 +88,7 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
               {t('common.no')}
             </Button>
 
-            <Spreader spread="small" />
+            <Spreader spread="0.5" />
 
             <Button
               width="50%"

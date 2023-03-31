@@ -15,7 +15,7 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
     <Fragment>
       <Heading textAlign="center">{t('page.forgot_password.enter_password.title')}</Heading>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Text
         fontSize="0.875"
@@ -25,7 +25,7 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
         {t('page.forgot_password.enter_password.description')}
       </Text>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <EnterPasswordForm token={token} />
     </Fragment>

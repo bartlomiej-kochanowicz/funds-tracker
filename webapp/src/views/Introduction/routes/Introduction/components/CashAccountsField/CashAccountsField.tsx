@@ -60,7 +60,7 @@ export const CashAccountsField = ({
         error={errors.cashAccounts?.[index]?.name?.message}
       />
 
-      <Spreader spread="tiny" />
+      <Spreader spread="0.25" />
 
       <Select
         width="130px"
@@ -70,7 +70,7 @@ export const CashAccountsField = ({
         {...currencySelectProps}
       />
 
-      <Spreader spread="tiny" />
+      <Spreader spread="0.25" />
 
       <Button
         color="secondary"

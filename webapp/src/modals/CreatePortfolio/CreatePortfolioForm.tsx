@@ -90,7 +90,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
           {t('common.cancel')}
         </Button>
 
-        <Spreader spread="small" />
+        <Spreader spread="0.5" />
 
         <Button
           disabled={isSubmitting || !isValid || !isDirty}
@@ -104,7 +104,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
             <Fragment>
               {t('add.portfolios.button.add')}
 
-              <Spreader spread="tiny" />
+              <Spreader spread="0.25" />
 
               <Icon icon={FaPlus} />
             </Fragment>

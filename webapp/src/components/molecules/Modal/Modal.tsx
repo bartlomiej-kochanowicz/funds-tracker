@@ -41,7 +41,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
             </CloseButton>
           </Row>
 
-          <Spacer space="small" />
+          <Spacer space="0.5" />
 
           {children}
         </ModalComponent>

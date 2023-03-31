@@ -93,7 +93,7 @@ export const CreateCashAccountsForm = () => {
       <Column>
         <Heading textAlign="center">{t('add.cash.accounts.title')}</Heading>
 
-        <Spacer space="small" />
+        <Spacer space="0.5" />
 
         <Text
           fontSize="0.875"
@@ -115,7 +115,7 @@ export const CreateCashAccountsForm = () => {
           />
         </Text>
 
-        <Spacer space="large" />
+        <Spacer space="1.5" />
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -145,7 +145,7 @@ export const CreateCashAccountsForm = () => {
               ))}
             </FieldsWrapper>
 
-            <Spacer space="tiny" />
+            <Spacer space="0.25" />
 
             {fields.length > 0 && fields.length < MAX_CASH_ACCOUNTS ? (
               <Button
@@ -154,13 +154,13 @@ export const CreateCashAccountsForm = () => {
               >
                 {t('add.cash.accounts.button.add.one.more')}
 
-                <Spreader spread="tiny" />
+                <Spreader spread="0.25" />
 
                 <Icon icon={FaPlus} />
               </Button>
             ) : null}
 
-            <Spacer space="large" />
+            <Spacer space="1.5" />
 
             <Button
               size="large"

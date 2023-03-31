@@ -130,11 +130,11 @@ export const theme = {
     },
   },
   spacing: {
-    tiny: rem(0.25),
-    small: rem(0.5),
-    medium: rem(1),
-    large: rem(1.5),
-    huge: rem(3.5),
+    '0.25': rem(0.25),
+    '0.5': rem(0.5),
+    '1': rem(1),
+    '1.5': rem(1.5),
+    '3.5': rem(3.5),
   },
   heading: {
     h1: { fontSize: rem(2.5) },

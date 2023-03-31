@@ -10,7 +10,7 @@ export type SpreaderProps = {
 const StyledSpreader = styled.span<SpreaderProps>`
   display: block;
 
-  ${({ theme: { spacing }, spread = 'medium' }) => css`
+  ${({ theme: { spacing }, spread = '1' }) => css`
     padding: 0 ${spacing[spread]};
   `}
 `;
