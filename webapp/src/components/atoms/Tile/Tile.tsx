@@ -17,7 +17,7 @@ export const Tile: FC<TilelProps> = ({ children, title, to }) => {
     <Column>
       <Wrapper>{children}</Wrapper>
 
-      <Spacer space="tiny" />
+      <Spacer space="0.25" />
 
       {title && (
         <Text

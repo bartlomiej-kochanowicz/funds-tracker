@@ -102,6 +102,81 @@ type IntroductionCashAccounts {
   success: Boolean!
 }
 
+type InstrumentDetails {
+  """language"""
+  language: String!
+
+  """region"""
+  region: String!
+
+  """currency"""
+  currency: String!
+
+  """exchangeTimezoneName"""
+  exchangeTimezoneName: String!
+
+  """longName"""
+  longName: String!
+
+  """symbol"""
+  symbol: String!
+
+  """quoteType"""
+  quoteType: String!
+
+  """regularMarketPrice"""
+  regularMarketPrice: Float!
+
+  """regularMarketDayRange"""
+  regularMarketDayRange: String!
+
+  """exchange"""
+  exchange: String!
+
+  """fiftyTwoWeekRange"""
+  fiftyTwoWeekRange: String!
+
+  """ytdReturn"""
+  ytdReturn: Float!
+
+  """quoteSourceName"""
+  quoteSourceName: String!
+
+  """regularMarketPreviousClose"""
+  regularMarketPreviousClose: Float!
+}
+
+type InstrumentHistory {
+  """Date"""
+  date: String!
+
+  """Open"""
+  open: Float!
+
+  """High"""
+  high: Float!
+
+  """Low"""
+  low: Float!
+
+  """Close"""
+  close: Float!
+}
+
+type SearchInstruments {
+  """quoteType"""
+  quoteType: String!
+
+  """symbol"""
+  symbol: String!
+
+  """longname"""
+  longname: String!
+
+  """exchange"""
+  exchange: String!
+}
+
 type IntroductionPortfolios {
   """Portfolios created successfully."""
   success: Boolean!
@@ -161,6 +236,9 @@ type Query {
   emailExist(data: EmailInput!): Email!
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: ID!): CashAccount!
+  searchInstruments(data: SearchInstrumentsInput!): [SearchInstruments!]!
+  instrumentDetails(data: InstrumentDetailsInput!): InstrumentDetails!
+  instrumentHistory(data: InstrumentHistoryInput!): [InstrumentHistory!]!
   portfolios: [Portfolio!]!
   portfolio(uuid: String!): Portfolio!
   user: User!
@@ -172,6 +250,27 @@ input EmailInput {
 
   """Token."""
   token: String!
+}
+
+input SearchInstrumentsInput {
+  """Instrument name."""
+  name: String!
+}
+
+input InstrumentDetailsInput {
+  """Symbol"""
+  symbol: String!
+}
+
+input InstrumentHistoryInput {
+  """Symbol"""
+  symbol: String!
+
+  """Interval"""
+  interval: String!
+
+  """From"""
+  from: String!
 }
 
 type Mutation {

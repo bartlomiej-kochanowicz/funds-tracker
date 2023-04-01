@@ -6,7 +6,7 @@ export const NotFound: FC = () => (
   <FullscreenClear>
     <Heading textAlign="center">404</Heading>
 
-    <Spacer space="tiny" />
+    <Spacer space="0.25" />
 
     <Text
       fontColor="gray400"

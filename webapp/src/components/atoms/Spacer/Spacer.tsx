@@ -10,7 +10,7 @@ export type SpacerProps = {
 const StyledSpacer = styled.span<SpacerProps>`
   display: block;
 
-  ${({ theme: { spacing }, space = 'medium' }) => css`
+  ${({ theme: { spacing }, space = '1' }) => css`
     padding: ${spacing[space]} 0;
   `}
 `;

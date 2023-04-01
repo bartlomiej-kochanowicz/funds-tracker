@@ -4,7 +4,7 @@ export const BackWrapper = styled.div`
   position: absolute;
 
   ${({ theme }) => css`
-    top: ${theme.spacing.medium};
-    left: ${theme.spacing.medium};
+    top: ${theme.spacing['1']};
+    left: ${theme.spacing['1']};
   `}
 `;

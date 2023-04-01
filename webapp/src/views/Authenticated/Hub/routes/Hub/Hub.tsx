@@ -30,7 +30,7 @@ export const Hub = () => {
         {t('navigation.dashboard')}
       </Heading>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Grid>
         {hubNavigation.essentials.map(({ icon, title, to }) => {

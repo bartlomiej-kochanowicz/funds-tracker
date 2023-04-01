@@ -12,7 +12,7 @@ export const EnterEmail = () => {
     <Fragment>
       <Heading textAlign="center">{t('page.signin.forgot_password')}</Heading>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Text
         fontSize="0.875"
@@ -22,7 +22,7 @@ export const EnterEmail = () => {
         {t('page.forgot_password.enter_email.description')}
       </Text>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <EnterEmailForm />
 

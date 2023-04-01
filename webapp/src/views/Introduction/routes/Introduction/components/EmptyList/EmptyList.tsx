@@ -19,7 +19,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
       {i18n.title}
     </Text>
 
-    <Spacer space="tiny" />
+    <Spacer space="0.25" />
 
     <Button
       color="secondary"
@@ -27,7 +27,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
     >
       {i18n.button}
 
-      <Spreader spread="tiny" />
+      <Spreader spread="0.25" />
 
       <Icon icon={FaPlus} />
     </Button>

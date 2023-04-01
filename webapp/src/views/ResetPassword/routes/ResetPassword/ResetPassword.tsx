@@ -16,9 +16,9 @@ export const ResetPassword = () => {
     <FullscreenClear>
       {token ? <EnterPassword token={token} /> : <EnterEmail />}
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <Column alignItems="center">
         <LangSelector />

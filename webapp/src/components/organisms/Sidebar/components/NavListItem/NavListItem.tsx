@@ -22,7 +22,7 @@ export const NavListItem: FC<NavListItemProps> = ({ isActive, title, icon: IconC
         color={isActive ? 'blue' : undefined}
       />
 
-      <Spreader spread="small" />
+      <Spreader spread="0.5" />
 
       <Text
         fontColor={fontColor}

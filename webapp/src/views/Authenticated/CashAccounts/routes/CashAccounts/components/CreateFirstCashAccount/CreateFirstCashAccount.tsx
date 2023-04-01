@@ -27,7 +27,7 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
         {t('page.cash_accounts.empty.list.title')}
       </Heading>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Button
         onClick={handleOpenModal}
@@ -35,7 +35,7 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
       >
         {t('page.cash_accounts.need.more.button')}
 
-        <Spreader spread="tiny" />
+        <Spreader spread="0.25" />
 
         <Icon icon={FaPlus} />
       </Button>

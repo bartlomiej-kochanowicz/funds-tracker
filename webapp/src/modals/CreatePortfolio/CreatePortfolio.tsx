@@ -23,7 +23,7 @@ export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callbac
       modalName={t('modal.CreatePortfolio.name')}
       closeModal={modal.remove}
     >
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Text
         fontSize="0.875"
@@ -35,7 +35,7 @@ export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callbac
         {t('modal.CreatePortfolio.description')}
       </Text>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <CreatePortfolioForm callback={callback} />
     </Modal>

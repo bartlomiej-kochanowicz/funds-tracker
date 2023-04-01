@@ -31,7 +31,7 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
         error={errors.portfolios?.[index]?.name?.message}
       />
 
-      <Spreader spread="tiny" />
+      <Spreader spread="0.25" />
 
       <Button
         color="secondary"

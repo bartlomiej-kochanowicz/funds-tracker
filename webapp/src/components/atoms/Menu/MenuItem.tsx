@@ -1,68 +1,64 @@
 import { Icon } from 'components/atoms/Icon';
 import { FC, Fragment, ReactNode } from 'react';
 import { IconType } from 'react-icons';
-import styled, { css, DefaultTheme } from 'styled-components';
+import { DefaultTheme } from 'styled-components';
 
 import { Spreader } from '../Spreader';
+import { StyledButton, StyledLink } from './MenuItem.styles';
 
 export interface MenuItemProps {
   children: ReactNode;
   onClick?: () => void;
+  to?: string;
   isSelected?: boolean;
   padding?: keyof DefaultTheme['padding'];
   icon?: IconType;
 }
 
-const StyledButton = styled.button<{ isSelected: boolean; padding: keyof DefaultTheme['padding'] }>`
-  display: flex;
-  align-items: center;
-  border: none;
-  width: 100%;
-  background-color: transparent;
-  cursor: pointer;
-  text-align: left;
-
-  ${({ theme, isSelected, padding }) => css`
-    color: ${theme.colors.text};
-    padding: ${theme.padding[padding]};
-    outline-color: ${theme.colors.blue};
-
-    ${isSelected &&
-    css`
-      font-weight: ${theme.font.weight[700]};
-    `}
-
-    &:hover {
-      background-color: ${theme.colors.blue};
-      color: ${theme.colors.white};
-    }
-  `};
-`;
-
 export const MenuItem: FC<MenuItemProps> = ({
   children,
   onClick,
+  to,
   isSelected = false,
   padding = 'medium',
   icon,
 }) => (
   <li>
-    <StyledButton
-      type="button"
-      onClick={onClick}
-      isSelected={isSelected}
-      padding={padding}
-    >
-      {icon && (
-        <Fragment>
-          <Icon icon={icon} />
+    {!to && onClick && (
+      <StyledButton
+        type="button"
+        onClick={onClick}
+        isSelected={isSelected}
+        padding={padding}
+      >
+        {icon && (
+          <Fragment>
+            <Icon icon={icon} />
 
-          <Spreader spread="tiny" />
-        </Fragment>
-      )}
+            <Spreader spread="0.25" />
+          </Fragment>
+        )}
 
-      {children}
-    </StyledButton>
+        {children}
+      </StyledButton>
+    )}
+
+    {to && !onClick && (
+      <StyledLink
+        to={to}
+        padding={padding}
+      >
+        {icon && (
+          <Fragment>
+            <Icon icon={icon} />
+
+            <Spreader spread="0.25" />
+          </Fragment>
+        )}
+
+        {children}
+      </StyledLink>
+    )}
   </li>
 );
 

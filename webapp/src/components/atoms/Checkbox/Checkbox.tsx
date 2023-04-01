@@ -32,7 +32,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
         {isLabelString ? (
           <Fragment>
-            <Spreader spread="tiny" />
+            <Spreader spread="0.25" />
 
             <Label>{label}</Label>
           </Fragment>

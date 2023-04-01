@@ -130,7 +130,7 @@ const SelectInner = <ValueType,>(
             {!selected && placeholder}
           </StyledContent>
 
-          <Spreader spread="small" />
+          <Spreader spread="0.5" />
 
           <Icon icon={isOpen ? FaChevronUp : FaChevronDown} />
         </StyledButton>

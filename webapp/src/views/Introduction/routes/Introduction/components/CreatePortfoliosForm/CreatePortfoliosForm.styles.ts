@@ -5,6 +5,6 @@ export const FieldsWrapper = styled.div`
   max-height: 250px;
 
   > div:not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.spacing.small};
+    margin-bottom: ${({ theme }) => theme.spacing['0.5']};
   }
 `;

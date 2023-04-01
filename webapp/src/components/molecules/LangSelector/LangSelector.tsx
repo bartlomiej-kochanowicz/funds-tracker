@@ -25,7 +25,7 @@ export const LangSelector = () => {
     <Row alignItems="center">
       <Icon icon={FaGlobeEurope} />
 
-      <Spreader spread="small" />
+      <Spreader spread="0.5" />
 
       {t(`selectors.languages.${value}`)}
     </Row>

@@ -36,7 +36,7 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         <Menu.Item>
           <Icon icon={FaUserAlt} />
 
-          <Spreader spread="small" />
+          <Spreader spread="0.5" />
 
           {t('navigation.my_profile')}
         </Menu.Item>
@@ -46,7 +46,7 @@ export const DropdownContent = forwardRef<HTMLUListElement, DropdownContentProps
         <Menu.Item onClick={handleSignOut}>
           <Icon icon={FaSignOutAlt} />
 
-          <Spreader spread="small" />
+          <Spreader spread="0.5" />
 
           {t('common.sign_out')}
         </Menu.Item>

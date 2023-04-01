@@ -88,7 +88,7 @@ export const CreatePortfoliosForm = () => {
       <Column>
         <Heading textAlign="center">{t('add.portfolios.title')}</Heading>
 
-        <Spacer space="small" />
+        <Spacer space="0.5" />
 
         <Text
           fontSize="0.875"
@@ -110,7 +110,7 @@ export const CreatePortfoliosForm = () => {
           />
         </Text>
 
-        <Spacer space="large" />
+        <Spacer space="1.5" />
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -139,7 +139,7 @@ export const CreatePortfoliosForm = () => {
               ))}
             </FieldsWrapper>
 
-            <Spacer space="tiny" />
+            <Spacer space="0.25" />
 
             {fields.length > 0 && fields.length < MAX_PORTFOLIOS ? (
               <Button
@@ -148,13 +148,13 @@ export const CreatePortfoliosForm = () => {
               >
                 {t('add.portfolios.button.add.one.more')}
 
-                <Spreader spread="tiny" />
+                <Spreader spread="0.25" />
 
                 <Icon icon={FaPlus} />
               </Button>
             ) : null}
 
-            <Spacer space="large" />
+            <Spacer space="1.5" />
 
             <Button
               size="large"

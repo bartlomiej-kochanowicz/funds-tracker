@@ -14,7 +14,7 @@ export const Signup = () => {
     <FullscreenClear>
       <Heading textAlign="center">{t('common.sign_up')}</Heading>
 
-      <Spacer space="small" />
+      <Spacer space="0.5" />
 
       <Text
         fontSize="0.875"
@@ -24,7 +24,7 @@ export const Signup = () => {
         {t('page.signup.description')}
       </Text>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <SignupForm />
 
@@ -48,9 +48,9 @@ export const Signup = () => {
         />
       </Text>
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
-      <Spacer space="large" />
+      <Spacer space="1.5" />
 
       <Column alignItems="center">
         <LangSelector />
