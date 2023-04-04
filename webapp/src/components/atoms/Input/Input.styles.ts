@@ -51,7 +51,7 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasSearch?: boolea
       &::-webkit-search-cancel-button {
         background-image: url(${theme.isDark
           ? '/src/assets/svgs/times-white.svg'
-          : '/src/assets/svgs/times-black.svg'});
+          : '/src/assets/svgs/times-grey-300.svg'});
       }
     }
   `}

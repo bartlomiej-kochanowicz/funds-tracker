@@ -22,6 +22,7 @@
     "@graphql-codegen/client-preset": "2.1.1",
     "@hookform/resolvers": "2.9.11",
     "color2k": "2.0.2",
+    "downshift": "7.6.0",
     "framer-motion": "10.5.0",
     "graphql": "16.6.0",
     "i18next": "22.4.11",

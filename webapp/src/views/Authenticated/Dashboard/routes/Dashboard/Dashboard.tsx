@@ -1,4 +1,5 @@
-import { Button, Input, Spacer, Toggle } from 'components/atoms';
+import { Button, Spacer, Toggle } from 'components/atoms';
+import { SearchInstruments } from 'components/molecules';
 import { Column } from 'simple-flexbox';
 
 export const Dashboard = () => (
@@ -28,6 +29,6 @@ export const Dashboard = () => (
 
     <Spacer />
 
-    <Input type="search" />
+    <SearchInstruments />
   </Column>
 );
