@@ -1,19 +1,22 @@
 import { darken, transparentize } from 'color2k';
+import { Icon } from 'components/atoms/Icon';
 import CurrencyInput from 'react-currency-input-field';
 import styled, { css } from 'styled-components';
 
-const inputStyles = css<{ error?: boolean; hasUnit?: boolean }>`
+const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasSearch?: boolean }>`
   border: none;
   width: 100%;
 
-  ${({ theme, error, hasUnit }) => css`
+  ${({ theme, error, hasUnit, hasSearch }) => css`
     border-radius: ${theme.radius.primary};
-    padding: ${hasUnit ? '0.5rem 2.5rem 0.5rem 1.25rem' : '0.5rem 1.25rem'};
     outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
     background-color: ${theme.colors.gray100};
     color: ${theme.colors[error ? 'error' : 'text']};
     border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
+    padding: 0.5rem 1.25rem;
+    ${hasUnit && `padding: 0.5rem 2.5rem 0.5rem 1.25rem;`}
+    ${hasSearch && `padding: 0.5rem 1.25rem 0.5rem 2.5rem;`}
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};
@@ -64,7 +67,7 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean }>`
 
 export const StyledInput = styled.input.withConfig({
   shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit'].includes(prop),
-})<{ error: boolean; hasUnit: boolean }>`
+})<{ error: boolean; hasUnit: boolean; hasSearch: boolean }>`
   ${inputStyles}
 `;
 
@@ -109,4 +112,21 @@ export const Unit = styled.span`
   right: 1.25rem;
   top: 0;
   bottom: 0;
+`;
+
+export const SearchIcon = styled(Icon).attrs({
+  className: 'search-icon',
+})<{ error: boolean }>`
+  position: absolute;
+  left: 1.25rem;
+  top: 0;
+  bottom: 0;
+  height: 2.75rem;
+
+  ${({ theme, error }) => css`
+    color: ${theme.colors.gray300};
+    &:has(+ input:focus) {
+      color: ${theme.colors[error ? 'error' : 'blue']};
+    }
+  `}
 `;
