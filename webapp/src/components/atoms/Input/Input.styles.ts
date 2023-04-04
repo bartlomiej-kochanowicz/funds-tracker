@@ -33,6 +33,24 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean }>`
     &::placeholder {
       color: ${theme.colors.gray300};
     }
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 16px;
+      width: 16px;
+      background-size: 16px 16px;
+      cursor: pointer;
+      background-image: url('/src/assets/svgs/times-blue.svg');
+    }
+
+    &:hover:not(:focus) {
+      &::-webkit-search-cancel-button {
+        background-image: url(${theme.isDark
+          ? '/src/assets/svgs/times-white.svg'
+          : '/src/assets/svgs/times-black.svg'});
+      }
+    }
   `}
 
   &::-webkit-outer-spin-button,

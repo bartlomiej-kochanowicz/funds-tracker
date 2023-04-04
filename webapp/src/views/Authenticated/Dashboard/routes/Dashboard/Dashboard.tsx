@@ -1,4 +1,4 @@
-import { Button, Spacer, Toggle } from 'components/atoms';
+import { Button, Input, Spacer, Toggle } from 'components/atoms';
 import { Column } from 'simple-flexbox';
 
 export const Dashboard = () => (
@@ -25,5 +25,9 @@ export const Dashboard = () => (
     >
       test
     </Button>
+
+    <Spacer />
+
+    <Input type="search" />
   </Column>
 );

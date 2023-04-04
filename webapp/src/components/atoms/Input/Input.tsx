@@ -30,7 +30,7 @@ interface DefaultInputProps
       | 'disabled'
       | 'autoFocus'
     > {
-  type?: 'text' | 'number' | 'password' | 'email';
+  type?: 'text' | 'number' | 'password' | 'email' | 'search';
 }
 
 interface CurrencyInputProps extends InputCommonProps, Omit<CurrencyInputFieldProps, 'width'> {
