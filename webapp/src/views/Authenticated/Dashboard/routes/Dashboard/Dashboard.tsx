@@ -1,4 +1,4 @@
-import { Button, Spacer, Toggle } from 'components/atoms';
+import { Badge, Button, Spacer, Toggle } from 'components/atoms';
 import { SearchInstruments } from 'components/molecules';
 import { Column } from 'simple-flexbox';
 

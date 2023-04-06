@@ -25,7 +25,7 @@ export const StyledNavLink = styled(NavLink)`
     color: ${theme.colors.gray400};
     outline-color: ${theme.colors.blue};
     padding: ${theme.padding.large};
-    border-radius: ${theme.radius.primary};
+    border-radius: ${theme.radius['0.7']};
 
     &:hover:not(.active) {
       background-color: ${theme.colors.gray200};

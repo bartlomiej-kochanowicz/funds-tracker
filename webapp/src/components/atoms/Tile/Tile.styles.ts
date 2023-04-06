@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.blue};
     background: ${theme.gradients.blue}};
-    border-radius: ${theme.radius.tertiary};
+    border-radius: ${theme.radius['1.25']};
 
     svg {
       fill: ${theme.colors.white};

@@ -1,6 +1,6 @@
 import { SearchInstrumentsQuery, SearchInstrumentsQueryVariables } from '__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
-import { Input, Menu } from 'components/atoms';
+import { Badge, Input, Menu, Spreader } from 'components/atoms';
 import { resetIdCounter, useCombobox } from 'downshift';
 import { AnimatePresence } from 'framer-motion';
 import { SEARCH_INSTRUMENTS } from 'graphql/query/instruments/SearchInstruments';
@@ -31,27 +31,26 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
 
   const findItemsButChill = debounce<typeof findInstruments>(findInstruments, 350);
 
-  const { isOpen, inputValue, getMenuProps, getInputProps, highlightedIndex, getItemProps } =
-    useCombobox({
-      items,
-      onInputValueChange: () => {
-        findItemsButChill({
-          variables: {
-            data: {
-              name: inputValue,
-            },
+  const { isOpen, inputValue, getMenuProps, getInputProps, getItemProps } = useCombobox({
+    items,
+    onInputValueChange: () => {
+      findItemsButChill({
+        variables: {
+          data: {
+            name: inputValue,
           },
-        });
-      },
-      onSelectedItemChange: ({ selectedItem }) => {
-        console.log(selectedItem);
-      },
-      itemToString: item => item?.symbol || '',
-    });
+        },
+      });
+    },
+    onSelectedItemChange: ({ selectedItem }) => {
+      console.log(selectedItem);
+    },
+    itemToString: item => item?.symbol || '',
+  });
 
   const showMenu = isOpen && items.length > 0;
 
-  const { renderLayer, triggerProps, layerProps, triggerBounds, layerSide } = useLayer({
+  const { renderLayer, triggerProps, layerProps, triggerBounds } = useLayer({
     isOpen,
     placement,
     auto: true,
@@ -78,7 +77,7 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
           <Menu
             {...getMenuProps(layerProps)}
             style={{
-              width: triggerBounds?.width, // we want the same width as the input
+              width: triggerBounds?.width,
               ...layerProps.style,
             }}
           >
@@ -88,7 +87,11 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
                   key={item.symbol}
                   {...getItemProps({ item, index })}
                 >
-                  {item.longname}
+                  <Badge>{item.symbol}</Badge>
+
+                  <Spreader spread="0.25" />
+
+                  {item.longname || item.symbol}
                 </Menu.Item>
               ))}
           </Menu>

@@ -14,7 +14,7 @@ export const Menu = styled(motion.ul)<MenuProps>`
 
   ${({ theme, minMenuWidth, isInModal }) => css`
     z-index: ${isInModal ? theme.zIndex.menu.modal : theme.zIndex.menu.default};
-    border-radius: ${theme.radius.primary};
+    border-radius: ${theme.radius['0.7']};
     background-color: ${theme.colors.gray200};
     padding: ${theme.padding.mediumY};
     outline-color: ${theme.colors.blue};

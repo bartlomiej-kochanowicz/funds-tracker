@@ -67,7 +67,7 @@ export const Button = styled.button.withConfig({
     color = 'primary',
     width = 'fit-content',
     fontWeight = '400',
-    borderRadius = 'primary',
+    borderRadius = '0.7',
     flexGrow = 0,
     outline = false,
     minWidth,

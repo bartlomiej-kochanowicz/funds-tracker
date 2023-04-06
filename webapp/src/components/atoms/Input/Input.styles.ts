@@ -8,7 +8,7 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasSearch?: boolea
   width: 100%;
 
   ${({ theme, error, hasUnit, hasSearch }) => css`
-    border-radius: ${theme.radius.primary};
+    border-radius: ${theme.radius['0.7']};
     outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
     background-color: ${theme.colors.gray100};

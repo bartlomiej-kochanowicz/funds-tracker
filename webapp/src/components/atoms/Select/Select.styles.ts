@@ -13,7 +13,7 @@ export const StyledButton = styled.button<
   min-height: 44px;
 
   ${({ theme, error }) => css`
-    border-radius: ${theme.radius.primary};
+    border-radius: ${theme.radius['0.7']};
     border: none;
     background-color: ${theme.colors.gray100};
     padding: ${theme.padding.medium};
