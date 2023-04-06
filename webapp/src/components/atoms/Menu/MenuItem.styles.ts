@@ -16,7 +16,10 @@ const mixin = css<{
   ${({ theme, padding }) => css`
     color: ${theme.colors.text};
     padding: ${theme.padding[padding]};
-    outline-color: ${theme.colors.blue};
+
+    &:focus-visible {
+      outline: 2px solid ${theme.colors.blue};
+    }
 
     &:hover {
       background-color: ${transparentize(theme.colors.gray300, 0.75)};

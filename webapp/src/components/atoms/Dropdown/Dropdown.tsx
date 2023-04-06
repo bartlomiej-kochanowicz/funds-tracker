@@ -1,9 +1,8 @@
 import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
 import { dropdownAnimation } from 'helpers/dropdownAnimation';
 import { forwardRef, ForwardRefExoticComponent, Fragment, ReactNode, Ref, useState } from 'react';
-import { LayerProps, TriggerProps, useLayer } from 'react-laag';
+import { LayerProps, mergeRefs, TriggerProps, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
-import { composeRefs } from 'utils/composeRefs';
 
 import { Trigger } from './Dropdown.styles';
 
@@ -65,7 +64,7 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
             ...rest,
             ...triggerProps,
             onClick: handleToggle,
-            ref: composeRefs(ref, triggerProps.ref),
+            ref: mergeRefs(ref, triggerProps.ref),
           })}
 
         {typeof children !== 'function' && (
@@ -73,7 +72,7 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
             {...rest}
             {...triggerProps}
             onClick={handleToggle}
-            ref={composeRefs(ref, triggerProps.ref)}
+            ref={mergeRefs(ref, triggerProps.ref)}
             type="button"
           >
             {children}

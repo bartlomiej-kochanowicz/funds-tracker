@@ -6,6 +6,8 @@ export const Trigger = styled.button`
   cursor: pointer;
 
   ${({ theme }) => css`
-    outline-color: ${theme.colors.blue};
+    &:focus-visible {
+      outline: 2px solid ${theme.colors.blue};
+    }
   `}
 `;

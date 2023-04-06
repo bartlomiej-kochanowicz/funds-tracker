@@ -9,7 +9,6 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasSearch?: boolea
 
   ${({ theme, error, hasUnit, hasSearch }) => css`
     border-radius: ${theme.radius['0.7']};
-    outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
     background-color: ${theme.colors.gray100};
     color: ${theme.colors[error ? 'error' : 'text']};
@@ -17,6 +16,10 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasSearch?: boolea
     padding: 0.5rem 1.25rem;
     ${hasUnit && `padding: 0.5rem 2.5rem 0.5rem 1.25rem;`}
     ${hasSearch && `padding: 0.5rem 1.25rem 0.5rem 2.5rem;`}
+
+    &:focus-visible {
+      outline: 2px solid ${theme.colors[error ? 'error' : 'blue']};
+    }
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};

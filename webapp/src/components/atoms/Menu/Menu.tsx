@@ -1,3 +1,4 @@
+import { darken } from 'color2k';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
@@ -8,28 +9,27 @@ export interface MenuProps {
   isInModal?: boolean;
 }
 
-export const Menu = styled(motion.ul)<MenuProps>`
+export const Menu = styled(motion.div)<MenuProps>`
   max-height: 16rem;
   overflow-y: auto;
 
   ${({ theme: { isDark, zIndex, radius, padding, colors }, minMenuWidth, isInModal }) => css`
     z-index: ${isInModal ? zIndex.menu.modal : zIndex.menu.default};
     border-radius: ${radius['0.7']};
-    background-color: ${isDark ? colors.gray100 : colors.gray200};
+    background-color: ${isDark ? darken(colors.gray200, 0.09) : colors.gray200};
     padding: ${padding.mediumY};
-    outline-color: ${colors.blue};
     color: ${colors.black};
     display: flex;
     flex-direction: column;
+
+    &:focus-visible {
+      outline: 2px solid ${colors.blue};
+    }
 
     ${minMenuWidth &&
     css`
       min-width: ${minMenuWidth};
     `}
-
-    li {
-      list-style: none;
-    }
   `}
 `;
 

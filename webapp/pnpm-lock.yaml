@@ -56,6 +56,7 @@ specifiers:
   mq-polyfill: 1.1.8
   prettier: 2.8.4
   react: 18.2.0
+  react-accessible-dropdown-menu-hook: ^4.0.0
   react-currency-input-field: 3.6.10
   react-dom: 18.2.0
   react-error-boundary: 3.1.4
@@ -97,6 +98,7 @@ dependencies:
   js-cookie: 3.0.1
   logrocket: 4.0.0
   react: 18.2.0
+  react-accessible-dropdown-menu-hook: 4.0.0
   react-currency-input-field: 3.6.10_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 3.1.4_react@18.2.0
@@ -7287,6 +7289,10 @@ packages:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
     dev: true
+
+  /react-accessible-dropdown-menu-hook/4.0.0:
+    resolution: {integrity: sha512-dquRX+26jBD2Pida0fmePfIYFPlHcAPh7uBSZ3TUJZcb3rRQ0yZXHEz2hFFX1/7vpofx8tIba85qc58tAuuOyg==}
+    dev: false
 
   /react-currency-input-field/3.6.10_react@18.2.0:
     resolution: {integrity: sha512-KRAJJaLujarBTLlEVbznsUxQ56+Qyqwoe5w9DnGxmsGnHv4ycQRpRkuuCDfF9BcXHmegzsOXesfIGpW7Cw9mTQ==}

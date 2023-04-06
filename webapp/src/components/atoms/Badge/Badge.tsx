@@ -1,4 +1,4 @@
-import { lighten, transparentize } from 'color2k';
+import { transparentize } from 'color2k';
 import styled, { css, DefaultTheme } from 'styled-components';
 
 export type BadgeColors = keyof DefaultTheme['button']['color'];

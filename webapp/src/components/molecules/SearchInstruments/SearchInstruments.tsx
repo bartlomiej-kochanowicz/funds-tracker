@@ -12,13 +12,15 @@ import { PlacementType } from 'react-laag/dist/PlacementType';
 interface SearchInstrumentsProps {
   placement?: PlacementType;
   triggerOffset?: number;
+  onChange: (instrument: SearchInstrumentsQuery['searchInstruments'][0]) => void;
 }
 
 export const SearchInstruments: FC<SearchInstrumentsProps> = ({
   placement = 'bottom-center',
   triggerOffset = 5,
+  onChange,
 }) => {
-  const [findInstruments, { loading, data, error }] = useLazyQuery<
+  const [findInstruments, { data }] = useLazyQuery<
     SearchInstrumentsQuery,
     SearchInstrumentsQueryVariables
   >(SEARCH_INSTRUMENTS, {
@@ -43,7 +45,9 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
       });
     },
     onSelectedItemChange: ({ selectedItem }) => {
-      console.log(selectedItem);
+      if (selectedItem) {
+        onChange(selectedItem);
+      }
     },
     itemToString: item => item?.symbol || '',
   });
@@ -78,6 +82,7 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
             {...getMenuProps(layerProps)}
             style={{
               width: triggerBounds?.width,
+              visibility: showMenu ? 'visible' : 'hidden',
               ...layerProps.style,
             }}
           >

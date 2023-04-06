@@ -9,16 +9,18 @@ import {
   forwardRef,
   Fragment,
   Key,
+  KeyboardEvent,
+  MouseEvent,
   ReactNode,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react';
+import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { ChangeHandler } from 'react-hook-form';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { useLayer } from 'react-laag';
+import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
-import { composeRefs } from 'utils/composeRefs';
 
 import { Error, StyledButton, StyledContent, Wrapper } from './Select.styles';
 
@@ -59,6 +61,8 @@ const SelectInner = <ValueType,>(
 ) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const { buttonProps, itemProps } = useDropdownMenu(options.length);
+
   const getDefaultSelected = (): Item<ValueType> | null =>
     defaultValue ? options.find(option => option.value === defaultValue) || null : null;
 
@@ -98,7 +102,19 @@ const SelectInner = <ValueType,>(
     onOutsideClick: () => setIsOpen(false),
   });
 
-  const handleOpen = () => setIsOpen(prev => !prev);
+  const handleOpen = (e: MouseEvent<HTMLButtonElement>) => {
+    setIsOpen(prev => !prev);
+
+    buttonProps.onClick?.(e);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Enter') {
+      setIsOpen(prev => !prev);
+    }
+
+    buttonProps.onKeyDown?.(e);
+  };
 
   const minMenuWidth = (
     buttonRef.current?.offsetWidth ? `${Number(buttonRef.current?.offsetWidth)}px` : undefined
@@ -113,10 +129,11 @@ const SelectInner = <ValueType,>(
         flexGrow={flexGrow}
       >
         <StyledButton
-          type="button"
+          {...buttonProps}
           onClick={handleOpen}
+          onKeyDown={handleKeyDown}
           onBlur={onBlur}
-          ref={composeRefs(buttonRef, triggerProps.ref)}
+          ref={mergeRefs(buttonRef, triggerProps.ref, buttonProps.ref)}
           error={Boolean(error)}
         >
           <StyledContent isSelected={Boolean(selected)}>
@@ -144,10 +161,11 @@ const SelectInner = <ValueType,>(
             <Menu
               minMenuWidth={minMenuWidth}
               isInModal={isInModal}
+              role="menu"
               {...layerProps}
               {...dropdownAnimation(anmimationDirection)}
             >
-              {options.map(({ value, label, ...rest }) => {
+              {options.map(({ value, label, ...rest }, index) => {
                 const handleSelect = () => {
                   setSelected({ value, label, ...rest });
 
@@ -159,6 +177,7 @@ const SelectInner = <ValueType,>(
                     onClick={handleSelect}
                     isSelected={selected?.value === value}
                     key={value as Key}
+                    {...itemProps[index]}
                   >
                     {label}
                   </Menu.Item>

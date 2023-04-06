@@ -1,4 +1,4 @@
-import { Badge, Button, Spacer, Toggle } from 'components/atoms';
+import { Button, Spacer, Toggle } from 'components/atoms';
 import { SearchInstruments } from 'components/molecules';
 import { Column } from 'simple-flexbox';
 
@@ -29,6 +29,10 @@ export const Dashboard = () => (
 
     <Spacer />
 
-    <SearchInstruments />
+    <SearchInstruments
+      onChange={e => {
+        console.log(e);
+      }}
+    />
   </Column>
 );
