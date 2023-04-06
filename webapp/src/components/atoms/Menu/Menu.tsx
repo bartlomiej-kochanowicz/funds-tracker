@@ -12,13 +12,13 @@ export const Menu = styled(motion.ul)<MenuProps>`
   max-height: 16rem;
   overflow-y: auto;
 
-  ${({ theme, minMenuWidth, isInModal }) => css`
-    z-index: ${isInModal ? theme.zIndex.menu.modal : theme.zIndex.menu.default};
-    border-radius: ${theme.radius['0.7']};
-    background-color: ${theme.colors.gray200};
-    padding: ${theme.padding.mediumY};
-    outline-color: ${theme.colors.blue};
-    color: ${theme.colors.black};
+  ${({ theme: { isDark, zIndex, radius, padding, colors }, minMenuWidth, isInModal }) => css`
+    z-index: ${isInModal ? zIndex.menu.modal : zIndex.menu.default};
+    border-radius: ${radius['0.7']};
+    background-color: ${isDark ? colors.gray100 : colors.gray200};
+    padding: ${padding.mediumY};
+    outline-color: ${colors.blue};
+    color: ${colors.black};
     display: flex;
     flex-direction: column;
 

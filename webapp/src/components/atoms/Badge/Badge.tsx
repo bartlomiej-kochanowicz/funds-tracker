@@ -1,4 +1,4 @@
-import { lighten } from 'color2k';
+import { lighten, transparentize } from 'color2k';
 import styled, { css, DefaultTheme } from 'styled-components';
 
 export type BadgeColors = keyof DefaultTheme['button']['color'];
@@ -9,7 +9,7 @@ interface BadgeProps {
 
 export const Badge = styled.span<BadgeProps>`
   ${({ theme, color = 'primary' }) => css`
-    background-color: ${lighten(theme.button.color[color].background, 0.3)};
+    background-color: ${transparentize(theme.button.color[color].background, 0.8)};
     color: ${theme.button.color[color].background};
     padding: ${theme.padding.tiny};
     border-radius: ${theme.radius['0.375']};

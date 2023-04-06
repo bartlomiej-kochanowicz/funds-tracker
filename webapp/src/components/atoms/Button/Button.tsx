@@ -107,7 +107,7 @@ export const Button = styled.button.withConfig({
       ${Boolean(outline) &&
       css`
         color: ${theme.button.color[color].background};
-        background-color: ${transparentize(theme.button.color[color].background, 0.9)};
+        background-color: ${transparentize(theme.button.color[color].background, 0.8)};
 
         &:hover {
           background-color: ${transparentize(theme.button.color[color].background, 0.85)};
