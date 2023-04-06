@@ -1,8 +1,8 @@
 import { SearchInstrumentsQuery, SearchInstrumentsQueryVariables } from '__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
-import { Input } from 'components/atoms';
+import { Input, Menu } from 'components/atoms';
 import { resetIdCounter, useCombobox } from 'downshift';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { SEARCH_INSTRUMENTS } from 'graphql/query/instruments/SearchInstruments';
 import { debounce } from 'helpers/debounce';
 import { FC, Fragment } from 'react';
@@ -34,7 +34,7 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
   const { isOpen, inputValue, getMenuProps, getInputProps, highlightedIndex, getItemProps } =
     useCombobox({
       items,
-      onInputValueChange() {
+      onInputValueChange: () => {
         findItemsButChill({
           variables: {
             data: {
@@ -75,32 +75,23 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
       />
       {renderLayer(
         <AnimatePresence>
-          {showMenu && (
-            <motion.ul
-              {...getMenuProps(layerProps)}
-              className="combobox__menu"
-              style={{
-                width: triggerBounds?.width, // we want the same width as the input
-                ...layerProps.style,
-              }}
-              initial={{ opacity: 0, scaleY: 0.75 }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              exit={{ opacity: 0, scaleY: 0.75 }}
-              transition={{
-                duration: 0.125, // 125ms
-              }}
-            >
-              {items.map((item, index) => (
-                <li
+          <Menu
+            {...getMenuProps(layerProps)}
+            style={{
+              width: triggerBounds?.width, // we want the same width as the input
+              ...layerProps.style,
+            }}
+          >
+            {showMenu &&
+              items.map((item, index) => (
+                <Menu.Item
                   key={item.symbol}
-                  className="combobox__menu-item"
                   {...getItemProps({ item, index })}
                 >
-                  {item.symbol}
-                </li>
+                  {item.longname}
+                </Menu.Item>
               ))}
-            </motion.ul>
-          )}
+          </Menu>
         </AnimatePresence>,
       )}
     </Fragment>
