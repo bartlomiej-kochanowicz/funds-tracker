@@ -10,10 +10,11 @@ interface IconProps {
   color?: keyof DefaultTheme['colors'];
 }
 
-export const Icon: FC<IconProps> = ({ icon: IconComponent, size = '1', color }) => (
+export const Icon: FC<IconProps> = ({ icon: IconComponent, size = '1', color, ...rest }) => (
   <StyledIcon
     as={IconComponent}
     size={size}
     color={color}
+    {...rest}
   />
 );

@@ -67,7 +67,7 @@ export const Button = styled.button.withConfig({
     color = 'primary',
     width = 'fit-content',
     fontWeight = '400',
-    borderRadius = 'primary',
+    borderRadius = '0.7',
     flexGrow = 0,
     outline = false,
     minWidth,
@@ -107,7 +107,7 @@ export const Button = styled.button.withConfig({
       ${Boolean(outline) &&
       css`
         color: ${theme.button.color[color].background};
-        background-color: ${transparentize(theme.button.color[color].background, 0.9)};
+        background-color: ${transparentize(theme.button.color[color].background, 0.8)};
 
         &:hover {
           background-color: ${transparentize(theme.button.color[color].background, 0.85)};

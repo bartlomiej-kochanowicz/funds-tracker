@@ -89,6 +89,9 @@ export const theme = {
     },
   },
   padding: {
+    tiny: `${rem(0.188)} ${rem(0.5)}`,
+    tinyX: `0 ${rem(0.5)}`,
+    tinyY: `${rem(0.188)} 0`,
     small: `${rem(0.25)} ${rem(0.75)}`,
     smallX: `0 ${rem(0.75)}`,
     smallY: `${rem(0.25)} 0`,
@@ -118,9 +121,10 @@ export const theme = {
     },
   },
   radius: {
-    primary: rem(0.7),
-    secondary: rem(6.25),
-    tertiary: rem(1.25),
+    '0.7': rem(0.7),
+    '6.25': rem(6.25),
+    '1.25': rem(1.25),
+    '0.375': rem(0.375),
   },
   loader: {
     size: {

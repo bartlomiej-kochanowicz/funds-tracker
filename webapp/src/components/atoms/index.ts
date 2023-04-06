@@ -1,4 +1,5 @@
 export { Avatar } from './Avatar';
+export { Badge } from './Badge';
 export { Box } from './Box';
 export { Button } from './Button';
 export { ButtonLink } from './ButtonLink';

@@ -1,5 +1,5 @@
 import { Icon } from 'components/atoms/Icon';
-import { FC, Fragment, ReactNode } from 'react';
+import { FC, ForwardedRef, forwardRef, Fragment, ReactNode } from 'react';
 import { IconType } from 'react-icons';
 import { DefaultTheme } from 'styled-components';
 
@@ -15,21 +15,19 @@ export interface MenuItemProps {
   icon?: IconType;
 }
 
-export const MenuItem: FC<MenuItemProps> = ({
-  children,
-  onClick,
-  to,
-  isSelected = false,
-  padding = 'medium',
-  icon,
-}) => (
-  <li>
+export const MenuItem: FC<MenuItemProps> = forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  MenuItemProps
+>(({ children, onClick, to, isSelected = false, padding = 'medium', icon, ...rest }, ref) => (
+  <Fragment>
     {!to && onClick && (
       <StyledButton
         type="button"
         onClick={onClick}
         isSelected={isSelected}
         padding={padding}
+        ref={ref as ForwardedRef<HTMLButtonElement>}
+        {...rest}
       >
         {icon && (
           <Fragment>
@@ -47,6 +45,8 @@ export const MenuItem: FC<MenuItemProps> = ({
       <StyledLink
         to={to}
         padding={padding}
+        ref={ref as ForwardedRef<HTMLAnchorElement>}
+        {...rest}
       >
         {icon && (
           <Fragment>
@@ -59,7 +59,7 @@ export const MenuItem: FC<MenuItemProps> = ({
         {children}
       </StyledLink>
     )}
-  </li>
-);
+  </Fragment>
+));
 
 MenuItem.displayName = 'MenuItem';

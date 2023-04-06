@@ -43,7 +43,7 @@ export const CashAccountsPanel: FC<
   return (
     <Box
       p={isPhone ? 'medium' : 'large'}
-      borderRadius="primary"
+      borderRadius="0.7"
     >
       <Row justifyContent="space-between">
         <Column>

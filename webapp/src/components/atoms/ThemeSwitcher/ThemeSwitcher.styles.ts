@@ -15,8 +15,11 @@ export const StyledButton = styled.button`
 
   ${({ theme: { isDark, colors, transition } }) => css`
     background-color: ${colors.black};
-    outline-color: ${colors.blue};
     transition: background-color ${transition.primary} ease;
+
+    &:focus-visible {
+      outline: 2px solid ${colors.blue};
+    }
 
     ${isDark &&
     css`

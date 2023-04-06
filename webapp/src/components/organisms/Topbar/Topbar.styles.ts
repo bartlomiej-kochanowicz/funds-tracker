@@ -2,7 +2,7 @@ import { Row } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
 export const StyledRow = styled(Row).withConfig({
-  shouldForwardProp: prop => !['hasBorder'].includes(prop),
+  shouldForwardProp: prop => !['hasBorder', 'leftPadding'].includes(prop),
 })<{ hasBorder: boolean; leftPadding: boolean }>`
   position: fixed;
   top: 0;

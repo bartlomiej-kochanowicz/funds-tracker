@@ -1,4 +1,5 @@
 import { Button, Spacer, Toggle } from 'components/atoms';
+import { SearchInstruments } from 'components/molecules';
 import { Column } from 'simple-flexbox';
 
 export const Dashboard = () => (
@@ -25,5 +26,13 @@ export const Dashboard = () => (
     >
       test
     </Button>
+
+    <Spacer />
+
+    <SearchInstruments
+      onChange={e => {
+        console.log(e);
+      }}
+    />
   </Column>
 );

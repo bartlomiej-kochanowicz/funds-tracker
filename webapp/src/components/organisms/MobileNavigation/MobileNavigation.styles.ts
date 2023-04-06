@@ -15,7 +15,7 @@ export const StyledNav = styled.nav`
     backdrop-filter: blur(10px);
     z-index: ${zIndex.mobileNavigation};
     bottom: ${spacing['1.5']};
-    border-radius: ${radius.secondary};
+    border-radius: ${radius['6.25']};
   `}
 `;
 
@@ -34,7 +34,10 @@ export const StyledNavLink = styled(NavLink)`
 
   ${({ theme }) => css`
     color: ${theme.colors.gray400};
-    outline-color: ${theme.colors.blue};
+
+    &:focus-visible {
+      outline: 2px solid ${theme.colors.blue};
+    }
 
     &.active {
       color: ${theme.colors.blue};

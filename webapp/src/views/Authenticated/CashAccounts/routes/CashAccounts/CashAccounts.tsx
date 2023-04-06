@@ -93,7 +93,7 @@ export const CashAccounts = () => {
 
       {!loading && cashAccountsExist && !error && (
         <Box
-          borderRadius="primary"
+          borderRadius="0.7"
           backgroundColor={isDark ? 'gray100' : 'white'}
           p={isPhone ? 'small' : 'large'}
         >

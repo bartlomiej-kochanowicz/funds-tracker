@@ -3,9 +3,10 @@ import { Text } from 'components/atoms/Text';
 import { forwardRef, HTMLProps, MutableRefObject, ReactNode, useRef } from 'react';
 import { CurrencyInputProps as CurrencyInputFieldProps } from 'react-currency-input-field';
 import { useTranslation } from 'react-i18next';
+import { FaSearch } from 'react-icons/fa';
 import { mergeRefs } from 'react-laag';
 
-import { Error, StyledCurrencyInput, StyledInput, Unit, Wrapper } from './Input.styles';
+import { Error, SearchIcon, StyledCurrencyInput, StyledInput, Unit, Wrapper } from './Input.styles';
 
 interface InputCommonProps {
   error?: string;
@@ -36,9 +37,16 @@ interface DefaultInputProps
 interface CurrencyInputProps extends InputCommonProps, Omit<CurrencyInputFieldProps, 'width'> {
   type?: 'currency';
   currency: Currency;
+  unit?: undefined;
 }
 
-type CtaInputProps = DefaultInputProps | CurrencyInputProps;
+interface SearchInputProps extends InputCommonProps, Omit<CurrencyInputFieldProps, 'width'> {
+  type?: 'search';
+  currency?: undefined;
+  unit?: undefined;
+}
+
+type CtaInputProps = DefaultInputProps | CurrencyInputProps | SearchInputProps;
 
 export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
   ({ error, unit, width = 'auto', flexGrow, label, type, ...rest }, ref) => {
@@ -110,6 +118,10 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
       );
     }
 
+    const hasSearch = type === 'search';
+    const hasUnit = Boolean(unit);
+    const hasError = Boolean(error);
+
     return (
       <Wrapper
         width={width}
@@ -124,10 +136,18 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
           </Text>
         )}
 
+        {hasSearch && (
+          <SearchIcon
+            icon={FaSearch}
+            error={hasError}
+          />
+        )}
+
         <StyledInput
-          error={Boolean(error)}
+          error={hasError}
           ref={ref}
-          hasUnit={Boolean(unit)}
+          hasUnit={hasUnit}
+          hasSearch={hasSearch}
           type={type}
           {...rest}
         />

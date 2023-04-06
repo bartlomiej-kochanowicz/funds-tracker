@@ -13,14 +13,17 @@ export const StyledButton = styled.button<
   min-height: 44px;
 
   ${({ theme, error }) => css`
-    border-radius: ${theme.radius.primary};
+    border-radius: ${theme.radius['0.7']};
     border: none;
     background-color: ${theme.colors.gray100};
     padding: ${theme.padding.medium};
     color: ${theme.colors[error ? 'error' : 'text']};
-    outline-color: ${theme.colors[error ? 'error' : 'blue']};
     font-weight: ${theme.font.weight[500]};
     border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
+
+    &:focus-visible {
+      outline: 2px solid ${theme.colors[error ? 'error' : 'blue']};
+    }
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};

@@ -32,7 +32,7 @@ export const ModalComponent = styled.div`
   ${({ theme: { colors, radius, breakpoints, zIndex } }) => css`
     z-index: ${zIndex.modal.modal};
     background-color: ${colors.gray100};
-    border-radius: ${radius.primary};
+    border-radius: ${radius['0.7']};
     padding: 1.75rem 2.5rem;
     max-width: 900px;
     max-height: 85vh;
