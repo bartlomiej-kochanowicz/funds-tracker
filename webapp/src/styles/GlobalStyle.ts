@@ -1,4 +1,4 @@
-import { darken } from 'color2k';
+import { darken, lighten } from 'color2k';
 import * as styled from 'styled-components';
 
 export const GlobalStyle = styled.createGlobalStyle`
@@ -103,6 +103,10 @@ export const GlobalStyle = styled.createGlobalStyle`
         &:hover {
           background-color: ${({ theme: { colors } }) => darken(colors.blue, 0.15)};
         }
+      }
+
+      &--keyboard-selected {
+        background-color: ${({ theme }) => lighten(theme.colors.blue, 0.15)};
       }
     }
   }
