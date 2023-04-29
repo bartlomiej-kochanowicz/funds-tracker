@@ -1,6 +1,14 @@
 import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
 import { dropdownAnimation } from 'helpers/dropdownAnimation';
-import { forwardRef, ForwardRefExoticComponent, Fragment, ReactNode, Ref, useState } from 'react';
+import {
+  forwardRef,
+  ForwardRefExoticComponent,
+  Fragment,
+  MouseEventHandler,
+  ReactNode,
+  Ref,
+  useState,
+} from 'react';
 import { LayerProps, mergeRefs, TriggerProps, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 
@@ -14,7 +22,7 @@ interface DropdownProps {
     | ReactNode
     | ((props: {
         isOpen?: boolean;
-        onClick: () => void;
+        onClick: MouseEventHandler<HTMLButtonElement>;
         ref: Ref<HTMLButtonElement>;
       }) => ReactNode);
   content:

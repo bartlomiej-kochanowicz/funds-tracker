@@ -14,7 +14,7 @@ import { SEND_CODE } from 'graphql/mutations/authentication/SendCode';
 import { SIGNIN } from 'graphql/mutations/authentication/Signin';
 import { EMAIL_EXIST } from 'graphql/query/common/EmailExist';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
-import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
+import { StateMachine, useStateMachine } from 'hooks/useStateMachie';
 import { ChangeEvent, Fragment, lazy, Suspense, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

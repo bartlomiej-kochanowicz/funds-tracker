@@ -10,7 +10,7 @@ import { Button, Loader, Spacer } from 'components/atoms';
 import { SIGNUP } from 'graphql/mutations/authentication/Signup';
 import { EMAIL_EXIST } from 'graphql/query/common/EmailExist';
 import { showErrorToast } from 'helpers/showToast';
-import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
+import { StateMachine, useStateMachine } from 'hooks/useStateMachie';
 import { lazy, Suspense, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
