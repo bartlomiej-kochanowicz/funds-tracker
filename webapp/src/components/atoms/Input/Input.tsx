@@ -3,14 +3,14 @@ import { Text } from 'components/atoms/Text';
 import { forwardRef, HTMLProps, MutableRefObject, ReactNode, useRef } from 'react';
 import { CurrencyInputProps as CurrencyInputFieldProps } from 'react-currency-input-field';
 import { useTranslation } from 'react-i18next';
-import { FaSearch } from 'react-icons/fa';
+import { FaCalendarAlt, FaSearch } from 'react-icons/fa';
 import { mergeRefs } from 'react-laag';
 
 import { Error, SearchIcon, StyledCurrencyInput, StyledInput, Unit, Wrapper } from './Input.styles';
 
 interface InputCommonProps {
   error?: string;
-  unit?: 'percentage';
+  unit?: '%';
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   flexGrow?: number;
   label?: string | ReactNode;
@@ -31,7 +31,7 @@ interface DefaultInputProps
       | 'disabled'
       | 'autoFocus'
     > {
-  type?: 'text' | 'number' | 'password' | 'email';
+  type?: 'text' | 'number' | 'password' | 'email' | 'date';
 }
 
 interface CurrencyInputProps extends InputCommonProps, Omit<CurrencyInputFieldProps, 'width'> {
@@ -118,9 +118,14 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
       );
     }
 
-    const hasSearch = type === 'search';
+    const hasIcon = type === 'search' || type === 'date';
     const hasUnit = Boolean(unit);
     const hasError = Boolean(error);
+
+    const icon = {
+      search: FaSearch,
+      date: FaCalendarAlt,
+    };
 
     return (
       <Wrapper
@@ -136,9 +141,9 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
           </Text>
         )}
 
-        {hasSearch && (
+        {hasIcon && (
           <SearchIcon
-            icon={FaSearch}
+            icon={icon[type as 'search' | 'date']}
             error={hasError}
           />
         )}
@@ -147,14 +152,14 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
           error={hasError}
           ref={ref}
           hasUnit={hasUnit}
-          hasSearch={hasSearch}
-          type={type}
+          hasIcon={hasIcon}
+          type={type === 'date' ? undefined : type}
           {...rest}
         />
 
         {error && <Error>{error}</Error>}
 
-        {unit && <Unit>%</Unit>}
+        {unit && <Unit>{unit}</Unit>}
       </Wrapper>
     );
   },

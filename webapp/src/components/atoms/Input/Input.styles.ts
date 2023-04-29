@@ -3,11 +3,11 @@ import { Icon } from 'components/atoms/Icon';
 import CurrencyInput from 'react-currency-input-field';
 import styled, { css } from 'styled-components';
 
-const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasSearch?: boolean }>`
+const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasIcon?: boolean }>`
   border: none;
   width: 100%;
 
-  ${({ theme, error, hasUnit, hasSearch }) => css`
+  ${({ theme, error, hasUnit, hasIcon }) => css`
     border-radius: ${theme.radius['0.7']};
     font-weight: ${theme.font.weight[500]};
     background-color: ${theme.colors.gray100};
@@ -15,7 +15,7 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasSearch?: boolea
     border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
     padding: 0.5rem 1.25rem;
     ${hasUnit && `padding: 0.5rem 2.5rem 0.5rem 1.25rem;`}
-    ${hasSearch && `padding: 0.5rem 1.25rem 0.5rem 2.5rem;`}
+    ${hasIcon && `padding: 0.5rem 1.25rem 0.5rem 2.5rem;`}
 
     &:focus-visible {
       outline: 2px solid ${theme.colors[error ? 'error' : 'blue']};
@@ -69,13 +69,13 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasSearch?: boolea
 `;
 
 export const StyledInput = styled.input.withConfig({
-  shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit', 'hasSearch'].includes(prop),
-})<{ error: boolean; hasUnit: boolean; hasSearch: boolean }>`
+  shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit', 'hasIcon'].includes(prop),
+})<{ error: boolean; hasUnit: boolean; hasIcon: boolean }>`
   ${inputStyles}
 `;
 
 export const StyledCurrencyInput = styled(CurrencyInput).withConfig({
-  shouldForwardProp: prop => !['flexGrow', 'error', 'hasSearch'].includes(prop),
+  shouldForwardProp: prop => !['flexGrow', 'error', 'hasIcon'].includes(prop),
 })<{ error?: boolean }>`
   ${inputStyles}
 `;

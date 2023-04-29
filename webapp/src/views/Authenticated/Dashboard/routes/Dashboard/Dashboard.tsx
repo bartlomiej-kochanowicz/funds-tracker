@@ -1,38 +1,50 @@
-import { Button, Spacer, Toggle } from 'components/atoms';
+import { Button, Datepicker, Spacer, Toggle } from 'components/atoms';
 import { SearchInstruments } from 'components/molecules';
+import { useState } from 'react';
 import { Column } from 'simple-flexbox';
 
-export const Dashboard = () => (
-  <Column>
-    <Toggle />
+export const Dashboard = () => {
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
 
-    <Spacer />
+  return (
+    <Column>
+      <Toggle />
 
-    <Button>test</Button>
+      <Spacer />
 
-    <Spacer />
+      <Button>test</Button>
 
-    <Button outline>test</Button>
+      <Spacer />
 
-    <Spacer />
+      <Button outline>test</Button>
 
-    <Button color="secondary">test</Button>
+      <Spacer />
 
-    <Spacer />
+      <Button color="secondary">test</Button>
 
-    <Button
-      color="secondary"
-      outline
-    >
-      test
-    </Button>
+      <Spacer />
 
-    <Spacer />
+      <Button
+        color="secondary"
+        outline
+      >
+        test
+      </Button>
 
-    <SearchInstruments
-      onChange={e => {
-        console.log(e);
-      }}
-    />
-  </Column>
-);
+      <Spacer />
+
+      <SearchInstruments
+        onChange={e => {
+          console.log(e);
+        }}
+      />
+
+      <Spacer />
+
+      <Datepicker
+        selected={startDate}
+        onChange={date => setStartDate(date)}
+      />
+    </Column>
+  );
+};
