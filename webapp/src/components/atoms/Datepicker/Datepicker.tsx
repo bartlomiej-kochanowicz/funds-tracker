@@ -15,7 +15,7 @@ export const Datepicker: FC<ReactDatePickerProps> = props => {
       {...props}
       locale={i18n.language}
       dateFormat="dd-mm-yyyy"
-      customInput={<Input />}
+      customInput={<Input type="date" />}
       showPopperArrow={false}
     />
   );

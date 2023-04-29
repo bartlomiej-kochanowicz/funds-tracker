@@ -1,3 +1,4 @@
+import { darken } from 'color2k';
 import * as styled from 'styled-components';
 
 export const GlobalStyle = styled.createGlobalStyle`
@@ -66,5 +67,43 @@ export const GlobalStyle = styled.createGlobalStyle`
 
   .grecaptcha-badge {
     display: none;
+  }
+
+  .react-datepicker {
+    background-color: ${({ theme: { isDark, colors } }) =>
+      isDark ? darken(colors.gray200, 0.09) : colors.gray200};
+    border: none;
+    border-radius: ${({ theme }) => theme.radius['0.7']};
+
+    &__current-month,
+    &__day-name,
+    &__day {
+      color: ${({ theme }) => theme.colors.text};
+    }
+
+    &__day:hover {
+      background-color: ${({ theme }) => darken(theme.colors.gray200, 0.15)};
+    }
+
+    &__header {
+      background-color: ${({ theme: { colors } }) => darken(colors.gray100, 0.05)};
+      border-bottom: 2px solid ${({ theme: { colors } }) => colors.gray300};
+      border-top-left-radius: ${({ theme: { radius } }) => radius['0.7']};
+
+      &:not(&--has-time-select) {
+        border-top-right-radius: ${({ theme: { radius } }) => radius['0.7']};
+      }
+    }
+
+    &__day {
+      &--selected {
+        background-color: ${({ theme }) => theme.colors.blue};
+        color: ${({ theme: { colors } }) => colors.white};
+
+        &:hover {
+          background-color: ${({ theme: { colors } }) => darken(colors.blue, 0.15)};
+        }
+      }
+    }
   }
 `;
