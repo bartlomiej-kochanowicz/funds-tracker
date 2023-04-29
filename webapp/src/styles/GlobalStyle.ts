@@ -106,7 +106,7 @@ export const GlobalStyle = styled.createGlobalStyle`
       }
 
       &--keyboard-selected {
-        background-color: ${({ theme }) => lighten(theme.colors.blue, 0.15)};
+        background-color: ${({ theme }) => lighten(theme.colors.blue, 0.1)};
       }
     }
   }
