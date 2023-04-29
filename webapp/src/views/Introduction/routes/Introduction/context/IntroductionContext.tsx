@@ -1,6 +1,6 @@
 import { IntroductionStep } from '__generated__/graphql';
 import { useUserContext } from 'contexts/UserContext';
-import { StateMachine, useStateMachine } from 'hooks/useStateMachine';
+import { StateMachine, useStateMachine } from 'hooks/useStateMachie';
 import { createContext, FC, useContext } from 'react';
 
 const AddModelPortfolioContext = createContext<AddModelPortfolioContextType | null>(null);
