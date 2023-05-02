@@ -27,14 +27,14 @@ export const Datepicker: FC<ReactDatePickerProps> = props => {
   const months = useMemo(() => {
     const { format } = new Intl.DateTimeFormat(i18n.language, { month: 'long' });
 
-    return [...Array(12).keys()].map(m => format(new Date(Date.UTC(2021, (m + 1) % 12))));
+    return [...Array(12).keys()].map(m => format(new Date(Date.UTC(2021, m))));
   }, [i18n.language]);
 
   return (
     <ReactDatePicker
       {...props}
       locale={i18n.language}
-      dateFormat="dd-mm-yyyy"
+      dateFormat="dd-MM-yyyy"
       customInput={<Input type="date" />}
       showPopperArrow={false}
       renderCustomHeader={({
