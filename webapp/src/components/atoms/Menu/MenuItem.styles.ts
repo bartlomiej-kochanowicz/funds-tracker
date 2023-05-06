@@ -4,6 +4,7 @@ import styled, { css, DefaultTheme } from 'styled-components';
 
 const mixin = css<{
   padding: keyof DefaultTheme['padding'];
+  highlighted?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -13,7 +14,7 @@ const mixin = css<{
   cursor: pointer;
   text-align: left;
 
-  ${({ theme, padding }) => css`
+  ${({ theme, padding, highlighted }) => css`
     color: ${theme.colors.text};
     padding: ${theme.padding[padding]};
 
@@ -21,15 +22,17 @@ const mixin = css<{
       outline: 2px solid ${theme.colors.blue};
     }
 
-    &:hover {
+    ${highlighted &&
+    css`
       background-color: ${transparentize(theme.colors.gray300, 0.75)};
-    }
+    `}
   `};
 `;
 
 export const StyledButton = styled.button<{
   isSelected: boolean;
   padding: keyof DefaultTheme['padding'];
+  highlighted?: boolean;
 }>`
   ${mixin}
 
@@ -43,6 +46,7 @@ export const StyledButton = styled.button<{
 
 export const StyledLink = styled(Link)<{
   padding: keyof DefaultTheme['padding'];
+  active?: boolean;
 }>`
   ${mixin}
 

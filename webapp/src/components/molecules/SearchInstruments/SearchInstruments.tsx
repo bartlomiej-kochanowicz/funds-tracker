@@ -33,24 +33,25 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
 
   const findItemsButChill = debounce<typeof findInstruments>(findInstruments, 350);
 
-  const { isOpen, inputValue, getMenuProps, getInputProps, getItemProps } = useCombobox({
-    items,
-    onInputValueChange: () => {
-      findItemsButChill({
-        variables: {
-          data: {
-            name: inputValue,
+  const { isOpen, highlightedIndex, inputValue, getMenuProps, getInputProps, getItemProps } =
+    useCombobox({
+      items,
+      onInputValueChange: () => {
+        findItemsButChill({
+          variables: {
+            data: {
+              name: inputValue,
+            },
           },
-        },
-      });
-    },
-    onSelectedItemChange: ({ selectedItem }) => {
-      if (selectedItem) {
-        onChange(selectedItem);
-      }
-    },
-    itemToString: item => item?.symbol || '',
-  });
+        });
+      },
+      onSelectedItemChange: ({ selectedItem }) => {
+        if (selectedItem) {
+          onChange(selectedItem);
+        }
+      },
+      itemToString: item => item?.symbol || '',
+    });
 
   const showMenu = isOpen && items.length > 0;
 
@@ -90,6 +91,7 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
               items.map((item, index) => (
                 <Menu.Item
                   key={item.symbol}
+                  highlighted={highlightedIndex === index}
                   {...getItemProps({ item, index })}
                 >
                   <Badge>{item.symbol}</Badge>

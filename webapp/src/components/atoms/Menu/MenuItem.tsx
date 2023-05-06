@@ -13,6 +13,7 @@ export interface MenuItemProps {
   isSelected?: boolean;
   padding?: keyof DefaultTheme['padding'];
   icon?: IconType;
+  highlighted?: boolean;
 }
 
 export const MenuItem: FC<MenuItemProps> = forwardRef<
