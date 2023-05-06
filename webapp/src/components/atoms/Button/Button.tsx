@@ -60,6 +60,8 @@ export const Button = styled.button.withConfig({
   position: relative;
   text-decoration: none;
   cursor: pointer;
+  user-select: none;
+  touch-action: none;
 
   ${({
     theme,
@@ -124,7 +126,7 @@ export const Button = styled.button.withConfig({
           background-color: transparent;
         }
       `}
-    `}
+    `};
 `;
 
 Button.displayName = 'Button';
