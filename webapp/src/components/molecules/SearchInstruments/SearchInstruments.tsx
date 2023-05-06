@@ -2,7 +2,6 @@ import { SearchInstrumentsQuery, SearchInstrumentsQueryVariables } from '__gener
 import { useLazyQuery } from '@apollo/client';
 import { Badge, Input, Menu, Spreader } from 'components/atoms';
 import { resetIdCounter, useCombobox } from 'downshift';
-import { AnimatePresence } from 'framer-motion';
 import { SEARCH_INSTRUMENTS } from 'graphql/query/instruments/SearchInstruments';
 import { debounce } from 'helpers/debounce';
 import { FC, Fragment } from 'react';
@@ -78,31 +77,29 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
         {...getInputProps(triggerProps)}
       />
       {renderLayer(
-        <AnimatePresence>
-          <Menu
-            {...getMenuProps(layerProps)}
-            style={{
-              width: triggerBounds?.width,
-              visibility: showMenu ? 'visible' : 'hidden',
-              ...layerProps.style,
-            }}
-          >
-            {showMenu &&
-              items.map((item, index) => (
-                <Menu.Item
-                  key={item.symbol}
-                  highlighted={highlightedIndex === index}
-                  {...getItemProps({ item, index })}
-                >
-                  <Badge>{item.symbol}</Badge>
+        <Menu
+          {...getMenuProps(layerProps)}
+          style={{
+            width: triggerBounds?.width,
+            display: showMenu ? 'block' : 'none',
+            ...layerProps.style,
+          }}
+        >
+          {showMenu &&
+            items.map((item, index) => (
+              <Menu.Item
+                key={item.symbol}
+                highlighted={highlightedIndex === index}
+                {...getItemProps({ item, index })}
+              >
+                <Badge>{item.symbol}</Badge>
 
-                  <Spreader spread="0.25" />
+                <Spreader spread="0.25" />
 
-                  {item.longname || item.symbol}
-                </Menu.Item>
-              ))}
-          </Menu>
-        </AnimatePresence>,
+                {item.longname || item.symbol}
+              </Menu.Item>
+            ))}
+        </Menu>,
       )}
     </Fragment>
   );
