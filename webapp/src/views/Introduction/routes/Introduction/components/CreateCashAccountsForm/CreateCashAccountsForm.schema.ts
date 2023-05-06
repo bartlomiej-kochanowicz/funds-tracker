@@ -3,10 +3,9 @@ import { array, object, string } from 'yup';
 
 export const validationSchema = object().shape({
   cashAccounts: array()
-    // empty character to show not show error message
     .of(
       object({
-        name: string().required('‎').min(2, '‎').max(50, '‎'),
+        name: string().min(2, '‎').max(50, '‎'),
         currency: string().required(),
       }),
     )

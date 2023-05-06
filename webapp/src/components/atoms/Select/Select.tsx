@@ -50,7 +50,7 @@ const SelectInner = <ValueType,>(
     width = 'auto',
     flexGrow,
     triggerOffset = 5,
-    placement = 'bottom-center',
+    placement = 'bottom-start',
   }: SelectProps<ValueType>,
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
@@ -115,6 +115,7 @@ const SelectInner = <ValueType,>(
           ref={mergeRefs(buttonRef, triggerProps.ref)}
           error={Boolean(error)}
           {...getToggleButtonProps(triggerProps)}
+          type="button"
         >
           <StyledContent isSelected={Boolean(selectedItem)}>
             {/* Render default label when customLabel is not provided */}
@@ -132,7 +133,7 @@ const SelectInner = <ValueType,>(
           <Icon icon={isOpen ? FaChevronUp : FaChevronDown} />
         </StyledButton>
 
-        {error && <Error>{error}</Error>}
+        {error && <Error role="alert">{error}</Error>}
       </Wrapper>
 
       {renderLayer(
@@ -140,7 +141,7 @@ const SelectInner = <ValueType,>(
           isInModal={isInModal}
           {...getMenuProps(layerProps)}
           style={{
-            width: triggerBounds?.width,
+            minWidth: triggerBounds?.width,
             display: isOpen ? 'block' : 'none',
             ...layerProps.style,
           }}
