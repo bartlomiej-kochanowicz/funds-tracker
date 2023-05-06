@@ -105,13 +105,14 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
 
           <StyledCurrencyInput
             error={Boolean(error)}
+            aria-invalid={Boolean(error)}
             intlConfig={{ locale: i18n.language, currency }}
             onValueChange={handleValueChange}
             defaultValue={rest.defaultValue}
             placeholder={rest.placeholder}
           />
 
-          {error && <Error>{error}</Error>}
+          {error && <Error role="alert">{error}</Error>}
 
           {unit && <Unit>%</Unit>}
         </Wrapper>
@@ -150,6 +151,7 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
 
         <StyledInput
           error={hasError}
+          aria-invalid={hasError}
           ref={ref}
           hasUnit={hasUnit}
           hasIcon={hasIcon}
@@ -157,7 +159,7 @@ export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
           {...rest}
         />
 
-        {error && <Error>{error}</Error>}
+        {error && <Error role="alert">{error}</Error>}
 
         {unit && <Unit>{unit}</Unit>}
       </Wrapper>
