@@ -1,22 +1,17 @@
 import { Icon } from 'components/atoms/Icon';
 import { Menu } from 'components/atoms/Menu';
 import { Spreader } from 'components/atoms/Spreader';
-import { AnimatePresence } from 'framer-motion';
-import { dropdownAnimation } from 'helpers/dropdownAnimation';
+import { useSelect } from 'downshift';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import {
   ForwardedRef,
   forwardRef,
   Fragment,
   Key,
-  KeyboardEvent,
-  MouseEvent,
   ReactNode,
   useImperativeHandle,
   useRef,
-  useState,
 } from 'react';
-import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { ChangeHandler } from 'react-hook-form';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { mergeRefs, useLayer } from 'react-laag';
@@ -59,18 +54,31 @@ const SelectInner = <ValueType,>(
   }: SelectProps<ValueType>,
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const { buttonProps, itemProps } = useDropdownMenu(options.length);
+  const itemToString = (item: Item<ValueType> | null) => {
+    return item?.label || '';
+  };
 
   const getDefaultSelected = (): Item<ValueType> | null =>
     defaultValue ? options.find(option => option.value === defaultValue) || null : null;
 
-  const [selected, setSelected] = useState<Item<ValueType> | null>(getDefaultSelected());
+  const {
+    isOpen,
+    selectedItem,
+    getToggleButtonProps,
+    getMenuProps,
+    highlightedIndex,
+    getItemProps,
+  } = useSelect({
+    items: options,
+    itemToString,
+    defaultSelectedItem: getDefaultSelected(),
+  });
 
   useUpdateEffect(() => {
-    if (onChange && selected) onChange(selected.value);
-  }, [selected]);
+    if (onChange && selectedItem) {
+      onChange(selectedItem.value);
+    }
+  }, [selectedItem]);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -78,7 +86,7 @@ const SelectInner = <ValueType,>(
 
   useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement);
 
-  const { renderLayer, triggerProps, layerProps, layerSide } = useLayer({
+  const { renderLayer, triggerProps, layerProps, triggerBounds } = useLayer({
     isOpen,
     placement,
     auto: true,
@@ -94,33 +102,7 @@ const SelectInner = <ValueType,>(
       'bottom-end',
     ],
     triggerOffset,
-    onDisappear: disappearType => {
-      if (disappearType === 'full') {
-        setIsOpen(false);
-      }
-    },
-    onOutsideClick: () => setIsOpen(false),
   });
-
-  const handleOpen = (e: MouseEvent<HTMLButtonElement>) => {
-    setIsOpen(prev => !prev);
-
-    buttonProps.onClick?.(e);
-  };
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === 'Enter') {
-      setIsOpen(prev => !prev);
-    }
-
-    buttonProps.onKeyDown?.(e);
-  };
-
-  const minMenuWidth = (
-    buttonRef.current?.offsetWidth ? `${Number(buttonRef.current?.offsetWidth)}px` : undefined
-  ) as `${number}px`;
-
-  const anmimationDirection = layerSide.includes('top') ? 5 : -5;
 
   return (
     <Fragment>
@@ -129,22 +111,20 @@ const SelectInner = <ValueType,>(
         flexGrow={flexGrow}
       >
         <StyledButton
-          {...buttonProps}
-          onClick={handleOpen}
-          onKeyDown={handleKeyDown}
           onBlur={onBlur}
-          ref={mergeRefs(buttonRef, triggerProps.ref, buttonProps.ref)}
+          ref={mergeRefs(buttonRef, triggerProps.ref)}
           error={Boolean(error)}
+          {...getToggleButtonProps(triggerProps)}
         >
-          <StyledContent isSelected={Boolean(selected)}>
+          <StyledContent isSelected={Boolean(selectedItem)}>
             {/* Render default label when customLabel is not provided */}
-            {!customLabel && selected && selected.label}
+            {!customLabel && selectedItem && selectedItem.label}
 
             {/* Render customLabel when customLabel is provided */}
-            {customLabel && selected && customLabel(selected)}
+            {customLabel && selectedItem && customLabel(selectedItem)}
 
             {/* Render placeholder when nothing is selected */}
-            {!selected && placeholder}
+            {!selectedItem && placeholder}
           </StyledContent>
 
           <Spreader spread="0.5" />
@@ -156,36 +136,27 @@ const SelectInner = <ValueType,>(
       </Wrapper>
 
       {renderLayer(
-        <AnimatePresence>
-          {isOpen && (
-            <Menu
-              minMenuWidth={minMenuWidth}
-              isInModal={isInModal}
-              role="menu"
-              {...layerProps}
-              {...dropdownAnimation(anmimationDirection)}
-            >
-              {options.map(({ value, label, ...rest }, index) => {
-                const handleSelect = () => {
-                  setSelected({ value, label, ...rest });
-
-                  setIsOpen(false);
-                };
-
-                return (
-                  <Menu.Item
-                    onClick={handleSelect}
-                    isSelected={selected?.value === value}
-                    key={value as Key}
-                    {...itemProps[index]}
-                  >
-                    {label}
-                  </Menu.Item>
-                );
-              })}
-            </Menu>
-          )}
-        </AnimatePresence>,
+        <Menu
+          isInModal={isInModal}
+          {...getMenuProps(layerProps)}
+          style={{
+            width: triggerBounds?.width,
+            display: isOpen ? 'block' : 'none',
+            ...layerProps.style,
+          }}
+        >
+          {isOpen &&
+            options.map(({ value, label, ...rest }, index) => (
+              <Menu.Item
+                isSelected={selectedItem?.value === value}
+                key={value as Key}
+                {...getItemProps({ item: { value, label, ...rest }, index })}
+                highlighted={highlightedIndex === index}
+              >
+                {label}
+              </Menu.Item>
+            ))}
+        </Menu>,
       )}
     </Fragment>
   );
