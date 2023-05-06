@@ -1,7 +1,6 @@
-import { Column } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
-export const Content = styled(Column).withConfig({
+export const Main = styled.main.withConfig({
   shouldForwardProp: prop => !['isDashboard'].includes(prop),
 })<{ isDashboard: boolean }>`
   min-height: 100%;
