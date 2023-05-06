@@ -7,7 +7,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useLocation, useRoutes } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
 
-import { Content } from './Authenticated.styles';
+import { Main } from './Authenticated.styles';
 import { CashAccountsRoutes } from './CashAccounts';
 import { DashboardRoutes } from './Dashboard/routes/Routes';
 import { HubRoutes } from './Hub';
@@ -53,9 +53,9 @@ export const Authenticated = () => {
           )}
 
           <Suspense fallback={<FullscreenLoading />}>
-            <Content isDashboard={!isHub}>
+            <Main isDashboard={!isHub}>
               <ErrorBoundary FallbackComponent={ErrorContent}>{views}</ErrorBoundary>
-            </Content>
+            </Main>
           </Suspense>
         </Fragment>
       </ProtectedRoute>
