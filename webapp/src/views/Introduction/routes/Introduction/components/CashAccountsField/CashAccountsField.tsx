@@ -36,7 +36,7 @@ export const CashAccountsField = ({
     errors,
   });
 
-  const options = useMemo(
+  const items = useMemo(
     () =>
       CURRENCIES_ARRAY.map(currency => ({
         label: t(`currency.${currency}`),
@@ -64,7 +64,7 @@ export const CashAccountsField = ({
 
       <Select
         width="130px"
-        options={options}
+        items={items}
         customLabel={customLabel}
         defaultValue={defaultValue}
         {...currencySelectProps}

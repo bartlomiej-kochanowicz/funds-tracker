@@ -78,7 +78,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 
   const customLabel = ({ value }: { value: string }) => value;
 
-  const options = useMemo(
+  const items = useMemo(
     () =>
       CURRENCIES_ARRAY.map(currency => ({
         label: t(`currency.${currency}`),
@@ -104,7 +104,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 
         <Select
           width="130px"
-          options={options}
+          items={items}
           customLabel={customLabel}
           defaultValue={user.defaultCurrency}
           placement="bottom-end"
