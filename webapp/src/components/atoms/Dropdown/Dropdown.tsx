@@ -1,21 +1,35 @@
-import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
-import {
-  forwardRef,
-  ForwardRefExoticComponent,
-  Fragment,
-  MouseEventHandler,
-  ReactNode,
-  Ref,
-  useState,
-} from 'react';
-import { LayerProps, mergeRefs, TriggerProps, useLayer } from 'react-laag';
+import { useSelect } from 'downshift';
+import { forwardRef, Fragment, Key, MouseEventHandler, ReactNode, Ref } from 'react';
+import { IconType } from 'react-icons';
+import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 
+import { Menu } from '../Menu';
 import { Trigger } from './Dropdown.styles';
 
-export type ContentProps = LayerProps & TriggerProps & { handleToggle: () => void };
+type ItemCommon = {
+  value: string | number;
+  label: string | ReactNode;
+  divider?: 'top' | 'bottom' | 'both';
+  icon?: IconType;
+};
+
+type ItemButton = ItemCommon & {
+  onClick?: () => void;
+  to?: undefined;
+};
+
+type ItemLink = ItemCommon & {
+  to?: string;
+  onClick?: undefined;
+};
+
+export type Item = ItemButton | ItemLink;
+
+export type DropdownItems = Item[];
 
 interface DropdownProps {
+  items: Item[];
   placement?: PlacementType;
   children:
     | ReactNode
@@ -24,17 +38,20 @@ interface DropdownProps {
         onClick: MouseEventHandler<HTMLButtonElement>;
         ref: Ref<HTMLButtonElement>;
       }) => ReactNode);
-  content:
-    | ForwardRefExoticComponent<{ handleToggle: () => void } & HTMLMotionProps<'ul'>>
-    | ((props: ContentProps) => ReactNode);
   triggerOffset?: number;
 }
 
 export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
-  ({ placement = 'bottom-center', children, content, triggerOffset = 5, ...rest }, ref) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+  ({ items, placement = 'bottom-center', children, triggerOffset = 5, ...rest }, ref) => {
+    const itemToString = (item: Item | null) => String(item?.value) || '';
 
-    const { renderLayer, triggerProps, layerProps } = useLayer({
+    const { isOpen, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps, reset } =
+      useSelect({
+        items,
+        itemToString,
+      });
+
+    const { renderLayer, triggerProps, layerProps, triggerBounds } = useLayer({
       isOpen,
       placement,
       auto: true,
@@ -47,19 +64,8 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
         'bottom-end',
       ],
       triggerOffset,
-      onDisappear: disappearType => {
-        if (disappearType === 'full') {
-          setIsOpen(false);
-        }
-      },
-      onOutsideClick: () => setIsOpen(false),
+      onDisappear: reset,
     });
-
-    const handleToggle = () => setIsOpen(prev => !prev);
-
-    const Content = content as ForwardRefExoticComponent<
-      { handleToggle: () => void } & HTMLMotionProps<'ul'>
-    >;
 
     return (
       <Fragment>
@@ -67,17 +73,16 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
           children({
             isOpen,
             ...rest,
-            ...triggerProps,
-            onClick: handleToggle,
+            ...getMenuProps(triggerProps),
             ref: mergeRefs(ref, triggerProps.ref),
+            ...getToggleButtonProps(triggerProps),
           })}
 
         {typeof children !== 'function' && (
           <Trigger
             {...rest}
-            {...triggerProps}
-            onClick={handleToggle}
             ref={mergeRefs(ref, triggerProps.ref)}
+            {...getToggleButtonProps(triggerProps)}
             type="button"
           >
             {children}
@@ -85,24 +90,31 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
         )}
 
         {renderLayer(
-          <AnimatePresence>
-            {isOpen && (
-              <Fragment>
-                {typeof content === 'function' &&
-                  content({
-                    ...layerProps,
-                    handleToggle,
-                  })}
+          <Menu
+            {...getMenuProps(layerProps)}
+            style={{
+              minWidth: triggerBounds?.width,
+              display: isOpen ? 'block' : 'none',
+              ...layerProps.style,
+            }}
+          >
+            {isOpen &&
+              items.map(({ value = '', label = '', divider, ...itemRest }, index) => (
+                <Fragment key={value as Key}>
+                  {(divider === 'top' || divider === 'both') && <Menu.Divider />}
 
-                {typeof content !== 'function' && (
-                  <Content
-                    {...layerProps}
-                    handleToggle={handleToggle}
-                  />
-                )}
-              </Fragment>
-            )}
-          </AnimatePresence>,
+                  <Menu.Item
+                    {...itemRest}
+                    {...getItemProps({ item: { value, label }, index })}
+                    highlighted={highlightedIndex === index}
+                  >
+                    {label}
+                  </Menu.Item>
+
+                  {(divider === 'bottom' || divider === 'both') && <Menu.Divider />}
+                </Fragment>
+              ))}
+          </Menu>,
         )}
       </Fragment>
     );

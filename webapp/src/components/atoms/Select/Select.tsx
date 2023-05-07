@@ -54,9 +54,7 @@ const SelectInner = <ValueType,>(
   }: SelectProps<ValueType>,
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
-  const itemToString = (item: Item<ValueType> | null) => {
-    return item?.label || '';
-  };
+  const itemToString = (item: Item<ValueType> | null) => item?.label || '';
 
   const getDefaultSelected = (): Item<ValueType> | null =>
     defaultValue ? items.find(item => item.value === defaultValue) || null : null;

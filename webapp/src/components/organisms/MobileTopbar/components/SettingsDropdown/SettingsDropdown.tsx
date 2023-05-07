@@ -4,7 +4,7 @@ import { FaCog } from 'react-icons/fa';
 
 import { DropdownContent } from '../DropdownContent';
 
-export const SettingsDropdown: FC = () => (
+/* export const SettingsDropdown: FC = () => (
   <Dropdown
     content={DropdownContent}
     placement="bottom-end"
@@ -15,4 +15,5 @@ export const SettingsDropdown: FC = () => (
       color="gray400"
     />
   </Dropdown>
-);
+); */
+export const SettingsDropdown: FC = () => null;

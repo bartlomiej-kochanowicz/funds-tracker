@@ -33,6 +33,7 @@
     "js-cookie": "3.0.5",
     "logrocket": "4.0.0",
     "react": "18.2.0",
+    "react-accessible-dropdown-menu-hook": "^4.0.0",
     "react-currency-input-field": "3.6.10",
     "react-datepicker": "4.11.0",
     "react-dom": "18.2.0",
