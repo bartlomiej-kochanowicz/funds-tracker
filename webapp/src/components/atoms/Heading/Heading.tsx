@@ -1,18 +1,18 @@
-import { createElement, ReactNode } from 'react';
+import { createElement, HTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { fontable, FontableProps, resolveProps } from 'styles/mixins';
 
 type Level = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-type HeadingProps = {
+interface IHeadingProps extends FontableProps, HTMLAttributes<HTMLHeadingElement> {
   level?: Level;
   inline?: boolean;
   children: ReactNode;
   ['data-testid']?: string;
-} & FontableProps;
+}
 
 export const Heading = styled(
-  ({ level = 'h1', children, ...props }: { className?: string } & HeadingProps) =>
+  ({ level = 'h1', children, ...props }: { className?: string } & IHeadingProps) =>
     createElement(level, resolveProps(props), children),
 )(
   ({ theme, level = 'h1', inline }) => css`
@@ -31,5 +31,3 @@ export const Heading = styled(
 );
 
 Heading.displayName = 'Heading';
-
-export default Heading;
