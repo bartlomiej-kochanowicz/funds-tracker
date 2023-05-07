@@ -1,11 +1,11 @@
 import { Avatar, Dropdown, Icon, Spreader, Text } from 'components/atoms';
+import type { DropdownItems } from 'components/atoms/Dropdown';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { useUserContext } from 'contexts/UserContext';
 import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaSignOutAlt } from 'react-icons/fa';
 
-import { DropdownContent } from './components/DropdownContent';
 import { ProfileContainer } from './Profile.styles';
 
 interface ProfileProps {
@@ -19,9 +19,18 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
   const { isDark } = useColorThemeContext();
 
+  const items = [
+    {
+      value: 'sign-out',
+      icon: FaSignOutAlt,
+      label: t('common.sign_out'),
+      divider: 'top',
+    },
+  ] satisfies DropdownItems;
+
   return (
     <Dropdown
-      content={DropdownContent}
+      items={items}
       placement="bottom-end"
       triggerOffset={0}
     >

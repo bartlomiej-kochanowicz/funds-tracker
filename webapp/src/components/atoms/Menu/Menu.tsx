@@ -10,7 +10,7 @@ export interface MenuProps {
 }
 
 export const Menu = styled(motion.div)<MenuProps>`
-  max-height: 16rem;
+  max-height: calc(var(--document-height) / 2);
   overflow-y: auto;
 
   ${({ theme: { isDark, zIndex, radius, padding, colors }, isInModal }) => css`

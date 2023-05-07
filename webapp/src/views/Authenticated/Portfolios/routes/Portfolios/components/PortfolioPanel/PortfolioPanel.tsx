@@ -1,6 +1,5 @@
 import { GetPortfoliosQuery } from '__generated__/graphql';
 import { Box, Button, Dropdown, Icon, Text } from 'components/atoms';
-import { ContentProps } from 'components/atoms/Dropdown';
 import { useUserContext } from 'contexts/UserContext';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { useBreakpoint } from 'hooks/useBreakpoint';
@@ -27,7 +26,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery['portfolios'][0] & Portfolios
 
   const isPhone = useBreakpoint('phone', 'max');
 
-  const content = (props: ContentProps) => (
+  /* const content = (props: ContentProps) => (
     <DropdownContent
       uuid={uuid}
       name={name}
@@ -35,7 +34,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery['portfolios'][0] & Portfolios
       updatePortfolioList={updatePortfolioList}
       {...props}
     />
-  );
+  ); */
 
   return (
     <Box
@@ -49,7 +48,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery['portfolios'][0] & Portfolios
           <Text>{formatCurrency(2137, defaultCurrency)}</Text>
         </Column>
 
-        <Dropdown
+        {/* <Dropdown
           content={content}
           placement="bottom-end"
         >
@@ -62,7 +61,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery['portfolios'][0] & Portfolios
               <Icon icon={FaEllipsisV} />
             </Button>
           )}
-        </Dropdown>
+        </Dropdown> */}
       </Row>
     </Box>
   );
