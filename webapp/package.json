@@ -37,6 +37,7 @@
     "react-datepicker": "4.11.0",
     "react-dom": "18.2.0",
     "react-error-boundary": "4.0.4",
+    "react-focus-lock": "2.9.4",
     "react-google-recaptcha-v3": "1.10.1",
     "react-hook-form": "7.43.9",
     "react-i18next": "12.2.2",

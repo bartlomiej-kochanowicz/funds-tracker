@@ -1,6 +1,7 @@
 import { Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
-import { FC, Fragment, ReactNode, useRef } from 'react';
+import { FC, Fragment, ReactNode, useCallback, useEffect, useRef } from 'react';
+import FocusLock from 'react-focus-lock';
 import { FaTimes } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 
@@ -17,35 +18,68 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
 
   useDetectOutsideClick<HTMLDivElement>(modalRef, closeModal);
 
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.keyCode === 27) {
+        closeModal();
+      }
+    },
+    [closeModal],
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown, false);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, false);
+    };
+  }, [onKeyDown]);
+
   return (
     <Fragment>
       <Background />
 
       <GlobalStyle />
 
-      <div
-        data-modal="true"
-        ref={modalRef}
-      >
-        <ModalComponent>
-          <Row justifyContent={modalName ? 'space-between' : 'flex-end'}>
-            {modalName && <Heading level="h2">{modalName}</Heading>}
+      <FocusLock>
+        <div
+          data-modal="true"
+          aria-labelledby={modalName}
+          role="dialog"
+          aria-modal="true"
+          tabIndex={-1}
+          ref={modalRef}
+        >
+          <ModalComponent>
+            <Row justifyContent={modalName ? 'space-between' : 'flex-end'}>
+              {modalName && (
+                <Heading
+                  level="h2"
+                  id={modalName}
+                >
+                  {modalName}
+                </Heading>
+              )}
 
-            <Spreader />
+              <Spreader />
 
-            <CloseButton onClick={closeModal}>
-              <Icon
-                icon={FaTimes}
-                size="1.25"
-              />
-            </CloseButton>
-          </Row>
+              <CloseButton
+                onClick={closeModal}
+                aria-label="close"
+              >
+                <Icon
+                  icon={FaTimes}
+                  size="1.25"
+                />
+              </CloseButton>
+            </Row>
 
-          <Spacer space="0.5" />
+            <Spacer space="0.5" />
 
-          {children}
-        </ModalComponent>
-      </div>
+            {children}
+          </ModalComponent>
+        </div>
+      </FocusLock>
     </Fragment>
   );
 };

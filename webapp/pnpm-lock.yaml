@@ -62,6 +62,7 @@ specifiers:
   react-datepicker: 4.11.0
   react-dom: 18.2.0
   react-error-boundary: 4.0.4
+  react-focus-lock: 2.9.4
   react-google-recaptcha-v3: 1.10.1
   react-hook-form: 7.43.9
   react-i18next: 12.2.2
@@ -106,6 +107,7 @@ dependencies:
   react-datepicker: 4.11.0_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 4.0.4_react@18.2.0
+  react-focus-lock: 2.9.4_3mjolpizrsjgnt7s4ahgoveqvu
   react-google-recaptcha-v3: 1.10.1_biqbaboplfbrettd7655fr4n2y
   react-hook-form: 7.43.9_react@18.2.0
   react-i18next: 12.2.2_qeiswpmww5mojeeisizknycqfq
@@ -4384,6 +4386,10 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /detect-node-es/1.1.0:
+    resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
+    dev: false
+
   /detective-amd/3.1.2:
     resolution: {integrity: sha512-jffU26dyqJ37JHR/o44La6CxtrDf3Rt9tvd2IbImJYxWKTMdBjctp37qoZ6ZcY80RHg+kzWz4bXn39e4P7cctQ==}
     engines: {node: '>=6.0'}
@@ -5348,6 +5354,13 @@ packages:
     resolution: {integrity: sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==}
     deprecated: flatten is deprecated in favor of utility frameworks such as lodash.
     dev: true
+
+  /focus-lock/0.11.6:
+    resolution: {integrity: sha512-KSuV3ur4gf2KqMNoZx3nXNVhqCkn42GuTYCX4tXPEwf0MjpFQmNMiN6m7dXaUXgIoivL6/65agoUMg4RLS0Vbg==}
+    engines: {node: '>=10'}
+    dependencies:
+      tslib: 2.5.0
+    dev: false
 
   /for-each/0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
@@ -7312,6 +7325,15 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
+  /react-clientside-effect/1.2.6_react@18.2.0:
+    resolution: {integrity: sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg==}
+    peerDependencies:
+      react: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.21.5
+      react: 18.2.0
+    dev: false
+
   /react-currency-input-field/3.6.10_react@18.2.0:
     resolution: {integrity: sha512-KRAJJaLujarBTLlEVbznsUxQ56+Qyqwoe5w9DnGxmsGnHv4ycQRpRkuuCDfF9BcXHmegzsOXesfIGpW7Cw9mTQ==}
     peerDependencies:
@@ -7366,6 +7388,25 @@ packages:
 
   /react-fast-compare/3.2.1:
     resolution: {integrity: sha512-xTYf9zFim2pEif/Fw16dBiXpe0hoy5PxcD8+OwBnTtNLfIm3g6WxhKNurY+6OmdH1u6Ta/W/Vl6vjbYP1MFnDg==}
+    dev: false
+
+  /react-focus-lock/2.9.4_3mjolpizrsjgnt7s4ahgoveqvu:
+    resolution: {integrity: sha512-7pEdXyMseqm3kVjhdVH18sovparAzLg5h6WvIx7/Ck3ekjhrrDMEegHSa3swwC8wgfdd7DIdUVRGeiHT9/7Sgg==}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.21.5
+      '@types/react': 18.2.0
+      focus-lock: 0.11.6
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-clientside-effect: 1.2.6_react@18.2.0
+      use-callback-ref: 1.3.0_3mjolpizrsjgnt7s4ahgoveqvu
+      use-sidecar: 1.1.2_3mjolpizrsjgnt7s4ahgoveqvu
     dev: false
 
   /react-google-recaptcha-v3/1.10.1_biqbaboplfbrettd7655fr4n2y:
@@ -8620,6 +8661,37 @@ packages:
   /urlpattern-polyfill/8.0.2:
     resolution: {integrity: sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==}
     dev: true
+
+  /use-callback-ref/1.3.0_3mjolpizrsjgnt7s4ahgoveqvu:
+    resolution: {integrity: sha512-3FT9PRuRdbB9HfXhEq35u4oZkvpJ5kuYbpqhCfmiZyReuRgpnhDlbr2ZEnnuS0RrJAPn6l23xjFg9kpDM+Ms7w==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 18.2.0
+      react: 18.2.0
+      tslib: 2.5.0
+    dev: false
+
+  /use-sidecar/1.1.2_3mjolpizrsjgnt7s4ahgoveqvu:
+    resolution: {integrity: sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@types/react': ^16.9.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 18.2.0
+      detect-node-es: 1.1.0
+      react: 18.2.0
+      tslib: 2.5.0
+    dev: false
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
