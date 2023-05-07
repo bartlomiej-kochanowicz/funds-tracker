@@ -20,7 +20,7 @@ export const DefaultCurrency = () => {
 
   const { user, updateUser: updateUserGlobal } = useUserContext();
 
-  const options = useMemo(
+  const items = useMemo(
     () =>
       CURRENCIES_ARRAY.map(currency => ({
         label: t(`currency.${currency}`),
@@ -108,7 +108,7 @@ export const DefaultCurrency = () => {
           noValidate
         >
           <Select
-            options={options}
+            items={items}
             defaultValue={defaultValues.defaultCurrency}
             {...defaultCurrencySelectProps}
           />

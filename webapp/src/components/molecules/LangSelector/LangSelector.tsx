@@ -8,7 +8,7 @@ import { Row } from 'simple-flexbox';
 export const LangSelector = () => {
   const { t, i18n } = useTranslation();
 
-  const options = useMemo(
+  const items = useMemo(
     () =>
       languages.map(({ label, ...rest }) => ({
         label: t(label),
@@ -33,7 +33,7 @@ export const LangSelector = () => {
 
   return (
     <Select
-      options={options}
+      items={items}
       defaultValue={i18n.resolvedLanguage}
       onChange={handleChangeLanguage}
       customLabel={customLabel}

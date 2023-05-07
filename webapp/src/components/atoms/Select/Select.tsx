@@ -25,7 +25,7 @@ type Item<ValueType> = {
 };
 
 interface SelectProps<ValueType> {
-  options: Item<ValueType>[];
+  items: Item<ValueType>[];
   placeholder?: string;
   defaultValue?: string;
   onChange?: (value: Item<ValueType>['value']) => void;
@@ -40,7 +40,7 @@ interface SelectProps<ValueType> {
 
 const SelectInner = <ValueType,>(
   {
-    options,
+    items,
     defaultValue,
     placeholder,
     onChange,
@@ -59,7 +59,7 @@ const SelectInner = <ValueType,>(
   };
 
   const getDefaultSelected = (): Item<ValueType> | null =>
-    defaultValue ? options.find(option => option.value === defaultValue) || null : null;
+    defaultValue ? items.find(item => item.value === defaultValue) || null : null;
 
   const {
     isOpen,
@@ -69,7 +69,7 @@ const SelectInner = <ValueType,>(
     highlightedIndex,
     getItemProps,
   } = useSelect({
-    items: options,
+    items,
     itemToString,
     defaultSelectedItem: getDefaultSelected(),
   });
@@ -147,7 +147,7 @@ const SelectInner = <ValueType,>(
           }}
         >
           {isOpen &&
-            options.map(({ value, label, ...rest }, index) => (
+            items.map(({ value, label, ...rest }, index) => (
               <Menu.Item
                 isSelected={selectedItem?.value === value}
                 key={value as Key}
