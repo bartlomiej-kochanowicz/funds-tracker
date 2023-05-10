@@ -1,5 +1,5 @@
-import { useSelect } from 'downshift';
 import { forwardRef, Fragment, Key, MouseEventHandler, ReactNode, Ref } from 'react';
+import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { IconType } from 'react-icons';
 import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
@@ -35,7 +35,7 @@ interface DropdownProps {
     | ReactNode
     | ((props: {
         isOpen?: boolean;
-        onClick: MouseEventHandler<HTMLButtonElement>;
+        onClick?: MouseEventHandler<HTMLButtonElement>;
         ref: Ref<HTMLButtonElement>;
       }) => ReactNode);
   triggerOffset?: number;
@@ -43,15 +43,9 @@ interface DropdownProps {
 
 export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
   ({ items, placement = 'bottom-center', children, triggerOffset = 5, ...rest }, ref) => {
-    const itemToString = (item: Item | null) => String(item?.value) || '';
+    const { buttonProps, itemProps, isOpen } = useDropdownMenu(items.length);
 
-    const { isOpen, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps, reset } =
-      useSelect({
-        items,
-        itemToString,
-      });
-
-    const { renderLayer, triggerProps, layerProps, triggerBounds } = useLayer({
+    const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
       placement,
       auto: true,
@@ -64,7 +58,6 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
         'bottom-end',
       ],
       triggerOffset,
-      onDisappear: reset,
     });
 
     return (
@@ -73,16 +66,15 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
           children({
             isOpen,
             ...rest,
-            ...getMenuProps(triggerProps),
-            ref: mergeRefs(ref, triggerProps.ref),
-            ...getToggleButtonProps(triggerProps),
+            ...buttonProps,
+            ref: mergeRefs(ref, triggerProps.ref, buttonProps.ref),
           })}
 
         {typeof children !== 'function' && (
           <Trigger
             {...rest}
-            ref={mergeRefs(ref, triggerProps.ref)}
-            {...getToggleButtonProps(triggerProps)}
+            {...buttonProps}
+            ref={mergeRefs(ref, triggerProps.ref, buttonProps.ref)}
             type="button"
           >
             {children}
@@ -91,12 +83,8 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
 
         {renderLayer(
           <Menu
-            {...getMenuProps(layerProps)}
-            style={{
-              minWidth: triggerBounds?.width,
-              display: isOpen ? 'block' : 'none',
-              ...layerProps.style,
-            }}
+            role="menu"
+            {...layerProps}
           >
             {isOpen &&
               items.map(({ value = '', label = '', divider, ...itemRest }, index) => (
@@ -105,8 +93,8 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
 
                   <Menu.Item
                     {...itemRest}
-                    {...getItemProps({ item: { value, label }, index })}
-                    highlighted={highlightedIndex === index}
+                    {...itemProps[index]}
+                    /* highlighted={highlightedIndex === index} */
                   >
                     {label}
                   </Menu.Item>
