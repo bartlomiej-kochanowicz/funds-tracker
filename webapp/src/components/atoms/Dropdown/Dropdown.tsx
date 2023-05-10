@@ -1,5 +1,5 @@
+import { useDropdownMenu } from 'hooks/useDropdownMenu';
 import { forwardRef, Fragment, Key, MouseEventHandler, ReactNode, Ref } from 'react';
-import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { IconType } from 'react-icons';
 import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
@@ -82,27 +82,28 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
         )}
 
         {renderLayer(
-          <Menu
-            role="menu"
-            {...layerProps}
-          >
-            {isOpen &&
-              items.map(({ value = '', label = '', divider, ...itemRest }, index) => (
+          isOpen && (
+            <Menu
+              role="menu"
+              {...layerProps}
+            >
+              {items.map(({ value = '', label = '', divider, ...itemRest }, index) => (
                 <Fragment key={value as Key}>
                   {(divider === 'top' || divider === 'both') && <Menu.Divider />}
 
-                  <Menu.Item
+                  <a
                     {...itemRest}
                     {...itemProps[index]}
                     /* highlighted={highlightedIndex === index} */
                   >
                     {label}
-                  </Menu.Item>
+                  </a>
 
                   {(divider === 'bottom' || divider === 'both') && <Menu.Divider />}
                 </Fragment>
               ))}
-          </Menu>,
+            </Menu>
+          ),
         )}
       </Fragment>
     );

@@ -135,17 +135,16 @@ const SelectInner = <ValueType,>(
       </Wrapper>
 
       {renderLayer(
-        <Menu
-          isInModal={isInModal}
-          {...getMenuProps(layerProps)}
-          style={{
-            minWidth: triggerBounds?.width,
-            display: isOpen ? 'block' : 'none',
-            ...layerProps.style,
-          }}
-        >
-          {isOpen &&
-            items.map(({ value, label, ...rest }, index) => (
+        isOpen && (
+          <Menu
+            isInModal={isInModal}
+            {...getMenuProps(layerProps)}
+            style={{
+              minWidth: triggerBounds?.width,
+              ...layerProps.style,
+            }}
+          >
+            {items.map(({ value, label, ...rest }, index) => (
               <Menu.Item
                 isSelected={selectedItem?.value === value}
                 key={value as Key}
@@ -155,7 +154,8 @@ const SelectInner = <ValueType,>(
                 {label}
               </Menu.Item>
             ))}
-        </Menu>,
+          </Menu>
+        ),
       )}
     </Fragment>
   );
