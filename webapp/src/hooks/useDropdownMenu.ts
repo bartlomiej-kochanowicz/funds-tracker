@@ -13,10 +13,10 @@ export interface ButtonProps<ButtonElement extends HTMLElement>
 
 // Create interface for item properties
 export interface ItemProps {
-  onKeyDown: (e: React.KeyboardEvent<HTMLAnchorElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => void;
   tabIndex: number;
   role: string;
-  ref: React.RefObject<HTMLAnchorElement>;
+  ref: React.RefObject<HTMLElement>;
 }
 
 // A custom Hook that abstracts away the listeners/controls for dropdown menus
@@ -44,8 +44,8 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
 
   // Create refs
   const buttonRef = useRef<ButtonElement>(null);
-  const itemRefs = useMemo<React.RefObject<HTMLAnchorElement>[]>(
-    () => Array.from({ length: itemCount }, () => createRef<HTMLAnchorElement>()),
+  const itemRefs = useMemo<React.RefObject<HTMLElement>[]>(
+    () => Array.from({ length: itemCount }, () => createRef<HTMLElement>()),
     [itemCount],
   );
 
@@ -175,7 +175,7 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
   };
 
   // Create a function that handles menu logic based on keyboard events that occur on menu items
-  const itemListener = (e: React.KeyboardEvent<HTMLAnchorElement>): void => {
+  const itemListener = (e: React.KeyboardEvent<HTMLElement>): void => {
     // Destructure the key property from the event object
     const { key } = e;
 
@@ -195,9 +195,9 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
         return;
       }
       if (key === 'Enter' || key === ' ') {
-        if (!e.currentTarget.href) {
+        /* if (!e.currentTarget.href) {
           e.currentTarget.click();
-        }
+        } */
 
         setIsOpen(false);
         return;

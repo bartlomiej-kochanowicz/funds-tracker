@@ -22,9 +22,13 @@ const mixin = css<{
       outline: 2px solid ${theme.colors.blue};
     }
 
+    &:hover {
+      background-color: ${transparentize(theme.colors.gray300, 0.75)};
+    }
+
     ${highlighted &&
     css`
-      background-color: ${transparentize(theme.colors.gray300, 0.75)};
+      outline: 2px solid ${theme.colors.blue};
     `}
   `};
 `;
