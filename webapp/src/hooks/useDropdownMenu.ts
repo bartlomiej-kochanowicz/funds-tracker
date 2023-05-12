@@ -130,6 +130,22 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
     return (): void => document.removeEventListener('keydown', disableArrowScroll);
   }, [isOpen]);
 
+  useEffect(() => {
+    itemRefs.forEach((ref, index) => {
+      ref.current?.addEventListener('mouseover', () => {
+        moveFocus(index);
+      });
+    });
+
+    return (): void => {
+      itemRefs.forEach((ref, index) => {
+        ref.current?.removeEventListener('mouseover', () => {
+          moveFocus(index);
+        });
+      });
+    };
+  }, [itemRefs, isOpen, moveFocus]);
+
   const buttonListener = (e: ReactKeyboardEvent | ReactMouseEvent): void => {
     if (isKeyboardEvent(e)) {
       const { key } = e;
