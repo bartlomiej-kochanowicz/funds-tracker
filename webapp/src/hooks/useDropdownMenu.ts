@@ -1,25 +1,34 @@
-/* eslint-disable consistent-return */
-// Imports
-import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  ButtonHTMLAttributes,
+  createRef,
+  DetailedHTMLProps,
+  Dispatch,
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+  RefObject,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
-// Create interface for button properties
 export interface ButtonProps<ButtonElement extends HTMLElement>
   extends Pick<
-    React.DetailedHTMLProps<React.ButtonHTMLAttributes<ButtonElement>, ButtonElement>,
+    DetailedHTMLProps<ButtonHTMLAttributes<ButtonElement>, ButtonElement>,
     'onKeyDown' | 'onClick' | 'tabIndex' | 'role' | 'aria-haspopup' | 'aria-expanded'
   > {
-  ref: React.RefObject<ButtonElement>;
+  ref: RefObject<ButtonElement>;
 }
 
-// Create interface for item properties
 export interface ItemProps {
-  onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => void;
+  onKeyDown: (e: ReactKeyboardEvent<HTMLElement>) => void;
   tabIndex: number;
   role: string;
-  ref: React.RefObject<HTMLElement>;
+  ref: RefObject<HTMLElement>;
 }
 
-// A custom Hook that abstracts away the listeners/controls for dropdown menus
 export interface DropdownMenuOptions {
   focusFirstItemOnClick?: boolean;
 }
@@ -28,7 +37,7 @@ interface DropdownMenuResponse<ButtonElement extends HTMLElement> {
   readonly buttonProps: ButtonProps<ButtonElement>;
   readonly itemProps: ItemProps[];
   readonly isOpen: boolean;
-  readonly setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly setIsOpen: Dispatch<SetStateAction<boolean>>;
   readonly moveFocus: (itemIndex: number) => void;
 }
 
@@ -36,24 +45,20 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
   itemCount: number,
   options?: DropdownMenuOptions,
 ): DropdownMenuResponse<ButtonElement> => {
-  // Use state
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const currentFocusIndex = useRef<number | null>(null);
   const firstRun = useRef(true);
   const clickedOpen = useRef(false);
 
-  // Create refs
   const buttonRef = useRef<ButtonElement>(null);
-  const itemRefs = useMemo<React.RefObject<HTMLElement>[]>(
+  const itemRefs = useMemo<RefObject<HTMLElement>[]>(
     () => Array.from({ length: itemCount }, () => createRef<HTMLElement>()),
     [itemCount],
   );
 
-  // Create type guard
-  const isKeyboardEvent = (e: React.KeyboardEvent | React.MouseEvent): e is React.KeyboardEvent =>
-    (e as React.KeyboardEvent).key !== undefined;
+  const isKeyboardEvent = (e: ReactKeyboardEvent | ReactMouseEvent): e is ReactKeyboardEvent =>
+    (e as ReactKeyboardEvent).key !== undefined;
 
-  // Handles moving the focus between menu items
   const moveFocus = useCallback(
     (itemIndex: number): void => {
       currentFocusIndex.current = itemIndex;
@@ -62,15 +67,12 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
     [itemRefs],
   );
 
-  // Focus the first item when the menu opens
   useEffect(() => {
-    // Stop if this is the first fire of the Hook, and update the ref
     if (firstRun.current) {
       firstRun.current = false;
       return;
     }
 
-    // If the menu is currently open focus on the first item in the menu
     if (isOpen && (!clickedOpen.current || options?.focusFirstItemOnClick)) {
       moveFocus(0);
     } else if (!isOpen) {
@@ -78,40 +80,29 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
     }
   }, [isOpen, moveFocus, options?.focusFirstItemOnClick]);
 
-  // Handle listening for clicks and auto-hiding the menu
   useEffect(() => {
-    // Ignore if the menu isn't open
     if (!isOpen) {
       return;
     }
 
-    // Initialize object to track if the removal happens before the addition of the event listener
-    //  -> We're using an object here so that arrow functions below capture the reference and not the value
     const removalTracker = {
       removed: false,
     };
 
-    // This function is designed to handle every click
     const handleEveryClick = (event: MouseEvent): void => {
-      // Make this happen asynchronously
       setTimeout(() => {
-        // Type guard
         if (!(event.target instanceof Element)) {
           return;
         }
 
-        // Ignore if we're clicking inside the menu
         if (event.target.closest('[role="menu"]') instanceof Element) {
           return;
         }
 
-        // Hide dropdown
         setIsOpen(false);
       }, 10);
     };
 
-    // Add listener
-    //  -> Force it to be async to fix: https://github.com/facebook/react/issues/20074
     setTimeout(() => {
       if (removalTracker.removed) {
         return;
@@ -120,7 +111,6 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
       document.addEventListener('click', handleEveryClick);
     }, 1);
 
-    // Return function to remove listener
     return (): void => {
       removalTracker.removed = true;
 
@@ -128,7 +118,6 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
     };
   }, [isOpen]);
 
-  // Disable scroll when the menu is opened, and revert back when the menu is closed
   useEffect(() => {
     const disableArrowScroll = (event: KeyboardEvent): void => {
       if (isOpen && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
@@ -141,9 +130,7 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
     return (): void => document.removeEventListener('keydown', disableArrowScroll);
   }, [isOpen]);
 
-  // Create a handler function for the button's clicks and keyboard events
-  const buttonListener = (e: React.KeyboardEvent | React.MouseEvent): void => {
-    // Detect if event was a keyboard event or a mouse event
+  const buttonListener = (e: ReactKeyboardEvent | ReactMouseEvent): void => {
     if (isKeyboardEvent(e)) {
       const { key } = e;
 
@@ -174,17 +161,12 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
     }
   };
 
-  // Create a function that handles menu logic based on keyboard events that occur on menu items
-  const itemListener = (e: React.KeyboardEvent<HTMLElement>): void => {
-    // Destructure the key property from the event object
+  const itemListener = (e: ReactKeyboardEvent<HTMLElement>): void => {
     const { key } = e;
 
-    // Handle keyboard controls
     if (['Tab', 'Shift', 'Enter', 'Escape', 'ArrowUp', 'ArrowDown', ' '].includes(key)) {
-      // Create mutable value that initializes as the currentFocusIndex value
       let newFocusIndex = currentFocusIndex.current;
 
-      // Controls whether the menu is open or closed, if the button should regain focus on close, and if a handler function should be called
       if (key === 'Escape') {
         setIsOpen(false);
         buttonRef.current?.focus();
@@ -203,7 +185,6 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
         return;
       }
 
-      // Controls the current index to focus
       if (newFocusIndex !== null) {
         if (key === 'ArrowUp') {
           newFocusIndex -= 1;
@@ -218,7 +199,6 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
         }
       }
 
-      // After any modification set state to the modified value
       if (newFocusIndex !== null) {
         moveFocus(newFocusIndex);
       }
@@ -226,7 +206,6 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
       return;
     }
 
-    // Handle printable keys
     if (/[a-zA-Z0-9./<>?;:"'`!@#$%^&*()\\[\]{}_+=|\\-~,]/.test(key)) {
       const index = itemRefs.findIndex(
         ref =>
@@ -241,7 +220,6 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
     }
   };
 
-  // Define spreadable props for button and items
   const buttonProps: ButtonProps<ButtonElement> = {
     onKeyDown: buttonListener,
     onClick: buttonListener,
@@ -259,6 +237,5 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
     ref: itemRefs[index],
   }));
 
-  // Return a listener for the button, individual list items, and the state of the menu
   return { buttonProps, itemProps, isOpen, setIsOpen, moveFocus } as const;
 };
