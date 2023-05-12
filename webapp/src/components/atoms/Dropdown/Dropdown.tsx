@@ -91,13 +91,12 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
                 <Fragment key={value as Key}>
                   {(divider === 'top' || divider === 'both') && <Menu.Divider />}
 
-                  <a
+                  <Menu.Item
                     {...itemRest}
                     {...itemProps[index]}
-                    /* highlighted={highlightedIndex === index} */
                   >
                     {label}
-                  </a>
+                  </Menu.Item>
 
                   {(divider === 'bottom' || divider === 'both') && <Menu.Divider />}
                 </Fragment>
