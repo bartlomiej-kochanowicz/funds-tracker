@@ -1,7 +1,10 @@
+import { LogoutMutation } from '__generated__/graphql';
+import { useMutation } from '@apollo/client';
 import { Avatar, Dropdown, Icon, Spreader, Text } from 'components/atoms';
 import type { DropdownItems } from 'components/atoms/Dropdown';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { useUserContext } from 'contexts/UserContext';
+import { LOGOUT } from 'graphql/mutations/authentication/Logout';
 import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChevronDown, FaChevronUp, FaSignOutAlt } from 'react-icons/fa';
@@ -19,11 +22,22 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
   const { isDark } = useColorThemeContext();
 
+  const { clearUser: onCompleted } = useUserContext();
+
+  const [logout] = useMutation<LogoutMutation>(LOGOUT, {
+    onCompleted,
+  });
+
+  const handleSignOut = async () => {
+    await logout();
+  };
+
   const items = [
     {
       value: 'sign-out',
       icon: FaSignOutAlt,
       label: t('common.sign_out'),
+      onClick: handleSignOut,
       divider: 'top',
     },
   ] satisfies DropdownItems;
