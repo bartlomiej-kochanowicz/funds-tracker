@@ -38,7 +38,9 @@ export const Handle = styled(motion.div)`
   `}
 `;
 
-export const StyledBiMoon = styled(BiMoon)<{ isVisible: boolean }>`
+export const StyledBiMoon = styled(BiMoon).withConfig({
+  shouldForwardProp: prop => !['isVisible'].includes(prop),
+})<{ isVisible: boolean }>`
   position: absolute;
   top: calc(50% - 12px);
   font-size: 24px;
@@ -47,7 +49,9 @@ export const StyledBiMoon = styled(BiMoon)<{ isVisible: boolean }>`
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
 `;
 
-export const StyledBiSun = styled(BiSun)<{ isVisible: boolean }>`
+export const StyledBiSun = styled(BiSun).withConfig({
+  shouldForwardProp: prop => !['isVisible'].includes(prop),
+})<{ isVisible: boolean }>`
   position: absolute;
   top: calc(50% - 12px);
   font-size: 24px;
