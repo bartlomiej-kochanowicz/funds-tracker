@@ -39,7 +39,7 @@ export const CashAccountsPanel: FC<
       icon: FaChartLine,
       label: t('page.cash_accounts.button.invest'),
       value: 'invest',
-      onClick: () => {},
+      to: '/test',
     },
     {
       icon: FaListUl,
