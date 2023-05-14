@@ -14,6 +14,18 @@ import {
   useState,
 } from 'react';
 
+export type ItemButton = {
+  onClick?: () => void;
+  to?: undefined;
+};
+
+export type ItemLink = {
+  to?: string;
+  onClick?: undefined;
+};
+
+export type ItemBase = ItemButton | ItemLink;
+
 export interface ButtonProps<ButtonElement extends HTMLElement>
   extends Pick<
     DetailedHTMLProps<ButtonHTMLAttributes<ButtonElement>, ButtonElement>,
@@ -41,10 +53,15 @@ interface DropdownMenuResponse<ButtonElement extends HTMLElement> {
   readonly moveFocus: (itemIndex: number) => void;
 }
 
-export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonElement>(
-  itemCount: number,
+export const useDropdownMenu = <
+  Item extends ItemBase,
+  ButtonElement extends HTMLElement = HTMLButtonElement,
+>(
+  items: Item[],
   options?: DropdownMenuOptions,
 ): DropdownMenuResponse<ButtonElement> => {
+  const itemCount = items.length;
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const currentFocusIndex = useRef<number | null>(null);
   const firstRun = useRef(true);

@@ -9,10 +9,10 @@ export const Wrapper = styled(Row).withConfig({
   left: 0;
   right: 0;
 
-  ${({ theme: { colors, spacing, zIndex }, hasBorder }) => css`
+  ${({ theme: { colors, spacing, zIndex, isDark }, hasBorder }) => css`
     padding: calc(${spacing['1']} - ${spacing['1']} / 2) ${spacing['1']};
     z-index: ${zIndex.mobileNavigation};
-    background-color: ${colors.gray100};
+    background-color: ${isDark ? colors.black : colors.gray100};
 
     ${hasBorder &&
     css`

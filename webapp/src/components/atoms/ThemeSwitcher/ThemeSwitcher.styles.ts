@@ -38,20 +38,22 @@ export const Handle = styled(motion.div)`
   `}
 `;
 
-export const StyledBiMoon = styled(BiMoon)`
+export const StyledBiMoon = styled(BiMoon)<{ isVisible: boolean }>`
   position: absolute;
   top: calc(50% - 12px);
   font-size: 24px;
   left: 6px;
   color: ${({ theme }) => theme.colors.black};
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
 `;
 
-export const StyledBiSun = styled(BiSun)`
+export const StyledBiSun = styled(BiSun)<{ isVisible: boolean }>`
   position: absolute;
   top: calc(50% - 12px);
   font-size: 24px;
   right: 6px;
   color: ${({ theme }) => theme.colors.white};
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
 `;
 
 export const spring = {
