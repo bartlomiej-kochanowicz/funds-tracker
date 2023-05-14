@@ -194,25 +194,31 @@ export const useDropdownMenu = <
     }
   };
 
-  const itemListener = (e: ReactKeyboardEvent<HTMLElement>): void => {
+  const itemListener = (e: ReactKeyboardEvent<HTMLElement>, index: number): void => {
     const { key } = e;
 
     if (['Tab', 'Shift', 'Enter', 'Escape', 'ArrowUp', 'ArrowDown', ' '].includes(key)) {
       let newFocusIndex = currentFocusIndex.current;
 
+      const { to, onClick } = items[index];
+
+      const keyboardAction = to || onClick;
+
       if (key === 'Escape') {
         setIsOpen(false);
         buttonRef.current?.focus();
+
         return;
       }
       if (key === 'Tab') {
         setIsOpen(false);
+
         return;
       }
-      if (key === 'Enter' || key === ' ') {
+      if ((key === 'Enter' || key === ' ') && keyboardAction) {
         e.currentTarget.click();
-
         setIsOpen(false);
+
         return;
       }
 
@@ -238,15 +244,15 @@ export const useDropdownMenu = <
     }
 
     if (/[a-zA-Z0-9./<>?;:"'`!@#$%^&*()\\[\]{}_+=|\\-~,]/.test(key)) {
-      const index = itemRefs.findIndex(
+      const newIndex = itemRefs.findIndex(
         ref =>
           ref.current?.innerText?.toLowerCase().startsWith(key.toLowerCase()) ||
           ref.current?.textContent?.toLowerCase().startsWith(key.toLowerCase()) ||
           ref.current?.getAttribute('aria-label')?.toLowerCase().startsWith(key.toLowerCase()),
       );
 
-      if (index !== -1) {
-        moveFocus(index);
+      if (newIndex !== -1) {
+        moveFocus(newIndex);
       }
     }
   };
@@ -262,7 +268,7 @@ export const useDropdownMenu = <
   };
 
   const itemProps = Array.from({ length: itemCount }, (_ignore, index) => ({
-    onKeyDown: itemListener,
+    onKeyDown: (e: ReactKeyboardEvent<HTMLElement>) => itemListener(e, index),
     tabIndex: -1,
     role: 'menuitem',
     ref: itemRefs[index],
