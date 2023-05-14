@@ -1,9 +1,10 @@
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
+import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Handle, spring, StyledBiMoon, StyledBiSun, StyledButton } from './ThemeSwitcher.styles';
 
-export const ThemeSwitcher = () => {
+export const ThemeSwitcher = forwardRef<HTMLButtonElement>((props, ref) => {
   const { t } = useTranslation();
 
   const { isDark, toggleTheme } = useColorThemeContext();
@@ -12,9 +13,13 @@ export const ThemeSwitcher = () => {
     <StyledButton
       onClick={toggleTheme}
       type="button"
+      role="switch"
       aria-label={t('common.theme_switcher')}
+      aria-checked={isDark}
+      ref={ref}
+      {...props}
     >
-      {isDark && <StyledBiMoon />}
+      <StyledBiMoon isVisible={isDark} />
 
       <Handle
         transition={spring}
@@ -22,9 +27,9 @@ export const ThemeSwitcher = () => {
         animate={{ x: isDark ? 30 : 0 }}
       />
 
-      {!isDark && <StyledBiSun />}
+      <StyledBiSun isVisible={!isDark} />
     </StyledButton>
   );
-};
+});
 
 ThemeSwitcher.displayName = 'ThemeSwitcher';

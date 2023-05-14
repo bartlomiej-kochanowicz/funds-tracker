@@ -6,8 +6,12 @@ import { DefaultTheme } from 'styled-components';
 import { Spreader } from '../Spreader';
 import { StyledButton, StyledLink } from './MenuItem.styles';
 
-export interface MenuItemProps {
-  children: ReactNode;
+export type ItemChildrenProps = {
+  ref: ForwardedRef<HTMLButtonElement | HTMLAnchorElement>;
+};
+
+interface MenuItemProps {
+  children: ReactNode | ((props: ItemChildrenProps) => ReactNode);
   onClick?: () => void;
   to?: string;
   isSelected?: boolean;
@@ -38,7 +42,7 @@ export const MenuItem: FC<MenuItemProps> = forwardRef<
           </Fragment>
         )}
 
-        {children}
+        {typeof children !== 'function' && children}
       </StyledButton>
     )}
 
@@ -57,9 +61,13 @@ export const MenuItem: FC<MenuItemProps> = forwardRef<
           </Fragment>
         )}
 
-        {children}
+        {typeof children !== 'function' && children}
       </StyledLink>
     )}
+
+    {!to && !onClick && typeof children !== 'function' && children}
+
+    {!to && !onClick && typeof children === 'function' && children({ ref, ...rest })}
   </Fragment>
 ));
 
