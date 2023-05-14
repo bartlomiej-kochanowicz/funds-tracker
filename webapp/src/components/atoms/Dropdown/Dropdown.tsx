@@ -43,7 +43,7 @@ interface DropdownProps {
 
 export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
   ({ items, placement = 'bottom-center', children, triggerOffset = 5, ...rest }, ref) => {
-    const { buttonProps, itemProps, isOpen } = useDropdownMenu(items.length);
+    const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(items.length);
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
@@ -87,12 +87,20 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
               role="menu"
               {...layerProps}
             >
-              {items.map(({ value = '', label = '', divider, ...itemRest }, index) => (
+              {items.map(({ value = '', label = '', divider, onClick, ...itemRest }, index) => (
                 <Fragment key={value as Key}>
                   {(divider === 'top' || divider === 'both') && <Menu.Divider />}
 
                   <Menu.Item
                     {...itemRest}
+                    {...(onClick
+                      ? {
+                          onClick: () => {
+                            onClick();
+                            setIsOpen(false);
+                          },
+                        }
+                      : {})}
                     {...itemProps[index]}
                   >
                     {label}

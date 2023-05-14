@@ -193,9 +193,7 @@ export const useDropdownMenu = <ButtonElement extends HTMLElement = HTMLButtonEl
         return;
       }
       if (key === 'Enter' || key === ' ') {
-        /* if (!e.currentTarget.href) {
-          e.currentTarget.click();
-        } */
+        e.currentTarget.click();
 
         setIsOpen(false);
         return;
