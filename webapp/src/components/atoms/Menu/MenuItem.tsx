@@ -10,7 +10,7 @@ export type ItemChildrenProps = {
   ref: ForwardedRef<HTMLButtonElement | HTMLAnchorElement>;
 };
 
-interface MenuItemProps {
+export interface MenuItemProps {
   children: ReactNode | ((props: ItemChildrenProps) => ReactNode);
   onClick?: () => void;
   to?: string;
