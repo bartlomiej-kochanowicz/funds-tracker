@@ -1,17 +1,12 @@
-import { CreatePortfolioMutation } from '__generated__/graphql';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Spacer, Text } from 'components/atoms';
 import { Modal } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useTranslation } from 'react-i18next';
 
-import { CreatePortfolioForm } from './CreatePortfolioForm';
+export type InvestFundsProps = {};
 
-export type CreatePortfolioProps = {
-  callback: (data: CreatePortfolioMutation) => void;
-};
-
-export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callback }) => {
+export const InvestFunds = NiceModal.create<InvestFundsProps>(() => {
   const { t } = useTranslation();
 
   const isPhone = useBreakpoint('tablet', 'max');
@@ -20,7 +15,7 @@ export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callbac
 
   return (
     <Modal
-      modalName={t('modal.CreatePortfolio.name')}
+      modalName={t('modal.InvestFunds.name')}
       closeModal={modal.remove}
     >
       <Text
@@ -30,12 +25,12 @@ export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callbac
         maxWidth={isPhone ? '300px' : '100%'}
         breakLine
       >
-        {t('modal.CreatePortfolio.description')}
+        {t('modal.InvestFunds.description')}
       </Text>
 
       <Spacer space="0.5" />
 
-      <CreatePortfolioForm callback={callback} />
+      <div>form</div>
     </Modal>
   );
 });

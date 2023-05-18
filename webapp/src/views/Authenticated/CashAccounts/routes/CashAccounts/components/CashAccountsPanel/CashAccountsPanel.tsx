@@ -7,6 +7,7 @@ import { useBreakpoint } from 'hooks/useBreakpoint';
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from 'modals/AddFundsCashAccount';
 import { MODAL_CASH_ACCOUNT_OPERATIONS } from 'modals/CashAccountOperations';
 import { MODAL_CONFIRM_DELETE_CASH_ACCOUNT } from 'modals/ConfirmDeleteCashAccount';
+import { MODAL_INVEST_FUNDS } from 'modals/InvestFunds';
 import { MODAL_RENAME_CASH_ACCOUNT } from 'modals/RenameCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -37,9 +38,11 @@ export const CashAccountsPanel: FC<
   const items = [
     {
       icon: FaChartLine,
-      label: t('page.cash_accounts.button.invest'),
+      label: t('modal.InvestFunds.name'),
       value: 'invest',
-      to: '/test',
+      onClick: () => {
+        NiceModal.show(MODAL_INVEST_FUNDS);
+      },
     },
     {
       icon: FaListUl,

@@ -115,7 +115,6 @@
   "page.forgot_password.enter_password.submit.success": "Hasło zostało zresetowane. <signin>Możesz teraz zalogować się nowym hasłem.</signin>",
   "page.cash_accounts.button.add_funds": "Dodaj środki",
   "page.cash_accounts.button.operations": "Operacje",
-  "page.cash_accounts.button.invest": "Inwestuj",
   "modal.AddFundsCashAccount.name": "Dodaj środki do konta gotówkowego",
   "modal.AddFundsCashAccount.description": "Wpisz kwotę, którą chcesz dodać do konta gotówkowego.",
   "modal.AddFundsCashAccount.input.placeholder": "Wpisz kwotę",
@@ -149,5 +148,7 @@
   "modal.RenamePortfolio.name": "Zmień nazwę portfela inwestycyjnego",
   "modal.ConfirmDeletePortfolio.name": "Usuń portfel inwestycyjny",
   "modal.ConfirmDeletePortfolio.description": "Czy na pewno chcesz usunąć portfel inwestycyjny <bold>{{name}}</bold>? <bold>Tej operacji nie można cofnąć.</bold>",
-  "common.back": "Wróć"
+  "common.back": "Wróć",
+  "modal.InvestFunds.name": "Inwestuj środki",
+  "modal.InvestFunds.description": "Tutaj możesz zainwestować środki z konta gotówkowego w wybrany portfel inwestycyjny."
 }
