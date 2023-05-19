@@ -3,7 +3,7 @@ import { DefaultInputProps, Input } from 'components/atoms/Input';
 import { Spreader } from 'components/atoms/Spreader';
 import { getMonth, getYear } from 'date-fns';
 import pl from 'date-fns/locale/pl';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useRef } from 'react';
 import ReactDatePicker, { ReactDatePickerProps, registerLocale } from 'react-datepicker';
 import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -28,10 +28,12 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
     [stopYear, startYear],
   );
 
+  const currentYear = useRef<number>(new Date().getFullYear());
+
   const months = useMemo(() => {
     const { format } = new Intl.DateTimeFormat(i18n.language, { month: 'long' });
 
-    return [...Array(12).keys()].map(m => format(new Date(Date.UTC(2021, m))));
+    return [...Array(12).keys()].map(m => format(new Date(Date.UTC(currentYear.current, m))));
   }, [i18n.language]);
 
   return (

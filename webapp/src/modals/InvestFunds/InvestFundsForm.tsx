@@ -1,5 +1,7 @@
 import { Datepicker, Spreader } from 'components/atoms';
+import { useDatepickerForm } from 'components/atoms/Datepicker';
 import { SearchInstruments } from 'components/molecules';
+import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { Row } from 'simple-flexbox';
 
@@ -14,26 +16,27 @@ export const InvestFundsForm = () => {
     date: new Date(),
   };
 
-  const { getValues, setValue } = useForm<InvestFundsFormValues>({
+  const { setValue, control } = useForm<InvestFundsFormValues>({
     defaultValues,
   });
 
-  const selectedDate = getValues('date');
+  const datepickerProps = useDatepickerForm({
+    control,
+    name: 'date',
+    setValue,
+  });
 
   return (
     <form>
       <Row>
-        <SearchInstruments onChange={({ symbol }) => setValue('instrument', symbol)} />
+        <SearchInstruments
+          onChange={e => console.log(e)}
+          width="100%"
+        />
 
         <Spreader spread="0.25" />
 
-        <Datepicker
-          selected={selectedDate}
-          onChange={date => setValue('date', date)}
-          inputProps={{
-            width: 'auto',
-          }}
-        />
+        <Datepicker {...datepickerProps} />
       </Row>
     </form>
   );

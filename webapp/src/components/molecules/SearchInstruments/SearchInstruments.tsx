@@ -1,23 +1,26 @@
 import { SearchInstrumentsQuery, SearchInstrumentsQueryVariables } from '__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { Badge, Input, Menu, Spreader } from 'components/atoms';
-import { resetIdCounter, useCombobox } from 'downshift';
+import type { SearchInputProps } from 'components/atoms/Input';
+import { useCombobox } from 'downshift';
+import { AnimatePresence } from 'framer-motion';
 import { SEARCH_INSTRUMENTS } from 'graphql/query/instruments/SearchInstruments';
 import { debounce } from 'helpers/debounce';
 import { FC, Fragment } from 'react';
 import { useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 
-interface SearchInstrumentsProps {
+interface SearchInstrumentsProps extends Omit<SearchInputProps, 'onChange'> {
   placement?: PlacementType;
   triggerOffset?: number;
   onChange: (instrument: SearchInstrumentsQuery['searchInstruments'][0]) => void;
 }
 
 export const SearchInstruments: FC<SearchInstrumentsProps> = ({
-  placement = 'bottom-center',
+  placement = 'bottom-start',
   triggerOffset = 5,
   onChange,
+  ...rest
 }) => {
   const [findInstruments, { data }] = useLazyQuery<
     SearchInstrumentsQuery,
@@ -27,8 +30,6 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
   });
 
   const items = data?.searchInstruments || [];
-
-  resetIdCounter();
 
   const findItemsButChill = debounce<typeof findInstruments>(findInstruments, 350);
 
@@ -67,6 +68,7 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
       'bottom-end',
     ],
     triggerOffset,
+    overflowContainer: false,
   });
 
   return (
@@ -74,32 +76,37 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
       <Input
         type="search"
         placeholder="Search instrument..."
+        {...rest}
         {...getInputProps(triggerProps)}
       />
+
       {renderLayer(
-        <Menu
-          {...getMenuProps(layerProps)}
-          style={{
-            width: triggerBounds?.width,
-            display: showMenu ? 'block' : 'none',
-            ...layerProps.style,
-          }}
-        >
-          {showMenu &&
-            items.map((item, index) => (
-              <Menu.Item
-                key={item.symbol}
-                highlighted={highlightedIndex === index}
-                {...getItemProps({ item, index })}
-              >
-                <Badge>{item.symbol}</Badge>
+        <AnimatePresence>
+          {showMenu && (
+            <Menu
+              {...getMenuProps(layerProps)}
+              style={{
+                minWidth: triggerBounds?.width,
+                display: showMenu ? 'block' : 'none',
+                ...layerProps.style,
+              }}
+            >
+              {items.map((item, index) => (
+                <Menu.Item
+                  key={item.symbol}
+                  highlighted={highlightedIndex === index}
+                  {...getItemProps({ item, index })}
+                >
+                  <Badge>{item.symbol}</Badge>
 
-                <Spreader spread="0.25" />
+                  <Spreader spread="0.25" />
 
-                {item.longname || item.symbol}
-              </Menu.Item>
-            ))}
-        </Menu>,
+                  {item.longname || item.symbol}
+                </Menu.Item>
+              ))}
+            </Menu>
+          )}
+        </AnimatePresence>,
       )}
     </Fragment>
   );
