@@ -17,7 +17,7 @@ interface InputCommonProps {
   defaultValue?: string | number;
 }
 
-interface DefaultInputProps
+export interface DefaultInputProps
   extends InputCommonProps,
     Pick<
       HTMLProps<HTMLInputElement>,
@@ -34,21 +34,23 @@ interface DefaultInputProps
   type?: 'text' | 'number' | 'password' | 'email' | 'date';
 }
 
-interface CurrencyInputProps extends InputCommonProps, Omit<CurrencyInputFieldProps, 'width'> {
+export interface CurrencyInputProps
+  extends InputCommonProps,
+    Omit<CurrencyInputFieldProps, 'width'> {
   type?: 'currency';
   currency: Currency;
   unit?: undefined;
 }
 
-interface SearchInputProps extends InputCommonProps, Omit<CurrencyInputFieldProps, 'width'> {
+export interface SearchInputProps extends InputCommonProps, Omit<CurrencyInputFieldProps, 'width'> {
   type?: 'search';
   currency?: undefined;
   unit?: undefined;
 }
 
-type CtaInputProps = DefaultInputProps | CurrencyInputProps | SearchInputProps;
+export type InputProps = DefaultInputProps | CurrencyInputProps | SearchInputProps;
 
-export const Input = forwardRef<HTMLInputElement, CtaInputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ error, unit, width = 'auto', flexGrow, label, type, ...rest }, ref) => {
     const { i18n } = useTranslation();
 

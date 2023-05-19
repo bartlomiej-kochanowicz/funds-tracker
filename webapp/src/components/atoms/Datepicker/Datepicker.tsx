@@ -1,5 +1,5 @@
 import { Icon } from 'components/atoms/Icon';
-import { Input } from 'components/atoms/Input';
+import { DefaultInputProps, Input } from 'components/atoms/Input';
 import { Spreader } from 'components/atoms/Spreader';
 import { getMonth, getYear } from 'date-fns';
 import pl from 'date-fns/locale/pl';
@@ -13,7 +13,11 @@ import { ArrowButton, StyledSelect } from './Datepicker.style';
 
 registerLocale('pl-PL', pl);
 
-export const Datepicker: FC<ReactDatePickerProps> = props => {
+interface DatepickerProps extends ReactDatePickerProps {
+  inputProps?: DefaultInputProps;
+}
+
+export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
   const { i18n } = useTranslation();
 
   const stopYear = getYear(props?.maxDate || new Date());
@@ -35,7 +39,12 @@ export const Datepicker: FC<ReactDatePickerProps> = props => {
       {...props}
       locale={i18n.language}
       dateFormat="dd-MM-yyyy"
-      customInput={<Input type="date" />}
+      customInput={
+        <Input
+          type="date"
+          {...inputProps}
+        />
+      }
       showPopperArrow={false}
       renderCustomHeader={({
         date,

@@ -4,6 +4,8 @@ import { Modal } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useTranslation } from 'react-i18next';
 
+import { InvestFundsForm } from './InvestFundsForm';
+
 export type InvestFundsProps = {};
 
 export const InvestFunds = NiceModal.create<InvestFundsProps>(() => {
@@ -30,7 +32,7 @@ export const InvestFunds = NiceModal.create<InvestFundsProps>(() => {
 
       <Spacer space="0.5" />
 
-      <div>form</div>
+      <InvestFundsForm />
     </Modal>
   );
 });
