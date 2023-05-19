@@ -24,7 +24,13 @@ export type ItemLink = {
   onClick?: undefined;
 };
 
-export type ItemBase = ItemButton | ItemLink;
+export type ItemBase =
+  | {
+      to?: undefined;
+      onClick?: undefined;
+    }
+  | ItemButton
+  | ItemLink;
 
 export interface ButtonProps<ButtonElement extends HTMLElement>
   extends Pick<
