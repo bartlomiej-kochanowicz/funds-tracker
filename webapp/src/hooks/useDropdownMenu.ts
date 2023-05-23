@@ -85,8 +85,10 @@ export const useDropdownMenu = <
 
   const moveFocus = useCallback(
     (itemIndex: number): void => {
-      currentFocusIndex.current = itemIndex;
-      itemRefs[itemIndex].current?.focus();
+      if (itemRefs[itemIndex]) {
+        currentFocusIndex.current = itemIndex;
+        itemRefs[itemIndex].current?.focus();
+      }
     },
     [itemRefs],
   );

@@ -1,7 +1,8 @@
 import { debounce } from 'helpers/debounce';
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 
 import { useDropdownMenu } from './useDropdownMenu';
+import { useUpdateEffect } from './useUpdateEffect';
 
 interface IUseCombobox<Item> {
   items: (Item & {
@@ -11,7 +12,12 @@ interface IUseCombobox<Item> {
 }
 
 export const useCombobox = <Item>({ items, onInputValueChange }: IUseCombobox<Item>) => {
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [selectedItem, setSelectedItem] = useState<
+    | (Item & {
+        value: string | number;
+      })
+    | null
+  >(null);
 
   const menuItems = useMemo(
     () =>
@@ -29,6 +35,13 @@ export const useCombobox = <Item>({ items, onInputValueChange }: IUseCombobox<It
     isOpen,
     setIsOpen,
   } = useDropdownMenu<{}, HTMLInputElement>(menuItems);
+
+  useUpdateEffect(() => {
+    if (useDropdownInputProps.ref.current && selectedItem) {
+      useDropdownInputProps.ref.current.focus();
+      useDropdownInputProps.ref.current.value = String(selectedItem.value);
+    }
+  }, [selectedItem]);
 
   const inputProps = {
     ...useDropdownInputProps,

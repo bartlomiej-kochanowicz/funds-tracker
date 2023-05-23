@@ -57,6 +57,8 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
     },
   });
 
+  console.log(selectedItem);
+
   const triggerRef = useRef<HTMLInputElement>(null);
 
   const isInModal = Boolean(triggerRef.current?.closest('[data-modal="true"]'));
