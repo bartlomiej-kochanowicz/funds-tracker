@@ -1,5 +1,5 @@
 import { debounce } from 'helpers/debounce';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useMemo, useState } from 'react';
 
 import { useDropdownMenu } from './useDropdownMenu';
 import { useUpdateEffect } from './useUpdateEffect';
@@ -51,5 +51,12 @@ export const useCombobox = <Item>({ items, onInputValueChange }: IUseCombobox<It
     ),
   };
 
-  return { selectedItem, items: menuItems, inputProps, itemProps, isOpen, setIsOpen };
+  return {
+    selectedItem,
+    items: menuItems,
+    inputProps,
+    itemProps,
+    isOpen: isOpen && menuItems.length > 0,
+    setIsOpen,
+  };
 };

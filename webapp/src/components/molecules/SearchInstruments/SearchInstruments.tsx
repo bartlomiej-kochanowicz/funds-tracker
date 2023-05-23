@@ -38,7 +38,6 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
   );
 
   const {
-    selectedItem,
     items: menuItems,
     inputProps: comboboxInputProps,
     isOpen,
@@ -56,8 +55,6 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
       });
     },
   });
-
-  console.log(selectedItem);
 
   const triggerRef = useRef<HTMLInputElement>(null);
 
