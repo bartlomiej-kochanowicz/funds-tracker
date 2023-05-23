@@ -2,12 +2,10 @@ import { SearchInstrumentsQuery, SearchInstrumentsQueryVariables } from '__gener
 import { useLazyQuery } from '@apollo/client';
 import { Badge, Input, Menu, Spreader } from 'components/atoms';
 import type { SearchInputProps } from 'components/atoms/Input';
-import { useCombobox } from 'downshift';
-import { AnimatePresence } from 'framer-motion';
 import { SEARCH_INSTRUMENTS } from 'graphql/query/instruments/SearchInstruments';
-import { debounce } from 'helpers/debounce';
-import { FC, Fragment } from 'react';
-import { useLayer } from 'react-laag';
+import { useCombobox } from 'hooks/useCombobox';
+import { FC, Fragment, useMemo, useRef } from 'react';
+import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 
 interface SearchInstrumentsProps extends Omit<SearchInputProps, 'onChange'> {
@@ -29,36 +27,47 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
     fetchPolicy: 'no-cache',
   });
 
-  const items = data?.searchInstruments || [];
+  const items = useMemo(
+    () =>
+      data?.searchInstruments.map(({ symbol, ...itemRest }) => ({
+        value: symbol,
+        symbol,
+        ...itemRest,
+      })) || [],
+    [data?.searchInstruments],
+  );
 
-  const findItemsButChill = debounce<typeof findInstruments>(findInstruments, 350);
-
-  const { isOpen, highlightedIndex, inputValue, getMenuProps, getInputProps, getItemProps } =
-    useCombobox({
-      items,
-      onInputValueChange: () => {
-        findItemsButChill({
-          variables: {
-            data: {
-              name: inputValue,
-            },
+  const {
+    selectedItem,
+    items: menuItems,
+    inputProps: comboboxInputProps,
+    isOpen,
+    inputProps,
+    itemProps,
+  } = useCombobox<(typeof items)[0]>({
+    items,
+    onInputValueChange: inputValue => {
+      findInstruments({
+        variables: {
+          data: {
+            name: inputValue,
           },
-        });
-      },
-      onSelectedItemChange: ({ selectedItem }) => {
-        if (selectedItem) {
-          onChange(selectedItem);
-        }
-      },
-      itemToString: item => item?.symbol || '',
-    });
+        },
+      });
+    },
+  });
 
-  const showMenu = isOpen && items.length > 0;
+  const triggerRef = useRef<HTMLInputElement>(null);
+
+  const isInModal = Boolean(triggerRef.current?.closest('[data-modal="true"]'));
 
   const { renderLayer, triggerProps, layerProps, triggerBounds } = useLayer({
     isOpen,
     placement,
     auto: true,
+    container: isInModal
+      ? (document.querySelector('[data-modal="true"]') as HTMLElement)
+      : undefined,
     possiblePlacements: [
       'top-start',
       'top-center',
@@ -68,7 +77,6 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
       'bottom-end',
     ],
     triggerOffset,
-    overflowContainer: false,
   });
 
   return (
@@ -77,25 +85,28 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
         type="search"
         placeholder="Search instrument..."
         {...rest}
-        {...getInputProps(triggerProps)}
+        {...inputProps}
+        {...comboboxInputProps}
+        ref={mergeRefs(triggerRef, inputProps.ref, triggerProps.ref)}
       />
 
       {renderLayer(
-        <AnimatePresence>
-          {showMenu && (
-            <Menu
-              {...getMenuProps(layerProps)}
-              style={{
-                minWidth: triggerBounds?.width,
-                display: showMenu ? 'block' : 'none',
-                ...layerProps.style,
-              }}
-            >
-              {items.map((item, index) => (
+        isOpen && (
+          <Menu
+            isInModal={isInModal}
+            role="menu"
+            {...layerProps}
+            style={{
+              minWidth: triggerBounds?.width,
+              ...layerProps.style,
+            }}
+          >
+            {menuItems.map((item, index) => {
+              return (
                 <Menu.Item
                   key={item.symbol}
-                  highlighted={highlightedIndex === index}
-                  {...getItemProps({ item, index })}
+                  onClick={item.onClick}
+                  {...itemProps[index]}
                 >
                   <Badge>{item.symbol}</Badge>
 
@@ -103,10 +114,10 @@ export const SearchInstruments: FC<SearchInstrumentsProps> = ({
 
                   {item.longname || item.symbol}
                 </Menu.Item>
-              ))}
-            </Menu>
-          )}
-        </AnimatePresence>,
+              );
+            })}
+          </Menu>
+        ),
       )}
     </Fragment>
   );

@@ -32,12 +32,12 @@ export type ItemBase =
   | ItemButton
   | ItemLink;
 
-export interface ButtonProps<ButtonElement extends HTMLElement>
+export interface TriggerProps<TriggerElement extends HTMLElement>
   extends Pick<
-    DetailedHTMLProps<ButtonHTMLAttributes<ButtonElement>, ButtonElement>,
+    DetailedHTMLProps<ButtonHTMLAttributes<TriggerElement>, TriggerElement>,
     'onKeyDown' | 'onClick' | 'tabIndex' | 'role' | 'aria-haspopup' | 'aria-expanded'
   > {
-  ref: RefObject<ButtonElement>;
+  ref: RefObject<TriggerElement>;
 }
 
 export interface ItemProps {
@@ -51,8 +51,9 @@ export interface DropdownMenuOptions {
   focusFirstItemOnClick?: boolean;
 }
 
-interface DropdownMenuResponse<ButtonElement extends HTMLElement> {
-  readonly buttonProps: ButtonProps<ButtonElement>;
+interface DropdownMenuResponse<TriggerElement extends HTMLElement> {
+  readonly inputProps: TriggerProps<TriggerElement>;
+  readonly buttonProps: TriggerProps<TriggerElement>;
   readonly itemProps: ItemProps[];
   readonly isOpen: boolean;
   readonly setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -61,11 +62,11 @@ interface DropdownMenuResponse<ButtonElement extends HTMLElement> {
 
 export const useDropdownMenu = <
   Item extends ItemBase,
-  ButtonElement extends HTMLElement = HTMLButtonElement,
+  TriggerElement extends HTMLElement = HTMLButtonElement,
 >(
   items: Item[],
   options?: DropdownMenuOptions,
-): DropdownMenuResponse<ButtonElement> => {
+): DropdownMenuResponse<TriggerElement> => {
   const itemCount = items.length;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -73,7 +74,7 @@ export const useDropdownMenu = <
   const firstRun = useRef(true);
   const clickedOpen = useRef(false);
 
-  const buttonRef = useRef<ButtonElement>(null);
+  const triggerRef = useRef<TriggerElement>(null);
   const itemRefs = useMemo<RefObject<HTMLElement>[]>(
     () => Array.from({ length: itemCount }, () => createRef<HTMLElement>()),
     [itemCount],
@@ -200,6 +201,37 @@ export const useDropdownMenu = <
     }
   };
 
+  const inputListener = (e: ReactKeyboardEvent | ReactMouseEvent): void => {
+    if (isKeyboardEvent(e)) {
+      const { key } = e;
+
+      if (!['Enter', ' ', 'Tab', 'ArrowDown', 'Escape'].includes(key)) {
+        return;
+      }
+
+      if ((key === 'Tab' || key === 'ArrowDown') && clickedOpen.current && isOpen) {
+        e.preventDefault();
+        moveFocus(0);
+      }
+
+      if (key === 'Enter' || key === ' ') {
+        e.preventDefault();
+        setIsOpen(true);
+      }
+
+      if (key === 'Escape') {
+        e.preventDefault();
+        setIsOpen(false);
+      }
+    } else {
+      if (!options?.focusFirstItemOnClick) {
+        clickedOpen.current = !isOpen;
+      }
+
+      setIsOpen(!isOpen);
+    }
+  };
+
   const itemListener = (e: ReactKeyboardEvent<HTMLElement>, index: number): void => {
     const { key } = e;
 
@@ -212,7 +244,7 @@ export const useDropdownMenu = <
 
       if (key === 'Escape') {
         setIsOpen(false);
-        buttonRef.current?.focus();
+        triggerRef.current?.focus();
 
         return;
       }
@@ -263,12 +295,21 @@ export const useDropdownMenu = <
     }
   };
 
-  const buttonProps: ButtonProps<ButtonElement> = {
+  const buttonProps: TriggerProps<TriggerElement> = {
     onKeyDown: buttonListener,
     onClick: buttonListener,
     tabIndex: 0,
-    ref: buttonRef,
+    ref: triggerRef,
     role: 'button',
+    'aria-haspopup': true,
+    'aria-expanded': isOpen,
+  };
+
+  const inputProps: TriggerProps<TriggerElement> = {
+    onKeyDown: inputListener,
+    onClick: inputListener,
+    tabIndex: 0,
+    ref: triggerRef,
     'aria-haspopup': true,
     'aria-expanded': isOpen,
   };
@@ -280,5 +321,5 @@ export const useDropdownMenu = <
     ref: itemRefs[index],
   }));
 
-  return { buttonProps, itemProps, isOpen, setIsOpen, moveFocus } as const;
+  return { inputProps, buttonProps, itemProps, isOpen, setIsOpen, moveFocus } as const;
 };
