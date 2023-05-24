@@ -1,8 +1,10 @@
-import { Datepicker, Spreader } from 'components/atoms';
+import { Datepicker, Spacer, Spreader } from 'components/atoms';
 import { useDatepickerForm } from 'components/atoms/Datepicker';
 import { SearchInstruments } from 'components/molecules';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useForm } from 'react-hook-form';
-import { Row } from 'simple-flexbox';
+
+import { Form } from './InvestFundsForm.style';
 
 type InvestFundsFormValues = {
   instrument: string;
@@ -10,6 +12,8 @@ type InvestFundsFormValues = {
 };
 
 export const InvestFundsForm = () => {
+  const isTablet = useBreakpoint('tablet', 'max');
+
   const defaultValues = {
     instrument: '',
     date: new Date(),
@@ -26,17 +30,15 @@ export const InvestFundsForm = () => {
   });
 
   return (
-    <form>
-      <Row>
-        <SearchInstruments
-          onChange={e => console.log(e)}
-          width="100%"
-        />
+    <Form>
+      <SearchInstruments
+        onChange={e => console.log(e)}
+        width="100%"
+      />
 
-        <Spreader spread="0.25" />
+      {isTablet ? <Spacer space="0.25" /> : <Spreader spread="0.25" />}
 
-        <Datepicker {...datepickerProps} />
-      </Row>
-    </form>
+      <Datepicker {...datepickerProps} />
+    </Form>
   );
 };
