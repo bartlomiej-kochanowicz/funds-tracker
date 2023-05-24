@@ -69,6 +69,10 @@ export const GlobalStyle = styled.createGlobalStyle`
     display: none;
   }
 
+  .react-datepicker-wrapper {
+    width: auto;
+  }
+
   .react-datepicker {
     background-color: ${({ theme: { isDark, colors } }) =>
       isDark ? darken(colors.gray200, 0.09) : colors.gray200};
