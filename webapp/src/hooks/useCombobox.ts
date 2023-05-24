@@ -22,7 +22,9 @@ export const useCombobox = <Item>({ items, onInputValueChange }: IUseCombobox<It
   const menuItems = useMemo(
     () =>
       items.map(({ value, ...itemRest }) => ({
-        onClick: () => setSelectedItem(items.find(item => item?.value === value) || null),
+        onClick: () => {
+          setSelectedItem(items.find(item => item?.value === value) || null);
+        },
         value,
         ...itemRest,
       })),
@@ -53,7 +55,13 @@ export const useCombobox = <Item>({ items, onInputValueChange }: IUseCombobox<It
 
   return {
     selectedItem,
-    items: menuItems,
+    items: menuItems.map(item => ({
+      ...item,
+      onClick: () => {
+        item.onClick();
+        setIsOpen(false);
+      },
+    })),
     inputProps,
     itemProps,
     isOpen: isOpen && menuItems.length > 0,

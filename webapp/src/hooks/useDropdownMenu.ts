@@ -13,6 +13,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export type ItemButton = {
   onClick?: () => void;
@@ -74,6 +75,7 @@ export const useDropdownMenu = <
   const firstRun = useRef(true);
   const clickedOpen = useRef(false);
 
+  const navigate = useNavigate();
   const triggerRef = useRef<TriggerElement>(null);
   const itemRefs = useMemo<RefObject<HTMLElement>[]>(
     () => Array.from({ length: itemCount }, () => createRef<HTMLElement>()),
@@ -134,13 +136,13 @@ export const useDropdownMenu = <
         return;
       }
 
-      document.addEventListener('click', handleEveryClick);
+      document.addEventListener('click', handleEveryClick, false);
     }, 1);
 
     return (): void => {
       removalTracker.removed = true;
 
-      document.removeEventListener('click', handleEveryClick);
+      document.removeEventListener('click', handleEveryClick, false);
     };
   }, [isOpen]);
 
@@ -151,23 +153,31 @@ export const useDropdownMenu = <
       }
     };
 
-    document.addEventListener('keydown', disableArrowScroll);
+    document.addEventListener('keydown', disableArrowScroll, false);
 
     return (): void => document.removeEventListener('keydown', disableArrowScroll);
   }, [isOpen]);
 
   useEffect(() => {
     itemRefs.forEach((ref, index) => {
-      ref.current?.addEventListener('mouseover', () => {
-        moveFocus(index);
-      });
+      ref.current?.addEventListener(
+        'mouseover',
+        () => {
+          moveFocus(index);
+        },
+        false,
+      );
     });
 
     return (): void => {
       itemRefs.forEach((ref, index) => {
-        ref.current?.removeEventListener('mouseover', () => {
-          moveFocus(index);
-        });
+        ref.current?.removeEventListener(
+          'mouseover',
+          () => {
+            moveFocus(index);
+          },
+          false,
+        );
       });
     };
   }, [itemRefs, isOpen, moveFocus]);
@@ -242,9 +252,8 @@ export const useDropdownMenu = <
 
       const { to, onClick } = items[index];
 
-      const keyboardAction = to || onClick;
-
       if (key === 'Escape') {
+        e.preventDefault();
         setIsOpen(false);
         triggerRef.current?.focus();
 
@@ -255,8 +264,15 @@ export const useDropdownMenu = <
 
         return;
       }
-      if ((key === 'Enter' || key === ' ') && keyboardAction) {
-        e.currentTarget.click();
+      if ((key === 'Enter' || key === ' ') && onClick) {
+        onClick();
+        setIsOpen(false);
+
+        return;
+      }
+      if ((key === 'Enter' || key === ' ') && to) {
+        navigate(to);
+
         setIsOpen(false);
 
         return;

@@ -20,7 +20,15 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.keyCode === 27) {
+      const excludeElements = [
+        document.activeElement?.attributes.getNamedItem('aria-expanded')?.value === 'true',
+        document.activeElement?.attributes.getNamedItem('role')?.value === 'menuitem',
+        document.activeElement?.attributes.getNamedItem('role')?.value === 'option',
+        Boolean(document.querySelector('.react-datepicker-popper')),
+      ].filter(Boolean);
+
+      if (event.key === 'Escape' && !excludeElements.length) {
+        event.preventDefault();
         closeModal();
       }
     },
@@ -28,10 +36,10 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
   );
 
   useEffect(() => {
-    document.addEventListener('keydown', onKeyDown, false);
+    document.addEventListener('keydown', onKeyDown, true);
 
     return () => {
-      document.removeEventListener('keydown', onKeyDown, false);
+      document.removeEventListener('keydown', onKeyDown, true);
     };
   }, [onKeyDown]);
 
