@@ -4,7 +4,7 @@ export const Form = styled.form`
   display: flex;
 
   ${({ theme }) => css`
-    ${theme.breakpoints.tablet.max} {
+    ${theme.breakpoints.phone.max} {
       flex-direction: column;
     }
   `}

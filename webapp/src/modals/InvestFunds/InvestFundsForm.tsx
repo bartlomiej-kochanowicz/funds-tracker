@@ -12,7 +12,7 @@ type InvestFundsFormValues = {
 };
 
 export const InvestFundsForm = () => {
-  const isTablet = useBreakpoint('tablet', 'max');
+  const isTablet = useBreakpoint('phone', 'max');
 
   const defaultValues = {
     instrument: '',

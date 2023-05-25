@@ -37,8 +37,13 @@ export const ModalComponent = styled.div`
     max-width: 900px;
     max-height: 85vh;
 
+    ${breakpoints.tablet.max} {
+      min-width: 75vw;
+    }
+
     ${breakpoints.phone.max} {
       padding: 1.25rem;
+      min-width: 90vw;
     }
   `}
 `;
