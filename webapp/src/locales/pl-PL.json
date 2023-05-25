@@ -149,5 +149,6 @@
   "modal.RenamePortfolio.name": "Zmień nazwę portfela inwestycyjnego",
   "modal.ConfirmDeletePortfolio.name": "Usuń portfel inwestycyjny",
   "modal.ConfirmDeletePortfolio.description": "Czy na pewno chcesz usunąć portfel inwestycyjny <bold>{{name}}</bold>? <bold>Tej operacji nie można cofnąć.</bold>",
-  "common.back": "Wróć"
+  "common.back": "Wróć",
+  "test.key.lokalise": "Polska zawartość"
 }

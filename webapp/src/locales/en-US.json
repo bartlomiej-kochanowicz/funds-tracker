@@ -149,5 +149,6 @@
   "modal.RenamePortfolio.name": "Rename portfolio",
   "modal.ConfirmDeletePortfolio.name": "Delete portfolio",
   "modal.ConfirmDeletePortfolio.description": "Are you sure you want to delete <bold>{{name}}</bold> portfolio? <bold>This action cannot be undone.</bold>",
-  "common.back": "Back"
+  "common.back": "Back",
+  "test.key.lokalise": "English value"
 }
