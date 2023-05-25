@@ -4,7 +4,8 @@ import { Badge, Input, Menu, Spreader } from 'components/atoms';
 import type { SearchInputProps } from 'components/atoms/Input';
 import { SEARCH_INSTRUMENTS } from 'graphql/query/instruments/SearchInstruments';
 import { useCombobox } from 'hooks/useCombobox';
-import { FC, Fragment, useMemo, useRef } from 'react';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
+import { forwardRef, Fragment, useMemo, useRef } from 'react';
 import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 
@@ -14,110 +15,114 @@ interface SearchInstrumentsProps extends Omit<SearchInputProps, 'onChange'> {
   onChange: (instrument: SearchInstrumentsQuery['searchInstruments'][0]) => void;
 }
 
-export const SearchInstruments: FC<SearchInstrumentsProps> = ({
-  placement = 'bottom-start',
-  triggerOffset = 5,
-  onChange,
-  ...rest
-}) => {
-  const [findInstruments, { data }] = useLazyQuery<
-    SearchInstrumentsQuery,
-    SearchInstrumentsQueryVariables
-  >(SEARCH_INSTRUMENTS, {
-    fetchPolicy: 'no-cache',
-  });
+export const SearchInstruments = forwardRef<HTMLInputElement, SearchInstrumentsProps>(
+  ({ placement = 'bottom-start', triggerOffset = 5, onChange, ...rest }, ref) => {
+    const [findInstruments, { data }] = useLazyQuery<
+      SearchInstrumentsQuery,
+      SearchInstrumentsQueryVariables
+    >(SEARCH_INSTRUMENTS, {
+      fetchPolicy: 'no-cache',
+    });
 
-  const items = useMemo(
-    () =>
-      data?.searchInstruments.map(({ symbol, ...itemRest }) => ({
-        value: symbol,
-        symbol,
-        ...itemRest,
-      })) || [],
-    [data?.searchInstruments],
-  );
+    const items = useMemo(
+      () =>
+        data?.searchInstruments.map(({ symbol, ...itemRest }) => ({
+          value: symbol,
+          symbol,
+          ...itemRest,
+        })) || [],
+      [data?.searchInstruments],
+    );
 
-  const {
-    items: menuItems,
-    inputProps: comboboxInputProps,
-    isOpen,
-    inputProps,
-    itemProps,
-  } = useCombobox<(typeof items)[0]>({
-    items,
-    onInputValueChange: inputValue => {
-      findInstruments({
-        variables: {
-          data: {
-            name: inputValue,
+    const {
+      selectedItem,
+      items: menuItems,
+      inputProps: comboboxInputProps,
+      isOpen,
+      inputProps,
+      itemProps,
+    } = useCombobox<(typeof items)[0]>({
+      items,
+      onInputValueChange: inputValue => {
+        findInstruments({
+          variables: {
+            data: {
+              name: inputValue,
+            },
           },
-        },
-      });
-    },
-  });
+        });
+      },
+    });
 
-  const triggerRef = useRef<HTMLInputElement>(null);
+    useUpdateEffect(() => {
+      if (selectedItem && onChange) {
+        onChange(selectedItem);
+      }
+    }, [selectedItem]);
 
-  const isInModal = Boolean(triggerRef.current?.closest('[data-modal="true"]'));
+    const triggerRef = useRef<HTMLInputElement>(null);
 
-  const { renderLayer, triggerProps, layerProps, triggerBounds } = useLayer({
-    isOpen,
-    placement,
-    auto: true,
-    container: isInModal
-      ? (document.querySelector('[data-modal="true"]') as HTMLElement)
-      : undefined,
-    possiblePlacements: [
-      'top-start',
-      'top-center',
-      'top-end',
-      'bottom-start',
-      'bottom-center',
-      'bottom-end',
-    ],
-    triggerOffset,
-  });
+    const isInModal = Boolean(triggerRef.current?.closest('[data-modal="true"]'));
 
-  return (
-    <Fragment>
-      <Input
-        type="search"
-        placeholder="Search instrument..."
-        {...rest}
-        {...inputProps}
-        {...comboboxInputProps}
-        ref={mergeRefs(triggerRef, inputProps.ref, triggerProps.ref)}
-      />
+    const { renderLayer, triggerProps, layerProps, triggerBounds } = useLayer({
+      isOpen,
+      placement,
+      auto: true,
+      container: isInModal
+        ? (document.querySelector('[data-modal="true"]') as HTMLElement)
+        : undefined,
+      possiblePlacements: [
+        'top-start',
+        'top-center',
+        'top-end',
+        'bottom-start',
+        'bottom-center',
+        'bottom-end',
+      ],
+      triggerOffset,
+    });
 
-      {renderLayer(
-        isOpen && (
-          <Menu
-            isInModal={isInModal}
-            role="menu"
-            {...layerProps}
-            style={{
-              minWidth: triggerBounds?.width,
-              ...layerProps.style,
-            }}
-          >
-            {menuItems.map((item, index) => {
-              return (
-                <Menu.Item
-                  key={item.symbol}
-                  onClick={item.onClick}
-                  {...itemProps[index]}
-                >
-                  <Badge>{item.symbol}</Badge>
+    return (
+      <Fragment>
+        <Input
+          type="search"
+          placeholder="Search instrument..."
+          {...rest}
+          {...inputProps}
+          {...comboboxInputProps}
+          ref={mergeRefs(ref, triggerRef, inputProps.ref, triggerProps.ref)}
+        />
 
-                  <Spreader spread="0.25" />
+        {renderLayer(
+          isOpen && (
+            <Menu
+              isInModal={isInModal}
+              role="menu"
+              {...layerProps}
+              style={{
+                minWidth: triggerBounds?.width,
+                ...layerProps.style,
+              }}
+            >
+              {menuItems.map((item, index) => {
+                return (
+                  <Menu.Item
+                    key={item.symbol}
+                    onClick={item.onClick}
+                    {...itemProps[index]}
+                  >
+                    <Badge>{item.symbol}</Badge>
 
-                  {item.longname || item.symbol}
-                </Menu.Item>
-              );
-            })}
-          </Menu>
-        ),
-      )}
-    </Fragment>
-  );
-};
+                    <Spreader spread="0.25" />
+
+                    {item.longname || item.symbol}
+                  </Menu.Item>
+                );
+              })}
+            </Menu>
+          ),
+        )}
+      </Fragment>
+    );
+  },
+);

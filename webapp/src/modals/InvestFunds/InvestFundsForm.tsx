@@ -1,15 +1,10 @@
-import { Datepicker, Spacer, Spreader } from 'components/atoms';
+import { Button, Datepicker, Spacer, Spreader } from 'components/atoms';
 import { useDatepickerForm } from 'components/atoms/Datepicker';
-import { SearchInstruments } from 'components/molecules';
+import { SearchInstruments, useSearchInstrumentsForm } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useForm } from 'react-hook-form';
 
 import { Form } from './InvestFundsForm.style';
-
-type InvestFundsFormValues = {
-  instrument: string;
-  date: Date | null;
-};
 
 export const InvestFundsForm = () => {
   const isTablet = useBreakpoint('phone', 'max');
@@ -19,8 +14,14 @@ export const InvestFundsForm = () => {
     date: new Date(),
   };
 
-  const { setValue, control } = useForm<InvestFundsFormValues>({
+  const { setValue, control, handleSubmit } = useForm<typeof defaultValues>({
     defaultValues,
+  });
+
+  const searchInstrumentsProps = useSearchInstrumentsForm({
+    control,
+    name: 'instrument',
+    setValue,
   });
 
   const datepickerProps = useDatepickerForm({
@@ -29,16 +30,25 @@ export const InvestFundsForm = () => {
     setValue,
   });
 
+  const onSubmit = (data: typeof defaultValues) => {
+    console.log(data);
+  };
+
   return (
-    <Form>
+    <Form
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <SearchInstruments
-        onChange={e => console.log(e)}
+        {...searchInstrumentsProps}
         width="100%"
       />
 
       {isTablet ? <Spacer space="0.25" /> : <Spreader spread="0.25" />}
 
       <Datepicker {...datepickerProps} />
+
+      <Button type="submit">test</Button>
     </Form>
   );
 };
