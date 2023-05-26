@@ -1,6 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { InstrumentDetails, InstrumentHistory, SearchInstruments } from './entities';
-import { InstrumentDetailsInput, InstrumentHistoryInput, SearchInstrumentsInput } from './inputs';
+import { InstrumentHistory, SearchInstruments } from './entities';
+import { InstrumentHistoryInput, SearchInstrumentsInput } from './inputs';
 import { InstrumentsService } from './instruments.service';
 
 @Resolver()
@@ -15,19 +15,11 @@ export class InstrumentsResolver {
     return this.instrumentsService.search(searchInstrumentsInput);
   }
 
-  @Query(() => InstrumentDetails)
-  instrumentDetails(
-    @Args('data')
-    instrumentInput: InstrumentDetailsInput,
-  ) {
-    return this.instrumentsService.findOne(instrumentInput);
-  }
-
   @Query(() => [InstrumentHistory])
   instrumentHistory(
     @Args('data')
-    instrumentInput: InstrumentHistoryInput,
+    instrumentHistoryInput: InstrumentHistoryInput,
   ) {
-    return this.instrumentsService.findHistoryOne(instrumentInput);
+    return this.instrumentsService.findHistory(instrumentHistoryInput);
   }
 }

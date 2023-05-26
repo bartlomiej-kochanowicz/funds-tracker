@@ -102,50 +102,6 @@ type IntroductionCashAccounts {
   success: Boolean!
 }
 
-type InstrumentDetails {
-  """language"""
-  language: String!
-
-  """region"""
-  region: String!
-
-  """currency"""
-  currency: String!
-
-  """exchangeTimezoneName"""
-  exchangeTimezoneName: String!
-
-  """longName"""
-  longName: String!
-
-  """symbol"""
-  symbol: String!
-
-  """quoteType"""
-  quoteType: String!
-
-  """regularMarketPrice"""
-  regularMarketPrice: Float!
-
-  """regularMarketDayRange"""
-  regularMarketDayRange: String!
-
-  """exchange"""
-  exchange: String!
-
-  """fiftyTwoWeekRange"""
-  fiftyTwoWeekRange: String!
-
-  """ytdReturn"""
-  ytdReturn: Float!
-
-  """quoteSourceName"""
-  quoteSourceName: String!
-
-  """regularMarketPreviousClose"""
-  regularMarketPreviousClose: Float!
-}
-
 type InstrumentHistory {
   """Date"""
   date: String!
@@ -161,20 +117,41 @@ type InstrumentHistory {
 
   """Close"""
   close: Float!
+
+  """Adjusted close"""
+  adjusted_close: Float!
+
+  """Volume"""
+  volume: Float!
 }
 
 type SearchInstruments {
-  """quoteType"""
-  quoteType: String!
+  """Code"""
+  Code: String!
 
-  """symbol"""
-  symbol: String!
+  """Exchange"""
+  Exchange: String!
 
-  """longname"""
-  longname: String!
+  """Name"""
+  Name: String!
 
-  """exchange"""
-  exchange: String!
+  """Type"""
+  Type: String!
+
+  """Country"""
+  Country: String!
+
+  """Currency"""
+  Currency: String!
+
+  """ISIN"""
+  ISIN: String
+
+  """previousClose"""
+  previousClose: Float!
+
+  """previousCloseDate"""
+  previousCloseDate: String!
 }
 
 type IntroductionPortfolios {
@@ -237,7 +214,6 @@ type Query {
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: ID!): CashAccount!
   searchInstruments(data: SearchInstrumentsInput!): [SearchInstruments!]!
-  instrumentDetails(data: InstrumentDetailsInput!): InstrumentDetails!
   instrumentHistory(data: InstrumentHistoryInput!): [InstrumentHistory!]!
   portfolios: [Portfolio!]!
   portfolio(uuid: String!): Portfolio!
@@ -257,20 +233,21 @@ input SearchInstrumentsInput {
   name: String!
 }
 
-input InstrumentDetailsInput {
-  """Symbol"""
-  symbol: String!
-}
-
 input InstrumentHistoryInput {
   """Symbol"""
   symbol: String!
 
-  """Interval"""
-  interval: String!
+  """Exchange"""
+  exchange: String!
+
+  """Period"""
+  period: String
 
   """From"""
   from: String!
+
+  """To"""
+  to: String
 }
 
 type Mutation {
