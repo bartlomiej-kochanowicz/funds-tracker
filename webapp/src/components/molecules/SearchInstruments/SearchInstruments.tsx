@@ -1,6 +1,6 @@
 import { SearchInstrumentsQuery, SearchInstrumentsQueryVariables } from '__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
-import { Badge, Input, Menu, Spreader } from 'components/atoms';
+import { Badge, Input, Menu, Spreader, Text } from 'components/atoms';
 import type { SearchInputProps } from 'components/atoms/Input';
 import { SEARCH_INSTRUMENTS } from 'graphql/query/instruments/SearchInstruments';
 import { useCombobox } from 'hooks/useCombobox';
@@ -29,9 +29,10 @@ export const SearchInstruments = forwardRef<HTMLInputElement, SearchInstrumentsP
 
     const items = useMemo(
       () =>
-        data?.searchInstruments.map(({ symbol, ...itemRest }) => ({
-          value: symbol,
-          symbol,
+        data?.searchInstruments.map(({ Code, Exchange, ...itemRest }) => ({
+          value: `${Code}.${Exchange}`,
+          Code,
+          Exchange,
           ...itemRest,
         })) || [],
       [data?.searchInstruments],
@@ -104,24 +105,24 @@ export const SearchInstruments = forwardRef<HTMLInputElement, SearchInstrumentsP
               {...layerProps}
               style={{
                 minWidth: triggerBounds?.width,
+                maxWidth: '90vh',
+                maxHeight: '35vh',
                 ...layerProps.style,
               }}
             >
-              {menuItems.map((item, index) => {
-                return (
-                  <Menu.Item
-                    key={item.symbol}
-                    onClick={item.onClick}
-                    {...itemProps[index]}
-                  >
-                    <Badge>{item.symbol}</Badge>
+              {menuItems.map((item, index) => (
+                <Menu.Item
+                  key={`${item.Code}.${item.Exchange}`}
+                  onClick={item.onClick}
+                  {...itemProps[index]}
+                >
+                  <Badge>{item.Code}</Badge>
 
-                    <Spreader spread="0.25" />
+                  <Spreader spread="0.25" />
 
-                    {item.longname || item.symbol}
-                  </Menu.Item>
-                );
-              })}
+                  <Text maxWidth="175px">{item.Name}</Text>
+                </Menu.Item>
+              ))}
             </Menu>
           ),
         )}

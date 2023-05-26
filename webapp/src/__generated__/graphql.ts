@@ -14,7 +14,7 @@ export type Scalars = {
   Float: number;
   /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: any;
-  /** A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/. */
+  /** A field whose value conforms to the standard internet email address format as specified in HTML Spec: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address. */
   EmailAddress: any;
 };
 
@@ -117,45 +117,10 @@ export type EmailInput = {
   token: Scalars['String'];
 };
 
-export type InstrumentDetails = {
-  __typename?: 'InstrumentDetails';
-  /** currency */
-  currency: Scalars['String'];
-  /** exchange */
-  exchange: Scalars['String'];
-  /** exchangeTimezoneName */
-  exchangeTimezoneName: Scalars['String'];
-  /** fiftyTwoWeekRange */
-  fiftyTwoWeekRange: Scalars['String'];
-  /** language */
-  language: Scalars['String'];
-  /** longName */
-  longName: Scalars['String'];
-  /** quoteSourceName */
-  quoteSourceName: Scalars['String'];
-  /** quoteType */
-  quoteType: Scalars['String'];
-  /** region */
-  region: Scalars['String'];
-  /** regularMarketDayRange */
-  regularMarketDayRange: Scalars['String'];
-  /** regularMarketPreviousClose */
-  regularMarketPreviousClose: Scalars['Float'];
-  /** regularMarketPrice */
-  regularMarketPrice: Scalars['Float'];
-  /** symbol */
-  symbol: Scalars['String'];
-  /** ytdReturn */
-  ytdReturn: Scalars['Float'];
-};
-
-export type InstrumentDetailsInput = {
-  /** Symbol */
-  symbol: Scalars['String'];
-};
-
 export type InstrumentHistory = {
   __typename?: 'InstrumentHistory';
+  /** Adjusted close */
+  adjusted_close: Scalars['Float'];
   /** Close */
   close: Scalars['Float'];
   /** Date */
@@ -166,15 +131,21 @@ export type InstrumentHistory = {
   low: Scalars['Float'];
   /** Open */
   open: Scalars['Float'];
+  /** Volume */
+  volume: Scalars['Float'];
 };
 
 export type InstrumentHistoryInput = {
+  /** Exchange */
+  exchange: Scalars['String'];
   /** From */
   from: Scalars['String'];
-  /** Interval */
-  interval: Scalars['String'];
+  /** Period */
+  period?: InputMaybe<Scalars['String']>;
   /** Symbol */
   symbol: Scalars['String'];
+  /** To */
+  to?: InputMaybe<Scalars['String']>;
 };
 
 export type IntroductionCashAccounts = {
@@ -335,7 +306,6 @@ export type Query = {
   cashAccount: CashAccount;
   cashAccounts: Array<CashAccount>;
   emailExist: Email;
-  instrumentDetails: InstrumentDetails;
   instrumentHistory: Array<InstrumentHistory>;
   portfolio: Portfolio;
   portfolios: Array<Portfolio>;
@@ -351,11 +321,6 @@ export type QueryCashAccountArgs = {
 
 export type QueryEmailExistArgs = {
   data: EmailInput;
-};
-
-
-export type QueryInstrumentDetailsArgs = {
-  data: InstrumentDetailsInput;
 };
 
 
@@ -394,14 +359,24 @@ export type ResetPasswordInput = {
 
 export type SearchInstruments = {
   __typename?: 'SearchInstruments';
-  /** exchange */
-  exchange: Scalars['String'];
-  /** longname */
-  longname: Scalars['String'];
-  /** quoteType */
-  quoteType: Scalars['String'];
-  /** symbol */
-  symbol: Scalars['String'];
+  /** Code */
+  Code: Scalars['String'];
+  /** Country */
+  Country: Scalars['String'];
+  /** Currency */
+  Currency: Scalars['String'];
+  /** Exchange */
+  Exchange: Scalars['String'];
+  /** ISIN */
+  ISIN?: Maybe<Scalars['String']>;
+  /** Name */
+  Name: Scalars['String'];
+  /** Type */
+  Type: Scalars['String'];
+  /** previousClose */
+  previousClose: Scalars['Float'];
+  /** previousCloseDate */
+  previousCloseDate: Scalars['String'];
 };
 
 export type SearchInstrumentsInput = {
@@ -657,7 +632,7 @@ export type SearchInstrumentsQueryVariables = Exact<{
 }>;
 
 
-export type SearchInstrumentsQuery = { __typename?: 'Query', searchInstruments: Array<{ __typename?: 'SearchInstruments', quoteType: string, symbol: string, longname: string, exchange: string }> };
+export type SearchInstrumentsQuery = { __typename?: 'Query', searchInstruments: Array<{ __typename?: 'SearchInstruments', Code: string, Exchange: string, Name: string, Type: string, Country: string, Currency: string, ISIN?: string | null, previousClose: number }> };
 
 export type GetPortfoliosQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -687,5 +662,5 @@ export const GetCashAccountOperationsDocument = {"kind":"Document","definitions"
 export const GetCashAccountsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCashAccounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"balance"}}]}}]}}]} as unknown as DocumentNode<GetCashAccountsQuery, GetCashAccountsQueryVariables>;
 export const EmailExistDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmailExist"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emailExist"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"exist"}}]}}]}}]} as unknown as DocumentNode<EmailExistQuery, EmailExistQueryVariables>;
 export const GetUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"introductionStep"}},{"kind":"Field","name":{"kind":"Name","value":"defaultCurrency"}}]}}]}}]} as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
-export const SearchInstrumentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SearchInstruments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SearchInstrumentsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"searchInstruments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"quoteType"}},{"kind":"Field","name":{"kind":"Name","value":"symbol"}},{"kind":"Field","name":{"kind":"Name","value":"longname"}},{"kind":"Field","name":{"kind":"Name","value":"exchange"}}]}}]}}]} as unknown as DocumentNode<SearchInstrumentsQuery, SearchInstrumentsQueryVariables>;
+export const SearchInstrumentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SearchInstruments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SearchInstrumentsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"searchInstruments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Code"}},{"kind":"Field","name":{"kind":"Name","value":"Exchange"}},{"kind":"Field","name":{"kind":"Name","value":"Name"}},{"kind":"Field","name":{"kind":"Name","value":"Type"}},{"kind":"Field","name":{"kind":"Name","value":"Country"}},{"kind":"Field","name":{"kind":"Name","value":"Currency"}},{"kind":"Field","name":{"kind":"Name","value":"ISIN"}},{"kind":"Field","name":{"kind":"Name","value":"previousClose"}}]}}]}}]} as unknown as DocumentNode<SearchInstrumentsQuery, SearchInstrumentsQueryVariables>;
 export const GetPortfoliosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPortfolios"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"portfolios"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetPortfoliosQuery, GetPortfoliosQueryVariables>;
