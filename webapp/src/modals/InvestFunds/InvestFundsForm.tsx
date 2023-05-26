@@ -1,9 +1,11 @@
-import { Button, Datepicker, Spacer, Spreader } from 'components/atoms';
+import { Datepicker, Spacer, Spreader } from 'components/atoms';
 import { useDatepickerForm } from 'components/atoms/Datepicker';
 import { SearchInstruments, useSearchInstrumentsForm } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { InstrumentDetails } from './components/InstrumentDetails';
 import { Form } from './InvestFundsForm.style';
 
 export const InvestFundsForm = () => {
@@ -14,9 +16,16 @@ export const InvestFundsForm = () => {
     date: new Date(),
   };
 
-  const { setValue, control, handleSubmit } = useForm<typeof defaultValues>({
+  const { setValue, control, handleSubmit, watch } = useForm<typeof defaultValues>({
     defaultValues,
   });
+
+  const watchInstrument = watch('instrument');
+  const watchDate = watch('date');
+
+  const onSubmit = useCallback((data: typeof defaultValues) => {
+    console.log(data);
+  }, []);
 
   const searchInstrumentsProps = useSearchInstrumentsForm({
     control,
@@ -29,10 +38,6 @@ export const InvestFundsForm = () => {
     name: 'date',
     setValue,
   });
-
-  const onSubmit = (data: typeof defaultValues) => {
-    console.log(data);
-  };
 
   return (
     <Form
@@ -48,7 +53,12 @@ export const InvestFundsForm = () => {
 
       <Datepicker {...datepickerProps} />
 
-      <Button type="submit">test</Button>
+      <Spacer space="0.25" />
+
+      <InstrumentDetails
+        instrument={watchInstrument}
+        date={watchDate}
+      />
     </Form>
   );
 };

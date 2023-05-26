@@ -150,5 +150,6 @@
   "modal.ConfirmDeletePortfolio.description": "Czy na pewno chcesz usunąć portfel inwestycyjny <bold>{{name}}</bold>? <bold>Tej operacji nie można cofnąć.</bold>",
   "common.back": "Wróć",
   "modal.InvestFunds.name": "Inwestuj środki",
-  "modal.InvestFunds.description": "Tutaj możesz zainwestować środki z konta gotówkowego w wybrany portfel inwestycyjny."
+  "modal.InvestFunds.description": "Tutaj możesz zainwestować środki z konta gotówkowego w wybrany portfel inwestycyjny.",
+  "input.search_instrument.placeholder": "Wyszukaj instrument"
 }

@@ -150,5 +150,6 @@
   "modal.ConfirmDeletePortfolio.description": "Are you sure you want to delete <bold>{{name}}</bold> portfolio? <bold>This action cannot be undone.</bold>",
   "common.back": "Back",
   "modal.InvestFunds.name": "Invest funds",
-  "modal.InvestFunds.description": "Here you can invest funds in your portfolio."
+  "modal.InvestFunds.description": "Here you can invest funds in your portfolio.",
+  "input.search_instrument.placeholder": "Search instrument"
 }
