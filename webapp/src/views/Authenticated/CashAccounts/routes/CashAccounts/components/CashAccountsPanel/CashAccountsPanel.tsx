@@ -41,7 +41,7 @@ export const CashAccountsPanel: FC<
       label: t('modal.InvestFunds.name'),
       value: 'invest',
       onClick: () => {
-        NiceModal.show(MODAL_INVEST_FUNDS);
+        NiceModal.show(MODAL_INVEST_FUNDS, { balance, currency, uuid });
       },
     },
     {

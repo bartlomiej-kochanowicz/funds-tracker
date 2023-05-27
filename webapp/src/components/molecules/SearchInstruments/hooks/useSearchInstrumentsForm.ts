@@ -28,7 +28,7 @@ export const useSearchInstrumentsForm = <FormType extends FieldValues>({
 
   return {
     ...searchInstrumentsProps,
-    onChange: ({ symbol }: SearchInstrumentsQuery['searchInstruments'][0]) =>
-      setValue(name, symbol as PathValue<FormType, Path<FormType>>),
+    onChange: (instrument: SearchInstrumentsQuery['searchInstruments'][0]) =>
+      setValue(name, instrument as PathValue<FormType, Path<FormType>>),
   };
 };

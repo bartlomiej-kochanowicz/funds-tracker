@@ -8,12 +8,25 @@ interface BoxProps extends PaddingMixinProps {
   backgroundColor?: Colors;
   borderRadius?: Radius;
   hoverBackgroundColor?: Colors;
+  flex?: boolean;
+  flexDirection?: 'row' | 'column';
+  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+  alignItems?: 'center' | 'flex-start' | 'flex-end';
 }
 
 export const Box = styled.div<BoxProps>`
   ${paddingMixin}
 
-  ${({ theme, backgroundColor, borderRadius, hoverBackgroundColor }) => css`
+  ${({
+    theme,
+    backgroundColor,
+    borderRadius,
+    hoverBackgroundColor,
+    flex,
+    flexDirection,
+    justifyContent,
+    alignItems,
+  }) => css`
     ${backgroundColor &&
     css`
       background-color: ${theme.colors[backgroundColor]};
@@ -31,6 +44,26 @@ export const Box = styled.div<BoxProps>`
       &:hover {
         background-color: ${theme.colors[hoverBackgroundColor]};
       }
+    `}
+
+    ${flex &&
+    css`
+      display: flex;
+
+      ${flexDirection &&
+      css`
+        flex-direction: ${flexDirection};
+      `}
+
+      ${justifyContent &&
+      css`
+        justify-content: ${justifyContent};
+      `}
+
+      ${alignItems &&
+      css`
+        align-items: ${alignItems};
+      `}
     `}
   `}
 `;

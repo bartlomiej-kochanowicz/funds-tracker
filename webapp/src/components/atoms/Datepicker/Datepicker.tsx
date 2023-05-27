@@ -48,6 +48,14 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
         />
       }
       showPopperArrow={false}
+      popperModifiers={[
+        {
+          name: 'offset',
+          options: {
+            offset: [0, -5],
+          },
+        },
+      ]}
       renderCustomHeader={({
         date,
         changeYear,

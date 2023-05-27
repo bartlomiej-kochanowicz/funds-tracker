@@ -151,5 +151,10 @@
   "common.back": "Back",
   "modal.InvestFunds.name": "Invest funds",
   "modal.InvestFunds.description": "Here you can invest funds in your portfolio.",
-  "input.search_instrument.placeholder": "Search instrument"
+  "input.search_instrument.placeholder": "Search instrument",
+  "modal.InvestFunds.form.label.account.balance": "Account balance",
+  "modal.InvestFunds.form.label.instrument": "Instrument",
+  "modal.InvestFunds.form.label.portfolio": "Portfolio",
+  "modal.InvestFunds.form.label.purchase_date": "Purchase date",
+  "modal.InvestFunds.form.label.quantity": "Quantity"
 }

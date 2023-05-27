@@ -53,6 +53,7 @@ const SelectInner = <ValueType,>(
     flexGrow,
     triggerOffset = 5,
     placement = 'bottom-start',
+    ...rest
   }: SelectProps<ValueType>,
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
@@ -63,10 +64,10 @@ const SelectInner = <ValueType,>(
 
   const menuItems = useMemo(
     () =>
-      items.map(({ value, ...rest }) => ({
+      items.map(({ value, ...menuItemRest }) => ({
         onClick: () => setSelectedItem(items.find(item => item.value === value) || null),
         value,
-        ...rest,
+        ...menuItemRest,
       })),
     [items],
   );
@@ -112,6 +113,7 @@ const SelectInner = <ValueType,>(
         <StyledButton
           onBlur={onBlur}
           error={Boolean(error)}
+          {...rest}
           {...buttonProps}
           ref={mergeRefs(buttonRef, triggerProps.ref, buttonProps.ref)}
           type="button"

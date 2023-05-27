@@ -116,7 +116,11 @@ export const SearchInstruments = forwardRef<HTMLInputElement, SearchInstrumentsP
                   onClick={item.onClick}
                   {...itemProps[index]}
                 >
-                  <Badge>{item.Code}</Badge>
+                  <Badge>{item.value}</Badge>
+
+                  <Spreader spread="0.25" />
+
+                  <Text fontWeight="700">{item.Type}</Text>
 
                   <Spreader spread="0.25" />
 

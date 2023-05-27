@@ -151,5 +151,10 @@
   "common.back": "Wróć",
   "modal.InvestFunds.name": "Inwestuj środki",
   "modal.InvestFunds.description": "Tutaj możesz zainwestować środki z konta gotówkowego w wybrany portfel inwestycyjny.",
-  "input.search_instrument.placeholder": "Wyszukaj instrument"
+  "input.search_instrument.placeholder": "Wyszukaj instrument",
+  "modal.InvestFunds.form.label.account.balance": "Saldo konta",
+  "modal.InvestFunds.form.label.instrument": "Instrument",
+  "modal.InvestFunds.form.label.portfolio": "Portfel",
+  "modal.InvestFunds.form.label.purchase_date": "Data zakupu",
+  "modal.InvestFunds.form.label.quantity": "Ilość"
 }
