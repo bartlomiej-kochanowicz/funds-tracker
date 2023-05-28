@@ -7,7 +7,6 @@ import {
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { Box, Datepicker, Input, Loader, Select, Spacer, Spreader, Text } from 'components/atoms';
 import { useDatepickerForm } from 'components/atoms/Datepicker';
-import { SearchInstrumentCombobox, useSearchInstrumentComboboxForm } from 'components/molecules';
 import { INSTRUMENT_HISTORY } from 'graphql/query/instruments/InstrumentHistory';
 import { GET_PORTFOLIOS } from 'graphql/query/portfolios/GetPortfolios';
 import { formatCurrency } from 'helpers/formatCurrency';
@@ -18,6 +17,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { FormField } from './components/FormField';
+import { SearchInstrumentField } from './components/SearchInstrumentField';
+import { SelectPortfolioField } from './components/SelectPortfolioField';
 
 interface InvestFundsFormProps {
   balance: number;
@@ -28,17 +29,10 @@ interface InvestFundsFormProps {
 export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, uuid }) => {
   const { t } = useTranslation();
 
-  const { loading, data: portfolios } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
   const [getInstrumentHisotry, { data: history }] = useLazyQuery<
     GetInstrumentHistoryQuery,
     GetInstrumentHistoryQueryVariables
   >(INSTRUMENT_HISTORY);
-
-  const selectPortfolioItems =
-    portfolios?.portfolios.map(portfolio => ({
-      label: portfolio.name,
-      value: portfolio.uuid,
-    })) || [];
 
   const defaultValues = {
     instrument: {
@@ -107,12 +101,6 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     [uuid],
   );
 
-  const searchInstrumentProps = useSearchInstrumentComboboxForm({
-    control,
-    name: 'instrument',
-    setValue,
-  });
-
   const datepickerProps = useDatepickerForm({
     control,
     name: 'date',
@@ -140,10 +128,6 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     },
   ];
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
     <FormProvider {...methods}>
       <Box
@@ -161,29 +145,11 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
         <Spacer space="0.25" />
 
-        <FormField
-          label={t('modal.InvestFunds.form.label.instrument')}
-          htmlFor="instrument"
-        >
-          <SearchInstrumentCombobox
-            {...searchInstrumentProps}
-            id="instrument"
-            flexGrow={1}
-          />
-        </FormField>
+        <SearchInstrumentField />
 
         <Spacer space="0.25" />
 
-        <FormField
-          label={t('modal.InvestFunds.form.label.portfolio')}
-          htmlFor="portfolio"
-        >
-          <Select
-            items={selectPortfolioItems}
-            placeholder={t('modal.InvestFunds.form.select.portfolio.placeholder')}
-            flexGrow={1}
-          />
-        </FormField>
+        <SelectPortfolioField />
 
         <Spacer space="0.25" />
 
