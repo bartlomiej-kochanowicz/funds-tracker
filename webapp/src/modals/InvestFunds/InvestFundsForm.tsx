@@ -1,5 +1,5 @@
 import { Currency } from '__generated__/graphql';
-import { Box, Spacer, Text } from 'components/atoms';
+import { Box, Button, Spacer, Text } from 'components/atoms';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -83,6 +83,16 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
         <Spacer space="0.25" />
 
         <TransactionCostField activeCurrency={activeCurrency as Currency} />
+
+        <Spacer />
+
+        <Button
+          type="submit"
+          size="large"
+          width="100%"
+        >
+          aaa
+        </Button>
       </Box>
     </FormProvider>
   );
