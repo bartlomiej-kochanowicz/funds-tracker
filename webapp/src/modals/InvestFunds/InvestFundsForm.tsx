@@ -7,13 +7,14 @@ import {
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { Box, Datepicker, Input, Loader, Select, Spacer, Spreader, Text } from 'components/atoms';
 import { useDatepickerForm } from 'components/atoms/Datepicker';
-import { SearchInstruments, useSearchInstrumentsForm } from 'components/molecules';
+import { SearchInstrumentCombobox, useSearchInstrumentComboboxForm } from 'components/molecules';
 import { INSTRUMENT_HISTORY } from 'graphql/query/instruments/InstrumentHistory';
 import { GET_PORTFOLIOS } from 'graphql/query/portfolios/GetPortfolios';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { useSelect } from 'hooks/useSelect';
-import { FC, useCallback, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
+import { FC, useCallback } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { FormField } from './components/FormField';
@@ -32,8 +33,6 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     GetInstrumentHistoryQuery,
     GetInstrumentHistoryQueryVariables
   >(INSTRUMENT_HISTORY);
-
-  console.log({ history });
 
   const selectPortfolioItems =
     portfolios?.portfolios.map(portfolio => ({
@@ -54,7 +53,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     },
     portfolio: '',
     date: new Date(),
-    quantity: 0,
+    quantity: '',
     price: 0,
     commission: 0,
     commission_type: '%',
@@ -63,6 +62,10 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
   type InvestFundsFormValues = typeof defaultValues;
 
+  const methods = useForm<InvestFundsFormValues>({
+    defaultValues,
+  });
+
   const {
     setValue,
     control,
@@ -70,14 +73,12 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     watch,
     register,
     formState: { errors },
-  } = useForm<InvestFundsFormValues>({
-    defaultValues,
-  });
+  } = methods;
 
   const watchInstrument = watch('instrument');
   const watchDate = watch('date');
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     if (watchInstrument?.Code) {
       getInstrumentHisotry({
         variables: {
@@ -86,11 +87,18 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
             exchange: watchInstrument.Exchange,
             from: watchDate.toISOString(),
             to: watchDate.toISOString(),
+            period: '1d',
           },
         },
       });
     }
   }, [watchInstrument, getInstrumentHisotry, watchDate]);
+
+  /* useUpdateEffect(() => {
+    if (watchInstrument?.Code && !history?.instrumentHistory.length) {
+      setValue('quantity', 2137, { shouldDirty: true });
+    }
+  }, [watchInstrument, history]); */
 
   const onSubmit = useCallback(
     (data: InvestFundsFormValues) => {
@@ -99,7 +107,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     [uuid],
   );
 
-  const searchInstrumentsProps = useSearchInstrumentsForm({
+  const searchInstrumentProps = useSearchInstrumentComboboxForm({
     control,
     name: 'instrument',
     setValue,
@@ -137,137 +145,139 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
   }
 
   return (
-    <Box
-      as="form"
-      onSubmit={handleSubmit(onSubmit)}
-      flex
-      flexDirection="column"
-    >
-      <FormField
-        label={t('modal.InvestFunds.form.label.account.balance')}
-        htmlFor="balance"
+    <FormProvider {...methods}>
+      <Box
+        as="form"
+        onSubmit={handleSubmit(onSubmit)}
+        flex
+        flexDirection="column"
       >
-        <Text>{formatCurrency(balance, currency)}</Text>
-      </FormField>
+        <FormField
+          label={t('modal.InvestFunds.form.label.account.balance')}
+          htmlFor="balance"
+        >
+          <Text>{formatCurrency(balance, currency)}</Text>
+        </FormField>
 
-      <Spacer space="0.25" />
+        <Spacer space="0.25" />
 
-      <FormField
-        label={t('modal.InvestFunds.form.label.instrument')}
-        htmlFor="instrument"
-      >
-        <SearchInstruments
-          {...searchInstrumentsProps}
-          id="instrument"
-          flexGrow={1}
-        />
-      </FormField>
+        <FormField
+          label={t('modal.InvestFunds.form.label.instrument')}
+          htmlFor="instrument"
+        >
+          <SearchInstrumentCombobox
+            {...searchInstrumentProps}
+            id="instrument"
+            flexGrow={1}
+          />
+        </FormField>
 
-      <Spacer space="0.25" />
+        <Spacer space="0.25" />
 
-      <FormField
-        label={t('modal.InvestFunds.form.label.portfolio')}
-        htmlFor="portfolio"
-      >
-        <Select
-          items={selectPortfolioItems}
-          placeholder={t('modal.InvestFunds.form.select.portfolio.placeholder')}
-          flexGrow={1}
-        />
-      </FormField>
+        <FormField
+          label={t('modal.InvestFunds.form.label.portfolio')}
+          htmlFor="portfolio"
+        >
+          <Select
+            items={selectPortfolioItems}
+            placeholder={t('modal.InvestFunds.form.select.portfolio.placeholder')}
+            flexGrow={1}
+          />
+        </FormField>
 
-      <Spacer space="0.25" />
+        <Spacer space="0.25" />
 
-      <FormField
-        label={t('modal.InvestFunds.form.label.purchase_date')}
-        htmlFor="date"
-      >
-        <Datepicker {...datepickerProps} />
-      </FormField>
+        <FormField
+          label={t('modal.InvestFunds.form.label.purchase_date')}
+          htmlFor="date"
+        >
+          <Datepicker {...datepickerProps} />
+        </FormField>
 
-      <Spacer space="0.25" />
+        <Spacer space="0.25" />
 
-      <FormField
-        label={t('modal.InvestFunds.form.label.quantity')}
-        htmlFor="quantity"
-      >
-        <Input
-          id="quantity"
-          type="number"
-          flexGrow={1}
-          placeholder={t('modal.InvestFunds.form.input.quantity.placeholder')}
-        />
-      </FormField>
-
-      <Spacer space="0.25" />
-
-      <FormField
-        label={t('modal.InvestFunds.form.label.price')}
-        htmlFor="price"
-      >
-        <Input
-          id="price"
-          type="currency"
-          flexGrow={1}
-          placeholder={t('modal.InvestFunds.form.input.price.placeholder')}
-          currency={activeCurrency as Currency}
-        />
-      </FormField>
-
-      <Spacer space="0.25" />
-
-      <FormField
-        label={t('modal.InvestFunds.form.label.commission', {
-          currency: activeCurrency,
-        })}
-        htmlFor="commission"
-      >
-        <Box
-          flex
-          alignItems="center"
-          flexGrow={1}
+        <FormField
+          label={t('modal.InvestFunds.form.label.quantity')}
+          htmlFor="quantity"
         >
           <Input
-            id="commission"
+            id="quantity"
+            type="number"
             flexGrow={1}
-            placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
-            {...(watchCommissionType === '%'
-              ? {
-                  type: 'number',
-                  unit: '%',
-                  min: 0,
-                  max: 100,
-                }
-              : {
-                  type: 'currency',
-                  currency: activeCurrency as Currency,
-                })}
+            placeholder={t('modal.InvestFunds.form.input.quantity.placeholder')}
           />
+        </FormField>
 
-          <Spreader spread="0.25" />
+        <Spacer space="0.25" />
 
-          <Select
-            items={selectCommisionType}
-            defaultValue={defaultValues.commission_type}
-            {...comissionTypeProps}
+        <FormField
+          label={t('modal.InvestFunds.form.label.price')}
+          htmlFor="price"
+        >
+          <Input
+            id="price"
+            type="currency"
+            flexGrow={1}
+            placeholder={t('modal.InvestFunds.form.input.price.placeholder')}
+            currency={activeCurrency as Currency}
           />
-        </Box>
-      </FormField>
+        </FormField>
 
-      <Spacer space="0.25" />
+        <Spacer space="0.25" />
 
-      <FormField
-        label={t('modal.InvestFunds.form.label.transaction_cost')}
-        htmlFor="transaction_cost"
-      >
-        <Input
-          id="transaction_cost"
-          type="number"
-          flexGrow={1}
-          placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
-          unit={activeCurrency}
-        />
-      </FormField>
-    </Box>
+        <FormField
+          label={t('modal.InvestFunds.form.label.commission', {
+            currency: activeCurrency,
+          })}
+          htmlFor="commission"
+        >
+          <Box
+            flex
+            alignItems="center"
+            flexGrow={1}
+          >
+            <Input
+              id="commission"
+              flexGrow={1}
+              placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
+              {...(watchCommissionType === '%'
+                ? {
+                    type: 'number',
+                    unit: '%',
+                    min: 0,
+                    max: 100,
+                  }
+                : {
+                    type: 'currency',
+                    currency: activeCurrency as Currency,
+                  })}
+            />
+
+            <Spreader spread="0.25" />
+
+            <Select
+              items={selectCommisionType}
+              defaultValue={defaultValues.commission_type}
+              {...comissionTypeProps}
+            />
+          </Box>
+        </FormField>
+
+        <Spacer space="0.25" />
+
+        <FormField
+          label={t('modal.InvestFunds.form.label.transaction_cost')}
+          htmlFor="transaction_cost"
+        >
+          <Input
+            id="transaction_cost"
+            type="currency"
+            flexGrow={1}
+            placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
+            currency={activeCurrency as Currency}
+          />
+        </FormField>
+      </Box>
+    </FormProvider>
   );
 };

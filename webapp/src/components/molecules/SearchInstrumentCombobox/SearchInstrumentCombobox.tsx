@@ -1,8 +1,8 @@
-import { SearchInstrumentsQuery, SearchInstrumentsQueryVariables } from '__generated__/graphql';
+import { SearchInstrumentQuery, SearchInstrumentQueryVariables } from '__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { Badge, Input, Menu, Spreader, Text } from 'components/atoms';
 import type { SearchInputProps } from 'components/atoms/Input';
-import { SEARCH_INSTRUMENTS } from 'graphql/query/instruments/SearchInstruments';
+import { SEARCH_INSTRUMENT } from 'graphql/query/instruments/SearchInstrument';
 import { useCombobox } from 'hooks/useCombobox';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { forwardRef, Fragment, useMemo, useRef } from 'react';
@@ -10,32 +10,32 @@ import { useTranslation } from 'react-i18next';
 import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 
-interface SearchInstrumentsProps extends Omit<SearchInputProps, 'onChange'> {
+interface SearchInstrumentComboboxProps extends Omit<SearchInputProps, 'onChange'> {
   placement?: PlacementType;
   triggerOffset?: number;
-  onChange: (instrument: SearchInstrumentsQuery['searchInstruments'][0]) => void;
+  onChange: (instrument: SearchInstrumentQuery['searchInstrument'][0]) => void;
 }
 
-export const SearchInstruments = forwardRef<HTMLInputElement, SearchInstrumentsProps>(
+export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstrumentComboboxProps>(
   ({ placement = 'bottom-start', triggerOffset = 5, onChange, ...rest }, ref) => {
     const { t } = useTranslation();
 
     const [findInstruments, { data }] = useLazyQuery<
-      SearchInstrumentsQuery,
-      SearchInstrumentsQueryVariables
-    >(SEARCH_INSTRUMENTS, {
+      SearchInstrumentQuery,
+      SearchInstrumentQueryVariables
+    >(SEARCH_INSTRUMENT, {
       fetchPolicy: 'no-cache',
     });
 
     const items = useMemo(
       () =>
-        data?.searchInstruments.map(({ Code, Exchange, ...itemRest }) => ({
+        data?.searchInstrument.map(({ Code, Exchange, ...itemRest }) => ({
           value: `${Code}.${Exchange}`,
           Code,
           Exchange,
           ...itemRest,
         })) || [],
-      [data?.searchInstruments],
+      [data?.searchInstrument],
     );
 
     const {

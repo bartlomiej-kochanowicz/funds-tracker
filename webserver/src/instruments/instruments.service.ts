@@ -2,17 +2,17 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
-import { InstrumentHistoryInput, SearchInstrumentsInput } from './inputs';
-import { InstrumentHistory, SearchInstruments } from './entities';
+import { InstrumentHistoryInput, SearchInstrumentInput } from './inputs';
+import { InstrumentHistory, SearchInstrument } from './entities';
 
 @Injectable()
 export class InstrumentsService {
   constructor(private readonly httpService: HttpService, private config: ConfigService) {}
 
-  async search(searchInstrumentsInput: SearchInstrumentsInput): Promise<SearchInstruments[]> {
+  async search(searchInstrumentInput: SearchInstrumentInput): Promise<SearchInstrument[]> {
     const { data } = await firstValueFrom(
       this.httpService
-        .get(`https://eodhistoricaldata.com/api/search/${searchInstrumentsInput.name}`, {
+        .get(`https://eodhistoricaldata.com/api/search/${searchInstrumentInput.name}`, {
           params: {
             api_token: this.config.get('EODHD_API_KEY'),
             fmt: 'json',

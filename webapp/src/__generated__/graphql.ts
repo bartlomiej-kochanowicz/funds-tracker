@@ -309,7 +309,7 @@ export type Query = {
   instrumentHistory: Array<InstrumentHistory>;
   portfolio: Portfolio;
   portfolios: Array<Portfolio>;
-  searchInstruments: Array<SearchInstruments>;
+  searchInstrument: Array<SearchInstrument>;
   user: User;
 };
 
@@ -334,8 +334,8 @@ export type QueryPortfolioArgs = {
 };
 
 
-export type QuerySearchInstrumentsArgs = {
-  data: SearchInstrumentsInput;
+export type QuerySearchInstrumentArgs = {
+  data: SearchInstrumentInput;
 };
 
 export type Refresh = {
@@ -357,8 +357,8 @@ export type ResetPasswordInput = {
   token: Scalars['String'];
 };
 
-export type SearchInstruments = {
-  __typename?: 'SearchInstruments';
+export type SearchInstrument = {
+  __typename?: 'SearchInstrument';
   /** Code */
   Code: Scalars['String'];
   /** Country */
@@ -379,7 +379,7 @@ export type SearchInstruments = {
   previousCloseDate: Scalars['String'];
 };
 
-export type SearchInstrumentsInput = {
+export type SearchInstrumentInput = {
   /** Instrument name. */
   name: Scalars['String'];
 };
@@ -634,12 +634,12 @@ export type GetInstrumentHistoryQueryVariables = Exact<{
 
 export type GetInstrumentHistoryQuery = { __typename?: 'Query', instrumentHistory: Array<{ __typename?: 'InstrumentHistory', date: string, open: number, close: number, high: number, low: number, volume: number }> };
 
-export type SearchInstrumentsQueryVariables = Exact<{
-  data: SearchInstrumentsInput;
+export type SearchInstrumentQueryVariables = Exact<{
+  data: SearchInstrumentInput;
 }>;
 
 
-export type SearchInstrumentsQuery = { __typename?: 'Query', searchInstruments: Array<{ __typename?: 'SearchInstruments', Code: string, Exchange: string, Name: string, Type: string, Country: string, Currency: string, ISIN?: string | null, previousClose: number }> };
+export type SearchInstrumentQuery = { __typename?: 'Query', searchInstrument: Array<{ __typename?: 'SearchInstrument', Code: string, Exchange: string, Name: string, Type: string, Country: string, Currency: string, ISIN?: string | null, previousClose: number, previousCloseDate: string }> };
 
 export type GetPortfoliosQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -670,5 +670,5 @@ export const GetCashAccountsDocument = {"kind":"Document","definitions":[{"kind"
 export const EmailExistDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmailExist"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emailExist"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"exist"}}]}}]}}]} as unknown as DocumentNode<EmailExistQuery, EmailExistQueryVariables>;
 export const GetUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"introductionStep"}},{"kind":"Field","name":{"kind":"Name","value":"defaultCurrency"}}]}}]}}]} as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
 export const GetInstrumentHistoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetInstrumentHistory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"InstrumentHistoryInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"instrumentHistory"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}},{"kind":"Field","name":{"kind":"Name","value":"high"}},{"kind":"Field","name":{"kind":"Name","value":"low"}},{"kind":"Field","name":{"kind":"Name","value":"volume"}}]}}]}}]} as unknown as DocumentNode<GetInstrumentHistoryQuery, GetInstrumentHistoryQueryVariables>;
-export const SearchInstrumentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SearchInstruments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SearchInstrumentsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"searchInstruments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Code"}},{"kind":"Field","name":{"kind":"Name","value":"Exchange"}},{"kind":"Field","name":{"kind":"Name","value":"Name"}},{"kind":"Field","name":{"kind":"Name","value":"Type"}},{"kind":"Field","name":{"kind":"Name","value":"Country"}},{"kind":"Field","name":{"kind":"Name","value":"Currency"}},{"kind":"Field","name":{"kind":"Name","value":"ISIN"}},{"kind":"Field","name":{"kind":"Name","value":"previousClose"}}]}}]}}]} as unknown as DocumentNode<SearchInstrumentsQuery, SearchInstrumentsQueryVariables>;
+export const SearchInstrumentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SearchInstrument"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SearchInstrumentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"searchInstrument"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Code"}},{"kind":"Field","name":{"kind":"Name","value":"Exchange"}},{"kind":"Field","name":{"kind":"Name","value":"Name"}},{"kind":"Field","name":{"kind":"Name","value":"Type"}},{"kind":"Field","name":{"kind":"Name","value":"Country"}},{"kind":"Field","name":{"kind":"Name","value":"Currency"}},{"kind":"Field","name":{"kind":"Name","value":"ISIN"}},{"kind":"Field","name":{"kind":"Name","value":"previousClose"}},{"kind":"Field","name":{"kind":"Name","value":"previousCloseDate"}}]}}]}}]} as unknown as DocumentNode<SearchInstrumentQuery, SearchInstrumentQueryVariables>;
 export const GetPortfoliosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPortfolios"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"portfolios"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetPortfoliosQuery, GetPortfoliosQueryVariables>;

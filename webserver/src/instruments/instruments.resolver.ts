@@ -1,18 +1,18 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { InstrumentHistory, SearchInstruments } from './entities';
-import { InstrumentHistoryInput, SearchInstrumentsInput } from './inputs';
+import { InstrumentHistory, SearchInstrument } from './entities';
+import { InstrumentHistoryInput, SearchInstrumentInput } from './inputs';
 import { InstrumentsService } from './instruments.service';
 
 @Resolver()
 export class InstrumentsResolver {
   constructor(private readonly instrumentsService: InstrumentsService) {}
 
-  @Query(() => [SearchInstruments])
-  searchInstruments(
+  @Query(() => [SearchInstrument])
+  searchInstrument(
     @Args('data')
-    searchInstrumentsInput: SearchInstrumentsInput,
+    searchInstrumentInput: SearchInstrumentInput,
   ) {
-    return this.instrumentsService.search(searchInstrumentsInput);
+    return this.instrumentsService.search(searchInstrumentInput);
   }
 
   @Query(() => [InstrumentHistory])

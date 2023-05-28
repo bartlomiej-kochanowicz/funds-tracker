@@ -125,7 +125,7 @@ type InstrumentHistory {
   volume: Float!
 }
 
-type SearchInstruments {
+type SearchInstrument {
   """Code"""
   Code: String!
 
@@ -213,7 +213,7 @@ type Query {
   emailExist(data: EmailInput!): Email!
   cashAccounts: [CashAccount!]!
   cashAccount(uuid: ID!): CashAccount!
-  searchInstruments(data: SearchInstrumentsInput!): [SearchInstruments!]!
+  searchInstrument(data: SearchInstrumentInput!): [SearchInstrument!]!
   instrumentHistory(data: InstrumentHistoryInput!): [InstrumentHistory!]!
   portfolios: [Portfolio!]!
   portfolio(uuid: String!): Portfolio!
@@ -228,7 +228,7 @@ input EmailInput {
   token: String!
 }
 
-input SearchInstrumentsInput {
+input SearchInstrumentInput {
   """Instrument name."""
   name: String!
 }
