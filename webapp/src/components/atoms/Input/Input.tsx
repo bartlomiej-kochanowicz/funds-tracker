@@ -10,7 +10,7 @@ import { Error, SearchIcon, StyledCurrencyInput, StyledInput, Unit, Wrapper } fr
 
 interface InputCommonProps {
   error?: string;
-  unit?: '%';
+  unit?: string;
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   flexGrow?: number;
   label?: string | ReactNode;

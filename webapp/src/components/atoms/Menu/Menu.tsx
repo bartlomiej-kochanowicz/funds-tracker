@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 
 export interface MenuProps {
   children: ReactNode;
-  minMenuWidth?: `${number}${'px' | 'rem'}`;
   isInModal?: boolean;
 }
 

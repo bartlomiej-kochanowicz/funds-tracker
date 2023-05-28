@@ -156,5 +156,13 @@
   "modal.InvestFunds.form.label.instrument": "Instrument",
   "modal.InvestFunds.form.label.portfolio": "Portfel",
   "modal.InvestFunds.form.label.purchase_date": "Data zakupu",
-  "modal.InvestFunds.form.label.quantity": "Ilość"
+  "modal.InvestFunds.form.label.quantity": "Ilość",
+  "modal.InvestFunds.form.label.price": "Cena jednostkowa",
+  "modal.InvestFunds.form.label.commission": "Prowizja ({{currency}})",
+  "modal.InvestFunds.form.label.transaction_cost": "Koszt transakcji",
+  "modal.InvestFunds.form.select.portfolio.placeholder": "Wybierz portfel",
+  "modal.InvestFunds.form.input.quantity.placeholder": "Podaj ilość zakupionych jednostek",
+  "modal.InvestFunds.form.input.price.placeholder": "Podaj cenę jednostkową",
+  "modal.InvestFunds.form.input.commission.placeholder": "Podaj prowizję",
+  "modal.InvestFunds.form.input.transaction_cost.placeholder": "Podaj całkowity koszt transakcji"
 }

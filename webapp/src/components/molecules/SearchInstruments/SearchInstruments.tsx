@@ -114,17 +114,14 @@ export const SearchInstruments = forwardRef<HTMLInputElement, SearchInstrumentsP
                 <Menu.Item
                   key={`${item.Code}.${item.Exchange}`}
                   onClick={item.onClick}
+                  maxWidth={triggerBounds?.width ? `${triggerBounds.width}px` : undefined}
                   {...itemProps[index]}
                 >
                   <Badge>{item.value}</Badge>
 
                   <Spreader spread="0.25" />
 
-                  <Text fontWeight="700">{item.Type}</Text>
-
-                  <Spreader spread="0.25" />
-
-                  <Text maxWidth="175px">{item.Name}</Text>
+                  <Text maxWidth="auto">{item.Name}</Text>
                 </Menu.Item>
               ))}
             </Menu>

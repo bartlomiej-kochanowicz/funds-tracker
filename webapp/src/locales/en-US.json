@@ -156,5 +156,12 @@
   "modal.InvestFunds.form.label.instrument": "Instrument",
   "modal.InvestFunds.form.label.portfolio": "Portfolio",
   "modal.InvestFunds.form.label.purchase_date": "Purchase date",
-  "modal.InvestFunds.form.label.quantity": "Quantity"
+  "modal.InvestFunds.form.label.quantity": "Quantity",
+  "modal.InvestFunds.form.label.price": "Unit price",
+  "modal.InvestFunds.form.label.commission": "Commission ({{currency}})",
+  "modal.InvestFunds.form.label.transaction_cost": "Transaction cost",
+  "modal.InvestFunds.form.select.portfolio.placeholder": "Select portfolio",
+  "modal.InvestFunds.form.input.quantity.placeholder": "Enter quantity of instrument",
+  "modal.InvestFunds.form.input.commission.placeholder": "Enter commission",
+  "modal.InvestFunds.form.input.transaction_cost.placeholder": "Enter transaction cost"
 }
