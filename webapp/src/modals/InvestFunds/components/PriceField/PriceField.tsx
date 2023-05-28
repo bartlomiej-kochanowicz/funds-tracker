@@ -6,6 +6,7 @@ import {
 import { useLazyQuery } from '@apollo/client';
 import { Input } from 'components/atoms';
 import { INSTRUMENT_HISTORY } from 'graphql/query/instruments/InstrumentHistory';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
@@ -57,6 +58,8 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
     }
   }, [watchInstrument, data]);
 
+  const isPhone = useBreakpoint('phone', 'max');
+
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.price')}
@@ -66,6 +69,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
         id="price"
         type="number"
         flexGrow={1}
+        width={isPhone ? '100%' : 'auto'}
         placeholder={t('modal.InvestFunds.form.input.price.placeholder')}
         unit={activeCurrency}
         {...register('price')}

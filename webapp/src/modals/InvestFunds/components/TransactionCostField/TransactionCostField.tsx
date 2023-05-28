@@ -1,5 +1,6 @@
 import { Currency } from '__generated__/graphql';
 import { Input } from 'components/atoms';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -16,6 +17,8 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 
   const { register } = useFormContext<InvestFundsFormValues>();
 
+  const isPhone = useBreakpoint('phone', 'max');
+
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.transaction_cost')}
@@ -25,6 +28,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
         id="transaction_cost"
         type="number"
         flexGrow={1}
+        width={isPhone ? '100%' : 'auto'}
         placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
         unit={activeCurrency}
         {...register('transaction_cost')}

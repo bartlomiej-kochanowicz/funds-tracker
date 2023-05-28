@@ -72,6 +72,12 @@ export const GlobalStyle = styled.createGlobalStyle`
   .react-datepicker-wrapper {
     width: auto;
     flex-grow: 1;
+
+    ${({ theme }) => styled.css`
+      ${theme.breakpoints.phone.max} {
+        width: 100%;
+      }
+    `}
   }
 
   .react-datepicker {

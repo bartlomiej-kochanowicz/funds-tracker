@@ -1,5 +1,6 @@
 import { Currency } from '__generated__/graphql';
 import { Box, Input, Select, Spreader } from 'components/atoms';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useSelect } from 'hooks/useSelect';
 import { defaultValues, InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
@@ -40,6 +41,8 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
 
   const watchCommissionType = watch('commission_type');
 
+  const isPhone = useBreakpoint('phone', 'max');
+
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.commission', {
@@ -51,6 +54,7 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
         flex
         alignItems="center"
         flexGrow={1}
+        width={isPhone ? '100%' : 'auto'}
       >
         <Input
           id="commission"

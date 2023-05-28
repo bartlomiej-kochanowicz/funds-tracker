@@ -1,4 +1,5 @@
 import { SearchInstrumentCombobox, useSearchInstrumentComboboxForm } from 'components/molecules';
+import { useBreakpoint } from 'hooks/useBreakpoint';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +17,8 @@ export const SearchInstrumentField = () => {
     setValue,
   });
 
+  const isPhone = useBreakpoint('phone', 'max');
+
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.instrument')}
@@ -25,6 +28,7 @@ export const SearchInstrumentField = () => {
         {...searchInstrumentProps}
         id="instrument"
         flexGrow={1}
+        width={isPhone ? '100%' : 'auto'}
       />
     </FormField>
   );

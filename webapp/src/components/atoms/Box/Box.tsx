@@ -13,6 +13,7 @@ interface BoxProps extends PaddingMixinProps {
   justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
   alignItems?: 'center' | 'flex-start' | 'flex-end';
   flexGrow?: number;
+  width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
 }
 
 export const Box = styled.div<BoxProps>`
@@ -28,6 +29,7 @@ export const Box = styled.div<BoxProps>`
     justifyContent,
     alignItems,
     flexGrow,
+    width,
   }) => css`
     ${backgroundColor &&
     css`
@@ -46,6 +48,11 @@ export const Box = styled.div<BoxProps>`
       &:hover {
         background-color: ${theme.colors[hoverBackgroundColor]};
       }
+    `}
+
+    ${width &&
+    css`
+      width: ${width};
     `}
 
     ${flex &&
