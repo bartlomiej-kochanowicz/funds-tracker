@@ -164,5 +164,6 @@
   "modal.InvestFunds.form.input.quantity.placeholder": "Podaj ilość zakupionych jednostek",
   "modal.InvestFunds.form.input.price.placeholder": "Podaj cenę jednostkową",
   "modal.InvestFunds.form.input.commission.placeholder": "Podaj prowizję",
-  "modal.InvestFunds.form.input.transaction_cost.placeholder": "Podaj całkowity koszt transakcji"
+  "modal.InvestFunds.form.input.transaction_cost.placeholder": "Podaj całkowity koszt transakcji",
+  "common.value": "Wartość"
 }

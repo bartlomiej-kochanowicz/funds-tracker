@@ -5,16 +5,12 @@ import { useDatepickerForm } from 'components/atoms/Datepicker';
 import { SearchInstruments, useSearchInstrumentsForm } from 'components/molecules';
 import { GET_PORTFOLIOS } from 'graphql/query/portfolios/GetPortfolios';
 import { formatCurrency } from 'helpers/formatCurrency';
+import { useSelect } from 'hooks/useSelect';
 import { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { FormField } from './components/FormField';
-
-type InvestFundsFormValues = {
-  instrument: SearchInstrumentsQuery['searchInstruments'][0];
-  date: Date;
-};
 
 interface InvestFundsFormProps {
   balance: number;
@@ -44,10 +40,25 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
       ISIN: null,
       previousClose: 0,
     },
+    portfolio: '',
     date: new Date(),
+    quantity: 0,
+    price: 0,
+    commission: 0,
+    commission_type: '%',
+    transaction_cost: 0,
   };
 
-  const { setValue, control, handleSubmit, watch } = useForm<InvestFundsFormValues>({
+  type InvestFundsFormValues = typeof defaultValues;
+
+  const {
+    setValue,
+    control,
+    handleSubmit,
+    watch,
+    register,
+    formState: { errors },
+  } = useForm<InvestFundsFormValues>({
     defaultValues,
   });
 
@@ -69,18 +80,26 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     setValue,
   });
 
+  const comissionTypeProps = useSelect<InvestFundsFormValues>({
+    register,
+    name: 'commission_type',
+    errors,
+  });
+
+  const watchCommissionType = watch('commission_type');
+
+  const activeCurrency = watchInstrument?.Currency || currency;
+
   const selectCommisionType = [
     {
       label: '%',
       value: '%',
     },
     {
-      label: currency,
-      value: currency,
+      label: t('common.value'),
+      value: 'value',
     },
   ];
-
-  const activeCurrency = watchInstrument?.Currency || currency;
 
   if (loading) {
     return <Loader />;
@@ -176,13 +195,17 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
           id="commission"
           type="number"
           flexGrow={1}
-          unit="PLN"
+          unit={watchCommissionType === '%' ? '%' : activeCurrency}
           placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
         />
 
         <Spreader spread="0.25" />
 
-        <Select items={selectCommisionType} />
+        <Select
+          items={selectCommisionType}
+          defaultValue={defaultValues.commission_type}
+          {...comissionTypeProps}
+        />
       </FormField>
 
       <Spacer space="0.25" />

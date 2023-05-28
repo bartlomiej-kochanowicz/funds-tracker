@@ -163,5 +163,6 @@
   "modal.InvestFunds.form.select.portfolio.placeholder": "Select portfolio",
   "modal.InvestFunds.form.input.quantity.placeholder": "Enter quantity of instrument",
   "modal.InvestFunds.form.input.commission.placeholder": "Enter commission",
-  "modal.InvestFunds.form.input.transaction_cost.placeholder": "Enter transaction cost"
+  "modal.InvestFunds.form.input.transaction_cost.placeholder": "Enter transaction cost",
+  "common.value": "Value"
 }
