@@ -4,8 +4,8 @@ import { IsOptional, IsString } from 'class-validator';
 @InputType()
 export class InstrumentHistoryInput {
   @IsString()
-  @Field(() => String, { description: 'Symbol' })
-  symbol: string;
+  @Field(() => String, { description: 'Code' })
+  code: string;
 
   @IsString()
   @Field(() => String, { description: 'Exchange' })

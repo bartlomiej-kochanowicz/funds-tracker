@@ -234,8 +234,8 @@ input SearchInstrumentsInput {
 }
 
 input InstrumentHistoryInput {
-  """Symbol"""
-  symbol: String!
+  """Code"""
+  code: String!
 
   """Exchange"""
   exchange: String!

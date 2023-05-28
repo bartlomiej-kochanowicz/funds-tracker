@@ -1,12 +1,18 @@
-import { Currency, GetPortfoliosQuery, SearchInstrumentsQuery } from '__generated__/graphql';
-import { useQuery } from '@apollo/client';
+import {
+  Currency,
+  GetInstrumentHistoryQuery,
+  GetInstrumentHistoryQueryVariables,
+  GetPortfoliosQuery,
+} from '__generated__/graphql';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { Box, Datepicker, Input, Loader, Select, Spacer, Spreader, Text } from 'components/atoms';
 import { useDatepickerForm } from 'components/atoms/Datepicker';
 import { SearchInstruments, useSearchInstrumentsForm } from 'components/molecules';
+import { INSTRUMENT_HISTORY } from 'graphql/query/instruments/InstrumentHistory';
 import { GET_PORTFOLIOS } from 'graphql/query/portfolios/GetPortfolios';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { useSelect } from 'hooks/useSelect';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -22,6 +28,12 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
   const { t } = useTranslation();
 
   const { loading, data: portfolios } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
+  const [getInstrumentHisotry, { data: history }] = useLazyQuery<
+    GetInstrumentHistoryQuery,
+    GetInstrumentHistoryQueryVariables
+  >(INSTRUMENT_HISTORY);
+
+  console.log({ history });
 
   const selectPortfolioItems =
     portfolios?.portfolios.map(portfolio => ({
@@ -63,10 +75,29 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
   });
 
   const watchInstrument = watch('instrument');
+  const watchDate = watch('date');
 
-  const onSubmit = useCallback((data: InvestFundsFormValues) => {
-    console.log(data);
-  }, []);
+  useEffect(() => {
+    if (watchInstrument?.Code) {
+      getInstrumentHisotry({
+        variables: {
+          data: {
+            code: watchInstrument.Code,
+            exchange: watchInstrument.Exchange,
+            from: watchDate.toISOString(),
+            to: watchDate.toISOString(),
+          },
+        },
+      });
+    }
+  }, [watchInstrument, getInstrumentHisotry, watchDate]);
+
+  const onSubmit = useCallback(
+    (data: InvestFundsFormValues) => {
+      console.log({ ...data, uuid });
+    },
+    [uuid],
+  );
 
   const searchInstrumentsProps = useSearchInstrumentsForm({
     control,
@@ -176,10 +207,10 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
       >
         <Input
           id="price"
-          type="number"
+          type="currency"
           flexGrow={1}
           placeholder={t('modal.InvestFunds.form.input.price.placeholder')}
-          unit={activeCurrency}
+          currency={activeCurrency as Currency}
         />
       </FormField>
 
@@ -191,21 +222,36 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
         })}
         htmlFor="commission"
       >
-        <Input
-          id="commission"
-          type="number"
+        <Box
+          flex
+          alignItems="center"
           flexGrow={1}
-          unit={watchCommissionType === '%' ? '%' : activeCurrency}
-          placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
-        />
+        >
+          <Input
+            id="commission"
+            flexGrow={1}
+            placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
+            {...(watchCommissionType === '%'
+              ? {
+                  type: 'number',
+                  unit: '%',
+                  min: 0,
+                  max: 100,
+                }
+              : {
+                  type: 'currency',
+                  currency: activeCurrency as Currency,
+                })}
+          />
 
-        <Spreader spread="0.25" />
+          <Spreader spread="0.25" />
 
-        <Select
-          items={selectCommisionType}
-          defaultValue={defaultValues.commission_type}
-          {...comissionTypeProps}
-        />
+          <Select
+            items={selectCommisionType}
+            defaultValue={defaultValues.commission_type}
+            {...comissionTypeProps}
+          />
+        </Box>
       </FormField>
 
       <Spacer space="0.25" />

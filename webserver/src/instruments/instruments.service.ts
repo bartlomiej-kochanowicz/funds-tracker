@@ -29,11 +29,11 @@ export class InstrumentsService {
   }
 
   async findHistory(instrumentHistoryInput: InstrumentHistoryInput): Promise<InstrumentHistory[]> {
-    const { symbol, exchange, from, to = new Date(), period = '1d' } = instrumentHistoryInput;
+    const { code, exchange, from, to = new Date(), period = '1d' } = instrumentHistoryInput;
 
     const { data } = await firstValueFrom(
       this.httpService
-        .get(`https://eodhistoricaldata.com/api/eod/${symbol}.${exchange}`, {
+        .get(`https://eodhistoricaldata.com/api/eod/${code}.${exchange}`, {
           params: {
             api_token: this.config.get('EODHD_API_KEY'),
             fmt: 'json',

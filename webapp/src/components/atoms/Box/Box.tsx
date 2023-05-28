@@ -12,6 +12,7 @@ interface BoxProps extends PaddingMixinProps {
   flexDirection?: 'row' | 'column';
   justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
   alignItems?: 'center' | 'flex-start' | 'flex-end';
+  flexGrow?: number;
 }
 
 export const Box = styled.div<BoxProps>`
@@ -26,6 +27,7 @@ export const Box = styled.div<BoxProps>`
     flexDirection,
     justifyContent,
     alignItems,
+    flexGrow,
   }) => css`
     ${backgroundColor &&
     css`
@@ -63,6 +65,11 @@ export const Box = styled.div<BoxProps>`
       ${alignItems &&
       css`
         align-items: ${alignItems};
+      `}
+
+      ${flexGrow &&
+      css`
+        flex-grow: ${flexGrow};
       `}
     `}
   `}

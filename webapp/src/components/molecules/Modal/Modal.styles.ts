@@ -28,6 +28,7 @@ export const ModalComponent = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow: auto;
 
   ${({ theme: { colors, radius, breakpoints, zIndex } }) => css`
     z-index: ${zIndex.modal.modal};
@@ -36,14 +37,15 @@ export const ModalComponent = styled.div`
     padding: 1.75rem 2.5rem;
     max-width: 900px;
     max-height: 85vh;
+    width: 75vw;
 
     ${breakpoints.tablet.max} {
-      min-width: 75vw;
+      width: 85vw;
     }
 
     ${breakpoints.phone.max} {
       padding: 1.25rem;
-      min-width: 90vw;
+      width: 90vw;
     }
   `}
 `;
