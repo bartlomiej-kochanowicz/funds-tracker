@@ -1,4 +1,5 @@
 import { SearchInstrumentCombobox, useSearchInstrumentComboboxForm } from 'components/molecules';
+import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -7,7 +8,7 @@ import { FormField } from '../FormField';
 export const SearchInstrumentField = () => {
   const { t } = useTranslation();
 
-  const { control, setValue } = useFormContext();
+  const { control, setValue } = useFormContext<InvestFundsFormValues>();
 
   const searchInstrumentProps = useSearchInstrumentComboboxForm({
     control,

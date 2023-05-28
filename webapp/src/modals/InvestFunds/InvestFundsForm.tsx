@@ -1,13 +1,6 @@
-import {
-  Currency,
-  GetInstrumentHistoryQuery,
-  GetInstrumentHistoryQueryVariables,
-} from '__generated__/graphql';
-import { useLazyQuery } from '@apollo/client';
-import { Box, Input, Spacer, Text } from 'components/atoms';
-import { INSTRUMENT_HISTORY } from 'graphql/query/instruments/InstrumentHistory';
+import { Currency } from '__generated__/graphql';
+import { Box, Spacer, Text } from 'components/atoms';
 import { formatCurrency } from 'helpers/formatCurrency';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -31,11 +24,6 @@ interface InvestFundsFormProps {
 export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, uuid }) => {
   const { t } = useTranslation();
 
-  /* const [getInstrumentHisotry, { data: history }] = useLazyQuery<
-    GetInstrumentHistoryQuery,
-    GetInstrumentHistoryQueryVariables
-  >(INSTRUMENT_HISTORY); */
-
   const methods = useForm<InvestFundsFormValues>({
     defaultValues,
   });
@@ -43,29 +31,6 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
   const { handleSubmit, watch } = methods;
 
   const watchInstrument = watch('instrument');
-  const watchDate = watch('date');
-
-  /* useUpdateEffect(() => {
-    if (watchInstrument?.Code) {
-      getInstrumentHisotry({
-        variables: {
-          data: {
-            code: watchInstrument.Code,
-            exchange: watchInstrument.Exchange,
-            from: watchDate.toISOString(),
-            to: watchDate.toISOString(),
-            period: '1d',
-          },
-        },
-      });
-    }
-  }, [watchInstrument, getInstrumentHisotry, watchDate]); */
-
-  /* useUpdateEffect(() => {
-    if (watchInstrument?.Code && !history?.instrumentHistory.length) {
-      setValue('quantity', 2137, { shouldDirty: true });
-    }
-  }, [watchInstrument, history]); */
 
   const onSubmit = useCallback(
     (data: InvestFundsFormValues) => {
