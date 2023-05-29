@@ -1,7 +1,7 @@
 import { Icon } from 'components/atoms/Icon';
 import { Menu } from 'components/atoms/Menu';
 import { Spreader } from 'components/atoms/Spreader';
-import { useSelect } from 'downshift';
+import { useDropdownMenu } from 'hooks/useDropdownMenu';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import {
   ForwardedRef,
@@ -10,7 +10,9 @@ import {
   Key,
   ReactNode,
   useImperativeHandle,
+  useMemo,
   useRef,
+  useState,
 } from 'react';
 import { ChangeHandler } from 'react-hook-form';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
@@ -51,26 +53,26 @@ const SelectInner = <ValueType,>(
     flexGrow,
     triggerOffset = 5,
     placement = 'bottom-start',
+    ...rest
   }: SelectProps<ValueType>,
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
-  const itemToString = (item: Item<ValueType> | null) => item?.label || '';
-
   const getDefaultSelected = (): Item<ValueType> | null =>
     defaultValue ? items.find(item => item.value === defaultValue) || null : null;
 
-  const {
-    isOpen,
-    selectedItem,
-    getToggleButtonProps,
-    getMenuProps,
-    highlightedIndex,
-    getItemProps,
-  } = useSelect({
-    items,
-    itemToString,
-    defaultSelectedItem: getDefaultSelected(),
-  });
+  const [selectedItem, setSelectedItem] = useState<Item<ValueType> | null>(getDefaultSelected());
+
+  const menuItems = useMemo(
+    () =>
+      items.map(({ value, ...menuItemRest }) => ({
+        onClick: () => setSelectedItem(items.find(item => item.value === value) || null),
+        value,
+        ...menuItemRest,
+      })),
+    [items],
+  );
+
+  const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(menuItems);
 
   useUpdateEffect(() => {
     if (onChange && selectedItem) {
@@ -110,9 +112,10 @@ const SelectInner = <ValueType,>(
       >
         <StyledButton
           onBlur={onBlur}
-          ref={mergeRefs(buttonRef, triggerProps.ref)}
           error={Boolean(error)}
-          {...getToggleButtonProps(triggerProps)}
+          {...rest}
+          {...buttonProps}
+          ref={mergeRefs(buttonRef, triggerProps.ref, buttonProps.ref)}
           type="button"
         >
           <StyledContent isSelected={Boolean(selectedItem)}>
@@ -135,26 +138,33 @@ const SelectInner = <ValueType,>(
       </Wrapper>
 
       {renderLayer(
-        <Menu
-          isInModal={isInModal}
-          {...getMenuProps(layerProps)}
-          style={{
-            minWidth: triggerBounds?.width,
-            ...layerProps.style,
-          }}
-        >
-          {isOpen &&
-            items.map(({ value, label, ...rest }, index) => (
+        isOpen && (
+          <Menu
+            isInModal={isInModal}
+            role="menu"
+            {...layerProps}
+            style={{
+              minWidth: triggerBounds?.width,
+              ...layerProps.style,
+            }}
+          >
+            {menuItems.map(({ value, label, onClick, ...itemRest }, index) => (
               <Menu.Item
                 isSelected={selectedItem?.value === value}
                 key={value as Key}
-                {...getItemProps({ item: { value, label, ...rest }, index })}
-                highlighted={highlightedIndex === index}
+                {...itemRest}
+                onClick={() => {
+                  onClick();
+
+                  setIsOpen(false);
+                }}
+                {...itemProps[index]}
               >
                 {label}
               </Menu.Item>
             ))}
-        </Menu>,
+          </Menu>
+        ),
       )}
     </Fragment>
   );

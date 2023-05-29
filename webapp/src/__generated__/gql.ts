@@ -35,7 +35,8 @@ const documents = {
     "\n  query GetCashAccounts {\n    cashAccounts {\n      uuid\n      name\n      currency\n      balance\n    }\n  }\n": types.GetCashAccountsDocument,
     "\n  query EmailExist($data: EmailInput!) {\n    emailExist(data: $data) {\n      exist\n    }\n  }\n": types.EmailExistDocument,
     "\n  query GetUser {\n    user {\n      uuid\n      name\n      email\n      createdAt\n      introductionStep\n      defaultCurrency\n    }\n  }\n": types.GetUserDocument,
-    "\n  query SearchInstruments($data: SearchInstrumentsInput!) {\n    searchInstruments(data: $data) {\n      quoteType\n      symbol\n      longname\n      exchange\n    }\n  }\n": types.SearchInstrumentsDocument,
+    "\n  query GetInstrumentHistory($data: InstrumentHistoryInput!) {\n    instrumentHistory(data: $data) {\n      date\n      open\n      close\n      high\n      low\n      volume\n    }\n  }\n": types.GetInstrumentHistoryDocument,
+    "\n  query SearchInstrument($data: SearchInstrumentInput!) {\n    searchInstrument(data: $data) {\n      Code\n      Exchange\n      Name\n      Type\n      Country\n      Currency\n      ISIN\n      previousClose\n      previousCloseDate\n    }\n  }\n": types.SearchInstrumentDocument,
     "\n  query GetPortfolios {\n    portfolios {\n      uuid\n      name\n    }\n  }\n": types.GetPortfoliosDocument,
 };
 
@@ -144,7 +145,11 @@ export function gql(source: "\n  query GetUser {\n    user {\n      uuid\n      
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query SearchInstruments($data: SearchInstrumentsInput!) {\n    searchInstruments(data: $data) {\n      quoteType\n      symbol\n      longname\n      exchange\n    }\n  }\n"): (typeof documents)["\n  query SearchInstruments($data: SearchInstrumentsInput!) {\n    searchInstruments(data: $data) {\n      quoteType\n      symbol\n      longname\n      exchange\n    }\n  }\n"];
+export function gql(source: "\n  query GetInstrumentHistory($data: InstrumentHistoryInput!) {\n    instrumentHistory(data: $data) {\n      date\n      open\n      close\n      high\n      low\n      volume\n    }\n  }\n"): (typeof documents)["\n  query GetInstrumentHistory($data: InstrumentHistoryInput!) {\n    instrumentHistory(data: $data) {\n      date\n      open\n      close\n      high\n      low\n      volume\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query SearchInstrument($data: SearchInstrumentInput!) {\n    searchInstrument(data: $data) {\n      Code\n      Exchange\n      Name\n      Type\n      Country\n      Currency\n      ISIN\n      previousClose\n      previousCloseDate\n    }\n  }\n"): (typeof documents)["\n  query SearchInstrument($data: SearchInstrumentInput!) {\n    searchInstrument(data: $data) {\n      Code\n      Exchange\n      Name\n      Type\n      Country\n      Currency\n      ISIN\n      previousClose\n      previousCloseDate\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

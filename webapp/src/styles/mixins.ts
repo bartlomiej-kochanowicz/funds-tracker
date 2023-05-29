@@ -20,7 +20,7 @@ export type FontableProps = {
   lineHeight?: `${string}rem`;
   textShadow?: boolean;
   textAlign?: 'left' | 'center' | 'right' | 'justify';
-  maxWidth?: `${string}px` | `${string}%`;
+  maxWidth?: `${string}px` | `${string}%` | 'auto';
   breakLine?: boolean;
 };
 
@@ -63,7 +63,7 @@ export const fontable = css<FontableProps>`
       text-align: ${textAlign};
     `}
 
-    ${({ maxWidth }) =>
+  ${({ maxWidth }) =>
     maxWidth &&
     css`
       text-overflow: ellipsis;
@@ -76,6 +76,14 @@ export const fontable = css<FontableProps>`
     breakLine &&
     css`
       white-space: normal;
+    `}
+
+  ${({ maxWidth }) =>
+    maxWidth === 'auto' &&
+    css`
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     `}
 `;
 

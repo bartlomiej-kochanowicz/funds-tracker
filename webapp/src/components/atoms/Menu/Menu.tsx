@@ -5,12 +5,10 @@ import styled, { css } from 'styled-components';
 
 export interface MenuProps {
   children: ReactNode;
-  minMenuWidth?: `${number}${'px' | 'rem'}`;
   isInModal?: boolean;
 }
 
 export const Menu = styled(motion.div)<MenuProps>`
-  max-height: calc(var(--document-height) / 2);
   overflow-y: auto;
 
   ${({ theme: { isDark, zIndex, radius, padding, colors }, isInModal }) => css`

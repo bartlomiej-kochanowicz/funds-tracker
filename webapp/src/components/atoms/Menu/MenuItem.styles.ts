@@ -4,7 +4,7 @@ import styled, { css, DefaultTheme } from 'styled-components';
 
 const mixin = css<{
   padding: keyof DefaultTheme['padding'];
-  highlighted?: boolean;
+  maxWidth?: `${string}px` | `${string}%`;
 }>`
   display: flex;
   align-items: center;
@@ -15,7 +15,7 @@ const mixin = css<{
   text-align: left;
   outline: none;
 
-  ${({ theme, padding, highlighted }) => css`
+  ${({ theme, padding, maxWidth }) => css`
     color: ${theme.colors.text};
     padding: ${theme.padding[padding]};
 
@@ -24,9 +24,9 @@ const mixin = css<{
       background-color: ${transparentize(theme.colors.gray300, 0.75)};
     }
 
-    ${highlighted &&
+    ${maxWidth &&
     css`
-      background-color: ${transparentize(theme.colors.gray300, 0.75)};
+      max-width: ${maxWidth};
     `}
   `};
 `;

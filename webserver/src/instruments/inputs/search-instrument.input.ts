@@ -2,8 +2,8 @@ import { InputType, Field } from '@nestjs/graphql';
 import { IsString } from 'class-validator';
 
 @InputType()
-export class InstrumentDetailsInput {
+export class SearchInstrumentInput {
   @IsString()
-  @Field(() => String, { description: 'Symbol' })
-  symbol: string;
+  @Field(() => String, { description: 'Instrument name.' })
+  name: string;
 }

@@ -1,5 +1,5 @@
 import { ItemButton, ItemLink, useDropdownMenu } from 'hooks/useDropdownMenu';
-import { forwardRef, Fragment, Key, MouseEventHandler, ReactNode, Ref } from 'react';
+import { forwardRef, Fragment, Key, MouseEventHandler, ReactNode, Ref, useRef } from 'react';
 import { IconType } from 'react-icons';
 import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
@@ -36,10 +36,17 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
   ({ items, placement = 'bottom-center', children, triggerOffset = 5, ...rest }, ref) => {
     const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(items);
 
+    const triggerRef = useRef<HTMLButtonElement>(null);
+
+    const isInModal = Boolean(triggerRef.current?.closest('[data-modal="true"]'));
+
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
       placement,
       auto: true,
+      container: isInModal
+        ? (document.querySelector('[data-modal="true"]') as HTMLElement)
+        : undefined,
       possiblePlacements: [
         'top-start',
         'top-center',
@@ -58,14 +65,14 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
             isOpen,
             ...rest,
             ...buttonProps,
-            ref: mergeRefs(ref, triggerProps.ref, buttonProps.ref),
+            ref: mergeRefs(ref, triggerProps.ref, buttonProps.ref, triggerRef),
           })}
 
         {typeof children !== 'function' && (
           <Trigger
             {...rest}
             {...buttonProps}
-            ref={mergeRefs(ref, triggerProps.ref, buttonProps.ref)}
+            ref={mergeRefs(ref, triggerProps.ref, buttonProps.ref, triggerRef)}
             type="button"
           >
             {children}
@@ -75,6 +82,7 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
         {renderLayer(
           isOpen && (
             <Menu
+              isInModal={isInModal}
               role="menu"
               {...layerProps}
             >

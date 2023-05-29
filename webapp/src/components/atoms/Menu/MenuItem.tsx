@@ -18,6 +18,7 @@ export interface MenuItemProps {
   padding?: keyof DefaultTheme['padding'];
   icon?: IconType;
   highlighted?: boolean;
+  maxWidth?: `${string}px` | `${string}%`;
 }
 
 export const MenuItem: FC<MenuItemProps> = forwardRef<

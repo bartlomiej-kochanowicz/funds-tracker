@@ -1,5 +1,4 @@
-import { Loader } from 'components/atoms';
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 import { ROUTES } from 'routes/paths';
 
 const Portfolios = lazy(() =>
@@ -17,18 +16,10 @@ const Portfolio = lazy(() =>
 export const PortfoliosRoutes = [
   {
     path: ROUTES.PORTFOLIOS.PORTFOLIOS,
-    element: (
-      <Suspense fallback={<Loader />}>
-        <Portfolios />
-      </Suspense>
-    ),
+    element: <Portfolios />,
   },
   {
     path: ROUTES.PORTFOLIOS.PORTFOLIO,
-    element: (
-      <Suspense fallback={<Loader />}>
-        <Portfolio />
-      </Suspense>
-    ),
+    element: <Portfolio />,
   },
 ];

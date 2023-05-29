@@ -23,8 +23,6 @@ export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callbac
       modalName={t('modal.CreatePortfolio.name')}
       closeModal={modal.remove}
     >
-      <Spacer space="0.5" />
-
       <Text
         fontSize="0.875"
         fontColor="gray400"
