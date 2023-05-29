@@ -3,22 +3,15 @@ import {
   createRef,
   FC,
   KeyboardEvent,
-  KeyboardEventHandler,
+  MouseEvent,
   ReactNode,
-  RefObject,
   useContext,
   useMemo,
-  useRef,
 } from 'react';
 
 /* class RadioGroup {
   constructor(groupNode) {
-    this.groupNode = groupNode;
 
-    this.radioButtons = [];
-
-    this.firstRadioButton = null;
-    this.lastRadioButton = null;
 
     const rbs = this.groupNode.querySelectorAll('[role=radio]');
 
@@ -28,8 +21,6 @@ import {
       rb.tabIndex = -1;
       rb.setAttribute('aria-checked', 'false');
 
-      rb.addEventListener('keydown', this.handleKeydown.bind(this));
-      rb.addEventListener('click', this.handleClick.bind(this));
       rb.addEventListener('focus', this.handleFocus.bind(this));
       rb.addEventListener('blur', this.handleBlur.bind(this));
 
@@ -41,12 +32,6 @@ import {
       this.lastRadioButton = rb;
     }
     this.firstRadioButton.tabIndex = 0;
-  }
-
- 
-
-  handleClick(event) {
-    this.setChecked(event.currentTarget);
   }
 
   handleFocus(event) {
@@ -134,8 +119,15 @@ const useRadioGroup = (values: string[]) => {
       }
     };
 
+    const onClick = (event: MouseEvent<HTMLDivElement, MouseEvent>) => {
+      const tgt = event.currentTarget;
+
+      setChecked(tgt);
+    };
+
     return {
       onKeyDown,
+      onClick,
       ref: redioRefs.get(value),
       value,
     };
