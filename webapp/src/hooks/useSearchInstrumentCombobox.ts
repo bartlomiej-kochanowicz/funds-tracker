@@ -8,17 +8,17 @@ import {
   UseFormSetValue,
 } from 'react-hook-form';
 
-interface IUseSearchInstrumentComboboxForm<FormType extends FieldValues> {
+interface IUseSearchInstrumentCombobox<FormType extends FieldValues> {
   control: Control<FormType>;
   name: Path<FormType>;
   setValue: UseFormSetValue<FormType>;
 }
 
-export const useSearchInstrumentComboboxForm = <FormType extends FieldValues>({
+export const useSearchInstrumentCombobox = <FormType extends FieldValues>({
   control,
   name,
   setValue,
-}: IUseSearchInstrumentComboboxForm<FormType>) => {
+}: IUseSearchInstrumentCombobox<FormType>) => {
   const {
     field: { value, ref, ...searchInstrumentProps },
   } = useController<FormType>({

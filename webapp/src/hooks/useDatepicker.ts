@@ -7,17 +7,17 @@ import {
   UseFormSetValue,
 } from 'react-hook-form';
 
-interface IUseDatepickerForm<FormType extends FieldValues> {
+interface IUseDatepicker<FormType extends FieldValues> {
   control: Control<FormType>;
   name: Path<FormType>;
   setValue: UseFormSetValue<FormType>;
 }
 
-export const useDatepickerForm = <FormType extends FieldValues>({
+export const useDatepicker = <FormType extends FieldValues>({
   control,
   name,
   setValue,
-}: IUseDatepickerForm<FormType>) => {
+}: IUseDatepicker<FormType>) => {
   const {
     field: { value, ref, ...datepickerProps },
   } = useController<FormType>({

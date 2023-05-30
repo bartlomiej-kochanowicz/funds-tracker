@@ -9,6 +9,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useState,
 } from 'react';
 
 interface IUseRadioGroup {
@@ -49,15 +50,18 @@ const useRadioGroup = ({ values, onChange, defaultValue }: IUseRadioGroup) => {
     [onChange, redioRefs],
   );
 
+  const [isDefaultChecked, setIsDefaultChecked] = useState(false);
+
   useEffect(() => {
-    if (defaultValue) {
+    if (defaultValue && !isDefaultChecked) {
       const target = redioRefs.get(defaultValue)?.current;
 
       if (target) {
         setChecked(target, defaultValue, false);
+        setIsDefaultChecked(true);
       }
     }
-  }, [defaultValue, setChecked, redioRefs]);
+  }, [defaultValue, setChecked, redioRefs, setIsDefaultChecked, isDefaultChecked]);
 
   const setCheckedToPreviousItem = (target: HTMLDivElement) => {
     if (target === firstRadioButton?.current) {
