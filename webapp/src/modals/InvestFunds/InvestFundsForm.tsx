@@ -88,10 +88,9 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
         <Button
           type="submit"
-          size="large"
           width="100%"
         >
-          aaa
+          Invest 🎉
         </Button>
       </Box>
     </FormProvider>
