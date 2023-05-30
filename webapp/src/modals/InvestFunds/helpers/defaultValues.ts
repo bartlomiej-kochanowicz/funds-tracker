@@ -27,6 +27,6 @@ export type InvestFundsFormValues = {
   quantity: number;
   price: number;
   commission: number;
-  commission_type: '%' | 'value';
+  commission_type: '%' | 'amount';
   transaction_cost: number;
 };

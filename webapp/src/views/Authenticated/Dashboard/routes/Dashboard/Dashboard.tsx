@@ -1,3 +1,1 @@
-import { Column } from 'simple-flexbox';
-
-export const Dashboard = () => <Column>Dashboard</Column>;
+export const Dashboard = () => <div>Dashboard</div>;

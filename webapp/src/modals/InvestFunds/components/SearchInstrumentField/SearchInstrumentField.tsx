@@ -1,5 +1,6 @@
-import { SearchInstrumentCombobox, useSearchInstrumentComboboxForm } from 'components/molecules';
+import { SearchInstrumentCombobox } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useSearchInstrumentCombobox } from 'hooks/useSearchInstrumentCombobox';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,7 @@ export const SearchInstrumentField = () => {
 
   const { control, setValue } = useFormContext<InvestFundsFormValues>();
 
-  const searchInstrumentProps = useSearchInstrumentComboboxForm({
+  const searchInstrumentProps = useSearchInstrumentCombobox({
     control,
     name: 'instrument',
     setValue,

@@ -1,5 +1,5 @@
 import { Datepicker } from 'components/atoms';
-import { useDatepickerForm } from 'components/atoms/Datepicker';
+import { useDatepicker } from 'hooks/useDatepicker';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -10,7 +10,7 @@ export const DateField = () => {
 
   const { control, setValue } = useFormContext();
 
-  const datepickerProps = useDatepickerForm({
+  const datepickerProps = useDatepicker({
     control,
     name: 'date',
     setValue,
