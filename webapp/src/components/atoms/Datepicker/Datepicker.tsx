@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
 
-import { ArrowButton, StyledSelect } from './Datepicker.style';
+import { ArrowButton, StyledSelect } from './Datepicker.styles';
 
 registerLocale('pl-PL', pl);
 

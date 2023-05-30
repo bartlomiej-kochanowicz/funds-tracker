@@ -9,40 +9,6 @@ import {
   useMemo,
 } from 'react';
 
-/* class RadioGroup {
-  constructor(groupNode) {
-
-
-    const rbs = this.groupNode.querySelectorAll('[role=radio]');
-
-    for (let i = 0; i < rbs.length; i++) {
-      const rb = rbs[i];
-
-      rb.tabIndex = -1;
-      rb.setAttribute('aria-checked', 'false');
-
-      rb.addEventListener('focus', this.handleFocus.bind(this));
-      rb.addEventListener('blur', this.handleBlur.bind(this));
-
-      this.radioButtons.push(rb);
-
-      if (!this.firstRadioButton) {
-        this.firstRadioButton = rb;
-      }
-      this.lastRadioButton = rb;
-    }
-    this.firstRadioButton.tabIndex = 0;
-  }
-
-  handleFocus(event) {
-    event.currentTarget.classList.add('focus');
-  }
-
-  handleBlur(event) {
-    event.currentTarget.classList.remove('focus');
-  }
-} */
-
 const useRadioGroup = (values: string[]) => {
   const redioRefs = useMemo(
     () => new Map(values.map(value => [value, createRef<HTMLDivElement>()])),
@@ -119,7 +85,7 @@ const useRadioGroup = (values: string[]) => {
       }
     };
 
-    const onClick = (event: MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const onClick = (event: MouseEvent<HTMLDivElement>) => {
       const tgt = event.currentTarget;
 
       setChecked(tgt);

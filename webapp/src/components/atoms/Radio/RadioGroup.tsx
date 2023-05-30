@@ -1,10 +1,10 @@
-import { FC, ReactElement, useRef } from 'react';
+import { FC, ReactElement } from 'react';
 
 import { RadioGroupProvider } from './context';
 
 interface IRadioGroupProps {
   children: ReactElement[];
-  label: string;
+  label?: string;
   id: string;
 }
 
@@ -15,10 +15,10 @@ export const RadioGroup: FC<IRadioGroupProps> = ({ children, label, id }) => {
     <RadioGroupProvider values={values}>
       <div
         role="radiogroup"
-        aria-labelledby={`group_${label}_${id}`}
+        aria-labelledby={`group_${id}`}
         id={id}
       >
-        <h3 id={id}>{label}</h3>
+        {label && <h3 id={id}>{label}</h3>}
 
         {children}
       </div>
