@@ -5,11 +5,19 @@ import {
   KeyboardEvent,
   MouseEvent,
   ReactNode,
+  useCallback,
   useContext,
+  useEffect,
   useMemo,
 } from 'react';
 
-const useRadioGroup = (values: string[]) => {
+interface IUseRadioGroup {
+  values: string[];
+  onChange?: (value: string) => void;
+  defaultValue?: string;
+}
+
+const useRadioGroup = ({ values, onChange, defaultValue }: IUseRadioGroup) => {
   const redioRefs = useMemo(
     () => new Map(values.map(value => [value, createRef<HTMLDivElement>()])),
     [values],
@@ -18,32 +26,64 @@ const useRadioGroup = (values: string[]) => {
   const firstRadioButton = redioRefs.get(values[0]);
   const lastRadioButton = redioRefs.get(values[values.length - 1]);
 
-  const setChecked = (target: HTMLDivElement) => {
-    redioRefs.forEach(ref => {
-      if (ref.current) {
-        ref.current.setAttribute('aria-checked', 'false');
-        ref.current.tabIndex = -1;
-      }
-    });
+  const setChecked = useCallback(
+    (target: HTMLDivElement, value: string, focus: boolean = true) => {
+      redioRefs.forEach(ref => {
+        if (ref.current) {
+          ref.current.setAttribute('aria-checked', 'false');
+          ref.current.tabIndex = -1;
+        }
+      });
 
-    target.setAttribute('aria-checked', 'true');
-    target.tabIndex = 0;
-    target.focus();
-  };
+      target.setAttribute('aria-checked', 'true');
+      target.tabIndex = 0;
+
+      if (focus) {
+        target.focus();
+      }
+
+      if (onChange && focus) {
+        onChange(value);
+      }
+    },
+    [onChange, redioRefs],
+  );
+
+  useEffect(() => {
+    if (defaultValue) {
+      const target = redioRefs.get(defaultValue)?.current;
+
+      if (target) {
+        setChecked(target, defaultValue, false);
+      }
+    }
+  }, [defaultValue, setChecked, redioRefs]);
 
   const setCheckedToPreviousItem = (target: HTMLDivElement) => {
     if (target === firstRadioButton?.current) {
-      setChecked(lastRadioButton?.current as HTMLDivElement);
+      setChecked(
+        lastRadioButton?.current as HTMLDivElement,
+        (lastRadioButton?.current as HTMLDivElement).getAttribute('value') as string,
+      );
     } else {
-      setChecked(target.previousElementSibling as HTMLDivElement);
+      setChecked(
+        target.previousElementSibling as HTMLDivElement,
+        (target.previousElementSibling as HTMLDivElement).getAttribute('value') as string,
+      );
     }
   };
 
   const setCheckedToNextItem = (target: HTMLDivElement) => {
     if (target === lastRadioButton?.current) {
-      setChecked(firstRadioButton?.current as HTMLDivElement);
+      setChecked(
+        firstRadioButton?.current as HTMLDivElement,
+        (firstRadioButton?.current as HTMLDivElement).getAttribute('value') as string,
+      );
     } else {
-      setChecked(target.nextElementSibling as HTMLDivElement);
+      setChecked(
+        target.nextElementSibling as HTMLDivElement,
+        (target.nextElementSibling as HTMLDivElement).getAttribute('value') as string,
+      );
     }
   };
 
@@ -55,7 +95,7 @@ const useRadioGroup = (values: string[]) => {
       switch (event.key) {
         case ' ':
         case 'Enter':
-          setChecked(tgt);
+          setChecked(tgt, value);
           flag = true;
           break;
 
@@ -88,7 +128,7 @@ const useRadioGroup = (values: string[]) => {
     const onClick = (event: MouseEvent<HTMLDivElement>) => {
       const tgt = event.currentTarget;
 
-      setChecked(tgt);
+      setChecked(tgt, value);
     };
 
     return {
@@ -119,10 +159,17 @@ export const useRadioGroupContext = () => {
 type ProviderProps = {
   children: ReactNode;
   values: string[];
+  onChange?: (value: string) => void;
+  defaultValue?: string;
 };
 
-export const RadioGroupProvider: FC<ProviderProps> = ({ children, values }) => {
-  const value = useRadioGroup(values);
+export const RadioGroupProvider: FC<ProviderProps> = ({
+  children,
+  values,
+  onChange,
+  defaultValue,
+}) => {
+  const value = useRadioGroup({ values, onChange, defaultValue });
 
   return <RadioGroupContext.Provider value={value}>{children}</RadioGroupContext.Provider>;
 };

@@ -13,6 +13,7 @@ export { Input } from './Input';
 export { Link } from './Link';
 export { Loader } from './Loader';
 export { Menu } from './Menu';
+export { Radio, RadioGroup } from './Radio';
 export { RouterLink } from './RouterLink';
 export { Select } from './Select';
 export { Spacer } from './Spacer';

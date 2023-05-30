@@ -1,7 +1,6 @@
 import { Currency } from '__generated__/graphql';
-import { Box, Input, Select, Spreader } from 'components/atoms';
+import { Box, Input, Radio, RadioGroup, Spreader } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
-import { useSelect } from 'hooks/useSelect';
 import { defaultValues, InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -16,28 +15,7 @@ interface ComissionFieldProps {
 export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
   const { t } = useTranslation();
 
-  const {
-    register,
-    watch,
-    formState: { errors },
-  } = useFormContext<InvestFundsFormValues>();
-
-  const selectCommisionType = [
-    {
-      label: '%',
-      value: '%',
-    },
-    {
-      label: t('common.value'),
-      value: 'value',
-    },
-  ];
-
-  const comissionTypeProps = useSelect<InvestFundsFormValues>({
-    register,
-    name: 'commission_type',
-    errors,
-  });
+  const { register, watch } = useFormContext<InvestFundsFormValues>();
 
   const watchCommissionType = watch('commission_type');
 
@@ -67,11 +45,17 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
 
         <Spreader spread="0.25" />
 
-        <Select
-          items={selectCommisionType}
+        <RadioGroup
+          id="commission_type"
           defaultValue={defaultValues.commission_type}
-          {...comissionTypeProps}
-        />
+          onChange={value => console.log('value', value)}
+        >
+          <Radio value="%">%</Radio>
+
+          <Radio value="value">
+            {t('common.value')} ({activeCurrency})
+          </Radio>
+        </RadioGroup>
       </Box>
     </FormField>
   );
