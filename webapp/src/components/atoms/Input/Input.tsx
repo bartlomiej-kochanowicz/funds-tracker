@@ -112,6 +112,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             onValueChange={handleValueChange}
             defaultValue={rest.defaultValue}
             placeholder={rest.placeholder}
+            ref={mergeRefs(ref, curencyInputRef)}
           />
 
           {error && <Error role="alert">{error}</Error>}

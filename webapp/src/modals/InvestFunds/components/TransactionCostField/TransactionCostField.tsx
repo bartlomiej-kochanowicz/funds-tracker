@@ -26,11 +26,11 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
     >
       <Input
         id="transaction_cost"
-        type="number"
+        type="currency"
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
         placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
-        unit={activeCurrency}
+        currency={activeCurrency}
         {...register('transaction_cost')}
       />
     </FormField>
