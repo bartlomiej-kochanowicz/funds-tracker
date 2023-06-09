@@ -29,7 +29,13 @@
       }
     }
   },
-  "ignorePatterns": ["vite.config.ts", "pwa-assets.config.ts", "src/__generated__/*.ts"],
+  "ignorePatterns": [
+    "vite.config.ts",
+    "pwa-assets.config.ts",
+    "src/__generated__/*.ts",
+    "dev-dist/**/*",
+    "/dev-sw.js"
+  ],
   "rules": {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",

@@ -31,3 +31,5 @@ mongo-volume
 .env
 .env.development
 .env.test
+
+webapp/dev-dist

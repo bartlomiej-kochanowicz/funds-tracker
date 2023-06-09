@@ -46,7 +46,6 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     svgr(),
-    eslint(),
     viteStaticCopy({
       targets: [
         {
@@ -56,6 +55,9 @@ export default defineConfig({
       ],
     }),
     VitePWA({
+      devOptions: {
+        enabled: IS_DEVELOPMENT,
+      },
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       includeAssets: ['logo.svg', 'favicon.ico', 'apple-touch-icon-180x180.png'],
@@ -91,6 +93,7 @@ export default defineConfig({
         ],
       },
     }),
+    eslint(),
   ],
   build: {
     assetsDir: 'static',
