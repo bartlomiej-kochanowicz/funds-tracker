@@ -2,7 +2,7 @@
   "name": "funds-tracker-webapp",
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --base=/static/",
     "preview": "vite preview",
     "check:circular-deps": "madge --warning --circular --extensions ts,tsx src",
     "check:circular-deps-image": "madge --image graph.svg --extensions ts,tsx src",

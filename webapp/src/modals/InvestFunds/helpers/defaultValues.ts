@@ -14,10 +14,10 @@ export const defaultValues = {
   portfolio: '',
   date: new Date(),
   quantity: 0,
-  price: 0,
-  commission: 0,
+  price: '',
+  commission: '',
   commission_type: '%',
-  transaction_cost: 0,
+  transaction_cost: '',
 } as const;
 
 export type InvestFundsFormValues = {
@@ -25,8 +25,8 @@ export type InvestFundsFormValues = {
   portfolio: string;
   date: Date;
   quantity: number;
-  price: number;
-  commission: number;
+  price: string;
+  commission: string | number;
   commission_type: '%' | 'amount';
-  transaction_cost: number;
+  transaction_cost: string;
 };

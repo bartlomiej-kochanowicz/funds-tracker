@@ -41,14 +41,25 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
       >
-        <Input
-          id="commission"
-          flexGrow={1}
-          placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
-          type="number"
-          unit={watchCommissionType === '%' ? '%' : activeCurrency}
-          {...register('commission')}
-        />
+        {watchCommissionType === '%' ? (
+          <Input
+            id="commission"
+            flexGrow={1}
+            placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
+            type="number"
+            unit="%"
+            {...register('commission')}
+          />
+        ) : (
+          <Input
+            id="commission"
+            flexGrow={1}
+            placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
+            type="currency"
+            currency={activeCurrency as Currency}
+            {...register('commission')}
+          />
+        )}
 
         <Spreader spread="0.25" />
 
