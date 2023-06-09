@@ -29,7 +29,7 @@
       }
     }
   },
-  "ignorePatterns": ["vite.config.ts", "src/__generated__/*.ts"],
+  "ignorePatterns": ["vite.config.ts", "pwa-assets.config.ts", "src/__generated__/*.ts"],
   "rules": {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
