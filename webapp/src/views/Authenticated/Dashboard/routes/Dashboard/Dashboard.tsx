@@ -22,7 +22,7 @@ export const Dashboard = () => {
 
   return (
     <div>
-      <div>new content available</div>
+      <div>aaa</div>
 
       {(offlineReady || needRefresh) && (
         <div>
