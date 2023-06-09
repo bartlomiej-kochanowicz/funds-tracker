@@ -5,7 +5,6 @@ import eslint from 'vite-plugin-eslint';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vitest/config';
-import hash from 'rollup-plugin-hash';
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 const IS_DOCKER = process.env.DOCKER === 'true';
@@ -93,10 +92,8 @@ export default defineConfig({
     }),
   ],
   build: {
+    assetsInlineLimit: 0,
     assetsDir: 'static',
     outDir: './dist',
-    rollupOptions: {
-      plugins: [hash()],
-    },
   },
 });
