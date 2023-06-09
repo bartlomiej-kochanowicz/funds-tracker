@@ -89,14 +89,9 @@
   <body>
     <div id="root"></div>
 
-    <script>
-      (function () {
-        var timestamp = new Date().getTime();
-        var script = document.createElement('script');
-        script.src = '/src/main.tsx?v=' + timestamp;
-        script.type = 'module';
-        document.head.appendChild(script);
-      })();
-    </script>
+    <script
+      type="module"
+      src="/src/main.tsx"
+    ></script>
   </body>
 </html>
