@@ -1,6 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
 import NiceModal from '@ebay/nice-modal-react';
-import { ReloadPrompt } from 'components/molecules';
 import { FullscreenErrorContent } from 'components/organisms';
 import client from 'config/client';
 import { ColorThemeProvider, useColorThemeContext } from 'contexts/ColorThemeContext';
@@ -32,8 +31,6 @@ const Content = () => {
           draggable
           pauseOnHover
         />
-
-        <ReloadPrompt />
 
         <ErrorBoundary FallbackComponent={FullscreenErrorContent}>
           <Root />
