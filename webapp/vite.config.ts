@@ -57,7 +57,7 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png', 'maskable-icon-512x512.svg'],
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'maskable-icon.svg'],
       manifest: {
         name: 'Funds Tracker',
         short_name: 'Funds Tracker',
