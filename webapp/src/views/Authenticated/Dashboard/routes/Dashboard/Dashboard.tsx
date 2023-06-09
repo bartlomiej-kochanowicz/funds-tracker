@@ -22,6 +22,8 @@ export const Dashboard = () => {
 
   return (
     <div>
+      <div>new content available</div>
+
       {(offlineReady || needRefresh) && (
         <div>
           <div>
