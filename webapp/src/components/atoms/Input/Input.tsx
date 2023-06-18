@@ -85,6 +85,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         curencyInputRef.current.dispatchEvent(event);
       };
 
+      const defaultValue =
+        Number(curencyInputRef.current?.value || 0) || rest.defaultValue || undefined;
+
       return (
         <Wrapper
           width={width}
@@ -110,9 +113,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-invalid={Boolean(error)}
             intlConfig={{ locale: i18n.language, currency }}
             onValueChange={handleValueChange}
-            defaultValue={rest.defaultValue}
+            defaultValue={defaultValue}
             placeholder={rest.placeholder}
-            ref={mergeRefs(ref, curencyInputRef)}
+            key={defaultValue}
           />
 
           {error && <Error role="alert">{error}</Error>}

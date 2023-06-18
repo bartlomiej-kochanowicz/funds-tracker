@@ -36,7 +36,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
   const closeModal = modal.remove;
 
   const defaultValues = {
-    amount: 0,
+    amount: '',
   };
 
   const {

@@ -1,5 +1,5 @@
 import { Currency } from '__generated__/graphql';
-import { Box, Button, Spacer, Text } from 'components/atoms';
+import { Box, Button, Loader, Spacer, Text } from 'components/atoms';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -28,7 +28,11 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     defaultValues,
   });
 
-  const { handleSubmit, watch } = methods;
+  const {
+    handleSubmit,
+    watch,
+    formState: { isValid, isSubmitting },
+  } = methods;
 
   const watchInstrument = watch('instrument');
 
@@ -89,8 +93,11 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
         <Button
           type="submit"
           width="100%"
+          disabled={!isValid || isSubmitting}
         >
-          Invest 🎉
+          {isSubmitting && <Loader size="small" />}
+
+          {!isSubmitting && 'Invest 🎉'}
         </Button>
       </Box>
     </FormProvider>

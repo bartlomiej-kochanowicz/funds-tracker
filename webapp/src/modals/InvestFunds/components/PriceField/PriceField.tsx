@@ -10,7 +10,6 @@ import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
-import { formatValue } from 'react-currency-input-field';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -21,7 +20,7 @@ interface IPriceFieldProps {
 }
 
 export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [getInstrumentHistory, { data }] = useLazyQuery<
     GetInstrumentHistoryQuery,
@@ -50,26 +49,16 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
   }, [watchInstrument, getInstrumentHistory, watchDate]);
 
   useUpdateEffect(() => {
-    const intlConfig = { locale: i18n.language, currency: activeCurrency };
-
     if (watchInstrument?.Code && !data?.instrumentHistory.length) {
-      setValue(
-        'price',
-        formatValue({ value: String(watchInstrument.previousClose.toFixed(2)), intlConfig }),
-        {
-          shouldDirty: true,
-        },
-      );
+      setValue('price', String(watchInstrument.previousClose.toFixed(2)), {
+        shouldDirty: true,
+      });
     }
 
     if (watchInstrument?.Code && data?.instrumentHistory.length) {
-      setValue(
-        'price',
-        formatValue({ value: String(data.instrumentHistory[0].close.toFixed(2)), intlConfig }),
-        {
-          shouldDirty: true,
-        },
-      );
+      setValue('price', String(data.instrumentHistory[0].close.toFixed(2)), {
+        shouldDirty: true,
+      });
     }
   }, [watchInstrument, data]);
 

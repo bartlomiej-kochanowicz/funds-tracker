@@ -13,7 +13,7 @@ export const defaultValues = {
   },
   portfolio: '',
   date: new Date(),
-  quantity: 0,
+  quantity: undefined,
   price: '',
   commission: '',
   commission_type: '%',
