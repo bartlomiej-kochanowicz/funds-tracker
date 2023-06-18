@@ -19,6 +19,12 @@
     "types": ["vitest/globals", "vite-plugin-pwa/client"]
   },
   "types": ["node", "jest", "@testing-library/jest-dom"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.spec.ts", "src/**/*.spec.tsx"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
+    "vite.config.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
