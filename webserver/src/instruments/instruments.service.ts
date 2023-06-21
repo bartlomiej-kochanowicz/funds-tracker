@@ -10,6 +10,8 @@ export class InstrumentsService {
   constructor(private readonly httpService: HttpService, private config: ConfigService) {}
 
   async search(searchInstrumentInput: SearchInstrumentInput): Promise<SearchInstrument[]> {
+    console.log('@@@@@', this.config.get('EODHD_API_KEY'));
+
     const { data } = await firstValueFrom(
       this.httpService
         .get(`https://eodhistoricaldata.com/api/search/${searchInstrumentInput.name}`, {
