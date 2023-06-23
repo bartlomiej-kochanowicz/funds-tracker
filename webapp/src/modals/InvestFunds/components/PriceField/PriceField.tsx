@@ -39,8 +39,8 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
           data: {
             code: watchInstrument.Code,
             exchange: watchInstrument.Exchange,
-            from: watchDate.toISOString(),
-            to: watchDate.toISOString(),
+            from: watchDate?.toISOString() || new Date().toISOString(),
+            to: watchDate?.toISOString() || new Date().toISOString(),
             period: '1d',
           },
         },
