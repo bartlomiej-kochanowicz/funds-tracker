@@ -34,6 +34,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 
   useUpdateEffect(() => {
     if (watchInstrument?.Code) {
+      console.log(watchDate);
       getInstrumentHistory({
         variables: {
           data: {
