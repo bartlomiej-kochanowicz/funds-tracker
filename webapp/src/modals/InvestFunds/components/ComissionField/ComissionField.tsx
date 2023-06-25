@@ -16,7 +16,8 @@ interface ComissionFieldProps {
 export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
   const { t } = useTranslation();
 
-  const { register, watch, control, setValue } = useFormContext<InvestFundsFormValues>();
+  const { register, watch, control, setValue, getFieldState } =
+    useFormContext<InvestFundsFormValues>();
 
   const radoProps = useRadio<InvestFundsFormValues>({
     control,
@@ -27,6 +28,8 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
   const watchCommissionType = watch('commission_type');
 
   const isPhone = useBreakpoint('phone', 'max');
+
+  const { error } = getFieldState('commission');
 
   return (
     <FormField
@@ -48,6 +51,7 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
             placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
             type="number"
             unit="%"
+            error={error?.message}
             {...register('commission')}
           />
         ) : (
@@ -57,6 +61,7 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
             placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
             type="currency"
             currency={activeCurrency as Currency}
+            error={error?.message}
             {...register('commission')}
           />
         )}

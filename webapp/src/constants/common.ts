@@ -7,3 +7,5 @@ export const COLOR_THEME = {
   LIGHT: 'LIGHT',
   DARK: 'DARK',
 } as const;
+
+export const EMPTY_VALIDATION_MESSAGE = '‎';

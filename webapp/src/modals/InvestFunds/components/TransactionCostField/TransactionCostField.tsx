@@ -1,6 +1,7 @@
 import { Currency } from '__generated__/graphql';
 import { Input } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -15,9 +16,22 @@ interface ITransactionCostFieldProps {
 export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCurrency }) => {
   const { t } = useTranslation();
 
-  const { register } = useFormContext<InvestFundsFormValues>();
+  const { register, getFieldState, watch, setValue } = useFormContext<InvestFundsFormValues>();
 
   const isPhone = useBreakpoint('phone', 'max');
+
+  const { error } = getFieldState('transaction_cost');
+
+  const watchQuantity = watch('quantity');
+  const watchPrice = watch('price');
+  const watchCommission = watch('commission');
+
+  useUpdateEffect(() => {
+    if (watchQuantity && watchPrice && watchCommission) {
+      const transactionCost = watchQuantity * Number(watchPrice) + Number(watchCommission);
+      setValue('transaction_cost', String(transactionCost));
+    }
+  }, [watchQuantity, watchPrice, watchCommission]);
 
   return (
     <FormField
@@ -31,6 +45,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
         width={isPhone ? '100%' : 'auto'}
         placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
         currency={activeCurrency}
+        error={error?.message}
         {...register('transaction_cost')}
       />
     </FormField>
