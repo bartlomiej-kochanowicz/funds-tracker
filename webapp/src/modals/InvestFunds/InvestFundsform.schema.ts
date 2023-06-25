@@ -19,7 +19,7 @@ export const validationSchema = object().shape({
   date: date().required(EMPTY_VALIDATION_MESSAGE),
   quantity: string().required(EMPTY_VALIDATION_MESSAGE),
   price: string().required(EMPTY_VALIDATION_MESSAGE),
-  commission: string().required(EMPTY_VALIDATION_MESSAGE),
-  commission_type: string().oneOf(['%', 'amount']).required(EMPTY_VALIDATION_MESSAGE),
+  comission: string().required(EMPTY_VALIDATION_MESSAGE),
+  comission_type: string().oneOf(['%', 'amount']).required(EMPTY_VALIDATION_MESSAGE),
   transaction_cost: string().required(EMPTY_VALIDATION_MESSAGE),
 });

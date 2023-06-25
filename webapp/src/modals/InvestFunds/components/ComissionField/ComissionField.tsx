@@ -21,22 +21,25 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
 
   const radoProps = useRadio<InvestFundsFormValues>({
     control,
-    name: 'commission_type',
+    name: 'comission_type',
     setValue,
+    onChange: () => {
+      setValue('comission', '');
+    },
   });
 
-  const watchCommissionType = watch('commission_type');
+  const watchComissionType = watch('comission_type');
 
   const isPhone = useBreakpoint('phone', 'max');
 
-  const { error } = getFieldState('commission');
+  const { error } = getFieldState('comission');
 
   return (
     <FormField
-      label={t('modal.InvestFunds.form.label.commission', {
+      label={t('modal.InvestFunds.form.label.comission', {
         currency: activeCurrency,
       })}
-      htmlFor="commission"
+      htmlFor="comission"
     >
       <Box
         flex
@@ -44,32 +47,32 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
       >
-        {watchCommissionType === '%' ? (
+        {watchComissionType === '%' ? (
           <Input
-            id="commission"
+            id="comission"
             flexGrow={1}
-            placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
+            placeholder={t('modal.InvestFunds.form.input.comission.placeholder')}
             type="number"
             unit="%"
             error={error?.message}
-            {...register('commission')}
+            {...register('comission')}
           />
         ) : (
           <Input
-            id="commission"
+            id="comission"
             flexGrow={1}
-            placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
+            placeholder={t('modal.InvestFunds.form.input.comission.placeholder')}
             type="currency"
             currency={activeCurrency as Currency}
             error={error?.message}
-            {...register('commission')}
+            {...register('comission')}
           />
         )}
 
         <Spreader spread="0.25" />
 
         <RadioGroup
-          defaultValue={defaultValues.commission_type}
+          defaultValue={defaultValues.comission_type}
           {...radoProps}
         >
           <Radio value="%">%</Radio>

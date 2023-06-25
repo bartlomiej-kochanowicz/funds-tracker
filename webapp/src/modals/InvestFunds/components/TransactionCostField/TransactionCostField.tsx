@@ -1,11 +1,13 @@
 import { Currency } from '__generated__/graphql';
-import { Input } from 'components/atoms';
+import { Button, Icon, Input, Spreader } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { FaCalculator } from 'react-icons/fa';
+import { Row } from 'simple-flexbox';
 
 import { FormField } from '../FormField';
 
@@ -16,38 +18,60 @@ interface ITransactionCostFieldProps {
 export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCurrency }) => {
   const { t } = useTranslation();
 
-  const { register, getFieldState, watch, setValue } = useFormContext<InvestFundsFormValues>();
+  const { register, getFieldState, getValues, setValue } = useFormContext<InvestFundsFormValues>();
 
   const isPhone = useBreakpoint('phone', 'max');
 
   const { error } = getFieldState('transaction_cost');
 
-  const watchQuantity = watch('quantity');
-  const watchPrice = watch('price');
-  const watchCommission = watch('commission');
+  const calculateTransactionCost = () => {
+    const { price, quantity, comission, comission_type: comissionType } = getValues();
 
-  useUpdateEffect(() => {
-    if (watchQuantity && watchPrice && watchCommission) {
-      const transactionCost = watchQuantity * Number(watchPrice) + Number(watchCommission);
-      setValue('transaction_cost', String(transactionCost));
+    if (!price || !quantity || !comission || !comissionType) return;
+
+    let transactionCost = 0;
+
+    if (comissionType === 'amount') {
+      transactionCost = Number(price) * Number(quantity) + Number(comission);
     }
-  }, [watchQuantity, watchPrice, watchCommission]);
+
+    if (comissionType === '%') {
+      transactionCost =
+        Number(price) * Number(quantity) +
+        (Number(price) * Number(quantity) * Number(comission)) / 100;
+    }
+
+    setValue('transaction_cost', String(transactionCost.toFixed(2)), {
+      shouldDirty: true,
+    });
+  };
 
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.transaction_cost')}
       htmlFor="transaction_cost"
     >
-      <Input
-        id="transaction_cost"
-        type="currency"
-        flexGrow={1}
-        width={isPhone ? '100%' : 'auto'}
-        placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
-        currency={activeCurrency}
-        error={error?.message}
-        {...register('transaction_cost')}
-      />
+      <Row flexGrow={1}>
+        <Input
+          id="transaction_cost"
+          type="currency"
+          flexGrow={1}
+          width={isPhone ? '100%' : 'auto'}
+          placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
+          currency={activeCurrency}
+          error={error?.message}
+          {...register('transaction_cost')}
+        />
+
+        <Spreader spread="0.25" />
+
+        <Button
+          color="secondary"
+          onClick={calculateTransactionCost}
+        >
+          <Icon icon={FaCalculator} />
+        </Button>
+      </Row>
     </FormField>
   );
 };
