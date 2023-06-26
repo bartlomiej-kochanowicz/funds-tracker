@@ -39,20 +39,23 @@ type ButtonProps = CommonProps &
       } & ReactRouterLinkProps)
   );
 
-export const Button = styled.button.withConfig({
-  shouldForwardProp: prop =>
-    ![
-      'width',
-      'fontWeight',
-      'borderRadius',
-      'color',
-      'boxShadow',
-      'flexGrow',
-      'outline',
-      'minWidth',
-      'isOpen',
-    ].includes(prop),
-})<ButtonProps>`
+export const Button = styled.button
+  .withConfig({
+    shouldForwardProp: prop =>
+      ![
+        'width',
+        'fontWeight',
+        'borderRadius',
+        'color',
+        'boxShadow',
+        'flexGrow',
+        'outline',
+        'minWidth',
+        'isOpen',
+        'theme',
+      ].includes(prop),
+  })
+  .attrs(props => ({ type: 'button', ...props }))<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;

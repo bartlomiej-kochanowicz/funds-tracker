@@ -7,6 +7,7 @@ import { useLazyQuery } from '@apollo/client';
 import { Input } from 'components/atoms';
 import { INSTRUMENT_HISTORY } from 'graphql/query/instruments/InstrumentHistory';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useCurrencyInput } from 'hooks/useCurrencyInput';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
@@ -22,25 +23,36 @@ interface IPriceFieldProps {
 export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
   const { t } = useTranslation();
 
-  const [getInstrumentHistory, { data }] = useLazyQuery<
+  const { setValue, watch, control } = useFormContext<InvestFundsFormValues>();
+
+  const [getInstrumentHistory] = useLazyQuery<
     GetInstrumentHistoryQuery,
     GetInstrumentHistoryQueryVariables
-  >(INSTRUMENT_HISTORY);
-
-  const { setValue, watch, register } = useFormContext<InvestFundsFormValues>();
+  >(INSTRUMENT_HISTORY, {
+    onCompleted: ({ instrumentHistory }) => {
+      setValue('price', String(instrumentHistory.at(-1)?.close.toFixed(2)), {
+        shouldDirty: true,
+      });
+      setValue('comission', '', {
+        shouldDirty: true,
+      });
+    },
+  });
 
   const watchInstrument = watch('instrument');
   const watchDate = watch('date');
 
   useUpdateEffect(() => {
-    if (watchInstrument?.Code) {
+    if (watchInstrument?.Code && watchDate) {
+      const sevenDaysAgo: Date = new Date(watchDate.getTime() - 7 * 24 * 60 * 60 * 1000);
+
       getInstrumentHistory({
         variables: {
           data: {
             code: watchInstrument.Code,
             exchange: watchInstrument.Exchange,
-            from: watchDate?.toISOString() || new Date().toISOString(),
-            to: watchDate?.toISOString() || new Date().toISOString(),
+            from: sevenDaysAgo.toISOString(),
+            to: watchDate.toISOString(),
             period: '1d',
           },
         },
@@ -48,21 +60,9 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
     }
   }, [watchInstrument, getInstrumentHistory, watchDate]);
 
-  useUpdateEffect(() => {
-    if (watchInstrument?.Code && !data?.instrumentHistory.length) {
-      setValue('price', String(watchInstrument.previousClose.toFixed(2)), {
-        shouldDirty: true,
-      });
-    }
-
-    if (watchInstrument?.Code && data?.instrumentHistory.length) {
-      setValue('price', String(data.instrumentHistory[0].close.toFixed(2)), {
-        shouldDirty: true,
-      });
-    }
-  }, [watchInstrument, data]);
-
   const isPhone = useBreakpoint('phone', 'max');
+
+  const currencyInputProps = useCurrencyInput<InvestFundsFormValues>({ control, name: 'price' });
 
   return (
     <FormField
@@ -70,13 +70,12 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
       htmlFor="price"
     >
       <Input
-        id="price"
         type="currency"
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
         placeholder={t('modal.InvestFunds.form.input.price.placeholder')}
         currency={activeCurrency}
-        {...register('price')}
+        {...currencyInputProps}
       />
     </FormField>
   );

@@ -3,6 +3,9 @@ import { useQuery } from '@apollo/client';
 import { Select } from 'components/atoms';
 import { GET_PORTFOLIOS } from 'graphql/query/portfolios/GetPortfolios';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useSelect } from 'hooks/useSelect';
+import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
+import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { FormField } from '../FormField';
@@ -20,6 +23,17 @@ export const SelectPortfolioField = () => {
 
   const isPhone = useBreakpoint('phone', 'max');
 
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<InvestFundsFormValues>();
+
+  const portfolioSelectProps = useSelect<InvestFundsFormValues>({
+    register,
+    name: 'portfolio',
+    errors,
+  });
+
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.portfolio')}
@@ -30,6 +44,7 @@ export const SelectPortfolioField = () => {
         placeholder={t('modal.InvestFunds.form.select.portfolio.placeholder')}
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
+        {...portfolioSelectProps}
       />
     </FormField>
   );

@@ -2,7 +2,8 @@ import { Icon } from 'components/atoms/Icon';
 import { DefaultInputProps, Input } from 'components/atoms/Input';
 import { Spreader } from 'components/atoms/Spreader';
 import { getMonth, getYear } from 'date-fns';
-import pl from 'date-fns/locale/pl';
+import enUS from 'date-fns/locale/en-US';
+import plPL from 'date-fns/locale/pl';
 import { FC, useMemo, useRef } from 'react';
 import ReactDatePicker, { ReactDatePickerProps, registerLocale } from 'react-datepicker';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,8 @@ import { Row } from 'simple-flexbox';
 
 import { ArrowButton, StyledSelect } from './Datepicker.styles';
 
-registerLocale('pl-PL', pl);
+registerLocale('pl-PL', plPL);
+registerLocale('en-US', enUS);
 
 interface DatepickerProps extends ReactDatePickerProps {
   inputProps?: DefaultInputProps;

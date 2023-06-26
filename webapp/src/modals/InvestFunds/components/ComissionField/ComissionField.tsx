@@ -1,6 +1,7 @@
 import { Currency } from '__generated__/graphql';
 import { Box, Input, Radio, RadioGroup, Spreader } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useCurrencyInput } from 'hooks/useCurrencyInput';
 import { useRadio } from 'hooks/useRadio';
 import { defaultValues, InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
@@ -16,24 +17,35 @@ interface ComissionFieldProps {
 export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
   const { t } = useTranslation();
 
-  const { register, watch, control, setValue } = useFormContext<InvestFundsFormValues>();
+  const { register, watch, control, setValue, getFieldState } =
+    useFormContext<InvestFundsFormValues>();
 
   const radoProps = useRadio<InvestFundsFormValues>({
     control,
-    name: 'commission_type',
+    name: 'comission_type',
     setValue,
+    onChange: () => {
+      setValue('comission', '');
+    },
   });
 
-  const watchCommissionType = watch('commission_type');
+  const watchComissionType = watch('comission_type');
 
   const isPhone = useBreakpoint('phone', 'max');
 
+  const { error } = getFieldState('comission');
+
+  const currencyInputProps = useCurrencyInput<InvestFundsFormValues>({
+    control,
+    name: 'comission',
+  });
+
   return (
     <FormField
-      label={t('modal.InvestFunds.form.label.commission', {
+      label={t('modal.InvestFunds.form.label.comission', {
         currency: activeCurrency,
       })}
-      htmlFor="commission"
+      htmlFor="comission"
     >
       <Box
         flex
@@ -41,30 +53,31 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
       >
-        {watchCommissionType === '%' ? (
+        {watchComissionType === '%' ? (
           <Input
-            id="commission"
+            id="comission"
             flexGrow={1}
-            placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
+            placeholder={t('modal.InvestFunds.form.input.comission.placeholder')}
             type="number"
             unit="%"
-            {...register('commission')}
+            error={error?.message}
+            {...register('comission')}
           />
         ) : (
           <Input
-            id="commission"
-            flexGrow={1}
-            placeholder={t('modal.InvestFunds.form.input.commission.placeholder')}
             type="currency"
+            flexGrow={1}
+            placeholder={t('modal.InvestFunds.form.input.comission.placeholder')}
             currency={activeCurrency as Currency}
-            {...register('commission')}
+            error={error?.message}
+            {...currencyInputProps}
           />
         )}
 
         <Spreader spread="0.25" />
 
         <RadioGroup
-          defaultValue={defaultValues.commission_type}
+          defaultValue={defaultValues.comission_type}
           {...radoProps}
         >
           <Radio value="%">%</Radio>

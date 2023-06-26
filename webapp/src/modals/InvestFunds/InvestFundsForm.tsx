@@ -1,9 +1,12 @@
 import { Currency } from '__generated__/graphql';
-import { Box, Button, Loader, Spacer, Text } from 'components/atoms';
+import { useModal } from '@ebay/nice-modal-react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Box, Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { formatCurrency } from 'helpers/formatCurrency';
 import { FC, useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { Row } from 'simple-flexbox';
 
 import { ComissionField } from './components/ComissionField';
 import { DateField } from './components/DateField';
@@ -14,6 +17,7 @@ import { SearchInstrumentField } from './components/SearchInstrumentField';
 import { SelectPortfolioField } from './components/SelectPortfolioField';
 import { TransactionCostField } from './components/TransactionCostField';
 import { defaultValues, InvestFundsFormValues } from './helpers/defaultValues';
+import { validationSchema } from './InvestFundsform.schema';
 
 interface InvestFundsFormProps {
   balance: number;
@@ -24,8 +28,11 @@ interface InvestFundsFormProps {
 export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, uuid }) => {
   const { t } = useTranslation();
 
+  const { remove } = useModal();
+
   const methods = useForm<InvestFundsFormValues>({
     defaultValues,
+    resolver: yupResolver(validationSchema),
   });
 
   const {
@@ -90,15 +97,29 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
         <Spacer />
 
-        <Button
-          type="submit"
-          width="100%"
-          disabled={!isValid || isSubmitting}
-        >
-          {isSubmitting && <Loader size="small" />}
+        <Row justifyContent="flex-end">
+          <Button
+            color="tertiary"
+            onClick={remove}
+            flexGrow={1}
+            minWidth="120px"
+          >
+            {t('common.cancel')}
+          </Button>
 
-          {!isSubmitting && 'Invest 🎉'}
-        </Button>
+          <Spreader spread="0.5" />
+
+          <Button
+            type="submit"
+            flexGrow={1}
+            minWidth="120px"
+            disabled={!isValid || isSubmitting}
+          >
+            {isSubmitting && <Loader size="small" />}
+
+            {!isSubmitting && 'Invest 🎉'}
+          </Button>
+        </Row>
       </Box>
     </FormProvider>
   );

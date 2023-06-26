@@ -1,6 +1,8 @@
 import { Heading, Icon, Spacer, Spreader } from 'components/atoms';
+import { ErrorContent } from 'components/molecules/ErrorContent';
 import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
 import { FC, Fragment, ReactNode, useCallback, useEffect, useRef } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import FocusLock from 'react-focus-lock';
 import { FaTimes } from 'react-icons/fa';
 import { Row } from 'simple-flexbox';
@@ -84,7 +86,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
 
             <Spacer space="0.5" />
 
-            {children}
+            <ErrorBoundary FallbackComponent={ErrorContent}>{children}</ErrorBoundary>
           </ModalComponent>
         </div>
       </FocusLock>
