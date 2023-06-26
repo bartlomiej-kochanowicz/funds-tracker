@@ -33,9 +33,6 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
       setValue('price', String(instrumentHistory.at(-1)?.close.toFixed(2)), {
         shouldDirty: true,
       });
-      setValue('comission', '', {
-        shouldDirty: true,
-      });
     },
   });
 
