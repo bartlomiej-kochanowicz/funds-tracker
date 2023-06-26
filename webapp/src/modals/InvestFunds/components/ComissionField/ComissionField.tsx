@@ -1,6 +1,7 @@
 import { Currency } from '__generated__/graphql';
 import { Box, Input, Radio, RadioGroup, Spreader } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useCurrencyInput } from 'hooks/useCurrencyInput';
 import { useRadio } from 'hooks/useRadio';
 import { defaultValues, InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
@@ -34,6 +35,11 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
 
   const { error } = getFieldState('comission');
 
+  const currencyInputProps = useCurrencyInput<InvestFundsFormValues>({
+    control,
+    name: 'comission',
+  });
+
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.comission', {
@@ -59,13 +65,12 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
           />
         ) : (
           <Input
-            id="comission"
+            type="currency"
             flexGrow={1}
             placeholder={t('modal.InvestFunds.form.input.comission.placeholder')}
-            type="currency"
             currency={activeCurrency as Currency}
             error={error?.message}
-            {...register('comission')}
+            {...currencyInputProps}
           />
         )}
 

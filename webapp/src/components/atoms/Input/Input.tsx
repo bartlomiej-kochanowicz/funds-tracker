@@ -1,12 +1,13 @@
 import { Currency } from '__generated__/graphql';
 import { Text } from 'components/atoms/Text';
-import { forwardRef, HTMLProps, MutableRefObject, ReactNode, useRef } from 'react';
-import { CurrencyInputProps as CurrencyInputFieldProps } from 'react-currency-input-field';
+import { forwardRef, HTMLProps, ReactNode } from 'react';
+import CurrencyInputComponent, {
+  CurrencyInputProps as CurrencyInputFieldProps,
+} from 'react-currency-input-field';
 import { useTranslation } from 'react-i18next';
 import { FaCalendarAlt, FaSearch } from 'react-icons/fa';
-import { mergeRefs } from 'react-laag';
 
-import { Error, SearchIcon, StyledCurrencyInput, StyledInput, Unit, Wrapper } from './Input.styles';
+import { Error, SearchIcon, StyledInput, Unit, Wrapper } from './Input.styles';
 
 interface InputCommonProps {
   error?: string;
@@ -54,51 +55,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ error, unit, width = 'auto', flexGrow, label, type, ...rest }, ref) => {
     const { i18n } = useTranslation();
 
-    const curencyInputRef = useRef() as MutableRefObject<HTMLInputElement> & {
-      current: {
-        _valueTracker: {
-          setValue: (value: string) => void;
-        };
-      };
-    };
-
     if (type === 'currency') {
       const { currency } = rest as CurrencyInputProps;
-
-      // special handling for currency input liblary
-      const handleValueChange = (value?: string) => {
-        curencyInputRef.current.setAttribute('value', value || '');
-
-        const lastValue = curencyInputRef.current.value;
-
-        curencyInputRef.current.value = value || '';
-
-        const event = new Event('input', { bubbles: true });
-
-        // eslint-disable-next-line no-underscore-dangle
-        const tracker = curencyInputRef.current._valueTracker;
-
-        if (tracker) {
-          tracker.setValue(lastValue);
-        }
-
-        curencyInputRef.current.dispatchEvent(event);
-      };
-
-      const defaultValue =
-        Number(curencyInputRef.current?.value || 0) || rest.defaultValue || undefined;
 
       return (
         <Wrapper
           width={width}
           flexGrow={flexGrow}
         >
-          <input
-            className="hidden-input"
-            ref={mergeRefs(ref, curencyInputRef)}
-            {...rest}
-          />
-
           {label && (
             <Text
               fontSize="0.875"
@@ -108,14 +72,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </Text>
           )}
 
-          <StyledCurrencyInput
-            error={Boolean(error)}
-            aria-invalid={Boolean(error)}
+          <CurrencyInputComponent
             intlConfig={{ locale: i18n.language, currency }}
-            onValueChange={handleValueChange}
-            defaultValue={defaultValue}
-            placeholder={rest.placeholder}
-            key={defaultValue}
+            customInput={Input}
+            ref={ref}
+            {...rest}
           />
 
           {error && <Error role="alert">{error}</Error>}

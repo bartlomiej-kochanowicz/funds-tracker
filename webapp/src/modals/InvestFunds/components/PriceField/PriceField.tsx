@@ -7,6 +7,7 @@ import { useLazyQuery } from '@apollo/client';
 import { Input } from 'components/atoms';
 import { INSTRUMENT_HISTORY } from 'graphql/query/instruments/InstrumentHistory';
 import { useBreakpoint } from 'hooks/useBreakpoint';
+import { useCurrencyInput } from 'hooks/useCurrencyInput';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
@@ -22,7 +23,7 @@ interface IPriceFieldProps {
 export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
   const { t } = useTranslation();
 
-  const { setValue, watch, register } = useFormContext<InvestFundsFormValues>();
+  const { setValue, watch, control } = useFormContext<InvestFundsFormValues>();
 
   const [getInstrumentHistory] = useLazyQuery<
     GetInstrumentHistoryQuery,
@@ -61,19 +62,20 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 
   const isPhone = useBreakpoint('phone', 'max');
 
+  const currencyInputProps = useCurrencyInput<InvestFundsFormValues>({ control, name: 'price' });
+
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.price')}
       htmlFor="price"
     >
       <Input
-        id="price"
         type="currency"
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
         placeholder={t('modal.InvestFunds.form.input.price.placeholder')}
         currency={activeCurrency}
-        {...register('price')}
+        {...currencyInputProps}
       />
     </FormField>
   );

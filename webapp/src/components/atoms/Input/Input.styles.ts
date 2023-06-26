@@ -1,6 +1,5 @@
 import { darken, transparentize } from 'color2k';
 import { Icon } from 'components/atoms/Icon';
-import CurrencyInput from 'react-currency-input-field';
 import styled, { css } from 'styled-components';
 
 const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasIcon?: boolean }>`
@@ -71,12 +70,6 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasIcon?: boolean 
 export const StyledInput = styled.input.withConfig({
   shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit', 'hasIcon'].includes(prop),
 })<{ error: boolean; hasUnit: boolean; hasIcon: boolean }>`
-  ${inputStyles}
-`;
-
-export const StyledCurrencyInput = styled(CurrencyInput).withConfig({
-  shouldForwardProp: prop => !['flexGrow', 'error', 'hasIcon'].includes(prop),
-})<{ error?: boolean }>`
   ${inputStyles}
 `;
 

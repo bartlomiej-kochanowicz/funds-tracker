@@ -1,7 +1,7 @@
 import { Currency } from '__generated__/graphql';
 import { Button, Icon, Input, Spreader } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
+import { useCurrencyInput } from 'hooks/useCurrencyInput';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -18,7 +18,8 @@ interface ITransactionCostFieldProps {
 export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCurrency }) => {
   const { t } = useTranslation();
 
-  const { register, getFieldState, getValues, setValue } = useFormContext<InvestFundsFormValues>();
+  const { control, getFieldState, getValues, setValue, watch } =
+    useFormContext<InvestFundsFormValues>();
 
   const isPhone = useBreakpoint('phone', 'max');
 
@@ -46,6 +47,15 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
     });
   };
 
+  const watchQuantity = watch('quantity');
+  const watchPrice = watch('price');
+  const watchComission = watch('comission');
+
+  const currencyInputProps = useCurrencyInput<InvestFundsFormValues>({
+    control,
+    name: 'transaction_cost',
+  });
+
   return (
     <FormField
       label={t('modal.InvestFunds.form.label.transaction_cost')}
@@ -53,14 +63,13 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
     >
       <Row flexGrow={1}>
         <Input
-          id="transaction_cost"
           type="currency"
           flexGrow={1}
           width={isPhone ? '100%' : 'auto'}
           placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
           currency={activeCurrency}
           error={error?.message}
-          {...register('transaction_cost')}
+          {...currencyInputProps}
         />
 
         <Spreader spread="0.25" />
@@ -68,6 +77,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
         <Button
           color="secondary"
           onClick={calculateTransactionCost}
+          disabled={!watchQuantity || !watchPrice || !watchComission}
         >
           <Icon icon={FaCalculator} />
         </Button>

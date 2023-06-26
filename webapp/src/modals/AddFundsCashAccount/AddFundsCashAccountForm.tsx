@@ -10,6 +10,7 @@ import { Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms'
 import { cache } from 'config/client';
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/AddFundsToCashAccount';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
+import { useCurrencyInput } from 'hooks/useCurrencyInput';
 import { FC, Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -41,8 +42,8 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 
   const {
     handleSubmit,
+    control,
     formState: { isSubmitting, isValid, isDirty },
-    register,
   } = useForm<typeof defaultValues>({
     defaultValues,
     resolver: yupResolver(validationSchema),
@@ -84,6 +85,12 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
     });
   };
 
+  const currencyInputProps = useCurrencyInput<typeof defaultValues>({
+    control,
+    name: 'amount',
+    defaultValue: defaultValues.amount,
+  });
+
   return (
     <form
       noValidate
@@ -92,9 +99,8 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
       <Input
         type="currency"
         currency={currency}
-        defaultValue={defaultValues.amount}
         placeholder={t('modal.AddFundsCashAccount.input.placeholder')}
-        {...register('amount')}
+        {...currencyInputProps}
       />
 
       <Spacer />
