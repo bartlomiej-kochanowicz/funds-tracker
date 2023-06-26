@@ -1,5 +1,5 @@
 import { Currency } from '__generated__/graphql';
-import { Button, Icon, Input, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Spreader } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useCurrencyInput } from 'hooks/useCurrencyInput';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
@@ -7,7 +7,6 @@ import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaCalculator } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 import { FormField } from '../FormField';
 
@@ -61,7 +60,11 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
       label={t('modal.InvestFunds.form.label.transaction_cost')}
       htmlFor="transaction_cost"
     >
-      <Row flexGrow={1}>
+      <Box
+        flex
+        flexGrow={1}
+        width={isPhone ? '100%' : undefined}
+      >
         <Input
           type="currency"
           flexGrow={1}
@@ -81,7 +84,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
         >
           <Icon icon={FaCalculator} />
         </Button>
-      </Row>
+      </Box>
     </FormField>
   );
 };

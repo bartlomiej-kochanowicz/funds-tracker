@@ -4,7 +4,7 @@ import {
   GetInstrumentHistoryQueryVariables,
 } from '__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
-import { Button, Icon, Input, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Spreader } from 'components/atoms';
 import { INSTRUMENT_HISTORY } from 'graphql/query/instruments/InstrumentHistory';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useCurrencyInput } from 'hooks/useCurrencyInput';
@@ -14,7 +14,6 @@ import { FC, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaSync } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 import { FormField } from '../FormField';
 
@@ -77,7 +76,11 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
       label={t('modal.InvestFunds.form.label.price')}
       htmlFor="price"
     >
-      <Row flexGrow={1}>
+      <Box
+        flex
+        flexGrow={1}
+        width={isPhone ? '100%' : undefined}
+      >
         <Input
           type="currency"
           flexGrow={1}
@@ -96,7 +99,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
         >
           <Icon icon={FaSync} />
         </Button>
-      </Row>
+      </Box>
     </FormField>
   );
 };
