@@ -40,7 +40,8 @@ const useUser = (): UserContextType => {
     !loading &&
     !data &&
     error?.message !== 'Failed to fetch' &&
-    error?.message !== 'Refresh token failed'
+    error?.message !== 'Refresh token failed' &&
+    error?.message !== 'Response not successful: Received status code 500'
   ) {
     getUser();
   }

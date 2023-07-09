@@ -9,9 +9,9 @@ interface BoxProps extends PaddingMixinProps {
   borderRadius?: Radius;
   hoverBackgroundColor?: Colors;
   flex?: boolean;
-  flexDirection?: 'row' | 'column';
+  flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
-  alignItems?: 'center' | 'flex-start' | 'flex-end';
+  alignItems?: 'center' | 'flex-start' | 'flex-end' | 'stretch' | 'start';
   flexGrow?: number;
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
 }

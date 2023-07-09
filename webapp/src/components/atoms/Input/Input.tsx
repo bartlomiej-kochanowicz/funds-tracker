@@ -95,6 +95,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       date: FaCalendarAlt,
     };
 
+    const inputType = () => {
+      switch (type) {
+        case 'search':
+        case 'date':
+          return undefined;
+        default:
+          return type;
+      }
+    };
+
     return (
       <Wrapper
         width={width}
@@ -122,7 +132,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           hasUnit={hasUnit}
           hasIcon={hasIcon}
-          type={type === 'date' ? undefined : type}
+          type={inputType()}
           {...rest}
         />
 

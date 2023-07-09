@@ -10,13 +10,15 @@ import { FormField } from '../FormField';
 export const SearchInstrumentField = () => {
   const { t } = useTranslation();
 
-  const { control, setValue } = useFormContext<InvestFundsFormValues>();
+  const { control, setValue, watch } = useFormContext<InvestFundsFormValues>();
 
   const searchInstrumentProps = useSearchInstrumentCombobox({
     control,
     name: 'instrument',
     setValue,
   });
+
+  const watchInstrumentType = watch('instrumentType');
 
   const isPhone = useBreakpoint('phone', 'max');
 
@@ -28,6 +30,7 @@ export const SearchInstrumentField = () => {
       <SearchInstrumentCombobox
         {...searchInstrumentProps}
         id="instrument"
+        placeholder={t(`input.search_instrument.placeholder.${watchInstrumentType}`)}
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
       />

@@ -70,6 +70,10 @@ enum CashAccountOperationType {
   deposit
   withdrawal
   transfer
+  interest
+  tax
+  fee
+  other
 }
 
 type CashAccount {

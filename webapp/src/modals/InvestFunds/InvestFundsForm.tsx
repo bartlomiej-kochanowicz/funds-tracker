@@ -3,7 +3,7 @@ import { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { formatCurrency } from 'helpers/formatCurrency';
-import { FC, useCallback } from 'react';
+import { FC, Fragment, useCallback, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Row } from 'simple-flexbox';
@@ -14,6 +14,7 @@ import { FormField } from './components/FormField';
 import { PriceField } from './components/PriceField';
 import { QuantityField } from './components/QuantityField';
 import { SearchInstrumentField } from './components/SearchInstrumentField';
+import { SelectInstrumentType } from './components/SelectInstrumentType';
 import { SelectPortfolioField } from './components/SelectPortfolioField';
 import { TransactionCostField } from './components/TransactionCostField';
 import { defaultValues, InvestFundsFormValues } from './helpers/defaultValues';
@@ -41,8 +42,6 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     formState: { isValid, isSubmitting },
   } = methods;
 
-  const watchInstrument = watch('instrument');
-
   const onSubmit = useCallback(
     (data: InvestFundsFormValues) => {
       console.log({ ...data, uuid });
@@ -50,7 +49,21 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     [uuid],
   );
 
+  const watchInstrument = watch('instrument');
+  const watchInstrumentType = watch('instrumentType');
+
   const activeCurrency = watchInstrument?.Currency || currency;
+
+  const shouldRenderMarketInstrumentFields = useMemo(() => {
+    switch (watchInstrumentType) {
+      case 'stocks':
+      case 'etfs':
+      case 'crypto':
+        return true;
+      default:
+        return false;
+    }
+  }, [watchInstrumentType]);
 
   return (
     <FormProvider {...methods}>
@@ -69,31 +82,39 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
         <Spacer space="0.25" />
 
-        <SearchInstrumentField />
+        <SelectInstrumentType />
 
-        <Spacer space="0.25" />
+        {shouldRenderMarketInstrumentFields && (
+          <Fragment>
+            <Spacer space="0.25" />
 
-        <SelectPortfolioField />
+            <SearchInstrumentField />
 
-        <Spacer space="0.25" />
+            <Spacer space="0.25" />
 
-        <DateField />
+            <SelectPortfolioField />
 
-        <Spacer space="0.25" />
+            <Spacer space="0.25" />
 
-        <QuantityField />
+            <DateField />
 
-        <Spacer space="0.25" />
+            <Spacer space="0.25" />
 
-        <PriceField activeCurrency={activeCurrency as Currency} />
+            <QuantityField />
 
-        <Spacer space="0.25" />
+            <Spacer space="0.25" />
 
-        <ComissionField activeCurrency={activeCurrency as Currency} />
+            <PriceField activeCurrency={activeCurrency as Currency} />
 
-        <Spacer space="0.25" />
+            <Spacer space="0.25" />
 
-        <TransactionCostField activeCurrency={activeCurrency as Currency} />
+            <ComissionField activeCurrency={activeCurrency as Currency} />
+
+            <Spacer space="0.25" />
+
+            <TransactionCostField activeCurrency={activeCurrency as Currency} />
+          </Fragment>
+        )}
 
         <Spacer />
 

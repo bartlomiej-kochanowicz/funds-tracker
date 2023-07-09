@@ -51,4 +51,6 @@ export class InstrumentsService {
 
     return data;
   }
+
+  async buyInstrument(instrumentHistoryInput: InstrumentHistoryInput): Promise<void> {}
 }

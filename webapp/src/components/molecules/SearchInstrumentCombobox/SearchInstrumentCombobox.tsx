@@ -6,7 +6,6 @@ import { SEARCH_INSTRUMENT } from 'graphql/query/instruments/SearchInstrument';
 import { useCombobox } from 'hooks/useCombobox';
 import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { forwardRef, Fragment, useMemo, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 
@@ -18,8 +17,6 @@ interface SearchInstrumentComboboxProps extends Omit<SearchInputProps, 'onChange
 
 export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstrumentComboboxProps>(
   ({ placement = 'bottom-start', triggerOffset = 5, onChange, ...rest }, ref) => {
-    const { t } = useTranslation();
-
     const [findInstruments, { data }] = useLazyQuery<
       SearchInstrumentQuery,
       SearchInstrumentQueryVariables
@@ -90,7 +87,6 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
       <Fragment>
         <Input
           type="search"
-          placeholder={t('input.search_instrument.placeholder')}
           {...rest}
           {...inputProps}
           {...comboboxInputProps}

@@ -1,5 +1,5 @@
 import { Currency } from '__generated__/graphql';
-import { Box, Input, Radio, RadioGroup, Spreader } from 'components/atoms';
+import { Box, Input, Radio, RadioGroup, Spacer, Spreader } from 'components/atoms';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useCurrencyInput } from 'hooks/useCurrencyInput';
 import { useRadio } from 'hooks/useRadio';
@@ -49,32 +49,37 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
     >
       <Box
         flex
-        alignItems="center"
+        flexDirection={isPhone ? 'column-reverse' : 'row'}
+        alignItems={isPhone ? 'start' : 'center'}
         flexGrow={1}
         width={isPhone ? '100%' : 'auto'}
       >
-        {watchComissionType === '%' ? (
+        {watchComissionType === '%' && (
           <Input
             id="comission"
             flexGrow={1}
             placeholder={t('modal.InvestFunds.form.input.comission.placeholder')}
             type="number"
             unit="%"
+            width={isPhone ? '100%' : 'auto'}
             error={error?.message}
             {...register('comission')}
           />
-        ) : (
+        )}
+
+        {watchComissionType === 'amount' && (
           <Input
             type="currency"
             flexGrow={1}
             placeholder={t('modal.InvestFunds.form.input.comission.placeholder')}
             currency={activeCurrency as Currency}
+            width={isPhone ? '100%' : 'auto'}
             error={error?.message}
             {...currencyInputProps}
           />
         )}
 
-        <Spreader spread="0.25" />
+        {isPhone ? <Spacer space="0.1" /> : <Spreader spread="0.25" />}
 
         <RadioGroup
           defaultValue={defaultValues.comission_type}
