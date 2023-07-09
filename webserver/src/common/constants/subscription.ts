@@ -12,17 +12,12 @@ export default {
     maxCashAccounts: 10,
     maxPortfolios: 5,
   },
-  PROFESSIONAL: {
-    maxCashAccounts: 25,
-    maxPortfolios: 15,
-  },
   EXPERT: {
-    maxCashAccounts: 100,
-    maxPortfolios: 100,
+    maxCashAccounts: 20,
+    maxPortfolios: 20,
   },
 } satisfies {
   FREE: Limits;
   LITE: Limits;
-  PROFESSIONAL: Limits;
   EXPERT: Limits;
 };
