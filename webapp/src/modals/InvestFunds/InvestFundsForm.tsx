@@ -11,6 +11,8 @@ import { Row } from 'simple-flexbox';
 import { ComissionField } from './components/ComissionField';
 import { DateField } from './components/DateField';
 import { FormField } from './components/FormField';
+import { NotSupportedYet } from './components/NotSupportedYet';
+import { PleaseSelectInstrumentType } from './components/PleaseSelectInstrumentType';
 import { PriceField } from './components/PriceField';
 import { QuantityField } from './components/QuantityField';
 import { SearchInstrumentField } from './components/SearchInstrumentField';
@@ -65,6 +67,11 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
     }
   }, [watchInstrumentType]);
 
+  const shouldRenderNotSupportedYet =
+    watchInstrumentType !== '' && !shouldRenderMarketInstrumentFields;
+
+  const shouldRenderPleaseSelectInstrumentType = watchInstrumentType === '';
+
   return (
     <FormProvider {...methods}>
       <Box
@@ -115,6 +122,10 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
             <TransactionCostField activeCurrency={activeCurrency as Currency} />
           </Fragment>
         )}
+
+        {shouldRenderNotSupportedYet && <NotSupportedYet />}
+
+        {shouldRenderPleaseSelectInstrumentType && <PleaseSelectInstrumentType />}
 
         <Spacer />
 
