@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
+import { Instrument } from '@app/common/constants/instrument';
 import { InstrumentHistoryInput, SearchInstrumentInput } from './inputs';
 import { InstrumentHistory, SearchInstrument } from './entities';
 
@@ -10,17 +11,21 @@ export class InstrumentsService {
   constructor(private readonly httpService: HttpService, private config: ConfigService) {}
 
   async search(searchInstrumentInput: SearchInstrumentInput): Promise<SearchInstrument[]> {
+    const type = this.getType(searchInstrumentInput.type);
+
     const { data } = await firstValueFrom(
       this.httpService
         .get(`https://eodhistoricaldata.com/api/search/${searchInstrumentInput.name}`, {
           params: {
             api_token: this.config.get('EODHD_API_KEY'),
+            type,
+            bonds_only: type === 'bond' ? 1 : 0,
             fmt: 'json',
           },
         })
         .pipe(
-          catchError(err => {
-            throw Error(err);
+          catchError(() => {
+            throw Error('Error fetching instruments');
           }),
         ),
     );
@@ -43,12 +48,29 @@ export class InstrumentsService {
           },
         })
         .pipe(
-          catchError(err => {
-            throw Error(err);
+          catchError(() => {
+            throw Error('Error fetching instrument history');
           }),
         ),
     );
 
     return data;
+  }
+
+  // async buyInstrument(instrumentHistoryInput: InstrumentHistoryInput): Promise<void> {}
+
+  private getType(type: SearchInstrumentInput['type']): string {
+    switch (type) {
+      case Instrument.stocks:
+        return 'stock';
+      case Instrument.bonds:
+        return 'bond';
+      case Instrument.etfs:
+        return 'etf';
+      case Instrument.crypto:
+        return 'crypto';
+      default:
+        return 'all';
+    }
   }
 }

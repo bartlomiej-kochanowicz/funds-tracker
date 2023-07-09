@@ -21,7 +21,10 @@ export const DateField = () => {
       label={t('modal.InvestFunds.form.label.purchase_date')}
       htmlFor="date"
     >
-      <Datepicker {...datepickerProps} />
+      <Datepicker
+        {...datepickerProps}
+        maxDate={new Date()}
+      />
     </FormField>
   );
 };

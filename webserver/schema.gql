@@ -70,6 +70,10 @@ enum CashAccountOperationType {
   deposit
   withdrawal
   transfer
+  interest
+  tax
+  fee
+  other
 }
 
 type CashAccount {
@@ -231,6 +235,22 @@ input EmailInput {
 input SearchInstrumentInput {
   """Instrument name."""
   name: String!
+
+  """Instrument type."""
+  type: Instrument!
+}
+
+enum Instrument {
+  stocks
+  bonds
+  governmentBonds
+  etfs
+  options
+  commodies
+  crypto
+  immovables
+  movables
+  other
 }
 
 input InstrumentHistoryInput {

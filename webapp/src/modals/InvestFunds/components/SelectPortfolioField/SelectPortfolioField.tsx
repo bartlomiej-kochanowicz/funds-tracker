@@ -5,6 +5,7 @@ import { GET_PORTFOLIOS } from 'graphql/query/portfolios/GetPortfolios';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useSelect } from 'hooks/useSelect';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
+import { useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -15,11 +16,14 @@ export const SelectPortfolioField = () => {
 
   const { data: portfolios } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
 
-  const selectPortfolioItems =
-    portfolios?.portfolios.map(portfolio => ({
-      label: portfolio.name,
-      value: portfolio.uuid,
-    })) || [];
+  const selectPortfolioItems = useMemo(
+    () =>
+      portfolios?.portfolios.map(portfolio => ({
+        label: portfolio.name,
+        value: portfolio.uuid,
+      })) || [],
+    [portfolios],
+  );
 
   const isPhone = useBreakpoint('phone', 'max');
 

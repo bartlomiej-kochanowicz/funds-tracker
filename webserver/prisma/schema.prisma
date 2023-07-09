@@ -62,20 +62,33 @@ model Portfolio {
 }
 
 model Instrument {
-  uuid                  String         @id @default(uuid())
+  uuid                  String                @id @default(uuid())
   name                  String
-  percentageOfPortfolio Int?           @default(0)
+  percentageOfPortfolio Int?                  @default(0)
   type                  InstrumentType
-  portfolio             Portfolio      @relation(fields: [portfolioUuid], references: [uuid])
+  portfolio             Portfolio             @relation(fields: [portfolioUuid], references: [uuid])
   portfolioUuid         String
+  code                  String
+  currency              String
+  ISIN                  String?
+  InstrumentOperation   InstrumentOperation[]
 
   @@unique([portfolioUuid, uuid])
+}
+
+model InstrumentOperation {
+  uuid           String        @id @default(uuid())
+  instrument     Instrument    @relation(fields: [instrumentUuid], references: [uuid])
+  instrumentUuid String
+  date           DateTime      @default(now())
+  type           OperationType
+  quantity       Float
+  price          Float
 }
 
 enum Subscription {
   FREE
   LITE
-  PROFESSIONAL
   EXPERT
 }
 
@@ -83,16 +96,23 @@ enum CashAccountOperationType {
   deposit
   withdrawal
   transfer
+  interest
+  tax
+  fee
+  other
 }
 
 enum InstrumentType {
   stocks
   bonds
+  governmentBonds
+  etfs
+  options
   commodies
   crypto
   immovables
   movables
-  deposits
+  other
 }
 
 enum Currency {
@@ -108,4 +128,17 @@ enum IntroductionStep {
   CashAccounts
   Portfolios
   Completed
+}
+
+enum OperationType {
+  deposit
+  withdrawal
+  transfer
+  buy
+  sell
+  dividend
+  interest
+  tax
+  fee
+  other
 }

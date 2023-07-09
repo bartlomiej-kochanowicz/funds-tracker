@@ -65,6 +65,10 @@ export type CashAccountOperation = {
 
 export enum CashAccountOperationType {
   Deposit = 'deposit',
+  Fee = 'fee',
+  Interest = 'interest',
+  Other = 'other',
+  Tax = 'tax',
   Transfer = 'transfer',
   Withdrawal = 'withdrawal'
 }
@@ -116,6 +120,19 @@ export type EmailInput = {
   /** Token. */
   token: Scalars['String'];
 };
+
+export enum Instrument {
+  Bonds = 'bonds',
+  Commodies = 'commodies',
+  Crypto = 'crypto',
+  Etfs = 'etfs',
+  GovernmentBonds = 'governmentBonds',
+  Immovables = 'immovables',
+  Movables = 'movables',
+  Options = 'options',
+  Others = 'others',
+  Stocks = 'stocks'
+}
 
 export type InstrumentHistory = {
   __typename?: 'InstrumentHistory';
@@ -382,6 +399,8 @@ export type SearchInstrument = {
 export type SearchInstrumentInput = {
   /** Instrument name. */
   name: Scalars['String'];
+  /** Instrument type. */
+  type: Instrument;
 };
 
 export type SendCode = {

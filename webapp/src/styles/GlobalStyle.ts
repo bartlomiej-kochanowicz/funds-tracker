@@ -116,6 +116,10 @@ export const GlobalStyle = styled.createGlobalStyle`
         }
       }
 
+      &--disabled {
+        color: ${({ theme }) => theme.colors.gray300};
+      }
+
       &--keyboard-selected {
         background-color: ${({ theme }) => lighten(theme.colors.blue, 0.1)};
       }
