@@ -11,7 +11,7 @@ export class SearchInstrumentInput {
 
   @IsInstrumentType()
   @Field(() => Instrument, { description: 'Instrument type.' })
-  type: Instrument;
+  type: keyof typeof Instrument;
 }
 
 registerEnumType(Instrument, {

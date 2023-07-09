@@ -1,12 +1,3 @@
-export enum Instrument {
-  'stocks',
-  'bonds',
-  'governmentBonds',
-  'etfs',
-  'options',
-  'commodies',
-  'crypto',
-  'immovables',
-  'movables',
-  'others',
-}
+import { InstrumentType } from '@prisma/client';
+
+export const Instrument = InstrumentType;

@@ -11,7 +11,7 @@ import { Instrument } from '@app/common/constants/instrument';
 export class CustomValidator implements ValidatorConstraintInterface {
   allowedValues = Object.values(Instrument);
 
-  validate(value: string) {
+  validate(value: keyof typeof Instrument) {
     return this.allowedValues.includes(value);
   }
 

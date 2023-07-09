@@ -46,7 +46,7 @@
   "selectors.instruments.crypto": "Crypto",
   "selectors.instruments.immovables": "Immovables",
   "selectors.instruments.movables": "Movables",
-  "selectors.instruments.others": "Others",
+  "selectors.instruments.other": "Others",
   "selectors.instruments.stocks": "Stocks",
   "selectors.languages.en-US": "English US",
   "selectors.languages.pl-PL": "Polski",

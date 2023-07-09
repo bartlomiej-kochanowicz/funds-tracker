@@ -46,7 +46,7 @@
   "selectors.instruments.crypto": "Kryptowaluty",
   "selectors.instruments.immovables": "Nieruchomości",
   "selectors.instruments.movables": "Ruchomości",
-  "selectors.instruments.others": "Inne",
+  "selectors.instruments.other": "Inne",
   "selectors.instruments.stocks": "Akcje",
   "selectors.languages.en-US": "English US",
   "selectors.languages.pl-PL": "Polski",
