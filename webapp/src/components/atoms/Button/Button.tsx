@@ -76,60 +76,59 @@ export const Button = styled.button
     flexGrow = 0,
     outline = false,
     minWidth,
-  }) =>
-    css`
-      font-size: ${theme.button.size[size].fontSize};
-      background-color: ${theme.button.color[color].background};
-      color: ${theme.button.color[color].font};
-      padding: ${theme.padding[size]};
-      font-weight: ${fontWeight};
-      border-radius: ${theme.radius[borderRadius]};
-      width: ${width};
-      transition: ${theme.transition.primary} all;
+  }) => css`
+    font-size: ${theme.button.size[size].fontSize};
+    background-color: ${theme.button.color[color].background};
+    color: ${theme.button.color[color].font};
+    padding: ${theme.padding[size]};
+    font-weight: ${fontWeight};
+    border-radius: ${theme.radius[borderRadius]};
+    width: ${width};
+    transition: ${theme.transition.primary} all;
 
-      ${minWidth && `min-width: ${minWidth};`}
+    ${minWidth && `min-width: ${minWidth};`}
+
+    &:active:not(&:disabled) {
+      transform: scale(0.98);
+    }
+
+    &:hover {
+      transition-duration: 0.1s;
+      background-color: ${darken(theme.button.color[color].background, 0.05)};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: ${transparentize(theme.button.color[color].background, 0.5)};
+      color: ${transparentize(theme.button.color[color].font, 0.5)};
+    }
+
+    ${Boolean(flexGrow) &&
+    css`
+      flex-grow: ${flexGrow};
+    `}
+
+    ${Boolean(outline) &&
+    css`
+      color: ${theme.button.color[color].background};
+      background-color: ${transparentize(theme.button.color[color].background, 0.8)};
+
+      &:hover {
+        background-color: ${transparentize(theme.button.color[color].background, 0.85)};
+      }
 
       &:active:not(&:disabled) {
         transform: scale(0.98);
       }
 
-      &:hover {
-        transition-duration: 0.1s;
-        background-color: ${darken(theme.button.color[color].background, 0.05)};
-      }
-
       &:disabled {
         cursor: not-allowed;
-        background-color: ${transparentize(theme.button.color[color].background, 0.5)};
-        color: ${transparentize(theme.button.color[color].font, 0.5)};
+        border: 2px solid ${transparentize(theme.button.color[color].background, 0.5)};
+        color: ${transparentize(theme.button.color[color].background, 0.5)};
+        background-color: transparent;
       }
-
-      ${Boolean(flexGrow) &&
-      css`
-        flex-grow: ${flexGrow};
-      `}
-
-      ${Boolean(outline) &&
-      css`
-        color: ${theme.button.color[color].background};
-        background-color: ${transparentize(theme.button.color[color].background, 0.8)};
-
-        &:hover {
-          background-color: ${transparentize(theme.button.color[color].background, 0.85)};
-        }
-
-        &:active:not(&:disabled) {
-          transform: scale(0.98);
-        }
-
-        &:disabled {
-          cursor: not-allowed;
-          border: 2px solid ${transparentize(theme.button.color[color].background, 0.5)};
-          color: ${transparentize(theme.button.color[color].background, 0.5)};
-          background-color: transparent;
-        }
-      `}
-    `};
+    `}
+  `};
 `;
 
 Button.displayName = 'Button';

@@ -29,10 +29,9 @@ export const fontable = css<FontableProps>`
     font-weight: ${fontWeight};
   `}
 
-  ${({ theme: { colors }, fontColor }) =>
-    css`
-      color: ${fontColor ? colors[fontColor] : colors.text};
-    `}
+  ${({ theme: { colors }, fontColor }) => css`
+    color: ${fontColor ? colors[fontColor] : colors.text};
+  `}
 
   ${({
     theme: {
