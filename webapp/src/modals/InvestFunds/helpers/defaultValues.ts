@@ -1,5 +1,4 @@
-import { SearchInstrument } from '__generated__/graphql';
-import { InstrumentTypes } from 'constants/instruments';
+import { Instrument, SearchInstrument } from '__generated__/graphql';
 
 export const defaultValues = {
   instrumentType: '',
@@ -24,7 +23,7 @@ export const defaultValues = {
 } satisfies InvestFundsFormValues;
 
 export type InvestFundsFormValues = {
-  instrumentType: InstrumentTypes | '';
+  instrumentType: Instrument | '';
   instrument: SearchInstrument;
   portfolio: string;
   date: Date;

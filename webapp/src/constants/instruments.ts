@@ -1,16 +1,3 @@
-const instruments = [
-  'stocks',
-  'bonds',
-  'governmentBonds',
-  'etfs',
-  'options',
-  'commodies',
-  'crypto',
-  'immovables',
-  'movables',
-  'others',
-] as const;
+import { Instrument } from '__generated__/graphql';
 
-export default instruments;
-
-export type InstrumentTypes = (typeof instruments)[number];
+export default Object.values(Instrument);

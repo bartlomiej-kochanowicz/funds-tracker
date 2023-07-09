@@ -1,4 +1,8 @@
-import { SearchInstrumentQuery, SearchInstrumentQueryVariables } from '__generated__/graphql';
+import {
+  Instrument,
+  SearchInstrumentQuery,
+  SearchInstrumentQueryVariables,
+} from '__generated__/graphql';
 import { useLazyQuery } from '@apollo/client';
 import { Badge, Input, Menu, Spreader, Text } from 'components/atoms';
 import type { SearchInputProps } from 'components/atoms/Input';
@@ -13,10 +17,11 @@ interface SearchInstrumentComboboxProps extends Omit<SearchInputProps, 'onChange
   placement?: PlacementType;
   triggerOffset?: number;
   onChange: (instrument: SearchInstrumentQuery['searchInstrument'][0]) => void;
+  instrumentType: Instrument;
 }
 
 export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstrumentComboboxProps>(
-  ({ placement = 'bottom-start', triggerOffset = 5, onChange, ...rest }, ref) => {
+  ({ placement = 'bottom-start', triggerOffset = 5, onChange, instrumentType, ...rest }, ref) => {
     const [findInstruments, { data }] = useLazyQuery<
       SearchInstrumentQuery,
       SearchInstrumentQueryVariables
@@ -49,6 +54,7 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
           variables: {
             data: {
               name: inputValue,
+              type: instrumentType,
             },
           },
         });

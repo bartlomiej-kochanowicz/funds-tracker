@@ -172,8 +172,8 @@
   "modal.InvestFunds.form.input.price.placeholder": "Podaj cenę jednostkową",
   "modal.InvestFunds.form.input.comission.placeholder": "Podaj prowizję",
   "modal.InvestFunds.form.input.transaction_cost.placeholder": "Podaj całkowity koszt transakcji",
-  "modal.InvestFunds.form.not.supported.yet": "Nie wspieramy jeszcze tego typu instrumentów.",
-  "modal.InvestFunds.form.not.supported.yet.description": "Jeśli jesteś zainteresowany dodaniem tego typu instrumentów, <support>napisz do nas</support>.",
+  "modal.InvestFunds.form.not.supported.yet": "Nie wspieramy jeszcze tego instrumentu.",
+  "modal.InvestFunds.form.not.supported.yet.description": "Jeśli jesteś zainteresowany dodaniem tego typu instrumentu, <support>napisz do nas</support>.",
   "modal.InvestFunds.form.please.select.instrumentType.to.continue": "Wybierz typ instrumentu, aby kontynuować.",
   "common.value": "Wartość"
 }

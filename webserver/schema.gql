@@ -235,6 +235,22 @@ input EmailInput {
 input SearchInstrumentInput {
   """Instrument name."""
   name: String!
+
+  """Instrument type."""
+  type: Instrument!
+}
+
+enum Instrument {
+  stocks
+  bonds
+  governmentBonds
+  etfs
+  options
+  commodies
+  crypto
+  immovables
+  movables
+  others
 }
 
 input InstrumentHistoryInput {

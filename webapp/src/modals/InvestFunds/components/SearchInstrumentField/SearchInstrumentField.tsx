@@ -1,3 +1,4 @@
+import { Instrument } from '__generated__/graphql';
 import { SearchInstrumentCombobox } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useSearchInstrumentCombobox } from 'hooks/useSearchInstrumentCombobox';
@@ -29,6 +30,7 @@ export const SearchInstrumentField = () => {
     >
       <SearchInstrumentCombobox
         {...searchInstrumentProps}
+        instrumentType={watchInstrumentType as Instrument}
         id="instrument"
         placeholder={t(`input.search_instrument.placeholder.${watchInstrumentType}`)}
         flexGrow={1}
