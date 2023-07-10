@@ -10,7 +10,10 @@ import { AuthService } from '../auth.service';
 
 @Injectable()
 export class SigninService {
-  constructor(private prisma: PrismaService, private authService: AuthService) {}
+  constructor(
+    private prisma: PrismaService,
+    private authService: AuthService,
+  ) {}
 
   async signinLocal(signinInput: SigninInput, res: Response): Promise<SigninLocal> {
     const { email, password, token } = signinInput;

@@ -28,15 +28,13 @@ describe('confirm signup', () => {
         const response = await request<{ confirmSignup: ConfirmSignup }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation ConfirmSignup($data: ConfirmSignupInput!) {
-                confirmSignup(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation ConfirmSignup($data: ConfirmSignupInput!) {
+              confirmSignup(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: confirmUserStub,
           })
@@ -74,15 +72,13 @@ describe('confirm signup', () => {
         const { response } = await request<{ confirmSignup: ConfirmSignup }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation ConfirmSignup($data: ConfirmSignupInput!) {
-                confirmSignup(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation ConfirmSignup($data: ConfirmSignupInput!) {
+              confirmSignup(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: {
               email: testUser.email,
@@ -108,15 +104,13 @@ describe('confirm signup', () => {
         const { response } = await request<{ confirmSignup: ConfirmSignup }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation ConfirmSignup($data: ConfirmSignupInput!) {
-                confirmSignup(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation ConfirmSignup($data: ConfirmSignupInput!) {
+              confirmSignup(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: {
               email: 'notExisted@email.com',

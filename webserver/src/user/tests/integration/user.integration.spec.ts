@@ -22,16 +22,14 @@ describe('user', () => {
     beforeAll(async () => {
       const response = await request<{ user: User }>(integrationTestManager.httpServer)
         .set('Cookie', `accessToken=${integrationTestManager.getAccessToken()}`)
-        .mutate(
-          gql`
-            query GetUser {
-              user {
-                name
-                email
-              }
+        .mutate(gql`
+          query GetUser {
+            user {
+              name
+              email
             }
-          `,
-        )
+          }
+        `)
         .expectNoErrors();
 
       user = response.data.user;

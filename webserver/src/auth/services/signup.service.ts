@@ -10,7 +10,10 @@ import { ConfirmSignupInput, SendCodeInput, SignupInput } from '../inputs';
 
 @Injectable()
 export class SignupService {
-  constructor(private prisma: PrismaService, private authService: AuthService) {}
+  constructor(
+    private prisma: PrismaService,
+    private authService: AuthService,
+  ) {}
 
   async signupLocal(signupInput: SignupInput): Promise<SignupLocal> {
     const { email, password, name, token } = signupInput;

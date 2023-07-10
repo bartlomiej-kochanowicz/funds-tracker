@@ -34,7 +34,7 @@ const mixin = css<{
 export const StyledButton = styled.button<{
   isSelected: boolean;
   padding: keyof DefaultTheme['padding'];
-  highlighted?: boolean;
+  maxWidth?: `${string}px` | `${string}%`;
 }>`
   ${mixin}
 
@@ -48,7 +48,7 @@ export const StyledButton = styled.button<{
 
 export const StyledLink = styled(Link)<{
   padding: keyof DefaultTheme['padding'];
-  active?: boolean;
+  maxWidth?: `${string}px` | `${string}%`;
 }>`
   ${mixin}
 

@@ -4,7 +4,7 @@ import { Spreader } from 'components/atoms/Spreader';
 import { getMonth, getYear } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 import plPL from 'date-fns/locale/pl';
-import { FC, useMemo, useRef } from 'react';
+import { ChangeEvent, FC, useMemo, useRef } from 'react';
 import ReactDatePicker, { ReactDatePickerProps, registerLocale } from 'react-datepicker';
 import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -79,7 +79,9 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
           <Row>
             <StyledSelect
               value={getYear(date)}
-              onChange={({ target: { value } }) => changeYear(Number(value))}
+              onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) =>
+                changeYear(Number(value))
+              }
             >
               {years.map(option => (
                 <option
@@ -95,7 +97,9 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 
             <StyledSelect
               value={months[getMonth(date)]}
-              onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
+              onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) =>
+                changeMonth(months.indexOf(value))
+              }
             >
               {months.map(option => (
                 <option

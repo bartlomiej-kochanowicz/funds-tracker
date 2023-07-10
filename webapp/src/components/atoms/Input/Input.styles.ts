@@ -110,13 +110,9 @@ export const Unit = styled.span`
   bottom: 0;
 `;
 
-export const SearchIcon = styled(Icon)
-  .attrs({
-    className: 'search-icon',
-  })
-  .withConfig({
-    shouldForwardProp: prop => !['error'].includes(prop),
-  })<{ error: boolean }>`
+export const SearchIcon = styled(Icon).withConfig({
+  shouldForwardProp: prop => !['error'].includes(prop),
+})<{ error: boolean }>`
   position: absolute;
   left: 1.25rem;
   top: 0;

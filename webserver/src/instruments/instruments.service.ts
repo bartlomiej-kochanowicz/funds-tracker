@@ -8,7 +8,10 @@ import { InstrumentHistory, SearchInstrument } from './entities';
 
 @Injectable()
 export class InstrumentsService {
-  constructor(private readonly httpService: HttpService, private config: ConfigService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private config: ConfigService,
+  ) {}
 
   async search(searchInstrumentInput: SearchInstrumentInput): Promise<SearchInstrument[]> {
     const type = this.getType(searchInstrumentInput.type);

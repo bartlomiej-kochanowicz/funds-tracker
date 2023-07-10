@@ -22,15 +22,13 @@ describe('refresh token', () => {
     beforeAll(async () => {
       const response = await request<{ refreshToken: Refresh }>(integrationTestManager.httpServer)
         .set('Cookie', `refreshToken=${integrationTestManager.getRefreshToken()}`)
-        .mutate(
-          gql`
-            mutation RefreshToken {
-              refreshToken {
-                success
-              }
+        .mutate(gql`
+          mutation RefreshToken {
+            refreshToken {
+              success
             }
-          `,
-        )
+          }
+        `)
         .expectNoErrors();
 
       refreshToken = response.data.refreshToken;
@@ -49,15 +47,13 @@ describe('refresh token', () => {
     beforeAll(async () => {
       const { response } = await request<{ refreshToken: Refresh }>(
         integrationTestManager.httpServer,
-      ).mutate(
-        gql`
-          mutation RefreshToken {
-            refreshToken {
-              success
-            }
+      ).mutate(gql`
+        mutation RefreshToken {
+          refreshToken {
+            success
           }
-        `,
-      );
+        }
+      `);
 
       resStatus = getGqlErrorStatus(response);
     });
@@ -82,15 +78,13 @@ describe('refresh token', () => {
         integrationTestManager.httpServer,
       )
         .set('Cookie', `refreshToken=${refreshToken}`)
-        .mutate(
-          gql`
-            mutation RefreshToken {
-              refreshToken {
-                success
-              }
+        .mutate(gql`
+          mutation RefreshToken {
+            refreshToken {
+              success
             }
-          `,
-        );
+          }
+        `);
 
       resStatus = getGqlErrorStatus(response);
     });

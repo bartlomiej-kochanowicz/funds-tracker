@@ -45,15 +45,13 @@ describe('send code', () => {
       ).confirmationCodeHash;
 
       const response = await request<{ sendCode: SendCode }>(integrationTestManager.httpServer)
-        .mutate(
-          gql`
-            mutation SendCode($data: SendCodeInput!) {
-              sendCode(data: $data) {
-                success
-              }
+        .mutate(gql`
+          mutation SendCode($data: SendCodeInput!) {
+            sendCode(data: $data) {
+              success
             }
-          `,
-        )
+          }
+        `)
         .variables({
           data: {
             email: sendCodeStub.email,
@@ -87,15 +85,13 @@ describe('send code', () => {
 
     beforeAll(async () => {
       const { response } = await request<{ sendCode: SendCode }>(integrationTestManager.httpServer)
-        .mutate(
-          gql`
-            mutation SendCode($data: SendCodeInput!) {
-              sendCode(data: $data) {
-                success
-              }
+        .mutate(gql`
+          mutation SendCode($data: SendCodeInput!) {
+            sendCode(data: $data) {
+              success
             }
-          `,
-        )
+          }
+        `)
         .variables({
           data: {
             email: 'not-existing-user@email.com',
@@ -116,15 +112,13 @@ describe('send code', () => {
 
     beforeAll(async () => {
       const { response } = await request<{ sendCode: SendCode }>(integrationTestManager.httpServer)
-        .mutate(
-          gql`
-            mutation SendCode($data: SendCodeInput!) {
-              sendCode(data: $data) {
-                success
-              }
+        .mutate(gql`
+          mutation SendCode($data: SendCodeInput!) {
+            sendCode(data: $data) {
+              success
             }
-          `,
-        )
+          }
+        `)
         .variables({
           data: {
             email: testUser.email,

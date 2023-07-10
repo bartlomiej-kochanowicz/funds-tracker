@@ -9,7 +9,10 @@ import { Refresh } from '../entities';
 
 @Injectable()
 export class TokenService {
-  constructor(private prisma: PrismaService, private authService: AuthService) {}
+  constructor(
+    private prisma: PrismaService,
+    private authService: AuthService,
+  ) {}
 
   async refreshToken(userId: string, rt: string, res: Response): Promise<Refresh> {
     const user = await this.prisma.user.findUnique({

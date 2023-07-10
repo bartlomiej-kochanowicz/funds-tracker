@@ -17,7 +17,6 @@ export interface MenuItemProps {
   isSelected?: boolean;
   padding?: keyof DefaultTheme['padding'];
   icon?: IconType;
-  highlighted?: boolean;
   maxWidth?: `${string}px` | `${string}%`;
 }
 

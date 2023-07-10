@@ -21,15 +21,13 @@ describe('exist email', () => {
 
       beforeAll(async () => {
         const response = await request<{ emailExist: Email }>(integrationTestManager.httpServer)
-          .mutate(
-            gql`
-              query EmailExist($data: EmailInput!) {
-                emailExist(data: $data) {
-                  exist
-                }
+          .mutate(gql`
+            query EmailExist($data: EmailInput!) {
+              emailExist(data: $data) {
+                exist
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: {
               email: testUser.email,

@@ -49,15 +49,13 @@ describe('logout', () => {
       const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
         .set('Cookie', `accessToken=${accessToken}; refreshToken=${refreshToken}`)
         .set('user-agent', 'main-user-session')
-        .mutate(
-          gql`
-            mutation Logout {
-              logout {
-                success
-              }
+        .mutate(gql`
+          mutation Logout {
+            logout {
+              success
             }
-          `,
-        )
+          }
+        `)
         .expectNoErrors();
 
       logout = response.data.logout;
@@ -132,15 +130,13 @@ describe('logout', () => {
       const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
         .set('Cookie', `accessToken=${accessToken}; refreshToken=${refreshToken}`)
         .set('user-agent', 'logout-user-session')
-        .mutate(
-          gql`
-            mutation Logout {
-              logout {
-                success
-              }
+        .mutate(gql`
+          mutation Logout {
+            logout {
+              success
             }
-          `,
-        );
+          }
+        `);
 
       logout = response.data.logout;
     });
@@ -158,15 +154,13 @@ describe('logout', () => {
     beforeAll(async () => {
       const { response } = await request<{ logout: Logout }>(
         integrationTestManager.httpServer,
-      ).mutate(
-        gql`
-          mutation Logout {
-            logout {
-              success
-            }
+      ).mutate(gql`
+        mutation Logout {
+          logout {
+            success
           }
-        `,
-      );
+        }
+      `);
 
       resStatus = getGqlErrorStatus(response);
     });

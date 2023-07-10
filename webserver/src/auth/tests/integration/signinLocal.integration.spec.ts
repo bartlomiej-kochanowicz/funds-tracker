@@ -25,15 +25,13 @@ describe('signin local', () => {
         const response = await request<{ signinLocal: SigninLocal }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation SigninLocal($data: SigninInput!) {
-                signinLocal(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation SigninLocal($data: SigninInput!) {
+              signinLocal(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: {
               email: testUser.email,
@@ -65,15 +63,13 @@ describe('signin local', () => {
         const { response } = await request<{ signinLocal: SigninLocal }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation SigninLocal($data: SigninInput!) {
-                signinLocal(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation SigninLocal($data: SigninInput!) {
+              signinLocal(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: {
               email: signinUserStub.email,
@@ -99,15 +95,13 @@ describe('signin local', () => {
         const { response } = await request<{ signinLocal: SigninLocal }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation SigninLocal($data: SigninInput!) {
-                signinLocal(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation SigninLocal($data: SigninInput!) {
+              signinLocal(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: {
               email: testUser.email,
@@ -133,15 +127,13 @@ describe('signin local', () => {
         const { response } = await request<{ signinLocal: SigninLocal }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation SigninLocal($data: SigninInput!) {
-                signinLocal(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation SigninLocal($data: SigninInput!) {
+              signinLocal(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: {
               email: 'wrong_email@test.com',

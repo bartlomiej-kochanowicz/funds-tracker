@@ -23,16 +23,14 @@ describe('create portfolio', () => {
         integrationTestManager.httpServer,
       )
         .set('Cookie', `accessToken=${integrationTestManager.getAccessToken()}`)
-        .mutate(
-          gql`
-            mutation CreatePortfolio($data: CreatePortfolioInput!) {
-              createPortfolio(data: $data) {
-                uuid
-                name
-              }
+        .mutate(gql`
+          mutation CreatePortfolio($data: CreatePortfolioInput!) {
+            createPortfolio(data: $data) {
+              uuid
+              name
             }
-          `,
-        )
+          }
+        `)
         .variables({
           data: createPortfolioStub,
         })

@@ -25,15 +25,13 @@ describe('signup local', () => {
         const response = await request<{ signupLocal: SignupLocal }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation SignupLocal($data: SignupInput!) {
-                signupLocal(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation SignupLocal($data: SignupInput!) {
+              signupLocal(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: signupUserStub,
           })
@@ -68,15 +66,13 @@ describe('signup local', () => {
         const { response } = await request<{ signupLocal: SignupLocal }>(
           integrationTestManager.httpServer,
         )
-          .mutate(
-            gql`
-              mutation SignupLocal($data: SignupInput!) {
-                signupLocal(data: $data) {
-                  success
-                }
+          .mutate(gql`
+            mutation SignupLocal($data: SignupInput!) {
+              signupLocal(data: $data) {
+                success
               }
-            `,
-          )
+            }
+          `)
           .variables({
             data: testUser,
           });
