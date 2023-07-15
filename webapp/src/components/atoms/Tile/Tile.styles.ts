@@ -9,12 +9,12 @@ export const Wrapper = styled.div`
 
   ${({ theme }) => css`
     background: ${theme.colors.blue};
-    background: ${theme.gradients.blue}};
+    background: ${theme.gradients.blue};
     border-radius: ${theme.radius['1.25']};
 
     svg {
       fill: ${theme.colors.white};
-      font-size: ${theme.font.size['1.5']}};
+      font-size: ${theme.font.size['1.5']};
     }
   `}
 `;
