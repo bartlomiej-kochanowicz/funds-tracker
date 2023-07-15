@@ -13,7 +13,7 @@ export const NavList = ({ navigation }: NavListProps) => (
       {navigation.map(({ to, title, icon }) => (
         <ListItem key={title}>
           <StyledNavLink to={to}>
-            {({ isActive }) => (
+            {({ isActive }: { isActive: boolean }) => (
               <NavListItem
                 title={title}
                 icon={icon}

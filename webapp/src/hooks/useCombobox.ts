@@ -22,6 +22,7 @@ export const useCombobox = <Item>({ items, onInputValueChange }: IUseCombobox<It
   const menuItems = useMemo(
     () =>
       items.map(({ value, ...itemRest }) => ({
+        // @ts-ignore TS2577 error couses TS7023 and vice versa - TODO: fix
         onClick: () => {
           setSelectedItem(items.find(item => item?.value === value) || null);
         },
@@ -57,6 +58,7 @@ export const useCombobox = <Item>({ items, onInputValueChange }: IUseCombobox<It
     selectedItem,
     items: menuItems.map(item => ({
       ...item,
+      // @ts-ignore TS2577 error couses TS7023 and vice versa - TODO: fix
       onClick: () => {
         item.onClick();
         setIsOpen(false);

@@ -56,7 +56,7 @@ export const MobileNavigation = () => {
                   to={to}
                   end
                 >
-                  {({ isActive }) => (
+                  {({ isActive }: { isActive: boolean }) => (
                     <Column alignItems="center">
                       <Icon size="1.5rem" />
 

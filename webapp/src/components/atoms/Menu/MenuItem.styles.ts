@@ -1,11 +1,14 @@
 import { transparentize } from 'color2k';
 import { Link } from 'react-router-dom';
 import styled, { css, DefaultTheme } from 'styled-components';
+import { StyleFunction } from 'styled-components/dist/types';
 
-const mixin = css<{
+interface MixinProps {
   padding: keyof DefaultTheme['padding'];
   maxWidth?: `${string}px` | `${string}%`;
-}>`
+}
+
+const mixin = css<MixinProps>`
   display: flex;
   align-items: center;
   border: none;
@@ -31,12 +34,12 @@ const mixin = css<{
   `};
 `;
 
-export const StyledButton = styled.button<{
-  isSelected: boolean;
-  padding: keyof DefaultTheme['padding'];
-  maxWidth?: `${string}px` | `${string}%`;
-}>`
-  ${mixin}
+export const StyledButton = styled.button<
+  {
+    isSelected: boolean;
+  } & MixinProps
+>`
+  ${mixin as unknown as StyleFunction<object>}
 
   ${({ theme, isSelected }) => css`
     ${isSelected &&
@@ -46,11 +49,8 @@ export const StyledButton = styled.button<{
   `}
 `;
 
-export const StyledLink = styled(Link)<{
-  padding: keyof DefaultTheme['padding'];
-  maxWidth?: `${string}px` | `${string}%`;
-}>`
-  ${mixin}
+export const StyledLink = styled(Link)<MixinProps>`
+  ${mixin as unknown as StyleFunction<object>}
 
   text-decoration: none;
 `;
