@@ -1,7 +1,9 @@
 import i18n from 'utils/i18n';
-import { object, ref, string } from 'yup';
+import { object, ObjectSchema, ref, string } from 'yup';
 
-export const validationSchema = (isPasswordsStep: boolean) =>
+import { SignupFormValues } from './Signup.types';
+
+export const validationSchema = (isPasswordsStep: boolean): ObjectSchema<SignupFormValues> =>
   object().shape({
     userName: string()
       .min(4, i18n.t('page.signup.name.too_short'))
@@ -25,4 +27,4 @@ export const validationSchema = (isPasswordsStep: boolean) =>
           .required(i18n.t('page.signup.password.confirm.required'))
           .oneOf([ref('userPassword')], i18n.t('page.signup.password.do_not_match')),
     }),
-  });
+  }) as unknown as ObjectSchema<SignupFormValues>;

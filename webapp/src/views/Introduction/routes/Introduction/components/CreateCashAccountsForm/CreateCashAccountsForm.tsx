@@ -67,7 +67,7 @@ export const CreateCashAccountsForm = () => {
     getValues,
   } = useForm<IntroductionCreateCashAccountsInput>({
     defaultValues,
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver<IntroductionCreateCashAccountsInput>(validationSchema),
     mode: 'onChange',
   });
 

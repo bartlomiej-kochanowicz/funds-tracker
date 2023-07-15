@@ -23,6 +23,7 @@ import { ROUTES } from 'routes/paths';
 
 import { validationSchema } from './Signin.schema';
 import { Form } from './Signin.styles';
+import { SigninFormValues } from './Signin.types';
 
 const GoogleReCaptcha = lazy(() =>
   import('react-google-recaptcha-v3').then(({ GoogleReCaptcha: component }) => ({
@@ -55,7 +56,7 @@ export const SigninForm = () => {
     SigninStateMachine,
   );
 
-  const defaultValues = { userEmail: '', userPassword: '' };
+  const defaultValues = { userEmail: '', userPassword: '' } satisfies SigninFormValues;
 
   const {
     register,
@@ -64,9 +65,9 @@ export const SigninForm = () => {
     setError,
     getValues,
     setValue,
-  } = useForm({
+  } = useForm<SigninFormValues>({
     defaultValues,
-    resolver: yupResolver(validationSchema(compareState(states.password))),
+    resolver: yupResolver<SigninFormValues>(validationSchema(compareState(states.password))),
   });
 
   const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {

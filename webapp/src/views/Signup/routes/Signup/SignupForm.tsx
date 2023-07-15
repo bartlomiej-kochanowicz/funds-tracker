@@ -21,6 +21,7 @@ import { NameAndEmail } from './components/NameAndEmail';
 import { Passwords } from './components/Passwords';
 import { validationSchema } from './Signup.schema';
 import { Form } from './Signup.styles';
+import { SignupFormValues } from './Signup.types';
 
 const GoogleReCaptcha = lazy(() =>
   import('react-google-recaptcha-v3').then(({ GoogleReCaptcha: component }) => ({
@@ -64,9 +65,9 @@ export const SignupForm = () => {
     formState: { errors, isSubmitting },
     setError,
     getValues,
-  } = useForm({
+  } = useForm<SignupFormValues>({
     defaultValues,
-    resolver: yupResolver(validationSchema(compareState(states.passwords))),
+    resolver: yupResolver<SignupFormValues>(validationSchema(compareState(states.passwords))),
   });
 
   const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
@@ -111,11 +112,11 @@ export const SignupForm = () => {
 
   const onVerify = useCallback(setToken, [setToken]);
 
-  const onSubmit = async ({ userName, userEmail, userPassword }: typeof defaultValues) => {
+  const onSubmit = async ({ userName, userEmail, userPassword }: SignupFormValues) => {
     if (!token) {
       setRefreshReCaptcha(r => !r);
 
-      onSubmit({ userName, userEmail, userPassword } as typeof defaultValues);
+      onSubmit({ userName, userEmail, userPassword } as SignupFormValues);
 
       return;
     }

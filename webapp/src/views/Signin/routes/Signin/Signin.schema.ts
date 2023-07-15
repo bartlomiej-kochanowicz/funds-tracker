@@ -1,8 +1,10 @@
 import i18n from 'utils/i18n';
-import { object, string } from 'yup';
+import { object, ObjectSchema, string } from 'yup';
 
-export const validationSchema = (isPasswordStep: boolean) =>
-  object().shape({
+import { SigninFormValues } from './Signin.types';
+
+export const validationSchema = (isPasswordStep: boolean): ObjectSchema<SigninFormValues> =>
+  object<SigninFormValues>().shape({
     userEmail: string()
       .email(i18n.t('page.signin.email.invalid'))
       .required(i18n.t('page.signin.email.required')),
@@ -10,4 +12,4 @@ export const validationSchema = (isPasswordStep: boolean) =>
       is: () => isPasswordStep,
       then: () => string().required(i18n.t('page.signin.password.required')),
     }),
-  });
+  }) as ObjectSchema<SigninFormValues>;

@@ -65,7 +65,7 @@ export const CreatePortfoliosForm = () => {
     control,
   } = useForm<IntroductionCreatePortfoliosInput>({
     defaultValues,
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver<IntroductionCreatePortfoliosInput>(validationSchema),
     mode: 'onChange',
   });
 

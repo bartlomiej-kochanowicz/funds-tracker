@@ -1,7 +1,9 @@
 import { EMPTY_VALIDATION_MESSAGE } from 'constants/common';
-import { date, mixed, object, string } from 'yup';
+import { date, mixed, object, ObjectSchema, string } from 'yup';
 
-export const validationSchema = object().shape({
+import { InvestFundsFormValues } from './helpers/defaultValues';
+
+export const validationSchema = object<InvestFundsFormValues>().shape({
   instrument: object()
     .shape({
       Code: string(),
@@ -15,4 +17,4 @@ export const validationSchema = object().shape({
   comission: string().required(EMPTY_VALIDATION_MESSAGE),
   comission_type: string().oneOf(['%', 'amount']).required(EMPTY_VALIDATION_MESSAGE),
   transaction_cost: string().required(EMPTY_VALIDATION_MESSAGE),
-});
+}) as unknown as ObjectSchema<InvestFundsFormValues>;

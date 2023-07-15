@@ -44,7 +44,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
     register,
   } = useForm<CreateCashAccountInput>({
     defaultValues,
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver<CreateCashAccountInput>(validationSchema),
     mode: 'onChange',
   });
 

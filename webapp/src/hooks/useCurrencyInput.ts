@@ -20,7 +20,9 @@ export const useCurrencyInput = <FormValues extends FieldValues>({
   });
 
   return {
-    onValueChange: (value?: string) => onChange(value || ''),
+    onValueChange: (value?: PathValue<FormValues, Path<FormValues>>) => {
+      onChange(value || ('' as PathValue<FormValues, Path<FormValues>>));
+    },
     ...props,
     value: props.value as string,
   };
