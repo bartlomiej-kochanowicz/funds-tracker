@@ -1,7 +1,8 @@
 import { Instrument, SearchInstrument } from '__generated__/graphql';
+import instruments from 'constants/selectors/instruments';
 
 export const defaultValues = {
-  instrumentType: Instrument.Stocks,
+  instrumentType: instruments[0].value,
   instrument: {
     Code: '',
     Exchange: '',

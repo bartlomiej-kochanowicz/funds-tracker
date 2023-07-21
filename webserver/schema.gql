@@ -246,7 +246,7 @@ enum Instrument {
   governmentBonds
   etfs
   options
-  commodies
+  commodities
   crypto
   immovables
   movables

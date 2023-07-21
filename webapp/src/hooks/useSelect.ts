@@ -20,7 +20,7 @@ export const useSelect = <Fields extends FieldValues>({
   errors,
   ...rest
 }: UseSelectProps<Fields>) => {
-  const { onChange: registerOnChange, ref, onBlur } = register(name);
+  const { onChange: registerOnChange, onBlur, ref } = register(name);
 
   const onChange = (value: PathValue<Fields, Path<Fields>>) => {
     const e = {
@@ -33,10 +33,14 @@ export const useSelect = <Fields extends FieldValues>({
     registerOnChange(e);
   };
 
+  const button = document.createElement('button');
+
+  ref(button);
+
   return {
     onChange,
     error: get(errors, name)?.message || undefined,
-    ref,
+    defaultValue: button.value,
     onBlur,
     ...rest,
   };

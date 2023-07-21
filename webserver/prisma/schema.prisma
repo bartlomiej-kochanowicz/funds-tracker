@@ -108,7 +108,7 @@ enum InstrumentType {
   governmentBonds
   etfs
   options
-  commodies
+  commodities
   crypto
   immovables
   movables

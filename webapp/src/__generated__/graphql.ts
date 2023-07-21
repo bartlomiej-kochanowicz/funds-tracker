@@ -5,62 +5,64 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
   /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: any;
+  Date: { input: any; output: any; }
   /** A field whose value conforms to the standard internet email address format as specified in HTML Spec: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address. */
-  EmailAddress: any;
+  EmailAddress: { input: any; output: any; }
 };
 
 export type AddFundsToCashAccountInput = {
   /** Cash amount. */
-  amount: Scalars['Float'];
+  amount: Scalars['Float']['input'];
   /** Account uuid. */
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['input'];
 };
 
 export type CashAccount = {
   __typename?: 'CashAccount';
   /** Account balance. */
-  balance: Scalars['Float'];
+  balance: Scalars['Float']['output'];
   /** Cash account currency. */
   currency: Currency;
   /** Cash account name. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Account opeartions. */
   operations: Array<CashAccountOperation>;
   /** Cash account uuid. */
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['output'];
 };
 
 
 export type CashAccountOperationsArgs = {
-  first?: InputMaybe<Scalars['Float']>;
-  skip?: InputMaybe<Scalars['Float']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  skip?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type CashAccountDelete = {
   __typename?: 'CashAccountDelete';
   /** Confirmatiopn delete cash account. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type CashAccountOperation = {
   __typename?: 'CashAccountOperation';
   /** Cash account balance. */
-  amount: Scalars['Float'];
+  amount: Scalars['Float']['output'];
   /** Date of the transaction. */
-  date: Scalars['String'];
+  date: Scalars['String']['output'];
   /** Cash account oparation type. */
   type: CashAccountOperationType;
   /** Transaction uuid. */
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['output'];
 };
 
 export enum CashAccountOperationType {
@@ -76,28 +78,28 @@ export enum CashAccountOperationType {
 export type ConfirmSignup = {
   __typename?: 'ConfirmSignup';
   /** Confirmatiopn signup successful. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type ConfirmSignupInput = {
   /** Code. */
-  code: Scalars['String'];
+  code: Scalars['String']['input'];
   /** Email. */
-  email: Scalars['EmailAddress'];
+  email: Scalars['EmailAddress']['input'];
   /** Token. */
-  token: Scalars['String'];
+  token: Scalars['String']['input'];
 };
 
 export type CreateCashAccountInput = {
   /** Cash account currency. */
   currency: Currency;
   /** Cash account name. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
 };
 
 export type CreatePortfolioInput = {
   /** Portfolio name. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
 };
 
 export enum Currency {
@@ -111,64 +113,64 @@ export enum Currency {
 export type Email = {
   __typename?: 'Email';
   /** Email existence. */
-  exist: Scalars['Boolean'];
+  exist: Scalars['Boolean']['output'];
 };
 
 export type EmailInput = {
   /** Email. */
-  email: Scalars['EmailAddress'];
+  email: Scalars['EmailAddress']['input'];
   /** Token. */
-  token: Scalars['String'];
+  token: Scalars['String']['input'];
 };
 
 export enum Instrument {
   Bonds = 'bonds',
-  Commodies = 'commodies',
+  Commodities = 'commodities',
   Crypto = 'crypto',
   Etfs = 'etfs',
   GovernmentBonds = 'governmentBonds',
   Immovables = 'immovables',
   Movables = 'movables',
   Options = 'options',
-  Others = 'others',
+  Other = 'other',
   Stocks = 'stocks'
 }
 
 export type InstrumentHistory = {
   __typename?: 'InstrumentHistory';
   /** Adjusted close */
-  adjusted_close: Scalars['Float'];
+  adjusted_close: Scalars['Float']['output'];
   /** Close */
-  close: Scalars['Float'];
+  close: Scalars['Float']['output'];
   /** Date */
-  date: Scalars['String'];
+  date: Scalars['String']['output'];
   /** High */
-  high: Scalars['Float'];
+  high: Scalars['Float']['output'];
   /** Low */
-  low: Scalars['Float'];
+  low: Scalars['Float']['output'];
   /** Open */
-  open: Scalars['Float'];
+  open: Scalars['Float']['output'];
   /** Volume */
-  volume: Scalars['Float'];
+  volume: Scalars['Float']['output'];
 };
 
 export type InstrumentHistoryInput = {
   /** Code */
-  code: Scalars['String'];
+  code: Scalars['String']['input'];
   /** Exchange */
-  exchange: Scalars['String'];
+  exchange: Scalars['String']['input'];
   /** From */
-  from: Scalars['String'];
+  from: Scalars['String']['input'];
   /** Period */
-  period?: InputMaybe<Scalars['String']>;
+  period?: InputMaybe<Scalars['String']['input']>;
   /** To */
-  to?: InputMaybe<Scalars['String']>;
+  to?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntroductionCashAccounts = {
   __typename?: 'IntroductionCashAccounts';
   /** Cash accounts created successfully. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type IntroductionCreateCashAccountsInput = {
@@ -184,7 +186,7 @@ export type IntroductionCreatePortfoliosInput = {
 export type IntroductionPortfolios = {
   __typename?: 'IntroductionPortfolios';
   /** Portfolios created successfully. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export enum IntroductionStep {
@@ -197,7 +199,7 @@ export enum IntroductionStep {
 export type Logout = {
   __typename?: 'Logout';
   /** Logout successful. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type Mutation = {
@@ -244,12 +246,12 @@ export type MutationCreatePortfolioArgs = {
 
 
 export type MutationDeleteCashAccountArgs = {
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['input'];
 };
 
 
 export type MutationDeletePortfolioArgs = {
-  uuid: Scalars['String'];
+  uuid: Scalars['String']['input'];
 };
 
 
@@ -290,13 +292,13 @@ export type MutationSignupLocalArgs = {
 
 export type MutationUpdateCashAccountArgs = {
   data: UpdateCashAccountInput;
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['input'];
 };
 
 
 export type MutationUpdatePortfolioArgs = {
   data: UpdatePortfolioInput;
-  uuid: Scalars['String'];
+  uuid: Scalars['String']['input'];
 };
 
 
@@ -307,15 +309,15 @@ export type MutationUpdateUserArgs = {
 export type Portfolio = {
   __typename?: 'Portfolio';
   /** Portfolio name. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Portfolio uuid. */
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['output'];
 };
 
 export type PortfolioDelete = {
   __typename?: 'PortfolioDelete';
   /** Confirmatiopn delete portfolio. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type Query = {
@@ -332,7 +334,7 @@ export type Query = {
 
 
 export type QueryCashAccountArgs = {
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['input'];
 };
 
 
@@ -347,7 +349,7 @@ export type QueryInstrumentHistoryArgs = {
 
 
 export type QueryPortfolioArgs = {
-  uuid: Scalars['String'];
+  uuid: Scalars['String']['input'];
 };
 
 
@@ -358,47 +360,47 @@ export type QuerySearchInstrumentArgs = {
 export type Refresh = {
   __typename?: 'Refresh';
   /** Refresh successful. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type ResetPassword = {
   __typename?: 'ResetPassword';
   /** Send reset password successful. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type ResetPasswordInput = {
   /** Email. */
-  email: Scalars['EmailAddress'];
+  email: Scalars['EmailAddress']['input'];
   /** Token. */
-  token: Scalars['String'];
+  token: Scalars['String']['input'];
 };
 
 export type SearchInstrument = {
   __typename?: 'SearchInstrument';
   /** Code */
-  Code: Scalars['String'];
+  Code: Scalars['String']['output'];
   /** Country */
-  Country: Scalars['String'];
+  Country: Scalars['String']['output'];
   /** Currency */
-  Currency: Scalars['String'];
+  Currency: Scalars['String']['output'];
   /** Exchange */
-  Exchange: Scalars['String'];
+  Exchange: Scalars['String']['output'];
   /** ISIN */
-  ISIN?: Maybe<Scalars['String']>;
+  ISIN?: Maybe<Scalars['String']['output']>;
   /** Name */
-  Name: Scalars['String'];
+  Name: Scalars['String']['output'];
   /** Type */
-  Type: Scalars['String'];
+  Type: Scalars['String']['output'];
   /** previousClose */
-  previousClose: Scalars['Float'];
+  previousClose: Scalars['Float']['output'];
   /** previousCloseDate */
-  previousCloseDate: Scalars['String'];
+  previousCloseDate: Scalars['String']['output'];
 };
 
 export type SearchInstrumentInput = {
   /** Instrument name. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /** Instrument type. */
   type: Instrument;
 };
@@ -406,96 +408,96 @@ export type SearchInstrumentInput = {
 export type SendCode = {
   __typename?: 'SendCode';
   /** Send code successful. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type SendCodeInput = {
   /** Email. */
-  email: Scalars['EmailAddress'];
+  email: Scalars['EmailAddress']['input'];
   /** Token. */
-  token: Scalars['String'];
+  token: Scalars['String']['input'];
 };
 
 export type SetNewPassword = {
   __typename?: 'SetNewPassword';
   /** Name of the user. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type SetNewPasswordInput = {
   /** Password. */
-  password: Scalars['String'];
+  password: Scalars['String']['input'];
   /** Reset token. */
-  resetToken: Scalars['String'];
+  resetToken: Scalars['String']['input'];
   /** Token. */
-  token: Scalars['String'];
+  token: Scalars['String']['input'];
 };
 
 export type SigninInput = {
   /** Email. */
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
   /** Password. */
-  password: Scalars['String'];
+  password: Scalars['String']['input'];
   /** Token. */
-  token: Scalars['String'];
+  token: Scalars['String']['input'];
 };
 
 export type SigninLocal = {
   __typename?: 'SigninLocal';
   /** Signin local successful. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type SignupInput = {
   /** Email. */
-  email: Scalars['EmailAddress'];
+  email: Scalars['EmailAddress']['input'];
   /** Name. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /** Password. */
-  password: Scalars['String'];
+  password: Scalars['String']['input'];
   /** Token. */
-  token: Scalars['String'];
+  token: Scalars['String']['input'];
 };
 
 export type SignupLocal = {
   __typename?: 'SignupLocal';
   /** Signup local successful. */
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type UpdateCashAccountInput = {
   /** Cash account name. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
 };
 
 export type UpdatePortfolioInput = {
   /** Portfolio name. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateUserInput = {
   /** New user default currency. */
   defaultCurrency?: InputMaybe<Currency>;
   /** New user email. */
-  email?: InputMaybe<Scalars['EmailAddress']>;
+  email?: InputMaybe<Scalars['EmailAddress']['input']>;
   /** New user name. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type User = {
   __typename?: 'User';
   /** User date created. */
-  createdAt: Scalars['Date'];
+  createdAt: Scalars['Date']['output'];
   /** User default currency. */
   defaultCurrency: Currency;
   /** User email. */
-  email: Scalars['EmailAddress'];
+  email: Scalars['EmailAddress']['output'];
   /** User introduction step. */
   introductionStep: IntroductionStep;
   /** User name. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** User uuid. */
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['output'];
 };
 
 export type ConfirmSignupMutationVariables = Exact<{
@@ -565,14 +567,14 @@ export type CreateCashAccountMutationVariables = Exact<{
 export type CreateCashAccountMutation = { __typename?: 'Mutation', createCashAccount: { __typename?: 'CashAccount', uuid: string, name: string, currency: Currency, balance: number } };
 
 export type DeleteCashAccountMutationVariables = Exact<{
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['input'];
 }>;
 
 
 export type DeleteCashAccountMutation = { __typename?: 'Mutation', deleteCashAccount: { __typename?: 'CashAccountDelete', success: boolean } };
 
 export type UpdateCashAccountMutationVariables = Exact<{
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['input'];
   data: UpdateCashAccountInput;
 }>;
 
@@ -608,14 +610,14 @@ export type CreatePortfolioMutationVariables = Exact<{
 export type CreatePortfolioMutation = { __typename?: 'Mutation', createPortfolio: { __typename?: 'Portfolio', uuid: string, name: string } };
 
 export type DeletePortfolioMutationVariables = Exact<{
-  uuid: Scalars['String'];
+  uuid: Scalars['String']['input'];
 }>;
 
 
 export type DeletePortfolioMutation = { __typename?: 'Mutation', deletePortfolio: { __typename?: 'PortfolioDelete', success: boolean } };
 
 export type UpdatePortfolioMutationVariables = Exact<{
-  uuid: Scalars['String'];
+  uuid: Scalars['String']['input'];
   data: UpdatePortfolioInput;
 }>;
 
@@ -623,7 +625,7 @@ export type UpdatePortfolioMutationVariables = Exact<{
 export type UpdatePortfolioMutation = { __typename?: 'Mutation', updatePortfolio: { __typename?: 'Portfolio', uuid: string, name: string } };
 
 export type GetCashAccountOperationsQueryVariables = Exact<{
-  uuid: Scalars['ID'];
+  uuid: Scalars['ID']['input'];
 }>;
 
 
