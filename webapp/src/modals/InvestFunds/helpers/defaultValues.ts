@@ -1,7 +1,7 @@
 import { Instrument, SearchInstrument } from '__generated__/graphql';
 
 export const defaultValues = {
-  instrumentType: '',
+  instrumentType: Instrument.Stocks,
   instrument: {
     Code: '',
     Exchange: '',
@@ -15,7 +15,7 @@ export const defaultValues = {
   },
   portfolio: '',
   date: new Date(),
-  quantity: undefined,
+  quantity: '',
   price: '',
   comission: '',
   comission_type: '%',
@@ -23,13 +23,13 @@ export const defaultValues = {
 } satisfies InvestFundsFormValues;
 
 export type InvestFundsFormValues = {
-  instrumentType: Instrument | '';
+  instrumentType: Instrument;
   instrument: SearchInstrument;
   portfolio: string;
   date: Date;
-  quantity: number | undefined;
+  quantity: string;
   price: string;
-  comission: string | number;
+  comission: string;
   comission_type: '%' | 'amount';
   transaction_cost: string;
 };

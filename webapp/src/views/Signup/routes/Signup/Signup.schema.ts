@@ -27,4 +27,5 @@ export const validationSchema = (isPasswordsStep: boolean): ObjectSchema<SignupF
           .required(i18n.t('page.signup.password.confirm.required'))
           .oneOf([ref('userPassword')], i18n.t('page.signup.password.do_not_match')),
     }),
+    // NOTE: State machine is carring about password fields
   }) as unknown as ObjectSchema<SignupFormValues>;
