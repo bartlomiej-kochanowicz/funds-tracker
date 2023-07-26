@@ -6,7 +6,6 @@ import { formatCurrency } from 'helpers/formatCurrency';
 import { FC, Fragment, useCallback, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Row } from 'simple-flexbox';
 
 import { ComissionField } from './components/ComissionField';
 import { DateField } from './components/DateField';
@@ -73,8 +72,8 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
       <Box
         as="form"
         onSubmit={handleSubmit(onSubmit)}
-        flex
-        flexDirection="column"
+        $flex
+        $flexDirection="column"
       >
         <FormField
           label={t('modal.InvestFunds.form.label.account.balance')}
@@ -123,7 +122,10 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
         <Spacer />
 
-        <Row justifyContent="flex-end">
+        <Box
+          $flex
+          $justifyContent="flex-end"
+        >
           <Button
             color="tertiary"
             onClick={remove}
@@ -145,7 +147,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
             {!isSubmitting && 'Invest 🎉'}
           </Button>
-        </Row>
+        </Box>
       </Box>
     </FormProvider>
   );

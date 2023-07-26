@@ -65,7 +65,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         >
           {label && (
             <Text
-              fontSize="0.875"
+              $fontSize="0.875"
               $fontColor="gray400"
             >
               {label}
@@ -112,7 +112,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       >
         {label && (
           <Text
-            fontSize="0.875"
+            $fontSize="0.875"
             $fontColor="gray400"
           >
             {label}

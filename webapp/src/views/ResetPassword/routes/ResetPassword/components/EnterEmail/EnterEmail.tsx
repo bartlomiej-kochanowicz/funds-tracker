@@ -15,7 +15,7 @@ export const EnterEmail = () => {
       <Spacer $space="0.5" />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >
@@ -29,7 +29,7 @@ export const EnterEmail = () => {
       <Spacer />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >

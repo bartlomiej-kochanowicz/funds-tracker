@@ -8,8 +8,8 @@ import { ChangeEvent, FC, useMemo, useRef } from 'react';
 import ReactDatePicker, { ReactDatePickerProps, registerLocale } from 'react-datepicker';
 import { useTranslation } from 'react-i18next';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
+import { Box } from '../Box';
 import { ArrowButton, StyledSelect } from './Datepicker.styles';
 
 registerLocale('pl-PL', plPL);
@@ -67,7 +67,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
         prevMonthButtonDisabled,
         nextMonthButtonDisabled,
       }) => (
-        <Row justifyContent="space-between">
+        <Box $justifyContent="space-between">
           <ArrowButton
             type="button"
             onClick={decreaseMonth}
@@ -76,7 +76,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
             <Icon icon={FaChevronLeft} />
           </ArrowButton>
 
-          <Row>
+          <Box>
             <StyledSelect
               value={getYear(date)}
               onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) =>
@@ -110,7 +110,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
                 </option>
               ))}
             </StyledSelect>
-          </Row>
+          </Box>
 
           <ArrowButton
             type="button"
@@ -119,7 +119,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
           >
             <Icon icon={FaChevronRight} />
           </ArrowButton>
-        </Row>
+        </Box>
       )}
     />
   );

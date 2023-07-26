@@ -1,7 +1,12 @@
-import { Row } from 'simple-flexbox';
 import styled, { css } from 'styled-components';
 
-export const Circle = styled(Row)`
+import { Box } from '../Box';
+
+export const Circle = styled(Box).attrs({
+  $flex: true,
+  $justifyContent: 'center',
+  $alignItems: 'center',
+})`
   width: 40px;
   height: 40px;
   border-radius: 50%;

@@ -7,9 +7,9 @@ export const NotSupportedYet: FC = () => {
 
   return (
     <Box
-      flex
-      flexDirection="column"
-      alignItems="center"
+      $flex
+      $flexDirection="column"
+      $alignItems="center"
     >
       <Spacer $space="0.5" />
 

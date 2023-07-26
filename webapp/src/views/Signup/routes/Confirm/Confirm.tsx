@@ -1,6 +1,6 @@
 import { SendCodeMutation, SendCodeMutationVariables } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
-import { ButtonLink, Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
+import { Box, ButtonLink, Heading, Link, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
 import { SEND_CODE } from 'graphql/mutations/authentication/SendCode';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
@@ -9,7 +9,6 @@ import { lazy, Suspense, useCallback, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Navigate, useLocation } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { Column } from 'simple-flexbox';
 
 import { ConfirmForm } from './ConfirmForm';
 
@@ -69,7 +68,7 @@ export const Confirm = () => {
       <Spacer $space="0.5" />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >
@@ -78,10 +77,10 @@ export const Confirm = () => {
           components={{
             bold: (
               <Text
-                fontSize="0.875"
+                $fontSize="0.875"
                 $fontColor="gray400"
                 $textAlign="center"
-                fontWeight="700"
+                $fontWeight="700"
               />
             ),
           }}
@@ -98,7 +97,7 @@ export const Confirm = () => {
       <Spacer />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >
@@ -126,13 +125,17 @@ export const Confirm = () => {
 
       <Spacer $space="1.5" />
 
-      <Column alignItems="center">
+      <Box
+        $flex
+        $flexDirection="column"
+        $alignItems="center"
+      >
         <LangSelector />
 
         <Spacer />
 
         <ThemeSwitcher />
-      </Column>
+      </Box>
     </FullscreenClear>
   );
 };

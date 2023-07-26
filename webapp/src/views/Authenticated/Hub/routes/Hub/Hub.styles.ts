@@ -1,7 +1,10 @@
-import { Column } from 'simple-flexbox';
+import { Box } from 'components/atoms';
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled(Column)`
+export const Wrapper = styled(Box).attrs({
+  $flex: true,
+  $flexDirection: 'column',
+})`
   ${({ theme }) => css`
     ${theme.breakpoints.phone.min} {
       padding: 0 calc(${theme.spacing['3.5']} + ${theme.spacing['1.5']});

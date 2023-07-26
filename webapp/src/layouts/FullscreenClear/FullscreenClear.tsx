@@ -7,12 +7,8 @@ interface FullscreenClearProps {
 }
 
 export const FullscreenClear = ({ children, ...rest }: FullscreenClearProps) => (
-  <Wrapper
-    alignItems="center"
-    justifyContent="center"
-    {...rest}
-  >
-    <InnerWrapper alignItems="stretch">{children}</InnerWrapper>
+  <Wrapper {...rest}>
+    <InnerWrapper>{children}</InnerWrapper>
   </Wrapper>
 );
 

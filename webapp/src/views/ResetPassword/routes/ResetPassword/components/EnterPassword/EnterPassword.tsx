@@ -18,7 +18,7 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
       <Spacer $space="0.5" />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >

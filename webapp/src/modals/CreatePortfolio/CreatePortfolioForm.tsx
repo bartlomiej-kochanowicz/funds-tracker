@@ -6,14 +6,13 @@ import {
 import { useMutation } from '@apollo/client';
 import { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { CREATE_PORTFOLIO } from 'graphql/mutations/portfolios/CreatePortfolio';
 import { showErrorToast } from 'helpers/showToast';
 import { FC, Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 import { validationSchema } from './CreatePortfolioForm.schema';
 
@@ -69,18 +68,24 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
       noValidate
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Row alignItems="end">
+      <Box
+        $flex
+        $alignItems="flex-end"
+      >
         <Input
           placeholder={t('common.input.name.placeholder')}
           flexGrow={1}
           error={errors.name?.message}
           {...register('name')}
         />
-      </Row>
+      </Box>
 
       <Spacer />
 
-      <Row justifyContent="flex-end">
+      <Box
+        $flex
+        $justifyContent="flex-end"
+      >
         <Button
           color="tertiary"
           onClick={closeModal}
@@ -110,7 +115,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
             </Fragment>
           )}
         </Button>
-      </Row>
+      </Box>
     </form>
   );
 };

@@ -1,11 +1,10 @@
-import { Heading, Icon, Spacer, Spreader } from 'components/atoms';
+import { Box, Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { ErrorContent } from 'components/molecules/ErrorContent';
 import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
 import { FC, Fragment, ReactNode, useCallback, useEffect, useRef } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import FocusLock from 'react-focus-lock';
 import { FaTimes } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 import { Background, CloseButton, GlobalStyle, ModalComponent } from './Modal.styles';
 
@@ -61,7 +60,10 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
           ref={modalRef}
         >
           <ModalComponent>
-            <Row justifyContent={modalName ? 'space-between' : 'flex-end'}>
+            <Box
+              $flex
+              $justifyContent={modalName ? 'space-between' : 'flex-end'}
+            >
               {modalName && (
                 <Heading
                   level="h2"
@@ -82,7 +84,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
                   size="1.25"
                 />
               </CloseButton>
-            </Row>
+            </Box>
 
             <Spacer $space="0.5" />
 

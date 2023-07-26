@@ -6,7 +6,7 @@ import {
 import { useMutation } from '@apollo/client';
 import { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Icon, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useUserContext } from 'contexts/UserContext';
 import { CREATE_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/CreateCashAccount';
@@ -16,7 +16,6 @@ import { FC, Fragment, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 import { validationSchema } from './CreateCashAccountForm.schema';
 
@@ -92,7 +91,10 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
       noValidate
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Row alignItems="end">
+      <Box
+        $flex
+        $alignItems="flex-end"
+      >
         <Input
           placeholder={t('common.input.name.placeholder')}
           flexGrow={1}
@@ -109,11 +111,14 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
           placement="bottom-end"
           {...currencySelectProps}
         />
-      </Row>
+      </Box>
 
       <Spacer />
 
-      <Row justifyContent="flex-end">
+      <Box
+        $flex
+        $justifyContent="flex-end"
+      >
         <Button
           color="tertiary"
           onClick={closeModal}
@@ -143,7 +148,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
             </Fragment>
           )}
         </Button>
-      </Row>
+      </Box>
     </form>
   );
 };

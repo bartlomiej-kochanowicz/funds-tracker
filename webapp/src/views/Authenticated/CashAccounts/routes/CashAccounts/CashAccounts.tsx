@@ -75,7 +75,7 @@ export const CashAccounts = () => {
       <Heading>{t('navigation.cash_accounts')}</Heading>
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
       >
         {t('page.cash_accounts.title.description')}
@@ -93,9 +93,9 @@ export const CashAccounts = () => {
 
       {!loading && cashAccountsExist && !error && (
         <Box
-          borderRadius="0.7"
-          backgroundColor={isDark ? 'gray100' : 'white'}
-          p={isPhone ? 'small' : 'large'}
+          $borderRadius="0.7"
+          $backgroundColor={isDark ? 'gray100' : 'white'}
+          $p={isPhone ? 'small' : 'large'}
         >
           {data?.cashAccounts.map(({ uuid, ...rest }) => (
             <CashAccountsPanel

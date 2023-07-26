@@ -1,10 +1,9 @@
 import NiceModal from '@ebay/nice-modal-react';
-import { Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
+import { Box, Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { MODAL_CREATE_PORTFOLIO } from 'modals/CreatePortfolio';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { Column } from 'simple-flexbox';
 
 interface CreateFirstPortfolioProps {
   callback: (data: any) => void;
@@ -18,7 +17,10 @@ export const CreateFirstPortfolio: FC<CreateFirstPortfolioProps> = ({ callback }
   };
 
   return (
-    <Column alignItems="center">
+    <Box
+      $flex
+      $alignItems="center"
+    >
       <Heading
         $textAlign="center"
         level="h2"
@@ -38,6 +40,6 @@ export const CreateFirstPortfolio: FC<CreateFirstPortfolioProps> = ({ callback }
 
         <Icon icon={FaPlus} />
       </Button>
-    </Column>
+    </Box>
   );
 };

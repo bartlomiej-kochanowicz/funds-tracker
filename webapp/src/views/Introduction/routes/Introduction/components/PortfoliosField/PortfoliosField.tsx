@@ -1,5 +1,5 @@
 import { IntroductionCreatePortfoliosInput } from '__generated__/graphql';
-import { Button, Icon, Input, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Spreader } from 'components/atoms';
 import {
   DeepRequired,
   FieldErrorsImpl,
@@ -8,7 +8,6 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 interface PortfoliosFieldProps {
   register: UseFormRegister<IntroductionCreatePortfoliosInput>;
@@ -23,7 +22,7 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
   const handleRemoveField = () => remove(index);
 
   return (
-    <Row>
+    <Box $flex>
       <Input
         placeholder={t('add.portfolios.input.placeholder')}
         flexGrow={1}
@@ -40,6 +39,6 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
       >
         <Icon icon={FaTrash} />
       </Button>
-    </Row>
+    </Box>
   );
 };

@@ -76,7 +76,7 @@ export const EnterEmailForm = () => {
   if (sendEmailSuccess) {
     return (
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >

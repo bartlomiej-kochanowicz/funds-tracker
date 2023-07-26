@@ -4,12 +4,11 @@ import {
 } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import { Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { Box, Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { Modal } from 'components/molecules';
 import { DELETE_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/DeleteCashAccount';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { Trans, useTranslation } from 'react-i18next';
-import { Column, Row } from 'simple-flexbox';
 
 export interface ConfirmDeleteCashAccountProps {
   name: string;
@@ -56,9 +55,12 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
         closeModal={modal.remove}
         modalName={t('modal.ConfirmDeleteCashAccount.name')}
       >
-        <Column>
+        <Box
+          $flex
+          $flexDirection="column"
+        >
           <Text
-            fontSize="0.875"
+            $fontSize="0.875"
             $fontColor="gray400"
           >
             <Trans
@@ -67,10 +69,10 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
               components={{
                 bold: (
                   <Text
-                    fontSize="0.875"
+                    $fontSize="0.875"
                     $fontColor="gray400"
                     $textAlign="center"
-                    fontWeight="700"
+                    $fontWeight="700"
                   />
                 ),
               }}
@@ -79,7 +81,7 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 
           <Spacer />
 
-          <Row>
+          <Box $flex>
             <Button
               color="tertiary"
               onClick={modal.remove}
@@ -99,8 +101,8 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 
               {!loading && t('common.yes')}
             </Button>
-          </Row>
-        </Column>
+          </Box>
+        </Box>
       </Modal>
     );
   },

@@ -1,8 +1,7 @@
-import { Spacer, ThemeSwitcher } from 'components/atoms';
+import { Box, Spacer, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { useSearchParams } from 'react-router-dom';
-import { Column } from 'simple-flexbox';
 
 import { EnterEmail } from './components/EnterEmail';
 import { EnterPassword } from './components/EnterPassword';
@@ -20,13 +19,17 @@ export const ResetPassword = () => {
 
       <Spacer $space="1.5" />
 
-      <Column alignItems="center">
+      <Box
+        $flex
+        $flexDirection="column"
+        $alignItems="center"
+      >
         <LangSelector />
 
         <Spacer />
 
         <ThemeSwitcher />
-      </Column>
+      </Box>
     </FullscreenClear>
   );
 };

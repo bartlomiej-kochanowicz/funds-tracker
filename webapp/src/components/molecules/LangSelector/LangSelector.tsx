@@ -1,9 +1,8 @@
-import { Icon, Select, Spreader } from 'components/atoms';
+import { Box, Icon, Select, Spreader } from 'components/atoms';
 import languages from 'constants/selectors/languages';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaGlobeEurope } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 export const LangSelector = () => {
   const { t, i18n } = useTranslation();
@@ -22,13 +21,16 @@ export const LangSelector = () => {
   };
 
   const customLabel = ({ value }: { value: string }) => (
-    <Row alignItems="center">
+    <Box
+      $flex
+      $alignItems="center"
+    >
       <Icon icon={FaGlobeEurope} />
 
       <Spreader $spread="0.5" />
 
       {t(`selectors.languages.${value}`)}
-    </Row>
+    </Box>
   );
 
   return (

@@ -123,7 +123,7 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
 
                   <Spreader $spread="0.25" />
 
-                  <Text maxWidth="auto">{item.Name}</Text>
+                  <Text $maxWidth="auto">{item.Name}</Text>
                 </Menu.Item>
               ))}
             </Menu>

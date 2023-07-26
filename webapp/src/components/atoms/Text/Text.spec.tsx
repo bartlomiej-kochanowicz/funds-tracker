@@ -13,10 +13,10 @@ describe('Atoms/Text fontable tests', () => {
   it('renders properly with custom font property', () => {
     const { getByText } = render(
       <Text
-        fontWeight="500"
+        $fontWeight="500"
         $fontColor="blue"
-        fontSize="2.5"
-        lineHeight="1.5rem"
+        $fontSize="2.5"
+        $lineHeight="1.5rem"
       >
         Hello World
       </Text>,

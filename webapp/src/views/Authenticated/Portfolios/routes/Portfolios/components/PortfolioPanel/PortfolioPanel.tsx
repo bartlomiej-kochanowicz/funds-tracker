@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import { FaChartPie, FaEllipsisV, FaPen, FaTrash } from 'react-icons/fa';
 import { generatePath } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { Column, Row } from 'simple-flexbox';
 
 interface PortfoliosPanelProps {
   updatePortfolioName: (data: { name: string; uuid: string }) => void;
@@ -73,15 +72,21 @@ export const PortfolioPanel: FC<GetPortfoliosQuery['portfolios'][0] & Portfolios
 
   return (
     <Box
-      p={isPhone ? 'medium' : 'large'}
-      borderRadius="0.7"
+      $p={isPhone ? 'medium' : 'large'}
+      $borderRadius="0.7"
     >
-      <Row justifyContent="space-between">
-        <Column>
-          <Text fontWeight="700">{name}</Text>
+      <Box
+        $flex
+        $justifyContent="space-between"
+      >
+        <Box
+          $flex
+          $flexDirection="column"
+        >
+          <Text $fontWeight="700">{name}</Text>
 
           <Text>{formatCurrency(2137, defaultCurrency)}</Text>
-        </Column>
+        </Box>
 
         <Dropdown
           items={items}
@@ -97,7 +102,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery['portfolios'][0] & Portfolios
             </Button>
           )}
         </Dropdown>
-      </Row>
+      </Box>
     </Box>
   );
 };

@@ -48,11 +48,11 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
       htmlFor="comission"
     >
       <Box
-        flex
-        flexDirection={isPhone ? 'column-reverse' : 'row'}
-        alignItems={isPhone ? 'start' : 'center'}
-        flexGrow={1}
-        width={isPhone ? '100%' : 'auto'}
+        $flex
+        $flexDirection={isPhone ? 'column-reverse' : 'row'}
+        $alignItems={isPhone ? 'start' : 'center'}
+        $flexGrow={1}
+        $width={isPhone ? '100%' : 'auto'}
       >
         {watchComissionType === '%' && (
           <Input

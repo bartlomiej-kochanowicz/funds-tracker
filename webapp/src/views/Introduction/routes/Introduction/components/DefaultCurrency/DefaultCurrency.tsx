@@ -1,6 +1,6 @@
 import { UpdateUserMutation, UpdateUserMutationVariables } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
-import { Button, Heading, Loader, Select, Spacer, Text } from 'components/atoms';
+import { Box, Button, Heading, Loader, Select, Spacer, Text } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useUserContext } from 'contexts/UserContext';
 import { motion } from 'framer-motion';
@@ -10,7 +10,6 @@ import { useSelect } from 'hooks/useSelect';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
-import { Column } from 'simple-flexbox';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 
 export const DefaultCurrency = () => {
@@ -76,13 +75,16 @@ export const DefaultCurrency = () => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
     >
-      <Column>
+      <Box
+        $flex
+        $flexDirection="column"
+      >
         <Heading $textAlign="center">{t('page.introduction.default.currency.title')}</Heading>
 
         <Spacer $space="0.5" />
 
         <Text
-          fontSize="0.875"
+          $fontSize="0.875"
           $fontColor="gray400"
           $textAlign="center"
         >
@@ -91,10 +93,10 @@ export const DefaultCurrency = () => {
             components={{
               bold: (
                 <Text
-                  fontSize="0.875"
+                  $fontSize="0.875"
                   $fontColor="gray400"
                   $textAlign="center"
-                  fontWeight="700"
+                  $fontWeight="700"
                 />
               ),
             }}
@@ -123,7 +125,7 @@ export const DefaultCurrency = () => {
             {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
           </Button>
         </form>
-      </Column>
+      </Box>
     </motion.div>
   );
 };

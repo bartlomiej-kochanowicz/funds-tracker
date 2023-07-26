@@ -12,7 +12,6 @@ import { MODAL_RENAME_CASH_ACCOUNT } from 'modals/RenameCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChartLine, FaEllipsisV, FaListUl, FaPen, FaPlus, FaTrash } from 'react-icons/fa';
-import { Column, Row } from 'simple-flexbox';
 
 interface CashAccountsPanelProps {
   updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
@@ -96,15 +95,21 @@ export const CashAccountsPanel: FC<
 
   return (
     <Box
-      p={isPhone ? 'medium' : 'large'}
-      borderRadius="0.7"
+      $p={isPhone ? 'medium' : 'large'}
+      $borderRadius="0.7"
     >
-      <Row justifyContent="space-between">
-        <Column>
-          <Text fontWeight="700">{name}</Text>
+      <Box
+        $flex
+        $justifyContent="space-between"
+      >
+        <Box
+          $flex
+          $flexDirection="column"
+        >
+          <Text $fontWeight="700">{name}</Text>
 
           <Text>{formatCurrency(balance, currency)}</Text>
-        </Column>
+        </Box>
 
         <Dropdown
           items={items}
@@ -120,7 +125,7 @@ export const CashAccountsPanel: FC<
             </Button>
           )}
         </Dropdown>
-      </Row>
+      </Box>
     </Box>
   );
 };

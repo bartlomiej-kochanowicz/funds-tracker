@@ -18,7 +18,7 @@ describe('Atoms/Spacer tests', () => {
     const { getByTestId } = render(
       <Spacer
         data-testid="spacer"
-        space={space}
+        $space={space}
       />,
     );
 

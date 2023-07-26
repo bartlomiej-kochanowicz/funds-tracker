@@ -5,15 +5,15 @@ import { Colors, Radius } from 'styles/styled';
 
 interface BoxProps extends PaddingMixinProps {
   children: ReactNode;
-  backgroundColor?: Colors;
-  borderRadius?: Radius;
-  hoverBackgroundColor?: Colors;
-  flex?: boolean;
-  flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
-  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
-  alignItems?: 'center' | 'flex-start' | 'flex-end' | 'stretch' | 'start';
-  flexGrow?: number;
-  width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
+  $backgroundColor?: Colors;
+  $borderRadius?: Radius;
+  $hoverBackgroundColor?: Colors;
+  $width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
+  $flex?: boolean;
+  $flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  $justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+  $alignItems?: 'center' | 'flex-start' | 'flex-end' | 'stretch' | 'start';
+  $flexGrow?: number;
 }
 
 export const Box = styled.div<BoxProps>`
@@ -21,62 +21,62 @@ export const Box = styled.div<BoxProps>`
 
   ${({
     theme,
-    backgroundColor,
-    borderRadius,
-    hoverBackgroundColor,
-    flex,
-    flexDirection,
-    justifyContent,
-    alignItems,
-    flexGrow,
-    width,
+    $backgroundColor,
+    $borderRadius,
+    $hoverBackgroundColor,
+    $flex,
+    $flexDirection,
+    $justifyContent,
+    $alignItems,
+    $flexGrow,
+    $width,
   }) => css`
-    ${backgroundColor &&
+    ${$backgroundColor &&
     css`
-      background-color: ${theme.colors[backgroundColor]};
+      background-color: ${theme.colors[$backgroundColor]};
     `}
 
-    ${borderRadius &&
+    ${$borderRadius &&
     css`
-      border-radius: ${theme.radius[borderRadius]};
+      border-radius: ${theme.radius[$borderRadius]};
     `}
 
-    ${hoverBackgroundColor &&
+    ${$hoverBackgroundColor &&
     css`
       transition: ${theme.transition.primary};
 
       &:hover {
-        background-color: ${theme.colors[hoverBackgroundColor]};
+        background-color: ${theme.colors[$hoverBackgroundColor]};
       }
     `}
 
-    ${width &&
+    ${$width &&
     css`
-      width: ${width};
+      width: ${$width};
     `}
 
-    ${flex &&
+    ${$flex &&
     css`
       display: flex;
 
-      ${flexDirection &&
+      ${$flexDirection &&
       css`
-        flex-direction: ${flexDirection};
+        flex-direction: ${$flexDirection};
       `}
 
-      ${justifyContent &&
+      ${$justifyContent &&
       css`
-        justify-content: ${justifyContent};
+        justify-content: ${$justifyContent};
       `}
 
-      ${alignItems &&
+      ${$alignItems &&
       css`
-        align-items: ${alignItems};
+        align-items: ${$alignItems};
       `}
 
-      ${flexGrow &&
+      ${$flexGrow &&
       css`
-        flex-grow: ${flexGrow};
+        flex-grow: ${$flexGrow};
       `}
     `}
   `}

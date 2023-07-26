@@ -19,7 +19,7 @@ export const ThemeSwitcher = forwardRef<HTMLButtonElement>((props, ref) => {
       ref={ref}
       {...props}
     >
-      <StyledBiMoon isVisible={isDark} />
+      <StyledBiMoon $isVisible={isDark} />
 
       <Handle
         transition={spring}

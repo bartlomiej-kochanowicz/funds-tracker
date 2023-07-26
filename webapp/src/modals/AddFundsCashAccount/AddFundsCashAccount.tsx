@@ -27,11 +27,11 @@ export const AddFundsCashAccount = NiceModal.create<AddFundsCashAccountProps>(
         modalName={t('modal.AddFundsCashAccount.name')}
       >
         <Text
-          fontSize="0.875"
+          $fontSize="0.875"
           $fontColor="gray400"
-          display="block"
-          maxWidth={isPhone ? '300px' : '100%'}
-          breakLine
+          $display="block"
+          $maxWidth={isPhone ? '300px' : '100%'}
+          $breakLine
         >
           {t('modal.AddFundsCashAccount.description')}
         </Text>

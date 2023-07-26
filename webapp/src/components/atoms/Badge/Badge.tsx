@@ -4,13 +4,13 @@ import styled, { css, DefaultTheme } from 'styled-components';
 export type BadgeColors = keyof DefaultTheme['button']['color'];
 
 interface BadgeProps {
-  color?: BadgeColors;
+  $color?: BadgeColors;
 }
 
 export const Badge = styled.span<BadgeProps>`
-  ${({ theme, color = 'primary' }) => css`
-    background-color: ${transparentize(theme.button.color[color].background, 0.8)};
-    color: ${theme.button.color[color].background};
+  ${({ theme, $color = 'primary' }) => css`
+    background-color: ${transparentize(theme.button.color[$color].background, 0.8)};
+    color: ${theme.button.color[$color].background};
     padding: ${theme.padding.tiny};
     border-radius: ${theme.radius['0.375']};
     padding: ${theme.padding.tiny};

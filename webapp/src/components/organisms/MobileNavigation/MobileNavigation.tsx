@@ -1,9 +1,8 @@
-import { Spacer } from 'components/atoms';
+import { Box, Spacer } from 'components/atoms';
 import { AnimatePresence, motion } from 'framer-motion';
 import { throttle } from 'helpers/throttle';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Column } from 'simple-flexbox';
 
 import { mobileNavigationNavigation } from './constants';
 import { List, ListItem, StyledNav, StyledNavLink, Title } from './MobileNavigation.styles';
@@ -57,21 +56,25 @@ export const MobileNavigation = () => {
                   end
                 >
                   {({ isActive }: { isActive: boolean }) => (
-                    <Column alignItems="center">
+                    <Box
+                      $flex
+                      $flexDirection="column"
+                      $alignItems="center"
+                    >
                       <Icon size="1.5rem" />
 
                       <Spacer $space="0.25" />
 
                       <Title
                         $fontColor={isActive ? 'text' : 'gray400'}
-                        fontWeight={isActive ? '700' : '500'}
-                        lineHeight="1rem"
+                        $fontWeight={isActive ? '700' : '500'}
+                        $lineHeight="1rem"
                         $textAlign="center"
-                        fontSize="0.875"
+                        $fontSize="0.875"
                       >
                         {t(title)}
                       </Title>
-                    </Column>
+                    </Box>
                   )}
                 </StyledNavLink>
               </ListItem>

@@ -34,7 +34,7 @@ export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) =>
   }
 
   if (!loading && !cashAccountsOperationsExist) {
-    return <Text fontWeight="700">{t('modal.RenameCashAccount.operations.empty')}</Text>;
+    return <Text $fontWeight="700">{t('modal.RenameCashAccount.operations.empty')}</Text>;
   }
 
   if (!loading && cashAccountsOperationsExist) {

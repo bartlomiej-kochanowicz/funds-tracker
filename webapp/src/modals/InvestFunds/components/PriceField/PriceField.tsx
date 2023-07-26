@@ -77,9 +77,9 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
       htmlFor="price"
     >
       <Box
-        flex
-        flexGrow={1}
-        width={isPhone ? '100%' : undefined}
+        $flex
+        $flexGrow={1}
+        $width={isPhone ? '100%' : undefined}
       >
         <Input
           type="currency"

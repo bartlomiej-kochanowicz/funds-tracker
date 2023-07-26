@@ -14,19 +14,19 @@ export const resolveProps = <
 });
 
 export type FontableProps = {
-  fontWeight?: keyof DefaultTheme['font']['weight'];
+  $fontWeight?: keyof DefaultTheme['font']['weight'];
   $fontColor?: Colors;
-  fontSize?: keyof DefaultTheme['font']['size'];
-  lineHeight?: `${string}rem`;
-  textShadow?: boolean;
+  $fontSize?: keyof DefaultTheme['font']['size'];
+  $lineHeight?: `${string}rem`;
+  $textShadow?: boolean;
   $textAlign?: 'left' | 'center' | 'right' | 'justify';
-  maxWidth?: `${string}px` | `${string}%` | 'auto';
-  breakLine?: boolean;
+  $maxWidth?: `${string}px` | `${string}%` | 'auto';
+  $breakLine?: boolean;
 };
 
 export const fontable = css<FontableProps>`
-  ${({ fontWeight }) => css`
-    font-weight: ${fontWeight};
+  ${({ $fontWeight }) => css`
+    font-weight: ${$fontWeight};
   `}
 
   ${({ theme: { colors }, $fontColor }) => css`
@@ -37,21 +37,21 @@ export const fontable = css<FontableProps>`
     theme: {
       font: { size },
     },
-    fontSize,
+    $fontSize,
   }) =>
-    fontSize &&
+    $fontSize &&
     css`
-      font-size: ${size[fontSize]};
+      font-size: ${size[$fontSize]};
     `}
 
-  ${({ lineHeight }) =>
-    lineHeight &&
+  ${({ $lineHeight }) =>
+    $lineHeight &&
     css`
-      line-height: ${lineHeight};
+      line-height: ${$lineHeight};
     `}
 
-  ${({ textShadow }) =>
-    textShadow &&
+  ${({ $textShadow }) =>
+    $textShadow &&
     css`
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     `}
@@ -62,23 +62,23 @@ export const fontable = css<FontableProps>`
       text-align: ${$textAlign};
     `}
 
-  ${({ maxWidth }) =>
-    maxWidth &&
+  ${({ $maxWidth }) =>
+    $maxWidth &&
     css`
       text-overflow: ellipsis;
       overflow: hidden;
-      max-width: ${maxWidth};
+      max-width: ${$maxWidth};
       white-space: nowrap;
     `}
 
-  ${({ breakLine = false }) =>
-    breakLine &&
+  ${({ $breakLine = false }) =>
+    $breakLine &&
     css`
       white-space: normal;
     `}
 
-  ${({ maxWidth }) =>
-    maxWidth === 'auto' &&
+  ${({ $maxWidth }) =>
+    $maxWidth === 'auto' &&
     css`
       text-overflow: ellipsis;
       overflow: hidden;
@@ -87,26 +87,25 @@ export const fontable = css<FontableProps>`
 `;
 
 export interface PaddingMixinProps {
-  p?: keyof DefaultTheme['padding'];
-  adjustMobile?: boolean;
+  $p?: keyof DefaultTheme['padding'];
 }
 
 export const paddingMixin = css<PaddingMixinProps>`
-  ${({ p, theme }) =>
-    p &&
+  ${({ $p, theme }) =>
+    $p &&
     css`
-      padding: ${theme.padding[p]};
+      padding: ${theme.padding[$p]};
     `}
 `;
 
 export type MarginMixinProps = {
-  m?: keyof DefaultTheme['padding'];
+  $m?: keyof DefaultTheme['padding'];
 };
 
 export const marginMixin = css<MarginMixinProps>`
-  ${({ m, theme }) =>
-    m &&
+  ${({ $m, theme }) =>
+    $m &&
     css`
-      padding: ${theme.padding[m]};
+      padding: ${theme.padding[$m]};
     `}
 `;

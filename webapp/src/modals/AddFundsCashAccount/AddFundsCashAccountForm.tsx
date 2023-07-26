@@ -6,7 +6,7 @@ import {
 import { useMutation } from '@apollo/client';
 import { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { cache } from 'config/client';
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/AddFundsToCashAccount';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
@@ -15,7 +15,6 @@ import { FC, Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 import { validationSchema } from './AddFundsCashAccountForm.schema';
 
@@ -105,7 +104,10 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 
       <Spacer />
 
-      <Row justifyContent="flex-end">
+      <Box
+        $flex
+        $justifyContent="flex-end"
+      >
         <Button
           color="tertiary"
           onClick={closeModal}
@@ -135,7 +137,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
             </Fragment>
           )}
         </Button>
-      </Row>
+      </Box>
     </form>
   );
 };

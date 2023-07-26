@@ -1,7 +1,9 @@
-import { Row } from 'simple-flexbox';
+import { Box } from 'components/atoms';
 import styled, { css } from 'styled-components';
 
-export const StyledRow = styled(Row)<{ $hasBorder: boolean; $leftPadding: boolean }>`
+export const StyledRow = styled(Box).attrs({
+  $flex: true,
+})<{ $hasBorder: boolean; $leftPadding: boolean }>`
   position: fixed;
   top: 0;
   left: 0;

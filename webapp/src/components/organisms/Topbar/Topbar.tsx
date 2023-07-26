@@ -46,8 +46,8 @@ export const Topbar = () => {
 
   return (
     <StyledRow
-      justifyContent={rendreBackButton ? 'space-between' : 'flex-end'}
-      alignItems="center"
+      $justifyContent={rendreBackButton ? 'space-between' : 'flex-end'}
+      $alignItems="center"
       $hasBorder={visible}
       $leftPadding={rendreBackButton}
     >

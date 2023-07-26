@@ -61,9 +61,9 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
       htmlFor="transaction_cost"
     >
       <Box
-        flex
-        flexGrow={1}
-        width={isPhone ? '100%' : undefined}
+        $flex
+        $flexGrow={1}
+        $width={isPhone ? '100%' : undefined}
       >
         <Input
           type="currency"

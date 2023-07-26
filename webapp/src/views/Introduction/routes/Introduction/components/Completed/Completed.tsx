@@ -1,14 +1,17 @@
-import { Button, Heading, Spacer, Text, ThumbUp } from 'components/atoms';
+import { Box, Button, Heading, Spacer, Text, ThumbUp } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'routes/paths';
-import { Column } from 'simple-flexbox';
 
 export const Completed = () => {
   const { t } = useTranslation();
 
   return (
-    <Column alignItems="center">
+    <Box
+      $flex
+      $flexDirection="column"
+      $alignItems="center"
+    >
       <ThumbUp />
 
       <Spacer $space="1.5" />
@@ -18,7 +21,7 @@ export const Completed = () => {
       <Spacer $space="0.5" />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >
@@ -36,6 +39,6 @@ export const Completed = () => {
       >
         {t('add.instrument.success.dashboard')}
       </Button>
-    </Column>
+    </Box>
   );
 };

@@ -1,12 +1,11 @@
 import { DeletePortfolioMutation, DeletePortfolioMutationVariables } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import { Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { Box, Button, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { Modal } from 'components/molecules';
 import { DELETE_PORTFOLIO } from 'graphql/mutations/portfolios/DeletePortfolio';
 import { showErrorToast, showSuccessToast } from 'helpers/showToast';
 import { Trans, useTranslation } from 'react-i18next';
-import { Column, Row } from 'simple-flexbox';
 
 export interface ConfirmDeletePortfolioProps {
   name: string;
@@ -53,9 +52,12 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
         closeModal={modal.remove}
         modalName={t('modal.ConfirmDeletePortfolio.name')}
       >
-        <Column>
+        <Box
+          $flex
+          $flexDirection="column"
+        >
           <Text
-            fontSize="0.875"
+            $fontSize="0.875"
             $fontColor="gray400"
           >
             <Trans
@@ -64,10 +66,10 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
               components={{
                 bold: (
                   <Text
-                    fontSize="0.875"
+                    $fontSize="0.875"
                     $fontColor="gray400"
                     $textAlign="center"
-                    fontWeight="700"
+                    $fontWeight="700"
                   />
                 ),
               }}
@@ -76,7 +78,7 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
 
           <Spacer />
 
-          <Row>
+          <Box $flex>
             <Button
               color="tertiary"
               onClick={modal.remove}
@@ -96,8 +98,8 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
 
               {!loading && t('common.yes')}
             </Button>
-          </Row>
-        </Column>
+          </Box>
+        </Box>
       </Modal>
     );
   },

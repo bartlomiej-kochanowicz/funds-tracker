@@ -88,7 +88,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
   if (newPasswordSuccess) {
     return (
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >

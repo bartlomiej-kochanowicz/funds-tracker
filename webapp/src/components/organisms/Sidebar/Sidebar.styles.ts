@@ -1,7 +1,10 @@
-import { Column } from 'simple-flexbox';
+import { Box } from 'components/atoms';
 import styled, { css } from 'styled-components';
 
-export const StyledColumn = styled(Column)`
+export const StyledColumn = styled(Box).attrs({
+  $flex: true,
+  $flexDirection: 'column',
+})`
   position: fixed;
   top: 0;
   left: 0;

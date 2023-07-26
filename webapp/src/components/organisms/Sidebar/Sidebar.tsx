@@ -1,8 +1,7 @@
-import { Spacer, ThemeSwitcher } from 'components/atoms';
+import { Box, Spacer, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { lazy, Suspense } from 'react';
-import { Column } from 'simple-flexbox';
 
 import { LogoFallback } from './components/LogoFallback';
 import { NavList } from './components/NavList';
@@ -25,8 +24,11 @@ export const Sidebar = () => {
   const { isDark } = useColorThemeContext();
 
   return (
-    <StyledColumn justifyContent="space-between">
-      <Column>
+    <StyledColumn $justifyContent="space-between">
+      <Box
+        $flex
+        $flexDirection="column"
+      >
         <Suspense fallback={<LogoFallback />}>
           {isDark ? (
             <LogoNameVertical
@@ -56,15 +58,19 @@ export const Sidebar = () => {
         <Spacer />
 
         <NavList navigation={sidebarNavigation} />
-      </Column>
+      </Box>
 
-      <Column alignItems="center">
+      <Box
+        $flex
+        $flexDirection="column"
+        $alignItems="center"
+      >
         <ThemeSwitcher />
 
         <Spacer />
 
         <LangSelector />
-      </Column>
+      </Box>
     </StyledColumn>
   );
 };

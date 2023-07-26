@@ -1,9 +1,8 @@
-import { Heading, RouterLink, Spacer, Text, ThemeSwitcher } from 'components/atoms';
+import { Box, Heading, RouterLink, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Trans, useTranslation } from 'react-i18next';
 import { ROUTES } from 'routes/paths';
-import { Column } from 'simple-flexbox';
 
 import { SignupForm } from './SignupForm';
 
@@ -17,7 +16,7 @@ export const Signup = () => {
       <Spacer $space="0.5" />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >
@@ -31,7 +30,7 @@ export const Signup = () => {
       <Spacer />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >
@@ -52,13 +51,17 @@ export const Signup = () => {
 
       <Spacer $space="1.5" />
 
-      <Column alignItems="center">
+      <Box
+        $flex
+        $flexDirection="column"
+        $alignItems="center"
+      >
         <LangSelector />
 
         <Spacer />
 
         <ThemeSwitcher />
-      </Column>
+      </Box>
     </FullscreenClear>
   );
 };

@@ -26,7 +26,7 @@ export const NavListItem: FC<NavListItemProps> = ({ isActive, title, icon: IconC
 
       <Text
         $fontColor={fontColor}
-        fontWeight={isActive ? '700' : '500'}
+        $fontWeight={isActive ? '700' : '500'}
       >
         {t(title)}
       </Text>

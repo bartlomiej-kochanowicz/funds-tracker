@@ -1,9 +1,8 @@
-import { Spacer } from 'components/atoms';
+import { Box, Spacer } from 'components/atoms';
 import { Profile } from 'components/molecules';
 import { useColorThemeContext } from 'contexts/ColorThemeContext';
 import { debounce } from 'helpers/debounce';
 import { FC, Fragment, lazy, useCallback, useEffect, useState } from 'react';
-import { Column } from 'simple-flexbox';
 
 import { SettingsDropdown } from './components/SettingsDropdown';
 import { Wrapper } from './MobileTopbar.styles';
@@ -52,18 +51,22 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
 
   return (
     <Wrapper
-      justifyContent={isDashboard ? 'center' : 'space-between'}
-      alignItems="center"
-      hasBorder={visible}
+      $flex
+      $justifyContent={isDashboard ? 'center' : 'space-between'}
+      $alignItems="center"
+      $hasBorder={visible}
     >
       {isDashboard && (
-        <Column>
+        <Box
+          $flex
+          $flexDirection="column"
+        >
           <Spacer $space="0.25" />
           {isDark && <LogoNameHorizontal height="18px" />}
 
           {!isDark && <LogoNameHorizontalDark height="18px" />}
           <Spacer $space="0.25" />
-        </Column>
+        </Box>
       )}
 
       {!isDashboard && (

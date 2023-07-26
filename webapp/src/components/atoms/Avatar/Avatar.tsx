@@ -12,13 +12,10 @@ export const Avatar = ({ name }: AvatarProps) => {
   const initials = useMemo(() => new Initials(name), [name]);
 
   return (
-    <Circle
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Circle>
       <Text
         $fontColor="white"
-        fontSize="1.25"
+        $fontSize="1.25"
       >
         {initials.getInitials()}
       </Text>

@@ -1,6 +1,5 @@
-import { Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
+import { Box, Button, Icon, Spacer, Spreader, Text } from 'components/atoms';
 import { FaPlus } from 'react-icons/fa';
-import { Column } from 'simple-flexbox';
 
 interface EmptyListProps {
   handleAppend: () => void;
@@ -11,10 +10,14 @@ interface EmptyListProps {
 }
 
 export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
-  <Column alignItems="center">
+  <Box
+    $flex
+    $flexDirection="column"
+    $alignItems="center"
+  >
     <Text
       $textAlign="center"
-      fontWeight="700"
+      $fontWeight="700"
     >
       {i18n.title}
     </Text>
@@ -31,7 +34,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
 
       <Icon icon={FaPlus} />
     </Button>
-  </Column>
+  </Box>
 );
 
 EmptyList.displayName = 'CreateCashAccountsEmptyList';

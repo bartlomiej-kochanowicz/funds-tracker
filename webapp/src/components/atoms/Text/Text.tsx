@@ -9,8 +9,8 @@ import {
 } from 'styles/mixins';
 
 type TextProps = {
-  display?: 'inline' | 'inline-block' | 'block';
-  width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
+  $display?: 'inline' | 'inline-block' | 'block';
+  $width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
 } & FontableProps &
   MarginMixinProps &
   PaddingMixinProps;
@@ -20,12 +20,12 @@ export const Text = styled.span<TextProps>`
   ${marginMixin}
   ${paddingMixin}
 
-  ${({ display = 'inline', width }) => css`
-    display: ${display};
+  ${({ $display = 'inline', $width }) => css`
+    display: ${$display};
 
-    ${width &&
+    ${$width &&
     css`
-      width: ${width};
+      width: ${$width};
     `}
   `}
 `;

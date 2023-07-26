@@ -28,9 +28,7 @@ export const StyledButton = styled.button`
   `}
 `;
 
-export const Handle = styled(motion.div).withConfig({
-  shouldForwardProp: prop => !['animate', 'initial', 'transition'].includes(prop),
-})`
+export const Handle = styled(motion.div)`
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -40,15 +38,13 @@ export const Handle = styled(motion.div).withConfig({
   `}
 `;
 
-export const StyledBiMoon = styled(BiMoon).withConfig({
-  shouldForwardProp: prop => !['isVisible'].includes(prop),
-})<{ isVisible: boolean }>`
+export const StyledBiMoon = styled(BiMoon)<{ $isVisible: boolean }>`
   position: absolute;
   top: calc(50% - 12px);
   font-size: 24px;
   left: 6px;
   color: ${({ theme }) => theme.colors.black};
-  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
 `;
 
 export const StyledBiSun = styled(BiSun).withConfig({

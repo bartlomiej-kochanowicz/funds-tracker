@@ -18,7 +18,7 @@ describe('Atoms/Spreader tests', () => {
     const { getByTestId } = render(
       <Spreader
         data-testid="spreader"
-        spread={spread}
+        $spread={spread}
       />,
     );
 

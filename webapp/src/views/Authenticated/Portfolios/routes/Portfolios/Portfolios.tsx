@@ -53,7 +53,7 @@ export const Portfolios = () => {
       <Heading>{t('navigation.portfolios')}</Heading>
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
       >
         {t('page.portfolios.title.description')}

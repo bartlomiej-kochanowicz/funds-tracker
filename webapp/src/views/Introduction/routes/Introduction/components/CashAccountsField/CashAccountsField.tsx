@@ -1,5 +1,5 @@
 import { Currency, IntroductionCreateCashAccountsInput } from '__generated__/graphql';
-import { Button, Icon, Input, Select, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Select, Spreader } from 'components/atoms';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useSelect } from 'hooks/useSelect';
 import { useMemo } from 'react';
@@ -11,7 +11,6 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from 'react-icons/fa';
-import { Row } from 'simple-flexbox';
 
 interface CashAccountsFieldProps {
   register: UseFormRegister<IntroductionCreateCashAccountsInput>;
@@ -52,7 +51,7 @@ export const CashAccountsField = ({
   };
 
   return (
-    <Row>
+    <Box $flex>
       <Input
         placeholder={t('common.input.name.placeholder')}
         flexGrow={1}
@@ -78,6 +77,6 @@ export const CashAccountsField = ({
       >
         <Icon icon={FaTrash} />
       </Button>
-    </Row>
+    </Box>
   );
 };

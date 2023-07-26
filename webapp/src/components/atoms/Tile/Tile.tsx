@@ -1,8 +1,8 @@
 import { RouterLink } from 'components/atoms/RouterLink';
 import { Text } from 'components/atoms/Text';
 import { FC, ReactNode } from 'react';
-import { Column } from 'simple-flexbox';
 
+import { Box } from '../Box';
 import { Spacer } from '../Spacer';
 import { Wrapper } from './Tile.styles';
 
@@ -14,22 +14,25 @@ interface TilelProps {
 
 export const Tile: FC<TilelProps> = ({ children, title, to }) => {
   const content = (
-    <Column>
+    <Box
+      $flex
+      $flexDirection="column"
+    >
       <Wrapper>{children}</Wrapper>
 
       <Spacer $space="0.25" />
 
       {title && (
         <Text
-          maxWidth="55px"
-          fontSize="0.75"
-          fontWeight="700"
+          $maxWidth="55px"
+          $fontSize="0.75"
+          $fontWeight="700"
           $textAlign="center"
         >
           {title}
         </Text>
       )}
-    </Column>
+    </Box>
   );
 
   if (to) {

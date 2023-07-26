@@ -1,9 +1,8 @@
-import { Heading, RouterLink, Spacer, Text, ThemeSwitcher } from 'components/atoms';
+import { Box, Heading, RouterLink, Spacer, Text, ThemeSwitcher } from 'components/atoms';
 import { LangSelector } from 'components/molecules';
 import { FullscreenClear } from 'layouts/FullscreenClear';
 import { Trans, useTranslation } from 'react-i18next';
 import { ROUTES } from 'routes/paths';
-import { Column, Row } from 'simple-flexbox';
 
 import { SigninForm } from './SigninForm';
 
@@ -17,7 +16,7 @@ export const Signin = () => {
       <Spacer $space="0.5" />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >
@@ -31,7 +30,7 @@ export const Signin = () => {
       <Spacer />
 
       <Text
-        fontSize="0.875"
+        $fontSize="0.875"
         $fontColor="gray400"
         $textAlign="center"
       >
@@ -50,27 +49,34 @@ export const Signin = () => {
 
       <Spacer $space="0.5" />
 
-      <Row justifyContent="center">
+      <Box
+        $flex
+        $justifyContent="center"
+      >
         <RouterLink
           to={ROUTES.RESET_PASSWORD}
           $fontColor="blue"
-          fontSize="0.875"
+          $fontSize="0.875"
         >
           {t('page.signin.forgot_password')}
         </RouterLink>
-      </Row>
+      </Box>
 
       <Spacer $space="1.5" />
 
       <Spacer $space="1.5" />
 
-      <Column alignItems="center">
+      <Box
+        $flex
+        $flexDirection="column"
+        $alignItems="center"
+      >
         <LangSelector />
 
         <Spacer />
 
         <ThemeSwitcher />
-      </Column>
+      </Box>
     </FullscreenClear>
   );
 };

@@ -6,7 +6,7 @@ import {
 } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Heading, Icon, Loader, Spacer, Spreader, Text } from 'components/atoms';
+import { Box, Button, Heading, Icon, Loader, Spacer, Spreader, Text } from 'components/atoms';
 import { MAX_CASH_ACCOUNTS } from 'constants/common';
 import { useUserContext } from 'contexts/UserContext';
 import { motion } from 'framer-motion';
@@ -15,7 +15,6 @@ import { showErrorToast } from 'helpers/showToast';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { Column } from 'simple-flexbox';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
 
 import { CashAccountsField } from '../CashAccountsField';
@@ -90,13 +89,16 @@ export const CreateCashAccountsForm = () => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
     >
-      <Column>
+      <Box
+        $flex
+        $flexDirection="column"
+      >
         <Heading $textAlign="center">{t('add.cash.accounts.title')}</Heading>
 
         <Spacer $space="0.5" />
 
         <Text
-          fontSize="0.875"
+          $fontSize="0.875"
           $fontColor="gray400"
           $textAlign="center"
         >
@@ -105,10 +107,10 @@ export const CreateCashAccountsForm = () => {
             components={{
               bold: (
                 <Text
-                  fontSize="0.875"
+                  $fontSize="0.875"
                   $fontColor="gray400"
                   $textAlign="center"
-                  fontWeight="700"
+                  $fontWeight="700"
                 />
               ),
             }}
@@ -121,7 +123,10 @@ export const CreateCashAccountsForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
-          <Column>
+          <Box
+            $flex
+            $flexDirection="column"
+          >
             {fields.length === 0 ? (
               <EmptyList
                 handleAppend={handleAppend}
@@ -170,9 +175,9 @@ export const CreateCashAccountsForm = () => {
             >
               {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
             </Button>
-          </Column>
+          </Box>
         </form>
-      </Column>
+      </Box>
     </motion.div>
   );
 };

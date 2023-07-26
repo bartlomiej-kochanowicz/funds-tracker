@@ -1,11 +1,10 @@
 import { CreateCashAccountMutation } from '__generated__/graphql';
 import NiceModal from '@ebay/nice-modal-react';
-import { Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
+import { Box, Button, Heading, Icon, Spacer, Spreader } from 'components/atoms';
 import { MODAL_CREATE_CASH_ACCOUNT } from 'modals/CreateCashAccount';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
-import { Column } from 'simple-flexbox';
 
 interface CreateCashAccountProps {
   callback: (data: CreateCashAccountMutation) => void;
@@ -17,7 +16,11 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
   const handleOpenModal = () => NiceModal.show(MODAL_CREATE_CASH_ACCOUNT, { callback });
 
   return (
-    <Column alignItems="center">
+    <Box
+      $flex
+      $flexDirection="column"
+      $alignItems="center"
+    >
       <Heading
         $textAlign="center"
         level="h2"
@@ -37,6 +40,6 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
 
         <Icon icon={FaPlus} />
       </Button>
-    </Column>
+    </Box>
   );
 };

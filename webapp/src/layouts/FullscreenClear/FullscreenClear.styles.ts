@@ -1,7 +1,12 @@
-import { Column } from 'simple-flexbox';
+import { Box } from 'components/atoms';
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled(Column)`
+export const Wrapper = styled(Box).attrs({
+  $flex: true,
+  $flexDirection: 'column',
+  $alignItems: 'center',
+  $justifyContent: 'center',
+})`
   width: 100%;
   height: 100%;
   height: var(--doc-height);
@@ -12,6 +17,10 @@ export const Wrapper = styled(Column)`
   `}
 `;
 
-export const InnerWrapper = styled(Column)`
+export const InnerWrapper = styled(Box).attrs({
+  $flex: true,
+  $flexDirection: 'column',
+  $alignItems: 'stretch',
+})`
   width: 350px;
 `;

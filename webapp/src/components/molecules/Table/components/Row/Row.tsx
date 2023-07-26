@@ -19,7 +19,7 @@ export const Row = <Item extends ItemBase>({ data, columns }: RowProps<Item>) =>
             >
               <Text
                 $fontColor="gray400"
-                maxWidth={column.width}
+                $maxWidth={column.width}
               >
                 {data[(column as ColumnAccessor<Item>).accessor] as ReactNode}
               </Text>
