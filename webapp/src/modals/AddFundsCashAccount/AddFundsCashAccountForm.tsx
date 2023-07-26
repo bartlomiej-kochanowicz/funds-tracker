@@ -115,7 +115,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
           {t('common.cancel')}
         </Button>
 
-        <Spreader spread="0.5" />
+        <Spreader $spread="0.5" />
 
         <Button
           disabled={isSubmitting || !isValid || !isDirty}
@@ -129,7 +129,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
             <Fragment>
               {t('page.cash_accounts.button.add_funds')}
 
-              <Spreader spread="0.25" />
+              <Spreader $spread="0.25" />
 
               <Icon icon={FaPlus} />
             </Fragment>

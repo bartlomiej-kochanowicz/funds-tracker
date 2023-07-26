@@ -77,8 +77,8 @@ export const EnterEmailForm = () => {
     return (
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         {t('page.forgot_password.enter_email.submit.success')}
       </Text>

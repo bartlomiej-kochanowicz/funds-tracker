@@ -58,11 +58,11 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
     >
       {isDashboard && (
         <Column>
-          <Spacer space="0.25" />
+          <Spacer $space="0.25" />
           {isDark && <LogoNameHorizontal height="18px" />}
 
           {!isDark && <LogoNameHorizontalDark height="18px" />}
-          <Spacer space="0.25" />
+          <Spacer $space="0.25" />
         </Column>
       )}
 

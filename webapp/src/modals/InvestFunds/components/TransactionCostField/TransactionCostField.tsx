@@ -75,7 +75,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
           {...currencyInputProps}
         />
 
-        <Spreader spread="0.25" />
+        <Spreader $spread="0.25" />
 
         <Button
           color="secondary"

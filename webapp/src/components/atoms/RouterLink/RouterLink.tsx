@@ -17,9 +17,7 @@ type RouterLinkProps = {
   MarginMixinProps &
   PaddingMixinProps;
 
-export const RouterLink = styled(ReactRouterLink).withConfig({
-  shouldForwardProp: prop => !['fontColor', 'maxWidth', 'textDecoration'].includes(prop),
-})<RouterLinkProps>`
+export const RouterLink = styled(ReactRouterLink)<RouterLinkProps>`
   ${fontable}
   ${marginMixin}
   ${paddingMixin}

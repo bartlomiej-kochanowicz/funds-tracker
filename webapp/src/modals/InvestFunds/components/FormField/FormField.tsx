@@ -26,7 +26,7 @@ export const FormField: FC<IFormFieldProps> = ({ children, label, htmlFor }) => 
         {label}:
       </Text>
 
-      <Spreader spread="0.25" />
+      <Spreader $spread="0.25" />
 
       {children}
     </Box>

@@ -11,21 +11,21 @@ export const NotSupportedYet: FC = () => {
       flexDirection="column"
       alignItems="center"
     >
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Heading
         level="h2"
-        fontColor="gray300"
+        $fontColor="gray300"
       >
         {t('modal.InvestFunds.form.not.supported.yet')}
       </Heading>
 
-      <Spacer space="0.25" />
+      <Spacer $space="0.25" />
 
       <Heading
         level="h3"
-        fontColor="gray300"
-        textAlign="center"
+        $fontColor="gray300"
+        $textAlign="center"
       >
         <Trans
           i18nKey="modal.InvestFunds.form.not.supported.yet.description"
@@ -33,7 +33,7 @@ export const NotSupportedYet: FC = () => {
             support: (
               <Link
                 href="mailto:support@funds-tracker.com"
-                fontColor="blue"
+                $fontColor="blue"
               />
             ),
           }}

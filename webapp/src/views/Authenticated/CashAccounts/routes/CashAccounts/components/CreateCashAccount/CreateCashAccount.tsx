@@ -19,13 +19,13 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
   return (
     <Column alignItems="center">
       <Heading
-        textAlign="center"
+        $textAlign="center"
         level="h2"
       >
         {t('page.cash_accounts.need.more')}
       </Heading>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Button
         onClick={handleOpenModal}
@@ -33,7 +33,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
       >
         {t('page.cash_accounts.need.more.button')}
 
-        <Spreader spread="0.25" />
+        <Spreader $spread="0.25" />
 
         <Icon icon={FaPlus} />
       </Button>

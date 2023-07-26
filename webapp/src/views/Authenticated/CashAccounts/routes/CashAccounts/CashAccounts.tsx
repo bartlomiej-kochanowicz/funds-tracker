@@ -76,7 +76,7 @@ export const CashAccounts = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
+        $fontColor="gray400"
       >
         {t('page.cash_accounts.title.description')}
       </Text>

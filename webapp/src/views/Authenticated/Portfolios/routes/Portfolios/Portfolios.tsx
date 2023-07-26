@@ -54,7 +54,7 @@ export const Portfolios = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
+        $fontColor="gray400"
       >
         {t('page.portfolios.title.description')}
       </Text>

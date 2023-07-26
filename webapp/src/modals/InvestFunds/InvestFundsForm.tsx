@@ -83,37 +83,37 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
           <Text>{formatCurrency(balance, currency)}</Text>
         </FormField>
 
-        <Spacer space="0.25" />
+        <Spacer $space="0.25" />
 
         <SelectInstrumentType />
 
         {shouldRenderMarketInstrumentFields && (
           <Fragment>
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             <SearchInstrumentField />
 
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             <SelectPortfolioField />
 
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             <DateField />
 
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             <QuantityField />
 
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             <PriceField activeCurrency={activeCurrency as Currency} />
 
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             <ComissionField activeCurrency={activeCurrency as Currency} />
 
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             <TransactionCostField activeCurrency={activeCurrency as Currency} />
           </Fragment>
@@ -133,7 +133,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
             {t('common.cancel')}
           </Button>
 
-          <Spreader spread="0.5" />
+          <Spreader $spread="0.5" />
 
           <Button
             type="submit"

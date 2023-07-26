@@ -84,7 +84,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
               </CloseButton>
             </Row>
 
-            <Spacer space="0.5" />
+            <Spacer $space="0.5" />
 
             <ErrorBoundary FallbackComponent={ErrorContent}>{children}</ErrorBoundary>
           </ModalComponent>

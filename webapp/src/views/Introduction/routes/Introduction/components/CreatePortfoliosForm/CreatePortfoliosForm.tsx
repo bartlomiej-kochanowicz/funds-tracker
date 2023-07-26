@@ -86,14 +86,14 @@ export const CreatePortfoliosForm = () => {
       exit={{ opacity: 0, scale: 0 }}
     >
       <Column>
-        <Heading textAlign="center">{t('add.portfolios.title')}</Heading>
+        <Heading $textAlign="center">{t('add.portfolios.title')}</Heading>
 
-        <Spacer space="0.5" />
+        <Spacer $space="0.5" />
 
         <Text
           fontSize="0.875"
-          fontColor="gray400"
-          textAlign="center"
+          $fontColor="gray400"
+          $textAlign="center"
         >
           <Trans
             i18nKey="add.portfolios.description"
@@ -101,8 +101,8 @@ export const CreatePortfoliosForm = () => {
               bold: (
                 <Text
                   fontSize="0.875"
-                  fontColor="gray400"
-                  textAlign="center"
+                  $fontColor="gray400"
+                  $textAlign="center"
                   fontWeight="700"
                 />
               ),
@@ -110,7 +110,7 @@ export const CreatePortfoliosForm = () => {
           />
         </Text>
 
-        <Spacer space="1.5" />
+        <Spacer $space="1.5" />
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -139,7 +139,7 @@ export const CreatePortfoliosForm = () => {
               ))}
             </FieldsWrapper>
 
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             {fields.length > 0 && fields.length < MAX_PORTFOLIOS ? (
               <Button
@@ -148,13 +148,13 @@ export const CreatePortfoliosForm = () => {
               >
                 {t('add.portfolios.button.add.one.more')}
 
-                <Spreader spread="0.25" />
+                <Spreader $spread="0.25" />
 
                 <Icon icon={FaPlus} />
               </Button>
             ) : null}
 
-            <Spacer space="1.5" />
+            <Spacer $space="1.5" />
 
             <Button
               size="large"

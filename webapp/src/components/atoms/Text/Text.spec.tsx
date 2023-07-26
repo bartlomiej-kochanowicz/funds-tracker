@@ -14,7 +14,7 @@ describe('Atoms/Text fontable tests', () => {
     const { getByText } = render(
       <Text
         fontWeight="500"
-        fontColor="blue"
+        $fontColor="blue"
         fontSize="2.5"
         lineHeight="1.5rem"
       >

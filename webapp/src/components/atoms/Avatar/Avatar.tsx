@@ -17,7 +17,7 @@ export const Avatar = ({ name }: AvatarProps) => {
       alignItems="center"
     >
       <Text
-        fontColor="white"
+        $fontColor="white"
         fontSize="1.25"
       >
         {initials.getInitials()}

@@ -33,7 +33,7 @@ interface SelectProps<ValueType> {
   onChange?: (value: Item<ValueType>['value']) => void;
   onBlur?: (() => void) | ChangeHandler;
   customLabel?: (value: Item<ValueType>) => ReactNode;
-  error?: string;
+  $error?: string;
   width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   flexGrow?: number;
   triggerOffset?: number;
@@ -48,7 +48,7 @@ const SelectInner = <ValueType,>(
     onChange,
     onBlur,
     customLabel,
-    error,
+    $error,
     width = 'auto',
     flexGrow,
     triggerOffset = 5,
@@ -112,13 +112,13 @@ const SelectInner = <ValueType,>(
       >
         <StyledButton
           onBlur={onBlur}
-          error={Boolean(error)}
+          $error={Boolean($error)}
           {...rest}
           {...buttonProps}
           ref={mergeRefs(buttonRef, triggerProps.ref, buttonProps.ref)}
           type="button"
         >
-          <StyledContent isSelected={Boolean(selectedItem)}>
+          <StyledContent $isSelected={Boolean(selectedItem)}>
             {/* Render default label when customLabel is not provided */}
             {!customLabel && selectedItem && selectedItem.label}
 
@@ -129,12 +129,12 @@ const SelectInner = <ValueType,>(
             {!selectedItem && placeholder}
           </StyledContent>
 
-          <Spreader spread="0.5" />
+          <Spreader $spread="0.5" />
 
           <Icon icon={isOpen ? FaChevronUp : FaChevronDown} />
         </StyledButton>
 
-        {error && <Error role="alert">{error}</Error>}
+        {$error && <Error role="alert">{$error}</Error>}
       </Wrapper>
 
       {renderLayer(
@@ -150,7 +150,7 @@ const SelectInner = <ValueType,>(
           >
             {menuItems.map(({ value, label, onClick, ...itemRest }, index) => (
               <Menu.Item
-                isSelected={selectedItem?.value === value}
+                $isSelected={selectedItem?.value === value}
                 key={value as Key}
                 {...itemRest}
                 onClick={() => {

@@ -12,19 +12,19 @@ export const Signin = () => {
 
   return (
     <FullscreenClear>
-      <Heading textAlign="center">{t('common.sign_in')}</Heading>
+      <Heading $textAlign="center">{t('common.sign_in')}</Heading>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         {t('page.signin.description')}
       </Text>
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
       <SigninForm />
 
@@ -32,8 +32,8 @@ export const Signin = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         <Trans
           i18nKey="page.signin.dont_have_account"
@@ -41,28 +41,28 @@ export const Signin = () => {
             signup: (
               <RouterLink
                 to={ROUTES.SIGNUP.SIGNUP}
-                fontColor="blue"
+                $fontColor="blue"
               />
             ),
           }}
         />
       </Text>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Row justifyContent="center">
         <RouterLink
           to={ROUTES.RESET_PASSWORD}
-          fontColor="blue"
+          $fontColor="blue"
           fontSize="0.875"
         >
           {t('page.signin.forgot_password')}
         </RouterLink>
       </Row>
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
       <Column alignItems="center">
         <LangSelector />

@@ -10,19 +10,19 @@ export const EnterEmail = () => {
 
   return (
     <Fragment>
-      <Heading textAlign="center">{t('page.signin.forgot_password')}</Heading>
+      <Heading $textAlign="center">{t('page.signin.forgot_password')}</Heading>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         {t('page.forgot_password.enter_email.description')}
       </Text>
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
       <EnterEmailForm />
 
@@ -30,8 +30,8 @@ export const EnterEmail = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         <Trans
           i18nKey="page.signup.already_have_account"
@@ -39,7 +39,7 @@ export const EnterEmail = () => {
             signin: (
               <RouterLink
                 to={ROUTES.SIGNIN}
-                fontColor="blue"
+                $fontColor="blue"
               />
             ),
           }}

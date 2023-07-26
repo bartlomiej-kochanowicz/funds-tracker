@@ -25,7 +25,7 @@ export const CreateCashAccount = NiceModal.create<CreateCashAccountProps>(({ cal
     >
       <Text
         fontSize="0.875"
-        fontColor="gray400"
+        $fontColor="gray400"
         display="block"
         maxWidth={isPhone ? '300px' : '100%'}
         breakLine
@@ -33,7 +33,7 @@ export const CreateCashAccount = NiceModal.create<CreateCashAccountProps>(({ cal
         {t('modal.CreateCashAccount.description')}
       </Text>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <CreateCashAccountForm callback={callback} />
     </Modal>

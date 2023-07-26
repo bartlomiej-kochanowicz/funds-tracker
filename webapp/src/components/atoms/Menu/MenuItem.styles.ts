@@ -4,7 +4,7 @@ import styled, { css, DefaultTheme } from 'styled-components';
 import { StyleFunction } from 'styled-components/dist/types';
 
 interface MixinProps {
-  padding: keyof DefaultTheme['padding'];
+  $padding: keyof DefaultTheme['padding'];
   maxWidth?: `${string}px` | `${string}%`;
 }
 
@@ -18,9 +18,9 @@ const mixin = css<MixinProps>`
   text-align: left;
   outline: none;
 
-  ${({ theme, padding, maxWidth }) => css`
+  ${({ theme, $padding, maxWidth }) => css`
     color: ${theme.colors.text};
-    padding: ${theme.padding[padding]};
+    padding: ${theme.padding[$padding]};
 
     &:focus-visible,
     &:focus {
@@ -36,13 +36,13 @@ const mixin = css<MixinProps>`
 
 export const StyledButton = styled.button<
   {
-    isSelected: boolean;
+    $isSelected: boolean;
   } & MixinProps
 >`
   ${mixin as unknown as StyleFunction<object>}
 
-  ${({ theme, isSelected }) => css`
-    ${isSelected &&
+  ${({ theme, $isSelected }) => css`
+    ${$isSelected &&
     css`
       font-weight: ${theme.font.weight[700]};
     `}

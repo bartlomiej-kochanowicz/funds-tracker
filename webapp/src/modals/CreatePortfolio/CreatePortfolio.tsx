@@ -25,7 +25,7 @@ export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callbac
     >
       <Text
         fontSize="0.875"
-        fontColor="gray400"
+        $fontColor="gray400"
         display="block"
         maxWidth={isPhone ? '300px' : '100%'}
         breakLine
@@ -33,7 +33,7 @@ export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callbac
         {t('modal.CreatePortfolio.description')}
       </Text>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <CreatePortfolioForm callback={callback} />
     </Modal>

@@ -26,6 +26,7 @@ export const Authenticated = () => {
     ...SettingsRoutes,
     ...HubRoutes,
   ]);
+
   const isDesktop = useBreakpoint('desktop', 'min');
 
   const location = useLocation();

@@ -79,7 +79,7 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
           />
         )}
 
-        {isPhone ? <Spacer space="0.1" /> : <Spreader spread="0.25" />}
+        {isPhone ? <Spacer $space="0.1" /> : <Spreader $spread="0.25" />}
 
         <RadioGroup
           defaultValue={defaultValues.comission_type}

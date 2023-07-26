@@ -77,14 +77,14 @@ export const DefaultCurrency = () => {
       exit={{ opacity: 0, scale: 0 }}
     >
       <Column>
-        <Heading textAlign="center">{t('page.introduction.default.currency.title')}</Heading>
+        <Heading $textAlign="center">{t('page.introduction.default.currency.title')}</Heading>
 
-        <Spacer space="0.5" />
+        <Spacer $space="0.5" />
 
         <Text
           fontSize="0.875"
-          fontColor="gray400"
-          textAlign="center"
+          $fontColor="gray400"
+          $textAlign="center"
         >
           <Trans
             i18nKey="page.introduction.default.currency.description"
@@ -92,8 +92,8 @@ export const DefaultCurrency = () => {
               bold: (
                 <Text
                   fontSize="0.875"
-                  fontColor="gray400"
-                  textAlign="center"
+                  $fontColor="gray400"
+                  $textAlign="center"
                   fontWeight="700"
                 />
               ),
@@ -101,7 +101,7 @@ export const DefaultCurrency = () => {
           />
         </Text>
 
-        <Spacer space="1.5" />
+        <Spacer $space="1.5" />
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -109,11 +109,10 @@ export const DefaultCurrency = () => {
         >
           <Select
             items={items}
-            defaultValue={defaultValues.defaultCurrency}
             {...defaultCurrencySelectProps}
           />
 
-          <Spacer space="1.5" />
+          <Spacer $space="1.5" />
 
           <Button
             size="large"

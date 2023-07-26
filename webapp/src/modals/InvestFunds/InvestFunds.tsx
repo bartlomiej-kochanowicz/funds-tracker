@@ -27,7 +27,7 @@ export const InvestFunds = NiceModal.create<InvestFundsProps>(props => {
     >
       <Text
         fontSize="0.875"
-        fontColor="gray400"
+        $fontColor="gray400"
         display="block"
         maxWidth={isPhone ? '300px' : '100%'}
         breakLine
@@ -35,7 +35,7 @@ export const InvestFunds = NiceModal.create<InvestFundsProps>(props => {
         {t('modal.InvestFunds.description')}
       </Text>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <InvestFundsForm {...props} />
     </Modal>

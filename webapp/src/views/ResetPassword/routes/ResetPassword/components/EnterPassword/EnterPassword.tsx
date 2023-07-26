@@ -13,19 +13,19 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
 
   return (
     <Fragment>
-      <Heading textAlign="center">{t('page.forgot_password.enter_password.title')}</Heading>
+      <Heading $textAlign="center">{t('page.forgot_password.enter_password.title')}</Heading>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         {t('page.forgot_password.enter_password.description')}
       </Text>
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
       <EnterPasswordForm token={token} />
     </Fragment>

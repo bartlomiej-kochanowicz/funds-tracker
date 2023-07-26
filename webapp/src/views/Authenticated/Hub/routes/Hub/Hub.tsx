@@ -25,12 +25,12 @@ export const Hub = () => {
     <Wrapper>
       <Heading
         level="h3"
-        fontColor="gray400"
+        $fontColor="gray400"
       >
         {t('navigation.dashboard')}
       </Heading>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Grid>
         {hubNavigation.essentials.map(({ icon, title, to }) => {

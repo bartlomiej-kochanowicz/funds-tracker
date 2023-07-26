@@ -15,9 +15,7 @@ type LinkProps = {
   MarginMixinProps &
   PaddingMixinProps;
 
-export const Link = styled.a.withConfig({
-  shouldForwardProp: prop => !['fontColor'].includes(prop),
-})<LinkProps>`
+export const Link = styled.a<LinkProps>`
   ${fontable}
   ${marginMixin}
   ${paddingMixin}

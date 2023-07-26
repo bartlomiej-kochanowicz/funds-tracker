@@ -60,13 +60,13 @@ export const MobileNavigation = () => {
                     <Column alignItems="center">
                       <Icon size="1.5rem" />
 
-                      <Spacer space="0.25" />
+                      <Spacer $space="0.25" />
 
                       <Title
-                        fontColor={isActive ? 'text' : 'gray400'}
+                        $fontColor={isActive ? 'text' : 'gray400'}
                         fontWeight={isActive ? '700' : '500'}
                         lineHeight="1rem"
-                        textAlign="center"
+                        $textAlign="center"
                         fontSize="0.875"
                       >
                         {t(title)}

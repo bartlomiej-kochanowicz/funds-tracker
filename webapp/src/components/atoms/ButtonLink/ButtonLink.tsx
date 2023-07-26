@@ -14,9 +14,7 @@ type ButtonLinkProps = {
   MarginMixinProps &
   PaddingMixinProps;
 
-export const ButtonLink = styled.button.withConfig({
-  shouldForwardProp: prop => !['fontColor'].includes(prop),
-})<ButtonLinkProps>`
+export const ButtonLink = styled.button<ButtonLinkProps>`
   background: none;
   border: none;
   padding: unset;

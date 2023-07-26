@@ -48,8 +48,8 @@ export const Topbar = () => {
     <StyledRow
       justifyContent={rendreBackButton ? 'space-between' : 'flex-end'}
       alignItems="center"
-      hasBorder={visible}
-      leftPadding={rendreBackButton}
+      $hasBorder={visible}
+      $leftPadding={rendreBackButton}
     >
       {rendreBackButton ? (
         <BackButton onClick={handleBackToPreviousPage}>
@@ -58,7 +58,7 @@ export const Topbar = () => {
             size="1.5"
           />
 
-          <Spreader spread="0.1" />
+          <Spreader $spread="0.1" />
 
           {t('common.back')}
         </BackButton>

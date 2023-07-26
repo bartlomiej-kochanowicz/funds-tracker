@@ -28,7 +28,9 @@ export const StyledButton = styled.button`
   `}
 `;
 
-export const Handle = styled(motion.div)`
+export const Handle = styled(motion.div).withConfig({
+  shouldForwardProp: prop => !['animate', 'initial', 'transition'].includes(prop),
+})`
   width: 24px;
   height: 24px;
   border-radius: 50%;

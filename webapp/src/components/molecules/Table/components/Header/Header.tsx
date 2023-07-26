@@ -16,7 +16,7 @@ export const Header = <Item extends ItemBase>({ columns }: HeaderProps<Item>) =>
         >
           <Text
             fontWeight="700"
-            fontColor="gray300"
+            $fontColor="gray300"
           >
             {header}
           </Text>

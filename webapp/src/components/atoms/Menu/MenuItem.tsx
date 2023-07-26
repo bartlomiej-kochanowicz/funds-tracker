@@ -14,8 +14,8 @@ export interface MenuItemProps {
   children: ReactNode | ((props: ItemChildrenProps) => ReactNode);
   onClick?: () => void;
   to?: string;
-  isSelected?: boolean;
-  padding?: keyof DefaultTheme['padding'];
+  $isSelected?: boolean;
+  $padding?: keyof DefaultTheme['padding'];
   icon?: IconType;
   maxWidth?: `${string}px` | `${string}%`;
 }
@@ -23,14 +23,14 @@ export interface MenuItemProps {
 export const MenuItem: FC<MenuItemProps> = forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   MenuItemProps
->(({ children, onClick, to, isSelected = false, padding = 'medium', icon, ...rest }, ref) => (
+>(({ children, onClick, to, $isSelected = false, $padding = 'medium', icon, ...rest }, ref) => (
   <Fragment>
     {!to && onClick && (
       <StyledButton
         type="button"
         onClick={onClick}
-        isSelected={isSelected}
-        padding={padding}
+        $isSelected={$isSelected}
+        $padding={$padding}
         ref={ref as ForwardedRef<HTMLButtonElement>}
         {...rest}
       >
@@ -38,7 +38,7 @@ export const MenuItem: FC<MenuItemProps> = forwardRef<
           <Fragment>
             <Icon icon={icon} />
 
-            <Spreader spread="0.25" />
+            <Spreader $spread="0.25" />
           </Fragment>
         )}
 
@@ -49,7 +49,7 @@ export const MenuItem: FC<MenuItemProps> = forwardRef<
     {to && !onClick && (
       <StyledLink
         to={to}
-        padding={padding}
+        $padding={$padding}
         ref={ref as ForwardedRef<HTMLAnchorElement>}
         {...rest}
       >
@@ -57,7 +57,7 @@ export const MenuItem: FC<MenuItemProps> = forwardRef<
           <Fragment>
             <Icon icon={icon} />
 
-            <Spreader spread="0.25" />
+            <Spreader $spread="0.25" />
           </Fragment>
         )}
 

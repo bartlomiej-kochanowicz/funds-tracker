@@ -59,7 +59,7 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
         <Column>
           <Text
             fontSize="0.875"
-            fontColor="gray400"
+            $fontColor="gray400"
           >
             <Trans
               i18nKey="modal.ConfirmDeleteCashAccount.description"
@@ -68,8 +68,8 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
                 bold: (
                   <Text
                     fontSize="0.875"
-                    fontColor="gray400"
-                    textAlign="center"
+                    $fontColor="gray400"
+                    $textAlign="center"
                     fontWeight="700"
                   />
                 ),
@@ -88,7 +88,7 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
               {t('common.no')}
             </Button>
 
-            <Spreader spread="0.5" />
+            <Spreader $spread="0.5" />
 
             <Button
               width="50%"

@@ -4,13 +4,13 @@ import { FC } from 'react';
 
 export const NotFound: FC = () => (
   <FullscreenClear>
-    <Heading textAlign="center">404</Heading>
+    <Heading $textAlign="center">404</Heading>
 
-    <Spacer space="0.25" />
+    <Spacer $space="0.25" />
 
     <Text
-      fontColor="gray400"
-      textAlign="center"
+      $fontColor="gray400"
+      $textAlign="center"
     >
       Page not found
     </Text>

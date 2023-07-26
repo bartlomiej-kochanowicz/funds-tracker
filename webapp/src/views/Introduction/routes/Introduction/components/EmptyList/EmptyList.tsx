@@ -13,13 +13,13 @@ interface EmptyListProps {
 export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
   <Column alignItems="center">
     <Text
-      textAlign="center"
+      $textAlign="center"
       fontWeight="700"
     >
       {i18n.title}
     </Text>
 
-    <Spacer space="0.25" />
+    <Spacer $space="0.25" />
 
     <Button
       color="secondary"
@@ -27,7 +27,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
     >
       {i18n.button}
 
-      <Spreader spread="0.25" />
+      <Spreader $spread="0.25" />
 
       <Icon icon={FaPlus} />
     </Button>

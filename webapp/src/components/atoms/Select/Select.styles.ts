@@ -3,7 +3,7 @@ import { HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
 
 export const StyledButton = styled.button<
-  HTMLProps<Omit<HTMLButtonElement, 'error'>> & { error: boolean }
+  HTMLProps<Omit<HTMLButtonElement, 'error'>> & { $error: boolean }
 >`
   display: flex;
   justify-content: space-between;
@@ -12,23 +12,23 @@ export const StyledButton = styled.button<
   width: 100%;
   min-height: 44px;
 
-  ${({ theme, error }) => css`
+  ${({ theme, $error }) => css`
     border-radius: ${theme.radius['0.7']};
     border: none;
     background-color: ${theme.colors.gray100};
     padding: ${theme.padding.medium};
-    color: ${theme.colors[error ? 'error' : 'text']};
+    color: ${theme.colors[$error ? 'error' : 'text']};
     font-weight: ${theme.font.weight[500]};
-    border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
+    border: 2px solid ${theme.colors[$error ? 'error' : 'gray300']};
 
     &:focus-visible {
-      outline: 2px solid ${theme.colors[error ? 'error' : 'blue']};
+      outline: 2px solid ${theme.colors[$error ? 'error' : 'blue']};
     }
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};
-      color: ${theme.colors[error ? 'error' : 'blue']};
-      border: 2px solid ${theme.colors[error ? 'error' : 'blue']};
+      color: ${theme.colors[$error ? 'error' : 'blue']};
+      border: 2px solid ${theme.colors[$error ? 'error' : 'blue']};
       outline-style: solid;
       outline-width: 2px;
       outline-offset: -2px;
@@ -41,9 +41,9 @@ export const StyledButton = styled.button<
 `;
 
 export const StyledContent = styled.div<{
-  isSelected: boolean;
+  $isSelected: boolean;
 }>`
-  color: ${({ theme, isSelected }) => (isSelected ? 'inline' : theme.colors.gray300)};
+  color: ${({ theme, $isSelected }) => ($isSelected ? 'inline' : theme.colors.gray300)};
 `;
 
 export const Wrapper = styled.div.withConfig({

@@ -51,7 +51,7 @@ export const Sidebar = () => {
           )}
         </Suspense>
 
-        <Spacer space="1.5" />
+        <Spacer $space="1.5" />
 
         <Spacer />
 

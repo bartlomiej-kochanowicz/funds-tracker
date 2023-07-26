@@ -64,14 +64,14 @@ export const Confirm = () => {
         />
       </Suspense>
 
-      <Heading textAlign="center">{t('common.sign_up_confirm')}</Heading>
+      <Heading $textAlign="center">{t('common.sign_up_confirm')}</Heading>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         <Trans
           i18nKey="page.confirm.description"
@@ -79,8 +79,8 @@ export const Confirm = () => {
             bold: (
               <Text
                 fontSize="0.875"
-                fontColor="gray400"
-                textAlign="center"
+                $fontColor="gray400"
+                $textAlign="center"
                 fontWeight="700"
               />
             ),
@@ -91,7 +91,7 @@ export const Confirm = () => {
         />
       </Text>
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
       <ConfirmForm email={email} />
 
@@ -99,8 +99,8 @@ export const Confirm = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         <Trans
           i18nKey="page.confirm.support"
@@ -108,13 +108,13 @@ export const Confirm = () => {
             support: (
               <Link
                 href="mailto:support@funds-tracker.com"
-                fontColor="blue"
+                $fontColor="blue"
               />
             ),
             code: (
               <ButtonLink
                 onClick={handleResendCode}
-                fontColor="blue"
+                $fontColor="blue"
                 data-testid="resend-code-button"
               />
             ),
@@ -122,9 +122,9 @@ export const Confirm = () => {
         />
       </Text>
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
       <Column alignItems="center">
         <LangSelector />

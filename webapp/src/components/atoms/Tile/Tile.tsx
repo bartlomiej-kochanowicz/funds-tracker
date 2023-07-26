@@ -17,14 +17,14 @@ export const Tile: FC<TilelProps> = ({ children, title, to }) => {
     <Column>
       <Wrapper>{children}</Wrapper>
 
-      <Spacer space="0.25" />
+      <Spacer $space="0.25" />
 
       {title && (
         <Text
           maxWidth="55px"
           fontSize="0.75"
           fontWeight="700"
-          textAlign="center"
+          $textAlign="center"
         >
           {title}
         </Text>

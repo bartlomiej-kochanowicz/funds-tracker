@@ -54,7 +54,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
             <Fragment>
               <Avatar name={user.name} />
 
-              <Spreader spread="0.25" />
+              <Spreader $spread="0.25" />
 
               <Text
                 fontWeight="700"
@@ -67,7 +67,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
           {!withName && <Avatar name={user.name} />}
 
-          <Spreader spread="0.5" />
+          <Spreader $spread="0.5" />
 
           <Icon
             icon={isOpen ? FaChevronUp : FaChevronDown}

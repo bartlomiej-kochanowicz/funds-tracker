@@ -100,13 +100,12 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
           {...register('name')}
         />
 
-        <Spreader spread="0.25" />
+        <Spreader $spread="0.25" />
 
         <Select
           width="130px"
           items={items}
           customLabel={customLabel}
-          defaultValue={user.defaultCurrency}
           placement="bottom-end"
           {...currencySelectProps}
         />
@@ -124,7 +123,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
           {t('common.cancel')}
         </Button>
 
-        <Spreader spread="0.5" />
+        <Spreader $spread="0.5" />
 
         <Button
           disabled={isSubmitting || !isValid || !isDirty}
@@ -138,7 +137,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
             <Fragment>
               {t('add.cash.accounts.button.add')}
 
-              <Spreader spread="0.25" />
+              <Spreader $spread="0.25" />
 
               <Icon icon={FaPlus} />
             </Fragment>

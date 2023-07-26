@@ -91,14 +91,14 @@ export const CreateCashAccountsForm = () => {
       exit={{ opacity: 0, scale: 0 }}
     >
       <Column>
-        <Heading textAlign="center">{t('add.cash.accounts.title')}</Heading>
+        <Heading $textAlign="center">{t('add.cash.accounts.title')}</Heading>
 
-        <Spacer space="0.5" />
+        <Spacer $space="0.5" />
 
         <Text
           fontSize="0.875"
-          fontColor="gray400"
-          textAlign="center"
+          $fontColor="gray400"
+          $textAlign="center"
         >
           <Trans
             i18nKey="add.cash.accounts.description"
@@ -106,8 +106,8 @@ export const CreateCashAccountsForm = () => {
               bold: (
                 <Text
                   fontSize="0.875"
-                  fontColor="gray400"
-                  textAlign="center"
+                  $fontColor="gray400"
+                  $textAlign="center"
                   fontWeight="700"
                 />
               ),
@@ -115,7 +115,7 @@ export const CreateCashAccountsForm = () => {
           />
         </Text>
 
-        <Spacer space="1.5" />
+        <Spacer $space="1.5" />
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -145,7 +145,7 @@ export const CreateCashAccountsForm = () => {
               ))}
             </FieldsWrapper>
 
-            <Spacer space="0.25" />
+            <Spacer $space="0.25" />
 
             {fields.length > 0 && fields.length < MAX_CASH_ACCOUNTS ? (
               <Button
@@ -154,13 +154,13 @@ export const CreateCashAccountsForm = () => {
               >
                 {t('add.cash.accounts.button.add.one.more')}
 
-                <Spreader spread="0.25" />
+                <Spreader $spread="0.25" />
 
                 <Icon icon={FaPlus} />
               </Button>
             ) : null}
 
-            <Spacer space="1.5" />
+            <Spacer $space="1.5" />
 
             <Button
               size="large"

@@ -56,7 +56,7 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
         <Column>
           <Text
             fontSize="0.875"
-            fontColor="gray400"
+            $fontColor="gray400"
           >
             <Trans
               i18nKey="modal.ConfirmDeletePortfolio.description"
@@ -65,8 +65,8 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
                 bold: (
                   <Text
                     fontSize="0.875"
-                    fontColor="gray400"
-                    textAlign="center"
+                    $fontColor="gray400"
+                    $textAlign="center"
                     fontWeight="700"
                   />
                 ),
@@ -85,7 +85,7 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
               {t('common.no')}
             </Button>
 
-            <Spreader spread="0.5" />
+            <Spreader $spread="0.5" />
 
             <Button
               width="50%"

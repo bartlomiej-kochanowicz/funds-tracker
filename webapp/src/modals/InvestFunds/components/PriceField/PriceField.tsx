@@ -90,7 +90,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
           {...currencyInputProps}
         />
 
-        <Spreader spread="0.25" />
+        <Spreader $spread="0.25" />
 
         <Button
           color="secondary"

@@ -15,11 +15,11 @@ export const resolveProps = <
 
 export type FontableProps = {
   fontWeight?: keyof DefaultTheme['font']['weight'];
-  fontColor?: Colors;
+  $fontColor?: Colors;
   fontSize?: keyof DefaultTheme['font']['size'];
   lineHeight?: `${string}rem`;
   textShadow?: boolean;
-  textAlign?: 'left' | 'center' | 'right' | 'justify';
+  $textAlign?: 'left' | 'center' | 'right' | 'justify';
   maxWidth?: `${string}px` | `${string}%` | 'auto';
   breakLine?: boolean;
 };
@@ -29,8 +29,8 @@ export const fontable = css<FontableProps>`
     font-weight: ${fontWeight};
   `}
 
-  ${({ theme: { colors }, fontColor }) => css`
-    color: ${fontColor ? colors[fontColor] : colors.text};
+  ${({ theme: { colors }, $fontColor }) => css`
+    color: ${$fontColor ? colors[$fontColor] : colors.text};
   `}
 
   ${({
@@ -56,10 +56,10 @@ export const fontable = css<FontableProps>`
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     `}
 
-  ${({ textAlign }) =>
-    textAlign &&
+  ${({ $textAlign }) =>
+    $textAlign &&
     css`
-      text-align: ${textAlign};
+      text-align: ${$textAlign};
     `}
 
   ${({ maxWidth }) =>

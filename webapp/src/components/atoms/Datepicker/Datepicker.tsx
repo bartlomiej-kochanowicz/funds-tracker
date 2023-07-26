@@ -93,7 +93,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
               ))}
             </StyledSelect>
 
-            <Spreader spread="0.25" />
+            <Spreader $spread="0.25" />
 
             <StyledSelect
               value={months[getMonth(date)]}

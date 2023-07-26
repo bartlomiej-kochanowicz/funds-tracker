@@ -89,8 +89,8 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
     return (
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         <Trans
           i18nKey="page.forgot_password.enter_password.submit.success"
@@ -98,7 +98,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
             signin: (
               <RouterLink
                 to={ROUTES.SIGNIN}
-                fontColor="blue"
+                $fontColor="blue"
               />
             ),
           }}

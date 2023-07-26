@@ -19,8 +19,8 @@ export const ErrorContent: FC = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         {t('error.component.description')}
       </Text>

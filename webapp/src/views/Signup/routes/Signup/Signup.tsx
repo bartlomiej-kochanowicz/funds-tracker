@@ -12,19 +12,19 @@ export const Signup = () => {
 
   return (
     <FullscreenClear>
-      <Heading textAlign="center">{t('common.sign_up')}</Heading>
+      <Heading $textAlign="center">{t('common.sign_up')}</Heading>
 
-      <Spacer space="0.5" />
+      <Spacer $space="0.5" />
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         {t('page.signup.description')}
       </Text>
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
       <SignupForm />
 
@@ -32,8 +32,8 @@ export const Signup = () => {
 
       <Text
         fontSize="0.875"
-        fontColor="gray400"
-        textAlign="center"
+        $fontColor="gray400"
+        $textAlign="center"
       >
         <Trans
           i18nKey="page.signup.already_have_account"
@@ -41,16 +41,16 @@ export const Signup = () => {
             signin: (
               <RouterLink
                 to={ROUTES.SIGNIN}
-                fontColor="blue"
+                $fontColor="blue"
               />
             ),
           }}
         />
       </Text>
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
-      <Spacer space="1.5" />
+      <Spacer $space="1.5" />
 
       <Column alignItems="center">
         <LangSelector />
