@@ -67,8 +67,8 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
       >
         <Input
           type="currency"
-          flexGrow={1}
-          width={isPhone ? '100%' : 'auto'}
+          $flexGrow={1}
+          $width={isPhone ? '100%' : 'auto'}
           placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
           currency={activeCurrency}
           error={error?.message}

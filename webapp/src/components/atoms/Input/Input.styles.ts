@@ -2,27 +2,27 @@ import { darken, transparentize } from 'color2k';
 import { Icon } from 'components/atoms/Icon';
 import styled, { css } from 'styled-components';
 
-const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasIcon?: boolean }>`
+export const StyledInput = styled.input<{ $error: boolean; $hasUnit: boolean; $hasIcon: boolean }>`
   border: none;
   width: 100%;
 
-  ${({ theme, error, hasUnit, hasIcon }) => css`
+  ${({ theme, $error, $hasUnit, $hasIcon }) => css`
     border-radius: ${theme.radius['0.7']};
     font-weight: ${theme.font.weight[500]};
     background-color: ${theme.colors.gray100};
-    color: ${theme.colors[error ? 'error' : 'text']};
-    border: 2px solid ${theme.colors[error ? 'error' : 'gray300']};
+    color: ${theme.colors[$error ? 'error' : 'text']};
+    border: 2px solid ${theme.colors[$error ? 'error' : 'gray300']};
     padding: 0.5rem 1.25rem;
-    ${hasUnit && `padding: 0.5rem 2.5rem 0.5rem 1.25rem;`}
-    ${hasIcon && `padding: 0.5rem 1.25rem 0.5rem 2.5rem;`}
+    ${$hasUnit && `padding: 0.5rem 2.5rem 0.5rem 1.25rem;`}
+    ${$hasIcon && `padding: 0.5rem 1.25rem 0.5rem 2.5rem;`}
 
     &:focus-visible {
-      outline: 2px solid ${theme.colors[error ? 'error' : 'blue']};
+      outline: 2px solid ${theme.colors[$error ? 'error' : 'blue']};
     }
 
     &:focus {
       background-color: ${darken(theme.colors.gray100, 0.05)};
-      color: ${theme.colors[error ? 'error' : 'blue']};
+      color: ${theme.colors[$error ? 'error' : 'blue']};
       outline-style: solid;
       outline-width: 2px;
       outline-offset: -2px;
@@ -67,22 +67,17 @@ const inputStyles = css<{ error?: boolean; hasUnit?: boolean; hasIcon?: boolean 
   }
 `;
 
-export const StyledInput = styled.input.withConfig({
-  shouldForwardProp: prop => !['flexGrow', 'error', 'hasUnit', 'hasIcon'].includes(prop),
-})<{ error: boolean; hasUnit: boolean; hasIcon: boolean }>`
-  ${inputStyles}
-`;
-
-export const Wrapper = styled.div.withConfig({
-  shouldForwardProp: prop => !['width', 'flexGrow'].includes(prop),
-})<{ width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`; flexGrow?: number }>`
+export const Wrapper = styled.div<{
+  $width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
+  $flexGrow?: number;
+}>`
   position: relative;
-  width: ${({ width }) => width};
+  width: ${({ $width }) => $width};
 
-  ${({ flexGrow }) =>
-    flexGrow &&
+  ${({ $flexGrow }) =>
+    $flexGrow &&
     css`
-      flex-grow: ${flexGrow};
+      flex-grow: ${$flexGrow};
     `}
 
   .hidden-input {
@@ -110,19 +105,17 @@ export const Unit = styled.span`
   bottom: 0;
 `;
 
-export const SearchIcon = styled(Icon).withConfig({
-  shouldForwardProp: prop => !['error'].includes(prop),
-})<{ error: boolean }>`
+export const SearchIcon = styled(Icon)<{ $error: boolean }>`
   position: absolute;
   left: 1.25rem;
   top: 0;
   bottom: 0;
   height: 2.75rem;
 
-  ${({ theme, error }) => css`
+  ${({ theme, $error }) => css`
     color: ${theme.colors.gray300};
     &:has(+ input:focus) {
-      color: ${theme.colors[error ? 'error' : 'blue']};
+      color: ${theme.colors[$error ? 'error' : 'blue']};
     }
   `}
 `;

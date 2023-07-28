@@ -54,7 +54,7 @@ export const CashAccountsField = ({
     <Box $flex>
       <Input
         placeholder={t('common.input.name.placeholder')}
-        flexGrow={1}
+        $flexGrow={1}
         {...register(`cashAccounts.${index}.name`)}
         error={errors.cashAccounts?.[index]?.name?.message}
       />

@@ -33,8 +33,8 @@ export const SearchInstrumentField = () => {
         instrumentType={watchInstrumentType as Instrument}
         id="instrument"
         placeholder={t(`input.search_instrument.placeholder.${watchInstrumentType}`)}
-        flexGrow={1}
-        width={isPhone ? '100%' : 'auto'}
+        $flexGrow={1}
+        $width={isPhone ? '100%' : 'auto'}
       />
     </FormField>
   );

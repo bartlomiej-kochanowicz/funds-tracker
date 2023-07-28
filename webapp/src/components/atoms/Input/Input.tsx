@@ -12,8 +12,8 @@ import { Error, SearchIcon, StyledInput, Unit, Wrapper } from './Input.styles';
 interface InputCommonProps {
   error?: string;
   unit?: string;
-  width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
-  flexGrow?: number;
+  $width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
+  $flexGrow?: number;
   label?: string | ReactNode;
   defaultValue?: string | number;
 }
@@ -52,7 +52,7 @@ export interface SearchInputProps extends InputCommonProps, Omit<CurrencyInputFi
 export type InputProps = DefaultInputProps | CurrencyInputProps | SearchInputProps;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ error, unit, width = 'auto', flexGrow, label, type, ...rest }, ref) => {
+  ({ error, unit, $width = 'auto', $flexGrow, label, type, ...rest }, ref) => {
     const { i18n } = useTranslation();
 
     if (type === 'currency') {
@@ -60,8 +60,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
       return (
         <Wrapper
-          width={width}
-          flexGrow={flexGrow}
+          $width={$width}
+          $flexGrow={$flexGrow}
         >
           {label && (
             <Text
@@ -107,8 +107,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <Wrapper
-        width={width}
-        flexGrow={flexGrow}
+        $width={$width}
+        $flexGrow={$flexGrow}
       >
         {label && (
           <Text
@@ -122,16 +122,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {hasIcon && (
           <SearchIcon
             icon={icon[type as 'search' | 'date']}
-            error={hasError}
+            $error={hasError}
           />
         )}
 
         <StyledInput
-          error={hasError}
+          $error={hasError}
           aria-invalid={hasError}
           ref={ref}
-          hasUnit={hasUnit}
-          hasIcon={hasIcon}
+          $hasUnit={hasUnit}
+          $hasIcon={hasIcon}
           type={inputType()}
           {...rest}
         />

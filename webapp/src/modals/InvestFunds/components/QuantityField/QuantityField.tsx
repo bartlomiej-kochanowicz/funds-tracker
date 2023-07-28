@@ -21,8 +21,8 @@ export const QuantityField = () => {
       <Input
         id="quantity"
         type="number"
-        flexGrow={1}
-        width={isPhone ? '100%' : 'auto'}
+        $flexGrow={1}
+        $width={isPhone ? '100%' : 'auto'}
         placeholder={t('modal.InvestFunds.form.input.quantity.placeholder')}
         {...register('quantity')}
       />

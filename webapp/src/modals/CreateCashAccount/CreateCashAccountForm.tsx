@@ -97,7 +97,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
       >
         <Input
           placeholder={t('common.input.name.placeholder')}
-          flexGrow={1}
+          $flexGrow={1}
           error={errors.name?.message}
           {...register('name')}
         />

@@ -74,7 +74,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
       >
         <Input
           placeholder={t('common.input.name.placeholder')}
-          flexGrow={1}
+          $flexGrow={1}
           error={errors.name?.message}
           {...register('name')}
         />

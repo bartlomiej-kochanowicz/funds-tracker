@@ -83,8 +83,8 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
       >
         <Input
           type="currency"
-          flexGrow={1}
-          width={isPhone ? '100%' : 'auto'}
+          $flexGrow={1}
+          $width={isPhone ? '100%' : 'auto'}
           placeholder={t('modal.InvestFunds.form.input.price.placeholder')}
           currency={activeCurrency}
           {...currencyInputProps}

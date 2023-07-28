@@ -25,7 +25,7 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
     <Box $flex>
       <Input
         placeholder={t('add.portfolios.input.placeholder')}
-        flexGrow={1}
+        $flexGrow={1}
         {...register(`portfolios.${index}.name`)}
         error={errors.portfolios?.[index]?.name?.message}
       />
