@@ -141,7 +141,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
       <Spacer />
 
       <Button
-        width="auto"
+        $width="auto"
         disabled={isSubmitting}
         type="submit"
       >

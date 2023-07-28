@@ -93,7 +93,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
         <Spreader $spread="0.25" />
 
         <Button
-          color="secondary"
+          $color="secondary"
           onClick={updatePrice}
           disabled={!watchInstrumentCode || !watchDate || !priceChanged}
         >

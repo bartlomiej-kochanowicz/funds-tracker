@@ -23,7 +23,7 @@ export const CreateFirstPortfolio: FC<CreateFirstPortfolioProps> = ({ callback }
     >
       <Heading
         $textAlign="center"
-        level="h2"
+        $level="h2"
       >
         {t('page.portfolios.empty.list.title')}
       </Heading>
@@ -32,7 +32,7 @@ export const CreateFirstPortfolio: FC<CreateFirstPortfolioProps> = ({ callback }
 
       <Button
         onClick={handleOpenModal}
-        outline
+        $outline
       >
         {t('page.portfolios.need.more.button')}
 

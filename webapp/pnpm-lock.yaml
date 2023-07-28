@@ -71,8 +71,7 @@ specifiers:
   react-router-dom: 6.14.1
   react-toastify: 9.1.3
   resize-observer-polyfill: 1.5.1
-  simple-flexbox: 2.3.3
-  styled-components: 6.0.3
+  styled-components: 6.0.5
   tsconfig-paths-webpack-plugin: 4.0.1
   typescript: 5.1.6
   vite: 4.4.2
@@ -114,8 +113,7 @@ dependencies:
   react-laag: 2.0.5_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.14.1_biqbaboplfbrettd7655fr4n2y
   react-toastify: 9.1.3_biqbaboplfbrettd7655fr4n2y
-  simple-flexbox: 2.3.3_react@18.2.0
-  styled-components: 6.0.3_hnfhdlwmftqs43jf4g35c3bd6e
+  styled-components: 6.0.5_hnfhdlwmftqs43jf4g35c3bd6e
   yup: 1.2.0
 
 devDependencies:
@@ -140,7 +138,7 @@ devDependencies:
   '@vitejs/plugin-react': 4.0.2_vite@4.4.2
   '@vitest/coverage-c8': 0.33.0_vitest@0.33.0
   babel-loader: 9.1.3_@babel+core@7.22.8
-  babel-plugin-styled-components: 2.1.4_w2anmjbczjhrfsijlo7atwhec4
+  babel-plugin-styled-components: 2.1.4_wdgarppp34iafm7gg6tgatvx4a
   c8: 8.0.0
   eslint: 8.44.0
   eslint-config-airbnb: 19.0.4_ructaxw2s2b5xqrvdml7mioacy
@@ -155,7 +153,7 @@ devDependencies:
   eslint-plugin-simple-import-sort: 10.0.0_eslint@8.44.0
   eslint-plugin-testing-library: 5.11.0_iqf7tbmerllfqanu4l3d6aqdn4
   eslint-plugin-vitest-globals: 1.3.1
-  jest-styled-components: 7.1.1_styled-components@6.0.3
+  jest-styled-components: 7.1.1_styled-components@6.0.5
   jsdom: 22.1.0
   madge: 6.1.0_typescript@5.1.6
   mq-polyfill: 1.1.8
@@ -373,25 +371,6 @@ packages:
       '@nicolo-ribaudo/semver-v6': 6.3.3
       browserslist: 4.21.9
       lru-cache: 5.1.1
-
-  /@babel/helper-create-class-features-plugin/7.21.5_@babel+core@7.22.8:
-    resolution: {integrity: sha512-yNSEck9SuDvPTEUYm4BSXl6ZVC7yO5ZLEMAhG3v3zi7RDxyL/nQDemWWZmw4L0stPWwhpnznRRyJHPRcbXR2jw==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-    dependencies:
-      '@babel/core': 7.22.8
-      '@babel/helper-annotate-as-pure': 7.22.5
-      '@babel/helper-environment-visitor': 7.22.5
-      '@babel/helper-function-name': 7.22.5
-      '@babel/helper-member-expression-to-functions': 7.21.5
-      '@babel/helper-optimise-call-expression': 7.18.6
-      '@babel/helper-replace-supers': 7.21.5
-      '@babel/helper-skip-transparent-expression-wrappers': 7.20.0
-      '@babel/helper-split-export-declaration': 7.22.6
-      semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
 
   /@babel/helper-create-class-features-plugin/7.22.6_@babel+core@7.22.8:
     resolution: {integrity: sha512-iwdzgtSiBxF6ni6mzVnZCF3xt5qE6cEA0J7nFt8QOAWZ0zjCFceEgpn3vtb2V7WFR6QzP2jmIFOHMTRo7eNJjQ==}
@@ -638,7 +617,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.8
       '@babel/helper-plugin-utils': 7.22.5
-      '@babel/helper-skip-transparent-expression-wrappers': 7.20.0
+      '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
       '@babel/plugin-proposal-optional-chaining': 7.21.0_@babel+core@7.22.8
 
   /@babel/plugin-external-helpers/7.22.5_@babel+core@7.22.8:
@@ -671,7 +650,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.8
-      '@babel/helper-create-class-features-plugin': 7.21.5_@babel+core@7.22.8
+      '@babel/helper-create-class-features-plugin': 7.22.6_@babel+core@7.22.8
       '@babel/helper-plugin-utils': 7.22.5
     transitivePeerDependencies:
       - supports-color
@@ -683,7 +662,7 @@ packages:
       '@babel/core': ^7.12.0
     dependencies:
       '@babel/core': 7.22.8
-      '@babel/helper-create-class-features-plugin': 7.21.5_@babel+core@7.22.8
+      '@babel/helper-create-class-features-plugin': 7.22.6_@babel+core@7.22.8
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-class-static-block': 7.14.5_@babel+core@7.22.8
     transitivePeerDependencies:
@@ -780,7 +759,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.8
       '@babel/helper-plugin-utils': 7.22.5
-      '@babel/helper-skip-transparent-expression-wrappers': 7.20.0
+      '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
       '@babel/plugin-syntax-optional-chaining': 7.8.3_@babel+core@7.22.8
 
   /@babel/plugin-proposal-private-methods/7.18.6_@babel+core@7.22.8:
@@ -790,7 +769,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.8
-      '@babel/helper-create-class-features-plugin': 7.21.5_@babel+core@7.22.8
+      '@babel/helper-create-class-features-plugin': 7.22.6_@babel+core@7.22.8
       '@babel/helper-plugin-utils': 7.22.5
     transitivePeerDependencies:
       - supports-color
@@ -803,7 +782,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.8
       '@babel/helper-annotate-as-pure': 7.22.5
-      '@babel/helper-create-class-features-plugin': 7.21.5_@babel+core@7.22.8
+      '@babel/helper-create-class-features-plugin': 7.22.6_@babel+core@7.22.8
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-private-property-in-object': 7.14.5_@babel+core@7.22.8
     transitivePeerDependencies:
@@ -1145,19 +1124,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@babel/plugin-transform-modules-commonjs/7.21.5_@babel+core@7.22.8:
-    resolution: {integrity: sha512-OVryBEgKUbtqMoB7eG2rs6UFexJi6Zj6FDXx+esBLPTCxCNxAY9o+8Di7IsUGJ+AVhp5ncK0fxWUBd0/1gPhrQ==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.22.8
-      '@babel/helper-module-transforms': 7.22.5
-      '@babel/helper-plugin-utils': 7.22.5
-      '@babel/helper-simple-access': 7.22.5
-    transitivePeerDependencies:
-      - supports-color
-
   /@babel/plugin-transform-modules-commonjs/7.22.5_@babel+core@7.22.8:
     resolution: {integrity: sha512-B4pzOXj+ONRmuaQTg05b3y/4DuFz3WcCNAXPLb2Q0GT0TrGKGxNKV4jwsXts+StaM0LQczZbOpj8o1DLPDJIiA==}
     engines: {node: '>=6.9.0'}
@@ -1464,7 +1430,7 @@ packages:
       '@babel/plugin-transform-literals': 7.18.9_@babel+core@7.22.8
       '@babel/plugin-transform-member-expression-literals': 7.18.6_@babel+core@7.22.8
       '@babel/plugin-transform-modules-amd': 7.20.11_@babel+core@7.22.8
-      '@babel/plugin-transform-modules-commonjs': 7.21.5_@babel+core@7.22.8
+      '@babel/plugin-transform-modules-commonjs': 7.22.5_@babel+core@7.22.8
       '@babel/plugin-transform-modules-systemjs': 7.20.11_@babel+core@7.22.8
       '@babel/plugin-transform-modules-umd': 7.18.6_@babel+core@7.22.8
       '@babel/plugin-transform-named-capturing-groups-regex': 7.20.5_@babel+core@7.22.8
@@ -3745,7 +3711,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /babel-plugin-styled-components/2.1.4_w2anmjbczjhrfsijlo7atwhec4:
+  /babel-plugin-styled-components/2.1.4_wdgarppp34iafm7gg6tgatvx4a:
     resolution: {integrity: sha512-Xgp9g+A/cG47sUyRwwYxGM4bR/jDRg5N6it/8+HxCnbT5XNKSKDT9xm4oag/osgqjC2It/vH0yXsomOG6k558g==}
     peerDependencies:
       styled-components: '>= 2'
@@ -3755,7 +3721,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5_@babel+core@7.22.8
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 6.0.3_hnfhdlwmftqs43jf4g35c3bd6e
+      styled-components: 6.0.5_hnfhdlwmftqs43jf4g35c3bd6e
     transitivePeerDependencies:
       - '@babel/core'
 
@@ -6410,14 +6376,14 @@ packages:
       stack-utils: 2.0.6
     dev: true
 
-  /jest-styled-components/7.1.1_styled-components@6.0.3:
+  /jest-styled-components/7.1.1_styled-components@6.0.5:
     resolution: {integrity: sha512-OUq31R5CivBF8oy81dnegNQrRW13TugMol/Dz6ZnFfEyo03exLASod7YGwyHGuayYlKmCstPtz0RQ1+NrAbIIA==}
     engines: {node: '>= 12'}
     peerDependencies:
       styled-components: '>= 5'
     dependencies:
       '@adobe/css-tools': 4.2.0
-      styled-components: 6.0.3_hnfhdlwmftqs43jf4g35c3bd6e
+      styled-components: 6.0.5_hnfhdlwmftqs43jf4g35c3bd6e
     dev: true
 
   /jest-util/29.5.0:
@@ -8232,16 +8198,6 @@ packages:
     resolution: {integrity: sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==}
     dev: true
 
-  /simple-flexbox/2.3.3_react@18.2.0:
-    resolution: {integrity: sha512-5INKo4u1m5LDWBeEZXcAesIRxamrMCbcYInLg9Dz0A/7lwLMbIBKIon+71qVw91m3ivSB/5fA5KDObrt+VT6vg==}
-    peerDependencies:
-      prop-types: ^15.7.2
-      react: ^17.0.2
-      webpack-cli: ^4.7.2
-    dependencies:
-      react: 18.2.0
-    dev: false
-
   /simple-get/4.0.1:
     resolution: {integrity: sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==}
     dependencies:
@@ -8469,8 +8425,8 @@ packages:
       acorn: 8.10.0
     dev: true
 
-  /styled-components/6.0.3_hnfhdlwmftqs43jf4g35c3bd6e:
-    resolution: {integrity: sha512-qEyWvDK4CYCyDckNIruRJIcQSvcUR3dVEw/fwxu1v0LFzUMPr2uf5PhXHp17FkGK+S4TkglOS+XIealo1MssQA==}
+  /styled-components/6.0.5_hnfhdlwmftqs43jf4g35c3bd6e:
+    resolution: {integrity: sha512-308zi5o7LrA9cVaP4nPD0TaUpOjGPePkAUFb/OGB0xRI3I9ozpW5UyASvRVi9wJcYASG+Y3mLDLDUZC7nqzimw==}
     engines: {node: '>= 16'}
     peerDependencies:
       babel-plugin-styled-components: '>= 2'
@@ -8493,7 +8449,7 @@ packages:
       '@emotion/is-prop-valid': 1.2.1
       '@emotion/unitless': 0.8.1
       '@types/stylis': 4.2.0
-      babel-plugin-styled-components: 2.1.4_w2anmjbczjhrfsijlo7atwhec4
+      babel-plugin-styled-components: 2.1.4_wdgarppp34iafm7gg6tgatvx4a
       css-to-react-native: 3.2.0
       csstype: 3.1.2
       postcss: 8.4.25
@@ -8501,7 +8457,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       shallowequal: 1.1.0
       stylis: 4.3.0
-      tslib: 2.5.0
+      tslib: 2.6.0
     transitivePeerDependencies:
       - supports-color
 

@@ -109,10 +109,10 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
         $justifyContent="flex-end"
       >
         <Button
-          color="tertiary"
+          $color="tertiary"
           onClick={closeModal}
-          flexGrow={1}
-          minWidth="100px"
+          $flexGrow={1}
+          $minWidth="100px"
         >
           {t('common.cancel')}
         </Button>
@@ -121,8 +121,8 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 
         <Button
           disabled={isSubmitting || !isValid || !isDirty}
-          flexGrow={1}
-          minWidth="170px"
+          $flexGrow={1}
+          $minWidth="170px"
           type="submit"
         >
           {isSubmitting && <Loader color="white" />}

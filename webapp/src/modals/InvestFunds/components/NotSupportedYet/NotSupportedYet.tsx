@@ -14,7 +14,7 @@ export const NotSupportedYet: FC = () => {
       <Spacer $space="0.5" />
 
       <Heading
-        level="h2"
+        $level="h2"
         $fontColor="gray300"
       >
         {t('modal.InvestFunds.form.not.supported.yet')}
@@ -23,7 +23,7 @@ export const NotSupportedYet: FC = () => {
       <Spacer $space="0.25" />
 
       <Heading
-        level="h3"
+        $level="h3"
         $fontColor="gray300"
         $textAlign="center"
       >

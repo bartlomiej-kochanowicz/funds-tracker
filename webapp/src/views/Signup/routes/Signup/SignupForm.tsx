@@ -163,7 +163,7 @@ export const SignupForm = () => {
       <Spacer />
 
       <Button
-        width="auto"
+        $width="auto"
         disabled={isSubmitting}
         type="submit"
       >

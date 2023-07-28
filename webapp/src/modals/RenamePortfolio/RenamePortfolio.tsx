@@ -73,10 +73,10 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
             $justifyContent="flex-end"
           >
             <Button
-              color="tertiary"
+              $color="tertiary"
               onClick={modal.remove}
-              flexGrow={1}
-              minWidth="120px"
+              $flexGrow={1}
+              $minWidth="120px"
             >
               {t('common.cancel')}
             </Button>
@@ -85,8 +85,8 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
 
             <Button
               disabled={isSubmitting || !isValid || !isDirty}
-              flexGrow={1}
-              minWidth="120px"
+              $flexGrow={1}
+              $minWidth="120px"
               type="submit"
             >
               {isSubmitting && <Loader color="white" />}

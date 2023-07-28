@@ -9,7 +9,7 @@ describe('Atoms/Heading tests', () => {
   });
 
   it('renders properly with inline property', () => {
-    const { getByText } = render(<Heading inline>Hello World</Heading>);
+    const { getByText } = render(<Heading $inline>Hello World</Heading>);
 
     expect(getByText('Hello World')).toHaveStyleRule('display', 'inline-block');
   });

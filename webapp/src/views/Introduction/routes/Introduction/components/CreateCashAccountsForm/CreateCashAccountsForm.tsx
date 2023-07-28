@@ -154,7 +154,7 @@ export const CreateCashAccountsForm = () => {
 
             {fields.length > 0 && fields.length < MAX_CASH_ACCOUNTS ? (
               <Button
-                color="secondary"
+                $color="secondary"
                 onClick={handleAppend}
               >
                 {t('add.cash.accounts.button.add.one.more')}
@@ -168,10 +168,10 @@ export const CreateCashAccountsForm = () => {
             <Spacer $space="1.5" />
 
             <Button
-              size="large"
+              $size="large"
               type="submit"
               disabled={isSubmitting || !isValid || !isDirty}
-              width="100%"
+              $width="100%"
             >
               {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
             </Button>

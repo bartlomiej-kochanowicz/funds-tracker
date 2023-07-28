@@ -78,7 +78,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
         <Spreader $spread="0.25" />
 
         <Button
-          color="secondary"
+          $color="secondary"
           onClick={calculateTransactionCost}
           disabled={!watchQuantity || !watchPrice || !watchComission}
         >

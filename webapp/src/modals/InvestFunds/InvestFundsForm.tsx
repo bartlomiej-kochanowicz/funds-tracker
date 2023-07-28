@@ -127,10 +127,10 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
           $justifyContent="flex-end"
         >
           <Button
-            color="tertiary"
+            $color="tertiary"
             onClick={remove}
-            flexGrow={1}
-            minWidth="120px"
+            $flexGrow={1}
+            $minWidth="120px"
           >
             {t('common.cancel')}
           </Button>
@@ -139,8 +139,8 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
           <Button
             type="submit"
-            flexGrow={1}
-            minWidth="120px"
+            $flexGrow={1}
+            $minWidth="120px"
             disabled={!isValid || isSubmitting}
           >
             {isSubmitting && <Loader size="small" />}

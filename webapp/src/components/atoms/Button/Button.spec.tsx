@@ -13,7 +13,7 @@ describe('Atoms/Button tests', () => {
     ['primary' as ButtonColors, { background: '#3F8CFF', font: '#ffffff' }],
     ['secondary' as ButtonColors, { background: '#333333', font: '#ffffff' }],
   ])('has correct color for %s', (color, { background, font }) => {
-    const { getByText } = render(<Button color={color}>test button</Button>);
+    const { getByText } = render(<Button $color={color}>test button</Button>);
 
     expect(getByText('test button')).toHaveStyleRule('background-color', background);
     expect(getByText('test button')).toHaveStyleRule('color', font);
@@ -24,7 +24,7 @@ describe('Atoms/Button tests', () => {
     ['medium' as Size, '0.5rem 1.25rem'],
     ['large' as Size, '0.75rem 1.5rem'],
   ])('has correct padding for %s', (padding, expected) => {
-    const { getByText } = render(<Button size={padding}>test button</Button>);
+    const { getByText } = render(<Button $size={padding}>test button</Button>);
 
     expect(getByText('test button')).toHaveStyleRule('padding', expected);
   });

@@ -90,7 +90,7 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
       <Spacer />
 
       <Button
-        width="auto"
+        $width="auto"
         disabled={isSubmitting}
         type="submit"
         data-testid="submit-button"

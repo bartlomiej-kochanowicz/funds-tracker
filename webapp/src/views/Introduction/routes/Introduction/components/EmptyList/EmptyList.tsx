@@ -25,7 +25,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
     <Spacer $space="0.25" />
 
     <Button
-      color="secondary"
+      $color="secondary"
       onClick={handleAppend}
     >
       {i18n.button}

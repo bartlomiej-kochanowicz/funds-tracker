@@ -117,8 +117,8 @@ export const CashAccountsPanel: FC<
         >
           {props => (
             <Button
-              outline
-              size="small"
+              $outline
+              $size="small"
               {...props}
             >
               <Icon icon={FaEllipsisV} />

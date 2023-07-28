@@ -25,7 +25,7 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
     >
       <Heading
         $textAlign="center"
-        level="h2"
+        $level="h2"
       >
         {t('page.cash_accounts.empty.list.title')}
       </Heading>
@@ -34,7 +34,7 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
 
       <Button
         onClick={handleOpenModal}
-        outline
+        $outline
       >
         {t('page.cash_accounts.need.more.button')}
 

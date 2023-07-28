@@ -178,7 +178,7 @@ export const SigninForm = () => {
       <Spacer />
 
       <Button
-        width="auto"
+        $width="auto"
         disabled={isSubmitting}
         type="submit"
         data-testid="submit-button"

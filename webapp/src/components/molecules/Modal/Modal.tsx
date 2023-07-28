@@ -66,7 +66,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
             >
               {modalName && (
                 <Heading
-                  level="h2"
+                  $level="h2"
                   id={modalName}
                 >
                   {modalName}

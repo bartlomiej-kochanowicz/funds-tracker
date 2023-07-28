@@ -117,10 +117,10 @@ export const DefaultCurrency = () => {
           <Spacer $space="1.5" />
 
           <Button
-            size="large"
+            $size="large"
             type="submit"
             disabled={isSubmitting}
-            width="100%"
+            $width="100%"
           >
             {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
           </Button>

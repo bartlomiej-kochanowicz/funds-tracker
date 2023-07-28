@@ -32,8 +32,8 @@ export const Completed = () => {
 
       <Button
         color="secondary"
-        width="100%"
-        size="large"
+        $width="100%"
+        $size="large"
         as={Link}
         to={ROUTES.DASHBOARD}
       >

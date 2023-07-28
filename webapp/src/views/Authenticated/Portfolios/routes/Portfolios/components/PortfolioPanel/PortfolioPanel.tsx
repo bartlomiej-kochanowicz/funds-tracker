@@ -94,8 +94,8 @@ export const PortfolioPanel: FC<GetPortfoliosQuery['portfolios'][0] & Portfolios
         >
           {props => (
             <Button
-              outline
-              size="small"
+              $outline
+              $size="small"
               {...props}
             >
               <Icon icon={FaEllipsisV} />

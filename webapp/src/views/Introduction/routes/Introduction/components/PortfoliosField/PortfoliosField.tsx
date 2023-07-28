@@ -33,9 +33,9 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
       <Spreader $spread="0.25" />
 
       <Button
-        color="secondary"
+        $color="secondary"
         onClick={handleRemoveField}
-        boxShadow="none"
+        $boxShadow="none"
       >
         <Icon icon={FaTrash} />
       </Button>

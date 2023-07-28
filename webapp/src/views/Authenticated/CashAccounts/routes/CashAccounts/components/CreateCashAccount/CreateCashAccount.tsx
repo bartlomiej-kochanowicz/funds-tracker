@@ -23,7 +23,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
     >
       <Heading
         $textAlign="center"
-        level="h2"
+        $level="h2"
       >
         {t('page.cash_accounts.need.more')}
       </Heading>
@@ -32,7 +32,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
 
       <Button
         onClick={handleOpenModal}
-        outline
+        $outline
       >
         {t('page.cash_accounts.need.more.button')}
 

@@ -24,7 +24,7 @@ export const Hub = () => {
   return (
     <Wrapper>
       <Heading
-        level="h3"
+        $level="h3"
         $fontColor="gray400"
       >
         {t('navigation.dashboard')}

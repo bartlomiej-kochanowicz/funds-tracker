@@ -80,9 +80,9 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
 
           <Box $flex>
             <Button
-              color="tertiary"
+              $color="tertiary"
               onClick={modal.remove}
-              width="50%"
+              $width="50%"
             >
               {t('common.no')}
             </Button>
@@ -90,7 +90,7 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
             <Spreader $spread="0.5" />
 
             <Button
-              width="50%"
+              $width="50%"
               disabled={loading}
               onClick={handleDelete}
             >

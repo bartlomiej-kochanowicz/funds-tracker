@@ -83,9 +83,9 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 
           <Box $flex>
             <Button
-              color="tertiary"
+              $color="tertiary"
               onClick={modal.remove}
-              width="50%"
+              $width="50%"
             >
               {t('common.no')}
             </Button>
@@ -93,7 +93,7 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
             <Spreader $spread="0.5" />
 
             <Button
-              width="50%"
+              $width="50%"
               disabled={loading}
               onClick={handleDelete}
             >
