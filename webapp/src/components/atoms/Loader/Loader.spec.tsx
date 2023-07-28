@@ -26,7 +26,7 @@ describe('Atoms/Loader tests', () => {
   ])('has correct color for %s', (color, expected) => {
     const { getByTestId } = render(
       <Loader
-        color={color}
+        $color={color}
         data-testid="test-loader"
       />,
     );

@@ -1,7 +1,11 @@
 import styled, { DefaultTheme, keyframes } from 'styled-components';
 
 type LoaderProps = {
+  /* disable dafault html type for size */
+  size?: undefined;
   $size?: keyof DefaultTheme['loader']['size'];
+  /* disable dafault html type for color */
+  color?: undefined;
   $color?: keyof DefaultTheme['colors'];
   'data-testid'?: string;
 };
