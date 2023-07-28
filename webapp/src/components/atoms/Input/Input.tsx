@@ -56,7 +56,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const { i18n } = useTranslation();
 
     if (type === 'currency') {
-      const { currency } = rest as CurrencyInputProps;
+      const { currency, ...currencyTypeRest } = rest as CurrencyInputProps;
 
       return (
         <Wrapper
@@ -76,7 +76,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             intlConfig={{ locale: i18n.language, currency }}
             customInput={Input}
             ref={ref}
-            {...rest}
+            {...currencyTypeRest}
           />
 
           {error && <Error role="alert">{error}</Error>}

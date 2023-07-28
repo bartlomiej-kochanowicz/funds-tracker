@@ -19,9 +19,4 @@ const customSortKey = (item: Instrument): number => {
   return commonness[item] || 0;
 };
 
-console.log({
-  before: Object.values(Instrument),
-  after: Object.values(Instrument).sort((a, b) => customSortKey(b) - customSortKey(a)),
-});
-
 export default Object.values(Instrument).sort((a, b) => customSortKey(b) - customSortKey(a));
