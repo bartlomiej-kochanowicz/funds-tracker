@@ -92,7 +92,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery['portfolios'][0] & Portfolios
           items={items}
           placement="bottom-end"
         >
-          {props => (
+          {({ isOpen, ...props }) => (
             <Button
               $outline
               $size="small"

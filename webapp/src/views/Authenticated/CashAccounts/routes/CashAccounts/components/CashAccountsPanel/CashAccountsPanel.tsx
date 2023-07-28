@@ -115,7 +115,7 @@ export const CashAccountsPanel: FC<
           items={items}
           placement="bottom-end"
         >
-          {props => (
+          {({ isOpen, ...props }) => (
             <Button
               $outline
               $size="small"
