@@ -14,7 +14,7 @@ const Wrapper = styled(Box).attrs({
 
 export const FullscreenLoading: FC = () => (
   <Wrapper>
-    <Loader size="large" />
+    <Loader $size="large" />
   </Wrapper>
 );
 

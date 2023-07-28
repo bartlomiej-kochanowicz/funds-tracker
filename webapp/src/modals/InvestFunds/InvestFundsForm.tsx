@@ -143,7 +143,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
             $minWidth="120px"
             disabled={!isValid || isSubmitting}
           >
-            {isSubmitting && <Loader size="small" />}
+            {isSubmitting && <Loader $size="small" />}
 
             {!isSubmitting && 'Invest 🎉'}
           </Button>

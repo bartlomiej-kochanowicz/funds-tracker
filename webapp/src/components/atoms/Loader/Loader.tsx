@@ -1,8 +1,8 @@
 import styled, { DefaultTheme, keyframes } from 'styled-components';
 
 type LoaderProps = {
-  size?: keyof DefaultTheme['loader']['size'];
-  color?: keyof DefaultTheme['colors'];
+  $size?: keyof DefaultTheme['loader']['size'];
+  $color?: keyof DefaultTheme['colors'];
   'data-testid'?: string;
 };
 
@@ -15,10 +15,10 @@ export const Loader = styled.div<LoaderProps>`
   align-self: center;
   background: transparent;
   box-sizing: border-box;
-  width: ${({ size = 'medium', theme }) => theme.loader.size[size]};
-  height: ${({ size = 'medium', theme }) => theme.loader.size[size]};
+  width: ${({ $size = 'medium', theme }) => theme.loader.size[$size]};
+  height: ${({ $size = 'medium', theme }) => theme.loader.size[$size]};
   border-radius: 100%;
-  border: 3px solid ${({ color = 'text', theme }) => theme.colors[color]};
+  border: 3px solid ${({ $color = 'text', theme }) => theme.colors[$color]};
   border-left: 3px solid transparent;
   border-bottom: 3px solid transparent;
   display: inline-block;

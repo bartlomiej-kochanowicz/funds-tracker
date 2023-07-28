@@ -83,7 +83,7 @@ export const CashAccounts = () => {
 
       <Spacer />
 
-      {loading && <Loader size="large" />}
+      {loading && <Loader $size="large" />}
 
       {!loading && error && <ErrorContent />}
 

@@ -61,7 +61,7 @@ export const Portfolios = () => {
 
       <Spacer />
 
-      {loading && <Loader size="large" />}
+      {loading && <Loader $size="large" />}
 
       {!loading && error && <ErrorContent />}
 

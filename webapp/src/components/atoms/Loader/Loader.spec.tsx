@@ -10,7 +10,7 @@ describe('Atoms/Loader tests', () => {
   ])('has correct size for %s', (size, expected) => {
     const { getByTestId } = render(
       <Loader
-        size={size}
+        $size={size}
         data-testid="test-loader"
       />,
     );
