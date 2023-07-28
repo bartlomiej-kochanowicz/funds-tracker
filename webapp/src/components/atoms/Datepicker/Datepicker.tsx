@@ -67,7 +67,10 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
         prevMonthButtonDisabled,
         nextMonthButtonDisabled,
       }) => (
-        <Box $justifyContent="space-between">
+        <Box
+          $flex
+          $justifyContent="space-between"
+        >
           <ArrowButton
             type="button"
             onClick={decreaseMonth}
@@ -76,7 +79,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
             <Icon icon={FaChevronLeft} />
           </ArrowButton>
 
-          <Box>
+          <Box $flex>
             <StyledSelect
               value={getYear(date)}
               onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) =>
