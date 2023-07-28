@@ -9,7 +9,7 @@ import {
 } from 'styles/mixins';
 
 type ButtonLinkProps = {
-  display?: 'inline' | 'inline-block' | 'block';
+  $display?: 'inline' | 'inline-block' | 'block';
 } & FontableProps &
   MarginMixinProps &
   PaddingMixinProps;
@@ -24,8 +24,8 @@ export const ButtonLink = styled.button<ButtonLinkProps>`
   ${marginMixin}
   ${paddingMixin}
 
-  ${({ display = 'inline' }) => css`
-    display: ${display};
+  ${({ $display = 'inline' }) => css`
+    display: ${$display};
   `}
 
   text-decoration: none;

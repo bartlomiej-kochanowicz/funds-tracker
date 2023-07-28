@@ -13,8 +13,8 @@ export const ErrorContent: FC = () => {
     >
       <Icon
         icon={BiSad}
-        color="error"
-        size="2.5"
+        $color="error"
+        $size="2.5"
       />
 
       <Text $fontWeight="700">{t('error.component.title')}</Text>

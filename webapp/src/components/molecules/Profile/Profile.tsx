@@ -71,8 +71,8 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
           <Icon
             icon={isOpen ? FaChevronUp : FaChevronDown}
-            size="0.875"
-            color={isDark ? 'white' : 'black'}
+            $size="0.875"
+            $color={isDark ? 'white' : 'black'}
           />
         </ProfileContainer>
       )}

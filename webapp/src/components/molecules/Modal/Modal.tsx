@@ -81,7 +81,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
               >
                 <Icon
                   icon={FaTimes}
-                  size="1.25"
+                  $size="1.25"
                 />
               </CloseButton>
             </Box>

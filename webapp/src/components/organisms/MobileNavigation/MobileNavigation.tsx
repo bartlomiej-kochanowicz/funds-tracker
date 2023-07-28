@@ -49,7 +49,7 @@ export const MobileNavigation = () => {
       {visible && (
         <MotionNav {...animation}>
           <List>
-            {mobileNavigationNavigation.map(({ to, title, icon: Icon }) => (
+            {mobileNavigationNavigation.map(({ to, title, icon }) => (
               <ListItem key={title}>
                 <StyledNavLink
                   to={to}
@@ -61,7 +61,7 @@ export const MobileNavigation = () => {
                       $flexDirection="column"
                       $alignItems="center"
                     >
-                      <Icon size="1.5rem" />
+                      {icon}
 
                       <Spacer $space="0.25" />
 

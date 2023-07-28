@@ -18,8 +18,8 @@ export const NavListItem: FC<NavListItemProps> = ({ isActive, title, icon: IconC
     <Fragment>
       <Icon
         icon={IconComponent}
-        size="1.25"
-        color={isActive ? 'blue' : undefined}
+        $size="1.25"
+        $color={isActive ? 'blue' : undefined}
       />
 
       <Spreader $spread="0.5" />

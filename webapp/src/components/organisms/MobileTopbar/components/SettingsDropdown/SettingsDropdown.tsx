@@ -22,8 +22,8 @@ export const SettingsDropdown: FC = () => {
     >
       <Icon
         icon={FaCog}
-        size="1.5"
-        color="gray400"
+        $size="1.5"
+        $color="gray400"
       />
     </Dropdown>
   );
