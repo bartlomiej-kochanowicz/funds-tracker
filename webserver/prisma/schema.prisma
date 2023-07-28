@@ -112,7 +112,7 @@ enum InstrumentType {
   crypto
   immovables
   movables
-  other
+  others
 }
 
 enum Currency {

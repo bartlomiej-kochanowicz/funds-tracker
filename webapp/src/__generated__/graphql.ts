@@ -132,7 +132,7 @@ export enum Instrument {
   Immovables = 'immovables',
   Movables = 'movables',
   Options = 'options',
-  Other = 'other',
+  Others = 'others',
   Stocks = 'stocks'
 }
 

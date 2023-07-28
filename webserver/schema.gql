@@ -250,7 +250,7 @@ enum Instrument {
   crypto
   immovables
   movables
-  other
+  others
 }
 
 input InstrumentHistoryInput {
