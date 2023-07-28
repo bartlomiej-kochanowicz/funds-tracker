@@ -94,7 +94,7 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
               disabled={loading}
               onClick={handleDelete}
             >
-              {loading && <Loader color="white" />}
+              {loading && <Loader $color="white" />}
 
               {!loading && t('common.yes')}
             </Button>

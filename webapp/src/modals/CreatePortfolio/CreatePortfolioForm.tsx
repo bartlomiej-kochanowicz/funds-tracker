@@ -103,7 +103,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
           $minWidth="170px"
           type="submit"
         >
-          {isSubmitting && <Loader color="white" />}
+          {isSubmitting && <Loader $color="white" />}
 
           {!isSubmitting && (
             <Fragment>

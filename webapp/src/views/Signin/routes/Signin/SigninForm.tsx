@@ -185,7 +185,7 @@ export const SigninForm = () => {
       >
         {isSubmitting && (
           <Loader
-            color="white"
+            $color="white"
             data-testid="button-loader"
           />
         )}

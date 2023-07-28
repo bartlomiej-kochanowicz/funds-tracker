@@ -92,7 +92,7 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
               $minWidth="120px"
               type="submit"
             >
-              {isSubmitting && <Loader color="white" />}
+              {isSubmitting && <Loader $color="white" />}
 
               {!isSubmitting && t('common.save')}
             </Button>

@@ -97,7 +97,7 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
               disabled={loading}
               onClick={handleDelete}
             >
-              {loading && <Loader color="white" />}
+              {loading && <Loader $color="white" />}
 
               {!loading && t('common.yes')}
             </Button>

@@ -89,7 +89,7 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
               $minWidth="120px"
               type="submit"
             >
-              {isSubmitting && <Loader color="white" />}
+              {isSubmitting && <Loader $color="white" />}
 
               {!isSubmitting && t('common.save')}
             </Button>

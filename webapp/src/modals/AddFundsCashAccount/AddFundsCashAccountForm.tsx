@@ -125,7 +125,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
           $minWidth="170px"
           type="submit"
         >
-          {isSubmitting && <Loader color="white" />}
+          {isSubmitting && <Loader $color="white" />}
 
           {!isSubmitting && (
             <Fragment>

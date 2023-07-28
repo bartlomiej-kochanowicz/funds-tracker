@@ -122,7 +122,7 @@ export const DefaultCurrency = () => {
             disabled={isSubmitting}
             $width="100%"
           >
-            {isSubmitting ? <Loader color="white" /> : t('page.introduction.next.step.submit')}
+            {isSubmitting ? <Loader $color="white" /> : t('page.introduction.next.step.submit')}
           </Button>
         </form>
       </Box>

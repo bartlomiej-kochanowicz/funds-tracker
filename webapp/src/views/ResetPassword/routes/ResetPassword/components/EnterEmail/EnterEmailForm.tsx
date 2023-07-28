@@ -115,7 +115,7 @@ export const EnterEmailForm = () => {
       >
         {isSubmitting && (
           <Loader
-            color="white"
+            $color="white"
             data-testid="button-loader"
           />
         )}

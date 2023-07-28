@@ -167,7 +167,7 @@ export const SignupForm = () => {
         disabled={isSubmitting}
         type="submit"
       >
-        {isSubmitting && <Loader color="white" />}
+        {isSubmitting && <Loader $color="white" />}
 
         {!isSubmitting && compareState(states.nameAndEmail) && t('common.next')}
 
