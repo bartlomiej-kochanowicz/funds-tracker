@@ -20,7 +20,7 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
 
     return (
       <StyledButton
-        isToggled={isToggled}
+        $isToggled={isToggled}
         onClick={handleToggle}
         role="switch"
         aria-checked={isToggled}

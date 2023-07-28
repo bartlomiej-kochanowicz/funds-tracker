@@ -82,7 +82,7 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
         {renderLayer(
           isOpen && (
             <Menu
-              isInModal={isInModal}
+              $isInModal={isInModal}
               role="menu"
               {...layerProps}
             >

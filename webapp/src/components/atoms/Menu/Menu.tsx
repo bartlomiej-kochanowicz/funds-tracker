@@ -5,14 +5,14 @@ import styled, { css } from 'styled-components';
 
 export interface MenuProps {
   children: ReactNode;
-  isInModal?: boolean;
+  $isInModal?: boolean;
 }
 
 export const Menu = styled(motion.div)<MenuProps>`
   overflow-y: auto;
 
-  ${({ theme: { isDark, zIndex, radius, padding, colors, breakpoints }, isInModal }) => css`
-    z-index: ${isInModal ? zIndex.menu.modal : zIndex.menu.default};
+  ${({ theme: { isDark, zIndex, radius, padding, colors, breakpoints }, $isInModal }) => css`
+    z-index: ${$isInModal ? zIndex.menu.modal : zIndex.menu.default};
     border-radius: ${radius['0.7']};
     background-color: ${isDark ? darken(colors.gray200, 0.09) : colors.gray200};
     padding: ${padding.mediumY};

@@ -39,7 +39,7 @@ export const Tile: FC<TilelProps> = ({ children, title, to }) => {
     return (
       <RouterLink
         to={to}
-        textDecoration="none"
+        $textDecoration="none"
       >
         {content}
       </RouterLink>

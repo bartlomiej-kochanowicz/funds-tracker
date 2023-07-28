@@ -11,8 +11,8 @@ import {
 
 type RouterLinkProps = {
   to: string;
-  display?: 'inline' | 'inline-block' | 'block';
-  textDecoration?: 'none' | 'underline';
+  $display?: 'inline' | 'inline-block' | 'block';
+  $textDecoration?: 'none' | 'underline';
 } & FontableProps &
   MarginMixinProps &
   PaddingMixinProps;
@@ -22,8 +22,8 @@ export const RouterLink = styled(ReactRouterLink)<RouterLinkProps>`
   ${marginMixin}
   ${paddingMixin}
 
-  ${({ display = 'inline' }) => css`
-    display: ${display};
+  ${({ $display = 'inline' }) => css`
+    display: ${$display};
   `}
 
   text-decoration: none;
@@ -31,8 +31,8 @@ export const RouterLink = styled(ReactRouterLink)<RouterLinkProps>`
   width: fit-content;
 
   &:hover {
-    ${({ textDecoration = 'underline' }) => css`
-      text-decoration: ${textDecoration};
+    ${({ $textDecoration = 'underline' }) => css`
+      text-decoration: ${$textDecoration};
     `}
   }
 `;

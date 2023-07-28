@@ -140,7 +140,7 @@ const SelectInner = <ValueType,>(
       {renderLayer(
         isOpen && (
           <Menu
-            isInModal={isInModal}
+            $isInModal={isInModal}
             role="menu"
             {...layerProps}
             style={{

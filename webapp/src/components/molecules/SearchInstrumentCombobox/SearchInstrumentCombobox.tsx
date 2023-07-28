@@ -102,7 +102,7 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
         {renderLayer(
           isOpen && (
             <Menu
-              isInModal={isInModal}
+              $isInModal={isInModal}
               role="menu"
               {...layerProps}
               style={{
@@ -116,7 +116,7 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
                 <Menu.Item
                   key={`${item.Code}.${item.Exchange}`}
                   onClick={item.onClick}
-                  maxWidth={triggerBounds?.width ? `${triggerBounds.width}px` : undefined}
+                  $maxWidth={triggerBounds?.width ? `${triggerBounds.width}px` : undefined}
                   {...itemProps[index]}
                 >
                   <Badge>{item.value}</Badge>

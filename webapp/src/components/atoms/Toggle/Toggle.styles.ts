@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-export const StyledButton = styled.button<{ isToggled: boolean }>`
+export const StyledButton = styled.button<{ $isToggled: boolean }>`
   width: 50px;
   height: 30px;
   display: flex;
@@ -11,7 +11,7 @@ export const StyledButton = styled.button<{ isToggled: boolean }>`
   cursor: pointer;
   border: 0;
 
-  ${({ theme, isToggled }) => css`
+  ${({ theme, $isToggled }) => css`
     background-color: ${theme.colors.gray300};
     transition: background-color ${theme.transition.primary} ease;
 
@@ -19,7 +19,7 @@ export const StyledButton = styled.button<{ isToggled: boolean }>`
       outline: 2px solid ${theme.colors.blue};
     }
 
-    ${isToggled &&
+    ${$isToggled &&
     css`
       justify-content: flex-end;
       background-color: ${theme.colors.blue};

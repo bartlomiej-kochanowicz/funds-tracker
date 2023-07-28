@@ -17,7 +17,7 @@ export interface MenuItemProps {
   $isSelected?: boolean;
   $padding?: keyof DefaultTheme['padding'];
   icon?: IconType;
-  maxWidth?: `${string}px` | `${string}%`;
+  $maxWidth?: `${string}px` | `${string}%`;
 }
 
 export const MenuItem: FC<MenuItemProps> = forwardRef<

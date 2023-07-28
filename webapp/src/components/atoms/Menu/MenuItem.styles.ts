@@ -5,7 +5,7 @@ import { StyleFunction } from 'styled-components/dist/types';
 
 interface MixinProps {
   $padding: keyof DefaultTheme['padding'];
-  maxWidth?: `${string}px` | `${string}%`;
+  $maxWidth?: `${string}px` | `${string}%`;
 }
 
 const mixin = css<MixinProps>`
@@ -18,7 +18,7 @@ const mixin = css<MixinProps>`
   text-align: left;
   outline: none;
 
-  ${({ theme, $padding, maxWidth }) => css`
+  ${({ theme, $padding, $maxWidth }) => css`
     color: ${theme.colors.text};
     padding: ${theme.padding[$padding]};
 
@@ -27,9 +27,9 @@ const mixin = css<MixinProps>`
       background-color: ${transparentize(theme.colors.gray300, 0.75)};
     }
 
-    ${maxWidth &&
+    ${$maxWidth &&
     css`
-      max-width: ${maxWidth};
+      max-width: ${$maxWidth};
     `}
   `};
 `;
