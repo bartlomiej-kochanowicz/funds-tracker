@@ -43,6 +43,8 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 
     setValue('transaction_cost', String(transactionCost.toFixed(2)), {
       shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
     });
   };
 
