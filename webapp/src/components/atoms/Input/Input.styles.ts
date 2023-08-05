@@ -1,6 +1,7 @@
 import { darken, transparentize } from 'color2k';
 import { Icon } from 'components/atoms/Icon';
 import styled, { css } from 'styled-components';
+import { borderColor } from 'styles/helpers';
 
 export const StyledInput = styled.input<{ $error: boolean; $hasUnit: boolean; $hasIcon: boolean }>`
   border: none;
@@ -11,7 +12,7 @@ export const StyledInput = styled.input<{ $error: boolean; $hasUnit: boolean; $h
     font-weight: ${theme.font.weight[500]};
     background-color: ${theme.colors.gray100};
     color: ${theme.colors[$error ? 'error' : 'text']};
-    border: 2px solid ${theme.colors[$error ? 'error' : 'gray300']};
+    border: 2px solid ${theme.colors[borderColor({ isDark: theme.isDark, $error })]};
     padding: 0.5rem 1.25rem;
     ${$hasUnit && `padding: 0.5rem 2.5rem 0.5rem 1.25rem;`}
     ${$hasIcon && `padding: 0.5rem 1.25rem 0.5rem 2.5rem;`}

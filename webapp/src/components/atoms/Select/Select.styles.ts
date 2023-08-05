@@ -1,6 +1,7 @@
 import { darken } from 'color2k';
 import { HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
+import { borderColor } from 'styles/helpers';
 
 export const StyledButton = styled.button<
   HTMLProps<Omit<HTMLButtonElement, 'error'>> & { $error: boolean }
@@ -19,7 +20,7 @@ export const StyledButton = styled.button<
     padding: ${theme.padding.medium};
     color: ${theme.colors[$error ? 'error' : 'text']};
     font-weight: ${theme.font.weight[500]};
-    border: 2px solid ${theme.colors[$error ? 'error' : 'gray300']};
+    border: 2px solid ${theme.colors[borderColor({ isDark: theme.isDark, $error })]};
 
     &:focus-visible {
       outline: 2px solid ${theme.colors[$error ? 'error' : 'blue']};
