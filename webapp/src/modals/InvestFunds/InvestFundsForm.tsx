@@ -141,7 +141,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
             type="submit"
             $flexGrow={1}
             $minWidth="120px"
-            disabled={!isValid || isSubmitting}
+            disabled={!isValid || isSubmitting || shouldRenderNotSupportedYet}
           >
             {isSubmitting && <Loader $size="small" />}
 

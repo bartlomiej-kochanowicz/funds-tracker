@@ -16,6 +16,8 @@ export const NotSupportedYet: FC = () => {
       <Heading
         $level="h2"
         $fontColor="gray300"
+        $textAlign="center"
+        $fontSize="1.25"
       >
         {t('modal.InvestFunds.form.not.supported.yet')}
       </Heading>
@@ -26,6 +28,7 @@ export const NotSupportedYet: FC = () => {
         $level="h3"
         $fontColor="gray300"
         $textAlign="center"
+        $fontSize="0.875"
       >
         <Trans
           i18nKey="modal.InvestFunds.form.not.supported.yet.description"
