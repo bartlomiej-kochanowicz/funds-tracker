@@ -9,6 +9,7 @@ interface BoxProps extends PaddingMixinProps {
   $borderRadius?: Radius;
   $hoverBackgroundColor?: Colors;
   $width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
+  $height?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   $flex?: boolean;
   $flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   $justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
@@ -30,6 +31,7 @@ export const Box = styled.div<BoxProps>`
     $alignItems,
     $flexGrow,
     $width,
+    $height,
   }) => css`
     ${$backgroundColor &&
     css`
@@ -53,6 +55,11 @@ export const Box = styled.div<BoxProps>`
     ${$width &&
     css`
       width: ${$width};
+    `}
+
+    ${$height &&
+    css`
+      height: ${$height};
     `}
 
     ${$flex &&

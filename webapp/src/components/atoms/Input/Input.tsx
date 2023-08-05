@@ -11,7 +11,7 @@ import { Error, SearchIcon, StyledInput, Unit, Wrapper } from './Input.styles';
 
 interface InputCommonProps {
   error?: string;
-  unit?: string;
+  unit?: ReactNode;
   $width?: 'auto' | 'fit-content' | `${number}px` | `${number}%`;
   $flexGrow?: number;
   label?: string | ReactNode;
@@ -46,7 +46,6 @@ export interface CurrencyInputProps
 export interface SearchInputProps extends InputCommonProps, Omit<CurrencyInputFieldProps, 'width'> {
   type?: 'search';
   currency?: undefined;
-  unit?: undefined;
 }
 
 export type InputProps = DefaultInputProps | CurrencyInputProps | SearchInputProps;
@@ -81,7 +80,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
           {error && <Error role="alert">{error}</Error>}
 
-          {unit && <Unit>%</Unit>}
+          {unit && <Unit>{unit}</Unit>}
         </Wrapper>
       );
     }
