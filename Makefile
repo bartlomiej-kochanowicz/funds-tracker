@@ -18,6 +18,8 @@ prisma-migration:
 	docker compose exec webserver npx prisma migrate dev
 prisma-migration-push:
 	docker compose exec webserver npx prisma db push
+prisma-studio:
+	docker compose exec webserver npx prisma studio
 logs-webapp:
 	docker logs -f webapp
 logs-webserver:

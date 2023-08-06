@@ -1,3 +1,4 @@
+import { InstrumentType } from '@prisma/client';
 import {
   registerDecorator,
   ValidationOptions,
@@ -5,13 +6,12 @@ import {
   ValidatorConstraintInterface,
   ValidationArguments,
 } from 'class-validator';
-import { Instrument } from '@app/common/constants/instrument';
 
 @ValidatorConstraint({ name: 'InstrumentType', async: false })
 export class CustomValidator implements ValidatorConstraintInterface {
-  allowedValues = Object.values(Instrument);
+  allowedValues = Object.values(InstrumentType);
 
-  validate(value: keyof typeof Instrument) {
+  validate(value: keyof typeof InstrumentType) {
     return this.allowedValues.includes(value);
   }
 

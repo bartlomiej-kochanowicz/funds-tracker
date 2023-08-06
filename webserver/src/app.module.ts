@@ -12,6 +12,7 @@ import { CashAccountsModule } from './cash-accounts/cash-accounts.module';
 import { InstrumentsModule } from './instruments/instruments.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { UserModule } from './user/user.module';
+import { InvestModule } from './invest/invest.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { UserModule } from './user/user.module';
     InstrumentsModule,
     PortfoliosModule,
     UserModule,
+    InvestModule,
   ],
   controllers: [],
   providers: [

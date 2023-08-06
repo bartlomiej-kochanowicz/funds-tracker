@@ -213,6 +213,11 @@ enum IntroductionStep {
   Completed
 }
 
+type InvestInNewInstrument {
+  """Invest success"""
+  success: Boolean!
+}
+
 type Query {
   emailExist(data: EmailInput!): Email!
   cashAccounts: [CashAccount!]!
@@ -237,10 +242,10 @@ input SearchInstrumentInput {
   name: String!
 
   """Instrument type."""
-  type: Instrument!
+  type: InstrumentType!
 }
 
-enum Instrument {
+enum InstrumentType {
   stocks
   bonds
   governmentBonds
@@ -289,6 +294,7 @@ type Mutation {
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
   deletePortfolio(uuid: String!): PortfolioDelete!
   updateUser(data: UpdateUserInput!): User!
+  investInNewInstrument(data: InvestInNewInstrumentInput!): InvestInNewInstrument!
 }
 
 input SignupInput {
@@ -404,4 +410,21 @@ input UpdateUserInput {
 
   """New user default currency."""
   defaultCurrency: Currency
+}
+
+input InvestInNewInstrumentInput {
+  instrument: Instrument!
+  date: String!
+  quantity: Float!
+  price: Float!
+}
+
+input Instrument {
+  name: String!
+  type: InstrumentType!
+  code: String!
+  currency: String!
+  country: String!
+  exchange: String!
+  ISIN: String
 }
