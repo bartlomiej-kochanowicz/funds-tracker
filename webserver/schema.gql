@@ -413,6 +413,7 @@ input UpdateUserInput {
 }
 
 input InvestInNewInstrumentInput {
+  portfolioUuid: String!
   instrument: Instrument!
   date: String!
   quantity: Float!

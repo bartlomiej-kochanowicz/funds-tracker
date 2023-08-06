@@ -4,6 +4,10 @@ import { IsNumber, IsString } from 'class-validator';
 
 @InputType()
 export class InvestInNewInstrumentInput {
+  @IsString()
+  @Field(() => String)
+  portfolioUuid: string;
+
   @Field(() => Instrument)
   instrument: Instrument;
 
