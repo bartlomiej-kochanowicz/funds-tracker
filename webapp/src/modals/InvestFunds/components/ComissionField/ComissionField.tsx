@@ -59,7 +59,6 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
             id="comission"
             $flexGrow={1}
             placeholder={t('modal.InvestFunds.form.input.comission.placeholder')}
-            type="number"
             unit="%"
             $width={isPhone ? '100%' : 'auto'}
             error={error?.message}
