@@ -421,11 +421,8 @@ input InvestInNewInstrumentInput {
 }
 
 input Instrument {
-  name: String!
   type: InstrumentType!
   code: String!
-  currency: String!
-  country: String!
   exchange: String!
   ISIN: String
 }

@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { catchError, firstValueFrom, of } from 'rxjs';
 import { PrismaService } from '@app/prisma/prisma.service';
 import { Instrument } from '@app/common/inputs/Instrument.input';
 import { EodHistoricalDataSearchResponse } from '@app/common/types/eodhistoricaldata-search';
-import { InvestInNewInstrumentInput } from './inputs/investInNewInstrument.input';
+import { InvestInNewInstrumentInput } from './inputs/InvestInNewInstrument.input';
 
 @Injectable()
 export class InvestService {
@@ -15,10 +15,23 @@ export class InvestService {
     private prisma: PrismaService,
   ) {}
 
-  async investInNewInstrumentInput(data: InvestInNewInstrumentInput) {
-    const { instrument } = data;
+  async investInNewInstrumentInput(userUuid: string, data: InvestInNewInstrumentInput) {
+    const { instrument, portfolioUuid, cashAccountUuid } = data;
 
     const { code, exchange } = instrument;
+
+    const user = await this.prisma.user.findUnique({
+      where: { uuid: userUuid },
+      include: { portfolios: true, cashAccounts: true },
+    });
+
+    if (!user.cashAccounts.some(cashAccount => cashAccount.uuid === cashAccountUuid)) {
+      throw new HttpException('Account not found', HttpStatus.NOT_FOUND);
+    }
+
+    if (!user.portfolios.some(portfolio => portfolio.uuid === portfolioUuid)) {
+      throw new HttpException('Portfolio not found', HttpStatus.NOT_FOUND);
+    }
 
     const instrumentExists = await this.checkIfInstrumentExists(code, exchange);
 
@@ -37,6 +50,8 @@ export class InvestService {
 
       await this.addOperationToPortfolio(data, codeExchange);
 
+      await this.addOparationToCashAccount(data);
+
       return {
         success: true,
       };
@@ -46,7 +61,7 @@ export class InvestService {
 
     await this.addOperationToPortfolio(data, codeExchange);
 
-    // add operation to cash account
+    await this.addOparationToCashAccount(data);
 
     return {
       success: true,
@@ -74,25 +89,42 @@ export class InvestService {
     });
   }
 
+  private async addOparationToCashAccount(data: InvestInNewInstrumentInput) {
+    await this.prisma.cashAccountOperation.create({
+      data: {
+        cashAccountUuid: data.cashAccountUuid,
+        // currency calculate
+        amount: data.price * data.quantity + data.comission,
+        type: 'transfer',
+        destinationUuid: data.portfolioUuid,
+      },
+    });
+  }
+
   private generateInstrumentCodeExchange(code: string, exchange: string) {
     return `${code.toUpperCase()}.${exchange.toUpperCase()}`;
   }
 
   private async addInstrumentToDatabase(instrument: Instrument) {
-    const { code, exchange, ISIN, ...restInstrument } = instrument;
+    const { code, exchange, type } = instrument;
+
+    const { Name, Currency, Country, ISIN } = await this.getInstrument(code, exchange);
 
     return await this.prisma.instrument.create({
       data: {
         codeExchange: this.generateInstrumentCodeExchange(code, exchange),
-        code: code.toUpperCase(),
-        exchange: exchange.toUpperCase(),
-        ISIN: ISIN || (await this.getInstrumentISIN(code, exchange)),
-        ...restInstrument,
+        name: Name,
+        type,
+        code,
+        exchange,
+        currency: Currency,
+        country: Country,
+        ISIN,
       },
     });
   }
 
-  private async getInstrumentISIN(code: string, exchange: string) {
+  private async getInstrument(code: string, exchange: string) {
     const { data } = await firstValueFrom(
       this.httpService
         .get<EodHistoricalDataSearchResponse>(
@@ -115,7 +147,7 @@ export class InvestService {
 
     const instrument = data.find(({ Code, Exchange }) => Code === CODE && Exchange === EXCHANGE);
 
-    return instrument?.ISIN || null;
+    return instrument || null;
   }
 
   private async checkIfInstrumentExists(code: string, exchange: string) {

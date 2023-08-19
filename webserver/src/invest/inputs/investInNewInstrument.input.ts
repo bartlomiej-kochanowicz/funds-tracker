@@ -1,12 +1,16 @@
 import { Instrument } from '@app/common/inputs/Instrument.input';
 import { InputType, Field } from '@nestjs/graphql';
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString, IsUUID } from 'class-validator';
 
 @InputType()
 export class InvestInNewInstrumentInput {
-  @IsString()
+  @IsUUID()
   @Field(() => String)
   portfolioUuid: string;
+
+  @IsUUID()
+  @Field(() => String)
+  cashAccountUuid: string;
 
   @Field(() => Instrument)
   instrument: Instrument;
@@ -22,4 +26,8 @@ export class InvestInNewInstrumentInput {
   @IsNumber()
   @Field(() => Number)
   price: number;
+
+  @IsNumber()
+  @Field(() => Number)
+  comission: number;
 }

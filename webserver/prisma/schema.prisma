@@ -49,14 +49,17 @@ model CashAccountOperation {
   date            DateTime                 @default(now())
   type            CashAccountOperationType
   amount          Float
+  destination     Portfolio?               @relation(fields: [destinationUuid], references: [uuid])
+  destinationUuid String?
 }
 
 model Portfolio {
-  uuid                String               @id @default(uuid())
-  name                String
-  user                User                 @relation(fields: [userUuid], references: [uuid])
-  userUuid            String
-  portfolioOperations PortfolioOperation[]
+  uuid                 String                 @id @default(uuid())
+  name                 String
+  user                 User                   @relation(fields: [userUuid], references: [uuid])
+  userUuid             String
+  portfolioOperations  PortfolioOperation[]
+  CashAccountOperation CashAccountOperation[]
 
   @@unique([userUuid, uuid])
 }

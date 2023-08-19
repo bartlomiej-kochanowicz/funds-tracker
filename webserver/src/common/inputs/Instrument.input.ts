@@ -4,24 +4,12 @@ import { IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class Instrument {
-  @IsString()
-  @Field(() => String)
-  name: string;
-
   @Field(() => InstrumentType)
   type: InstrumentType;
 
   @IsString()
   @Field(() => String)
   code: string;
-
-  @IsString()
-  @Field(() => String)
-  currency: string;
-
-  @IsString()
-  @Field(() => String)
-  country: string;
 
   @IsString()
   @Field(() => String)
