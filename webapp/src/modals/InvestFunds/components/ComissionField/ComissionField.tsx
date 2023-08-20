@@ -62,6 +62,7 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
             unit="%"
             $width={isPhone ? '100%' : 'auto'}
             error={error?.message}
+            type="number"
             {...register('comission')}
           />
         )}

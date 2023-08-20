@@ -21,7 +21,10 @@ interface SearchInstrumentComboboxProps extends Omit<SearchInputProps, 'onChange
 }
 
 export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstrumentComboboxProps>(
-  ({ placement = 'bottom-start', triggerOffset = 5, onChange, instrumentType, ...rest }, ref) => {
+  (
+    { placement = 'bottom-start', triggerOffset = 5, onChange, instrumentType, currency, ...rest },
+    ref,
+  ) => {
     const [findInstruments, { data, loading }] = useLazyQuery<
       SearchInstrumentQuery,
       SearchInstrumentQueryVariables
@@ -136,6 +139,10 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
                   <Spreader $spread="0.25" />
 
                   <Text $maxWidth="auto">{item.Name}</Text>
+
+                  <Spreader $spread="0.1" />
+
+                  <Text>({item.Currency})</Text>
                 </Menu.Item>
               ))}
             </Menu>

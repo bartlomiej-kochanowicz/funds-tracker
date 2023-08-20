@@ -24,7 +24,9 @@ export const validationSchema: ObjectSchema<InvestFundsFormValues> =
       .required(EMPTY_VALIDATION_MESSAGE),
     portfolio: string().required(EMPTY_VALIDATION_MESSAGE),
     date: date().required(EMPTY_VALIDATION_MESSAGE),
-    quantity: string().required(EMPTY_VALIDATION_MESSAGE),
+    quantity: string()
+      .matches(/^(100(\.0+)?|\d{1,2}(\.\d+)?)$/, EMPTY_VALIDATION_MESSAGE)
+      .required(EMPTY_VALIDATION_MESSAGE),
     price: string().required(EMPTY_VALIDATION_MESSAGE),
     comission: string().required(EMPTY_VALIDATION_MESSAGE),
     comission_type: string().oneOf(['%', 'amount']).required(EMPTY_VALIDATION_MESSAGE),
