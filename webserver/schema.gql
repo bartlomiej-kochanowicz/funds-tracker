@@ -64,6 +64,9 @@ type CashAccountOperation {
 
   """Cash account oparation type."""
   type: CashAccountOperationType!
+
+  """Destination uuid."""
+  destinationUuid: String!
 }
 
 enum CashAccountOperationType {
@@ -414,10 +417,12 @@ input UpdateUserInput {
 
 input InvestInNewInstrumentInput {
   portfolioUuid: String!
+  cashAccountUuid: String!
   instrument: Instrument!
   date: String!
   quantity: Float!
   price: Float!
+  comission: Float!
 }
 
 input Instrument {

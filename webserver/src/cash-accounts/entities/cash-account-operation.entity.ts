@@ -19,6 +19,9 @@ export class CashAccountOperation
 
   @Field(() => CashAccountOperationType, { description: 'Cash account oparation type.' })
   type: CashAccountOperationType;
+
+  @Field(() => String, { description: 'Destination uuid.' })
+  destinationUuid: string;
 }
 
 registerEnumType(CashAccountOperationType, {
