@@ -25,11 +25,11 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
     { placement = 'bottom-start', triggerOffset = 5, onChange, instrumentType, currency, ...rest },
     ref,
   ) => {
-    const [findInstruments, { data, loading }] = useLazyQuery<
+    const [findInstruments, { data, loading, updateQuery }] = useLazyQuery<
       SearchInstrumentQuery,
       SearchInstrumentQueryVariables
     >(SEARCH_INSTRUMENT, {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'network-only',
     });
 
     const items = useMemo(
@@ -53,6 +53,12 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
     } = useCombobox<(typeof items)[0]>({
       items,
       onInputValueChange: inputValue => {
+        if (!inputValue) {
+          updateQuery(prev => ({ ...prev, searchInstrument: [] }));
+
+          return;
+        }
+
         findInstruments({
           variables: {
             data: {
