@@ -9,9 +9,11 @@ import { FormField } from '../FormField';
 export const QuantityField = () => {
   const { t } = useTranslation();
 
-  const { register } = useFormContext<InvestFundsFormValues>();
+  const { register, getFieldState } = useFormContext<InvestFundsFormValues>();
 
   const isPhone = useBreakpoint('phone', 'max');
+
+  const { error } = getFieldState('quantity');
 
   return (
     <FormField
@@ -20,10 +22,10 @@ export const QuantityField = () => {
     >
       <Input
         id="quantity"
-        type="number"
         $flexGrow={1}
         $width={isPhone ? '100%' : 'auto'}
         placeholder={t('modal.InvestFunds.form.input.quantity.placeholder')}
+        error={error?.message}
         {...register('quantity')}
       />
     </FormField>

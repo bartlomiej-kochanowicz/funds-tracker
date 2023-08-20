@@ -28,7 +28,12 @@ export const validationSchema: ObjectSchema<InvestFundsFormValues> =
       .matches(/^(100(\.0+)?|\d{1,2}(\.\d+)?)$/, EMPTY_VALIDATION_MESSAGE)
       .required(EMPTY_VALIDATION_MESSAGE),
     price: string().required(EMPTY_VALIDATION_MESSAGE),
-    comission: string().required(EMPTY_VALIDATION_MESSAGE),
+    comission: string()
+      .when('comission_type', {
+        is: (type: string) => type === '%',
+        then: schema => schema.matches(/^(100(\.0+)?|\d{1,2}(\.\d+)?)$/, EMPTY_VALIDATION_MESSAGE),
+      })
+      .required(EMPTY_VALIDATION_MESSAGE),
     comission_type: string().oneOf(['%', 'amount']).required(EMPTY_VALIDATION_MESSAGE),
     transaction_cost: string().required(EMPTY_VALIDATION_MESSAGE),
   });
