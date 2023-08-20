@@ -1,14 +1,13 @@
-import { Instrument, SearchInstrument } from '__generated__/graphql';
+import { InstrumentType, SearchInstrument } from '__generated__/graphql';
 import { EMPTY_VALIDATION_MESSAGE } from 'constants/common';
+import instruments from 'constants/instruments';
 import { date, mixed, number, object, ObjectSchema, string } from 'yup';
 
 import { InvestFundsFormValues } from './helpers/defaultValues';
 
 export const validationSchema: ObjectSchema<InvestFundsFormValues> =
   object<InvestFundsFormValues>().shape({
-    instrumentType: mixed<Instrument>()
-      .oneOf(Object.values(Instrument))
-      .required(EMPTY_VALIDATION_MESSAGE),
+    instrumentType: mixed<InstrumentType>().oneOf(instruments).required(EMPTY_VALIDATION_MESSAGE),
     instrument: object<SearchInstrument>()
       .shape({
         Code: string().required(),

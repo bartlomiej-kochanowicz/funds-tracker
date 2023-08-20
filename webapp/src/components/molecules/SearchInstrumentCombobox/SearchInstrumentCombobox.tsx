@@ -1,5 +1,5 @@
 import {
-  Instrument,
+  InstrumentType,
   SearchInstrumentQuery,
   SearchInstrumentQueryVariables,
 } from '__generated__/graphql';
@@ -17,7 +17,7 @@ interface SearchInstrumentComboboxProps extends Omit<SearchInputProps, 'onChange
   placement?: PlacementType;
   triggerOffset?: number;
   onChange: (instrument: SearchInstrumentQuery['searchInstrument'][0]) => void;
-  instrumentType: Instrument;
+  instrumentType: InstrumentType;
 }
 
 export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstrumentComboboxProps>(

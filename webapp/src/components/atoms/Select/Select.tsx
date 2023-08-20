@@ -145,6 +145,7 @@ const SelectInner = <ValueType,>(
             {...layerProps}
             style={{
               minWidth: triggerBounds?.width,
+              maxHeight: '35vh',
               ...layerProps.style,
             }}
           >

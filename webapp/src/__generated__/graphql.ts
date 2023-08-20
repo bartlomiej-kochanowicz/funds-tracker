@@ -59,6 +59,8 @@ export type CashAccountOperation = {
   amount: Scalars['Float']['output'];
   /** Date of the transaction. */
   date: Scalars['String']['output'];
+  /** Destination uuid. */
+  destinationUuid: Scalars['String']['output'];
   /** Cash account oparation type. */
   type: CashAccountOperationType;
   /** Transaction uuid. */
@@ -103,11 +105,45 @@ export type CreatePortfolioInput = {
 };
 
 export enum Currency {
+  Aed = 'AED',
+  Ars = 'ARS',
+  Aud = 'AUD',
+  Bgn = 'BGN',
+  Bhd = 'BHD',
+  Brl = 'BRL',
+  Cad = 'CAD',
   Chf = 'CHF',
+  Clp = 'CLP',
+  Cny = 'CNY',
+  Cop = 'COP',
+  Czk = 'CZK',
+  Dkk = 'DKK',
   Eur = 'EUR',
   Gbp = 'GBP',
+  Hkd = 'HKD',
+  Huf = 'HUF',
+  Idr = 'IDR',
+  Ils = 'ILS',
+  Inr = 'INR',
+  Jpy = 'JPY',
+  Krw = 'KRW',
+  Mxn = 'MXN',
+  Myr = 'MYR',
+  Nok = 'NOK',
+  Nzd = 'NZD',
+  Pen = 'PEN',
+  Php = 'PHP',
   Pln = 'PLN',
-  Usd = 'USD'
+  Ron = 'RON',
+  Rub = 'RUB',
+  Sar = 'SAR',
+  Sek = 'SEK',
+  Sgd = 'SGD',
+  Thb = 'THB',
+  Try = 'TRY',
+  Twd = 'TWD',
+  Usd = 'USD',
+  Zar = 'ZAR'
 }
 
 export type Email = {
@@ -123,18 +159,12 @@ export type EmailInput = {
   token: Scalars['String']['input'];
 };
 
-export enum Instrument {
-  Bonds = 'bonds',
-  Commodities = 'commodities',
-  Crypto = 'crypto',
-  Etfs = 'etfs',
-  GovernmentBonds = 'governmentBonds',
-  Immovables = 'immovables',
-  Movables = 'movables',
-  Options = 'options',
-  Others = 'others',
-  Stocks = 'stocks'
-}
+export type Instrument = {
+  ISIN?: InputMaybe<Scalars['String']['input']>;
+  code: Scalars['String']['input'];
+  exchange: Scalars['String']['input'];
+  type: InstrumentType;
+};
 
 export type InstrumentHistory = {
   __typename?: 'InstrumentHistory';
@@ -167,6 +197,19 @@ export type InstrumentHistoryInput = {
   to?: InputMaybe<Scalars['String']['input']>;
 };
 
+export enum InstrumentType {
+  Bonds = 'bonds',
+  Commodities = 'commodities',
+  Crypto = 'crypto',
+  Etfs = 'etfs',
+  GovernmentBonds = 'governmentBonds',
+  Immovables = 'immovables',
+  Movables = 'movables',
+  Options = 'options',
+  Others = 'others',
+  Stocks = 'stocks'
+}
+
 export type IntroductionCashAccounts = {
   __typename?: 'IntroductionCashAccounts';
   /** Cash accounts created successfully. */
@@ -196,6 +239,22 @@ export enum IntroductionStep {
   Portfolios = 'Portfolios'
 }
 
+export type InvestInNewInstrument = {
+  __typename?: 'InvestInNewInstrument';
+  /** Invest success */
+  success: Scalars['Boolean']['output'];
+};
+
+export type InvestInNewInstrumentInput = {
+  cashAccountUuid: Scalars['String']['input'];
+  comission: Scalars['Float']['input'];
+  date: Scalars['String']['input'];
+  instrument: Instrument;
+  portfolioUuid: Scalars['String']['input'];
+  price: Scalars['Float']['input'];
+  quantity: Scalars['Float']['input'];
+};
+
 export type Logout = {
   __typename?: 'Logout';
   /** Logout successful. */
@@ -212,6 +271,7 @@ export type Mutation = {
   deletePortfolio: PortfolioDelete;
   introductionCreateCashAccounts: IntroductionCashAccounts;
   introductionCreatePortfolios: IntroductionPortfolios;
+  investInNewInstrument: InvestInNewInstrument;
   logout: Logout;
   refreshToken: Refresh;
   resetPassword: ResetPassword;
@@ -262,6 +322,11 @@ export type MutationIntroductionCreateCashAccountsArgs = {
 
 export type MutationIntroductionCreatePortfoliosArgs = {
   data: IntroductionCreatePortfoliosInput;
+};
+
+
+export type MutationInvestInNewInstrumentArgs = {
+  data: InvestInNewInstrumentInput;
 };
 
 
@@ -402,7 +467,7 @@ export type SearchInstrumentInput = {
   /** Instrument name. */
   name: Scalars['String']['input'];
   /** Instrument type. */
-  type: Instrument;
+  type: InstrumentType;
 };
 
 export type SendCode = {

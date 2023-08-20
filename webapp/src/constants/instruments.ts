@@ -1,6 +1,6 @@
-import { Instrument } from '__generated__/graphql';
+import { InstrumentType } from '__generated__/graphql';
 
-const customSortKey = (item: Instrument): number => {
+const customSortKey = (item: InstrumentType): number => {
   // Define the commonness of each instrument (higher values indicate more common)
   const commonness: { [key: string]: number } = {
     stocks: 10,
@@ -19,4 +19,4 @@ const customSortKey = (item: Instrument): number => {
   return commonness[item] || 0;
 };
 
-export default Object.values(Instrument).sort((a, b) => customSortKey(b) - customSortKey(a));
+export default Object.values(InstrumentType).sort((a, b) => customSortKey(b) - customSortKey(a));

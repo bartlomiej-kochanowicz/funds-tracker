@@ -1,4 +1,4 @@
-import { Instrument } from '__generated__/graphql';
+import { Instrument, InstrumentType } from '__generated__/graphql';
 import { SearchInstrumentCombobox } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
 import { useSearchInstrumentCombobox } from 'hooks/useSearchInstrumentCombobox';
@@ -30,7 +30,7 @@ export const SearchInstrumentField = () => {
     >
       <SearchInstrumentCombobox
         {...searchInstrumentProps}
-        instrumentType={watchInstrumentType as Instrument}
+        instrumentType={watchInstrumentType as unknown as InstrumentType}
         id="instrument"
         placeholder={t(`input.search_instrument.placeholder.${watchInstrumentType}`)}
         $flexGrow={1}
