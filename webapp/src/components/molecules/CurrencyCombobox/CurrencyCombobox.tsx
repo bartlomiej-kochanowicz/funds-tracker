@@ -1,6 +1,7 @@
 import { Currency } from '__generated__/graphql';
-import { Box, Icon, Input, Menu } from 'components/atoms';
+import { Box, Icon, Image, Input, Menu, Spreader } from 'components/atoms';
 import { InputProps } from 'components/atoms/Input';
+import { currencyFlags } from 'constants/currencyFlags';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useCombobox } from 'hooks/useCombobox';
 import { forwardRef, Fragment, useMemo, useRef, useState } from 'react';
@@ -102,7 +103,22 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
                       $alignItems="center"
                       $width="100%"
                     >
-                      {label}
+                      <Box
+                        $flex
+                        $alignItems="center"
+                      >
+                        <Image
+                          src={currencyFlags[value]}
+                          $height="16px"
+                          $width="auto"
+                          alt={label}
+                          loading="lazy"
+                        />
+
+                        <Spreader $spread="0.25" />
+
+                        {label}
+                      </Box>
 
                       {isSelected && <Icon icon={FaCheck} />}
                     </Box>

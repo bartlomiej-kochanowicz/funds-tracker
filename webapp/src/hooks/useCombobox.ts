@@ -11,11 +11,7 @@ interface IUseCombobox<Item> {
   onItemSelect?: (item: Item) => void;
 }
 
-export const useCombobox = <
-  Item extends {
-    value: string | number;
-  },
->({
+export const useCombobox = <Item extends { value: Item['value'] }>({
   items,
   onInputValueChange,
   onItemSelect,
