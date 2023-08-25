@@ -3,7 +3,7 @@ import { Box, Icon, Input, Menu } from 'components/atoms';
 import { InputProps } from 'components/atoms/Input';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useCombobox } from 'hooks/useCombobox';
-import { forwardRef, Fragment, useMemo, useRef } from 'react';
+import { forwardRef, Fragment, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaCheck } from 'react-icons/fa';
 import { mergeRefs, useLayer } from 'react-laag';
@@ -17,6 +17,7 @@ interface CurrencyComboboxProps extends Omit<InputProps, 'onChange' | 'type'> {
 
 export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxProps>(
   ({ placement = 'bottom-start', triggerOffset = 5, onChange, ...rest }, ref) => {
+    const [inputValue, setInputValue] = useState('');
     const { t } = useTranslation();
 
     const items = useMemo(
@@ -32,10 +33,8 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
       inputProps,
       itemProps,
     } = useCombobox<(typeof items)[0]>({
-      items,
-      onInputValueChange: inputValue => {
-        // console.log(inputValue);
-      },
+      items: items.filter(item => item.value.toLowerCase().includes(inputValue.toLowerCase())),
+      onInputValueChange: setInputValue,
       onItemSelect: newItem => {
         onChange(newItem.value);
       },
@@ -93,6 +92,7 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
                     key={value}
                     $maxWidth={triggerBounds?.width ? `${triggerBounds.width}px` : undefined}
                     $variant="combobox"
+                    $isSelected={isSelected}
                     {...itemRest}
                     {...itemPropsRest}
                   >

@@ -236,6 +236,7 @@ export const useDropdownMenu = <
         e.preventDefault();
         setIsOpen(false);
       }
+      // @ts-ignore
     } else {
       if (!initFocusIndex) {
         clickedOpen.current = !isOpen;
