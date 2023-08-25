@@ -198,11 +198,13 @@ export const useDropdownMenu = <
 
       if (key === 'Enter' || key === ' ') {
         e.preventDefault();
+
         setIsOpen(true);
       }
 
       if (key === 'Escape') {
         e.preventDefault();
+
         setIsOpen(false);
       }
     } else {
@@ -267,12 +269,16 @@ export const useDropdownMenu = <
         return;
       }
       if ((key === 'Enter' || key === ' ') && onClick) {
+        e.preventDefault();
+
         onClick();
         setIsOpen(false);
 
         return;
       }
       if ((key === 'Enter' || key === ' ') && to) {
+        e.preventDefault();
+
         navigate(to);
 
         setIsOpen(false);
