@@ -49,7 +49,7 @@ export interface ItemProps {
 }
 
 export interface DropdownMenuOptions {
-  focusFirstItemOnClick?: boolean;
+  initFocusIndex?: number;
 }
 
 interface DropdownMenuResponse<TriggerElement extends HTMLElement> {
@@ -69,6 +69,7 @@ export const useDropdownMenu = <
   options?: DropdownMenuOptions,
 ): DropdownMenuResponse<TriggerElement> => {
   const itemCount = items.length;
+  const initFocusIndex = options?.initFocusIndex;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const currentFocusIndex = useRef<number | null>(null);
@@ -101,12 +102,12 @@ export const useDropdownMenu = <
       return;
     }
 
-    if (isOpen && (!clickedOpen.current || options?.focusFirstItemOnClick)) {
-      moveFocus(0);
+    if (isOpen && (!clickedOpen.current || initFocusIndex)) {
+      moveFocus(initFocusIndex || 0);
     } else if (!isOpen) {
       clickedOpen.current = false;
     }
-  }, [isOpen, moveFocus, options?.focusFirstItemOnClick]);
+  }, [isOpen, moveFocus, initFocusIndex]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -205,7 +206,7 @@ export const useDropdownMenu = <
         setIsOpen(false);
       }
     } else {
-      if (!options?.focusFirstItemOnClick) {
+      if (!initFocusIndex) {
         clickedOpen.current = !isOpen;
       }
 
@@ -236,7 +237,7 @@ export const useDropdownMenu = <
         setIsOpen(false);
       }
     } else {
-      if (!options?.focusFirstItemOnClick) {
+      if (!initFocusIndex) {
         clickedOpen.current = !isOpen;
       }
 

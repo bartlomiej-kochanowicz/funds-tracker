@@ -8,7 +8,6 @@ import { Badge, Box, Input, Loader, Menu, Spreader, Text } from 'components/atom
 import type { SearchInputProps } from 'components/atoms/Input';
 import { SEARCH_INSTRUMENT } from 'graphql/query/instruments/SearchInstrument';
 import { useCombobox } from 'hooks/useCombobox';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { forwardRef, Fragment, useMemo, useRef } from 'react';
 import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
@@ -44,7 +43,6 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
     );
 
     const {
-      selectedItem,
       items: menuItems,
       inputProps: comboboxInputProps,
       isOpen,
@@ -68,13 +66,12 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
           },
         });
       },
+      onItemSelect: newSelectedItem => {
+        if (newSelectedItem && onChange) {
+          onChange(newSelectedItem);
+        }
+      },
     });
-
-    useUpdateEffect(() => {
-      if (selectedItem && onChange) {
-        onChange(selectedItem);
-      }
-    }, [selectedItem]);
 
     const triggerRef = useRef<HTMLInputElement>(null);
 

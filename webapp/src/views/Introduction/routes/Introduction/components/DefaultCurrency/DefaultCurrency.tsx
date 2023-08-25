@@ -1,50 +1,43 @@
 import { UpdateUserMutation, UpdateUserMutationVariables } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
-import { Box, Button, Heading, Loader, Select, Spacer, Text } from 'components/atoms';
-import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Box, Button, Heading, Loader, Spacer, Text } from 'components/atoms';
+import { CurrencyCombobox } from 'components/molecules';
 import { useUserContext } from 'contexts/UserContext';
 import { motion } from 'framer-motion';
 import { UPDATE_USER } from 'graphql/mutations/common/UpdateUser';
 import { showErrorToast } from 'helpers/showToast';
-import { useSelect } from 'hooks/useSelect';
-import { useMemo } from 'react';
+import { useRegisterCombobox } from 'hooks/useRegisterCombobox';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { useIntroductionContext } from 'views/Introduction/routes/Introduction/context';
+
+import { FormSchemaType, validationSchema } from './DefaultCurrency.schema';
 
 export const DefaultCurrency = () => {
   const { t } = useTranslation();
 
   const { updateState, actions } = useIntroductionContext();
 
-  const { user, updateUser: updateUserGlobal } = useUserContext();
-
-  const items = useMemo(
-    () =>
-      CURRENCIES_ARRAY.map(currency => ({
-        label: t(`currency.${currency}`),
-        value: currency,
-      })),
-    [t],
-  );
+  const { updateUser: updateUserGlobal } = useUserContext();
 
   const defaultValues = {
-    defaultCurrency: user.defaultCurrency,
+    defaultCurrency: undefined,
   };
 
   const {
-    register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<typeof defaultValues>({
+    formState: { isSubmitting, isValid },
+    control,
+  } = useForm<FormSchemaType>({
     defaultValues,
     mode: 'onChange',
+    resolver: yupResolver(validationSchema),
   });
 
-  const defaultCurrencySelectProps = useSelect<typeof defaultValues>({
-    register,
+  const defaultCurrencySelectProps = useRegisterCombobox<FormSchemaType>({
+    control,
     name: 'defaultCurrency',
-    errors,
   });
 
   const [updateUser] = useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UPDATE_USER, {
@@ -61,7 +54,7 @@ export const DefaultCurrency = () => {
     },
   });
 
-  const onSubmit = async (data: typeof defaultValues) => {
+  const onSubmit = async (data: FormSchemaType) => {
     await updateUser({
       variables: {
         data,
@@ -109,17 +102,14 @@ export const DefaultCurrency = () => {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
-          <Select
-            items={items}
-            {...defaultCurrencySelectProps}
-          />
+          <CurrencyCombobox {...defaultCurrencySelectProps} />
 
           <Spacer $space="1.5" />
 
           <Button
             $size="large"
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !isValid}
             $width="100%"
           >
             {isSubmitting ? <Loader $color="white" /> : t('page.introduction.next.step.submit')}
