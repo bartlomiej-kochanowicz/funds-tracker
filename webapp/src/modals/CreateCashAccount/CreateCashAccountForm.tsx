@@ -7,10 +7,12 @@ import { useMutation } from '@apollo/client';
 import { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Icon, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
+import { CurrencyCombobox } from 'components/molecules';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useUserContext } from 'contexts/UserContext';
 import { CREATE_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/CreateCashAccount';
 import { showErrorToast } from 'helpers/showToast';
+import { useRegisterCombobox } from 'hooks/useRegisterCombobox';
 import { useSelect } from 'hooks/useSelect';
 import { FC, Fragment, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -41,6 +43,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
     handleSubmit,
     formState: { errors, isSubmitting, isValid, isDirty },
     register,
+    control,
   } = useForm<CreateCashAccountInput>({
     defaultValues,
     resolver: yupResolver<CreateCashAccountInput>(validationSchema),
@@ -69,22 +72,10 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
     });
   };
 
-  const currencySelectProps = useSelect<CreateCashAccountInput>({
-    register,
+  const currencySelectProps = useRegisterCombobox<CreateCashAccountInput>({
+    control,
     name: 'currency',
-    errors,
   });
-
-  const customLabel = ({ value }: { value: string }) => value;
-
-  const items = useMemo(
-    () =>
-      CURRENCIES_ARRAY.map(currency => ({
-        label: t(`currency.${currency}`),
-        value: currency,
-      })),
-    [t],
-  );
 
   return (
     <form
@@ -104,11 +95,8 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 
         <Spreader $spread="0.25" />
 
-        <Select
-          width="130px"
-          items={items}
-          customLabel={customLabel}
-          placement="bottom-end"
+        <CurrencyCombobox
+          $width="130px"
           {...currencySelectProps}
         />
       </Box>

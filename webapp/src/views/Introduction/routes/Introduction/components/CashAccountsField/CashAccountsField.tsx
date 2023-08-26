@@ -1,9 +1,12 @@
 import { Currency, IntroductionCreateCashAccountsInput } from '__generated__/graphql';
 import { Box, Button, Icon, Input, Select, Spreader } from 'components/atoms';
+import { CurrencyCombobox } from 'components/molecules';
 import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
+import { useRegisterCombobox } from 'hooks/useRegisterCombobox';
 import { useSelect } from 'hooks/useSelect';
 import { useMemo } from 'react';
 import {
+  Control,
   DeepRequired,
   FieldErrorsImpl,
   UseFieldArrayRemove,
@@ -14,6 +17,7 @@ import { FaTrash } from 'react-icons/fa';
 
 interface CashAccountsFieldProps {
   register: UseFormRegister<IntroductionCreateCashAccountsInput>;
+  control: Control<IntroductionCreateCashAccountsInput>;
   errors: FieldErrorsImpl<DeepRequired<IntroductionCreateCashAccountsInput>>;
   index: number;
   defaultValue: Currency;
@@ -26,25 +30,14 @@ export const CashAccountsField = ({
   index,
   defaultValue,
   remove,
+  control,
 }: CashAccountsFieldProps) => {
   const { t } = useTranslation();
 
-  const currencySelectProps = useSelect<IntroductionCreateCashAccountsInput>({
-    register,
+  const currencySelectProps = useRegisterCombobox<IntroductionCreateCashAccountsInput>({
+    control,
     name: `cashAccounts.${index}.currency`,
-    errors,
   });
-
-  const items = useMemo(
-    () =>
-      CURRENCIES_ARRAY.map(currency => ({
-        label: t(`currency.${currency}`),
-        value: currency,
-      })),
-    [t],
-  );
-
-  const customLabel = ({ value }: { value: string }) => value;
 
   const handleRemoveField = async () => {
     remove(index);
@@ -61,10 +54,8 @@ export const CashAccountsField = ({
 
       <Spreader $spread="0.25" />
 
-      <Select
-        width="130px"
-        items={items}
-        customLabel={customLabel}
+      <CurrencyCombobox
+        $width="130px"
         {...currencySelectProps}
       />
 

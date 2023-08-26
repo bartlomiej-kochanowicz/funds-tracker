@@ -91,7 +91,6 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
                 return (
                   <Menu.Item
                     key={value}
-                    $maxWidth={triggerBounds?.width ? `${triggerBounds.width}px` : undefined}
                     $variant="combobox"
                     $isSelected={isSelected}
                     {...itemRest}
