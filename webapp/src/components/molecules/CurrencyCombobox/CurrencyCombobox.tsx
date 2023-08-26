@@ -19,7 +19,7 @@ interface CurrencyComboboxProps extends Omit<InputProps, 'onChange' | 'type'> {
 
 export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxProps>(
   ({ placement = 'bottom-start', triggerOffset = 5, onChange, defaultValue, ...rest }, ref) => {
-    const [inputValue, setInputValue] = useState(defaultValue || '');
+    const [inputValue, setInputValue] = useState('');
     const { t } = useTranslation();
 
     const items = useMemo(
