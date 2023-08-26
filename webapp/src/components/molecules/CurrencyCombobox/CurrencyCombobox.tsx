@@ -39,6 +39,7 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
       onInputValueChange: setInputValue,
       onItemSelect: newItem => {
         onChange(newItem.value);
+        setInputValue('');
       },
       defaultValue,
     });
