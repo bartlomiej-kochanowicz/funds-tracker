@@ -1,10 +1,7 @@
 import { Currency, IntroductionCreateCashAccountsInput } from '__generated__/graphql';
-import { Box, Button, Icon, Input, Select, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Spreader } from 'components/atoms';
 import { CurrencyCombobox } from 'components/molecules';
-import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useRegisterCombobox } from 'hooks/useRegisterCombobox';
-import { useSelect } from 'hooks/useSelect';
-import { useMemo } from 'react';
 import {
   Control,
   DeepRequired,
@@ -37,6 +34,7 @@ export const CashAccountsField = ({
   const currencySelectProps = useRegisterCombobox<IntroductionCreateCashAccountsInput>({
     control,
     name: `cashAccounts.${index}.currency`,
+    defaultValue,
   });
 
   const handleRemoveField = async () => {

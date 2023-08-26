@@ -14,11 +14,12 @@ interface CurrencyComboboxProps extends Omit<InputProps, 'onChange' | 'type'> {
   placement?: PlacementType;
   triggerOffset?: number;
   onChange: (currency: Currency) => void;
+  defaultValue?: Currency;
 }
 
 export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxProps>(
-  ({ placement = 'bottom-start', triggerOffset = 5, onChange, ...rest }, ref) => {
-    const [inputValue, setInputValue] = useState('');
+  ({ placement = 'bottom-start', triggerOffset = 5, onChange, defaultValue, ...rest }, ref) => {
+    const [inputValue, setInputValue] = useState(defaultValue || '');
     const { t } = useTranslation();
 
     const items = useMemo(
@@ -39,6 +40,7 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
       onItemSelect: newItem => {
         onChange(newItem.value);
       },
+      defaultValue,
     });
 
     const triggerRef = useRef<HTMLInputElement>(null);
@@ -69,7 +71,8 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
           {...rest}
           {...inputProps}
           {...comboboxInputProps}
-          ref={mergeRefs(ref, triggerRef, inputProps.ref, triggerProps.ref)}
+          ref={mergeRefs(ref, triggerRef, inputProps.ref, triggerProps.ref, comboboxInputProps.ref)}
+          defaultValue={defaultValue}
         />
 
         {renderLayer(
@@ -118,6 +121,8 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
 
                         {label}
                       </Box>
+
+                      <Spreader $spread="0.25" />
 
                       {isSelected && <Icon icon={FaCheck} />}
                     </Box>

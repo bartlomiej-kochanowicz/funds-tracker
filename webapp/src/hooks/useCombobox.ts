@@ -5,18 +5,25 @@ import { mergeRefs } from 'react-laag';
 import { useDropdownMenu } from './useDropdownMenu';
 import { useUpdateEffect } from './useUpdateEffect';
 
-interface IUseCombobox<Item> {
+interface IUseCombobox<Item extends { value: Item['value'] }> {
   items: Item[];
   onInputValueChange: (value: string) => void;
   onItemSelect?: (item: Item) => void;
+  defaultValue?: Item['value'];
 }
 
 export const useCombobox = <Item extends { value: Item['value'] }>({
   items,
   onInputValueChange,
   onItemSelect,
+  defaultValue,
 }: IUseCombobox<Item>) => {
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const initSelectedItem = useMemo(
+    () => items.find(item => item.value === defaultValue),
+    [items, defaultValue],
+  );
+
+  const [selectedItem, setSelectedItem] = useState<Item | null>(initSelectedItem || null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const menuItems = useMemo(
@@ -37,8 +44,8 @@ export const useCombobox = <Item extends { value: Item['value'] }>({
       })),
     [items, onItemSelect],
   );
+
   const itemIndex = items.findIndex(item => item.value === selectedItem?.value);
-  const initFocusIndex = itemIndex === -1 ? undefined : itemIndex;
 
   const {
     inputProps: useDropdownInputProps,
@@ -46,7 +53,11 @@ export const useCombobox = <Item extends { value: Item['value'] }>({
     isOpen,
     setIsOpen,
   } = useDropdownMenu<{}, HTMLInputElement>(menuItems, {
-    initFocusIndex,
+    onMenuToggle: isMenuOpen => {
+      if (!isMenuOpen && inputRef.current) {
+        inputRef.current.value = String(selectedItem?.value);
+      }
+    },
   });
 
   useUpdateEffect(() => {
@@ -62,11 +73,6 @@ export const useCombobox = <Item extends { value: Item['value'] }>({
       (e: ChangeEvent<HTMLInputElement>) => onInputValueChange(e.target.value),
       350,
     ),
-    onBlur: () => {
-      if (inputRef.current && selectedItem) {
-        inputRef.current.value = String(selectedItem.value);
-      }
-    },
     ref: mergeRefs(inputRef, useDropdownInputProps.ref),
   };
 

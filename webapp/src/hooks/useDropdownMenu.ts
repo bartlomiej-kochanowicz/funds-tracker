@@ -15,6 +15,8 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useUpdateEffect } from './useUpdateEffect';
+
 export type ItemButton = {
   onClick?: () => void;
   to?: undefined;
@@ -50,6 +52,7 @@ export interface ItemProps {
 
 export interface DropdownMenuOptions {
   initFocusIndex?: number;
+  onMenuToggle?: (isOpen: boolean) => void;
 }
 
 interface DropdownMenuResponse<TriggerElement extends HTMLElement> {
@@ -70,6 +73,7 @@ export const useDropdownMenu = <
 ): DropdownMenuResponse<TriggerElement> => {
   const itemCount = items.length;
   const initFocusIndex = options?.initFocusIndex;
+  const onMenuToggle = options?.onMenuToggle;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const currentFocusIndex = useRef<number | null>(null);
@@ -238,7 +242,6 @@ export const useDropdownMenu = <
         e.preventDefault();
         setIsOpen(false);
       }
-      // @ts-ignore
     } else {
       if (!initFocusIndex) {
         clickedOpen.current = !isOpen;
@@ -347,5 +350,18 @@ export const useDropdownMenu = <
     ref: itemRefs[index],
   }));
 
-  return { inputProps, buttonProps, itemProps, isOpen, setIsOpen, moveFocus } as const;
+  useUpdateEffect(() => {
+    if (onMenuToggle) {
+      onMenuToggle(isOpen);
+    }
+  }, [isOpen]);
+
+  return {
+    inputProps,
+    buttonProps,
+    itemProps,
+    isOpen,
+    setIsOpen,
+    moveFocus,
+  } as const;
 };

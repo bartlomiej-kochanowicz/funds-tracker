@@ -2,19 +2,18 @@ import {
   CreateCashAccountInput,
   CreateCashAccountMutation,
   CreateCashAccountMutationVariables,
+  Currency,
 } from '__generated__/graphql';
 import { useMutation } from '@apollo/client';
 import { useModal } from '@ebay/nice-modal-react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Icon, Input, Loader, Select, Spacer, Spreader } from 'components/atoms';
+import { Box, Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
 import { CurrencyCombobox } from 'components/molecules';
-import { CURRENCIES_ARRAY } from 'constants/selectors/currencies';
 import { useUserContext } from 'contexts/UserContext';
 import { CREATE_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/CreateCashAccount';
 import { showErrorToast } from 'helpers/showToast';
 import { useRegisterCombobox } from 'hooks/useRegisterCombobox';
-import { useSelect } from 'hooks/useSelect';
-import { FC, Fragment, useMemo } from 'react';
+import { FC, Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FaPlus } from 'react-icons/fa';
@@ -72,9 +71,10 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
     });
   };
 
-  const currencySelectProps = useRegisterCombobox<CreateCashAccountInput>({
+  const currencySelectProps = useRegisterCombobox<CreateCashAccountInput, Currency>({
     control,
     name: 'currency',
+    defaultValue: defaultValues.currency,
   });
 
   return (
