@@ -13,6 +13,7 @@ import { InstrumentsModule } from './instruments/instruments.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { UserModule } from './user/user.module';
 import { InvestModule } from './invest/invest.module';
+import { CurrenciesModule } from './currencies/currencies.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { InvestModule } from './invest/invest.module';
     PortfoliosModule,
     UserModule,
     InvestModule,
+    CurrenciesModule,
   ],
   controllers: [],
   providers: [
