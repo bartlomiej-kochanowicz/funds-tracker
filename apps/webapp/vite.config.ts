@@ -7,18 +7,11 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
-const IS_DOCKER = process.env.DOCKER === 'true';
 
 export default defineConfig({
   server: {
     port: 3000,
     host: true,
-    proxy: {
-      '/api/graphql': {
-        rewrite: path => (IS_DEVELOPMENT ? path.replace(/^\/api/, '') : path),
-        target: `http://${IS_DOCKER ? 'webserver' : 'localhost'}:3001/graphql`,
-      },
-    },
   },
   test: {
     globals: true,
