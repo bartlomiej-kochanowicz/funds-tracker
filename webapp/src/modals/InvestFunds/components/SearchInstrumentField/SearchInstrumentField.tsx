@@ -1,9 +1,9 @@
-import { Instrument } from '__generated__/graphql';
+import { InstrumentType } from '__generated__/graphql';
 import { SearchInstrumentCombobox } from 'components/molecules';
 import { useBreakpoint } from 'hooks/useBreakpoint';
-import { useSearchInstrumentCombobox } from 'hooks/useSearchInstrumentCombobox';
+import { useRegisterCombobox } from 'hooks/useRegisterCombobox';
 import { InvestFundsFormValues } from 'modals/InvestFunds/helpers/defaultValues';
-import { useFormContext } from 'react-hook-form';
+import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { FormField } from '../FormField';
@@ -11,12 +11,11 @@ import { FormField } from '../FormField';
 export const SearchInstrumentField = () => {
   const { t } = useTranslation();
 
-  const { control, setValue, watch } = useFormContext<InvestFundsFormValues>();
+  const { control, watch } = useFormContext<InvestFundsFormValues>();
 
-  const searchInstrumentProps = useSearchInstrumentCombobox({
+  const searchInstrumentCombobox = useRegisterCombobox<InvestFundsFormValues>({
     control,
     name: 'instrument',
-    setValue,
   });
 
   const watchInstrumentType = watch('instrumentType');
@@ -29,8 +28,8 @@ export const SearchInstrumentField = () => {
       htmlFor="instrument"
     >
       <SearchInstrumentCombobox
-        {...searchInstrumentProps}
-        instrumentType={watchInstrumentType as Instrument}
+        {...searchInstrumentCombobox}
+        instrumentType={watchInstrumentType as unknown as InstrumentType}
         id="instrument"
         placeholder={t(`input.search_instrument.placeholder.${watchInstrumentType}`)}
         $flexGrow={1}

@@ -1,14 +1,13 @@
-import { Instrument, SearchInstrument } from '__generated__/graphql';
+import { InstrumentType, SearchInstrument } from '__generated__/graphql';
 import { EMPTY_VALIDATION_MESSAGE } from 'constants/common';
+import instruments from 'constants/instruments';
 import { date, mixed, number, object, ObjectSchema, string } from 'yup';
 
 import { InvestFundsFormValues } from './helpers/defaultValues';
 
 export const validationSchema: ObjectSchema<InvestFundsFormValues> =
   object<InvestFundsFormValues>().shape({
-    instrumentType: mixed<Instrument>()
-      .oneOf(Object.values(Instrument))
-      .required(EMPTY_VALIDATION_MESSAGE),
+    instrumentType: mixed<InstrumentType>().oneOf(instruments).required(EMPTY_VALIDATION_MESSAGE),
     instrument: object<SearchInstrument>()
       .shape({
         Code: string().required(),
@@ -24,9 +23,16 @@ export const validationSchema: ObjectSchema<InvestFundsFormValues> =
       .required(EMPTY_VALIDATION_MESSAGE),
     portfolio: string().required(EMPTY_VALIDATION_MESSAGE),
     date: date().required(EMPTY_VALIDATION_MESSAGE),
-    quantity: string().required(EMPTY_VALIDATION_MESSAGE),
+    quantity: string()
+      .matches(/^(100(\.0+)?|\d{1,2}(\.\d+)?)$/, EMPTY_VALIDATION_MESSAGE)
+      .required(EMPTY_VALIDATION_MESSAGE),
     price: string().required(EMPTY_VALIDATION_MESSAGE),
-    comission: string().required(EMPTY_VALIDATION_MESSAGE),
+    comission: string()
+      .when('comission_type', {
+        is: (type: string) => type === '%',
+        then: schema => schema.matches(/^(100(\.0+)?|\d{1,2}(\.\d+)?)$/, EMPTY_VALIDATION_MESSAGE),
+      })
+      .required(EMPTY_VALIDATION_MESSAGE),
     comission_type: string().oneOf(['%', 'amount']).required(EMPTY_VALIDATION_MESSAGE),
     transaction_cost: string().required(EMPTY_VALIDATION_MESSAGE),
   });

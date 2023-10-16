@@ -64,6 +64,9 @@ type CashAccountOperation {
 
   """Cash account oparation type."""
   type: CashAccountOperationType!
+
+  """Destination uuid."""
+  destinationUuid: String!
 }
 
 enum CashAccountOperationType {
@@ -94,11 +97,45 @@ type CashAccount {
 }
 
 enum Currency {
-  CHF
-  EUR
-  GBP
   USD
+  EUR
+  JPY
+  GBP
+  CNY
+  AUD
+  CAD
+  CHF
+  HKD
+  SGD
+  SEK
+  KRW
+  NOK
+  NZD
+  INR
+  MXN
+  TWD
+  ZAR
+  BRL
+  DKK
   PLN
+  THB
+  ILS
+  IDR
+  CZK
+  AED
+  TRY
+  HUF
+  CLP
+  SAR
+  PHP
+  MYR
+  COP
+  RUB
+  RON
+  PEN
+  BHD
+  BGN
+  ARS
 }
 
 type IntroductionCashAccounts {
@@ -213,6 +250,11 @@ enum IntroductionStep {
   Completed
 }
 
+type InvestInNewInstrument {
+  """Invest success"""
+  success: Boolean!
+}
+
 type Query {
   emailExist(data: EmailInput!): Email!
   cashAccounts: [CashAccount!]!
@@ -237,10 +279,10 @@ input SearchInstrumentInput {
   name: String!
 
   """Instrument type."""
-  type: Instrument!
+  type: InstrumentType!
 }
 
-enum Instrument {
+enum InstrumentType {
   stocks
   bonds
   governmentBonds
@@ -289,6 +331,7 @@ type Mutation {
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
   deletePortfolio(uuid: String!): PortfolioDelete!
   updateUser(data: UpdateUserInput!): User!
+  investInNewInstrument(data: InvestInNewInstrumentInput!): InvestInNewInstrument!
 }
 
 input SignupInput {
@@ -404,4 +447,21 @@ input UpdateUserInput {
 
   """New user default currency."""
   defaultCurrency: Currency
+}
+
+input InvestInNewInstrumentInput {
+  portfolioUuid: String!
+  cashAccountUuid: String!
+  instrument: Instrument!
+  date: String!
+  quantity: Float!
+  price: Float!
+  comission: Float!
+}
+
+input Instrument {
+  type: InstrumentType!
+  code: String!
+  exchange: String!
+  ISIN: String
 }

@@ -22,7 +22,8 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 
   const isPhone = useBreakpoint('phone', 'max');
 
-  const { error } = getFieldState('transaction_cost');
+  const { error: transactionCostError } = getFieldState('transaction_cost');
+  const { error: comissionError } = getFieldState('comission');
 
   const calculateTransactionCost = () => {
     const { price, quantity, comission, comission_type: comissionType } = getValues();
@@ -73,7 +74,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
           $width={isPhone ? '100%' : 'auto'}
           placeholder={t('modal.InvestFunds.form.input.transaction_cost.placeholder')}
           currency={activeCurrency}
-          error={error?.message}
+          error={transactionCostError?.message}
           {...currencyInputProps}
         />
 
@@ -82,7 +83,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
         <Button
           $color="secondary"
           onClick={calculateTransactionCost}
-          disabled={!watchQuantity || !watchPrice || !watchComission}
+          disabled={!watchQuantity || !watchPrice || !watchComission || Boolean(comissionError)}
         >
           <Icon icon={FaCalculator} />
         </Button>

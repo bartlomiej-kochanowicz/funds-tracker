@@ -1,5 +1,5 @@
 import {
-  Instrument,
+  InstrumentType,
   SearchInstrumentQuery,
   SearchInstrumentQueryVariables,
 } from '__generated__/graphql';
@@ -8,7 +8,6 @@ import { Badge, Box, Input, Loader, Menu, Spreader, Text } from 'components/atom
 import type { SearchInputProps } from 'components/atoms/Input';
 import { SEARCH_INSTRUMENT } from 'graphql/query/instruments/SearchInstrument';
 import { useCombobox } from 'hooks/useCombobox';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
 import { forwardRef, Fragment, useMemo, useRef } from 'react';
 import { mergeRefs, useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
@@ -17,16 +16,19 @@ interface SearchInstrumentComboboxProps extends Omit<SearchInputProps, 'onChange
   placement?: PlacementType;
   triggerOffset?: number;
   onChange: (instrument: SearchInstrumentQuery['searchInstrument'][0]) => void;
-  instrumentType: Instrument;
+  instrumentType: InstrumentType;
 }
 
 export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstrumentComboboxProps>(
-  ({ placement = 'bottom-start', triggerOffset = 5, onChange, instrumentType, ...rest }, ref) => {
-    const [findInstruments, { data, loading }] = useLazyQuery<
+  (
+    { placement = 'bottom-start', triggerOffset = 5, onChange, instrumentType, currency, ...rest },
+    ref,
+  ) => {
+    const [findInstruments, { data, loading, updateQuery }] = useLazyQuery<
       SearchInstrumentQuery,
       SearchInstrumentQueryVariables
     >(SEARCH_INSTRUMENT, {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'network-only',
     });
 
     const items = useMemo(
@@ -41,7 +43,6 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
     );
 
     const {
-      selectedItem,
       items: menuItems,
       inputProps: comboboxInputProps,
       isOpen,
@@ -50,6 +51,12 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
     } = useCombobox<(typeof items)[0]>({
       items,
       onInputValueChange: inputValue => {
+        if (!inputValue) {
+          updateQuery(prev => ({ ...prev, searchInstrument: [] }));
+
+          return;
+        }
+
         findInstruments({
           variables: {
             data: {
@@ -59,13 +66,12 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
           },
         });
       },
+      onItemSelect: newSelectedItem => {
+        if (newSelectedItem && onChange) {
+          onChange(newSelectedItem);
+        }
+      },
     });
-
-    useUpdateEffect(() => {
-      if (selectedItem && onChange) {
-        onChange(selectedItem);
-      }
-    }, [selectedItem]);
 
     const triggerRef = useRef<HTMLInputElement>(null);
 
@@ -136,6 +142,10 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
                   <Spreader $spread="0.25" />
 
                   <Text $maxWidth="auto">{item.Name}</Text>
+
+                  <Spreader $spread="0.1" />
+
+                  <Text>({item.Currency})</Text>
                 </Menu.Item>
               ))}
             </Menu>

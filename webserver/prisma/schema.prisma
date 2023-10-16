@@ -49,41 +49,45 @@ model CashAccountOperation {
   date            DateTime                 @default(now())
   type            CashAccountOperationType
   amount          Float
+  destination     Portfolio?               @relation(fields: [destinationUuid], references: [uuid])
+  destinationUuid String?
 }
 
 model Portfolio {
-  uuid        String       @id @default(uuid())
-  name        String
-  instruments Instrument[]
-  user        User         @relation(fields: [userUuid], references: [uuid])
-  userUuid    String
+  uuid                 String                 @id @default(uuid())
+  name                 String
+  user                 User                   @relation(fields: [userUuid], references: [uuid])
+  userUuid             String
+  portfolioOperations  PortfolioOperation[]
+  CashAccountOperation CashAccountOperation[]
 
   @@unique([userUuid, uuid])
 }
 
-model Instrument {
-  uuid                  String                @id @default(uuid())
-  name                  String
-  percentageOfPortfolio Int?                  @default(0)
-  type                  InstrumentType
-  portfolio             Portfolio             @relation(fields: [portfolioUuid], references: [uuid])
-  portfolioUuid         String
-  code                  String
-  currency              String
-  ISIN                  String?
-  InstrumentOperation   InstrumentOperation[]
-
-  @@unique([portfolioUuid, uuid])
+model PortfolioOperation {
+  uuid                   String        @id @default(uuid())
+  instrument             Instrument    @relation(fields: [instrumentCodeExchange], references: [codeExchange])
+  instrumentCodeExchange String
+  date                   DateTime      @default(now())
+  type                   OperationType
+  quantity               Float
+  price                  Float
+  portfolio              Portfolio     @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid          String
 }
 
-model InstrumentOperation {
-  uuid           String        @id @default(uuid())
-  instrument     Instrument    @relation(fields: [instrumentUuid], references: [uuid])
-  instrumentUuid String
-  date           DateTime      @default(now())
-  type           OperationType
-  quantity       Float
-  price          Float
+model Instrument {
+  codeExchange       String               @id
+  name               String
+  type               InstrumentType
+  code               String
+  currency           String
+  country            String
+  exchange           String
+  ISIN               String?
+  portfolioOperation PortfolioOperation[]
+
+  @@unique([codeExchange, code, ISIN])
 }
 
 enum Subscription {
@@ -116,11 +120,45 @@ enum InstrumentType {
 }
 
 enum Currency {
-  CHF
-  EUR
-  GBP
   USD
+  EUR
+  JPY
+  GBP
+  CNY
+  AUD
+  CAD
+  CHF
+  HKD
+  SGD
+  SEK
+  KRW
+  NOK
+  NZD
+  INR
+  MXN
+  TWD
+  ZAR
+  BRL
+  DKK
   PLN
+  THB
+  ILS
+  IDR
+  CZK
+  AED
+  TRY
+  HUF
+  CLP
+  SAR
+  PHP
+  MYR
+  COP
+  RUB
+  RON
+  PEN
+  BHD
+  BGN
+  ARS
 }
 
 enum IntroductionStep {

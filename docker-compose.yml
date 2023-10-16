@@ -85,6 +85,7 @@ services:
       - development-database
     ports:
       - ${WEBSERVER_PORT}:${WEBSERVER_PORT}
+      - 5555:5555
 
   webapp:
     container_name: webapp

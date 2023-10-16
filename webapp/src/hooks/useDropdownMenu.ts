@@ -15,6 +15,8 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useUpdateEffect } from './useUpdateEffect';
+
 export type ItemButton = {
   onClick?: () => void;
   to?: undefined;
@@ -49,7 +51,8 @@ export interface ItemProps {
 }
 
 export interface DropdownMenuOptions {
-  focusFirstItemOnClick?: boolean;
+  initFocusIndex?: number;
+  onMenuToggle?: (isOpen: boolean) => void;
 }
 
 interface DropdownMenuResponse<TriggerElement extends HTMLElement> {
@@ -69,6 +72,8 @@ export const useDropdownMenu = <
   options?: DropdownMenuOptions,
 ): DropdownMenuResponse<TriggerElement> => {
   const itemCount = items.length;
+  const initFocusIndex = options?.initFocusIndex;
+  const onMenuToggle = options?.onMenuToggle;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const currentFocusIndex = useRef<number | null>(null);
@@ -101,12 +106,12 @@ export const useDropdownMenu = <
       return;
     }
 
-    if (isOpen && (!clickedOpen.current || options?.focusFirstItemOnClick)) {
-      moveFocus(0);
+    if (isOpen && (!clickedOpen.current || initFocusIndex)) {
+      moveFocus(initFocusIndex || 0);
     } else if (!isOpen) {
       clickedOpen.current = false;
     }
-  }, [isOpen, moveFocus, options?.focusFirstItemOnClick]);
+  }, [isOpen, moveFocus, initFocusIndex]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -197,15 +202,17 @@ export const useDropdownMenu = <
 
       if (key === 'Enter' || key === ' ') {
         e.preventDefault();
+
         setIsOpen(true);
       }
 
       if (key === 'Escape') {
         e.preventDefault();
+
         setIsOpen(false);
       }
     } else {
-      if (!options?.focusFirstItemOnClick) {
+      if (!initFocusIndex) {
         clickedOpen.current = !isOpen;
       }
 
@@ -236,7 +243,7 @@ export const useDropdownMenu = <
         setIsOpen(false);
       }
     } else {
-      if (!options?.focusFirstItemOnClick) {
+      if (!initFocusIndex) {
         clickedOpen.current = !isOpen;
       }
 
@@ -265,12 +272,16 @@ export const useDropdownMenu = <
         return;
       }
       if ((key === 'Enter' || key === ' ') && onClick) {
+        e.preventDefault();
+
         onClick();
         setIsOpen(false);
 
         return;
       }
       if ((key === 'Enter' || key === ' ') && to) {
+        e.preventDefault();
+
         navigate(to);
 
         setIsOpen(false);
@@ -339,5 +350,18 @@ export const useDropdownMenu = <
     ref: itemRefs[index],
   }));
 
-  return { inputProps, buttonProps, itemProps, isOpen, setIsOpen, moveFocus } as const;
+  useUpdateEffect(() => {
+    if (onMenuToggle) {
+      onMenuToggle(isOpen);
+    }
+  }, [isOpen]);
+
+  return {
+    inputProps,
+    buttonProps,
+    itemProps,
+    isOpen,
+    setIsOpen,
+    moveFocus,
+  } as const;
 };

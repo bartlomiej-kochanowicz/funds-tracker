@@ -15,6 +15,7 @@ export interface MenuItemProps {
   onClick?: () => void;
   to?: string;
   $isSelected?: boolean;
+  $variant?: 'combobox';
   $padding?: keyof DefaultTheme['padding'];
   icon?: IconType;
   $maxWidth?: `${string}px` | `${string}%`;

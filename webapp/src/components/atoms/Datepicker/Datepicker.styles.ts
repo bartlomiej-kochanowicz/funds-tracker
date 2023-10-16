@@ -4,6 +4,10 @@ export const ArrowButton = styled.button`
   background-color: transparent;
   border: none;
   color: ${({ theme }) => theme.colors.text};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const StyledSelect = styled.select`
@@ -18,6 +22,10 @@ export const StyledSelect = styled.select`
 
     &:focus-visible {
       outline: 2px solid ${colors.blue};
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   `};
 `;

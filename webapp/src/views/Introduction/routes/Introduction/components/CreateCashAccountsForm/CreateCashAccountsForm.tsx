@@ -143,6 +143,7 @@ export const CreateCashAccountsForm = () => {
                   key={field.id}
                   index={index}
                   register={register}
+                  control={control}
                   errors={errors}
                   defaultValue={values.cashAccounts[index].currency}
                   remove={remove}

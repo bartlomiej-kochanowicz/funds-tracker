@@ -37,14 +37,24 @@ const mixin = css<MixinProps>`
 export const StyledButton = styled.button<
   {
     $isSelected: boolean;
+    $variant?: 'combobox';
   } & MixinProps
 >`
   ${mixin as unknown as StyleFunction<object>}
 
-  ${({ theme, $isSelected }) => css`
+  ${({ theme, $isSelected, $variant }) => css`
     ${$isSelected &&
     css`
       font-weight: ${theme.font.weight[700]};
+    `}
+
+    ${$variant === 'combobox' &&
+    css`
+      &:focus-visible,
+      &:focus {
+        background-color: ${theme.colors.blue};
+        color: ${theme.colors.white};
+      }
     `}
   `}
 `;

@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
-import { Instrument } from '@app/common/constants/instrument';
+import { InstrumentType } from '@prisma/client';
 import { InstrumentHistoryInput, SearchInstrumentInput } from './inputs';
 import { InstrumentHistory, SearchInstrument } from './entities';
 
@@ -27,7 +27,7 @@ export class InstrumentsService {
           },
         })
         .pipe(
-          catchError(() => {
+          catchError(err => {
             throw Error('Error fetching instruments');
           }),
         ),
@@ -60,17 +60,15 @@ export class InstrumentsService {
     return data;
   }
 
-  // async buyInstrument(instrumentHistoryInput: InstrumentHistoryInput): Promise<void> {}
-
   private getType(type: SearchInstrumentInput['type']): string {
     switch (type) {
-      case Instrument.stocks:
+      case InstrumentType.stocks:
         return 'stock';
-      case Instrument.bonds:
+      case InstrumentType.bonds:
         return 'bond';
-      case Instrument.etfs:
+      case InstrumentType.etfs:
         return 'etf';
-      case Instrument.crypto:
+      case InstrumentType.crypto:
         return 'crypto';
       default:
         return 'all';

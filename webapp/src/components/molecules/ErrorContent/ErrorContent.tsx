@@ -9,6 +9,7 @@ export const ErrorContent: FC = () => {
   return (
     <Box
       $flex
+      $flexDirection="column"
       $alignItems="center"
     >
       <Icon

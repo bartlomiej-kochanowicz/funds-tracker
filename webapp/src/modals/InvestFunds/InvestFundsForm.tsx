@@ -34,6 +34,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
   const methods = useForm<InvestFundsFormValues>({
     defaultValues,
     resolver: yupResolver<InvestFundsFormValues>(validationSchema),
+    mode: 'onChange',
   });
 
   const {
