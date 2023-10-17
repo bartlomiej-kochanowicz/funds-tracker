@@ -1,0 +1,182 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  uuid                 String           @id @default(uuid())
+  createdAt            DateTime         @default(now())
+  email                String           @unique
+  name                 String
+  password             String
+  confirmationCodeHash String?          @unique
+  defaultCurrency      Currency         @default(USD)
+  introductionStep     IntroductionStep @default(DefaultCurrency)
+  sessions             Session[]
+  cashAccounts         CashAccount[]
+  portfolios           Portfolio[]
+  subscription         Subscription     @default(FREE)
+}
+
+model Session {
+  name      String
+  rtHash    String   @unique
+  updatedAt DateTime @default(now())
+  User      User     @relation(fields: [userUuid], references: [uuid])
+  userUuid  String
+}
+
+model CashAccount {
+  uuid       String                 @id @default(uuid())
+  name       String
+  balance    Float                  @default(0)
+  currency   Currency
+  user       User                   @relation(fields: [userUuid], references: [uuid])
+  userUuid   String
+  operations CashAccountOperation[] @relation()
+
+  @@unique([userUuid, uuid])
+}
+
+model CashAccountOperation {
+  uuid            String                   @id @default(uuid())
+  cashAccount     CashAccount              @relation(fields: [cashAccountUuid], references: [uuid])
+  cashAccountUuid String
+  date            DateTime                 @default(now())
+  type            CashAccountOperationType
+  amount          Float
+  destination     Portfolio?               @relation(fields: [destinationUuid], references: [uuid])
+  destinationUuid String?
+}
+
+model Portfolio {
+  uuid                 String                 @id @default(uuid())
+  name                 String
+  user                 User                   @relation(fields: [userUuid], references: [uuid])
+  userUuid             String
+  portfolioOperations  PortfolioOperation[]
+  CashAccountOperation CashAccountOperation[]
+
+  @@unique([userUuid, uuid])
+}
+
+model PortfolioOperation {
+  uuid                   String        @id @default(uuid())
+  instrument             Instrument    @relation(fields: [instrumentCodeExchange], references: [codeExchange])
+  instrumentCodeExchange String
+  date                   DateTime      @default(now())
+  type                   OperationType
+  quantity               Float
+  price                  Float
+  portfolio              Portfolio     @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid          String
+}
+
+model Instrument {
+  codeExchange       String               @id
+  name               String
+  type               InstrumentType
+  code               String
+  currency           String
+  country            String
+  exchange           String
+  ISIN               String?
+  portfolioOperation PortfolioOperation[]
+
+  @@unique([codeExchange, code, ISIN])
+}
+
+enum Subscription {
+  FREE
+  LITE
+  EXPERT
+}
+
+enum CashAccountOperationType {
+  deposit
+  withdrawal
+  transfer
+  interest
+  tax
+  fee
+  other
+}
+
+enum InstrumentType {
+  stocks
+  bonds
+  governmentBonds
+  etfs
+  options
+  commodities
+  crypto
+  immovables
+  movables
+  others
+}
+
+enum Currency {
+  USD
+  EUR
+  JPY
+  GBP
+  CNY
+  AUD
+  CAD
+  CHF
+  HKD
+  SGD
+  SEK
+  KRW
+  NOK
+  NZD
+  INR
+  MXN
+  TWD
+  ZAR
+  BRL
+  DKK
+  PLN
+  THB
+  ILS
+  IDR
+  CZK
+  AED
+  TRY
+  HUF
+  CLP
+  SAR
+  PHP
+  MYR
+  COP
+  RUB
+  RON
+  PEN
+  BHD
+  BGN
+  ARS
+}
+
+enum IntroductionStep {
+  DefaultCurrency
+  CashAccounts
+  Portfolios
+  Completed
+}
+
+enum OperationType {
+  deposit
+  withdrawal
+  transfer
+  buy
+  sell
+  dividend
+  interest
+  tax
+  fee
+  other
+}
