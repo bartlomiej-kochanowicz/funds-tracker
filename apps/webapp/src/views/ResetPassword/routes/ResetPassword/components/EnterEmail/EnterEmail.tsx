@@ -1,52 +1,39 @@
-import { Heading, RouterLink, Spacer, Text } from 'components/atoms';
-import { Fragment } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { ROUTES } from 'routes/paths';
+import { Heading, RouterLink, Spacer, Text } from "components/atoms";
+import { Fragment } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { ROUTES } from "routes/paths";
 
-import { EnterEmailForm } from './EnterEmailForm';
+import { EnterEmailForm } from "./EnterEmailForm";
 
 export const EnterEmail = () => {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
-  return (
-    <Fragment>
-      <Heading $textAlign="center">{t('page.signin.forgot_password')}</Heading>
+	return (
+		<Fragment>
+			<Heading $textAlign="center">{t("page.signin.forgot_password")}</Heading>
 
-      <Spacer $space="0.5" />
+			<Spacer $space="0.5" />
 
-      <Text
-        $fontSize="0.875"
-        $fontColor="gray400"
-        $textAlign="center"
-      >
-        {t('page.forgot_password.enter_email.description')}
-      </Text>
+			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+				{t("page.forgot_password.enter_email.description")}
+			</Text>
 
-      <Spacer $space="1.5" />
+			<Spacer $space="1.5" />
 
-      <EnterEmailForm />
+			<EnterEmailForm />
 
-      <Spacer />
+			<Spacer />
 
-      <Text
-        $fontSize="0.875"
-        $fontColor="gray400"
-        $textAlign="center"
-      >
-        <Trans
-          i18nKey="page.signup.already_have_account"
-          components={{
-            signin: (
-              <RouterLink
-                to={ROUTES.SIGNIN}
-                $fontColor="blue"
-              />
-            ),
-          }}
-        />
-      </Text>
-    </Fragment>
-  );
+			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+				<Trans
+					i18nKey="page.signup.already_have_account"
+					components={{
+						signin: <RouterLink to={ROUTES.SIGNIN} $fontColor="blue" />,
+					}}
+				/>
+			</Text>
+		</Fragment>
+	);
 };
 
-EnterEmail.displayName = 'EnterEmail';
+EnterEmail.displayName = "EnterEmail";

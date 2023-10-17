@@ -1,5 +1,5 @@
-import { object, string } from 'yup';
+import { object, string } from "yup";
 
 export const validationSchema = object().shape({
-  name: string().required('‎').min(2, '‎').max(50, '‎'),
+	name: string().required("‎").min(2, "‎").max(50, "‎"),
 });

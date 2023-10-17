@@ -1,1 +1,1 @@
-export * from './NameAndEmail';
+export * from "./NameAndEmail";

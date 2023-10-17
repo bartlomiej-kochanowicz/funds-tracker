@@ -1,1 +1,1 @@
-export * from './SettingsDropdown';
+export * from "./SettingsDropdown";

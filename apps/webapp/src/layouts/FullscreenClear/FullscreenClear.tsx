@@ -1,15 +1,15 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-import { InnerWrapper, Wrapper } from './FullscreenClear.styles';
+import { InnerWrapper, Wrapper } from "./FullscreenClear.styles";
 
 interface FullscreenClearProps {
-  children: ReactNode;
+	children: ReactNode;
 }
 
 export const FullscreenClear = ({ children, ...rest }: FullscreenClearProps) => (
-  <Wrapper {...rest}>
-    <InnerWrapper>{children}</InnerWrapper>
-  </Wrapper>
+	<Wrapper {...rest}>
+		<InnerWrapper>{children}</InnerWrapper>
+	</Wrapper>
 );
 
-FullscreenClear.displayName = 'LayoutFullscreenClear';
+FullscreenClear.displayName = "LayoutFullscreenClear";

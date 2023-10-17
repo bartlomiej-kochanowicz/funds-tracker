@@ -1,15 +1,15 @@
-import { lazy } from 'react';
-import { ROUTES } from 'routes/paths';
+import { lazy } from "react";
+import { ROUTES } from "routes/paths";
 
 const Dashboard = lazy(() =>
-  import('./Dashboard').then(({ Dashboard: component }) => ({
-    default: component,
-  })),
+	import("./Dashboard").then(({ Dashboard: component }) => ({
+		default: component,
+	})),
 );
 
 export const DashboardRoutes = [
-  {
-    path: ROUTES.DASHBOARD,
-    element: <Dashboard />,
-  },
+	{
+		path: ROUTES.DASHBOARD,
+		element: <Dashboard />,
+	},
 ];

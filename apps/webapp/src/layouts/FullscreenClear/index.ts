@@ -1,1 +1,1 @@
-export * from './FullscreenClear';
+export * from "./FullscreenClear";

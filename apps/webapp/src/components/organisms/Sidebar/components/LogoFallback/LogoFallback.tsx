@@ -1,5 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const LogoFallback = styled.div`
-  height: 35px;
+	height: 35px;
 `;

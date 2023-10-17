@@ -1,1 +1,1 @@
-export * from './LogoFallback';
+export * from "./LogoFallback";

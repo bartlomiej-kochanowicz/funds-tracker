@@ -1,34 +1,34 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 import {
-  fontable,
-  FontableProps,
-  marginMixin,
-  MarginMixinProps,
-  paddingMixin,
-  PaddingMixinProps,
-} from 'styles/mixins';
+	fontable,
+	FontableProps,
+	marginMixin,
+	MarginMixinProps,
+	paddingMixin,
+	PaddingMixinProps,
+} from "styles/mixins";
 
 type LinkProps = {
-  href?: string;
-  display?: 'inline' | 'inline-block' | 'block';
+	href?: string;
+	display?: "inline" | "inline-block" | "block";
 } & FontableProps &
-  MarginMixinProps &
-  PaddingMixinProps;
+	MarginMixinProps &
+	PaddingMixinProps;
 
 export const Link = styled.a<LinkProps>`
-  ${fontable}
-  ${marginMixin}
+	${fontable}
+	${marginMixin}
   ${paddingMixin}
 
-  ${({ display = 'inline' }) => css`
-    display: ${display};
-  `}
+  ${({ display = "inline" }) => css`
+		display: ${display};
+	`}
 
   text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
-  }
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 
-Link.displayName = 'Link';
+Link.displayName = "Link";

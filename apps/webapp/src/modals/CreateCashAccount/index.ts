@@ -1,6 +1,6 @@
-import NiceModal from '@ebay/nice-modal-react';
+import NiceModal from "@ebay/nice-modal-react";
 
-import { Modal, MODAL_CREATE_CASH_ACCOUNT } from './Modal';
+import { Modal, MODAL_CREATE_CASH_ACCOUNT } from "./Modal";
 
 export { MODAL_CREATE_CASH_ACCOUNT };
 

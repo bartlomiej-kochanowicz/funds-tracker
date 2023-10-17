@@ -1,104 +1,93 @@
 import {
-  UpdateCashAccountMutation,
-  UpdateCashAccountMutationVariables,
-} from '__generated__/graphql';
-import { useMutation } from '@apollo/client';
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Input, Loader, Spacer, Spreader } from 'components/atoms';
-import { Modal } from 'components/molecules';
-import { UPDATE_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/UpdateCashAccount';
-import { showErrorToast } from 'helpers/showToast';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+	UpdateCashAccountMutation,
+	UpdateCashAccountMutationVariables,
+} from "__generated__/graphql";
+import { useMutation } from "@apollo/client";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Button, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Modal } from "components/molecules";
+import { UPDATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/UpdateCashAccount";
+import { showErrorToast } from "helpers/showToast";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-import { validationSchema } from './RenameCashAccount.schema';
+import { validationSchema } from "./RenameCashAccount.schema";
 
 export interface RenameCashAccountProps {
-  uuid: string;
-  name: string;
-  callback: (data: { name: string; uuid: string }) => void;
+	uuid: string;
+	name: string;
+	callback: (data: { name: string; uuid: string }) => void;
 }
 
 export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
-  ({ uuid, name, callback }) => {
-    const { t } = useTranslation();
+	({ uuid, name, callback }) => {
+		const { t } = useTranslation();
 
-    const modal = useModal();
+		const modal = useModal();
 
-    const defaultValues = {
-      name,
-    };
+		const defaultValues = {
+			name,
+		};
 
-    const {
-      handleSubmit,
-      formState: { isSubmitting, isValid, isDirty, errors },
-      register,
-    } = useForm({ defaultValues, resolver: yupResolver(validationSchema), mode: 'onChange' });
+		const {
+			handleSubmit,
+			formState: { isSubmitting, isValid, isDirty, errors },
+			register,
+		} = useForm({ defaultValues, resolver: yupResolver(validationSchema), mode: "onChange" });
 
-    const [updateCashAccount] = useMutation<
-      UpdateCashAccountMutation,
-      UpdateCashAccountMutationVariables
-    >(UPDATE_CASH_ACCOUNT, {
-      onCompleted: ({ updateCashAccount: { name: newName } }) => {
-        callback({ name: newName, uuid });
+		const [updateCashAccount] = useMutation<
+			UpdateCashAccountMutation,
+			UpdateCashAccountMutationVariables
+		>(UPDATE_CASH_ACCOUNT, {
+			onCompleted: ({ updateCashAccount: { name: newName } }) => {
+				callback({ name: newName, uuid });
 
-        modal.remove();
-      },
-      onError: () => {
-        modal.remove();
+				modal.remove();
+			},
+			onError: () => {
+				modal.remove();
 
-        showErrorToast(t('service.unknown_error'));
-      },
-    });
+				showErrorToast(t("service.unknown_error"));
+			},
+		});
 
-    const onSubmit = async ({ name: newName }: typeof defaultValues) => {
-      await updateCashAccount({ variables: { data: { name: newName }, uuid } });
-    };
+		const onSubmit = async ({ name: newName }: typeof defaultValues) => {
+			await updateCashAccount({ variables: { data: { name: newName }, uuid } });
+		};
 
-    return (
-      <Modal
-        closeModal={modal.remove}
-        modalName={t('modal.RenameCashAccount.name')}
-      >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            defaultValue={defaultValues.name}
-            placeholder={t('common.input.name.placeholder')}
-            {...register('name')}
-            error={errors.name?.message}
-          />
+		return (
+			<Modal closeModal={modal.remove} modalName={t("modal.RenameCashAccount.name")}>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Input
+						defaultValue={defaultValues.name}
+						placeholder={t("common.input.name.placeholder")}
+						{...register("name")}
+						error={errors.name?.message}
+					/>
 
-          <Spacer />
+					<Spacer />
 
-          <Box
-            $flex
-            $justifyContent="flex-end"
-          >
-            <Button
-              $color="tertiary"
-              onClick={modal.remove}
-              $flexGrow={1}
-              $minWidth="120px"
-            >
-              {t('common.cancel')}
-            </Button>
+					<Box $flex $justifyContent="flex-end">
+						<Button $color="tertiary" onClick={modal.remove} $flexGrow={1} $minWidth="120px">
+							{t("common.cancel")}
+						</Button>
 
-            <Spreader $spread="0.5" />
+						<Spreader $spread="0.5" />
 
-            <Button
-              disabled={isSubmitting || !isValid || !isDirty}
-              $flexGrow={1}
-              $minWidth="120px"
-              type="submit"
-            >
-              {isSubmitting && <Loader $color="white" />}
+						<Button
+							disabled={isSubmitting || !isValid || !isDirty}
+							$flexGrow={1}
+							$minWidth="120px"
+							type="submit"
+						>
+							{isSubmitting && <Loader $color="white" />}
 
-              {!isSubmitting && t('common.save')}
-            </Button>
-          </Box>
-        </form>
-      </Modal>
-    );
-  },
+							{!isSubmitting && t("common.save")}
+						</Button>
+					</Box>
+				</form>
+			</Modal>
+		);
+	},
 );

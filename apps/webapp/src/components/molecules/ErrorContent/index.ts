@@ -1,1 +1,1 @@
-export * from './ErrorContent';
+export * from "./ErrorContent";

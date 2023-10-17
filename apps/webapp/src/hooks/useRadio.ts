@@ -1,36 +1,36 @@
 import {
-  Control,
-  FieldValues,
-  Path,
-  PathValue,
-  useController,
-  UseFormSetValue,
-} from 'react-hook-form';
+	Control,
+	FieldValues,
+	Path,
+	PathValue,
+	useController,
+	UseFormSetValue,
+} from "react-hook-form";
 
 interface IUseRadio<FormType extends FieldValues> {
-  control: Control<FormType>;
-  name: Path<FormType>;
-  setValue: UseFormSetValue<FormType>;
-  onChange?: (newValue: string) => void;
+	control: Control<FormType>;
+	name: Path<FormType>;
+	setValue: UseFormSetValue<FormType>;
+	onChange?: (newValue: string) => void;
 }
 
 export const useRadio = <FormType extends FieldValues>({
-  control,
-  name,
-  setValue,
-  onChange,
+	control,
+	name,
+	setValue,
+	onChange,
 }: IUseRadio<FormType>) => {
-  useController<FormType>({
-    control,
-    name,
-  });
+	useController<FormType>({
+		control,
+		name,
+	});
 
-  return {
-    id: name,
-    onChange: (newValue: string) => {
-      if (onChange) onChange(newValue);
+	return {
+		id: name,
+		onChange: (newValue: string) => {
+			if (onChange) onChange(newValue);
 
-      setValue(name, newValue as PathValue<FormType, Path<FormType>>);
-    },
-  };
+			setValue(name, newValue as PathValue<FormType, Path<FormType>>);
+		},
+	};
 };

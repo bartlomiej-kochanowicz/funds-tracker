@@ -1,5 +1,5 @@
-import { transparentize } from 'color2k';
-import styled, { createGlobalStyle, css } from 'styled-components';
+import { transparentize } from "color2k";
+import styled, { createGlobalStyle, css } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   body {
@@ -8,64 +8,64 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Background = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 
-  height: var(--doc-height);
-  height: 100%;
+	height: var(--doc-height);
+	height: 100%;
 
-  ${({ theme: { colors, zIndex } }) => css`
-    background: ${transparentize(colors.black, 0.25)};
-    backdrop-filter: blur(10px);
-    z-index: ${zIndex.modal.background};
-  `}
+	${({ theme: { colors, zIndex } }) => css`
+		background: ${transparentize(colors.black, 0.25)};
+		backdrop-filter: blur(10px);
+		z-index: ${zIndex.modal.background};
+	`}
 `;
 
 export const ModalComponent = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: auto;
 
-  ${({ theme: { colors, radius, breakpoints, zIndex } }) => css`
-    z-index: ${zIndex.modal.modal};
-    background-color: ${colors.gray100};
-    border-radius: ${radius['0.7']};
-    padding: 1.75rem 2.5rem;
-    max-width: 900px;
-    max-height: 85vh;
-    width: 75vw;
+	${({ theme: { colors, radius, breakpoints, zIndex } }) => css`
+		z-index: ${zIndex.modal.modal};
+		background-color: ${colors.gray100};
+		border-radius: ${radius["0.7"]};
+		padding: 1.75rem 2.5rem;
+		max-width: 900px;
+		max-height: 85vh;
+		width: 75vw;
 
-    ${breakpoints.tablet.max} {
-      width: 85vw;
-    }
+		${breakpoints.tablet.max} {
+			width: 85vw;
+		}
 
-    ${breakpoints.phone.max} {
-      padding: 1.25rem;
-      width: 90vw;
-    }
-  `}
+		${breakpoints.phone.max} {
+			padding: 1.25rem;
+			width: 90vw;
+		}
+	`}
 `;
 
 export const CloseButton = styled.button`
-  border: 0;
-  background: none;
-  padding: 0;
+	border: 0;
+	background: none;
+	padding: 0;
 
-  ${({ theme: { colors, font } }) => css`
-    width: ${font.size['1.25']};
-    height: ${font.size['1.25']};
+	${({ theme: { colors, font } }) => css`
+		width: ${font.size["1.25"]};
+		height: ${font.size["1.25"]};
 
-    svg {
-      color: ${colors.gray500};
-      font-size: ${font.size['1.25']};
-    }
-  `}
+		svg {
+			color: ${colors.gray500};
+			font-size: ${font.size["1.25"]};
+		}
+	`}
 
-  &:hover {
-    cursor: pointer;
-  }
+	&:hover {
+		cursor: pointer;
+	}
 `;

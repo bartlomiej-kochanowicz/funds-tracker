@@ -4,17 +4,18 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "lint:fix": "turbo run lint:fix",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\""
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "devDependencies": {
-    "eslint": "8.48.0",
+    "eslint": "8.51.0",
     "prettier": "3.0.3",
     "tsconfig": "workspace:*",
-    "turbo": "latest"
+    "turbo": "1.10.15"
   },
   "packageManager": "pnpm@8.6.10",
   "name": "funds-tracker"

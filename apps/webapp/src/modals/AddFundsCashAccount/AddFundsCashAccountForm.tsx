@@ -1,143 +1,132 @@
 import {
-  AddFundsToCashAccountMutation,
-  AddFundsToCashAccountMutationVariables,
-  Currency,
-} from '__generated__/graphql';
-import { useMutation } from '@apollo/client';
-import { useModal } from '@ebay/nice-modal-react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Icon, Input, Loader, Spacer, Spreader } from 'components/atoms';
-import { cache } from 'config/client';
-import { ADD_FUNDS_TO_CASH_ACCOUNT } from 'graphql/mutations/cashAccounts/AddFundsToCashAccount';
-import { showErrorToast, showSuccessToast } from 'helpers/showToast';
-import { useCurrencyInput } from 'hooks/useCurrencyInput';
-import { FC, Fragment } from 'react';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { FaPlus } from 'react-icons/fa';
+	AddFundsToCashAccountMutation,
+	AddFundsToCashAccountMutationVariables,
+	Currency,
+} from "__generated__/graphql";
+import { useMutation } from "@apollo/client";
+import { useModal } from "@ebay/nice-modal-react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Button, Icon, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { cache } from "config/client";
+import { ADD_FUNDS_TO_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/AddFundsToCashAccount";
+import { showErrorToast, showSuccessToast } from "helpers/showToast";
+import { useCurrencyInput } from "hooks/useCurrencyInput";
+import { FC, Fragment } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { FaPlus } from "react-icons/fa";
 
-import { validationSchema } from './AddFundsCashAccountForm.schema';
+import { validationSchema } from "./AddFundsCashAccountForm.schema";
 
 interface AddFundsCashAccountFormProps {
-  callback: ({ balance, uuid }: { balance: number; uuid: string }) => void;
-  uuid: string;
-  currency: Currency;
+	callback: ({ balance, uuid }: { balance: number; uuid: string }) => void;
+	uuid: string;
+	currency: Currency;
 }
 
 export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
-  callback,
-  currency,
-  uuid,
+	callback,
+	currency,
+	uuid,
 }) => {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
-  const modal = useModal();
+	const modal = useModal();
 
-  const closeModal = modal.remove;
+	const closeModal = modal.remove;
 
-  const defaultValues = {
-    amount: '',
-  };
+	const defaultValues = {
+		amount: "",
+	};
 
-  const {
-    handleSubmit,
-    control,
-    formState: { isSubmitting, isValid, isDirty },
-  } = useForm<typeof defaultValues>({
-    defaultValues,
-    resolver: yupResolver(validationSchema),
-    mode: 'onChange',
-  });
+	const {
+		handleSubmit,
+		control,
+		formState: { isSubmitting, isValid, isDirty },
+	} = useForm<typeof defaultValues>({
+		defaultValues,
+		resolver: yupResolver(validationSchema),
+		mode: "onChange",
+	});
 
-  const [addFundsToCashAcount] = useMutation<
-    AddFundsToCashAccountMutation,
-    AddFundsToCashAccountMutationVariables
-  >(ADD_FUNDS_TO_CASH_ACCOUNT, {
-    onCompleted: data => {
-      callback({
-        balance: data.addFundsToCashAccount.balance,
-        uuid,
-      });
+	const [addFundsToCashAcount] = useMutation<
+		AddFundsToCashAccountMutation,
+		AddFundsToCashAccountMutationVariables
+	>(ADD_FUNDS_TO_CASH_ACCOUNT, {
+		onCompleted: data => {
+			callback({
+				balance: data.addFundsToCashAccount.balance,
+				uuid,
+			});
 
-      cache.evict({ id: 'ROOT_QUERY', fieldName: `cashAccount({"uuid":"${uuid}"})` });
-      cache.gc();
+			cache.evict({ id: "ROOT_QUERY", fieldName: `cashAccount({"uuid":"${uuid}"})` });
+			cache.gc();
 
-      closeModal();
+			closeModal();
 
-      showSuccessToast(t('toast.add_funds.success'));
-    },
-    onError: () => {
-      closeModal();
+			showSuccessToast(t("toast.add_funds.success"));
+		},
+		onError: () => {
+			closeModal();
 
-      showErrorToast(t('service.unknown_error'));
-    },
-  });
+			showErrorToast(t("service.unknown_error"));
+		},
+	});
 
-  const onSubmit = async (data: typeof defaultValues) => {
-    await addFundsToCashAcount({
-      variables: {
-        data: {
-          amount: Number(data.amount),
-          uuid,
-        },
-      },
-    });
-  };
+	const onSubmit = async (data: typeof defaultValues) => {
+		await addFundsToCashAcount({
+			variables: {
+				data: {
+					amount: Number(data.amount),
+					uuid,
+				},
+			},
+		});
+	};
 
-  const currencyInputProps = useCurrencyInput<typeof defaultValues>({
-    control,
-    name: 'amount',
-    defaultValue: defaultValues.amount,
-  });
+	const currencyInputProps = useCurrencyInput<typeof defaultValues>({
+		control,
+		name: "amount",
+		defaultValue: defaultValues.amount,
+	});
 
-  return (
-    <form
-      noValidate
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <Input
-        type="currency"
-        currency={currency}
-        placeholder={t('modal.AddFundsCashAccount.input.placeholder')}
-        {...currencyInputProps}
-      />
+	return (
+		<form noValidate onSubmit={handleSubmit(onSubmit)}>
+			<Input
+				type="currency"
+				currency={currency}
+				placeholder={t("modal.AddFundsCashAccount.input.placeholder")}
+				{...currencyInputProps}
+			/>
 
-      <Spacer />
+			<Spacer />
 
-      <Box
-        $flex
-        $justifyContent="flex-end"
-      >
-        <Button
-          $color="tertiary"
-          onClick={closeModal}
-          $flexGrow={1}
-          $minWidth="100px"
-        >
-          {t('common.cancel')}
-        </Button>
+			<Box $flex $justifyContent="flex-end">
+				<Button $color="tertiary" onClick={closeModal} $flexGrow={1} $minWidth="100px">
+					{t("common.cancel")}
+				</Button>
 
-        <Spreader $spread="0.5" />
+				<Spreader $spread="0.5" />
 
-        <Button
-          disabled={isSubmitting || !isValid || !isDirty}
-          $flexGrow={1}
-          $minWidth="170px"
-          type="submit"
-        >
-          {isSubmitting && <Loader $color="white" />}
+				<Button
+					disabled={isSubmitting || !isValid || !isDirty}
+					$flexGrow={1}
+					$minWidth="170px"
+					type="submit"
+				>
+					{isSubmitting && <Loader $color="white" />}
 
-          {!isSubmitting && (
-            <Fragment>
-              {t('page.cash_accounts.button.add_funds')}
+					{!isSubmitting && (
+						<Fragment>
+							{t("page.cash_accounts.button.add_funds")}
 
-              <Spreader $spread="0.25" />
+							<Spreader $spread="0.25" />
 
-              <Icon icon={FaPlus} />
-            </Fragment>
-          )}
-        </Button>
-      </Box>
-    </form>
-  );
+							<Icon icon={FaPlus} />
+						</Fragment>
+					)}
+				</Button>
+			</Box>
+		</form>
+	);
 };

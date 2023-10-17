@@ -1,1 +1,1 @@
-export * from './SearchInstrumentCombobox';
+export * from "./SearchInstrumentCombobox";

@@ -1,66 +1,66 @@
-import { transparentize } from 'color2k';
-import { Link } from 'react-router-dom';
-import styled, { css, DefaultTheme } from 'styled-components';
-import { StyleFunction } from 'styled-components/dist/types';
+import { transparentize } from "color2k";
+import { Link } from "react-router-dom";
+import styled, { css, DefaultTheme } from "styled-components";
+import { StyleFunction } from "styled-components/dist/types";
 
 interface MixinProps {
-  $padding: keyof DefaultTheme['padding'];
-  $maxWidth?: `${string}px` | `${string}%`;
+	$padding: keyof DefaultTheme["padding"];
+	$maxWidth?: `${string}px` | `${string}%`;
 }
 
 const mixin = css<MixinProps>`
-  display: flex;
-  align-items: center;
-  border: none;
-  width: 100%;
-  background-color: transparent;
-  cursor: pointer;
-  text-align: left;
-  outline: none;
+	display: flex;
+	align-items: center;
+	border: none;
+	width: 100%;
+	background-color: transparent;
+	cursor: pointer;
+	text-align: left;
+	outline: none;
 
-  ${({ theme, $padding, $maxWidth }) => css`
-    color: ${theme.colors.text};
-    padding: ${theme.padding[$padding]};
+	${({ theme, $padding, $maxWidth }) => css`
+		color: ${theme.colors.text};
+		padding: ${theme.padding[$padding]};
 
-    &:focus-visible,
-    &:focus {
-      background-color: ${transparentize(theme.colors.gray300, 0.75)};
-    }
+		&:focus-visible,
+		&:focus {
+			background-color: ${transparentize(theme.colors.gray300, 0.75)};
+		}
 
-    ${$maxWidth &&
-    css`
-      max-width: ${$maxWidth};
-    `}
-  `};
+		${$maxWidth &&
+		css`
+			max-width: ${$maxWidth};
+		`}
+	`};
 `;
 
 export const StyledButton = styled.button<
-  {
-    $isSelected: boolean;
-    $variant?: 'combobox';
-  } & MixinProps
+	{
+		$isSelected: boolean;
+		$variant?: "combobox";
+	} & MixinProps
 >`
-  ${mixin as unknown as StyleFunction<object>}
+	${mixin as unknown as StyleFunction<object>}
 
-  ${({ theme, $isSelected, $variant }) => css`
-    ${$isSelected &&
-    css`
-      font-weight: ${theme.font.weight[700]};
-    `}
+	${({ theme, $isSelected, $variant }) => css`
+		${$isSelected &&
+		css`
+			font-weight: ${theme.font.weight[700]};
+		`}
 
-    ${$variant === 'combobox' &&
-    css`
-      &:focus-visible,
-      &:focus {
-        background-color: ${theme.colors.blue};
-        color: ${theme.colors.white};
-      }
-    `}
-  `}
+		${$variant === "combobox" &&
+		css`
+			&:focus-visible,
+			&:focus {
+				background-color: ${theme.colors.blue};
+				color: ${theme.colors.white};
+			}
+		`}
+	`}
 `;
 
 export const StyledLink = styled(Link)<MixinProps>`
-  ${mixin as unknown as StyleFunction<object>}
+	${mixin as unknown as StyleFunction<object>}
 
-  text-decoration: none;
+	text-decoration: none;
 `;

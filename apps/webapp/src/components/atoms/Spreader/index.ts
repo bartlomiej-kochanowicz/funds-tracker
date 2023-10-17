@@ -1,1 +1,1 @@
-export * from './Spreader';
+export * from "./Spreader";

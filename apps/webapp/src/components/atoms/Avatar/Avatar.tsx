@@ -1,24 +1,21 @@
-import { Text } from 'components/atoms/Text';
-import { Initials } from 'helpers/Initials';
-import { useMemo } from 'react';
+import { Text } from "components/atoms/Text";
+import { Initials } from "helpers/Initials";
+import { useMemo } from "react";
 
-import { Circle } from './Avatar.styles';
+import { Circle } from "./Avatar.styles";
 
 interface AvatarProps {
-  name: string;
+	name: string;
 }
 
 export const Avatar = ({ name }: AvatarProps) => {
-  const initials = useMemo(() => new Initials(name), [name]);
+	const initials = useMemo(() => new Initials(name), [name]);
 
-  return (
-    <Circle>
-      <Text
-        $fontColor="white"
-        $fontSize="1.25"
-      >
-        {initials.getInitials()}
-      </Text>
-    </Circle>
-  );
+	return (
+		<Circle>
+			<Text $fontColor="white" $fontSize="1.25">
+				{initials.getInitials()}
+			</Text>
+		</Circle>
+	);
 };

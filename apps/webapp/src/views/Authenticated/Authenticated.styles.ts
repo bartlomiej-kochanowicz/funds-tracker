@@ -1,23 +1,23 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const Main = styled.main.withConfig({
-  shouldForwardProp: prop => !['isDashboard'].includes(prop),
+	shouldForwardProp: prop => !["isDashboard"].includes(prop),
 })<{ isDashboard: boolean }>`
-  min-height: 100%;
-  min-height: var(--doc-height);
+	min-height: 100%;
+	min-height: var(--doc-height);
 
-  ${({ theme, isDashboard }) => css`
-    padding: ${theme.spacing['1']};
+	${({ theme, isDashboard }) => css`
+		padding: ${theme.spacing["1"]};
 
-    ${theme.breakpoints.desktop.min} {
-      margin-left: 230px;
-      padding: calc(5 * ${theme.spacing['3.5']});
-      padding-top: 95px;
-    }
+		${theme.breakpoints.desktop.min} {
+			margin-left: 230px;
+			padding: calc(5 * ${theme.spacing["3.5"]});
+			padding-top: 95px;
+		}
 
-    ${theme.breakpoints.desktop.max} {
-      padding-top: ${isDashboard ? '55px' : '95px'};
-      padding-bottom: 150px; // some space for the footer
-    }
-  `}
+		${theme.breakpoints.desktop.max} {
+			padding-top: ${isDashboard ? "55px" : "95px"};
+			padding-bottom: 150px; // some space for the footer
+		}
+	`}
 `;

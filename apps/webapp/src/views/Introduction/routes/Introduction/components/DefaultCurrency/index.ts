@@ -1,1 +1,1 @@
-export * from './DefaultCurrency';
+export * from "./DefaultCurrency";

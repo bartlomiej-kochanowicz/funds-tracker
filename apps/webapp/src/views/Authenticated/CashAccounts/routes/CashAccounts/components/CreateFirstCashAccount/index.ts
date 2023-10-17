@@ -1,1 +1,1 @@
-export * from './CreateFirstCashAccount';
+export * from "./CreateFirstCashAccount";

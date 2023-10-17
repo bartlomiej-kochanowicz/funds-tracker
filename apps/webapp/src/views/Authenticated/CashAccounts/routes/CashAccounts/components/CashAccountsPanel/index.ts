@@ -1,1 +1,1 @@
-export * from './CashAccountsPanel';
+export * from "./CashAccountsPanel";

@@ -1,19 +1,19 @@
-import styled, { css, DefaultTheme } from 'styled-components';
+import styled, { css, DefaultTheme } from "styled-components";
 
-export type Spread = keyof DefaultTheme['spacing'];
+export type Spread = keyof DefaultTheme["spacing"];
 
 export type SpreaderProps = {
-  $spread?: Spread;
-  'data-testid'?: string;
+	$spread?: Spread;
+	"data-testid"?: string;
 };
 
 export const Spreader = styled.span.attrs(props => ({
-  ...props,
-  'data-testid': 'spreader',
+	...props,
+	"data-testid": "spreader",
 }))<SpreaderProps>`
-  display: block;
+	display: block;
 
-  ${({ theme: { spacing }, $spread = '1' }) => css`
-    padding: 0 ${spacing[$spread]};
-  `}
+	${({ theme: { spacing }, $spread = "1" }) => css`
+		padding: 0 ${spacing[$spread]};
+	`}
 `;

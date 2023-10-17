@@ -1,3 +1,3 @@
-import { Currency } from '__generated__/graphql';
+import { Currency } from "__generated__/graphql";
 
 export const CURRENCIES_ARRAY = Object.values(Currency);
