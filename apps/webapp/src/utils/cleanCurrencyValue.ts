@@ -13,8 +13,9 @@ export const countryCodesWithAbbreviationsChars = [
 	/B[A-Z][A-Z]/,
 ];
 
-export const escapeRegExp = (stringToGoIntoTheRegex: string): string =>
-	stringToGoIntoTheRegex.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
+export const escapeRegExp = (stringToGoIntoTheRegex: string): string => {
+	return stringToGoIntoTheRegex.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
+};
 
 export const cleanCurrencyValue = (value: string, validChars: ReadonlyArray<string>): string => {
 	const chars = escapeRegExp(validChars.join(""));

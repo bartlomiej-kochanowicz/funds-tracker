@@ -99,9 +99,9 @@ describe("Signin tests", () => {
 		await signinPO.submitForm();
 
 		// then
-		await waitFor(() => {
-			signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalledWith(ROUTES.DASHBOARD);
-		});
+		await waitFor(() =>
+			signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalledWith(ROUTES.DASHBOARD),
+		);
 	});
 
 	it("shows error when email is invalid", async () => {
@@ -290,17 +290,17 @@ describe("Signin tests", () => {
 		// then
 		await signinPO.expectLoaderDisappeared();
 		await signinPO.expectTextDisplayed("User not confirmed.");
-		await waitFor(() => {
+		await waitFor(() =>
 			signinPO
 				.expectSuccessCallback(mockNavigate)
-				.toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, { state: { email: "test@email.xyz" } });
-		});
+				.toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, { state: { email: "test@email.xyz" } }),
+		);
 
-		await waitFor(() => {
+		await waitFor(() =>
 			expect(showSuccessToast).toHaveBeenCalledWith(
 				"Confirmation code has been sent to your email.",
-			);
-		});
+			),
+		);
 	});
 
 	it("send code and redirect when email is not confirmed - sending failure", async () => {
@@ -377,14 +377,14 @@ describe("Signin tests", () => {
 		// then
 		await signinPO.expectLoaderDisappeared();
 		await signinPO.expectTextDisplayed("User not confirmed.");
-		await waitFor(() => {
+		await waitFor(() =>
 			signinPO
 				.expectSuccessCallback(mockNavigate)
-				.toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, { state: { email: "test@email.xyz" } });
-		});
+				.toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, { state: { email: "test@email.xyz" } }),
+		);
 
-		await waitFor(() => {
-			expect(showErrorToast).toHaveBeenCalledWith("Code sending failed. Please try again later.");
-		});
+		await waitFor(() =>
+			expect(showErrorToast).toHaveBeenCalledWith("Code sending failed. Please try again later."),
+		);
 	});
 });

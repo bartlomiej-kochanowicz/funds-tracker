@@ -45,7 +45,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
 	const onSubmit = useCallback(
 		(/* data: InvestFundsFormValues */) => {
-			// console.log({ ...data, uuid });
+			/* console.log({ ...data, uuid }); */
 		},
 		[uuid],
 	);

@@ -156,7 +156,7 @@ export const theme = {
 	shadows: {
 		box: `0px 6px 10px 0px ${transparentize(Colors.Gray300, 0.86)},
           0px 1px 18px 0px  ${transparentize(Colors.Gray300, 0.88)},
-      0px 3px 5px -1px ${transparentize(Colors.Gray300, 0.8)}`,
+		      0px 3px 5px -1px ${transparentize(Colors.Gray300, 0.8)}`,
 	},
 	gradients: {
 		blue: `linear-gradient(133deg, ${darken(Colors.Blue, 0.15)} 0%, ${Colors.Blue} 75%)`,

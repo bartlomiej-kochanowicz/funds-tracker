@@ -72,9 +72,9 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 					<Box $flex>
 						<StyledSelect
 							value={getYear(date)}
-							onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
-								changeYear(Number(value));
-							}}
+							onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) =>
+								changeYear(Number(value))
+							}
 						>
 							{years.map(option => (
 								<option key={option} value={option}>
@@ -87,9 +87,9 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 
 						<StyledSelect
 							value={months[getMonth(date)]}
-							onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
-								changeMonth(months.indexOf(value));
-							}}
+							onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) =>
+								changeMonth(months.indexOf(value))
+							}
 						>
 							{months.map(option => (
 								<option key={option} value={option}>

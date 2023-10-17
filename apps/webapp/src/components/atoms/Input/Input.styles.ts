@@ -14,8 +14,8 @@ export const StyledInput = styled.input<{ $error: boolean; $hasUnit: boolean; $h
 		color: ${theme.colors[$error ? "error" : "text"]};
 		border: 2px solid ${theme.colors[borderColor({ isDark: theme.isDark, $error })]};
 		padding: 0.5rem 1.25rem;
-		${$hasUnit && "padding: 0.5rem 2.5rem 0.5rem 1.25rem;"}
-		${$hasIcon && "padding: 0.5rem 1.25rem 0.5rem 2.5rem;"}
+		${$hasUnit && `padding: 0.5rem 2.5rem 0.5rem 1.25rem;`}
+		${$hasIcon && `padding: 0.5rem 1.25rem 0.5rem 2.5rem;`}
 
     &:focus-visible {
 			outline: 2px solid ${theme.colors[$error ? "error" : "blue"]};

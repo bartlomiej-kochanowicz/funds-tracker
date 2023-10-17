@@ -40,7 +40,6 @@ interface SelectProps<ValueType> {
 	placement?: PlacementType;
 }
 
-// eslint-disable-next-line @typescript-eslint/comma-dangle
 const SelectInner = <ValueType,>(
 	{
 		items,

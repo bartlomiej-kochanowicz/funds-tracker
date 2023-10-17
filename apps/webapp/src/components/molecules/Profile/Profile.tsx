@@ -53,7 +53,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 							<Spreader $spread="0.25" />
 
 							<Text $fontWeight="700" $maxWidth="250px">
-								{t("common.hi")},{user.name}!
+								{t("common.hi")}, {user.name}!
 							</Text>
 						</Fragment>
 					)}
