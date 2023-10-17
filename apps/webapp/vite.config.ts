@@ -6,7 +6,7 @@ import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
-const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+    const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 export default defineConfig({
   server: {
