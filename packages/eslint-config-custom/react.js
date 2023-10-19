@@ -8,13 +8,13 @@ module.exports = {
 	plugins: [
 		"react",
 		"eslint-plugin-react-hooks",
-		"prettier",
 		"eslint-plugin-prettier",
 		"eslint-plugin-vitest-globals",
 		"@typescript-eslint",
 		"jest-dom",
 		"testing-library",
 		"simple-import-sort",
+		"prettier",
 	],
 	parserOptions: {
 		project,
