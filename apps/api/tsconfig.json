@@ -2,6 +2,10 @@
 	"extends": "tsconfig/typescript.json",
 	"compilerOptions": {
 		"outDir": "./dist",
-		"baseUrl": "./"
+		"baseUrl": "./",
+		"paths": {
+			"@app/*": ["src/*"],
+			"@common/*": ["src/common/*"]
+		}
 	}
 }

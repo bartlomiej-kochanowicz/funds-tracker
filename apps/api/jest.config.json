@@ -1,0 +1,19 @@
+{
+  "moduleDirectories": ["node_modules", "<rootDir>"],
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "globalSetup": "./common/tests/setup.ts",
+  "globalTeardown": "./common/tests/teardown.ts",
+  "rootDir": "src",
+  "testRegex": ".*\\.spec\\.ts$",
+  "transform": {
+    ".+\\.(t|j)s$": "ts-jest"
+  },
+  "collectCoverageFrom": ["**/*.(t|j)s", "!**/*/index.ts", "!src/**/*.type.ts", "!main.ts"],
+  "watchPlugins": ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
+  "coverageDirectory": "../coverage",
+  "testEnvironment": "node",
+  "moduleNameMapper": {
+    "^@app/(.*)$": "<rootDir>/../src/$1",
+    "^@common/(.*)$": "<rootDir>/../src/common/$1"
+  }
+}

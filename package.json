@@ -1,12 +1,15 @@
 {
 	"private": true,
 	"scripts": {
-		"prepare": "docker compose up -d && pnpm prisma:generate && pnpm prisma:migrate-dev",
-		"prisma:generate": "pnpm dlx prisma generate",
-		"prisma:migrate-dev": "pnpm dlx prisma migrate dev",
-		"prisma:studio": "pnpm dlx prisma studio",
+		"up": "docker compose up -d && pnpm prisma:generate && pnpm prisma:migrate-dev",
+		"prisma:generate": "cd apps/api && pnpm dlx prisma generate",
+		"prisma:migrate-dev": "cd apps/api && pnpm dlx prisma migrate dev",
+		"prisma:push": "cd apps/api && pnpm dlx prisma db push",
+		"prisma:studio": "cd apps/api && pnpm dlx prisma studio",
 		"build": "turbo run build",
 		"dev": "turbo run dev",
+		"dev:webapp": "turbo run dev --no-daemon --filter=webapp...",
+		"dev:api": "turbo run dev --no-daemon --filter=api...",
 		"lint": "turbo run lint",
 		"lint:fix": "turbo run lint:fix",
 		"format": "prettier --write \"**/*.{js,ts,tsx,md}\""

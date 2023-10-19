@@ -1,0 +1,467 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ConfirmSignup {
+  """Confirmatiopn signup successful."""
+  success: Boolean!
+}
+
+type Email {
+  """Email existence."""
+  exist: Boolean!
+}
+
+type Logout {
+  """Logout successful."""
+  success: Boolean!
+}
+
+type Refresh {
+  """Refresh successful."""
+  success: Boolean!
+}
+
+type ResetPassword {
+  """Send reset password successful."""
+  success: Boolean!
+}
+
+type SendCode {
+  """Send code successful."""
+  success: Boolean!
+}
+
+type SetNewPassword {
+  """Name of the user."""
+  success: Boolean!
+}
+
+type SigninLocal {
+  """Signin local successful."""
+  success: Boolean!
+}
+
+type SignupLocal {
+  """Signup local successful."""
+  success: Boolean!
+}
+
+type CashAccountDelete {
+  """Confirmatiopn delete cash account."""
+  success: Boolean!
+}
+
+type CashAccountOperation {
+  """Transaction uuid."""
+  uuid: ID!
+
+  """Date of the transaction."""
+  date: String!
+
+  """Cash account balance."""
+  amount: Float!
+
+  """Cash account oparation type."""
+  type: CashAccountOperationType!
+
+  """Destination uuid."""
+  destinationUuid: String!
+}
+
+enum CashAccountOperationType {
+  deposit
+  withdrawal
+  transfer
+  interest
+  tax
+  fee
+  other
+}
+
+type CashAccount {
+  """Cash account uuid."""
+  uuid: ID!
+
+  """Cash account name."""
+  name: String!
+
+  """Cash account currency."""
+  currency: Currency!
+
+  """Account balance."""
+  balance: Float!
+
+  """Account opeartions."""
+  operations(first: Float, skip: Float): [CashAccountOperation!]!
+}
+
+enum Currency {
+  USD
+  EUR
+  JPY
+  GBP
+  CNY
+  AUD
+  CAD
+  CHF
+  HKD
+  SGD
+  SEK
+  KRW
+  NOK
+  NZD
+  INR
+  MXN
+  TWD
+  ZAR
+  BRL
+  DKK
+  PLN
+  THB
+  ILS
+  IDR
+  CZK
+  AED
+  TRY
+  HUF
+  CLP
+  SAR
+  PHP
+  MYR
+  COP
+  RUB
+  RON
+  PEN
+  BHD
+  BGN
+  ARS
+}
+
+type IntroductionCashAccounts {
+  """Cash accounts created successfully."""
+  success: Boolean!
+}
+
+type InstrumentHistory {
+  """Date"""
+  date: String!
+
+  """Open"""
+  open: Float!
+
+  """High"""
+  high: Float!
+
+  """Low"""
+  low: Float!
+
+  """Close"""
+  close: Float!
+
+  """Adjusted close"""
+  adjusted_close: Float!
+
+  """Volume"""
+  volume: Float!
+}
+
+type SearchInstrument {
+  """Code"""
+  Code: String!
+
+  """Exchange"""
+  Exchange: String!
+
+  """Name"""
+  Name: String!
+
+  """Type"""
+  Type: String!
+
+  """Country"""
+  Country: String!
+
+  """Currency"""
+  Currency: String!
+
+  """ISIN"""
+  ISIN: String
+
+  """previousClose"""
+  previousClose: Float!
+
+  """previousCloseDate"""
+  previousCloseDate: String!
+}
+
+type IntroductionPortfolios {
+  """Portfolios created successfully."""
+  success: Boolean!
+}
+
+type PortfolioDelete {
+  """Confirmatiopn delete portfolio."""
+  success: Boolean!
+}
+
+type Portfolio {
+  """Portfolio uuid."""
+  uuid: ID!
+
+  """Portfolio name."""
+  name: String!
+}
+
+type User {
+  """User uuid."""
+  uuid: ID!
+
+  """User date created."""
+  createdAt: Date!
+
+  """User email."""
+  email: EmailAddress!
+
+  """User name."""
+  name: String!
+
+  """User introduction step."""
+  introductionStep: IntroductionStep!
+
+  """User default currency."""
+  defaultCurrency: Currency!
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""
+A field whose value conforms to the standard internet email address format as specified in HTML Spec: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address.
+"""
+scalar EmailAddress @specifiedBy(url: "https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address")
+
+enum IntroductionStep {
+  DefaultCurrency
+  CashAccounts
+  Portfolios
+  Completed
+}
+
+type InvestInNewInstrument {
+  """Invest success"""
+  success: Boolean!
+}
+
+type Query {
+  emailExist(data: EmailInput!): Email!
+  cashAccounts: [CashAccount!]!
+  cashAccount(uuid: ID!): CashAccount!
+  searchInstrument(data: SearchInstrumentInput!): [SearchInstrument!]!
+  instrumentHistory(data: InstrumentHistoryInput!): [InstrumentHistory!]!
+  portfolios: [Portfolio!]!
+  portfolio(uuid: String!): Portfolio!
+  user: User!
+}
+
+input EmailInput {
+  """Email."""
+  email: EmailAddress!
+
+  """Token."""
+  token: String!
+}
+
+input SearchInstrumentInput {
+  """Instrument name."""
+  name: String!
+
+  """Instrument type."""
+  type: InstrumentType!
+}
+
+enum InstrumentType {
+  stocks
+  bonds
+  governmentBonds
+  etfs
+  options
+  commodities
+  crypto
+  immovables
+  movables
+  others
+}
+
+input InstrumentHistoryInput {
+  """Code"""
+  code: String!
+
+  """Exchange"""
+  exchange: String!
+
+  """Period"""
+  period: String
+
+  """From"""
+  from: String!
+
+  """To"""
+  to: String
+}
+
+type Mutation {
+  signupLocal(data: SignupInput!): SignupLocal!
+  confirmSignup(data: ConfirmSignupInput!): ConfirmSignup!
+  sendCode(data: SendCodeInput!): SendCode!
+  signinLocal(data: SigninInput!): SigninLocal!
+  logout: Logout!
+  resetPassword(data: ResetPasswordInput!): ResetPassword!
+  setNewPassword(data: SetNewPasswordInput!): SetNewPassword!
+  refreshToken: Refresh!
+  createCashAccount(data: CreateCashAccountInput!): CashAccount!
+  introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
+  updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
+  deleteCashAccount(uuid: ID!): CashAccountDelete!
+  addFundsToCashAccount(data: AddFundsToCashAccountInput!): CashAccount!
+  createPortfolio(data: CreatePortfolioInput!): Portfolio!
+  introductionCreatePortfolios(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
+  updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
+  deletePortfolio(uuid: String!): PortfolioDelete!
+  updateUser(data: UpdateUserInput!): User!
+  investInNewInstrument(data: InvestInNewInstrumentInput!): InvestInNewInstrument!
+}
+
+input SignupInput {
+  """Email."""
+  email: EmailAddress!
+
+  """Name."""
+  name: String!
+
+  """Password."""
+  password: String!
+
+  """Token."""
+  token: String!
+}
+
+input ConfirmSignupInput {
+  """Email."""
+  email: EmailAddress!
+
+  """Code."""
+  code: String!
+
+  """Token."""
+  token: String!
+}
+
+input SendCodeInput {
+  """Email."""
+  email: EmailAddress!
+
+  """Token."""
+  token: String!
+}
+
+input SigninInput {
+  """Email."""
+  email: String!
+
+  """Password."""
+  password: String!
+
+  """Token."""
+  token: String!
+}
+
+input ResetPasswordInput {
+  """Email."""
+  email: EmailAddress!
+
+  """Token."""
+  token: String!
+}
+
+input SetNewPasswordInput {
+  """Password."""
+  password: String!
+
+  """Reset token."""
+  resetToken: String!
+
+  """Token."""
+  token: String!
+}
+
+input CreateCashAccountInput {
+  """Cash account name."""
+  name: String!
+
+  """Cash account currency."""
+  currency: Currency!
+}
+
+input IntroductionCreateCashAccountsInput {
+  """Cash accounts array."""
+  cashAccounts: [CreateCashAccountInput!]!
+}
+
+input UpdateCashAccountInput {
+  """Cash account name."""
+  name: String!
+}
+
+input AddFundsToCashAccountInput {
+  """Account uuid."""
+  uuid: ID!
+
+  """Cash amount."""
+  amount: Float!
+}
+
+input CreatePortfolioInput {
+  """Portfolio name."""
+  name: String!
+}
+
+input IntroductionCreatePortfoliosInput {
+  """Portfolios array."""
+  portfolios: [CreatePortfolioInput!]!
+}
+
+input UpdatePortfolioInput {
+  """Portfolio name."""
+  name: String
+}
+
+input UpdateUserInput {
+  """New user email."""
+  email: EmailAddress
+
+  """New user name."""
+  name: String
+
+  """New user default currency."""
+  defaultCurrency: Currency
+}
+
+input InvestInNewInstrumentInput {
+  portfolioUuid: String!
+  cashAccountUuid: String!
+  instrument: Instrument!
+  date: String!
+  quantity: Float!
+  price: Float!
+  comission: Float!
+}
+
+input Instrument {
+  type: InstrumentType!
+  code: String!
+  exchange: String!
+  ISIN: String
+}
