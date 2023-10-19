@@ -2,7 +2,7 @@ import { IS_DEVELOPMENT, IS_TEST } from "@common/config/env";
 import { COOKIE_NAMES, EXPIRES } from "@common/constants/cookies";
 import { PrismaService } from "@app/prisma/prisma.service";
 import { ForbiddenException, Injectable } from "@nestjs/common";
-import bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt";
 import { Response } from "express";
 import { AuthService } from "../auth.service";
 import { ConfirmSignup, SendCode, SignupLocal } from "../entities";

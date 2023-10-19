@@ -1,7 +1,7 @@
 import { PrismaService } from "@app/prisma/prisma.service";
 import { Injectable } from "@nestjs/common";
 import { Response } from "express";
-import bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt";
 import { COOKIE_NAMES } from "@app/common/constants/cookies";
 import { IS_DEVELOPMENT } from "@app/common/config/env";
 import { Logout } from "../entities";

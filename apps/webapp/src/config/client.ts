@@ -51,7 +51,7 @@ const retryLink = new RetryLink({
 });
 
 const httpLink = new HttpLink({
-	uri: "/api/graphql",
+	uri: "http://localhost:4000/graphql",
 	credentials: "include",
 });
 

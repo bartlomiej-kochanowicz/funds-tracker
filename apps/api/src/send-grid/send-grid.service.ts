@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as SendGrid from "@sendgrid/mail";
 import { IS_DEVELOPMENT, IS_PRODUCTION } from "@common/config/env";
-import Handlebars from "handlebars";
-import nodemailer from "nodemailer";
+import * as Handlebars from "handlebars";
+import * as nodemailer from "nodemailer";
 
 @Injectable()
 export class SendGridService {
@@ -36,7 +36,7 @@ export class SendGridService {
 	private async sendEmailDevelopment(mail: SendGrid.MailDataRequired): Promise<boolean> {
 		try {
 			const transport = nodemailer.createTransport({
-				host: "mailslurper",
+				// host: "127.0.0.1",
 				port: 2500,
 				secure: false,
 				encoding: "utf-8",

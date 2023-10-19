@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from "@nestjs/common";
 import crypto from "crypto";
 import { PrismaService } from "@app/prisma/prisma.service";
-import bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt";
 import { InjectRedis } from "@liaoliaots/nestjs-redis";
 import Redis from "ioredis";
 import { ttl24h } from "@common/constants/redis";

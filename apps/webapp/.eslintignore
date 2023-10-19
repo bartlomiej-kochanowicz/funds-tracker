@@ -4,4 +4,4 @@ pwa-assets.config.ts
 src/__generated__/*.ts
 dev-dist/**/*
 dev-sw.js
-vitext.config.ts
+vite.config.ts
