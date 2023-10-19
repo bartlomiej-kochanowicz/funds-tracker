@@ -17,7 +17,16 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"strictNullChecks": true,
-		"baseUrl": "./"
+		"baseUrl": "./",
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"target": "ES2021",
+		"sourceMap": true,
+		"incremental": true,
+		"noImplicitAny": false,
+		"strictBindCallApply": false,
+		"noFallthroughCasesInSwitch": false
 	},
 	"exclude": ["node_modules"]
 }

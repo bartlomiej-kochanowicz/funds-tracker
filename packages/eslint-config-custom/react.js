@@ -1,7 +1,3 @@
-const { resolve } = require("node:path");
-
-const project = resolve(process.cwd(), "tsconfig.json");
-
 module.exports = {
 	extends: ["eslint-config-airbnb", "eslint-config-airbnb-typescript", "prettier"],
 	parser: "@typescript-eslint/parser",
@@ -16,21 +12,8 @@ module.exports = {
 		"simple-import-sort",
 		"prettier",
 	],
-	parserOptions: {
-		project,
-	},
 	globals: {
 		JSX: true,
-	},
-	settings: {
-		"import/resolver": {
-			typescript: {
-				project,
-			},
-			node: {
-				paths: ["src"],
-			},
-		},
 	},
 	ignorePatterns: ["node_modules/", "dist/", ".eslintrc.js"],
 	rules: {
