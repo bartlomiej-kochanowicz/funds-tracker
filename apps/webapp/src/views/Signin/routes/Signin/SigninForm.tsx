@@ -139,9 +139,15 @@ export const SigninForm = () => {
 	const userNotConfirmed = errors.userPassword?.message === "User not confirmed.";
 
 	return (
-		<Form onSubmit={handleSubmit(onSubmit)} noValidate>
+		<Form
+			onSubmit={handleSubmit(onSubmit)}
+			noValidate
+		>
 			<Suspense>
-				<GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha} />
+				<GoogleReCaptcha
+					onVerify={onVerify}
+					refreshReCaptcha={refreshReCaptcha}
+				/>
 			</Suspense>
 
 			<Input
@@ -171,8 +177,18 @@ export const SigninForm = () => {
 
 			<Spacer />
 
-			<Button $width="auto" disabled={isSubmitting} type="submit" data-testid="submit-button">
-				{isSubmitting && <Loader $color="white" data-testid="button-loader" />}
+			<Button
+				$width="auto"
+				disabled={isSubmitting}
+				type="submit"
+				data-testid="submit-button"
+			>
+				{isSubmitting && (
+					<Loader
+						$color="white"
+						data-testid="button-loader"
+					/>
+				)}
 
 				{!isSubmitting && compareState(states.email) && t("common.next")}
 

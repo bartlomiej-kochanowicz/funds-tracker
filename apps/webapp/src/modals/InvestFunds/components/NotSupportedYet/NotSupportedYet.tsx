@@ -6,20 +6,39 @@ export const NotSupportedYet: FC = () => {
 	const { t } = useTranslation();
 
 	return (
-		<Box $flex $flexDirection="column" $alignItems="center">
+		<Box
+			$flex
+			$flexDirection="column"
+			$alignItems="center"
+		>
 			<Spacer $space="0.5" />
 
-			<Heading $level="h2" $fontColor="gray300" $textAlign="center" $fontSize="1.25">
+			<Heading
+				$level="h2"
+				$fontColor="gray300"
+				$textAlign="center"
+				$fontSize="1.25"
+			>
 				{t("modal.InvestFunds.form.not.supported.yet")}
 			</Heading>
 
 			<Spacer $space="0.25" />
 
-			<Heading $level="h3" $fontColor="gray300" $textAlign="center" $fontSize="0.875">
+			<Heading
+				$level="h3"
+				$fontColor="gray300"
+				$textAlign="center"
+				$fontSize="0.875"
+			>
 				<Trans
 					i18nKey="modal.InvestFunds.form.not.supported.yet.description"
 					components={{
-						support: <Link href="mailto:support@funds-tracker.com" $fontColor="blue" />,
+						support: (
+							<Link
+								href="mailto:support@funds-tracker.com"
+								$fontColor="blue"
+							/>
+						),
 					}}
 				/>
 			</Heading>

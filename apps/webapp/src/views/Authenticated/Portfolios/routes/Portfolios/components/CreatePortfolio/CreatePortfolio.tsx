@@ -16,14 +16,24 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
 	const handleOpenModal = () => NiceModal.show(MODAL_CREATE_PORTFOLIO, { callback });
 
 	return (
-		<Box $flex $flexDirection="column" $alignItems="center">
-			<Heading $textAlign="center" $level="h2">
+		<Box
+			$flex
+			$flexDirection="column"
+			$alignItems="center"
+		>
+			<Heading
+				$textAlign="center"
+				$level="h2"
+			>
 				{t("page.portfolios.need.more")}
 			</Heading>
 
 			<Spacer $space="0.5" />
 
-			<Button onClick={handleOpenModal} $outline>
+			<Button
+				onClick={handleOpenModal}
+				$outline
+			>
 				{t("page.portfolios.need.more.button")}
 
 				<Spreader $spread="0.25" />

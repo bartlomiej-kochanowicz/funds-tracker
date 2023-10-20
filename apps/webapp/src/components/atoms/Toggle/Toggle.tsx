@@ -26,7 +26,10 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
 				aria-checked={isToggled}
 				{...rest}
 			>
-				<Handle layout transition={spring} />
+				<Handle
+					layout
+					transition={spring}
+				/>
 			</StyledButton>
 		);
 	},

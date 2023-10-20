@@ -6,7 +6,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import FocusLock from "react-focus-lock";
 import { FaTimes } from "react-icons/fa";
 
-import { Background, CloseButton, GlobalStyle, ModalComponent } from "./Modal.styles";
+import { Background, CloseButton, ModalComponent } from "./Modal.styles";
 
 interface ModalComponentProps {
 	closeModal: () => void;
@@ -48,8 +48,6 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
 		<Fragment>
 			<Background />
 
-			<GlobalStyle />
-
 			<FocusLock>
 				<div
 					data-modal="true"
@@ -60,17 +58,29 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
 					ref={modalRef}
 				>
 					<ModalComponent>
-						<Box $flex $justifyContent={modalName ? "space-between" : "flex-end"}>
+						<Box
+							$flex
+							$justifyContent={modalName ? "space-between" : "flex-end"}
+						>
 							{modalName && (
-								<Heading $level="h2" id={modalName}>
+								<Heading
+									$level="h2"
+									id={modalName}
+								>
 									{modalName}
 								</Heading>
 							)}
 
 							<Spreader />
 
-							<CloseButton onClick={closeModal} aria-label="close">
-								<Icon icon={FaTimes} $size="1.25" />
+							<CloseButton
+								onClick={closeModal}
+								aria-label="close"
+							>
+								<Icon
+									icon={FaTimes}
+									$size="1.25"
+								/>
 							</CloseButton>
 						</Box>
 

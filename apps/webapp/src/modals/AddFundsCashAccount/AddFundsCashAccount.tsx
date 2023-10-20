@@ -22,7 +22,10 @@ export const AddFundsCashAccount = NiceModal.create<AddFundsCashAccountProps>(
 		const modal = useModal();
 
 		return (
-			<Modal closeModal={modal.remove} modalName={t("modal.AddFundsCashAccount.name")}>
+			<Modal
+				closeModal={modal.remove}
+				modalName={t("modal.AddFundsCashAccount.name")}
+			>
 				<Text
 					$fontSize="0.875"
 					$fontColor="gray400"
@@ -35,7 +38,11 @@ export const AddFundsCashAccount = NiceModal.create<AddFundsCashAccountProps>(
 
 				<Spacer $space="0.5" />
 
-				<AddFundsCashAccountForm callback={callback} uuid={uuid} currency={currency} />
+				<AddFundsCashAccountForm
+					callback={callback}
+					uuid={uuid}
+					currency={currency}
+				/>
 			</Modal>
 		);
 	},

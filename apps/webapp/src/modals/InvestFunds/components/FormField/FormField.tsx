@@ -17,7 +17,12 @@ export const FormField: FC<IFormFieldProps> = ({ children, label, htmlFor }) => 
 			$alignItems={isPhone ? "flex-start" : "center"}
 			$flexDirection={isPhone ? "column" : "row"}
 		>
-			<Text as="label" $fontWeight="700" $width="150px" htmlFor={htmlFor}>
+			<Text
+				as="label"
+				$fontWeight="700"
+				$width="150px"
+				htmlFor={htmlFor}
+			>
 				{label}:
 			</Text>
 

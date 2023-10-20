@@ -23,7 +23,10 @@ export const SearchInstrumentField = () => {
 	const isPhone = useBreakpoint("phone", "max");
 
 	return (
-		<FormField label={t("modal.InvestFunds.form.label.instrument")} htmlFor="instrument">
+		<FormField
+			label={t("modal.InvestFunds.form.label.instrument")}
+			htmlFor="instrument"
+		>
 			<SearchInstrumentCombobox
 				{...searchInstrumentCombobox}
 				instrumentType={watchInstrumentType as unknown as InstrumentType}

@@ -13,8 +13,14 @@ export const Row = <Item extends ItemBase>({ data, columns }: RowProps<Item>) =>
 			{columns.map(column => {
 				if ((column as ColumnAccessor<Item>).accessor) {
 					return (
-						<Cell center={column.center} key={column.identifier}>
-							<Text $fontColor="gray400" $maxWidth={column.width}>
+						<Cell
+							center={column.center}
+							key={column.identifier}
+						>
+							<Text
+								$fontColor="gray400"
+								$maxWidth={column.width}
+							>
 								{data[(column as ColumnAccessor<Item>).accessor] as ReactNode}
 							</Text>
 						</Cell>
@@ -22,7 +28,10 @@ export const Row = <Item extends ItemBase>({ data, columns }: RowProps<Item>) =>
 				}
 
 				return (
-					<Cell center={column.center} key={column.identifier}>
+					<Cell
+						center={column.center}
+						key={column.identifier}
+					>
 						{(column as CustomColumn<Item>).render(data)}
 					</Cell>
 				);

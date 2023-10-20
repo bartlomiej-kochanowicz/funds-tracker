@@ -21,7 +21,10 @@ export const LangSelector = () => {
 	};
 
 	const customLabel = ({ value }: { value: string }) => (
-		<Box $flex $alignItems="center">
+		<Box
+			$flex
+			$alignItems="center"
+		>
 			<Icon icon={FaGlobeEurope} />
 
 			<Spreader $spread="0.5" />

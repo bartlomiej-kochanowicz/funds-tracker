@@ -15,7 +15,12 @@ describe("Atoms/Spreader tests", () => {
 		["1" as Spread, "0 1rem"],
 		["3.5" as Spread, "0 3.5rem"],
 	])("has correct size for %s", (spread, padding) => {
-		const { getByTestId } = render(<Spreader data-testid="spreader" $spread={spread} />);
+		const { getByTestId } = render(
+			<Spreader
+				data-testid="spreader"
+				$spread={spread}
+			/>,
+		);
 
 		expect(getByTestId("spreader")).toHaveStyleRule("padding", padding);
 	});

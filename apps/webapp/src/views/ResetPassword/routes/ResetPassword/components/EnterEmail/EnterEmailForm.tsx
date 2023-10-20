@@ -75,16 +75,26 @@ export const EnterEmailForm = () => {
 
 	if (sendEmailSuccess) {
 		return (
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				{t("page.forgot_password.enter_email.submit.success")}
 			</Text>
 		);
 	}
 
 	return (
-		<Form onSubmit={handleSubmit(onSubmit)} noValidate>
+		<Form
+			onSubmit={handleSubmit(onSubmit)}
+			noValidate
+		>
 			<Suspense>
-				<GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha} />
+				<GoogleReCaptcha
+					onVerify={onVerify}
+					refreshReCaptcha={refreshReCaptcha}
+				/>
 			</Suspense>
 
 			<Input
@@ -97,8 +107,18 @@ export const EnterEmailForm = () => {
 
 			<Spacer />
 
-			<Button $width="auto" disabled={isSubmitting} type="submit" data-testid="submit-button">
-				{isSubmitting && <Loader $color="white" data-testid="button-loader" />}
+			<Button
+				$width="auto"
+				disabled={isSubmitting}
+				type="submit"
+				data-testid="submit-button"
+			>
+				{isSubmitting && (
+					<Loader
+						$color="white"
+						data-testid="button-loader"
+					/>
+				)}
 
 				{!isSubmitting && t("page.forgot_password.enter_email.submit.button")}
 			</Button>

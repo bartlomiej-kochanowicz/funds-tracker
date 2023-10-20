@@ -91,7 +91,10 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 	});
 
 	return (
-		<form noValidate onSubmit={handleSubmit(onSubmit)}>
+		<form
+			noValidate
+			onSubmit={handleSubmit(onSubmit)}
+		>
 			<Input
 				type="currency"
 				currency={currency}
@@ -101,8 +104,16 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 
 			<Spacer />
 
-			<Box $flex $justifyContent="flex-end">
-				<Button $color="tertiary" onClick={closeModal} $flexGrow={1} $minWidth="100px">
+			<Box
+				$flex
+				$justifyContent="flex-end"
+			>
+				<Button
+					$color="tertiary"
+					onClick={closeModal}
+					$flexGrow={1}
+					$minWidth="100px"
+				>
 					{t("common.cancel")}
 				</Button>
 

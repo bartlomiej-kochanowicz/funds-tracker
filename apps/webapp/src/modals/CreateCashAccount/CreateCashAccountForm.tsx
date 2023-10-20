@@ -78,8 +78,14 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 	});
 
 	return (
-		<form noValidate onSubmit={handleSubmit(onSubmit)}>
-			<Box $flex $alignItems="flex-end">
+		<form
+			noValidate
+			onSubmit={handleSubmit(onSubmit)}
+		>
+			<Box
+				$flex
+				$alignItems="flex-end"
+			>
 				<Input
 					placeholder={t("common.input.name.placeholder")}
 					$flexGrow={1}
@@ -89,13 +95,24 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 
 				<Spreader $spread="0.25" />
 
-				<CurrencyCombobox $width="130px" {...currencySelectProps} />
+				<CurrencyCombobox
+					$width="130px"
+					{...currencySelectProps}
+				/>
 			</Box>
 
 			<Spacer />
 
-			<Box $flex $justifyContent="flex-end">
-				<Button $color="tertiary" onClick={closeModal} $flexGrow={1} $minWidth="100px">
+			<Box
+				$flex
+				$justifyContent="flex-end"
+			>
+				<Button
+					$color="tertiary"
+					onClick={closeModal}
+					$flexGrow={1}
+					$minWidth="100px"
+				>
 					{t("common.cancel")}
 				</Button>
 

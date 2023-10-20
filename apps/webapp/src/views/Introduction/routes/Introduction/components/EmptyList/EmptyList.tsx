@@ -10,14 +10,24 @@ interface EmptyListProps {
 }
 
 export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
-	<Box $flex $flexDirection="column" $alignItems="center">
-		<Text $textAlign="center" $fontWeight="700">
+	<Box
+		$flex
+		$flexDirection="column"
+		$alignItems="center"
+	>
+		<Text
+			$textAlign="center"
+			$fontWeight="700"
+		>
 			{i18n.title}
 		</Text>
 
 		<Spacer $space="0.25" />
 
-		<Button $color="secondary" onClick={handleAppend}>
+		<Button
+			$color="secondary"
+			onClick={handleAppend}
+		>
 			{i18n.button}
 
 			<Spreader $spread="0.25" />

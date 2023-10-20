@@ -52,11 +52,18 @@ export const CashAccountsField = ({
 
 			<Spreader $spread="0.25" />
 
-			<CurrencyCombobox $width="130px" {...currencySelectProps} />
+			<CurrencyCombobox
+				$width="130px"
+				{...currencySelectProps}
+			/>
 
 			<Spreader $spread="0.25" />
 
-			<Button $color="secondary" onClick={handleRemoveField} $boxShadow="none">
+			<Button
+				$color="secondary"
+				onClick={handleRemoveField}
+				$boxShadow="none"
+			>
 				<Icon icon={FaTrash} />
 			</Button>
 		</Box>

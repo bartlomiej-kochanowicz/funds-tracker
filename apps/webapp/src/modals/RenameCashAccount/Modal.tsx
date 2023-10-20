@@ -12,6 +12,9 @@ export const MODAL_RENAME_CASH_ACCOUNT = "RenameCashAccount";
 
 export const Modal: FC<RenameCashAccountProps> = props => (
 	<Suspense>
-		<RenameCashAccount id={MODAL_RENAME_CASH_ACCOUNT} {...props} />
+		<RenameCashAccount
+			id={MODAL_RENAME_CASH_ACCOUNT}
+			{...props}
+		/>
 	</Suspense>
 );

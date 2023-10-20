@@ -19,7 +19,10 @@ export const CreateCashAccount = NiceModal.create<CreateCashAccountProps>(({ cal
 	const modal = useModal();
 
 	return (
-		<Modal modalName={t("modal.CreateCashAccount.name")} closeModal={modal.remove}>
+		<Modal
+			modalName={t("modal.CreateCashAccount.name")}
+			closeModal={modal.remove}
+		>
 			<Text
 				$fontSize="0.875"
 				$fontColor="gray400"

@@ -101,7 +101,12 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
 					type="search"
 					unit={
 						loading ? (
-							<Box $flex $flexDirection="column" $justifyContent="center" $height="100%">
+							<Box
+								$flex
+								$flexDirection="column"
+								$justifyContent="center"
+								$height="100%"
+							>
 								<Loader $size="small" />
 							</Box>
 						) : undefined

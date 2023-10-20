@@ -135,18 +135,38 @@ export const SignupForm = () => {
 	};
 
 	return (
-		<Form onSubmit={handleSubmit(onSubmit)} noValidate>
+		<Form
+			onSubmit={handleSubmit(onSubmit)}
+			noValidate
+		>
 			<Suspense>
-				<GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha} />
+				<GoogleReCaptcha
+					onVerify={onVerify}
+					refreshReCaptcha={refreshReCaptcha}
+				/>
 			</Suspense>
 
-			{compareState(states.nameAndEmail) && <NameAndEmail setValue={setValue} errors={errors} />}
+			{compareState(states.nameAndEmail) && (
+				<NameAndEmail
+					setValue={setValue}
+					errors={errors}
+				/>
+			)}
 
-			{compareState(states.passwords) && <Passwords setValue={setValue} errors={errors} />}
+			{compareState(states.passwords) && (
+				<Passwords
+					setValue={setValue}
+					errors={errors}
+				/>
+			)}
 
 			<Spacer />
 
-			<Button $width="auto" disabled={isSubmitting} type="submit">
+			<Button
+				$width="auto"
+				disabled={isSubmitting}
+				type="submit"
+			>
 				{isSubmitting && <Loader $color="white" />}
 
 				{!isSubmitting && compareState(states.nameAndEmail) && t("common.next")}

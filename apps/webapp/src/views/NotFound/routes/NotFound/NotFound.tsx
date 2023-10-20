@@ -8,7 +8,10 @@ export const NotFound: FC = () => (
 
 		<Spacer $space="0.25" />
 
-		<Text $fontColor="gray400" $textAlign="center">
+		<Text
+			$fontColor="gray400"
+			$textAlign="center"
+		>
 			Page not found
 		</Text>
 	</FullscreenClear>

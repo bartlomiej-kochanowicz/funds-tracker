@@ -39,7 +39,10 @@ export const SelectPortfolioField = () => {
 	});
 
 	return (
-		<FormField label={t("modal.InvestFunds.form.label.portfolio")} htmlFor="portfolio">
+		<FormField
+			label={t("modal.InvestFunds.form.label.portfolio")}
+			htmlFor="portfolio"
+		>
 			<Select
 				items={selectPortfolioItems}
 				placeholder={t("modal.InvestFunds.form.select.portfolio.placeholder")}

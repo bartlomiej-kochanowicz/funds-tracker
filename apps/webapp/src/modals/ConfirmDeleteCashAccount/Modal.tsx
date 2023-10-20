@@ -12,6 +12,9 @@ export const MODAL_CONFIRM_DELETE_CASH_ACCOUNT = "ConfirmDeleteCashAccount";
 
 export const Modal: FC<ConfirmDeleteCashAccountProps> = props => (
 	<Suspense>
-		<ConfirmDeleteCashAccount id={MODAL_CONFIRM_DELETE_CASH_ACCOUNT} {...props} />
+		<ConfirmDeleteCashAccount
+			id={MODAL_CONFIRM_DELETE_CASH_ACCOUNT}
+			{...props}
+		/>
 	</Suspense>
 );

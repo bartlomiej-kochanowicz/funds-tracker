@@ -12,7 +12,12 @@ export const Radio: FC<IRadioProps> = ({ children, value }) => {
 	const { register } = useRadioGroupContext();
 
 	return (
-		<StyledRadio role="radio" aria-checked="false" tabIndex={-1} {...register(value)}>
+		<StyledRadio
+			role="radio"
+			aria-checked="false"
+			tabIndex={-1}
+			{...register(value)}
+		>
 			{children}
 		</StyledRadio>
 	);

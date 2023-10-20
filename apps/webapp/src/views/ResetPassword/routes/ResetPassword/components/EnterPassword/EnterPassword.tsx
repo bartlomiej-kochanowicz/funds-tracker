@@ -17,7 +17,11 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
 
 			<Spacer $space="0.5" />
 
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				{t("page.forgot_password.enter_password.description")}
 			</Text>
 

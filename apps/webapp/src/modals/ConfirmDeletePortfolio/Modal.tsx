@@ -12,6 +12,9 @@ export const MODAL_CONFIRM_DELETE_PORTFOLIO = "ConfirmDeletePortfolio";
 
 export const Modal: FC<ConfirmDeletePortfolioProps> = props => (
 	<Suspense>
-		<ConfirmDeletePortfolio id={MODAL_CONFIRM_DELETE_PORTFOLIO} {...props} />
+		<ConfirmDeletePortfolio
+			id={MODAL_CONFIRM_DELETE_PORTFOLIO}
+			{...props}
+		/>
 	</Suspense>
 );

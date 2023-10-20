@@ -8,34 +8,38 @@ import { FC } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "styles/GlobalStyle";
+import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
+import { ThemeProvider } from "next-themes";
 import { Root } from "views/Root";
 
 const Content = () => {
 	const { theme } = useColorThemeContext();
 
 	return (
-		<ThemeProvider theme={theme}>
-			<NiceModal.Provider>
-				<GlobalStyle />
+		<ThemeProvider
+			attribute="class"
+			defaultTheme="system"
+			enableSystem
+		>
+			<StyledComponentsThemeProvider theme={theme}>
+				<NiceModal.Provider>
+					<ToastContainer
+						position="top-right"
+						autoClose={5000}
+						hideProgressBar={false}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+					/>
 
-				<ToastContainer
-					position="top-right"
-					autoClose={5000}
-					hideProgressBar={false}
-					newestOnTop={false}
-					closeOnClick
-					rtl={false}
-					pauseOnFocusLoss
-					draggable
-					pauseOnHover
-				/>
-
-				<ErrorBoundary FallbackComponent={FullscreenErrorContent}>
-					<Root />
-				</ErrorBoundary>
-			</NiceModal.Provider>
+					<ErrorBoundary FallbackComponent={FullscreenErrorContent}>
+						<Root />
+					</ErrorBoundary>
+				</NiceModal.Provider>
+			</StyledComponentsThemeProvider>
 		</ThemeProvider>
 	);
 };

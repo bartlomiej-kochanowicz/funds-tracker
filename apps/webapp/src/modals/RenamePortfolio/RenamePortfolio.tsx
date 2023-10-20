@@ -54,7 +54,10 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
 		};
 
 		return (
-			<Modal closeModal={modal.remove} modalName={t("modal.RenamePortfolio.name")}>
+			<Modal
+				closeModal={modal.remove}
+				modalName={t("modal.RenamePortfolio.name")}
+			>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Input
 						defaultValue={defaultValues.name}
@@ -65,8 +68,16 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
 
 					<Spacer />
 
-					<Box $flex $justifyContent="flex-end">
-						<Button $color="tertiary" onClick={modal.remove} $flexGrow={1} $minWidth="120px">
+					<Box
+						$flex
+						$justifyContent="flex-end"
+					>
+						<Button
+							$color="tertiary"
+							onClick={modal.remove}
+							$flexGrow={1}
+							$minWidth="120px"
+						>
 							{t("common.cancel")}
 						</Button>
 

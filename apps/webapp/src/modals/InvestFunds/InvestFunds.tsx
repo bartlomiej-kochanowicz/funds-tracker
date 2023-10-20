@@ -21,7 +21,10 @@ export const InvestFunds = NiceModal.create<InvestFundsProps>(props => {
 	const modal = useModal();
 
 	return (
-		<Modal modalName={t("modal.InvestFunds.name")} closeModal={modal.remove}>
+		<Modal
+			modalName={t("modal.InvestFunds.name")}
+			closeModal={modal.remove}
+		>
 			<Text
 				$fontSize="0.875"
 				$fontColor="gray400"

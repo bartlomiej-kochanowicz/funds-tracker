@@ -10,8 +10,14 @@ export const Header = <Item extends ItemBase>({ columns }: HeaderProps<Item>) =>
 	return (
 		<Wrapper $gridTemplateColumns={gridTemplateColumns}>
 			{columns.map(({ header, identifier, center }) => (
-				<Cell center={center} key={identifier}>
-					<Text $fontWeight="700" $fontColor="gray300">
+				<Cell
+					center={center}
+					key={identifier}
+				>
+					<Text
+						$fontWeight="700"
+						$fontColor="gray300"
+					>
 						{header}
 					</Text>
 				</Cell>

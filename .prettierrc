@@ -5,5 +5,8 @@
 	"printWidth": 100,
 	"tabWidth": 2,
 	"useTabs": true,
-	"arrowParens": "avoid"
+	"arrowParens": "avoid",
+	"plugins": ["prettier-plugin-tailwindcss"],
+	"tailwindConfig": "./apps/webapp/tailwind.config.js",
+	"singleAttributePerLine": true
 }

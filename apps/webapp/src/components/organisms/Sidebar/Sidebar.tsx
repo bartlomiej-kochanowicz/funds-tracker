@@ -25,7 +25,10 @@ export const Sidebar = () => {
 
 	return (
 		<StyledColumn $justifyContent="space-between">
-			<Box $flex $flexDirection="column">
+			<Box
+				$flex
+				$flexDirection="column"
+			>
 				<Suspense fallback={<LogoFallback />}>
 					{isDark ? (
 						<LogoNameVertical
@@ -57,7 +60,11 @@ export const Sidebar = () => {
 				<NavList navigation={sidebarNavigation} />
 			</Box>
 
-			<Box $flex $flexDirection="column" $alignItems="center">
+			<Box
+				$flex
+				$flexDirection="column"
+				$alignItems="center"
+			>
 				<ThemeSwitcher />
 
 				<Spacer />

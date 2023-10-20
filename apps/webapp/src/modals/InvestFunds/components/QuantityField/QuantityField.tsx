@@ -16,7 +16,10 @@ export const QuantityField = () => {
 	const { error } = getFieldState("quantity");
 
 	return (
-		<FormField label={t("modal.InvestFunds.form.label.quantity")} htmlFor="quantity">
+		<FormField
+			label={t("modal.InvestFunds.form.label.quantity")}
+			htmlFor="quantity"
+		>
 			<Input
 				id="quantity"
 				$flexGrow={1}

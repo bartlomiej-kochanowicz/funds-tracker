@@ -14,13 +14,21 @@ interface TilelProps {
 
 export const Tile: FC<TilelProps> = ({ children, title, to }) => {
 	const content = (
-		<Box $flex $flexDirection="column">
+		<Box
+			$flex
+			$flexDirection="column"
+		>
 			<Wrapper>{children}</Wrapper>
 
 			<Spacer $space="0.25" />
 
 			{title && (
-				<Text $maxWidth="55px" $fontSize="0.75" $fontWeight="700" $textAlign="center">
+				<Text
+					$maxWidth="55px"
+					$fontSize="0.75"
+					$fontWeight="700"
+					$textAlign="center"
+				>
 					{title}
 				</Text>
 			)}
@@ -29,7 +37,10 @@ export const Tile: FC<TilelProps> = ({ children, title, to }) => {
 
 	if (to) {
 		return (
-			<RouterLink to={to} $textDecoration="none">
+			<RouterLink
+				to={to}
+				$textDecoration="none"
+			>
 				{content}
 			</RouterLink>
 		);

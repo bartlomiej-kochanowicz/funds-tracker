@@ -72,8 +72,15 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 	const priceChanged = watchPrice !== data?.instrumentHistory.at(-1)?.close.toFixed(2);
 
 	return (
-		<FormField label={t("modal.InvestFunds.form.label.price")} htmlFor="price">
-			<Box $flex $flexGrow={1} $width={isPhone ? "100%" : undefined}>
+		<FormField
+			label={t("modal.InvestFunds.form.label.price")}
+			htmlFor="price"
+		>
+			<Box
+				$flex
+				$flexGrow={1}
+				$width={isPhone ? "100%" : undefined}
+			>
 				<Input
 					type="currency"
 					$flexGrow={1}

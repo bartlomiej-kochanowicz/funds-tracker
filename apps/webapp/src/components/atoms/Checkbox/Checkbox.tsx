@@ -18,7 +18,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
 		return (
 			<Container htmlFor={id}>
-				<Input type="checkbox" id={id} name={name} onChange={onChange} ref={ref} />
+				<Input
+					type="checkbox"
+					id={id}
+					name={name}
+					onChange={onChange}
+					ref={ref}
+				/>
 
 				<Marker>
 					<Icon icon={FaCheck} />

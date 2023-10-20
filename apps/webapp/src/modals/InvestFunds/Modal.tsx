@@ -12,6 +12,9 @@ export const MODAL_INVEST_FUNDS = "InvestFunds";
 
 export const Modal: FC<InvestFundsProps> = props => (
 	<Suspense>
-		<InvestFunds id={MODAL_INVEST_FUNDS} {...props} />
+		<InvestFunds
+			id={MODAL_INVEST_FUNDS}
+			{...props}
+		/>
 	</Suspense>
 );

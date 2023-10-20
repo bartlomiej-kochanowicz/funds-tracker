@@ -46,25 +46,42 @@ export const Confirm = () => {
 	}, [sendCode, email, token]);
 
 	if (!email) {
-		return <Navigate to={ROUTES.SIGNIN} replace />;
+		return (
+			<Navigate
+				to={ROUTES.SIGNIN}
+				replace
+			/>
+		);
 	}
 
 	return (
 		<FullscreenClear>
 			<Suspense>
-				<GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha} />
+				<GoogleReCaptcha
+					onVerify={onVerify}
+					refreshReCaptcha={refreshReCaptcha}
+				/>
 			</Suspense>
 
 			<Heading $textAlign="center">{t("common.sign_up_confirm")}</Heading>
 
 			<Spacer $space="0.5" />
 
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				<Trans
 					i18nKey="page.confirm.description"
 					components={{
 						bold: (
-							<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center" $fontWeight="700" />
+							<Text
+								$fontSize="0.875"
+								$fontColor="gray400"
+								$textAlign="center"
+								$fontWeight="700"
+							/>
 						),
 					}}
 					values={{
@@ -79,11 +96,20 @@ export const Confirm = () => {
 
 			<Spacer />
 
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				<Trans
 					i18nKey="page.confirm.support"
 					components={{
-						support: <Link href="mailto:support@funds-tracker.com" $fontColor="blue" />,
+						support: (
+							<Link
+								href="mailto:support@funds-tracker.com"
+								$fontColor="blue"
+							/>
+						),
 						code: (
 							<ButtonLink
 								onClick={handleResendCode}
@@ -99,7 +125,11 @@ export const Confirm = () => {
 
 			<Spacer $space="1.5" />
 
-			<Box $flex $flexDirection="column" $alignItems="center">
+			<Box
+				$flex
+				$flexDirection="column"
+				$alignItems="center"
+			>
 				<LangSelector />
 
 				<Spacer />

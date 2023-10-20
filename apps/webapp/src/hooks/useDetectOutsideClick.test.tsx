@@ -28,7 +28,12 @@ describe("useDetectOutsideClick tests", () => {
 			result: { current: ref },
 		} = renderHook(() => useRef(null));
 
-		const { getByTestId } = render(<div ref={ref} data-testid="div-ref" />);
+		const { getByTestId } = render(
+			<div
+				ref={ref}
+				data-testid="div-ref"
+			/>,
+		);
 
 		const mockHandler = vi.fn();
 

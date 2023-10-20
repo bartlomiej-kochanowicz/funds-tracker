@@ -15,7 +15,13 @@ module.exports = {
 	globals: {
 		JSX: true,
 	},
-	ignorePatterns: ["node_modules/", "dist/", ".eslintrc.js"],
+	ignorePatterns: [
+		"node_modules/",
+		"dist/",
+		".eslintrc.js",
+		"tailwind.config.js",
+		"postcss.config.js",
+	],
 	rules: {
 		"prettier/prettier": "error",
 		"arrow-body-style": "off",

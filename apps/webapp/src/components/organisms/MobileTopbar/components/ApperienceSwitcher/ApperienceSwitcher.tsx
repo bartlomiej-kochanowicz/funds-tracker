@@ -9,7 +9,11 @@ export const ApperienceSwitcher = ({ ref, ...props }: ItemChildrenProps) => {
 	const { t } = useTranslation();
 
 	return (
-		<ApperienceWrapper {...props} role="group" aria-labelledby={t("common.apperience")}>
+		<ApperienceWrapper
+			{...props}
+			role="group"
+			aria-labelledby={t("common.apperience")}
+		>
 			<Text id={t("common.apperience")}>{t("common.apperience")}</Text>
 
 			<Spreader />

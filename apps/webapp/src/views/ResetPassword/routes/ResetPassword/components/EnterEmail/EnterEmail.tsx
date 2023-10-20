@@ -14,7 +14,11 @@ export const EnterEmail = () => {
 
 			<Spacer $space="0.5" />
 
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				{t("page.forgot_password.enter_email.description")}
 			</Text>
 
@@ -24,11 +28,20 @@ export const EnterEmail = () => {
 
 			<Spacer />
 
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				<Trans
 					i18nKey="page.signup.already_have_account"
 					components={{
-						signin: <RouterLink to={ROUTES.SIGNIN} $fontColor="blue" />,
+						signin: (
+							<RouterLink
+								to={ROUTES.SIGNIN}
+								$fontColor="blue"
+							/>
+						),
 					}}
 				/>
 			</Text>

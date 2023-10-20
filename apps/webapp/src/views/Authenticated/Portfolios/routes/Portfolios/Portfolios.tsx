@@ -52,7 +52,10 @@ export const Portfolios = () => {
 		<Fragment>
 			<Heading>{t("navigation.portfolios")}</Heading>
 
-			<Text $fontSize="0.875" $fontColor="gray400">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+			>
 				{t("page.portfolios.title.description")}
 			</Text>
 

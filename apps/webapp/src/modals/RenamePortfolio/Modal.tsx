@@ -12,6 +12,9 @@ export const MODAL_RENAME_PORTFOLIO = "RenamePortfolio";
 
 export const Modal: FC<RenamePortfolioProps> = props => (
 	<Suspense>
-		<RenamePortfolio id={MODAL_RENAME_PORTFOLIO} {...props} />
+		<RenamePortfolio
+			id={MODAL_RENAME_PORTFOLIO}
+			{...props}
+		/>
 	</Suspense>
 );

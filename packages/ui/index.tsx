@@ -1,2 +1,1 @@
-// component exports
-export { Card } from "./card";
+export { Text } from "./components/atoms/Text";

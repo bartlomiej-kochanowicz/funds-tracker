@@ -70,8 +70,16 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
 	return (
 		<FormProvider {...methods}>
-			<Box as="form" onSubmit={handleSubmit(onSubmit)} $flex $flexDirection="column">
-				<FormField label={t("modal.InvestFunds.form.label.account.balance")} htmlFor="balance">
+			<Box
+				as="form"
+				onSubmit={handleSubmit(onSubmit)}
+				$flex
+				$flexDirection="column"
+			>
+				<FormField
+					label={t("modal.InvestFunds.form.label.account.balance")}
+					htmlFor="balance"
+				>
 					<Text>{formatCurrency(balance, currency)}</Text>
 				</FormField>
 
@@ -115,8 +123,16 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
 				<Spacer />
 
-				<Box $flex $justifyContent="flex-end">
-					<Button $color="tertiary" onClick={remove} $flexGrow={1} $minWidth="120px">
+				<Box
+					$flex
+					$justifyContent="flex-end"
+				>
+					<Button
+						$color="tertiary"
+						onClick={remove}
+						$flexGrow={1}
+						$minWidth="120px"
+					>
 						{t("common.cancel")}
 					</Button>
 

@@ -68,12 +68,19 @@ export const DefaultCurrency = () => {
 			animate={{ opacity: 1, scale: 1 }}
 			exit={{ opacity: 0, scale: 0 }}
 		>
-			<Box $flex $flexDirection="column">
+			<Box
+				$flex
+				$flexDirection="column"
+			>
 				<Heading $textAlign="center">{t("page.introduction.default.currency.title")}</Heading>
 
 				<Spacer $space="0.5" />
 
-				<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+				<Text
+					$fontSize="0.875"
+					$fontColor="gray400"
+					$textAlign="center"
+				>
 					<Trans
 						i18nKey="page.introduction.default.currency.description"
 						components={{
@@ -91,12 +98,20 @@ export const DefaultCurrency = () => {
 
 				<Spacer $space="1.5" />
 
-				<form onSubmit={handleSubmit(onSubmit)} noValidate>
+				<form
+					onSubmit={handleSubmit(onSubmit)}
+					noValidate
+				>
 					<CurrencyCombobox {...defaultCurrencySelectProps} />
 
 					<Spacer $space="1.5" />
 
-					<Button $size="large" type="submit" disabled={isSubmitting || !isValid} $width="100%">
+					<Button
+						$size="large"
+						type="submit"
+						disabled={isSubmitting || !isValid}
+						$width="100%"
+					>
 						{isSubmitting ? <Loader $color="white" /> : t("page.introduction.next.step.submit")}
 					</Button>
 				</form>

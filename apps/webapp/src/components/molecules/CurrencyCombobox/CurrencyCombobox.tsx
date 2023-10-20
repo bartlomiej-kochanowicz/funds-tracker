@@ -100,8 +100,16 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
 										{...itemRest}
 										{...itemPropsRest}
 									>
-										<Box $flex $justifyContent="space-between" $alignItems="center" $width="100%">
-											<Box $flex $alignItems="center">
+										<Box
+											$flex
+											$justifyContent="space-between"
+											$alignItems="center"
+											$width="100%"
+										>
+											<Box
+												$flex
+												$alignItems="center"
+											>
 												<Image
 													src={currencyFlags[value]}
 													$height="16px"

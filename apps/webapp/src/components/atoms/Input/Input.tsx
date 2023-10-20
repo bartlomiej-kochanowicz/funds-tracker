@@ -58,9 +58,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 			const { currency, ...currencyTypeRest } = rest as CurrencyInputProps;
 
 			return (
-				<Wrapper $width={$width} $flexGrow={$flexGrow}>
+				<Wrapper
+					$width={$width}
+					$flexGrow={$flexGrow}
+				>
 					{label && (
-						<Text $fontSize="0.875" $fontColor="gray400">
+						<Text
+							$fontSize="0.875"
+							$fontColor="gray400"
+						>
 							{label}
 						</Text>
 					)}
@@ -99,14 +105,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 		};
 
 		return (
-			<Wrapper $width={$width} $flexGrow={$flexGrow}>
+			<Wrapper
+				$width={$width}
+				$flexGrow={$flexGrow}
+			>
 				{label && (
-					<Text $fontSize="0.875" $fontColor="gray400">
+					<Text
+						$fontSize="0.875"
+						$fontColor="gray400"
+					>
 						{label}
 					</Text>
 				)}
 
-				{hasIcon && <SearchIcon icon={icon[type as "search" | "date"]} $error={hasError} />}
+				{hasIcon && (
+					<SearchIcon
+						icon={icon[type as "search" | "date"]}
+						$error={hasError}
+					/>
+				)}
 
 				<StyledInput
 					$error={hasError}

@@ -64,8 +64,14 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 	};
 
 	return (
-		<form noValidate onSubmit={handleSubmit(onSubmit)}>
-			<Box $flex $alignItems="flex-end">
+		<form
+			noValidate
+			onSubmit={handleSubmit(onSubmit)}
+		>
+			<Box
+				$flex
+				$alignItems="flex-end"
+			>
 				<Input
 					placeholder={t("common.input.name.placeholder")}
 					$flexGrow={1}
@@ -76,8 +82,16 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 
 			<Spacer />
 
-			<Box $flex $justifyContent="flex-end">
-				<Button $color="tertiary" onClick={closeModal} $flexGrow={1} $minWidth="100px">
+			<Box
+				$flex
+				$justifyContent="flex-end"
+			>
+				<Button
+					$color="tertiary"
+					onClick={closeModal}
+					$flexGrow={1}
+					$minWidth="100px"
+				>
 					{t("common.cancel")}
 				</Button>
 

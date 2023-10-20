@@ -13,7 +13,13 @@ export const NavList = ({ navigation }: NavListProps) => (
 			{navigation.map(({ to, title, icon }) => (
 				<ListItem key={title}>
 					<StyledNavLink to={to}>
-						{(props: { isActive: boolean }) => <NavListItem title={title} icon={icon} {...props} />}
+						{(props: { isActive: boolean }) => (
+							<NavListItem
+								title={title}
+								icon={icon}
+								{...props}
+							/>
+						)}
 					</StyledNavLink>
 				</ListItem>
 			))}

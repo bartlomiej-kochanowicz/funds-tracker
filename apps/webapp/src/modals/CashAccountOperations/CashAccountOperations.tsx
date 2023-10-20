@@ -20,8 +20,14 @@ export const CashAccountOperations = NiceModal.create<CashAccountOperationsProps
 		const modal = useModal();
 
 		return (
-			<Modal modalName={t("modal.CashAccountOperations.name")} closeModal={modal.remove}>
-				<OperationsTable uuid={deleteModalProps.uuid} currency={currency} />
+			<Modal
+				modalName={t("modal.CashAccountOperations.name")}
+				closeModal={modal.remove}
+			>
+				<OperationsTable
+					uuid={deleteModalProps.uuid}
+					currency={currency}
+				/>
 			</Modal>
 		);
 	},

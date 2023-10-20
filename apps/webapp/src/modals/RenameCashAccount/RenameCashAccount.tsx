@@ -57,7 +57,10 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 		};
 
 		return (
-			<Modal closeModal={modal.remove} modalName={t("modal.RenameCashAccount.name")}>
+			<Modal
+				closeModal={modal.remove}
+				modalName={t("modal.RenameCashAccount.name")}
+			>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Input
 						defaultValue={defaultValues.name}
@@ -68,8 +71,16 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 
 					<Spacer />
 
-					<Box $flex $justifyContent="flex-end">
-						<Button $color="tertiary" onClick={modal.remove} $flexGrow={1} $minWidth="120px">
+					<Box
+						$flex
+						$justifyContent="flex-end"
+					>
+						<Button
+							$color="tertiary"
+							onClick={modal.remove}
+							$flexGrow={1}
+							$minWidth="120px"
+						>
 							{t("common.cancel")}
 						</Button>
 

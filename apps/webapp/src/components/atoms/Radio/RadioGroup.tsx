@@ -20,8 +20,16 @@ export const RadioGroup: FC<IRadioGroupProps> = ({
 	const values = children.map(child => child.props.value) as string[];
 
 	return (
-		<RadioGroupProvider values={values} onChange={onChange} defaultValue={defaultValue}>
-			<div role="radiogroup" aria-labelledby={`group_${id}`} id={id}>
+		<RadioGroupProvider
+			values={values}
+			onChange={onChange}
+			defaultValue={defaultValue}
+		>
+			<div
+				role="radiogroup"
+				aria-labelledby={`group_${id}`}
+				id={id}
+			>
 				{label && <h3 id={id}>{label}</h3>}
 
 				{children}

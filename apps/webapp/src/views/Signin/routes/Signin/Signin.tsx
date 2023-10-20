@@ -3,6 +3,7 @@ import { LangSelector } from "components/molecules";
 import { FullscreenClear } from "layouts/FullscreenClear";
 import { Trans, useTranslation } from "react-i18next";
 import { ROUTES } from "routes/paths";
+import { Text as NewText } from "ui";
 
 import { SigninForm } from "./SigninForm";
 
@@ -15,9 +16,17 @@ export const Signin = () => {
 
 			<Spacer $space="0.5" />
 
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				{t("page.signin.description")}
 			</Text>
+
+			<p className="text-black">test</p>
+
+			<NewText>{t("page.signin.description")}</NewText>
 
 			<Spacer $space="1.5" />
 
@@ -25,19 +34,35 @@ export const Signin = () => {
 
 			<Spacer />
 
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				<Trans
 					i18nKey="page.signin.dont_have_account"
 					components={{
-						signup: <RouterLink to={ROUTES.SIGNUP.SIGNUP} $fontColor="blue" />,
+						signup: (
+							<RouterLink
+								to={ROUTES.SIGNUP.SIGNUP}
+								$fontColor="blue"
+							/>
+						),
 					}}
 				/>
 			</Text>
 
 			<Spacer $space="0.5" />
 
-			<Box $flex $justifyContent="center">
-				<RouterLink to={ROUTES.RESET_PASSWORD} $fontColor="blue" $fontSize="0.875">
+			<Box
+				$flex
+				$justifyContent="center"
+			>
+				<RouterLink
+					to={ROUTES.RESET_PASSWORD}
+					$fontColor="blue"
+					$fontSize="0.875"
+				>
 					{t("page.signin.forgot_password")}
 				</RouterLink>
 			</Box>
@@ -46,7 +71,11 @@ export const Signin = () => {
 
 			<Spacer $space="1.5" />
 
-			<Box $flex $flexDirection="column" $alignItems="center">
+			<Box
+				$flex
+				$flexDirection="column"
+				$alignItems="center"
+			>
 				<LangSelector />
 
 				<Spacer />

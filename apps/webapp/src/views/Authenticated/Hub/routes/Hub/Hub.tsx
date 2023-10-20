@@ -13,12 +13,20 @@ export const Hub = () => {
 	const { t } = useTranslation();
 
 	if (isDesktop) {
-		return <Navigate to={ROUTES.DASHBOARD} replace />;
+		return (
+			<Navigate
+				to={ROUTES.DASHBOARD}
+				replace
+			/>
+		);
 	}
 
 	return (
 		<Wrapper>
-			<Heading $level="h3" $fontColor="gray400">
+			<Heading
+				$level="h3"
+				$fontColor="gray400"
+			>
 				{t("navigation.dashboard")}
 			</Heading>
 
@@ -29,7 +37,11 @@ export const Hub = () => {
 					const Icon = icon;
 
 					return (
-						<Tile key={title} title={t(title)} to={to}>
+						<Tile
+							key={title}
+							title={t(title)}
+							to={to}
+						>
 							<Icon />
 						</Tile>
 					);

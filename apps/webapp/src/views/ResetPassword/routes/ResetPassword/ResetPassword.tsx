@@ -19,7 +19,11 @@ export const ResetPassword = () => {
 
 			<Spacer $space="1.5" />
 
-			<Box $flex $flexDirection="column" $alignItems="center">
+			<Box
+				$flex
+				$flexDirection="column"
+				$alignItems="center"
+			>
 				<LangSelector />
 
 				<Spacer />

@@ -81,7 +81,11 @@ export const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
 
 				{renderLayer(
 					isOpen && (
-						<Menu $isInModal={isInModal} role="menu" {...layerProps}>
+						<Menu
+							$isInModal={isInModal}
+							role="menu"
+							{...layerProps}
+						>
 							{items.map(({ value = "", label = "", divider, onClick, ...itemRest }, index) => (
 								<Fragment key={value as Key}>
 									{(divider === "top" || divider === "both") && <Menu.Divider />}

@@ -16,7 +16,10 @@ const StyledSpacer = styled.span<SpacerProps>`
 `;
 
 export const Spacer = ({ $space, "data-testid": dataTestId = "spacer" }: SpacerProps) => (
-	<StyledSpacer $space={$space} data-testid={dataTestId} />
+	<StyledSpacer
+		$space={$space}
+		data-testid={dataTestId}
+	/>
 );
 
 Spacer.displayName = "Spacer";

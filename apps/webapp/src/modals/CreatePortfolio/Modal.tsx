@@ -12,6 +12,9 @@ export const MODAL_CREATE_PORTFOLIO = "CreatePortfolio";
 
 export const Modal: FC<CreatePortfolioProps> = props => (
 	<Suspense>
-		<CreatePortfolio id={MODAL_CREATE_PORTFOLIO} {...props} />
+		<CreatePortfolio
+			id={MODAL_CREATE_PORTFOLIO}
+			{...props}
+		/>
 	</Suspense>
 );

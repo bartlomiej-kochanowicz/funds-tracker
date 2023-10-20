@@ -16,8 +16,15 @@ export const SettingsDropdown: FC = () => {
 	] satisfies DropdownItems;
 
 	return (
-		<Dropdown items={items} placement="bottom-end">
-			<Icon icon={FaCog} $size="1.5" $color="gray400" />
+		<Dropdown
+			items={items}
+			placement="bottom-end"
+		>
+			<Icon
+				icon={FaCog}
+				$size="1.5"
+				$color="gray400"
+			/>
 		</Dropdown>
 	);
 };

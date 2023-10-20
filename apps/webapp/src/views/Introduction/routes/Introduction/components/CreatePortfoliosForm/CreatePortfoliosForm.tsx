@@ -84,12 +84,19 @@ export const CreatePortfoliosForm = () => {
 			animate={{ opacity: 1, scale: 1 }}
 			exit={{ opacity: 0, scale: 0 }}
 		>
-			<Box $flex $flexDirection="column">
+			<Box
+				$flex
+				$flexDirection="column"
+			>
 				<Heading $textAlign="center">{t("add.portfolios.title")}</Heading>
 
 				<Spacer $space="0.5" />
 
-				<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+				<Text
+					$fontSize="0.875"
+					$fontColor="gray400"
+					$textAlign="center"
+				>
 					<Trans
 						i18nKey="add.portfolios.description"
 						components={{
@@ -107,8 +114,14 @@ export const CreatePortfoliosForm = () => {
 
 				<Spacer $space="1.5" />
 
-				<form onSubmit={handleSubmit(onSubmit)} noValidate>
-					<Box $flex $flexDirection="column">
+				<form
+					onSubmit={handleSubmit(onSubmit)}
+					noValidate
+				>
+					<Box
+						$flex
+						$flexDirection="column"
+					>
 						{fields.length === 0 ? (
 							<EmptyList
 								handleAppend={handleAppend}
@@ -134,7 +147,10 @@ export const CreatePortfoliosForm = () => {
 						<Spacer $space="0.25" />
 
 						{fields.length > 0 && fields.length < MAX_PORTFOLIOS ? (
-							<Button $color="secondary" onClick={handleAppend}>
+							<Button
+								$color="secondary"
+								onClick={handleAppend}
+							>
 								{t("add.portfolios.button.add.one.more")}
 
 								<Spreader $spread="0.25" />

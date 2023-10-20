@@ -69,9 +69,15 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 	};
 
 	return (
-		<Form onSubmit={handleSubmit(onSubmit)} noValidate>
+		<Form
+			onSubmit={handleSubmit(onSubmit)}
+			noValidate
+		>
 			<Suspense>
-				<GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha} />
+				<GoogleReCaptcha
+					onVerify={onVerify}
+					refreshReCaptcha={refreshReCaptcha}
+				/>
 			</Suspense>
 
 			<Input
@@ -83,7 +89,12 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 
 			<Spacer />
 
-			<Button $width="auto" disabled={isSubmitting} type="submit" data-testid="submit-button">
+			<Button
+				$width="auto"
+				disabled={isSubmitting}
+				type="submit"
+				data-testid="submit-button"
+			>
 				{t("form.button.submit")}
 			</Button>
 		</Form>

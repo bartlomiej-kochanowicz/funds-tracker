@@ -12,6 +12,9 @@ export const MODAL_ADD_FUNDS_CASH_ACCOUNT = "AddFundsCashAccount";
 
 export const Modal: FC<AddFundsCashAccountProps> = props => (
 	<Suspense>
-		<AddFundsCashAccount id={MODAL_ADD_FUNDS_CASH_ACCOUNT} {...props} />
+		<AddFundsCashAccount
+			id={MODAL_ADD_FUNDS_CASH_ACCOUNT}
+			{...props}
+		/>
 	</Suspense>
 );

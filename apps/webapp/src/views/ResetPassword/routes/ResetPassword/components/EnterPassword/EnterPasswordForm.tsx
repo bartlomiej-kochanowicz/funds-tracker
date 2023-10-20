@@ -87,11 +87,20 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 	if (newPasswordSuccess) {
 		return (
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				<Trans
 					i18nKey="page.forgot_password.enter_password.submit.success"
 					components={{
-						signin: <RouterLink to={ROUTES.SIGNIN} $fontColor="blue" />,
+						signin: (
+							<RouterLink
+								to={ROUTES.SIGNIN}
+								$fontColor="blue"
+							/>
+						),
 					}}
 				/>
 			</Text>
@@ -99,9 +108,15 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 	}
 
 	return (
-		<Form onSubmit={handleSubmit(onSubmit)} noValidate>
+		<Form
+			onSubmit={handleSubmit(onSubmit)}
+			noValidate
+		>
 			<Suspense>
-				<GoogleReCaptcha onVerify={onVerify} refreshReCaptcha={refreshReCaptcha} />
+				<GoogleReCaptcha
+					onVerify={onVerify}
+					refreshReCaptcha={refreshReCaptcha}
+				/>
 			</Suspense>
 
 			<Input
@@ -125,7 +140,11 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 			<Spacer />
 
-			<Button $width="auto" disabled={isSubmitting} type="submit">
+			<Button
+				$width="auto"
+				disabled={isSubmitting}
+				type="submit"
+			>
 				{isSubmitting && <Loader $color="white" />}
 
 				{!isSubmitting && t("common.save")}

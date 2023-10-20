@@ -12,7 +12,10 @@ describe("useHover tests", () => {
 		} = renderHook(() => useHover());
 
 		const { getByTestId } = render(
-			<div data-testid="div-hover" {...props}>
+			<div
+				data-testid="div-hover"
+				{...props}
+			>
 				test
 			</div>,
 		);

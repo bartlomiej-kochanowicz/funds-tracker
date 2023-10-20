@@ -43,7 +43,11 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 	] satisfies DropdownItems;
 
 	return (
-		<Dropdown items={items} placement="bottom-end" triggerOffset={0}>
+		<Dropdown
+			items={items}
+			placement="bottom-end"
+			triggerOffset={0}
+		>
 			{({ isOpen, ...rest }) => (
 				<ProfileContainer {...rest}>
 					{withName && (
@@ -52,7 +56,10 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
 							<Spreader $spread="0.25" />
 
-							<Text $fontWeight="700" $maxWidth="250px">
+							<Text
+								$fontWeight="700"
+								$maxWidth="250px"
+							>
 								{t("common.hi")}, {user.name}!
 							</Text>
 						</Fragment>

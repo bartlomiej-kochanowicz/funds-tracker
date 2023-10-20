@@ -47,7 +47,12 @@ export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) =>
 				type: t(`cashAccount.operation.type.${type}`),
 			})) || [];
 
-		return <Table columns={columns} data={processedData} />;
+		return (
+			<Table
+				columns={columns}
+				data={processedData}
+			/>
+		);
 	}
 
 	return null;

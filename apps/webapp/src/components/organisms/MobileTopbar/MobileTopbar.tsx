@@ -57,7 +57,10 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
 			$hasBorder={visible}
 		>
 			{isDashboard && (
-				<Box $flex $flexDirection="column">
+				<Box
+					$flex
+					$flexDirection="column"
+				>
 					<Spacer $space="0.25" />
 					{isDark && <LogoNameHorizontal height="18px" />}
 

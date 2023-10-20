@@ -1,11 +1,5 @@
 import { transparentize } from "color2k";
-import styled, { createGlobalStyle, css } from "styled-components";
-
-export const GlobalStyle = createGlobalStyle`
-  body {
-      overflow: hidden;
-  }
-`;
+import styled, { css } from "styled-components";
 
 export const Background = styled.div`
 	position: fixed;

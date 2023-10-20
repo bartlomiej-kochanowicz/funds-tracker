@@ -51,9 +51,18 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 		};
 
 		return (
-			<Modal closeModal={modal.remove} modalName={t("modal.ConfirmDeleteCashAccount.name")}>
-				<Box $flex $flexDirection="column">
-					<Text $fontSize="0.875" $fontColor="gray400">
+			<Modal
+				closeModal={modal.remove}
+				modalName={t("modal.ConfirmDeleteCashAccount.name")}
+			>
+				<Box
+					$flex
+					$flexDirection="column"
+				>
+					<Text
+						$fontSize="0.875"
+						$fontColor="gray400"
+					>
 						<Trans
 							i18nKey="modal.ConfirmDeleteCashAccount.description"
 							values={{ name }}
@@ -73,13 +82,21 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 					<Spacer />
 
 					<Box $flex>
-						<Button $color="tertiary" onClick={modal.remove} $width="50%">
+						<Button
+							$color="tertiary"
+							onClick={modal.remove}
+							$width="50%"
+						>
 							{t("common.no")}
 						</Button>
 
 						<Spreader $spread="0.5" />
 
-						<Button $width="50%" disabled={loading} onClick={handleDelete}>
+						<Button
+							$width="50%"
+							disabled={loading}
+							onClick={handleDelete}
+						>
 							{loading && <Loader $color="white" />}
 
 							{!loading && t("common.yes")}

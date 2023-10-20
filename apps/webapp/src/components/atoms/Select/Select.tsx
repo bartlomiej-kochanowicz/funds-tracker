@@ -106,7 +106,10 @@ const SelectInner = <ValueType,>(
 
 	return (
 		<Fragment>
-			<Wrapper width={width} flexGrow={flexGrow}>
+			<Wrapper
+				width={width}
+				flexGrow={flexGrow}
+			>
 				<StyledButton
 					onBlur={onBlur}
 					$error={Boolean($error)}

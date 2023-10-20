@@ -18,14 +18,24 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
 	};
 
 	return (
-		<Box $flex $flexDirection="column" $alignItems="center">
-			<Heading $textAlign="center" $level="h2">
+		<Box
+			$flex
+			$flexDirection="column"
+			$alignItems="center"
+		>
+			<Heading
+				$textAlign="center"
+				$level="h2"
+			>
 				{t("page.cash_accounts.empty.list.title")}
 			</Heading>
 
 			<Spacer $space="0.5" />
 
-			<Button onClick={handleOpenModal} $outline>
+			<Button
+				onClick={handleOpenModal}
+				$outline
+			>
 				{t("page.cash_accounts.need.more.button")}
 
 				<Spreader $spread="0.25" />

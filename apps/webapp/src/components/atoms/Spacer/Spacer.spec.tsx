@@ -15,7 +15,12 @@ describe("Atoms/Spacer tests", () => {
 		["1" as Space, "1rem 0"],
 		["3.5" as Space, "3.5rem 0"],
 	])("has correct size for %s", (space, padding) => {
-		const { getByTestId } = render(<Spacer data-testid="spacer" $space={space} />);
+		const { getByTestId } = render(
+			<Spacer
+				data-testid="spacer"
+				$space={space}
+			/>,
+		);
 
 		expect(getByTestId("spacer")).toHaveStyleRule("padding", padding);
 	});

@@ -71,17 +71,33 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 	] satisfies DropdownItems;
 
 	return (
-		<Box $p={isPhone ? "medium" : "large"} $borderRadius="0.7">
-			<Box $flex $justifyContent="space-between">
-				<Box $flex $flexDirection="column">
+		<Box
+			$p={isPhone ? "medium" : "large"}
+			$borderRadius="0.7"
+		>
+			<Box
+				$flex
+				$justifyContent="space-between"
+			>
+				<Box
+					$flex
+					$flexDirection="column"
+				>
 					<Text $fontWeight="700">{name}</Text>
 
 					<Text>{formatCurrency(2137, defaultCurrency)}</Text>
 				</Box>
 
-				<Dropdown items={items} placement="bottom-end">
+				<Dropdown
+					items={items}
+					placement="bottom-end"
+				>
 					{({ isOpen, ...props }) => (
-						<Button $outline $size="small" {...props}>
+						<Button
+							$outline
+							$size="small"
+							{...props}
+						>
 							<Icon icon={FaEllipsisV} />
 						</Button>
 					)}

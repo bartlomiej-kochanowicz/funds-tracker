@@ -28,7 +28,10 @@ export const SelectInstrumentType: FC<SelectInstrumentTypeProps> = () => {
 	});
 
 	return (
-		<FormField label={t("modal.InvestFunds.form.label.instrumentType")} htmlFor="instrumentType">
+		<FormField
+			label={t("modal.InvestFunds.form.label.instrumentType")}
+			htmlFor="instrumentType"
+		>
 			<Select
 				items={instruments}
 				placeholder={t("modal.InvestFunds.form.select.portfolio.instrumentType.placeholder")}

@@ -19,7 +19,10 @@ export const CreatePortfolio = NiceModal.create<CreatePortfolioProps>(({ callbac
 	const modal = useModal();
 
 	return (
-		<Modal modalName={t("modal.CreatePortfolio.name")} closeModal={modal.remove}>
+		<Modal
+			modalName={t("modal.CreatePortfolio.name")}
+			closeModal={modal.remove}
+		>
 			<Text
 				$fontSize="0.875"
 				$fontColor="gray400"

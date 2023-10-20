@@ -8,7 +8,10 @@ export const Table = <Item extends ItemBase>({ columns, data }: TableProps<Item>
 		<TableWrapper>
 			<Header columns={columns} />
 
-			<Body columns={columns} data={data} />
+			<Body
+				columns={columns}
+				data={data}
+			/>
 		</TableWrapper>
 	</Wrapper>
 );

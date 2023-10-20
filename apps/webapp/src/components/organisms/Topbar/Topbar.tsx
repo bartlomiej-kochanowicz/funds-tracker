@@ -53,7 +53,10 @@ export const Topbar = () => {
 		>
 			{rendreBackButton ? (
 				<BackButton onClick={handleBackToPreviousPage}>
-					<Icon icon={FaChevronLeft} $size="1.5" />
+					<Icon
+						icon={FaChevronLeft}
+						$size="1.5"
+					/>
 
 					<Spreader $spread="0.1" />
 

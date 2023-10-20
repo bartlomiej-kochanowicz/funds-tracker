@@ -63,7 +63,11 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 			label={t("modal.InvestFunds.form.label.transaction_cost")}
 			htmlFor="transaction_cost"
 		>
-			<Box $flex $flexGrow={1} $width={isPhone ? "100%" : undefined}>
+			<Box
+				$flex
+				$flexGrow={1}
+				$width={isPhone ? "100%" : undefined}
+			>
 				<Input
 					type="currency"
 					$flexGrow={1}

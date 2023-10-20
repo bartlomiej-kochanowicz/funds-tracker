@@ -45,7 +45,12 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 			{...props}
 			locale={i18n.language}
 			dateFormat="dd-MM-yyyy"
-			customInput={<Input type="date" {...inputProps} />}
+			customInput={
+				<Input
+					type="date"
+					{...inputProps}
+				/>
+			}
 			showPopperArrow={false}
 			popperModifiers={[
 				{
@@ -64,8 +69,15 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 				prevMonthButtonDisabled,
 				nextMonthButtonDisabled,
 			}) => (
-				<Box $flex $justifyContent="space-between">
-					<ArrowButton type="button" onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+				<Box
+					$flex
+					$justifyContent="space-between"
+				>
+					<ArrowButton
+						type="button"
+						onClick={decreaseMonth}
+						disabled={prevMonthButtonDisabled}
+					>
 						<Icon icon={FaChevronLeft} />
 					</ArrowButton>
 
@@ -77,7 +89,10 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 							}
 						>
 							{years.map(option => (
-								<option key={option} value={option}>
+								<option
+									key={option}
+									value={option}
+								>
 									{option}
 								</option>
 							))}
@@ -92,14 +107,21 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 							}
 						>
 							{months.map(option => (
-								<option key={option} value={option}>
+								<option
+									key={option}
+									value={option}
+								>
 									{option}
 								</option>
 							))}
 						</StyledSelect>
 					</Box>
 
-					<ArrowButton type="button" onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+					<ArrowButton
+						type="button"
+						onClick={increaseMonth}
+						disabled={nextMonthButtonDisabled}
+					>
 						<Icon icon={FaChevronRight} />
 					</ArrowButton>
 				</Box>

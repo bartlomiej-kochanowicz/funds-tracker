@@ -7,7 +7,11 @@ export const Completed = () => {
 	const { t } = useTranslation();
 
 	return (
-		<Box $flex $flexDirection="column" $alignItems="center">
+		<Box
+			$flex
+			$flexDirection="column"
+			$alignItems="center"
+		>
 			<ThumbUp />
 
 			<Spacer $space="1.5" />
@@ -16,13 +20,23 @@ export const Completed = () => {
 
 			<Spacer $space="0.5" />
 
-			<Text $fontSize="0.875" $fontColor="gray400" $textAlign="center">
+			<Text
+				$fontSize="0.875"
+				$fontColor="gray400"
+				$textAlign="center"
+			>
 				{t("add.instrument.success.description")}
 			</Text>
 
 			<Spacer $space="1.5" />
 
-			<Button color="secondary" $width="100%" $size="large" as={Link} to={ROUTES.DASHBOARD}>
+			<Button
+				color="secondary"
+				$width="100%"
+				$size="large"
+				as={Link}
+				to={ROUTES.DASHBOARD}
+			>
 				{t("add.instrument.success.dashboard")}
 			</Button>
 		</Box>
