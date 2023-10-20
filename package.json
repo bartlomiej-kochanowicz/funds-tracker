@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"up": "docker compose up -d && pnpm prisma:generate && pnpm prisma:migrate-dev",
+		"compose": "docker compose up -d && pnpm prisma:generate && pnpm prisma:migrate-dev",
 		"prisma:generate": "cd apps/api && pnpm dlx prisma generate",
 		"prisma:migrate-dev": "cd apps/api && pnpm dlx prisma migrate dev",
 		"prisma:push": "cd apps/api && pnpm dlx prisma db push",
