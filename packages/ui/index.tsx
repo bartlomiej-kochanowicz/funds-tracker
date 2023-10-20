@@ -1,2 +1,2 @@
-export { Heading } from "./components/atoms/Heading";
-export { Text } from "./components/atoms/Text";
+export * from "./components/atoms/Heading";
+export * from "./components/atoms/Text";

@@ -2,7 +2,7 @@ import { Box, RouterLink, Spacer, ThemeSwitcher } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { Trans, useTranslation } from "react-i18next";
 import { ROUTES } from "routes/paths";
-import { Heading, Text } from "ui";
+import { H1, Text } from "ui";
 
 import { SigninForm } from "./SigninForm";
 
@@ -11,7 +11,7 @@ export const Signin = () => {
 
 	return (
 		<>
-			<Heading.H1 className="text-center">{t("common.sign_in")}</Heading.H1>
+			<H1 className="text-center">{t("common.sign_in")}</H1>
 
 			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
 				{t("page.signin.description")}
@@ -21,11 +21,7 @@ export const Signin = () => {
 
 			<Spacer />
 
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="cen ter"
-			>
+			<Text className="text-center text-sm text-gray-600">
 				<Trans
 					i18nKey="page.signin.dont_have_account"
 					components={{

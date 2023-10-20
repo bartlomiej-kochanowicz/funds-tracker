@@ -14,9 +14,9 @@ export const Heading = Object.fromEntries(
 			] as const
 		).map(([level, className]) => [
 			level.toUpperCase(),
-			({ className: topClassname, ...rest }: HTMLAttributes<HTMLHeadingElement>) =>
+			({ className: topClassName, ...rest }: HTMLAttributes<HTMLHeadingElement>) =>
 				createElement(level, {
-					className: clsx("text-gray-900 dark:text-white", className, topClassname),
+					className: clsx("text-gray-900 dark:text-white", className, topClassName),
 					...rest,
 				}),
 		]),
