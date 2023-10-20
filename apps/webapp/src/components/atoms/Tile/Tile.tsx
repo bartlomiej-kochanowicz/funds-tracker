@@ -1,6 +1,6 @@
-import { RouterLink } from "components/atoms/RouterLink";
 import { Text } from "components/atoms/Text";
 import { FC, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 import { Box } from "../Box";
 import { Spacer } from "../Spacer";
@@ -37,12 +37,12 @@ export const Tile: FC<TilelProps> = ({ children, title, to }) => {
 
 	if (to) {
 		return (
-			<RouterLink
+			<Link
 				to={to}
-				$textDecoration="none"
+				className="no-underline"
 			>
 				{content}
-			</RouterLink>
+			</Link>
 		);
 	}
 

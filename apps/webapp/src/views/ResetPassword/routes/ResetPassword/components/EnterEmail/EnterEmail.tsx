@@ -1,6 +1,7 @@
-import { Heading, RouterLink, Spacer, Text } from "components/atoms";
+import { Heading, Spacer, Text } from "components/atoms";
 import { Fragment } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
 import { EnterEmailForm } from "./EnterEmailForm";
@@ -37,9 +38,9 @@ export const EnterEmail = () => {
 					i18nKey="page.signup.already_have_account"
 					components={{
 						signin: (
-							<RouterLink
+							<Link
 								to={ROUTES.SIGNIN}
-								$fontColor="blue"
+								className="text-blue-500 hover:underline"
 							/>
 						),
 					}}

@@ -8,7 +8,7 @@ import {
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Input, Loader, Spacer } from "components/atoms";
+import { Input, Loader, Spacer } from "components/atoms";
 import { useUserContext } from "contexts/UserContext";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { SIGNIN } from "graphql/mutations/authentication/Signin";
@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
+import { Button } from "ui";
 
 import { validationSchema } from "./Signin.schema";
 import { Form } from "./Signin.styles";
@@ -178,7 +179,6 @@ export const SigninForm = () => {
 			<Spacer />
 
 			<Button
-				$width="auto"
 				disabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"

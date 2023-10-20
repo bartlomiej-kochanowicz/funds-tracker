@@ -1,4 +1,5 @@
-import { Box, Spacer, ThemeSwitcher } from "components/atoms";
+import { ThemeSwitcher } from "components";
+import { Box, Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { lazy, Suspense } from "react";
 

@@ -5,7 +5,11 @@ import { useFocusRing, useSwitch, VisuallyHidden } from "react-aria";
 import { useTranslation } from "react-i18next";
 import { BiMoon, BiSun } from "react-icons/bi";
 
-export const ThemeSwitcher = () => {
+interface ThemeSwitcherProps {
+	className?: string;
+}
+
+export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
 	const { t } = useTranslation();
 
 	const children = t("common.theme_switcher");
@@ -29,7 +33,7 @@ export const ThemeSwitcher = () => {
 	const { isFocusVisible, focusProps } = useFocusRing();
 
 	return (
-		<label className="relative cursor-pointer">
+		<label className={cslx("relative cursor-pointer", className)}>
 			<VisuallyHidden>
 				<input
 					{...inputProps}

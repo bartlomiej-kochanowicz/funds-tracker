@@ -1,7 +1,9 @@
-import { Box, Heading, RouterLink, Spacer, Text, ThemeSwitcher } from "components/atoms";
+import { ThemeSwitcher } from "components";
+import { Box, Heading, Spacer, Text } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { FullscreenClear } from "layouts/FullscreenClear";
 import { Trans, useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
 import { SignupForm } from "./SignupForm";
@@ -38,9 +40,9 @@ export const Signup = () => {
 					i18nKey="page.signup.already_have_account"
 					components={{
 						signin: (
-							<RouterLink
+							<Link
 								to={ROUTES.SIGNIN}
-								$fontColor="blue"
+								className="text-blue-500 hover:underline"
 							/>
 						),
 					}}

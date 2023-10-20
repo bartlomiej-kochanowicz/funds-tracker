@@ -1,4 +1,5 @@
-import { Spreader, Text, ThemeSwitcher } from "components/atoms";
+import { ThemeSwitcher } from "components";
+import { Spreader, Text } from "components/atoms";
 import { ItemChildrenProps } from "components/atoms/Menu/MenuItem";
 import { ForwardedRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,7 +19,7 @@ export const ApperienceSwitcher = ({ ref, ...props }: ItemChildrenProps) => {
 
 			<Spreader />
 
-			<ThemeSwitcher ref={ref as ForwardedRef<HTMLButtonElement>} />
+			<ThemeSwitcher />
 		</ApperienceWrapper>
 	);
 };

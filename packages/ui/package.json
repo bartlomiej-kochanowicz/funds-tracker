@@ -9,7 +9,9 @@
 	},
 	"dependencies": {
 		"clsx": "2.0.0",
-		"react": "18.2.0"
+		"framer-motion": "10.16.4",
+		"react": "18.2.0",
+		"react-aria": "3.29.1"
 	},
 	"devDependencies": {
 		"@types/node": "20.8.7",

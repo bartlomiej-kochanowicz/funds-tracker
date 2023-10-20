@@ -1,6 +1,7 @@
-import { Box, RouterLink, Spacer, ThemeSwitcher } from "components/atoms";
+import { ThemeSwitcher } from "components";
 import { LangSelector } from "components/molecules";
 import { Trans, useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 import { H1, Text } from "ui";
 
@@ -10,7 +11,7 @@ export const Signin = () => {
 	const { t } = useTranslation();
 
 	return (
-		<>
+		<div className="mx-auto max-w-lg">
 			<H1 className="text-center">{t("common.sign_in")}</H1>
 
 			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
@@ -19,52 +20,32 @@ export const Signin = () => {
 
 			<SigninForm />
 
-			<Spacer />
-
-			<Text className="text-center text-sm text-gray-600">
+			<Text className="my-4 text-center text-sm text-gray-600">
 				<Trans
 					i18nKey="page.signin.dont_have_account"
 					components={{
 						signup: (
-							<RouterLink
+							<Link
 								to={ROUTES.SIGNUP.SIGNUP}
-								$fontColor="blue"
+								className="text-blue-500 hover:underline"
 							/>
 						),
 					}}
 				/>
 			</Text>
 
-			<Spacer $space="0.5" />
-
-			<Box
-				$flex
-				$justifyContent="center"
+			<Link
+				className="block text-center text-sm text-blue-500 hover:underline"
+				to={ROUTES.RESET_PASSWORD}
 			>
-				<RouterLink
-					to={ROUTES.RESET_PASSWORD}
-					$fontColor="blue"
-					$fontSize="0.875"
-				>
-					{t("page.signin.forgot_password")}
-				</RouterLink>
-			</Box>
+				{t("page.signin.forgot_password")}
+			</Link>
 
-			<Spacer $space="1.5" />
-
-			<Spacer $space="1.5" />
-
-			<Box
-				$flex
-				$flexDirection="column"
-				$alignItems="center"
-			>
+			<div className="mt-12 flex flex-col items-center">
 				<LangSelector />
 
-				<Spacer />
-
-				<ThemeSwitcher />
-			</Box>
-		</>
+				<ThemeSwitcher className="mt-8" />
+			</div>
+		</div>
 	);
 };
