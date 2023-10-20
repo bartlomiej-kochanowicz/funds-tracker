@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { Box, Heading, Loader, Spacer, Text } from "components/atoms";
 import { ErrorContent } from "components/molecules";
 import { MAX_CASH_ACCOUNTS } from "constants/common";
-import { useColorThemeContext } from "contexts/ColorThemeContext";
 import { GET_CASH_ACCOUNTS } from "graphql/query/cashAccounts/GetCashAccounts";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { Fragment } from "react";
@@ -16,7 +15,7 @@ import { CreateFirstCashAccount } from "./components/CreateFirstCashAccount";
 export const CashAccounts = () => {
 	const { t } = useTranslation();
 
-	const { isDark } = useColorThemeContext();
+	const isDark = false;
 
 	const isPhone = useBreakpoint("phone", "max");
 

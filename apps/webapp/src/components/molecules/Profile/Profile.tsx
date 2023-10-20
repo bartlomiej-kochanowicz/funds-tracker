@@ -2,7 +2,6 @@ import { LogoutMutation } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { Avatar, Dropdown, Icon, Spreader, Text } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
-import { useColorThemeContext } from "contexts/ColorThemeContext";
 import { useUserContext } from "contexts/UserContext";
 import { LOGOUT } from "graphql/mutations/authentication/Logout";
 import { FC, Fragment } from "react";
@@ -20,7 +19,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
 	const { t } = useTranslation();
 
-	const { isDark } = useColorThemeContext();
+	const isDark = false;
 
 	const { clearUser: onCompleted } = useUserContext();
 

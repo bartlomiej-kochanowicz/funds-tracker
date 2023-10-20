@@ -1,5 +1,4 @@
 import { Box } from "components/atoms";
-import { useColorThemeContext } from "contexts/ColorThemeContext";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { FC, ReactNode } from "react";
 
@@ -8,7 +7,7 @@ interface PanelProps {
 }
 
 export const Panel: FC<PanelProps> = ({ children }) => {
-	const { isDark } = useColorThemeContext();
+	const isDark = false;
 
 	const isPhone = useBreakpoint("phone", "max");
 

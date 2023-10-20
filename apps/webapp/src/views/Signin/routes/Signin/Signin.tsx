@@ -1,6 +1,5 @@
 import { Box, Heading, RouterLink, Spacer, Text, ThemeSwitcher } from "components/atoms";
 import { LangSelector } from "components/molecules";
-import { FullscreenClear } from "layouts/FullscreenClear";
 import { Trans, useTranslation } from "react-i18next";
 import { ROUTES } from "routes/paths";
 import { Text as NewText } from "ui";
@@ -11,7 +10,7 @@ export const Signin = () => {
 	const { t } = useTranslation();
 
 	return (
-		<FullscreenClear>
+		<>
 			<Heading $textAlign="center">{t("common.sign_in")}</Heading>
 
 			<Spacer $space="0.5" />
@@ -82,6 +81,6 @@ export const Signin = () => {
 
 				<ThemeSwitcher />
 			</Box>
-		</FullscreenClear>
+		</>
 	);
 };

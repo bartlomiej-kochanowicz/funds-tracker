@@ -1,6 +1,5 @@
 import { Box, Spacer, ThemeSwitcher } from "components/atoms";
 import { LangSelector } from "components/molecules";
-import { useColorThemeContext } from "contexts/ColorThemeContext";
 import { lazy, Suspense } from "react";
 
 import { LogoFallback } from "./components/LogoFallback";
@@ -21,7 +20,7 @@ const LogoNameVerticalDark = lazy(() =>
 );
 
 export const Sidebar = () => {
-	const { isDark } = useColorThemeContext();
+	const isDark = false;
 
 	return (
 		<StyledColumn $justifyContent="space-between">

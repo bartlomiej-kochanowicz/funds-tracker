@@ -1,7 +1,6 @@
 import { Currency, IntroductionStep } from "__generated__/graphql";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { render as rtlRender, RenderOptions } from "@testing-library/react";
-import { ColorThemeProvider } from "contexts/ColorThemeContext";
 import { UserContextProvider } from "contexts/UserContext";
 import { GET_USER } from "graphql/query/common/GetUser";
 import { ComponentType, ReactElement, ReactNode } from "react";
@@ -40,11 +39,9 @@ const render = (ui: ReactElement, options?: Options) => {
 			addTypename={false}
 		>
 			<I18nextProvider i18n={i18n}>
-				<ColorThemeProvider>
-					<UserContextProvider>
-						<ThemeProvider theme={theme}>{children}</ThemeProvider>
-					</UserContextProvider>
-				</ColorThemeProvider>
+				<UserContextProvider>
+					<ThemeProvider theme={theme}>{children}</ThemeProvider>
+				</UserContextProvider>
 			</I18nextProvider>
 		</MockedProvider>
 	);

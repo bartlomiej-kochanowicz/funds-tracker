@@ -1,35 +1,58 @@
-import { useColorThemeContext } from "contexts/ColorThemeContext";
-import { forwardRef } from "react";
+import cslx from "clsx";
+import { useTheme } from "next-themes";
+import { useRef } from "react";
+import { useFocusRing, useSwitch, VisuallyHidden } from "react-aria";
 import { useTranslation } from "react-i18next";
+import { BiMoon, BiSun } from "react-icons/bi";
 
-import { Handle, spring, StyledBiMoon, StyledBiSun, StyledButton } from "./ThemeSwitcher.styles";
-
-export const ThemeSwitcher = forwardRef<HTMLButtonElement>((props, ref) => {
+export const ThemeSwitcher = () => {
 	const { t } = useTranslation();
 
-	const { isDark, toggleTheme } = useColorThemeContext();
+	const children = t("common.theme_switcher");
+
+	const { theme, setTheme } = useTheme();
+
+	const state = {
+		isSelected: theme === "dark",
+		setSelected: state => {
+			if (state) {
+				setTheme("dark");
+			} else {
+				setTheme("light");
+			}
+		},
+		toggle: () => {},
+	};
+
+	const ref = useRef(null);
+	const { inputProps } = useSwitch({ children }, state, ref);
+	const { isFocusVisible, focusProps } = useFocusRing();
 
 	return (
-		<StyledButton
-			onClick={toggleTheme}
-			type="button"
-			role="switch"
-			aria-label={t("common.theme_switcher")}
-			aria-checked={isDark}
-			ref={ref}
-			{...props}
-		>
-			<StyledBiMoon $isVisible={isDark} />
+		<label className="relative cursor-pointer">
+			<VisuallyHidden>
+				<input
+					{...inputProps}
+					{...focusProps}
+					ref={ref}
+				/>
+			</VisuallyHidden>
 
-			<Handle
-				transition={spring}
-				initial={{ x: isDark ? 30 : 0 }}
-				animate={{ x: isDark ? 30 : 0 }}
-			/>
+			<div
+				className={cslx(
+					"flex h-6 w-11 items-center justify-between rounded-full bg-gray-200 px-1 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] dark:border-gray-600 dark:bg-gray-700",
+					{
+						"after:translate-x-full after:border-white": state.isSelected,
+						"outline-none ring-4 ring-blue-300 dark:ring-blue-800": isFocusVisible,
+					},
+				)}
+			>
+				<BiMoon className="text-white" />
 
-			<StyledBiSun isVisible={!isDark} />
-		</StyledButton>
+				<BiSun className="text-gray-700" />
+			</div>
+		</label>
 	);
-});
+};
 
 ThemeSwitcher.displayName = "ThemeSwitcher";

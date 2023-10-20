@@ -63,5 +63,6 @@ module.exports = {
 		"quote-props": "off",
 		"no-tabs": ["error", { allowIndentationTabs: true }],
 		"react/jsx-wrap-multilines": "off",
+		"@typescript-eslint/no-shadow": "off",
 	},
 };

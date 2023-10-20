@@ -1,6 +1,5 @@
 import { Box, Spacer } from "components/atoms";
 import { Profile } from "components/molecules";
-import { useColorThemeContext } from "contexts/ColorThemeContext";
 import { debounce } from "helpers/debounce";
 import { FC, Fragment, lazy, useCallback, useEffect, useState } from "react";
 
@@ -24,7 +23,7 @@ interface MobileTopbarProps {
 }
 
 export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
-	const { isDark } = useColorThemeContext();
+	const isDark = false;
 
 	const [visible, setVisible] = useState(window.pageYOffset !== 0);
 
