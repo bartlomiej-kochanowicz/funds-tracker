@@ -1,9 +1,10 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, Button, Dropdown, Icon, Text } from "components/atoms";
+import { Box, Button, Dropdown, Text } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { formatCurrency } from "helpers/formatCurrency";
 import { useBreakpoint } from "hooks/useBreakpoint";
+import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from "modals/AddFundsCashAccount";
 import { MODAL_CASH_ACCOUNT_OPERATIONS } from "modals/CashAccountOperations";
 import { MODAL_CONFIRM_DELETE_CASH_ACCOUNT } from "modals/ConfirmDeleteCashAccount";
@@ -11,7 +12,6 @@ import { MODAL_INVEST_FUNDS } from "modals/InvestFunds";
 import { MODAL_RENAME_CASH_ACCOUNT } from "modals/RenameCashAccount";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { FaChartLine, FaEllipsisV, FaListUl, FaPen, FaPlus, FaTrash } from "react-icons/fa";
 
 interface CashAccountsPanelProps {
 	updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
@@ -36,7 +36,7 @@ export const CashAccountsPanel: FC<
 
 	const items = [
 		{
-			icon: FaChartLine,
+			icon: AreaChart,
 			label: t("modal.InvestFunds.name"),
 			value: "invest",
 			onClick: () => {
@@ -44,7 +44,7 @@ export const CashAccountsPanel: FC<
 			},
 		},
 		{
-			icon: FaListUl,
+			icon: List,
 			label: t("page.cash_accounts.button.operations"),
 			value: "operations",
 			onClick: () => {
@@ -55,7 +55,7 @@ export const CashAccountsPanel: FC<
 			},
 		},
 		{
-			icon: FaPlus,
+			icon: Plus,
 			label: t("page.cash_accounts.button.add_funds"),
 			value: "add_funds",
 			divider: "bottom",
@@ -68,7 +68,7 @@ export const CashAccountsPanel: FC<
 			},
 		},
 		{
-			icon: FaPen,
+			icon: Pencil,
 			label: t("common.rename"),
 			value: "rename",
 			onClick: () => {
@@ -80,7 +80,7 @@ export const CashAccountsPanel: FC<
 			},
 		},
 		{
-			icon: FaTrash,
+			icon: Trash2,
 			label: t("common.delete"),
 			value: "delete",
 			onClick: () => {
@@ -121,7 +121,7 @@ export const CashAccountsPanel: FC<
 							$size="small"
 							{...props}
 						>
-							<Icon icon={FaEllipsisV} />
+							<MoreVertical />
 						</Button>
 					)}
 				</Dropdown>

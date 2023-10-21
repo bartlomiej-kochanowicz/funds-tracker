@@ -1,8 +1,7 @@
-import { Icon } from "components/atoms/Icon";
 import { Spreader } from "components/atoms/Spreader";
 import { Text } from "components/atoms/Text";
+import { Check } from "lucide-react";
 import { FC, forwardRef, Fragment, HTMLProps, ReactNode } from "react";
-import { FaCheck } from "react-icons/fa";
 
 import { Container, Input, Marker } from "./Checkbox.styles";
 
@@ -27,7 +26,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 				/>
 
 				<Marker>
-					<Icon icon={FaCheck} />
+					<Check />
 				</Marker>
 
 				{isLabelString ? (

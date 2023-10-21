@@ -1,8 +1,8 @@
-import { Box, Icon, Select, Spreader } from "components/atoms";
+import { Box, Select, Spreader } from "components/atoms";
 import languages from "constants/selectors/languages";
+import { Globe2 } from "lucide-react";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { FaGlobeEurope } from "react-icons/fa";
 
 export const LangSelector = () => {
 	const { t, i18n } = useTranslation();
@@ -25,7 +25,7 @@ export const LangSelector = () => {
 			$flex
 			$alignItems="center"
 		>
-			<Icon icon={FaGlobeEurope} />
+			<Globe2 />
 
 			<Spreader $spread="0.5" />
 

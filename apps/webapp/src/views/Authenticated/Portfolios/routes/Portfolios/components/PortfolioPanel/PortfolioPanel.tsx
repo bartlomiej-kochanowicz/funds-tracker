@@ -1,15 +1,15 @@
 import { GetPortfoliosQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, Button, Dropdown, Icon, Text } from "components/atoms";
+import { Box, Button, Dropdown, Text } from "components/atoms";
 import { DropdownItems } from "components/atoms/Dropdown";
 import { useUserContext } from "contexts/UserContext";
 import { formatCurrency } from "helpers/formatCurrency";
 import { useBreakpoint } from "hooks/useBreakpoint";
+import { MoreVertical, Pencil, PieChart, Trash2 } from "lucide-react";
 import { MODAL_CONFIRM_DELETE_PORTFOLIO } from "modals/ConfirmDeletePortfolio";
 import { MODAL_RENAME_PORTFOLIO } from "modals/RenamePortfolio";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { FaChartPie, FaEllipsisV, FaPen, FaTrash } from "react-icons/fa";
 import { generatePath } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
@@ -54,19 +54,19 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 			label: t("common.manage"),
 			to: generatePath(ROUTES.PORTFOLIOS.PORTFOLIO, { uuid }),
 			divider: "bottom",
-			icon: FaChartPie,
+			icon: PieChart,
 		},
 		{
 			value: "rename",
 			label: t("common.rename"),
 			onClick: handleOpenRenameModal,
-			icon: FaPen,
+			icon: Pencil,
 		},
 		{
 			value: "delete",
 			label: t("common.delete"),
 			onClick: handleOpenDeletePortfolioModal,
-			icon: FaTrash,
+			icon: Trash2,
 		},
 	] satisfies DropdownItems;
 
@@ -98,7 +98,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 							$size="small"
 							{...props}
 						>
-							<Icon icon={FaEllipsisV} />
+							<MoreVertical />
 						</Button>
 					)}
 				</Dropdown>

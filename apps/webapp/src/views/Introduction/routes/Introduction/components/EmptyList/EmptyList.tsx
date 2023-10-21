@@ -1,5 +1,5 @@
-import { Box, Button, Icon, Spacer, Spreader, Text } from "components/atoms";
-import { FaPlus } from "react-icons/fa";
+import { Box, Button, Spacer, Spreader, Text } from "components/atoms";
+import { Plus } from "lucide-react";
 
 interface EmptyListProps {
 	handleAppend: () => void;
@@ -32,7 +32,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
 
 			<Spreader $spread="0.25" />
 
-			<Icon icon={FaPlus} />
+			<Plus />
 		</Button>
 	</Box>
 );

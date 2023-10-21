@@ -1,12 +1,12 @@
 import { Currency } from "__generated__/graphql";
-import { Box, Button, Icon, Input, Spreader } from "components/atoms";
+import { Box, Button, Input, Spreader } from "components/atoms";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
+import { Calculator } from "lucide-react";
 import { InvestFundsFormValues } from "modals/InvestFunds/helpers/defaultValues";
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { FaCalculator } from "react-icons/fa";
 
 import { FormField } from "../FormField";
 
@@ -85,7 +85,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 					onClick={calculateTransactionCost}
 					disabled={!watchQuantity || !watchPrice || !watchComission || Boolean(comissionError)}
 				>
-					<Icon icon={FaCalculator} />
+					<Calculator />
 				</Button>
 			</Box>
 		</FormField>

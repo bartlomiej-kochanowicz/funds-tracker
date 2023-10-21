@@ -1,9 +1,9 @@
 import cslx from "clsx";
+import { MoonStar, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useRef } from "react";
 import { useFocusRing, useSwitch, VisuallyHidden } from "react-aria";
 import { useTranslation } from "react-i18next";
-import { BiMoon, BiSun } from "react-icons/bi";
 
 interface ThemeSwitcherProps {
 	className?: string;
@@ -51,9 +51,9 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
 					},
 				)}
 			>
-				<BiMoon className="text-white" />
+				<MoonStar className="text-white" />
 
-				<BiSun className="text-gray-700" />
+				<Sun className="text-gray-700" />
 			</div>
 		</label>
 	);

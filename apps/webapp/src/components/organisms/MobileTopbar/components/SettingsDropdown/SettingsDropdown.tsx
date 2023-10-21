@@ -1,7 +1,7 @@
-import { Dropdown, Icon } from "components/atoms";
+import { Dropdown } from "components/atoms";
 import { DropdownItems } from "components/atoms/Dropdown";
+import { Settings } from "lucide-react";
 import { FC } from "react";
-import { FaCog } from "react-icons/fa";
 
 import { ApperienceSwitcher } from "../ApperienceSwitcher";
 
@@ -20,11 +20,7 @@ export const SettingsDropdown: FC = () => {
 			items={items}
 			placement="bottom-end"
 		>
-			<Icon
-				icon={FaCog}
-				$size="1.5"
-				$color="gray400"
-			/>
+			<Settings />
 		</Dropdown>
 	);
 };

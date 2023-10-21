@@ -6,15 +6,15 @@ import {
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Heading, Icon, Loader, Spacer, Spreader, Text } from "components/atoms";
+import { Box, Button, Heading, Loader, Spacer, Spreader, Text } from "components/atoms";
 import { MAX_PORTFOLIOS } from "constants/common";
 import { useUserContext } from "contexts/UserContext";
 import { motion } from "framer-motion";
 import { INTRODUCTION_CREATE_PORTFOLIOS } from "graphql/mutations/introduction/IntroductionCreatePortfolios";
 import { showErrorToast } from "helpers/showToast";
+import { Plus } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
-import { FaPlus } from "react-icons/fa";
 import { useIntroductionContext } from "views/Introduction/routes/Introduction/context";
 
 import { EmptyList } from "../EmptyList";
@@ -155,7 +155,7 @@ export const CreatePortfoliosForm = () => {
 
 								<Spreader $spread="0.25" />
 
-								<Icon icon={FaPlus} />
+								<Plus />
 							</Button>
 						) : null}
 

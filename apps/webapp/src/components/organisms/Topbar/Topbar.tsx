@@ -1,10 +1,10 @@
-import { Icon, Spreader } from "components/atoms";
+import { Spreader } from "components/atoms";
 import { Profile } from "components/molecules";
 import { debounce } from "helpers/debounce";
 import { useMatches } from "hooks/useMatches";
+import { ChevronLeft } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
@@ -53,10 +53,7 @@ export const Topbar = () => {
 		>
 			{rendreBackButton ? (
 				<BackButton onClick={handleBackToPreviousPage}>
-					<Icon
-						icon={FaChevronLeft}
-						$size="1.5"
-					/>
+					<ChevronLeft />
 
 					<Spreader $spread="0.1" />
 

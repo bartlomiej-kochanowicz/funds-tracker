@@ -5,11 +5,11 @@ import { Spreader } from "components/atoms/Spreader";
 import { getMonth, getYear } from "date-fns";
 import enUS from "date-fns/locale/en-US";
 import plPL from "date-fns/locale/pl";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 /* eslint-disable import/no-duplicates */
 import { ChangeEvent, FC, useMemo, useRef } from "react";
 import ReactDatePicker, { ReactDatePickerProps, registerLocale } from "react-datepicker";
 import { useTranslation } from "react-i18next";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { Box } from "../Box";
 import { ArrowButton, StyledSelect } from "./Datepicker.styles";
@@ -78,7 +78,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 						onClick={decreaseMonth}
 						disabled={prevMonthButtonDisabled}
 					>
-						<Icon icon={FaChevronLeft} />
+						<ChevronLeft />
 					</ArrowButton>
 
 					<Box $flex>
@@ -122,7 +122,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 						onClick={increaseMonth}
 						disabled={nextMonthButtonDisabled}
 					>
-						<Icon icon={FaChevronRight} />
+						<ChevronRight />
 					</ArrowButton>
 				</Box>
 			)}

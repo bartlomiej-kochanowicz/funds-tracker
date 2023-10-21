@@ -1,4 +1,4 @@
-import { FaThumbsUp } from "react-icons/fa";
+import { ThumbsUp } from "lucide-react";
 import styled, { css, keyframes } from "styled-components";
 
 const scale = keyframes`
@@ -205,7 +205,7 @@ export const Center = styled.div`
 	}
 `;
 
-export const Thumb = styled(FaThumbsUp)`
+export const Thumb = styled(ThumbsUp)`
 	color: ${({ theme }) => theme.colors.blue};
 	font-size: 96px;
 	text-decoration: none;

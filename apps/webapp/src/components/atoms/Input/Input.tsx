@@ -1,11 +1,11 @@
 import { Currency } from "__generated__/graphql";
 import { Text } from "components/atoms/Text";
+import { CalendarDays, Search } from "lucide-react";
 import { forwardRef, HTMLProps, ReactNode } from "react";
 import CurrencyInputComponent, {
 	CurrencyInputProps as CurrencyInputFieldProps,
 } from "react-currency-input-field";
 import { useTranslation } from "react-i18next";
-import { FaCalendarAlt, FaSearch } from "react-icons/fa";
 
 import { Error, SearchIcon, StyledInput, Unit, Wrapper } from "./Input.styles";
 
@@ -89,11 +89,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 		const hasUnit = Boolean(unit);
 		const hasError = Boolean(error);
 
-		const icon = {
-			search: FaSearch,
-			date: FaCalendarAlt,
-		};
-
 		const inputType = () => {
 			switch (type) {
 				case "search":
@@ -118,12 +113,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 					</Text>
 				)}
 
-				{hasIcon && (
-					<SearchIcon
-						icon={icon[type as "search" | "date"]}
-						$error={hasError}
-					/>
-				)}
+				{hasIcon && type === "search" && <Search />}
+				{hasIcon && type === "date" && <CalendarDays />}
 
 				<StyledInput
 					$error={hasError}

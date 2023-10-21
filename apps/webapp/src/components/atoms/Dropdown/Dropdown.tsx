@@ -1,6 +1,15 @@
 import { ItemButton, ItemLink, useDropdownMenu } from "hooks/useDropdownMenu";
-import { forwardRef, Fragment, Key, MouseEventHandler, ReactNode, Ref, useRef } from "react";
-import { IconType } from "react-icons";
+import { LucideProps } from "lucide-react";
+import {
+	forwardRef,
+	ForwardRefExoticComponent,
+	Fragment,
+	Key,
+	MouseEventHandler,
+	ReactNode,
+	Ref,
+	useRef,
+} from "react";
 import { mergeRefs, useLayer } from "react-laag";
 import { PlacementType } from "react-laag/dist/PlacementType";
 
@@ -12,7 +21,7 @@ type ItemCommon = {
 	value: string | number;
 	label: string | ReactNode | ((props: ItemChildrenProps) => ReactNode);
 	divider?: "top" | "bottom" | "both";
-	icon?: IconType;
+	icon?: ForwardRefExoticComponent<LucideProps>;
 };
 
 export type Item = (ItemCommon & ItemButton) | (ItemCommon & ItemLink);

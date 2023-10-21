@@ -1,10 +1,11 @@
 import { NavListItem } from "components/organisms/Sidebar/components/NavListItem";
-import { IconType } from "react-icons";
+import { LucideProps } from "lucide-react";
+import { ForwardRefExoticComponent } from "react";
 
 import { List, ListItem, StyledNavLink } from "./NavList.styles";
 
 interface NavListProps {
-	navigation: { to: string; title: string; icon: IconType }[];
+	navigation: { to: string; title: string; icon: ForwardRefExoticComponent<LucideProps> }[];
 }
 
 export const NavList = ({ navigation }: NavListProps) => (

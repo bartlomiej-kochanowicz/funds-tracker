@@ -1,12 +1,12 @@
 import { LogoutMutation } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Avatar, Dropdown, Icon, Spreader, Text } from "components/atoms";
+import { Avatar, Dropdown, Spreader, Text } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { useUserContext } from "contexts/UserContext";
 import { LOGOUT } from "graphql/mutations/authentication/Logout";
+import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { FaChevronDown, FaChevronUp, FaSignOutAlt } from "react-icons/fa";
 
 import { ProfileContainer } from "./Profile.styles";
 
@@ -34,7 +34,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 	const items = [
 		{
 			value: "sign-out",
-			icon: FaSignOutAlt,
+			icon: LogOut,
 			label: t("common.sign_out"),
 			onClick: handleSignOut,
 			divider: "top",
@@ -68,11 +68,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
 					<Spreader $spread="0.5" />
 
-					<Icon
-						icon={isOpen ? FaChevronUp : FaChevronDown}
-						$size="0.875"
-						$color={isDark ? "white" : "black"}
-					/>
+					{isOpen ? <ChevronUp /> : <ChevronDown />}
 				</ProfileContainer>
 			)}
 		</Dropdown>

@@ -6,15 +6,15 @@ import {
 import { useMutation } from "@apollo/client";
 import { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Icon, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Box, Button, Input, Loader, Spacer, Spreader } from "components/atoms";
 import { cache } from "config/client";
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/AddFundsToCashAccount";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
+import { Plus } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { FaPlus } from "react-icons/fa";
 
 import { validationSchema } from "./AddFundsCashAccountForm.schema";
 
@@ -133,7 +133,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 
 							<Spreader $spread="0.25" />
 
-							<Icon icon={FaPlus} />
+							<Plus />
 						</Fragment>
 					)}
 				</Button>

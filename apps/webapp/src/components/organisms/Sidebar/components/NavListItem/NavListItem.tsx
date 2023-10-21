@@ -1,26 +1,22 @@
-import { Icon, Spreader, Text } from "components/atoms";
-import { FC, Fragment } from "react";
+import { Spreader, Text } from "components/atoms";
+import { LucideProps } from "lucide-react";
+import { FC, ForwardRefExoticComponent, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { IconType } from "react-icons";
 
 interface NavListItemProps {
 	isActive: boolean;
 	title: string;
-	icon: IconType;
+	icon: ForwardRefExoticComponent<LucideProps>;
 }
 
-export const NavListItem: FC<NavListItemProps> = ({ isActive, title, icon: IconComponent }) => {
+export const NavListItem: FC<NavListItemProps> = ({ isActive, title, icon: Icon }) => {
 	const { t } = useTranslation();
 
 	const fontColor = isActive ? "blue" : "gray400";
 
 	return (
 		<Fragment>
-			<Icon
-				icon={IconComponent}
-				$size="1.25"
-				$color={isActive ? "blue" : undefined}
-			/>
+			<Icon />
 
 			<Spreader $spread="0.5" />
 

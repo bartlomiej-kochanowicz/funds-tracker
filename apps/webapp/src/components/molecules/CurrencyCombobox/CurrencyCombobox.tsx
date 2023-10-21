@@ -1,12 +1,12 @@
 import { Currency } from "__generated__/graphql";
-import { Box, Icon, Image, Input, Menu, Spreader } from "components/atoms";
+import { Box, Image, Input, Menu, Spreader } from "components/atoms";
 import { InputProps } from "components/atoms/Input";
 import { currencyFlags } from "constants/currencyFlags";
 import { CURRENCIES_ARRAY } from "constants/selectors/currencies";
 import { useCombobox } from "hooks/useCombobox";
+import { Check } from "lucide-react";
 import { forwardRef, Fragment, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FaCheck } from "react-icons/fa";
 import { mergeRefs, useLayer } from "react-laag";
 import { PlacementType } from "react-laag/dist/PlacementType";
 
@@ -125,7 +125,7 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
 
 											<Spreader $spread="0.25" />
 
-											{isSelected && <Icon icon={FaCheck} />}
+											{isSelected && <Check />}
 										</Box>
 									</Menu.Item>
 								);

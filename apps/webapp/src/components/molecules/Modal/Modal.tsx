@@ -1,10 +1,10 @@
-import { Box, Heading, Icon, Spacer, Spreader } from "components/atoms";
+import { Box, Heading, Spacer, Spreader } from "components/atoms";
 import { ErrorContent } from "components/molecules/ErrorContent";
 import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
+import { X } from "lucide-react";
 import { FC, Fragment, ReactNode, useCallback, useEffect, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import FocusLock from "react-focus-lock";
-import { FaTimes } from "react-icons/fa";
 
 import { Background, CloseButton, ModalComponent } from "./Modal.styles";
 
@@ -77,10 +77,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
 								onClick={closeModal}
 								aria-label="close"
 							>
-								<Icon
-									icon={FaTimes}
-									$size="1.25"
-								/>
+								<X />
 							</CloseButton>
 						</Box>
 

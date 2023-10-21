@@ -1,36 +1,20 @@
-import { Icon } from "components/atoms";
-import { FaHome, FaShapes, FaWallet } from "react-icons/fa";
+import { Home, Shapes, Wallet } from "lucide-react";
 import { ROUTES } from "routes/paths";
 
 export const mobileNavigationNavigation = [
 	{
 		to: ROUTES.DASHBOARD,
 		title: "navigation.dashboard",
-		icon: (
-			<Icon
-				icon={FaHome}
-				$size="1.5"
-			/>
-		),
+		icon: <Home />,
 	},
 	{
 		to: ROUTES.PORTFOLIOS.PORTFOLIOS,
 		title: "navigation.portfolios",
-		icon: (
-			<Icon
-				icon={FaWallet}
-				$size="1.5"
-			/>
-		),
+		icon: <Wallet />,
 	},
 	{
 		to: ROUTES.HUB,
 		title: "navigation.hub",
-		icon: (
-			<Icon
-				icon={FaShapes}
-				$size="1.5"
-			/>
-		),
+		icon: <Shapes />,
 	},
 ];

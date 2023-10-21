@@ -1,7 +1,7 @@
-import { Box, Icon, Text } from "components/atoms";
+import { Box, Text } from "components/atoms";
+import { Frown } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { BiSad } from "react-icons/bi";
 
 export const ErrorContent: FC = () => {
 	const { t } = useTranslation();
@@ -12,11 +12,7 @@ export const ErrorContent: FC = () => {
 			$flexDirection="column"
 			$alignItems="center"
 		>
-			<Icon
-				icon={BiSad}
-				$color="error"
-				$size="2.5"
-			/>
+			<Frown />
 
 			<Text $fontWeight="700">{t("error.component.title")}</Text>
 

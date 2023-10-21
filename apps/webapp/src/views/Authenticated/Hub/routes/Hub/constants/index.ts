@@ -1,5 +1,4 @@
-import { FaExchangeAlt, FaHistory } from "react-icons/fa";
-import { MdAccountBalance } from "react-icons/md";
+import { ArrowLeftRight, History, Landmark } from "lucide-react";
 import { ROUTES } from "routes/paths";
 
 export const hubNavigation = {
@@ -7,9 +6,9 @@ export const hubNavigation = {
 		{
 			to: ROUTES.CASH_ACCOUNTS,
 			title: "navigation.cash_accounts",
-			icon: MdAccountBalance,
+			icon: Landmark,
 		},
-		{ to: ROUTES.TRANSACTIONS, title: "navigation.transactions", icon: FaExchangeAlt },
-		{ to: ROUTES.HISTORY, title: "navigation.history", icon: FaHistory },
+		{ to: ROUTES.TRANSACTIONS, title: "navigation.transactions", icon: ArrowLeftRight },
+		{ to: ROUTES.HISTORY, title: "navigation.history", icon: History },
 	],
 };

@@ -3,6 +3,7 @@ import { Menu } from "components/atoms/Menu";
 import { Spreader } from "components/atoms/Spreader";
 import { useDropdownMenu } from "hooks/useDropdownMenu";
 import { useUpdateEffect } from "hooks/useUpdateEffect";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import {
 	ForwardedRef,
 	forwardRef,
@@ -15,7 +16,6 @@ import {
 	useState,
 } from "react";
 import { ChangeHandler } from "react-hook-form";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { mergeRefs, useLayer } from "react-laag";
 import { PlacementType } from "react-laag/dist/PlacementType";
 
@@ -131,7 +131,7 @@ const SelectInner = <ValueType,>(
 
 					<Spreader $spread="0.5" />
 
-					<Icon icon={isOpen ? FaChevronUp : FaChevronDown} />
+					{isOpen ? <ChevronUp /> : <ChevronDown />}
 				</StyledButton>
 
 				{$error && <Error role="alert">{$error}</Error>}

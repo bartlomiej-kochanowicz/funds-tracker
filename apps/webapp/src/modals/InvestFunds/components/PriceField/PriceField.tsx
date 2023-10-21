@@ -9,11 +9,11 @@ import { INSTRUMENT_HISTORY } from "graphql/query/instruments/InstrumentHistory"
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
 import { useUpdateEffect } from "hooks/useUpdateEffect";
+import { RefreshCw } from "lucide-react";
 import { InvestFundsFormValues } from "modals/InvestFunds/helpers/defaultValues";
 import { FC, useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { FaSync } from "react-icons/fa";
 
 import { FormField } from "../FormField";
 
@@ -97,7 +97,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 					onClick={updatePrice}
 					disabled={!watchInstrumentCode || !watchDate || !priceChanged}
 				>
-					<Icon icon={FaSync} />
+					<RefreshCw />
 				</Button>
 			</Box>
 		</FormField>
