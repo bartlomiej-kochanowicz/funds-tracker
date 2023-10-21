@@ -7,9 +7,9 @@ import { LOGOUT } from "graphql/mutations/authentication/Logout";
 import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { Avatar } from "ui";
 
 import { ProfileContainer } from "./Profile.styles";
-import { Avatar } from "ui";
 
 interface ProfileProps {
 	withName?: boolean;

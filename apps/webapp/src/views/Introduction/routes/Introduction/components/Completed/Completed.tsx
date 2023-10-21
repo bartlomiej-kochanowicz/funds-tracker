@@ -1,7 +1,8 @@
-import { Box, Button, Heading, Spacer, Text, ThumbUp } from "components/atoms";
+import { Box, Heading, Spacer, Text, ThumbUp } from "components/atoms";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { ROUTES } from "routes/paths";
+/* import { Link } from "react-router-dom";
+import { ROUTES } from "routes/paths"; */
+import { Button } from "ui";
 
 export const Completed = () => {
 	const { t } = useTranslation();
@@ -31,11 +32,10 @@ export const Completed = () => {
 			<Spacer $space="1.5" />
 
 			<Button
-				color="secondary"
-				$width="100%"
-				$size="large"
-				as={Link}
-				to={ROUTES.DASHBOARD}
+				className="w-full"
+				color="black"
+				/* as={Link}
+				to={ROUTES.DASHBOARD} */
 			>
 				{t("add.instrument.success.dashboard")}
 			</Button>

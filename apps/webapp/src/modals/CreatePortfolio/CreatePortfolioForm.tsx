@@ -6,13 +6,14 @@ import {
 import { useMutation } from "@apollo/client";
 import { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Box, Input, Loader, Spacer, Spreader } from "components/atoms";
 import { CREATE_PORTFOLIO } from "graphql/mutations/portfolios/CreatePortfolio";
 import { showErrorToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Button } from "ui";
 
 import { validationSchema } from "./CreatePortfolioForm.schema";
 
@@ -87,10 +88,9 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 				$justifyContent="flex-end"
 			>
 				<Button
-					$color="tertiary"
+					className="min-w-[100px] grow"
+					color="gray"
 					onClick={closeModal}
-					$flexGrow={1}
-					$minWidth="100px"
 				>
 					{t("common.cancel")}
 				</Button>
@@ -98,9 +98,8 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 				<Spreader $spread="0.5" />
 
 				<Button
+					className="min-w-[170px] grow"
 					disabled={isSubmitting || !isValid || !isDirty}
-					$flexGrow={1}
-					$minWidth="170px"
 					type="submit"
 				>
 					{isSubmitting && <Loader $color="white" />}

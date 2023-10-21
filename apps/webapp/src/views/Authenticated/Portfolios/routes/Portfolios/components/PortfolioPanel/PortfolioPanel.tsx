@@ -1,6 +1,6 @@
 import { GetPortfoliosQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, Button, Dropdown, Text } from "components/atoms";
+import { Box, Dropdown, Text } from "components/atoms";
 import { DropdownItems } from "components/atoms/Dropdown";
 import { useUserContext } from "contexts/UserContext";
 import { formatCurrency } from "helpers/formatCurrency";
@@ -12,6 +12,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { generatePath } from "react-router-dom";
 import { ROUTES } from "routes/paths";
+import { Button } from "ui";
 
 interface PortfoliosPanelProps {
 	updatePortfolioName: (data: { name: string; uuid: string }) => void;
@@ -94,8 +95,8 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 				>
 					{({ isOpen, ...props }) => (
 						<Button
-							$outline
-							$size="small"
+							size="small"
+							/* $outline */
 							{...props}
 						>
 							<MoreVertical />

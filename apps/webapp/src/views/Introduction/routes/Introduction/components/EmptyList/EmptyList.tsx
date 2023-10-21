@@ -1,5 +1,6 @@
-import { Box, Button, Spacer, Spreader, Text } from "components/atoms";
+import { Box, Spacer, Spreader, Text } from "components/atoms";
 import { Plus } from "lucide-react";
+import { Button } from "ui";
 
 interface EmptyListProps {
 	handleAppend: () => void;
@@ -25,7 +26,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
 		<Spacer $space="0.25" />
 
 		<Button
-			$color="secondary"
+			color="black"
 			onClick={handleAppend}
 		>
 			{i18n.button}

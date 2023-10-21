@@ -1,6 +1,7 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Box, ButtonLink, Heading, Link, Spacer, Text, ThemeSwitcher } from "components/atoms";
+import { ThemeSwitcher } from "components";
+import { Box, ButtonLink, Heading, Link, Spacer, Text } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";

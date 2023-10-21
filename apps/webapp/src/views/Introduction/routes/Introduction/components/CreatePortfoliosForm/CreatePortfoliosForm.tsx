@@ -6,7 +6,7 @@ import {
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Heading, Loader, Spacer, Spreader, Text } from "components/atoms";
+import { Box, Heading, Loader, Spacer, Spreader, Text } from "components/atoms";
 import { MAX_PORTFOLIOS } from "constants/common";
 import { useUserContext } from "contexts/UserContext";
 import { motion } from "framer-motion";
@@ -15,6 +15,7 @@ import { showErrorToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
+import { Button } from "ui";
 import { useIntroductionContext } from "views/Introduction/routes/Introduction/context";
 
 import { EmptyList } from "../EmptyList";
@@ -148,7 +149,7 @@ export const CreatePortfoliosForm = () => {
 
 						{fields.length > 0 && fields.length < MAX_PORTFOLIOS ? (
 							<Button
-								$color="secondary"
+								color="black"
 								onClick={handleAppend}
 							>
 								{t("add.portfolios.button.add.one.more")}
@@ -162,10 +163,9 @@ export const CreatePortfoliosForm = () => {
 						<Spacer $space="1.5" />
 
 						<Button
-							$size="large"
+							className="w-full"
 							type="submit"
 							disabled={isSubmitting || !isValid || !isDirty}
-							$width="100%"
 						>
 							{isSubmitting ? <Loader $color="white" /> : t("page.introduction.next.step.submit")}
 						</Button>

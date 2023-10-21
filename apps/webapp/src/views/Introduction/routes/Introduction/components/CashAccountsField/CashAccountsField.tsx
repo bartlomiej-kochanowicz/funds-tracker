@@ -1,5 +1,5 @@
 import { Currency, IntroductionCreateCashAccountsInput } from "__generated__/graphql";
-import { Box, Button, Input, Spreader } from "components/atoms";
+import { Box, Input, Spreader } from "components/atoms";
 import { CurrencyCombobox } from "components/molecules";
 import { useRegisterCombobox } from "hooks/useRegisterCombobox";
 import { Trash2 } from "lucide-react";
@@ -11,6 +11,7 @@ import {
 	UseFormRegister,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Button } from "ui";
 
 interface CashAccountsFieldProps {
 	register: UseFormRegister<IntroductionCreateCashAccountsInput>;
@@ -60,9 +61,9 @@ export const CashAccountsField = ({
 			<Spreader $spread="0.25" />
 
 			<Button
-				$color="secondary"
+				className="shadow-none"
+				color="gray"
 				onClick={handleRemoveField}
-				$boxShadow="none"
 			>
 				<Trash2 />
 			</Button>

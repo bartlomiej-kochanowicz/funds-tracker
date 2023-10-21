@@ -4,7 +4,7 @@ import {
 	GetInstrumentHistoryQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Box, Button, Icon, Input, Spreader } from "components/atoms";
+import { Box, Input, Spreader } from "components/atoms";
 import { INSTRUMENT_HISTORY } from "graphql/query/instruments/InstrumentHistory";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
@@ -14,6 +14,7 @@ import { InvestFundsFormValues } from "modals/InvestFunds/helpers/defaultValues"
 import { FC, useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Button } from "ui";
 
 import { FormField } from "../FormField";
 
@@ -93,7 +94,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 				<Spreader $spread="0.25" />
 
 				<Button
-					$color="secondary"
+					color="black"
 					onClick={updatePrice}
 					disabled={!watchInstrumentCode || !watchDate || !priceChanged}
 				>

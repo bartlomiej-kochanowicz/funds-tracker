@@ -5,12 +5,13 @@ import {
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Box, Input, Loader, Spacer, Spreader } from "components/atoms";
 import { Modal } from "components/molecules";
 import { UPDATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/UpdateCashAccount";
 import { showErrorToast } from "helpers/showToast";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Button } from "ui";
 
 import { validationSchema } from "./RenameCashAccount.schema";
 
@@ -76,10 +77,9 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 						$justifyContent="flex-end"
 					>
 						<Button
-							$color="tertiary"
+							className="min-w-[120px] grow"
+							color="gray"
 							onClick={modal.remove}
-							$flexGrow={1}
-							$minWidth="120px"
 						>
 							{t("common.cancel")}
 						</Button>
@@ -87,9 +87,8 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 						<Spreader $spread="0.5" />
 
 						<Button
+							className="min-w-[120px] grow"
 							disabled={isSubmitting || !isValid || !isDirty}
-							$flexGrow={1}
-							$minWidth="120px"
 							type="submit"
 						>
 							{isSubmitting && <Loader $color="white" />}

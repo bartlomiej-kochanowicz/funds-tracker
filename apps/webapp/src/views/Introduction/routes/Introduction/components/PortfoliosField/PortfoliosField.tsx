@@ -1,5 +1,5 @@
 import { IntroductionCreatePortfoliosInput } from "__generated__/graphql";
-import { Box, Button, Input, Spreader } from "components/atoms";
+import { Box, Input, Spreader } from "components/atoms";
 import { Trash2 } from "lucide-react";
 import {
 	DeepRequired,
@@ -8,6 +8,7 @@ import {
 	UseFormRegister,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Button } from "ui";
 
 interface PortfoliosFieldProps {
 	register: UseFormRegister<IntroductionCreatePortfoliosInput>;
@@ -33,9 +34,9 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
 			<Spreader $spread="0.25" />
 
 			<Button
-				$color="secondary"
+				className="shadow-none"
+				color="black"
 				onClick={handleRemoveField}
-				$boxShadow="none"
 			>
 				<Trash2 />
 			</Button>

@@ -1,11 +1,12 @@
 import { Currency } from "__generated__/graphql";
 import { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Loader, Spacer, Spreader, Text } from "components/atoms";
+import { Box, Loader, Spacer, Spreader, Text } from "components/atoms";
 import { formatCurrency } from "helpers/formatCurrency";
 import { FC, Fragment, useCallback, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Button } from "ui";
 
 import { ComissionField } from "./components/ComissionField";
 import { DateField } from "./components/DateField";
@@ -128,10 +129,9 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 					$justifyContent="flex-end"
 				>
 					<Button
-						$color="tertiary"
+						className="min-w-[120px] grow"
+						color="gray"
 						onClick={remove}
-						$flexGrow={1}
-						$minWidth="120px"
 					>
 						{t("common.cancel")}
 					</Button>
@@ -139,9 +139,8 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 					<Spreader $spread="0.5" />
 
 					<Button
+						className="min-w-[120px] grow"
 						type="submit"
-						$flexGrow={1}
-						$minWidth="120px"
 						disabled={!isValid || isSubmitting || shouldRenderNotSupportedYet}
 					>
 						{isSubmitting && <Loader $size="small" />}

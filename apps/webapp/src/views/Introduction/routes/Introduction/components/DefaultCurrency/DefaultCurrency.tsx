@@ -1,7 +1,7 @@
 import { UpdateUserMutation, UpdateUserMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Heading, Loader, Spacer, Text } from "components/atoms";
+import { Box, Heading, Loader, Spacer, Text } from "components/atoms";
 import { CurrencyCombobox } from "components/molecules";
 import { useUserContext } from "contexts/UserContext";
 import { motion } from "framer-motion";
@@ -10,6 +10,7 @@ import { showErrorToast } from "helpers/showToast";
 import { useRegisterCombobox } from "hooks/useRegisterCombobox";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
+import { Button } from "ui";
 import { useIntroductionContext } from "views/Introduction/routes/Introduction/context";
 
 import { FormSchemaType, validationSchema } from "./DefaultCurrency.schema";
@@ -107,10 +108,9 @@ export const DefaultCurrency = () => {
 					<Spacer $space="1.5" />
 
 					<Button
-						$size="large"
+						className="w-full"
 						type="submit"
 						disabled={isSubmitting || !isValid}
-						$width="100%"
 					>
 						{isSubmitting ? <Loader $color="white" /> : t("page.introduction.next.step.submit")}
 					</Button>

@@ -1,5 +1,4 @@
 import { darken, transparentize } from "color2k";
-import { Icon } from "components/atoms/Icon";
 import styled, { css } from "styled-components";
 import { borderColor } from "styles/helpers";
 
@@ -104,19 +103,4 @@ export const Unit = styled.span`
 	right: 1.25rem;
 	top: 0;
 	bottom: 0;
-`;
-
-export const SearchIcon = styled(Icon)<{ $error: boolean }>`
-	position: absolute;
-	left: 1.25rem;
-	top: 0;
-	bottom: 0;
-	height: 2.75rem;
-
-	${({ theme, $error }) => css`
-		color: ${theme.colors.gray300};
-		&:has(+ input:focus) {
-			color: ${theme.colors[$error ? "error" : "blue"]};
-		}
-	`}
 `;

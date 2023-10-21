@@ -26,9 +26,8 @@ const colors = {
 	},
 };
 
-interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "color"> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
 	children: React.ReactNode;
-	onClick?: (e?: PressEvent) => void;
 	size?: keyof typeof sizes;
 	color?: keyof typeof colors;
 }
@@ -55,10 +54,11 @@ export const Button = ({
 					transition: { duration: 0.4 },
 				});
 			},
-			onPress: onClick,
+			onPress: onClick as unknown as (e: PressEvent) => void | undefined,
 			isDisabled: disabled,
 			...rest,
 		},
+
 		ref,
 	);
 
@@ -71,7 +71,7 @@ export const Button = ({
 					WebkitTapHighlightColor: "transparent",
 				}}
 				className={clsx(
-					"enabled:active:scale-99 transform touch-none select-none rounded-xl transition-transform focus:outline-none disabled:cursor-not-allowed",
+					"transform touch-none select-none rounded-xl transition-transform focus:outline-none enabled:active:scale-99 disabled:cursor-not-allowed",
 					sizes[size],
 					colors[color].button,
 					className,

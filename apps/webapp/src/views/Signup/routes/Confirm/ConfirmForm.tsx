@@ -1,7 +1,7 @@
 import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Input, Spacer } from "components/atoms";
+import { Input, Spacer } from "components/atoms";
 import { useUserContext } from "contexts/UserContext";
 import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
 import { FC, lazy, Suspense, useCallback, useState } from "react";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
+import { Button } from "ui";
 
 import { validationSchema } from "./Confirm.schema";
 import { Form } from "./Confirm.styles";
@@ -90,7 +91,7 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 			<Spacer />
 
 			<Button
-				$width="auto"
+				className="w-auto"
 				disabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"

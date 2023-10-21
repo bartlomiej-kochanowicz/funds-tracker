@@ -1,10 +1,11 @@
 import { CreatePortfolioMutation } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, Button, Heading, Spacer, Spreader } from "components/atoms";
+import { Box, Heading, Spacer, Spreader } from "components/atoms";
 import { Plus } from "lucide-react";
 import { MODAL_CREATE_PORTFOLIO } from "modals/CreatePortfolio";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "ui";
 
 interface CreatePortfolioProps {
 	callback: (data: CreatePortfolioMutation) => void;
@@ -32,7 +33,7 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
 
 			<Button
 				onClick={handleOpenModal}
-				$outline
+				/* $outline */
 			>
 				{t("page.portfolios.need.more.button")}
 

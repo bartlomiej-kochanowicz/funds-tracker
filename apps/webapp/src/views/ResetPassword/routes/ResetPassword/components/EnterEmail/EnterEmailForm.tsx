@@ -1,12 +1,13 @@
 import { ResetPasswordMutation, ResetPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Input, Loader, Spacer, Text } from "components/atoms";
+import { Input, Loader, Spacer, Text } from "components/atoms";
 import { RESET_PASSWORD } from "graphql/mutations/authentication/ResetPassword";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { ChangeEvent, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Button } from "ui";
 
 import { validationSchema } from "./EnterEmail.schema";
 import { Form } from "./EnterEmail.styles";
@@ -108,7 +109,7 @@ export const EnterEmailForm = () => {
 			<Spacer />
 
 			<Button
-				$width="auto"
+				className="w-auto"
 				disabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"

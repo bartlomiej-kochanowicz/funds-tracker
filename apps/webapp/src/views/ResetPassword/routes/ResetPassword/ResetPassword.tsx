@@ -1,4 +1,5 @@
-import { Box, Spacer, ThemeSwitcher } from "components/atoms";
+import { ThemeSwitcher } from "components";
+import { Box, Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { FullscreenClear } from "layouts/FullscreenClear";
 import { useSearchParams } from "react-router-dom";
