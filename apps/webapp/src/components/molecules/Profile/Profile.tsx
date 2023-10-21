@@ -1,6 +1,6 @@
 import { LogoutMutation } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Avatar, Dropdown, Spreader, Text } from "components/atoms";
+import { Dropdown, Spreader, Text } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { useUserContext } from "contexts/UserContext";
 import { LOGOUT } from "graphql/mutations/authentication/Logout";
@@ -9,6 +9,7 @@ import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ProfileContainer } from "./Profile.styles";
+import { Avatar } from "ui";
 
 interface ProfileProps {
 	withName?: boolean;
