@@ -6,7 +6,7 @@ import {
 import { useMutation } from "@apollo/client";
 import { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Input, Loader, Spacer, Spreader } from "components/atoms";
 import { cache } from "config/client";
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/AddFundsToCashAccount";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
@@ -105,10 +105,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 
 			<Spacer />
 
-			<Box
-				$flex
-				$justifyContent="flex-end"
-			>
+			<div className="flex justify-end">
 				<Button
 					className="min-w-[100px] grow"
 					color="gray"
@@ -136,7 +133,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 						</Fragment>
 					)}
 				</Button>
-			</Box>
+			</div>
 		</form>
 	);
 };

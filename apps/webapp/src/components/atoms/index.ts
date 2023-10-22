@@ -1,4 +1,3 @@
-export { Box } from "./Box";
 export { ButtonLink } from "./ButtonLink";
 export { Checkbox } from "./Checkbox";
 export { Datepicker } from "./Datepicker";

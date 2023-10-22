@@ -7,7 +7,7 @@ import {
 import { useMutation } from "@apollo/client";
 import { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Input, Loader, Spacer, Spreader } from "components/atoms";
 import { CurrencyCombobox } from "components/molecules";
 import { useUserContext } from "contexts/UserContext";
 import { CREATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/CreateCashAccount";
@@ -83,10 +83,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 			noValidate
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<Box
-				$flex
-				$alignItems="flex-end"
-			>
+			<div className="flex flex-col">
 				<Input
 					placeholder={t("common.input.name.placeholder")}
 					$flexGrow={1}
@@ -100,14 +97,11 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 					$width="130px"
 					{...currencySelectProps}
 				/>
-			</Box>
+			</div>
 
 			<Spacer />
 
-			<Box
-				$flex
-				$justifyContent="flex-end"
-			>
+			<div className="flex flex-col">
 				<Button
 					className="min-w-[100px] grow"
 					color="gray"
@@ -135,7 +129,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 						</Fragment>
 					)}
 				</Button>
-			</Box>
+			</div>
 		</form>
 	);
 };

@@ -1,4 +1,4 @@
-import { Box, Heading, Link, Spacer } from "components/atoms";
+import { Heading, Link, Spacer } from "components/atoms";
 import { FC } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -6,11 +6,7 @@ export const NotSupportedYet: FC = () => {
 	const { t } = useTranslation();
 
 	return (
-		<Box
-			$flex
-			$flexDirection="column"
-			$alignItems="center"
-		>
+		<div className="flex flex-col items-center">
 			<Spacer $space="0.5" />
 
 			<Heading
@@ -42,6 +38,6 @@ export const NotSupportedYet: FC = () => {
 					}}
 				/>
 			</Heading>
-		</Box>
+		</div>
 	);
 };

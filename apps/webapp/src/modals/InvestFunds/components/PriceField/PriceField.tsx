@@ -4,7 +4,7 @@ import {
 	GetInstrumentHistoryQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Box, Input, Spreader } from "components/atoms";
+import { Input, Spreader } from "components/atoms";
 import { INSTRUMENT_HISTORY } from "graphql/query/instruments/InstrumentHistory";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
@@ -77,11 +77,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 			label={t("modal.InvestFunds.form.label.price")}
 			htmlFor="price"
 		>
-			<Box
-				$flex
-				$flexGrow={1}
-				$width={isPhone ? "100%" : undefined}
-			>
+			<div className="flex w-full grow md:w-auto">
 				<Input
 					type="currency"
 					$flexGrow={1}
@@ -100,7 +96,7 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 				>
 					<RefreshCw />
 				</Button>
-			</Box>
+			</div>
 		</FormField>
 	);
 };

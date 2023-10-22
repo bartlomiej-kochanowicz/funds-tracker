@@ -1,5 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Box, Image, Input, Menu, Spreader } from "components/atoms";
+import { Image, Input, Menu, Spreader } from "components/atoms";
 import { InputProps } from "components/atoms/Input";
 import { currencyFlags } from "constants/currencyFlags";
 import { CURRENCIES_ARRAY } from "constants/selectors/currencies";
@@ -100,16 +100,8 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
 										{...itemRest}
 										{...itemPropsRest}
 									>
-										<Box
-											$flex
-											$justifyContent="space-between"
-											$alignItems="center"
-											$width="100%"
-										>
-											<Box
-												$flex
-												$alignItems="center"
-											>
+										<div className="flex w-full items-center justify-between">
+											<div className="flex items-center">
 												<Image
 													src={currencyFlags[value]}
 													$height="16px"
@@ -121,12 +113,12 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
 												<Spreader $spread="0.25" />
 
 												{label}
-											</Box>
+											</div>
 
 											<Spreader $spread="0.25" />
 
 											{isSelected && <Check />}
-										</Box>
+										</div>
 									</Menu.Item>
 								);
 							})}

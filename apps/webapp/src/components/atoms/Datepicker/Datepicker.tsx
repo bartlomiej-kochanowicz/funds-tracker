@@ -1,4 +1,3 @@
-import { Icon } from "components/atoms/Icon";
 import { DefaultInputProps, Input } from "components/atoms/Input";
 import { Spreader } from "components/atoms/Spreader";
 /* eslint-disable import/no-duplicates */
@@ -11,7 +10,6 @@ import { ChangeEvent, FC, useMemo, useRef } from "react";
 import ReactDatePicker, { ReactDatePickerProps, registerLocale } from "react-datepicker";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "../Box";
 import { ArrowButton, StyledSelect } from "./Datepicker.styles";
 
 registerLocale("pl-PL", plPL);
@@ -69,10 +67,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 				prevMonthButtonDisabled,
 				nextMonthButtonDisabled,
 			}) => (
-				<Box
-					$flex
-					$justifyContent="space-between"
-				>
+				<div className="flex justify-between">
 					<ArrowButton
 						type="button"
 						onClick={decreaseMonth}
@@ -81,7 +76,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 						<ChevronLeft />
 					</ArrowButton>
 
-					<Box $flex>
+					<div className="flex">
 						<StyledSelect
 							value={getYear(date)}
 							onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) =>
@@ -115,7 +110,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 								</option>
 							))}
 						</StyledSelect>
-					</Box>
+					</div>
 
 					<ArrowButton
 						type="button"
@@ -124,7 +119,7 @@ export const Datepicker: FC<DatepickerProps> = ({ inputProps, ...props }) => {
 					>
 						<ChevronRight />
 					</ArrowButton>
-				</Box>
+				</div>
 			)}
 		/>
 	);

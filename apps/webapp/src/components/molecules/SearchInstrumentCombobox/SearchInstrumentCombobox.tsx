@@ -4,7 +4,7 @@ import {
 	SearchInstrumentQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Box, Input, Loader, Menu, Spreader, Text } from "components/atoms";
+import { Input, Loader, Menu, Spreader, Text } from "components/atoms";
 import type { SearchInputProps } from "components/atoms/Input";
 import { SEARCH_INSTRUMENT } from "graphql/query/instruments/SearchInstrument";
 import { useCombobox } from "hooks/useCombobox";
@@ -102,14 +102,9 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
 					type="search"
 					unit={
 						loading ? (
-							<Box
-								$flex
-								$flexDirection="column"
-								$justifyContent="center"
-								$height="100%"
-							>
+							<div className="flex h-full flex-col justify-center">
 								<Loader $size="small" />
-							</Box>
+							</div>
 						) : undefined
 					}
 					{...rest}

@@ -1,12 +1,12 @@
 import { CreateCashAccountMutation, GetCashAccountsQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
-import { Box, Heading, Loader, Spacer, Text } from "components/atoms";
+import { Heading, Loader, Spacer, Text } from "components/atoms";
 import { ErrorContent } from "components/molecules";
 import { MAX_CASH_ACCOUNTS } from "constants/common";
 import { GET_CASH_ACCOUNTS } from "graphql/query/cashAccounts/GetCashAccounts";
-import { useBreakpoint } from "hooks/useBreakpoint";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { Panel } from "ui";
 
 import { CashAccountsPanel } from "./components/CashAccountsPanel";
 import { CreateCashAccount } from "./components/CreateCashAccount";
@@ -14,10 +14,6 @@ import { CreateFirstCashAccount } from "./components/CreateFirstCashAccount";
 
 export const CashAccounts = () => {
 	const { t } = useTranslation();
-
-	const isDark = false;
-
-	const isPhone = useBreakpoint("phone", "max");
 
 	const { loading, data, error, updateQuery } = useQuery<GetCashAccountsQuery>(GET_CASH_ACCOUNTS);
 
@@ -91,11 +87,7 @@ export const CashAccounts = () => {
 			)}
 
 			{!loading && cashAccountsExist && !error && (
-				<Box
-					$borderRadius="0.7"
-					$backgroundColor={isDark ? "gray100" : "white"}
-					$p={isPhone ? "small" : "large"}
-				>
+				<Panel>
 					{data?.cashAccounts.map(({ uuid, ...rest }) => (
 						<CashAccountsPanel
 							key={uuid}
@@ -106,7 +98,7 @@ export const CashAccounts = () => {
 							{...rest}
 						/>
 					))}
-				</Box>
+				</Panel>
 			)}
 
 			<Spacer />

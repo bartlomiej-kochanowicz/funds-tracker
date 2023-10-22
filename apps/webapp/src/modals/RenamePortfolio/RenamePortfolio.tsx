@@ -2,7 +2,7 @@ import { UpdatePortfolioMutation, UpdatePortfolioMutationVariables } from "__gen
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Input, Loader, Spacer, Spreader } from "components/atoms";
 import { Modal } from "components/molecules";
 import { UPDATE_PORTFOLIO } from "graphql/mutations/portfolios/UpdatePortfolio";
 import { showErrorToast } from "helpers/showToast";
@@ -69,10 +69,7 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
 
 					<Spacer />
 
-					<Box
-						$flex
-						$justifyContent="flex-end"
-					>
+					<div className="flex justify-end">
 						<Button
 							className="min-w-[120px] grow"
 							color="gray"
@@ -92,7 +89,7 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
 
 							{!isSubmitting && t("common.save")}
 						</Button>
-					</Box>
+					</div>
 				</form>
 			</Modal>
 		);

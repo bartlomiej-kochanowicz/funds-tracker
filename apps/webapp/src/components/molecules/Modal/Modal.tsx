@@ -1,4 +1,5 @@
-import { Box, Heading, Spacer, Spreader } from "components/atoms";
+import clsx from "clsx";
+import { Heading, Spacer, Spreader } from "components/atoms";
 import { ErrorContent } from "components/molecules/ErrorContent";
 import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
 import { X } from "lucide-react";
@@ -58,10 +59,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
 					ref={modalRef}
 				>
 					<ModalComponent>
-						<Box
-							$flex
-							$justifyContent={modalName ? "space-between" : "flex-end"}
-						>
+						<div className={clsx("flex", modalName ? "justify-between" : "justify-end")}>
 							{modalName && (
 								<Heading
 									$level="h2"
@@ -79,7 +77,7 @@ export const Modal: FC<ModalComponentProps> = ({ closeModal, modalName, children
 							>
 								<X />
 							</CloseButton>
-						</Box>
+						</div>
 
 						<Spacer $space="0.5" />
 

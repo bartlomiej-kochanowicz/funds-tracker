@@ -1,5 +1,4 @@
-import { Box, Spreader, Text } from "components/atoms";
-import { useBreakpoint } from "hooks/useBreakpoint";
+import { Spreader, Text } from "components/atoms";
 import { FC, ReactNode } from "react";
 
 interface IFormFieldProps {
@@ -8,27 +7,19 @@ interface IFormFieldProps {
 	htmlFor: string;
 }
 
-export const FormField: FC<IFormFieldProps> = ({ children, label, htmlFor }) => {
-	const isPhone = useBreakpoint("phone", "max");
-
-	return (
-		<Box
-			$flex
-			$alignItems={isPhone ? "flex-start" : "center"}
-			$flexDirection={isPhone ? "column" : "row"}
+export const FormField: FC<IFormFieldProps> = ({ children, label, htmlFor }) => (
+	<div className="flex flex-col md:flex-row md:items-center">
+		<Text
+			as="label"
+			$fontWeight="700"
+			$width="150px"
+			htmlFor={htmlFor}
 		>
-			<Text
-				as="label"
-				$fontWeight="700"
-				$width="150px"
-				htmlFor={htmlFor}
-			>
-				{label}:
-			</Text>
+			{label}:
+		</Text>
 
-			<Spreader $spread="0.25" />
+		<Spreader $spread="0.25" />
 
-			{children}
-		</Box>
-	);
-};
+		{children}
+	</div>
+);

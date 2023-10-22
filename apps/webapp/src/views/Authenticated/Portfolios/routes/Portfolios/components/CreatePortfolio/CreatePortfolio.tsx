@@ -1,6 +1,6 @@
 import { CreatePortfolioMutation } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, Heading, Spacer, Spreader } from "components/atoms";
+import { Heading, Spacer, Spreader } from "components/atoms";
 import { Plus } from "lucide-react";
 import { MODAL_CREATE_PORTFOLIO } from "modals/CreatePortfolio";
 import { FC } from "react";
@@ -17,11 +17,7 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
 	const handleOpenModal = () => NiceModal.show(MODAL_CREATE_PORTFOLIO, { callback });
 
 	return (
-		<Box
-			$flex
-			$flexDirection="column"
-			$alignItems="center"
-		>
+		<div className="flex flex-col items-center">
 			<Heading
 				$textAlign="center"
 				$level="h2"
@@ -41,6 +37,6 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
 
 				<Plus />
 			</Button>
-		</Box>
+		</div>
 	);
 };

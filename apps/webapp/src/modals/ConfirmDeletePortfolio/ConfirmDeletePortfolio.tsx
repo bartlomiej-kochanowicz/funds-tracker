@@ -1,7 +1,7 @@
 import { DeletePortfolioMutation, DeletePortfolioMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
-import { Box, Loader, Spacer, Spreader, Text } from "components/atoms";
+import { Loader, Spacer, Spreader, Text } from "components/atoms";
 import { Modal } from "components/molecules";
 import { DELETE_PORTFOLIO } from "graphql/mutations/portfolios/DeletePortfolio";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
@@ -53,10 +53,7 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
 				closeModal={modal.remove}
 				modalName={t("modal.ConfirmDeletePortfolio.name")}
 			>
-				<Box
-					$flex
-					$flexDirection="column"
-				>
+				<div className="flex flex-col">
 					<Text
 						$fontSize="0.875"
 						$fontColor="gray400"
@@ -79,7 +76,7 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
 
 					<Spacer />
 
-					<Box $flex>
+					<div className="flex">
 						<Button
 							className="w-1/2"
 							color="gray"
@@ -99,8 +96,8 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
 
 							{!loading && t("common.yes")}
 						</Button>
-					</Box>
-				</Box>
+					</div>
+				</div>
 			</Modal>
 		);
 	},

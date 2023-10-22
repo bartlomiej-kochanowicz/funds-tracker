@@ -1,4 +1,4 @@
-import { Box, Spacer } from "components/atoms";
+import { Spacer } from "components/atoms";
 import { AnimatePresence, motion } from "framer-motion";
 import { throttle } from "helpers/throttle";
 import { useCallback, useEffect, useState } from "react";
@@ -56,11 +56,7 @@ export const MobileNavigation = () => {
 									end
 								>
 									{({ isActive }: { isActive: boolean }) => (
-										<Box
-											$flex
-											$flexDirection="column"
-											$alignItems="center"
-										>
+										<div className="flex flex-col items-center">
 											{icon}
 
 											<Spacer $space="0.25" />
@@ -74,7 +70,7 @@ export const MobileNavigation = () => {
 											>
 												{t(title)}
 											</Title>
-										</Box>
+										</div>
 									)}
 								</StyledNavLink>
 							</ListItem>

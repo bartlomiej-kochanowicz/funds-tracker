@@ -1,7 +1,7 @@
 import { Currency } from "__generated__/graphql";
 import { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Loader, Spacer, Spreader, Text } from "components/atoms";
+import { Loader, Spacer, Spreader, Text } from "components/atoms";
 import { formatCurrency } from "helpers/formatCurrency";
 import { FC, Fragment, useCallback, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -71,11 +71,9 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
 	return (
 		<FormProvider {...methods}>
-			<Box
-				as="form"
+			<form
+				className="flex flex-col"
 				onSubmit={handleSubmit(onSubmit)}
-				$flex
-				$flexDirection="column"
 			>
 				<FormField
 					label={t("modal.InvestFunds.form.label.account.balance")}
@@ -124,10 +122,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
 				<Spacer />
 
-				<Box
-					$flex
-					$justifyContent="flex-end"
-				>
+				<div className="flex-end flex">
 					<Button
 						className="min-w-[120px] grow"
 						color="gray"
@@ -147,8 +142,8 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 
 						{!isSubmitting && "Invest 🎉"}
 					</Button>
-				</Box>
-			</Box>
+				</div>
+			</form>
 		</FormProvider>
 	);
 };

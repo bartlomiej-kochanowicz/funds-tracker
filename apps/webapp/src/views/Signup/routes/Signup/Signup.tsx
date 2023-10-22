@@ -1,5 +1,5 @@
 import { ThemeSwitcher } from "components";
-import { Box, Heading, Spacer, Text } from "components/atoms";
+import { Heading, Spacer, Text } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { FullscreenClear } from "layouts/FullscreenClear";
 import { Trans, useTranslation } from "react-i18next";
@@ -53,17 +53,13 @@ export const Signup = () => {
 
 			<Spacer $space="1.5" />
 
-			<Box
-				$flex
-				$flexDirection="column"
-				$alignItems="center"
-			>
+			<div className="flex flex-col items-center">
 				<LangSelector />
 
 				<Spacer />
 
 				<ThemeSwitcher />
-			</Box>
+			</div>
 		</FullscreenClear>
 	);
 };

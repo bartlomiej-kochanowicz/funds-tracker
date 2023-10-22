@@ -1,10 +1,9 @@
 import { GetPortfoliosQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, Dropdown, Text } from "components/atoms";
+import { Dropdown, Text } from "components/atoms";
 import { DropdownItems } from "components/atoms/Dropdown";
 import { useUserContext } from "contexts/UserContext";
 import { formatCurrency } from "helpers/formatCurrency";
-import { useBreakpoint } from "hooks/useBreakpoint";
 import { MoreVertical, Pencil, PieChart, Trash2 } from "lucide-react";
 import { MODAL_CONFIRM_DELETE_PORTFOLIO } from "modals/ConfirmDeletePortfolio";
 import { MODAL_RENAME_PORTFOLIO } from "modals/RenamePortfolio";
@@ -12,7 +11,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { generatePath } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button } from "ui";
+import { Button, Panel } from "ui";
 
 interface PortfoliosPanelProps {
 	updatePortfolioName: (data: { name: string; uuid: string }) => void;
@@ -30,8 +29,6 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 	} = useUserContext();
 
 	const { t } = useTranslation();
-
-	const isPhone = useBreakpoint("phone", "max");
 
 	const handleOpenRenameModal = () => {
 		NiceModal.show(MODAL_RENAME_PORTFOLIO, {
@@ -72,38 +69,27 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 	] satisfies DropdownItems;
 
 	return (
-		<Box
-			$p={isPhone ? "medium" : "large"}
-			$borderRadius="0.7"
-		>
-			<Box
-				$flex
-				$justifyContent="space-between"
+		<Panel className="flex justify-between">
+			<div className="flex flex-col">
+				<Text $fontWeight="700">{name}</Text>
+
+				<Text>{formatCurrency(2137, defaultCurrency)}</Text>
+			</div>
+
+			<Dropdown
+				items={items}
+				placement="bottom-end"
 			>
-				<Box
-					$flex
-					$flexDirection="column"
-				>
-					<Text $fontWeight="700">{name}</Text>
-
-					<Text>{formatCurrency(2137, defaultCurrency)}</Text>
-				</Box>
-
-				<Dropdown
-					items={items}
-					placement="bottom-end"
-				>
-					{({ isOpen, ...props }) => (
-						<Button
-							size="small"
-							/* $outline */
-							{...props}
-						>
-							<MoreVertical />
-						</Button>
-					)}
-				</Dropdown>
-			</Box>
-		</Box>
+				{({ isOpen, ...props }) => (
+					<Button
+						size="small"
+						/* $outline */
+						{...props}
+					>
+						<MoreVertical />
+					</Button>
+				)}
+			</Dropdown>
+		</Panel>
 	);
 };

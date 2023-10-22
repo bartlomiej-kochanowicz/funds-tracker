@@ -1,5 +1,5 @@
 import { ThemeSwitcher } from "components";
-import { Box, Spacer } from "components/atoms";
+import { Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { lazy, Suspense } from "react";
 
@@ -25,10 +25,7 @@ export const Sidebar = () => {
 
 	return (
 		<StyledColumn $justifyContent="space-between">
-			<Box
-				$flex
-				$flexDirection="column"
-			>
+			<div className="flex flex-col">
 				<Suspense fallback={<LogoFallback />}>
 					{isDark ? (
 						<LogoNameVertical
@@ -58,19 +55,15 @@ export const Sidebar = () => {
 				<Spacer />
 
 				<NavList navigation={sidebarNavigation} />
-			</Box>
+			</div>
 
-			<Box
-				$flex
-				$flexDirection="column"
-				$alignItems="center"
-			>
+			<div className="flex flex-col items-center">
 				<ThemeSwitcher />
 
 				<Spacer />
 
 				<LangSelector />
-			</Box>
+			</div>
 		</StyledColumn>
 	);
 };

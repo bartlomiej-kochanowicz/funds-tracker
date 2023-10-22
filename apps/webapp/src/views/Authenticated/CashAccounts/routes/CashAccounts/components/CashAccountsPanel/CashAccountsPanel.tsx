@@ -1,9 +1,8 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, Dropdown, Text } from "components/atoms";
+import { Dropdown, Text } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { formatCurrency } from "helpers/formatCurrency";
-import { useBreakpoint } from "hooks/useBreakpoint";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from "modals/AddFundsCashAccount";
 import { MODAL_CASH_ACCOUNT_OPERATIONS } from "modals/CashAccountOperations";
@@ -12,7 +11,7 @@ import { MODAL_INVEST_FUNDS } from "modals/InvestFunds";
 import { MODAL_RENAME_CASH_ACCOUNT } from "modals/RenameCashAccount";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "ui";
+import { Button, Panel } from "ui";
 
 interface CashAccountsPanelProps {
 	updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
@@ -31,8 +30,6 @@ export const CashAccountsPanel: FC<
 	updateCashAccountName,
 	updateCashAccountList,
 }) => {
-	const isPhone = useBreakpoint("phone", "max");
-
 	const { t } = useTranslation();
 
 	const items = [
@@ -95,38 +92,27 @@ export const CashAccountsPanel: FC<
 	] satisfies DropdownItems;
 
 	return (
-		<Box
-			$p={isPhone ? "medium" : "large"}
-			$borderRadius="0.7"
-		>
-			<Box
-				$flex
-				$justifyContent="space-between"
+		<Panel className="flex justify-between">
+			<div className="flex flex-col">
+				<Text $fontWeight="700">{name}</Text>
+
+				<Text>{formatCurrency(balance, currency)}</Text>
+			</div>
+
+			<Dropdown
+				items={items}
+				placement="bottom-end"
 			>
-				<Box
-					$flex
-					$flexDirection="column"
-				>
-					<Text $fontWeight="700">{name}</Text>
-
-					<Text>{formatCurrency(balance, currency)}</Text>
-				</Box>
-
-				<Dropdown
-					items={items}
-					placement="bottom-end"
-				>
-					{({ isOpen, ...props }) => (
-						<Button
-							size="small"
-							/* $outline */
-							{...props}
-						>
-							<MoreVertical />
-						</Button>
-					)}
-				</Dropdown>
-			</Box>
-		</Box>
+				{({ isOpen, ...props }) => (
+					<Button
+						size="small"
+						/* $outline */
+						{...props}
+					>
+						<MoreVertical />
+					</Button>
+				)}
+			</Dropdown>
+		</Panel>
 	);
 };

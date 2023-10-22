@@ -6,7 +6,7 @@ import {
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Heading, Loader, Spacer, Spreader, Text } from "components/atoms";
+import { Heading, Loader, Spacer, Spreader, Text } from "components/atoms";
 import { MAX_PORTFOLIOS } from "constants/common";
 import { useUserContext } from "contexts/UserContext";
 import { motion } from "framer-motion";
@@ -85,10 +85,7 @@ export const CreatePortfoliosForm = () => {
 			animate={{ opacity: 1, scale: 1 }}
 			exit={{ opacity: 0, scale: 0 }}
 		>
-			<Box
-				$flex
-				$flexDirection="column"
-			>
+			<div className="flex flex-col">
 				<Heading $textAlign="center">{t("add.portfolios.title")}</Heading>
 
 				<Spacer $space="0.5" />
@@ -119,10 +116,7 @@ export const CreatePortfoliosForm = () => {
 					onSubmit={handleSubmit(onSubmit)}
 					noValidate
 				>
-					<Box
-						$flex
-						$flexDirection="column"
-					>
+					<div className="flex flex-col">
 						{fields.length === 0 ? (
 							<EmptyList
 								handleAppend={handleAppend}
@@ -169,9 +163,9 @@ export const CreatePortfoliosForm = () => {
 						>
 							{isSubmitting ? <Loader $color="white" /> : t("page.introduction.next.step.submit")}
 						</Button>
-					</Box>
+					</div>
 				</form>
-			</Box>
+			</div>
 		</motion.div>
 	);
 };

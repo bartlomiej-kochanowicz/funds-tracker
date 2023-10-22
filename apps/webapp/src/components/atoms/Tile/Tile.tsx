@@ -2,7 +2,6 @@ import { Text } from "components/atoms/Text";
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-import { Box } from "../Box";
 import { Spacer } from "../Spacer";
 import { Wrapper } from "./Tile.styles";
 
@@ -14,10 +13,7 @@ interface TilelProps {
 
 export const Tile: FC<TilelProps> = ({ children, title, to }) => {
 	const content = (
-		<Box
-			$flex
-			$flexDirection="column"
-		>
+		<div className="flex flex-col">
 			<Wrapper>{children}</Wrapper>
 
 			<Spacer $space="0.25" />
@@ -32,7 +28,7 @@ export const Tile: FC<TilelProps> = ({ children, title, to }) => {
 					{title}
 				</Text>
 			)}
-		</Box>
+		</div>
 	);
 
 	if (to) {

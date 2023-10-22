@@ -1,4 +1,4 @@
-import { Box, Spacer } from "components/atoms";
+import { Spacer } from "components/atoms";
 import { Profile } from "components/molecules";
 import { debounce } from "helpers/debounce";
 import { FC, Fragment, lazy, useCallback, useEffect, useState } from "react";
@@ -56,16 +56,13 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
 			$hasBorder={visible}
 		>
 			{isDashboard && (
-				<Box
-					$flex
-					$flexDirection="column"
-				>
+				<div className="flex flex-col">
 					<Spacer $space="0.25" />
 					{isDark && <LogoNameHorizontal height="18px" />}
 
 					{!isDark && <LogoNameHorizontalDark height="18px" />}
 					<Spacer $space="0.25" />
-				</Box>
+				</div>
 			)}
 
 			{!isDashboard && (

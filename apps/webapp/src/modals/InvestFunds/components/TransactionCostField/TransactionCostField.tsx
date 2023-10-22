@@ -1,5 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Box, Input, Spreader } from "components/atoms";
+import { Input, Spreader } from "components/atoms";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
 import { Calculator } from "lucide-react";
@@ -64,11 +64,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 			label={t("modal.InvestFunds.form.label.transaction_cost")}
 			htmlFor="transaction_cost"
 		>
-			<Box
-				$flex
-				$flexGrow={1}
-				$width={isPhone ? "100%" : undefined}
-			>
+			<div className="flex w-full grow md:w-auto">
 				<Input
 					type="currency"
 					$flexGrow={1}
@@ -88,7 +84,7 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 				>
 					<Calculator />
 				</Button>
-			</Box>
+			</div>
 		</FormField>
 	);
 };

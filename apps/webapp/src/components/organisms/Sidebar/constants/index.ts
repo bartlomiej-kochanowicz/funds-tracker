@@ -1,4 +1,4 @@
-import { ArrowLeftRight, Home, Landmark, Wallet } from "lucide-react";
+import { ArrowLeftRight, History, Home, Landmark, Wallet } from "lucide-react";
 import { ROUTES } from "routes/paths";
 
 export const sidebarNavigation = [

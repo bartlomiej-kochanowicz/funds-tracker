@@ -1,5 +1,5 @@
 import { ThemeSwitcher } from "components";
-import { Box, Spacer } from "components/atoms";
+import { Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { FullscreenClear } from "layouts/FullscreenClear";
 import { useSearchParams } from "react-router-dom";
@@ -20,17 +20,13 @@ export const ResetPassword = () => {
 
 			<Spacer $space="1.5" />
 
-			<Box
-				$flex
-				$flexDirection="column"
-				$alignItems="center"
-			>
+			<div className="flex flex-col items-center">
 				<LangSelector />
 
 				<Spacer />
 
 				<ThemeSwitcher />
-			</Box>
+			</div>
 		</FullscreenClear>
 	);
 };

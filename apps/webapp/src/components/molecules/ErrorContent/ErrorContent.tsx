@@ -1,4 +1,4 @@
-import { Box, Text } from "components/atoms";
+import { Text } from "components/atoms";
 import { Frown } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,11 +7,7 @@ export const ErrorContent: FC = () => {
 	const { t } = useTranslation();
 
 	return (
-		<Box
-			$flex
-			$flexDirection="column"
-			$alignItems="center"
-		>
+		<div className="flex flex-col items-center">
 			<Frown />
 
 			<Text $fontWeight="700">{t("error.component.title")}</Text>
@@ -23,6 +19,6 @@ export const ErrorContent: FC = () => {
 			>
 				{t("error.component.description")}
 			</Text>
-		</Box>
+		</div>
 	);
 };

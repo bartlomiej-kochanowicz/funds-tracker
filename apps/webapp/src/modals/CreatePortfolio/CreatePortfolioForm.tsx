@@ -6,7 +6,7 @@ import {
 import { useMutation } from "@apollo/client";
 import { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Input, Loader, Spacer, Spreader } from "components/atoms";
 import { CREATE_PORTFOLIO } from "graphql/mutations/portfolios/CreatePortfolio";
 import { showErrorToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
@@ -69,24 +69,18 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 			noValidate
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<Box
-				$flex
-				$alignItems="flex-end"
-			>
+			<div className="flex-end flex">
 				<Input
 					placeholder={t("common.input.name.placeholder")}
 					$flexGrow={1}
 					error={errors.name?.message}
 					{...register("name")}
 				/>
-			</Box>
+			</div>
 
 			<Spacer />
 
-			<Box
-				$flex
-				$justifyContent="flex-end"
-			>
+			<div className="flex-end flex">
 				<Button
 					className="min-w-[100px] grow"
 					color="gray"
@@ -114,7 +108,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 						</Fragment>
 					)}
 				</Button>
-			</Box>
+			</div>
 		</form>
 	);
 };

@@ -1,5 +1,5 @@
 import { Currency, IntroductionCreateCashAccountsInput } from "__generated__/graphql";
-import { Box, Input, Spreader } from "components/atoms";
+import { Input, Spreader } from "components/atoms";
 import { CurrencyCombobox } from "components/molecules";
 import { useRegisterCombobox } from "hooks/useRegisterCombobox";
 import { Trash2 } from "lucide-react";
@@ -43,7 +43,7 @@ export const CashAccountsField = ({
 	};
 
 	return (
-		<Box $flex>
+		<div className="flex">
 			<Input
 				placeholder={t("common.input.name.placeholder")}
 				$flexGrow={1}
@@ -67,6 +67,6 @@ export const CashAccountsField = ({
 			>
 				<Trash2 />
 			</Button>
-		</Box>
+		</div>
 	);
 };

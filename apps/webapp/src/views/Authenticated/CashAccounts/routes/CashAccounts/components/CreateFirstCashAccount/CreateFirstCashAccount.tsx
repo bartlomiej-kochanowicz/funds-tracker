@@ -1,6 +1,6 @@
 import { CreateCashAccountMutation } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, Heading, Spacer, Spreader } from "components/atoms";
+import { Heading, Spacer, Spreader } from "components/atoms";
 import { Plus } from "lucide-react";
 import { MODAL_CREATE_CASH_ACCOUNT } from "modals/CreateCashAccount";
 import { FC } from "react";
@@ -19,11 +19,7 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
 	};
 
 	return (
-		<Box
-			$flex
-			$flexDirection="column"
-			$alignItems="center"
-		>
+		<div className="fle flex-col items-center">
 			<Heading
 				$textAlign="center"
 				$level="h2"
@@ -43,6 +39,6 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
 
 				<Plus />
 			</Button>
-		</Box>
+		</div>
 	);
 };

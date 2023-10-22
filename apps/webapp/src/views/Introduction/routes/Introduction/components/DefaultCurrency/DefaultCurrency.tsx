@@ -1,7 +1,7 @@
 import { UpdateUserMutation, UpdateUserMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Heading, Loader, Spacer, Text } from "components/atoms";
+import { Heading, Loader, Spacer, Text } from "components/atoms";
 import { CurrencyCombobox } from "components/molecules";
 import { useUserContext } from "contexts/UserContext";
 import { motion } from "framer-motion";
@@ -69,10 +69,7 @@ export const DefaultCurrency = () => {
 			animate={{ opacity: 1, scale: 1 }}
 			exit={{ opacity: 0, scale: 0 }}
 		>
-			<Box
-				$flex
-				$flexDirection="column"
-			>
+			<div className="flex flex-col">
 				<Heading $textAlign="center">{t("page.introduction.default.currency.title")}</Heading>
 
 				<Spacer $space="0.5" />
@@ -115,7 +112,7 @@ export const DefaultCurrency = () => {
 						{isSubmitting ? <Loader $color="white" /> : t("page.introduction.next.step.submit")}
 					</Button>
 				</form>
-			</Box>
+			</div>
 		</motion.div>
 	);
 };

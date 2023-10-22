@@ -1,7 +1,7 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { ThemeSwitcher } from "components";
-import { Box, ButtonLink, Heading, Link, Spacer, Text } from "components/atoms";
+import { ButtonLink, Heading, Link, Spacer, Text } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
@@ -126,17 +126,13 @@ export const Confirm = () => {
 
 			<Spacer $space="1.5" />
 
-			<Box
-				$flex
-				$flexDirection="column"
-				$alignItems="center"
-			>
+			<div className="flex flex-col items-center">
 				<LangSelector />
 
 				<Spacer />
 
 				<ThemeSwitcher />
-			</Box>
+			</div>
 		</FullscreenClear>
 	);
 };

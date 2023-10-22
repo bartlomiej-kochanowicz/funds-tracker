@@ -1,5 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Box, Input, Radio, RadioGroup, Spacer, Spreader } from "components/atoms";
+import { Input, Radio, RadioGroup, Spacer, Spreader } from "components/atoms";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
 import { useRadio } from "hooks/useRadio";
@@ -47,13 +47,7 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
 			})}
 			htmlFor="comission"
 		>
-			<Box
-				$flex
-				$flexDirection={isPhone ? "column-reverse" : "row"}
-				$alignItems={isPhone ? "start" : "center"}
-				$flexGrow={1}
-				$width={isPhone ? "100%" : "auto"}
-			>
+			<div className="flex w-full grow flex-col-reverse md:w-auto md:flex-row md:items-center">
 				{watchComissionType === "%" && (
 					<Input
 						id="comission"
@@ -88,7 +82,7 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
 
 					<Radio value="amount">{t("common.amount")}</Radio>
 				</RadioGroup>
-			</Box>
+			</div>
 		</FormField>
 	);
 };

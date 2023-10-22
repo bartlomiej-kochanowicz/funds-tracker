@@ -1,5 +1,5 @@
 import NiceModal from "@ebay/nice-modal-react";
-import { Box, /* Button, */ Heading, Spacer, Spreader } from "components/atoms";
+import { Heading, Spacer, Spreader } from "components/atoms";
 import { Plus } from "lucide-react";
 import { MODAL_CREATE_PORTFOLIO } from "modals/CreatePortfolio";
 import { FC } from "react";
@@ -18,10 +18,7 @@ export const CreateFirstPortfolio: FC<CreateFirstPortfolioProps> = ({ callback }
 	};
 
 	return (
-		<Box
-			$flex
-			$alignItems="center"
-		>
+		<div className="flex items-center">
 			<Heading
 				$textAlign="center"
 				$level="h2"
@@ -41,6 +38,6 @@ export const CreateFirstPortfolio: FC<CreateFirstPortfolioProps> = ({ callback }
 
 				<Plus />
 			</Button>
-		</Box>
+		</div>
 	);
 };

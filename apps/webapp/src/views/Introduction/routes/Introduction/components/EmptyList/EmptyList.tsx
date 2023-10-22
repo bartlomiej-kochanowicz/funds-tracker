@@ -1,4 +1,4 @@
-import { Box, Spacer, Spreader, Text } from "components/atoms";
+import { Spacer, Spreader, Text } from "components/atoms";
 import { Plus } from "lucide-react";
 import { Button } from "ui";
 
@@ -11,11 +11,7 @@ interface EmptyListProps {
 }
 
 export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
-	<Box
-		$flex
-		$flexDirection="column"
-		$alignItems="center"
-	>
+	<div className="flex flex-col items-center">
 		<Text
 			$textAlign="center"
 			$fontWeight="700"
@@ -35,7 +31,7 @@ export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
 
 			<Plus />
 		</Button>
-	</Box>
+	</div>
 );
 
 EmptyList.displayName = "CreateCashAccountsEmptyList";

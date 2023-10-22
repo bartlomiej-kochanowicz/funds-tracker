@@ -5,7 +5,7 @@ import {
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Input, Loader, Spacer, Spreader } from "components/atoms";
+import { Input, Loader, Spacer, Spreader } from "components/atoms";
 import { Modal } from "components/molecules";
 import { UPDATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/UpdateCashAccount";
 import { showErrorToast } from "helpers/showToast";
@@ -72,10 +72,7 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 
 					<Spacer />
 
-					<Box
-						$flex
-						$justifyContent="flex-end"
-					>
+					<div className="flex justify-end">
 						<Button
 							className="min-w-[120px] grow"
 							color="gray"
@@ -95,7 +92,7 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 
 							{!isSubmitting && t("common.save")}
 						</Button>
-					</Box>
+					</div>
 				</form>
 			</Modal>
 		);

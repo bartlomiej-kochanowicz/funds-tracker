@@ -1,4 +1,4 @@
-import { Box, Select, Spreader } from "components/atoms";
+import { Select, Spreader } from "components/atoms";
 import languages from "constants/selectors/languages";
 import { Globe2 } from "lucide-react";
 import { useMemo } from "react";
@@ -21,16 +21,13 @@ export const LangSelector = () => {
 	};
 
 	const customLabel = ({ value }: { value: string }) => (
-		<Box
-			$flex
-			$alignItems="center"
-		>
+		<div className="flex items-center">
 			<Globe2 />
 
 			<Spreader $spread="0.5" />
 
 			{t(`selectors.languages.${value}`)}
-		</Box>
+		</div>
 	);
 
 	return (

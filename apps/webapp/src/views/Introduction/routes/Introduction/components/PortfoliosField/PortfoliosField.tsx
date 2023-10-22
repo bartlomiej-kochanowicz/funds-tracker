@@ -1,5 +1,5 @@
 import { IntroductionCreatePortfoliosInput } from "__generated__/graphql";
-import { Box, Input, Spreader } from "components/atoms";
+import { Input, Spreader } from "components/atoms";
 import { Trash2 } from "lucide-react";
 import {
 	DeepRequired,
@@ -23,7 +23,7 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
 	const handleRemoveField = () => remove(index);
 
 	return (
-		<Box $flex>
+		<div className="flex">
 			<Input
 				placeholder={t("add.portfolios.input.placeholder")}
 				$flexGrow={1}
@@ -40,6 +40,6 @@ export const PortfoliosField = ({ register, errors, index, remove }: PortfoliosF
 			>
 				<Trash2 />
 			</Button>
-		</Box>
+		</div>
 	);
 };
