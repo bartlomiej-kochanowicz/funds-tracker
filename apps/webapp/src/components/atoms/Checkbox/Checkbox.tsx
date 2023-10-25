@@ -1,7 +1,7 @@
 import { Spreader } from "components/atoms/Spreader";
-import { Text } from "components/atoms/Text";
 import { Check } from "lucide-react";
 import { FC, forwardRef, Fragment, HTMLProps, ReactNode } from "react";
+import { Text } from "ui";
 
 import { Container, Input, Marker } from "./Checkbox.styles";
 

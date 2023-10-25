@@ -1,6 +1,6 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Dropdown, Text } from "components/atoms";
+import { Dropdown } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { formatCurrency } from "helpers/formatCurrency";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
@@ -11,7 +11,7 @@ import { MODAL_INVEST_FUNDS } from "modals/InvestFunds";
 import { MODAL_RENAME_CASH_ACCOUNT } from "modals/RenameCashAccount";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Panel } from "ui";
+import { Button, Panel, Text } from "ui";
 
 interface CashAccountsPanelProps {
 	updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
@@ -94,7 +94,7 @@ export const CashAccountsPanel: FC<
 	return (
 		<Panel className="flex justify-between">
 			<div className="flex flex-col">
-				<Text $fontWeight="700">{name}</Text>
+				<Text className="font-bold">{name}</Text>
 
 				<Text>{formatCurrency(balance, currency)}</Text>
 			</div>

@@ -1,6 +1,6 @@
-import { Spacer, Spreader, Text } from "components/atoms";
+import { Spacer, Spreader } from "components/atoms";
 import { Plus } from "lucide-react";
-import { Button } from "ui";
+import { Button, Text } from "ui";
 
 interface EmptyListProps {
 	handleAppend: () => void;
@@ -12,12 +12,7 @@ interface EmptyListProps {
 
 export const EmptyList = ({ handleAppend, i18n }: EmptyListProps) => (
 	<div className="flex flex-col items-center">
-		<Text
-			$textAlign="center"
-			$fontWeight="700"
-		>
-			{i18n.title}
-		</Text>
+		<Text className="text-bold text-center">{i18n.title}</Text>
 
 		<Spacer $space="0.25" />
 

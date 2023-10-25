@@ -1,4 +1,4 @@
-import { Spreader, Text } from "components/atoms";
+import { Spreader } from "components/atoms";
 import { FC, ReactNode } from "react";
 
 interface IFormFieldProps {
@@ -9,14 +9,12 @@ interface IFormFieldProps {
 
 export const FormField: FC<IFormFieldProps> = ({ children, label, htmlFor }) => (
 	<div className="flex flex-col md:flex-row md:items-center">
-		<Text
-			as="label"
-			$fontWeight="700"
-			$width="150px"
+		<label
+			className="w-[150px] font-bold text-gray-900 dark:text-white"
 			htmlFor={htmlFor}
 		>
 			{label}:
-		</Text>
+		</label>
 
 		<Spreader $spread="0.25" />
 

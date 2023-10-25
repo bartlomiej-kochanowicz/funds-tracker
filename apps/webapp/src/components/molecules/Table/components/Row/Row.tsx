@@ -1,5 +1,5 @@
-import { Text } from "components/atoms";
 import { ReactNode } from "react";
+import { Text } from "ui";
 
 import { ColumnAccessor, CustomColumn, ItemBase, RowProps } from "../../types";
 import { Cell } from "../Cell";
@@ -18,8 +18,10 @@ export const Row = <Item extends ItemBase>({ data, columns }: RowProps<Item>) =>
 							key={column.identifier}
 						>
 							<Text
-								$fontColor="gray400"
-								$maxWidth={column.width}
+								className="text-gray-600"
+								style={{
+									maxWidth: column.width,
+								}}
 							>
 								{data[(column as ColumnAccessor<Item>).accessor] as ReactNode}
 							</Text>

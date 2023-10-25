@@ -1,7 +1,7 @@
 import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Loader, Spacer, Text } from "components/atoms";
+import { Input, Loader, Spacer } from "components/atoms";
 import { SET_NEW_PASSWORD } from "graphql/mutations/authentication/SetNewPassword";
 import { showErrorToast } from "helpers/showToast";
 import { ChangeEvent, FC, lazy, Suspense, useCallback, useState } from "react";
@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button } from "ui";
+import { Button, Text } from "ui";
 
 import { validationSchema } from "./EnterPassword.schema";
 import { Form } from "./EnterPassword.styles";
@@ -89,11 +89,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 	if (newPasswordSuccess) {
 		return (
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="center"
-			>
+			<Text className="text-center text-sm text-gray-400">
 				<Trans
 					i18nKey="page.forgot_password.enter_password.submit.success"
 					components={{

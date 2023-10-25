@@ -1,4 +1,4 @@
-import { Text } from "components/atoms";
+import { Text } from "ui";
 
 import { HeaderProps, ItemBase } from "../../types";
 import { Cell } from "../Cell";
@@ -14,12 +14,7 @@ export const Header = <Item extends ItemBase>({ columns }: HeaderProps<Item>) =>
 					center={center}
 					key={identifier}
 				>
-					<Text
-						$fontWeight="700"
-						$fontColor="gray300"
-					>
-						{header}
-					</Text>
+					<Text className="font-bold text-gray-600">{header}</Text>
 				</Cell>
 			))}
 		</Wrapper>

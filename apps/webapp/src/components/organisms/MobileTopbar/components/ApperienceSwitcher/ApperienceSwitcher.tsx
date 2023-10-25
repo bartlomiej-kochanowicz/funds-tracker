@@ -1,8 +1,8 @@
 import { ThemeSwitcher } from "components";
-import { Spreader, Text } from "components/atoms";
+import { Spreader } from "components/atoms";
 import { ItemChildrenProps } from "components/atoms/Menu/MenuItem";
-import { ForwardedRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Text } from "ui";
 
 import { ApperienceWrapper } from "./ApperienceSwitcher.styles";
 

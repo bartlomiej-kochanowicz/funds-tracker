@@ -1,6 +1,7 @@
-import { Heading, Spacer, Text } from "components/atoms";
+import { Heading, Spacer } from "components/atoms";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { Text } from "ui";
 
 import { EnterPasswordForm } from "./EnterPasswordForm";
 
@@ -17,11 +18,7 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
 
 			<Spacer $space="0.5" />
 
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="center"
-			>
+			<Text className="text-center text-sm text-gray-400">
 				{t("page.forgot_password.enter_password.description")}
 			</Text>
 

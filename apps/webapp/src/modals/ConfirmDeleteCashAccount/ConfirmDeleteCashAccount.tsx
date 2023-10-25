@@ -4,12 +4,12 @@ import {
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
-import { Loader, Spacer, Spreader, Text } from "components/atoms";
+import { Loader, Spacer, Spreader } from "components/atoms";
 import { Modal } from "components/molecules";
 import { DELETE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/DeleteCashAccount";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { Trans, useTranslation } from "react-i18next";
-import { Button } from "ui";
+import { Button, Text } from "ui";
 
 export interface ConfirmDeleteCashAccountProps {
 	name: string;
@@ -57,22 +57,12 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 				modalName={t("modal.ConfirmDeleteCashAccount.name")}
 			>
 				<div className="flex flex-col">
-					<Text
-						$fontSize="0.875"
-						$fontColor="gray400"
-					>
+					<Text className="text-sm text-gray-600">
 						<Trans
 							i18nKey="modal.ConfirmDeleteCashAccount.description"
 							values={{ name }}
 							components={{
-								bold: (
-									<Text
-										$fontSize="0.875"
-										$fontColor="gray400"
-										$textAlign="center"
-										$fontWeight="700"
-									/>
-								),
+								bold: <Text className="text-center text-sm font-bold text-gray-600" />,
 							}}
 						/>
 					</Text>

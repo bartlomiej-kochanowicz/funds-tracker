@@ -1,13 +1,13 @@
 import { ResetPasswordMutation, ResetPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Loader, Spacer, Text } from "components/atoms";
+import { Input, Loader, Spacer } from "components/atoms";
 import { RESET_PASSWORD } from "graphql/mutations/authentication/ResetPassword";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { ChangeEvent, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button } from "ui";
+import { Button, Text } from "ui";
 
 import { validationSchema } from "./EnterEmail.schema";
 import { Form } from "./EnterEmail.styles";
@@ -76,11 +76,7 @@ export const EnterEmailForm = () => {
 
 	if (sendEmailSuccess) {
 		return (
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="center"
-			>
+			<Text className="text-center text-sm text-gray-400">
 				{t("page.forgot_password.enter_email.submit.success")}
 			</Text>
 		);

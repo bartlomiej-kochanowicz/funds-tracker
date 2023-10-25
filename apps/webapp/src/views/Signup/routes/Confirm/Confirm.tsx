@@ -1,7 +1,7 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { ThemeSwitcher } from "components";
-import { ButtonLink, Heading, Link, Spacer, Text } from "components/atoms";
+import { ButtonLink, Heading, Link, Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
@@ -10,6 +10,7 @@ import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router-dom";
 import { ROUTES } from "routes/paths";
+import { Text } from "ui";
 
 import { ConfirmForm } from "./ConfirmForm";
 
@@ -68,22 +69,11 @@ export const Confirm = () => {
 
 			<Spacer $space="0.5" />
 
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="center"
-			>
+			<Text className="text-center text-sm text-gray-400">
 				<Trans
 					i18nKey="page.confirm.description"
 					components={{
-						bold: (
-							<Text
-								$fontSize="0.875"
-								$fontColor="gray400"
-								$textAlign="center"
-								$fontWeight="700"
-							/>
-						),
+						bold: <Text className="text-center text-sm font-bold text-gray-400" />,
 					}}
 					values={{
 						email,
@@ -97,11 +87,7 @@ export const Confirm = () => {
 
 			<Spacer />
 
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="center"
-			>
+			<Text className="text-center text-sm text-gray-400">
 				<Trans
 					i18nKey="page.confirm.support"
 					components={{

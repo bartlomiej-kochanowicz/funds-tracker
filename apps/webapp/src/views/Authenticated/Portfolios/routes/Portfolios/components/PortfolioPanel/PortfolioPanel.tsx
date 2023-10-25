@@ -1,6 +1,6 @@
 import { GetPortfoliosQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Dropdown, Text } from "components/atoms";
+import { Dropdown } from "components/atoms";
 import { DropdownItems } from "components/atoms/Dropdown";
 import { useUserContext } from "contexts/UserContext";
 import { formatCurrency } from "helpers/formatCurrency";
@@ -11,7 +11,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { generatePath } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button, Panel } from "ui";
+import { Button, Panel, Text } from "ui";
 
 interface PortfoliosPanelProps {
 	updatePortfolioName: (data: { name: string; uuid: string }) => void;
@@ -71,7 +71,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 	return (
 		<Panel className="flex justify-between">
 			<div className="flex flex-col">
-				<Text $fontWeight="700">{name}</Text>
+				<Text className="font-bold">{name}</Text>
 
 				<Text>{formatCurrency(2137, defaultCurrency)}</Text>
 			</div>

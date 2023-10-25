@@ -13,7 +13,6 @@ export { Radio, RadioGroup } from "./Radio";
 export { Select } from "./Select";
 export { Spacer } from "./Spacer";
 export { Spreader } from "./Spreader";
-export { Text } from "./Text";
 export { ThumbUp } from "./ThumbUp";
 export { Tile } from "./Tile";
 export { Toggle } from "./Toggle";

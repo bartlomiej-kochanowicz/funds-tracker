@@ -1,13 +1,13 @@
 import { LogoutMutation } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Dropdown, Spreader, Text } from "components/atoms";
+import { Dropdown, Spreader } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { useUserContext } from "contexts/UserContext";
 import { LOGOUT } from "graphql/mutations/authentication/Logout";
 import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Avatar } from "ui";
+import { Avatar, Text } from "ui";
 
 import { ProfileContainer } from "./Profile.styles";
 
@@ -19,8 +19,6 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 	const { user } = useUserContext();
 
 	const { t } = useTranslation();
-
-	const isDark = false;
 
 	const { clearUser: onCompleted } = useUserContext();
 
@@ -56,10 +54,7 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 
 							<Spreader $spread="0.25" />
 
-							<Text
-								$fontWeight="700"
-								$maxWidth="250px"
-							>
+							<Text className="max-w-[250px] font-bold">
 								{t("common.hi")}, {user.name}!
 							</Text>
 						</Fragment>

@@ -1,8 +1,8 @@
-import { Heading, Spacer, Text, ThumbUp } from "components/atoms";
+import { Heading, Spacer, ThumbUp } from "components/atoms";
 import { useTranslation } from "react-i18next";
 /* import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths"; */
-import { Button } from "ui";
+import { Button, Text } from "ui";
 
 export const Completed = () => {
 	const { t } = useTranslation();
@@ -17,11 +17,7 @@ export const Completed = () => {
 
 			<Spacer $space="0.5" />
 
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="center"
-			>
+			<Text className="text-center text-sm text-gray-400">
 				{t("add.instrument.success.description")}
 			</Text>
 

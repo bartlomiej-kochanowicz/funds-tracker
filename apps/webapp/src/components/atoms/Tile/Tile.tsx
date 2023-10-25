@@ -1,6 +1,6 @@
-import { Text } from "components/atoms/Text";
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { Text } from "ui";
 
 import { Spacer } from "../Spacer";
 import { Wrapper } from "./Tile.styles";
@@ -18,16 +18,7 @@ export const Tile: FC<TilelProps> = ({ children, title, to }) => {
 
 			<Spacer $space="0.25" />
 
-			{title && (
-				<Text
-					$maxWidth="55px"
-					$fontSize="0.75"
-					$fontWeight="700"
-					$textAlign="center"
-				>
-					{title}
-				</Text>
-			)}
+			{title && <Text className="max-w-[55px] text-center text-xs font-bold">{title}</Text>}
 		</div>
 	);
 

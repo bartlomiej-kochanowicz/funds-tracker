@@ -1,10 +1,11 @@
 import { ThemeSwitcher } from "components";
-import { Heading, Spacer, Text } from "components/atoms";
+import { Heading, Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { FullscreenClear } from "layouts/FullscreenClear";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
+import { Text } from "ui";
 
 import { SignupForm } from "./SignupForm";
 
@@ -17,13 +18,7 @@ export const Signup = () => {
 
 			<Spacer $space="0.5" />
 
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="center"
-			>
-				{t("page.signup.description")}
-			</Text>
+			<Text className="text-center text-sm text-gray-400">{t("page.signup.description")}</Text>
 
 			<Spacer $space="1.5" />
 
@@ -31,11 +26,7 @@ export const Signup = () => {
 
 			<Spacer />
 
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-				$textAlign="center"
-			>
+			<Text className="text-center text-sm text-gray-400">
 				<Trans
 					i18nKey="page.signup.already_have_account"
 					components={{

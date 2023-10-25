@@ -1,13 +1,13 @@
 import { Currency } from "__generated__/graphql";
-import { Text } from "components/atoms/Text";
 import { CalendarDays, Search } from "lucide-react";
 import { forwardRef, HTMLProps, ReactNode } from "react";
 import CurrencyInputComponent, {
 	CurrencyInputProps as CurrencyInputFieldProps,
 } from "react-currency-input-field";
 import { useTranslation } from "react-i18next";
+import { Text } from "ui";
 
-import { Error, SearchIcon, StyledInput, Unit, Wrapper } from "./Input.styles";
+import { Error, StyledInput, Unit, Wrapper } from "./Input.styles";
 
 interface InputCommonProps {
 	error?: string;
@@ -62,14 +62,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 					$width={$width}
 					$flexGrow={$flexGrow}
 				>
-					{label && (
-						<Text
-							$fontSize="0.875"
-							$fontColor="gray400"
-						>
-							{label}
-						</Text>
-					)}
+					{label && <Text className="text-sm text-gray-600">{label}</Text>}
 
 					<CurrencyInputComponent
 						intlConfig={{ locale: i18n.language, currency }}
@@ -104,14 +97,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 				$width={$width}
 				$flexGrow={$flexGrow}
 			>
-				{label && (
-					<Text
-						$fontSize="0.875"
-						$fontColor="gray400"
-					>
-						{label}
-					</Text>
-				)}
+				{label && <Text className="text-sm text-gray-600">{label}</Text>}
 
 				{hasIcon && type === "search" && <Search />}
 				{hasIcon && type === "date" && <CalendarDays />}

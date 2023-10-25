@@ -1,7 +1,9 @@
-import { Spreader, Text } from "components/atoms";
+import clsx from "clsx";
+import { Spreader } from "components/atoms";
 import { LucideProps } from "lucide-react";
 import { FC, ForwardRefExoticComponent, Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { Text } from "ui";
 
 interface NavListItemProps {
 	isActive: boolean;
@@ -12,18 +14,13 @@ interface NavListItemProps {
 export const NavListItem: FC<NavListItemProps> = ({ isActive, title, icon: Icon }) => {
 	const { t } = useTranslation();
 
-	const fontColor = isActive ? "blue" : "gray400";
-
 	return (
 		<Fragment>
 			<Icon />
 
 			<Spreader $spread="0.5" />
 
-			<Text
-				$fontColor={fontColor}
-				$fontWeight={isActive ? "700" : "500"}
-			>
+			<Text className={clsx(isActive ? "font-bold text-blue-600" : "font-medium text-gray-600")}>
 				{t(title)}
 			</Text>
 		</Fragment>

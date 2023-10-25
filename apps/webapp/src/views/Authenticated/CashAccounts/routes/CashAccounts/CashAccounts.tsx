@@ -1,12 +1,12 @@
 import { CreateCashAccountMutation, GetCashAccountsQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
-import { Heading, Loader, Spacer, Text } from "components/atoms";
+import { Heading, Loader, Spacer } from "components/atoms";
 import { ErrorContent } from "components/molecules";
 import { MAX_CASH_ACCOUNTS } from "constants/common";
 import { GET_CASH_ACCOUNTS } from "graphql/query/cashAccounts/GetCashAccounts";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Panel } from "ui";
+import { Panel, Text } from "ui";
 
 import { CashAccountsPanel } from "./components/CashAccountsPanel";
 import { CreateCashAccount } from "./components/CreateCashAccount";
@@ -69,12 +69,7 @@ export const CashAccounts = () => {
 		<Fragment>
 			<Heading>{t("navigation.cash_accounts")}</Heading>
 
-			<Text
-				$fontSize="0.875"
-				$fontColor="gray400"
-			>
-				{t("page.cash_accounts.title.description")}
-			</Text>
+			<Text className="text-sm text-gray-400">{t("page.cash_accounts.title.description")}</Text>
 
 			<Spacer />
 

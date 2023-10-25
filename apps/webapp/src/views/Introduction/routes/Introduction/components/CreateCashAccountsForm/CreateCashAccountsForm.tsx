@@ -6,7 +6,7 @@ import {
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Heading, Loader, Spacer, Spreader, Text } from "components/atoms";
+import { Heading, Loader, Spacer, Spreader } from "components/atoms";
 import { MAX_CASH_ACCOUNTS } from "constants/common";
 import { useUserContext } from "contexts/UserContext";
 import { motion } from "framer-motion";
@@ -15,7 +15,7 @@ import { showErrorToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
-import { Button } from "ui";
+import { Button, Text } from "ui";
 import { useIntroductionContext } from "views/Introduction/routes/Introduction/context";
 
 import { CashAccountsField } from "../CashAccountsField";
@@ -95,22 +95,11 @@ export const CreateCashAccountsForm = () => {
 
 				<Spacer $space="0.5" />
 
-				<Text
-					$fontSize="0.875"
-					$fontColor="gray400"
-					$textAlign="center"
-				>
+				<Text className="text-center text-sm text-gray-400">
 					<Trans
 						i18nKey="add.cash.accounts.description"
 						components={{
-							bold: (
-								<Text
-									$fontSize="0.875"
-									$fontColor="gray400"
-									$textAlign="center"
-									$fontWeight="700"
-								/>
-							),
+							bold: <Text className="text-bold text-center text-sm text-gray-400" />,
 						}}
 					/>
 				</Text>

@@ -1,6 +1,7 @@
-import { Heading, Spacer, Text } from "components/atoms";
+import { Heading, Spacer } from "components/atoms";
 import { FullscreenClear } from "layouts/FullscreenClear";
 import { FC } from "react";
+import { Text } from "ui";
 
 export const NotFound: FC = () => (
 	<FullscreenClear>
@@ -8,11 +9,6 @@ export const NotFound: FC = () => (
 
 		<Spacer $space="0.25" />
 
-		<Text
-			$fontColor="gray400"
-			$textAlign="center"
-		>
-			Page not found
-		</Text>
+		<Text className="text-center  text-gray-400">Page not found</Text>
 	</FullscreenClear>
 );

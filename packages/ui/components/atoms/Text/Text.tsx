@@ -2,7 +2,7 @@ import cslx from "clsx";
 import { HTMLAttributes, ReactNode } from "react";
 
 interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 export const Text = ({ children, className, ...rest }: TextProps) => (

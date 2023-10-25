@@ -4,14 +4,14 @@ import {
 	SearchInstrumentQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Input, Loader, Menu, Spreader, Text } from "components/atoms";
+import { Input, Loader, Menu, Spreader } from "components/atoms";
 import type { SearchInputProps } from "components/atoms/Input";
 import { SEARCH_INSTRUMENT } from "graphql/query/instruments/SearchInstrument";
 import { useCombobox } from "hooks/useCombobox";
 import { forwardRef, Fragment, useMemo, useRef } from "react";
 import { mergeRefs, useLayer } from "react-laag";
 import { PlacementType } from "react-laag/dist/PlacementType";
-import { Badge } from "ui";
+import { Badge, Text } from "ui";
 
 interface SearchInstrumentComboboxProps extends Omit<SearchInputProps, "onChange"> {
 	placement?: PlacementType;
@@ -137,7 +137,7 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
 
 									<Spreader $spread="0.25" />
 
-									<Text $maxWidth="auto">{item.Name}</Text>
+									<Text>{item.Name}</Text>
 
 									<Spreader $spread="0.1" />
 

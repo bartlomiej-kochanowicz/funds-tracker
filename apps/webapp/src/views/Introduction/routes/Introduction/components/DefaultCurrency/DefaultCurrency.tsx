@@ -1,7 +1,7 @@
 import { UpdateUserMutation, UpdateUserMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Heading, Loader, Spacer, Text } from "components/atoms";
+import { Heading, Loader, Spacer } from "components/atoms";
 import { CurrencyCombobox } from "components/molecules";
 import { useUserContext } from "contexts/UserContext";
 import { motion } from "framer-motion";
@@ -10,7 +10,7 @@ import { showErrorToast } from "helpers/showToast";
 import { useRegisterCombobox } from "hooks/useRegisterCombobox";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
-import { Button } from "ui";
+import { Button, Text } from "ui";
 import { useIntroductionContext } from "views/Introduction/routes/Introduction/context";
 
 import { FormSchemaType, validationSchema } from "./DefaultCurrency.schema";
@@ -74,22 +74,11 @@ export const DefaultCurrency = () => {
 
 				<Spacer $space="0.5" />
 
-				<Text
-					$fontSize="0.875"
-					$fontColor="gray400"
-					$textAlign="center"
-				>
+				<Text className="text-center text-sm text-gray-400">
 					<Trans
 						i18nKey="page.introduction.default.currency.description"
 						components={{
-							bold: (
-								<Text
-									$fontSize="0.875"
-									$fontColor="gray400"
-									$textAlign="center"
-									$fontWeight="700"
-								/>
-							),
+							bold: <Text className="text-center text-sm font-bold text-gray-400" />,
 						}}
 					/>
 				</Text>
