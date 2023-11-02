@@ -1,7 +1,7 @@
 import { ThemeSwitcher } from "components";
 import { Heading, Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
-import { FullscreenClear } from "layouts/FullscreenClear";
+import { ClearCentered } from "layouts/ClearCentered";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -13,7 +13,7 @@ export const Signup = () => {
 	const { t } = useTranslation();
 
 	return (
-		<FullscreenClear>
+		<ClearCentered>
 			<Heading $textAlign="center">{t("common.sign_up")}</Heading>
 
 			<Spacer $space="0.5" />
@@ -51,6 +51,6 @@ export const Signup = () => {
 
 				<ThemeSwitcher />
 			</div>
-		</FullscreenClear>
+		</ClearCentered>
 	);
 };

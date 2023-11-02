@@ -6,5 +6,3 @@ export const FullscreenLoading: FC = () => (
 		<Loader $size="large" />
 	</div>
 );
-
-FullscreenLoading.displayName = "FullscreenLoading";

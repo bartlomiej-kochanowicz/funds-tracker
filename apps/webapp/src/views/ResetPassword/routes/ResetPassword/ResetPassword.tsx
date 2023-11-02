@@ -1,7 +1,7 @@
 import { ThemeSwitcher } from "components";
 import { Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
-import { FullscreenClear } from "layouts/FullscreenClear";
+import { ClearCentered } from "layouts/ClearCentered";
 import { useSearchParams } from "react-router-dom";
 
 import { EnterEmail } from "./components/EnterEmail";
@@ -13,7 +13,7 @@ export const ResetPassword = () => {
 	const token = searchParams.get("token");
 
 	return (
-		<FullscreenClear>
+		<ClearCentered>
 			{token ? <EnterPassword token={token} /> : <EnterEmail />}
 
 			<Spacer $space="1.5" />
@@ -27,6 +27,6 @@ export const ResetPassword = () => {
 
 				<ThemeSwitcher />
 			</div>
-		</FullscreenClear>
+		</ClearCentered>
 	);
 };

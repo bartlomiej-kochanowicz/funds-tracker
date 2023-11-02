@@ -5,7 +5,7 @@ import { ButtonLink, Heading, Link, Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
-import { FullscreenClear } from "layouts/FullscreenClear";
+import { ClearCentered } from "layouts/ClearCentered";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router-dom";
@@ -57,7 +57,7 @@ export const Confirm = () => {
 	}
 
 	return (
-		<FullscreenClear>
+		<ClearCentered>
 			<Suspense>
 				<GoogleReCaptcha
 					onVerify={onVerify}
@@ -119,6 +119,6 @@ export const Confirm = () => {
 
 				<ThemeSwitcher />
 			</div>
-		</FullscreenClear>
+		</ClearCentered>
 	);
 };

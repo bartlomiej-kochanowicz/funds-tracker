@@ -1,5 +1,6 @@
 import { ThemeSwitcher } from "components";
 import { LangSelector } from "components/molecules";
+import { ClearCentered } from "layouts/ClearCentered";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -11,7 +12,7 @@ export const Signin = () => {
 	const { t } = useTranslation();
 
 	return (
-		<div className="mx-auto max-w-lg">
+		<ClearCentered>
 			<H1 className="text-center">{t("common.sign_in")}</H1>
 
 			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
@@ -46,6 +47,6 @@ export const Signin = () => {
 
 				<ThemeSwitcher className="mt-8" />
 			</div>
-		</div>
+		</ClearCentered>
 	);
 };

@@ -1,9 +1,9 @@
 import { ErrorContent } from "components/molecules";
-import { FullscreenClear } from "layouts/FullscreenClear";
+import { ClearCentered } from "layouts/ClearCentered";
 import { FC } from "react";
 
 export const FullscreenErrorContent: FC = () => (
-	<FullscreenClear>
+	<ClearCentered>
 		<ErrorContent />
-	</FullscreenClear>
+	</ClearCentered>
 );
