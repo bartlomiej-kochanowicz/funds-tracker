@@ -1,5 +1,5 @@
 import { ErrorContent } from "components/molecules";
-import { ProtectedRoute } from "components/ProtectedRoute/ProtectedRoute";
+import { ProtectedRoute } from "components/ProtectedRoute";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
 import { ROUTES } from "routes/paths";

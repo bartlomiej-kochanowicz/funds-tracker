@@ -18,8 +18,8 @@ export const PublicRoute = ({ children, to = ROUTES.HOME }: PublicRouteProps) =>
 		return <FullscreenLoading />;
 	}
 
-	if (!isAuthenticated) {
-		return <Navigate to={to} />;
+	if (isAuthenticated) {
+		<Navigate to={to} />;
 	}
 
 	return children;
