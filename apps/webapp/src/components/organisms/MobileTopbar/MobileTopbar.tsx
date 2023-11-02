@@ -1,10 +1,10 @@
+import clsx from "clsx";
 import { Spacer } from "components/atoms";
 import { Profile } from "components/molecules";
 import { debounce } from "helpers/debounce";
 import { FC, Fragment, lazy, useCallback, useEffect, useState } from "react";
 
 import { SettingsDropdown } from "./components/SettingsDropdown";
-import { Wrapper } from "./MobileTopbar.styles";
 
 const LogoNameHorizontal = lazy(() =>
 	import("assets/logo/logo-name-horizontal.svg").then(({ ReactComponent: component }) => ({
@@ -49,11 +49,14 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
 	}, [onScroll]);
 
 	return (
-		<Wrapper
-			$flex
-			$justifyContent={isDashboard ? "center" : "space-between"}
-			$alignItems="center"
-			$hasBorder={visible}
+		<div
+			className={
+				(clsx(
+					"fixed left-0 right-0 top-0 z-[1] flex items-center bg-gray-100 px-4 py-2 dark:bg-gray-900",
+					isDashboard ? "justify-center" : "justify-between",
+				),
+				visible ? "border border-gray-300" : undefined)
+			}
 		>
 			{isDashboard && (
 				<div className="flex flex-col">
@@ -72,7 +75,7 @@ export const MobileTopbar: FC<MobileTopbarProps> = ({ isDashboard }) => {
 					<Profile />
 				</Fragment>
 			)}
-		</Wrapper>
+		</div>
 	);
 };
 

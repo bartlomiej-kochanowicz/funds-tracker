@@ -6,7 +6,6 @@ import { lazy, Suspense } from "react";
 import { LogoFallback } from "./components/LogoFallback";
 import { NavList } from "./components/NavList";
 import { sidebarNavigation } from "./constants";
-import { StyledColumn } from "./Sidebar.styles";
 
 const LogoNameVertical = lazy(() =>
 	import("assets/logo/logo-name-vertical.svg").then(({ ReactComponent: component }) => ({
@@ -24,7 +23,7 @@ export const Sidebar = () => {
 	const isDark = false;
 
 	return (
-		<StyledColumn $justifyContent="space-between">
+		<div className="fixed left-0 top-0 z-10 flex h-full flex-col justify-between pb-14 pl-4 pr-0 pt-6">
 			<div className="flex flex-col">
 				<Suspense fallback={<LogoFallback />}>
 					{isDark ? (
@@ -64,6 +63,6 @@ export const Sidebar = () => {
 
 				<LangSelector />
 			</div>
-		</StyledColumn>
+		</div>
 	);
 };

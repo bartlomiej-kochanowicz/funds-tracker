@@ -1,15 +1,10 @@
+import { PublicRoute } from "components/PublicRoute";
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { lazy } from "react";
 import { ROUTES } from "routes/paths";
 
 const GoogleReCaptchaProvider = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptchaProvider: component }) => ({
-		default: component,
-	})),
-);
-
-const UnprotectedRoute = lazy(() =>
-	import("utils/UnprotectedRoute").then(({ UnprotectedRoute: component }) => ({
 		default: component,
 	})),
 );
@@ -26,21 +21,21 @@ export const SignupRoutes = [
 	{
 		path: ROUTES.SIGNUP.SIGNUP,
 		element: (
-			<UnprotectedRoute to={ROUTES.DASHBOARD}>
+			<PublicRoute>
 				<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
 					<Signup />
 				</GoogleReCaptchaProvider>
-			</UnprotectedRoute>
+			</PublicRoute>
 		),
 	},
 	{
 		path: ROUTES.SIGNUP.CONFIRM,
 		element: (
-			<UnprotectedRoute to={ROUTES.DASHBOARD}>
+			<PublicRoute>
 				<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
 					<Confirm />
 				</GoogleReCaptchaProvider>
-			</UnprotectedRoute>
+			</PublicRoute>
 		),
 	},
 ];

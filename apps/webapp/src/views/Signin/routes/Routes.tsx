@@ -1,3 +1,4 @@
+import { PublicRoute } from "components/PublicRoute";
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { lazy } from "react";
 import { ROUTES } from "routes/paths";
@@ -22,11 +23,11 @@ export const SinginRoutes = [
 	{
 		path: ROUTES.SIGNIN,
 		element: (
-			<UnprotectedRoute to={ROUTES.DASHBOARD}>
+			<PublicRoute>
 				<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
 					<Signin />
 				</GoogleReCaptchaProvider>
-			</UnprotectedRoute>
+			</PublicRoute>
 		),
 	},
 ];

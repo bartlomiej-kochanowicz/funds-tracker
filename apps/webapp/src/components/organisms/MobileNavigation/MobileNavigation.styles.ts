@@ -1,4 +1,3 @@
-import { Text } from "components/atoms";
 import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
 
@@ -43,13 +42,4 @@ export const StyledNavLink = styled(NavLink)`
 			color: ${theme.colors.blue};
 		}
 	`}
-`;
-
-export const Title = styled(Text)`
-	width: 75px;
-	overflow: hidden;
-	display: inline-block;
-	box-sizing: border-box;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 `;

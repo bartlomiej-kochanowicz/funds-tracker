@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Spacer } from "components/atoms";
 import { AnimatePresence, motion } from "framer-motion";
 import { throttle } from "helpers/throttle";
@@ -5,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { mobileNavigationNavigation } from "./constants";
-import { List, ListItem, StyledNav, StyledNavLink, Title } from "./MobileNavigation.styles";
+import { List, ListItem, StyledNav, StyledNavLink } from "./MobileNavigation.styles";
 
 const MotionNav = motion(StyledNav);
 
@@ -61,15 +62,14 @@ export const MobileNavigation = () => {
 
 											<Spacer $space="0.25" />
 
-											<Title
-												$fontColor={isActive ? "text" : "gray400"}
-												$fontWeight={isActive ? "700" : "500"}
-												$lineHeight="1rem"
-												$textAlign="center"
-												$fontSize="0.875"
+											<span
+												className={clsx(
+													"box-border inline-block overflow-hidden text-ellipsis whitespace-nowrap text-center text-sm leading-4",
+													isActive ? "font-bold text-gray-900" : "font-medium text-gray-600",
+												)}
 											>
 												{t(title)}
-											</Title>
+											</span>
 										</div>
 									)}
 								</StyledNavLink>

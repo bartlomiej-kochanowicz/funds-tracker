@@ -1,4 +1,3 @@
-import { Icon } from "components/atoms/Icon";
 import { Menu } from "components/atoms/Menu";
 import { Spreader } from "components/atoms/Spreader";
 import { useDropdownMenu } from "hooks/useDropdownMenu";

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Spreader } from "components/atoms";
 import { Profile } from "components/molecules";
 import { debounce } from "helpers/debounce";
@@ -8,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
-import { BackButton, StyledRow } from "./Topbar.styles";
+import { BackButton } from "./Topbar.styles";
 
 const withBackButton = [ROUTES.PORTFOLIOS.PORTFOLIO];
 
@@ -17,7 +18,7 @@ export const Topbar = () => {
 
 	const [visible, setVisible] = useState(window.pageYOffset !== 0);
 
-	const rendreBackButton = useMatches(withBackButton);
+	const renderBackButton = useMatches(withBackButton);
 
 	const navigate = useNavigate();
 
@@ -45,13 +46,15 @@ export const Topbar = () => {
 	}, [onScroll]);
 
 	return (
-		<StyledRow
-			$justifyContent={rendreBackButton ? "space-between" : "flex-end"}
-			$alignItems="center"
-			$hasBorder={visible}
-			$leftPadding={rendreBackButton}
+		<div
+			className={clsx(
+				"fixed left-0 right-0 top-0 z-10 flex items-center px-14 py-1",
+				renderBackButton ? "justify-between" : "justify-end",
+				renderBackButton && " pb-[230px] pl-1 pr-14 pt-1",
+				visible && "border-b border-gray-200",
+			)}
 		>
-			{rendreBackButton ? (
+			{renderBackButton ? (
 				<BackButton onClick={handleBackToPreviousPage}>
 					<ChevronLeft />
 
@@ -62,6 +65,6 @@ export const Topbar = () => {
 			) : null}
 
 			<Profile withName />
-		</StyledRow>
+		</div>
 	);
 };

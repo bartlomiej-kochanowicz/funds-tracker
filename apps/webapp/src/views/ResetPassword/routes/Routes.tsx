@@ -1,3 +1,4 @@
+import { PublicRoute } from "components/PublicRoute";
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { lazy } from "react";
 import { ROUTES } from "routes/paths";
@@ -16,9 +17,11 @@ export const ResetPasswordRoutes = [
 	{
 		path: ROUTES.RESET_PASSWORD,
 		element: (
-			<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-				<ResetPassword />
-			</GoogleReCaptchaProvider>
+			<PublicRoute>
+				<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+					<ResetPassword />
+				</GoogleReCaptchaProvider>
+			</PublicRoute>
 		),
 	},
 ];
