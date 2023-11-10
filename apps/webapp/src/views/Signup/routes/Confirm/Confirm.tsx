@@ -1,7 +1,7 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { ThemeSwitcher } from "components";
-import { ButtonLink, Heading, Link, Spacer } from "components/atoms";
+import { Heading, Link, Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
@@ -10,7 +10,7 @@ import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Text } from "ui";
+import { Button, Text } from "ui";
 
 import { ConfirmForm } from "./ConfirmForm";
 
@@ -98,9 +98,8 @@ export const Confirm = () => {
 							/>
 						),
 						code: (
-							<ButtonLink
+							<Button
 								onClick={handleResendCode}
-								$fontColor="blue"
 								data-testid="resend-code-button"
 							/>
 						),

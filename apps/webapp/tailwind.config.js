@@ -1,12 +1,9 @@
+/** @type {import('tailwindcss').Config} */
+const uiTheme = require("../../packages/ui/tailwind.config");
+
 module.exports = {
 	darkMode: "class",
 	content: ["./index.html", "./src/**/*.{ts,tsx}", "../../packages/ui/**/*.{ts,tsx}"],
-	theme: {
-		extend: {
-			scale: {
-				99: "0.99",
-			},
-		},
-	},
+	theme: uiTheme.theme,
 	plugins: [],
 };

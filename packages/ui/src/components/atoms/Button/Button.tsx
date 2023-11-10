@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { HTMLMotionProps, motion, useAnimation } from "framer-motion";
-import { ButtonHTMLAttributes, useRef } from "react";
+import { ButtonHTMLAttributes, ReactNode, useRef } from "react";
 import { FocusRing, PressEvent, useButton } from "react-aria";
 
 const sizes = {
@@ -27,7 +27,7 @@ const colors = {
 };
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
-	children: React.ReactNode;
+	children?: ReactNode;
 	size?: keyof typeof sizes;
 	color?: keyof typeof colors;
 }

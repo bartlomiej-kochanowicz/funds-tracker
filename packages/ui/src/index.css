@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: Roboto;
+	src: url(/assets/fonts/Roboto-Medium.woff2);
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Roboto;
+	src: url(/assets/fonts/Roboto-Regular.woff2);
+	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Roboto;
+	src: url(/assets/fonts/Roboto-Medium.woff2);
+	font-weight: 500;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: Roboto;
+	src: url(/assets/fonts/Roboto-Bold.woff2);
+	font-weight: 700;
+	font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: Roboto, sans-serif;
+}

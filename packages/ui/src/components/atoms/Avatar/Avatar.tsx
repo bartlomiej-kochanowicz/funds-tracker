@@ -1,5 +1,5 @@
-import { Text } from "components/atoms/Text";
-import { Initials } from "helpers/Initials";
+import { Text } from "src/components/atoms/Text";
+import { Initials } from "src/helpers/Initials";
 import { useMemo } from "react";
 
 interface AvatarProps {

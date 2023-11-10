@@ -1,5 +1,5 @@
 module.exports = {
-	extends: ["custom/react"],
+	extends: ["custom/react", "plugin:storybook/recommended"],
 	parserOptions: {
 		project: "tsconfig.json",
 		tsconfigRootDir: __dirname,
