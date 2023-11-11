@@ -1,10 +1,10 @@
 {
-	"exclude": ["node_modules"],
 	"extends": "tsconfig/vite.json",
 	"compilerOptions": {
 		"rootDir": "src",
 		"outDir": "dist",
 		"baseUrl": "./src"
 	},
-	"include": ["src", "../../packages/ui/components/atoms/ButtonLink"]
+	"include": ["src"],
+	"exclude": ["node_modules"]
 }
