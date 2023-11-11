@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vitest";
+
 import { Initials } from "./Initials";
 
 describe("Initial tests", () => {
