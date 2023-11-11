@@ -2,7 +2,6 @@ import { createCalendar } from "@internationalized/date";
 import { useRef } from "react";
 import { useDateField, useLocale } from "react-aria";
 import { useDateFieldState } from "react-stately";
-import { v4 as uuidv4 } from "uuid";
 
 import { DateSegment } from "./DateSegment";
 
@@ -23,9 +22,9 @@ export const DateField = props => {
 			ref={ref}
 			className="flex"
 		>
-			{state.segments.map(segment => (
+			{state.segments.map((segment, index) => (
 				<DateSegment
-					key={uuidv4()}
+					key={index}
 					segment={segment}
 					state={state}
 				/>

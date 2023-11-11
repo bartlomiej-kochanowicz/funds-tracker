@@ -32,7 +32,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 				ref={ref}
 				className="group flex"
 			>
-				<div className="relative flex items-center rounded-l-md border border-gray-300 bg-white p-1 pr-10 transition-colors group-focus-within:border-violet-600 group-hover:border-gray-400 group-focus-within:group-hover:border-violet-600">
+				<div className="relative flex items-center rounded-l-md border border-gray-300 bg-white p-1 pr-10 transition-colors group-focus-within:border-blue-600 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-600">
 					<DateField {...fieldProps} />
 					{state.isInvalid && <AlertCircle className="absolute right-1 h-6 w-6 text-red-500" />}
 				</div>
@@ -40,7 +40,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 					{...buttonProps}
 					isPressed={state.isOpen}
 				>
-					<CalendarDays className="h-5 w-5 text-gray-700 group-focus-within:text-violet-700" />
+					<CalendarDays className="h-5 w-5 text-gray-700 group-focus-within:text-blue-600" />
 				</FieldButton>
 			</div>
 			{state.isOpen && (

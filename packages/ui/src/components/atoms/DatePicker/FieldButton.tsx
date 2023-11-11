@@ -15,7 +15,7 @@ export const FieldButton = (props: FieldButtonProps) => {
 			{...buttonProps}
 			type="button"
 			ref={ref}
-			className={`-ml-px rounded-r-md border px-2 outline-none transition-colors group-focus-within:border-violet-600 group-focus-within:group-hover:border-violet-600 ${
+			className={`-ml-px rounded-r-md border px-2 outline-none transition-colors group-focus-within:border-blue-600 group-focus-within:group-hover:border-blue-600 ${
 				isPressed || isPressedFromProps
 					? "border-gray-400 bg-gray-200"
 					: "border-gray-300 bg-gray-50 group-hover:border-gray-400"

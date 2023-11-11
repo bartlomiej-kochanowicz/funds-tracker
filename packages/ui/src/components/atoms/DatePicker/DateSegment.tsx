@@ -19,7 +19,7 @@ export const DateSegment = ({ segment, state }: DateSegmentProps) => {
 				...segmentProps.style,
 				minWidth: segment.maxValue != null ? `${String(segment.maxValue).length}ch` : undefined,
 			}}
-			className={`group box-content rounded-sm px-0.5 text-right tabular-nums outline-none focus:bg-violet-600 focus:text-white ${
+			className={`group box-content rounded-sm px-0.5 text-right tabular-nums outline-none focus:bg-blue-600 focus:text-white ${
 				!segment.isEditable ? "text-gray-500" : "text-gray-800"
 			}`}
 		>

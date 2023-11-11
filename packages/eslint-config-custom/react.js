@@ -64,5 +64,6 @@ module.exports = {
 		"no-tabs": ["error", { allowIndentationTabs: true }],
 		"react/jsx-wrap-multilines": "off",
 		"@typescript-eslint/no-shadow": "off",
+		"react/no-array-index-key": "off",
 	},
 };
