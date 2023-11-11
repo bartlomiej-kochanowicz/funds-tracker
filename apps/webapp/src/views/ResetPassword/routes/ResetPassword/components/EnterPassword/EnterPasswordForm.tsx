@@ -140,7 +140,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 			<Button
 				className="w-auto"
-				disabled={isSubmitting}
+				isDisabled={isSubmitting}
 				type="submit"
 			>
 				{isSubmitting && <Loader $color="white" />}

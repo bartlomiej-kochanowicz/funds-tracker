@@ -126,7 +126,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 					<Button
 						className="min-w-[120px] grow"
 						color="gray"
-						onClick={remove}
+						onPress={remove}
 					>
 						{t("common.cancel")}
 					</Button>
@@ -136,7 +136,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 					<Button
 						className="min-w-[120px] grow"
 						type="submit"
-						disabled={!isValid || isSubmitting || shouldRenderNotSupportedYet}
+						isDisabled={!isValid || isSubmitting || shouldRenderNotSupportedYet}
 					>
 						{isSubmitting && <Loader $size="small" />}
 

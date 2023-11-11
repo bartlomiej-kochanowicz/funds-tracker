@@ -179,7 +179,7 @@ export const SigninForm = () => {
 			<Spacer />
 
 			<Button
-				disabled={isSubmitting}
+				isDisabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
 			>

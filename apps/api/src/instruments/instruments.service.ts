@@ -27,7 +27,7 @@ export class InstrumentsService {
 					},
 				})
 				.pipe(
-					catchError(err => {
+					catchError(() => {
 						throw Error("Error fetching instruments");
 					}),
 				),

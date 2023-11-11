@@ -165,7 +165,7 @@ export const SignupForm = () => {
 
 			<Button
 				className="w-auto"
-				disabled={isSubmitting}
+				isDisabled={isSubmitting}
 				type="submit"
 			>
 				{isSubmitting && <Loader $color="white" />}

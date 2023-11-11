@@ -76,7 +76,7 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 						<Button
 							className="min-w-[120px] grow"
 							color="gray"
-							onClick={modal.remove}
+							onPress={modal.remove}
 						>
 							{t("common.cancel")}
 						</Button>
@@ -85,7 +85,7 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 
 						<Button
 							className="min-w-[120px] grow"
-							disabled={isSubmitting || !isValid || !isDirty}
+							isDisabled={isSubmitting || !isValid || !isDirty}
 							type="submit"
 						>
 							{isSubmitting && <Loader $color="white" />}

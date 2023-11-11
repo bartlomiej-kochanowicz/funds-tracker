@@ -91,8 +91,8 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 
 				<Button
 					color="black"
-					onClick={updatePrice}
-					disabled={!watchInstrumentCode || !watchDate || !priceChanged}
+					onPress={updatePrice}
+					isDisabled={!watchInstrumentCode || !watchDate || !priceChanged}
 				>
 					<RefreshCw />
 				</Button>

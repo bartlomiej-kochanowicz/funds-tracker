@@ -55,7 +55,7 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 			onCompleted: async () => {
 				await getUser();
 
-				navigate(ROUTES.INTRODUCTION);
+				navigate(ROUTES.HOME);
 			},
 			onError: () => {
 				setError("code", { type: "custom", message: t("service.unknown_error") });
@@ -92,7 +92,7 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 
 			<Button
 				className="w-auto"
-				disabled={isSubmitting}
+				isDisabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
 			>

@@ -162,6 +162,9 @@ importers:
       '@types/ua-parser-js':
         specifier: 0.7.38
         version: 0.7.38
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../../packages/eslint-config-custom
       graphql-tag:
         specifier: 2.12.6
         version: 2.12.6(graphql@16.7.1)

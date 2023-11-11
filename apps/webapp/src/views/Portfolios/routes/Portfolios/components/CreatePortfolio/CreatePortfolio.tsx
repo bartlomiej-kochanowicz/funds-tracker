@@ -28,7 +28,7 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
 			<Spacer $space="0.5" />
 
 			<Button
-				onClick={handleOpenModal}
+				onPress={handleOpenModal}
 				/* $outline */
 			>
 				{t("page.portfolios.need.more.button")}

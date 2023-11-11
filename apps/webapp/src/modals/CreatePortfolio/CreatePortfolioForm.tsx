@@ -84,7 +84,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 				<Button
 					className="min-w-[100px] grow"
 					color="gray"
-					onClick={closeModal}
+					onPress={closeModal}
 				>
 					{t("common.cancel")}
 				</Button>
@@ -93,7 +93,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 
 				<Button
 					className="min-w-[170px] grow"
-					disabled={isSubmitting || !isValid || !isDirty}
+					isDisabled={isSubmitting || !isValid || !isDirty}
 					type="submit"
 				>
 					{isSubmitting && <Loader $color="white" />}

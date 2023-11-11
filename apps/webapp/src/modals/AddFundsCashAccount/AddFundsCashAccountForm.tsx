@@ -109,7 +109,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 				<Button
 					className="min-w-[100px] grow"
 					color="gray"
-					onClick={closeModal}
+					onPress={closeModal}
 				>
 					{t("common.cancel")}
 				</Button>
@@ -118,7 +118,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 
 				<Button
 					className="min-w-[170px] grow"
-					disabled={isSubmitting || !isValid || !isDirty}
+					isDisabled={isSubmitting || !isValid || !isDirty}
 					type="submit"
 				>
 					{isSubmitting && <Loader $color="white" />}

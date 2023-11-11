@@ -73,7 +73,7 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 						<Button
 							className="w-1/2"
 							color="gray"
-							onClick={modal.remove}
+							onPress={modal.remove}
 						>
 							{t("common.no")}
 						</Button>
@@ -82,8 +82,8 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 
 						<Button
 							className="w-1/2"
-							disabled={loading}
-							onClick={handleDelete}
+							isDisabled={loading}
+							onPress={handleDelete}
 						>
 							{loading && <Loader $color="white" />}
 

@@ -106,7 +106,7 @@ export const EnterEmailForm = () => {
 
 			<Button
 				className="w-auto"
-				disabled={isSubmitting}
+				isDisabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
 			>

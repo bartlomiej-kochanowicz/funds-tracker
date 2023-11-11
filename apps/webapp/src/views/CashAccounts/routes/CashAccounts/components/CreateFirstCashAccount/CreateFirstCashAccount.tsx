@@ -30,7 +30,7 @@ export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callba
 			<Spacer $space="0.5" />
 
 			<Button
-				onClick={handleOpenModal}
+				onPress={handleOpenModal}
 				/* $outline */
 			>
 				{t("page.cash_accounts.need.more.button")}

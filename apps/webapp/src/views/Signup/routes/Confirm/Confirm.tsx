@@ -99,7 +99,7 @@ export const Confirm = () => {
 						),
 						code: (
 							<Button
-								onClick={handleResendCode}
+								onPress={handleResendCode}
 								data-testid="resend-code-button"
 							/>
 						),

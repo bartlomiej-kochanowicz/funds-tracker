@@ -79,8 +79,8 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 
 				<Button
 					color="black"
-					onClick={calculateTransactionCost}
-					disabled={!watchQuantity || !watchPrice || !watchComission || Boolean(comissionError)}
+					onPress={calculateTransactionCost}
+					isDisabled={!watchQuantity || !watchPrice || !watchComission || Boolean(comissionError)}
 				>
 					<Calculator />
 				</Button>
