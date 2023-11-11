@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { HTMLMotionProps, motion, useAnimation } from "framer-motion";
-import { ButtonHTMLAttributes, ReactNode, useRef } from "react";
-import { FocusRing, PressEvent, useButton } from "react-aria";
+import { ReactNode, useRef } from "react";
+import { AriaButtonProps, FocusRing, useButton } from "react-aria";
 
 const sizes = {
 	xSmall: "px-4 py-2 text-xs",
@@ -26,19 +26,18 @@ const colors = {
 	},
 };
 
-interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
+interface ButtonProps extends AriaButtonProps {
 	children?: ReactNode;
+	className?: string;
 	size?: keyof typeof sizes;
 	color?: keyof typeof colors;
 }
 
 export const Button = ({
 	children,
-	onClick,
 	className,
 	size = "base",
 	color = "blue",
-	disabled,
 	...rest
 }: ButtonProps) => {
 	const controls = useAnimation();
@@ -54,8 +53,6 @@ export const Button = ({
 					transition: { duration: 0.4 },
 				});
 			},
-			onPress: onClick as unknown as (e: PressEvent) => void | undefined,
-			isDisabled: disabled,
 			...rest,
 		},
 
@@ -71,7 +68,7 @@ export const Button = ({
 					WebkitTapHighlightColor: "transparent",
 				}}
 				className={clsx(
-					"transform touch-none select-none rounded-xl transition-transform focus:outline-none enabled:active:scale-99 disabled:cursor-not-allowed",
+					"transform touch-none select-none rounded-xl transition-transform focus:outline-none enabled:active:scale-97 disabled:cursor-not-allowed",
 					sizes[size],
 					colors[color].button,
 					className,

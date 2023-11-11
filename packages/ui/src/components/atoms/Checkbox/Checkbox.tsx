@@ -18,18 +18,18 @@ export function Checkbox(props: AriaCheckboxProps) {
 	const { focusProps, isFocusVisible } = useFocusRing();
 
 	const checkboxClassName = clsx(
-		"text-white border-2 rounded w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 transition ease-in-out duration-150",
+		"text-white border-2 rounded w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 transition ease-in-out duration-150 cursor-pointer",
 		state.isSelected ? "bg-blue-500 group-active:bg-blue-600" : "bg-white",
 		isFocusVisible && "shadow-outline",
-		isDisabled && "border-gray-300",
+		isDisabled && "border-gray-300 cursor-not-allowed",
 		!isDisabled && (isFocusVisible || state.isSelected)
 			? "border-blue-500 group-active:border-indigo-600"
 			: "border-gray-500 group-active:border-gray-600",
 	);
 
 	const labelClassName = clsx(
-		isDisabled ? "text-gray-400" : "text-gray-700 group-active:text-gray-800",
-		"select-none",
+		"select-none cursor-pointer",
+		isDisabled ? "text-gray-400 cursor-not-allowed" : "text-gray-700 group-active:text-gray-800",
 	);
 
 	return (
