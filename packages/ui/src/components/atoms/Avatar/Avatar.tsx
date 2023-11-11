@@ -1,6 +1,7 @@
-import { Text } from "components/atoms/Text";
-import { Initials } from "helpers/Initials";
 import { useMemo } from "react";
+
+import { Initials } from "../../../helpers/Initials";
+import { Text } from "../Text";
 
 interface AvatarProps {
 	name: string;

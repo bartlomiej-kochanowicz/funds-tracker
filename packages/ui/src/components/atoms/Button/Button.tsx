@@ -41,7 +41,7 @@ export const Button = ({
 	...rest
 }: ButtonProps) => {
 	const controls = useAnimation();
-	const ref = useRef<Element>(null);
+	const ref = useRef<HTMLButtonElement>(null);
 
 	const { buttonProps } = useButton(
 		{
