@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useRef } from "react";
 import { useDateSegment } from "react-aria";
-import { DateFieldState, type DateSegment as DateSegmentType } from "react-stately";
+import { type DateFieldState, type DateSegment as DateSegmentType } from "react-stately";
 
 interface DateSegmentProps {
 	segment: DateSegmentType;

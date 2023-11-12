@@ -1,7 +1,7 @@
-import { Datepicker } from "components/atoms";
-import { useDatepicker } from "hooks/useDatepicker";
+import { getLocalTimeZone, today } from "@internationalized/date";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { DatePicker, useDatepicker } from "ui";
 
 import { FormField } from "../FormField";
 
@@ -21,9 +21,9 @@ export const DateField = () => {
 			label={t("modal.InvestFunds.form.label.purchase_date")}
 			htmlFor="date"
 		>
-			<Datepicker
+			<DatePicker
 				{...datepickerProps}
-				maxDate={new Date()}
+				maxValue={today(getLocalTimeZone())}
 			/>
 		</FormField>
 	);

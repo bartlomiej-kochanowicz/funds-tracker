@@ -21,6 +21,7 @@
 		"@ebay/nice-modal-react": "1.2.10",
 		"@graphql-codegen/client-preset": "4.0.1",
 		"@hookform/resolvers": "3.1.1",
+		"@internationalized/date": "3.5.0",
 		"@types/react-datepicker": "4.11.2",
 		"clsx": "^2.0.0",
 		"color2k": "2.0.2",

@@ -1,5 +1,5 @@
 import { type ReactNode, useRef } from "react";
-import { AriaPopoverProps, DismissButton, Overlay, usePopover } from "react-aria";
+import { type AriaPopoverProps, DismissButton, Overlay, usePopover } from "react-aria";
 import { type DatePickerState } from "react-stately";
 
 interface PopoverProps extends Omit<AriaPopoverProps, "popoverRef"> {

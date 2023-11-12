@@ -1,3 +1,5 @@
+import { CalendarDate, CalendarDateTime, ZonedDateTime } from "@internationalized/date";
+import { DateValue } from "react-aria";
 import {
 	Control,
 	FieldValues,
@@ -27,7 +29,9 @@ export const useDatepicker = <FormType extends FieldValues>({
 
 	return {
 		...datepickerProps,
-		selected: value as Date | null,
-		onChange: (date: Date | null) => setValue(name, date as PathValue<FormType, Path<FormType>>),
+		value: value as DateValue | null,
+		onChange: (date: CalendarDate | CalendarDateTime | ZonedDateTime) => {
+			setValue(name, date as PathValue<FormType, Path<FormType>>);
+		},
 	};
 };

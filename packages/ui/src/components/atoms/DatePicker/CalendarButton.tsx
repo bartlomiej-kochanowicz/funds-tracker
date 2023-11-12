@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useRef } from "react";
-import { AriaButtonProps, mergeProps, useButton, useFocusRing } from "react-aria";
+import { type AriaButtonProps, mergeProps, useButton, useFocusRing } from "react-aria";
 
 interface CalendarButtonProps extends AriaButtonProps {}
 
