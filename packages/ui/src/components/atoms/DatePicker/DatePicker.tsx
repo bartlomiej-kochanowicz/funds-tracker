@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { AlertCircle, CalendarDays } from "lucide-react";
 import { useRef } from "react";
 import { type DateValue, useDatePicker } from "react-aria";
@@ -31,17 +32,24 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 			<div
 				{...groupProps}
 				ref={ref}
-				className="group flex"
+				className={clsx("group flex", isDisabled && "cursor-not-allowed opacity-50")}
 			>
-				<div className="relative flex items-center rounded-l-md border-2 border-gray-300 bg-white p-1 pr-10 transition-colors group-focus-within:border-blue-500 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-500 dark:bg-neutral-700">
+				<div
+					className={clsx(
+						"relative flex items-center rounded-l-md border-2 border-gray-300 bg-white p-1 pr-10 transition-colors dark:bg-neutral-700",
+						!isDisabled &&
+							"group-focus-within:border-blue-500 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-600",
+					)}
+				>
 					<DateField {...fieldProps} />
 					{state.isInvalid && <AlertCircle className="absolute right-1 h-6 w-6 text-red-500" />}
 				</div>
 				<FieldButton
 					{...buttonProps}
+					isDisabled={isDisabled}
 					isPressed={state.isOpen}
 				>
-					<CalendarDays className="h-5 w-5 text-gray-700 group-focus-within:text-blue-500 dark:text-white" />
+					<CalendarDays className="h-5 w-5 text-gray-700 group-focus-within:text-blue-500 group-focus-within:group-hover:text-blue-600 dark:text-white" />
 				</FieldButton>
 			</div>
 			{state.isOpen && !isDisabled && (

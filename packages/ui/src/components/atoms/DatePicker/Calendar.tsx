@@ -8,6 +8,7 @@ import { CalendarGrid } from "./CalendarGrid";
 
 export const Calendar = props => {
 	const { locale } = useLocale();
+
 	const state = useCalendarState({
 		...props,
 		locale,
@@ -19,7 +20,7 @@ export const Calendar = props => {
 	return (
 		<div
 			{...calendarProps}
-			className="inline-block text-gray-800"
+			className="inline-block text-gray-900 dark:text-white"
 		>
 			<div className="flex items-center pb-4">
 				<h2 className="ml-2 flex-1 text-xl font-bold">{title}</h2>

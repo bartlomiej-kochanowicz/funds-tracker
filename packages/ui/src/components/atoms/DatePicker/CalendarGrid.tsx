@@ -22,7 +22,7 @@ export const CalendarGrid = ({ state, ...props }: CalendarGridProps) => {
 		>
 			<thead
 				{...headerProps}
-				className="text-gray-600"
+				className="text-gray-600 dark:text-gray-400"
 			>
 				<tr>
 					{weekDays.map((day, index) => (
