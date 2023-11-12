@@ -35,5 +35,8 @@
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-family: Roboto, sans-serif;
+}
+
+body {
+	@apply dark:bg-red-500;
 }
