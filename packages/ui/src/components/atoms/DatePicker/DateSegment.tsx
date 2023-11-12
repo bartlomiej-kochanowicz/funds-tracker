@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useRef } from "react";
 import { useDateSegment } from "react-aria";
 import { DateFieldState, type DateSegment as DateSegmentType } from "react-stately";
@@ -19,18 +20,17 @@ export const DateSegment = ({ segment, state }: DateSegmentProps) => {
 				...segmentProps.style,
 				minWidth: segment.maxValue != null ? `${String(segment.maxValue).length}ch` : undefined,
 			}}
-			className={`group box-content rounded-sm px-0.5 text-right tabular-nums outline-none focus:bg-blue-600 focus:text-white ${
-				!segment.isEditable ? "text-gray-500" : "text-gray-800"
-			}`}
+			className={clsx(
+				"group box-content rounded-md px-0.5 text-right tabular-nums outline-none focus:bg-blue-500 focus:text-white",
+				!segment.isEditable ? "text-gray-500" : "text-gray-800",
+			)}
 		>
 			<span
 				aria-hidden="true"
-				className="block w-full text-center italic text-gray-500 group-focus:text-white"
-				style={{
-					visibility: segment.isPlaceholder ? undefined : "hidden",
-					height: segment.isPlaceholder ? undefined : "0",
-					pointerEvents: "none",
-				}}
+				className={clsx(
+					"pointer-events-none block w-full text-center text-gray-500 group-focus:text-white",
+					!segment.isPlaceholder && "invisible h-0",
+				)}
 			>
 				{segment.placeholder}
 			</span>

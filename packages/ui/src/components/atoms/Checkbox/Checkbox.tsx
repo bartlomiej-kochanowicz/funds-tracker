@@ -19,7 +19,7 @@ export function Checkbox(props: AriaCheckboxProps) {
 
 	const checkboxClassName = clsx(
 		"text-white border-2 rounded w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 transition ease-in-out duration-150 cursor-pointer",
-		state.isSelected ? "bg-blue-500 group-active:bg-blue-600" : "bg-white",
+		state.isSelected ? "bg-blue-500 group-active:bg-blue-500" : "bg-white",
 		isFocusVisible && "shadow-outline",
 		isDisabled && "border-gray-300 cursor-not-allowed",
 		!isDisabled && (isFocusVisible || state.isSelected)
