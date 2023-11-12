@@ -1,9 +1,9 @@
-import { RefObject, useRef } from "react";
+import { Fragment, RefObject, useRef } from "react";
 import { AriaButtonProps, type AriaMenuProps, useMenuTrigger } from "react-aria";
 import { type MenuTriggerProps, useMenuTriggerState } from "react-stately";
 
+import { Popover } from "../Popover";
 import { Menu } from "./Menu";
-import { Popover } from "./Popover";
 
 interface MenuButtonProps<T extends object> extends AriaMenuProps<T>, MenuTriggerProps {
 	triggerElement: (
@@ -20,7 +20,7 @@ export const MenuButton = <T extends object>({ triggerElement, ...props }: MenuB
 	const { menuTriggerProps, menuProps } = useMenuTrigger<T>({}, state, ref);
 
 	return (
-		<div style={{ position: "relative", display: "inline-block" }}>
+		<Fragment>
 			{triggerElement(menuTriggerProps, ref, state.isOpen)}
 
 			{state.isOpen && (
@@ -33,10 +33,10 @@ export const MenuButton = <T extends object>({ triggerElement, ...props }: MenuB
 						{...menuProps}
 						{...props}
 						autoFocus={state.focusStrategy || true}
-						onClose={() => state.close()}
+						onClose={state.close}
 					/>
 				</Popover>
 			)}
-		</div>
+		</Fragment>
 	);
 };

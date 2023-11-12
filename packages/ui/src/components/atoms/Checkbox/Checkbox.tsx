@@ -34,9 +34,8 @@ export function Checkbox(props: AriaCheckboxProps) {
 			</VisuallyHidden>
 			<div
 				className={clsx(
-					"mr-1  flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border-2 text-white transition duration-150 ease-in-out",
+					"mr-1  flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border text-white transition duration-150 ease-in-out",
 					state.isSelected ? "bg-blue-500" : "bg-white dark:bg-neutral-700",
-					// isFocusVisible && "shadow-outline",
 					!isDisabled && "cursor-pointer",
 					isDisabled && "cursor-not-allowed border-gray-300",
 					!isDisabled && (isFocusVisible || state.isSelected)

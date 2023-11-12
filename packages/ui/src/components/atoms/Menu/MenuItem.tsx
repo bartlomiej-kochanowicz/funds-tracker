@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useRef } from "react";
 import { Key, useMenuItem } from "react-aria";
 import { type Node, type TreeState } from "react-stately";
@@ -22,14 +23,15 @@ export const MenuItem = <T,>({ item, state, onAction, onClose }: MenuItemProps<T
 	);
 
 	const isFocused = state.selectionManager.focusedKey === item.key;
-	const focusBg = item.key === "delete" ? "bg-red-500" : "bg-blue-500";
-	const focus = isFocused ? `${focusBg} text-white` : "text-gray-900";
 
 	return (
 		<li
 			{...menuItemProps}
 			ref={ref}
-			className={`${focus} relative mx-1 cursor-default select-none rounded py-2 pl-3 pr-9 text-sm focus:outline-none`}
+			className={clsx(
+				"relative mx-1 cursor-default select-none rounded py-2 pl-3 pr-9 text-sm focus:outline-none",
+				isFocused ? "bg-blue-500 text-white" : "text-gray-900 dark:text-white",
+			)}
 		>
 			{item.rendered}
 		</li>

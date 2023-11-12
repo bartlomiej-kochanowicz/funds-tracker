@@ -1,13 +1,15 @@
+import clsx from "clsx";
 import { type ReactNode, useRef } from "react";
 import { type AriaPopoverProps, DismissButton, Overlay, usePopover } from "react-aria";
-import { type DatePickerState } from "react-stately";
+import { type OverlayTriggerState } from "react-stately";
 
 interface PopoverProps extends Omit<AriaPopoverProps, "popoverRef"> {
-	state: DatePickerState;
+	state: OverlayTriggerState;
 	children?: ReactNode;
+	className?: string;
 }
 
-export const Popover = (props: PopoverProps) => {
+export const Popover = ({ className, ...props }: PopoverProps) => {
 	const ref = useRef<HTMLDivElement>(null);
 	const { state, children } = props;
 
@@ -28,7 +30,10 @@ export const Popover = (props: PopoverProps) => {
 			<div
 				{...popoverProps}
 				ref={ref}
-				className="absolute top-full z-10 mt-2 rounded-md border-2 border-gray-300 bg-white p-4 shadow-lg dark:border-gray-600 dark:bg-neutral-900"
+				className={clsx(
+					className,
+					"absolute top-full z-10 mt-2 rounded-md border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-neutral-900",
+				)}
 			>
 				<DismissButton onDismiss={state.close} />
 				{children}

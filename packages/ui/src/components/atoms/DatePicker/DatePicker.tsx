@@ -4,12 +4,12 @@ import { useRef } from "react";
 import { type DateValue, useDatePicker } from "react-aria";
 import { type DatePickerStateOptions, useDatePickerState } from "react-stately";
 
+import { Popover } from "../Popover";
 import { Text } from "../Text";
 import { Calendar } from "./Calendar";
 import { DateField } from "./DateField";
 import { Dialog } from "./Dialog";
 import { FieldButton } from "./FieldButton";
-import { Popover } from "./Popover";
 
 interface DatePickerProps<T extends DateValue = DateValue> extends DatePickerStateOptions<T> {}
 
@@ -36,7 +36,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 			>
 				<div
 					className={clsx(
-						"relative flex items-center rounded-l-md border-2 border-gray-300 bg-white p-1 pr-10 transition-colors dark:bg-neutral-700",
+						"relative flex items-center rounded-l-md border border-gray-300 bg-white p-1 pr-10 transition-colors dark:bg-neutral-700",
 						!isDisabled &&
 							"group-focus-within:border-blue-500 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-600",
 					)}
@@ -57,6 +57,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 					triggerRef={ref}
 					state={state}
 					placement="bottom start"
+					className="p-2"
 				>
 					<Dialog {...dialogProps}>
 						<Calendar {...calendarProps} />
