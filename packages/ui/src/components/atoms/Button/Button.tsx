@@ -1,7 +1,9 @@
 import clsx from "clsx";
 import { HTMLMotionProps, motion, useAnimation } from "framer-motion";
-import { ReactNode, useRef } from "react";
+import { forwardRef, ReactNode, useRef } from "react";
 import { AriaButtonProps, FocusRing, useButton } from "react-aria";
+
+import { mergeRefs } from "../../../helpers/mergeRefs";
 
 const sizes = {
 	xSmall: "px-4 py-2 text-xs",
@@ -33,50 +35,46 @@ interface ButtonProps extends AriaButtonProps {
 	color?: keyof typeof colors;
 }
 
-export const Button = ({
-	children,
-	className,
-	size = "base",
-	color = "blue",
-	...rest
-}: ButtonProps) => {
-	const controls = useAnimation();
-	const ref = useRef<HTMLButtonElement>(null);
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+	({ children, className, size = "base", color = "blue", ...rest }, propsRef) => {
+		const controls = useAnimation();
+		const ref = useRef<HTMLButtonElement>(null);
 
-	const { buttonProps } = useButton(
-		{
-			onPressStart: () => {
-				controls.stop();
+		const { buttonProps } = useButton(
+			{
+				onPressStart: () => {
+					controls.stop();
+				},
+				onPressEnd: () => {
+					controls.start({
+						transition: { duration: 0.4 },
+					});
+				},
+				...rest,
 			},
-			onPressEnd: () => {
-				controls.start({
-					transition: { duration: 0.4 },
-				});
-			},
-			...rest,
-		},
 
-		ref,
-	);
+			ref,
+		);
 
-	return (
-		<FocusRing focusRingClass={clsx("ring", colors[color].ring)}>
-			<motion.button
-				{...(buttonProps as HTMLMotionProps<"button">)}
-				animate={controls}
-				style={{
-					WebkitTapHighlightColor: "transparent",
-				}}
-				className={clsx(
-					"transform touch-none select-none rounded-xl transition-transform focus:outline-none enabled:active:scale-97 disabled:cursor-not-allowed",
-					sizes[size],
-					colors[color].button,
-					className,
-				)}
-				ref={ref}
-			>
-				{children}
-			</motion.button>
-		</FocusRing>
-	);
-};
+		return (
+			<FocusRing focusRingClass={clsx("ring", colors[color].ring)}>
+				<motion.button
+					{...(buttonProps as HTMLMotionProps<"button">)}
+					animate={controls}
+					style={{
+						WebkitTapHighlightColor: "transparent",
+					}}
+					className={clsx(
+						"transform touch-none select-none rounded-xl transition-transform focus:outline-none enabled:active:scale-97 disabled:cursor-not-allowed",
+						sizes[size],
+						colors[color].button,
+						className,
+					)}
+					ref={mergeRefs([ref, propsRef])}
+				>
+					{children}
+				</motion.button>
+			</FocusRing>
+		);
+	},
+);

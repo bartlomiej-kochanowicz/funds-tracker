@@ -1,34 +1,28 @@
-import { ChevronDown } from "lucide-react";
-import { useRef } from "react";
-import { type AriaMenuProps, useMenuTrigger } from "react-aria";
+import { RefObject, useRef } from "react";
+import { AriaButtonProps, type AriaMenuProps, useMenuTrigger } from "react-aria";
 import { type MenuTriggerProps, useMenuTriggerState } from "react-stately";
 
-import { Button } from "./Button";
 import { Menu } from "./Menu";
 import { Popover } from "./Popover";
 
 interface MenuButtonProps<T extends object> extends AriaMenuProps<T>, MenuTriggerProps {
-	label: string;
+	triggerElement: (
+		menuTriggerProps: AriaButtonProps<"button">,
+		ref: RefObject<HTMLButtonElement>,
+		isOpen: boolean,
+	) => JSX.Element;
 }
 
-export const MenuButton = <T extends object>(props: MenuButtonProps<T>) => {
+export const MenuButton = <T extends object>({ triggerElement, ...props }: MenuButtonProps<T>) => {
 	const state = useMenuTriggerState(props);
 
 	const ref = useRef<HTMLButtonElement>(null);
 	const { menuTriggerProps, menuProps } = useMenuTrigger<T>({}, state, ref);
 
-	const { label } = props;
-
 	return (
 		<div style={{ position: "relative", display: "inline-block" }}>
-			<Button
-				{...menuTriggerProps}
-				isPressed={state.isOpen}
-				ref={ref}
-			>
-				{label}
-				<ChevronDown className="-mr-2 ml-1 inline h-5 w-5" />
-			</Button>
+			{triggerElement(menuTriggerProps, ref, state.isOpen)}
+
 			{state.isOpen && (
 				<Popover
 					state={state}
