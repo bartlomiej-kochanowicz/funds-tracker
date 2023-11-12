@@ -17,7 +17,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 	const { groupProps, labelProps, fieldProps, buttonProps, dialogProps, calendarProps } =
 		useDatePicker(props, state, ref);
 
-	const { label } = props;
+	const { label, isDisabled } = props;
 
 	return (
 		<div className="relative inline-flex flex-col text-left">
@@ -43,7 +43,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 					<CalendarDays className="h-5 w-5 text-gray-700 group-focus-within:text-blue-600" />
 				</FieldButton>
 			</div>
-			{state.isOpen && (
+			{state.isOpen && !isDisabled && (
 				<Popover
 					triggerRef={ref}
 					state={state}

@@ -18,3 +18,13 @@ export const Default: Story = {
 		/>
 	),
 };
+
+export const Disabled: Story = {
+	render: () => (
+		<DatePicker
+			label="Hello World"
+			isDisabled
+			maxValue={today(getLocalTimeZone())}
+		/>
+	),
+};

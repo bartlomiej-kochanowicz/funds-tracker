@@ -19,7 +19,7 @@ export const CalendarButton = (props: CalendarButtonProps) => {
 			className={clsx(
 				"rounded-md p-1 outline-none",
 				isDisabled && "text-gray-400",
-				!isDisabled && "hover:bg-blue-100 active:bg-blue-200",
+				!isDisabled && "hover:bg-blue-200 active:bg-blue-200",
 				isFocusVisible && "ring-2 ring-blue-300 ring-offset-2",
 			)}
 		>
