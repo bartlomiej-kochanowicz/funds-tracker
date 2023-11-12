@@ -38,5 +38,5 @@
 }
 
 body {
-	@apply dark:bg-red-500;
+	@apply dark:bg-neutral-800;
 }
