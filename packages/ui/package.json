@@ -26,7 +26,6 @@
 		"@storybook/addon-essentials": "7.5.3",
 		"@storybook/addon-interactions": "7.5.3",
 		"@storybook/addon-links": "7.5.3",
-		"@storybook/addon-onboarding": "1.0.8",
 		"@storybook/addon-postcss": "2.0.0",
 		"@storybook/addon-themes": "7.5.3",
 		"@storybook/blocks": "7.5.3",

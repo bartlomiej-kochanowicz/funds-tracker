@@ -1,20 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Item, Section } from "react-stately";
 
 import { Button } from "../Button";
-import { MenuButton } from "./MenuButton";
+import { Menu } from ".";
 
-const meta: Meta<typeof MenuButton> = {
-	component: MenuButton,
+const meta: Meta<typeof Menu> = {
+	component: Menu,
 };
 
 export default meta;
-type Story = StoryObj<typeof MenuButton>;
+type Story = StoryObj<typeof Menu>;
 
 export const Default: Story = {
 	render: () => (
-		<MenuButton
-			onAction={key => console.log(key)}
+		<Menu
 			triggerElement={(props, ref, isOpen) => (
 				<Button
 					{...props}
@@ -25,18 +23,18 @@ export const Default: Story = {
 				</Button>
 			)}
 		>
-			<Section>
-				<Item key="edit">Edit…</Item>
-				<Item key="duplicate">Duplicate</Item>
-			</Section>
-			<Section>
-				<Item key="move">Move…</Item>
-				<Item key="rename">Rename…</Item>
-			</Section>
-			<Section>
-				<Item key="archive">Archive</Item>
-				<Item key="delete">Delete…</Item>
-			</Section>
-		</MenuButton>
+			<Menu.Section>
+				<Menu.Item key="edit">Edit…</Menu.Item>
+				<Menu.Item key="duplicate">Duplicate</Menu.Item>
+			</Menu.Section>
+			<Menu.Section>
+				<Menu.Item key="move">Move…</Menu.Item>
+				<Menu.Item key="rename">Rename…</Menu.Item>
+			</Menu.Section>
+			<Menu.Section>
+				<Menu.Item key="archive">Archive</Menu.Item>
+				<Menu.Item key="delete">Delete…</Menu.Item>
+			</Menu.Section>
+		</Menu>
 	),
 };
