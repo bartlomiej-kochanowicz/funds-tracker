@@ -9,6 +9,8 @@ import {
 } from "react-aria";
 import { useToggleState } from "react-stately";
 
+import { Text } from "../Text";
+
 export function Checkbox(props: AriaCheckboxProps) {
 	const { isDisabled, children } = props;
 
@@ -17,23 +19,13 @@ export function Checkbox(props: AriaCheckboxProps) {
 	const { inputProps } = useCheckbox(props, state, ref);
 	const { focusProps, isFocusVisible } = useFocusRing();
 
-	const checkboxClassName = clsx(
-		"text-white border-2 rounded w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 transition ease-in-out duration-150 cursor-pointer",
-		state.isSelected ? "bg-blue-500 group-active:bg-blue-500" : "bg-white",
-		isFocusVisible && "shadow-outline",
-		isDisabled && "border-gray-300 cursor-not-allowed",
-		!isDisabled && (isFocusVisible || state.isSelected)
-			? "border-blue-500 group-active:border-indigo-600"
-			: "border-gray-500 group-active:border-gray-600",
-	);
-
-	const labelClassName = clsx(
-		"select-none cursor-pointer",
-		isDisabled ? "text-gray-400 cursor-not-allowed" : "text-gray-700 group-active:text-gray-800",
-	);
-
 	return (
-		<label className="group flex items-center">
+		<label
+			className={clsx(
+				"flex w-fit items-center pl-0.5 pr-1",
+				isFocusVisible && "rounded-md ring ring-blue-300",
+			)}
+		>
 			<VisuallyHidden>
 				<input
 					{...mergeProps(inputProps, focusProps)}
@@ -41,7 +33,16 @@ export function Checkbox(props: AriaCheckboxProps) {
 				/>
 			</VisuallyHidden>
 			<div
-				className={checkboxClassName}
+				className={clsx(
+					"mr-1  flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border-2 text-white transition duration-150 ease-in-out",
+					state.isSelected ? "bg-blue-500" : "bg-white dark:bg-neutral-700",
+					// isFocusVisible && "shadow-outline",
+					!isDisabled && "cursor-pointer",
+					isDisabled && "cursor-not-allowed border-gray-300",
+					!isDisabled && (isFocusVisible || state.isSelected)
+						? "border-blue-500"
+						: "border-gray-400",
+				)}
 				aria-hidden="true"
 			>
 				<svg
@@ -60,7 +61,9 @@ export function Checkbox(props: AriaCheckboxProps) {
 					/>
 				</svg>
 			</div>
-			<span className={labelClassName}>{children}</span>
+			<Text className={clsx("select-none", isDisabled ? "cursor-not-allowed" : "cursor-pointer")}>
+				{children}
+			</Text>
 		</label>
 	);
 }
