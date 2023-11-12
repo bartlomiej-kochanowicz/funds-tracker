@@ -22,13 +22,13 @@ export const DateSegment = ({ segment, state }: DateSegmentProps) => {
 			}}
 			className={clsx(
 				"group box-content rounded-md px-0.5 text-right tabular-nums outline-none focus:bg-blue-500 focus:text-white",
-				!segment.isEditable ? "text-gray-500" : "text-gray-800",
+				!segment.isEditable ? "text-gray-500 dark:text-gray-300" : "dark:text-white",
 			)}
 		>
 			<span
 				aria-hidden="true"
 				className={clsx(
-					"pointer-events-none block w-full text-center text-gray-500 group-focus:text-white",
+					"pointer-events-none block w-full text-center text-gray-500 group-focus:text-white dark:text-gray-300",
 					!segment.isPlaceholder && "invisible h-0",
 				)}
 			>

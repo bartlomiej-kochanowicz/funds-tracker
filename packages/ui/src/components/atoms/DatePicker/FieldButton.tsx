@@ -18,10 +18,10 @@ export const FieldButton = (props: FieldButtonProps) => {
 			type="button"
 			ref={ref}
 			className={clsx(
-				"-ml-px rounded-r-md border px-2 outline-none transition-colors group-focus-within:border-blue-600 group-focus-within:group-hover:border-blue-600",
+				"-ml-px rounded-r-md border-2 border-l-0 px-2 outline-none transition-colors group-focus-within:border-blue-500 group-focus-within:group-hover:border-blue-500",
 				isPressed || isPressedFromProps
-					? "border-gray-400 bg-gray-200"
-					: "border-gray-300 bg-gray-50 group-hover:border-gray-400",
+					? "border-gray-300 bg-gray-200 dark:bg-neutral-700"
+					: "border-gray-300 bg-gray-100 group-hover:border-gray-400 dark:bg-neutral-600",
 			)}
 		>
 			{children}

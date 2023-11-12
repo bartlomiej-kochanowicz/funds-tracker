@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { type DateValue, useDatePicker } from "react-aria";
 import { type DatePickerStateOptions, useDatePickerState } from "react-stately";
 
+import { Text } from "../Text";
 import { Calendar } from "./Calendar";
 import { DateField } from "./DateField";
 import { Dialog } from "./Dialog";
@@ -21,18 +22,18 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 
 	return (
 		<div className="relative inline-flex flex-col text-left">
-			<span
+			<Text
 				{...labelProps}
-				className="text-sm text-gray-800"
+				className="text-sm"
 			>
 				{label}
-			</span>
+			</Text>
 			<div
 				{...groupProps}
 				ref={ref}
 				className="group flex"
 			>
-				<div className="relative flex items-center rounded-l-md border border-gray-300 bg-white p-1 pr-10 transition-colors group-focus-within:border-blue-600 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-600">
+				<div className="relative flex items-center rounded-l-md border-2 border-gray-300 bg-white p-1 pr-10 transition-colors group-focus-within:border-blue-500 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-500 dark:bg-neutral-700">
 					<DateField {...fieldProps} />
 					{state.isInvalid && <AlertCircle className="absolute right-1 h-6 w-6 text-red-500" />}
 				</div>
@@ -40,7 +41,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 					{...buttonProps}
 					isPressed={state.isOpen}
 				>
-					<CalendarDays className="h-5 w-5 text-gray-700 group-focus-within:text-blue-600" />
+					<CalendarDays className="h-5 w-5 text-gray-700 group-focus-within:text-blue-500 dark:text-white" />
 				</FieldButton>
 			</div>
 			{state.isOpen && !isDisabled && (
