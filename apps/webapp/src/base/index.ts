@@ -1,5 +1,3 @@
-import "react-toastify/dist/ReactToastify.css";
-import "react-datepicker/dist/react-datepicker.css";
 import "utils/i18n";
 
 import { IS_DEVELOPMENT, LOG_ROCKET_KEY } from "config/env";
