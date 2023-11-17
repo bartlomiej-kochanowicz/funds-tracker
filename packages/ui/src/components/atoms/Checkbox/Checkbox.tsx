@@ -37,10 +37,11 @@ export function Checkbox(props: AriaCheckboxProps) {
 					"mr-1  flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border text-white transition duration-150 ease-in-out",
 					state.isSelected ? "bg-blue-500" : "bg-white dark:bg-neutral-700",
 					!isDisabled && "cursor-pointer",
-					isDisabled && "cursor-not-allowed border-gray-200",
+					isDisabled && "cursor-not-allowed opacity-50",
+					!isDisabled && !(isFocusVisible || state.isSelected) && "group-hover:border-gray-400",
 					!isDisabled && (isFocusVisible || state.isSelected)
 						? "border-blue-500"
-						: "border-gray-300 group-hover:border-gray-400 dark:border-gray-600",
+						: "border-gray-300 dark:border-gray-600",
 				)}
 				aria-hidden="true"
 			>

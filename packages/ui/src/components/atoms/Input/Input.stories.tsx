@@ -17,3 +17,24 @@ export const Default: Story = {
 		/>
 	),
 };
+
+export const Disabled: Story = {
+	render: () => (
+		<Input
+			isDisabled
+			label="Hello world"
+			placeholder="Placeholder text..."
+		/>
+	),
+};
+
+export const Invalid: Story = {
+	render: () => (
+		<Input
+			isInvalid
+			errorMessage="This is an error message"
+			label="Hello world"
+			placeholder="Placeholder text..."
+		/>
+	),
+};
