@@ -1,3 +1,9 @@
+// react-aria cares of accessibility
+const a11yOff = Object.keys(require("eslint-plugin-jsx-a11y").rules).reduce((acc, rule) => {
+	acc[`jsx-a11y/${rule}`] = "off";
+	return acc;
+}, {});
+
 module.exports = {
 	extends: ["eslint-config-airbnb", "eslint-config-airbnb-typescript", "prettier"],
 	parser: "@typescript-eslint/parser",
@@ -23,6 +29,7 @@ module.exports = {
 		"postcss.config.js",
 	],
 	rules: {
+		...a11yOff,
 		"prettier/prettier": "error",
 		"arrow-body-style": "off",
 		"prefer-arrow-callback": "off",
@@ -36,22 +43,6 @@ module.exports = {
 		"react/jsx-props-no-spreading": "off",
 		"arrow-parens": ["error", "as-needed"],
 		"react/jsx-fragments": "off",
-		"jsx-a11y/label-has-associated-control": [
-			"error",
-			{
-				required: {
-					some: ["nesting", "id"],
-				},
-			},
-		],
-		"jsx-a11y/label-has-for": [
-			"error",
-			{
-				required: {
-					some: ["nesting", "id"],
-				},
-			},
-		],
 		"no-param-reassign": "off",
 		"no-plusplus": "off",
 		"no-await-in-loop": "off",
