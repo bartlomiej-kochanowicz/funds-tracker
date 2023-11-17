@@ -17,7 +17,10 @@ export const Link = (props: LinkProps) => {
 		<a
 			{...linkProps}
 			ref={ref}
-			className={clsx(className, "text-blue-500 hover:underline")}
+			className={clsx(
+				className,
+				"rounded-md text-blue-500 outline-none ring-blue-300 transition duration-150 ease-in-out hover:underline focus:ring",
+			)}
 		>
 			{children}
 		</a>
