@@ -18,7 +18,7 @@ export const FieldButton = (props: FieldButtonProps) => {
 			type="button"
 			ref={ref}
 			className={clsx(
-				"-ml-px rounded-r-md border border-l-0 px-2 outline-none transition-colors group-focus-within:border-blue-500 group-focus-within:group-hover:border-blue-600",
+				"-ml-px rounded-r-xl border border-l-0 px-2 outline-none transition-colors group-focus-within:border-blue-500 group-focus-within:group-hover:border-blue-500 dark:border-gray-600",
 				isPressed || isPressedFromProps
 					? "border-gray-300 bg-gray-200 dark:bg-neutral-700"
 					: "border-gray-300 bg-gray-100 group-hover:border-gray-400 dark:bg-neutral-600",

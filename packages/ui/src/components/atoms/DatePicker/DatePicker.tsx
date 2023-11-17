@@ -25,7 +25,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 		<div className="relative inline-flex flex-col text-left">
 			<Text
 				{...labelProps}
-				className="text-sm"
+				className="mb-2 block text-sm"
 			>
 				{label}
 			</Text>
@@ -36,9 +36,9 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 			>
 				<div
 					className={clsx(
-						"relative flex items-center rounded-l-md border border-gray-300 bg-white p-1 pr-10 transition-colors dark:bg-neutral-700",
+						"relative flex items-center rounded-l-xl border border-gray-300 bg-gray-50 p-2.5 pr-10 text-sm transition-colors dark:border-gray-600 dark:bg-neutral-700",
 						!isDisabled &&
-							"group-focus-within:border-blue-500 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-600",
+							"group-focus-within:border-blue-500 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-500",
 					)}
 				>
 					<DateField {...fieldProps} />
@@ -49,7 +49,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 					isDisabled={isDisabled}
 					isPressed={state.isOpen}
 				>
-					<CalendarDays className="h-5 w-5 text-gray-700 group-focus-within:text-blue-500 group-focus-within:group-hover:text-blue-600 dark:text-white" />
+					<CalendarDays className="h-5 w-5 text-gray-500 group-focus-within:text-blue-500 dark:text-white" />
 				</FieldButton>
 			</div>
 			{state.isOpen && !isDisabled && (

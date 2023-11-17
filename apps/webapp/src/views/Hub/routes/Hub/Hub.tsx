@@ -32,7 +32,7 @@ export const Hub = () => {
 
 			<Spacer $space="0.5" />
 
-			<Grid>
+			<div className="grid gap-6">
 				{hubNavigation.essentials.map(({ icon, title, to }) => {
 					const Icon = icon;
 
@@ -46,7 +46,7 @@ export const Hub = () => {
 						</Tile>
 					);
 				})}
-			</Grid>
+			</div>
 		</div>
 	);
 };
