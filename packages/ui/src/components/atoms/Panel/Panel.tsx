@@ -5,5 +5,7 @@ interface PanelProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Panel: FC<PanelProps> = ({ children }) => (
-	<div className="rounded-xl bg-white px-3 py-1 dark:bg-gray-300 md:px-6 md:py-3">{children}</div>
+	<div className="rounded-xl bg-neutral-200 px-3 py-1 shadow-sm dark:bg-neutral-700 md:px-6 md:py-3">
+		{children}
+	</div>
 );
