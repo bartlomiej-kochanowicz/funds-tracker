@@ -25,7 +25,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 
 	return (
 		<div {...radioGroupProps}>
-			<span {...labelProps}>{label}</span>
+			<Text {...labelProps}>{label}</Text>
 			<RadioContext.Provider value={state}>{children}</RadioContext.Provider>
 			{description && (
 				<Text
