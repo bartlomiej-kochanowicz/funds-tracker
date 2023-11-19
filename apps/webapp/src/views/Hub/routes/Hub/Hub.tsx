@@ -5,7 +5,6 @@ import { Navigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
 import { hubNavigation } from "./constants";
-import { Grid } from "./Hub.styles";
 
 export const Hub = () => {
 	const isDesktop = useBreakpoint("desktop", "min");

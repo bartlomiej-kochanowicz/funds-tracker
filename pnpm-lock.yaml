@@ -526,6 +526,9 @@ importers:
       react-hook-form:
         specifier: 7.48.2
         version: 7.48.2(react@18.2.0)
+      react-router-dom:
+        specifier: 6.14.1
+        version: 6.14.1(react-dom@18.2.0)(react@18.2.0)
       react-stately:
         specifier: 3.28.0
         version: 3.28.0(react@18.2.0)
@@ -587,6 +590,9 @@ importers:
       storybook:
         specifier: 7.5.3
         version: 7.5.3
+      storybook-addon-react-router-v6:
+        specifier: ^2.0.10
+        version: 2.0.10(@storybook/blocks@7.5.3)(@storybook/channels@7.5.3)(@storybook/components@7.5.3)(@storybook/core-events@7.5.3)(@storybook/manager-api@7.5.3)(@storybook/preview-api@7.5.3)(@storybook/theming@7.5.3)(react-dom@18.2.0)(react-router-dom@6.14.1)(react@18.2.0)
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -7899,7 +7905,6 @@ packages:
   /@remix-run/router@1.7.1:
     resolution: {integrity: sha512-bgVQM4ZJ2u2CM8k1ey70o1ePFXsEzYVZoWghh6WjM8p59jQ7HxzbHW4SbnWFG7V9ig9chLawQxDTZ3xzOF8MkQ==}
     engines: {node: '>=14'}
-    dev: false
 
   /@repeaterjs/repeater@3.0.4:
     resolution: {integrity: sha512-AW8PKd6iX3vAZ0vA43nOUOnbq/X5ihgU+mSXXqunMkeQADGiqw/PY0JNeYtD5sr0PAy51YPgAPbDoeapv9r8WA==}
@@ -11743,6 +11748,10 @@ packages:
 
   /commondir@1.0.1:
     resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
+    dev: true
+
+  /compare-versions@6.1.0:
+    resolution: {integrity: sha512-LNZQXhqUvqUTotpZ00qLSaify3b4VFD588aRr8MKFw4CMUr98ytzCW5wDH5qx/DEY5kCDXcbcRuCqL0szEf2tg==}
     dev: true
 
   /component-emitter@1.3.0:
@@ -17902,7 +17911,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-router: 6.14.1(react@18.2.0)
-    dev: false
 
   /react-router@6.14.1(react@18.2.0):
     resolution: {integrity: sha512-U4PfgvG55LdvbQjg5Y9QRWyVxIdO1LlpYT7x+tMAxd9/vmiPuJhIwdxZuIQLN/9e3O4KFDHYfR9gzGeYMasW8g==}
@@ -17912,7 +17920,6 @@ packages:
     dependencies:
       '@remix-run/router': 1.7.1
       react: 18.2.0
-    dev: false
 
   /react-simple-animate@3.5.2(react-dom@18.2.0):
     resolution: {integrity: sha512-xLE65euP920QMTOmv5haPlml+hmOPDkbIr5WeF7ADIXWBYt5kW/vwpNfWg8EKMab8aeDxIZ6QjffVh8v2dUyhg==}
@@ -18853,6 +18860,39 @@ packages:
 
   /store2@2.14.2:
     resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
+    dev: true
+
+  /storybook-addon-react-router-v6@2.0.10(@storybook/blocks@7.5.3)(@storybook/channels@7.5.3)(@storybook/components@7.5.3)(@storybook/core-events@7.5.3)(@storybook/manager-api@7.5.3)(@storybook/preview-api@7.5.3)(@storybook/theming@7.5.3)(react-dom@18.2.0)(react-router-dom@6.14.1)(react@18.2.0):
+    resolution: {integrity: sha512-HnrjbujAW1oGCdgvv7W6QKskETNXvt0U5qR2pKD8GXHlqkV9wmWa6HW3J0ks0aiBJBsRrPdEViatrhnRD5RZZw==}
+    peerDependencies:
+      '@storybook/blocks': ^7.0.0
+      '@storybook/channels': ^7.0.0
+      '@storybook/components': ^7.0.0
+      '@storybook/core-events': ^7.0.0
+      '@storybook/manager-api': ^7.0.0
+      '@storybook/preview-api': ^7.0.0
+      '@storybook/theming': ^7.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-router-dom: ^6.4.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@storybook/blocks': 7.5.3(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/channels': 7.5.3
+      '@storybook/components': 7.5.3(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/core-events': 7.5.3
+      '@storybook/manager-api': 7.5.3(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/preview-api': 7.5.3
+      '@storybook/theming': 7.5.3(react-dom@18.2.0)(react@18.2.0)
+      compare-versions: 6.1.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-inspector: 6.0.2(react@18.2.0)
+      react-router-dom: 6.14.1(react-dom@18.2.0)(react@18.2.0)
     dev: true
 
   /storybook@7.5.3:
