@@ -16,15 +16,12 @@ const sizes = {
 const colors = {
 	blue: {
 		button: "bg-blue-500 text-white enabled:hover:bg-blue-600  disabled:opacity-50",
-		ring: "ring-blue-300",
 	},
 	black: {
 		button: "bg-zinc-950 text-white enabled:hover:bg-zinc-800 disabled:opacity-50",
-		ring: "ring-zinc-300",
 	},
 	gray: {
 		button: "bg-neutral-500 text-white enabled:hover:bg-neutral-600 disabled:opacity-50",
-		ring: "ring-neutral-300",
 	},
 };
 
@@ -57,7 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 		);
 
 		return (
-			<FocusRing focusRingClass={clsx("ring", colors[color].ring)}>
+			<FocusRing focusRingClass="ring-4 ring-blue-300 dark:ring-blue-800">
 				<motion.button
 					{...(buttonProps as HTMLMotionProps<"button">)}
 					animate={controls}

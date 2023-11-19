@@ -47,7 +47,7 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
 					"flex h-6 w-11 items-center justify-between rounded-full bg-gray-200 px-1 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] dark:border-gray-600 dark:bg-gray-700",
 					{
 						"after:translate-x-full after:border-white": state.isSelected,
-						"outline-none ring-4 ring-blue-300 dark:ring-blue-800": isFocusVisible,
+						"outline-none ring-2 ring-blue-300 dark:ring-blue-800": isFocusVisible,
 					},
 				)}
 			>

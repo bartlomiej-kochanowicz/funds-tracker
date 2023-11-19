@@ -23,7 +23,8 @@ export function Checkbox(props: AriaCheckboxProps) {
 		<label
 			className={clsx(
 				"group flex w-fit items-center pl-0.5 pr-1",
-				isFocusVisible && "rounded-md ring ring-blue-300 transition duration-150 ease-in-out",
+				isFocusVisible &&
+					"rounded-md ring-2 ring-blue-300 transition duration-150 ease-in-out dark:ring-blue-800",
 				isDisabled && "cursor-not-allowed opacity-50",
 			)}
 		>

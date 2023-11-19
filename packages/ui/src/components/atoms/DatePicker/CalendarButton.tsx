@@ -21,7 +21,7 @@ export const CalendarButton = (props: CalendarButtonProps) => {
 				isDisabled && "text-gray-400",
 				!isDisabled &&
 					"hover:bg-gray-200 active:bg-gray-200 dark:hover:bg-gray-300 dark:hover:text-gray-900",
-				isFocusVisible && "ring-2 ring-blue-300",
+				isFocusVisible && "ring-2 ring-blue-300 dark:ring-blue-800",
 			)}
 		>
 			{children}
