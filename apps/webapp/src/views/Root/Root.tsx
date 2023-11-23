@@ -1,4 +1,4 @@
-import { FullscreenLoading } from "layouts/FullscreenLoading";
+import { FullscreenLoading } from "components/layouts/FullscreenLoading";
 import { FC, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import { CashAccountsRoutes } from "views/CashAccounts";

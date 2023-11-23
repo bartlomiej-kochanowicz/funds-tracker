@@ -1,5 +1,5 @@
 import { Heading, Spacer } from "components/atoms";
-import { ClearCentered } from "layouts/ClearCentered";
+import { ClearCentered } from "components/layouts/ClearCentered";
 import { FC } from "react";
 import { Text } from "ui";
 

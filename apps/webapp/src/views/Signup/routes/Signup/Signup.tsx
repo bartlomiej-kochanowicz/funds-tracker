@@ -1,7 +1,7 @@
 import { ThemeSwitcher } from "components";
 import { Heading, Spacer } from "components/atoms";
 import { LangSelector } from "components/molecules";
-import { ClearCentered } from "layouts/ClearCentered";
+import { ClearCentered } from "components/layouts/ClearCentered";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";

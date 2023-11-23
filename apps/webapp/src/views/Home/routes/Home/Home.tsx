@@ -1,6 +1,6 @@
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { useUserContext } from "contexts/UserContext";
-import { FullscreenLoading } from "layouts/FullscreenLoading";
+import { FullscreenLoading } from "components/layouts/FullscreenLoading";
 import { FC } from "react";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { Dashboard } from "views/Dashboard";
