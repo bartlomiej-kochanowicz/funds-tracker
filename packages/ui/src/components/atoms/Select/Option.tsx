@@ -27,6 +27,7 @@ export const Option = ({ item, state }: OptionProps) => {
 				"relative mx-1 flex cursor-default select-none items-center justify-between rounded px-3 py-2 text-sm focus:outline-none",
 				isFocused ? "bg-blue-500 text-white" : "text-gray-900 dark:text-white",
 				isSelected && "font-bold",
+				isDisabled && "cursor-not-allowed opacity-50",
 			)}
 		>
 			{item.rendered}
