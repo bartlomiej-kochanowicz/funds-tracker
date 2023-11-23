@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ChevronsUpDown } from "lucide-react";
 import { useRef } from "react";
 import {
@@ -25,13 +26,13 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
 
 	const { focusProps, isFocusVisible } = useFocusRing();
 
-	const { label, name } = props;
+	const { label, name, isDisabled } = props;
 
 	return (
-		<div className="relative mt-4 inline-flex w-52 flex-col">
+		<div className="group">
 			<div
 				{...labelProps}
-				className="block cursor-default text-left text-sm font-medium text-gray-700"
+				className="mb-2 block text-sm text-gray-900 dark:text-white"
 			>
 				{label}
 			</div>
@@ -45,18 +46,25 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
 				{...mergeProps(buttonProps, focusProps)}
 				type="button"
 				ref={ref}
-				className={`relative inline-flex cursor-default flex-row items-center justify-between overflow-hidden rounded-md border-2 p-1 py-1 pl-3 shadow-sm outline-none ${
-					isFocusVisible ? "border-pink-500" : "border-gray-300"
-				} ${state.isOpen ? "bg-gray-100" : "bg-white"}`}
+				className={clsx(
+					"flex w-full items-center justify-between rounded-xl border bg-gray-50 p-2.5 text-sm outline-none dark:border-gray-600 dark:bg-neutral-700",
+					isFocusVisible && "border-blue-500 group-hover:border-blue-500 dark:border-blue-500",
+					!isFocusVisible && "border-gray-300",
+					isDisabled && "cursor-not-allowed opacity-50",
+					!isDisabled && "group-hover:border-gray-400",
+				)}
 			>
 				<span
 					{...valueProps}
-					className={`text-md ${state.selectedItem ? "text-gray-800" : "text-gray-500"}`}
+					className={clsx(
+						"text-md",
+						state.selectedItem ? "text-gray-900 dark:text-gray-300" : "text-gray-400",
+					)}
 				>
 					{state.selectedItem ? state.selectedItem.rendered : "Select an option"}
 				</span>
 				<ChevronsUpDown
-					className={`h-5 w-5 ${isFocusVisible ? "text-pink-500" : "text-gray-500"}`}
+					className={clsx("h-5 w-5", isFocusVisible ? "text-blue-500" : "text-gray-400")}
 				/>
 			</button>
 			{state.isOpen && (

@@ -20,7 +20,7 @@ export const Menu = <T extends object>(props: MenuProps<T>) => {
 		<ul
 			{...menuProps}
 			ref={ref}
-			className="shadow-xs min-w-[200px] rounded-md pb-1 pt-1 focus:outline-none"
+			className="outline-none"
 		>
 			{[...state.collection].map(item => (
 				<MenuSection

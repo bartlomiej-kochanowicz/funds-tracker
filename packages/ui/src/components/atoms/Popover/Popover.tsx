@@ -32,7 +32,7 @@ export const Popover = ({ className, ...props }: PopoverProps) => {
 				ref={ref}
 				className={clsx(
 					className,
-					"absolute top-full z-10 mt-2 rounded-md border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-neutral-900",
+					"absolute top-full z-10 mt-2 min-w-[200px] rounded-md border border-gray-300 bg-white py-1 shadow-lg dark:border-gray-600 dark:bg-neutral-900",
 				)}
 			>
 				<DismissButton onDismiss={state.close} />

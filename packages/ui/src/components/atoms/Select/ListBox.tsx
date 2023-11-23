@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { type AriaListBoxOptions, useListBox } from "react-aria";
 import { type ListState } from "react-stately";
 
-import { ListBoxSection } from "./ListBoxSection";
 import { Option } from "./Option";
 
 interface ListBoxProps extends AriaListBoxOptions<unknown> {
@@ -19,23 +18,15 @@ export function ListBox(props: ListBoxProps) {
 		<ul
 			{...listBoxProps}
 			ref={listBoxRef}
-			className="max-h-72 w-full overflow-auto outline-none"
+			className="outline-none"
 		>
-			{[...state.collection].map(item =>
-				item.type === "section" ? (
-					<ListBoxSection
-						key={item.key}
-						section={item}
-						state={state}
-					/>
-				) : (
-					<Option
-						key={item.key}
-						item={item}
-						state={state}
-					/>
-				),
-			)}
+			{[...state.collection].map(item => (
+				<Option
+					key={item.key}
+					item={item}
+					state={state}
+				/>
+			))}
 		</ul>
 	);
 }
