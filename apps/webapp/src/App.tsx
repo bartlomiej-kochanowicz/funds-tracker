@@ -8,8 +8,6 @@ import { FC } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
-import { theme } from "styles/theme";
 import { Root } from "views/Root";
 
 const App: FC = (): JSX.Element => (
@@ -21,25 +19,23 @@ const App: FC = (): JSX.Element => (
 					defaultTheme="system"
 					enableSystem
 				>
-					<StyledComponentsThemeProvider theme={theme}>
-						<NiceModal.Provider>
-							<ToastContainer
-								position="top-right"
-								autoClose={5000}
-								hideProgressBar={false}
-								newestOnTop={false}
-								closeOnClick
-								rtl={false}
-								pauseOnFocusLoss
-								draggable
-								pauseOnHover
-							/>
+					<NiceModal.Provider>
+						<ToastContainer
+							position="top-right"
+							autoClose={5000}
+							hideProgressBar={false}
+							newestOnTop={false}
+							closeOnClick
+							rtl={false}
+							pauseOnFocusLoss
+							draggable
+							pauseOnHover
+						/>
 
-							<ErrorBoundary FallbackComponent={FullscreenErrorContent}>
-								<Root />
-							</ErrorBoundary>
-						</NiceModal.Provider>
-					</StyledComponentsThemeProvider>
+						<ErrorBoundary FallbackComponent={FullscreenErrorContent}>
+							<Root />
+						</ErrorBoundary>
+					</NiceModal.Provider>
 				</ThemeProvider>
 			</UserContextProvider>
 		</ApolloProvider>
