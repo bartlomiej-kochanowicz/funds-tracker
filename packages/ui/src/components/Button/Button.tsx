@@ -3,7 +3,7 @@ import { HTMLMotionProps, motion, useAnimation } from "framer-motion";
 import { forwardRef, ReactNode, useRef } from "react";
 import { AriaButtonProps, FocusRing, useButton } from "react-aria";
 
-import { mergeRefs } from "../../../helpers/mergeRefs";
+import { mergeRefs } from "../../helpers/mergeRefs";
 
 const sizes = {
 	xSmall: "px-4 py-2 text-xs",
