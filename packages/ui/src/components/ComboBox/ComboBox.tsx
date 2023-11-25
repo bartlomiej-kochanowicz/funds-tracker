@@ -9,7 +9,7 @@ import { Popover } from "../Popover";
 
 export { Item, Section } from "react-stately";
 
-export function ComboBox<T extends object>(props: AriaComboBoxProps<T>) {
+export const ComboBox = <T extends object>(props: AriaComboBoxProps<T>) => {
 	const { contains } = useFilter({ sensitivity: "base" });
 	const state = useComboBoxState({ ...props, defaultFilter: contains });
 
@@ -77,9 +77,7 @@ export function ComboBox<T extends object>(props: AriaComboBoxProps<T>) {
 					popoverRef={popoverRef}
 					triggerRef={inputRef}
 					state={state}
-					isNonModal
 					placement="bottom start"
-					className="w-52"
 				>
 					<ListBox
 						{...listBoxProps}
@@ -90,4 +88,4 @@ export function ComboBox<T extends object>(props: AriaComboBoxProps<T>) {
 			)}
 		</div>
 	);
-}
+};
