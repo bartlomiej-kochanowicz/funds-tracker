@@ -58,6 +58,7 @@ export const Modal = ({ state, children, className, title, ...props }: ModalProp
 					initial="hidden"
 					animate="visible"
 					exit="exit"
+					onClick={e => e.stopPropagation()}
 				>
 					{title && <H3 {...titleProps}>{title}</H3>}
 					<hr className="mb-4" />
