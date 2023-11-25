@@ -36,34 +36,36 @@ export const ComboBox = <T extends object>(props: AriaComboBoxProps<T>) => {
 
 	const { buttonProps } = useButton(triggerProps, buttonRef);
 
-	const { label } = props;
+	const { label, isDisabled } = props;
 
 	return (
-		<div className="relative inline-flex w-52 flex-col">
+		<div className="group">
 			<label
 				{...labelProps}
-				className="block text-left text-sm font-medium text-gray-700"
+				className="mb-2 block text-sm text-gray-900 dark:text-white"
 			>
 				{label}
 			</label>
 			<div
 				className={clsx(
-					"relative flex flex-row overflow-hidden rounded-md border-2 shadow-sm",
-					state.isFocused ? "border-pink-500" : "border-gray-300",
+					"relative flex w-full overflow-hidden rounded-xl border border-gray-300 bg-gray-50  text-sm text-gray-900 outline-none group-hover:border-blue-500 dark:bg-neutral-700  dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500",
+					isDisabled && "cursor-not-allowed opacity-50",
+					!isDisabled && "group-hover:border-gray-400",
+					state.isFocused ? "!border-blue-500" : "dark:border-gray-600",
 				)}
 			>
 				<input
 					{...inputProps}
 					ref={inputRef}
-					className="w-full px-3 py-1 outline-none"
+					className="w-full bg-transparent p-2.5 outline-none"
 				/>
 				<button
 					{...buttonProps}
 					ref={buttonRef}
 					type="button"
 					className={clsx(
-						"cursor-default border-l-2 bg-gray-100 px-1",
-						state.isFocused ? "border-pink-500 text-pink-600" : "border-gray-300 text-gray-500",
+						"cursor-default border-l border-gray-300 bg-gray-100 px-1 dark:border-gray-600 dark:bg-neutral-600",
+						state.isFocused ? "!border-blue-500 text-blue-500" : "border-gray-300 text-gray-500",
 					)}
 				>
 					<ChevronDownIcon
