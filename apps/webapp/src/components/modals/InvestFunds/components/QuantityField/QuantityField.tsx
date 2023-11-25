@@ -1,6 +1,6 @@
 import { Input } from "components/atoms";
 import { useBreakpoint } from "hooks/useBreakpoint";
-import { InvestFundsFormValues } from "components/dialogs/InvestFunds/helpers/defaultValues";
+import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 

@@ -4,6 +4,7 @@ import { ReactNode, useRef } from "react";
 import { Overlay, useDialog, useModalOverlay } from "react-aria";
 import { type OverlayTriggerState } from "react-stately";
 
+import { H3 } from "../Heading";
 import { Backdrop } from "./Backdrop";
 
 const effect = {
@@ -29,10 +30,11 @@ const effect = {
 interface ModalProps {
 	state: OverlayTriggerState;
 	children: ReactNode;
+	title?: string;
 	className?: string;
 }
 
-export const Modal = ({ state, children, className, ...props }: ModalProps) => {
+export const Modal = ({ state, children, className, title, ...props }: ModalProps) => {
 	const ref = useRef(null);
 	const { modalProps, underlayProps } = useModalOverlay(props, state, ref);
 
@@ -45,18 +47,20 @@ export const Modal = ({ state, children, className, ...props }: ModalProps) => {
 				{...underlayProps}
 			>
 				<motion.div
-					{...modalProps}
+					{...(modalProps as any)}
 					{...dialogProps}
 					ref={ref}
 					className={clsx(
-						"relative outline-none",
-						className || "m-5 rounded-xl bg-slate-50 p-5 shadow-xl dark:bg-neutral-800",
+						"relative w-full max-w-lg outline-none sm:w-auto",
+						className || "m-4 rounded-xl bg-slate-50 p-5 shadow-xl dark:bg-neutral-800",
 					)}
 					variants={effect}
 					initial="hidden"
 					animate="visible"
 					exit="exit"
 				>
+					{title && <H3 {...titleProps}>{title}</H3>}
+					<hr className="mb-4" />
 					{children}
 				</motion.div>
 			</Backdrop>

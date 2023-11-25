@@ -5,7 +5,12 @@ import { useOverlayTriggerState } from "react-stately";
 
 import { Modal } from "./Modal";
 
-export const useModal = ({ children, ...props }) => {
+interface UseModalArgs {
+	children: (close: () => void) => JSX.Element;
+	title?: string;
+}
+
+export const useModal = ({ children, title, ...props }: UseModalArgs) => {
 	const state = useOverlayTriggerState(props);
 	const { triggerProps, overlayProps } = useOverlayTrigger({ type: "dialog" }, state);
 
@@ -14,7 +19,12 @@ export const useModal = ({ children, ...props }) => {
 		Modal: () => (
 			<AnimatePresence>
 				{state.isOpen && (
-					<Modal state={state}>{cloneElement(children(state.close), overlayProps)}</Modal>
+					<Modal
+						state={state}
+						title={title}
+					>
+						{cloneElement(children(state.close), overlayProps)}
+					</Modal>
 				)}
 			</AnimatePresence>
 		),

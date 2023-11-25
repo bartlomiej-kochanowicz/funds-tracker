@@ -4,7 +4,7 @@ import { Select } from "components/atoms";
 import { GET_PORTFOLIOS } from "graphql/query/portfolios/GetPortfolios";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useSelect } from "hooks/useSelect";
-import { InvestFundsFormValues } from "components/dialogs/InvestFunds/helpers/defaultValues";
+import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";

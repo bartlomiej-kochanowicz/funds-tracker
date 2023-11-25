@@ -16,6 +16,7 @@ type Story = StoryObj<typeof Modal>;
 export const Default: Story = {
 	render: () => {
 		const { Modal: ModalHook, triggerProps } = useModal({
+			title: "Modal title",
 			children: close => (
 				<Fragment>
 					<Button onPress={close}>Close</Button>

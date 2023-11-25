@@ -58,7 +58,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
 					{...valueProps}
 					className={clsx(
 						"text-md",
-						state.selectedItem ? "text-gray-900 dark:text-gray-300" : "text-gray-400",
+						state.selectedItem ? "text-gray-900 dark:text-white" : "text-gray-400",
 					)}
 				>
 					{state.selectedItem ? state.selectedItem.rendered : "Select an option"}

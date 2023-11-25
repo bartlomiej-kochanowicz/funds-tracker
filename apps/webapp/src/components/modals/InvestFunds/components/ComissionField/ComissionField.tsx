@@ -6,7 +6,7 @@ import { useRadio } from "hooks/useRadio";
 import {
 	defaultValues,
 	InvestFundsFormValues,
-} from "components/dialogs/InvestFunds/helpers/defaultValues";
+} from "components/modals/InvestFunds/helpers/defaultValues";
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";

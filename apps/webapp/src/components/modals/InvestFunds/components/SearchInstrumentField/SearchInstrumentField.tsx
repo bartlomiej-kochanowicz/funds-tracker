@@ -2,7 +2,7 @@ import { InstrumentType } from "__generated__/graphql";
 import { SearchInstrumentCombobox } from "components/molecules";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useRegisterCombobox } from "hooks/useRegisterCombobox";
-import { InvestFundsFormValues } from "components/dialogs/InvestFunds/helpers/defaultValues";
+import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
