@@ -11,8 +11,8 @@ import {
 } from "react-aria";
 import { useSelectState } from "react-stately";
 
+import { ListBox } from "../ListBox";
 import { Popover } from "../Popover";
-import { ListBox } from "./ListBox";
 
 export { Item } from "react-stately";
 

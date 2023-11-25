@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { type AriaListBoxOptions, useListBox } from "react-aria";
 import { type ListState } from "react-stately";
 
-import { Option } from "./Option";
+import { Option } from "../Select/Option";
 
 interface ListBoxProps extends AriaListBoxOptions<unknown> {
 	listBoxRef?: React.RefObject<HTMLUListElement>;
