@@ -3,7 +3,7 @@ import { Input, Spreader } from "components/atoms";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
 import { Calculator } from "lucide-react";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
+import { InvestFundsFormValues } from "components/dialogs/InvestFunds/helpers/defaultValues";
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";

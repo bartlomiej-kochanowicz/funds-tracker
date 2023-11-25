@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Heading, Spacer, Spreader } from "components/atoms";
-import { ErrorContent } from "components/molecules/ErrorContent";
+import { ErrorContent } from "components/ErrorContent";
 import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
 import { X } from "lucide-react";
 import { FC, Fragment, ReactNode, useCallback, useEffect, useRef } from "react";

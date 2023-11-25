@@ -1,7 +1,7 @@
 import NiceModal from "@ebay/nice-modal-react";
 import { Heading, Spacer, Spreader } from "components/atoms";
 import { Plus } from "lucide-react";
-import { MODAL_CREATE_PORTFOLIO } from "components/modals/CreatePortfolio";
+import { MODAL_CREATE_PORTFOLIO } from "components/dialogs/CreatePortfolio";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "ui";
