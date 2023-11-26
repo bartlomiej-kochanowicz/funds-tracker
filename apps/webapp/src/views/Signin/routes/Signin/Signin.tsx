@@ -1,6 +1,6 @@
 import { ThemeSwitcher } from "components";
-import { LangSelector } from "components/molecules";
 import { ClearCentered } from "components/layouts/ClearCentered";
+// import { LangSelector } from "components/molecules";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -43,9 +43,9 @@ export const Signin = () => {
 			</Link>
 
 			<div className="mt-12 flex flex-col items-center">
-				<LangSelector />
+				{/* <LangSelector /> */}
 
-				<ThemeSwitcher className="mt-8" />
+				<ThemeSwitcher />
 			</div>
 		</ClearCentered>
 	);

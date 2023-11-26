@@ -37,7 +37,7 @@ export const Switch = (props: SwitchProps) => {
 					isFocusVisible && "outline-none ring-4 ring-blue-300 dark:ring-blue-800",
 				)}
 			/>
-			<Text className="ml-1">{children}</Text>
+			{children && <Text className="ml-1">{children}</Text>}
 		</label>
 	);
 };

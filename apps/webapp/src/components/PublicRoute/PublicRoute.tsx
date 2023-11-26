@@ -1,5 +1,5 @@
-import { useUserContext } from "contexts/UserContext";
 import { FullscreenLoading } from "components/layouts/FullscreenLoading";
+import { useUserContext } from "contexts/UserContext";
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";

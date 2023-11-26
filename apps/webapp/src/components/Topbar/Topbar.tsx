@@ -1,6 +1,4 @@
 import clsx from "clsx";
-import { Spreader } from "components/atoms";
-import { Profile } from "components/molecules";
 import { debounce } from "helpers/debounce";
 import { useMatches } from "hooks/useMatches";
 import { ChevronLeft } from "lucide-react";
@@ -9,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
+import { Profile } from "../Profile";
 import { BackButton } from "./Topbar.styles";
 
 const withBackButton = [ROUTES.PORTFOLIOS.PORTFOLIO];
@@ -56,9 +55,7 @@ export const Topbar = () => {
 		>
 			{renderBackButton ? (
 				<BackButton onClick={handleBackToPreviousPage}>
-					<ChevronLeft />
-
-					<Spreader $spread="0.1" />
+					<ChevronLeft className="mr-0.5" />
 
 					{t("common.back")}
 				</BackButton>

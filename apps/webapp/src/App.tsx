@@ -1,6 +1,6 @@
 import { ApolloProvider } from "@apollo/client";
 import NiceModal from "@ebay/nice-modal-react";
-import { FullscreenErrorContent } from "components/organisms";
+import { FullscreenErrorContent } from "components/FullscreenErrorContent";
 import client from "config/client";
 import { UserContextProvider } from "contexts/UserContext";
 import { ThemeProvider } from "next-themes";

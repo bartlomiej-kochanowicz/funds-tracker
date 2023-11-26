@@ -5,8 +5,12 @@ import { useTextField } from "react-aria";
 
 import { Text } from "../Text";
 
-export const Input = (props: AriaTextFieldProps) => {
-	const { label } = props;
+interface InputProps extends AriaTextFieldProps {
+	className?: string;
+}
+
+export const Input = (props: InputProps) => {
+	const { label, className } = props;
 	const ref = useRef<HTMLInputElement>(null);
 
 	const {
@@ -21,7 +25,7 @@ export const Input = (props: AriaTextFieldProps) => {
 	const { description, isDisabled } = props;
 
 	return (
-		<div className="group">
+		<div className={clsx(className, "group")}>
 			<label
 				{...labelProps}
 				className="mb-2 block text-sm text-gray-900 dark:text-white"

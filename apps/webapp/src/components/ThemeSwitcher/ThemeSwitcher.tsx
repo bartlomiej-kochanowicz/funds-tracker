@@ -1,4 +1,4 @@
-import cslx from "clsx";
+import clsx from "clsx";
 import { MoonStar, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useRef } from "react";
@@ -33,7 +33,7 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
 	const { isFocusVisible, focusProps } = useFocusRing();
 
 	return (
-		<label className={cslx("relative cursor-pointer", className)}>
+		<label className={clsx("relative inline-flex cursor-pointer items-center", className)}>
 			<VisuallyHidden>
 				<input
 					{...inputProps}
@@ -43,17 +43,16 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
 			</VisuallyHidden>
 
 			<div
-				className={cslx(
-					"flex h-6 w-11 items-center justify-between rounded-full bg-gray-200 px-1 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] dark:border-gray-600 dark:bg-gray-700",
-					{
-						"after:translate-x-full after:border-white": state.isSelected,
-						"outline-none ring-2 ring-blue-300 dark:ring-blue-800": isFocusVisible,
-					},
+				className={clsx(
+					"peer flex h-6 w-11 items-center justify-between rounded-full px-1  after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] dark:border-gray-600",
+					state.isSelected && "bg-blue-500 after:translate-x-full after:border-white",
+					!state.isSelected && "bg-gray-200 dark:bg-neutral-700",
+					isFocusVisible && "outline-none ring-4 ring-blue-300 dark:ring-blue-800",
 				)}
 			>
-				<MoonStar className="text-white" />
+				<MoonStar className="h-4 w-4 text-white" />
 
-				<Sun className="text-gray-700" />
+				<Sun className="h-4 w-4 text-gray-700" />
 			</div>
 		</label>
 	);

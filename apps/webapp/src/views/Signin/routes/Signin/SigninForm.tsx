@@ -8,19 +8,19 @@ import {
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Loader, Spacer } from "components/atoms";
 import { useUserContext } from "contexts/UserContext";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { SIGNIN } from "graphql/mutations/authentication/Signin";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
+import { Loader } from "lucide-react";
 import { ChangeEvent, Fragment, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button } from "ui";
+import { Button, Input } from "ui";
 
 import { validationSchema } from "./Signin.schema";
 import { Form } from "./Signin.styles";
@@ -154,41 +154,32 @@ export const SigninForm = () => {
 			<Input
 				placeholder={t("common.email")}
 				type="email"
-				disabled={compareState(states.password)}
+				isDisabled={compareState(states.password)}
 				data-testid="email-input"
-				error={errors.userEmail?.message}
+				// error={errors.userEmail?.message}
 				// react-hook-form doesn't support browser autofill
-				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("userEmail", e.target.value)}
+				// onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("userEmail", e.target.value)}
 			/>
 
 			{compareState(states.password) && (
-				<Fragment>
-					<Spacer />
-
-					<Input
-						placeholder={t("common.password")}
-						type="password"
-						autoFocus
-						data-testid="password-input"
-						error={errors.userPassword?.message}
-						{...register("userPassword")}
-					/>
-				</Fragment>
+				<Input
+					className="mt-4"
+					placeholder={t("common.password")}
+					type="password"
+					autoFocus
+					data-testid="password-input"
+					// error={errors.userPassword?.message}
+					// {...register("userPassword")}
+				/>
 			)}
 
-			<Spacer />
-
 			<Button
+				className="mt-4"
 				isDisabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
 			>
-				{isSubmitting && (
-					<Loader
-						$color="white"
-						data-testid="button-loader"
-					/>
-				)}
+				{isSubmitting && <Loader data-testid="button-loader" />}
 
 				{!isSubmitting && compareState(states.email) && t("common.next")}
 
