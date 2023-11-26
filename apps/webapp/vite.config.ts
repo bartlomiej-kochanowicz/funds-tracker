@@ -1,7 +1,6 @@
 import react from "@vitejs/plugin-react";
 import eslint from "vite-plugin-eslint";
 import { VitePWA } from "vite-plugin-pwa";
-import { viteStaticCopy } from "vite-plugin-static-copy";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
@@ -18,35 +17,23 @@ export default defineConfig({
 		environment: "jsdom",
 		setupFiles: "./src/config/tests/setupTests.ts",
 		coverage: {
-			provider: "c8",
+			provider: "v8",
 			reporter: ["text", "html"],
 			exclude: ["node_modules/", "src/utils/test-utils.tsx", "src/config/tests/"],
 		},
 	},
 	plugins: [
-		react({
-			babel: {
-				plugins: [
-					[
-						"babel-plugin-styled-components",
-						{
-							displayName: true,
-							fileName: false,
-						},
-					],
-				],
-			},
-		}),
+		react(),
 		tsconfigPaths(),
 		svgr(),
-		viteStaticCopy({
+		/* viteStaticCopy({
 			targets: [
 				{
 					src: "src/locales/*.json",
 					dest: "locales",
 				},
 			],
-		}),
+		}), */
 		VitePWA({
 			devOptions: {
 				enabled: IS_DEVELOPMENT,

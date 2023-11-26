@@ -23,7 +23,6 @@ import { ROUTES } from "routes/paths";
 import { Button, Input } from "ui";
 
 import { validationSchema } from "./Signin.schema";
-import { Form } from "./Signin.styles";
 import { SigninFormValues } from "./Signin.types";
 
 const GoogleReCaptcha = lazy(() =>
@@ -140,7 +139,8 @@ export const SigninForm = () => {
 	const userNotConfirmed = errors.userPassword?.message === "User not confirmed.";
 
 	return (
-		<Form
+		<form
+			className="flex flex-col"
 			onSubmit={handleSubmit(onSubmit)}
 			noValidate
 		>
@@ -190,6 +190,6 @@ export const SigninForm = () => {
 					userNotConfirmed &&
 					t("common.sign_up_confirm")}
 			</Button>
-		</Form>
+		</form>
 	);
 };

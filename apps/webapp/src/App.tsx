@@ -1,5 +1,4 @@
 import { ApolloProvider } from "@apollo/client";
-import NiceModal from "@ebay/nice-modal-react";
 import { FullscreenErrorContent } from "components/FullscreenErrorContent";
 import client from "config/client";
 import { UserContextProvider } from "contexts/UserContext";
@@ -19,23 +18,21 @@ const App: FC = (): JSX.Element => (
 					defaultTheme="system"
 					enableSystem
 				>
-					<NiceModal.Provider>
-						<ToastContainer
-							position="top-right"
-							autoClose={5000}
-							hideProgressBar={false}
-							newestOnTop={false}
-							closeOnClick
-							rtl={false}
-							pauseOnFocusLoss
-							draggable
-							pauseOnHover
-						/>
+					<ToastContainer
+						position="top-right"
+						autoClose={5000}
+						hideProgressBar={false}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+					/>
 
-						<ErrorBoundary FallbackComponent={FullscreenErrorContent}>
-							<Root />
-						</ErrorBoundary>
-					</NiceModal.Provider>
+					<ErrorBoundary FallbackComponent={FullscreenErrorContent}>
+						<Root />
+					</ErrorBoundary>
 				</ThemeProvider>
 			</UserContextProvider>
 		</ApolloProvider>
