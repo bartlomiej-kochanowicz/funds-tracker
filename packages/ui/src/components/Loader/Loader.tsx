@@ -1,8 +1,24 @@
-export const Loader = () => (
-	<div role="status">
+import clsx from "clsx";
+
+interface LoaderProps {
+	className?: string;
+	size?: "sm" | "md" | "lg";
+}
+
+export const Loader = ({ size = "md", className, ...rest }: LoaderProps) => (
+	<div
+		role="status"
+		{...rest}
+	>
 		<svg
 			aria-hidden="true"
-			className="h-8 w-8 animate-spin fill-blue-500 text-gray-200 dark:text-gray-600"
+			className={clsx(
+				className,
+				"animate-spin fill-blue-500 text-gray-200 dark:text-gray-600",
+				size === "sm" && "h-5 w-5",
+				size === "md" && "h-8 w-8",
+				size === "lg" && "h-12 w-12",
+			)}
 			viewBox="0 0 100 101"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

@@ -14,8 +14,7 @@ import { SIGNIN } from "graphql/mutations/authentication/Signin";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
-import { Loader } from "lucide-react";
-import { ChangeEvent, Fragment, lazy, Suspense, useCallback, useState } from "react";
+import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -64,7 +63,6 @@ export const SigninForm = () => {
 		formState: { errors, isSubmitting },
 		setError,
 		getValues,
-		setValue,
 	} = useForm<SigninFormValues>({
 		defaultValues,
 		resolver: yupResolver<SigninFormValues>(validationSchema(compareState(states.password))),
@@ -154,22 +152,24 @@ export const SigninForm = () => {
 			<Input
 				placeholder={t("common.email")}
 				type="email"
+				aria-label="email"
 				isDisabled={compareState(states.password)}
 				data-testid="email-input"
-				// error={errors.userEmail?.message}
-				// react-hook-form doesn't support browser autofill
-				// onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("userEmail", e.target.value)}
+				isInvalid={!!errors.userEmail}
+				errorMessage={errors.userEmail?.message}
+				{...register("userEmail")}
 			/>
 
 			{compareState(states.password) && (
 				<Input
-					className="mt-4"
 					placeholder={t("common.password")}
 					type="password"
+					aria-label="password"
 					autoFocus
 					data-testid="password-input"
-					// error={errors.userPassword?.message}
-					// {...register("userPassword")}
+					isInvalid={!!errors.userPassword}
+					errorMessage={errors.userPassword?.message}
+					{...register("userPassword")}
 				/>
 			)}
 
@@ -178,9 +178,8 @@ export const SigninForm = () => {
 				isDisabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
+				isLoading={isSubmitting}
 			>
-				{isSubmitting && <Loader data-testid="button-loader" />}
-
 				{!isSubmitting && compareState(states.email) && t("common.next")}
 
 				{!isSubmitting && compareState(states.password) && !userNotConfirmed && t("common.sign_in")}

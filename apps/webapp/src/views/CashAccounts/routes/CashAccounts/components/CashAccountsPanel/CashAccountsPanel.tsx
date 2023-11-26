@@ -2,13 +2,13 @@ import { GetCashAccountsQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
 import { Dropdown } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
-import { formatCurrency } from "helpers/formatCurrency";
-import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from "components/modals/AddFundsCashAccount";
 import { MODAL_CASH_ACCOUNT_OPERATIONS } from "components/modals/CashAccountOperations";
 import { MODAL_CONFIRM_DELETE_CASH_ACCOUNT } from "components/modals/ConfirmDeleteCashAccount";
 import { MODAL_INVEST_FUNDS } from "components/modals/InvestFunds";
 import { MODAL_RENAME_CASH_ACCOUNT } from "components/modals/RenameCashAccount";
+import { formatCurrency } from "helpers/formatCurrency";
+import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Panel, Text } from "ui";
@@ -105,7 +105,6 @@ export const CashAccountsPanel: FC<
 			>
 				{({ isOpen, ...props }) => (
 					<Button
-						size="small"
 						/* $outline */
 						{...props}
 					>

@@ -1,31 +1,34 @@
 import clsx from "clsx";
-import { useRef } from "react";
+import { forwardRef, ReactNode, useRef } from "react";
 import { type AriaTextFieldProps } from "react-aria";
 import { useTextField } from "react-aria";
+import { ChangeHandler } from "react-hook-form";
 
+import { mergeRefs } from "../../helpers/mergeRefs";
 import { Text } from "../Text";
 
-interface InputProps extends AriaTextFieldProps {
+interface InputProps extends Omit<AriaTextFieldProps, "onChange"> {
 	className?: string;
+	errorMessage?: ReactNode;
+	onChange?: ChangeHandler;
 }
 
-export const Input = (props: InputProps) => {
-	const { label, className } = props;
-	const ref = useRef<HTMLInputElement>(null);
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+	const { label, className, onChange } = props;
+	const inputRef = useRef<HTMLInputElement>(null);
 
-	const {
-		labelProps,
-		inputProps,
-		descriptionProps,
-		errorMessageProps,
-		isInvalid,
-		validationErrors,
-	} = useTextField(props, ref);
+	const { labelProps, inputProps, descriptionProps, errorMessageProps, isInvalid } = useTextField(
+		{
+			...props,
+			onChange: onChange && (value => onChange({ target: { value } })),
+		},
+		inputRef,
+	);
 
-	const { description, isDisabled } = props;
+	const { description, isDisabled, errorMessage } = props;
 
 	return (
-		<div className={clsx(className, "group")}>
+		<div className={clsx(className, "group", !description && !isInvalid && "mb-4")}>
 			<label
 				{...labelProps}
 				className="mb-2 block text-sm text-gray-900 dark:text-white"
@@ -41,12 +44,12 @@ export const Input = (props: InputProps) => {
 					isInvalid &&
 						"border-red-500 focus:border-red-500 group-hover:border-red-500 focus:group-hover:border-red-500 dark:border-red-500 dark:focus:border-red-500",
 				)}
-				ref={ref}
+				ref={mergeRefs([inputRef, ref])}
 			/>
-			{description && (
+			{description && !isInvalid && (
 				<Text
 					{...descriptionProps}
-					className="mt-1 text-xs"
+					className="text-xs"
 				>
 					{description}
 				</Text>
@@ -54,11 +57,11 @@ export const Input = (props: InputProps) => {
 			{isInvalid && (
 				<div
 					{...errorMessageProps}
-					className="mt-1 text-xs text-red-500"
+					className="text-xs text-red-500"
 				>
-					{validationErrors.join(" ")}
+					{errorMessage}
 				</div>
 			)}
 		</div>
 	);
-};
+});

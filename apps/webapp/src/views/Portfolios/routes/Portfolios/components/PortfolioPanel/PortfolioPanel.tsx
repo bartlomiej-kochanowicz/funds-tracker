@@ -2,11 +2,11 @@ import { GetPortfoliosQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
 import { Dropdown } from "components/atoms";
 import { DropdownItems } from "components/atoms/Dropdown";
+import { MODAL_CONFIRM_DELETE_PORTFOLIO } from "components/modals/ConfirmDeletePortfolio";
+import { MODAL_RENAME_PORTFOLIO } from "components/modals/RenamePortfolio";
 import { useUserContext } from "contexts/UserContext";
 import { formatCurrency } from "helpers/formatCurrency";
 import { MoreVertical, Pencil, PieChart, Trash2 } from "lucide-react";
-import { MODAL_CONFIRM_DELETE_PORTFOLIO } from "components/modals/ConfirmDeletePortfolio";
-import { MODAL_RENAME_PORTFOLIO } from "components/modals/RenamePortfolio";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { generatePath } from "react-router-dom";
@@ -82,7 +82,6 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 			>
 				{({ isOpen, ...props }) => (
 					<Button
-						size="small"
 						/* $outline */
 						{...props}
 					>

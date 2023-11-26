@@ -4,25 +4,20 @@ import { forwardRef, ReactNode, useRef } from "react";
 import { AriaButtonProps, FocusRing, useButton } from "react-aria";
 
 import { mergeRefs } from "../../helpers/mergeRefs";
+import { Loader } from "../Loader";
 
 const sizes = {
-	xSmall: "px-4 py-2 text-xs",
-	small: "px-4 py-2 text-sm",
-	base: "px-6 py-2.5 text-sm",
-	large: "px-6 py-3 text-base",
-	xLarge: "px-7 py-3.5 text-base",
+	xm: "px-4 py-2 text-xs",
+	sm: "px-4 py-2 text-sm",
+	md: "px-6 py-2.5 text-sm",
+	lg: "px-6 py-3 text-base",
+	xl: "px-7 py-3.5 text-base",
 };
 
 const colors = {
-	blue: {
-		button: "bg-blue-500 text-white enabled:hover:bg-blue-600  disabled:opacity-50",
-	},
-	black: {
-		button: "bg-zinc-950 text-white enabled:hover:bg-zinc-800 disabled:opacity-50",
-	},
-	gray: {
-		button: "bg-neutral-500 text-white enabled:hover:bg-neutral-600 disabled:opacity-50",
-	},
+	blue: "bg-blue-500 text-white enabled:hover:bg-blue-600",
+	black: "bg-zinc-950 text-white enabled:hover:bg-zinc-800",
+	gray: "bg-neutral-500 text-white enabled:hover:bg-neutral-600",
 };
 
 interface ButtonProps extends AriaButtonProps {
@@ -30,10 +25,11 @@ interface ButtonProps extends AriaButtonProps {
 	className?: string;
 	size?: keyof typeof sizes;
 	color?: keyof typeof colors;
+	isLoading?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	({ children, className, size = "base", color = "blue", ...rest }, propsRef) => {
+	({ children, className, size = "md", color = "blue", isLoading, ...rest }, propsRef) => {
 		const controls = useAnimation();
 		const ref = useRef<HTMLButtonElement>(null);
 
@@ -62,14 +58,22 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 						WebkitTapHighlightColor: "transparent",
 					}}
 					className={clsx(
-						"transform touch-none select-none rounded-xl transition-transform focus:outline-none enabled:active:scale-97 disabled:cursor-not-allowed",
+						"transform touch-none select-none rounded-xl transition-transform focus:outline-none enabled:active:scale-97 disabled:cursor-not-allowed disabled:opacity-50",
 						sizes[size],
-						colors[color].button,
+						colors[color],
+						isLoading && "pointer-events-none flex items-center justify-center",
 						className,
 					)}
 					ref={mergeRefs([ref, propsRef])}
 				>
-					{children}
+					{!isLoading && children}
+					{isLoading && (
+						<Loader
+							size="sm"
+							className="dark:text-gray-200"
+							data-testid="button-loader"
+						/>
+					)}
 				</motion.button>
 			</FocusRing>
 		);

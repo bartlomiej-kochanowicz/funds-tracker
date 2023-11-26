@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
+import { Switch } from "../Switch";
 import { Button } from "./Button";
 
 const meta: Meta<typeof Button> = {
@@ -75,4 +76,22 @@ export const Gray: Story = {
 			</Button>
 		</Fragment>
 	),
+};
+
+export const WithLoader: Story = {
+	render: () => {
+		const [isLoading, setIsLoading] = useState(false);
+
+		return (
+			<Fragment>
+				<Button
+					className="whitespace-nowrap"
+					isLoading={isLoading}
+				>
+					Hello world
+				</Button>
+				<Switch onChange={prev => setIsLoading(prev)} />
+			</Fragment>
+		);
+	},
 };
