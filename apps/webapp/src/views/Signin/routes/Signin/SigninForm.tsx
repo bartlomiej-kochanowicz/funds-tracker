@@ -152,7 +152,7 @@ export const SigninForm = () => {
 			<Input
 				placeholder={t("common.email")}
 				type="email"
-				aria-label="email"
+				aria-label={t("common.email")}
 				isDisabled={compareState(states.password)}
 				data-testid="email-input"
 				isInvalid={!!errors.userEmail}
@@ -164,7 +164,7 @@ export const SigninForm = () => {
 				<Input
 					placeholder={t("common.password")}
 					type="password"
-					aria-label="password"
+					aria-label={t("common.password")}
 					autoFocus
 					data-testid="password-input"
 					isInvalid={!!errors.userPassword}

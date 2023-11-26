@@ -1,42 +1,37 @@
-import { Input, Spacer } from "components/atoms";
-import { ChangeEvent, Fragment } from "react";
-import { DeepRequired, FieldErrorsImpl, UseFormSetValue } from "react-hook-form";
+import { Fragment } from "react";
+import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Input } from "ui";
 
-type DefaultValues = {
-	userName: string;
-	userEmail: string;
-	userPassword: string;
-	userPasswordConfirmation: string;
-};
+import { SignupFormValues } from "../../Signup.types";
 
-interface PasswordsProps {
-	setValue: UseFormSetValue<DefaultValues>;
-	errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
-}
-
-export const Passwords = ({ setValue, errors }: PasswordsProps) => {
+export const Passwords = () => {
 	const { t } = useTranslation();
+
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext<SignupFormValues>();
 
 	return (
 		<Fragment>
 			<Input
 				placeholder={t("common.password")}
+				aria-label={t("common.password")}
 				type="password"
 				autoFocus
-				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("userPassword", e.target.value)}
-				error={errors.userPassword?.message}
+				isInvalid={!!errors.userPassword}
+				errorMessage={errors.userPassword?.message}
+				{...register("userPassword")}
 			/>
-
-			<Spacer />
 
 			<Input
 				placeholder={t("page.signup.password.confirm")}
+				aria-label={t("page.signup.password.confirm")}
 				type="password"
-				onChange={(e: ChangeEvent<HTMLInputElement>) =>
-					setValue("userPasswordConfirmation", e.target.value)
-				}
-				error={errors.userPasswordConfirmation?.message}
+				isInvalid={!!errors.userPasswordConfirmation}
+				errorMessage={errors.userPasswordConfirmation?.message}
+				{...register("userPasswordConfirmation")}
 			/>
 		</Fragment>
 	);

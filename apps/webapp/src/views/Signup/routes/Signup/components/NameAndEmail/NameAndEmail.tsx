@@ -1,39 +1,36 @@
-import { Input, Spacer } from "components/atoms";
-import { ChangeEvent, Fragment } from "react";
-import { DeepRequired, FieldErrorsImpl, UseFormSetValue } from "react-hook-form";
+import { Fragment } from "react";
+import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Input } from "ui";
 
-type DefaultValues = {
-	userName: string;
-	userEmail: string;
-	userPassword: string;
-	userPasswordConfirmation: string;
-};
+import { SignupFormValues } from "../../Signup.types";
 
-interface NameAndEmailProps {
-	setValue: UseFormSetValue<DefaultValues>;
-	errors: FieldErrorsImpl<DeepRequired<DefaultValues>>;
-}
-
-export const NameAndEmail = ({ setValue, errors }: NameAndEmailProps) => {
+export const NameAndEmail = () => {
 	const { t } = useTranslation();
+
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext<SignupFormValues>();
 
 	return (
 		<Fragment>
 			<Input
 				placeholder={t("common.name")}
+				aria-label={t("common.name")}
 				type="text"
-				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("userName", e.target.value)}
-				error={errors.userName?.message}
+				isInvalid={!!errors.userName}
+				errorMessage={errors.userName?.message}
+				{...register("userName")}
 			/>
-
-			<Spacer />
 
 			<Input
 				placeholder={t("common.email")}
+				aria-label={t("common.email")}
 				type="text"
-				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("userEmail", e.target.value)}
-				error={errors.userEmail?.message}
+				isInvalid={!!errors.userEmail}
+				errorMessage={errors.userEmail?.message}
+				{...register("userEmail")}
 			/>
 		</Fragment>
 	);

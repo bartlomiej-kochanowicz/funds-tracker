@@ -29,12 +29,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
 	return (
 		<div className={clsx(className, "group", !description && !isInvalid && "mb-4")}>
-			<label
-				{...labelProps}
-				className="mb-2 block text-sm text-gray-900 dark:text-white"
-			>
-				{label}
-			</label>
+			{label && (
+				<label
+					{...labelProps}
+					className="mb-2 block text-sm text-gray-900 dark:text-white"
+				>
+					{label}
+				</label>
+			)}
 			<input
 				{...inputProps}
 				className={clsx(

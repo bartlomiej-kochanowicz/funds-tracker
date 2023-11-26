@@ -1,11 +1,9 @@
 import { ThemeSwitcher } from "components";
-import { Heading, Spacer } from "components/atoms";
-import { LangSelector } from "components/molecules";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Text } from "ui";
+import { H1, Text } from "ui";
 
 import { SignupForm } from "./SignupForm";
 
@@ -14,19 +12,15 @@ export const Signup = () => {
 
 	return (
 		<ClearCentered>
-			<Heading $textAlign="center">{t("common.sign_up")}</Heading>
+			<H1 className="text-center">{t("common.sign_up")}</H1>
 
-			<Spacer $space="0.5" />
-
-			<Text className="text-center text-sm text-gray-400">{t("page.signup.description")}</Text>
-
-			<Spacer $space="1.5" />
+			<Text className="mb-6 mt-2 text-center text-sm text-gray-400">
+				{t("page.signup.description")}
+			</Text>
 
 			<SignupForm />
 
-			<Spacer />
-
-			<Text className="text-center text-sm text-gray-400">
+			<Text className="my-4 text-center text-sm text-gray-400">
 				<Trans
 					i18nKey="page.signup.already_have_account"
 					components={{
@@ -40,14 +34,8 @@ export const Signup = () => {
 				/>
 			</Text>
 
-			<Spacer $space="1.5" />
-
-			<Spacer $space="1.5" />
-
-			<div className="flex flex-col items-center">
-				<LangSelector />
-
-				<Spacer />
+			<div className="mt-12 flex flex-col items-center">
+				{/* <LangSelector /> */}
 
 				<ThemeSwitcher />
 			</div>

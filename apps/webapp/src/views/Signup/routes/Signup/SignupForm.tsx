@@ -6,13 +6,12 @@ import {
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Loader, Spacer } from "components/atoms";
 import { SIGNUP } from "graphql/mutations/authentication/Signup";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
 import { showErrorToast } from "helpers/showToast";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, Suspense, useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -21,7 +20,6 @@ import { Button } from "ui";
 import { NameAndEmail } from "./components/NameAndEmail";
 import { Passwords } from "./components/Passwords";
 import { validationSchema } from "./Signup.schema";
-import { Form } from "./Signup.styles";
 import { SignupFormValues } from "./Signup.types";
 
 const GoogleReCaptcha = lazy(() =>
@@ -60,16 +58,17 @@ export const SignupForm = () => {
 		userPasswordConfirmation: "",
 	};
 
-	const {
-		setValue,
-		handleSubmit,
-		formState: { errors, isSubmitting },
-		setError,
-		getValues,
-	} = useForm<SignupFormValues>({
+	const methods = useForm<SignupFormValues>({
 		defaultValues,
 		resolver: yupResolver<SignupFormValues>(validationSchema(compareState(states.passwords))),
 	});
+
+	const {
+		handleSubmit,
+		formState: { isSubmitting },
+		setError,
+		getValues,
+	} = methods;
 
 	const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
 		onCompleted: data => {
@@ -136,44 +135,34 @@ export const SignupForm = () => {
 	};
 
 	return (
-		<Form
-			onSubmit={handleSubmit(onSubmit)}
-			noValidate
-		>
-			<Suspense>
-				<GoogleReCaptcha
-					onVerify={onVerify}
-					refreshReCaptcha={refreshReCaptcha}
-				/>
-			</Suspense>
-
-			{compareState(states.nameAndEmail) && (
-				<NameAndEmail
-					setValue={setValue}
-					errors={errors}
-				/>
-			)}
-
-			{compareState(states.passwords) && (
-				<Passwords
-					setValue={setValue}
-					errors={errors}
-				/>
-			)}
-
-			<Spacer />
-
-			<Button
-				className="w-auto"
-				isDisabled={isSubmitting}
-				type="submit"
+		<FormProvider {...methods}>
+			<form
+				className="flex flex-col"
+				onSubmit={handleSubmit(onSubmit)}
+				noValidate
 			>
-				{isSubmitting && <Loader $color="white" />}
+				<Suspense>
+					<GoogleReCaptcha
+						onVerify={onVerify}
+						refreshReCaptcha={refreshReCaptcha}
+					/>
+				</Suspense>
 
-				{!isSubmitting && compareState(states.nameAndEmail) && t("common.next")}
+				{compareState(states.nameAndEmail) && <NameAndEmail />}
 
-				{!isSubmitting && compareState(states.passwords) && t("common.sign_up")}
-			</Button>
-		</Form>
+				{compareState(states.passwords) && <Passwords />}
+
+				<Button
+					className="mt-4 w-auto"
+					isDisabled={isSubmitting}
+					type="submit"
+					isLoading={isSubmitting}
+				>
+					{!isSubmitting && compareState(states.nameAndEmail) && t("common.next")}
+
+					{!isSubmitting && compareState(states.passwords) && t("common.sign_up")}
+				</Button>
+			</form>
+		</FormProvider>
 	);
 };

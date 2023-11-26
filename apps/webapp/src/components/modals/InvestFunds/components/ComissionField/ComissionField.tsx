@@ -1,12 +1,12 @@
 import { Currency } from "__generated__/graphql";
 import { Input, Radio, RadioGroup, Spacer, Spreader } from "components/atoms";
-import { useBreakpoint } from "hooks/useBreakpoint";
-import { useCurrencyInput } from "hooks/useCurrencyInput";
-import { useRadio } from "hooks/useRadio";
 import {
 	defaultValues,
 	InvestFundsFormValues,
 } from "components/modals/InvestFunds/helpers/defaultValues";
+import { useBreakpoint } from "hooks/useBreakpoint";
+import { useCurrencyInput } from "hooks/useCurrencyInput";
+import { useRadio } from "hooks/useRadio";
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
