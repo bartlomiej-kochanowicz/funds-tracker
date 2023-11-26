@@ -1,16 +1,14 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { ThemeSwitcher } from "components";
-import { Heading, Link, Spacer } from "components/atoms";
-import { LangSelector } from "components/molecules";
+import { ClearCentered } from "components/layouts/ClearCentered";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
-import { ClearCentered } from "components/layouts/ClearCentered";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button, Text } from "ui";
+import { Button, H1, Link, Text } from "ui";
 
 import { ConfirmForm } from "./ConfirmForm";
 
@@ -65,11 +63,9 @@ export const Confirm = () => {
 				/>
 			</Suspense>
 
-			<Heading $textAlign="center">{t("common.sign_up_confirm")}</Heading>
+			<H1 className="text-center">{t("common.sign_up_confirm")}</H1>
 
-			<Spacer $space="0.5" />
-
-			<Text className="text-center text-sm text-gray-400">
+			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
 				<Trans
 					i18nKey="page.confirm.description"
 					components={{
@@ -81,24 +77,17 @@ export const Confirm = () => {
 				/>
 			</Text>
 
-			<Spacer $space="1.5" />
-
 			<ConfirmForm email={email} />
 
-			<Spacer />
-
-			<Text className="text-center text-sm text-gray-400">
+			<Text className="my-4 text-center text-sm text-gray-600">
 				<Trans
 					i18nKey="page.confirm.support"
 					components={{
-						support: (
-							<Link
-								href="mailto:support@funds-tracker.com"
-								$fontColor="blue"
-							/>
-						),
+						support: <Link href="mailto:support@funds-tracker.com" />,
 						code: (
 							<Button
+								size="xs"
+								color="gray"
 								onPress={handleResendCode}
 								data-testid="resend-code-button"
 							/>
@@ -107,14 +96,8 @@ export const Confirm = () => {
 				/>
 			</Text>
 
-			<Spacer $space="1.5" />
-
-			<Spacer $space="1.5" />
-
-			<div className="flex flex-col items-center">
-				<LangSelector />
-
-				<Spacer />
+			<div className="mt-12 flex flex-col items-center">
+				{/* <LangSelector /> */}
 
 				<ThemeSwitcher />
 			</div>

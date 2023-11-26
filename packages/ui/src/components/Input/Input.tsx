@@ -51,7 +51,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 			{description && !isInvalid && (
 				<Text
 					{...descriptionProps}
-					className="text-xs"
+					className="mb-0.5 text-xs"
 				>
 					{description}
 				</Text>
@@ -59,7 +59,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 			{isInvalid && (
 				<div
 					{...errorMessageProps}
-					className="text-xs text-red-500"
+					className="mb-0.5 text-xs text-red-500"
 				>
 					{errorMessage}
 				</div>

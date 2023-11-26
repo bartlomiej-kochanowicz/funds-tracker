@@ -7,7 +7,7 @@ import { mergeRefs } from "../../helpers/mergeRefs";
 import { Loader } from "../Loader";
 
 const sizes = {
-	xm: "px-4 py-2 text-xs",
+	xs: "px-4 py-2 text-xs",
 	sm: "px-4 py-2 text-sm",
 	md: "px-6 py-2.5 text-sm",
 	lg: "px-6 py-3 text-base",

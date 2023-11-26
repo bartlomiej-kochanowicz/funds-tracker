@@ -6,10 +6,10 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 }
 
 export const Text = ({ children, className, ...rest }: TextProps) => (
-	<p
+	<span
 		className={cslx("text-gray-900 dark:text-white", className)}
 		{...rest}
 	>
 		{children}
-	</p>
+	</span>
 );

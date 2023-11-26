@@ -1,5 +1,6 @@
 import "base";
-import "./styles/global.css";
+import "styles/global.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
