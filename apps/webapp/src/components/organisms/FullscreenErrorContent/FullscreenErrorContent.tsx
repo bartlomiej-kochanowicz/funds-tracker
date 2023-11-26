@@ -1,4 +1,4 @@
-import { ErrorContent } from "components/molecules";
+import { ErrorContent } from "components/ErrorContent";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { FC } from "react";
 
