@@ -1,16 +1,14 @@
 import { ResetPasswordMutation, ResetPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Loader, Spacer } from "components/atoms";
 import { RESET_PASSWORD } from "graphql/mutations/authentication/ResetPassword";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
-import { ChangeEvent, lazy, Suspense, useCallback, useState } from "react";
+import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button, Text } from "ui";
+import { Button, Input, Text } from "ui";
 
 import { validationSchema } from "./EnterEmail.schema";
-import { Form } from "./EnterEmail.styles";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -33,7 +31,7 @@ export const EnterEmailForm = () => {
 	const {
 		handleSubmit,
 		formState: { errors, isSubmitting },
-		setValue,
+		register,
 	} = useForm({
 		defaultValues,
 		resolver: yupResolver(validationSchema),
@@ -76,14 +74,15 @@ export const EnterEmailForm = () => {
 
 	if (sendEmailSuccess) {
 		return (
-			<Text className="text-center text-sm text-gray-400">
+			<Text className="text-center text-sm italic text-gray-400">
 				{t("page.forgot_password.enter_email.submit.success")}
 			</Text>
 		);
 	}
 
 	return (
-		<Form
+		<form
+			className="flex flex-col"
 			onSubmit={handleSubmit(onSubmit)}
 			noValidate
 		>
@@ -96,30 +95,24 @@ export const EnterEmailForm = () => {
 
 			<Input
 				placeholder={t("common.email")}
+				aria-label={t("common.email")}
 				type="email"
 				data-testid="email-input"
-				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("userEmail", e.target.value)}
-				error={errors.userEmail?.message}
+				isInvalid={!!errors.userEmail}
+				errorMessage={errors.userEmail?.message}
+				{...register("userEmail")}
 			/>
-
-			<Spacer />
 
 			<Button
 				className="w-auto"
 				isDisabled={isSubmitting}
+				isLoading={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
 			>
-				{isSubmitting && (
-					<Loader
-						$color="white"
-						data-testid="button-loader"
-					/>
-				)}
-
-				{!isSubmitting && t("page.forgot_password.enter_email.submit.button")}
+				{t("page.forgot_password.enter_email.submit.button")}
 			</Button>
-		</Form>
+		</form>
 	);
 };
 

@@ -1,7 +1,6 @@
-import { Heading, Spacer } from "components/atoms";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "ui";
+import { H1, Text } from "ui";
 
 import { EnterPasswordForm } from "./EnterPasswordForm";
 
@@ -14,15 +13,11 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
 
 	return (
 		<Fragment>
-			<Heading $textAlign="center">{t("page.forgot_password.enter_password.title")}</Heading>
+			<H1 className="text-center">{t("page.forgot_password.enter_password.title")}</H1>
 
-			<Spacer $space="0.5" />
-
-			<Text className="text-center text-sm text-gray-400">
+			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
 				{t("page.forgot_password.enter_password.description")}
 			</Text>
-
-			<Spacer $space="1.5" />
 
 			<EnterPasswordForm token={token} />
 		</Fragment>

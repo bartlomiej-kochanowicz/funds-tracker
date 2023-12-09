@@ -1,18 +1,16 @@
 import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Loader, Spacer } from "components/atoms";
 import { SET_NEW_PASSWORD } from "graphql/mutations/authentication/SetNewPassword";
 import { showErrorToast } from "helpers/showToast";
-import { ChangeEvent, FC, lazy, Suspense, useCallback, useState } from "react";
+import { FC, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button, Text } from "ui";
+import { Button, Input, Text } from "ui";
 
 import { validationSchema } from "./EnterPassword.schema";
-import { Form } from "./EnterPassword.styles";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -43,7 +41,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		setError,
-		setValue,
+		register,
 	} = useForm({
 		defaultValues,
 		resolver: yupResolver(validationSchema),
@@ -56,8 +54,8 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 		onCompleted: () => {
 			setNewPasswordSuccess(true);
 		},
-		onError: () => {
-			const message = t("service.unknown_error");
+		onError: a => {
+			const message = a.message || t("service.unknown_error");
 
 			setError("userPassword", { type: "custom", message });
 			setError("userPasswordConfirmation", { type: "custom", message: "‎" });
@@ -106,7 +104,8 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 	}
 
 	return (
-		<Form
+		<form
+			className="flex flex-col"
 			onSubmit={handleSubmit(onSubmit)}
 			noValidate
 		>
@@ -119,35 +118,32 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 			<Input
 				placeholder={t("common.password")}
+				aria-label={t("common.password")}
 				type="password"
 				autoFocus
-				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("userPassword", e.target.value)}
-				error={errors.userPassword?.message}
+				isInvalid={!!errors.userPassword}
+				errorMessage={errors.userPassword?.message}
+				{...register("userPassword")}
 			/>
-
-			<Spacer />
 
 			<Input
 				placeholder={t("page.signup.password.confirm")}
+				aria-label={t("page.signup.password.confirm")}
 				type="password"
-				onChange={(e: ChangeEvent<HTMLInputElement>) =>
-					setValue("userPasswordConfirmation", e.target.value)
-				}
-				error={errors.userPasswordConfirmation?.message}
+				isInvalid={!!errors.userPasswordConfirmation}
+				errorMessage={errors.userPasswordConfirmation?.message}
+				{...register("userPasswordConfirmation")}
 			/>
-
-			<Spacer />
 
 			<Button
 				className="w-auto"
 				isDisabled={isSubmitting}
+				isLoading={isSubmitting}
 				type="submit"
 			>
-				{isSubmitting && <Loader $color="white" />}
-
 				{!isSubmitting && t("common.save")}
 			</Button>
-		</Form>
+		</form>
 	);
 };
 

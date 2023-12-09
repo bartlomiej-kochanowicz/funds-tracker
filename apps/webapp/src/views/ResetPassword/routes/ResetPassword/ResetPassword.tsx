@@ -1,6 +1,4 @@
 import { ThemeSwitcher } from "components";
-import { Spacer } from "components/atoms";
-import { LangSelector } from "components/molecules";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { useSearchParams } from "react-router-dom";
 
@@ -16,14 +14,8 @@ export const ResetPassword = () => {
 		<ClearCentered>
 			{token ? <EnterPassword token={token} /> : <EnterEmail />}
 
-			<Spacer $space="1.5" />
-
-			<Spacer $space="1.5" />
-
-			<div className="flex flex-col items-center">
-				<LangSelector />
-
-				<Spacer />
+			<div className="mt-12 flex flex-col items-center">
+				{/* <LangSelector /> */}
 
 				<ThemeSwitcher />
 			</div>

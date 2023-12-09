@@ -1,9 +1,8 @@
-import { Heading, Spacer } from "components/atoms";
 import { Fragment } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Text } from "ui";
+import { H1, Text } from "ui";
 
 import { EnterEmailForm } from "./EnterEmailForm";
 
@@ -12,21 +11,15 @@ export const EnterEmail = () => {
 
 	return (
 		<Fragment>
-			<Heading $textAlign="center">{t("page.signin.forgot_password")}</Heading>
+			<H1 className="text-center">{t("page.signin.forgot_password")}</H1>
 
-			<Spacer $space="0.5" />
-
-			<Text className="text-center text-sm text-gray-400">
+			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
 				{t("page.forgot_password.enter_email.description")}
 			</Text>
 
-			<Spacer $space="1.5" />
-
 			<EnterEmailForm />
 
-			<Spacer />
-
-			<Text className="text-center text-sm text-gray-400">
+			<Text className="my-4 text-center text-sm text-gray-600">
 				<Trans
 					i18nKey="page.signup.already_have_account"
 					components={{

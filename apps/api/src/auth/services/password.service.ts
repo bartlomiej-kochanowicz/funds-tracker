@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from "@nestjs/common";
-import crypto from "crypto";
+import * as crypto from "crypto";
 import { PrismaService } from "@app/prisma/prisma.service";
 import * as bcrypt from "bcrypt";
 import { InjectRedis } from "@liaoliaots/nestjs-redis";
@@ -55,8 +55,8 @@ export class PasswordService {
 		if (!isHuman) {
 			throw new ForbiddenException("You are a robot!");
 		}
-
 		const uuid = await this.redis.get(resetToken);
+		console.log("resetToken", resetToken, uuid);
 
 		const { password: currentPassword } = await this.prisma.user.findUniqueOrThrow({
 			where: {
