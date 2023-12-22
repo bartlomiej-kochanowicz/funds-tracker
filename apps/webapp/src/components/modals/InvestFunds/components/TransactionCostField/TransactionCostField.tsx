@@ -1,13 +1,13 @@
 import { Currency } from "__generated__/graphql";
+import { Button } from "@faunds-tracker/ui";
 import { Input, Spreader } from "components/atoms";
+import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
 import { Calculator } from "lucide-react";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button } from "ui";
 
 import { FormField } from "../FormField";
 

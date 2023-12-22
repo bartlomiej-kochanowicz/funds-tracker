@@ -4,17 +4,17 @@ import {
 	GetInstrumentHistoryQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
+import { Button } from "@faunds-tracker/ui";
 import { Input, Spreader } from "components/atoms";
+import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { INSTRUMENT_HISTORY } from "graphql/query/instruments/InstrumentHistory";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useCurrencyInput } from "hooks/useCurrencyInput";
 import { useUpdateEffect } from "hooks/useUpdateEffect";
 import { RefreshCw } from "lucide-react";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { FC, useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button } from "ui";
 
 import { FormField } from "../FormField";
 

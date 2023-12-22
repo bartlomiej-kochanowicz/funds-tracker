@@ -1,5 +1,6 @@
 import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
+import { Button, Input } from "@faunds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
 import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
@@ -8,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button, Input } from "ui";
 
 import { validationSchema } from "./Confirm.schema";
 

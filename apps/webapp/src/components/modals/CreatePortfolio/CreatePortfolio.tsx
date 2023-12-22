@@ -1,9 +1,9 @@
 import { CreatePortfolioMutation } from "__generated__/graphql";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
+import { Text } from "@faunds-tracker/ui";
 import { Spacer } from "components/atoms";
 import { Modal } from "components/molecules";
 import { useTranslation } from "react-i18next";
-import { Text } from "ui";
 
 import { CreatePortfolioForm } from "./CreatePortfolioForm";
 

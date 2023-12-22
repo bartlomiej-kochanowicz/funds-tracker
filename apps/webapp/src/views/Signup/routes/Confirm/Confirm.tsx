@@ -1,5 +1,6 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
+import { Button, H1, Link, Text } from "@faunds-tracker/ui";
 import { ThemeSwitcher } from "components";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
@@ -8,7 +9,6 @@ import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button, H1, Link, Text } from "ui";
 
 import { ConfirmForm } from "./ConfirmForm";
 

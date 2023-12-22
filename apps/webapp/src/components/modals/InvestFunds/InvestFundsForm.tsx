@@ -1,12 +1,12 @@
 import { Currency } from "__generated__/graphql";
 import { useModal } from "@ebay/nice-modal-react";
+import { Button, Text } from "@faunds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Loader, Spacer, Spreader } from "components/atoms";
 import { formatCurrency } from "helpers/formatCurrency";
 import { FC, Fragment, useCallback, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button, Text } from "ui";
 
 import { ComissionField } from "./components/ComissionField";
 import { DateField } from "./components/DateField";

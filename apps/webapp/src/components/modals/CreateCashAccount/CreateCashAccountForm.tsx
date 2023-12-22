@@ -6,6 +6,7 @@ import {
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { useModal } from "@ebay/nice-modal-react";
+import { Button } from "@faunds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Loader, Spacer, Spreader } from "components/atoms";
 import { CurrencyCombobox } from "components/molecules";
@@ -17,7 +18,6 @@ import { Plus } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button } from "ui";
 
 import { validationSchema } from "./CreateCashAccountForm.schema";
 

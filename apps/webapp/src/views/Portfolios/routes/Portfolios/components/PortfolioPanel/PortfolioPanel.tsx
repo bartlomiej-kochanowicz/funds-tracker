@@ -1,5 +1,6 @@
 import { GetPortfoliosQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
+import { Button, Panel, Text } from "@faunds-tracker/ui";
 import { Dropdown } from "components/atoms";
 import { DropdownItems } from "components/atoms/Dropdown";
 import { MODAL_CONFIRM_DELETE_PORTFOLIO } from "components/modals/ConfirmDeletePortfolio";
@@ -11,7 +12,6 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { generatePath } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button, Panel, Text } from "ui";
 
 interface PortfoliosPanelProps {
 	updatePortfolioName: (data: { name: string; uuid: string }) => void;

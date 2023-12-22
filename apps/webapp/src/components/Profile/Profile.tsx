@@ -1,5 +1,6 @@
 import { LogoutMutation } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
+import { Avatar, Text } from "@faunds-tracker/ui";
 import { Dropdown, Spreader } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { useUserContext } from "contexts/UserContext";
@@ -7,7 +8,6 @@ import { LOGOUT } from "graphql/mutations/authentication/Logout";
 import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Avatar, Text } from "ui";
 
 import { ProfileContainer } from "./Profile.styles";
 

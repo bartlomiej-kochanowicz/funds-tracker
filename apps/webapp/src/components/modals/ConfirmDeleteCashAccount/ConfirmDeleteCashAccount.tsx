@@ -4,12 +4,12 @@ import {
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
+import { Button, Text } from "@faunds-tracker/ui";
 import { Loader, Spacer, Spreader } from "components/atoms";
 import { Modal } from "components/molecules";
 import { DELETE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/DeleteCashAccount";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { Trans, useTranslation } from "react-i18next";
-import { Button, Text } from "ui";
 
 export interface ConfirmDeleteCashAccountProps {
 	name: string;

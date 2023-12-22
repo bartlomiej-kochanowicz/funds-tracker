@@ -1,9 +1,9 @@
+import { H1, Text } from "@faunds-tracker/ui";
 import { ThemeSwitcher } from "components";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { H1, Text } from "ui";
 
 import { SignupForm } from "./SignupForm";
 

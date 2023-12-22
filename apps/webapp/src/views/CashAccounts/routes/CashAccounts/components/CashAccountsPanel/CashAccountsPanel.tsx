@@ -1,5 +1,6 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
+import { Button, Panel, Text } from "@faunds-tracker/ui";
 import { Dropdown } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from "components/modals/AddFundsCashAccount";
@@ -11,7 +12,6 @@ import { formatCurrency } from "helpers/formatCurrency";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Panel, Text } from "ui";
 
 interface CashAccountsPanelProps {
 	updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;

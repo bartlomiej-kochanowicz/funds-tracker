@@ -1,10 +1,10 @@
 import NiceModal from "@ebay/nice-modal-react";
+import { Button } from "@faunds-tracker/ui";
 import { Heading, Spacer, Spreader } from "components/atoms";
-import { Plus } from "lucide-react";
 import { MODAL_CREATE_PORTFOLIO } from "components/modals/CreatePortfolio";
+import { Plus } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "ui";
 
 interface CreateFirstPortfolioProps {
 	callback: (data: any) => void;

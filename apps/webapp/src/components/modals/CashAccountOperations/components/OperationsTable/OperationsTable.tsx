@@ -4,6 +4,7 @@ import {
 	GetCashAccountOperationsQueryVariables,
 } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
+import { Text } from "@faunds-tracker/ui";
 import { Loader } from "components/atoms";
 import { Table } from "components/molecules";
 import { GET_CASH_ACCOUNT_OPERATIONS } from "graphql/query/cashAccounts/GetCashAccountOperations";
@@ -11,7 +12,6 @@ import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "ui";
 
 import { columns } from "./columns";
 

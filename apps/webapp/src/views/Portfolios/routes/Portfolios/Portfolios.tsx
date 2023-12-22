@@ -1,12 +1,12 @@
 import { CreatePortfolioMutation, GetPortfoliosQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
+import { Panel, Text } from "@faunds-tracker/ui";
 import { Heading, Loader, Spacer } from "components/atoms";
 import { ErrorContent } from "components/molecules";
 import { MAX_PORTFOLIOS } from "constants/common";
 import { GET_PORTFOLIOS } from "graphql/query/portfolios/GetPortfolios";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Panel, Text } from "ui";
 
 import { CreateFirstPortfolio } from "./components/CreateFirstPortfolio";
 import { CreatePortfolio } from "./components/CreatePortfolio";

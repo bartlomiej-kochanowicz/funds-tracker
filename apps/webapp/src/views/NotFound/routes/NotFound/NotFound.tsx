@@ -1,7 +1,7 @@
+import { Text } from "@faunds-tracker/ui";
 import { Heading, Spacer } from "components/atoms";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { FC } from "react";
-import { Text } from "ui";
 
 export const NotFound: FC = () => (
 	<ClearCentered>

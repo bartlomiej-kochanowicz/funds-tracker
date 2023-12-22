@@ -1,6 +1,6 @@
+import { H1, Text } from "@faunds-tracker/ui";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { H1, Text } from "ui";
 
 import { EnterPasswordForm } from "./EnterPasswordForm";
 

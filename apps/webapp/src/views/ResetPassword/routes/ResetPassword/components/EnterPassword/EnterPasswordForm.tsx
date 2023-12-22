@@ -1,5 +1,6 @@
 import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
+import { Button, Input, Text } from "@faunds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SET_NEW_PASSWORD } from "graphql/mutations/authentication/SetNewPassword";
 import { showErrorToast } from "helpers/showToast";
@@ -8,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button, Input, Text } from "ui";
 
 import { validationSchema } from "./EnterPassword.schema";
 

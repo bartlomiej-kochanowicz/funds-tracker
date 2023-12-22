@@ -1,7 +1,7 @@
+import { Input } from "@faunds-tracker/ui";
 import { Fragment } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Input } from "ui";
 
 import { SignupFormValues } from "../../Signup.types";
 

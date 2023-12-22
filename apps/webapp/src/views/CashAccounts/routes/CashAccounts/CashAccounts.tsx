@@ -1,12 +1,12 @@
 import { CreateCashAccountMutation, GetCashAccountsQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
+import { Panel, Text } from "@faunds-tracker/ui";
 import { Heading, Loader, Spacer } from "components/atoms";
 import { ErrorContent } from "components/molecules";
 import { MAX_CASH_ACCOUNTS } from "constants/common";
 import { GET_CASH_ACCOUNTS } from "graphql/query/cashAccounts/GetCashAccounts";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Panel, Text } from "ui";
 
 import { CashAccountsPanel } from "./components/CashAccountsPanel";
 import { CreateCashAccount } from "./components/CreateCashAccount";

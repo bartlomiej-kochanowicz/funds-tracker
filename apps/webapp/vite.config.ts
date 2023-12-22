@@ -26,14 +26,6 @@ export default defineConfig({
 		react(),
 		tsconfigPaths(),
 		svgr(),
-		/* viteStaticCopy({
-			targets: [
-				{
-					src: "src/locales/*.json",
-					dest: "locales",
-				},
-			],
-		}), */
 		VitePWA({
 			devOptions: {
 				enabled: IS_DEVELOPMENT,

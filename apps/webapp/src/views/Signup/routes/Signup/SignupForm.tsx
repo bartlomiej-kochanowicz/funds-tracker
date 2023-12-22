@@ -5,6 +5,7 @@ import {
 	SignupMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
+import { Button } from "@faunds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SIGNUP } from "graphql/mutations/authentication/Signup";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
@@ -15,7 +16,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
-import { Button } from "ui";
 
 import { NameAndEmail } from "./components/NameAndEmail";
 import { Passwords } from "./components/Passwords";

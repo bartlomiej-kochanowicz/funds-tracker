@@ -1,5 +1,5 @@
+import { Panel } from "@faunds-tracker/ui";
 import { useParams } from "react-router-dom";
-import { Panel } from "ui";
 
 export const Portfolio = () => {
 	const { uuid } = useParams<{ uuid: string }>();

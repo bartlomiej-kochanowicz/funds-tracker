@@ -1,11 +1,11 @@
 import { CreateCashAccountMutation } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
+import { Button } from "@faunds-tracker/ui";
 import { Heading, Spacer, Spreader } from "components/atoms";
-import { Plus } from "lucide-react";
 import { MODAL_CREATE_CASH_ACCOUNT } from "components/modals/CreateCashAccount";
+import { Plus } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "ui";
 
 interface CreateCashAccountProps {
 	callback: (data: CreateCashAccountMutation) => void;

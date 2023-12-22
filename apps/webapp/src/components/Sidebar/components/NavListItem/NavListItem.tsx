@@ -1,9 +1,9 @@
+import { Text } from "@faunds-tracker/ui";
 import clsx from "clsx";
 import { Spreader } from "components/atoms";
 import { LucideProps } from "lucide-react";
 import { FC, ForwardRefExoticComponent, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "ui";
 
 interface NavListItemProps {
 	isActive: boolean;

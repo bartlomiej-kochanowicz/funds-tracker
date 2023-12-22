@@ -4,6 +4,7 @@ import {
 	SearchInstrumentQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
+import { Badge, Text } from "@faunds-tracker/ui";
 import { Input, Loader, Menu, Spreader } from "components/atoms";
 import type { SearchInputProps } from "components/atoms/Input";
 import { SEARCH_INSTRUMENT } from "graphql/query/instruments/SearchInstrument";
@@ -11,7 +12,6 @@ import { useCombobox } from "hooks/useCombobox";
 import { forwardRef, Fragment, useMemo, useRef } from "react";
 import { mergeRefs, useLayer } from "react-laag";
 import { PlacementType } from "react-laag/dist/PlacementType";
-import { Badge, Text } from "ui";
 
 interface SearchInstrumentComboboxProps extends Omit<SearchInputProps, "onChange"> {
 	placement?: PlacementType;
