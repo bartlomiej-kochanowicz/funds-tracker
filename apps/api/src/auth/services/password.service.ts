@@ -56,9 +56,12 @@ export class PasswordService {
 			throw new ForbiddenException("You are a robot!");
 		}
 		const uuid = await this.redis.get(resetToken);
-		console.log("resetToken", resetToken, uuid);
 
-		const { password: currentPassword } = await this.prisma.user.findUniqueOrThrow({
+		if (!uuid) {
+			throw new ForbiddenException("Invalid or expired token.");
+		}
+
+		const { password: currentPassword } = await this.prisma.user.findUnique({
 			where: {
 				uuid,
 			},

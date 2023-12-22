@@ -1,14 +1,16 @@
-import { Text } from "@faunds-tracker/ui";
-import { Heading, Spacer } from "components/atoms";
+import { H1, Text } from "@faunds-tracker/ui";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
-export const NotFound: FC = () => (
-	<ClearCentered>
-		<Heading $textAlign="center">404</Heading>
+export const NotFound: FC = () => {
+	const { t } = useTranslation();
 
-		<Spacer $space="0.25" />
+	return (
+		<ClearCentered>
+			<H1 className="mb-4 text-center">404</H1>
 
-		<Text className="text-center  text-gray-400">Page not found</Text>
-	</ClearCentered>
-);
+			<Text className="text-center  text-gray-400">{t("common.page.not.found")}</Text>
+		</ClearCentered>
+	);
+};
