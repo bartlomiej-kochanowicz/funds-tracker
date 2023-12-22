@@ -23,7 +23,6 @@
 		"experimentalDecorators": true,
 		"target": "ES2021",
 		"sourceMap": true,
-		"incremental": true,
 		"noImplicitAny": false,
 		"strictBindCallApply": false,
 		"noFallthroughCasesInSwitch": false

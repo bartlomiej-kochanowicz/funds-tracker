@@ -1,4 +1,5 @@
 import react from "@vitejs/plugin-react";
+import { resolve } from "path";
 import eslint from "vite-plugin-eslint";
 import { VitePWA } from "vite-plugin-pwa";
 import svgr from "vite-plugin-svgr";
@@ -21,6 +22,14 @@ export default defineConfig({
 			reporter: ["text", "html"],
 			exclude: ["node_modules/", "src/utils/test-utils.tsx", "src/config/tests/"],
 		},
+	},
+	resolve: {
+		alias: [
+			{
+				find: "@web/aero-ui",
+				replacement: resolve(__dirname, "./node_modules/@funds-tracker/ui"),
+			},
+		],
 	},
 	plugins: [
 		react(),
