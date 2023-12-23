@@ -1,8 +1,8 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { Button, H1, Link, Text } from "@faunds-tracker/ui";
-import { ThemeSwitcher } from "components";
 import { ClearCentered } from "components/layouts/ClearCentered";
+import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { lazy, Suspense, useCallback, useState } from "react";

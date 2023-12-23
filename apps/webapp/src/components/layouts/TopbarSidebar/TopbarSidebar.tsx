@@ -1,5 +1,4 @@
-import { ErrorContent } from "components/molecules";
-import { MobileNavigation, MobileTopbar, Topbar } from "components/organisms";
+import { ErrorContent } from "components/ErrorContent";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { Sidebar } from "lucide-react";
 import { Fragment, ReactNode } from "react";

@@ -1,7 +1,5 @@
 import { Text } from "@faunds-tracker/ui";
-import { ThemeSwitcher } from "components";
-import { Spreader } from "components/atoms";
-import { ItemChildrenProps } from "components/atoms/Menu/MenuItem";
+import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { useTranslation } from "react-i18next";
 
 import { ApperienceWrapper } from "./ApperienceSwitcher.styles";

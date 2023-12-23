@@ -1,5 +1,5 @@
-import { ThemeSwitcher } from "components";
 import { ClearCentered } from "components/layouts/ClearCentered";
+import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { useSearchParams } from "react-router-dom";
 
 import { EnterEmail } from "./components/EnterEmail";
