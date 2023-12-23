@@ -20,3 +20,4 @@ export * from "./components/Tile";
 
 // Path: src/hooks
 export * from "./hooks/useDatepicker";
+export * from "./hooks/useTailwindBreakpoint";

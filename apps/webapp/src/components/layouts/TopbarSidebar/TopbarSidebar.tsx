@@ -1,5 +1,8 @@
+import { useBreakpoint } from "@faunds-tracker/ui";
 import { ErrorContent } from "components/ErrorContent";
-import { useBreakpoint } from "hooks/useBreakpoint";
+import { MobileNavigation } from "components/MobileNavigation";
+import { MobileTopbar } from "components/MobileTopbar";
+import { Topbar } from "components/Topbar";
 import { Sidebar } from "lucide-react";
 import { Fragment, ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -11,7 +14,7 @@ interface TopbarSidebarProps {
 }
 
 export const TopbarSidebar = ({ children }: TopbarSidebarProps) => {
-	const isDesktop = useBreakpoint("desktop", "min");
+	const isDesktop = useBreakpoint("md");
 
 	const location = useLocation();
 

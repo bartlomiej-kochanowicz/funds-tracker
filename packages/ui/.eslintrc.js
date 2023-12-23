@@ -9,7 +9,7 @@ module.exports = {
 		"import/no-extraneous-dependencies": [
 			"error",
 			{
-				devDependencies: ["**/*.spec.*", "**/*.stories.*"],
+				devDependencies: ["**/*.spec.*", "**/*.stories.*", "*.config.*", "**/setupTests.ts"],
 				peerDependencies: true,
 			},
 		],
