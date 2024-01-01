@@ -1,4 +1,4 @@
-import { useBreakpoint } from "@faunds-tracker/ui";
+import { useTailwindBreakpoint } from "@faunds-tracker/ui";
 import { ErrorContent } from "components/ErrorContent";
 import { MobileNavigation } from "components/MobileNavigation";
 import { MobileTopbar } from "components/MobileTopbar";
@@ -14,7 +14,7 @@ interface TopbarSidebarProps {
 }
 
 export const TopbarSidebar = ({ children }: TopbarSidebarProps) => {
-	const isDesktop = useBreakpoint("md");
+	const isDesktop = useTailwindBreakpoint("lg");
 
 	const location = useLocation();
 
@@ -26,17 +26,17 @@ export const TopbarSidebar = ({ children }: TopbarSidebarProps) => {
 				<Fragment>
 					<Topbar />
 
-					<Sidebar />
+					{/* <Sidebar /> */}
 				</Fragment>
 			)}
 
-			{!isDesktop && (
+			{/* {!isDesktop && (
 				<Fragment>
 					<MobileTopbar isDashboard={!isHub} />
 
 					<MobileNavigation />
 				</Fragment>
-			)}
+			)} */}
 
 			<main className="min-h-screen p-4">
 				<ErrorBoundary FallbackComponent={ErrorContent}>{children}</ErrorBoundary>

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
 import { Profile } from "../Profile";
-import { BackButton } from "./Topbar.styles";
 
 const withBackButton = [ROUTES.PORTFOLIOS.PORTFOLIO];
 
@@ -50,15 +49,20 @@ export const Topbar = () => {
 				"fixed left-0 right-0 top-0 z-10 flex items-center px-14 py-1",
 				renderBackButton ? "justify-between" : "justify-end",
 				renderBackButton && " pb-[230px] pl-1 pr-14 pt-1",
-				visible && "border-b border-gray-200",
+				visible &&
+					"flex cursor-pointer items-center border-b border-none border-gray-200 bg-transparent p-0 text-base font-bold",
 			)}
 		>
 			{renderBackButton ? (
-				<BackButton onClick={handleBackToPreviousPage}>
+				<button
+					type="button"
+					className="p-0 text-gray-900 dark:text-white"
+					onClick={handleBackToPreviousPage}
+				>
 					<ChevronLeft className="mr-0.5" />
 
 					{t("common.back")}
-				</BackButton>
+				</button>
 			) : null}
 
 			<Profile withName />

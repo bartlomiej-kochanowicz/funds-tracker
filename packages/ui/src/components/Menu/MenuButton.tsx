@@ -1,5 +1,5 @@
 import { Fragment, RefObject, useRef } from "react";
-import { AriaButtonProps, type AriaMenuProps, useMenuTrigger } from "react-aria";
+import { AriaButtonProps, type AriaMenuProps, AriaPopoverProps, useMenuTrigger } from "react-aria";
 import { type MenuTriggerProps, useMenuTriggerState } from "react-stately";
 
 import { Popover } from "../Popover";
@@ -11,9 +11,14 @@ interface MenuButtonProps<T extends object> extends AriaMenuProps<T>, MenuTrigge
 		ref: RefObject<HTMLButtonElement>,
 		isOpen: boolean,
 	) => JSX.Element;
+	placement?: AriaPopoverProps["placement"];
 }
 
-export const MenuButton = <T extends object>({ triggerElement, ...props }: MenuButtonProps<T>) => {
+export const MenuButton = <T extends object>({
+	triggerElement,
+	placement = "bottom start",
+	...props
+}: MenuButtonProps<T>) => {
 	const state = useMenuTriggerState(props);
 
 	const ref = useRef<HTMLButtonElement>(null);
@@ -27,7 +32,7 @@ export const MenuButton = <T extends object>({ triggerElement, ...props }: MenuB
 				<Popover
 					state={state}
 					triggerRef={ref}
-					placement="bottom start"
+					placement={placement}
 				>
 					<Menu
 						{...menuProps}

@@ -1,3 +1,4 @@
+import { TopbarSidebar } from "components/layouts/TopbarSidebar";
 import { ProtectedRoute } from "components/ProtectedRoute";
 import { lazy } from "react";
 import { ROUTES } from "routes/paths";
@@ -13,7 +14,9 @@ export const DashboardRoutes = [
 		path: ROUTES.DASHBOARD,
 		element: (
 			<ProtectedRoute>
-				<Dashboard />
+				<TopbarSidebar>
+					<Dashboard />
+				</TopbarSidebar>
 			</ProtectedRoute>
 		),
 	},
