@@ -1,17 +1,13 @@
 import { LogoutMutation } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Avatar, Button, Menu, Text } from "@faunds-tracker/ui";
+import { Avatar, Menu, PureButton } from "@faunds-tracker/ui";
 import { useUserContext } from "contexts/UserContext";
 import { LOGOUT } from "graphql/mutations/authentication/Logout";
-import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
-import { FC, Fragment } from "react";
+import { LogOut, Settings } from "lucide-react";
+import { Key } from "react-aria";
 import { useTranslation } from "react-i18next";
 
-interface ProfileProps {
-	withName?: boolean;
-}
-
-export const Profile: FC<ProfileProps> = ({ withName = false }) => {
+export const Profile = () => {
 	const { user } = useUserContext();
 
 	const { t } = useTranslation();
@@ -22,83 +18,53 @@ export const Profile: FC<ProfileProps> = ({ withName = false }) => {
 		onCompleted,
 	});
 
-	const handleSignOut = async () => {
-		await logout();
+	const handleAction = async (key: Key) => {
+		switch (key) {
+			case "sign-out":
+				await logout();
+
+				break;
+			default:
+				break;
+		}
 	};
-
-	/* return (
-		<Dropdown
-			items={items}
-			placement="bottom-end"
-			triggerOffset={0}
-		>
-		display: flex;
-	align-items: center;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-			{({ isOpen, ...rest }) => (
-				<ProfileContainer {...rest}>
-					{withName && (
-						<Fragment>
-							<Avatar name={user.name} />
-
-							<Spreader $spread="0.25" />
-
-							<Text className="max-w-[250px] font-bold">
-								{t("common.hi")}, {user.name}!
-							</Text>
-						</Fragment>
-					)}
-
-					{!withName && <Avatar name={user.name} />}
-
-					<Spreader $spread="0.5" />
-
-					{isOpen ? <ChevronUp /> : <ChevronDown />}
-				</ProfileContainer>
-			)}
-		</Dropdown>
-	); */
 
 	return (
 		<Menu
-			onAction={a => {
-				console.log(a);
-			}}
+			onAction={handleAction}
 			placement="bottom right"
 			// eslint-disable-next-line react/no-unstable-nested-components
-			triggerElement={(props, ref, isOpen) => (
-				<Button
-					noAnimation
-					color="transparent"
-					className="flex items-center !px-0 !py-0"
+			triggerElement={(props, ref) => (
+				<PureButton
+					className="flex items-center rounded-full outline-none ring-blue-300 focus:ring-4 dark:ring-blue-800"
 					{...props}
 					ref={ref}
 				>
-					{withName && (
-						<Fragment>
-							<Avatar name={user.name} />
-
-							<Text className="ml-1 max-w-[250px] font-bold">
-								{t("common.hi")}, {user.name}!
-							</Text>
-						</Fragment>
-					)}
-
-					{!withName && (
-						<Avatar
-							name={user.name}
-							className="mr-2"
-						/>
-					)}
-
-					{isOpen ? <ChevronUp /> : <ChevronDown />}
-				</Button>
+					<Avatar name={user.name} />
+				</PureButton>
 			)}
 		>
 			<Menu.Section>
-				<Menu.Item key="sign-out">{t("common.sign_out")}</Menu.Item>
+				<Menu.Item
+					key="settings"
+					textValue={t("common.settings")}
+				>
+					<div className="flex items-center gap-2">
+						<Settings className="h-4 w-4" />
+
+						{t("common.settings")}
+					</div>
+				</Menu.Item>
+				<Menu.Item
+					key="sign-out"
+					textValue={t("common.sign_out")}
+				>
+					<div className="flex items-center gap-2">
+						<LogOut className="h-4 w-4" />
+
+						{t("common.sign_out")}
+					</div>
+				</Menu.Item>
 			</Menu.Section>
 		</Menu>
 	);

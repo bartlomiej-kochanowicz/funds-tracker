@@ -2,8 +2,8 @@ import { useTailwindBreakpoint } from "@faunds-tracker/ui";
 import { ErrorContent } from "components/ErrorContent";
 import { MobileNavigation } from "components/MobileNavigation";
 import { MobileTopbar } from "components/MobileTopbar";
+import { Sidebar } from "components/Sidebar";
 import { Topbar } from "components/Topbar";
-import { Sidebar } from "lucide-react";
 import { Fragment, ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useLocation } from "react-router-dom";
@@ -26,7 +26,7 @@ export const TopbarSidebar = ({ children }: TopbarSidebarProps) => {
 				<Fragment>
 					<Topbar />
 
-					{/* <Sidebar /> */}
+					<Sidebar />
 				</Fragment>
 			)}
 
@@ -38,7 +38,7 @@ export const TopbarSidebar = ({ children }: TopbarSidebarProps) => {
 				</Fragment>
 			)} */}
 
-			<main className="min-h-screen p-4">
+			<main className="min-h-screen pb-4 pl-4 pr-4 pt-14">
 				<ErrorBoundary FallbackComponent={ErrorContent}>{children}</ErrorBoundary>
 			</main>
 		</Fragment>

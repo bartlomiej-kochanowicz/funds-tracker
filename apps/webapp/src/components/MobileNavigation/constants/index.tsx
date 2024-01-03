@@ -3,8 +3,8 @@ import { ROUTES } from "routes/paths";
 
 export const mobileNavigationNavigation = [
 	{
-		to: ROUTES.DASHBOARD,
-		title: "navigation.dashboard",
+		to: ROUTES.HOME,
+		title: "navigation.home",
 		icon: <Home />,
 	},
 	{

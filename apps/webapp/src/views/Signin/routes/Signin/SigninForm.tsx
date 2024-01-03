@@ -97,7 +97,7 @@ export const SigninForm = () => {
 		onCompleted: async () => {
 			await getUser();
 
-			navigate(ROUTES.DASHBOARD);
+			navigate(ROUTES.HOME);
 		},
 		onError: async error => {
 			setError("userPassword", { type: "custom", message: error.message });

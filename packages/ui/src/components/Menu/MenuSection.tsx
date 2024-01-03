@@ -25,7 +25,7 @@ export const MenuSection = <T,>({ section, state, onAction, onClose }: MenuSecti
 			{section.key !== state.collection.getFirstKey() && (
 				<li
 					{...separatorProps}
-					className="mx-2 mb-1 mt-1 border-t border-gray-300 dark:border-gray-600"
+					className="mx-2 mb-1 mt-1 border-t border-gray-300 dark:border-neutral-700"
 				/>
 			)}
 			<li {...itemProps}>

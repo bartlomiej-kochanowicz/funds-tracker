@@ -1,68 +1,35 @@
-import { ThemeSwitcher } from "components";
-import { Spacer } from "components/atoms";
-import { LangSelector } from "components/molecules";
-import { lazy, Suspense } from "react";
+import LogoNameVertical from "assets/logo/logo-name-vertical.svg?react";
+import LogoNameVerticalDark from "assets/logo/logo-name-vertical-dark.svg?react";
+import { ThemeSwitcher } from "components/ThemeSwitcher";
+import { Link } from "react-router-dom";
+import { ROUTES } from "routes/paths";
 
-import { LogoFallback } from "./components/LogoFallback";
-import { NavList } from "./components/NavList";
+import { NavItem } from "./components/NavItem";
 import { sidebarNavigation } from "./constants";
 
-const LogoNameVertical = lazy(() =>
-	import("assets/logo/logo-name-vertical.svg").then(({ ReactComponent: component }) => ({
-		default: component,
-	})),
-);
+export const Sidebar = () => (
+	<div className="fixed bottom-0 start-0 top-0 z-20 hidden w-64 border-e border-gray-300 bg-white pb-10 pt-7 dark:border-neutral-700 dark:bg-zinc-800 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-slate-700 [&::-webkit-scrollbar]:w-2">
+		<div className="px-6">
+			<Link
+				to={ROUTES.HOME}
+				className="dark:outline-blue-800"
+			>
+				<LogoNameVerticalDark className="h-auto w-36 dark:hidden" />
+				<LogoNameVertical className="hidden h-auto w-36 dark:block " />
+			</Link>
+		</div>
 
-const LogoNameVerticalDark = lazy(() =>
-	import("assets/logo/logo-name-vertical-dark.svg").then(({ ReactComponent: component }) => ({
-		default: component,
-	})),
-);
-
-export const Sidebar = () => {
-	const isDark = false;
-
-	return (
-		<div className="fixed left-0 top-0 z-10 flex h-full flex-col justify-between pb-14 pl-4 pr-0 pt-6">
-			<div className="flex flex-col">
-				<Suspense fallback={<LogoFallback />}>
-					{isDark ? (
-						<LogoNameVertical
-							height="35px"
-							style={{
-								width: "fit-content",
-								maxWidth: "140px",
-								display: "block",
-								marginLeft: "20px",
-							}}
-						/>
-					) : (
-						<LogoNameVerticalDark
-							height="35px"
-							style={{
-								width: "fit-content",
-								maxWidth: "140px",
-								display: "block",
-								marginLeft: "20px",
-							}}
-						/>
-					)}
-				</Suspense>
-
-				<Spacer $space="1.5" />
-
-				<Spacer />
-
-				<NavList navigation={sidebarNavigation} />
-			</div>
-
-			<div className="flex flex-col items-center">
+		<div className="flex h-full flex-col justify-between">
+			<nav className="flex w-full flex-col flex-wrap p-6">
+				<ul className="space-y-1.5">
+					{sidebarNavigation.map(item => (
+						<NavItem {...item} />
+					))}
+				</ul>
+			</nav>
+			<div className="mx-auto block w-fit p-6">
 				<ThemeSwitcher />
-
-				<Spacer />
-
-				<LangSelector />
 			</div>
 		</div>
-	);
-};
+	</div>
+);

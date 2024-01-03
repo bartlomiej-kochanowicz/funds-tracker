@@ -12,6 +12,7 @@ export * from "./components/Loader";
 export * from "./components/Menu";
 export * from "./components/Panel";
 export * from "./components/Popover";
+export * from "./components/PureButton";
 export * from "./components/Radio";
 export * from "./components/Select";
 export * from "./components/Switch";

@@ -47,7 +47,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
 				type="button"
 				ref={ref}
 				className={clsx(
-					"flex w-full items-center justify-between rounded-xl border bg-gray-50 p-2.5 text-sm outline-none dark:border-gray-600 dark:bg-neutral-700",
+					"flex w-full items-center justify-between rounded-xl border bg-gray-50 p-2.5 text-sm outline-none dark:border-neutral-700 dark:bg-neutral-700",
 					isFocusVisible && "border-blue-500 group-hover:border-blue-500 dark:border-blue-500",
 					!isFocusVisible && "border-gray-300",
 					isDisabled && "cursor-not-allowed opacity-50",

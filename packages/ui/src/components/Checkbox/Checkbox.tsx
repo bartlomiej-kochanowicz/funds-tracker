@@ -42,7 +42,7 @@ export function Checkbox(props: AriaCheckboxProps) {
 					!isDisabled && !(isFocusVisible || state.isSelected) && "group-hover:border-gray-400",
 					!isDisabled && (isFocusVisible || state.isSelected)
 						? "border-blue-500"
-						: "border-gray-300 dark:border-gray-600",
+						: "border-gray-300 dark:border-neutral-700",
 				)}
 				aria-hidden="true"
 			>

@@ -14,7 +14,7 @@ export const Hub = () => {
 	if (isDesktop) {
 		return (
 			<Navigate
-				to={ROUTES.DASHBOARD}
+				to={ROUTES.HOME}
 				replace
 			/>
 		);
@@ -26,7 +26,7 @@ export const Hub = () => {
 				$level="h3"
 				$fontColor="gray400"
 			>
-				{t("navigation.dashboard")}
+				{t("navigation.home")}
 			</Heading>
 
 			<Spacer $space="0.5" />

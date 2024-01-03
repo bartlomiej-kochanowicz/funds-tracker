@@ -51,7 +51,7 @@ export const ComboBox = <T extends object>(props: AriaComboBoxProps<T>) => {
 					"relative flex w-full overflow-hidden rounded-xl border border-gray-300 bg-gray-50  text-sm text-gray-900 outline-none group-hover:border-blue-500 dark:bg-neutral-700  dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500",
 					isDisabled && "cursor-not-allowed opacity-50",
 					!isDisabled && "group-hover:border-gray-400",
-					state.isFocused ? "!border-blue-500" : "dark:border-gray-600",
+					state.isFocused ? "!border-blue-500" : "dark:border-neutral-700",
 				)}
 			>
 				<input
@@ -64,7 +64,7 @@ export const ComboBox = <T extends object>(props: AriaComboBoxProps<T>) => {
 					ref={buttonRef}
 					type="button"
 					className={clsx(
-						"cursor-default border-l border-gray-300 bg-gray-100 px-1 dark:border-gray-600 dark:bg-neutral-600",
+						"cursor-default border-l border-gray-300 bg-gray-100 px-1 dark:border-neutral-700 dark:bg-neutral-600",
 						state.isFocused ? "!border-blue-500 text-blue-500" : "border-gray-300 text-gray-500",
 					)}
 				>

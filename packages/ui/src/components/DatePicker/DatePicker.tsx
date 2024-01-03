@@ -36,7 +36,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 			>
 				<div
 					className={clsx(
-						"relative flex items-center rounded-l-xl border border-gray-300 bg-gray-50 p-2.5 pr-10 text-sm transition-colors dark:border-gray-600 dark:bg-neutral-700",
+						"relative flex items-center rounded-l-xl border border-gray-300 bg-gray-50 p-2.5 pr-10 text-sm transition-colors dark:border-neutral-700 dark:bg-neutral-700",
 						!isDisabled &&
 							"group-focus-within:border-blue-500 group-hover:border-gray-400 group-focus-within:group-hover:border-blue-500",
 					)}
