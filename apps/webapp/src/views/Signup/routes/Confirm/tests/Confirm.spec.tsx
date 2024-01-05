@@ -5,6 +5,7 @@ import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { ROUTES } from "routes/paths";
 import { Mock } from "vitest";
 
 import { Confirm } from "../Confirm";
@@ -133,7 +134,7 @@ describe("Confirm password tests", () => {
 
 		// then
 		await waitFor(async () => {
-			await confirmPO.expectSuccessCallback(mockUseNavigate).toBeCalledWith("/introduction");
+			await confirmPO.expectSuccessCallback(mockUseNavigate).toBeCalledWith(ROUTES.HOME);
 		});
 	});
 

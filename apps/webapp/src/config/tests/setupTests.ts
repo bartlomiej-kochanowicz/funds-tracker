@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 
 import matchMediaPolyfill from "mq-polyfill";
