@@ -8,7 +8,7 @@ import { ROUTES } from "routes/paths";
 import { NavItem } from "./components/NavItem";
 
 export const Sidebar = () => (
-	<div className="fixed bottom-0 top-0 z-20 hidden w-64 border-e border-gray-300 bg-white pb-10 pt-7 dark:border-neutral-700 dark:bg-zinc-800 md:block">
+	<div className="fixed bottom-0 top-0 z-20 hidden w-64 border-e border-gray-300 bg-white pb-10 pt-7 md:block dark:border-neutral-700 dark:bg-zinc-800">
 		<div className="px-6">
 			<Link
 				to={ROUTES.HOME}

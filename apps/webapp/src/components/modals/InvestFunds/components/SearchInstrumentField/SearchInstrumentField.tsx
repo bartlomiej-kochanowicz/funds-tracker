@@ -1,8 +1,8 @@
 import { InstrumentType } from "__generated__/graphql";
+import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { SearchInstrumentCombobox } from "components/molecules";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useRegisterCombobox } from "hooks/useRegisterCombobox";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 

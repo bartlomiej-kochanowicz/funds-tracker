@@ -1,8 +1,8 @@
 import { Select } from "components/atoms";
+import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import instruments from "constants/selectors/instruments";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useSelect } from "hooks/useSelect";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
