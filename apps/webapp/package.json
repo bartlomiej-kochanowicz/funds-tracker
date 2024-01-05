@@ -1,5 +1,6 @@
 {
 	"name": "webapp",
+	"type": "module",
 	"scripts": {
 		"build": "tsc && vite build",
 		"clean": "rm -rf dist",

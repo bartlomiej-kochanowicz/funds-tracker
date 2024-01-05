@@ -5,3 +5,4 @@ src/__generated__/*.ts
 dev-dist/**/*
 dev-sw.js
 vite.config.ts
+.eslintrc.cjs
