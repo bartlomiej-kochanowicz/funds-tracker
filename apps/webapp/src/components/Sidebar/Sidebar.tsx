@@ -23,7 +23,10 @@ export const Sidebar = () => (
 			<nav className="flex w-full flex-col flex-wrap p-6">
 				<ul className="space-y-1.5">
 					{NAVIGATION.map(item => (
-						<NavItem {...item} />
+						<NavItem
+							{...item}
+							key={item.to}
+						/>
 					))}
 				</ul>
 			</nav>
