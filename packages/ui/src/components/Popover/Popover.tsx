@@ -35,7 +35,7 @@ export const Popover = ({ className, ...props }: PopoverProps) => {
 				ref={mergedRefs}
 				className={clsx(
 					className,
-					"absolute top-full z-10 mt-2 min-w-[200px] rounded-md border border-gray-300 bg-white py-1 shadow-lg dark:border-neutral-700 dark:bg-neutral-900",
+					"absolute top-full z-10 mt-2 min-w-[200px] rounded-md border border-gray-300 bg-white py-1 shadow-lg dark:border-neutral-700 dark:bg-zinc-800",
 				)}
 			>
 				<DismissButton onDismiss={state.close} />

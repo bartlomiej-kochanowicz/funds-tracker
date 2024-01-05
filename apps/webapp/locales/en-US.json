@@ -108,7 +108,7 @@
 	"navigation.transactions": "Transactions",
 	"navigation.history": "History",
 	"navigation.my_profile": "My profile",
-	"navigation.hub": "Hub",
+	"navigation.hub": "More",
 	"common.sign_out": "Sign out",
 	"add.portfolios.title": "Add your portfolios",
 	"add.portfolios.description": "Don't be limited to one strategy, divide your investments into <bold>independent portfolios</bold>. For example, you can separate your passively and actively managed portfolios. <bold>Maximum 10 portfolios.</bold>",
@@ -210,5 +210,6 @@
 	"modal.InvestFunds.form.not.supported.yet.description": "If you are interested in adding this type of instrument, please <support>write to us</support>.",
 	"modal.InvestFunds.form.please.select.instrumentType.to.continue": "Please select instrument type to continue.",
 	"common.value": "Value",
-	"common.page.not.found": "Page not found"
+	"common.page.not.found": "Page not found",
+	"common.settings": "Settings"
 }

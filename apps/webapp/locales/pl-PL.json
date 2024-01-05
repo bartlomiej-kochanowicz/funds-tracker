@@ -108,7 +108,7 @@
 	"navigation.transactions": "Transakcje",
 	"navigation.history": "Historia",
 	"navigation.my_profile": "Mój profil",
-	"navigation.hub": "Centrum",
+	"navigation.hub": "Więcej",
 	"common.sign_out": "Wyloguj się",
 	"add.portfolios.title": "Dodaj portfele",
 	"add.portfolios.description": "Nie ograniczaj się do jednej strategii, podziel swoje inwestycje na <bold>nieżalene portfele</bold>. Dla przykładu możesz rozdzielić swoje pasywnie i aktywnie zarządzane portfele. <bold>Maksymalnie 10 portfeli.</bold>",
@@ -210,5 +210,6 @@
 	"modal.InvestFunds.form.not.supported.yet.description": "Jeśli jesteś zainteresowany dodaniem tego typu instrumentu, <support>napisz do nas</support>.",
 	"modal.InvestFunds.form.please.select.instrumentType.to.continue": "Wybierz typ instrumentu, aby kontynuować.",
 	"common.value": "Wartość",
-	"common.page.not.found": "Strona nie została znaleziona"
+	"common.page.not.found": "Strona nie została znaleziona",
+	"common.settings": "Ustawienia"
 }

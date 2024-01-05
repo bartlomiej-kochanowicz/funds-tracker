@@ -31,7 +31,7 @@ export const MenuItem = <T,>({ item, state, onAction, onClose, className }: Menu
 			ref={ref}
 			className={clsx(
 				className,
-				"relative mx-1 cursor-default select-none rounded px-3 py-2 text-sm focus:outline-none",
+				"relative mx-1 cursor-pointer select-none rounded border-none px-3 py-2 text-sm transition-colors focus:outline-none",
 				isFocused ? "bg-blue-500 text-white" : "text-gray-900 dark:text-white",
 			)}
 		>
