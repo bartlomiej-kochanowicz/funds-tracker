@@ -12,8 +12,8 @@ export const Topbar = () => (
 				to={ROUTES.HOME}
 				className="dark:outline-blue-800 lg:hidden"
 			>
-				<LogoNameVerticalDark className="h-10 w-auto dark:hidden" />
-				<LogoNameVertical className="hidden h-10 w-auto dark:block " />
+				<LogoNameVerticalDark className="h-8 w-auto dark:hidden" />
+				<LogoNameVertical className="hidden h-8 w-auto dark:block " />
 			</Link>
 
 			<Profile />
