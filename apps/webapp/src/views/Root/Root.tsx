@@ -3,7 +3,7 @@ import { FC, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 /* import { CashAccountsRoutes } from "views/CashAccounts"; */
 import { HomeRoutes } from "views/Home";
-/* import { HubRoutes } from "views/Hub"; */
+import { HubRoutes } from "views/Hub";
 import { NotFoundRoutes } from "views/NotFound";
 /* import { PortfoliosRoutes } from "views/Portfolios"; */
 import { ResetPasswordRoutes } from "views/ResetPassword";
@@ -21,7 +21,8 @@ export const Root: FC = () => {
 		...PortfoliosRoutes,
 		...CashAccountsRoutes,
 		...SettingsRoutes,
-		...HubRoutes, */
+		 */
+		...HubRoutes,
 		...NotFoundRoutes,
 	]);
 

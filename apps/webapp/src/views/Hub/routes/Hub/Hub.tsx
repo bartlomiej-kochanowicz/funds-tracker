@@ -1,5 +1,4 @@
-import { Heading, Spacer, Tile } from "components/atoms";
-import { useBreakpoint } from "hooks/useBreakpoint";
+import { H1, Tile, useTailwindBreakpoint } from "@faunds-tracker/ui";
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -7,11 +6,11 @@ import { ROUTES } from "routes/paths";
 import { hubNavigation } from "./constants";
 
 export const Hub = () => {
-	const isDesktop = useBreakpoint("desktop", "min");
+	const isMd = useTailwindBreakpoint("md");
 
 	const { t } = useTranslation();
 
-	if (isDesktop) {
+	if (isMd) {
 		return (
 			<Navigate
 				to={ROUTES.HOME}
@@ -22,29 +21,18 @@ export const Hub = () => {
 
 	return (
 		<div className="flex flex-col">
-			<Heading
-				$level="h3"
-				$fontColor="gray400"
-			>
-				{t("navigation.home")}
-			</Heading>
+			<H1>{t("navigation.explore")}</H1>
 
-			<Spacer $space="0.5" />
-
-			<div className="grid gap-6">
-				{hubNavigation.essentials.map(({ icon, title, to }) => {
-					const Icon = icon;
-
-					return (
-						<Tile
-							key={title}
-							title={t(title)}
-							to={to}
-						>
-							<Icon />
-						</Tile>
-					);
-				})}
+			<div className="mt-4 grid grid-cols-3 gap-6 sm:grid-cols-4">
+				{hubNavigation.essentials.map(({ icon: Icon, title, to }) => (
+					<Tile
+						key={title}
+						title={t(title)}
+						to={to}
+					>
+						<Icon className="h-6 w-6" />
+					</Tile>
+				))}
 			</div>
 		</div>
 	);

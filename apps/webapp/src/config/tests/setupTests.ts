@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
-import "jest-styled-components";
 
 import matchMediaPolyfill from "mq-polyfill";
 import ResizeObserver from "resize-observer-polyfill";

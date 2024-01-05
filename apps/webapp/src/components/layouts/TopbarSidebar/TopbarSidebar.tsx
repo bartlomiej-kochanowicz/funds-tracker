@@ -17,7 +17,7 @@ export const TopbarSidebar = ({ children }: TopbarSidebarProps) => (
 
 		<MobileNavigation />
 
-		<main className="mb-[50px] mt-[61px] p-4 lg:mb-0 lg:ml-[255px] lg:mt-[73px]">
+		<main className="mb-[50px] mt-[61px] p-4 md:mb-0 md:ml-[255px] md:mt-[73px]">
 			<ErrorBoundary FallbackComponent={ErrorContent}>{children}</ErrorBoundary>
 		</main>
 	</Fragment>
