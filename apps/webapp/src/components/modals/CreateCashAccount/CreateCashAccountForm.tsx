@@ -79,10 +79,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 	});
 
 	return (
-		<form
-			noValidate
-			onSubmit={handleSubmit(onSubmit)}
-		>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="flex flex-col">
 				<Input
 					placeholder={t("common.input.name.placeholder")}

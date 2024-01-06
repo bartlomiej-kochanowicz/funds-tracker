@@ -65,10 +65,7 @@ export const CreatePortfolioForm: FC<CreatePortfolioFormProps> = ({ callback }) 
 	};
 
 	return (
-		<form
-			noValidate
-			onSubmit={handleSubmit(onSubmit)}
-		>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="flex-end flex">
 				<Input
 					placeholder={t("common.input.name.placeholder")}

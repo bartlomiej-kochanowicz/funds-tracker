@@ -71,7 +71,6 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 		<form
 			className="flex flex-col"
 			onSubmit={handleSubmit(onSubmit)}
-			noValidate
 		>
 			<Suspense>
 				<GoogleReCaptcha

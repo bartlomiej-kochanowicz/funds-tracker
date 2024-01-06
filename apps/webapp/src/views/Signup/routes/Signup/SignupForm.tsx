@@ -139,7 +139,6 @@ export const SignupForm = () => {
 			<form
 				className="flex flex-col"
 				onSubmit={handleSubmit(onSubmit)}
-				noValidate
 			>
 				<Suspense>
 					<GoogleReCaptcha

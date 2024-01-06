@@ -107,7 +107,6 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 		<form
 			className="flex flex-col"
 			onSubmit={handleSubmit(onSubmit)}
-			noValidate
 		>
 			<Suspense>
 				<GoogleReCaptcha

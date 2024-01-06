@@ -92,10 +92,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 	});
 
 	return (
-		<form
-			noValidate
-			onSubmit={handleSubmit(onSubmit)}
-		>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<Input
 				type="currency"
 				currency={currency}
