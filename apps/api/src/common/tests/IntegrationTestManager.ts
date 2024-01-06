@@ -1,6 +1,6 @@
 import { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
-import cookieParser from "cookie-parser";
+import * as cookieParser from "cookie-parser";
 import { PrismaService } from "@app/prisma/prisma.service";
 import { testUser } from "@common/tests/stubs/testUser.stub";
 import { AppModule } from "@app/app.module";

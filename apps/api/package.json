@@ -10,10 +10,9 @@
 		"start:prod": "node dist/main",
 		"lint": "eslint src",
 		"lint:fix": "eslint src --fix",
-		"test": "jest",
-		"test:watch": "jest --watch",
-		"test:cov": "jest --coverage",
-		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+		"test": "dotenv -e .env.test -- jest",
+		"test:watch": "dotenv -e .env.test -- jest --watch",
+		"test:cov": "dotenv -e .env.test -- jest --coverage"
 	},
 	"dependencies": {
 		"@apollo/server": "4.9.4",
