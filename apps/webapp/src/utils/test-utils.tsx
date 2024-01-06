@@ -30,7 +30,7 @@ interface Options extends RenderOptions {
 	mocks?: readonly MockedResponse<Record<string, any>>[];
 }
 
-const render = (ui: ReactElement, options?: Options) => {
+const render = (ui: ReactElement, options?: Options): ReturnType<typeof rtlRender> => {
 	const AllProviders = ({ children }: { children: ReactNode }) => (
 		<MockedProvider
 			mocks={[userMock, ...(options?.mocks ? options.mocks : [])]}

@@ -5,7 +5,6 @@ import { FC } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { findByText, getByTestId, queryByTestId, render, waitFor } from "utils/test-utils";
 import { unsafeCast } from "utils/unsafeCast";
-import { Mock } from "vitest";
 
 export class SigninPO {
 	private elements: {
@@ -56,10 +55,6 @@ export class SigninPO {
 			// await loader disappears
 			expect(queryByTestId(this.container, "button-loader")).not.toBeInTheDocument();
 		});
-	}
-
-	expectSuccessCallback(callback: Mock) {
-		return expect(callback);
 	}
 
 	async expectTextDisplayed(text: string) {

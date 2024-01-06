@@ -150,7 +150,6 @@ export const SigninForm = () => {
 
 			<Input
 				placeholder={t("common.email")}
-				type="email"
 				aria-label={t("common.email")}
 				isDisabled={compareState(states.password)}
 				data-testid="email-input"

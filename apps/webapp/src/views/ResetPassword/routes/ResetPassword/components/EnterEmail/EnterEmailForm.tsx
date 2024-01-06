@@ -95,7 +95,6 @@ export const EnterEmailForm = () => {
 			<Input
 				placeholder={t("common.email")}
 				aria-label={t("common.email")}
-				type="email"
 				data-testid="email-input"
 				isInvalid={!!errors.userEmail}
 				errorMessage={errors.userEmail?.message}

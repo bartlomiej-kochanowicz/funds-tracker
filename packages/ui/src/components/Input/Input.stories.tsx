@@ -35,7 +35,6 @@ export const Invalid: Story = {
 			<Input
 				label="Hello world"
 				placeholder="Placeholder text..."
-				type="email"
 				isRequired
 				validationBehavior="native"
 			/>

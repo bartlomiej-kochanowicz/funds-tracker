@@ -1,4 +1,4 @@
-import request from "supertest";
+import { Response } from "supertest";
 
-export const getGqlErrorStatus = (response: request.Response): number =>
+export const getGqlErrorStatus = (response: Response): number =>
 	response.body.errors[0].extensions.originalError.statusCode;

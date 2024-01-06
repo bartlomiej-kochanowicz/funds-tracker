@@ -9,6 +9,7 @@
 		"dev": "tsup ./src/index.ts --format esm,cjs --watch --dts --external react",
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
 		"test": "vitest",
+		"test:ui": "pnpm test",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"storybook": "storybook dev -p 6006",

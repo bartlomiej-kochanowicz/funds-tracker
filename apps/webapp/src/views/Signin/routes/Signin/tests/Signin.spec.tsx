@@ -36,7 +36,9 @@ vi.mock("react-router-dom", async () => ({
 vi.mock("helpers/showToast", () => ({ showErrorToast: vi.fn(), showSuccessToast: vi.fn() }));
 
 describe("Signin tests", () => {
-	afterAll(vi.clearAllMocks);
+	afterAll(() => {
+		vi.clearAllMocks();
+	});
 
 	it("sign in properly", async () => {
 		// given
@@ -99,9 +101,7 @@ describe("Signin tests", () => {
 		await signinPO.submitForm();
 
 		// then
-		await waitFor(() =>
-			signinPO.expectSuccessCallback(mockNavigate).toHaveBeenCalledWith(ROUTES.HOME),
-		);
+		await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(ROUTES.HOME));
 	});
 
 	it("shows error when email is invalid", async () => {
@@ -291,9 +291,9 @@ describe("Signin tests", () => {
 		await signinPO.expectLoaderDisappeared();
 		await signinPO.expectTextDisplayed("User not confirmed.");
 		await waitFor(() =>
-			signinPO
-				.expectSuccessCallback(mockNavigate)
-				.toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, { state: { email: "test@email.xyz" } }),
+			expect(mockNavigate).toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, {
+				state: { email: "test@email.xyz" },
+			}),
 		);
 
 		await waitFor(() =>
@@ -378,9 +378,9 @@ describe("Signin tests", () => {
 		await signinPO.expectLoaderDisappeared();
 		await signinPO.expectTextDisplayed("User not confirmed.");
 		await waitFor(() =>
-			signinPO
-				.expectSuccessCallback(mockNavigate)
-				.toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, { state: { email: "test@email.xyz" } }),
+			expect(mockNavigate).toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, {
+				state: { email: "test@email.xyz" },
+			}),
 		);
 
 		await waitFor(() =>
