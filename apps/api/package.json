@@ -13,7 +13,8 @@
 		"test": "dotenv -e .env.test -- jest",
 		"test:api": "pnpm test",
 		"test:watch": "dotenv -e .env.test -- jest --watch",
-		"test:cov": "dotenv -e .env.test -- jest --coverage"
+		"test:cov": "dotenv -e .env.test -- jest --coverage",
+		"tsc": "tsc"
 	},
 	"dependencies": {
 		"@apollo/server": "4.10.0",

@@ -17,6 +17,7 @@
 		},
 		"test:api": {},
 		"test:webapp": {},
-		"test:ui": {}
+		"test:ui": {},
+		"tsc": {}
 	}
 }

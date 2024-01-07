@@ -16,7 +16,8 @@
 		"lint:fix": "eslint src --fix",
 		"codegen": "graphql-codegen --config ./src/config/codegen.ts",
 		"codegen:watch": "graphql-codegen -w --config ./src/config/codegen.ts",
-		"generate-pwa-assets": "pwa-assets-generator"
+		"generate-pwa-assets": "pwa-assets-generator",
+		"tsc": "tsc"
 	},
 	"dependencies": {
 		"@apollo/client": "3.8.8",

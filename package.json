@@ -19,7 +19,8 @@
 		"test": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test",
 		"test:api": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test:api",
 		"test:webapp": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test:webapp",
-		"test:ui": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test:ui"
+		"test:ui": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test:ui",
+		"tsc": "turbo run tsc"
 	},
 	"workspaces": [
 		"apps/*",
