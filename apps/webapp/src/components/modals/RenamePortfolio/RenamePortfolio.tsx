@@ -1,4 +1,4 @@
-import { UpdatePortfolioMutation, UpdatePortfolioMutationVariables } from "__generated__/graphql";
+/* import { UpdatePortfolioMutation, UpdatePortfolioMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { Button } from "@funds-tracker/ui";
@@ -95,3 +95,4 @@ export const RenamePortfolio = NiceModal.create<RenamePortfolioProps>(
 		);
 	},
 );
+ */

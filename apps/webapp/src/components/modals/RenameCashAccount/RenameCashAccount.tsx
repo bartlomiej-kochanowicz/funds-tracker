@@ -1,4 +1,4 @@
-import {
+/* import {
 	UpdateCashAccountMutation,
 	UpdateCashAccountMutationVariables,
 } from "__generated__/graphql";
@@ -98,3 +98,4 @@ export const RenameCashAccount = NiceModal.create<RenameCashAccountProps>(
 		);
 	},
 );
+ */

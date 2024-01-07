@@ -1,4 +1,4 @@
-import { Input } from "components/atoms";
+/* import { Input } from "components/atoms";
 import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { useBreakpoint } from "hooks/useBreakpoint";
 import { useFormContext } from "react-hook-form";
@@ -31,3 +31,4 @@ export const QuantityField = () => {
 		</FormField>
 	);
 };
+ */

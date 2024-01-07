@@ -1,4 +1,4 @@
-import {
+/* import {
 	DeleteCashAccountMutation,
 	DeleteCashAccountMutationVariables,
 } from "__generated__/graphql";
@@ -95,3 +95,4 @@ export const ConfirmDeleteCashAccount = NiceModal.create<ConfirmDeleteCashAccoun
 		);
 	},
 );
+ */

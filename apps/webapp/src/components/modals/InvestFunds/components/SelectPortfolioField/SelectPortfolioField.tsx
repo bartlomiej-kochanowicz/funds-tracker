@@ -1,4 +1,4 @@
-import { GetPortfoliosQuery } from "__generated__/graphql";
+/* import { GetPortfoliosQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
 import { Select } from "components/atoms";
 import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
@@ -53,3 +53,4 @@ export const SelectPortfolioField = () => {
 		</FormField>
 	);
 };
+ */

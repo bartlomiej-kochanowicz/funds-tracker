@@ -1,4 +1,4 @@
-import { FC, lazy, Suspense } from "react";
+/* import { FC, lazy, Suspense } from "react";
 
 import type { InvestFundsProps } from "./InvestFunds";
 
@@ -18,3 +18,4 @@ export const Modal: FC<InvestFundsProps> = props => (
 		/>
 	</Suspense>
 );
+ */

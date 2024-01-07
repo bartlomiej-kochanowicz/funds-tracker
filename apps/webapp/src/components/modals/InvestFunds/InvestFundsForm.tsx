@@ -1,4 +1,4 @@
-import { Currency } from "__generated__/graphql";
+/* import { Currency } from "__generated__/graphql";
 import { useModal } from "@ebay/nice-modal-react";
 import { Button, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -45,8 +45,8 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 	} = methods;
 
 	const onSubmit = useCallback(
-		(/* data: InvestFundsFormValues */) => {
-			/* console.log({ ...data, uuid }); */
+		(data: InvestFundsFormValues) => {
+			console.log({ ...data, uuid });
 		},
 		[uuid],
 	);
@@ -147,3 +147,4 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 		</FormProvider>
 	);
 };
+ */

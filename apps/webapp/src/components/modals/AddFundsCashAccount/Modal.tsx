@@ -1,4 +1,4 @@
-import { FC, lazy, Suspense } from "react";
+/* import { FC, lazy, Suspense } from "react";
 
 import type { AddFundsCashAccountProps } from "./AddFundsCashAccount";
 
@@ -18,3 +18,4 @@ export const Modal: FC<AddFundsCashAccountProps> = props => (
 		/>
 	</Suspense>
 );
+ */

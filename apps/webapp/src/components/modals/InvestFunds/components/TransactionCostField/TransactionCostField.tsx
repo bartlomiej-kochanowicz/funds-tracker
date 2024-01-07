@@ -1,4 +1,4 @@
-import { Currency } from "__generated__/graphql";
+/* import { Currency } from "__generated__/graphql";
 import { Button } from "@funds-tracker/ui";
 import { Input, Spreader } from "components/atoms";
 import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
@@ -88,3 +88,4 @@ export const TransactionCostField: FC<ITransactionCostFieldProps> = ({ activeCur
 		</FormField>
 	);
 };
+ */

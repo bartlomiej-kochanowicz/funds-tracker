@@ -1,4 +1,4 @@
-import { Currency } from "__generated__/graphql";
+/* import { Currency } from "__generated__/graphql";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { Text } from "@funds-tracker/ui";
 import { Spacer } from "components/atoms";
@@ -39,3 +39,4 @@ export const AddFundsCashAccount = NiceModal.create<AddFundsCashAccountProps>(
 		);
 	},
 );
+ */

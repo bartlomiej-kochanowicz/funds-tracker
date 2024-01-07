@@ -1,4 +1,4 @@
-import NiceModal from "@ebay/nice-modal-react";
+/* import NiceModal from "@ebay/nice-modal-react";
 import { Button } from "@funds-tracker/ui";
 import { Heading, Spacer, Spreader } from "components/atoms";
 import { MODAL_CREATE_PORTFOLIO } from "components/modals/CreatePortfolio";
@@ -30,7 +30,7 @@ export const CreateFirstPortfolio: FC<CreateFirstPortfolioProps> = ({ callback }
 
 			<Button
 				onPress={handleOpenModal}
-				/* $outline */
+				$outline
 			>
 				{t("page.portfolios.need.more.button")}
 
@@ -41,3 +41,4 @@ export const CreateFirstPortfolio: FC<CreateFirstPortfolioProps> = ({ callback }
 		</div>
 	);
 };
+ */

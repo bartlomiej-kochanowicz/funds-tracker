@@ -1,4 +1,4 @@
-import { Spreader } from "components/atoms";
+/* import { Spreader } from "components/atoms";
 import { FC, ReactNode } from "react";
 
 interface IFormFieldProps {
@@ -21,3 +21,4 @@ export const FormField: FC<IFormFieldProps> = ({ children, label, htmlFor }) => 
 		{children}
 	</div>
 );
+ */

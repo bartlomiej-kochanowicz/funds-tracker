@@ -1,4 +1,4 @@
-import { ProtectedRoute } from "components/ProtectedRoute";
+/* import { ProtectedRoute } from "components/ProtectedRoute";
 import { lazy } from "react";
 import { ROUTES } from "routes/paths";
 
@@ -32,3 +32,4 @@ export const PortfoliosRoutes = [
 		),
 	},
 ];
+ */

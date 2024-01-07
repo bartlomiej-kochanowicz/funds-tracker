@@ -1,4 +1,4 @@
-import { CreatePortfolioMutation } from "__generated__/graphql";
+/* import { CreatePortfolioMutation } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
 import { Button } from "@funds-tracker/ui";
 import { Heading, Spacer, Spreader } from "components/atoms";
@@ -29,7 +29,7 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
 
 			<Button
 				onPress={handleOpenModal}
-				/* $outline */
+				$outline
 			>
 				{t("page.portfolios.need.more.button")}
 
@@ -40,3 +40,4 @@ export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
 		</div>
 	);
 };
+ */

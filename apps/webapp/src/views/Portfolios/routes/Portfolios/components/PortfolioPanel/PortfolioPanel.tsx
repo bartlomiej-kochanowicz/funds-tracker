@@ -1,4 +1,4 @@
-import { GetPortfoliosQuery } from "__generated__/graphql";
+/* import { GetPortfoliosQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
 import { Button, Panel, Text } from "@funds-tracker/ui";
 import { Dropdown } from "components/atoms";
@@ -82,7 +82,7 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 			>
 				{({ isOpen, ...props }) => (
 					<Button
-						/* $outline */
+						$outline
 						{...props}
 					>
 						<MoreVertical />
@@ -92,3 +92,4 @@ export const PortfolioPanel: FC<GetPortfoliosQuery["portfolios"][0] & Portfolios
 		</Panel>
 	);
 };
+ */

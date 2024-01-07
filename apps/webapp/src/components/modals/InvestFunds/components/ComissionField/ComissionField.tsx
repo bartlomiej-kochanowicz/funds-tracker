@@ -1,4 +1,4 @@
-import { Currency } from "__generated__/graphql";
+/* import { Currency } from "__generated__/graphql";
 import { Input, Radio, RadioGroup, Spacer, Spreader } from "components/atoms";
 import {
 	defaultValues,
@@ -89,3 +89,4 @@ export const ComissionField: FC<ComissionFieldProps> = ({ activeCurrency }) => {
 		</FormField>
 	);
 };
+ */

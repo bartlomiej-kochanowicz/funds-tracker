@@ -1,4 +1,4 @@
-import { ErrorContent } from "components/molecules";
+/* import { ErrorContent } from "components/molecules";
 import { ProtectedRoute } from "components/ProtectedRoute";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
@@ -19,3 +19,4 @@ export const SettingsRoutes = [
 		children: [{ path: ROUTES.SETTINGS.MY_PROFILE, element: <MyProfile /> }],
 	},
 ];
+ */

@@ -1,4 +1,4 @@
-import { InstrumentType } from "__generated__/graphql";
+/* import { InstrumentType } from "__generated__/graphql";
 import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { SearchInstrumentCombobox } from "components/molecules";
 import { useBreakpoint } from "hooks/useBreakpoint";
@@ -38,3 +38,4 @@ export const SearchInstrumentField = () => {
 		</FormField>
 	);
 };
+ */

@@ -1,4 +1,4 @@
-import { CreateCashAccountMutation } from "__generated__/graphql";
+/* import { CreateCashAccountMutation } from "__generated__/graphql";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { Text } from "@funds-tracker/ui";
 import { Spacer } from "components/atoms";
@@ -31,3 +31,4 @@ export const CreateCashAccount = NiceModal.create<CreateCashAccountProps>(({ cal
 		</Modal>
 	);
 });
+ */

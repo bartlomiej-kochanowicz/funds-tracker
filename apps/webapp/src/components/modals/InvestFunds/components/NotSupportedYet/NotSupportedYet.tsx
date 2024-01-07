@@ -1,4 +1,4 @@
-import { Heading, Link, Spacer } from "components/atoms";
+/* import { Heading, Link, Spacer } from "components/atoms";
 import { FC } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -41,3 +41,4 @@ export const NotSupportedYet: FC = () => {
 		</div>
 	);
 };
+ */

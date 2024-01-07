@@ -1,4 +1,4 @@
-import { CreateCashAccountMutation, GetCashAccountsQuery } from "__generated__/graphql";
+/* import { CreateCashAccountMutation, GetCashAccountsQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
 import { Panel, Text } from "@funds-tracker/ui";
 import { Heading, Loader, Spacer } from "components/atoms";
@@ -102,3 +102,4 @@ export const CashAccounts = () => {
 		</Fragment>
 	);
 };
+ */

@@ -1,4 +1,4 @@
-import {
+/* import {
 	Currency,
 	GetCashAccountOperationsQuery,
 	GetCashAccountOperationsQueryVariables,
@@ -58,3 +58,4 @@ export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) =>
 
 	return null;
 };
+ */

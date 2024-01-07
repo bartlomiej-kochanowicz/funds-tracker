@@ -1,4 +1,4 @@
-import { GetCashAccountsQuery } from "__generated__/graphql";
+/* import { GetCashAccountsQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
 import { Button, Panel, Text } from "@funds-tracker/ui";
 import { Dropdown } from "components/atoms";
@@ -105,7 +105,7 @@ export const CashAccountsPanel: FC<
 			>
 				{({ isOpen, ...props }) => (
 					<Button
-						/* $outline */
+						$outline
 						{...props}
 					>
 						<MoreVertical />
@@ -115,3 +115,4 @@ export const CashAccountsPanel: FC<
 		</Panel>
 	);
 };
+ */

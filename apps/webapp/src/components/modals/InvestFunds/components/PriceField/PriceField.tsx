@@ -1,4 +1,4 @@
-import {
+/* import {
 	Currency,
 	GetInstrumentHistoryQuery,
 	GetInstrumentHistoryQueryVariables,
@@ -100,3 +100,4 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 		</FormField>
 	);
 };
+ */

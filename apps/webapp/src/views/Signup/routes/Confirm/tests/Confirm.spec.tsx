@@ -44,7 +44,9 @@ vi.mock("contexts/UserContext", async () => ({
 }));
 
 describe("Confirm password tests", () => {
-	afterAll(vi.clearAllMocks);
+	afterAll(() => {
+		vi.clearAllMocks();
+	});
 
 	it("navigates to signin when emain not exist", () => {
 		const mocks = [

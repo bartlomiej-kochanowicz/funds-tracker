@@ -1,4 +1,4 @@
-import { DeletePortfolioMutation, DeletePortfolioMutationVariables } from "__generated__/graphql";
+/* import { DeletePortfolioMutation, DeletePortfolioMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { Button, Text } from "@funds-tracker/ui";
@@ -92,3 +92,4 @@ export const ConfirmDeletePortfolio = NiceModal.create<ConfirmDeletePortfolioPro
 		);
 	},
 );
+ */

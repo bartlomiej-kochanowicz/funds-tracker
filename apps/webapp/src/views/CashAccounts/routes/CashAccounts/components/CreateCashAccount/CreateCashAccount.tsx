@@ -1,4 +1,4 @@
-import { CreateCashAccountMutation } from "__generated__/graphql";
+/* import { CreateCashAccountMutation } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
 import { Button } from "@funds-tracker/ui";
 import { Heading, Spacer, Spreader } from "components/atoms";
@@ -29,7 +29,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
 
 			<Button
 				onPress={handleOpenModal}
-				/* $outline */
+				$outline
 			>
 				{t("page.cash_accounts.need.more.button")}
 
@@ -40,3 +40,4 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback }) => {
 		</div>
 	);
 };
+ */

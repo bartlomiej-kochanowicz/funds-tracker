@@ -1,4 +1,4 @@
-import { Select } from "components/atoms";
+/* import { Select } from "components/atoms";
 import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import instruments from "constants/selectors/instruments";
 import { useBreakpoint } from "hooks/useBreakpoint";
@@ -42,3 +42,4 @@ export const SelectInstrumentType: FC<SelectInstrumentTypeProps> = () => {
 		</FormField>
 	);
 };
+ */

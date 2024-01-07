@@ -1,4 +1,4 @@
-import { Select, Spreader } from "components/atoms";
+/* import { Select, Spreader } from "components/atoms";
 import languages from "constants/selectors/languages";
 import { Globe2 } from "lucide-react";
 import { useMemo } from "react";
@@ -40,3 +40,4 @@ export const LangSelector = () => {
 		/>
 	);
 };
+ */
