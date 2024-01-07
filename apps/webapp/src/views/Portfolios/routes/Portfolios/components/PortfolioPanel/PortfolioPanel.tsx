@@ -1,6 +1,6 @@
 import { GetPortfoliosQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Button, Panel, Text } from "@faunds-tracker/ui";
+import { Button, Panel, Text } from "@funds-tracker/ui";
 import { Dropdown } from "components/atoms";
 import { DropdownItems } from "components/atoms/Dropdown";
 import { MODAL_CONFIRM_DELETE_PORTFOLIO } from "components/modals/ConfirmDeletePortfolio";

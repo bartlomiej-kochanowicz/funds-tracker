@@ -1,4 +1,4 @@
-import { H1, Text } from "@faunds-tracker/ui";
+import { H1, Text } from "@funds-tracker/ui";
 import { Fragment } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";

@@ -1,4 +1,4 @@
-import { DatePicker, useDatepicker } from "@faunds-tracker/ui";
+import { DatePicker, useDatepicker } from "@funds-tracker/ui";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";

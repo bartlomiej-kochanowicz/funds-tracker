@@ -1,7 +1,7 @@
 import { DeletePortfolioMutation, DeletePortfolioMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
-import { Button, Text } from "@faunds-tracker/ui";
+import { Button, Text } from "@funds-tracker/ui";
 import { Loader, Spacer, Spreader } from "components/atoms";
 import { Modal } from "components/molecules";
 import { DELETE_PORTFOLIO } from "graphql/mutations/portfolios/DeletePortfolio";

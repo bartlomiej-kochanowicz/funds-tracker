@@ -1,5 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Button } from "@faunds-tracker/ui";
+import { Button } from "@funds-tracker/ui";
 import { Input, Spreader } from "components/atoms";
 import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { useBreakpoint } from "hooks/useBreakpoint";

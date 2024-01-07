@@ -49,7 +49,7 @@
 		"react-router-dom": "6.21.1",
 		"react-stately": "3.29.0",
 		"react-toastify": "9.1.3",
-		"@faunds-tracker/ui": "workspace:*",
+		"@funds-tracker/ui": "workspace:*",
 		"yup": "1.3.3"
 	},
 	"devDependencies": {

@@ -1,6 +1,6 @@
 import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input } from "@faunds-tracker/ui";
+import { Button, Input } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
 import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";

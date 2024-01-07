@@ -1,4 +1,4 @@
-import { Loader } from "@faunds-tracker/ui";
+import { Loader } from "@funds-tracker/ui";
 import { FC } from "react";
 
 export const FullscreenLoading: FC = () => (

@@ -1,6 +1,6 @@
 import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input, Text } from "@faunds-tracker/ui";
+import { Button, Input, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SET_NEW_PASSWORD } from "graphql/mutations/authentication/SetNewPassword";
 import { showErrorToast } from "helpers/showToast";

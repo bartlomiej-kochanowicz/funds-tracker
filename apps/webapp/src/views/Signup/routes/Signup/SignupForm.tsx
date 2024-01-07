@@ -5,7 +5,7 @@ import {
 	SignupMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Button } from "@faunds-tracker/ui";
+import { Button } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SIGNUP } from "graphql/mutations/authentication/Signup";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";

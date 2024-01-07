@@ -1,4 +1,4 @@
-import { H1, Text } from "@faunds-tracker/ui";
+import { H1, Text } from "@funds-tracker/ui";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { Trans, useTranslation } from "react-i18next";

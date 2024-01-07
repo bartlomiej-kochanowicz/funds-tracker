@@ -1,6 +1,6 @@
 import { CreatePortfolioMutation } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Button } from "@faunds-tracker/ui";
+import { Button } from "@funds-tracker/ui";
 import { Heading, Spacer, Spreader } from "components/atoms";
 import { MODAL_CREATE_PORTFOLIO } from "components/modals/CreatePortfolio";
 import { Plus } from "lucide-react";

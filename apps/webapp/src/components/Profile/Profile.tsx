@@ -1,6 +1,6 @@
 import { LogoutMutation } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Avatar, Menu, PureButton } from "@faunds-tracker/ui";
+import { Avatar, Menu, PureButton } from "@funds-tracker/ui";
 import { useUserContext } from "contexts/UserContext";
 import { LOGOUT } from "graphql/mutations/authentication/Logout";
 import { LogOut, Settings } from "lucide-react";

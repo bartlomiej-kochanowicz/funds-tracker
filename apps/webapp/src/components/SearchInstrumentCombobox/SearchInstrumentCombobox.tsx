@@ -4,7 +4,7 @@ import {
 	SearchInstrumentQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Badge, Text } from "@faunds-tracker/ui";
+import { Badge, Text } from "@funds-tracker/ui";
 import { Input, Loader, Menu, Spreader } from "components/atoms";
 import type { SearchInputProps } from "components/atoms/Input";
 import { SEARCH_INSTRUMENT } from "graphql/query/instruments/SearchInstrument";

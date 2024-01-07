@@ -7,7 +7,7 @@ import {
 	SigninMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Button, Input } from "@faunds-tracker/ui";
+import { Button, Input } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";

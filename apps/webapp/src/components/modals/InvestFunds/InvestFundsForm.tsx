@@ -1,6 +1,6 @@
 import { Currency } from "__generated__/graphql";
 import { useModal } from "@ebay/nice-modal-react";
-import { Button, Text } from "@faunds-tracker/ui";
+import { Button, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Loader, Spacer, Spreader } from "components/atoms";
 import { formatCurrency } from "helpers/formatCurrency";

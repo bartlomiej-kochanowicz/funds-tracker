@@ -4,7 +4,7 @@ import {
 	GetInstrumentHistoryQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Button } from "@faunds-tracker/ui";
+import { Button } from "@funds-tracker/ui";
 import { Input, Spreader } from "components/atoms";
 import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
 import { INSTRUMENT_HISTORY } from "graphql/query/instruments/InstrumentHistory";

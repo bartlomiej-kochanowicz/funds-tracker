@@ -1,6 +1,6 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import NiceModal from "@ebay/nice-modal-react";
-import { Button, Panel, Text } from "@faunds-tracker/ui";
+import { Button, Panel, Text } from "@funds-tracker/ui";
 import { Dropdown } from "components/atoms";
 import type { DropdownItems } from "components/atoms/Dropdown";
 import { MODAL_ADD_FUNDS_CASH_ACCOUNT } from "components/modals/AddFundsCashAccount";

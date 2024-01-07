@@ -1,4 +1,4 @@
-import { H1, Panel } from "@faunds-tracker/ui";
+import { H1, Panel } from "@funds-tracker/ui";
 import { useTranslation } from "react-i18next";
 
 export const Dashboard = () => {

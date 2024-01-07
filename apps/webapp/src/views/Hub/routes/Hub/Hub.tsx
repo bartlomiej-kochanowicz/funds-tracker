@@ -1,4 +1,4 @@
-import { H1, Tile, useTailwindBreakpoint } from "@faunds-tracker/ui";
+import { H1, Tile, useTailwindBreakpoint } from "@funds-tracker/ui";
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";

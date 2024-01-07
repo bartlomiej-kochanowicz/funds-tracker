@@ -1,4 +1,4 @@
-import { H1, Text } from "@faunds-tracker/ui";
+import { H1, Text } from "@funds-tracker/ui";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
 

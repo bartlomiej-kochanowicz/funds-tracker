@@ -1,4 +1,4 @@
-import { Text } from "@faunds-tracker/ui";
+import { Text } from "@funds-tracker/ui";
 import { Frown } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

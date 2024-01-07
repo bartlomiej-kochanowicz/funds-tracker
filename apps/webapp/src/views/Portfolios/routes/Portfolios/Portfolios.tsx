@@ -1,6 +1,6 @@
 import { CreatePortfolioMutation, GetPortfoliosQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
-import { Panel, Text } from "@faunds-tracker/ui";
+import { Panel, Text } from "@funds-tracker/ui";
 import { Heading, Loader, Spacer } from "components/atoms";
 import { ErrorContent } from "components/molecules";
 import { MAX_PORTFOLIOS } from "constants/common";

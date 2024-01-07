@@ -1,4 +1,4 @@
-import { Input } from "@faunds-tracker/ui";
+import { Input } from "@funds-tracker/ui";
 import { Fragment } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
