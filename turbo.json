@@ -12,9 +12,8 @@
 			"cache": false,
 			"persistent": true
 		},
-		"test": {
-			"dependsOn": ["^test"]
-		},
+		"test": {},
+		"test:ci": {},
 		"test:api": {},
 		"test:webapp": {},
 		"test:ui": {},
