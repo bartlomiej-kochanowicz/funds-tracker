@@ -2,7 +2,7 @@ name: Pull Request check
 on:
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   static-code-analysis:
     name: static-code-analysis

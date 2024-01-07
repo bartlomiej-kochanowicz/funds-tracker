@@ -138,4 +138,4 @@ Start api
 
 ### 💥 Deployment
 
-To deploy this project just push the changes to your remote branch, create Pull Request, wait for CI/CD to be done and merge to master.
+To deploy this project just push the changes to your remote branch, create Pull Request, wait for CI/CD to be done and merge to main.
