@@ -10,6 +10,7 @@
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
 		"test": "vitest run",
 		"test:ui": "pnpm test",
+		"test:ci": "pnpm test",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"storybook": "storybook dev -p 6006",
