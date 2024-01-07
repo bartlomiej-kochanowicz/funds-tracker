@@ -5,7 +5,7 @@ import { catchError, firstValueFrom, of } from "rxjs";
 import { PrismaService } from "@app/prisma/prisma.service";
 import { Instrument } from "@app/common/inputs/Instrument.input";
 import { EodHistoricalDataSearchResponse } from "@app/common/types/eodhistoricaldata-search";
-import { InvestInNewInstrumentInput } from "./inputs/InvestInNewInstrument.input";
+import { InvestInNewInstrumentInput } from "./inputs/investInNewInstrument.input";
 
 @Injectable()
 export class InvestService {
