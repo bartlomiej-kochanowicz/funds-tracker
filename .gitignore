@@ -1,35 +1,39 @@
-# Logs
-logs
-*.log
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# misc
+.DS_Store
+*.pem
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+*.log
 
-node_modules
-coverage
-dist-ssr
-dist
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-.DS_Store
-graph.svg
-
-mongo-volume
+# local env files
 .env
-.env.development
-.env.test
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-webapp/dev-dist
+# turbo
+.turbo
+
+# vercel
+.vercel
+
+dev-dist
+
+# _old
+_old
+
+dist

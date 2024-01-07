@@ -21,7 +21,7 @@
 # :notebook_with_decorative_cover: Table of Contents
 
 - [💸 About the Project](#-about-the-project)
-  - [📄 Project board](#-project-board) 
+  - [📄 Project board](#-project-board)
   - [🧨 Tech Stack](#-tech-stack)
   - [🪨 Milestones](#-milestones)
 - [🛠 Getting Started](#-getting-started)
@@ -46,11 +46,10 @@ deviation from the model you provide before, tells you how to rebalance the inst
     <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
     <li><a href="https://vitejs.dev/">Vitejs</a></li>
     <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://styled-components.com/">Styled Components</a></li>
+    <li><a href="https://tailwindcss.com/">Tailwind</a></li>
     <li><a href="https://www.i18next.com/">i18next</a></li>
     <li><a href="https://reactrouter.com/">React Router</a></li>
     <li><a href="https://www.react-laag.com/">React Laag</a></li>
-    <li><a href="https://github.com/llorentegerman/simple-flexbox">Simple Flexbox</a></li>
   </ul>
 </details>
 
@@ -80,6 +79,8 @@ deviation from the model you provide before, tells you how to rebalance the inst
   <ul>
     <li><a href="https://www.docker.com/">Docker</a></li>
     <li><a href="https://www.ovhcloud.com/">OVH Cloud</a></li>
+    <li><a href="https://vercel.com/">Vercel</a></li>
+    <li><a href="https://turbo.build/repo">Turborepo</a></li>
     <li><a href="https://github.com/features/actions">Github Actions</a></li>
   </ul>
 </details>
@@ -107,8 +108,8 @@ This project uses [pnpm](https://pnpm.io/installation) as package manager and do
 Install funds-tracker with pnpm
 
 ```bash
-  $ pnpm install:all
-  $ make build
+  $ pnpm install
+  $ pnpm comose
 ```
 
 ### 🧷 Environment Variables
@@ -117,18 +118,22 @@ Duplicate .env.example file for each <strong>root, webapp and webserver</strong>
 
 ### 🏃 Run Locally
 
-Start monorepo
+Start dev server
 
 ```bash
-  $ make up
-  $ make prisma-generate
-  $ make prisma-migration-push
+  $ pnpm dev
 ```
 
-Start webapp (bypass docker)
+Start webapp
 
 ```bash
-  $ pnpm start:webapp
+  $ pnpm dev:webapp
+```
+
+Start api
+
+```bash
+  $ pnpm dev:api
 ```
 
 ### 💥 Deployment

@@ -1,6 +1,0 @@
-node_modules/
-dist/
-pwa-assets.config.ts
-src/__generated__/*.ts
-dev-dist/**/*
-dev-sw.js
