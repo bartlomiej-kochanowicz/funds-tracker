@@ -1,5 +1,5 @@
 <div align='center'>
-    <img src="webapp/src/assets/logo/logo-name-vertical.svg" alt="logo" width="400" height="auto" />
+    <img src="apps/webapp/src/assets/logo/logo-name-vertical.svg" alt="logo" width="400" height="auto" />
 
   <h3>
     Manage all your investments in one place
