@@ -17,6 +17,7 @@
 		"lint:fix": "turbo run lint:fix",
 		"format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
 		"test": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test",
+		"test:ci": "pnpm prisma:migrate && pnpm prisma:push && turbo run test",
 		"test:api": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test:api",
 		"test:webapp": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test:webapp",
 		"test:ui": "pnpm prisma:migrate:test && pnpm prisma:push:test && turbo run test:ui",

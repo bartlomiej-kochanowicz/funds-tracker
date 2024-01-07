@@ -57,7 +57,7 @@ jobs:
         with:
           version: 8.x
       - run: pnpm install
-      - run: pnpm test
+      - run: pnpm test:ci
         env:
           DATABASE_URL: ${{secrets.TESTS_DATABASE_URL}}
           AT_SECRET: ${{secrets.TESTS_AT_SECRET}}

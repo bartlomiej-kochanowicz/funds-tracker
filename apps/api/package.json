@@ -11,6 +11,7 @@
 		"lint": "eslint src",
 		"lint:fix": "eslint src --fix",
 		"test": "dotenv -e .env.test -- jest",
+		"test:ci": "jest",
 		"test:api": "pnpm test",
 		"test:watch": "dotenv -e .env.test -- jest --watch",
 		"test:cov": "dotenv -e .env.test -- jest --coverage",

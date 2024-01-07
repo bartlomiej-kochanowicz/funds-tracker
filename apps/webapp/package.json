@@ -8,6 +8,7 @@
 		"check:circular-deps": "madge --warning --circular --extensions ts,tsx src",
 		"check:circular-deps-image": "madge --image graph.svg --extensions ts,tsx src",
 		"test": "vitest run",
+		"test:ci": "pnpm test",
 		"test:webapp": "pnpm test",
 		"test:cov": "vitest run --coverage && open ./coverage/index.html",
 		"test:badges": "pnpm test:cov && jest-coverage-badges",
