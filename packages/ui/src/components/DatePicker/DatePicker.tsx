@@ -58,6 +58,7 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 					state={state}
 					placement="bottom start"
 					className="p-2"
+					isNonModal
 				>
 					<Dialog {...dialogProps}>
 						<Calendar {...calendarProps} />

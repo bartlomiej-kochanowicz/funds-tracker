@@ -1,10 +1,8 @@
-/* import { CreateCashAccountMutation } from "__generated__/graphql";
-import NiceModal from "@ebay/nice-modal-react";
-import { Button } from "@funds-tracker/ui";
-import { Heading, Spacer, Spreader } from "components/atoms";
-import { MODAL_CREATE_CASH_ACCOUNT } from "components/modals/CreateCashAccount";
+import { CreateCashAccountMutation } from "__generated__/graphql";
+import { Button, H2 } from "@funds-tracker/ui";
+import { useCreateCashAccountModal } from "components/modals/CreateCashAccount";
 import { Plus } from "lucide-react";
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
 interface CreateFirstCashAccountProps {
@@ -14,32 +12,24 @@ interface CreateFirstCashAccountProps {
 export const CreateFirstCashAccount: FC<CreateFirstCashAccountProps> = ({ callback }) => {
 	const { t } = useTranslation();
 
-	const handleOpenModal = () => {
-		NiceModal.show(MODAL_CREATE_CASH_ACCOUNT, { callback });
-	};
+	const { Modal, triggerProps } = useCreateCashAccountModal({ callback });
 
 	return (
-		<div className="fle flex-col items-center">
-			<Heading
-				$textAlign="center"
-				$level="h2"
-			>
-				{t("page.cash_accounts.empty.list.title")}
-			</Heading>
+		<Fragment>
+			<Modal />
 
-			<Spacer $space="0.5" />
+			<div className="mt-16 flex flex-col items-center gap-2">
+				<H2 className="text-center">{t("page.cash_accounts.empty.list.title")}</H2>
 
-			<Button
-				onPress={handleOpenModal}
-				$outline
-			>
-				{t("page.cash_accounts.need.more.button")}
+				<Button
+					className="flex items-center gap-2"
+					{...triggerProps}
+				>
+					{t("page.cash_accounts.need.more.button")}
 
-				<Spreader $spread="0.25" />
-
-				<Plus />
-			</Button>
-		</div>
+					<Plus />
+				</Button>
+			</div>
+		</Fragment>
 	);
 };
- */

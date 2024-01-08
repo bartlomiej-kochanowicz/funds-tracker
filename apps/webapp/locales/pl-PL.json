@@ -212,5 +212,6 @@
 	"modal.InvestFunds.form.please.select.instrumentType.to.continue": "Wybierz typ instrumentu, aby kontynuować.",
 	"common.value": "Wartość",
 	"common.page.not.found": "Strona nie została znaleziona",
-	"common.settings": "Ustawienia"
+	"common.settings": "Ustawienia",
+	"form.currency.select.placeholder": "Wybierz walutę"
 }

@@ -3,10 +3,14 @@ import { cloneElement } from "react";
 import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 
-import { Modal } from "./Modal";
+import { Modal } from "../components/Modal/Modal";
+
+export interface ModalProps {
+	close: () => void;
+}
 
 interface UseModalArgs {
-	children: (close: () => void) => JSX.Element;
+	children: ({ close }: ModalProps) => JSX.Element;
 	title?: string;
 }
 
@@ -23,7 +27,7 @@ export const useModal = ({ children, title, ...props }: UseModalArgs) => {
 						state={state}
 						title={title}
 					>
-						{cloneElement(children(state.close), overlayProps)}
+						{cloneElement(children({ close: state.close }), overlayProps)}
 					</Modal>
 				)}
 			</AnimatePresence>

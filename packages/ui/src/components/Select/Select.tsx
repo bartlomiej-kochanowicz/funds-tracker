@@ -72,7 +72,7 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
 					state={state}
 					triggerRef={ref}
 					placement="bottom start"
-					className="w-52"
+					isNonModal
 				>
 					<ListBox
 						{...menuProps}

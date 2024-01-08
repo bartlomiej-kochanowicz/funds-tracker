@@ -1,19 +1,16 @@
-/* import {
+import {
 	CreateCashAccountInput,
 	CreateCashAccountMutation,
 	CreateCashAccountMutationVariables,
 	Currency,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { useModal } from "@ebay/nice-modal-react";
-import { Button } from "@funds-tracker/ui";
+import { Button, Input, Loader, ModalProps } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Loader, Spacer, Spreader } from "components/atoms";
-import { CurrencyCombobox } from "components/molecules";
+import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { useUserContext } from "contexts/UserContext";
 import { CREATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/CreateCashAccount";
 import { showErrorToast } from "helpers/showToast";
-import { useRegisterCombobox } from "hooks/useRegisterCombobox";
 import { Plus } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useForm } from "react-hook-form";
@@ -21,18 +18,14 @@ import { useTranslation } from "react-i18next";
 
 import { validationSchema } from "./CreateCashAccountForm.schema";
 
-interface CreateCashAccountFormProps {
+interface CreateCashAccountFormProps extends ModalProps {
 	callback: (data: CreateCashAccountMutation) => void;
 }
 
-export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback }) => {
+export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback, close }) => {
 	const { t } = useTranslation();
 
 	const { user } = useUserContext();
-
-	const modal = useModal();
-
-	const closeModal = modal.remove;
 
 	const defaultValues = {
 		name: "",
@@ -55,7 +48,7 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 		CreateCashAccountMutationVariables
 	>(CREATE_CASH_ACCOUNT, {
 		onCompleted: data => {
-			closeModal();
+			close();
 
 			callback(data);
 		},
@@ -72,55 +65,45 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 		});
 	};
 
-	const currencySelectProps = useRegisterCombobox<CreateCashAccountInput, Currency>({
+	/* const currencySelectProps = useRegisterCombobox<CreateCashAccountInput, Currency>({
 		control,
 		name: "currency",
 		defaultValue: defaultValues.currency,
-	});
+	}); */
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="flex flex-col">
 				<Input
+					aria-label={t("common.input.name.placeholder")}
 					placeholder={t("common.input.name.placeholder")}
-					$flexGrow={1}
-					error={errors.name?.message}
+					isInvalid={!!errors.name}
+					errorMessage={errors.name?.message}
 					{...register("name")}
 				/>
 
-				<Spreader $spread="0.25" />
-
-				<CurrencyCombobox
-					$width="130px"
-					{...currencySelectProps}
-				/>
+				<CurrencyCombobox />
 			</div>
 
-			<Spacer />
-
-			<div className="flex flex-col">
+			<div className="mt-6 flex gap-4">
 				<Button
-					className="min-w-[100px] grow"
+					className="w-1/2"
 					color="gray"
-					onPress={closeModal}
+					onPress={close}
 				>
 					{t("common.cancel")}
 				</Button>
 
-				<Spreader $spread="0.5" />
-
 				<Button
-					className="max-w-[170px] grow"
+					className="flex w-1/2 items-center justify-center gap-2"
 					isDisabled={isSubmitting || !isValid || !isDirty}
 					type="submit"
 				>
-					{isSubmitting && <Loader $color="white" />}
+					{isSubmitting && <Loader />}
 
 					{!isSubmitting && (
 						<Fragment>
 							{t("add.cash.accounts.button.add")}
-
-							<Spreader $spread="0.25" />
 
 							<Plus />
 						</Fragment>
@@ -130,4 +113,3 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 		</form>
 	);
 };
- */

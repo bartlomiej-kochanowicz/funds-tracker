@@ -1,4 +1,5 @@
-/* import { ProtectedRoute } from "components/ProtectedRoute";
+import { TopbarSidebar } from "components/layouts/TopbarSidebar";
+import { ProtectedRoute } from "components/ProtectedRoute";
 import { lazy } from "react";
 import { ROUTES } from "routes/paths";
 
@@ -13,9 +14,10 @@ export const CashAccountsRoutes = [
 		path: ROUTES.CASH_ACCOUNTS,
 		element: (
 			<ProtectedRoute>
-				<CashAccounts />
+				<TopbarSidebar>
+					<CashAccounts />
+				</TopbarSidebar>
 			</ProtectedRoute>
 		),
 	},
 ];
- */

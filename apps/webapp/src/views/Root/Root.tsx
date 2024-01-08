@@ -1,7 +1,7 @@
 import { FullscreenLoading } from "components/layouts/FullscreenLoading";
 import { FC, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
-/* import { CashAccountsRoutes } from "views/CashAccounts"; */
+import { CashAccountsRoutes } from "views/CashAccounts";
 import { HomeRoutes } from "views/Home";
 import { HubRoutes } from "views/Hub";
 import { NotFoundRoutes } from "views/NotFound";
@@ -17,9 +17,9 @@ export const Root: FC = () => {
 		...SinginRoutes,
 		...SignupRoutes,
 		...ResetPasswordRoutes,
+		...CashAccountsRoutes,
 		/*
 		...PortfoliosRoutes,
-		...CashAccountsRoutes,
 		...SettingsRoutes,
 		 */
 		...HubRoutes,

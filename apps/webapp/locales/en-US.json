@@ -131,7 +131,7 @@
 	"form.button.submit": "Submit",
 	"toast.send_confirm_code.success": "Confirmation code has been sent to your email.",
 	"toast.send_confirm_code.failure": "Code sending failed. Please try again later.",
-	"page.cash_accounts.title.description": "Here you can manage your cash accounts. You can add new, edit or delete existing ones and check details.",
+	"page.cash_accounts.title.description": "Here you can manage your cash accounts. You can add new one, edit or delete existing ones and check details.",
 	"page.cash_accounts.need.more": "Need more accounts?",
 	"page.cash_accounts.need.more.button": "Add new one here",
 	"page.introduction.default.currency.title": "Choose your default currency",
@@ -175,7 +175,7 @@
 	"cashAccount.operation.type.deposit": "Deposit",
 	"cashAccount.operation.type.withdrawal": "Withdrawal",
 	"cashAccount.operation.type.transfer": "Transfer",
-	"page.portfolios.title.description": "Here you can manage your portfolios. You can add new, edit or delete existing ones and check details.",
+	"page.portfolios.title.description": "Here you can manage your portfolios. You can add new one, edit or delete existing ones and check details.",
 	"page.portfolios.empty.list.title": "No portfolios added",
 	"page.portfolios.need.more": "Need more portfolios?",
 	"page.portfolios.need.more.button": "Add new one here",
@@ -212,5 +212,6 @@
 	"modal.InvestFunds.form.please.select.instrumentType.to.continue": "Please select instrument type to continue.",
 	"common.value": "Value",
 	"common.page.not.found": "Page not found",
-	"common.settings": "Settings"
+	"common.settings": "Settings",
+	"form.currency.select.placeholder": "Select currency"
 }

@@ -1,8 +1,7 @@
-/* import { CreateCashAccountMutation, GetCashAccountsQuery } from "__generated__/graphql";
+import { CreateCashAccountMutation, GetCashAccountsQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
-import { Panel, Text } from "@funds-tracker/ui";
-import { Heading, Loader, Spacer } from "components/atoms";
-import { ErrorContent } from "components/molecules";
+import { H1, Loader, Panel, Text } from "@funds-tracker/ui";
+import { ErrorContent } from "components/ErrorContent";
 import { MAX_CASH_ACCOUNTS } from "constants/common";
 import { GET_CASH_ACCOUNTS } from "graphql/query/cashAccounts/GetCashAccounts";
 import { Fragment } from "react";
@@ -67,13 +66,11 @@ export const CashAccounts = () => {
 
 	return (
 		<Fragment>
-			<Heading>{t("navigation.cash_accounts")}</Heading>
+			<H1>{t("navigation.cash_accounts")}</H1>
 
 			<Text className="text-sm text-gray-400">{t("page.cash_accounts.title.description")}</Text>
 
-			<Spacer />
-
-			{loading && <Loader $size="large" />}
+			{loading && <Loader />}
 
 			{!loading && error && <ErrorContent />}
 
@@ -96,10 +93,7 @@ export const CashAccounts = () => {
 				</Panel>
 			)}
 
-			<Spacer />
-
 			{renderCreateCashAccountButton && <CreateCashAccount callback={addCashAccountToList} />}
 		</Fragment>
 	);
 };
- */

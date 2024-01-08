@@ -3,6 +3,7 @@ export * from "./components/Avatar";
 export * from "./components/Badge";
 export * from "./components/Button";
 export * from "./components/Checkbox";
+export * from "./components/ComboBox";
 export * from "./components/DatePicker";
 export * from "./components/Heading";
 export * from "./components/Input";
@@ -21,4 +22,5 @@ export * from "./components/Tile";
 
 // Path: src/hooks
 export * from "./hooks/useDatepicker";
+export * from "./hooks/useModal";
 export * from "./hooks/useTailwindBreakpoint";
