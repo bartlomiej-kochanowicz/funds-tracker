@@ -1,5 +1,6 @@
 import { CreateCashAccountMutation } from "__generated__/graphql";
 import { H3, ModalProps, Text } from "@funds-tracker/ui";
+import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { useRef } from "react";
 import { useDialog } from "react-aria";
 import { useTranslation } from "react-i18next";

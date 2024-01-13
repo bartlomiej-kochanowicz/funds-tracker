@@ -1,6 +1,7 @@
 import { CreateCashAccountMutation } from "__generated__/graphql";
 import { Button, H2 } from "@funds-tracker/ui";
 import { Modal } from "@funds-tracker/ui/src/components/Modal/Modal";
+import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { CreateCashAccount } from "components/modals/CreateCashAccount/CreateCashAccount";
 import { Plus } from "lucide-react";
 import { FC, Fragment } from "react";
