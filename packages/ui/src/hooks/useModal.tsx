@@ -1,6 +1,4 @@
 import { AnimatePresence } from "framer-motion";
-import { cloneElement } from "react";
-import { useOverlayTrigger } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 
 import { Modal } from "../components/Modal/Modal";
@@ -11,10 +9,10 @@ export interface ModalProps {
 
 interface UseModalArgs {
 	children: ({ close }: ModalProps) => JSX.Element;
-	title?: string;
+	title: string;
 }
 
-export const useModal = ({ children, title, ...props }: UseModalArgs) => {
+export const useModal = ({ children, ...props }: UseModalArgs) => {
 	const state = useOverlayTriggerState({});
 
 	const triggerProps = {
@@ -25,14 +23,7 @@ export const useModal = ({ children, title, ...props }: UseModalArgs) => {
 		triggerProps,
 		Modal: () => (
 			<AnimatePresence>
-				{state.isOpen && (
-					<Modal
-						state={state}
-						title={title}
-					>
-						{children({ close: state.close })}
-					</Modal>
-				)}
+				{state.isOpen && <Modal state={state}>{children({ close: state.close, ...props })}</Modal>}
 			</AnimatePresence>
 		),
 	};

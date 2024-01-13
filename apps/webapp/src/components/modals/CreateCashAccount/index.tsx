@@ -1,23 +1,25 @@
 import { useModal } from "@funds-tracker/ui";
-import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 
 import { CreateCashAccount, type CreateCashAccountProps } from "./CreateCashAccount";
 
-export const useCreateCashAccountModal = <TProps extends Omit<CreateCashAccountProps, "close">>(
+export const useCreateCashAccountModal = <
+	TProps extends Omit<CreateCashAccountProps, "close" | "title">,
+>(
 	props: TProps,
 ) => {
 	const { t } = useTranslation();
 
+	const title = t("modal.CreateCashAccount.name");
+
 	return useModal({
-		title: t("modal.CreateCashAccount.name"),
+		title,
 		children: ({ close }) => (
-			<Suspense>
-				<CreateCashAccount
-					close={close}
-					{...props}
-				/>
-			</Suspense>
+			<CreateCashAccount
+				title={title}
+				close={close}
+				{...props}
+			/>
 		),
 	});
 };
