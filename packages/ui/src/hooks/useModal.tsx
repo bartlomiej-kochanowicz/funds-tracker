@@ -15,8 +15,11 @@ interface UseModalArgs {
 }
 
 export const useModal = ({ children, title, ...props }: UseModalArgs) => {
-	const state = useOverlayTriggerState(props);
-	const { triggerProps, overlayProps } = useOverlayTrigger({ type: "dialog" }, state);
+	const state = useOverlayTriggerState({});
+
+	const triggerProps = {
+		onPress: state.open,
+	};
 
 	return {
 		triggerProps,
@@ -27,7 +30,7 @@ export const useModal = ({ children, title, ...props }: UseModalArgs) => {
 						state={state}
 						title={title}
 					>
-						{cloneElement(children({ close: state.close }), overlayProps)}
+						{children({ close: state.close })}
 					</Modal>
 				)}
 			</AnimatePresence>

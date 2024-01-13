@@ -33,7 +33,6 @@ export const MenuButton = <T extends object>({
 					state={state}
 					triggerRef={ref}
 					placement={placement}
-					isNonModal
 				>
 					<Menu
 						{...menuProps}

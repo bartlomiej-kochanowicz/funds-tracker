@@ -76,7 +76,6 @@ export const ComboBox = <T extends object>(props: AriaComboBoxProps<T>) => {
 			</div>
 			{state.isOpen && (
 				<Popover
-					isNonModal
 					popoverRef={popoverRef}
 					triggerRef={inputRef}
 					state={state}
