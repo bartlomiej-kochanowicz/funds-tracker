@@ -9,7 +9,7 @@ interface ListBoxProps extends AriaListBoxOptions<unknown> {
 	state: ListState<unknown>;
 }
 
-export function ListBox(props: ListBoxProps) {
+export const ListBox = (props: ListBoxProps) => {
 	const ref = useRef<HTMLUListElement>(null);
 	const { listBoxRef = ref, state } = props;
 	const { listBoxProps } = useListBox(props, state, listBoxRef);
@@ -18,7 +18,7 @@ export function ListBox(props: ListBoxProps) {
 		<ul
 			{...listBoxProps}
 			ref={listBoxRef}
-			className="outline-none"
+			className="max-h-72 w-full overflow-auto outline-none"
 		>
 			{[...state.collection].map(item => (
 				<Option
@@ -29,4 +29,4 @@ export function ListBox(props: ListBoxProps) {
 			))}
 		</ul>
 	);
-}
+};
