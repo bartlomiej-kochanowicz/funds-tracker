@@ -16,7 +16,7 @@ export const CreateCashAccount = (props: CreateCashAccountProps) => {
 
 	return (
 		<Dialog title={title}>
-			<Text className="mb-2 block max-w-[300px] whitespace-normal text-center text-sm text-gray-400 sm:max-w-full">
+			<Text className="mb-2 block whitespace-normal  text-sm text-gray-400 sm:max-w-full">
 				{t("modal.CreateCashAccount.description")}
 			</Text>
 

@@ -2,17 +2,16 @@ import {
 	CreateCashAccountInput,
 	CreateCashAccountMutation,
 	CreateCashAccountMutationVariables,
-	Currency,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input, Loader, ModalProps } from "@funds-tracker/ui";
+import { Button, Input, ModalProps } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { useUserContext } from "contexts/UserContext";
 import { CREATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/CreateCashAccount";
 import { showErrorToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
-import { FC, Fragment } from "react";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -34,13 +33,12 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 
 	const {
 		handleSubmit,
-		formState: { errors, isSubmitting, isValid, isDirty },
+		formState: { errors, isSubmitting },
 		register,
 		control,
 	} = useForm<CreateCashAccountInput>({
 		defaultValues,
 		resolver: yupResolver<CreateCashAccountInput>(validationSchema),
-		mode: "onChange",
 	});
 
 	const [createCashAccount] = useMutation<
@@ -65,12 +63,6 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 		});
 	};
 
-	/* const currencySelectProps = useRegisterCombobox<CreateCashAccountInput, Currency>({
-		control,
-		name: "currency",
-		defaultValue: defaultValues.currency,
-	}); */
-
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="flex flex-col">
@@ -82,7 +74,11 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 					{...register("name")}
 				/>
 
-				<CurrencyCombobox />
+				<CurrencyCombobox
+					control={control}
+					name="currency"
+					defaultValue={defaultValues.currency}
+				/>
 			</div>
 
 			<div className="mt-6 flex gap-4">
@@ -96,18 +92,13 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 
 				<Button
 					className="flex w-1/2 items-center justify-center gap-2"
-					isDisabled={isSubmitting || !isValid || !isDirty}
+					isDisabled={isSubmitting}
+					isLoading={isSubmitting}
 					type="submit"
 				>
-					{isSubmitting && <Loader />}
+					{t("add.cash.accounts.button.add")}
 
-					{!isSubmitting && (
-						<Fragment>
-							{t("add.cash.accounts.button.add")}
-
-							<Plus />
-						</Fragment>
-					)}
+					<Plus />
 				</Button>
 			</div>
 		</form>
