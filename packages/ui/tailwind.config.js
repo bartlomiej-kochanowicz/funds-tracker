@@ -7,6 +7,11 @@ export default {
 			scale: {
 				97: "0.97",
 			},
+			colors: {
+				'neutral': {
+					750: '#2C2C2C',
+				},
+			},
 		},
 	},
 	plugins: [],

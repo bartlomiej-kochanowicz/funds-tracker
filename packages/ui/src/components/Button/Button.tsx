@@ -8,14 +8,21 @@ import { Loader } from "../Loader";
 
 const sizes = {
 	xs: "px-4 py-2 text-xs",
+	"square-xs": "p-2 text-xs",
 	sm: "px-4 py-2 text-sm",
+	"square-sm": "p-2 text-sm",
 	md: "px-6 py-2.5 text-sm",
+	"square-md": "p-2.5 text-sm",
 	lg: "px-6 py-3 text-base",
+	"square-lg": "p-3 text-base",
 	xl: "px-7 py-3.5 text-base",
+	"square-xl": "p-3.5 text-base",
 };
 
 const colors = {
 	blue: "bg-blue-500 text-white enabled:hover:bg-blue-600",
+	"outline-blue":
+		"border border-blue-500 text-blue-500 enabled:hover:border-blue-600 enabled:hover:text-blue-600",
 	black: "bg-zinc-950 text-white enabled:hover:bg-zinc-800",
 	gray: "bg-neutral-500 text-white enabled:hover:bg-neutral-600",
 	transparent: "bg-transparent text-gray-900 dark:text-white",

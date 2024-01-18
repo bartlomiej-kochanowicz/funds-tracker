@@ -91,6 +91,13 @@ export const CashAccountsPanel: FC<
 				<Text>{formatCurrency(balance, currency)}</Text>
 			</div>
 
+			<Button
+				color="outline-blue"
+				size="square-md"
+			>
+				<MoreVertical />
+			</Button>
+
 			{/* <Dropdown
 				items={items}
 				placement="bottom-end"
