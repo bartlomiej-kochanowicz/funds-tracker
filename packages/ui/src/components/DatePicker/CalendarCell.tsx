@@ -26,10 +26,10 @@ export const CalendarCell = ({ state, date }: CalendarCellProps) => {
 				ref={ref}
 				hidden={isOutsideVisibleRange}
 				className={clsx(
-					"group flex h-8 w-8 items-center justify-center rounded-md outline-none",
+					"group flex size-8 items-center justify-center rounded-md outline-none",
 					isSelected && "bg-blue-500 text-white",
-					isDisabled && "disabled cursor-not-allowed text-gray-400",
-					isFocusVisible && "group-focus:z-2 ring-2ring-blue-300 dark:ring-blue-800",
+					isDisabled && "cursor-not-allowed text-gray-400",
+					isFocusVisible && "ring-2 ring-blue-300 dark:ring-blue-800",
 					!isSelected &&
 						!isDisabled &&
 						"hover:bg-gray-200 dark:hover:bg-gray-300 dark:hover:text-gray-900",

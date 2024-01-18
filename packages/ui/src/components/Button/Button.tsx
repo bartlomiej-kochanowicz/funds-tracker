@@ -44,7 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 						WebkitTapHighlightColor: "transparent",
 					}}
 					className={clsx(
-						"transform touch-none select-none rounded-xl transition-transform focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+						"touch-none select-none rounded-xl transition-transform focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
 						sizes[size],
 						colors[color],
 						isLoading && "pointer-events-none flex items-center justify-center",

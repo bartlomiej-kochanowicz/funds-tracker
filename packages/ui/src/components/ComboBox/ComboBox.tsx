@@ -48,7 +48,7 @@ export const ComboBox = <T extends object>(props: AriaComboBoxProps<T>) => {
 			</label>
 			<div
 				className={clsx(
-					"relative flex w-full overflow-hidden rounded-xl border border-gray-300 bg-gray-50  text-sm text-gray-900 outline-none group-hover:border-blue-500 dark:bg-neutral-700  dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500",
+					"relative flex w-full overflow-hidden rounded-xl border border-gray-300 bg-gray-50  text-sm text-gray-900 outline-none group-hover:border-blue-500 dark:bg-neutral-700  dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500",
 					isDisabled && "cursor-not-allowed opacity-50",
 					!isDisabled && "group-hover:border-gray-400",
 					state.isFocused ? "!border-blue-500" : "dark:border-neutral-700",
@@ -69,7 +69,7 @@ export const ComboBox = <T extends object>(props: AriaComboBoxProps<T>) => {
 					)}
 				>
 					<ChevronDownIcon
-						className="h-5 w-5"
+						className="size-5"
 						aria-hidden="true"
 					/>
 				</button>

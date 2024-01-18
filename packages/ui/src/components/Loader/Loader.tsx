@@ -15,9 +15,9 @@ export const Loader = ({ size = "md", className, ...rest }: LoaderProps) => (
 			className={clsx(
 				className,
 				"animate-spin fill-blue-500 text-gray-200 dark:text-gray-600",
-				size === "sm" && "h-5 w-5",
-				size === "md" && "h-8 w-8",
-				size === "lg" && "h-12 w-12",
+				size === "sm" && "size-5",
+				size === "md" && "size-8",
+				size === "lg" && "size-12",
 			)}
 			viewBox="0 0 100 101"
 			fill="none"

@@ -30,7 +30,7 @@ export const Hub = () => {
 						title={t(title)}
 						to={to}
 					>
-						<Icon className="h-6 w-6" />
+						<Icon className="size-6" />
 					</Tile>
 				))}
 			</div>

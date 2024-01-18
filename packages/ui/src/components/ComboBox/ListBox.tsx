@@ -102,7 +102,7 @@ function Option({ item, state }: OptionProps) {
 		<li
 			{...optionProps}
 			ref={ref}
-			className={`m-1 flex cursor-default items-center justify-between rounded-md px-2 py-2 text-sm outline-none ${text} ${
+			className={`m-1 flex cursor-default items-center justify-between rounded-md p-2 text-sm outline-none ${text} ${
 				isFocused ? "bg-pink-100" : ""
 			} ${isSelected ? "font-bold" : ""}`}
 		>
@@ -110,7 +110,7 @@ function Option({ item, state }: OptionProps) {
 			{isSelected && (
 				<Check
 					aria-hidden="true"
-					className="h-5 w-5 text-pink-600"
+					className="size-5 text-pink-600"
 				/>
 			)}
 		</li>

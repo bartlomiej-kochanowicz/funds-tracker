@@ -5,7 +5,7 @@ const a11yOff = Object.keys(require("eslint-plugin-jsx-a11y").rules).reduce((acc
 }, {});
 
 module.exports = {
-	extends: ["eslint-config-airbnb", "eslint-config-airbnb-typescript", "prettier"],
+	extends: ["eslint-config-airbnb", "eslint-config-airbnb-typescript", "prettier", "plugin:tailwindcss/recommended"],
 	parser: "@typescript-eslint/parser",
 	plugins: [
 		"react",
@@ -16,7 +16,7 @@ module.exports = {
 		"jest-dom",
 		"testing-library",
 		"simple-import-sort",
-		"prettier",
+		"prettier"
 	],
 	globals: {
 		JSX: true,
@@ -55,6 +55,11 @@ module.exports = {
 		"no-tabs": ["error", { allowIndentationTabs: true }],
 		"react/jsx-wrap-multilines": "off",
 		"@typescript-eslint/no-shadow": "off",
-		"react/no-array-index-key": "off",
+		"react/no-array-index-key": "off"
 	},
+	settings: {
+		tailwindcss:{
+			callees: ["clsx"],
+		}
+	}
 };

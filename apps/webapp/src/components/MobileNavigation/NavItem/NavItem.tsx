@@ -23,7 +23,7 @@ export const NavItem = ({ to, title, icon: Icon }: NavItemProps) => {
 					)
 				}
 			>
-				<Icon className="mb-0.5 h-5 w-5 sm:h-6 sm:w-6" />
+				<Icon className="mb-0.5 size-5 sm:size-6" />
 				{t(title)}
 			</NavLink>
 		</li>

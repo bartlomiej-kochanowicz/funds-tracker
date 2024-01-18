@@ -56,15 +56,12 @@ export function Select<T extends object>(props: AriaSelectProps<T>) {
 			>
 				<span
 					{...valueProps}
-					className={clsx(
-						"text-md",
-						state.selectedItem ? "text-gray-900 dark:text-white" : "text-gray-400",
-					)}
+					className={clsx(state.selectedItem ? "text-gray-900 dark:text-white" : "text-gray-400")}
 				>
 					{state.selectedItem ? state.selectedItem.rendered : "Select an option"}
 				</span>
 				<ChevronsUpDown
-					className={clsx("h-5 w-5", isFocusVisible ? "text-blue-500" : "text-gray-400")}
+					className={clsx("size-5", isFocusVisible ? "text-blue-500" : "text-gray-400")}
 				/>
 			</button>
 			{state.isOpen && (

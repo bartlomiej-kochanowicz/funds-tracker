@@ -42,14 +42,14 @@ export const DatePicker = <T extends DateValue = DateValue>(props: DatePickerPro
 					)}
 				>
 					<DateField {...fieldProps} />
-					{state.isInvalid && <AlertCircle className="absolute right-1 h-6 w-6 text-red-500" />}
+					{state.isInvalid && <AlertCircle className="absolute right-1 size-6 text-red-500" />}
 				</div>
 				<FieldButton
 					{...buttonProps}
 					isDisabled={isDisabled}
 					isPressed={state.isOpen}
 				>
-					<CalendarDays className="h-5 w-5 text-gray-500 group-focus-within:text-blue-500 dark:text-white" />
+					<CalendarDays className="size-5 text-gray-500 group-focus-within:text-blue-500 dark:text-white" />
 				</FieldButton>
 			</div>
 			{state.isOpen && !isDisabled && (

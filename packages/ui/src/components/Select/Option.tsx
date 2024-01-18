@@ -34,7 +34,7 @@ export const Option = ({ item, state }: OptionProps) => {
 			{isSelected && (
 				<Check
 					aria-hidden="true"
-					className={clsx("h-5 w-5", isFocused ? "text-white" : "text-gray-900 dark:text-white")}
+					className={clsx("size-5", isFocused ? "text-white" : "text-gray-900 dark:text-white")}
 				/>
 			)}
 		</li>

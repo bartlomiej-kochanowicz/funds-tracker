@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 			<input
 				{...inputProps}
 				className={clsx(
-					"block w-full rounded-xl border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:group-hover:border-blue-500 dark:border-neutral-700 dark:bg-neutral-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500",
+					"block w-full rounded-xl border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:group-hover:border-blue-500 dark:border-neutral-700 dark:bg-neutral-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500",
 					isDisabled && "cursor-not-allowed opacity-50",
 					!isDisabled && "group-hover:border-gray-400",
 					isInvalid &&
