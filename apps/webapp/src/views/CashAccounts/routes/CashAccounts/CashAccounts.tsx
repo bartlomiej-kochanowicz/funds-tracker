@@ -1,6 +1,6 @@
 import { CreateCashAccountMutation, GetCashAccountsQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
-import { H1, Loader, Panel, Text } from "@funds-tracker/ui";
+import { H1, Loader, Text } from "@funds-tracker/ui";
 import { ErrorContent } from "components/ErrorContent";
 import { MAX_CASH_ACCOUNTS } from "constants/common";
 import { GET_CASH_ACCOUNTS } from "graphql/query/cashAccounts/GetCashAccounts";
@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 
 import { CashAccountsPanel } from "./components/CashAccountsPanel";
 import { CreateCashAccount } from "./components/CreateCashAccount";
-import { CreateFirstCashAccount } from "./components/CreateFirstCashAccount";
 
 export const CashAccounts = () => {
 	const { t } = useTranslation();
@@ -19,7 +18,7 @@ export const CashAccounts = () => {
 	const cashAccountsExist = Boolean(data && data.cashAccounts.length > 0);
 
 	const renderCreateCashAccountButton = Boolean(
-		data && data.cashAccounts.length < MAX_CASH_ACCOUNTS && data.cashAccounts.length > 0,
+		data && data.cashAccounts.length < MAX_CASH_ACCOUNTS,
 	);
 
 	const addCashAccountToList = (newCashAccountData: CreateCashAccountMutation) => {
@@ -74,12 +73,8 @@ export const CashAccounts = () => {
 
 			{!loading && error && <ErrorContent />}
 
-			{!loading && !cashAccountsExist && !error && (
-				<CreateFirstCashAccount callback={addCashAccountToList} />
-			)}
-
 			{!loading && cashAccountsExist && !error && (
-				<Panel>
+				<div className="mx-auto my-8 flex max-w-3xl flex-col gap-4">
 					{data?.cashAccounts.map(({ uuid, ...rest }) => (
 						<CashAccountsPanel
 							key={uuid}
@@ -90,10 +85,15 @@ export const CashAccounts = () => {
 							{...rest}
 						/>
 					))}
-				</Panel>
+				</div>
 			)}
 
-			{renderCreateCashAccountButton && <CreateCashAccount callback={addCashAccountToList} />}
+			{renderCreateCashAccountButton && (
+				<CreateCashAccount
+					isListEmpty={!cashAccountsExist}
+					callback={addCashAccountToList}
+				/>
+			)}
 		</Fragment>
 	);
 };

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Plus } from "lucide-react";
 import { Fragment, useState } from "react";
 
 import { Switch } from "../Switch";
@@ -94,4 +95,23 @@ export const WithLoader: Story = {
 			</Fragment>
 		);
 	},
+};
+
+export const WithIcon: Story = {
+	render: () => (
+		<Fragment>
+			<Button
+				hasIcon
+				className="whitespace-nowrap"
+			>
+				Hello world <Plus />
+			</Button>
+			<Button
+				hasIcon
+				className="whitespace-nowrap"
+			>
+				<Plus /> Hello world
+			</Button>
+		</Fragment>
+	),
 };

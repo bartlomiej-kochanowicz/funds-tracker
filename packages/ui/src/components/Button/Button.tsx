@@ -27,14 +27,11 @@ interface ButtonProps extends AriaButtonProps {
 	size?: keyof typeof sizes;
 	color?: keyof typeof colors;
 	isLoading?: boolean;
-	noAnimation?: boolean;
+	hasIcon?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	(
-		{ children, className, size = "md", color = "blue", isLoading, noAnimation = false, ...rest },
-		propsRef,
-	) => {
+	({ children, className, size = "md", color = "blue", isLoading, hasIcon, ...rest }, propsRef) => {
 		const ref = useRef<HTMLButtonElement>(null);
 
 		const { buttonProps } = useButton(rest, ref);
@@ -51,7 +48,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 						sizes[size],
 						colors[color],
 						isLoading && "pointer-events-none flex items-center justify-center",
-						!noAnimation && "enabled:active:scale-97",
+						hasIcon && "flex items-center gap-2",
 						className,
 					)}
 					ref={mergeRefs([ref, propsRef])}
