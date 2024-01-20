@@ -26,6 +26,7 @@
 		"@graphql-codegen/client-preset": "4.1.0",
 		"@hookform/resolvers": "3.3.4",
 		"@internationalized/date": "3.5.1",
+		"class-variance-authority": "^0.7.0",
 		"clsx": "2.1.0",
 		"framer-motion": "10.17.9",
 		"graphql": "16.8.1",

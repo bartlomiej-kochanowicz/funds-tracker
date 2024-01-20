@@ -25,3 +25,5 @@ export * from "./components/Tile";
 export * from "./hooks/useDatepicker";
 export * from "./hooks/useModal";
 export * from "./hooks/useTailwindBreakpoint";
+// shadcn-ui
+export { buttonVariants, Button as ShadcnButton } from "./components/shadnc-ui/Button";
