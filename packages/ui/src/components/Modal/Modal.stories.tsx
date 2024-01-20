@@ -19,7 +19,7 @@ export const Default: Story = {
 			title: "Modal title",
 			children: ({ close }) => (
 				<Fragment>
-					<Button onPress={close}>Close</Button>
+					<Button onClick={close}>Close</Button>
 					<Input />
 				</Fragment>
 			),

@@ -103,8 +103,8 @@ export const EnterEmailForm = () => {
 
 			<Button
 				className="w-auto"
-				isDisabled={isSubmitting}
-				isLoading={isSubmitting}
+				disabled={isSubmitting}
+				loading={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
 			>

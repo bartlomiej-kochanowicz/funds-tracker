@@ -7,7 +7,7 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 
 export const Text = ({ children, className, ...rest }: TextProps) => (
 	<span
-		className={cslx("text-gray-900 dark:text-white", className)}
+		className={cslx("text-primary-foreground", className)}
 		{...rest}
 	>
 		{children}

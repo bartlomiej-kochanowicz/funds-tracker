@@ -86,9 +86,8 @@ export const Confirm = () => {
 						support: <Link href="mailto:support@funds-tracker.com" />,
 						code: (
 							<Button
-								size="xs"
-								color="gray"
-								onPress={handleResendCode}
+								variant="link"
+								onClick={handleResendCode}
 								data-testid="resend-code-button"
 							/>
 						),

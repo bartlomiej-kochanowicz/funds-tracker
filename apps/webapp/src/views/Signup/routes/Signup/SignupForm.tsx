@@ -153,9 +153,9 @@ export const SignupForm = () => {
 
 				<Button
 					className="mt-4 w-auto"
-					isDisabled={isSubmitting}
+					disabled={isSubmitting}
 					type="submit"
-					isLoading={isSubmitting}
+					loading={isSubmitting}
 				>
 					{!isSubmitting && compareState(states.nameAndEmail) && t("common.next")}
 

@@ -85,15 +85,15 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 				<Button
 					className="w-1/2"
 					color="gray"
-					onPress={close}
+					onClick={close}
 				>
 					{t("common.cancel")}
 				</Button>
 
 				<Button
 					className="flex w-1/2 items-center justify-center gap-2"
-					isDisabled={isSubmitting}
-					isLoading={isSubmitting}
+					disabled={isSubmitting}
+					loading={isSubmitting}
 					type="submit"
 				>
 					{t("add.cash.accounts.button.add")}

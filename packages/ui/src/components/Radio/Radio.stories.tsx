@@ -66,7 +66,6 @@ export const Invalid: Story = {
 			<Button
 				type="submit"
 				className="mt-4"
-				size="xs"
 			>
 				submit
 			</Button>

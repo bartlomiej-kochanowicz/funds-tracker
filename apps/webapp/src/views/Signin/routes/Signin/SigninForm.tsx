@@ -173,10 +173,10 @@ export const SigninForm = () => {
 
 			<Button
 				className="mt-4"
-				isDisabled={isSubmitting}
+				disabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
-				isLoading={isSubmitting}
+				loading={isSubmitting}
 			>
 				{!isSubmitting && compareState(states.email) && t("common.next")}
 

@@ -27,7 +27,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback, isList
 				</H2>
 
 				<Button
-					hasIcon
+					// hasIcon
 					{...triggerProps}
 				>
 					{t(

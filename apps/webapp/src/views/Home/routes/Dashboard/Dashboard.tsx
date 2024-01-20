@@ -1,4 +1,4 @@
-import { H1, Panel, ShadcnButton } from "@funds-tracker/ui";
+import { Button, Card, H1 } from "@funds-tracker/ui";
 import { useTranslation } from "react-i18next";
 
 export const Dashboard = () => {
@@ -8,45 +8,48 @@ export const Dashboard = () => {
 		<div className="flex flex-col gap-2">
 			<H1>{t("navigation.home")}</H1>
 			<div className="flex gap-2">
-				<Panel className="grow">
-					<ShadcnButton>test</ShadcnButton>
-					<br />
-					<br />
-					<br />
-					<br />
-				</Panel>
-				<Panel className="grow" />
+				<Card className="grow">
+					<Card.Header>Test</Card.Header>
+					<Card.Content>
+						<Button>test</Button>
+						<br />
+						<br />
+						<br />
+						<br />
+					</Card.Content>
+				</Card>
+				<Card className="grow" />
 			</div>
-			<Panel>
+			<Card>
 				<br />
 				<br />
-			</Panel>
-			<Panel>
-				<br />
-				<br />
-				<br />
-			</Panel>
-			<Panel>
-				<br />
-				<br />
-			</Panel>
-			<Panel>
+			</Card>
+			<Card>
 				<br />
 				<br />
 				<br />
-			</Panel>
-			<Panel>
+			</Card>
+			<Card>
+				<br />
+				<br />
+			</Card>
+			<Card>
 				<br />
 				<br />
 				<br />
-				<br />
-			</Panel>
-			<Panel>
+			</Card>
+			<Card>
 				<br />
 				<br />
 				<br />
 				<br />
-			</Panel>
+			</Card>
+			<Card>
+				<br />
+				<br />
+				<br />
+				<br />
+			</Card>
 		</div>
 	);
 };

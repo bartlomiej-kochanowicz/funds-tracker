@@ -136,8 +136,8 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 			<Button
 				className="w-auto"
-				isDisabled={isSubmitting}
-				isLoading={isSubmitting}
+				disabled={isSubmitting}
+				loading={isSubmitting}
 				type="submit"
 			>
 				{!isSubmitting && t("common.save")}

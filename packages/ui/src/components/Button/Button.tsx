@@ -1,75 +1,61 @@
+import { cva, type VariantProps } from "class-variance-authority";
 import clsx from "clsx";
-import { HTMLMotionProps, motion } from "framer-motion";
-import { forwardRef, ReactNode, useRef } from "react";
-import { AriaButtonProps, FocusRing, useButton } from "react-aria";
+import { forwardRef } from "react";
 
-import { mergeRefs } from "../../helpers/mergeRefs";
 import { Loader } from "../Loader";
 
-const sizes = {
-	xs: "px-4 py-2 text-xs",
-	"square-xs": "p-2 text-xs",
-	sm: "px-4 py-2 text-sm",
-	"square-sm": "p-2 text-sm",
-	md: "px-6 py-2.5 text-sm",
-	"square-md": "p-2.5 text-sm",
-	lg: "px-6 py-3 text-base",
-	"square-lg": "p-3 text-base",
-	xl: "px-7 py-3.5 text-base",
-	"square-xl": "p-3.5 text-base",
-};
+const buttonVariants = cva(
+	"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+	{
+		variants: {
+			variant: {
+				default: "bg-primary text-primary-foreground hover:bg-primary/90",
+				destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+				outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+				secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+				ghost: "hover:bg-accent hover:text-accent-foreground",
+				link: "text-primary underline-offset-4 hover:underline",
+			},
+			size: {
+				default: "h-10 px-4 py-2",
+				sm: "h-9 rounded-md px-3",
+				lg: "h-11 rounded-md px-8",
+				icon: "h-10 w-10",
+			},
+		},
+		defaultVariants: {
+			variant: "default",
+			size: "default",
+		},
+	},
+);
 
-const colors = {
-	blue: "bg-blue-500 text-white enabled:hover:bg-blue-600",
-	"outline-blue":
-		"border border-blue-500 text-blue-500 enabled:hover:border-blue-600 enabled:hover:text-blue-600",
-	black: "bg-zinc-950 text-white enabled:hover:bg-zinc-800",
-	gray: "bg-neutral-500 text-white enabled:hover:bg-neutral-600",
-	transparent: "bg-transparent text-gray-900 dark:text-white",
-};
-
-interface ButtonProps extends AriaButtonProps {
-	children?: ReactNode;
-	className?: string;
-	size?: keyof typeof sizes;
-	color?: keyof typeof colors;
-	isLoading?: boolean;
-	hasIcon?: boolean;
+export interface ButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+		VariantProps<typeof buttonVariants> {
+	loading?: boolean;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	({ children, className, size = "md", color = "blue", isLoading, hasIcon, ...rest }, propsRef) => {
-		const ref = useRef<HTMLButtonElement>(null);
-
-		const { buttonProps } = useButton(rest, ref);
-
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+	({ className, variant, size, children, loading, type = "button", ...props }, ref) => {
 		return (
-			<FocusRing focusRingClass="ring-4 ring-blue-300 dark:ring-blue-800">
-				<motion.button
-					{...(buttonProps as HTMLMotionProps<"button">)}
-					style={{
-						WebkitTapHighlightColor: "transparent",
-					}}
-					className={clsx(
-						"touch-none select-none rounded-xl transition-transform focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
-						sizes[size],
-						colors[color],
-						isLoading && "pointer-events-none flex items-center justify-center",
-						hasIcon && "flex items-center gap-2",
-						className,
-					)}
-					ref={mergeRefs([ref, propsRef])}
-				>
-					{!isLoading && children}
-					{isLoading && (
-						<Loader
-							size="sm"
-							className="dark:text-gray-200"
-							data-testid="button-loader"
-						/>
-					)}
-				</motion.button>
-			</FocusRing>
+			<button
+				className={clsx(
+					buttonVariants({ variant, size, className }),
+					loading && "pointer-events-none flex items-center justify-center gap-2",
+				)}
+				ref={ref}
+				type={type}
+				{...props}
+			>
+				{children}
+
+				{loading && <Loader data-testid="button-loader" />}
+			</button>
 		);
 	},
 );
+
+Button.displayName = "Button";
+
+export { Button, buttonVariants };

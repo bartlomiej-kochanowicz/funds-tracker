@@ -1,5 +1,5 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
-import { Button, Panel, Text } from "@funds-tracker/ui";
+import { Button, Card, Text } from "@funds-tracker/ui";
 import { formatCurrency } from "helpers/formatCurrency";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { FC } from "react";
@@ -84,33 +84,21 @@ export const CashAccountsPanel: FC<
 	] satisfies DropdownItems; */
 
 	return (
-		<Panel className="flex justify-between">
-			<div className="flex flex-col">
-				<Text className="font-bold">{name}</Text>
-
-				<Text>{formatCurrency(balance, currency)}</Text>
-			</div>
-
-			<Button
-				color="outline-blue"
-				size="square-md"
-			>
-				<MoreVertical />
-			</Button>
-
-			{/* <Dropdown
-				items={items}
-				placement="bottom-end"
-			>
-				{({ isOpen, ...props }) => (
+		<Card className="flex justify-between">
+			<Card.Header className="w-full">
+				<div className="flex items-center justify-between">
+					<div>
+						<Card.Title>{name}</Card.Title>
+						<Card.Description>{formatCurrency(balance, currency)}</Card.Description>
+					</div>
 					<Button
-						$outline
-						{...props}
+						variant="outline"
+						size="icon"
 					>
 						<MoreVertical />
 					</Button>
-				)}
-			</Dropdown> */}
-		</Panel>
+				</div>
+			</Card.Header>
+		</Card>
 	);
 };
