@@ -5,7 +5,7 @@ import {
 	SignupMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Button } from "@funds-tracker/ui";
+import { Button, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SIGNUP } from "graphql/mutations/authentication/Signup";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
@@ -155,11 +155,12 @@ export const SignupForm = () => {
 					className="mt-4 w-auto"
 					disabled={isSubmitting}
 					type="submit"
-					loading={isSubmitting}
 				>
-					{!isSubmitting && compareState(states.nameAndEmail) && t("common.next")}
+					{isSubmitting && <Loader />}
 
-					{!isSubmitting && compareState(states.passwords) && t("common.sign_up")}
+					{compareState(states.nameAndEmail) && t("common.next")}
+
+					{compareState(states.passwords) && t("common.sign_up")}
 				</Button>
 			</form>
 		</FormProvider>

@@ -1,8 +1,6 @@
+import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import clsx from "clsx";
 import { forwardRef } from "react";
-
-import { Loader } from "../Loader";
 
 const buttonVariants = cva(
 	"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -33,25 +31,20 @@ const buttonVariants = cva(
 export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
 		VariantProps<typeof buttonVariants> {
-	loading?: boolean;
+	asChild?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	({ className, variant, size, children, loading, type = "button", ...props }, ref) => {
+	({ className, variant, size, type = "button", asChild, ...props }, ref) => {
+		const Element = asChild ? Slot : "button";
+
 		return (
-			<button
-				className={clsx(
-					buttonVariants({ variant, size, className }),
-					loading && "pointer-events-none flex items-center justify-center gap-2",
-				)}
+			<Element
+				className={buttonVariants({ variant, size, className })}
 				ref={ref}
 				type={type}
 				{...props}
-			>
-				{children}
-
-				{loading && <Loader data-testid="button-loader" />}
-			</button>
+			/>
 		);
 	},
 );

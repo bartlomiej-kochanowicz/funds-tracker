@@ -4,7 +4,7 @@ import {
 	CreateCashAccountMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input, ModalProps } from "@funds-tracker/ui";
+import { Button, Input, Loader, ModalProps } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { useUserContext } from "contexts/UserContext";
@@ -93,12 +93,11 @@ export const CreateCashAccountForm: FC<CreateCashAccountFormProps> = ({ callback
 				<Button
 					className="flex w-1/2 items-center justify-center gap-2"
 					disabled={isSubmitting}
-					loading={isSubmitting}
 					type="submit"
 				>
-					{t("add.cash.accounts.button.add")}
+					{isSubmitting ? <Loader /> : <Plus className="size-6" />}
 
-					<Plus />
+					{t("add.cash.accounts.button.add")}
 				</Button>
 			</div>
 		</form>

@@ -1,6 +1,6 @@
 import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input } from "@funds-tracker/ui";
+import { Button, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
 import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
@@ -91,10 +91,11 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 			<Button
 				className="w-auto"
 				disabled={isSubmitting}
-				loading={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
 			>
+				{isSubmitting && <Loader />}
+
 				{t("form.button.submit")}
 			</Button>
 		</form>

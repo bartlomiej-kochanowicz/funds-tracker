@@ -7,7 +7,7 @@ import {
 	SigninMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Button, Input } from "@funds-tracker/ui";
+import { Button, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
@@ -176,16 +176,14 @@ export const SigninForm = () => {
 				disabled={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
-				loading={isSubmitting}
 			>
-				{!isSubmitting && compareState(states.email) && t("common.next")}
+				{isSubmitting && <Loader />}
 
-				{!isSubmitting && compareState(states.password) && !userNotConfirmed && t("common.sign_in")}
+				{compareState(states.email) && t("common.next")}
 
-				{!isSubmitting &&
-					compareState(states.password) &&
-					userNotConfirmed &&
-					t("common.sign_up_confirm")}
+				{compareState(states.password) && !userNotConfirmed && t("common.sign_in")}
+
+				{compareState(states.password) && userNotConfirmed && t("common.sign_up_confirm")}
 			</Button>
 		</form>
 	);

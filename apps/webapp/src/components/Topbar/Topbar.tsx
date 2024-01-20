@@ -6,7 +6,7 @@ import { ROUTES } from "routes/paths";
 import { Profile } from "../Profile";
 
 export const Topbar = () => (
-	<header className="fixed inset-x-0 top-0 z-10 flex w-full flex-wrap border-b border-gray-300 bg-white py-2.5 text-sm dark:border-neutral-700 dark:bg-neutral-750 md:py-4">
+	<header className="fixed inset-x-0 top-0 z-10 flex w-full flex-wrap border-b bg-background py-2.5 text-sm md:py-4">
 		<nav className="mx-auto flex w-full basis-full items-center justify-between px-4 md:justify-end md:px-8">
 			<Link
 				to={ROUTES.HOME}

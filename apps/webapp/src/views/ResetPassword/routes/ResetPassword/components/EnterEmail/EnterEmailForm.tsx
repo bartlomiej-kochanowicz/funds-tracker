@@ -1,6 +1,6 @@
 import { ResetPasswordMutation, ResetPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input, Text } from "@funds-tracker/ui";
+import { Button, Input, Loader, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RESET_PASSWORD } from "graphql/mutations/authentication/ResetPassword";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
@@ -104,10 +104,11 @@ export const EnterEmailForm = () => {
 			<Button
 				className="w-auto"
 				disabled={isSubmitting}
-				loading={isSubmitting}
 				type="submit"
 				data-testid="submit-button"
 			>
+				{isSubmitting && <Loader />}
+
 				{t("page.forgot_password.enter_email.submit.button")}
 			</Button>
 		</form>

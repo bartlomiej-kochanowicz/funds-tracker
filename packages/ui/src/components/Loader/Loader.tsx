@@ -8,7 +8,7 @@ interface LoaderProps {
 export const Loader = ({ className, ...rest }: LoaderProps) => (
 	<Loader2
 		role="loader"
-		className={clsx(className, "mr-2 size-4 animate-spin")}
+		className={clsx(className, "size-4 animate-spin")}
 		{...rest}
 	/>
 );

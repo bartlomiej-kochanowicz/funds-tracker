@@ -26,17 +26,14 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback, isList
 					{t(isListEmpty ? "page.cash_accounts.empty.list.title" : "page.cash_accounts.need.more")}
 				</H2>
 
-				<Button
-					// hasIcon
-					{...triggerProps}
-				>
+				<Button {...triggerProps}>
+					<Plus className="mr-2 size-6" />
+
 					{t(
 						isListEmpty
 							? "page.cash_accounts.need.more.button"
 							: "page.cash_accounts.need.more.button",
 					)}
-
-					<Plus />
 				</Button>
 			</div>
 		</Fragment>
