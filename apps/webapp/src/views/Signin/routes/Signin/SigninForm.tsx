@@ -176,6 +176,8 @@ export const SigninForm = () => {
 							<Form.Item>
 								<Form.Control>
 									<Input
+										autoFocus
+										type="password"
 										aria-label={t("common.password")}
 										placeholder={t("common.password")}
 										{...field}

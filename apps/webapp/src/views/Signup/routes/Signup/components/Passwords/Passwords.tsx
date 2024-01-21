@@ -20,6 +20,7 @@ export const Passwords = () => {
 						<Form.Control>
 							<Input
 								type="password"
+								autoFocus
 								aria-label={t("common.password")}
 								placeholder={t("common.password")}
 								{...field}
