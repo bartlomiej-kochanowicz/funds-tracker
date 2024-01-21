@@ -1,4 +1,4 @@
-import { Text } from "@funds-tracker/ui";
+import { H2, Text } from "@funds-tracker/ui";
 import { Frown } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,11 +8,16 @@ export const ErrorContent: FC = () => {
 
 	return (
 		<div className="flex flex-col items-center">
-			<Frown />
+			<Frown className="size-10 text-red-500" />
 
-			<Text className="font-bold">{t("error.component.title")}</Text>
+			<H2>{t("error.component.title")}</H2>
 
-			<Text className="text-center text-sm text-gray-600">{t("error.component.description")}</Text>
+			<Text
+				muted
+				className="text-sm"
+			>
+				{t("error.component.description")}
+			</Text>
 		</div>
 	);
 };
