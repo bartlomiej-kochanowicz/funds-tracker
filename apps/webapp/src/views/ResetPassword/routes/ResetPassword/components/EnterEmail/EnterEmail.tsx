@@ -1,4 +1,4 @@
-import { H1, Text } from "@funds-tracker/ui";
+import { buttonVariants, Card, H1, Text } from "@funds-tracker/ui";
 import { Fragment } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -11,27 +11,39 @@ export const EnterEmail = () => {
 
 	return (
 		<Fragment>
-			<H1 className="text-center">{t("page.signin.forgot_password")}</H1>
+			<Card.Header className="text-center">
+				<H1>{t("page.signin.forgot_password")}</H1>
 
-			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
-				{t("page.forgot_password.enter_email.description")}
-			</Text>
+				<Text
+					muted
+					className="mb-6 mt-2 text-sm"
+				>
+					{t("page.forgot_password.enter_email.description")}
+				</Text>
+			</Card.Header>
 
-			<EnterEmailForm />
+			<Card.Content>
+				<EnterEmailForm />
+			</Card.Content>
 
-			<Text className="my-4 text-center text-sm text-gray-600">
-				<Trans
-					i18nKey="page.signup.already_have_account"
-					components={{
-						signin: (
-							<Link
-								to={ROUTES.SIGNIN}
-								className="text-blue-500 hover:underline"
-							/>
-						),
-					}}
-				/>
-			</Text>
+			<Card.Footer className="flex flex-col">
+				<Text
+					muted
+					className="text-center text-sm"
+				>
+					<Trans
+						i18nKey="page.signup.already_have_account"
+						components={{
+							signin: (
+								<Link
+									to={ROUTES.SIGNIN}
+									className={buttonVariants({ variant: "link", size: "sm" })}
+								/>
+							),
+						}}
+					/>
+				</Text>
+			</Card.Footer>
 		</Fragment>
 	);
 };

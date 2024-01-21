@@ -1,6 +1,6 @@
 import { ResetPasswordMutation, ResetPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input, Loader, Text } from "@funds-tracker/ui";
+import { Button, Form, Input, Loader, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RESET_PASSWORD } from "graphql/mutations/authentication/ResetPassword";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
@@ -28,14 +28,16 @@ export const EnterEmailForm = () => {
 
 	const defaultValues = { userEmail: "" };
 
-	const {
-		handleSubmit,
-		formState: { errors, isSubmitting },
-		register,
-	} = useForm({
+	const form = useForm({
 		defaultValues,
 		resolver: yupResolver(validationSchema),
 	});
+
+	const {
+		handleSubmit,
+		formState: { isSubmitting },
+		control,
+	} = form;
 
 	const [resetPassword] = useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(
 		RESET_PASSWORD,
@@ -74,44 +76,57 @@ export const EnterEmailForm = () => {
 
 	if (sendEmailSuccess) {
 		return (
-			<Text className="text-center text-sm italic text-gray-400">
+			<Text
+				muted
+				className="flex justify-center text-center text-sm italic"
+			>
 				{t("page.forgot_password.enter_email.submit.success")}
 			</Text>
 		);
 	}
 
 	return (
-		<form
-			className="flex flex-col"
-			onSubmit={handleSubmit(onSubmit)}
-		>
-			<Suspense>
-				<GoogleReCaptcha
-					onVerify={onVerify}
-					refreshReCaptcha={refreshReCaptcha}
-				/>
-			</Suspense>
-
-			<Input
-				placeholder={t("common.email")}
-				aria-label={t("common.email")}
-				data-testid="email-input"
-				isInvalid={!!errors.userEmail}
-				errorMessage={errors.userEmail?.message}
-				{...register("userEmail")}
-			/>
-
-			<Button
-				className="w-auto"
-				disabled={isSubmitting}
-				type="submit"
-				data-testid="submit-button"
+		<Form {...form}>
+			<form
+				className="flex flex-col gap-4"
+				onSubmit={handleSubmit(onSubmit)}
 			>
-				{isSubmitting && <Loader />}
+				<Suspense>
+					<GoogleReCaptcha
+						onVerify={onVerify}
+						refreshReCaptcha={refreshReCaptcha}
+					/>
+				</Suspense>
 
-				{t("page.forgot_password.enter_email.submit.button")}
-			</Button>
-		</form>
+				<Form.Field
+					control={control}
+					name="userEmail"
+					render={({ field }) => (
+						<Form.Item>
+							<Form.Control>
+								<Input
+									autoFocus
+									aria-label={t("common.email")}
+									placeholder={t("common.email")}
+									{...field}
+								/>
+							</Form.Control>
+							<Form.Message />
+						</Form.Item>
+					)}
+				/>
+
+				<Button
+					disabled={isSubmitting}
+					type="submit"
+					data-testid="submit-button"
+				>
+					{isSubmitting && <Loader className="mr-2" />}
+
+					{t("page.forgot_password.enter_email.submit.button")}
+				</Button>
+			</form>
+		</Form>
 	);
 };
 

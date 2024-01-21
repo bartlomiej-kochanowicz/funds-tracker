@@ -1,6 +1,6 @@
 import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input, Loader, Text } from "@funds-tracker/ui";
+import { Button, Form, Input, Loader, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SET_NEW_PASSWORD } from "graphql/mutations/authentication/SetNewPassword";
 import { showErrorToast } from "helpers/showToast";
@@ -37,15 +37,17 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 		userPasswordConfirmation: "",
 	};
 
-	const {
-		handleSubmit,
-		formState: { errors, isSubmitting },
-		setError,
-		register,
-	} = useForm({
+	const form = useForm({
 		defaultValues,
 		resolver: yupResolver(validationSchema),
 	});
+
+	const {
+		control,
+		handleSubmit,
+		formState: { isSubmitting },
+		setError,
+	} = form;
 
 	const [setNewPasswordMutation] = useMutation<
 		SetNewPasswordMutation,
@@ -104,46 +106,65 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 	}
 
 	return (
-		<form
-			className="flex flex-col"
-			onSubmit={handleSubmit(onSubmit)}
-		>
-			<Suspense>
-				<GoogleReCaptcha
-					onVerify={onVerify}
-					refreshReCaptcha={refreshReCaptcha}
-				/>
-			</Suspense>
-
-			<Input
-				placeholder={t("common.password")}
-				aria-label={t("common.password")}
-				type="password"
-				autoFocus
-				isInvalid={!!errors.userPassword}
-				errorMessage={errors.userPassword?.message}
-				{...register("userPassword")}
-			/>
-
-			<Input
-				placeholder={t("page.signup.password.confirm")}
-				aria-label={t("page.signup.password.confirm")}
-				type="password"
-				isInvalid={!!errors.userPasswordConfirmation}
-				errorMessage={errors.userPasswordConfirmation?.message}
-				{...register("userPasswordConfirmation")}
-			/>
-
-			<Button
-				className="w-auto"
-				disabled={isSubmitting}
-				type="submit"
+		<Form {...form}>
+			<form
+				className="flex flex-col gap-4"
+				onSubmit={handleSubmit(onSubmit)}
 			>
-				{isSubmitting && <Loader />}
+				<Suspense>
+					<GoogleReCaptcha
+						onVerify={onVerify}
+						refreshReCaptcha={refreshReCaptcha}
+					/>
+				</Suspense>
 
-				{t("common.save")}
-			</Button>
-		</form>
+				<Form.Field
+					control={control}
+					name="userPassword"
+					render={({ field }) => (
+						<Form.Item>
+							<Form.Control>
+								<Input
+									autoFocus
+									type="password"
+									aria-label={t("common.password")}
+									placeholder={t("common.password")}
+									{...field}
+								/>
+							</Form.Control>
+							<Form.Message />
+						</Form.Item>
+					)}
+				/>
+
+				<Form.Field
+					control={control}
+					name="userPasswordConfirmation"
+					render={({ field }) => (
+						<Form.Item>
+							<Form.Control>
+								<Input
+									type="password"
+									aria-label={t("page.signup.password.confirm")}
+									placeholder={t("page.signup.password.confirm")}
+									{...field}
+								/>
+							</Form.Control>
+							<Form.Message />
+						</Form.Item>
+					)}
+				/>
+
+				<Button
+					disabled={isSubmitting}
+					type="submit"
+				>
+					{isSubmitting && <Loader className="mr-2" />}
+
+					{t("common.save")}
+				</Button>
+			</form>
+		</Form>
 	);
 };
 

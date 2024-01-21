@@ -99,21 +99,12 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 					)}
 				/>
 
-				{/* <Input
-				placeholder={t("page.confirm.input.placeholder")}
-				aria-label={t("page.confirm.input.placeholder")}
-				data-testid="code-input"
-				isInvalid={!!errors.code}
-				errorMessage={errors.code?.message}
-				{...register("code")}
-			/> */}
-
 				<Button
 					disabled={isSubmitting}
 					type="submit"
 					data-testid="submit-button"
 				>
-					{isSubmitting && <Loader />}
+					{isSubmitting && <Loader className="mr-2" />}
 
 					{t("form.button.submit")}
 				</Button>

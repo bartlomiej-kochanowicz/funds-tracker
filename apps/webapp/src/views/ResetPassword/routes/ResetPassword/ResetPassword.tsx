@@ -1,3 +1,4 @@
+import { Card } from "@funds-tracker/ui";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { useSearchParams } from "react-router-dom";
@@ -12,7 +13,7 @@ export const ResetPassword = () => {
 
 	return (
 		<ClearCentered>
-			{token ? <EnterPassword token={token} /> : <EnterEmail />}
+			<Card>{token ? <EnterPassword token={token} /> : <EnterEmail />}</Card>
 
 			<div className="mt-12 flex flex-col items-center">
 				{/* <LangSelector /> */}

@@ -1,4 +1,4 @@
-import { H1, Text } from "@funds-tracker/ui";
+import { Card, H1, Text } from "@funds-tracker/ui";
 import { FC, Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -13,13 +13,20 @@ export const EnterPassword: FC<EnterPasswordProps> = ({ token }) => {
 
 	return (
 		<Fragment>
-			<H1 className="text-center">{t("page.forgot_password.enter_password.title")}</H1>
+			<Card.Header className="text-center">
+				<H1>{t("page.forgot_password.enter_password.title")}</H1>
 
-			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
-				{t("page.forgot_password.enter_password.description")}
-			</Text>
+				<Text
+					muted
+					className="mb-6 mt-2 text-sm"
+				>
+					{t("page.forgot_password.enter_password.description")}
+				</Text>
+			</Card.Header>
 
-			<EnterPasswordForm token={token} />
+			<Card.Content className="my-3">
+				<EnterPasswordForm token={token} />
+			</Card.Content>
 		</Fragment>
 	);
 };
