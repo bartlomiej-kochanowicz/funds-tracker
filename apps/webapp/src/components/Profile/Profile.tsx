@@ -29,7 +29,7 @@ export const Profile = () => {
 				</Avatar>
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content align="end">
-				<DropdownMenu.Label>My Account</DropdownMenu.Label>
+				<DropdownMenu.Label>{t("common.my.account")}</DropdownMenu.Label>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
 					<DropdownMenu.Item>

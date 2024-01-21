@@ -25,7 +25,7 @@ export const CurrencyCombobox = () => {
 					aria-expanded={open}
 					className="justify-between"
 				>
-					{value ? t(`currency.${value.toUpperCase()}`) : "Select framework..."}
+					{value ? t(`currency.${value.toUpperCase()}`) : t("form.currency.select.placeholder")}
 					<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
 				</Button>
 			</Popover.Trigger>
