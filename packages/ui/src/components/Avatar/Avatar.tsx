@@ -1,25 +1,59 @@
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import clsx from "clsx";
-import { useMemo } from "react";
+import { forwardRef, useMemo } from "react";
 
 import { Initials } from "../../helpers/Initials";
-import { Text } from "../Text";
 
-interface AvatarProps {
-	name: string;
-	className?: string;
-}
+const Avatar = forwardRef<
+	React.ElementRef<typeof AvatarPrimitive.Root>,
+	React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
+>(({ className, ...props }, ref) => (
+	<AvatarPrimitive.Root
+		ref={ref}
+		className={clsx("relative flex size-10 shrink-0 overflow-hidden rounded-full", className)}
+		{...props}
+	/>
+));
 
-export const Avatar = ({ name, className }: AvatarProps) => {
-	const initials = useMemo(() => new Initials(name), [name]);
+Avatar.displayName = AvatarPrimitive.Root.displayName;
+
+const AvatarImage = forwardRef<
+	React.ElementRef<typeof AvatarPrimitive.Image>,
+	React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+>(({ className, ...props }, ref) => (
+	<AvatarPrimitive.Image
+		ref={ref}
+		className={clsx("aspect-square size-full", className)}
+		{...props}
+	/>
+));
+
+AvatarImage.displayName = AvatarPrimitive.Image.displayName;
+
+const AvatarFallback = forwardRef<
+	React.ElementRef<typeof AvatarPrimitive.Fallback>,
+	React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
+>(({ className, children, ...props }, ref) => {
+	if (typeof children !== "string") {
+		return;
+	}
+
+	const initials = useMemo(() => new Initials(children).getInitials(), [children]);
 
 	return (
-		<div
+		<AvatarPrimitive.Fallback
+			ref={ref}
 			className={clsx(
+				"flex size-full items-center justify-center rounded-full bg-primary text-white",
 				className,
-				"flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-700",
 			)}
+			{...props}
 		>
-			<Text className="text-lg font-bold text-white">{initials.getInitials()}</Text>
-		</div>
+			{initials}
+		</AvatarPrimitive.Fallback>
 	);
-};
+});
+
+AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
+
+export { Avatar, AvatarFallback, AvatarImage };

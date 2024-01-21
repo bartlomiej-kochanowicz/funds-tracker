@@ -67,7 +67,12 @@ export const CashAccounts = () => {
 		<Fragment>
 			<H1>{t("navigation.cash_accounts")}</H1>
 
-			<Text className="text-sm text-gray-400">{t("page.cash_accounts.title.description")}</Text>
+			<Text
+				muted
+				className="text-sm"
+			>
+				{t("page.cash_accounts.title.description")}
+			</Text>
 
 			{loading && <Loader />}
 

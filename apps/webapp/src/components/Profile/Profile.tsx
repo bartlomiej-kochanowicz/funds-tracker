@@ -40,7 +40,9 @@ export const Profile = () => {
 					{...props}
 					ref={ref}
 				>
-					<Avatar name={user.name} />
+					<Avatar>
+						<Avatar.Fallback>{user.name}</Avatar.Fallback>
+					</Avatar>
 				</PureButton>
 			)}
 		>
