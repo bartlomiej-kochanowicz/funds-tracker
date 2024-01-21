@@ -1,69 +1,40 @@
 import clsx from "clsx";
-import { forwardRef, ReactNode, useRef } from "react";
-import { type AriaTextFieldProps } from "react-aria";
-import { useTextField } from "react-aria";
-import { ChangeHandler } from "react-hook-form";
+import { forwardRef } from "react";
 
-import { mergeRefs } from "../../helpers/mergeRefs";
-import { Text } from "../Text";
+import { Label } from "../Label";
 
-interface InputProps extends Omit<AriaTextFieldProps, "onChange"> {
-	className?: string;
-	errorMessage?: ReactNode;
-	onChange?: ChangeHandler;
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+	label?: string;
+	htmlFor?: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-	const { label, className, onChange } = props;
-	const inputRef = useRef<HTMLInputElement>(null);
-
-	const { labelProps, inputProps, descriptionProps, errorMessageProps, isInvalid } = useTextField(
-		{
-			...props,
-			onChange: onChange && (value => onChange({ target: { value } })),
-		},
-		inputRef,
-	);
-
-	const { description, isDisabled, errorMessage } = props;
-
-	return (
-		<div className={clsx(className, "group", !description && !isInvalid && "mb-4")}>
-			{label && (
-				<label
-					{...labelProps}
-					className="mb-2 block text-sm text-gray-900 dark:text-white"
-				>
-					{label}
-				</label>
-			)}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+	({ className, type, label, htmlFor, ...props }, ref) => {
+		const element = (
 			<input
-				{...inputProps}
+				type={type}
 				className={clsx(
-					"block w-full rounded-xl border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:group-hover:border-blue-500 dark:border-neutral-700 dark:bg-neutral-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500",
-					isDisabled && "cursor-not-allowed opacity-50",
-					!isDisabled && "group-hover:border-gray-400",
-					isInvalid &&
-						"border-red-500 focus:border-red-500 group-hover:border-red-500 focus:group-hover:border-red-500 dark:border-red-500 dark:focus:border-red-500",
+					"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+					className,
 				)}
-				ref={mergeRefs([inputRef, ref])}
+				ref={ref}
+				{...props}
 			/>
-			{description && !isInvalid && (
-				<Text
-					{...descriptionProps}
-					className="mb-0.5 text-xs"
-				>
-					{description}
-				</Text>
-			)}
-			{isInvalid && (
-				<div
-					{...errorMessageProps}
-					className="mb-0.5 text-xs text-red-500"
-				>
-					{errorMessage}
+		);
+
+		if (label) {
+			return (
+				<div className="grid w-full max-w-sm items-center gap-1.5">
+					<Label htmlFor={htmlFor}>{label}</Label>
+					{element}
 				</div>
-			)}
-		</div>
-	);
-});
+			);
+		}
+
+		return element;
+	},
+);
+
+Input.displayName = "Input";
+
+export { Input };

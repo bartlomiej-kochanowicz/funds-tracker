@@ -9,6 +9,7 @@ export * from "./components/DatePicker";
 export * from "./components/Dialog";
 export * from "./components/Heading";
 export * from "./components/Input";
+export * from "./components/Label";
 export * from "./components/Link";
 export * from "./components/ListBox";
 export * from "./components/Loader";
