@@ -3,11 +3,12 @@ import { HTMLAttributes, ReactNode } from "react";
 
 interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 	children?: ReactNode;
+	muted?: boolean;
 }
 
-export const Text = ({ children, className, ...rest }: TextProps) => (
+export const Text = ({ children, className, muted, ...rest }: TextProps) => (
 	<span
-		className={cslx("text-primary-foreground", className)}
+		className={cslx(muted ? "text-muted-foreground" : "text-primary-foreground", className)}
 		{...rest}
 	>
 		{children}

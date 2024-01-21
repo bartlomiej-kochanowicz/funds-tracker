@@ -7,7 +7,7 @@ import {
 	SigninMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Button, Input, Loader } from "@funds-tracker/ui";
+import { Button, Form, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
@@ -57,16 +57,17 @@ export const SigninForm = () => {
 
 	const defaultValues = { userEmail: "", userPassword: "" } satisfies SigninFormValues;
 
+	const form = useForm<SigninFormValues>({
+		defaultValues,
+		resolver: yupResolver<SigninFormValues>(validationSchema(compareState(states.password))),
+	});
+
 	const {
-		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		setError,
 		getValues,
-	} = useForm<SigninFormValues>({
-		defaultValues,
-		resolver: yupResolver<SigninFormValues>(validationSchema(compareState(states.password))),
-	});
+	} = form;
 
 	const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
 		onCompleted: data => {
@@ -137,54 +138,68 @@ export const SigninForm = () => {
 	const userNotConfirmed = errors.userPassword?.message === "User not confirmed.";
 
 	return (
-		<form
-			className="flex flex-col"
-			onSubmit={handleSubmit(onSubmit)}
-		>
-			<Suspense>
-				<GoogleReCaptcha
-					onVerify={onVerify}
-					refreshReCaptcha={refreshReCaptcha}
-				/>
-			</Suspense>
-
-			<Input
-				placeholder={t("common.email")}
-				aria-label={t("common.email")}
-				isDisabled={compareState(states.password)}
-				data-testid="email-input"
-				isInvalid={!!errors.userEmail}
-				errorMessage={errors.userEmail?.message}
-				{...register("userEmail")}
-			/>
-
-			{compareState(states.password) && (
-				<Input
-					placeholder={t("common.password")}
-					type="password"
-					aria-label={t("common.password")}
-					autoFocus
-					data-testid="password-input"
-					isInvalid={!!errors.userPassword}
-					errorMessage={errors.userPassword?.message}
-					{...register("userPassword")}
-				/>
-			)}
-
-			<Button
-				className="mt-4"
-				disabled={isSubmitting}
-				type="submit"
-				data-testid="submit-button"
+		<Form {...form}>
+			<form
+				className="flex flex-col gap-4"
+				onSubmit={handleSubmit(onSubmit)}
 			>
-				{isSubmitting && <Loader />}
+				<Suspense>
+					<GoogleReCaptcha
+						onVerify={onVerify}
+						refreshReCaptcha={refreshReCaptcha}
+					/>
+				</Suspense>
 
-				{compareState(states.email) && t("common.next")}
+				<Form.Field
+					control={form.control}
+					name="userEmail"
+					render={({ field }) => (
+						<Form.Item>
+							<Form.Control>
+								<Input
+									aria-label={t("common.email")}
+									placeholder={t("common.email")}
+									{...field}
+								/>
+							</Form.Control>
+							<Form.Message />
+						</Form.Item>
+					)}
+				/>
 
-				{compareState(states.password) && !userNotConfirmed && t("common.sign_in")}
+				{compareState(states.password) && (
+					<Form.Field
+						control={form.control}
+						name="userPassword"
+						render={({ field }) => (
+							<Form.Item>
+								<Form.Control>
+									<Input
+										aria-label={t("common.password")}
+										placeholder={t("common.password")}
+										{...field}
+									/>
+								</Form.Control>
+								<Form.Message />
+							</Form.Item>
+						)}
+					/>
+				)}
 
-				{compareState(states.password) && userNotConfirmed && t("common.sign_up_confirm")}
-			</Button>
-		</form>
+				<Button
+					disabled={isSubmitting}
+					type="submit"
+					data-testid="submit-button"
+				>
+					{isSubmitting && <Loader />}
+
+					{compareState(states.email) && t("common.next")}
+
+					{compareState(states.password) && !userNotConfirmed && t("common.sign_in")}
+
+					{compareState(states.password) && userNotConfirmed && t("common.sign_up_confirm")}
+				</Button>
+			</form>
+		</Form>
 	);
 };

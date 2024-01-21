@@ -1,4 +1,4 @@
-import { H1, Text } from "@funds-tracker/ui";
+import { buttonVariants, Card, H1, Text } from "@funds-tracker/ui";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
 // import { LangSelector } from "components/molecules";
@@ -13,34 +13,47 @@ export const Signin = () => {
 
 	return (
 		<ClearCentered>
-			<H1 className="text-center">{t("common.sign_in")}</H1>
+			<Card>
+				<Card.Header className="text-center">
+					<H1>{t("common.sign_in")}</H1>
+					<Text
+						muted
+						className="mb-6 mt-2 text-sm"
+					>
+						{t("page.signin.description")}
+					</Text>
+				</Card.Header>
 
-			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
-				{t("page.signin.description")}
-			</Text>
+				<Card.Content className="my-3">
+					<SigninForm />
+				</Card.Content>
 
-			<SigninForm />
+				<Card.Footer className="flex flex-col">
+					<Text
+						muted
+						className="text-center text-sm"
+					>
+						<Trans
+							i18nKey="page.signin.dont_have_account"
+							components={{
+								signup: (
+									<Link
+										to={ROUTES.SIGNUP.SIGNUP}
+										className={buttonVariants({ variant: "link", size: "sm" })}
+									/>
+								),
+							}}
+						/>
+					</Text>
 
-			<Text className="my-4 text-center text-sm text-gray-600">
-				<Trans
-					i18nKey="page.signin.dont_have_account"
-					components={{
-						signup: (
-							<Link
-								to={ROUTES.SIGNUP.SIGNUP}
-								className="text-blue-500 hover:underline"
-							/>
-						),
-					}}
-				/>
-			</Text>
-
-			<Link
-				className="block text-center text-sm text-blue-500 hover:underline"
-				to={ROUTES.RESET_PASSWORD}
-			>
-				{t("page.signin.forgot_password")}
-			</Link>
+					<Link
+						className={buttonVariants({ variant: "link", size: "sm" })}
+						to={ROUTES.RESET_PASSWORD}
+					>
+						{t("page.signin.forgot_password")}
+					</Link>
+				</Card.Footer>
+			</Card>
 
 			<div className="mt-12 flex flex-col items-center">
 				{/* <LangSelector /> */}

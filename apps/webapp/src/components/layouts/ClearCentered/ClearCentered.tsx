@@ -9,6 +9,6 @@ export const ClearCentered = ({ children, ...rest }: ClearCenteredProps) => (
 		className="flex h-screen w-full flex-col items-center justify-center px-5 py-2"
 		{...rest}
 	>
-		<div className="flex max-w-sm flex-col">{children}</div>
+		<div className="flex max-w-md flex-col">{children}</div>
 	</main>
 );
