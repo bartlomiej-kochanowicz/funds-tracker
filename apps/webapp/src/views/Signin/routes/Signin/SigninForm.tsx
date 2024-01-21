@@ -63,6 +63,7 @@ export const SigninForm = () => {
 	});
 
 	const {
+		control,
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		setError,
@@ -151,7 +152,7 @@ export const SigninForm = () => {
 				</Suspense>
 
 				<Form.Field
-					control={form.control}
+					control={control}
 					name="userEmail"
 					render={({ field }) => (
 						<Form.Item>
@@ -169,7 +170,7 @@ export const SigninForm = () => {
 
 				{compareState(states.password) && (
 					<Form.Field
-						control={form.control}
+						control={control}
 						name="userPassword"
 						render={({ field }) => (
 							<Form.Item>

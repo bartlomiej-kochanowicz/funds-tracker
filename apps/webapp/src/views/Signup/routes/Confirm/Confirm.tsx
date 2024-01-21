@@ -1,6 +1,6 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, H1, Link, Text } from "@funds-tracker/ui";
+import { Button, buttonVariants, Card, H1, Link, Text } from "@funds-tracker/ui";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
@@ -62,38 +62,61 @@ export const Confirm = () => {
 					refreshReCaptcha={refreshReCaptcha}
 				/>
 			</Suspense>
+			<Card>
+				<Card.Header className="text-center">
+					<H1>{t("common.sign_up_confirm")}</H1>
 
-			<H1 className="text-center">{t("common.sign_up_confirm")}</H1>
+					<Text
+						muted
+						className="mb-6 mt-2 text-sm"
+					>
+						<Trans
+							i18nKey="page.confirm.description"
+							components={{
+								bold: (
+									<Text
+										muted
+										className="font-bold"
+									/>
+								),
+							}}
+							values={{
+								email,
+							}}
+						/>
+					</Text>
+				</Card.Header>
 
-			<Text className="mb-6 mt-2 text-center text-sm text-gray-600">
-				<Trans
-					i18nKey="page.confirm.description"
-					components={{
-						bold: <Text className="text-center text-sm font-bold text-gray-400" />,
-					}}
-					values={{
-						email,
-					}}
-				/>
-			</Text>
+				<Card.Content className="my-3">
+					<ConfirmForm email={email} />
+				</Card.Content>
 
-			<ConfirmForm email={email} />
-
-			<Text className="my-4 text-center text-sm text-gray-600">
-				<Trans
-					i18nKey="page.confirm.support"
-					components={{
-						support: <Link href="mailto:support@funds-tracker.com" />,
-						code: (
-							<Button
-								variant="link"
-								onClick={handleResendCode}
-								data-testid="resend-code-button"
-							/>
-						),
-					}}
-				/>
-			</Text>
+				<Card.Footer>
+					<Text
+						muted
+						className="text-center text-sm"
+					>
+						<Trans
+							i18nKey="page.confirm.support"
+							components={{
+								support: (
+									<Link
+										className={buttonVariants({ variant: "link", size: "sm" })}
+										href="mailto:support@funds-tracker.com"
+									/>
+								),
+								code: (
+									<Button
+										variant="link"
+										onClick={handleResendCode}
+										data-testid="resend-code-button"
+									/>
+								),
+							}}
+						/>
+					</Text>
+				</Card.Footer>
+			</Card>
 
 			<div className="mt-12 flex flex-col items-center">
 				{/* <LangSelector /> */}

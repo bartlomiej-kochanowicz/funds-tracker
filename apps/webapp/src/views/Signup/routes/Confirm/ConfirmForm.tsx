@@ -1,6 +1,6 @@
 import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Input, Loader } from "@funds-tracker/ui";
+import { Button, Form, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
 import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
@@ -36,16 +36,18 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 
 	const defaultValues = { code: "" };
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isSubmitting },
-		setError,
-	} = useForm({
+	const form = useForm({
 		defaultValues,
 		resolver: yupResolver(validationSchema),
 		mode: "onChange",
 	});
+
+	const {
+		control,
+		handleSubmit,
+		formState: { isSubmitting },
+		setError,
+	} = form;
 
 	const [confirmSignup] = useMutation<ConfirmSignupMutation, ConfirmSignupMutationVariables>(
 		CONFIRM_SIGNUP,
@@ -68,36 +70,54 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 	};
 
 	return (
-		<form
-			className="flex flex-col"
-			onSubmit={handleSubmit(onSubmit)}
-		>
-			<Suspense>
-				<GoogleReCaptcha
-					onVerify={onVerify}
-					refreshReCaptcha={refreshReCaptcha}
-				/>
-			</Suspense>
+		<Form {...form}>
+			<form
+				className="flex flex-col gap-4"
+				onSubmit={handleSubmit(onSubmit)}
+			>
+				<Suspense>
+					<GoogleReCaptcha
+						onVerify={onVerify}
+						refreshReCaptcha={refreshReCaptcha}
+					/>
+				</Suspense>
 
-			<Input
+				<Form.Field
+					control={control}
+					name="code"
+					render={({ field }) => (
+						<Form.Item>
+							<Form.Control>
+								<Input
+									aria-label={t("page.confirm.input.placeholder")}
+									placeholder={t("page.confirm.input.placeholder")}
+									{...field}
+								/>
+							</Form.Control>
+							<Form.Message />
+						</Form.Item>
+					)}
+				/>
+
+				{/* <Input
 				placeholder={t("page.confirm.input.placeholder")}
 				aria-label={t("page.confirm.input.placeholder")}
 				data-testid="code-input"
 				isInvalid={!!errors.code}
 				errorMessage={errors.code?.message}
 				{...register("code")}
-			/>
+			/> */}
 
-			<Button
-				className="w-auto"
-				disabled={isSubmitting}
-				type="submit"
-				data-testid="submit-button"
-			>
-				{isSubmitting && <Loader />}
+				<Button
+					disabled={isSubmitting}
+					type="submit"
+					data-testid="submit-button"
+				>
+					{isSubmitting && <Loader />}
 
-				{t("form.button.submit")}
-			</Button>
-		</form>
+					{t("form.button.submit")}
+				</Button>
+			</form>
+		</Form>
 	);
 };

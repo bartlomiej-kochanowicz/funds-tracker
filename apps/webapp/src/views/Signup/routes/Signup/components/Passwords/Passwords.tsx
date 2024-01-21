@@ -1,4 +1,4 @@
-import { Input } from "@funds-tracker/ui";
+import { Form, Input } from "@funds-tracker/ui";
 import { Fragment } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -8,30 +8,44 @@ import { SignupFormValues } from "../../Signup.types";
 export const Passwords = () => {
 	const { t } = useTranslation();
 
-	const {
-		register,
-		formState: { errors },
-	} = useFormContext<SignupFormValues>();
+	const { control } = useFormContext<SignupFormValues>();
 
 	return (
 		<Fragment>
-			<Input
-				placeholder={t("common.password")}
-				aria-label={t("common.password")}
-				type="password"
-				autoFocus
-				isInvalid={!!errors.userPassword}
-				errorMessage={errors.userPassword?.message}
-				{...register("userPassword")}
+			<Form.Field
+				control={control}
+				name="userPassword"
+				render={({ field }) => (
+					<Form.Item>
+						<Form.Control>
+							<Input
+								type="password"
+								aria-label={t("common.password")}
+								placeholder={t("common.password")}
+								{...field}
+							/>
+						</Form.Control>
+						<Form.Message />
+					</Form.Item>
+				)}
 			/>
 
-			<Input
-				placeholder={t("page.signup.password.confirm")}
-				aria-label={t("page.signup.password.confirm")}
-				type="password"
-				isInvalid={!!errors.userPasswordConfirmation}
-				errorMessage={errors.userPasswordConfirmation?.message}
-				{...register("userPasswordConfirmation")}
+			<Form.Field
+				control={control}
+				name="userPasswordConfirmation"
+				render={({ field }) => (
+					<Form.Item>
+						<Form.Control>
+							<Input
+								type="password"
+								aria-label={t("page.signup.password.confirm")}
+								placeholder={t("page.signup.password.confirm")}
+								{...field}
+							/>
+						</Form.Control>
+						<Form.Message />
+					</Form.Item>
+				)}
 			/>
 		</Fragment>
 	);

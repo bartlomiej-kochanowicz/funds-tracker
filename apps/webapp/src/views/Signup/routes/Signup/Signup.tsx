@@ -1,4 +1,4 @@
-import { H1, Text } from "@funds-tracker/ui";
+import { buttonVariants, Card, H1, Text } from "@funds-tracker/ui";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { Trans, useTranslation } from "react-i18next";
@@ -12,27 +12,40 @@ export const Signup = () => {
 
 	return (
 		<ClearCentered>
-			<H1 className="text-center">{t("common.sign_up")}</H1>
+			<Card>
+				<Card.Header className="text-center">
+					<H1>{t("common.sign_up")}</H1>
 
-			<Text className="mb-6 mt-2 text-center text-sm text-gray-400">
-				{t("page.signup.description")}
-			</Text>
+					<Text
+						muted
+						className="mb-6 mt-2 text-sm"
+					>
+						{t("page.signup.description")}
+					</Text>
+				</Card.Header>
 
-			<SignupForm />
-
-			<Text className="my-4 text-center text-sm text-gray-400">
-				<Trans
-					i18nKey="page.signup.already_have_account"
-					components={{
-						signin: (
-							<Link
-								to={ROUTES.SIGNIN}
-								className="text-blue-500 hover:underline"
-							/>
-						),
-					}}
-				/>
-			</Text>
+				<Card.Content className="my-3">
+					<SignupForm />
+				</Card.Content>
+				<Card.Footer className="flex flex-col">
+					<Text
+						muted
+						className="text-center text-sm"
+					>
+						<Trans
+							i18nKey="page.signup.already_have_account"
+							components={{
+								signin: (
+									<Link
+										to={ROUTES.SIGNIN}
+										className={buttonVariants({ variant: "link", size: "sm" })}
+									/>
+								),
+							}}
+						/>
+					</Text>
+				</Card.Footer>
+			</Card>
 
 			<div className="mt-12 flex flex-col items-center">
 				{/* <LangSelector /> */}

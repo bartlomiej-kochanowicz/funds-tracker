@@ -30,7 +30,7 @@
 	"page.signin.password.too_long": "Password is too long, max. 50 characters",
 	"page.signin.password.too_short": "Password is too short, min. 12 characters",
 	"page.signup.already_have_account": "Have an account already? <signin>Log in</signin>",
-	"page.signup.description": "Join Funds Tracker and begin managing your investment today.",
+	"page.signup.description": "Join Funds Tracker and start managing your investment today.",
 	"page.signup.email.already_in_use": "Email already in use",
 	"page.signup.name.required": "What’s your name?",
 	"page.signup.password.confirm": "Confirm password",

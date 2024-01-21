@@ -5,14 +5,14 @@ import {
 	SignupMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Button, Loader } from "@funds-tracker/ui";
+import { Button, Form, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SIGNUP } from "graphql/mutations/authentication/Signup";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
 import { showErrorToast } from "helpers/showToast";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, Suspense, useCallback, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -58,7 +58,7 @@ export const SignupForm = () => {
 		userPasswordConfirmation: "",
 	};
 
-	const methods = useForm<SignupFormValues>({
+	const form = useForm<SignupFormValues>({
 		defaultValues,
 		resolver: yupResolver<SignupFormValues>(validationSchema(compareState(states.passwords))),
 	});
@@ -68,7 +68,7 @@ export const SignupForm = () => {
 		formState: { isSubmitting },
 		setError,
 		getValues,
-	} = methods;
+	} = form;
 
 	const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
 		onCompleted: data => {
@@ -135,9 +135,9 @@ export const SignupForm = () => {
 	};
 
 	return (
-		<FormProvider {...methods}>
+		<Form {...form}>
 			<form
-				className="flex flex-col"
+				className="flex flex-col gap-4"
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Suspense>
@@ -152,17 +152,16 @@ export const SignupForm = () => {
 				{compareState(states.passwords) && <Passwords />}
 
 				<Button
-					className="mt-4 w-auto"
 					disabled={isSubmitting}
 					type="submit"
 				>
-					{isSubmitting && <Loader />}
+					{isSubmitting && <Loader className="mr-2" />}
 
 					{compareState(states.nameAndEmail) && t("common.next")}
 
 					{compareState(states.passwords) && t("common.sign_up")}
 				</Button>
 			</form>
-		</FormProvider>
+		</Form>
 	);
 };
