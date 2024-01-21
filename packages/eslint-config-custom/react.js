@@ -57,6 +57,7 @@ module.exports = {
 		"@typescript-eslint/no-shadow": "off",
 		"react/no-array-index-key": "off",
 		"react/button-has-type": "off",
+		"react/no-unknown-property": ['error', { ignore: ['cmdk-input-wrapper'] }]
 	},
 	settings: {
 		tailwindcss:{

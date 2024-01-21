@@ -213,5 +213,6 @@
 	"common.value": "Wartość",
 	"common.page.not.found": "Strona nie została znaleziona",
 	"common.settings": "Ustawienia",
-	"form.currency.select.placeholder": "Wybierz walutę"
+	"form.currency.select.placeholder": "Wybierz walutę",
+	"form.currency.select.search.empty": "Nie znaleziono waluty"
 }
