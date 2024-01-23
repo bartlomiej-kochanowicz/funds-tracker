@@ -11,7 +11,7 @@ import { useUserContext } from "contexts/UserContext";
 import { CREATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/CreateCashAccount";
 import { showErrorToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -42,8 +42,15 @@ export const CreateCashAccountDialog = ({ children, callback }: CreateCashAccoun
 	const {
 		control,
 		handleSubmit,
-		formState: { isSubmitting },
+		formState: { isSubmitting, isSubmitSuccessful },
+		reset,
 	} = form;
+
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			reset();
+		}
+	}, [isSubmitSuccessful, reset]);
 
 	const [createCashAccount] = useMutation<
 		CreateCashAccountMutation,
@@ -77,7 +84,6 @@ export const CreateCashAccountDialog = ({ children, callback }: CreateCashAccoun
 					<Dialog.Title>{t("modal.CreateCashAccount.name")}</Dialog.Title>
 					<Dialog.Description>{t("modal.CreateCashAccount.description")}</Dialog.Description>
 				</Dialog.Header>
-
 				<Form {...form}>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="my-4 flex flex-col gap-4">
@@ -99,7 +105,18 @@ export const CreateCashAccountDialog = ({ children, callback }: CreateCashAccoun
 								)}
 							/>
 
-							<CurrencyCombobox />
+							<Form.Field
+								control={control}
+								name="currency"
+								render={({ field }) => (
+									<Form.Item>
+										<Form.Control>
+											<CurrencyCombobox {...field} />
+										</Form.Control>
+										<Form.Message />
+									</Form.Item>
+								)}
+							/>
 						</div>
 
 						<Dialog.Footer className="flex gap-4">

@@ -214,6 +214,7 @@
 	"common.page.not.found": "Page not found",
 	"common.settings": "Settings",
 	"form.currency.select.placeholder": "Select currency",
+	"form.currency.select.search.placeholder": "Search currency",
 	"form.currency.select.search.empty": "No currencies found",
 	"common.my.account": "My account"
 }
