@@ -1,10 +1,10 @@
 import { ApolloProvider } from "@apollo/client";
+import { ErrorBoundary } from "components/ErrorBoundary";
 import { FullscreenErrorContent } from "components/FullscreenErrorContent";
 import client from "config/client";
 import { UserContextProvider } from "contexts/UserContext";
 import { ThemeProvider } from "next-themes";
 import { FC } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Root } from "views/Root";
@@ -30,7 +30,7 @@ const App: FC = (): JSX.Element => (
 						pauseOnHover
 					/>
 
-					<ErrorBoundary FallbackComponent={FullscreenErrorContent}>
+					<ErrorBoundary fallback={<FullscreenErrorContent />}>
 						<Root />
 					</ErrorBoundary>
 				</ThemeProvider>

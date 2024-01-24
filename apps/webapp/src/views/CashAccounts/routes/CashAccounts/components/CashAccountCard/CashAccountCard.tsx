@@ -1,8 +1,9 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
-import { Button, Card, Text } from "@funds-tracker/ui";
+import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
 import { formatCurrency } from "helpers/formatCurrency";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
+import { Fragment, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 type CashAccountCardProps = {
@@ -12,64 +13,68 @@ type CashAccountCardProps = {
 export const CashAccountCard = ({ name, currency, balance, isPending }: CashAccountCardProps) => {
 	const { t } = useTranslation();
 
-	/* const items = [
-		{
-			icon: AreaChart,
-			label: t("modal.InvestFunds.name"),
-			value: "invest",
-			onClick: () => {
-				NiceModal.show(MODAL_INVEST_FUNDS, { balance, currency, uuid });
-			},
-		},
-		{
-			icon: List,
-			label: t("page.cash_accounts.button.operations"),
-			value: "operations",
-			onClick: () => {
-				NiceModal.show(MODAL_CASH_ACCOUNT_OPERATIONS, {
+	const items = useMemo(
+		() => [
+			[
+				{
+					icon: AreaChart,
+					label: t("modal.InvestFunds.name"),
+					onClick: () => {
+						/* NiceModal.show(MODAL_INVEST_FUNDS, { balance, currency, uuid }); */
+					},
+				},
+				{
+					icon: List,
+					label: t("page.cash_accounts.button.operations"),
+					value: "operations",
+					onClick: () => {
+						/* NiceModal.show(MODAL_CASH_ACCOUNT_OPERATIONS, {
 					deleteModalProps: { name, uuid },
 					currency,
-				});
-			},
-		},
-		{
-			icon: Plus,
-			label: t("page.cash_accounts.button.add_funds"),
-			value: "add_funds",
-			divider: "bottom",
-			onClick: () => {
-				NiceModal.show(MODAL_ADD_FUNDS_CASH_ACCOUNT, {
+				}); */
+					},
+				},
+				{
+					icon: Plus,
+					label: t("page.cash_accounts.button.add_funds"),
+					onClick: () => {
+						/* NiceModal.show(MODAL_ADD_FUNDS_CASH_ACCOUNT, {
 					callback: updateCashAccountBalance,
 					uuid,
 					currency,
-				});
-			},
-		},
-		{
-			icon: Pencil,
-			label: t("common.rename"),
-			value: "rename",
-			onClick: () => {
-				NiceModal.show(MODAL_RENAME_CASH_ACCOUNT, {
+				}); */
+					},
+				},
+			],
+			[
+				{
+					icon: Pencil,
+					label: t("common.rename"),
+					onClick: () => {
+						/* NiceModal.show(MODAL_RENAME_CASH_ACCOUNT, {
 					uuid,
 					name,
 					callback: updateCashAccountName,
-				});
-			},
-		},
-		{
-			icon: Trash2,
-			label: t("common.delete"),
-			value: "delete",
-			onClick: () => {
-				NiceModal.show(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, {
+				}); */
+					},
+				},
+				{
+					icon: Trash2,
+					label: t("common.delete"),
+					onClick: () => {
+						/* NiceModal.show(MODAL_CONFIRM_DELETE_CASH_ACCOUNT, {
 					name,
 					uuid,
 					callback: updateCashAccountList,
-				});
-			},
-		},
-	] satisfies DropdownItems; */
+				}); */
+					},
+				},
+			],
+		],
+		[],
+	);
+
+	const groupQuantity = items.length;
 
 	return (
 		<Card
@@ -84,12 +89,36 @@ export const CashAccountCard = ({ name, currency, balance, isPending }: CashAcco
 						<Card.Title>{name}</Card.Title>
 						<Card.Description>{formatCurrency(balance, currency)}</Card.Description>
 					</div>
-					<Button
-						variant="outline"
-						size="icon"
-					>
-						<MoreVertical />
-					</Button>
+					<DropdownMenu>
+						<DropdownMenu.Trigger asChild>
+							<Button
+								variant="outline"
+								size="icon"
+							>
+								<MoreVertical />
+							</Button>
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content align="end">
+							{items.map((group, index) => (
+								<Fragment key={index}>
+									<DropdownMenu.Group>
+										{group.map(({ icon: Icon, label, onClick }) => (
+											<DropdownMenu.Item
+												key={label}
+												onClick={onClick}
+											>
+												<Icon className="mr-2 size-4" />
+
+												<span>{label}</span>
+											</DropdownMenu.Item>
+										))}
+									</DropdownMenu.Group>
+
+									{groupQuantity !== index + 1 && <DropdownMenu.Separator />}
+								</Fragment>
+							))}
+						</DropdownMenu.Content>
+					</DropdownMenu>
 				</div>
 			</Card.Header>
 		</Card>
