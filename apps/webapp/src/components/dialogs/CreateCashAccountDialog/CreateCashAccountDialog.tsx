@@ -122,7 +122,7 @@ export const CreateCashAccountDialog = ({
 							/>
 						</div>
 
-						<Dialog.Footer className="flex gap-4">
+						<Dialog.Footer>
 							<Dialog.Close asChild>
 								<Button
 									variant="secondary"
