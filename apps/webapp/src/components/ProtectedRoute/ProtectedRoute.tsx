@@ -1,4 +1,3 @@
-import { FullscreenLoading } from "components/layouts/FullscreenLoading";
 import { useUserContext } from "contexts/UserContext";
 import { Navigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -14,7 +13,7 @@ export const ProtectedRoute = ({ children, to = ROUTES.SIGNIN }: ProtectedRouteP
 	const isAuthenticated = Boolean(!loading && user);
 
 	if (loading) {
-		return <FullscreenLoading />;
+		return null;
 	}
 
 	if (!isAuthenticated) {

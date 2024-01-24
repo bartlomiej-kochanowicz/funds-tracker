@@ -3,7 +3,7 @@ import { ErrorContent } from "components/ErrorContent";
 import { MobileNavigation } from "components/MobileNavigation";
 import { Sidebar } from "components/Sidebar";
 import { Topbar } from "components/Topbar";
-import { Fragment, ReactNode, Suspense } from "react";
+import { Fragment, ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 interface TopbarSidebarProps {
@@ -19,9 +19,7 @@ export const TopbarSidebar = ({ children }: TopbarSidebarProps) => (
 		<MobileNavigation />
 
 		<main className="mb-[50px] mt-[61px] p-4 md:mb-0 md:ml-[255px] md:mt-[73px]">
-			<Suspense fallback={<Loader />}>
-				<ErrorBoundary FallbackComponent={ErrorContent}>{children}</ErrorBoundary>
-			</Suspense>
+			<ErrorBoundary FallbackComponent={ErrorContent}>{children}</ErrorBoundary>
 		</main>
 	</Fragment>
 );

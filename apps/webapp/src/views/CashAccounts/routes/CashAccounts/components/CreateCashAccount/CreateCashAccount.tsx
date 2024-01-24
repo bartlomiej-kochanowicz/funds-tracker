@@ -1,4 +1,3 @@
-import { CreateCashAccountMutation } from "__generated__/graphql";
 import { Button, H2 } from "@funds-tracker/ui";
 import { CreateCashAccountDialog } from "components/dialogs/CreateCashAccountDialog";
 import { Plus } from "lucide-react";
@@ -6,11 +5,11 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 interface CreateCashAccountProps {
-	callback: (data: CreateCashAccountMutation) => void;
 	isListEmpty: boolean;
+	handleRefetch: () => void;
 }
 
-export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback, isListEmpty }) => {
+export const CreateCashAccount: FC<CreateCashAccountProps> = ({ isListEmpty, handleRefetch }) => {
 	const { t } = useTranslation();
 
 	return (
@@ -19,7 +18,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ callback, isList
 				{t(isListEmpty ? "page.cash_accounts.empty.list.title" : "page.cash_accounts.need.more")}
 			</H2>
 
-			<CreateCashAccountDialog callback={callback}>
+			<CreateCashAccountDialog handleRefetch={handleRefetch}>
 				<Button>
 					<Plus className="mr-2 size-6" />
 

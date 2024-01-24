@@ -1,6 +1,7 @@
-import { gql } from "__generated__";
+import { GetCashAccountsQuery } from "__generated__/graphql";
+import { gql, TypedDocumentNode } from "@apollo/client";
 
-export const GET_CASH_ACCOUNTS = gql(/* GraphQL */ `
+export const GET_CASH_ACCOUNTS: TypedDocumentNode<GetCashAccountsQuery> = gql(/* GraphQL */ `
 	query GetCashAccounts {
 		cashAccounts {
 			uuid

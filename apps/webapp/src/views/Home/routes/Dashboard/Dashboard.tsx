@@ -1,5 +1,4 @@
 import { Button, Card, H1 } from "@funds-tracker/ui";
-import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { useTranslation } from "react-i18next";
 
 export const Dashboard = () => {
@@ -15,7 +14,6 @@ export const Dashboard = () => {
 						<Button>test</Button>
 						<br />
 						<br />
-						<CurrencyCombobox />
 						<br />
 						<br />
 					</Card.Content>

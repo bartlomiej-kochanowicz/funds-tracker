@@ -1,27 +1,15 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import { Button, Card, Text } from "@funds-tracker/ui";
+import clsx from "clsx";
 import { formatCurrency } from "helpers/formatCurrency";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
-import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-interface CashAccountsPanelProps {
-	updateCashAccountBalance: (data: { balance: number; uuid: string }) => void;
-	updateCashAccountName: (data: { name: string; uuid: string }) => void;
-	updateCashAccountList: (data: { uuid: string }) => void;
-}
+type CashAccountCardProps = {
+	isPending: boolean;
+} & GetCashAccountsQuery["cashAccounts"][0];
 
-export const CashAccountsPanel: FC<
-	GetCashAccountsQuery["cashAccounts"][0] & CashAccountsPanelProps
-> = ({
-	name,
-	currency,
-	balance,
-	uuid,
-	updateCashAccountBalance,
-	updateCashAccountName,
-	updateCashAccountList,
-}) => {
+export const CashAccountCard = ({ name, currency, balance, isPending }: CashAccountCardProps) => {
 	const { t } = useTranslation();
 
 	/* const items = [
@@ -84,7 +72,12 @@ export const CashAccountsPanel: FC<
 	] satisfies DropdownItems; */
 
 	return (
-		<Card className="flex justify-between">
+		<Card
+			className={clsx(
+				"flex justify-between",
+				isPending && "pointer-events-auto cursor-not-allowed opacity-50",
+			)}
+		>
 			<Card.Header className="w-full">
 				<div className="flex items-center justify-between">
 					<div>

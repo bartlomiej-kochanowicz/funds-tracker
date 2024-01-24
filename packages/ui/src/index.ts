@@ -16,6 +16,7 @@ export * from "./components/Loader";
 export * from "./components/Popover";
 export * from "./components/Radio";
 export * from "./components/ScrollArea";
+export * from "./components/Skeleton";
 export * from "./components/Switch";
 export * from "./components/Text";
 export * from "./components/Tile";

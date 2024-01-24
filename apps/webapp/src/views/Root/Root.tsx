@@ -1,4 +1,3 @@
-import { FullscreenLoading } from "components/layouts/FullscreenLoading";
 import { FC, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import { CashAccountsRoutes } from "views/CashAccounts";
@@ -26,5 +25,5 @@ export const Root: FC = () => {
 		...NotFoundRoutes,
 	]);
 
-	return <Suspense fallback={<FullscreenLoading />}>{views}</Suspense>;
+	return <Suspense>{views}</Suspense>;
 };

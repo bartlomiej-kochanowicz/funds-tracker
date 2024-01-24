@@ -1,13 +1,8 @@
 import { TopbarSidebar } from "components/layouts/TopbarSidebar";
 import { ProtectedRoute } from "components/ProtectedRoute";
-import { lazy } from "react";
 import { ROUTES } from "routes/paths";
 
-const CashAccounts = lazy(() =>
-	import("./CashAccounts").then(({ CashAccounts: component }) => ({
-		default: component,
-	})),
-);
+import { CashAccounts } from "./CashAccounts";
 
 export const CashAccountsRoutes = [
 	{

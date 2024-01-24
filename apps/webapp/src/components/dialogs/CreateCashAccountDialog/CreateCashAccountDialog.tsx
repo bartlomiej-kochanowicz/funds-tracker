@@ -19,10 +19,13 @@ import { validationSchema } from "./CreateCashAccountForm.schema";
 
 interface CreateCashAccountDialogProps {
 	children: ReactNode;
-	callback: (data: CreateCashAccountMutation) => void;
+	handleRefetch: () => void;
 }
 
-export const CreateCashAccountDialog = ({ children, callback }: CreateCashAccountDialogProps) => {
+export const CreateCashAccountDialog = ({
+	children,
+	handleRefetch,
+}: CreateCashAccountDialogProps) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const { t } = useTranslation();
@@ -56,8 +59,8 @@ export const CreateCashAccountDialog = ({ children, callback }: CreateCashAccoun
 		CreateCashAccountMutation,
 		CreateCashAccountMutationVariables
 	>(CREATE_CASH_ACCOUNT, {
-		onCompleted: data => {
-			callback(data);
+		onCompleted: () => {
+			handleRefetch();
 			setOpen(false);
 		},
 		onError: () => {

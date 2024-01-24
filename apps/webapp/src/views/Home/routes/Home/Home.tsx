@@ -1,4 +1,3 @@
-import { FullscreenLoading } from "components/layouts/FullscreenLoading";
 import { TopbarSidebar } from "components/layouts/TopbarSidebar";
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { useUserContext } from "contexts/UserContext";
@@ -14,7 +13,7 @@ export const Home: FC = () => {
 	const isAuthenticated = Boolean(!loading && user);
 
 	if (loading) {
-		return <FullscreenLoading />;
+		return null;
 	}
 
 	if (!isAuthenticated) {
