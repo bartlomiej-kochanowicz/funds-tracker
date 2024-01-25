@@ -11,7 +11,6 @@ export * from "./components/Form";
 export * from "./components/Heading";
 export * from "./components/Input";
 export * from "./components/Label";
-export * from "./components/Link";
 export * from "./components/Loader";
 export * from "./components/Popover";
 export * from "./components/Radio";

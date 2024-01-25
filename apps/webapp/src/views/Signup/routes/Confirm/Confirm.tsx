@@ -1,6 +1,6 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, buttonVariants, Card, H1, Link, Text } from "@funds-tracker/ui";
+import { Button, buttonVariants, Card, H1, Text } from "@funds-tracker/ui";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
@@ -100,7 +100,7 @@ export const Confirm = () => {
 							i18nKey="page.confirm.support"
 							components={{
 								support: (
-									<Link
+									<a
 										className={buttonVariants({ variant: "link", size: "sm" })}
 										href="mailto:support@funds-tracker.com"
 									/>
