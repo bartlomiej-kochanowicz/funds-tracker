@@ -49,7 +49,7 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
 						<Command.Input placeholder={t("form.currency.select.search.placeholder")} />
 						<Command.Empty>{t("form.currency.select.search.empty")}</Command.Empty>
 						<Command.Group>
-							<ScrollArea className="h-72">
+							<ScrollArea className="h-72 pr-3">
 								{CURRENCIES_ARRAY.map(currency => (
 									<Command.Item
 										key={currency}

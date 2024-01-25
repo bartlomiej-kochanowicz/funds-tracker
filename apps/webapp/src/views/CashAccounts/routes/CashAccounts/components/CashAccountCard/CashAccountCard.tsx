@@ -2,6 +2,7 @@ import { GetCashAccountsQuery } from "__generated__/graphql";
 import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
 import { useConfirmDeleteCashAccountDialog } from "components/dialogs/ConfirmDeleteCashAccountDialog";
+import { useRenameCashAccountDialog } from "components/dialogs/RenameCashAccountDialog";
 import { formatCurrency } from "helpers/formatCurrency";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { Fragment, useMemo } from "react";
@@ -25,6 +26,9 @@ export const CashAccountCard = ({
 	const { open: openConfirmDeleteCashAccountDialog, dialog: ConfirmDeleteCashAccountDialog } =
 		useConfirmDeleteCashAccountDialog({ uuid, name, handleRefetch });
 
+	const { open: openRenameCashAccountDialog, dialog: RenameCashAccountDialog } =
+		useRenameCashAccountDialog({ uuid, name, handleRefetch });
+
 	const items = useMemo(
 		() => [
 			[
@@ -45,6 +49,7 @@ export const CashAccountCard = ({
 				{
 					icon: Pencil,
 					label: t("common.rename"),
+					onSelect: openRenameCashAccountDialog,
 				},
 				{
 					icon: Trash2,
@@ -60,7 +65,9 @@ export const CashAccountCard = ({
 
 	return (
 		<Fragment>
-			<ConfirmDeleteCashAccountDialog />
+			{ConfirmDeleteCashAccountDialog}
+			{RenameCashAccountDialog}
+
 			<Card
 				className={clsx(
 					"flex justify-between",
@@ -86,11 +93,11 @@ export const CashAccountCard = ({
 								{items.map((group, index) => (
 									<Fragment key={index}>
 										<DropdownMenu.Group>
-											{group.map(({ icon: Icon, label, onSelect }) => {
+											{group.map(({ icon: Icon, label, ...rest }) => {
 												return (
 													<DropdownMenu.Item
 														key={label}
-														onSelect={onSelect}
+														onSelect={rest.onSelect}
 													>
 														<Icon className="mr-2 size-4" />
 

@@ -54,7 +54,7 @@ export const useConfirmDeleteCashAccountDialog = ({
 
 	return {
 		open: handleOpen,
-		dialog: () => (
+		dialog: (
 			<Dialog
 				open={open}
 				onOpenChange={setOpen}
@@ -93,7 +93,7 @@ export const useConfirmDeleteCashAccountDialog = ({
 							onClick={handleDelete}
 							variant="destructive"
 						>
-							{loading ? <Loader /> : <Trash className="size-6" />}
+							{loading ? <Loader /> : <Trash className="size-4" />}
 
 							{t("common.delete")}
 						</Button>
