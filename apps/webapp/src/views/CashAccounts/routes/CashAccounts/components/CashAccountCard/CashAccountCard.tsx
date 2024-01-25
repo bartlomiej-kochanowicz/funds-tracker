@@ -23,7 +23,7 @@ export const CashAccountCard = ({
 	const { t } = useTranslation();
 
 	const { open: openConfirmDeleteCashAccountDialog, dialog: ConfirmDeleteCashAccountDialog } =
-		useConfirmDeleteCashAccountDialog();
+		useConfirmDeleteCashAccountDialog({ uuid, name, handleRefetch });
 
 	const items = useMemo(
 		() => [
@@ -60,11 +60,7 @@ export const CashAccountCard = ({
 
 	return (
 		<Fragment>
-			<ConfirmDeleteCashAccountDialog
-				uuid={uuid}
-				name={name}
-				handleRefetch={handleRefetch}
-			/>
+			<ConfirmDeleteCashAccountDialog />
 			<Card
 				className={clsx(
 					"flex justify-between",
