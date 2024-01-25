@@ -1,6 +1,7 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
+import { useAddFundsToCashAccountDialog } from "components/dialogs/AddFundsToCashAccountDialog/useAddFundsToCashAccountDialog";
 import { useConfirmDeleteCashAccountDialog } from "components/dialogs/ConfirmDeleteCashAccountDialog";
 import { useRenameCashAccountDialog } from "components/dialogs/RenameCashAccountDialog";
 import { formatCurrency } from "helpers/formatCurrency";
@@ -29,6 +30,12 @@ export const CashAccountCard = ({
 	const { open: openRenameCashAccountDialog, dialog: RenameCashAccountDialog } =
 		useRenameCashAccountDialog({ uuid, name, handleRefetch });
 
+	const { open: openAddFundsToCashAccountDialog, dialog: AddFundsToCashAccountDialog } =
+		useAddFundsToCashAccountDialog({
+			handleRefetch,
+			uuid,
+		});
+
 	const items = useMemo(
 		() => [
 			[
@@ -43,6 +50,7 @@ export const CashAccountCard = ({
 				{
 					icon: Plus,
 					label: t("page.cash_accounts.button.add_funds"),
+					onSelect: openAddFundsToCashAccountDialog,
 				},
 			],
 			[
@@ -67,6 +75,7 @@ export const CashAccountCard = ({
 		<Fragment>
 			{ConfirmDeleteCashAccountDialog}
 			{RenameCashAccountDialog}
+			{AddFundsToCashAccountDialog}
 
 			<Card
 				className={clsx(

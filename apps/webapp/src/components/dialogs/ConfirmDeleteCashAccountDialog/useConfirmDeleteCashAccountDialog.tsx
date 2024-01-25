@@ -35,7 +35,6 @@ export const useConfirmDeleteCashAccountDialog = ({
 	>(DELETE_CASH_ACCOUNT, {
 		onCompleted: () => {
 			showSuccessToast(t("modal.ConfirmDeleteCashAccount.toast.success"));
-
 			handleRefetch();
 			setOpen(false);
 		},

@@ -100,37 +100,7 @@ export const AddFundsCashAccountForm: FC<AddFundsCashAccountFormProps> = ({
 				{...currencyInputProps}
 			/>
 
-			<Spacer />
-
-			<div className="flex justify-end">
-				<Button
-					className="min-w-[100px] grow"
-					color="gray"
-					onPress={closeModal}
-				>
-					{t("common.cancel")}
-				</Button>
-
-				<Spreader $spread="0.5" />
-
-				<Button
-					className="min-w-[170px] grow"
-					isDisabled={isSubmitting || !isValid || !isDirty}
-					type="submit"
-				>
-					{isSubmitting && <Loader $color="white" />}
-
-					{!isSubmitting && (
-						<Fragment>
-							{t("page.cash_accounts.button.add_funds")}
-
-							<Spreader $spread="0.25" />
-
-							<Plus />
-						</Fragment>
-					)}
-				</Button>
-			</div>
+			
 		</form>
 	);
 };
