@@ -27,6 +27,7 @@ export const CashAccountsContent = () => {
 					key={uuid}
 					uuid={uuid}
 					isPending={isPending}
+					handleRefetch={handleRefetch}
 					{...rest}
 				/>
 			))}

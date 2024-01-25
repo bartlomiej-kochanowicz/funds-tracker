@@ -42,7 +42,7 @@ export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxPro
 					</Button>
 				</Popover.Trigger>
 				<Popover.Content
-					className="h-72 !p-0"
+					className="!p-0"
 					align="start"
 				>
 					<Command>
