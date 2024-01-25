@@ -8,7 +8,7 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 
 export const Text = ({ children, className, muted, ...rest }: TextProps) => (
 	<span
-		className={cslx(muted ? "text-muted-foreground" : "text-primary-foreground", className)}
+		className={cslx(muted ? "text-muted-foreground" : "", className)}
 		{...rest}
 	>
 		{children}
