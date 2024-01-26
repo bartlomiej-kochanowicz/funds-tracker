@@ -1,9 +1,10 @@
 import {
 	AddFundsToCashAccountMutation,
 	AddFundsToCashAccountMutationVariables,
+	Currency,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Dialog, Form, Input, Loader } from "@funds-tracker/ui";
+import { Button, Dialog, Form, Loader, NumberInput } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/AddFundsToCashAccount";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
@@ -17,11 +18,13 @@ import { validationSchema } from "./AddFundsCashAccountForm.schema";
 type UseAddFundsToCashAccountDialogProps = {
 	handleRefetch: () => void;
 	uuid: string;
+	currency: Currency;
 };
 
 export const useAddFundsToCashAccountDialog = ({
 	handleRefetch,
 	uuid,
+	currency,
 }: UseAddFundsToCashAccountDialogProps) => {
 	const [open, setOpen] = useState<boolean>(false);
 
@@ -29,10 +32,10 @@ export const useAddFundsToCashAccountDialog = ({
 		setOpen(true);
 	};
 
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	const defaultValues = {
-		amount: "",
+		amount: 0,
 	};
 
 	const form = useForm<typeof defaultValues>({
@@ -93,14 +96,19 @@ export const useAddFundsToCashAccountDialog = ({
 							<Form.Field
 								control={control}
 								name="amount"
-								render={({ field }) => (
+								render={({ field: { ...rest } }) => (
 									<Form.Item>
 										<Form.Control>
-											<Input
+											<NumberInput
 												autoFocus
+												locale={i18n.language}
+												formatOptions={{
+													style: "currency",
+													currency,
+												}}
 												aria-label={t("modal.AddFundsCashAccount.input.placeholder")}
 												placeholder={t("modal.AddFundsCashAccount.input.placeholder")}
-												{...field}
+												{...rest}
 											/>
 										</Form.Control>
 										<Form.Message />

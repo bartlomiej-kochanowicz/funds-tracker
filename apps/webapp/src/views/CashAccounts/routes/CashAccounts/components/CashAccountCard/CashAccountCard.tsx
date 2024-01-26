@@ -34,6 +34,7 @@ export const CashAccountCard = ({
 		useAddFundsToCashAccountDialog({
 			handleRefetch,
 			uuid,
+			currency,
 		});
 
 	const items = useMemo(

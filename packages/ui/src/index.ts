@@ -11,6 +11,7 @@ export * from "./components/Heading";
 export * from "./components/Input";
 export * from "./components/Label";
 export * from "./components/Loader";
+export * from "./components/NumberInput";
 export * from "./components/Popover";
 export * from "./components/ScrollArea";
 export * from "./components/Skeleton";
