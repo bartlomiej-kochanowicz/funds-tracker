@@ -45,15 +45,15 @@ export const CreateCashAccountDialog = ({
 	const {
 		control,
 		handleSubmit,
-		formState: { isSubmitting, isSubmitSuccessful },
+		formState: { isSubmitting },
 		reset,
 	} = form;
 
 	useEffect(() => {
-		if (isSubmitSuccessful) {
+		if (!open) {
 			reset();
 		}
-	}, [isSubmitSuccessful, reset]);
+	}, [open, reset]);
 
 	const [createCashAccount] = useMutation<
 		CreateCashAccountMutation,

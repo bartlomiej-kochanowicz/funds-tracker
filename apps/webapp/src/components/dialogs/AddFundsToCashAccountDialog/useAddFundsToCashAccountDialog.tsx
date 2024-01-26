@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/AddFundsToCashAccount";
 import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -47,7 +47,14 @@ export const useAddFundsToCashAccountDialog = ({
 		handleSubmit,
 		control,
 		formState: { isSubmitting },
+		reset,
 	} = form;
+
+	useEffect(() => {
+		if (!open) {
+			reset();
+		}
+	}, [open, reset]);
 
 	const [addFundsToCashAcount] = useMutation<
 		AddFundsToCashAccountMutation,
