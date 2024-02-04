@@ -1,7 +1,7 @@
 import { buttonVariants, Card, H1, Text } from "@funds-tracker/ui";
+import { LangSelector } from "components/LangSelector";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
-// import { LangSelector } from "components/molecules";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -56,7 +56,7 @@ export const Signin = () => {
 			</Card>
 
 			<div className="mt-12 flex flex-col items-center">
-				{/* <LangSelector /> */}
+				<LangSelector />
 
 				<ThemeSwitcher />
 			</div>

@@ -1,6 +1,7 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { Button, buttonVariants, Card, H1, Text } from "@funds-tracker/ui";
+import { LangSelector } from "components/LangSelector";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
@@ -119,7 +120,7 @@ export const Confirm = () => {
 			</Card>
 
 			<div className="mt-12 flex flex-col items-center">
-				{/* <LangSelector /> */}
+				<LangSelector />
 
 				<ThemeSwitcher />
 			</div>

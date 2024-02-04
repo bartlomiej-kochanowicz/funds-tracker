@@ -1,4 +1,3 @@
-/* import { Select, Spreader } from "components/atoms";
 import languages from "constants/selectors/languages";
 import { Globe2 } from "lucide-react";
 import { useMemo } from "react";
@@ -7,7 +6,7 @@ import { useTranslation } from "react-i18next";
 export const LangSelector = () => {
 	const { t, i18n } = useTranslation();
 
-	const items = useMemo(
+	/* const items = useMemo(
 		() =>
 			languages.map(({ label, ...rest }) => ({
 				label: t(label),
@@ -38,6 +37,7 @@ export const LangSelector = () => {
 			customLabel={customLabel}
 			width="fit-content"
 		/>
-	);
+	); */
+
+	return null;
 };
- */
