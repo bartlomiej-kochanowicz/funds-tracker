@@ -1,43 +1,32 @@
+import { Select } from "@funds-tracker/ui";
 import languages from "constants/selectors/languages";
 import { Globe2 } from "lucide-react";
-import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 export const LangSelector = () => {
 	const { t, i18n } = useTranslation();
 
-	/* const items = useMemo(
-		() =>
-			languages.map(({ label, ...rest }) => ({
-				label: t(label),
-				...rest,
-			})),
-		[t],
-	);
-
 	const handleChangeLanguage = (value: string) => {
 		i18n.changeLanguage(value);
 	};
 
-	const customLabel = ({ value }: { value: string }) => (
-		<div className="flex items-center">
-			<Globe2 />
-
-			<Spreader $spread="0.5" />
-
-			{t(`selectors.languages.${value}`)}
-		</div>
-	);
-
 	return (
 		<Select
-			items={items}
-			defaultValue={i18n.resolvedLanguage}
-			onChange={handleChangeLanguage}
-			customLabel={customLabel}
-			width="fit-content"
-		/>
-	); */
+			onValueChange={handleChangeLanguage}
+			defaultValue={i18n.language}
+		>
+			<Select.Trigger className="w-[180px]">
+				<Globe2 className="mr-2" />
 
-	return null;
+				<Select.Value placeholder="Select a fruit" />
+			</Select.Trigger>
+			<Select.Content>
+				<Select.Group>
+					{languages.map(({ label, value }) => (
+						<Select.Item value={value}>{t(label)}</Select.Item>
+					))}
+				</Select.Group>
+			</Select.Content>
+		</Select>
+	);
 };

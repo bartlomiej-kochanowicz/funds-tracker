@@ -21,7 +21,7 @@ interface ISelect extends SelectType {
 	ScrollDownButton: typeof SelectScrollDownButton;
 	ScrollUpButton: typeof SelectScrollUpButton;
 	Separator: typeof SelectSeparator;
-	rigger: typeof SelectTrigger;
+	Trigger: typeof SelectTrigger;
 	Value: typeof SelectValue;
 }
 
@@ -33,6 +33,6 @@ export const Select = Object.assign(SelectComponent, {
 	ScrollDownButton: SelectScrollDownButton,
 	ScrollUpButton: SelectScrollUpButton,
 	Separator: SelectSeparator,
-	rigger: SelectTrigger,
+	Trigger: SelectTrigger,
 	Value: SelectValue,
 }) as ISelect;

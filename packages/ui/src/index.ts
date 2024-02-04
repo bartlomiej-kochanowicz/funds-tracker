@@ -14,10 +14,10 @@ export * from "./components/Loader";
 export * from "./components/NumberInput";
 export * from "./components/Popover";
 export * from "./components/ScrollArea";
+export * from "./components/Select";
 export * from "./components/Skeleton";
 export * from "./components/Text";
 export * from "./components/Tile";
 
 // Path: src/hooks
 export * from "./hooks/useTailwindBreakpoint";
-// shadcn-ui
