@@ -1,4 +1,4 @@
-import { Button, Card, H1 } from "@funds-tracker/ui";
+import { Button, Card, H1, toast } from "@funds-tracker/ui";
 import { useTranslation } from "react-i18next";
 
 export const Dashboard = () => {
@@ -11,7 +11,7 @@ export const Dashboard = () => {
 				<Card className="grow">
 					<Card.Header>Test</Card.Header>
 					<Card.Content>
-						<Button>test</Button>
+						<Button onClick={() => toast("Event has been created.")}>emit toast</Button>
 						<br />
 						<br />
 						<br />

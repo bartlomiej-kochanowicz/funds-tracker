@@ -62,6 +62,7 @@ module.exports = {
 	settings: {
 		tailwindcss:{
 			callees: ["clsx"],
+			whitelist:["toaster"]
 		}
 	}
 };

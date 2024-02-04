@@ -18,6 +18,7 @@ export * from "./components/Select";
 export * from "./components/Skeleton";
 export * from "./components/Text";
 export * from "./components/Tile";
+export * from "./components/Toaster";
 
 // Path: src/hooks
 export * from "./hooks/useTailwindBreakpoint";

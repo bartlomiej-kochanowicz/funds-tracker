@@ -1,4 +1,6 @@
-import { FC, Suspense } from "react";
+import { Toaster } from "@funds-tracker/ui";
+import { useTheme } from "next-themes";
+import { ComponentProps, FC, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import { CashAccountsRoutes } from "views/CashAccounts";
 import { HomeRoutes } from "views/Home";
@@ -11,6 +13,8 @@ import { SinginRoutes } from "views/Signin";
 import { SignupRoutes } from "views/Signup";
 
 export const Root: FC = () => {
+	const { theme = "system" } = useTheme();
+
 	const views = useRoutes([
 		...HomeRoutes,
 		...SinginRoutes,
@@ -25,5 +29,11 @@ export const Root: FC = () => {
 		...NotFoundRoutes,
 	]);
 
-	return <Suspense>{views}</Suspense>;
+	return (
+		<Suspense>
+			<Toaster theme={theme as ComponentProps<typeof Toaster>["theme"]} />
+
+			{views}
+		</Suspense>
+	);
 };
