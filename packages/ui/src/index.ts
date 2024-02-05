@@ -22,3 +22,6 @@ export * from "./components/Toaster";
 
 // Path: src/hooks
 export * from "./hooks/useTailwindBreakpoint";
+
+// Path: src/icons
+export * from "./icons/CheckCircleAnimated";

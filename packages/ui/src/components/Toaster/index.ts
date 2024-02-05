@@ -1,4 +1,2 @@
-import { toast } from "sonner";
-
+export * from "./emitToast";
 export * from "./Toaster";
-export { toast };

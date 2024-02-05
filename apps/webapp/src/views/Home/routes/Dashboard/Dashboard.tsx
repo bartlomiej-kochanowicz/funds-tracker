@@ -1,4 +1,11 @@
-import { Button, Card, H1, toast } from "@funds-tracker/ui";
+import {
+	Button,
+	Card,
+	CheckCircleAnimated,
+	emitErrorToast,
+	emitSuccessToast,
+	H1,
+} from "@funds-tracker/ui";
 import { useTranslation } from "react-i18next";
 
 export const Dashboard = () => {
@@ -11,11 +18,17 @@ export const Dashboard = () => {
 				<Card className="grow">
 					<Card.Header>Test</Card.Header>
 					<Card.Content>
-						<Button onClick={() => toast("Event has been created.")}>emit toast</Button>
+						<Button onClick={() => emitSuccessToast("Success event has been created.")}>
+							emit success toast
+						</Button>
 						<br />
 						<br />
+						<Button onClick={() => emitErrorToast("Error event has been created.")}>
+							emit error toast
+						</Button>
 						<br />
 						<br />
+						<CheckCircleAnimated />
 					</Card.Content>
 				</Card>
 				<Card className="grow" />
