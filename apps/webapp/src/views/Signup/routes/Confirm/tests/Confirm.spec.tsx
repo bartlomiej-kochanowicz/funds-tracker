@@ -1,5 +1,5 @@
 import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
-import { screen, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 import { GraphQLError } from "graphql";
 import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";

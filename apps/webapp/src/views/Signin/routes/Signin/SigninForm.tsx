@@ -158,6 +158,7 @@ export const SigninForm = () => {
 							<Form.Control>
 								<Input
 									aria-label={t("common.email")}
+									data-testid="email-input"
 									placeholder={t("common.email")}
 									{...field}
 								/>
@@ -178,6 +179,7 @@ export const SigninForm = () => {
 										autoFocus
 										type="password"
 										aria-label={t("common.password")}
+										data-testid="password-input"
 										placeholder={t("common.password")}
 										{...field}
 									/>

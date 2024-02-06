@@ -35,8 +35,8 @@ vi.mock("react-router-dom", async () => ({
 
 vi.mock("@funds-tracker/ui", async () => ({
 	...(await vi.importActual("@funds-tracker/ui")),
-	showErrorToast: vi.fn(),
-	showSuccessToast: vi.fn(),
+	emitErrorToast: vi.fn(),
+	emitSuccessToast: vi.fn(),
 }));
 
 describe("Signin tests", () => {
