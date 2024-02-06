@@ -3,10 +3,9 @@ import {
 	UpdateCashAccountMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Dialog, Form, Input } from "@funds-tracker/ui";
+import { Button, Dialog, emitErrorToast, emitSuccessToast, Form, Input } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UPDATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/UpdateCashAccount";
-import { showErrorToast } from "helpers/showToast";
 import { Loader, Pencil } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -56,9 +55,11 @@ export const useRenameCashAccountDialog = ({
 			handleRefetch();
 
 			setOpen(false);
+
+			emitSuccessToast(t("modal.RenameCashAccount.toast.success"));
 		},
 		onError: () => {
-			showErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("service.unknown_error"));
 		},
 	});
 

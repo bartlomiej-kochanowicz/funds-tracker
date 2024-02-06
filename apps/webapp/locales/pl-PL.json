@@ -216,5 +216,7 @@
 	"form.currency.select.placeholder": "Wybierz walutę",
 	"form.currency.select.search.placeholder": "Wyszukaj walutę",
 	"form.currency.select.search.empty": "Nie znaleziono waluty",
-	"common.my.account": "Moje konto"
+	"common.my.account": "Moje konto",
+	"modal.CreateCashAccount.toast.success": "Konto gotówkowe zostało pomyślnie dodane.",
+	"modal.RenameCashAccount.toast.success": "Nazwa konta gotówkowego została pomyślnie zmieniona."
 }

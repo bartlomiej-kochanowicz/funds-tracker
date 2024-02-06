@@ -3,9 +3,8 @@ import {
 	DeleteCashAccountMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Dialog, Loader, Text } from "@funds-tracker/ui";
+import { Button, Dialog, emitErrorToast, emitSuccessToast, Loader, Text } from "@funds-tracker/ui";
 import { DELETE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/DeleteCashAccount";
-import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { Trash } from "lucide-react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -34,12 +33,12 @@ export const useConfirmDeleteCashAccountDialog = ({
 		DeleteCashAccountMutationVariables
 	>(DELETE_CASH_ACCOUNT, {
 		onCompleted: () => {
-			showSuccessToast(t("modal.ConfirmDeleteCashAccount.toast.success"));
+			emitSuccessToast(t("modal.ConfirmDeleteCashAccount.toast.success"));
 			handleRefetch();
 			setOpen(false);
 		},
 		onError: () => {
-			showErrorToast(t("modal.ConfirmDeleteCashAccount.toast.failure"));
+			emitErrorToast(t("modal.ConfirmDeleteCashAccount.toast.failure"));
 		},
 	});
 

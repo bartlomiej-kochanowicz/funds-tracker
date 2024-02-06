@@ -1,8 +1,8 @@
+import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
 import { waitFor } from "@testing-library/react";
 import { GraphQLError } from "graphql";
 import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
-import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -27,7 +27,11 @@ vi.mock("react-google-recaptcha-v3", () => ({
 	},
 }));
 
-vi.mock("helpers/showToast", () => ({ showErrorToast: vi.fn(), showSuccessToast: vi.fn() }));
+vi.mock("@funds-tracker/ui", async () => ({
+	...(await vi.importActual("@funds-tracker/ui")),
+	showErrorToast: vi.fn(),
+	showSuccessToast: vi.fn(),
+}));
 
 const mockUseNavigate = vi.fn();
 
@@ -169,7 +173,7 @@ describe("Confirm password tests", () => {
 		await confirmPO.clickResendCodeButton();
 
 		await waitFor(() =>
-			expect(showSuccessToast).toHaveBeenCalledWith(
+			expect(emitSuccessToast).toHaveBeenCalledWith(
 				"Confirmation code has been sent to your email.",
 			),
 		);
@@ -200,7 +204,7 @@ describe("Confirm password tests", () => {
 		await confirmPO.clickResendCodeButton();
 
 		await waitFor(() =>
-			expect(showErrorToast).toHaveBeenCalledWith("Code sending failed. Please try again later."),
+			expect(emitErrorToast).toHaveBeenCalledWith("Code sending failed. Please try again later."),
 		);
 	});
 });

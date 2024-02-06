@@ -5,11 +5,10 @@ import {
 	SignupMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Button, Form, Loader } from "@funds-tracker/ui";
+import { Button, emitErrorToast, Form, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SIGNUP } from "graphql/mutations/authentication/Signup";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
-import { showErrorToast } from "helpers/showToast";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -79,7 +78,7 @@ export const SignupForm = () => {
 			}
 		},
 		onError: () => {
-			showErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("service.unknown_error"));
 		},
 	});
 
@@ -106,7 +105,7 @@ export const SignupForm = () => {
 				message: "‎",
 			});
 
-			showErrorToast(message);
+			emitErrorToast(message);
 		},
 	});
 

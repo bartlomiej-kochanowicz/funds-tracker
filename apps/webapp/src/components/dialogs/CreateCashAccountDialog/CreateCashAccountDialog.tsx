@@ -4,12 +4,19 @@ import {
 	CreateCashAccountMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Dialog, Form, Input, Loader } from "@funds-tracker/ui";
+import {
+	Button,
+	Dialog,
+	emitErrorToast,
+	emitSuccessToast,
+	Form,
+	Input,
+	Loader,
+} from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { useUserContext } from "contexts/UserContext";
 import { CREATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/CreateCashAccount";
-import { showErrorToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
 import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -62,9 +69,10 @@ export const CreateCashAccountDialog = ({
 		onCompleted: () => {
 			handleRefetch();
 			setOpen(false);
+			emitSuccessToast(t("modal.CreateCashAccount.toast.success"));
 		},
 		onError: () => {
-			showErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("service.unknown_error"));
 		},
 	});
 

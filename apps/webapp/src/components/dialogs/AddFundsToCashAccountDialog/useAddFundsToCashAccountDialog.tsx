@@ -4,10 +4,17 @@ import {
 	Currency,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Dialog, Form, Loader, NumberInput } from "@funds-tracker/ui";
+import {
+	Button,
+	Dialog,
+	emitErrorToast,
+	emitSuccessToast,
+	Form,
+	Loader,
+	NumberInput,
+} from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ADD_FUNDS_TO_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/AddFundsToCashAccount";
-import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -65,10 +72,10 @@ export const useAddFundsToCashAccountDialog = ({
 
 			setOpen(false);
 
-			showSuccessToast(t("toast.add_funds.success"));
+			emitSuccessToast(t("toast.add_funds.success"));
 		},
 		onError: () => {
-			showErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("service.unknown_error"));
 		},
 	});
 

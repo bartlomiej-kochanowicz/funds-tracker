@@ -1,11 +1,4 @@
-import {
-	Button,
-	Card,
-	CheckCircleAnimated,
-	emitErrorToast,
-	emitSuccessToast,
-	H1,
-} from "@funds-tracker/ui";
+import { Button, Card, emitErrorToast, emitSuccessToast, H1 } from "@funds-tracker/ui";
 import { useTranslation } from "react-i18next";
 
 export const Dashboard = () => {
@@ -28,7 +21,6 @@ export const Dashboard = () => {
 						</Button>
 						<br />
 						<br />
-						<CheckCircleAnimated />
 					</Card.Content>
 				</Card>
 				<Card className="grow" />

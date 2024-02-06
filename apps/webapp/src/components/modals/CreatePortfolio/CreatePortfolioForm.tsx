@@ -9,7 +9,6 @@ import { Button } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Loader, Spacer, Spreader } from "components/atoms";
 import { CREATE_PORTFOLIO } from "graphql/mutations/portfolios/CreatePortfolio";
-import { showErrorToast } from "helpers/showToast";
 import { Plus } from "lucide-react";
 import { FC, Fragment } from "react";
 import { useForm } from "react-hook-form";

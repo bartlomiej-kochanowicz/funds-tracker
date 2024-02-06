@@ -1,9 +1,8 @@
 import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Form, Input, Loader, Text } from "@funds-tracker/ui";
+import { Button, emitErrorToast, Form, Input, Loader, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SET_NEW_PASSWORD } from "graphql/mutations/authentication/SetNewPassword";
-import { showErrorToast } from "helpers/showToast";
 import { FC, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -61,7 +60,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 			setError("userPassword", { type: "custom", message });
 			setError("userPasswordConfirmation", { type: "custom", message: "‎" });
-			showErrorToast(message);
+			emitErrorToast(message);
 		},
 	});
 

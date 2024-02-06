@@ -216,5 +216,7 @@
 	"form.currency.select.placeholder": "Select currency",
 	"form.currency.select.search.placeholder": "Search currency",
 	"form.currency.select.search.empty": "No currencies found",
-	"common.my.account": "My account"
+	"common.my.account": "My account",
+	"modal.CreateCashAccount.toast.success": "Cash account has been created.",
+	"modal.RenameCashAccount.toast.success": "Cash account has been renamed."
 }

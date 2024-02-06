@@ -7,13 +7,12 @@ import {
 	SigninMutationVariables,
 } from "__generated__/graphql";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { Button, Form, Input, Loader } from "@funds-tracker/ui";
+import { Button, emitErrorToast, emitSuccessToast, Form, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { SIGNIN } from "graphql/mutations/authentication/Signin";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
-import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -82,16 +81,16 @@ export const SigninForm = () => {
 			}
 		},
 		onError: () => {
-			showErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("service.unknown_error"));
 		},
 	});
 
 	const [sendCode] = useMutation<SendCodeMutation, SendCodeMutationVariables>(SEND_CODE, {
 		onCompleted: async () => {
-			showSuccessToast(t("toast.send_confirm_code.success"));
+			emitSuccessToast(t("toast.send_confirm_code.success"));
 		},
 		onError: () => {
-			showErrorToast(t("toast.send_confirm_code.failure"));
+			emitErrorToast(t("toast.send_confirm_code.failure"));
 		},
 	});
 

@@ -1,5 +1,4 @@
 import "base";
-import "react-toastify/dist/ReactToastify.css";
 import "@funds-tracker/ui/src/index.css";
 
 import { StrictMode } from "react";

@@ -1,8 +1,8 @@
+import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
 import { GraphQLError } from "graphql";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { SIGNIN } from "graphql/mutations/authentication/Signin";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
-import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { useEffect } from "react";
 import { ROUTES } from "routes/paths";
 import { waitFor } from "utils/test-utils";
@@ -33,7 +33,11 @@ vi.mock("react-router-dom", async () => ({
 	useNavigate: () => mockNavigate,
 }));
 
-vi.mock("helpers/showToast", () => ({ showErrorToast: vi.fn(), showSuccessToast: vi.fn() }));
+vi.mock("@funds-tracker/ui", async () => ({
+	...(await vi.importActual("@funds-tracker/ui")),
+	showErrorToast: vi.fn(),
+	showSuccessToast: vi.fn(),
+}));
 
 describe("Signin tests", () => {
 	afterAll(() => {
@@ -297,7 +301,7 @@ describe("Signin tests", () => {
 		);
 
 		await waitFor(() =>
-			expect(showSuccessToast).toHaveBeenCalledWith(
+			expect(emitSuccessToast).toHaveBeenCalledWith(
 				"Confirmation code has been sent to your email.",
 			),
 		);
@@ -384,7 +388,7 @@ describe("Signin tests", () => {
 		);
 
 		await waitFor(() =>
-			expect(showErrorToast).toHaveBeenCalledWith("Code sending failed. Please try again later."),
+			expect(emitErrorToast).toHaveBeenCalledWith("Code sending failed. Please try again later."),
 		);
 	});
 });

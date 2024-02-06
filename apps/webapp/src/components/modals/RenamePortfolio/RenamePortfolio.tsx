@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Loader, Spacer, Spreader } from "components/atoms";
 import { Modal } from "components/molecules";
 import { UPDATE_PORTFOLIO } from "graphql/mutations/portfolios/UpdatePortfolio";
-import { showErrorToast } from "helpers/showToast";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 

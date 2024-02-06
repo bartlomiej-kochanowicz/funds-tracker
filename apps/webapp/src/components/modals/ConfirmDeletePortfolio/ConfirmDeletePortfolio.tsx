@@ -5,7 +5,6 @@ import { Button, Text } from "@funds-tracker/ui";
 import { Loader, Spacer, Spreader } from "components/atoms";
 import { Modal } from "components/molecules";
 import { DELETE_PORTFOLIO } from "graphql/mutations/portfolios/DeletePortfolio";
-import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { Trans, useTranslation } from "react-i18next";
 
 export interface ConfirmDeletePortfolioProps {

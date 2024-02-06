@@ -1,9 +1,16 @@
 import { ResetPasswordMutation, ResetPasswordMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Form, Input, Loader, Text } from "@funds-tracker/ui";
+import {
+	Button,
+	emitErrorToast,
+	emitSuccessToast,
+	Form,
+	Input,
+	Loader,
+	Text,
+} from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RESET_PASSWORD } from "graphql/mutations/authentication/ResetPassword";
-import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -43,12 +50,12 @@ export const EnterEmailForm = () => {
 		RESET_PASSWORD,
 		{
 			onCompleted: async () => {
-				showSuccessToast(t("toast.send_reset_password_link.success"));
+				emitSuccessToast(t("toast.send_reset_password_link.success"));
 
 				setSendEmailSuccess(true);
 			},
 			onError: () => {
-				showErrorToast(t("toast.send_reset_password_link.failure"));
+				emitErrorToast(t("toast.send_reset_password_link.failure"));
 			},
 		},
 	);

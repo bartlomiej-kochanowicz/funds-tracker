@@ -1,11 +1,18 @@
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, buttonVariants, Card, H1, Text } from "@funds-tracker/ui";
+import {
+	Button,
+	buttonVariants,
+	Card,
+	emitErrorToast,
+	emitSuccessToast,
+	H1,
+	Text,
+} from "@funds-tracker/ui";
 import { LangSelector } from "components/LangSelector";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeSwitcher } from "components/ThemeSwitcher";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
-import { showErrorToast, showSuccessToast } from "helpers/showToast";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router-dom";
@@ -33,10 +40,10 @@ export const Confirm = () => {
 
 	const [sendCode] = useMutation<SendCodeMutation, SendCodeMutationVariables>(SEND_CODE, {
 		onCompleted: () => {
-			showSuccessToast(t("toast.send_confirm_code.success"));
+			emitSuccessToast(t("toast.send_confirm_code.success"));
 		},
 		onError: () => {
-			showErrorToast(t("toast.send_confirm_code.failure"));
+			emitErrorToast(t("toast.send_confirm_code.failure"));
 		},
 	});
 
