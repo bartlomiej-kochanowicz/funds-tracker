@@ -1,5 +1,5 @@
 import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
-import { waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { GraphQLError } from "graphql";
 import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
@@ -29,8 +29,8 @@ vi.mock("react-google-recaptcha-v3", () => ({
 
 vi.mock("@funds-tracker/ui", async () => ({
 	...(await vi.importActual("@funds-tracker/ui")),
-	showErrorToast: vi.fn(),
-	showSuccessToast: vi.fn(),
+	emitErrorToast: vi.fn(),
+	emitSuccessToast: vi.fn(),
 }));
 
 const mockUseNavigate = vi.fn();
@@ -52,31 +52,16 @@ describe("Confirm password tests", () => {
 		vi.clearAllMocks();
 	});
 
-	it("navigates to signin when emain not exist", () => {
-		const mocks = [
+	it("navigates to signin when email not exist", () => {
+		ConfirmPO.render(Confirm);
+
+		expect(Navigate).toBeCalledWith(
 			{
-				request: {
-					query: SEND_CODE,
-					variables: {
-						data: {
-							email: "test@email.xyz",
-							token: "token",
-						},
-					},
-				},
-				result: {
-					data: {
-						emailExist: {
-							exist: true,
-						},
-					},
-				},
+				replace: true,
+				to: "/signin",
 			},
-		];
-
-		ConfirmPO.render(Confirm, mocks);
-
-		expect(Navigate).toBeCalled();
+			{},
+		);
 	});
 
 	it("navigates to introduction page on success confirmation", async () => {
@@ -140,11 +125,11 @@ describe("Confirm password tests", () => {
 
 		// then
 		await waitFor(async () => {
-			await confirmPO.expectSuccessCallback(mockUseNavigate).toBeCalledWith(ROUTES.HOME);
+			expect(mockUseNavigate).toBeCalledWith(ROUTES.HOME);
 		});
 	});
 
-	it("send code properly", async () => {
+	it("resend code - success", async () => {
 		const email = "test@email.xyz";
 
 		const mocks = [
@@ -179,7 +164,7 @@ describe("Confirm password tests", () => {
 		);
 	});
 
-	it("send code failure", async () => {
+	it("resend code - fail", async () => {
 		const email = "test@email.xyz";
 
 		const mocks = [

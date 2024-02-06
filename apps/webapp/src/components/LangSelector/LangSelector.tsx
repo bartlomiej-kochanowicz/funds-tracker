@@ -23,7 +23,12 @@ export const LangSelector = () => {
 			<Select.Content>
 				<Select.Group>
 					{languages.map(({ label, value }) => (
-						<Select.Item value={value}>{t(label)}</Select.Item>
+						<Select.Item
+							value={value}
+							key={value}
+						>
+							{t(label)}
+						</Select.Item>
 					))}
 				</Select.Group>
 			</Select.Content>

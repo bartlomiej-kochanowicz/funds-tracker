@@ -5,7 +5,6 @@ import { FC } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { getByTestId, render } from "utils/test-utils";
 import { unsafeCast } from "utils/unsafeCast";
-import { Mock } from "vitest";
 
 // code-input
 
@@ -47,10 +46,6 @@ export class ConfirmPO {
 
 	async clickResendCodeButton() {
 		await this.user.click(this.elements.chooseResendCodeButton);
-	}
-
-	expectSuccessCallback(callback: Mock) {
-		return expect(callback);
 	}
 
 	static render(ConfirmComponent: FC, mocks?: readonly MockedResponse<Record<string, any>>[]) {

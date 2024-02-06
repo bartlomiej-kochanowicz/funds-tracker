@@ -90,6 +90,7 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 							<Form.Control>
 								<Input
 									aria-label={t("page.confirm.input.placeholder")}
+									data-testid="code-input"
 									placeholder={t("page.confirm.input.placeholder")}
 									{...field}
 								/>
