@@ -13,7 +13,6 @@ const config: StorybookConfig = {
 	stories: ["../src/components/**/*.stories.@(ts|tsx)"],
 	addons: [
 		getAbsolutePath("@storybook/addon-themes"),
-		getAbsolutePath("@storybook/addon-postcss"),
 		getAbsolutePath("@storybook/addon-links"),
 		getAbsolutePath("@storybook/addon-essentials"),
 		getAbsolutePath("@storybook/addon-interactions"),
