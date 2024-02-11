@@ -218,5 +218,8 @@
 	"form.currency.select.search.empty": "No currencies found",
 	"common.my.account": "My account",
 	"modal.CreateCashAccount.toast.success": "Cash account has been created.",
-	"modal.RenameCashAccount.toast.success": "Cash account has been renamed."
+	"modal.RenameCashAccount.toast.success": "Cash account has been renamed.",
+	"theme.light": "Light",
+	"theme.dark": "Dark",
+	"theme.system": "System"
 }

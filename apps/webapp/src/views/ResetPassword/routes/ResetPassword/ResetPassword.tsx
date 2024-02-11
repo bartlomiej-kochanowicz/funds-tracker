@@ -16,7 +16,7 @@ export const ResetPassword = () => {
 		<ClearCentered>
 			<Card>{token ? <EnterPassword token={token} /> : <EnterEmail />}</Card>
 
-			<div className="mx-32 mt-12 flex flex-col items-center">
+			<div className="mx-32 mt-12 flex flex-col items-center gap-4">
 				<LangSelector />
 
 				<ThemeToggle />

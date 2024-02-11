@@ -126,7 +126,7 @@ export const Confirm = () => {
 				</Card.Footer>
 			</Card>
 
-			<div className="mx-32 flex flex-col items-center">
+			<div className="mx-32 flex flex-col items-center gap-4">
 				<LangSelector />
 
 				<ThemeToggle />

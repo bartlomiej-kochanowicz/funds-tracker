@@ -1,10 +1,12 @@
 import { Button, DropdownMenu } from "@funds-tracker/ui";
-import { Moon, Sun } from "lucide-react";
+import { Check, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 export const ThemeToggle = () => {
-	const { setTheme } = useTheme();
+	const { setTheme, theme: currentTheme, themes } = useTheme();
+
+	const { t } = useTranslation();
 
 	return (
 		<DropdownMenu>
@@ -18,10 +20,18 @@ export const ThemeToggle = () => {
 					<span className="sr-only">Toggle theme</span>
 				</Button>
 			</DropdownMenu.Trigger>
-			<DropdownMenu.Content align="end">
-				<DropdownMenu.Item onClick={() => setTheme("light")}>Light</DropdownMenu.Item>
-				<DropdownMenu.Item onClick={() => setTheme("dark")}>Dark</DropdownMenu.Item>
-				<DropdownMenu.Item onClick={() => setTheme("system")}>System</DropdownMenu.Item>
+			<DropdownMenu.Content>
+				{themes.map(theme => (
+					<DropdownMenu.Item
+						key={theme}
+						onClick={() => setTheme(theme)}
+						className="flex w-full items-center justify-between"
+					>
+						{t(`theme.${theme}`)}
+
+						{theme === currentTheme && <Check className="size-4" />}
+					</DropdownMenu.Item>
+				))}
 			</DropdownMenu.Content>
 		</DropdownMenu>
 	);

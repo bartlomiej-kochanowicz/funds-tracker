@@ -48,7 +48,7 @@ export const Signup = () => {
 				</Card.Footer>
 			</Card>
 
-			<div className="mx-32 mt-12 flex flex-col items-center">
+			<div className="mx-32 mt-12 flex flex-col items-center gap-4">
 				<LangSelector />
 
 				<ThemeToggle />
