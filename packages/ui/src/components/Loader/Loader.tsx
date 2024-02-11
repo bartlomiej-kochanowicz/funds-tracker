@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { Loader2 } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 interface LoaderProps {
 	className?: string;
@@ -8,7 +8,7 @@ interface LoaderProps {
 export const Loader = ({ className, ...rest }: LoaderProps) => (
 	<Loader2
 		role="loader"
-		className={clsx(className, "size-4 animate-spin")}
+		className={twMerge(className, "size-4 animate-spin")}
 		{...rest}
 	/>
 );

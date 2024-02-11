@@ -1,6 +1,6 @@
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
-import clsx from "clsx";
 import { forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 const ScrollBar = forwardRef<
 	React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
@@ -9,7 +9,7 @@ const ScrollBar = forwardRef<
 	<ScrollAreaPrimitive.ScrollAreaScrollbar
 		ref={ref}
 		orientation={orientation}
-		className={clsx(
+		className={twMerge(
 			"flex touch-none select-none transition-colors",
 			orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent p-[1px]",
 			orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent p-[1px]",
@@ -28,7 +28,7 @@ const ScrollArea = forwardRef<
 >(({ className, children, ...props }, ref) => (
 	<ScrollAreaPrimitive.Root
 		ref={ref}
-		className={clsx("relative overflow-hidden", className)}
+		className={twMerge("relative overflow-hidden", className)}
 		{...props}
 	>
 		<ScrollAreaPrimitive.Viewport className="size-full rounded-[inherit]">

@@ -16,6 +16,7 @@ export * from "./components/Popover";
 export * from "./components/ScrollArea";
 export * from "./components/Select";
 export * from "./components/Skeleton";
+export * from "./components/Switch";
 export * from "./components/Text";
 export * from "./components/Tile";
 export * from "./components/Toaster";

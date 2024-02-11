@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { motion } from "framer-motion";
+import { twMerge } from "tailwind-merge";
 
 export const XCircleanimated = ({ className, ...rest }: React.SVGProps<SVGSVGElement>) => (
 	<svg
@@ -12,7 +12,7 @@ export const XCircleanimated = ({ className, ...rest }: React.SVGProps<SVGSVGEle
 		strokeWidth="2"
 		strokeLinecap="round"
 		strokeLinejoin="round"
-		className={clsx(className, "lucide lucide-x-circle")}
+		className={twMerge(className, "lucide lucide-x-circle")}
 		{...rest}
 	>
 		<motion.circle

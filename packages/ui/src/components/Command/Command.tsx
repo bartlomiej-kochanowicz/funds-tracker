@@ -1,8 +1,8 @@
 import { type DialogProps } from "@radix-ui/react-dialog";
-import clsx from "clsx";
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, HTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { Dialog } from "../Dialog";
 
@@ -12,7 +12,7 @@ const Command = forwardRef<
 >(({ className, ...props }, ref) => (
 	<CommandPrimitive
 		ref={ref}
-		className={clsx(
+		className={twMerge(
 			"flex size-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
 			className,
 		)}
@@ -46,7 +46,7 @@ const CommandInput = forwardRef<
 		<Search className="mr-2 size-4 shrink-0 opacity-50" />
 		<CommandPrimitive.Input
 			ref={ref}
-			className={clsx(
+			className={twMerge(
 				"flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
 				className,
 			)}
@@ -63,7 +63,7 @@ const CommandList = forwardRef<
 >(({ className, ...props }, ref) => (
 	<CommandPrimitive.List
 		ref={ref}
-		className={clsx("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
+		className={twMerge("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
 		{...props}
 	/>
 ));
@@ -89,7 +89,7 @@ const CommandGroup = forwardRef<
 >(({ className, ...props }, ref) => (
 	<CommandPrimitive.Group
 		ref={ref}
-		className={clsx(
+		className={twMerge(
 			"overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
 			className,
 		)}
@@ -105,7 +105,7 @@ const CommandSeparator = forwardRef<
 >(({ className, ...props }, ref) => (
 	<CommandPrimitive.Separator
 		ref={ref}
-		className={clsx("-mx-1 h-px bg-border", className)}
+		className={twMerge("-mx-1 h-px bg-border", className)}
 		{...props}
 	/>
 ));
@@ -117,7 +117,7 @@ const CommandItem = forwardRef<
 >(({ className, ...props }, ref) => (
 	<CommandPrimitive.Item
 		ref={ref}
-		className={clsx(
+		className={twMerge(
 			"relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
 			className,
 		)}
@@ -130,7 +130,7 @@ CommandItem.displayName = CommandPrimitive.Item.displayName;
 const CommandShortcut = ({ className, ...props }: HTMLAttributes<HTMLSpanElement>) => {
 	return (
 		<span
-			className={clsx("ml-auto text-xs tracking-widest text-muted-foreground", className)}
+			className={twMerge("ml-auto text-xs tracking-widest text-muted-foreground", className)}
 			{...props}
 		/>
 	);

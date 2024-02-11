@@ -1,11 +1,11 @@
-import clsx from "clsx";
 import { forwardRef, HTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
 const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={clsx("rounded-lg border bg-card text-card-foreground  shadow-sm", className)}
+			className={twMerge("rounded-lg border bg-card text-card-foreground  shadow-sm", className)}
 			{...props}
 		/>
 	),
@@ -17,7 +17,7 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={clsx("flex flex-col space-y-1.5 p-6", className)}
+			className={twMerge("flex flex-col space-y-1.5 p-6", className)}
 			{...props}
 		/>
 	),
@@ -28,7 +28,7 @@ const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingEle
 	({ className, ...props }, ref) => (
 		<h3
 			ref={ref}
-			className={clsx("text-2xl font-semibold leading-none tracking-tight", className)}
+			className={twMerge("text-2xl font-semibold leading-none tracking-tight", className)}
 			{...props}
 		/>
 	),
@@ -39,7 +39,7 @@ const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLPara
 	({ className, ...props }, ref) => (
 		<p
 			ref={ref}
-			className={clsx("text-sm text-muted-foreground", className)}
+			className={twMerge("text-sm text-muted-foreground", className)}
 			{...props}
 		/>
 	),
@@ -50,7 +50,7 @@ const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={clsx("p-6 pt-0", className)}
+			className={twMerge("p-6 pt-0", className)}
 			{...props}
 		/>
 	),
@@ -61,7 +61,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={clsx("flex items-center p-6 pt-0", className)}
+			className={twMerge("flex items-center p-6 pt-0", className)}
 			{...props}
 		/>
 	),

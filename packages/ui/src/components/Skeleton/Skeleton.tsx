@@ -1,8 +1,8 @@
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 const Skeleton = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
 	<div
-		className={clsx("animate-pulse rounded-md bg-muted", className)}
+		className={twMerge("animate-pulse rounded-md bg-muted", className)}
 		{...props}
 	/>
 );

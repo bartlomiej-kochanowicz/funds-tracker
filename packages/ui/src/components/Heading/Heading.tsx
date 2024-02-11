@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { createElement, HTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
 export const Heading = Object.fromEntries(
 	new Map(
@@ -16,7 +16,7 @@ export const Heading = Object.fromEntries(
 			level.toUpperCase(),
 			({ className: topClassName, ...rest }: HTMLAttributes<HTMLHeadingElement>) =>
 				createElement(level, {
-					className: clsx("text-gray-900 dark:text-white", className, topClassName),
+					className: twMerge("text-gray-900 dark:text-white", className, topClassName),
 					...rest,
 				}),
 		]),

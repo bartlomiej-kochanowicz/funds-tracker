@@ -1,6 +1,6 @@
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import clsx from "clsx";
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useMemo } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { Initials } from "../../helpers/Initials";
 
@@ -10,7 +10,7 @@ const Avatar = forwardRef<
 >(({ className, ...props }, ref) => (
 	<AvatarPrimitive.Root
 		ref={ref}
-		className={clsx("relative flex size-10 shrink-0 overflow-hidden rounded-full", className)}
+		className={twMerge("relative flex size-10 shrink-0 overflow-hidden rounded-full", className)}
 		{...props}
 	/>
 ));
@@ -23,7 +23,7 @@ const AvatarImage = forwardRef<
 >(({ className, ...props }, ref) => (
 	<AvatarPrimitive.Image
 		ref={ref}
-		className={clsx("aspect-square size-full", className)}
+		className={twMerge("aspect-square size-full", className)}
 		{...props}
 	/>
 ));
@@ -43,7 +43,7 @@ const AvatarFallback = forwardRef<
 	return (
 		<AvatarPrimitive.Fallback
 			ref={ref}
-			className={clsx(
+			className={twMerge(
 				"flex size-full items-center justify-center rounded-full bg-primary text-white",
 				className,
 			)}

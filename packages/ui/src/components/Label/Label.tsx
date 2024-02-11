@@ -1,7 +1,7 @@
 import { Root as LabelPrimitiveRoot } from "@radix-ui/react-label";
 import { cva, type VariantProps } from "class-variance-authority";
-import clsx from "clsx";
 import { forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 const labelVariants = cva(
 	"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
@@ -13,7 +13,7 @@ const Label = forwardRef<
 >(({ className, ...props }, ref) => (
 	<LabelPrimitiveRoot
 		ref={ref}
-		className={clsx(labelVariants(), className)}
+		className={twMerge(labelVariants(), className)}
 		{...props}
 	/>
 ));

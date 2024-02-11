@@ -1,6 +1,5 @@
 import { Root as LabelPrimitiveRoot } from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
-import clsx from "clsx";
 import { createContext, forwardRef, useContext, useId, useMemo } from "react";
 import {
 	Controller,
@@ -10,6 +9,7 @@ import {
 	FormProvider as Form,
 	useFormContext,
 } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
 
 import { Label } from "../Label";
 
@@ -76,7 +76,7 @@ const FormItem = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>
 			<FormItemContext.Provider value={contextValue}>
 				<div
 					ref={ref}
-					className={clsx("space-y-2", className)}
+					className={twMerge("space-y-2", className)}
 					{...props}
 				/>
 			</FormItemContext.Provider>
@@ -94,7 +94,7 @@ const FormLabel = forwardRef<
 	return (
 		<Label
 			ref={ref}
-			className={clsx(error && "text-destructive", className)}
+			className={twMerge(error && "text-destructive", className)}
 			htmlFor={formItemId}
 			{...props}
 		/>
@@ -130,7 +130,7 @@ const FormDescription = forwardRef<
 		<p
 			ref={ref}
 			id={formDescriptionId}
-			className={clsx("text-sm text-muted-foreground", className)}
+			className={twMerge("text-sm text-muted-foreground", className)}
 			{...props}
 		/>
 	);
@@ -150,7 +150,7 @@ const FormMessage = forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLPa
 			<p
 				ref={ref}
 				id={formMessageId}
-				className={clsx("text-sm font-medium text-destructive", className)}
+				className={twMerge("text-sm font-medium text-destructive", className)}
 				{...props}
 			>
 				{body}
