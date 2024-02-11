@@ -1,6 +1,6 @@
 import LogoNameVertical from "assets/logo/logo-name-vertical.svg?react";
 import LogoNameVerticalDark from "assets/logo/logo-name-vertical-dark.svg?react";
-import { ThemeSwitcher } from "components/ThemeSwitcher";
+import { ThemeToggle } from "components/ThemeToggle";
 import { NAVIGATION } from "constants/navigation";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -31,7 +31,7 @@ export const Sidebar = () => (
 				</ul>
 			</nav>
 			<div className="mx-auto block w-fit p-6">
-				<ThemeSwitcher />
+				<ThemeToggle />
 			</div>
 		</div>
 	</div>

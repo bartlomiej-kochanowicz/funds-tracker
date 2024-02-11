@@ -1,7 +1,7 @@
 import { Card } from "@funds-tracker/ui";
 import { LangSelector } from "components/LangSelector";
 import { ClearCentered } from "components/layouts/ClearCentered";
-import { ThemeSwitcher } from "components/ThemeSwitcher";
+import { ThemeToggle } from "components/ThemeToggle";
 import { useSearchParams } from "react-router-dom";
 
 import { EnterEmail } from "./components/EnterEmail";
@@ -19,7 +19,7 @@ export const ResetPassword = () => {
 			<div className="mx-32 mt-12 flex flex-col items-center">
 				<LangSelector />
 
-				<ThemeSwitcher />
+				<ThemeToggle />
 			</div>
 		</ClearCentered>
 	);

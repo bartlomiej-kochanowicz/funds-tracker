@@ -11,7 +11,7 @@ import {
 } from "@funds-tracker/ui";
 import { LangSelector } from "components/LangSelector";
 import { ClearCentered } from "components/layouts/ClearCentered";
-import { ThemeSwitcher } from "components/ThemeSwitcher";
+import { ThemeToggle } from "components/ThemeToggle";
 import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -129,7 +129,7 @@ export const Confirm = () => {
 			<div className="mx-32 flex flex-col items-center">
 				<LangSelector />
 
-				<ThemeSwitcher />
+				<ThemeToggle />
 			</div>
 		</ClearCentered>
 	);

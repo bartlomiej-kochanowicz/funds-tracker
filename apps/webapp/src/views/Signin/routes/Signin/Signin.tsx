@@ -1,7 +1,7 @@
 import { buttonVariants, Card, H1, Text } from "@funds-tracker/ui";
 import { LangSelector } from "components/LangSelector";
 import { ClearCentered } from "components/layouts/ClearCentered";
-import { ThemeSwitcher } from "components/ThemeSwitcher";
+import { ThemeToggle } from "components/ThemeToggle";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
@@ -58,7 +58,7 @@ export const Signin = () => {
 			<div className="mx-32 mt-12 flex flex-col items-center">
 				<LangSelector />
 
-				<ThemeSwitcher />
+				<ThemeToggle />
 			</div>
 		</ClearCentered>
 	);

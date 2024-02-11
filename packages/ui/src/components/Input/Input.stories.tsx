@@ -21,14 +21,3 @@ export const Disabled: Story = {
 		/>
 	),
 };
-
-export const WithDescription: Story = {
-	render: () => (
-		<Input
-			label="Hello world"
-			htmlFor="test"
-			id="test"
-			placeholder="Placeholder text..."
-		/>
-	),
-};
