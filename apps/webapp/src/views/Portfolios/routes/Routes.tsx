@@ -1,25 +1,18 @@
-/* import { ProtectedRoute } from "components/ProtectedRoute";
-import { lazy } from "react";
+import { TopbarSidebar } from "components/layouts/TopbarSidebar";
+import { ProtectedRoute } from "components/ProtectedRoute";
 import { ROUTES } from "routes/paths";
 
-const Portfolios = lazy(() =>
-	import("./Portfolios").then(({ Portfolios: component }) => ({
-		default: component,
-	})),
-);
-
-const Portfolio = lazy(() =>
-	import("./Portfolio").then(({ Portfolio: component }) => ({
-		default: component,
-	})),
-);
+/* import { Portfolio } from "./Portfolio"; */
+import { Portfolios } from "./Portfolios/Portfolios";
 
 export const PortfoliosRoutes = [
 	{
 		path: ROUTES.PORTFOLIOS.PORTFOLIOS,
 		element: (
 			<ProtectedRoute>
-				<Portfolios />
+				<TopbarSidebar>
+					<Portfolios />
+				</TopbarSidebar>
 			</ProtectedRoute>
 		),
 	},
@@ -27,9 +20,11 @@ export const PortfoliosRoutes = [
 		path: ROUTES.PORTFOLIOS.PORTFOLIO,
 		element: (
 			<ProtectedRoute>
-				<Portfolio />
+				<TopbarSidebar>
+					<div>portfolio</div>
+					{/* <Portfolio /> */}
+				</TopbarSidebar>
 			</ProtectedRoute>
 		),
 	},
 ];
- */

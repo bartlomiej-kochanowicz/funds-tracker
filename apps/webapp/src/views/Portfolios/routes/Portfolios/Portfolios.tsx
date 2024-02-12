@@ -1,88 +1,22 @@
-/* import { CreatePortfolioMutation, GetPortfoliosQuery } from "__generated__/graphql";
-import { useQuery } from "@apollo/client";
-import { Panel, Text } from "@funds-tracker/ui";
-import { Heading, Loader, Spacer } from "components/atoms";
-import { ErrorContent } from "components/molecules";
-import { MAX_PORTFOLIOS } from "constants/common";
-import { GET_PORTFOLIOS } from "graphql/query/portfolios/GetPortfolios";
-import { Fragment } from "react";
+import { CardsList } from "components/layouts/CardsList";
+import { lazy } from "react";
 import { useTranslation } from "react-i18next";
 
-import { CreateFirstPortfolio } from "./components/CreateFirstPortfolio";
-import { CreatePortfolio } from "./components/CreatePortfolio";
-import { PortfolioPanel } from "./components/PortfolioPanel";
+const PortfoliosContent = lazy(() =>
+	import("./components/PortfoliosContent").then(({ PortfoliosContent: component }) => ({
+		default: component,
+	})),
+);
 
 export const Portfolios = () => {
 	const { t } = useTranslation();
 
-	const { loading, data, error, updateQuery } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
-
-	const portfoliosExist = Boolean(data && data.portfolios.length > 0);
-
-	const renderCreatePortfolioButton = Boolean(
-		data && data.portfolios.length < MAX_PORTFOLIOS && data.portfolios.length > 0,
-	);
-
-	const addCashAccountToList = (newPortfoliotData: CreatePortfolioMutation) => {
-		updateQuery(prev => ({
-			portfolios: [...prev.portfolios, newPortfoliotData.createPortfolio],
-		}));
-	};
-
-	const updatePortfolioName = ({ name, uuid }: { name: string; uuid: string }) => {
-		updateQuery(prev => ({
-			portfolios: prev.portfolios.map(portfolio => {
-				if (portfolio.uuid === uuid) {
-					return {
-						...portfolio,
-						name,
-					};
-				}
-
-				return portfolio;
-			}),
-		}));
-	};
-	const updatePortfolioList = ({ uuid }: { uuid: string }) => {
-		updateQuery(prev => ({
-			portfolios: prev.portfolios.filter(portfolio => portfolio.uuid !== uuid),
-		}));
-	};
-
 	return (
-		<Fragment>
-			<Heading>{t("navigation.portfolios")}</Heading>
-
-			<Text className="text-sm text-gray-400">{t("page.portfolios.title.description")}</Text>
-
-			<Spacer />
-
-			{loading && <Loader $size="large" />}
-
-			{!loading && error && <ErrorContent />}
-
-			{!loading && !portfoliosExist && !error && (
-				<CreateFirstPortfolio callback={addCashAccountToList} />
-			)}
-
-			{!loading && portfoliosExist && !error && (
-				<Panel>
-					{data?.portfolios.map(({ uuid, ...rest }) => (
-						<PortfolioPanel
-							key={uuid}
-							uuid={uuid}
-							updatePortfolioName={updatePortfolioName}
-							updatePortfolioList={updatePortfolioList}
-							{...rest}
-						/>
-					))}
-				</Panel>
-			)}
-
-			<Spacer />
-
-			{renderCreatePortfolioButton && <CreatePortfolio callback={addCashAccountToList} />}
-		</Fragment>
+		<CardsList
+			title={t("navigation.portfolios")}
+			description={t("page.portfolios.title.description")}
+		>
+			<PortfoliosContent />
+		</CardsList>
 	);
 };
- */

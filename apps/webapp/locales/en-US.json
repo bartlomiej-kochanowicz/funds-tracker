@@ -221,5 +221,8 @@
 	"modal.RenameCashAccount.toast.success": "Cash account has been renamed.",
 	"theme.light": "Light",
 	"theme.dark": "Dark",
-	"theme.system": "System"
+	"theme.system": "System",
+	"modal.CreatePortfolio.toast.success": "Portfolio has been created.",
+	"modal.RenamePortfolio.toast.success": "Portfolio has been renamed.",
+	"modal.rename.submit": "Rename"
 }

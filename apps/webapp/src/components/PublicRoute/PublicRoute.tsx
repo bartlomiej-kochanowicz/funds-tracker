@@ -1,10 +1,10 @@
 import { useUserContext } from "contexts/UserContext";
-import { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import { ReactElement } from "react";
+import { redirect } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
 interface PublicRouteProps {
-	children: ReactNode;
+	children: ReactElement;
 	to?: string;
 }
 
@@ -18,7 +18,9 @@ export const PublicRoute = ({ children, to = ROUTES.HOME }: PublicRouteProps) =>
 	}
 
 	if (isAuthenticated) {
-		return <Navigate to={to} />;
+		redirect(to);
+
+		return null;
 	}
 	return children;
 };

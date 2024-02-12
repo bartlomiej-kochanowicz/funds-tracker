@@ -22,11 +22,7 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ isListEmpty, han
 				<Button>
 					<Plus className="mr-2 size-6" />
 
-					{t(
-						isListEmpty
-							? "page.cash_accounts.need.more.button"
-							: "page.cash_accounts.need.more.button",
-					)}
+					{t("page.cash_accounts.need.more.button")}
 				</Button>
 			</CreateCashAccountDialog>
 		</div>

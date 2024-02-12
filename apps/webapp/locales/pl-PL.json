@@ -221,5 +221,8 @@
 	"modal.RenameCashAccount.toast.success": "Nazwa konta gotówkowego została pomyślnie zmieniona.",
 	"theme.light": "Jasny",
 	"theme.dark": "Ciemny",
-	"theme.system": "Systemowy"
+	"theme.system": "Systemowy",
+	"modal.CreatePortfolio.toast.success": "Portfel inwestycyjny został pomyślnie dodany.",
+	"modal.RenamePortfolio.toast.success": "Nazwa portfela inwestycyjnego została pomyślnie zmieniona.",
+	"modal.rename.submit": "Zmień nazwę"
 }

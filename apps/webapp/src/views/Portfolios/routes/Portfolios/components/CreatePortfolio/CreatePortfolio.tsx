@@ -1,43 +1,30 @@
-/* import { CreatePortfolioMutation } from "__generated__/graphql";
-import NiceModal from "@ebay/nice-modal-react";
-import { Button } from "@funds-tracker/ui";
-import { Heading, Spacer, Spreader } from "components/atoms";
-import { MODAL_CREATE_PORTFOLIO } from "components/modals/CreatePortfolio";
+import { Button, H2 } from "@funds-tracker/ui";
+import { CreatePortfolioDialog } from "components/dialogs/CreatePortfolioDialog";
 import { Plus } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 interface CreatePortfolioProps {
-	callback: (data: CreatePortfolioMutation) => void;
+	isListEmpty: boolean;
+	handleRefetch: () => void;
 }
 
-export const CreatePortfolio: FC<CreatePortfolioProps> = ({ callback }) => {
+export const CreatePortfolio: FC<CreatePortfolioProps> = ({ isListEmpty, handleRefetch }) => {
 	const { t } = useTranslation();
 
-	const handleOpenModal = () => NiceModal.show(MODAL_CREATE_PORTFOLIO, { callback });
-
 	return (
-		<div className="flex flex-col items-center">
-			<Heading
-				$textAlign="center"
-				$level="h2"
-			>
-				{t("page.portfolios.need.more")}
-			</Heading>
+		<div className="mt-16 flex flex-col items-center gap-3">
+			<H2 className="text-center">
+				{t(isListEmpty ? "page.portfolios.empty.list.title" : "page.portfolios.need.more")}
+			</H2>
 
-			<Spacer $space="0.5" />
+			<CreatePortfolioDialog handleRefetch={handleRefetch}>
+				<Button>
+					<Plus className="mr-2 size-6" />
 
-			<Button
-				onPress={handleOpenModal}
-				$outline
-			>
-				{t("page.portfolios.need.more.button")}
-
-				<Spreader $spread="0.25" />
-
-				<Plus />
-			</Button>
+					{t("page.portfolios.need.more.button")}
+				</Button>
+			</CreatePortfolioDialog>
 		</div>
 	);
 };
- */
