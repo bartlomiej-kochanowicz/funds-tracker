@@ -224,5 +224,7 @@
 	"modal.RenamePortfolio.toast.success": "Portfolio has been renamed.",
 	"modal.rename.submit": "Rename",
 	"modal.CashAccountOperations.description": "Here you can view all operations for your cash account.",
-	"modal.CashAccountOperations.table.caption": "A list of all operations for your cash account."
+	"modal.CashAccountOperations.table.caption": "A list of all operations for your cash account.",
+	"common.more": "More",
+	"common.link.home": "Go to home"
 }

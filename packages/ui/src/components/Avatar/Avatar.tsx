@@ -44,7 +44,7 @@ const AvatarFallback = forwardRef<
 		<AvatarPrimitive.Fallback
 			ref={ref}
 			className={twMerge(
-				"flex size-full items-center justify-center rounded-full bg-primary text-white",
+				"flex size-full items-center justify-center rounded-full bg-primary text-primary-foreground font-bold",
 				className,
 			)}
 			{...props}

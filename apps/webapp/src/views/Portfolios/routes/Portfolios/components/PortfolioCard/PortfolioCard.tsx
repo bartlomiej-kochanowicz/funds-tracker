@@ -67,6 +67,7 @@ export const PortfolioCard = ({ name, isPending, uuid, handleRefetch }: Portfoli
 						<DropdownMenu>
 							<DropdownMenu.Trigger asChild>
 								<Button
+									aria-label={t("common.more")}
 									variant="outline"
 									size="icon"
 								>

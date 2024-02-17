@@ -99,6 +99,7 @@ export const CashAccountCard = ({
 						<DropdownMenu>
 							<DropdownMenu.Trigger asChild>
 								<Button
+									aria-label={t("common.more")}
 									variant="outline"
 									size="icon"
 								>
