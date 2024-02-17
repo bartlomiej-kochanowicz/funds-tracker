@@ -5,6 +5,8 @@ import { useUserContext } from "contexts/UserContext";
 import { LOGOUT } from "graphql/mutations/authentication/Logout";
 import { LogOut, Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { ROUTES } from "routes/paths";
 
 export const Profile = () => {
 	const { user } = useUserContext();
@@ -32,9 +34,11 @@ export const Profile = () => {
 				<DropdownMenu.Label>{t("common.my.account")}</DropdownMenu.Label>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
-					<DropdownMenu.Item>
-						<Settings className="mr-2 size-4" />
-						<span>{t("common.settings")}</span>
+					<DropdownMenu.Item asChild>
+						<Link to={ROUTES.SETTINGS}>
+							<Settings className="mr-2 size-4" />
+							<span>{t("common.settings")}</span>
+						</Link>
 					</DropdownMenu.Item>
 					<DropdownMenu.Item
 						onClick={handleLogOut}

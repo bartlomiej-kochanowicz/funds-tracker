@@ -1,1 +1,7 @@
-export const Settings = () => <div>my profile</div>;
+import { LangSelector } from "components/LangSelector";
+
+export const Settings = () => (
+	<div>
+		<LangSelector />
+	</div>
+);
