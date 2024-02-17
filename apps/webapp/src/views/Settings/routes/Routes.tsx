@@ -1,21 +1,18 @@
-/* import { ErrorContent } from "components/molecules";
+import { TopbarSidebar } from "components/layouts/TopbarSidebar";
 import { ProtectedRoute } from "components/ProtectedRoute";
-import { Outlet } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
-import { MyProfile } from "./MyProfile";
+import { Settings } from "./Settings";
 
 export const SettingsRoutes = [
 	{
-		path: ROUTES.SETTINGS.SETTINGS,
+		path: ROUTES.SETTINGS,
 		element: (
 			<ProtectedRoute>
-				
-					<Outlet />
-			
+				<TopbarSidebar>
+					<Settings />
+				</TopbarSidebar>
 			</ProtectedRoute>
 		),
-		children: [{ path: ROUTES.SETTINGS.MY_PROFILE, element: <MyProfile /> }],
 	},
 ];
- */

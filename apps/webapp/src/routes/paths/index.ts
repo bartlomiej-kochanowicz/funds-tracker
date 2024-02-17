@@ -14,9 +14,6 @@ export const ROUTES = {
 	TRANSACTIONS: "/transactions",
 	HISTORY: "/history",
 	HUB: "/hub",
-	SETTINGS: {
-		SETTINGS: "/settings",
-		MY_PROFILE: "/settings/my-profile",
-	},
+	SETTINGS: "/settings",
 	ANY: "*",
 };
