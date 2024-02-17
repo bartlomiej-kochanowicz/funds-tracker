@@ -1,24 +1,27 @@
 import { forwardRef, HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
-const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(
-	({ className, ...props }, ref) => (
-		<div className="relative w-full overflow-auto">
-			<table
-				ref={ref}
-				className={twMerge("w-full caption-bottom text-sm", className)}
-				{...props}
-			/>
-		</div>
-	),
-);
+import { ScrollArea } from "../ScrollArea";
+
+const Table = forwardRef<
+	HTMLTableElement,
+	HTMLAttributes<HTMLTableElement> & { wrapperClassName?: string }
+>(({ className, wrapperClassName, ...props }, ref) => (
+	<ScrollArea className={twMerge("relative w-full overflow-auto", wrapperClassName)}>
+		<table
+			ref={ref}
+			className={twMerge("w-full caption-bottom text-sm", className)}
+			{...props}
+		/>
+	</ScrollArea>
+));
 Table.displayName = "Table";
 
 const TableHeader = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLTableSectionElement>>(
 	({ className, ...props }, ref) => (
 		<thead
 			ref={ref}
-			className={twMerge("[&_tr]:border-b", className)}
+			className={twMerge("[&_tr]:border-b bg-background", className)}
 			{...props}
 		/>
 	),

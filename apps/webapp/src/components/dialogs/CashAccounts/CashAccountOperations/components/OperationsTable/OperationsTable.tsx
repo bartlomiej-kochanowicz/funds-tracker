@@ -42,9 +42,9 @@ export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) =>
 
 	if (!loading && cashAccountsOperationsExist) {
 		return (
-			<Table>
+			<Table wrapperClassName="h-[50vh]">
 				<Table.Caption>{t("modal.CashAccountOperations.table.caption")}</Table.Caption>
-				<Table.Header>
+				<Table.Header className="sticky top-0 z-10">
 					<Table.Row>
 						<Table.Head>{t("common.amount")}</Table.Head>
 						<Table.Head>{t("common.date")}</Table.Head>
