@@ -8,7 +8,7 @@ import { Loader, Table, Text } from "@funds-tracker/ui";
 import { GET_CASH_ACCOUNT_OPERATIONS } from "graphql/query/cashAccounts/GetCashAccountOperations";
 import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
-import { ArrowDownCircle } from "lucide-react";
+import { ArrowDownCircle, XCircle } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -32,7 +32,12 @@ export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) =>
 	}
 
 	if (!loading && !cashAccountsOperationsExist) {
-		return <Text className="font-bold">{t("modal.RenameCashAccount.operations.empty")}</Text>;
+		return (
+			<div className="flex items-center gap-2">
+				<XCircle className="size-4" />
+				<Text className="font-bold">{t("modal.RenameCashAccount.operations.empty")}</Text>
+			</div>
+		);
 	}
 
 	if (!loading && cashAccountsOperationsExist) {
