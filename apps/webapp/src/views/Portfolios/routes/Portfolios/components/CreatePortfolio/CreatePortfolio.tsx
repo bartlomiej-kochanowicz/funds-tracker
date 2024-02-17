@@ -1,5 +1,5 @@
 import { Button, H2 } from "@funds-tracker/ui";
-import { CreatePortfolioDialog } from "components/dialogs/CreatePortfolioDialog";
+import { CreatePortfolioDialog } from "components/dialogs/Portfolios/CreatePortfolioDialog";
 import { Plus } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

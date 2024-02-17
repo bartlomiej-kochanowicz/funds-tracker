@@ -158,7 +158,6 @@
 	"modal.CashAccountOperations.name": "Twoje operacje na koncie gotówkowym",
 	"common.rename": "Zmień nazwę",
 	"common.delete": "Usuń",
-	"modal.CashAccountOperations.button.delete": "Usuń konto gotówkowe",
 	"modal.RenameCashAccount.name": "Zmień nazwę konta gotówkowego",
 	"modal.RenameCashAccount.operations.empty": "Nie wykonałeś żadnych operacji na tym koncie.",
 	"modal.ConfirmDeleteCashAccount.name": "Usuń konto gotówkowe",
@@ -223,5 +222,7 @@
 	"theme.system": "Systemowy",
 	"modal.CreatePortfolio.toast.success": "Portfel inwestycyjny został pomyślnie dodany.",
 	"modal.RenamePortfolio.toast.success": "Nazwa portfela inwestycyjnego została pomyślnie zmieniona.",
-	"modal.rename.submit": "Zmień nazwę"
+	"modal.rename.submit": "Zmień nazwę",
+	"modal.CashAccountOperations.description":"Tutaj możesz podejrzeć wszystkie operacje na koncie gotówkowym.",
+	"modal.CashAccountOperations.table.caption": "Lista operacji na koncie gotówkowym"
 }

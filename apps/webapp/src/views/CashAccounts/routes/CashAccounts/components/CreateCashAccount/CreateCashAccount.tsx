@@ -1,5 +1,5 @@
 import { Button, H2 } from "@funds-tracker/ui";
-import { CreateCashAccountDialog } from "components/dialogs/CreateCashAccountDialog";
+import { CreateCashAccountDialog } from "components/dialogs/CashAccounts/CreateCashAccountDialog";
 import { Plus } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

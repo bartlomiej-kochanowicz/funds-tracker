@@ -158,7 +158,6 @@
 	"modal.CashAccountOperations.name": "Your cash account operations",
 	"common.rename": "Rename",
 	"common.delete": "Delete",
-	"modal.CashAccountOperations.button.delete": "Delete cash account",
 	"modal.RenameCashAccount.name": "Rename cash account",
 	"modal.RenameCashAccount.operations.empty": "There are no operations for this cash account.",
 	"modal.ConfirmDeleteCashAccount.name": "Delete cash account",
@@ -223,5 +222,7 @@
 	"theme.system": "System",
 	"modal.CreatePortfolio.toast.success": "Portfolio has been created.",
 	"modal.RenamePortfolio.toast.success": "Portfolio has been renamed.",
-	"modal.rename.submit": "Rename"
+	"modal.rename.submit": "Rename",
+	"modal.CashAccountOperations.description": "Here you can view all operations for your cash account.",
+	"modal.CashAccountOperations.table.caption": "A list of all operations for your cash account."
 }

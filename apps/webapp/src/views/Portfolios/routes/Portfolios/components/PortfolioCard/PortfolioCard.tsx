@@ -1,8 +1,8 @@
 import { GetPortfoliosQuery } from "__generated__/graphql";
 import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
-import { useConfirmDeletePortfolioDialog } from "components/dialogs/ConfirmDeletePortfolioDialog";
-import { useRenamePortfolioDialog } from "components/dialogs/RenamePortfolioDialog";
+import { useConfirmDeletePortfolioDialog } from "components/dialogs/Portfolios/ConfirmDeletePortfolioDialog";
+import { useRenamePortfolioDialog } from "components/dialogs/Portfolios/RenamePortfolioDialog";
 import { MoreVertical, Pencil, PieChart, Trash2 } from "lucide-react";
 import { Fragment, useMemo } from "react";
 import { useTranslation } from "react-i18next";

@@ -1,9 +1,10 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
-import { useAddFundsToCashAccountDialog } from "components/dialogs/AddFundsToCashAccountDialog/useAddFundsToCashAccountDialog";
-import { useConfirmDeleteCashAccountDialog } from "components/dialogs/ConfirmDeleteCashAccountDialog";
-import { useRenameCashAccountDialog } from "components/dialogs/RenameCashAccountDialog";
+import { useAddFundsToCashAccountDialog } from "components/dialogs/CashAccounts/AddFundsToCashAccountDialog";
+import { useCashAccountOperationsDialog } from "components/dialogs/CashAccounts/CashAccountOperations";
+import { useConfirmDeleteCashAccountDialog } from "components/dialogs/CashAccounts/ConfirmDeleteCashAccountDialog";
+import { useRenameCashAccountDialog } from "components/dialogs/CashAccounts/RenameCashAccountDialog";
 import { formatCurrency } from "helpers/formatCurrency";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { Fragment, useMemo } from "react";
@@ -23,6 +24,9 @@ export const CashAccountCard = ({
 	handleRefetch,
 }: CashAccountCardProps) => {
 	const { t } = useTranslation();
+
+	const { open: openCashAccountOperationsDialog, dialog: CashAccountOperationsDialog } =
+		useCashAccountOperationsDialog({ uuid, currency });
 
 	const { open: openConfirmDeleteCashAccountDialog, dialog: ConfirmDeleteCashAccountDialog } =
 		useConfirmDeleteCashAccountDialog({ uuid, name, handleRefetch });
@@ -47,6 +51,7 @@ export const CashAccountCard = ({
 				{
 					icon: List,
 					label: t("page.cash_accounts.button.operations"),
+					onSelect: openCashAccountOperationsDialog,
 				},
 				{
 					icon: Plus,
@@ -74,6 +79,7 @@ export const CashAccountCard = ({
 
 	return (
 		<Fragment>
+			{CashAccountOperationsDialog}
 			{ConfirmDeleteCashAccountDialog}
 			{RenameCashAccountDialog}
 			{AddFundsToCashAccountDialog}

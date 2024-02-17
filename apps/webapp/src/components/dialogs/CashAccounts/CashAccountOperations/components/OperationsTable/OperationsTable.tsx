@@ -1,19 +1,16 @@
-/* import {
+import {
 	Currency,
 	GetCashAccountOperationsQuery,
 	GetCashAccountOperationsQueryVariables,
 } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
-import { Text } from "@funds-tracker/ui";
-import { Loader } from "components/atoms";
-import { Table } from "components/molecules";
+import { Loader, Table, Text } from "@funds-tracker/ui";
 import { GET_CASH_ACCOUNT_OPERATIONS } from "graphql/query/cashAccounts/GetCashAccountOperations";
 import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
+import { ArrowDownCircle } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-
-import { columns } from "./columns";
 
 interface OperationsTableProps {
 	uuid: string;
@@ -39,23 +36,32 @@ export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) =>
 	}
 
 	if (!loading && cashAccountsOperationsExist) {
-		const processedData =
-			data?.cashAccount.operations.map(({ date, amount, uuid: dataUuid, type, ...rest }) => ({
-				...rest,
-				date: formatDate(date),
-				amount: formatCurrency(amount, currency),
-				identifier: dataUuid,
-				type: t(`cashAccount.operation.type.${type}`),
-			})) || [];
-
 		return (
-			<Table
-				columns={columns}
-				data={processedData}
-			/>
+			<Table>
+				<Table.Caption>{t("modal.CashAccountOperations.table.caption")}</Table.Caption>
+				<Table.Header>
+					<Table.Row>
+						<Table.Head>{t("common.amount")}</Table.Head>
+						<Table.Head>{t("common.date")}</Table.Head>
+						<Table.Head>{t("common.type")}</Table.Head>
+					</Table.Row>
+				</Table.Header>
+				<Table.Body>
+					{data?.cashAccount.operations.map(({ type, uuid, amount, date }) => (
+						<Table.Row key={uuid}>
+							<Table.Cell>{formatCurrency(amount, currency)}</Table.Cell>
+							<Table.Cell>{formatDate(date)}</Table.Cell>
+							<Table.Cell className="flex items-center gap-1">
+								{type === "withdrawal" && <ArrowDownCircle className="size-4" />}
+								{type === "deposit" && <ArrowDownCircle className="size-4 rotate-180" />}
+								{t(`cashAccount.operation.type.${type}`)}
+							</Table.Cell>
+						</Table.Row>
+					))}
+				</Table.Body>
+			</Table>
 		);
 	}
 
 	return null;
 };
- */
