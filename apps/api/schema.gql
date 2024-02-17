@@ -325,7 +325,7 @@ type Mutation {
   introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
   updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
   deleteCashAccount(uuid: ID!): CashAccountDelete!
-  addFundsToCashAccount(data: AddFundsToCashAccountInput!): CashAccount!
+  cashAccountAddFunds(data: CashAccountAddFundsInput!): CashAccount!
   createPortfolio(data: CreatePortfolioInput!): Portfolio!
   introductionCreatePortfolios(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
   updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
@@ -415,7 +415,7 @@ input UpdateCashAccountInput {
   name: String!
 }
 
-input AddFundsToCashAccountInput {
+input CashAccountAddFundsInput {
   """Account uuid."""
   uuid: ID!
 

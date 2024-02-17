@@ -8,7 +8,7 @@ import {
 	IntroductionCashAccounts,
 } from "./entities";
 import {
-	AddFundsToCashAccountInput,
+	CashAccountAddFundsInput,
 	CreateCashAccountInput,
 	IntroductionCreateCashAccountsInput,
 	UpdateCashAccountInput,
@@ -81,11 +81,11 @@ export class CashAccountsResolver {
 	}
 
 	@Mutation(() => CashAccount)
-	addFundsToCashAccount(
+	cashAccountAddFunds(
 		@GetCurrentUserId() userId: string,
 		@Args("data")
-		addFundsToCashAccountInput: AddFundsToCashAccountInput,
+		cashAccountAddFundsInput: CashAccountAddFundsInput,
 	) {
-		return this.cashAccountsService.addFundsToCashAccountInput(userId, addFundsToCashAccountInput);
+		return this.cashAccountsService.cashAccountAddFundsInput(userId, cashAccountAddFundsInput);
 	}
 }

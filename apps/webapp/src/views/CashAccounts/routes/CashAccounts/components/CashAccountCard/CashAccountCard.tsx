@@ -1,7 +1,7 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
 import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
-import { useAddFundsToCashAccountDialog } from "components/dialogs/CashAccounts/AddFundsToCashAccountDialog";
+import { useCashAccountAddFundsDialog } from "components/dialogs/CashAccounts/CashAccountAddFundsDialog";
 import { useCashAccountOperationsDialog } from "components/dialogs/CashAccounts/CashAccountOperations";
 import { useConfirmDeleteCashAccountDialog } from "components/dialogs/CashAccounts/ConfirmDeleteCashAccountDialog";
 import { useRenameCashAccountDialog } from "components/dialogs/CashAccounts/RenameCashAccountDialog";
@@ -34,8 +34,8 @@ export const CashAccountCard = ({
 	const { open: openRenameCashAccountDialog, dialog: RenameCashAccountDialog } =
 		useRenameCashAccountDialog({ uuid, name, handleRefetch });
 
-	const { open: openAddFundsToCashAccountDialog, dialog: AddFundsToCashAccountDialog } =
-		useAddFundsToCashAccountDialog({
+	const { open: openCashAccountAddFundsDialog, dialog: CashAccountAddFundsDialog } =
+		useCashAccountAddFundsDialog({
 			handleRefetch,
 			uuid,
 			currency,
@@ -56,7 +56,7 @@ export const CashAccountCard = ({
 				{
 					icon: Plus,
 					label: t("page.cash_accounts.button.add_funds"),
-					onSelect: openAddFundsToCashAccountDialog,
+					onSelect: openCashAccountAddFundsDialog,
 				},
 			],
 			[
@@ -82,7 +82,7 @@ export const CashAccountCard = ({
 			{CashAccountOperationsDialog}
 			{ConfirmDeleteCashAccountDialog}
 			{RenameCashAccountDialog}
-			{AddFundsToCashAccountDialog}
+			{CashAccountAddFundsDialog}
 
 			<Card
 				className={clsx(

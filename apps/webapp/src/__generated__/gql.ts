@@ -21,7 +21,7 @@ const documents = {
     "\n\tmutation SetNewPassword($data: SetNewPasswordInput!) {\n\t\tsetNewPassword(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SetNewPasswordDocument,
     "\n\tmutation Signin($data: SigninInput!) {\n\t\tsigninLocal(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SigninDocument,
     "\n\tmutation Signup($data: SignupInput!) {\n\t\tsignupLocal(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SignupDocument,
-    "\n\tmutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n\t\taddFundsToCashAccount(data: $data) {\n\t\t\tbalance\n\t\t}\n\t}\n": types.AddFundsToCashAccountDocument,
+    "\n\tmutation CashAccountAddFunds($data: CashAccountAddFundsInput!) {\n\t\tcashAccountAddFunds(data: $data) {\n\t\t\tbalance\n\t\t}\n\t}\n": types.CashAccountAddFundsDocument,
     "\n\tmutation CreateCashAccount($data: CreateCashAccountInput!) {\n\t\tcreateCashAccount(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n": types.CreateCashAccountDocument,
     "\n\tmutation DeleteCashAccount($uuid: ID!) {\n\t\tdeleteCashAccount(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.DeleteCashAccountDocument,
     "\n\tmutation UpdateCashAccount($uuid: ID!, $data: UpdateCashAccountInput!) {\n\t\tupdateCashAccount(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.UpdateCashAccountDocument,
@@ -89,7 +89,7 @@ export function gql(source: "\n\tmutation Signup($data: SignupInput!) {\n\t\tsig
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n\t\taddFundsToCashAccount(data: $data) {\n\t\t\tbalance\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation AddFundsToCashAccount($data: AddFundsToCashAccountInput!) {\n\t\taddFundsToCashAccount(data: $data) {\n\t\t\tbalance\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation CashAccountAddFunds($data: CashAccountAddFundsInput!) {\n\t\tcashAccountAddFunds(data: $data) {\n\t\t\tbalance\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CashAccountAddFunds($data: CashAccountAddFundsInput!) {\n\t\tcashAccountAddFunds(data: $data) {\n\t\t\tbalance\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

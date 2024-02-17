@@ -12,7 +12,7 @@ import {
 	CreateCashAccountInput,
 	UpdateCashAccountInput,
 	IntroductionCreateCashAccountsInput,
-	AddFundsToCashAccountInput,
+	CashAccountAddFundsInput,
 } from "./inputs";
 
 @Injectable()
@@ -172,11 +172,11 @@ export class CashAccountsService {
 		};
 	}
 
-	async addFundsToCashAccountInput(
+	async cashAccountAddFundsInput(
 		userUuid: string,
-		addFundsToCashAccountInput: AddFundsToCashAccountInput,
+		cashAccountAddFundsInput: CashAccountAddFundsInput,
 	): Promise<Omit<CashAccount, "operations">> {
-		const { uuid, amount } = addFundsToCashAccountInput;
+		const { uuid, amount } = cashAccountAddFundsInput;
 
 		try {
 			const cashAccount = await this.prisma.cashAccount.update({

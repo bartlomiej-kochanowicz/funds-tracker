@@ -2,7 +2,7 @@ import { InputType, Field, ID } from "@nestjs/graphql";
 import { IsNumber, IsPositive, Max, Min } from "class-validator";
 
 @InputType()
-export class AddFundsToCashAccountInput {
+export class CashAccountAddFundsInput {
 	@Field(() => ID, { description: "Account uuid." })
 	uuid: string;
 

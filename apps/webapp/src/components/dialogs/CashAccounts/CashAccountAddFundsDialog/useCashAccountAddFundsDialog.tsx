@@ -1,6 +1,6 @@
 import {
-	AddFundsToCashAccountMutation,
-	AddFundsToCashAccountMutationVariables,
+	CashAccountAddFundsMutation,
+	CashAccountAddFundsMutationVariables,
 	Currency,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
@@ -14,25 +14,25 @@ import {
 	NumberInput,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ADD_FUNDS_TO_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/AddFundsToCashAccount";
+import { CASH_ACCOUNT_ADD_FUNDS } from "graphql/mutations/cashAccounts/CashAccountAddFunds";
 import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./AddFundsCashAccountForm.schema";
+import { validationSchema } from "./CashAccountAddFundsForm.schema";
 
-type UseAddFundsToCashAccountDialogProps = {
+type UseCashAccountAddFundsDialogProps = {
 	handleRefetch: () => void;
 	uuid: string;
 	currency: Currency;
 };
 
-export const useAddFundsToCashAccountDialog = ({
+export const useCashAccountAddFundsDialog = ({
 	handleRefetch,
 	uuid,
 	currency,
-}: UseAddFundsToCashAccountDialogProps) => {
+}: UseCashAccountAddFundsDialogProps) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const handleOpen = () => {
@@ -63,10 +63,10 @@ export const useAddFundsToCashAccountDialog = ({
 		}
 	}, [open, reset]);
 
-	const [addFundsToCashAcount] = useMutation<
-		AddFundsToCashAccountMutation,
-		AddFundsToCashAccountMutationVariables
-	>(ADD_FUNDS_TO_CASH_ACCOUNT, {
+	const [cashAcountAddFunds] = useMutation<
+		CashAccountAddFundsMutation,
+		CashAccountAddFundsMutationVariables
+	>(CASH_ACCOUNT_ADD_FUNDS, {
 		onCompleted: () => {
 			handleRefetch();
 
@@ -80,7 +80,7 @@ export const useAddFundsToCashAccountDialog = ({
 	});
 
 	const onSubmit = async (data: typeof defaultValues) => {
-		await addFundsToCashAcount({
+		await cashAcountAddFunds({
 			variables: {
 				data: {
 					amount: Number(data.amount),
