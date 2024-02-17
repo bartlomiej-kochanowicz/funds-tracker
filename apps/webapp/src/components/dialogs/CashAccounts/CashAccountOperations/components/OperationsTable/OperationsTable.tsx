@@ -42,7 +42,7 @@ export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) =>
 
 	if (!loading && cashAccountsOperationsExist) {
 		return (
-			<Table wrapperClassName="h-[50vh]">
+			<Table wrapperClassName="max-h-[50vh]">
 				<Table.Caption>{t("modal.CashAccountOperations.table.caption")}</Table.Caption>
 				<Table.Header className="sticky top-0 z-10">
 					<Table.Row>
