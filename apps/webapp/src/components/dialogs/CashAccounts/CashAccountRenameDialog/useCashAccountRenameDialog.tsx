@@ -1,29 +1,29 @@
 import {
-	UpdateCashAccountMutation,
-	UpdateCashAccountMutationVariables,
+	CashAccountUpdateMutation,
+	CashAccountUpdateMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { Button, Dialog, emitErrorToast, emitSuccessToast, Form, Input } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { UPDATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/UpdateCashAccount";
+import { CASH_ACCOUNT_UPDATE } from "graphql/mutations/cashAccounts/CashAccountUpdate";
 import { Loader, Pencil } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./RenameCashAccount.schema";
+import { validationSchema } from "./CashAccountRename.schema";
 
-type UseRenameCashAccountDialogProps = {
+type UseCashAccountRenameDialogProps = {
 	handleRefetch: () => void;
 	name: string;
 	uuid: string;
 };
 
-export const useRenameCashAccountDialog = ({
+export const useCashAccountRenameDialog = ({
 	uuid,
 	name,
 	handleRefetch,
-}: UseRenameCashAccountDialogProps) => {
+}: UseCashAccountRenameDialogProps) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const handleOpen = () => {
@@ -47,16 +47,16 @@ export const useRenameCashAccountDialog = ({
 		control,
 	} = form;
 
-	const [updateCashAccount] = useMutation<
-		UpdateCashAccountMutation,
-		UpdateCashAccountMutationVariables
-	>(UPDATE_CASH_ACCOUNT, {
+	const [cashAccountUpdate] = useMutation<
+		CashAccountUpdateMutation,
+		CashAccountUpdateMutationVariables
+	>(CASH_ACCOUNT_UPDATE, {
 		onCompleted: () => {
 			handleRefetch();
 
 			setOpen(false);
 
-			emitSuccessToast(t("modal.RenameCashAccount.toast.success"));
+			emitSuccessToast(t("modal.CashAccountRename.toast.success"));
 		},
 		onError: () => {
 			emitErrorToast(t("service.unknown_error"));
@@ -64,7 +64,7 @@ export const useRenameCashAccountDialog = ({
 	});
 
 	const onSubmit = async ({ name: newName }: typeof defaultValues) => {
-		await updateCashAccount({ variables: { data: { name: newName }, uuid } });
+		await cashAccountUpdate({ variables: { data: { name: newName }, uuid } });
 	};
 
 	return {
@@ -76,7 +76,7 @@ export const useRenameCashAccountDialog = ({
 			>
 				<Dialog.Content>
 					<Dialog.Header>
-						<Dialog.Title>{t("modal.RenameCashAccount.name")}</Dialog.Title>
+						<Dialog.Title>{t("modal.CashAccountRename.name")}</Dialog.Title>
 					</Dialog.Header>
 
 					<Form {...form}>

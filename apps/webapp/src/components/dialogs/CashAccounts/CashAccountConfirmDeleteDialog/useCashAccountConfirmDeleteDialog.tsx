@@ -1,25 +1,25 @@
 import {
-	DeleteCashAccountMutation,
-	DeleteCashAccountMutationVariables,
+	CashAccountDeleteMutation,
+	CashAccountDeleteMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import { Button, Dialog, emitErrorToast, emitSuccessToast, Loader, Text } from "@funds-tracker/ui";
-import { DELETE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/DeleteCashAccount";
+import { CASH_ACCOUNT_DELETE } from "graphql/mutations/cashAccounts/CashAccountDelete";
 import { Trash } from "lucide-react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-type UseConfirmDeleteCashAccountDialogProps = {
+type UseCashAccountConfirmDeleteDialogProps = {
 	handleRefetch: () => void;
 	name: string;
 	uuid: string;
 };
 
-export const useConfirmDeleteCashAccountDialog = ({
+export const useCashAccountConfirmDeleteDialog = ({
 	handleRefetch,
 	name,
 	uuid,
-}: UseConfirmDeleteCashAccountDialogProps) => {
+}: UseCashAccountConfirmDeleteDialogProps) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const handleOpen = () => {
@@ -28,22 +28,22 @@ export const useConfirmDeleteCashAccountDialog = ({
 
 	const { t } = useTranslation();
 
-	const [deleteCashAccount, { loading }] = useMutation<
-		DeleteCashAccountMutation,
-		DeleteCashAccountMutationVariables
-	>(DELETE_CASH_ACCOUNT, {
+	const [cashAccountdelete, { loading }] = useMutation<
+		CashAccountDeleteMutation,
+		CashAccountDeleteMutationVariables
+	>(CASH_ACCOUNT_DELETE, {
 		onCompleted: () => {
-			emitSuccessToast(t("modal.ConfirmDeleteCashAccount.toast.success"));
+			emitSuccessToast(t("modal.CashAccountConfirmDelete.toast.success"));
 			handleRefetch();
 			setOpen(false);
 		},
 		onError: () => {
-			emitErrorToast(t("modal.ConfirmDeleteCashAccount.toast.failure"));
+			emitErrorToast(t("modal.CashAccountConfirmDelete.toast.failure"));
 		},
 	});
 
 	const handleDelete = async () => {
-		await deleteCashAccount({
+		await cashAccountdelete({
 			variables: {
 				uuid,
 			},
@@ -59,10 +59,10 @@ export const useConfirmDeleteCashAccountDialog = ({
 			>
 				<Dialog.Content>
 					<Dialog.Header>
-						<Dialog.Title>{t("modal.ConfirmDeleteCashAccount.name")}</Dialog.Title>
+						<Dialog.Title>{t("modal.CashAccountConfirmDelete.name")}</Dialog.Title>
 						<Dialog.Description>
 							<Trans
-								i18nKey="modal.ConfirmDeleteCashAccount.description"
+								i18nKey="modal.CashAccountConfirmDelete.description"
 								values={{ name }}
 								components={{
 									bold: (

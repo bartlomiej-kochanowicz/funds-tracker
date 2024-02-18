@@ -2,9 +2,9 @@ import { GetCashAccountsQuery } from "__generated__/graphql";
 import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
 import { useCashAccountAddFundsDialog } from "components/dialogs/CashAccounts/CashAccountAddFundsDialog";
-import { useCashAccountOperationsDialog } from "components/dialogs/CashAccounts/CashAccountOperations";
-import { useConfirmDeleteCashAccountDialog } from "components/dialogs/CashAccounts/ConfirmDeleteCashAccountDialog";
-import { useRenameCashAccountDialog } from "components/dialogs/CashAccounts/RenameCashAccountDialog";
+import { useCashAccountConfirmDeleteDialog } from "components/dialogs/CashAccounts/CashAccountConfirmDeleteDialog";
+import { useCashAccountOperationsDialog } from "components/dialogs/CashAccounts/CashAccountOperationsDialog";
+import { useCashAccountRenameDialog } from "components/dialogs/CashAccounts/CashAccountRenameDialog";
 import { formatCurrency } from "helpers/formatCurrency";
 import { AreaChart, List, MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { Fragment, useMemo } from "react";
@@ -28,11 +28,11 @@ export const CashAccountCard = ({
 	const { open: openCashAccountOperationsDialog, dialog: CashAccountOperationsDialog } =
 		useCashAccountOperationsDialog({ uuid, currency });
 
-	const { open: openConfirmDeleteCashAccountDialog, dialog: ConfirmDeleteCashAccountDialog } =
-		useConfirmDeleteCashAccountDialog({ uuid, name, handleRefetch });
+	const { open: openCashAccountConfirmDeleteDialog, dialog: CashAccountConfirmDeleteDialog } =
+		useCashAccountConfirmDeleteDialog({ uuid, name, handleRefetch });
 
-	const { open: openRenameCashAccountDialog, dialog: RenameCashAccountDialog } =
-		useRenameCashAccountDialog({ uuid, name, handleRefetch });
+	const { open: openCashAccountRenameDialog, dialog: CashAccountRenameDialog } =
+		useCashAccountRenameDialog({ uuid, name, handleRefetch });
 
 	const { open: openCashAccountAddFundsDialog, dialog: CashAccountAddFundsDialog } =
 		useCashAccountAddFundsDialog({
@@ -63,12 +63,12 @@ export const CashAccountCard = ({
 				{
 					icon: Pencil,
 					label: t("common.rename"),
-					onSelect: openRenameCashAccountDialog,
+					onSelect: openCashAccountRenameDialog,
 				},
 				{
 					icon: Trash2,
 					label: t("common.delete"),
-					onSelect: openConfirmDeleteCashAccountDialog,
+					onSelect: openCashAccountConfirmDeleteDialog,
 				},
 			],
 		],
@@ -80,8 +80,8 @@ export const CashAccountCard = ({
 	return (
 		<Fragment>
 			{CashAccountOperationsDialog}
-			{ConfirmDeleteCashAccountDialog}
-			{RenameCashAccountDialog}
+			{CashAccountConfirmDeleteDialog}
+			{CashAccountRenameDialog}
 			{CashAccountAddFundsDialog}
 
 			<Card

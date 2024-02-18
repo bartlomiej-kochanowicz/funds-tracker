@@ -9,9 +9,9 @@ import {
 	IntroductionCashAccounts,
 } from "./entities";
 import {
-	CreateCashAccountInput,
-	UpdateCashAccountInput,
-	IntroductionCreateCashAccountsInput,
+	CashAccountCreateInput,
+	CashAccountUpdateInput,
+	IntroductionCashAccountCreatesInput,
 	CashAccountAddFundsInput,
 } from "./inputs";
 
@@ -21,7 +21,7 @@ export class CashAccountsService {
 
 	async create(
 		userUuid: string,
-		createCashAccountInput: CreateCashAccountInput,
+		cashAccountCreateInput: CashAccountCreateInput,
 	): Promise<Omit<CashAccount, "operations">> {
 		const cashAccounts = await this.prisma.cashAccount.count({
 			where: {
@@ -29,7 +29,7 @@ export class CashAccountsService {
 			},
 		});
 
-		const { name, currency } = createCashAccountInput;
+		const { name, currency } = cashAccountCreateInput;
 
 		if (cashAccounts >= MAX_CASH_ACCOUNTS) {
 			throw new HttpException("Max accounts reached", HttpStatus.FORBIDDEN);
@@ -46,9 +46,9 @@ export class CashAccountsService {
 		return cashAccount;
 	}
 
-	async introductionCreateCashAccounts(
+	async introductionCashAccountCreates(
 		userUuid: string,
-		introductionCreateCashAccountInput: IntroductionCreateCashAccountsInput,
+		introductionCashAccountCreateInput: IntroductionCashAccountCreatesInput,
 	): Promise<IntroductionCashAccounts> {
 		const { introductionStep } = await this.prisma.user.findUnique({
 			where: { uuid: userUuid },
@@ -60,7 +60,7 @@ export class CashAccountsService {
 		}
 
 		await this.prisma.cashAccount.createMany({
-			data: introductionCreateCashAccountInput.cashAccounts.map(cashAccount => ({
+			data: introductionCashAccountCreateInput.cashAccounts.map(cashAccount => ({
 				userUuid,
 				...cashAccount,
 			})),
@@ -128,7 +128,7 @@ export class CashAccountsService {
 	async update(
 		userUuid: string,
 		uuid: string,
-		updateCashAccountInput: UpdateCashAccountInput,
+		cashAccountUpdateInput: CashAccountUpdateInput,
 	): Promise<Omit<CashAccount, "operations">> {
 		try {
 			const cashAccount = await this.prisma.cashAccount.update({
@@ -138,7 +138,7 @@ export class CashAccountsService {
 						uuid,
 					},
 				},
-				data: updateCashAccountInput,
+				data: cashAccountUpdateInput,
 			});
 
 			return cashAccount;

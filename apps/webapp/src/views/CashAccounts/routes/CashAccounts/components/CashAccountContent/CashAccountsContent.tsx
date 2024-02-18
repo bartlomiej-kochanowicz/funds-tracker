@@ -4,7 +4,7 @@ import { GET_CASH_ACCOUNTS } from "graphql/query/cashAccounts/GetCashAccounts";
 import { Fragment, useTransition } from "react";
 
 import { CashAccountCard } from "../CashAccountCard";
-import { CreateCashAccount } from "../CreateCashAccount";
+import { CashAccountCreate } from "../CashAccountCreate";
 
 export const CashAccountsContent = () => {
 	const [isPending, startTransition] = useTransition();
@@ -12,7 +12,7 @@ export const CashAccountsContent = () => {
 
 	const cashAccountsExist = Boolean(data.cashAccounts.length > 0);
 
-	const renderCreateCashAccountButton = Boolean(data.cashAccounts.length < MAX_CASH_ACCOUNTS);
+	const renderCashAccountCreateButton = Boolean(data.cashAccounts.length < MAX_CASH_ACCOUNTS);
 
 	const handleRefetch = () => {
 		startTransition(() => {
@@ -32,8 +32,8 @@ export const CashAccountsContent = () => {
 				/>
 			))}
 
-			{renderCreateCashAccountButton && (
-				<CreateCashAccount
+			{renderCashAccountCreateButton && (
+				<CashAccountCreate
 					isListEmpty={!cashAccountsExist}
 					handleRefetch={handleRefetch}
 				/>

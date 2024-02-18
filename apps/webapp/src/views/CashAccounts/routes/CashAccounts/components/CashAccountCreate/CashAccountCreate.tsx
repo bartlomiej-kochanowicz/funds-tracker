@@ -1,15 +1,15 @@
 import { Button, H2 } from "@funds-tracker/ui";
-import { CreateCashAccountDialog } from "components/dialogs/CashAccounts/CreateCashAccountDialog";
+import { CashAccountCreateDialog } from "components/dialogs/CashAccounts/CashAccountCreateDialog";
 import { Plus } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-interface CreateCashAccountProps {
+interface CashAccountCreateProps {
 	isListEmpty: boolean;
 	handleRefetch: () => void;
 }
 
-export const CreateCashAccount: FC<CreateCashAccountProps> = ({ isListEmpty, handleRefetch }) => {
+export const CashAccountCreate: FC<CashAccountCreateProps> = ({ isListEmpty, handleRefetch }) => {
 	const { t } = useTranslation();
 
 	return (
@@ -18,13 +18,13 @@ export const CreateCashAccount: FC<CreateCashAccountProps> = ({ isListEmpty, han
 				{t(isListEmpty ? "page.cash_accounts.empty.list.title" : "page.cash_accounts.need.more")}
 			</H2>
 
-			<CreateCashAccountDialog handleRefetch={handleRefetch}>
+			<CashAccountCreateDialog handleRefetch={handleRefetch}>
 				<Button>
 					<Plus className="mr-2 size-6" />
 
 					{t("page.cash_accounts.need.more.button")}
 				</Button>
-			</CreateCashAccountDialog>
+			</CashAccountCreateDialog>
 		</div>
 	);
 };

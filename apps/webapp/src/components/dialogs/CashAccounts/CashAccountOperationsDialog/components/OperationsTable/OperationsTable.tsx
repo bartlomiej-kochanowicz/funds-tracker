@@ -35,7 +35,7 @@ export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) =>
 		return (
 			<div className="flex items-center gap-2">
 				<XCircle className="size-4" />
-				<Text className="font-bold">{t("modal.RenameCashAccount.operations.empty")}</Text>
+				<Text className="font-bold">{t("modal.CashAccountRename.operations.empty")}</Text>
 			</div>
 		);
 	}

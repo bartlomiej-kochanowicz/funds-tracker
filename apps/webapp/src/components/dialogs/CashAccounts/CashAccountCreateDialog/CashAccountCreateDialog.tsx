@@ -1,7 +1,7 @@
 import {
-	CreateCashAccountInput,
-	CreateCashAccountMutation,
-	CreateCashAccountMutationVariables,
+	CashAccountCreateInput,
+	CashAccountCreateMutation,
+	CashAccountCreateMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import {
@@ -16,23 +16,23 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { useUserContext } from "contexts/UserContext";
-import { CREATE_CASH_ACCOUNT } from "graphql/mutations/cashAccounts/CreateCashAccount";
+import { CASH_ACCOUNT_CREATE } from "graphql/mutations/cashAccounts/CashAccountCreate";
 import { Plus } from "lucide-react";
 import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./CreateCashAccountForm.schema";
+import { validationSchema } from "./CashAccountCreateForm.schema";
 
-interface CreateCashAccountDialogProps {
+interface CashAccountCreateDialogProps {
 	children: ReactNode;
 	handleRefetch: () => void;
 }
 
-export const CreateCashAccountDialog = ({
+export const CashAccountCreateDialog = ({
 	children,
 	handleRefetch,
-}: CreateCashAccountDialogProps) => {
+}: CashAccountCreateDialogProps) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const { t } = useTranslation();
@@ -42,11 +42,11 @@ export const CreateCashAccountDialog = ({
 	const defaultValues = {
 		name: "",
 		currency: user.defaultCurrency,
-	} satisfies CreateCashAccountInput;
+	} satisfies CashAccountCreateInput;
 
-	const form = useForm<CreateCashAccountInput>({
+	const form = useForm<CashAccountCreateInput>({
 		defaultValues,
-		resolver: yupResolver<CreateCashAccountInput>(validationSchema),
+		resolver: yupResolver<CashAccountCreateInput>(validationSchema),
 	});
 
 	const {
@@ -62,22 +62,22 @@ export const CreateCashAccountDialog = ({
 		}
 	}, [open, reset]);
 
-	const [createCashAccount] = useMutation<
-		CreateCashAccountMutation,
-		CreateCashAccountMutationVariables
-	>(CREATE_CASH_ACCOUNT, {
+	const [cashAccountCreate] = useMutation<
+		CashAccountCreateMutation,
+		CashAccountCreateMutationVariables
+	>(CASH_ACCOUNT_CREATE, {
 		onCompleted: () => {
 			handleRefetch();
 			setOpen(false);
-			emitSuccessToast(t("modal.CreateCashAccount.toast.success"));
+			emitSuccessToast(t("modal.CashAccountCreate.toast.success"));
 		},
 		onError: () => {
 			emitErrorToast(t("service.unknown_error"));
 		},
 	});
 
-	const onSubmit = async (data: CreateCashAccountInput) => {
-		await createCashAccount({
+	const onSubmit = async (data: CashAccountCreateInput) => {
+		await cashAccountCreate({
 			variables: {
 				data,
 			},
@@ -92,8 +92,8 @@ export const CreateCashAccountDialog = ({
 			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Header>
-					<Dialog.Title>{t("modal.CreateCashAccount.name")}</Dialog.Title>
-					<Dialog.Description>{t("modal.CreateCashAccount.description")}</Dialog.Description>
+					<Dialog.Title>{t("modal.CashAccountCreate.name")}</Dialog.Title>
+					<Dialog.Description>{t("modal.CashAccountCreate.description")}</Dialog.Description>
 				</Dialog.Header>
 				<Form {...form}>
 					<form onSubmit={handleSubmit(onSubmit)}>
