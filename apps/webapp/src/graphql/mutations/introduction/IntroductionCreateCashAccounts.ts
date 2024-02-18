@@ -1,8 +1,8 @@
 import { gql } from "__generated__";
 
 export const INTRODUCTION_CREATE_CASH_ACCOUNTS = gql(/* GraphQL */ `
-	mutation IntroductionCreateCashAccounts($data: IntroductionCreateCashAccountsInput!) {
-		introductionCreateCashAccounts(data: $data) {
+	mutation IntroductionCashAccountCreates($data: IntroductionCashAccountCreatesInput!) {
+		introductionCashAccountCreates(data: $data) {
 			success
 		}
 	}

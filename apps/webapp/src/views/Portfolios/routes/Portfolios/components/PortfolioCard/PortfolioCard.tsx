@@ -1,8 +1,8 @@
 import { GetPortfoliosQuery } from "__generated__/graphql";
 import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
-import { useConfirmDeletePortfolioDialog } from "components/dialogs/Portfolios/ConfirmDeletePortfolioDialog";
-import { useRenamePortfolioDialog } from "components/dialogs/Portfolios/RenamePortfolioDialog";
+import { usePortfolioConfirmDeleteDialog } from "components/dialogs/Portfolios/PortfolioConfirmDeleteDialog";
+import { usePortfolioRenameDialog } from "components/dialogs/Portfolios/PortfolioRenameDialog";
 import { MoreVertical, Pencil, PieChart, Trash2 } from "lucide-react";
 import { Fragment, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,11 +15,11 @@ type PortfolioCardProps = {
 export const PortfolioCard = ({ name, isPending, uuid, handleRefetch }: PortfolioCardProps) => {
 	const { t } = useTranslation();
 
-	const { open: openConfirmDeletePortfolioDialog, dialog: ConfirmDeletePortfolioDialog } =
-		useConfirmDeletePortfolioDialog({ uuid, name, handleRefetch });
+	const { open: openPortfolioConfirmDeleteDialog, dialog: PortfolioConfirmDeleteDialog } =
+		usePortfolioConfirmDeleteDialog({ uuid, name, handleRefetch });
 
-	const { open: openRenamePortfolioDialog, dialog: RenamePortfolioDialog } =
-		useRenamePortfolioDialog({ uuid, name, handleRefetch });
+	const { open: openPortfolioRenameDialog, dialog: PortfolioRenameDialog } =
+		usePortfolioRenameDialog({ uuid, name, handleRefetch });
 
 	const items = useMemo(
 		() => [
@@ -33,12 +33,12 @@ export const PortfolioCard = ({ name, isPending, uuid, handleRefetch }: Portfoli
 				{
 					icon: Pencil,
 					label: t("common.rename"),
-					onSelect: openRenamePortfolioDialog,
+					onSelect: openPortfolioRenameDialog,
 				},
 				{
 					icon: Trash2,
 					label: t("common.delete"),
-					onSelect: openConfirmDeletePortfolioDialog,
+					onSelect: openPortfolioConfirmDeleteDialog,
 				},
 			],
 		],
@@ -49,8 +49,8 @@ export const PortfolioCard = ({ name, isPending, uuid, handleRefetch }: Portfoli
 
 	return (
 		<Fragment>
-			{ConfirmDeletePortfolioDialog}
-			{RenamePortfolioDialog}
+			{PortfolioConfirmDeleteDialog}
+			{PortfolioRenameDialog}
 
 			<Card
 				className={clsx(

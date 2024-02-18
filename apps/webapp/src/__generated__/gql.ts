@@ -22,15 +22,15 @@ const documents = {
     "\n\tmutation Signin($data: SigninInput!) {\n\t\tsigninLocal(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SigninDocument,
     "\n\tmutation Signup($data: SignupInput!) {\n\t\tsignupLocal(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SignupDocument,
     "\n\tmutation CashAccountAddFunds($data: CashAccountAddFundsInput!) {\n\t\tcashAccountAddFunds(data: $data) {\n\t\t\tbalance\n\t\t}\n\t}\n": types.CashAccountAddFundsDocument,
-    "\n\tmutation CreateCashAccount($data: CreateCashAccountInput!) {\n\t\tcreateCashAccount(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n": types.CreateCashAccountDocument,
-    "\n\tmutation DeleteCashAccount($uuid: ID!) {\n\t\tdeleteCashAccount(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.DeleteCashAccountDocument,
-    "\n\tmutation UpdateCashAccount($uuid: ID!, $data: UpdateCashAccountInput!) {\n\t\tupdateCashAccount(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.UpdateCashAccountDocument,
+    "\n\tmutation CashAccountCreate($data: CashAccountCreateInput!) {\n\t\tcashAccountCreate(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n": types.CashAccountCreateDocument,
+    "\n\tmutation CashAccountDelete($uuid: ID!) {\n\t\tcashAccountDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.CashAccountDeleteDocument,
+    "\n\tmutation CashAccountUpdate($uuid: ID!, $data: CashAccountUpdateInput!) {\n\t\tcashAccountUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.CashAccountUpdateDocument,
     "\n\tmutation UpdateUser($data: UpdateUserInput!) {\n\t\tupdateUser(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\temail\n\t\t\tcreatedAt\n\t\t\tintroductionStep\n\t\t\tdefaultCurrency\n\t\t}\n\t}\n": types.UpdateUserDocument,
-    "\n\tmutation IntroductionCreateCashAccounts($data: IntroductionCreateCashAccountsInput!) {\n\t\tintroductionCreateCashAccounts(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.IntroductionCreateCashAccountsDocument,
-    "\n\tmutation IntroductionCreatePortfolios($data: IntroductionCreatePortfoliosInput!) {\n\t\tintroductionCreatePortfolios(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.IntroductionCreatePortfoliosDocument,
-    "\n\tmutation CreatePortfolio($data: CreatePortfolioInput!) {\n\t\tcreatePortfolio(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.CreatePortfolioDocument,
-    "\n\tmutation DeletePortfolio($uuid: String!) {\n\t\tdeletePortfolio(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.DeletePortfolioDocument,
-    "\n\tmutation UpdatePortfolio($uuid: String!, $data: UpdatePortfolioInput!) {\n\t\tupdatePortfolio(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.UpdatePortfolioDocument,
+    "\n\tmutation IntroductionCashAccountCreates($data: IntroductionCashAccountCreatesInput!) {\n\t\tintroductionCashAccountCreates(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.IntroductionCashAccountCreatesDocument,
+    "\n\tmutation IntroductionPortfolioCreates($data: IntroductionPortfolioCreatesInput!) {\n\t\tintroductionPortfolioCreates(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.IntroductionPortfolioCreatesDocument,
+    "\n\tmutation PortfolioCreate($data: PortfolioCreateInput!) {\n\t\tportfolioCreate(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.PortfolioCreateDocument,
+    "\n\tmutation PortfolioDelete($uuid: String!) {\n\t\tportfolioDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.PortfolioDeleteDocument,
+    "\n\tmutation PortfolioUpdate($uuid: String!, $data: PortfolioUpdateInput!) {\n\t\tportfolioUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.PortfolioUpdateDocument,
     "\n\tquery GetCashAccountOperations($uuid: ID!) {\n\t\tcashAccount(uuid: $uuid) {\n\t\t\toperations {\n\t\t\t\tuuid\n\t\t\t\ttype\n\t\t\t\tamount\n\t\t\t\tdate\n\t\t\t}\n\t\t}\n\t}\n": types.GetCashAccountOperationsDocument,
     "\n\tquery GetCashAccounts {\n\t\tcashAccounts {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n": types.GetCashAccountsDocument,
     "\n\tquery EmailExist($data: EmailInput!) {\n\t\temailExist(data: $data) {\n\t\t\texist\n\t\t}\n\t}\n": types.EmailExistDocument,
@@ -93,15 +93,15 @@ export function gql(source: "\n\tmutation CashAccountAddFunds($data: CashAccount
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation CreateCashAccount($data: CreateCashAccountInput!) {\n\t\tcreateCashAccount(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CreateCashAccount($data: CreateCashAccountInput!) {\n\t\tcreateCashAccount(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation CashAccountCreate($data: CashAccountCreateInput!) {\n\t\tcashAccountCreate(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CashAccountCreate($data: CashAccountCreateInput!) {\n\t\tcashAccountCreate(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation DeleteCashAccount($uuid: ID!) {\n\t\tdeleteCashAccount(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation DeleteCashAccount($uuid: ID!) {\n\t\tdeleteCashAccount(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation CashAccountDelete($uuid: ID!) {\n\t\tcashAccountDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CashAccountDelete($uuid: ID!) {\n\t\tcashAccountDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation UpdateCashAccount($uuid: ID!, $data: UpdateCashAccountInput!) {\n\t\tupdateCashAccount(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateCashAccount($uuid: ID!, $data: UpdateCashAccountInput!) {\n\t\tupdateCashAccount(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation CashAccountUpdate($uuid: ID!, $data: CashAccountUpdateInput!) {\n\t\tcashAccountUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CashAccountUpdate($uuid: ID!, $data: CashAccountUpdateInput!) {\n\t\tcashAccountUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -109,23 +109,23 @@ export function gql(source: "\n\tmutation UpdateUser($data: UpdateUserInput!) {\
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation IntroductionCreateCashAccounts($data: IntroductionCreateCashAccountsInput!) {\n\t\tintroductionCreateCashAccounts(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation IntroductionCreateCashAccounts($data: IntroductionCreateCashAccountsInput!) {\n\t\tintroductionCreateCashAccounts(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation IntroductionCashAccountCreates($data: IntroductionCashAccountCreatesInput!) {\n\t\tintroductionCashAccountCreates(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation IntroductionCashAccountCreates($data: IntroductionCashAccountCreatesInput!) {\n\t\tintroductionCashAccountCreates(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation IntroductionCreatePortfolios($data: IntroductionCreatePortfoliosInput!) {\n\t\tintroductionCreatePortfolios(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation IntroductionCreatePortfolios($data: IntroductionCreatePortfoliosInput!) {\n\t\tintroductionCreatePortfolios(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation IntroductionPortfolioCreates($data: IntroductionPortfolioCreatesInput!) {\n\t\tintroductionPortfolioCreates(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation IntroductionPortfolioCreates($data: IntroductionPortfolioCreatesInput!) {\n\t\tintroductionPortfolioCreates(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation CreatePortfolio($data: CreatePortfolioInput!) {\n\t\tcreatePortfolio(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CreatePortfolio($data: CreatePortfolioInput!) {\n\t\tcreatePortfolio(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation PortfolioCreate($data: PortfolioCreateInput!) {\n\t\tportfolioCreate(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation PortfolioCreate($data: PortfolioCreateInput!) {\n\t\tportfolioCreate(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation DeletePortfolio($uuid: String!) {\n\t\tdeletePortfolio(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation DeletePortfolio($uuid: String!) {\n\t\tdeletePortfolio(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation PortfolioDelete($uuid: String!) {\n\t\tportfolioDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation PortfolioDelete($uuid: String!) {\n\t\tportfolioDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tmutation UpdatePortfolio($uuid: String!, $data: UpdatePortfolioInput!) {\n\t\tupdatePortfolio(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdatePortfolio($uuid: String!, $data: UpdatePortfolioInput!) {\n\t\tupdatePortfolio(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tmutation PortfolioUpdate($uuid: String!, $data: PortfolioUpdateInput!) {\n\t\tportfolioUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation PortfolioUpdate($uuid: String!, $data: PortfolioUpdateInput!) {\n\t\tportfolioUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

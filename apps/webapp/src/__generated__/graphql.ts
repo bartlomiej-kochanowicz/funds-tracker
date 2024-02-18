@@ -47,6 +47,13 @@ export type CashAccountAddFundsInput = {
   uuid: Scalars['ID']['input'];
 };
 
+export type CashAccountCreateInput = {
+  /** Cash account currency. */
+  currency: Currency;
+  /** Cash account name. */
+  name: Scalars['String']['input'];
+};
+
 export type CashAccountDelete = {
   __typename?: 'CashAccountDelete';
   /** Confirmatiopn delete cash account. */
@@ -77,6 +84,11 @@ export enum CashAccountOperationType {
   Withdrawal = 'withdrawal'
 }
 
+export type CashAccountUpdateInput = {
+  /** Cash account name. */
+  name: Scalars['String']['input'];
+};
+
 export type ConfirmSignup = {
   __typename?: 'ConfirmSignup';
   /** Confirmatiopn signup successful. */
@@ -90,18 +102,6 @@ export type ConfirmSignupInput = {
   email: Scalars['EmailAddress']['input'];
   /** Token. */
   token: Scalars['String']['input'];
-};
-
-export type CreateCashAccountInput = {
-  /** Cash account currency. */
-  currency: Currency;
-  /** Cash account name. */
-  name: Scalars['String']['input'];
-};
-
-export type CreatePortfolioInput = {
-  /** Portfolio name. */
-  name: Scalars['String']['input'];
 };
 
 export enum Currency {
@@ -210,20 +210,20 @@ export enum InstrumentType {
   Stocks = 'stocks'
 }
 
+export type IntroductionCashAccountCreatesInput = {
+  /** Cash accounts array. */
+  cashAccounts: Array<CashAccountCreateInput>;
+};
+
 export type IntroductionCashAccounts = {
   __typename?: 'IntroductionCashAccounts';
   /** Cash accounts created successfully. */
   success: Scalars['Boolean']['output'];
 };
 
-export type IntroductionCreateCashAccountsInput = {
-  /** Cash accounts array. */
-  cashAccounts: Array<CreateCashAccountInput>;
-};
-
-export type IntroductionCreatePortfoliosInput = {
+export type IntroductionPortfolioCreatesInput = {
   /** Portfolios array. */
-  portfolios: Array<CreatePortfolioInput>;
+  portfolios: Array<PortfolioCreateInput>;
 };
 
 export type IntroductionPortfolios = {
@@ -264,23 +264,23 @@ export type Logout = {
 export type Mutation = {
   __typename?: 'Mutation';
   cashAccountAddFunds: CashAccount;
+  cashAccountCreate: CashAccount;
+  cashAccountDelete: CashAccountDelete;
+  cashAccountUpdate: CashAccount;
   confirmSignup: ConfirmSignup;
-  createCashAccount: CashAccount;
-  createPortfolio: Portfolio;
-  deleteCashAccount: CashAccountDelete;
-  deletePortfolio: PortfolioDelete;
-  introductionCreateCashAccounts: IntroductionCashAccounts;
-  introductionCreatePortfolios: IntroductionPortfolios;
+  introductionCashAccountCreates: IntroductionCashAccounts;
+  introductionPortfolioCreates: IntroductionPortfolios;
   investInNewInstrument: InvestInNewInstrument;
   logout: Logout;
+  portfolioCreate: Portfolio;
+  portfolioDelete: PortfolioDelete;
+  portfolioUpdate: Portfolio;
   refreshToken: Refresh;
   resetPassword: ResetPassword;
   sendCode: SendCode;
   setNewPassword: SetNewPassword;
   signinLocal: SigninLocal;
   signupLocal: SignupLocal;
-  updateCashAccount: CashAccount;
-  updatePortfolio: Portfolio;
   updateUser: User;
 };
 
@@ -290,43 +290,55 @@ export type MutationCashAccountAddFundsArgs = {
 };
 
 
+export type MutationCashAccountCreateArgs = {
+  data: CashAccountCreateInput;
+};
+
+
+export type MutationCashAccountDeleteArgs = {
+  uuid: Scalars['ID']['input'];
+};
+
+
+export type MutationCashAccountUpdateArgs = {
+  data: CashAccountUpdateInput;
+  uuid: Scalars['ID']['input'];
+};
+
+
 export type MutationConfirmSignupArgs = {
   data: ConfirmSignupInput;
 };
 
 
-export type MutationCreateCashAccountArgs = {
-  data: CreateCashAccountInput;
+export type MutationIntroductionCashAccountCreatesArgs = {
+  data: IntroductionCashAccountCreatesInput;
 };
 
 
-export type MutationCreatePortfolioArgs = {
-  data: CreatePortfolioInput;
-};
-
-
-export type MutationDeleteCashAccountArgs = {
-  uuid: Scalars['ID']['input'];
-};
-
-
-export type MutationDeletePortfolioArgs = {
-  uuid: Scalars['String']['input'];
-};
-
-
-export type MutationIntroductionCreateCashAccountsArgs = {
-  data: IntroductionCreateCashAccountsInput;
-};
-
-
-export type MutationIntroductionCreatePortfoliosArgs = {
-  data: IntroductionCreatePortfoliosInput;
+export type MutationIntroductionPortfolioCreatesArgs = {
+  data: IntroductionPortfolioCreatesInput;
 };
 
 
 export type MutationInvestInNewInstrumentArgs = {
   data: InvestInNewInstrumentInput;
+};
+
+
+export type MutationPortfolioCreateArgs = {
+  data: PortfolioCreateInput;
+};
+
+
+export type MutationPortfolioDeleteArgs = {
+  uuid: Scalars['String']['input'];
+};
+
+
+export type MutationPortfolioUpdateArgs = {
+  data: PortfolioUpdateInput;
+  uuid: Scalars['String']['input'];
 };
 
 
@@ -355,18 +367,6 @@ export type MutationSignupLocalArgs = {
 };
 
 
-export type MutationUpdateCashAccountArgs = {
-  data: UpdateCashAccountInput;
-  uuid: Scalars['ID']['input'];
-};
-
-
-export type MutationUpdatePortfolioArgs = {
-  data: UpdatePortfolioInput;
-  uuid: Scalars['String']['input'];
-};
-
-
 export type MutationUpdateUserArgs = {
   data: UpdateUserInput;
 };
@@ -379,10 +379,20 @@ export type Portfolio = {
   uuid: Scalars['ID']['output'];
 };
 
+export type PortfolioCreateInput = {
+  /** Portfolio name. */
+  name: Scalars['String']['input'];
+};
+
 export type PortfolioDelete = {
   __typename?: 'PortfolioDelete';
   /** Confirmatiopn delete portfolio. */
   success: Scalars['Boolean']['output'];
+};
+
+export type PortfolioUpdateInput = {
+  /** Portfolio name. */
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
@@ -530,16 +540,6 @@ export type SignupLocal = {
   success: Scalars['Boolean']['output'];
 };
 
-export type UpdateCashAccountInput = {
-  /** Cash account name. */
-  name: Scalars['String']['input'];
-};
-
-export type UpdatePortfolioInput = {
-  /** Portfolio name. */
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type UpdateUserInput = {
   /** New user default currency. */
   defaultCurrency?: InputMaybe<Currency>;
@@ -624,27 +624,27 @@ export type CashAccountAddFundsMutationVariables = Exact<{
 
 export type CashAccountAddFundsMutation = { __typename?: 'Mutation', cashAccountAddFunds: { __typename?: 'CashAccount', balance: number } };
 
-export type CreateCashAccountMutationVariables = Exact<{
-  data: CreateCashAccountInput;
+export type CashAccountCreateMutationVariables = Exact<{
+  data: CashAccountCreateInput;
 }>;
 
 
-export type CreateCashAccountMutation = { __typename?: 'Mutation', createCashAccount: { __typename?: 'CashAccount', uuid: string, name: string, currency: Currency, balance: number } };
+export type CashAccountCreateMutation = { __typename?: 'Mutation', cashAccountCreate: { __typename?: 'CashAccount', uuid: string, name: string, currency: Currency, balance: number } };
 
-export type DeleteCashAccountMutationVariables = Exact<{
+export type CashAccountDeleteMutationVariables = Exact<{
   uuid: Scalars['ID']['input'];
 }>;
 
 
-export type DeleteCashAccountMutation = { __typename?: 'Mutation', deleteCashAccount: { __typename?: 'CashAccountDelete', success: boolean } };
+export type CashAccountDeleteMutation = { __typename?: 'Mutation', cashAccountDelete: { __typename?: 'CashAccountDelete', success: boolean } };
 
-export type UpdateCashAccountMutationVariables = Exact<{
+export type CashAccountUpdateMutationVariables = Exact<{
   uuid: Scalars['ID']['input'];
-  data: UpdateCashAccountInput;
+  data: CashAccountUpdateInput;
 }>;
 
 
-export type UpdateCashAccountMutation = { __typename?: 'Mutation', updateCashAccount: { __typename?: 'CashAccount', uuid: string, name: string } };
+export type CashAccountUpdateMutation = { __typename?: 'Mutation', cashAccountUpdate: { __typename?: 'CashAccount', uuid: string, name: string } };
 
 export type UpdateUserMutationVariables = Exact<{
   data: UpdateUserInput;
@@ -653,41 +653,41 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', uuid: string, name: string, email: any, createdAt: any, introductionStep: IntroductionStep, defaultCurrency: Currency } };
 
-export type IntroductionCreateCashAccountsMutationVariables = Exact<{
-  data: IntroductionCreateCashAccountsInput;
+export type IntroductionCashAccountCreatesMutationVariables = Exact<{
+  data: IntroductionCashAccountCreatesInput;
 }>;
 
 
-export type IntroductionCreateCashAccountsMutation = { __typename?: 'Mutation', introductionCreateCashAccounts: { __typename?: 'IntroductionCashAccounts', success: boolean } };
+export type IntroductionCashAccountCreatesMutation = { __typename?: 'Mutation', introductionCashAccountCreates: { __typename?: 'IntroductionCashAccounts', success: boolean } };
 
-export type IntroductionCreatePortfoliosMutationVariables = Exact<{
-  data: IntroductionCreatePortfoliosInput;
+export type IntroductionPortfolioCreatesMutationVariables = Exact<{
+  data: IntroductionPortfolioCreatesInput;
 }>;
 
 
-export type IntroductionCreatePortfoliosMutation = { __typename?: 'Mutation', introductionCreatePortfolios: { __typename?: 'IntroductionPortfolios', success: boolean } };
+export type IntroductionPortfolioCreatesMutation = { __typename?: 'Mutation', introductionPortfolioCreates: { __typename?: 'IntroductionPortfolios', success: boolean } };
 
-export type CreatePortfolioMutationVariables = Exact<{
-  data: CreatePortfolioInput;
+export type PortfolioCreateMutationVariables = Exact<{
+  data: PortfolioCreateInput;
 }>;
 
 
-export type CreatePortfolioMutation = { __typename?: 'Mutation', createPortfolio: { __typename?: 'Portfolio', uuid: string, name: string } };
+export type PortfolioCreateMutation = { __typename?: 'Mutation', portfolioCreate: { __typename?: 'Portfolio', uuid: string, name: string } };
 
-export type DeletePortfolioMutationVariables = Exact<{
+export type PortfolioDeleteMutationVariables = Exact<{
   uuid: Scalars['String']['input'];
 }>;
 
 
-export type DeletePortfolioMutation = { __typename?: 'Mutation', deletePortfolio: { __typename?: 'PortfolioDelete', success: boolean } };
+export type PortfolioDeleteMutation = { __typename?: 'Mutation', portfolioDelete: { __typename?: 'PortfolioDelete', success: boolean } };
 
-export type UpdatePortfolioMutationVariables = Exact<{
+export type PortfolioUpdateMutationVariables = Exact<{
   uuid: Scalars['String']['input'];
-  data: UpdatePortfolioInput;
+  data: PortfolioUpdateInput;
 }>;
 
 
-export type UpdatePortfolioMutation = { __typename?: 'Mutation', updatePortfolio: { __typename?: 'Portfolio', uuid: string, name: string } };
+export type PortfolioUpdateMutation = { __typename?: 'Mutation', portfolioUpdate: { __typename?: 'Portfolio', uuid: string, name: string } };
 
 export type GetCashAccountOperationsQueryVariables = Exact<{
   uuid: Scalars['ID']['input'];
@@ -742,15 +742,15 @@ export const SetNewPasswordDocument = {"kind":"Document","definitions":[{"kind":
 export const SigninDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signin"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SigninInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signinLocal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<SigninMutation, SigninMutationVariables>;
 export const SignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignupInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signupLocal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
 export const CashAccountAddFundsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CashAccountAddFunds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CashAccountAddFundsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccountAddFunds"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"balance"}}]}}]}}]} as unknown as DocumentNode<CashAccountAddFundsMutation, CashAccountAddFundsMutationVariables>;
-export const CreateCashAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateCashAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateCashAccountInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createCashAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"balance"}}]}}]}}]} as unknown as DocumentNode<CreateCashAccountMutation, CreateCashAccountMutationVariables>;
-export const DeleteCashAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteCashAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteCashAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<DeleteCashAccountMutation, DeleteCashAccountMutationVariables>;
-export const UpdateCashAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateCashAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateCashAccountInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateCashAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UpdateCashAccountMutation, UpdateCashAccountMutationVariables>;
+export const CashAccountCreateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CashAccountCreate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CashAccountCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccountCreate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"balance"}}]}}]}}]} as unknown as DocumentNode<CashAccountCreateMutation, CashAccountCreateMutationVariables>;
+export const CashAccountDeleteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CashAccountDelete"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccountDelete"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<CashAccountDeleteMutation, CashAccountDeleteMutationVariables>;
+export const CashAccountUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CashAccountUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CashAccountUpdateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccountUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<CashAccountUpdateMutation, CashAccountUpdateMutationVariables>;
 export const UpdateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"introductionStep"}},{"kind":"Field","name":{"kind":"Name","value":"defaultCurrency"}}]}}]}}]} as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
-export const IntroductionCreateCashAccountsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"IntroductionCreateCashAccounts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IntroductionCreateCashAccountsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"introductionCreateCashAccounts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<IntroductionCreateCashAccountsMutation, IntroductionCreateCashAccountsMutationVariables>;
-export const IntroductionCreatePortfoliosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"IntroductionCreatePortfolios"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IntroductionCreatePortfoliosInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"introductionCreatePortfolios"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<IntroductionCreatePortfoliosMutation, IntroductionCreatePortfoliosMutationVariables>;
-export const CreatePortfolioDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePortfolio"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreatePortfolioInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPortfolio"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<CreatePortfolioMutation, CreatePortfolioMutationVariables>;
-export const DeletePortfolioDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeletePortfolio"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deletePortfolio"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<DeletePortfolioMutation, DeletePortfolioMutationVariables>;
-export const UpdatePortfolioDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdatePortfolio"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdatePortfolioInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updatePortfolio"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UpdatePortfolioMutation, UpdatePortfolioMutationVariables>;
+export const IntroductionCashAccountCreatesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"IntroductionCashAccountCreates"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IntroductionCashAccountCreatesInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"introductionCashAccountCreates"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<IntroductionCashAccountCreatesMutation, IntroductionCashAccountCreatesMutationVariables>;
+export const IntroductionPortfolioCreatesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"IntroductionPortfolioCreates"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"IntroductionPortfolioCreatesInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"introductionPortfolioCreates"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<IntroductionPortfolioCreatesMutation, IntroductionPortfolioCreatesMutationVariables>;
+export const PortfolioCreateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"PortfolioCreate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PortfolioCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"portfolioCreate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<PortfolioCreateMutation, PortfolioCreateMutationVariables>;
+export const PortfolioDeleteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"PortfolioDelete"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"portfolioDelete"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<PortfolioDeleteMutation, PortfolioDeleteMutationVariables>;
+export const PortfolioUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"PortfolioUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PortfolioUpdateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"portfolioUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<PortfolioUpdateMutation, PortfolioUpdateMutationVariables>;
 export const GetCashAccountOperationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCashAccountOperations"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"operations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]}}]} as unknown as DocumentNode<GetCashAccountOperationsQuery, GetCashAccountOperationsQueryVariables>;
 export const GetCashAccountsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCashAccounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cashAccounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"currency"}},{"kind":"Field","name":{"kind":"Name","value":"balance"}}]}}]}}]} as unknown as DocumentNode<GetCashAccountsQuery, GetCashAccountsQueryVariables>;
 export const EmailExistDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmailExist"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emailExist"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"exist"}}]}}]}}]} as unknown as DocumentNode<EmailExistQuery, EmailExistQueryVariables>;

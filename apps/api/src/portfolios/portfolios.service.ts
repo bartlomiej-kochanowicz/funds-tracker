@@ -4,23 +4,23 @@ import { MAX_PORTFOLIOS } from "@common/constants/common";
 import { PrismaService } from "@app/prisma/prisma.service";
 import { IntroductionPortfolios, Portfolio, PortfolioDelete } from "./entities";
 import {
-	CreatePortfolioInput,
-	IntroductionCreatePortfoliosInput,
-	UpdatePortfolioInput,
+	PortfolioCreateInput,
+	IntroductionPortfolioCreatesInput,
+	PortfolioUpdateInput,
 } from "./inputs";
 
 @Injectable()
 export class PortfoliosService {
 	constructor(private prisma: PrismaService) {}
 
-	async create(userUuid: string, createPortfolioInput: CreatePortfolioInput): Promise<Portfolio> {
+	async create(userUuid: string, portfolioCreateInput: PortfolioCreateInput): Promise<Portfolio> {
 		const portfolios = await this.prisma.portfolio.count({
 			where: {
 				userUuid,
 			},
 		});
 
-		const { name } = createPortfolioInput;
+		const { name } = portfolioCreateInput;
 
 		if (portfolios > MAX_PORTFOLIOS) {
 			throw new HttpException("Max portfolios reached", HttpStatus.FORBIDDEN);
@@ -36,9 +36,9 @@ export class PortfoliosService {
 		return portfolio;
 	}
 
-	async introductionCreatePortfolios(
+	async introductionPortfolioCreates(
 		userUuid: string,
-		introductionCreatePortfoliosInput: IntroductionCreatePortfoliosInput,
+		introductionPortfolioCreatesInput: IntroductionPortfolioCreatesInput,
 	): Promise<IntroductionPortfolios> {
 		const { introductionStep } = await this.prisma.user.findUnique({
 			where: { uuid: userUuid },
@@ -50,7 +50,7 @@ export class PortfoliosService {
 		}
 
 		await this.prisma.portfolio.createMany({
-			data: introductionCreatePortfoliosInput.portfolios.map(portfolio => ({
+			data: introductionPortfolioCreatesInput.portfolios.map(portfolio => ({
 				userUuid,
 				...portfolio,
 			})),
@@ -106,7 +106,7 @@ export class PortfoliosService {
 	async update(
 		userUuid: string,
 		uuid: string,
-		updatePortfolioInput: UpdatePortfolioInput,
+		portfolioUpdateInput: PortfolioUpdateInput,
 	): Promise<Portfolio> {
 		try {
 			const portfolio = await this.prisma.portfolio.update({
@@ -116,7 +116,7 @@ export class PortfoliosService {
 						uuid,
 					},
 				},
-				data: updatePortfolioInput,
+				data: portfolioUpdateInput,
 			});
 
 			return portfolio;

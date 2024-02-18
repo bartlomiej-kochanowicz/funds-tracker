@@ -3,8 +3,8 @@ import { MAX_PORTFOLIOS } from "constants/common";
 import { GET_PORTFOLIOS } from "graphql/query/portfolios/GetPortfolios";
 import { Fragment, useTransition } from "react";
 
-import { CreatePortfolio } from "../CreatePortfolio";
 import { PortfolioCard } from "../PortfolioCard";
+import { PortfolioCreate } from "../PortfolioCreate";
 
 export const PortfoliosContent = () => {
 	const [isPending, startTransition] = useTransition();
@@ -12,7 +12,7 @@ export const PortfoliosContent = () => {
 
 	const portfoliosExist = Boolean(data.portfolios.length > 0);
 
-	const renderCreatePortfolioButton = Boolean(data.portfolios.length < MAX_PORTFOLIOS);
+	const renderPortfolioCreateButton = Boolean(data.portfolios.length < MAX_PORTFOLIOS);
 
 	const handleRefetch = () => {
 		startTransition(() => {
@@ -32,8 +32,8 @@ export const PortfoliosContent = () => {
 				/>
 			))}
 
-			{renderCreatePortfolioButton && (
-				<CreatePortfolio
+			{renderPortfolioCreateButton && (
+				<PortfolioCreate
 					isListEmpty={!portfoliosExist}
 					handleRefetch={handleRefetch}
 				/>

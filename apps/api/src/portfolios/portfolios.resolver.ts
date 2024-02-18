@@ -2,9 +2,9 @@ import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { GetCurrentUserId } from "@common/decorators";
 import { IntroductionPortfolios, Portfolio, PortfolioDelete } from "./entities";
 import {
-	CreatePortfolioInput,
-	UpdatePortfolioInput,
-	IntroductionCreatePortfoliosInput,
+	PortfolioCreateInput,
+	PortfolioUpdateInput,
+	IntroductionPortfolioCreatesInput,
 } from "./inputs";
 import { PortfoliosService } from "./portfolios.service";
 
@@ -13,23 +13,23 @@ export class PortfoliosResolver {
 	constructor(private readonly portfoliosService: PortfoliosService) {}
 
 	@Mutation(() => Portfolio)
-	createPortfolio(
+	portfolioCreate(
 		@GetCurrentUserId() userId: string,
 		@Args("data")
-		createPortfolioInput: CreatePortfolioInput,
+		portfolioCreateInput: PortfolioCreateInput,
 	) {
-		return this.portfoliosService.create(userId, createPortfolioInput);
+		return this.portfoliosService.create(userId, portfolioCreateInput);
 	}
 
 	@Mutation(() => IntroductionPortfolios)
-	introductionCreatePortfolios(
+	introductionPortfolioCreates(
 		@GetCurrentUserId() userId: string,
 		@Args("data")
-		introductionCreatePortfoliosInput: IntroductionCreatePortfoliosInput,
+		introductionPortfolioCreatesInput: IntroductionPortfolioCreatesInput,
 	) {
-		return this.portfoliosService.introductionCreatePortfolios(
+		return this.portfoliosService.introductionPortfolioCreates(
 			userId,
-			introductionCreatePortfoliosInput,
+			introductionPortfolioCreatesInput,
 		);
 	}
 
@@ -47,17 +47,17 @@ export class PortfoliosResolver {
 	}
 
 	@Mutation(() => Portfolio)
-	updatePortfolio(
+	portfolioUpdate(
 		@GetCurrentUserId() userId: string,
 		@Args("uuid", { type: () => String }) uuid: string,
 		@Args("data")
-		updatePortfolioInput: UpdatePortfolioInput,
+		portfolioUpdateInput: PortfolioUpdateInput,
 	) {
-		return this.portfoliosService.update(userId, uuid, updatePortfolioInput);
+		return this.portfoliosService.update(userId, uuid, portfolioUpdateInput);
 	}
 
 	@Mutation(() => PortfolioDelete)
-	deletePortfolio(
+	portfolioDelete(
 		@GetCurrentUserId() userId: string,
 		@Args("uuid", { type: () => String }) uuid: string,
 	) {

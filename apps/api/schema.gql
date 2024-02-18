@@ -321,15 +321,15 @@ type Mutation {
   resetPassword(data: ResetPasswordInput!): ResetPassword!
   setNewPassword(data: SetNewPasswordInput!): SetNewPassword!
   refreshToken: Refresh!
-  createCashAccount(data: CreateCashAccountInput!): CashAccount!
-  introductionCreateCashAccounts(data: IntroductionCreateCashAccountsInput!): IntroductionCashAccounts!
-  updateCashAccount(uuid: ID!, data: UpdateCashAccountInput!): CashAccount!
-  deleteCashAccount(uuid: ID!): CashAccountDelete!
+  cashAccountCreate(data: CashAccountCreateInput!): CashAccount!
+  introductionCashAccountCreates(data: IntroductionCashAccountCreatesInput!): IntroductionCashAccounts!
+  cashAccountUpdate(uuid: ID!, data: CashAccountUpdateInput!): CashAccount!
+  cashAccountDelete(uuid: ID!): CashAccountDelete!
   cashAccountAddFunds(data: CashAccountAddFundsInput!): CashAccount!
-  createPortfolio(data: CreatePortfolioInput!): Portfolio!
-  introductionCreatePortfolios(data: IntroductionCreatePortfoliosInput!): IntroductionPortfolios!
-  updatePortfolio(uuid: String!, data: UpdatePortfolioInput!): Portfolio!
-  deletePortfolio(uuid: String!): PortfolioDelete!
+  portfolioCreate(data: PortfolioCreateInput!): Portfolio!
+  introductionPortfolioCreates(data: IntroductionPortfolioCreatesInput!): IntroductionPortfolios!
+  portfolioUpdate(uuid: String!, data: PortfolioUpdateInput!): Portfolio!
+  portfolioDelete(uuid: String!): PortfolioDelete!
   updateUser(data: UpdateUserInput!): User!
   investInNewInstrument(data: InvestInNewInstrumentInput!): InvestInNewInstrument!
 }
@@ -397,7 +397,7 @@ input SetNewPasswordInput {
   token: String!
 }
 
-input CreateCashAccountInput {
+input CashAccountCreateInput {
   """Cash account name."""
   name: String!
 
@@ -405,12 +405,12 @@ input CreateCashAccountInput {
   currency: Currency!
 }
 
-input IntroductionCreateCashAccountsInput {
+input IntroductionCashAccountCreatesInput {
   """Cash accounts array."""
-  cashAccounts: [CreateCashAccountInput!]!
+  cashAccounts: [CashAccountCreateInput!]!
 }
 
-input UpdateCashAccountInput {
+input CashAccountUpdateInput {
   """Cash account name."""
   name: String!
 }
@@ -423,17 +423,17 @@ input CashAccountAddFundsInput {
   amount: Float!
 }
 
-input CreatePortfolioInput {
+input PortfolioCreateInput {
   """Portfolio name."""
   name: String!
 }
 
-input IntroductionCreatePortfoliosInput {
+input IntroductionPortfolioCreatesInput {
   """Portfolios array."""
-  portfolios: [CreatePortfolioInput!]!
+  portfolios: [PortfolioCreateInput!]!
 }
 
-input UpdatePortfolioInput {
+input PortfolioUpdateInput {
   """Portfolio name."""
   name: String
 }

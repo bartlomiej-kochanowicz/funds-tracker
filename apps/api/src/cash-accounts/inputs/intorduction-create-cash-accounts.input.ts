@@ -1,11 +1,11 @@
 import { Field, InputType } from "@nestjs/graphql";
 import { ArrayNotEmpty, IsArray } from "class-validator";
-import { CreateCashAccountInput } from "./create-cash-account.input";
+import { CashAccountCreateInput } from "./cash-account-create.input";
 
 @InputType()
-export class IntroductionCreateCashAccountsInput {
+export class IntroductionCashAccountCreatesInput {
 	@IsArray({ message: "Cash accounts must be an array." })
 	@ArrayNotEmpty({ message: "Cash accounts array must not be empty." })
-	@Field(() => [CreateCashAccountInput], { description: "Cash accounts array." })
-	cashAccounts: CreateCashAccountInput[];
+	@Field(() => [CashAccountCreateInput], { description: "Cash accounts array." })
+	cashAccounts: CashAccountCreateInput[];
 }

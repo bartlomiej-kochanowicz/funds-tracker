@@ -9,9 +9,9 @@ import {
 } from "./entities";
 import {
 	CashAccountAddFundsInput,
-	CreateCashAccountInput,
-	IntroductionCreateCashAccountsInput,
-	UpdateCashAccountInput,
+	CashAccountCreateInput,
+	IntroductionCashAccountCreatesInput,
+	CashAccountUpdateInput,
 } from "./inputs";
 
 @Resolver(() => CashAccount)
@@ -19,23 +19,23 @@ export class CashAccountsResolver {
 	constructor(private readonly cashAccountsService: CashAccountsService) {}
 
 	@Mutation(() => CashAccount)
-	createCashAccount(
+	cashAccountCreate(
 		@GetCurrentUserId() userId: string,
 		@Args("data")
-		createCashAccountInput: CreateCashAccountInput,
+		cashAccountCreateInput: CashAccountCreateInput,
 	) {
-		return this.cashAccountsService.create(userId, createCashAccountInput);
+		return this.cashAccountsService.create(userId, cashAccountCreateInput);
 	}
 
 	@Mutation(() => IntroductionCashAccounts)
-	introductionCreateCashAccounts(
+	introductionCashAccountCreates(
 		@GetCurrentUserId() userId: string,
 		@Args("data")
-		introductionCreateCashAccountInput: IntroductionCreateCashAccountsInput,
+		introductionCashAccountCreateInput: IntroductionCashAccountCreatesInput,
 	) {
-		return this.cashAccountsService.introductionCreateCashAccounts(
+		return this.cashAccountsService.introductionCashAccountCreates(
 			userId,
-			introductionCreateCashAccountInput,
+			introductionCashAccountCreateInput,
 		);
 	}
 
@@ -63,17 +63,17 @@ export class CashAccountsResolver {
 	}
 
 	@Mutation(() => CashAccount)
-	updateCashAccount(
+	cashAccountUpdate(
 		@GetCurrentUserId() userId: string,
 		@Args("uuid", { type: () => ID }) uuid: string,
 		@Args("data")
-		updateCashAccountInput: UpdateCashAccountInput,
+		cashAccountUpdateInput: CashAccountUpdateInput,
 	) {
-		return this.cashAccountsService.update(userId, uuid, updateCashAccountInput);
+		return this.cashAccountsService.update(userId, uuid, cashAccountUpdateInput);
 	}
 
 	@Mutation(() => CashAccountDelete)
-	deleteCashAccount(
+	cashAccountDelete(
 		@GetCurrentUserId() userId: string,
 		@Args("uuid", { type: () => ID }) uuid: string,
 	): Promise<CashAccountDelete> {
