@@ -3,6 +3,7 @@ import { Button, Card, DropdownMenu } from "@funds-tracker/ui";
 import clsx from "clsx";
 import { useCashAccountAddFundsDialog } from "components/dialogs/CashAccounts/CashAccountAddFundsDialog";
 import { useCashAccountConfirmDeleteDialog } from "components/dialogs/CashAccounts/CashAccountConfirmDeleteDialog";
+import { useCashAccountInvestFundsDialog } from "components/dialogs/CashAccounts/CashAccountInvestFundsDialog";
 import { useCashAccountOperationsDialog } from "components/dialogs/CashAccounts/CashAccountOperationsDialog";
 import { useCashAccountRenameDialog } from "components/dialogs/CashAccounts/CashAccountRenameDialog";
 import { formatCurrency } from "helpers/formatCurrency";
@@ -25,6 +26,9 @@ export const CashAccountCard = ({
 }: CashAccountCardProps) => {
 	const { t } = useTranslation();
 
+	const { open: openCashAccoutnInvestFundsDialog, dialog: CashAccoutnInvestFundsDialog } =
+		useCashAccountInvestFundsDialog({ handleRefetch, name, uuid });
+
 	const { open: openCashAccountOperationsDialog, dialog: CashAccountOperationsDialog } =
 		useCashAccountOperationsDialog({ uuid, currency });
 
@@ -46,7 +50,8 @@ export const CashAccountCard = ({
 			[
 				{
 					icon: AreaChart,
-					label: t("modal.InvestFunds.name"),
+					label: t("modal.CashAccountInvestFunds.name"),
+					onSelect: openCashAccoutnInvestFundsDialog,
 				},
 				{
 					icon: List,
@@ -79,6 +84,7 @@ export const CashAccountCard = ({
 
 	return (
 		<Fragment>
+			{CashAccoutnInvestFundsDialog}
 			{CashAccountOperationsDialog}
 			{CashAccountConfirmDeleteDialog}
 			{CashAccountRenameDialog}

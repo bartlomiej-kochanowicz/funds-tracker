@@ -20,7 +20,7 @@ export const InvestFunds = NiceModal.create<InvestFundsProps>(props => {
 
 	return (
 		<Modal
-			modalName={t("modal.InvestFunds.name")}
+			modalName={t("modal.CashAccountInvestFunds.name")}
 			closeModal={modal.remove}
 		>
 			<Text className="block max-w-[300px] whitespace-normal text-center text-sm text-gray-400 sm:max-w-full">

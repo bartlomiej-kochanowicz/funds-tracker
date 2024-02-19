@@ -184,7 +184,7 @@
 	"modal.PortfolioConfirmDelete.name": "Delete portfolio",
 	"modal.PortfolioConfirmDelete.description": "Are you sure you want to delete <bold>{{name}}</bold> portfolio? <bold>This action cannot be undone.</bold>",
 	"common.back": "Back",
-	"modal.InvestFunds.name": "Invest funds",
+	"modal.CashAccountInvestFunds.name": "Invest funds",
 	"modal.InvestFunds.description": "Here you can invest funds in your portfolio.",
 	"input.search_instrument.placeholder.stocks": "Ex. 'AAPL', 'Apple Inc', 'Apple', 'US0378331005'",
 	"input.search_instrument.placeholder.etfs": "Ex. 'iShares Core S&P 500', 'IE00B5BMR087'",

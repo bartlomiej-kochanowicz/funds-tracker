@@ -184,7 +184,7 @@
 	"modal.PortfolioConfirmDelete.name": "Usuń portfel inwestycyjny",
 	"modal.PortfolioConfirmDelete.description": "Czy na pewno chcesz usunąć portfel inwestycyjny <bold>{{name}}</bold>? <bold>Tej operacji nie można cofnąć.</bold>",
 	"common.back": "Wróć",
-	"modal.InvestFunds.name": "Inwestuj środki",
+	"modal.CashAccountInvestFunds.name": "Inwestuj środki",
 	"modal.InvestFunds.description": "Tutaj możesz zainwestować środki z konta gotówkowego w wybrany portfel inwestycyjny.",
 	"input.search_instrument.placeholder.stocks": "np. 'AAPL', 'Apple Inc', 'Apple', 'US0378331005'",
 	"input.search_instrument.placeholder.etfs": "np. 'iShares Core S&P 500', 'IE00B5BMR087'",
