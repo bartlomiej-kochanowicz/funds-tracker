@@ -50,7 +50,7 @@ deviation from the model you provide before, tells you how to rebalance the inst
     <li><a href="https://ui.shadcn.com/">shadcn/ui</a></li>
     <li><a href="https://www.i18next.com/">i18next</a></li>
     <li><a href="https://reactrouter.com/">React Router</a></li>
-    <li><a href="https://www.react-laag.com/">React Laag</a></li>
+    <li><a href="https://www.radix-ui.com/">Radix</a></li>
   </ul>
 </details>
 

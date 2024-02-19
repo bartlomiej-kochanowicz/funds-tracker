@@ -2,7 +2,6 @@
 import "@testing-library/jest-dom";
 
 import matchMediaPolyfill from "mq-polyfill";
-import ResizeObserver from "resize-observer-polyfill";
 
 /**
  * Define the window.matchMedia
@@ -21,6 +20,3 @@ window.resizeTo = function resizeTo(width, height) {
 		outerHeight: height,
 	}).dispatchEvent(new this.Event("resize"));
 };
-
-// mock ResizeObserver for react-laag liblary
-window.ResizeObserver = ResizeObserver;

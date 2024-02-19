@@ -65,7 +65,6 @@
 		"postcss": "8.4.35",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"resize-observer-polyfill": "1.5.1",
 		"storybook": "7.6.14",
 		"storybook-addon-react-router-v6": "2.0.10",
 		"tsconfig": "workspace:*",

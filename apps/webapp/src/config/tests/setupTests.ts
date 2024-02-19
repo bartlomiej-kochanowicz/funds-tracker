@@ -2,7 +2,6 @@
 import "@testing-library/jest-dom";
 
 import matchMediaPolyfill from "mq-polyfill";
-import ResizeObserver from "resize-observer-polyfill";
 import i18nForTests from "utils/i18nForTests";
 
 const originalError = console.error;
@@ -33,9 +32,6 @@ window.resizeTo = function resizeTo(width, height) {
 		outerHeight: height,
 	}).dispatchEvent(new this.Event("resize"));
 };
-
-// mock ResizeObserver for react-laag liblary
-window.ResizeObserver = ResizeObserver;
 
 beforeAll(() => {
 	console.error = (...args) => {
