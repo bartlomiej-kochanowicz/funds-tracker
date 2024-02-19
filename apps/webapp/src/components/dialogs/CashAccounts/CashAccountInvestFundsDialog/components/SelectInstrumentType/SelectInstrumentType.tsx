@@ -1,45 +1,47 @@
-/* import { Select } from "components/atoms";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
+import { Form, Select } from "@funds-tracker/ui";
 import instruments from "constants/selectors/instruments";
-import { useBreakpoint } from "hooks/useBreakpoint";
-import { useSelect } from "hooks/useSelect";
-import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { FormField } from "../FormField";
-
-interface SelectInstrumentTypeProps {}
-
-export const SelectInstrumentType: FC<SelectInstrumentTypeProps> = () => {
-	const isPhone = useBreakpoint("phone", "max");
+export const SelectInstrumentType = () => {
+	const form = useFormContext();
 
 	const { t } = useTranslation();
 
-	const {
-		register,
-		formState: { errors },
-	} = useFormContext<InvestFundsFormValues>();
-
-	const instrumentTypeSelectProps = useSelect<InvestFundsFormValues>({
-		register,
-		name: "instrumentType",
-		errors,
-	});
-
 	return (
-		<FormField
-			label={t("modal.InvestFunds.form.label.instrumentType")}
-			htmlFor="instrumentType"
-		>
-			<Select
-				items={instruments}
-				placeholder={t("modal.InvestFunds.form.select.portfolio.instrumentType.placeholder")}
-				flexGrow={1}
-				width={isPhone ? "100%" : "auto"}
-				{...instrumentTypeSelectProps}
-			/>
-		</FormField>
+		<Form.Field
+			control={form.control}
+			name="email"
+			render={({ field }) => (
+				<Form.Item>
+					<Form.Label>{t("modal.InvestFunds.form.label.instrumentType")}</Form.Label>
+					<Select
+						onValueChange={field.onChange}
+						defaultValue={field.value}
+					>
+						<Form.Control>
+							<Select.Trigger>
+								<Select.Value
+									placeholder={t(
+										"modal.InvestFunds.form.select.portfolio.instrumentType.placeholder",
+									)}
+								/>
+							</Select.Trigger>
+						</Form.Control>
+						<Select.Content>
+							{instruments.map(({ value, label }) => (
+								<Select.Item
+									key={value}
+									value={value}
+								>
+									{t(label)}
+								</Select.Item>
+							))}
+						</Select.Content>
+					</Select>
+					<Form.Message />
+				</Form.Item>
+			)}
+		/>
 	);
 };
- */

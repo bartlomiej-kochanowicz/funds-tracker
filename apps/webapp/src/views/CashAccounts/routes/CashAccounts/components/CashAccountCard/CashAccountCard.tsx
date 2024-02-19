@@ -27,7 +27,7 @@ export const CashAccountCard = ({
 	const { t } = useTranslation();
 
 	const { open: openCashAccoutnInvestFundsDialog, dialog: CashAccoutnInvestFundsDialog } =
-		useCashAccountInvestFundsDialog({ handleRefetch, name, uuid });
+		useCashAccountInvestFundsDialog({ handleRefetch, uuid, balance, currency });
 
 	const { open: openCashAccountOperationsDialog, dialog: CashAccountOperationsDialog } =
 		useCashAccountOperationsDialog({ uuid, currency });

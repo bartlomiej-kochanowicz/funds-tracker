@@ -1,38 +1,41 @@
-/* import { Currency } from "__generated__/graphql";
-import { useModal } from "@ebay/nice-modal-react";
-import { Button, Text } from "@funds-tracker/ui";
+import { Currency } from "__generated__/graphql";
+import { Button, Dialog, Form, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Loader, Spacer, Spreader } from "components/atoms";
 import { formatCurrency } from "helpers/formatCurrency";
 import { FC, Fragment, useCallback, useMemo } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { ComissionField } from "./components/ComissionField";
-import { DateField } from "./components/DateField";
+import { validationSchema } from "./CashAccountInvestFundsForm.schema";
 import { FormField } from "./components/FormField";
 import { NotSupportedYet } from "./components/NotSupportedYet";
+import { SearchInstrumentField } from "./components/SearchInstrumentField";
+import { SelectInstrumentType } from "./components/SelectInstrumentType";
+/* import { ComissionField } from "./components/ComissionField";
+import { DateField } from "./components/DateField";
+import { FormField } from "./components/FormField";
 import { PriceField } from "./components/PriceField";
 import { QuantityField } from "./components/QuantityField";
 import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
 import { SelectPortfolioField } from "./components/SelectPortfolioField";
-import { TransactionCostField } from "./components/TransactionCostField";
+import { TransactionCostField } from "./components/TransactionCostField"; */
 import { defaultValues, InvestFundsFormValues } from "./helpers/defaultValues";
-import { validationSchema } from "./InvestFundsform.schema";
 
-interface InvestFundsFormProps {
+interface CashAccountInvestFundsFormFormProps {
 	balance: number;
 	currency: Currency;
 	uuid: string;
 }
 
-export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, uuid }) => {
+export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps> = ({
+	balance,
+	currency,
+	uuid,
+}) => {
 	const { t } = useTranslation();
 
-	const { remove } = useModal();
-
-	const methods = useForm<InvestFundsFormValues>({
+	const form = useForm<InvestFundsFormValues>({
 		defaultValues,
 		resolver: yupResolver<InvestFundsFormValues>(validationSchema),
 		mode: "onChange",
@@ -42,7 +45,7 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 		handleSubmit,
 		watch,
 		formState: { isValid, isSubmitting },
-	} = methods;
+	} = form;
 
 	const onSubmit = useCallback(
 		(data: InvestFundsFormValues) => {
@@ -70,81 +73,60 @@ export const InvestFundsForm: FC<InvestFundsFormProps> = ({ balance, currency, u
 	const shouldRenderNotSupportedYet = !shouldRenderMarketInstrumentFields;
 
 	return (
-		<FormProvider {...methods}>
+		<Form {...form}>
 			<form
-				className="flex flex-col"
+				className="flex flex-col gap-1"
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<FormField
-					label={t("modal.InvestFunds.form.label.account.balance")}
-					htmlFor="balance"
-				>
-					<Text>{formatCurrency(balance, currency)}</Text>
-				</FormField>
-
-				<Spacer $space="0.25" />
+				<Form.Item>
+					<Form.Label>{t("modal.InvestFunds.form.label.account.balance")}</Form.Label>
+					<Form.Description>{formatCurrency(balance, currency)}</Form.Description>
+				</Form.Item>
 
 				<SelectInstrumentType />
 
 				{shouldRenderMarketInstrumentFields && (
 					<Fragment>
-						<Spacer $space="0.25" />
-
 						<SearchInstrumentField />
 
-						<Spacer $space="0.25" />
+						<div>rest</div>
+						{/* 
 
 						<SelectPortfolioField />
 
-						<Spacer $space="0.25" />
-
 						<DateField />
-
-						<Spacer $space="0.25" />
 
 						<QuantityField />
 
-						<Spacer $space="0.25" />
-
 						<PriceField activeCurrency={activeCurrency as Currency} />
-
-						<Spacer $space="0.25" />
 
 						<ComissionField activeCurrency={activeCurrency as Currency} />
 
-						<Spacer $space="0.25" />
-
-						<TransactionCostField activeCurrency={activeCurrency as Currency} />
+						<TransactionCostField activeCurrency={activeCurrency as Currency} /> */}
 					</Fragment>
 				)}
 
 				{shouldRenderNotSupportedYet && <NotSupportedYet />}
 
-				<Spacer />
-
-				<div className="flex-end flex">
-					<Button
-						className="min-w-[120px] grow"
-						color="gray"
-						onPress={remove}
-					>
-						{t("common.cancel")}
-					</Button>
-
-					<Spreader $spread="0.5" />
+				<Dialog.Footer>
+					<Dialog.Close asChild>
+						<Button
+							variant="secondary"
+							className="w-1/2"
+						>
+							{t("common.cancel")}
+						</Button>
+					</Dialog.Close>
 
 					<Button
-						className="min-w-[120px] grow"
+						className="flex w-1/2 items-center justify-center gap-2"
+						disabled={!isValid || isSubmitting || shouldRenderNotSupportedYet}
 						type="submit"
-						isDisabled={!isValid || isSubmitting || shouldRenderNotSupportedYet}
 					>
-						{isSubmitting && <Loader $size="small" />}
-
 						{!isSubmitting && "Invest 🎉"}
 					</Button>
-				</div>
+				</Dialog.Footer>
 			</form>
-		</FormProvider>
+		</Form>
 	);
 };
- */

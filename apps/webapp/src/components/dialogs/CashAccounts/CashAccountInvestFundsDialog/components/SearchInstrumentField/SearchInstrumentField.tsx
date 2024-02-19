@@ -39,3 +39,7 @@ export const SearchInstrumentField = () => {
 	);
 };
  */
+
+export const SearchInstrumentField = () => {
+	return <div>search instrument field</div>;
+};

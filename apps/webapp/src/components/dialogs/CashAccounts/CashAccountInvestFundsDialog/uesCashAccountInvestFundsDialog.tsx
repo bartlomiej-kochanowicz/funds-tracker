@@ -1,14 +1,22 @@
+import { Currency } from "__generated__/graphql";
 import { Dialog } from "@funds-tracker/ui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { CashAccountInvestFundsForm } from "./CashAccountInvestFundsForm";
+
 type UseCashAccountInvestFundsDialogProps = {
 	handleRefetch: () => void;
-	name: string;
+	balance: number;
+	currency: Currency;
 	uuid: string;
 };
 
-export const useCashAccountInvestFundsDialog = (props: UseCashAccountInvestFundsDialogProps) => {
+export const useCashAccountInvestFundsDialog = ({
+	balance,
+	currency,
+	uuid,
+}: UseCashAccountInvestFundsDialogProps) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	const handleOpen = () => {
@@ -29,28 +37,12 @@ export const useCashAccountInvestFundsDialog = (props: UseCashAccountInvestFunds
 						<Dialog.Title>{t("modal.CashAccountInvestFunds.name")}</Dialog.Title>
 						<Dialog.Description>{t("modal.InvestFunds.description")}</Dialog.Description>
 					</Dialog.Header>
-					form
-					{/* <Dialog.Footer>
-						<Dialog.Close asChild>
-							<Button
-								variant="secondary"
-								className="w-1/2"
-							>
-								{t("common.cancel")}
-							</Button>
-						</Dialog.Close>
 
-						<Button
-							className="flex w-1/2 items-center justify-center gap-2"
-							disabled={loading}
-							onClick={handleDelete}
-							variant="destructive"
-						>
-							{loading ? <Loader /> : <Trash className="size-4" />}
-
-							{t("common.delete")}
-						</Button>
-					</Dialog.Footer> */}
+					<CashAccountInvestFundsForm
+						balance={balance}
+						currency={currency}
+						uuid={uuid}
+					/>
 				</Dialog.Content>
 			</Dialog>
 		),
