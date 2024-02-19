@@ -152,3 +152,7 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
 	},
 );
  */
+
+export const SearchInstrumentCombobox = () => {
+	return null;
+};

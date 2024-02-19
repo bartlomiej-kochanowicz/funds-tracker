@@ -3,15 +3,17 @@ import instruments from "constants/selectors/instruments";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
+
 export const SelectInstrumentType = () => {
-	const form = useFormContext();
+	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
 
 	const { t } = useTranslation();
 
 	return (
 		<Form.Field
 			control={form.control}
-			name="email"
+			name="instrumentType"
 			render={({ field }) => (
 				<Form.Item>
 					<Form.Label>{t("modal.InvestFunds.form.label.instrumentType")}</Form.Label>

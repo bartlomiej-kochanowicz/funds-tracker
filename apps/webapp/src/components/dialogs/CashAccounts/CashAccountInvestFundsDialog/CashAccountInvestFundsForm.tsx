@@ -1,16 +1,20 @@
 import { Currency } from "__generated__/graphql";
-import { Button, Dialog, Form, Text } from "@funds-tracker/ui";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Button, Dialog, Form } from "@funds-tracker/ui";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { formatCurrency } from "helpers/formatCurrency";
 import { FC, Fragment, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./CashAccountInvestFundsForm.schema";
-import { FormField } from "./components/FormField";
+import {
+	CashAccountInvestFundsFormSchema,
+	CashAccountInvestFundsFormSchemaType,
+	defaultValues,
+} from "./CashAccountInvestFundsFormSchema";
 import { NotSupportedYet } from "./components/NotSupportedYet";
 import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
+
 /* import { ComissionField } from "./components/ComissionField";
 import { DateField } from "./components/DateField";
 import { FormField } from "./components/FormField";
@@ -20,7 +24,6 @@ import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
 import { SelectPortfolioField } from "./components/SelectPortfolioField";
 import { TransactionCostField } from "./components/TransactionCostField"; */
-import { defaultValues, InvestFundsFormValues } from "./helpers/defaultValues";
 
 interface CashAccountInvestFundsFormFormProps {
 	balance: number;
@@ -35,9 +38,9 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 }) => {
 	const { t } = useTranslation();
 
-	const form = useForm<InvestFundsFormValues>({
+	const form = useForm<CashAccountInvestFundsFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver<InvestFundsFormValues>(validationSchema),
+		resolver: zodResolver(CashAccountInvestFundsFormSchema),
 		mode: "onChange",
 	});
 
@@ -48,7 +51,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 	} = form;
 
 	const onSubmit = useCallback(
-		(data: InvestFundsFormValues) => {
+		(data: CashAccountInvestFundsFormSchemaType) => {
 			console.log({ ...data, uuid });
 		},
 		[uuid],
@@ -90,7 +93,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						<SearchInstrumentField />
 
 						<div>rest</div>
-						{/* 
+						{/*
 
 						<SelectPortfolioField />
 
