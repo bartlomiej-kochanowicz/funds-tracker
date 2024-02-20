@@ -11,7 +11,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./CashAccountRename.schema";
+import {
+	CashAccountRenameFormSchema,
+	CashAccountRenameFormSchemaType,
+} from "./CashAccountRenameFormSchema";
 
 type UseCashAccountRenameDialogProps = {
 	handleRefetch: () => void;
@@ -34,11 +37,11 @@ export const useCashAccountRenameDialog = ({
 
 	const defaultValues = {
 		name,
-	};
+	} satisfies CashAccountRenameFormSchemaType;
 
-	const form = useForm({
+	const form = useForm<CashAccountRenameFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver(validationSchema),
+		resolver: yupResolver(CashAccountRenameFormSchema),
 	});
 
 	const {
@@ -63,7 +66,7 @@ export const useCashAccountRenameDialog = ({
 		},
 	});
 
-	const onSubmit = async ({ name: newName }: typeof defaultValues) => {
+	const onSubmit = async ({ name: newName }: CashAccountRenameFormSchemaType) => {
 		await cashAccountUpdate({ variables: { data: { name: newName }, uuid } });
 	};
 

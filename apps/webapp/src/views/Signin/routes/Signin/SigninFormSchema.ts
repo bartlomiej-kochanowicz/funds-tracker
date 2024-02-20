@@ -1,10 +1,8 @@
 import i18n from "utils/i18n";
-import { object, ObjectSchema, string } from "yup";
+import { InferType, object, string } from "yup";
 
-import { SigninFormValues } from "./Signin.types";
-
-export const validationSchema = (isPasswordStep: boolean): ObjectSchema<SigninFormValues> =>
-	object<SigninFormValues>().shape({
+export const SigninFormSchema = (isPasswordStep: boolean) =>
+	object().shape({
 		userEmail: string()
 			.email(i18n.t("page.signin.email.invalid"))
 			.required(i18n.t("page.signin.email.required")),
@@ -12,4 +10,6 @@ export const validationSchema = (isPasswordStep: boolean): ObjectSchema<SigninFo
 			is: () => isPasswordStep,
 			then: () => string().required(i18n.t("page.signin.password.required")),
 		}),
-	}) as ObjectSchema<SigninFormValues>;
+	});
+
+export type SigninFormSchemaType = InferType<ReturnType<typeof SigninFormSchema>>;

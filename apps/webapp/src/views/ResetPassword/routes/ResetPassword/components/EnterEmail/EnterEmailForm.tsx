@@ -15,7 +15,7 @@ import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./EnterEmail.schema";
+import { EnterEmailFormSchema, EnterEmailFormSchemaType } from "./EnterEmailFormSchema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -33,11 +33,11 @@ export const EnterEmailForm = () => {
 
 	const onVerify = useCallback(setToken, [setToken]);
 
-	const defaultValues = { userEmail: "" };
+	const defaultValues = { userEmail: "" } satisfies EnterEmailFormSchemaType;
 
-	const form = useForm({
+	const form = useForm<EnterEmailFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver(validationSchema),
+		resolver: yupResolver(EnterEmailFormSchema),
 	});
 
 	const {
@@ -60,11 +60,11 @@ export const EnterEmailForm = () => {
 		},
 	);
 
-	const onSubmit = async ({ userEmail }: typeof defaultValues) => {
+	const onSubmit = async ({ userEmail }: EnterEmailFormSchemaType) => {
 		if (!token) {
 			setRefreshReCaptcha(r => !r);
 
-			onSubmit({ userEmail } as typeof defaultValues);
+			onSubmit({ userEmail });
 
 			return;
 		}

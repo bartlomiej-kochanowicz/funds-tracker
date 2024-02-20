@@ -20,7 +20,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./CashAccountAddFundsForm.schema";
+import {
+	CashAccountAddFundsFormSchema,
+	CashAccountAddFundsFormSchemaType,
+} from "./CashAccountAddFundsFormSchema";
 
 type UseCashAccountAddFundsDialogProps = {
 	handleRefetch: () => void;
@@ -45,9 +48,9 @@ export const useCashAccountAddFundsDialog = ({
 		amount: 0,
 	};
 
-	const form = useForm<typeof defaultValues>({
+	const form = useForm<CashAccountAddFundsFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver(validationSchema),
+		resolver: yupResolver(CashAccountAddFundsFormSchema),
 	});
 
 	const {

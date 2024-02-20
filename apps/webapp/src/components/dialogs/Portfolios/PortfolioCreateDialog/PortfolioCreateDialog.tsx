@@ -1,8 +1,4 @@
-import {
-	PortfolioCreateInput,
-	PortfolioCreateMutation,
-	PortfolioCreateMutationVariables,
-} from "__generated__/graphql";
+import { PortfolioCreateMutation, PortfolioCreateMutationVariables } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
 import {
 	Button,
@@ -20,7 +16,10 @@ import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./PortfolioCreateForm.schema";
+import {
+	PortfolioCreateFormSchema,
+	PortfolioCreateFormSchemaType,
+} from "./PortfolioCreateFormSchema";
 
 interface PortfolioCreateDialogProps {
 	children: ReactNode;
@@ -34,11 +33,11 @@ export const PortfolioCreateDialog = ({ children, handleRefetch }: PortfolioCrea
 
 	const defaultValues = {
 		name: "",
-	} satisfies PortfolioCreateInput;
+	} satisfies PortfolioCreateFormSchemaType;
 
-	const form = useForm<PortfolioCreateInput>({
+	const form = useForm<PortfolioCreateFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver<PortfolioCreateInput>(validationSchema),
+		resolver: yupResolver(PortfolioCreateFormSchema),
 	});
 
 	const {
@@ -68,7 +67,7 @@ export const PortfolioCreateDialog = ({ children, handleRefetch }: PortfolioCrea
 		},
 	);
 
-	const onSubmit = async (data: PortfolioCreateInput) => {
+	const onSubmit = async (data: PortfolioCreateFormSchemaType) => {
 		await portfolioCreate({
 			variables: {
 				data,

@@ -1,6 +1,6 @@
 import { Currency } from "__generated__/graphql";
 import { Button, Dialog, Form } from "@funds-tracker/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { formatCurrency } from "helpers/formatCurrency";
 import { FC, Fragment, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
@@ -40,7 +40,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 
 	const form = useForm<CashAccountInvestFundsFormSchemaType>({
 		defaultValues,
-		resolver: zodResolver(CashAccountInvestFundsFormSchema),
+		resolver: yupResolver(CashAccountInvestFundsFormSchema),
 		mode: "onChange",
 	});
 

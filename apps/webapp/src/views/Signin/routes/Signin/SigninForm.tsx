@@ -20,8 +20,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
-import { validationSchema } from "./Signin.schema";
-import { SigninFormValues } from "./Signin.types";
+import { SigninFormSchema, SigninFormSchemaType } from "./SigninFormSchema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -54,11 +53,11 @@ export const SigninForm = () => {
 		SigninStateMachine,
 	);
 
-	const defaultValues = { userEmail: "", userPassword: "" } satisfies SigninFormValues;
+	const defaultValues = { userEmail: "", userPassword: "" } satisfies SigninFormSchemaType;
 
-	const form = useForm<SigninFormValues>({
+	const form = useForm<SigninFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver<SigninFormValues>(validationSchema(compareState(states.password))),
+		resolver: yupResolver(SigninFormSchema(compareState(states.password))),
 	});
 
 	const {
@@ -115,7 +114,7 @@ export const SigninForm = () => {
 
 	const onVerify = useCallback(setToken, [setToken]);
 
-	const onSubmit = async ({ userEmail, userPassword }: typeof defaultValues) => {
+	const onSubmit = async ({ userEmail, userPassword }: SigninFormSchemaType) => {
 		if (!token) {
 			setRefreshReCaptcha(r => !r);
 
@@ -128,7 +127,7 @@ export const SigninForm = () => {
 			await emailExist({ variables: { data: { email: userEmail, token } } });
 		}
 
-		if (compareState(states.password)) {
+		if (compareState(states.password) && userPassword) {
 			await signin({ variables: { data: { email: userEmail, password: userPassword, token } } });
 		}
 

@@ -2,6 +2,7 @@ import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from "__gener
 import { useMutation } from "@apollo/client";
 import { Button, emitErrorToast, Form, Input, Loader, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
 import { SET_NEW_PASSWORD } from "graphql/mutations/authentication/SetNewPassword";
 import { FC, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,7 +10,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
-import { validationSchema } from "./EnterPassword.schema";
+import { EnterPasswordFormSchema, EnterPasswordFormSchemaType } from "./EnterPasswordFormSchema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -34,11 +35,11 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 	const defaultValues = {
 		userPassword: "",
 		userPasswordConfirmation: "",
-	};
+	} satisfies EnterPasswordFormSchemaType;
 
-	const form = useForm({
+	const form = useForm<EnterPasswordFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver(validationSchema),
+		resolver: yupResolver(EnterPasswordFormSchema),
 	});
 
 	const {
@@ -59,16 +60,19 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 			const message = a.message || t("service.unknown_error");
 
 			setError("userPassword", { type: "custom", message });
-			setError("userPasswordConfirmation", { type: "custom", message: "‎" });
+			setError("userPasswordConfirmation", { type: "custom", message: EMPTY_VALIDATION_MESSAGE });
 			emitErrorToast(message);
 		},
 	});
 
-	const onSubmit = async ({ userPassword }: typeof defaultValues) => {
+	const onSubmit = async ({
+		userPassword,
+		userPasswordConfirmation,
+	}: EnterPasswordFormSchemaType) => {
 		if (!token) {
 			setRefreshReCaptcha(r => !r);
 
-			onSubmit({ userPassword } as typeof defaultValues);
+			onSubmit({ userPassword, userPasswordConfirmation });
 
 			return;
 		}

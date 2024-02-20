@@ -1,11 +1,11 @@
 import { InstrumentType, SearchInstrument } from "__generated__/graphql";
 import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
 import instruments from "constants/instruments";
-import { z } from "zod";
+import { date, InferType, mixed, number, object, string } from "yup";
 
-export const CashAccountInvestFundsFormSchema = z.object({
-	instrumentType: z.nativeEnum(InstrumentType),
-	/* instrument: object<SearchInstrument>()
+export const CashAccountInvestFundsFormSchema = object().shape({
+	instrumentType: mixed<InstrumentType>().oneOf(instruments).required(EMPTY_VALIDATION_MESSAGE),
+	instrument: object<SearchInstrument>()
 		.shape({
 			Code: string().required(),
 			Exchange: string().required(),
@@ -31,14 +31,16 @@ export const CashAccountInvestFundsFormSchema = z.object({
 		})
 		.required(EMPTY_VALIDATION_MESSAGE),
 	comission_type: string().oneOf(["%", "amount"]).required(EMPTY_VALIDATION_MESSAGE),
-	transaction_cost: string().required(EMPTY_VALIDATION_MESSAGE), */
+	transaction_cost: string().required(EMPTY_VALIDATION_MESSAGE),
 });
 
-export type CashAccountInvestFundsFormSchemaType = z.infer<typeof CashAccountInvestFundsFormSchema>;
+export type CashAccountInvestFundsFormSchemaType = InferType<
+	typeof CashAccountInvestFundsFormSchema
+>;
 
 export const defaultValues: CashAccountInvestFundsFormSchemaType = {
 	instrumentType: instruments[0],
-	/* instrument: {
+	instrument: {
 		Code: "",
 		Exchange: "",
 		Name: "",
@@ -55,5 +57,5 @@ export const defaultValues: CashAccountInvestFundsFormSchemaType = {
 	price: "",
 	comission: "",
 	comission_type: "%",
-	transaction_cost: "", */
+	transaction_cost: "",
 };

@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes/paths";
 
-import { validationSchema } from "./Confirm.schema";
+import { ConfirmFormSchema, ConfirmFormSchemaType } from "./ConfirmFormSchema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -34,11 +34,11 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 
 	const { getUser } = useUserContext();
 
-	const defaultValues = { code: "" };
+	const defaultValues = { code: "" } satisfies ConfirmFormSchemaType;
 
-	const form = useForm({
+	const form = useForm<ConfirmFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver(validationSchema),
+		resolver: yupResolver(ConfirmFormSchema),
 		mode: "onChange",
 	});
 
@@ -63,7 +63,7 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 		},
 	);
 
-	const onSubmit = async (data: typeof defaultValues) => {
+	const onSubmit = async (data: ConfirmFormSchemaType) => {
 		confirmSignup({ variables: { data: { code: data.code, email, token } } });
 
 		setRefreshReCaptcha(r => !r);

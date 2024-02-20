@@ -7,6 +7,7 @@ import {
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { Button, emitErrorToast, Form, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
 import { SIGNUP } from "graphql/mutations/authentication/Signup";
 import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
@@ -18,8 +19,7 @@ import { ROUTES } from "routes/paths";
 
 import { NameAndEmail } from "./components/NameAndEmail";
 import { Passwords } from "./components/Passwords";
-import { validationSchema } from "./Signup.schema";
-import { SignupFormValues } from "./Signup.types";
+import { SignupFormSchema,SignupFormSchemaType } from "./SignupFormSchema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -55,11 +55,11 @@ export const SignupForm = () => {
 		userEmail: "",
 		userPassword: "",
 		userPasswordConfirmation: "",
-	};
+	} satisfies SignupFormSchemaType;
 
-	const form = useForm<SignupFormValues>({
+	const form = useForm<SignupFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver<SignupFormValues>(validationSchema(compareState(states.passwords))),
+		resolver: yupResolver(SignupFormSchema(compareState(states.passwords))),
 	});
 
 	const {
@@ -92,7 +92,7 @@ export const SignupForm = () => {
 				setError("userPassword", { type: "custom", message: t("service.unknown_error") });
 				setError("userPasswordConfirmation", {
 					type: "custom",
-					message: "‎",
+					message: EMPTY_VALIDATION_MESSAGE,
 				});
 			}
 		},
@@ -102,7 +102,7 @@ export const SignupForm = () => {
 			setError("userPassword", { type: "custom", message });
 			setError("userPasswordConfirmation", {
 				type: "custom",
-				message: "‎",
+				message: EMPTY_VALIDATION_MESSAGE,
 			});
 
 			emitErrorToast(message);
@@ -111,11 +111,11 @@ export const SignupForm = () => {
 
 	const onVerify = useCallback(setToken, [setToken]);
 
-	const onSubmit = async ({ userName, userEmail, userPassword }: SignupFormValues) => {
+	const onSubmit = async ({ userName, userEmail, userPassword }: SignupFormSchemaType) => {
 		if (!token) {
 			setRefreshReCaptcha(r => !r);
 
-			onSubmit({ userName, userEmail, userPassword } as SignupFormValues);
+			onSubmit({ userName, userEmail, userPassword });
 
 			return;
 		}
@@ -124,7 +124,7 @@ export const SignupForm = () => {
 			emailExist({ variables: { data: { email: userEmail, token } } });
 		}
 
-		if (compareState(states.passwords)) {
+		if (compareState(states.passwords) && userPassword) {
 			await signup({
 				variables: { data: { name: userName, email: userEmail, password: userPassword, token } },
 			});

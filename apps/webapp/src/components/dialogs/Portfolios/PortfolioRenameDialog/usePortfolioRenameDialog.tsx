@@ -8,7 +8,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./PortfolioRename.schema";
+import {
+	PortfolioRenameFormSchema,
+	PortfolioRenameFormSchemaType,
+} from "./PortfolioRenameFormSchema";
 
 type UsePortfolioRenameDialogProps = {
 	handleRefetch: () => void;
@@ -31,11 +34,11 @@ export const usePortfolioRenameDialog = ({
 
 	const defaultValues = {
 		name,
-	};
+	} satisfies PortfolioRenameFormSchemaType;
 
-	const form = useForm({
+	const form = useForm<PortfolioRenameFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver(validationSchema),
+		resolver: yupResolver(PortfolioRenameFormSchema),
 	});
 
 	const {
@@ -60,7 +63,7 @@ export const usePortfolioRenameDialog = ({
 		},
 	);
 
-	const onSubmit = async ({ name: newName }: typeof defaultValues) => {
+	const onSubmit = async ({ name: newName }: PortfolioRenameFormSchemaType) => {
 		await portfolioUpdate({ variables: { data: { name: newName }, uuid } });
 	};
 

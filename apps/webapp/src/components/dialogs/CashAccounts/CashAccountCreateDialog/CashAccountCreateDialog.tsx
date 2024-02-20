@@ -1,5 +1,4 @@
 import {
-	CashAccountCreateInput,
 	CashAccountCreateMutation,
 	CashAccountCreateMutationVariables,
 } from "__generated__/graphql";
@@ -22,7 +21,10 @@ import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { validationSchema } from "./CashAccountCreateForm.schema";
+import {
+	CashAccountCreateFormSchema,
+	CashAccountCreateFormSchemaType,
+} from "./CashAccountCreateFormSchema";
 
 interface CashAccountCreateDialogProps {
 	children: ReactNode;
@@ -42,11 +44,11 @@ export const CashAccountCreateDialog = ({
 	const defaultValues = {
 		name: "",
 		currency: user.defaultCurrency,
-	} satisfies CashAccountCreateInput;
+	} satisfies CashAccountCreateFormSchemaType;
 
-	const form = useForm<CashAccountCreateInput>({
+	const form = useForm<CashAccountCreateFormSchemaType>({
 		defaultValues,
-		resolver: yupResolver<CashAccountCreateInput>(validationSchema),
+		resolver: yupResolver(CashAccountCreateFormSchema),
 	});
 
 	const {
@@ -76,7 +78,7 @@ export const CashAccountCreateDialog = ({
 		},
 	});
 
-	const onSubmit = async (data: CashAccountCreateInput) => {
+	const onSubmit = async (data: CashAccountCreateFormSchemaType) => {
 		await cashAccountCreate({
 			variables: {
 				data,

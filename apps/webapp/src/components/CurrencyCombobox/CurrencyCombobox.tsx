@@ -16,7 +16,7 @@ interface CurrencyComboboxProps {
 }
 
 export const CurrencyCombobox = forwardRef<HTMLInputElement, CurrencyComboboxProps>(
-	({ value: valueFromProps, onChange, onBlur, defautValue, disabled }: CurrencyComboboxProps) => {
+	({ value: valueFromProps, onChange, onBlur, defautValue, disabled }) => {
 		const [open, setOpen] = useState(false);
 
 		const { t } = useTranslation();

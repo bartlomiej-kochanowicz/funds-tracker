@@ -153,6 +153,18 @@ export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstr
 );
  */
 
-export const SearchInstrumentCombobox = () => {
-	return null;
-};
+import { InstrumentType, SearchInstrumentQuery } from "__generated__/graphql";
+import { forwardRef } from "react";
+
+interface SearchInstrumentComboboxProps {
+	instrumentType: InstrumentType;
+	onChange: (value: SearchInstrumentQuery["searchInstrument"][0]) => void;
+	onBlur: () => void;
+	disabled?: boolean;
+}
+
+export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstrumentComboboxProps>(
+	() => {
+		return null;
+	},
+);

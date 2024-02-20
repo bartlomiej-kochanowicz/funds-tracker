@@ -1,9 +1,7 @@
 import i18n from "utils/i18n";
-import { object, ObjectSchema, ref, string } from "yup";
+import { InferType, object, ref, string } from "yup";
 
-import { SignupFormValues } from "./Signup.types";
-
-export const validationSchema = (isPasswordsStep: boolean): ObjectSchema<SignupFormValues> =>
+export const SignupFormSchema = (isPasswordsStep: boolean) =>
 	object().shape({
 		userName: string()
 			.min(4, i18n.t("page.signup.name.too_short"))
@@ -27,5 +25,6 @@ export const validationSchema = (isPasswordsStep: boolean): ObjectSchema<SignupF
 					.required(i18n.t("page.signup.password.confirm.required"))
 					.oneOf([ref("userPassword")], i18n.t("page.signup.password.do_not_match")),
 		}),
-		// NOTE: State machine is carring about password fields
-	}) as unknown as ObjectSchema<SignupFormValues>;
+	});
+
+export type SignupFormSchemaType = InferType<ReturnType<typeof SignupFormSchema>>;
