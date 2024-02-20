@@ -1,45 +1,31 @@
-/* import { InstrumentType } from "__generated__/graphql";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
-import { SearchInstrumentCombobox } from "components/molecules";
-import { useBreakpoint } from "hooks/useBreakpoint";
-import { useRegisterCombobox } from "hooks/useRegisterCombobox";
+import { Form } from "@funds-tracker/ui";
+import { SearchInstrumentCombobox } from "components/SearchInstrumentCombobox";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { FormField } from "../FormField";
+import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
 export const SearchInstrumentField = () => {
+	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
+
+	const instrumentType = form.watch("instrumentType");
+
 	const { t } = useTranslation();
 
-	const { control, watch } = useFormContext<InvestFundsFormValues>();
-
-	const searchInstrumentCombobox = useRegisterCombobox<InvestFundsFormValues>({
-		control,
-		name: "instrument",
-	});
-
-	const watchInstrumentType = watch("instrumentType");
-
-	const isPhone = useBreakpoint("phone", "max");
-
 	return (
-		<FormField
-			label={t("modal.InvestFunds.form.label.instrument")}
-			htmlFor="instrument"
-		>
-			<SearchInstrumentCombobox
-				{...searchInstrumentCombobox}
-				instrumentType={watchInstrumentType as unknown as InstrumentType}
-				id="instrument"
-				placeholder={t(`input.search_instrument.placeholder.${watchInstrumentType}`)}
-				$flexGrow={1}
-				$width={isPhone ? "100%" : "auto"}
-			/>
-		</FormField>
+		<Form.Field
+			control={form.control}
+			name="instrument"
+			render={({ field }) => (
+				<Form.Item>
+					<Form.Label>{t("modal.InvestFunds.form.label.instrument")}</Form.Label>
+					<SearchInstrumentCombobox
+						instrumentType={instrumentType}
+						{...field}
+					/>
+					<Form.Message />
+				</Form.Item>
+			)}
+		/>
 	);
-};
- */
-
-export const SearchInstrumentField = () => {
-	return <div>search instrument field</div>;
 };

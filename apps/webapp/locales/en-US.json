@@ -186,6 +186,7 @@
 	"common.back": "Back",
 	"modal.CashAccountInvestFunds.name": "Invest funds",
 	"modal.InvestFunds.description": "Here you can invest funds in your portfolio.",
+	"input.search_instrument.placeholder": "Search instrument...",
 	"input.search_instrument.placeholder.stocks": "Ex. 'AAPL', 'Apple Inc', 'Apple', 'US0378331005'",
 	"input.search_instrument.placeholder.etfs": "Ex. 'iShares Core S&P 500', 'IE00B5BMR087'",
 	"input.search_instrument.placeholder.crypto": "Ex. 'BTC', 'ETH', 'Bitcoin', 'Ethereum'",
