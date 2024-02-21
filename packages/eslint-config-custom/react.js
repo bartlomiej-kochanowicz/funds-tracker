@@ -1,9 +1,3 @@
-// react-aria cares of accessibility
-const a11yOff = Object.keys(require("eslint-plugin-jsx-a11y").rules).reduce((acc, rule) => {
-	acc[`jsx-a11y/${rule}`] = "off";
-	return acc;
-}, {});
-
 module.exports = {
 	extends: ["eslint-config-airbnb", "eslint-config-airbnb-typescript", "prettier", "plugin:tailwindcss/recommended"],
 	parser: "@typescript-eslint/parser",
@@ -29,7 +23,6 @@ module.exports = {
 		"postcss.config.js",
 	],
 	rules: {
-		...a11yOff,
 		"prettier/prettier": "error",
 		"arrow-body-style": "off",
 		"prefer-arrow-callback": "off",

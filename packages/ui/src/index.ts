@@ -2,6 +2,7 @@
 export * from "./components/Avatar";
 export * from "./components/Badge";
 export * from "./components/Button";
+export * from "./components/Calendar";
 export * from "./components/Card";
 export * from "./components/Command";
 export * from "./components/Dialog";

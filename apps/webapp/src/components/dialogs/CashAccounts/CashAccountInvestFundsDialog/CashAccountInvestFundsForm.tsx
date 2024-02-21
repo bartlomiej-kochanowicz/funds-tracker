@@ -11,6 +11,7 @@ import {
 	CashAccountInvestFundsFormSchemaType,
 	defaultValues,
 } from "./CashAccountInvestFundsFormSchema";
+import { DateField } from "./components/DateField";
 import { NotSupportedYet } from "./components/NotSupportedYet";
 import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
@@ -94,9 +95,9 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						<SearchInstrumentField />
 
 						<SelectPortfolioField />
-						{/*
 
 						<DateField />
+						{/*
 
 						<QuantityField />
 
