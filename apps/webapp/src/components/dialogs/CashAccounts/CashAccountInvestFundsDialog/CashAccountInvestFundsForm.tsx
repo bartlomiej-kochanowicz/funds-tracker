@@ -14,6 +14,7 @@ import {
 import { NotSupportedYet } from "./components/NotSupportedYet";
 import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
+import { SelectPortfolioField } from "./components/SelectPortfolioField";
 
 /* import { ComissionField } from "./components/ComissionField";
 import { DateField } from "./components/DateField";
@@ -22,7 +23,7 @@ import { PriceField } from "./components/PriceField";
 import { QuantityField } from "./components/QuantityField";
 import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
-import { SelectPortfolioField } from "./components/SelectPortfolioField";
+
 import { TransactionCostField } from "./components/TransactionCostField"; */
 
 interface CashAccountInvestFundsFormFormProps {
@@ -92,10 +93,8 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 					<Fragment>
 						<SearchInstrumentField />
 
-						<div>rest</div>
-						{/*
-
 						<SelectPortfolioField />
+						{/*
 
 						<DateField />
 

@@ -1,56 +1,51 @@
-/* import { GetPortfoliosQuery } from "__generated__/graphql";
+import { GetPortfoliosQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
-import { Select } from "components/atoms";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
+import { Form, Select } from "@funds-tracker/ui";
 import { GET_PORTFOLIOS } from "graphql/query/portfolios/GetPortfolios";
-import { useBreakpoint } from "hooks/useBreakpoint";
-import { useSelect } from "hooks/useSelect";
-import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { FormField } from "../FormField";
+import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
 export const SelectPortfolioField = () => {
+	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
+
+	const { data } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
+
 	const { t } = useTranslation();
 
-	const { data: portfolios } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
-
-	const selectPortfolioItems = useMemo(
-		() =>
-			portfolios?.portfolios.map(portfolio => ({
-				label: portfolio.name,
-				value: portfolio.uuid,
-			})) || [],
-		[portfolios],
-	);
-
-	const isPhone = useBreakpoint("phone", "max");
-
-	const {
-		register,
-		formState: { errors },
-	} = useFormContext<InvestFundsFormValues>();
-
-	const portfolioSelectProps = useSelect<InvestFundsFormValues>({
-		register,
-		name: "portfolio",
-		errors,
-	});
-
 	return (
-		<FormField
-			label={t("modal.InvestFunds.form.label.portfolio")}
-			htmlFor="portfolio"
-		>
-			<Select
-				items={selectPortfolioItems}
-				placeholder={t("modal.InvestFunds.form.select.portfolio.placeholder")}
-				flexGrow={1}
-				width={isPhone ? "100%" : "auto"}
-				{...portfolioSelectProps}
-			/>
-		</FormField>
+		<Form.Field
+			control={form.control}
+			name="portfolio"
+			render={({ field }) => (
+				<Form.Item>
+					<Form.Label>{t("modal.InvestFunds.form.label.portfolio")}</Form.Label>
+					<Select
+						onValueChange={field.onChange}
+						defaultValue={field.value}
+					>
+						<Form.Control>
+							<Select.Trigger>
+								<Select.Value
+									placeholder={t("modal.InvestFunds.form.select.portfolio.placeholder")}
+								/>
+							</Select.Trigger>
+						</Form.Control>
+						<Select.Content>
+							{data?.portfolios.map(({ uuid, name }) => (
+								<Select.Item
+									key={uuid}
+									value={uuid}
+								>
+									{name}
+								</Select.Item>
+							))}
+						</Select.Content>
+					</Select>
+					<Form.Message />
+				</Form.Item>
+			)}
+		/>
 	);
 };
- */

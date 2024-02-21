@@ -16,6 +16,8 @@ export class InstrumentsService {
 	async search(searchInstrumentInput: SearchInstrumentInput): Promise<SearchInstrument[]> {
 		const type = this.getType(searchInstrumentInput.type);
 
+		console.log("@@@", this.config.get("EODHD_API_KEY"));
+
 		const { data } = await firstValueFrom(
 			this.httpService
 				.get(`https://eodhistoricaldata.com/api/search/${searchInstrumentInput.name}`, {
@@ -27,7 +29,8 @@ export class InstrumentsService {
 					},
 				})
 				.pipe(
-					catchError(() => {
+					catchError(e => {
+						console.error(e);
 						throw Error("Error fetching instruments");
 					}),
 				),
