@@ -13,13 +13,14 @@ export type CalendarProps = ComponentProps<typeof DayPicker>;
 
 const Calendar = ({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) => (
 	<DayPicker
+		captionLayout="dropdown-buttons"
 		showOutsideDays={showOutsideDays}
 		className={twMerge("p-3", className)}
 		classNames={{
 			months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
 			month: "space-y-4",
 			caption: "flex justify-center pt-1 relative items-center",
-			caption_label: "text-sm font-medium",
+			caption_label: "hidden",
 			nav: "space-x-1 flex items-center",
 			nav_button: twMerge(
 				buttonVariants({ variant: "outline" }),
@@ -45,6 +46,10 @@ const Calendar = ({ className, classNames, showOutsideDays = true, ...props }: C
 			day_disabled: "text-muted-foreground opacity-50",
 			day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
 			day_hidden: "invisible",
+			dropdown: "bg-transparent",
+			caption_dropdowns: "flex gap-0.5",
+			dropdown_month: "[&>*:first-child]:hidden",
+			dropdown_year: "[&>*:first-child]:hidden",
 			...classNames,
 		}}
 		components={{

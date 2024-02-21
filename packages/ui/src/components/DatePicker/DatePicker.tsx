@@ -1,4 +1,5 @@
 import { Calendar as CalendarIcon } from "lucide-react";
+import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { Button } from "../Button";
@@ -10,9 +11,9 @@ type DatePickerProps = {
 	onChange: (date?: Date) => void;
 	formatDate: (date: Date) => string;
 	placeholder: string;
-};
+} & Omit<ComponentProps<typeof Calendar>, "mode" | "selected">;
 
-const DatePicker = ({ value, onChange, formatDate, placeholder }: DatePickerProps) => (
+const DatePicker = ({ value, onChange, formatDate, placeholder, ...rest }: DatePickerProps) => (
 	<Popover>
 		<Popover.Trigger asChild>
 			<Button
@@ -34,6 +35,7 @@ const DatePicker = ({ value, onChange, formatDate, placeholder }: DatePickerProp
 				selected={value}
 				onSelect={onChange}
 				initialFocus
+				{...rest}
 			/>
 		</Popover.Content>
 	</Popover>

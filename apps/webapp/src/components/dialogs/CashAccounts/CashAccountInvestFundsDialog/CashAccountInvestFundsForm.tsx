@@ -18,12 +18,9 @@ import { SelectInstrumentType } from "./components/SelectInstrumentType";
 import { SelectPortfolioField } from "./components/SelectPortfolioField";
 
 /* import { ComissionField } from "./components/ComissionField";
-import { DateField } from "./components/DateField";
 import { FormField } from "./components/FormField";
 import { PriceField } from "./components/PriceField";
 import { QuantityField } from "./components/QuantityField";
-import { SearchInstrumentField } from "./components/SearchInstrumentField";
-import { SelectInstrumentType } from "./components/SelectInstrumentType";
 
 import { TransactionCostField } from "./components/TransactionCostField"; */
 
