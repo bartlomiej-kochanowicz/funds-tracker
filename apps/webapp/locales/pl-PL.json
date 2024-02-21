@@ -227,5 +227,6 @@
 	"modal.CashAccountOperations.description":"Tutaj możesz podejrzeć wszystkie operacje na koncie gotówkowym.",
 	"modal.CashAccountOperations.table.caption": "Lista operacji na koncie gotówkowym",
 	"common.more": "Więcej",
-	"common.link.home": "Przejdz do pulpitu"
+	"common.link.home": "Przejdz do pulpitu",
+	"modal.InvestFunds.form.placeholder.purchase_date": "Wybierz datę zakupu"
 }

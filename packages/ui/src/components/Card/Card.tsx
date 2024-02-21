@@ -25,12 +25,14 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 CardHeader.displayName = "CardHeader";
 
 const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingElement>>(
-	({ className, ...props }, ref) => (
+	({ className, children, ...props }, ref) => (
 		<h2
 			ref={ref}
 			className={twMerge("text-2xl font-semibold leading-none tracking-tight", className)}
 			{...props}
-		/>
+		>
+			{children}
+		</h2>
 	),
 );
 CardTitle.displayName = "CardTitle";

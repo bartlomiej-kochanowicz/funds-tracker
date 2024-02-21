@@ -15,6 +15,7 @@ export const NotSupportedYet: FC = () => {
 					components={{
 						support: (
 							<a
+								aria-label="email"
 								href="mailto:support@funds-tracker.com"
 								className="text-primary"
 							/>

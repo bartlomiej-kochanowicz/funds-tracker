@@ -227,5 +227,6 @@
 	"modal.CashAccountOperations.description": "Here you can view all operations for your cash account.",
 	"modal.CashAccountOperations.table.caption": "A list of all operations for your cash account.",
 	"common.more": "More",
-	"common.link.home": "Go to home"
+	"common.link.home": "Go to home",
+	"modal.InvestFunds.form.placeholder.purchase_date": "Select purchase date"
 }
