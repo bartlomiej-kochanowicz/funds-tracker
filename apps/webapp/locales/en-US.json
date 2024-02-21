@@ -228,5 +228,6 @@
 	"modal.CashAccountOperations.table.caption": "A list of all operations for your cash account.",
 	"common.more": "More",
 	"common.link.home": "Go to home",
-	"modal.InvestFunds.form.placeholder.purchase_date": "Select purchase date"
+	"modal.InvestFunds.form.placeholder.purchase_date": "Select purchase date",
+	"form.search_instrument.empty": "No instruments found"
 }

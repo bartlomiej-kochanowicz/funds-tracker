@@ -228,5 +228,6 @@
 	"modal.CashAccountOperations.table.caption": "Lista operacji na koncie gotówkowym",
 	"common.more": "Więcej",
 	"common.link.home": "Przejdz do pulpitu",
-	"modal.InvestFunds.form.placeholder.purchase_date": "Wybierz datę zakupu"
+	"modal.InvestFunds.form.placeholder.purchase_date": "Wybierz datę zakupu",
+	"form.search_instrument.empty": "Nie znaleziono instrumentów"
 }
