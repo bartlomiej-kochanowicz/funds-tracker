@@ -19,14 +19,14 @@ export const SelectPortfolioField = () => {
 			control={form.control}
 			name="portfolio"
 			render={({ field }) => (
-				<Form.Item>
-					<Form.Label>{t("modal.InvestFunds.form.label.portfolio")}</Form.Label>
+				<Form.Item orientation="horizontal">
+					<Form.Label className="w-40">{t("modal.InvestFunds.form.label.portfolio")}</Form.Label>
 					<Select
 						onValueChange={field.onChange}
 						defaultValue={field.value}
 					>
 						<Form.Control>
-							<Select.Trigger>
+							<Select.Trigger className="w-fit grow">
 								<Select.Value
 									placeholder={t("modal.InvestFunds.form.select.portfolio.placeholder")}
 								/>

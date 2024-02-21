@@ -77,12 +77,17 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 	return (
 		<Form {...form}>
 			<form
-				className="flex flex-col gap-1"
+				className="flex flex-col gap-2"
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<Form.Item>
-					<Form.Label>{t("modal.InvestFunds.form.label.account.balance")}</Form.Label>
-					<Form.Description>{formatCurrency(balance, currency)}</Form.Description>
+				<Form.Item
+					className="flex items-center"
+					orientation="horizontal"
+				>
+					<Form.Label className="w-40">
+						{t("modal.InvestFunds.form.label.account.balance")}
+					</Form.Label>
+					<Form.Description className="mt-0">{formatCurrency(balance, currency)}</Form.Description>
 				</Form.Item>
 
 				<SelectInstrumentType />

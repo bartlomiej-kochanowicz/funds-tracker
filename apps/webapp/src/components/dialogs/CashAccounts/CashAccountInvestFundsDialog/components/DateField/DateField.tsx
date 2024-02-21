@@ -15,9 +15,12 @@ export const DateField = () => {
 			control={form.control}
 			name="date"
 			render={({ field }) => (
-				<Form.Item className="flex flex-col">
-					<Form.Label>{t("modal.InvestFunds.form.label.purchase_date")}</Form.Label>
+				<Form.Item orientation="horizontal">
+					<Form.Label className="w-40">
+						{t("modal.InvestFunds.form.label.purchase_date")}
+					</Form.Label>
 					<DatePicker
+						className="grow"
 						placeholder={t("modal.InvestFunds.form.placeholder.purchase_date")}
 						formatDate={date => formatDate(date, { withTime: false })}
 						toDate={new Date()}

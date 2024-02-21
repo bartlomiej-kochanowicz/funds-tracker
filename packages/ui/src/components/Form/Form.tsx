@@ -66,23 +66,28 @@ const useFormField = () => {
 	};
 };
 
-const FormItem = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-	({ className, ...props }, ref) => {
-		const id = useId();
+const FormItem = forwardRef<
+	HTMLDivElement,
+	React.HTMLAttributes<HTMLDivElement> & { orientation?: "vertical" | "horizontal" }
+>(({ className, orientation = "vertical", ...props }, ref) => {
+	const id = useId();
 
-		const contextValue = useMemo(() => ({ id }), [id]);
+	const contextValue = useMemo(() => ({ id }), [id]);
 
-		return (
-			<FormItemContext.Provider value={contextValue}>
-				<div
-					ref={ref}
-					className={twMerge("space-y-2", className)}
-					{...props}
-				/>
-			</FormItemContext.Provider>
-		);
-	},
-);
+	return (
+		<FormItemContext.Provider value={contextValue}>
+			<div
+				ref={ref}
+				className={twMerge(
+					orientation === "vertical" && "space-y-2",
+					orientation === "horizontal" && "flex items-center",
+					className,
+				)}
+				{...props}
+			/>
+		</FormItemContext.Provider>
+	);
+});
 FormItem.displayName = "FormItem";
 
 const FormLabel = forwardRef<

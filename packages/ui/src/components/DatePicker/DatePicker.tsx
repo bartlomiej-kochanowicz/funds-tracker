@@ -11,16 +11,25 @@ type DatePickerProps = {
 	onChange: (date?: Date) => void;
 	formatDate: (date: Date) => string;
 	placeholder: string;
+	className?: string;
 } & Omit<ComponentProps<typeof Calendar>, "mode" | "selected">;
 
-const DatePicker = ({ value, onChange, formatDate, placeholder, ...rest }: DatePickerProps) => (
+const DatePicker = ({
+	value,
+	onChange,
+	formatDate,
+	placeholder,
+	className,
+	...rest
+}: DatePickerProps) => (
 	<Popover>
 		<Popover.Trigger asChild>
 			<Button
 				variant="outline"
 				className={twMerge(
-					"w-[280px] justify-start text-left font-normal",
+					"justify-start text-left font-normal",
 					!value && "text-muted-foreground",
+					className,
 				)}
 			>
 				<CalendarIcon className="mr-2 size-4" />
@@ -30,7 +39,6 @@ const DatePicker = ({ value, onChange, formatDate, placeholder, ...rest }: DateP
 		</Popover.Trigger>
 		<Popover.Content className="w-auto p-0">
 			<Calendar
-				toDate={new Date()}
 				mode="single"
 				selected={value}
 				onSelect={onChange}
