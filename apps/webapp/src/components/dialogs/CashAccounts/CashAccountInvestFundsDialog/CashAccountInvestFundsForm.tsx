@@ -17,12 +17,12 @@ import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
 import { SelectPortfolioField } from "./components/SelectPortfolioField";
 
-/* import { ComissionField } from "./components/ComissionField";
-import { FormField } from "./components/FormField";
+/*
+import { ComissionField } from "./components/ComissionField";
 import { PriceField } from "./components/PriceField";
 import { QuantityField } from "./components/QuantityField";
-
-import { TransactionCostField } from "./components/TransactionCostField"; */
+import { TransactionCostField } from "./components/TransactionCostField";
+*/
 
 interface CashAccountInvestFundsFormFormProps {
 	balance: number;
@@ -72,12 +72,14 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 		}
 	}, [watchInstrumentType]);
 
-	const shouldRenderNotSupportedYet = !shouldRenderMarketInstrumentFields;
+	const shouldRenderNotSupportedYet = Boolean(
+		!shouldRenderMarketInstrumentFields && watchInstrumentType,
+	);
 
 	return (
 		<Form {...form}>
 			<form
-				className="flex flex-col gap-2"
+				className="my-2 flex flex-col gap-2"
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Form.Item

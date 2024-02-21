@@ -23,7 +23,7 @@ export const SelectPortfolioField = () => {
 					<Form.Label className="w-40">{t("modal.InvestFunds.form.label.portfolio")}</Form.Label>
 					<Select
 						onValueChange={field.onChange}
-						defaultValue={field.value}
+						defaultValue={field.value || undefined}
 					>
 						<Form.Control>
 							<Select.Trigger className="w-fit grow">

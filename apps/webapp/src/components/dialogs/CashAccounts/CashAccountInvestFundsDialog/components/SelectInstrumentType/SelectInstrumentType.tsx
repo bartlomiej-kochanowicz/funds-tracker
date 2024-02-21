@@ -21,7 +21,7 @@ export const SelectInstrumentType = () => {
 					</Form.Label>
 					<Select
 						onValueChange={field.onChange}
-						defaultValue={field.value}
+						defaultValue={field.value || undefined}
 					>
 						<Form.Control>
 							<Select.Trigger className="w-fit grow">

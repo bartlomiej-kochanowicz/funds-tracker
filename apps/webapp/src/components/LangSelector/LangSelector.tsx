@@ -18,7 +18,7 @@ export const LangSelector = () => {
 			<Select.Trigger className="w-[180px]">
 				<Globe2 className="mr-2" />
 
-				<Select.Value placeholder="Select a fruit" />
+				<Select.Value />
 			</Select.Trigger>
 			<Select.Content>
 				<Select.Group>

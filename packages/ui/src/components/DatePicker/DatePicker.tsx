@@ -7,7 +7,7 @@ import { Calendar } from "../Calendar";
 import { Popover } from "../Popover";
 
 type DatePickerProps = {
-	value: Date;
+	value: Date | null;
 	onChange: (date?: Date) => void;
 	formatDate: (date: Date) => string;
 	placeholder: string;
@@ -15,34 +15,42 @@ type DatePickerProps = {
 } & Omit<ComponentProps<typeof Calendar>, "mode" | "selected">;
 
 const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
-	({ value, onChange, formatDate, placeholder, className, ...rest }, ref) => (
-		<Popover>
-			<Popover.Trigger asChild>
-				<Button
-					variant="outline"
-					className={twMerge(
-						"justify-start text-left font-normal",
-						!value && "text-muted-foreground",
-						className,
-					)}
-					ref={ref}
-				>
-					<CalendarIcon className="mr-2 size-4" />
+	({ value, onChange, formatDate, placeholder, className, ...rest }, ref) => {
+		const handleSelect = (date?: Date) => {
+			if (!date) return;
 
-					{value ? formatDate(value) : <span>{placeholder}</span>}
-				</Button>
-			</Popover.Trigger>
-			<Popover.Content className="w-auto p-0">
-				<Calendar
-					mode="single"
-					selected={value}
-					onSelect={onChange}
-					initialFocus
-					{...rest}
-				/>
-			</Popover.Content>
-		</Popover>
-	),
+			onChange(date);
+		};
+
+		return (
+			<Popover>
+				<Popover.Trigger asChild>
+					<Button
+						variant="outline"
+						className={twMerge(
+							"justify-start text-left font-normal",
+							!value && "text-muted-foreground",
+							className,
+						)}
+						ref={ref}
+					>
+						<CalendarIcon className="mr-2 size-4" />
+
+						{value ? formatDate(value) : <span>{placeholder}</span>}
+					</Button>
+				</Popover.Trigger>
+				<Popover.Content className="w-auto p-0">
+					<Calendar
+						mode="single"
+						selected={value || undefined}
+						onSelect={handleSelect}
+						initialFocus
+						{...rest}
+					/>
+				</Popover.Content>
+			</Popover>
+		);
+	},
 );
 
 DatePicker.displayName = "DatePicker";

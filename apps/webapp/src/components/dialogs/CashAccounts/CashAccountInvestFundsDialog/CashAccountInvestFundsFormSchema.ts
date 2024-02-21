@@ -4,7 +4,10 @@ import instruments from "constants/instruments";
 import { date, InferType, mixed, number, object, string } from "yup";
 
 export const CashAccountInvestFundsFormSchema = object().shape({
-	instrumentType: mixed<InstrumentType>().oneOf(instruments).required(EMPTY_VALIDATION_MESSAGE),
+	instrumentType: mixed<InstrumentType>()
+		.oneOf(instruments)
+		.required(EMPTY_VALIDATION_MESSAGE)
+		.nullable(),
 	instrument: object<SearchInstrument>()
 		.shape({
 			Code: string().required(),
@@ -17,9 +20,10 @@ export const CashAccountInvestFundsFormSchema = object().shape({
 			previousClose: number().required(),
 			previousCloseDate: string().required(),
 		})
-		.required(EMPTY_VALIDATION_MESSAGE),
-	portfolio: string().required(EMPTY_VALIDATION_MESSAGE),
-	date: date().required(EMPTY_VALIDATION_MESSAGE),
+		.required(EMPTY_VALIDATION_MESSAGE)
+		.nullable(),
+	portfolio: string().required(EMPTY_VALIDATION_MESSAGE).nullable(),
+	date: date().required(EMPTY_VALIDATION_MESSAGE).nullable(),
 	quantity: string()
 		.matches(/^(100(\.0+)?|\d{1,2}(\.\d+)?)$/, EMPTY_VALIDATION_MESSAGE)
 		.required(EMPTY_VALIDATION_MESSAGE),
@@ -39,20 +43,10 @@ export type CashAccountInvestFundsFormSchemaType = InferType<
 >;
 
 export const defaultValues: CashAccountInvestFundsFormSchemaType = {
-	instrumentType: instruments[0],
-	instrument: {
-		Code: "",
-		Exchange: "",
-		Name: "",
-		Type: "",
-		Country: "",
-		Currency: "",
-		ISIN: undefined,
-		previousClose: 0,
-		previousCloseDate: "",
-	},
-	portfolio: "",
-	date: new Date(),
+	instrumentType: null,
+	instrument: null,
+	portfolio: null,
+	date: null,
 	quantity: "",
 	price: "",
 	comission: "",

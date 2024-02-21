@@ -12,11 +12,11 @@ import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 interface SearchInstrumentComboboxProps {
-	instrumentType: InstrumentType;
+	instrumentType: InstrumentType | null;
 	onChange: (value: SearchInstrumentQuery["searchInstrument"][0]) => void;
 	onBlur: () => void;
 	disabled?: boolean;
-	value: SearchInstrumentQuery["searchInstrument"][0];
+	value: SearchInstrumentQuery["searchInstrument"][0] | null;
 	className?: string;
 }
 
@@ -36,14 +36,16 @@ export const SearchInstrumentCombobox = forwardRef<
 	});
 
 	const handleInputChange = (name: string) => {
-		findInstruments({
-			variables: {
-				data: {
-					name,
-					type: instrumentType,
+		if (instrumentType) {
+			findInstruments({
+				variables: {
+					data: {
+						name,
+						type: instrumentType,
+					},
 				},
-			},
-		});
+			});
+		}
 	};
 
 	return (
@@ -61,7 +63,8 @@ export const SearchInstrumentCombobox = forwardRef<
 					disabled={disabled}
 					ref={ref}
 				>
-					{value.Name || t("input.search_instrument.placeholder")}
+					{value?.Name || t("input.search_instrument.placeholder")}
+
 					<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
 				</Button>
 			</Popover.Trigger>
