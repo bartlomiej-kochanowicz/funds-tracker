@@ -20,86 +20,88 @@ interface SearchInstrumentComboboxProps {
 	className?: string;
 }
 
-export const SearchInstrumentCombobox = forwardRef<HTMLInputElement, SearchInstrumentComboboxProps>(
-	({ value, onChange, onBlur, disabled, instrumentType, className }) => {
-		const [open, setOpen] = useState(false);
+export const SearchInstrumentCombobox = forwardRef<
+	HTMLButtonElement,
+	SearchInstrumentComboboxProps
+>(({ value, onChange, onBlur, disabled, instrumentType, className }, ref) => {
+	const [open, setOpen] = useState(false);
 
-		const { t } = useTranslation();
+	const { t } = useTranslation();
 
-		const [findInstruments, { data, loading /* , updateQuery */ }] = useLazyQuery<
-			SearchInstrumentQuery,
-			SearchInstrumentQueryVariables
-		>(SEARCH_INSTRUMENT, {
-			fetchPolicy: "network-only",
-		});
+	const [findInstruments, { data, loading /* , updateQuery */ }] = useLazyQuery<
+		SearchInstrumentQuery,
+		SearchInstrumentQueryVariables
+	>(SEARCH_INSTRUMENT, {
+		fetchPolicy: "network-only",
+	});
 
-		const handleInputChange = (name: string) => {
-			findInstruments({
-				variables: {
-					data: {
-						name,
-						type: instrumentType,
-					},
+	const handleInputChange = (name: string) => {
+		findInstruments({
+			variables: {
+				data: {
+					name,
+					type: instrumentType,
 				},
-			});
-		};
+			},
+		});
+	};
 
-		return (
-			<Popover
-				open={open}
-				onOpenChange={setOpen}
-			>
-				<Popover.Trigger asChild>
-					<Button
-						variant="outline"
-						role="combobox"
-						aria-expanded={open}
-						className={twMerge("w-full justify-between", className)}
-						onBlur={onBlur}
-						disabled={disabled}
-					>
-						{value.Name || t("input.search_instrument.placeholder")}
-						<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
-					</Button>
-				</Popover.Trigger>
-				<Popover.Content
-					className="!p-0"
-					align="start"
+	return (
+		<Popover
+			open={open}
+			onOpenChange={setOpen}
+		>
+			<Popover.Trigger asChild>
+				<Button
+					variant="outline"
+					role="combobox"
+					aria-expanded={open}
+					className={twMerge("w-full justify-between", className)}
+					onBlur={onBlur}
+					disabled={disabled}
+					ref={ref}
 				>
-					<Command>
-						<Command.Input
-							onValueChange={handleInputChange}
-							placeholder={t(`input.search_instrument.placeholder.${instrumentType}`)}
-						/>
-						{/* <Command.Empty>{t("form.currency.select.search.empty")}</Command.Empty> */}
-						<Command.Group>
-							<ScrollArea className="h-44 pr-3">
-								{!data && loading && <Loader className="mx-auto" />}
+					{value.Name || t("input.search_instrument.placeholder")}
+					<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
+				</Button>
+			</Popover.Trigger>
+			<Popover.Content
+				className="!p-0"
+				align="start"
+			>
+				<Command>
+					<Command.Input
+						onValueChange={handleInputChange}
+						placeholder={t(`input.search_instrument.placeholder.${instrumentType}`)}
+					/>
+					{/* <Command.Empty>{t("form.currency.select.search.empty")}</Command.Empty> */}
+					<Command.Group>
+						<ScrollArea className="h-44 pr-3">
+							{!data && loading && <Loader className="mx-auto" />}
 
-								{data &&
-									!loading &&
-									data.searchInstrument.map(({ Name, Code, Currency, ...rest }) => {
-										return (
-											<Command.Item
-												key={Code}
-												onSelect={() => {
-													onChange({ Name, Code, Currency, ...rest });
-													setOpen(false);
-												}}
-											>
-												<Badge>{Code}</Badge>
+							{data &&
+								!loading &&
+								data.searchInstrument.map(({ Name, Code, Currency, ...rest }) => {
+									return (
+										<Command.Item
+											key={Code}
+											onSelect={() => {
+												onChange({ Name, Code, Currency, ...rest });
+												setOpen(false);
+											}}
+										>
+											<Badge>{Code}</Badge>
 
-												<Text>{Name}</Text>
+											<Text>{Name}</Text>
 
-												<Text>({Currency})</Text>
-											</Command.Item>
-										);
-									})}
-							</ScrollArea>
-						</Command.Group>
-					</Command>
-				</Popover.Content>
-			</Popover>
-		);
-	},
-);
+											<Text>({Currency})</Text>
+										</Command.Item>
+									);
+								})}
+						</ScrollArea>
+					</Command.Group>
+				</Command>
+			</Popover.Content>
+		</Popover>
+	);
+});
