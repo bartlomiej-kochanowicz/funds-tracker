@@ -228,9 +228,6 @@ importers:
       clsx:
         specifier: 2.1.0
         version: 2.1.0
-      date-fns:
-        specifier: ^3.3.1
-        version: 3.3.1
       framer-motion:
         specifier: 10.17.9
         version: 10.17.9(react-dom@18.2.0)(react@18.2.0)
@@ -261,9 +258,6 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
-      react-day-picker:
-        specifier: ^8.10.0
-        version: 8.10.0(date-fns@3.3.1)(react@18.2.0)
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
@@ -505,6 +499,9 @@ importers:
       cmdk:
         specifier: 0.2.1
         version: 0.2.1(@types/react@18.2.7)(react-dom@18.2.0)(react@18.2.0)
+      date-fns:
+        specifier: ^3.3.1
+        version: 3.3.1
       framer-motion:
         specifier: 11.0.3
         version: 11.0.3(react-dom@18.2.0)(react@18.2.0)
