@@ -82,10 +82,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 				className="my-2 flex flex-col gap-2"
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<Form.Item
-					className="flex items-center"
-					orientation="horizontal"
-				>
+				<Form.Item orientation="horizontal">
 					<Form.Label className="w-40">
 						{t("modal.InvestFunds.form.label.account.balance")}
 					</Form.Label>

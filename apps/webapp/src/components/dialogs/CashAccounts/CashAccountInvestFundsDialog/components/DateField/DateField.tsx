@@ -28,7 +28,6 @@ export const DateField = () => {
 						toYear={new Date().getFullYear()}
 						{...field}
 					/>
-					<Form.Message />
 				</Form.Item>
 			)}
 		/>

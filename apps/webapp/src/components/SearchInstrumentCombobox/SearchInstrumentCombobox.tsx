@@ -52,7 +52,7 @@ export const SearchInstrumentCombobox = forwardRef<
 
 			return prev;
 		});
-	}, [instrumentType]);
+	}, [instrumentType, open]);
 
 	const handleInputChange = (name: string) => {
 		if (instrumentType) {
@@ -77,12 +77,15 @@ export const SearchInstrumentCombobox = forwardRef<
 					variant="outline"
 					role="combobox"
 					aria-expanded={open}
-					className={twMerge("w-full justify-between", className)}
+					className={twMerge("justify-between", className)}
 					onBlur={onBlur}
 					disabled={disabled}
 					ref={mergeRefs([triggerRef, ref])}
 				>
-					{value?.Name || t("input.search_instrument.placeholder")}
+					<span className="truncate">
+						sodijfsd fsodifosdfuosdufo sdfosdiuosdiufosd foiusdo fusdoifusodiuf
+						{/* {value?.Name || t("input.search_instrument.placeholder")} */}
+					</span>
 
 					<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
 				</Button>
@@ -90,7 +93,7 @@ export const SearchInstrumentCombobox = forwardRef<
 			<Popover.Content
 				className="w-fit !p-0"
 				style={{
-					minWidth: triggerRef.current?.offsetWidth,
+					width: triggerRef.current?.offsetWidth,
 				}}
 				align="start"
 			>
@@ -100,20 +103,20 @@ export const SearchInstrumentCombobox = forwardRef<
 						placeholder={t(`input.search_instrument.placeholder.${instrumentType}`)}
 					/>
 
-					{!data && loading && <Loader className="mx-auto mt-4" />}
-
-					{data?.searchInstrument.length === 0 && (
-						<Text
-							muted
-							className="mx-auto mt-4 text-sm"
-						>
-							{t("form.search_instrument.empty")}
-						</Text>
-					)}
-
 					<Command.List>
 						<Command.Group>
 							<ScrollArea className="h-44 pr-3">
+								{!data && loading && <Loader className="mx-auto mt-4" />}
+
+								{data?.searchInstrument.length === 0 && (
+									<Text
+										muted
+										className="mt-4 block text-center text-sm"
+									>
+										{t("form.search_instrument.empty")}
+									</Text>
+								)}
+
 								{data &&
 									data.searchInstrument.map(instrument => {
 										const { Name, Exchange, Code, Currency: currency, previousClose } = instrument;

@@ -24,7 +24,7 @@ export const SelectInstrumentType = () => {
 						defaultValue={field.value || undefined}
 					>
 						<Form.Control>
-							<Select.Trigger className="w-fit grow">
+							<Select.Trigger className="w-full grow md:w-fit">
 								<Select.Value
 									placeholder={t(
 										"modal.InvestFunds.form.select.portfolio.instrumentType.placeholder",
@@ -43,7 +43,6 @@ export const SelectInstrumentType = () => {
 							))}
 						</Select.Content>
 					</Select>
-					<Form.Message />
 				</Form.Item>
 			)}
 		/>

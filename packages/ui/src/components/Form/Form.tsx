@@ -80,7 +80,8 @@ const FormItem = forwardRef<
 				ref={ref}
 				className={twMerge(
 					orientation === "vertical" && "space-y-2",
-					orientation === "horizontal" && "flex items-center",
+					orientation === "horizontal" &&
+						"flex flex-col space-y-1 md:space-y-0 md:flex-row md:items-center",
 					className,
 				)}
 				{...props}

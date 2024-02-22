@@ -18,13 +18,14 @@ export const SearchInstrumentField = () => {
 			name="instrument"
 			render={({ field }) => (
 				<Form.Item orientation="horizontal">
-					<Form.Label className="w-40">{t("modal.InvestFunds.form.label.instrument")}</Form.Label>
+					<Form.Label className="w-40 min-w-40">
+						{t("modal.InvestFunds.form.label.instrument")}
+					</Form.Label>
 					<SearchInstrumentCombobox
-						className="w-fit grow"
+						className="w-full"
 						instrumentType={instrumentType}
 						{...field}
 					/>
-					<Form.Message />
 				</Form.Item>
 			)}
 		/>
