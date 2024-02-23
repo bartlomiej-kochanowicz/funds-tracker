@@ -1,34 +1,32 @@
-/* import { Input } from "components/atoms";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
-import { useBreakpoint } from "hooks/useBreakpoint";
+import { Form, NumberInput } from "@funds-tracker/ui";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { FormField } from "../FormField";
+import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
 export const QuantityField = () => {
+	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
+
 	const { t } = useTranslation();
 
-	const { register, getFieldState } = useFormContext<InvestFundsFormValues>();
-
-	const isPhone = useBreakpoint("phone", "max");
-
-	const { error } = getFieldState("quantity");
+	const { i18n } = useTranslation();
 
 	return (
-		<FormField
-			label={t("modal.InvestFunds.form.label.quantity")}
-			htmlFor="quantity"
-		>
-			<Input
-				id="quantity"
-				$flexGrow={1}
-				$width={isPhone ? "100%" : "auto"}
-				placeholder={t("modal.InvestFunds.form.input.quantity.placeholder")}
-				error={error?.message}
-				{...register("quantity")}
-			/>
-		</FormField>
+		<Form.Field
+			control={form.control}
+			name="quantity"
+			render={({ field: { value, ...rest } }) => (
+				<Form.Item orientation="horizontal">
+					<Form.Label className="min-w-44">{t("modal.InvestFunds.form.label.quantity")}</Form.Label>
+					<NumberInput
+						locale={i18n.language}
+						aria-label={t("modal.InvestFunds.form.input.quantity.placeholder")}
+						placeholder={t("modal.InvestFunds.form.input.quantity.placeholder")}
+						value={value || undefined}
+						{...rest}
+					/>
+				</Form.Item>
+			)}
+		/>
 	);
 };
- */

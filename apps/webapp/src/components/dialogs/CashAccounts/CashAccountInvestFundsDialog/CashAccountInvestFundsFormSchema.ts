@@ -24,9 +24,7 @@ export const CashAccountInvestFundsFormSchema = object().shape({
 		.nullable(),
 	portfolio: string().required(EMPTY_VALIDATION_MESSAGE).nullable(),
 	date: date().required(EMPTY_VALIDATION_MESSAGE).nullable(),
-	quantity: string()
-		.matches(/^(100(\.0+)?|\d{1,2}(\.\d+)?)$/, EMPTY_VALIDATION_MESSAGE)
-		.required(EMPTY_VALIDATION_MESSAGE),
+	quantity: number().required(EMPTY_VALIDATION_MESSAGE).nullable(),
 	price: string().required(EMPTY_VALIDATION_MESSAGE),
 	comission: string()
 		.when("comission_type", {
@@ -47,7 +45,7 @@ export const defaultValues: CashAccountInvestFundsFormSchemaType = {
 	instrument: null,
 	portfolio: null,
 	date: null,
-	quantity: "",
+	quantity: null,
 	price: "",
 	comission: "",
 	comission_type: "%",
