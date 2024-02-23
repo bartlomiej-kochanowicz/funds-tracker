@@ -83,7 +83,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Form.Item orientation="horizontal">
-					<Form.Label className="w-40">
+					<Form.Label className="min-w-44">
 						{t("modal.InvestFunds.form.label.account.balance")}
 					</Form.Label>
 					<Form.Description className="mt-0">{formatCurrency(balance, currency)}</Form.Description>

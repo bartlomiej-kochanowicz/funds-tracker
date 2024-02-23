@@ -16,7 +16,7 @@ export const DateField = () => {
 			name="date"
 			render={({ field }) => (
 				<Form.Item orientation="horizontal">
-					<Form.Label className="w-40">
+					<Form.Label className="min-w-44">
 						{t("modal.InvestFunds.form.label.purchase_date")}
 					</Form.Label>
 					<DatePicker

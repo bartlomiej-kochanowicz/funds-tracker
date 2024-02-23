@@ -20,7 +20,7 @@ export const SelectPortfolioField = () => {
 			name="portfolio"
 			render={({ field }) => (
 				<Form.Item orientation="horizontal">
-					<Form.Label className="w-40 min-w-40">
+					<Form.Label className="min-w-44">
 						{t("modal.InvestFunds.form.label.portfolio")}
 					</Form.Label>
 					<Select
@@ -28,7 +28,7 @@ export const SelectPortfolioField = () => {
 						defaultValue={field.value || undefined}
 					>
 						<Form.Control>
-							<Select.Trigger className="w-full grow md:w-fit [&>span]:truncate">
+							<Select.Trigger className="w-full grow md:w-fit md:max-w-[350px] lg:max-w-[446px] [&>span]:truncate">
 								<Select.Value
 									placeholder={t("modal.InvestFunds.form.select.portfolio.placeholder")}
 								/>

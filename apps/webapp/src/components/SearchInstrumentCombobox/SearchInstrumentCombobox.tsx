@@ -5,7 +5,16 @@ import {
 	SearchInstrumentQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Badge, Button, Command, Loader, Popover, ScrollArea, Text } from "@funds-tracker/ui";
+import {
+	Badge,
+	Button,
+	Command,
+	debounce,
+	Loader,
+	Popover,
+	ScrollArea,
+	Text,
+} from "@funds-tracker/ui";
 import { mergeRefs } from "@funds-tracker/ui/src/helpers/mergeRefs";
 import { SEARCH_INSTRUMENT } from "graphql/query/instruments/SearchInstrument";
 import { formatCurrency } from "helpers/formatCurrency";
@@ -83,8 +92,7 @@ export const SearchInstrumentCombobox = forwardRef<
 					ref={mergeRefs([triggerRef, ref])}
 				>
 					<span className="truncate">
-						sodijfsd fsodifosdfuosdufo sdfosdiuosdiufosd foiusdo fusdoifusodiuf
-						{/* {value?.Name || t("input.search_instrument.placeholder")} */}
+						{value?.Name || t("input.search_instrument.placeholder")}
 					</span>
 
 					<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
@@ -99,7 +107,7 @@ export const SearchInstrumentCombobox = forwardRef<
 			>
 				<Command shouldFilter={false}>
 					<Command.Input
-						onValueChange={handleInputChange}
+						onValueChange={debounce(handleInputChange)}
 						placeholder={t(`input.search_instrument.placeholder.${instrumentType}`)}
 					/>
 

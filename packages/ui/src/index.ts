@@ -29,3 +29,6 @@ export * from "./hooks/useTailwindBreakpoint";
 
 // Path: src/icons
 export * from "./icons/CheckCircleAnimated";
+
+// Path: src/helpers
+export * from "./helpers/debounce";
