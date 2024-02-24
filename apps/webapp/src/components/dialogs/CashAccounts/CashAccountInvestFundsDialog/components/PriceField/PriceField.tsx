@@ -64,7 +64,7 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 		<Form.Field
 			control={form.control}
 			name="price"
-			render={({ ...field }) => (
+			render={({ field }) => (
 				<Form.Item orientation="horizontal">
 					<Form.Label className="min-w-44">{t("modal.InvestFunds.form.label.price")}</Form.Label>
 					<NumberInput

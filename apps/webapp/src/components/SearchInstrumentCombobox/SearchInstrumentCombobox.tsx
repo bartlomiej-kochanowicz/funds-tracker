@@ -18,7 +18,6 @@ import {
 import { mergeRefs } from "@funds-tracker/ui/src/helpers/mergeRefs";
 import { SEARCH_INSTRUMENT } from "graphql/query/instruments/SearchInstrument";
 import { formatCurrency } from "helpers/formatCurrency";
-import { useUpdateEffect } from "hooks/useUpdateEffect";
 import { ChevronsUpDown } from "lucide-react";
 import { forwardRef, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -50,7 +49,7 @@ export const SearchInstrumentCombobox = forwardRef<
 		fetchPolicy: "network-only",
 	});
 
-	useUpdateEffect(() => {
+	const cleanSearchData = () => {
 		updateQuery(prev => {
 			if (prev) {
 				return {
@@ -61,7 +60,15 @@ export const SearchInstrumentCombobox = forwardRef<
 
 			return prev;
 		});
-	}, [instrumentType, open]);
+	};
+
+	const handleOpenChange = (nextOpen: boolean) => {
+		if (nextOpen) {
+			cleanSearchData();
+		}
+
+		setOpen(nextOpen);
+	};
 
 	const handleInputChange = (name: string) => {
 		if (instrumentType) {
@@ -79,7 +86,7 @@ export const SearchInstrumentCombobox = forwardRef<
 	return (
 		<Popover
 			open={open}
-			onOpenChange={setOpen}
+			onOpenChange={handleOpenChange}
 		>
 			<Popover.Trigger asChild>
 				<Button
