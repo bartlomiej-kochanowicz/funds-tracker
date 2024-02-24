@@ -15,14 +15,14 @@ export const QuantityField = () => {
 		<Form.Field
 			control={form.control}
 			name="quantity"
-			render={({ field: { value, ...rest } }) => (
+			render={({ ...field }) => (
 				<Form.Item orientation="horizontal">
 					<Form.Label className="min-w-44">{t("modal.InvestFunds.form.label.quantity")}</Form.Label>
 					<NumberInput
 						locale={i18n.language}
+						aria-label={t("modal.InvestFunds.form.label.quantity")}
 						placeholder={t("modal.InvestFunds.form.input.quantity.placeholder")}
-						value={value || undefined}
-						{...rest}
+						{...field}
 					/>
 				</Form.Item>
 			)}

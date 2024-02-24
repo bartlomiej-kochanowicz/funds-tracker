@@ -58,15 +58,13 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 		updatePrice();
 	}, [updatePrice]);
 
-	const { t } = useTranslation();
-
-	const { i18n } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	return (
 		<Form.Field
 			control={form.control}
 			name="price"
-			render={({ field: { value, ...rest } }) => (
+			render={({ ...field }) => (
 				<Form.Item orientation="horizontal">
 					<Form.Label className="min-w-44">{t("modal.InvestFunds.form.label.price")}</Form.Label>
 					<NumberInput
@@ -75,9 +73,9 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 							style: "currency",
 							currency: activeCurrency,
 						}}
+						aria-label={t("modal.InvestFunds.form.label.price")}
 						placeholder={t("modal.InvestFunds.form.input.price.placeholder")}
-						value={value || undefined}
-						{...rest}
+						{...field}
 					/>
 				</Form.Item>
 			)}

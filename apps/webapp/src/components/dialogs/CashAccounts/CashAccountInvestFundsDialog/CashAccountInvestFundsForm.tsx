@@ -11,6 +11,8 @@ import {
 	CashAccountInvestFundsFormSchemaType,
 	defaultValues,
 } from "./CashAccountInvestFundsFormSchema";
+import { ComissionField } from "./components/ComissionField";
+import { ComissionTypeField } from "./components/CommissionTypeField";
 import { DateField } from "./components/DateField";
 import { NotSupportedYet } from "./components/NotSupportedYet";
 import { PriceField } from "./components/PriceField";
@@ -20,7 +22,7 @@ import { SelectInstrumentType } from "./components/SelectInstrumentType";
 import { SelectPortfolioField } from "./components/SelectPortfolioField";
 
 /*
-import { ComissionField } from "./components/ComissionField";
+
 
 
 import { TransactionCostField } from "./components/TransactionCostField";
@@ -100,9 +102,9 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						<DateField />
 						<QuantityField />
 						<PriceField activeCurrency={activeCurrency} />
-						{/*
+						<ComissionTypeField />
 						<ComissionField activeCurrency={activeCurrency} />
-
+						{/*
 						<TransactionCostField activeCurrency={activeCurrency} />
 						*/}
 					</Fragment>
