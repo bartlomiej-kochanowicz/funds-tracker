@@ -1,38 +1,33 @@
-/* import {
+import {
 	Currency,
 	GetInstrumentHistoryQuery,
 	GetInstrumentHistoryQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Button } from "@funds-tracker/ui";
-import { Input, Spreader } from "components/atoms";
-import { InvestFundsFormValues } from "components/modals/InvestFunds/helpers/defaultValues";
+import { Form, NumberInput } from "@funds-tracker/ui";
 import { INSTRUMENT_HISTORY } from "graphql/query/instruments/InstrumentHistory";
-import { useBreakpoint } from "hooks/useBreakpoint";
-import { useCurrencyInput } from "hooks/useCurrencyInput";
 import { useUpdateEffect } from "hooks/useUpdateEffect";
-import { RefreshCw } from "lucide-react";
-import { FC, useCallback } from "react";
+import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { FormField } from "../FormField";
+import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
-interface IPriceFieldProps {
+interface PriceFieldProps {
 	activeCurrency: Currency;
 }
 
-export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
-	const { t } = useTranslation();
+export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
+	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
 
-	const { setValue, watch, control } = useFormContext<InvestFundsFormValues>();
+	const { setValue, watch } = form;
 
-	const [getInstrumentHistory, { data }] = useLazyQuery<
+	const [getInstrumentHistory] = useLazyQuery<
 		GetInstrumentHistoryQuery,
 		GetInstrumentHistoryQueryVariables
 	>(INSTRUMENT_HISTORY, {
 		onCompleted: ({ instrumentHistory }) => {
-			setValue("price", String(instrumentHistory.at(-1)?.close.toFixed(2)), {
+			setValue("price", Number(instrumentHistory.at(-1)?.close.toFixed(2)), {
 				shouldDirty: true,
 			});
 		},
@@ -63,41 +58,29 @@ export const PriceField: FC<IPriceFieldProps> = ({ activeCurrency }) => {
 		updatePrice();
 	}, [updatePrice]);
 
-	const isPhone = useBreakpoint("phone", "max");
+	const { t } = useTranslation();
 
-	const currencyInputProps = useCurrencyInput<InvestFundsFormValues>({ control, name: "price" });
-
-	const watchInstrumentCode = watch("instrument.Code");
-	const watchPrice = watch("price");
-
-	const priceChanged = watchPrice !== data?.instrumentHistory.at(-1)?.close.toFixed(2);
+	const { i18n } = useTranslation();
 
 	return (
-		<FormField
-			label={t("modal.InvestFunds.form.label.price")}
-			htmlFor="price"
-		>
-			<div className="flex w-full grow md:w-auto">
-				<Input
-					type="currency"
-					$flexGrow={1}
-					$width={isPhone ? "100%" : "auto"}
-					placeholder={t("modal.InvestFunds.form.input.price.placeholder")}
-					currency={activeCurrency}
-					{...currencyInputProps}
-				/>
-
-				<Spreader $spread="0.25" />
-
-				<Button
-					color="black"
-					onPress={updatePrice}
-					isDisabled={!watchInstrumentCode || !watchDate || !priceChanged}
-				>
-					<RefreshCw />
-				</Button>
-			</div>
-		</FormField>
+		<Form.Field
+			control={form.control}
+			name="price"
+			render={({ field: { value, ...rest } }) => (
+				<Form.Item orientation="horizontal">
+					<Form.Label className="min-w-44">{t("modal.InvestFunds.form.label.price")}</Form.Label>
+					<NumberInput
+						locale={i18n.language}
+						formatOptions={{
+							style: "currency",
+							currency: activeCurrency,
+						}}
+						placeholder={t("modal.InvestFunds.form.input.price.placeholder")}
+						value={value || undefined}
+						{...rest}
+					/>
+				</Form.Item>
+			)}
+		/>
 	);
 };
- */

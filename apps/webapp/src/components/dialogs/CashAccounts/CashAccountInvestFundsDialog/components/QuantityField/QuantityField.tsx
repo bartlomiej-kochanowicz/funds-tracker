@@ -20,7 +20,6 @@ export const QuantityField = () => {
 					<Form.Label className="min-w-44">{t("modal.InvestFunds.form.label.quantity")}</Form.Label>
 					<NumberInput
 						locale={i18n.language}
-						aria-label={t("modal.InvestFunds.form.input.quantity.placeholder")}
 						placeholder={t("modal.InvestFunds.form.input.quantity.placeholder")}
 						value={value || undefined}
 						{...rest}

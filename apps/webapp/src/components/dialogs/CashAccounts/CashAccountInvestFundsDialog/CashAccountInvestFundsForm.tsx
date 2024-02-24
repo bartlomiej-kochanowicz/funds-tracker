@@ -13,6 +13,7 @@ import {
 } from "./CashAccountInvestFundsFormSchema";
 import { DateField } from "./components/DateField";
 import { NotSupportedYet } from "./components/NotSupportedYet";
+import { PriceField } from "./components/PriceField";
 import { QuantityField } from "./components/QuantityField";
 import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
@@ -20,7 +21,7 @@ import { SelectPortfolioField } from "./components/SelectPortfolioField";
 
 /*
 import { ComissionField } from "./components/ComissionField";
-import { PriceField } from "./components/PriceField";
+
 
 import { TransactionCostField } from "./components/TransactionCostField";
 */
@@ -60,7 +61,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 	const watchInstrument = watch("instrument");
 	const watchInstrumentType = watch("instrumentType");
 
-	const activeCurrency = watchInstrument?.Currency || currency;
+	const activeCurrency = (watchInstrument?.Currency || currency) as Currency;
 
 	const shouldRenderMarketInstrumentFields = useMemo(() => {
 		switch (watchInstrumentType) {
@@ -98,12 +99,11 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						<SelectPortfolioField />
 						<DateField />
 						<QuantityField />
+						<PriceField activeCurrency={activeCurrency} />
 						{/*
-						<PriceField activeCurrency={activeCurrency as Currency} />
+						<ComissionField activeCurrency={activeCurrency} />
 
-						<ComissionField activeCurrency={activeCurrency as Currency} />
-
-						<TransactionCostField activeCurrency={activeCurrency as Currency} />
+						<TransactionCostField activeCurrency={activeCurrency} />
 						*/}
 					</Fragment>
 				)}
