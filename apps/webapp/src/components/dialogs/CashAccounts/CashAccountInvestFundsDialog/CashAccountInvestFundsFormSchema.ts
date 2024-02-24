@@ -28,7 +28,7 @@ export const CashAccountInvestFundsFormSchema = object().shape({
 	price: number().required(EMPTY_VALIDATION_MESSAGE).nullable(),
 	comission: number().required(EMPTY_VALIDATION_MESSAGE),
 	comission_type: string().oneOf(["%", "amount"]).required(EMPTY_VALIDATION_MESSAGE),
-	transaction_cost: string().required(EMPTY_VALIDATION_MESSAGE),
+	transaction_cost: number().required(EMPTY_VALIDATION_MESSAGE),
 });
 
 export type CashAccountInvestFundsFormSchemaType = InferType<
@@ -44,5 +44,5 @@ export const defaultValues: CashAccountInvestFundsFormSchemaType = {
 	price: null,
 	comission: 0,
 	comission_type: "%",
-	transaction_cost: "",
+	transaction_cost: 0,
 };

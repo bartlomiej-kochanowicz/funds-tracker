@@ -26,7 +26,9 @@ export * from "./components/Tile";
 export * from "./components/Toaster";
 
 // Path: src/hooks
+export * from "./hooks/useIsFirstRender";
 export * from "./hooks/useTailwindBreakpoint";
+export * from "./hooks/useUpdateEffect";
 
 // Path: src/icons
 export * from "./icons/CheckCircleAnimated";

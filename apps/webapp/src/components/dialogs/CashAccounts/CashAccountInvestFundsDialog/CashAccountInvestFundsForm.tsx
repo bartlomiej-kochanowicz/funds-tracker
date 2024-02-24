@@ -45,7 +45,6 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 		handleSubmit,
 		watch,
 		formState: { isValid, isSubmitting },
-		control,
 	} = form;
 
 	const onSubmit = useCallback(

@@ -15,7 +15,7 @@ export const QuantityField = () => {
 		<Form.Field
 			control={form.control}
 			name="quantity"
-			render={({ ...field }) => (
+			render={({ field }) => (
 				<Form.Item orientation="horizontal">
 					<Form.Label className="min-w-44">{t("modal.InvestFunds.form.label.quantity")}</Form.Label>
 					<NumberInput

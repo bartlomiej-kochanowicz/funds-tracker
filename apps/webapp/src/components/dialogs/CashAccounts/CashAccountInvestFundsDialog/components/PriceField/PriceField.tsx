@@ -4,9 +4,8 @@ import {
 	GetInstrumentHistoryQueryVariables,
 } from "__generated__/graphql";
 import { useLazyQuery } from "@apollo/client";
-import { Form, NumberInput } from "@funds-tracker/ui";
+import { Form, NumberInput, useUpdateEffect } from "@funds-tracker/ui";
 import { INSTRUMENT_HISTORY } from "graphql/query/instruments/InstrumentHistory";
-import { useUpdateEffect } from "hooks/useUpdateEffect";
 import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";

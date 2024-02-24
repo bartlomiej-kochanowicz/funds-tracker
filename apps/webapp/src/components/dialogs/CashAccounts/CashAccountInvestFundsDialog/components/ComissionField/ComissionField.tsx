@@ -1,6 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Form, NumberInput } from "@funds-tracker/ui";
-import { useUpdateEffect } from "hooks/useUpdateEffect";
+import { Form, NumberInput, useUpdateEffect } from "@funds-tracker/ui";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -18,7 +17,9 @@ export const ComissionField = ({ activeCurrency }: ComissionFieldProps) => {
 	const { t, i18n } = useTranslation();
 
 	useUpdateEffect(() => {
-		setValue("comission", 0);
+		setValue("comission", 0, {
+			shouldDirty: true,
+		});
 	}, [watchComissionType]);
 
 	return (
