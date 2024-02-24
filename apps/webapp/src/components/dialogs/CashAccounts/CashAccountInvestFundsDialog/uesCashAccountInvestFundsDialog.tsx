@@ -1,5 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Dialog } from "@funds-tracker/ui";
+import { Dialog, ScrollArea } from "@funds-tracker/ui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -38,11 +38,13 @@ export const useCashAccountInvestFundsDialog = ({
 						<Dialog.Description>{t("modal.InvestFunds.description")}</Dialog.Description>
 					</Dialog.Header>
 
-					<CashAccountInvestFundsForm
-						balance={balance}
-						currency={currency}
-						uuid={uuid}
-					/>
+					<ScrollArea className="h-[75vh]">
+						<CashAccountInvestFundsForm
+							balance={balance}
+							currency={currency}
+							uuid={uuid}
+						/>
+					</ScrollArea>
 				</Dialog.Content>
 			</Dialog>
 		),

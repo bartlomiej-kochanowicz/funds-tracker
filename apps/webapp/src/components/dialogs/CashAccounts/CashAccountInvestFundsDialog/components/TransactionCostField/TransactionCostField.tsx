@@ -161,7 +161,7 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 						{...field}
 					/>
 					<Button
-						className="ml-2"
+						className="md:ml-2"
 						variant="secondary"
 						onClick={calculateTransactionCost}
 						disabled={!watchQuantity || !watchPrice || !watchComission}
