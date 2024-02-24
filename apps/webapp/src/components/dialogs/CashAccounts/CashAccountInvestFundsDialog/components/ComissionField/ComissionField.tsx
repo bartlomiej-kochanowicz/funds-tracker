@@ -28,10 +28,7 @@ export const ComissionField = ({ activeCurrency }: ComissionFieldProps) => {
 			name="comission"
 			render={({ field }) => (
 				<Form.Item orientation="horizontal">
-					<Form.Label
-						className="min-w-44"
-						htmlFor="comission"
-					>
+					<Form.Label className="min-w-44">
 						{t("modal.InvestFunds.form.label.comission", {
 							currency: activeCurrency,
 						})}

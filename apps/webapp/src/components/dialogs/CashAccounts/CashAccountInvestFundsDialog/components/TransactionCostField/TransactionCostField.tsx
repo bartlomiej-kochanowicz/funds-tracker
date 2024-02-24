@@ -48,10 +48,7 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 			name="transaction_cost"
 			render={({ field }) => (
 				<Form.Item orientation="horizontal">
-					<Form.Label
-						className="min-w-44"
-						htmlFor="comission"
-					>
+					<Form.Label className="min-w-44">
 						{t("modal.InvestFunds.form.label.transaction_cost")}
 					</Form.Label>
 					<NumberInput
