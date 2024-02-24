@@ -20,13 +20,7 @@ import { QuantityField } from "./components/QuantityField";
 import { SearchInstrumentField } from "./components/SearchInstrumentField";
 import { SelectInstrumentType } from "./components/SelectInstrumentType";
 import { SelectPortfolioField } from "./components/SelectPortfolioField";
-
-/*
-
-
-
 import { TransactionCostField } from "./components/TransactionCostField";
-*/
 
 interface CashAccountInvestFundsFormFormProps {
 	balance: number;
@@ -104,9 +98,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						<PriceField activeCurrency={activeCurrency} />
 						<ComissionTypeField />
 						<ComissionField activeCurrency={activeCurrency} />
-						{/*
 						<TransactionCostField activeCurrency={activeCurrency} />
-						*/}
 					</Fragment>
 				)}
 
