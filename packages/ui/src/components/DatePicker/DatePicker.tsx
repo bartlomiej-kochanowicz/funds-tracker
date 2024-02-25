@@ -1,5 +1,5 @@
 import { Calendar as CalendarIcon } from "lucide-react";
-import { ComponentProps, forwardRef } from "react";
+import { ComponentProps, forwardRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { Button } from "../Button";
@@ -16,14 +16,20 @@ type DatePickerProps = {
 
 const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
 	({ value, onChange, formatDate, placeholder, className, ...rest }, ref) => {
+		const [open, setOpen] = useState(false);
+
 		const handleSelect = (date?: Date) => {
 			if (!date) return;
 
 			onChange(date);
+			setOpen(false);
 		};
 
 		return (
-			<Popover>
+			<Popover
+				open={open}
+				onOpenChange={setOpen}
+			>
 				<Popover.Trigger asChild>
 					<Button
 						variant="outline"

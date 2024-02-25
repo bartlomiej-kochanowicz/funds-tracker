@@ -45,8 +45,10 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 	const {
 		handleSubmit,
 		watch,
-		formState: { isValid, isSubmitting },
+		formState: { isValid, isSubmitting, errors },
 	} = form;
+
+	console.log(errors);
 
 	const onSubmit = useCallback(
 		(data: CashAccountInvestFundsFormSchemaType) => {
@@ -96,10 +98,10 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 					{shouldRenderMarketInstrumentFields && (
 						<Fragment>
 							<SearchInstrumentField />
-							<SelectPortfolioField />
 							<DateField />
-							<QuantityField />
 							<PriceField activeCurrency={activeCurrency} />
+							<QuantityField />
+							<SelectPortfolioField />
 							<ComissionTypeField />
 							<ComissionField activeCurrency={activeCurrency} />
 							<TransactionCostField activeCurrency={activeCurrency} />

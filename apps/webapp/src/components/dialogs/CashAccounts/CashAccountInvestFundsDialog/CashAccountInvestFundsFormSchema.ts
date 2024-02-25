@@ -10,13 +10,14 @@ export const CashAccountInvestFundsFormSchema = object().shape({
 		.nullable(),
 	instrument: object<SearchInstrument>()
 		.shape({
+			__typename: string(),
 			Code: string().required(),
 			Exchange: string().required(),
 			Name: string().required(),
 			Type: string().required(),
 			Country: string().required(),
 			Currency: string().required(),
-			ISIN: string(),
+			ISIN: string().nullable(),
 			previousClose: number().required(),
 			previousCloseDate: string().required(),
 		})
