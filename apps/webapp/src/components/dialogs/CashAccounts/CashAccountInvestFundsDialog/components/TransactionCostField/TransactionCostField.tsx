@@ -44,12 +44,6 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 		});
 	};
 
-	console.log({
-		watchComission,
-		watchPrice,
-		watchQuantity,
-	});
-
 	return (
 		<Form.Field
 			control={control}
