@@ -60,10 +60,8 @@ export const PortfolioCard = ({ name, isPending, uuid, handleRefetch }: Portfoli
 			>
 				<Card.Header className="w-full">
 					<div className="flex items-center justify-between">
-						<div>
-							<Card.Title>{name}</Card.Title>
-							{/* <Card.Description>{formatCurrency(balance, currency)}</Card.Description> */}
-						</div>
+						<Card.Title className="max-w-[80%]">{name}</Card.Title>
+						{/* <Card.Description>{formatCurrency(balance, currency)}</Card.Description> */}
 						<DropdownMenu>
 							<DropdownMenu.Trigger asChild>
 								<Button

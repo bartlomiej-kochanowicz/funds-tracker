@@ -98,7 +98,7 @@ export const CashAccountCard = ({
 			>
 				<Card.Header className="w-full">
 					<div className="flex items-center justify-between">
-						<div>
+						<div className="max-w-[80%] grow">
 							<Card.Title>{name}</Card.Title>
 							<Card.Description>{formatCurrency(balance, currency)}</Card.Description>
 						</div>

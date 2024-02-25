@@ -28,7 +28,7 @@ const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingEle
 	({ className, children, ...props }, ref) => (
 		<h2
 			ref={ref}
-			className={twMerge("text-2xl font-semibold leading-none tracking-tight", className)}
+			className={twMerge("text-2xl font-semibold tracking-tight truncate", className)}
 			{...props}
 		>
 			{children}
