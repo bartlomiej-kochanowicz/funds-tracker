@@ -1,5 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Button, Form, NumberInput } from "@funds-tracker/ui";
+import { Button, Form, NumberInput, useUpdateEffect } from "@funds-tracker/ui";
 import { Calculator } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -24,7 +24,7 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 	const calculateTransactionCost = () => {
 		const { price, quantity, comission, comission_type: comissionType } = getValues();
 
-		if (!price || !quantity || !comission || !comissionType) return;
+		if (!validateNonNullish([price, quantity, comission, comissionType])) return;
 
 		let transactionCost = 0;
 
@@ -43,6 +43,10 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 			shouldValidate: true,
 		});
 	};
+
+	useUpdateEffect(() => {
+		calculateTransactionCost();
+	}, [watchQuantity, watchPrice, watchComission]);
 
 	return (
 		<Form.Field

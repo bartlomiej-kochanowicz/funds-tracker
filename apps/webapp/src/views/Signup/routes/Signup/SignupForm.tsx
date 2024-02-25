@@ -19,7 +19,7 @@ import { ROUTES } from "routes/paths";
 
 import { NameAndEmail } from "./components/NameAndEmail";
 import { Passwords } from "./components/Passwords";
-import { SignupFormSchema,SignupFormSchemaType } from "./SignupFormSchema";
+import { SignupFormSchema, SignupFormSchemaType } from "./SignupFormSchema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({

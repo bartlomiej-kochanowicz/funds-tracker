@@ -39,7 +39,6 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 	const form = useForm<CashAccountInvestFundsFormSchemaType>({
 		defaultValues,
 		resolver: yupResolver(CashAccountInvestFundsFormSchema),
-		mode: "onChange",
 	});
 
 	const {

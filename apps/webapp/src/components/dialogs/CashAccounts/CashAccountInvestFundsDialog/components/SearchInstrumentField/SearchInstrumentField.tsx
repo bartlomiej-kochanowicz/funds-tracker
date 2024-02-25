@@ -1,4 +1,4 @@
-import { Form } from "@funds-tracker/ui";
+import { Form, useUpdateEffect } from "@funds-tracker/ui";
 import { SearchInstrumentCombobox } from "components/SearchInstrumentCombobox";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,11 @@ export const SearchInstrumentField = () => {
 	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
 
 	const instrumentType = form.watch("instrumentType");
+
+	useUpdateEffect(() => {
+		form.resetField("instrument");
+		form.resetField("price");
+	}, [instrumentType]);
 
 	const { t } = useTranslation();
 

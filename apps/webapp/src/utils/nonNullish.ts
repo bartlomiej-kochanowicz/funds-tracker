@@ -3,5 +3,5 @@ export const validateNonNullish = (value: any | any[]): boolean => {
 		return value.map(v => validateNonNullish(v)).every(v => v);
 	}
 
-	return value !== null && value !== undefined;
+	return value !== null && value !== undefined && value !== "" && !Number.isNaN(value);
 };

@@ -10,17 +10,14 @@ interface ComissionFieldProps {
 }
 
 export const ComissionField = ({ activeCurrency }: ComissionFieldProps) => {
-	const { watch, control, setValue } = useFormContext<CashAccountInvestFundsFormSchemaType>();
+	const { watch, control, resetField } = useFormContext<CashAccountInvestFundsFormSchemaType>();
 
 	const watchComissionType = watch("comission_type");
 
 	const { t, i18n } = useTranslation();
 
 	useUpdateEffect(() => {
-		setValue("comission", 0, {
-			shouldDirty: true,
-			shouldValidate: true,
-		});
+		resetField("comission");
 	}, [watchComissionType]);
 
 	return (
