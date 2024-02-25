@@ -10,10 +10,13 @@ export const LangSelector = () => {
 		i18n.changeLanguage(value);
 	};
 
+	const defaultValue =
+		languages.find(({ value }) => value === i18n.language)?.value || languages[1].value;
+
 	return (
 		<Select
 			onValueChange={handleChangeLanguage}
-			defaultValue={i18n.language}
+			defaultValue={defaultValue}
 		>
 			<Select.Trigger className="w-[180px]">
 				<Globe2 className="mr-2" />

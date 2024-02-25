@@ -6,9 +6,9 @@ interface ClearCenteredProps {
 
 export const ClearCentered = ({ children, ...rest }: ClearCenteredProps) => (
 	<main
-		className="flex h-screen w-full flex-col items-center justify-center px-5 py-2"
+		className="flex h-[100dvh] flex-col items-center justify-center px-5 py-2"
 		{...rest}
 	>
-		<div className="flex max-w-md flex-col">{children}</div>
+		{children}
 	</main>
 );
