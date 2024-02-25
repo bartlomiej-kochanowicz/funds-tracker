@@ -3,6 +3,7 @@ import { Button, Form, NumberInput } from "@funds-tracker/ui";
 import { Calculator } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { validateNonNullish } from "utils/nonNullish";
 
 import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
@@ -39,8 +40,15 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 
 		setValue("transaction_cost", Number(transactionCost.toFixed(2)), {
 			shouldDirty: true,
+			shouldValidate: true,
 		});
 	};
+
+	console.log({
+		watchComission,
+		watchPrice,
+		watchQuantity,
+	});
 
 	return (
 		<Form.Field
@@ -67,7 +75,7 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 						className="md:ml-2"
 						variant="secondary"
 						onClick={calculateTransactionCost}
-						disabled={!watchQuantity || !watchPrice || !watchComission}
+						disabled={!validateNonNullish([watchQuantity, watchPrice, watchComission])}
 					>
 						<Calculator />
 					</Button>

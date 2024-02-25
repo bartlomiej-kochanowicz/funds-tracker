@@ -109,6 +109,7 @@ export const Confirm = () => {
 							components={{
 								support: (
 									<a
+										aria-label="support@funds-tracker.com"
 										className={buttonVariants({ variant: "link", size: "sm" })}
 										href="mailto:support@funds-tracker.com"
 									/>

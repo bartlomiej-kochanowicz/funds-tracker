@@ -28,6 +28,7 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 		onCompleted: ({ instrumentHistory }) => {
 			setValue("price", Number(instrumentHistory.at(-1)?.close.toFixed(2)), {
 				shouldDirty: true,
+				shouldValidate: true,
 			});
 		},
 	});

@@ -19,6 +19,7 @@ export const ComissionField = ({ activeCurrency }: ComissionFieldProps) => {
 	useUpdateEffect(() => {
 		setValue("comission", 0, {
 			shouldDirty: true,
+			shouldValidate: true,
 		});
 	}, [watchComissionType]);
 

@@ -27,7 +27,9 @@ export class InstrumentsService {
 					},
 				})
 				.pipe(
-					catchError(() => {
+					catchError(e => {
+						console.error(e);
+
 						throw Error("Error fetching instruments");
 					}),
 				),
@@ -51,7 +53,9 @@ export class InstrumentsService {
 					},
 				})
 				.pipe(
-					catchError(() => {
+					catchError(e => {
+						console.error(e);
+
 						throw Error("Error fetching instrument history");
 					}),
 				),
