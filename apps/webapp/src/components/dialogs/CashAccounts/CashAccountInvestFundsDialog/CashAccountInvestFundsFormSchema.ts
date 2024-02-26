@@ -32,5 +32,9 @@ export type CashAccountInvestFundsFormSchemaType = InferType<
 >;
 
 export const defaultValues: Partial<CashAccountInvestFundsFormSchemaType> = {
+	price: 0,
+	quantity: 0,
 	comission_type: "%",
+	comission: 0,
+	transaction_cost: 0,
 };

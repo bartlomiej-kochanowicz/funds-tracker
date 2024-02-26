@@ -20,6 +20,14 @@ export const ComissionField = ({ activeCurrency }: ComissionFieldProps) => {
 		resetField("comission");
 	}, [watchComissionType]);
 
+	const numberFormat =
+		watchComissionType === "amount"
+			? {
+					style: "currency",
+					currency: activeCurrency,
+				}
+			: { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 2 };
+
 	return (
 		<Form.Field
 			control={control}
@@ -33,10 +41,7 @@ export const ComissionField = ({ activeCurrency }: ComissionFieldProps) => {
 					</Form.Label>
 					<NumberInput
 						locale={i18n.language}
-						formatOptions={{
-							style: watchComissionType === "amount" ? "currency" : "percent",
-							currency: activeCurrency,
-						}}
+						formatOptions={numberFormat}
 						aria-label={t("modal.InvestFunds.form.label.comission", {
 							currency: activeCurrency,
 						})}

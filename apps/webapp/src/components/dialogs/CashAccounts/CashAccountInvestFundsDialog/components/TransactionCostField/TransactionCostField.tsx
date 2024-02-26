@@ -24,7 +24,12 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 	const calculateTransactionCost = () => {
 		const { price, quantity, comission, comission_type: comissionType } = getValues();
 
-		if (!validateNonNullish([price, quantity, comission, comissionType])) return;
+		if (
+			!validateNonNullish([price, quantity, comission, comissionType]) ||
+			watchQuantity === 0 ||
+			watchPrice === 0
+		)
+			return;
 
 		let transactionCost = 0;
 
@@ -73,7 +78,11 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 						className="md:ml-2"
 						variant="secondary"
 						onClick={calculateTransactionCost}
-						disabled={!validateNonNullish([watchQuantity, watchPrice, watchComission])}
+						disabled={
+							!validateNonNullish([watchQuantity, watchPrice, watchComission]) ||
+							watchQuantity === 0 ||
+							watchPrice === 0
+						}
 					>
 						<Calculator />
 					</Button>
