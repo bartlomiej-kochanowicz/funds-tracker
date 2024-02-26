@@ -32,7 +32,7 @@ export const useCashAccountInvestFundsDialog = ({
 				open={open}
 				onOpenChange={setOpen}
 			>
-				<Dialog.Content>
+				<Dialog.Content className="px-4 py-6">
 					<Dialog.Header>
 						<Dialog.Title>{t("modal.CashAccountInvestFunds.name")}</Dialog.Title>
 						<Dialog.Description>{t("modal.InvestFunds.description")}</Dialog.Description>

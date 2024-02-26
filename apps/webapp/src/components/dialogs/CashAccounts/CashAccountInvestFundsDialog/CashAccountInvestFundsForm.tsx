@@ -49,7 +49,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 
 	const onSubmit = useCallback(
 		(data: CashAccountInvestFundsFormSchemaType) => {
-			console.log({ ...data, uuid });
+			console.log({ ...data, cashAccountUuid: uuid });
 		},
 		[uuid],
 	);
@@ -78,7 +78,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 		<ScrollArea className={clsx(shouldRenderMarketInstrumentFields && "h-[75vh] md:h-auto")}>
 			<Form {...form}>
 				<form
-					className="my-2 flex flex-col gap-2"
+					className="my-2 flex flex-col gap-2 px-2"
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					<Form.Item orientation="horizontal">
