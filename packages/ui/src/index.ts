@@ -24,6 +24,7 @@ export * from "./components/Table";
 export * from "./components/Text";
 export * from "./components/Tile";
 export * from "./components/Toaster";
+export * from "./components/Tooltip";
 
 // Path: src/hooks
 export * from "./hooks/useIsFirstRender";
