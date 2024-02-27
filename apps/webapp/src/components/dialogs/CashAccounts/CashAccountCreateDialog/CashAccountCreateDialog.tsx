@@ -5,12 +5,12 @@ import {
 import { useMutation } from "@apollo/client";
 import {
 	Button,
-	Dialog,
 	emitErrorToast,
 	emitSuccessToast,
 	Form,
 	Input,
 	Loader,
+	responsiveDialog,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CurrencyCombobox } from "components/CurrencyCombobox";
@@ -86,17 +86,21 @@ export const CashAccountCreateDialog = ({
 		});
 	};
 
+	const ResponsiveDialog = responsiveDialog();
+
 	return (
-		<Dialog
+		<ResponsiveDialog
 			open={open}
 			onOpenChange={setOpen}
 		>
-			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
-			<Dialog.Content>
-				<Dialog.Header>
-					<Dialog.Title>{t("modal.CashAccountCreate.name")}</Dialog.Title>
-					<Dialog.Description>{t("modal.CashAccountCreate.description")}</Dialog.Description>
-				</Dialog.Header>
+			<ResponsiveDialog.Trigger asChild>{children}</ResponsiveDialog.Trigger>
+			<ResponsiveDialog.Content>
+				<ResponsiveDialog.Header>
+					<ResponsiveDialog.Title>{t("modal.CashAccountCreate.name")}</ResponsiveDialog.Title>
+					<ResponsiveDialog.Description>
+						{t("modal.CashAccountCreate.description")}
+					</ResponsiveDialog.Description>
+				</ResponsiveDialog.Header>
 				<Form {...form}>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="my-4 flex flex-col gap-4">
@@ -132,15 +136,15 @@ export const CashAccountCreateDialog = ({
 							/>
 						</div>
 
-						<Dialog.Footer>
-							<Dialog.Close asChild>
+						<ResponsiveDialog.Footer>
+							<ResponsiveDialog.Close asChild>
 								<Button
 									variant="secondary"
 									className="w-1/2"
 								>
 									{t("common.cancel")}
 								</Button>
-							</Dialog.Close>
+							</ResponsiveDialog.Close>
 
 							<Button
 								className="flex w-1/2 items-center justify-center gap-2"
@@ -151,10 +155,10 @@ export const CashAccountCreateDialog = ({
 
 								{t("add.cash.accounts.button.add")}
 							</Button>
-						</Dialog.Footer>
+						</ResponsiveDialog.Footer>
 					</form>
 				</Form>
-			</Dialog.Content>
-		</Dialog>
+			</ResponsiveDialog.Content>
+		</ResponsiveDialog>
 	);
 };

@@ -1,5 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Button, Dialog, Form, ScrollArea } from "@funds-tracker/ui";
+import { Button, Form, responsiveDialog, ScrollArea } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import clsx from "clsx";
 import { formatCurrency } from "helpers/formatCurrency";
@@ -74,6 +74,8 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 		!shouldRenderMarketInstrumentFields && watchInstrumentType,
 	);
 
+	const ResponsiveDialog = responsiveDialog();
+
 	return (
 		<ScrollArea className={clsx(shouldRenderMarketInstrumentFields && "h-[75vh] md:h-auto")}>
 			<Form {...form}>
@@ -107,15 +109,15 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 
 					{shouldRenderNotSupportedYet && <NotSupportedYet />}
 
-					<Dialog.Footer>
-						<Dialog.Close asChild>
+					<ResponsiveDialog.Footer>
+						<ResponsiveDialog.Close asChild>
 							<Button
 								variant="secondary"
 								className="w-1/2"
 							>
 								{t("common.cancel")}
 							</Button>
-						</Dialog.Close>
+						</ResponsiveDialog.Close>
 
 						<Button
 							className="flex w-1/2 items-center justify-center gap-2"
@@ -124,7 +126,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						>
 							{!isSubmitting && "Invest 🎉"}
 						</Button>
-					</Dialog.Footer>
+					</ResponsiveDialog.Footer>
 				</form>
 			</Form>
 		</ScrollArea>

@@ -6,12 +6,12 @@ import {
 import { useMutation } from "@apollo/client";
 import {
 	Button,
-	Dialog,
 	emitErrorToast,
 	emitSuccessToast,
 	Form,
 	Loader,
 	NumberInput,
+	responsiveDialog,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CASH_ACCOUNT_ADD_FUNDS } from "graphql/mutations/cashAccounts/CashAccountAddFunds";
@@ -93,18 +93,22 @@ export const useCashAccountAddFundsDialog = ({
 		});
 	};
 
+	const ResponsiveDialog = responsiveDialog();
+
 	return {
 		open: handleOpen,
 		dialog: (
-			<Dialog
+			<ResponsiveDialog
 				open={open}
 				onOpenChange={setOpen}
 			>
-				<Dialog.Content>
-					<Dialog.Header>
-						<Dialog.Title>{t("modal.AddFundsCashAccount.name")}</Dialog.Title>
-						<Dialog.Description>{t("modal.AddFundsCashAccount.description")}</Dialog.Description>
-					</Dialog.Header>
+				<ResponsiveDialog.Content>
+					<ResponsiveDialog.Header>
+						<ResponsiveDialog.Title>{t("modal.AddFundsCashAccount.name")}</ResponsiveDialog.Title>
+						<ResponsiveDialog.Description>
+							{t("modal.AddFundsCashAccount.description")}
+						</ResponsiveDialog.Description>
+					</ResponsiveDialog.Header>
 					<Form {...form}>
 						<form
 							onSubmit={handleSubmit(onSubmit)}
@@ -133,15 +137,15 @@ export const useCashAccountAddFundsDialog = ({
 								)}
 							/>
 
-							<Dialog.Footer>
-								<Dialog.Close asChild>
+							<ResponsiveDialog.Footer>
+								<ResponsiveDialog.Close asChild>
 									<Button
 										variant="secondary"
 										className="w-1/2"
 									>
 										{t("common.cancel")}
 									</Button>
-								</Dialog.Close>
+								</ResponsiveDialog.Close>
 
 								<Button
 									className="flex w-1/2 items-center justify-center gap-2"
@@ -152,11 +156,11 @@ export const useCashAccountAddFundsDialog = ({
 
 									{t("page.cash_accounts.button.add_funds")}
 								</Button>
-							</Dialog.Footer>
+							</ResponsiveDialog.Footer>
 						</form>
 					</Form>
-				</Dialog.Content>
-			</Dialog>
+				</ResponsiveDialog.Content>
+			</ResponsiveDialog>
 		),
 	};
 };

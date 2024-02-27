@@ -3,7 +3,14 @@ import {
 	CashAccountUpdateMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Dialog, emitErrorToast, emitSuccessToast, Form, Input } from "@funds-tracker/ui";
+import {
+	Button,
+	emitErrorToast,
+	emitSuccessToast,
+	Form,
+	Input,
+	responsiveDialog,
+} from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CASH_ACCOUNT_UPDATE } from "graphql/mutations/cashAccounts/CashAccountUpdate";
 import { Loader, Pencil } from "lucide-react";
@@ -70,17 +77,19 @@ export const useCashAccountRenameDialog = ({
 		await cashAccountUpdate({ variables: { data: { name: newName }, uuid } });
 	};
 
+	const ResponsiveDialog = responsiveDialog();
+
 	return {
 		open: handleOpen,
 		dialog: (
-			<Dialog
+			<ResponsiveDialog
 				open={open}
 				onOpenChange={setOpen}
 			>
-				<Dialog.Content>
-					<Dialog.Header>
-						<Dialog.Title>{t("modal.CashAccountRename.name")}</Dialog.Title>
-					</Dialog.Header>
+				<ResponsiveDialog.Content>
+					<ResponsiveDialog.Header>
+						<ResponsiveDialog.Title>{t("modal.CashAccountRename.name")}</ResponsiveDialog.Title>
+					</ResponsiveDialog.Header>
 
 					<Form {...form}>
 						<form
@@ -105,15 +114,15 @@ export const useCashAccountRenameDialog = ({
 								)}
 							/>
 
-							<Dialog.Footer>
-								<Dialog.Close asChild>
+							<ResponsiveDialog.Footer>
+								<ResponsiveDialog.Close asChild>
 									<Button
 										variant="secondary"
 										className="w-1/2"
 									>
 										{t("common.cancel")}
 									</Button>
-								</Dialog.Close>
+								</ResponsiveDialog.Close>
 
 								<Button
 									className="flex w-1/2 items-center justify-center gap-2"
@@ -124,11 +133,11 @@ export const useCashAccountRenameDialog = ({
 
 									{t("modal.rename.submit")}
 								</Button>
-							</Dialog.Footer>
+							</ResponsiveDialog.Footer>
 						</form>
 					</Form>
-				</Dialog.Content>
-			</Dialog>
+				</ResponsiveDialog.Content>
+			</ResponsiveDialog>
 		),
 	};
 };

@@ -3,7 +3,14 @@ import {
 	CashAccountDeleteMutationVariables,
 } from "__generated__/graphql";
 import { useMutation } from "@apollo/client";
-import { Button, Dialog, emitErrorToast, emitSuccessToast, Loader, Text } from "@funds-tracker/ui";
+import {
+	Button,
+	emitErrorToast,
+	emitSuccessToast,
+	Loader,
+	responsiveDialog,
+	Text,
+} from "@funds-tracker/ui";
 import { CASH_ACCOUNT_DELETE } from "graphql/mutations/cashAccounts/CashAccountDelete";
 import { Trash } from "lucide-react";
 import { useState } from "react";
@@ -49,18 +56,21 @@ export const useCashAccountConfirmDeleteDialog = ({
 			},
 		});
 	};
+	const ResponsiveDialog = responsiveDialog();
 
 	return {
 		open: handleOpen,
 		dialog: (
-			<Dialog
+			<ResponsiveDialog
 				open={open}
 				onOpenChange={setOpen}
 			>
-				<Dialog.Content>
-					<Dialog.Header>
-						<Dialog.Title>{t("modal.CashAccountConfirmDelete.name")}</Dialog.Title>
-						<Dialog.Description>
+				<ResponsiveDialog.Content>
+					<ResponsiveDialog.Header>
+						<ResponsiveDialog.Title>
+							{t("modal.CashAccountConfirmDelete.name")}
+						</ResponsiveDialog.Title>
+						<ResponsiveDialog.Description>
 							<Trans
 								i18nKey="modal.CashAccountConfirmDelete.description"
 								values={{ name }}
@@ -73,17 +83,17 @@ export const useCashAccountConfirmDeleteDialog = ({
 									),
 								}}
 							/>
-						</Dialog.Description>
-					</Dialog.Header>
-					<Dialog.Footer>
-						<Dialog.Close asChild>
+						</ResponsiveDialog.Description>
+					</ResponsiveDialog.Header>
+					<ResponsiveDialog.Footer>
+						<ResponsiveDialog.Close asChild>
 							<Button
 								variant="secondary"
 								className="w-1/2"
 							>
 								{t("common.cancel")}
 							</Button>
-						</Dialog.Close>
+						</ResponsiveDialog.Close>
 
 						<Button
 							className="flex w-1/2 items-center justify-center gap-2"
@@ -95,9 +105,9 @@ export const useCashAccountConfirmDeleteDialog = ({
 
 							{t("common.delete")}
 						</Button>
-					</Dialog.Footer>
-				</Dialog.Content>
-			</Dialog>
+					</ResponsiveDialog.Footer>
+				</ResponsiveDialog.Content>
+			</ResponsiveDialog>
 		),
 	};
 };

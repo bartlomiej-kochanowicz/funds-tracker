@@ -13,7 +13,7 @@ import {
 
 type DrawerType = typeof DrawerComponent;
 
-interface IDrawer extends DrawerType {
+export interface IDrawer extends DrawerType {
 	Close: typeof DrawerClose;
 	Content: typeof DrawerContent;
 	Description: typeof DrawerDescription;

@@ -13,7 +13,7 @@ import {
 
 type DialogType = typeof DialogComponent;
 
-interface IDialog extends DialogType {
+export interface IDialog extends DialogType {
 	Close: typeof DialogClose;
 	Content: typeof DialogContent;
 	Description: typeof DialogDescription;

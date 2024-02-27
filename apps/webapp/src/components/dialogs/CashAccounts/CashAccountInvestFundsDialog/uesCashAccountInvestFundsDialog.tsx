@@ -1,5 +1,5 @@
 import { Currency } from "__generated__/graphql";
-import { Dialog } from "@funds-tracker/ui";
+import { responsiveDialog } from "@funds-tracker/ui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -25,26 +25,32 @@ export const useCashAccountInvestFundsDialog = ({
 
 	const { t } = useTranslation();
 
+	const ResponsiveDialog = responsiveDialog();
+
 	return {
 		open: handleOpen,
 		dialog: (
-			<Dialog
+			<ResponsiveDialog
 				open={open}
 				onOpenChange={setOpen}
 			>
-				<Dialog.Content className="px-4 py-6">
-					<Dialog.Header>
-						<Dialog.Title>{t("modal.CashAccountInvestFunds.name")}</Dialog.Title>
-						<Dialog.Description>{t("modal.InvestFunds.description")}</Dialog.Description>
-					</Dialog.Header>
+				<ResponsiveDialog.Content className="px-4 py-6">
+					<ResponsiveDialog.Header>
+						<ResponsiveDialog.Title>
+							{t("modal.CashAccountInvestFunds.name")}
+						</ResponsiveDialog.Title>
+						<ResponsiveDialog.Description>
+							{t("modal.InvestFunds.description")}
+						</ResponsiveDialog.Description>
+					</ResponsiveDialog.Header>
 
 					<CashAccountInvestFundsForm
 						balance={balance}
 						currency={currency}
 						uuid={uuid}
 					/>
-				</Dialog.Content>
-			</Dialog>
+				</ResponsiveDialog.Content>
+			</ResponsiveDialog>
 		),
 	};
 };
