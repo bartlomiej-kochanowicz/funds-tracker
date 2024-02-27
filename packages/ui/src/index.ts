@@ -7,6 +7,7 @@ export * from "./components/Card";
 export * from "./components/Command";
 export * from "./components/DatePicker";
 export * from "./components/Dialog";
+export * from "./components/Drawer";
 export * from "./components/DropdownMenu";
 export * from "./components/Form";
 export * from "./components/Heading";
