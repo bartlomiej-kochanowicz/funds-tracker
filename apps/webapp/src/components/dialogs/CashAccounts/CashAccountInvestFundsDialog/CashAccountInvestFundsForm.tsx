@@ -113,14 +113,14 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						<ResponsiveDialog.Close asChild>
 							<Button
 								variant="secondary"
-								className="w-1/2"
+								className="md:w-1/2"
 							>
 								{t("common.cancel")}
 							</Button>
 						</ResponsiveDialog.Close>
 
 						<Button
-							className="flex w-1/2 items-center justify-center gap-2"
+							className="flex items-center justify-center gap-2 md:w-1/2"
 							disabled={!isValid || isSubmitting || shouldRenderNotSupportedYet}
 							type="submit"
 						>

@@ -34,7 +34,7 @@ export const useCashAccountInvestFundsDialog = ({
 				open={open}
 				onOpenChange={setOpen}
 			>
-				<ResponsiveDialog.Content className="px-4 py-6">
+				<ResponsiveDialog.Content className="md:px-4 md:py-6">
 					<ResponsiveDialog.Header>
 						<ResponsiveDialog.Title>
 							{t("modal.CashAccountInvestFunds.name")}
