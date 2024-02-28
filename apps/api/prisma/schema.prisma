@@ -26,7 +26,7 @@ model Session {
   name      String
   rtHash    String   @unique
   updatedAt DateTime @default(now())
-  User      User     @relation(fields: [userUuid], references: [uuid])
+  user      User     @relation(fields: [userUuid], references: [uuid])
   userUuid  String
 }
 
@@ -49,17 +49,17 @@ model CashAccountOperation {
   date            DateTime                 @default(now())
   type            CashAccountOperationType
   amount          Float
-  destination     Portfolio?               @relation(fields: [destinationUuid], references: [uuid])
-  destinationUuid String?
+  portfolio       Portfolio?               @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid   String?
 }
 
 model Portfolio {
-  uuid                 String                 @id @default(uuid())
-  name                 String
-  user                 User                   @relation(fields: [userUuid], references: [uuid])
-  userUuid             String
-  portfolioOperations  PortfolioOperation[]
-  CashAccountOperation CashAccountOperation[]
+  uuid                  String                 @id @default(uuid())
+  name                  String
+  user                  User                   @relation(fields: [userUuid], references: [uuid])
+  userUuid              String
+  portfolioOperations   PortfolioOperation[]
+  cashAccountOperations CashAccountOperation[]
 
   @@unique([userUuid, uuid])
 }
@@ -77,17 +77,14 @@ model PortfolioOperation {
 }
 
 model Instrument {
-  codeExchange       String               @id
+  codeExchange       String               @id @unique
   name               String
   type               InstrumentType
   code               String
   currency           String
   country            String
   exchange           String
-  ISIN               String?
   portfolioOperation PortfolioOperation[]
-
-  @@unique([codeExchange, code, ISIN])
 }
 
 enum Subscription {

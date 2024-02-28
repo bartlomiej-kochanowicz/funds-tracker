@@ -463,5 +463,4 @@ input Instrument {
   type: InstrumentType!
   code: String!
   exchange: String!
-  ISIN: String
 }

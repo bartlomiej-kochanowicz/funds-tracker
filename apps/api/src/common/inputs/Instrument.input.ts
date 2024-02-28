@@ -1,6 +1,6 @@
 import { Field, InputType } from "@nestjs/graphql";
 import { InstrumentType } from "@prisma/client";
-import { IsOptional, IsString } from "class-validator";
+import { IsString } from "class-validator";
 
 @InputType()
 export class Instrument {
@@ -14,9 +14,4 @@ export class Instrument {
 	@IsString()
 	@Field(() => String)
 	exchange: string;
-
-	@IsString()
-	@IsOptional()
-	@Field(() => String, { nullable: true })
-	ISIN?: string;
 }

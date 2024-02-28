@@ -13,6 +13,6 @@ export class InvestResolver {
 		@GetCurrentUserId() userUuid: string,
 		@Args("data") data: InvestInNewInstrumentInput,
 	) {
-		return this.investService.investInNewInstrumentInput(userUuid, data);
+		return this.investService.investInNewInstrument(userUuid, data);
 	}
 }

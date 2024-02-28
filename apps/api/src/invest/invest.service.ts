@@ -15,7 +15,7 @@ export class InvestService {
 		private prisma: PrismaService,
 	) {}
 
-	async investInNewInstrumentInput(userUuid: string, data: InvestInNewInstrumentInput) {
+	async investInNewInstrument(userUuid: string, data: InvestInNewInstrumentInput) {
 		const { instrument, portfolioUuid, cashAccountUuid } = data;
 
 		const { code, exchange } = instrument;
