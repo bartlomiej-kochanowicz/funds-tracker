@@ -19,7 +19,7 @@ export const CashAccountInvestFundsFormSchema = object().shape({
 		})
 		.required(EMPTY_VALIDATION_MESSAGE),
 	portfolio: string().required(EMPTY_VALIDATION_MESSAGE),
-	date: date().required(EMPTY_VALIDATION_MESSAGE),
+	date: date().max(new Date()).required(EMPTY_VALIDATION_MESSAGE),
 	quantity: number().required(EMPTY_VALIDATION_MESSAGE).min(0.0001),
 	price: number().required(EMPTY_VALIDATION_MESSAGE).min(0.0001),
 	comission: number().required(EMPTY_VALIDATION_MESSAGE),

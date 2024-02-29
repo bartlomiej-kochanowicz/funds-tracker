@@ -65,8 +65,8 @@ type CashAccountOperation {
   """Cash account oparation type."""
   type: CashAccountOperationType!
 
-  """Destination uuid."""
-  destinationUuid: String!
+  """Portfolio uuid."""
+  portfolioUuid: String!
 }
 
 enum CashAccountOperationType {

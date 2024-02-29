@@ -1,12 +1,12 @@
-import { DatePicker, Form } from "@funds-tracker/ui";
-import { formatDate } from "helpers/formatDate";
+import { DateTimeInput, Form } from "@funds-tracker/ui";
+import { getLocalTimeZone, today } from "@internationalized/date";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
 export const DateField = () => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
 
@@ -19,13 +19,12 @@ export const DateField = () => {
 					<Form.Label className="min-w-44">
 						{t("modal.InvestFunds.form.label.purchase_date")}
 					</Form.Label>
-					<DatePicker
-						className="grow"
-						placeholder={t("modal.InvestFunds.form.placeholder.purchase_date")}
-						formatDate={date => formatDate(date, { withTime: false })}
-						toDate={new Date()}
-						fromYear={2000}
-						toYear={new Date().getFullYear()}
+					<DateTimeInput
+						aria-label={t("modal.InvestFunds.form.label.purchase_date")}
+						className="w-full"
+						locale={i18n.language}
+						granularity="minute"
+						maxValue={today(getLocalTimeZone())}
 						{...field}
 					/>
 				</Form.Item>

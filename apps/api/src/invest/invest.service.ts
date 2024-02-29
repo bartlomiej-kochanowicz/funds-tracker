@@ -96,7 +96,7 @@ export class InvestService {
 				// currency calculate
 				amount: data.price * data.quantity + data.comission,
 				type: "transfer",
-				destinationUuid: data.portfolioUuid,
+				portfolioUuid: data.portfolioUuid,
 			},
 		});
 	}
@@ -108,7 +108,7 @@ export class InvestService {
 	private async addInstrumentToDatabase(instrument: Instrument) {
 		const { code, exchange, type } = instrument;
 
-		const { Name, Currency, Country, ISIN } = await this.getInstrument(code, exchange);
+		const { Name, Currency, Country } = await this.getInstrument(code, exchange);
 
 		return await this.prisma.instrument.create({
 			data: {
@@ -119,7 +119,6 @@ export class InvestService {
 				exchange,
 				currency: Currency,
 				country: Country,
-				ISIN,
 			},
 		});
 	}

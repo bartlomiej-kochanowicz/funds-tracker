@@ -86,7 +86,7 @@ export class AuthService {
 
 		await this.prisma.session.create({
 			data: {
-				User: {
+				user: {
 					connect: {
 						uuid: userId,
 					},
