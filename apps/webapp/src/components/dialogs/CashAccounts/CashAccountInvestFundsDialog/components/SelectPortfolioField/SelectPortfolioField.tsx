@@ -2,6 +2,7 @@ import { GetPortfoliosQuery } from "__generated__/graphql";
 import { useQuery } from "@apollo/client";
 import { Form, Select } from "@funds-tracker/ui";
 import { GET_PORTFOLIOS } from "graphql/query/portfolios/GetPortfolios";
+import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +10,8 @@ import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFun
 
 export const SelectPortfolioField = () => {
 	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
+
+	const triggerRef = useRef<HTMLButtonElement>(null);
 
 	const { data } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
 
@@ -28,13 +31,21 @@ export const SelectPortfolioField = () => {
 						defaultValue={field.value || undefined}
 					>
 						<Form.Control>
-							<Select.Trigger className="w-full grow md:w-fit md:max-w-[350px] lg:max-w-[446px] [&>span]:truncate">
+							<Select.Trigger
+								ref={triggerRef}
+								className="w-full grow md:w-fit md:max-w-[350px] lg:max-w-[446px] [&>span]:truncate"
+							>
 								<Select.Value
 									placeholder={t("modal.InvestFunds.form.select.portfolio.placeholder")}
 								/>
 							</Select.Trigger>
 						</Form.Control>
-						<Select.Content>
+						<Select.Content
+							style={{
+								width: triggerRef.current?.offsetWidth,
+								maxWidth: triggerRef.current?.offsetWidth,
+							}}
+						>
 							{data?.portfolios.map(({ uuid, name }) => (
 								<Select.Item
 									key={uuid}

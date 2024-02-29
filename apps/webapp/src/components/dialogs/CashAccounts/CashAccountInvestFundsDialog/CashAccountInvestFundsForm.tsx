@@ -44,11 +44,8 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 	const {
 		handleSubmit,
 		watch,
-		formState: { isValid, isSubmitting, errors },
-		getValues,
+		formState: { isValid, isSubmitting },
 	} = form;
-
-	console.log(errors, getValues());
 
 	const onSubmit = useCallback(
 		(data: CashAccountInvestFundsFormSchemaType) => {

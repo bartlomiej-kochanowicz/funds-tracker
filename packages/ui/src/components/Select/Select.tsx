@@ -119,7 +119,7 @@ const SelectItem = forwardRef<
 			</SelectPrimitive.ItemIndicator>
 		</span>
 
-		<SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+		<SelectPrimitive.ItemText className="truncate">{children}</SelectPrimitive.ItemText>
 	</SelectPrimitive.Item>
 ));
 SelectItem.displayName = SelectPrimitive.Item.displayName;
