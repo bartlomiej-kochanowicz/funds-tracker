@@ -39,8 +39,7 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 
 		if (comissionType === "%") {
 			transactionCost =
-				Number(price) * Number(quantity) +
-				(Number(price) * Number(quantity) * Number(comission)) / 100;
+				Number(price) * Number(quantity) + Number(price) * Number(quantity) * Number(comission);
 		}
 
 		setValue("transaction_cost", Number(transactionCost.toFixed(2)), {

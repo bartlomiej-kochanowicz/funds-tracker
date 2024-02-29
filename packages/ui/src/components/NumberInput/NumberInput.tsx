@@ -7,17 +7,12 @@ import { Input } from "../Input";
 
 type NumberInputProps = {
 	locale: string;
-	value?: number | null;
-} & Omit<NumberFieldStateOptions, "value"> &
-	Omit<ComponentPropsWithoutRef<"input">, "value">;
+} & NumberFieldStateOptions &
+	ComponentPropsWithoutRef<"input">;
 
 export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
-	({ locale, value, ...rest }, ref) => {
+	({ locale, ...props }, ref) => {
 		const inputRef = useRef<HTMLInputElement>(null);
-		const props = {
-			...rest,
-			value,
-		} as NumberFieldStateOptions & ComponentPropsWithoutRef<"input">;
 
 		const state = useNumberFieldState({ ...props, locale });
 		const { inputProps } = useNumberField(props, state, inputRef);
