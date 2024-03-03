@@ -1,7 +1,5 @@
-import { GetPortfoliosQuery } from "__generated__/graphql";
-import { useQuery } from "@apollo/client";
 import { Form, Select } from "@funds-tracker/ui";
-import { GET_PORTFOLIOS } from "graphql/query/portfolios/GetPortfolios";
+import { useSuspenseQueryPortfolios } from "hooks/api/portfolios/useSuspenseQueryPortfolios";
 import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -13,7 +11,7 @@ export const SelectPortfolioField = () => {
 
 	const triggerRef = useRef<HTMLButtonElement>(null);
 
-	const { data } = useQuery<GetPortfoliosQuery>(GET_PORTFOLIOS);
+	const { data } = useSuspenseQueryPortfolios();
 
 	const { t } = useTranslation();
 

@@ -1,9 +1,4 @@
 import {
-	CashAccountDeleteMutation,
-	CashAccountDeleteMutationVariables,
-} from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
-import {
 	Button,
 	emitErrorToast,
 	emitSuccessToast,
@@ -11,7 +6,7 @@ import {
 	responsiveDialog,
 	Text,
 } from "@funds-tracker/ui";
-import { CASH_ACCOUNT_DELETE } from "graphql/mutations/cashAccounts/CashAccountDelete";
+import { useMutationCashAccountDelete } from "hooks/api/cashAccounts/useMutationCashAccountDelete";
 import { Trash } from "lucide-react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -35,10 +30,7 @@ export const useCashAccountConfirmDeleteDialog = ({
 
 	const { t } = useTranslation();
 
-	const [cashAccountdelete, { loading }] = useMutation<
-		CashAccountDeleteMutation,
-		CashAccountDeleteMutationVariables
-	>(CASH_ACCOUNT_DELETE, {
+	const [cashAccountDelete, { loading }] = useMutationCashAccountDelete({
 		onCompleted: () => {
 			emitSuccessToast(t("modal.CashAccountConfirmDelete.toast.success"));
 			handleRefetch();
@@ -50,7 +42,7 @@ export const useCashAccountConfirmDeleteDialog = ({
 	});
 
 	const handleDelete = async () => {
-		await cashAccountdelete({
+		await cashAccountDelete({
 			variables: {
 				uuid,
 			},

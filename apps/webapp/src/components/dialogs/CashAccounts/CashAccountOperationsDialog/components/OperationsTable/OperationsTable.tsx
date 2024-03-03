@@ -1,13 +1,8 @@
-import {
-	Currency,
-	GetCashAccountOperationsQuery,
-	GetCashAccountOperationsQueryVariables,
-} from "__generated__/graphql";
-import { useQuery } from "@apollo/client";
+import { Currency } from "__generated__/graphql";
 import { Loader, Table, Text } from "@funds-tracker/ui";
-import { GET_CASH_ACCOUNT_OPERATIONS } from "graphql/query/cashAccounts/GetCashAccountOperations";
 import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
+import { useQueryCashAccountOperations } from "hooks/api/cashAccounts/useQueryCashAccountOperations";
 import { ArrowDownCircle, XCircle } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,10 +15,7 @@ interface OperationsTableProps {
 export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) => {
 	const { t } = useTranslation();
 
-	const { loading, data } = useQuery<
-		GetCashAccountOperationsQuery,
-		GetCashAccountOperationsQueryVariables
-	>(GET_CASH_ACCOUNT_OPERATIONS, { variables: { uuid } });
+	const { loading, data } = useQueryCashAccountOperations({ variables: { uuid } });
 
 	const cashAccountsOperationsExist = Boolean(data && data.cashAccount.operations.length > 0);
 

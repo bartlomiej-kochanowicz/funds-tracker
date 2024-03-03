@@ -1,15 +1,8 @@
-import {
-	EmailExistQuery,
-	EmailExistQueryVariables,
-	SignupMutation,
-	SignupMutationVariables,
-} from "__generated__/graphql";
-import { useLazyQuery, useMutation } from "@apollo/client";
 import { Button, emitErrorToast, Form, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
-import { SIGNUP } from "graphql/mutations/authentication/Signup";
-import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
+import { useLazyQueryUserEmailExist } from "hooks/api/user/useLazyQueryUserEmailExist";
+import { useMutationUserSignup } from "hooks/api/user/useMutationUserSignup";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -69,7 +62,7 @@ export const SignupForm = () => {
 		getValues,
 	} = form;
 
-	const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
+	const [emailExist] = useLazyQueryUserEmailExist({
 		onCompleted: data => {
 			if (data.emailExist.exist) {
 				setError("userEmail", { type: "custom", message: t("page.signup.email.already_in_use") });
@@ -82,7 +75,7 @@ export const SignupForm = () => {
 		},
 	});
 
-	const [signup] = useMutation<SignupMutation, SignupMutationVariables>(SIGNUP, {
+	const [signup] = useMutationUserSignup({
 		onCompleted: async data => {
 			if (data.signupLocal.success) {
 				const { userEmail } = getValues();

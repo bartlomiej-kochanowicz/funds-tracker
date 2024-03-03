@@ -1,11 +1,6 @@
-import {
-	Currency,
-	GetInstrumentHistoryQuery,
-	GetInstrumentHistoryQueryVariables,
-} from "__generated__/graphql";
-import { useLazyQuery } from "@apollo/client";
+import { Currency } from "__generated__/graphql";
 import { Form, NumberInput, useUpdateEffect } from "@funds-tracker/ui";
-import { INSTRUMENT_HISTORY } from "graphql/query/instruments/InstrumentHistory";
+import { useLazyQueryInstrumentHistory } from "hooks/api/instruments/useLazyQueryInstrumentHistory";
 import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -21,14 +16,9 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 
 	const { setValue, watch } = form;
 
-	const [getInstrumentHistory, { data }] = useLazyQuery<
-		GetInstrumentHistoryQuery,
-		GetInstrumentHistoryQueryVariables
-	>(INSTRUMENT_HISTORY, {
+	const [getInstrumentHistory] = useLazyQueryInstrumentHistory({
 		onCompleted: ({ instrumentHistory }) => {
 			if (!instrumentHistory.length) return;
-
-			console.log(instrumentHistory);
 
 			setValue("price", Number(instrumentHistory.at(-1)?.close.toFixed(2)), {
 				shouldDirty: true,

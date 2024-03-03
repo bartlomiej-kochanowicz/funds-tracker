@@ -1,5 +1,3 @@
-import { PortfolioCreateMutation, PortfolioCreateMutationVariables } from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
 import {
 	Button,
 	emitErrorToast,
@@ -10,7 +8,7 @@ import {
 	responsiveDialog,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PORTFOLIO_CREATE } from "graphql/mutations/portfolios/PortfolioCreate";
+import { useMutationPortfolioCreate } from "hooks/api/portfolios/useMutationPortfolioCreate";
 import { Plus } from "lucide-react";
 import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -53,19 +51,16 @@ export const PortfolioCreateDialog = ({ children, handleRefetch }: PortfolioCrea
 		}
 	}, [open, reset]);
 
-	const [portfolioCreate] = useMutation<PortfolioCreateMutation, PortfolioCreateMutationVariables>(
-		PORTFOLIO_CREATE,
-		{
-			onCompleted: () => {
-				handleRefetch();
-				setOpen(false);
-				emitSuccessToast(t("modal.PortfolioCreate.toast.success"));
-			},
-			onError: () => {
-				emitErrorToast(t("service.unknown_error"));
-			},
+	const [portfolioCreate] = useMutationPortfolioCreate({
+		onCompleted: () => {
+			handleRefetch();
+			setOpen(false);
+			emitSuccessToast(t("modal.PortfolioCreate.toast.success"));
 		},
-	);
+		onError: () => {
+			emitErrorToast(t("service.unknown_error"));
+		},
+	});
 
 	const onSubmit = async (data: PortfolioCreateFormSchemaType) => {
 		await portfolioCreate({

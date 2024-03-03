@@ -1,9 +1,7 @@
-import { SetNewPasswordMutation, SetNewPasswordMutationVariables } from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
 import { Button, emitErrorToast, Form, Input, Loader, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
-import { SET_NEW_PASSWORD } from "graphql/mutations/authentication/SetNewPassword";
+import { useMutationUserSetNewPassword } from "hooks/api/user/useMutationUserSetNewPassword";
 import { FC, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -49,10 +47,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 		setError,
 	} = form;
 
-	const [setNewPasswordMutation] = useMutation<
-		SetNewPasswordMutation,
-		SetNewPasswordMutationVariables
-	>(SET_NEW_PASSWORD, {
+	const [setNewPasswordMutation] = useMutationUserSetNewPassword({
 		onCompleted: () => {
 			setNewPasswordSuccess(true);
 		},

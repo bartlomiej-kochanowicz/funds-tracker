@@ -1,6 +1,5 @@
-import { useSuspenseQuery } from "@apollo/client";
 import { MAX_PORTFOLIOS } from "constants/common";
-import { GET_PORTFOLIOS } from "graphql/query/portfolios/GetPortfolios";
+import { useSuspenseQueryPortfolios } from "hooks/api/portfolios/useSuspenseQueryPortfolios";
 import { Fragment, useTransition } from "react";
 
 import { PortfolioCard } from "../PortfolioCard";
@@ -8,7 +7,7 @@ import { PortfolioCreate } from "../PortfolioCreate";
 
 export const PortfoliosContent = () => {
 	const [isPending, startTransition] = useTransition();
-	const { data, refetch } = useSuspenseQuery(GET_PORTFOLIOS);
+	const { data, refetch } = useSuspenseQueryPortfolios();
 
 	const portfoliosExist = Boolean(data.portfolios.length > 0);
 

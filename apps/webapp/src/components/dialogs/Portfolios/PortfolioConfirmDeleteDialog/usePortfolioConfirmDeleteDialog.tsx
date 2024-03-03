@@ -1,5 +1,3 @@
-import { PortfolioDeleteMutation, PortfolioDeleteMutationVariables } from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
 import {
 	Button,
 	emitErrorToast,
@@ -8,7 +6,7 @@ import {
 	responsiveDialog,
 	Text,
 } from "@funds-tracker/ui";
-import { PORTFOLIO_DELETE } from "graphql/mutations/portfolios/PortfolioDelete";
+import { useMutationPortfolioDelete } from "hooks/api/portfolios/useMutationPortfolioDelete";
 import { Trash } from "lucide-react";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -32,10 +30,7 @@ export const usePortfolioConfirmDeleteDialog = ({
 
 	const { t } = useTranslation();
 
-	const [portfolioDelete, { loading }] = useMutation<
-		PortfolioDeleteMutation,
-		PortfolioDeleteMutationVariables
-	>(PORTFOLIO_DELETE, {
+	const [portfolioDelete, { loading }] = useMutationPortfolioDelete({
 		onCompleted: () => {
 			emitSuccessToast(t("modal.PortfolioConfirmDelete.toast.success"));
 			handleRefetch();

@@ -1,9 +1,4 @@
 import {
-	CashAccountCreateMutation,
-	CashAccountCreateMutationVariables,
-} from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
-import {
 	Button,
 	emitErrorToast,
 	emitSuccessToast,
@@ -15,7 +10,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CurrencyCombobox } from "components/CurrencyCombobox";
 import { useUserContext } from "contexts/UserContext";
-import { CASH_ACCOUNT_CREATE } from "graphql/mutations/cashAccounts/CashAccountCreate";
+import { useMutationCashAccountCreate } from "hooks/api/cashAccounts/useMutationCashAccountCreate";
 import { Plus } from "lucide-react";
 import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -64,10 +59,7 @@ export const CashAccountCreateDialog = ({
 		}
 	}, [open, reset]);
 
-	const [cashAccountCreate] = useMutation<
-		CashAccountCreateMutation,
-		CashAccountCreateMutationVariables
-	>(CASH_ACCOUNT_CREATE, {
+	const [cashAccountCreate] = useMutationCashAccountCreate({
 		onCompleted: () => {
 			handleRefetch();
 			setOpen(false);

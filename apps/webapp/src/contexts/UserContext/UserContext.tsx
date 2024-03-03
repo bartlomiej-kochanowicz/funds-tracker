@@ -1,8 +1,8 @@
 import { GetUserQuery, IntroductionStep, UpdateUserInput } from "__generated__/graphql";
-import { LazyQueryExecFunction, OperationVariables, useLazyQuery } from "@apollo/client";
+import { LazyQueryExecFunction, OperationVariables } from "@apollo/client";
 import { IS_DEVELOPMENT } from "config/env";
-import { GET_USER } from "graphql/query/common/GetUser";
 import { isUserLoggedIn } from "helpers/isUserLoggedIn";
+import { useLazyQueryUser } from "hooks/api/user/useLazyQueryUser";
 import LogRocket from "logrocket";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
 
@@ -19,8 +19,7 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | null>(null);
 
 const useUser = (): UserContextType => {
-	const [getUser, { loading, data, client, error, updateQuery }] =
-		useLazyQuery<GetUserQuery>(GET_USER);
+	const [getUser, { loading, data, client, error, updateQuery }] = useLazyQueryUser();
 
 	const updateUser = ({ defaultCurrency, email, name, introductionStep }: UpdateLocalUserData) => {
 		updateQuery(prev => ({

@@ -1,5 +1,3 @@
-import { PortfolioUpdateMutation, PortfolioUpdateMutationVariables } from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
 import {
 	Button,
 	emitErrorToast,
@@ -9,7 +7,7 @@ import {
 	responsiveDialog,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PORTFOLIO_UPDATE } from "graphql/mutations/portfolios/PortfolioUpdate";
+import { useMutationPortfolioUpdate } from "hooks/api/portfolios/useMutationPortfolioUpdate";
 import { Loader, Pencil } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -54,21 +52,18 @@ export const usePortfolioRenameDialog = ({
 		control,
 	} = form;
 
-	const [portfolioUpdate] = useMutation<PortfolioUpdateMutation, PortfolioUpdateMutationVariables>(
-		PORTFOLIO_UPDATE,
-		{
-			onCompleted: () => {
-				handleRefetch();
+	const [portfolioUpdate] = useMutationPortfolioUpdate({
+		onCompleted: () => {
+			handleRefetch();
 
-				setOpen(false);
+			setOpen(false);
 
-				emitSuccessToast(t("modal.PortfolioRename.toast.success"));
-			},
-			onError: () => {
-				emitErrorToast(t("service.unknown_error"));
-			},
+			emitSuccessToast(t("modal.PortfolioRename.toast.success"));
 		},
-	);
+		onError: () => {
+			emitErrorToast(t("service.unknown_error"));
+		},
+	});
 
 	const onSubmit = async ({ name: newName }: PortfolioRenameFormSchemaType) => {
 		await portfolioUpdate({ variables: { data: { name: newName }, uuid } });

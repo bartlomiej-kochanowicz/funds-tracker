@@ -1,9 +1,4 @@
 import {
-	CashAccountUpdateMutation,
-	CashAccountUpdateMutationVariables,
-} from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
-import {
 	Button,
 	emitErrorToast,
 	emitSuccessToast,
@@ -12,7 +7,7 @@ import {
 	responsiveDialog,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CASH_ACCOUNT_UPDATE } from "graphql/mutations/cashAccounts/CashAccountUpdate";
+import { useMutationCashAccountUpdate } from "hooks/api/cashAccounts/useMutationCashAccountUpdate";
 import { Loader, Pencil } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -57,10 +52,7 @@ export const useCashAccountRenameDialog = ({
 		control,
 	} = form;
 
-	const [cashAccountUpdate] = useMutation<
-		CashAccountUpdateMutation,
-		CashAccountUpdateMutationVariables
-	>(CASH_ACCOUNT_UPDATE, {
+	const [cashAccountUpdate] = useMutationCashAccountUpdate({
 		onCompleted: () => {
 			handleRefetch();
 

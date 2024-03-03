@@ -1,10 +1,4 @@
-import {
-	Currency,
-	InstrumentType,
-	SearchInstrumentQuery,
-	SearchInstrumentQueryVariables,
-} from "__generated__/graphql";
-import { useLazyQuery } from "@apollo/client";
+import { Currency, InstrumentType, SearchInstrumentQuery } from "__generated__/graphql";
 import {
 	Badge,
 	Button,
@@ -16,8 +10,8 @@ import {
 	Text,
 } from "@funds-tracker/ui";
 import { mergeRefs } from "@funds-tracker/ui/src/helpers/mergeRefs";
-import { SEARCH_INSTRUMENT } from "graphql/query/instruments/SearchInstrument";
 import { formatCurrency } from "helpers/formatCurrency";
+import { useLazyQueryInstrumentSearch } from "hooks/api/instruments/useLazyQueryInstrumentSearch";
 import { ChevronsUpDown } from "lucide-react";
 import { forwardRef, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -42,12 +36,7 @@ export const SearchInstrumentCombobox = forwardRef<
 
 	const { t } = useTranslation();
 
-	const [findInstruments, { data, loading, updateQuery }] = useLazyQuery<
-		SearchInstrumentQuery,
-		SearchInstrumentQueryVariables
-	>(SEARCH_INSTRUMENT, {
-		fetchPolicy: "network-only",
-	});
+	const [findInstruments, { data, loading, updateQuery }] = useLazyQueryInstrumentSearch();
 
 	const cleanSearchData = () => {
 		updateQuery(prev => {

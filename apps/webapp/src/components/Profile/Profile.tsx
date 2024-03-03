@@ -1,8 +1,6 @@
-import { LogoutMutation } from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
 import { Avatar, DropdownMenu, Loader } from "@funds-tracker/ui";
 import { useUserContext } from "contexts/UserContext";
-import { LOGOUT } from "graphql/mutations/authentication/Logout";
+import { useMutationUserLogout } from "hooks/api/user/useMutationUserLogout";
 import { LogOut, Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -15,7 +13,7 @@ export const Profile = () => {
 
 	const { clearUser: onCompleted } = useUserContext();
 
-	const [logout, { loading }] = useMutation<LogoutMutation>(LOGOUT, {
+	const [logout, { loading }] = useMutationUserLogout({
 		onCompleted,
 	});
 

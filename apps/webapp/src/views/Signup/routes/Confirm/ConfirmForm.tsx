@@ -1,9 +1,7 @@
-import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
 import { Button, Form, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
-import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
+import { useMutationUserConfirmSignup } from "hooks/api/user/useMutationUserConfirmSignup";
 import { FC, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -49,19 +47,16 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 		setError,
 	} = form;
 
-	const [confirmSignup] = useMutation<ConfirmSignupMutation, ConfirmSignupMutationVariables>(
-		CONFIRM_SIGNUP,
-		{
-			onCompleted: async () => {
-				await getUser();
+	const [confirmSignup] = useMutationUserConfirmSignup({
+		onCompleted: async () => {
+			await getUser();
 
-				navigate(ROUTES.HOME);
-			},
-			onError: () => {
-				setError("code", { type: "custom", message: t("service.unknown_error") });
-			},
+			navigate(ROUTES.HOME);
 		},
-	);
+		onError: () => {
+			setError("code", { type: "custom", message: t("service.unknown_error") });
+		},
+	});
 
 	const onSubmit = async (data: ConfirmFormSchemaType) => {
 		confirmSignup({ variables: { data: { code: data.code, email, token } } });

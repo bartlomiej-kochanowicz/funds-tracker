@@ -1,18 +1,9 @@
-import {
-	EmailExistQuery,
-	EmailExistQueryVariables,
-	SendCodeMutation,
-	SendCodeMutationVariables,
-	SigninMutation,
-	SigninMutationVariables,
-} from "__generated__/graphql";
-import { useLazyQuery, useMutation } from "@apollo/client";
 import { Button, emitErrorToast, emitSuccessToast, Form, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
-import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
-import { SIGNIN } from "graphql/mutations/authentication/Signin";
-import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
+import { useLazyQueryUserEmailExist } from "hooks/api/user/useLazyQueryUserEmailExist";
+import { useMutationUserSendCode } from "hooks/api/user/useMutationUserSendCode";
+import { useMutationUserSignin } from "hooks/api/user/useMutationUserSignin";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -68,7 +59,7 @@ export const SigninForm = () => {
 		getValues,
 	} = form;
 
-	const [emailExist] = useLazyQuery<EmailExistQuery, EmailExistQueryVariables>(EMAIL_EXIST, {
+	const [emailExist] = useLazyQueryUserEmailExist({
 		onCompleted: data => {
 			if (data?.emailExist?.exist) {
 				updateState(actions.CHANGE_TO_PASSWORD);
@@ -84,7 +75,7 @@ export const SigninForm = () => {
 		},
 	});
 
-	const [sendCode] = useMutation<SendCodeMutation, SendCodeMutationVariables>(SEND_CODE, {
+	const [sendCode] = useMutationUserSendCode({
 		onCompleted: async () => {
 			emitSuccessToast(t("toast.send_confirm_code.success"));
 		},
@@ -93,7 +84,7 @@ export const SigninForm = () => {
 		},
 	});
 
-	const [signin] = useMutation<SigninMutation, SigninMutationVariables>(SIGNIN, {
+	const [signin] = useMutationUserSignin({
 		onCompleted: async () => {
 			await getUser();
 

@@ -1,5 +1,3 @@
-import { ResetPasswordMutation, ResetPasswordMutationVariables } from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
 import {
 	Button,
 	emitErrorToast,
@@ -10,7 +8,7 @@ import {
 	Text,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RESET_PASSWORD } from "graphql/mutations/authentication/ResetPassword";
+import { useMutationUserResetPassword } from "hooks/api/user/useMutationUserResetPassword";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -46,19 +44,16 @@ export const EnterEmailForm = () => {
 		control,
 	} = form;
 
-	const [resetPassword] = useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(
-		RESET_PASSWORD,
-		{
-			onCompleted: async () => {
-				emitSuccessToast(t("toast.send_reset_password_link.success"));
+	const [resetPassword] = useMutationUserResetPassword({
+		onCompleted: async () => {
+			emitSuccessToast(t("toast.send_reset_password_link.success"));
 
-				setSendEmailSuccess(true);
-			},
-			onError: () => {
-				emitErrorToast(t("toast.send_reset_password_link.failure"));
-			},
+			setSendEmailSuccess(true);
 		},
-	);
+		onError: () => {
+			emitErrorToast(t("toast.send_reset_password_link.failure"));
+		},
+	});
 
 	const onSubmit = async ({ userEmail }: EnterEmailFormSchemaType) => {
 		if (!token) {

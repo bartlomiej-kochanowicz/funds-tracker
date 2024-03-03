@@ -1,9 +1,4 @@
-import {
-	CashAccountAddFundsMutation,
-	CashAccountAddFundsMutationVariables,
-	Currency,
-} from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
+import { Currency } from "__generated__/graphql";
 import {
 	Button,
 	emitErrorToast,
@@ -14,7 +9,7 @@ import {
 	responsiveDialog,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CASH_ACCOUNT_ADD_FUNDS } from "graphql/mutations/cashAccounts/CashAccountAddFunds";
+import { useMutationCashAccountAddFunds } from "hooks/api/cashAccounts/useMutationCashAccountAddFunds";
 import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -66,10 +61,7 @@ export const useCashAccountAddFundsDialog = ({
 		}
 	}, [open, reset]);
 
-	const [cashAcountAddFunds] = useMutation<
-		CashAccountAddFundsMutation,
-		CashAccountAddFundsMutationVariables
-	>(CASH_ACCOUNT_ADD_FUNDS, {
+	const [cashAcountAddFunds] = useMutationCashAccountAddFunds({
 		onCompleted: () => {
 			handleRefetch();
 

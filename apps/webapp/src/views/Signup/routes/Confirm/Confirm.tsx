@@ -1,5 +1,3 @@
-import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
-import { useMutation } from "@apollo/client";
 import {
 	Button,
 	buttonVariants,
@@ -12,7 +10,7 @@ import {
 import { LangSelector } from "components/LangSelector";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeToggle } from "components/ThemeToggle";
-import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
+import { useMutationUserSendCode } from "hooks/api/user/useMutationUserSendCode";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router-dom";
@@ -38,7 +36,7 @@ export const Confirm = () => {
 
 	const email = location?.state?.email as string;
 
-	const [sendCode] = useMutation<SendCodeMutation, SendCodeMutationVariables>(SEND_CODE, {
+	const [sendCode] = useMutationUserSendCode({
 		onCompleted: () => {
 			emitSuccessToast(t("toast.send_confirm_code.success"));
 		},
