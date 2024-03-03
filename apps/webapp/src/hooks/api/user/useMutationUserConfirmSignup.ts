@@ -1,6 +1,14 @@
+import { gql } from "__generated__";
 import { ConfirmSignupMutation, ConfirmSignupMutationVariables } from "__generated__/graphql";
 import { MutationHookOptions, NoInfer, useMutation } from "@apollo/client";
-import { CONFIRM_SIGNUP } from "graphql/mutations/authentication/ConfirmSignup";
+
+export const CONFIRM_SIGNUP = gql(/* GraphQL */ `
+	mutation ConfirmSignup($data: ConfirmSignupInput!) {
+		confirmSignup(data: $data) {
+			success
+		}
+	}
+`);
 
 export const useMutationUserConfirmSignup = (
 	options?: MutationHookOptions<

@@ -1,6 +1,14 @@
+import { gql } from "__generated__";
 import { EmailExistQuery, EmailExistQueryVariables } from "__generated__/graphql";
 import { LazyQueryHookOptions, NoInfer, useLazyQuery } from "@apollo/client";
-import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
+
+export const EMAIL_EXIST = gql(/* GraphQL */ `
+	query EmailExist($data: EmailInput!) {
+		emailExist(data: $data) {
+			exist
+		}
+	}
+`);
 
 export const useLazyQueryUserEmailExist = (
 	options?: LazyQueryHookOptions<NoInfer<EmailExistQuery>, NoInfer<EmailExistQueryVariables>>,

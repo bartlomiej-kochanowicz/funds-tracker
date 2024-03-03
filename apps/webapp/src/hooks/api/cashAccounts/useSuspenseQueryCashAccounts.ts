@@ -1,6 +1,16 @@
 import { GetCashAccountsQuery } from "__generated__/graphql";
-import { useSuspenseQuery } from "@apollo/client";
-import { GET_CASH_ACCOUNTS } from "graphql/query/cashAccounts/GetCashAccounts";
+import { gql, TypedDocumentNode, useSuspenseQuery } from "@apollo/client";
+
+const GET_CASH_ACCOUNTS: TypedDocumentNode<GetCashAccountsQuery> = gql(/* GraphQL */ `
+	query GetCashAccounts {
+		cashAccounts {
+			uuid
+			name
+			currency
+			balance
+		}
+	}
+`);
 
 export const useSuspenseQueryCashAccounts = () =>
 	useSuspenseQuery<GetCashAccountsQuery>(GET_CASH_ACCOUNTS);

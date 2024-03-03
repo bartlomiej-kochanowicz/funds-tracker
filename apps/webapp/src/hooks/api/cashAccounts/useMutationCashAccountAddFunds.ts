@@ -1,9 +1,17 @@
+import { gql } from "__generated__";
 import {
 	CashAccountAddFundsMutation,
 	CashAccountAddFundsMutationVariables,
 } from "__generated__/graphql";
 import { MutationHookOptions, NoInfer, useMutation } from "@apollo/client";
-import { CASH_ACCOUNT_ADD_FUNDS } from "graphql/mutations/cashAccounts/CashAccountAddFunds";
+
+const CASH_ACCOUNT_ADD_FUNDS = gql(/* GraphQL */ `
+	mutation CashAccountAddFunds($data: CashAccountAddFundsInput!) {
+		cashAccountAddFunds(data: $data) {
+			balance
+		}
+	}
+`);
 
 export const useMutationCashAccountAddFunds = (
 	options?: MutationHookOptions<

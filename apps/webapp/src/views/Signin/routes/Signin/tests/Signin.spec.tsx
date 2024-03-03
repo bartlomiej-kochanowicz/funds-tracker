@@ -1,8 +1,8 @@
 import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
 import { GraphQLError } from "graphql";
-import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
-import { SIGNIN } from "graphql/mutations/authentication/Signin";
-import { EMAIL_EXIST } from "graphql/query/common/EmailExist";
+import { EMAIL_EXIST } from "hooks/api/user/useLazyQueryUserEmailExist";
+import { SEND_CODE } from "hooks/api/user/useMutationUserSendCode";
+import { SIGNIN } from "hooks/api/user/useMutationUserSignin";
 import { useEffect } from "react";
 import { ROUTES } from "routes/paths";
 import { waitFor } from "utils/test-utils";

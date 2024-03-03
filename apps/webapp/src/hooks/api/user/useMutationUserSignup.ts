@@ -1,6 +1,14 @@
+import { gql } from "__generated__";
 import { SignupMutation, SignupMutationVariables } from "__generated__/graphql";
 import { MutationHookOptions, NoInfer, useMutation } from "@apollo/client";
-import { SIGNUP } from "graphql/mutations/authentication/Signup";
+
+const SIGNUP = gql(/* GraphQL */ `
+	mutation Signup($data: SignupInput!) {
+		signupLocal(data: $data) {
+			success
+		}
+	}
+`);
 
 export const useMutationUserSignup = (
 	options?: MutationHookOptions<NoInfer<SignupMutation>, NoInfer<SignupMutationVariables>>,

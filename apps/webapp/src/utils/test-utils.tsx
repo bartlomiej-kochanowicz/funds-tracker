@@ -2,7 +2,7 @@ import { Currency, IntroductionStep } from "__generated__/graphql";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { render as rtlRender, RenderOptions } from "@testing-library/react";
 import { UserContextProvider } from "contexts/UserContext";
-import { GET_USER } from "graphql/query/common/GetUser";
+import { GET_USER } from "hooks/api/user/useLazyQueryUser";
 import { ComponentType, ReactElement, ReactNode } from "react";
 import { I18nextProvider } from "react-i18next";
 

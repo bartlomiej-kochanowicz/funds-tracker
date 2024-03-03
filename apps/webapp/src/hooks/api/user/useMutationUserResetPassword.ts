@@ -1,6 +1,14 @@
+import { gql } from "__generated__";
 import { ResetPasswordMutation, ResetPasswordMutationVariables } from "__generated__/graphql";
 import { MutationHookOptions, NoInfer, useMutation } from "@apollo/client";
-import { RESET_PASSWORD } from "graphql/mutations/authentication/ResetPassword";
+
+const RESET_PASSWORD = gql(/* GraphQL */ `
+	mutation ResetPassword($data: ResetPasswordInput!) {
+		resetPassword(data: $data) {
+			success
+		}
+	}
+`);
 
 export const useMutationUserResetPassword = (
 	options?: MutationHookOptions<

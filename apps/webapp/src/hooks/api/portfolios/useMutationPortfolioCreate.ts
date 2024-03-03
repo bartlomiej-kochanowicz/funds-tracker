@@ -1,6 +1,15 @@
+import { gql } from "__generated__";
 import { PortfolioCreateMutation, PortfolioCreateMutationVariables } from "__generated__/graphql";
 import { MutationHookOptions, NoInfer, useMutation } from "@apollo/client";
-import { PORTFOLIO_CREATE } from "graphql/mutations/portfolios/PortfolioCreate";
+
+const PORTFOLIO_CREATE = gql(/* GraphQL */ `
+	mutation PortfolioCreate($data: PortfolioCreateInput!) {
+		portfolioCreate(data: $data) {
+			uuid
+			name
+		}
+	}
+`);
 
 export const useMutationPortfolioCreate = (
 	options?: MutationHookOptions<

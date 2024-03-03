@@ -1,6 +1,14 @@
+import { gql } from "__generated__";
 import { SendCodeMutation, SendCodeMutationVariables } from "__generated__/graphql";
 import { MutationHookOptions, NoInfer, useMutation } from "@apollo/client";
-import { SEND_CODE } from "graphql/mutations/authentication/SendCode";
+
+export const SEND_CODE = gql(/* GraphQL */ `
+	mutation SendCode($data: SendCodeInput!) {
+		sendCode(data: $data) {
+			success
+		}
+	}
+`);
 
 export const useMutationUserSendCode = (
 	options?: MutationHookOptions<NoInfer<SendCodeMutation>, NoInfer<SendCodeMutationVariables>>,

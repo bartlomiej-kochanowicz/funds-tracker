@@ -1,9 +1,17 @@
+import { gql } from "__generated__";
 import {
 	CashAccountDeleteMutation,
 	CashAccountDeleteMutationVariables,
 } from "__generated__/graphql";
 import { MutationHookOptions, NoInfer, useMutation } from "@apollo/client";
-import { CASH_ACCOUNT_DELETE } from "graphql/mutations/cashAccounts/CashAccountDelete";
+
+const CASH_ACCOUNT_DELETE = gql(/* GraphQL */ `
+	mutation CashAccountDelete($uuid: ID!) {
+		cashAccountDelete(uuid: $uuid) {
+			success
+		}
+	}
+`);
 
 export const useMutationCashAccountDelete = (
 	options?: MutationHookOptions<

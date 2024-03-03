@@ -1,11 +1,19 @@
 /* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import { gql } from "__generated__";
 import { RefreshTokenMutation } from "__generated__/graphql";
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, Observable } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { RetryLink } from "@apollo/client/link/retry";
 import { IS_DEVELOPMENT } from "config/env";
-import { REFRESH_TOKEN } from "graphql/mutations/authentication/RefreshToken";
+
+const REFRESH_TOKEN = gql(/* GraphQL */ `
+	mutation RefreshToken {
+		refreshToken {
+			success
+		}
+	}
+`);
 
 const refreshTokensLink = onError(({ graphQLErrors, operation, forward }) => {
 	if (!graphQLErrors) return;
