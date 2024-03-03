@@ -21,12 +21,14 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 
 	const { setValue, watch } = form;
 
-	const [getInstrumentHistory] = useLazyQuery<
+	const [getInstrumentHistory, { data }] = useLazyQuery<
 		GetInstrumentHistoryQuery,
 		GetInstrumentHistoryQueryVariables
 	>(INSTRUMENT_HISTORY, {
 		onCompleted: ({ instrumentHistory }) => {
 			if (!instrumentHistory.length) return;
+
+			console.log(instrumentHistory);
 
 			setValue("price", Number(instrumentHistory.at(-1)?.close.toFixed(2)), {
 				shouldDirty: true,
