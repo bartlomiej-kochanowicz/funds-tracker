@@ -17,7 +17,7 @@ export const CardsList = ({ children, title, description }: CardsListProps) => (
 
 		<Text
 			muted
-			className="text-sm"
+			className="mt-4 block text-sm"
 		>
 			{description}
 		</Text>
