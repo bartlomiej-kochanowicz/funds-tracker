@@ -4,8 +4,17 @@
 		"outDir": "./dist",
 		"baseUrl": "./",
 		"paths": {
-			"@app/*": ["src/*"],
-			"@common/*": ["src/common/*"]
+			"@src/*": ["src/*"],
+			"@app/*": ["src/app/*"],
+			"@config/*": ["src/config/*"],
+			"@constants/*": ["src/constants/*"],
+			"@decorators/*": ["src/decorators/*"],
+			"@guards/*": ["src/guards/*"],
+			"@handlebars/*": ["src/handlebars/*"],
+			"@inputs/*": ["src/inputs/*"],
+			"@services/*": ["src/services/*"],
+			"@tests/*": ["src/tests/*"],
+			"@validators/*": ["src/validators/*"],
 		}
 	}
 }

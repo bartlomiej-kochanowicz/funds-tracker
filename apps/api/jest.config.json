@@ -13,7 +13,16 @@
   "coverageDirectory": "../coverage",
   "testEnvironment": "node",
   "moduleNameMapper": {
-    "^@app/(.*)$": "<rootDir>/../src/$1",
-    "^@common/(.*)$": "<rootDir>/../src/common/$1"
+  "^@src/(.*)$": "<rootDir>/../src/$1",
+  "^@app/(.*)$": "<rootDir>/../src/app/$1",
+  "^@config/(.*)$": "<rootDir>/../src/config/$1",
+	"^@constants/(.*)$": "<rootDir>/../src/constants/$1",
+	"^@decorators/(.*)$": "<rootDir>/../src/decorators/$1",
+	"^@guards/(.*)$": "<rootDir>/../src/guards/$1",
+	"^@handlebars/(.*)$": "<rootDir>/../src/handlebars/$1",
+	"^@inputs/(.*)$": "<rootDir>/../src/inputs/$1",
+	"^@services/(.*)$": "<rootDir>/../src/services/$1",
+	"^@tests/(.*)$": "<rootDir>/../src/tests/$1",
+	"^@validators/(.*)$": "<rootDir>/../src/validators/$1"
   }
 }

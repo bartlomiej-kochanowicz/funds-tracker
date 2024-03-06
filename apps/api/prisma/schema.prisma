@@ -58,33 +58,21 @@ model Portfolio {
   name                  String
   user                  User                   @relation(fields: [userUuid], references: [uuid])
   userUuid              String
-  portfolioOperations   PortfolioOperation[]
+  transactions          Transaction[]
   cashAccountOperations CashAccountOperation[]
 
   @@unique([userUuid, uuid])
 }
 
-model PortfolioOperation {
-  uuid                   String        @id @default(uuid())
-  instrument             Instrument    @relation(fields: [instrumentCodeExchange], references: [codeExchange])
-  instrumentCodeExchange String
-  date                   DateTime      @default(now())
-  type                   OperationType
-  quantity               Float
-  price                  Float
-  portfolio              Portfolio     @relation(fields: [portfolioUuid], references: [uuid])
-  portfolioUuid          String
-}
-
-model Instrument {
-  codeExchange       String               @id @unique
-  name               String
-  type               InstrumentType
-  code               String
-  currency           String
-  country            String
-  exchange           String
-  portfolioOperation PortfolioOperation[]
+model Transaction {
+  uuid             String        @id @default(uuid())
+  instrumentTicker String
+  date             DateTime      @default(now())
+  type             OperationType
+  quantity         Float
+  price            Float
+  portfolio        Portfolio     @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid    String
 }
 
 enum Subscription {

@@ -125,7 +125,7 @@ export const SearchInstrumentCombobox = forwardRef<
 									data.searchInstrument.map(instrument => {
 										const { Name, Exchange, Code, Currency: currency, previousClose } = instrument;
 
-										const ticker = `${Code}.${Exchange}`;
+										const ticker = `${Code}:${Exchange}`;
 
 										return (
 											<Command.Item

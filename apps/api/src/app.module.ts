@@ -4,15 +4,15 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ConfigModule } from "@nestjs/config";
 import { ApolloDriver } from "@nestjs/apollo";
 import { RedisModule } from "@liaoliaots/nestjs-redis";
-import { AtGuard } from "@common/guards";
-import { PrismaModule } from "./prisma/prisma.module";
-import { AuthModule } from "./auth/auth.module";
-import { CashAccountsModule } from "./cash-accounts/cash-accounts.module";
-import { InstrumentsModule } from "./instruments/instruments.module";
-import { PortfoliosModule } from "./portfolios/portfolios.module";
-import { UserModule } from "./user/user.module";
-import { InvestModule } from "./invest/invest.module";
-import { CurrenciesModule } from "./currencies/currencies.module";
+import { AtGuard } from "@guards/at.guard";
+import { PrismaModule } from "./services/prisma/prisma.module";
+import { AuthModule } from "./app/auth/auth.module";
+import { CashAccountsModule } from "./app/cash-accounts/cash-accounts.module";
+import { InstrumentsModule } from "./app/instruments/instruments.module";
+import { PortfoliosModule } from "./app/portfolios/portfolios.module";
+import { UserModule } from "./app/user/user.module";
+import { InvestModule } from "./app/invest/invest.module";
+import { CurrenciesModule } from "./app/currencies/currencies.module";
 
 @Module({
 	imports: [
