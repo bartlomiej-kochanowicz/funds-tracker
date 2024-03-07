@@ -3,19 +3,18 @@ import { HttpService } from "@nestjs/axios";
 import { ConfigService } from "@nestjs/config";
 import { catchError, firstValueFrom, of } from "rxjs";
 import { PrismaService } from "@services/prisma/prisma.service";
-import { Instrument } from "@inputs/Instrument.input";
 import { EodHistoricalDataSearchResponse } from "@src/types/eodhistoricaldata-search";
-import { InvestInNewInstrumentInput } from "./inputs/investInNewInstrument.input";
+import { CreateTransactionInput } from "./inputs/createTransaction.input";
 
 @Injectable()
-export class InvestService {
+export class TransactionsService {
 	constructor(
 		private readonly httpService: HttpService,
 		private config: ConfigService,
 		private prisma: PrismaService,
 	) {}
 
-	async investInNewInstrument(userUuid: string, data: InvestInNewInstrumentInput) {
+	async createTransaction(userUuid: string, data: CreateTransactionInput) {
 		const { instrument, portfolioUuid, cashAccountUuid } = data;
 
 		const { code, exchange } = instrument;
@@ -39,25 +38,7 @@ export class InvestService {
 			throw new Error("Instrument does not exist");
 		}
 
-		const isInstrumentAlreadyAdded = await this.prisma.instrument.findFirst({
-			where: {
-				codeExchange: this.generateInstrumentCodeExchange(code, exchange),
-			},
-		});
-
-		if (!isInstrumentAlreadyAdded) {
-			const { codeExchange } = await this.addInstrumentToDatabase(instrument);
-
-			await this.addOperationToPortfolio(data, codeExchange);
-
-			await this.addOparationToCashAccount(data);
-
-			return {
-				success: true,
-			};
-		}
-
-		const { codeExchange } = isInstrumentAlreadyAdded;
+		const codeExchange = this.generateInstrumentCodeExchange(code, exchange);
 
 		await this.addOperationToPortfolio(data, codeExchange);
 
@@ -68,19 +49,15 @@ export class InvestService {
 		};
 	}
 
-	private async addOperationToPortfolio(data: InvestInNewInstrumentInput, codeExchange: string) {
-		await this.prisma.portfolioOperation.create({
+	private async addOperationToPortfolio(data: CreateTransactionInput, codeExchange: string) {
+		await this.prisma.transaction.create({
 			data: {
 				portfolio: {
 					connect: {
 						uuid: data.portfolioUuid,
 					},
 				},
-				instrument: {
-					connect: {
-						codeExchange,
-					},
-				},
+				codeExchange,
 				price: data.price,
 				quantity: data.quantity,
 				date: new Date(data.date),
@@ -89,7 +66,7 @@ export class InvestService {
 		});
 	}
 
-	private async addOparationToCashAccount(data: InvestInNewInstrumentInput) {
+	private async addOparationToCashAccount(data: CreateTransactionInput) {
 		await this.prisma.cashAccountOperation.create({
 			data: {
 				cashAccountUuid: data.cashAccountUuid,
@@ -103,24 +80,6 @@ export class InvestService {
 
 	private generateInstrumentCodeExchange(code: string, exchange: string) {
 		return `${code.toUpperCase()}.${exchange.toUpperCase()}`;
-	}
-
-	private async addInstrumentToDatabase(instrument: Instrument) {
-		const { code, exchange, type } = instrument;
-
-		const { Name, Currency, Country } = await this.getInstrument(code, exchange);
-
-		return await this.prisma.instrument.create({
-			data: {
-				codeExchange: this.generateInstrumentCodeExchange(code, exchange),
-				name: Name,
-				type,
-				code,
-				exchange,
-				currency: Currency,
-				country: Country,
-			},
-		});
 	}
 
 	private async getInstrument(code: string, exchange: string) {

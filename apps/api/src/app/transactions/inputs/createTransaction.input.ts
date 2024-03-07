@@ -3,7 +3,7 @@ import { InputType, Field } from "@nestjs/graphql";
 import { IsNumber, IsString, IsUUID } from "class-validator";
 
 @InputType()
-export class InvestInNewInstrumentInput {
+export class CreateTransactionInput {
 	@IsUUID()
 	@Field(() => String)
 	portfolioUuid: string;

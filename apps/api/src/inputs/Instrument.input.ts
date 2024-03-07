@@ -1,5 +1,5 @@
 import { Field, InputType } from "@nestjs/graphql";
-import { InstrumentType } from "@prisma/client";
+import { InstrumentType } from "@prisma/client/generator-build";
 import { IsString } from "class-validator";
 
 @InputType()

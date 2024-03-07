@@ -1,4 +1,4 @@
-import { InstrumentType } from "@prisma/client";
+import { InstrumentType } from "@prisma/client/generator-build";
 import {
 	registerDecorator,
 	ValidationOptions,

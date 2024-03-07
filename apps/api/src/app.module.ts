@@ -11,7 +11,7 @@ import { CashAccountsModule } from "./app/cash-accounts/cash-accounts.module";
 import { InstrumentsModule } from "./app/instruments/instruments.module";
 import { PortfoliosModule } from "./app/portfolios/portfolios.module";
 import { UserModule } from "./app/user/user.module";
-import { InvestModule } from "./app/invest/invest.module";
+import { TransactionsModule } from "./app/transactions/transactions.module";
 import { CurrenciesModule } from "./app/currencies/currencies.module";
 
 @Module({
@@ -39,8 +39,9 @@ import { CurrenciesModule } from "./app/currencies/currencies.module";
 		InstrumentsModule,
 		PortfoliosModule,
 		UserModule,
-		InvestModule,
+		TransactionsModule,
 		CurrenciesModule,
+		TransactionsModule,
 	],
 	controllers: [],
 	providers: [
