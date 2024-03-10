@@ -48,6 +48,7 @@ export const useCashAccountInvestFundsDialog = ({
 						balance={balance}
 						currency={currency}
 						uuid={uuid}
+						setOpen={setOpen}
 					/>
 				</ResponsiveDialog.Content>
 			</ResponsiveDialog>

@@ -57,7 +57,7 @@ CREATE TABLE "CashAccountOperation" (
     "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "type" "CashAccountOperationType" NOT NULL,
     "amount" DOUBLE PRECISION NOT NULL,
-    "destinationUuid" TEXT,
+    "portfolioUuid" TEXT,
 
     CONSTRAINT "CashAccountOperation_pkey" PRIMARY KEY ("uuid")
 );
@@ -72,30 +72,27 @@ CREATE TABLE "Portfolio" (
 );
 
 -- CreateTable
-CREATE TABLE "PortfolioOperation" (
+CREATE TABLE "Transaction" (
     "uuid" TEXT NOT NULL,
-    "instrumentCodeExchange" TEXT NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "date" TIMESTAMP(3) NOT NULL,
     "type" "OperationType" NOT NULL,
     "quantity" DOUBLE PRECISION NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "portfolioUuid" TEXT NOT NULL,
+    "instrumentUuid" TEXT NOT NULL,
 
-    CONSTRAINT "PortfolioOperation_pkey" PRIMARY KEY ("uuid")
+    CONSTRAINT "Transaction_pkey" PRIMARY KEY ("uuid")
 );
 
 -- CreateTable
 CREATE TABLE "Instrument" (
+    "uuid" TEXT NOT NULL,
     "codeExchange" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" "InstrumentType" NOT NULL,
-    "code" TEXT NOT NULL,
-    "currency" TEXT NOT NULL,
-    "country" TEXT NOT NULL,
-    "exchange" TEXT NOT NULL,
-    "ISIN" TEXT,
+    "currency" "Currency" NOT NULL,
 
-    CONSTRAINT "Instrument_pkey" PRIMARY KEY ("codeExchange")
+    CONSTRAINT "Instrument_pkey" PRIMARY KEY ("uuid")
 );
 
 -- CreateIndex
@@ -114,7 +111,7 @@ CREATE UNIQUE INDEX "CashAccount_userUuid_uuid_key" ON "CashAccount"("userUuid",
 CREATE UNIQUE INDEX "Portfolio_userUuid_uuid_key" ON "Portfolio"("userUuid", "uuid");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Instrument_codeExchange_code_ISIN_key" ON "Instrument"("codeExchange", "code", "ISIN");
+CREATE UNIQUE INDEX "Instrument_codeExchange_key" ON "Instrument"("codeExchange");
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userUuid_fkey" FOREIGN KEY ("userUuid") REFERENCES "User"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -126,13 +123,13 @@ ALTER TABLE "CashAccount" ADD CONSTRAINT "CashAccount_userUuid_fkey" FOREIGN KEY
 ALTER TABLE "CashAccountOperation" ADD CONSTRAINT "CashAccountOperation_cashAccountUuid_fkey" FOREIGN KEY ("cashAccountUuid") REFERENCES "CashAccount"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CashAccountOperation" ADD CONSTRAINT "CashAccountOperation_destinationUuid_fkey" FOREIGN KEY ("destinationUuid") REFERENCES "Portfolio"("uuid") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "CashAccountOperation" ADD CONSTRAINT "CashAccountOperation_portfolioUuid_fkey" FOREIGN KEY ("portfolioUuid") REFERENCES "Portfolio"("uuid") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Portfolio" ADD CONSTRAINT "Portfolio_userUuid_fkey" FOREIGN KEY ("userUuid") REFERENCES "User"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PortfolioOperation" ADD CONSTRAINT "PortfolioOperation_instrumentCodeExchange_fkey" FOREIGN KEY ("instrumentCodeExchange") REFERENCES "Instrument"("codeExchange") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_portfolioUuid_fkey" FOREIGN KEY ("portfolioUuid") REFERENCES "Portfolio"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PortfolioOperation" ADD CONSTRAINT "PortfolioOperation_portfolioUuid_fkey" FOREIGN KEY ("portfolioUuid") REFERENCES "Portfolio"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_instrumentUuid_fkey" FOREIGN KEY ("instrumentUuid") REFERENCES "Instrument"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;

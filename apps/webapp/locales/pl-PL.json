@@ -230,5 +230,6 @@
 	"common.link.home": "Przejdz do pulpitu",
 	"modal.InvestFunds.form.placeholder.purchase_date": "Wybierz datę zakupu",
 	"form.search_instrument.empty": "Nie znaleziono instrumentów",
-	"modal.InvestFunds.instrument.tooltip": "Obsługujemy ponad 60 giełd na całym świecie. Wszystkie giełdy amerykańskie są połączone w jedną wirtualną giełdę \"US\", która obejmuje NYSE, NASDAQ, NYSE ARCA i tickery OTC/PINK."
+	"modal.InvestFunds.instrument.tooltip": "Obsługujemy ponad 60 giełd na całym świecie. Wszystkie giełdy amerykańskie są połączone w jedną wirtualną giełdę \"US\", która obejmuje NYSE, NASDAQ, NYSE ARCA i tickery OTC/PINK.",
+	"modal.InvestFunds.toast.success": "Transakcja została pomyślnie dodana."
 }

@@ -13,7 +13,10 @@ import {
 export class PortfoliosService {
 	constructor(private prisma: PrismaService) {}
 
-	async create(userUuid: string, portfolioCreateInput: PortfolioCreateInput): Promise<Portfolio> {
+	async create(
+		userUuid: string,
+		portfolioCreateInput: PortfolioCreateInput,
+	): Promise<Partial<Portfolio>> {
 		const portfolios = await this.prisma.portfolio.count({
 			where: {
 				userUuid,
@@ -68,7 +71,7 @@ export class PortfoliosService {
 		};
 	}
 
-	async findAll(userUuid: string): Promise<Portfolio[]> {
+	async findAll(userUuid: string): Promise<Partial<Portfolio>[]> {
 		const portfolios = await this.prisma.portfolio.findMany({
 			where: {
 				userUuid,
@@ -93,6 +96,24 @@ export class PortfoliosService {
 			select: {
 				uuid: true,
 				name: true,
+				transactions: {
+					select: {
+						uuid: true,
+						date: true,
+						type: true,
+						price: true,
+						quantity: true,
+						instrument: {
+							select: {
+								uuid: true,
+								codeExchange: true,
+								name: true,
+								type: true,
+								currency: true,
+							},
+						},
+					},
+				},
 			},
 		});
 
@@ -107,7 +128,7 @@ export class PortfoliosService {
 		userUuid: string,
 		uuid: string,
 		portfolioUpdateInput: PortfolioUpdateInput,
-	): Promise<Portfolio> {
+	): Promise<Partial<Portfolio>> {
 		try {
 			const portfolio = await this.prisma.portfolio.update({
 				where: {

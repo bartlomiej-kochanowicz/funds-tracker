@@ -6,5 +6,6 @@ import { InstrumentsResolver } from "./instruments.resolver";
 @Module({
 	imports: [HttpModule],
 	providers: [InstrumentsService, InstrumentsResolver],
+	exports: [InstrumentsService],
 })
 export class InstrumentsModule {}

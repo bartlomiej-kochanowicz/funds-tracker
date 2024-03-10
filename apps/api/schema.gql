@@ -205,12 +205,83 @@ type PortfolioDelete {
   success: Boolean!
 }
 
+type Instrument {
+  """Instrument uuid."""
+  uuid: ID!
+
+  """Code"""
+  codeExchange: String!
+
+  """Name"""
+  name: String!
+
+  """Type"""
+  type: InstrumentType!
+
+  """Instrument currency"""
+  currency: Currency!
+}
+
+enum InstrumentType {
+  stocks
+  bonds
+  governmentBonds
+  etfs
+  options
+  commodities
+  crypto
+  immovables
+  movables
+  others
+}
+
+type Transaction {
+  """Transaction uuid."""
+  uuid: ID!
+
+  """Date of purchase"""
+  date: DateTime!
+
+  """Operation type"""
+  type: OperationType!
+
+  """Quantity"""
+  quantity: Float!
+
+  """Price"""
+  price: Float!
+
+  """Instrument"""
+  instrument: Instrument!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum OperationType {
+  deposit
+  withdrawal
+  transfer
+  buy
+  sell
+  dividend
+  interest
+  tax
+  fee
+  other
+}
+
 type Portfolio {
   """Portfolio uuid."""
   uuid: ID!
 
   """Portfolio name."""
   name: String!
+
+  """Portfolio transactions."""
+  transactions: [Transaction!]!
 }
 
 type User {
@@ -250,8 +321,8 @@ enum IntroductionStep {
   Completed
 }
 
-type InvestInNewInstrument {
-  """Invest success"""
+type TransactionCreate {
+  """Success"""
   success: Boolean!
 }
 
@@ -280,19 +351,6 @@ input SearchInstrumentInput {
 
   """Instrument type."""
   type: InstrumentType!
-}
-
-enum InstrumentType {
-  stocks
-  bonds
-  governmentBonds
-  etfs
-  options
-  commodities
-  crypto
-  immovables
-  movables
-  others
 }
 
 input InstrumentHistoryInput {
@@ -331,7 +389,7 @@ type Mutation {
   portfolioUpdate(uuid: String!, data: PortfolioUpdateInput!): Portfolio!
   portfolioDelete(uuid: String!): PortfolioDelete!
   updateUser(data: UpdateUserInput!): User!
-  investInNewInstrument(data: InvestInNewInstrumentInput!): InvestInNewInstrument!
+  transactionCreate(data: TransactionCreateInput!): TransactionCreate!
 }
 
 input SignupInput {
@@ -449,18 +507,29 @@ input UpdateUserInput {
   defaultCurrency: Currency
 }
 
-input InvestInNewInstrumentInput {
+input TransactionCreateInput {
   portfolioUuid: String!
   cashAccountUuid: String!
-  instrument: Instrument!
-  date: String!
+  instrument: InstrumentCreateInput!
+  date: DateTime!
   quantity: Float!
   price: Float!
   comission: Float!
 }
 
-input Instrument {
-  type: InstrumentType!
+input InstrumentCreateInput {
+  """Code"""
   code: String!
+
+  """Exchange"""
   exchange: String!
+
+  """Name"""
+  name: String!
+
+  """Type"""
+  type: InstrumentType!
+
+  """Instrument currency"""
+  currency: Currency!
 }

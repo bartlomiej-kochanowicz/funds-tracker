@@ -12,7 +12,7 @@ import { InstrumentsModule } from "./app/instruments/instruments.module";
 import { PortfoliosModule } from "./app/portfolios/portfolios.module";
 import { UserModule } from "./app/user/user.module";
 import { TransactionsModule } from "./app/transactions/transactions.module";
-import { CurrenciesModule } from "./app/currencies/currencies.module";
+import { CurrenciesModule } from "./services/currencies/currencies.module";
 
 @Module({
 	imports: [

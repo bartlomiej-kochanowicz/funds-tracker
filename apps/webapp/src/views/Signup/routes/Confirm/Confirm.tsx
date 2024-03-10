@@ -68,7 +68,7 @@ export const Confirm = () => {
 					refreshReCaptcha={refreshReCaptcha}
 				/>
 			</Suspense>
-			<Card>
+			<Card className="sm:max-w-md">
 				<Card.Header className="text-center">
 					<H1>{t("common.sign_up_confirm")}</H1>
 
@@ -125,7 +125,7 @@ export const Confirm = () => {
 				</Card.Footer>
 			</Card>
 
-			<div className="mx-32 flex flex-col items-center gap-4">
+			<div className="mx-32 mt-12 flex flex-col items-center gap-4">
 				<LangSelector />
 
 				<ThemeToggle />

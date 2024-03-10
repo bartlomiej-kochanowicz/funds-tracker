@@ -2,7 +2,7 @@ import { TopbarSidebar } from "components/layouts/TopbarSidebar";
 import { ProtectedRoute } from "components/ProtectedRoute";
 import { ROUTES } from "routes/paths";
 
-/* import { Portfolio } from "./Portfolio"; */
+import { Portfolio } from "./Portfolio";
 import { Portfolios } from "./Portfolios/Portfolios";
 
 export const PortfoliosRoutes = [
@@ -21,8 +21,7 @@ export const PortfoliosRoutes = [
 		element: (
 			<ProtectedRoute>
 				<TopbarSidebar>
-					<div>portfolio</div>
-					{/* <Portfolio /> */}
+					<Portfolio />
 				</TopbarSidebar>
 			</ProtectedRoute>
 		),

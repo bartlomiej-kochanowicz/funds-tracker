@@ -1,11 +1,21 @@
 import { Currency } from "__generated__/graphql";
-import { Button, Form, responsiveDialog, ScrollArea } from "@funds-tracker/ui";
+import {
+	Button,
+	emitErrorToast,
+	emitSuccessToast,
+	Form,
+	responsiveDialog,
+	ScrollArea,
+} from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import clsx from "clsx";
 import { formatCurrency } from "helpers/formatCurrency";
+import { useMutationTransactionCreate } from "hooks/api/transactions/useMutationTransactionCreate";
 import { FC, Fragment, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { generatePath, useNavigate } from "react-router-dom";
+import { ROUTES } from "routes/paths";
 
 import {
 	CashAccountInvestFundsFormSchema,
@@ -27,14 +37,18 @@ interface CashAccountInvestFundsFormFormProps {
 	balance: number;
 	currency: Currency;
 	uuid: string;
+	setOpen: (open: boolean) => void;
 }
 
 export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps> = ({
 	balance,
 	currency,
 	uuid,
+	setOpen,
 }) => {
 	const { t } = useTranslation();
+
+	const navigate = useNavigate();
 
 	const form = useForm<CashAccountInvestFundsFormSchemaType>({
 		defaultValues,
@@ -45,11 +59,43 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 		handleSubmit,
 		watch,
 		formState: { isValid, isSubmitting },
+		getValues,
 	} = form;
 
+	const [transactionCreate] = useMutationTransactionCreate({
+		onCompleted: async () => {
+			setOpen(false);
+			emitSuccessToast(t("modal.InvestFunds.toast.success"));
+			navigate(generatePath(ROUTES.PORTFOLIOS.PORTFOLIO, { uuid: getValues("portfolio") }));
+		},
+		onError: () => {
+			emitErrorToast(t("service.unknown_error"));
+		},
+	});
+
 	const onSubmit = useCallback(
-		(data: CashAccountInvestFundsFormSchemaType) => {
-			console.log({ ...data, cashAccountUuid: uuid });
+		async (data: CashAccountInvestFundsFormSchemaType) => {
+			const date = data.date.setHours(12, 0, 0, 0);
+
+			await transactionCreate({
+				variables: {
+					data: {
+						portfolioUuid: data.portfolio,
+						cashAccountUuid: uuid,
+						instrument: {
+							type: data.instrumentType,
+							code: data.instrument.Code,
+							exchange: data.instrument.Exchange,
+							name: data.instrument.Name,
+							currency: data.instrument.Currency as Currency,
+						},
+						date,
+						quantity: data.quantity,
+						price: data.price,
+						comission: data.comission,
+					},
+				},
+			});
 		},
 		[uuid],
 	);

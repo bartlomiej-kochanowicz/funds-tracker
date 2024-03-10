@@ -1,20 +1,16 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { HttpService } from "@nestjs/axios";
-import { ConfigService } from "@nestjs/config";
-import { catchError, firstValueFrom, of } from "rxjs";
 import { PrismaService } from "@services/prisma/prisma.service";
-import { EodHistoricalDataSearchResponse } from "@src/types/eodhistoricaldata-search";
-import { CreateTransactionInput } from "./inputs/createTransaction.input";
+import { TransactionCreateInput } from "./inputs/transaction-create.input";
+import { InstrumentsService } from "@app/instruments/instruments.service";
 
 @Injectable()
 export class TransactionsService {
 	constructor(
-		private readonly httpService: HttpService,
-		private config: ConfigService,
 		private prisma: PrismaService,
+		private instruments: InstrumentsService,
 	) {}
 
-	async createTransaction(userUuid: string, data: CreateTransactionInput) {
+	async transactionCreate(userUuid: string, data: TransactionCreateInput) {
 		const { instrument, portfolioUuid, cashAccountUuid } = data;
 
 		const { code, exchange } = instrument;
@@ -32,24 +28,36 @@ export class TransactionsService {
 			throw new HttpException("Portfolio not found", HttpStatus.NOT_FOUND);
 		}
 
-		const instrumentExists = await this.checkIfInstrumentExists(code, exchange);
+		const instrumentExists = await this.instruments.instrumentExists(code, exchange);
 
 		if (!instrumentExists) {
 			throw new Error("Instrument does not exist");
 		}
 
-		const codeExchange = this.generateInstrumentCodeExchange(code, exchange);
+		const codeExchange = this.instruments.generateInstrumentCodeExchange(code, exchange);
 
-		await this.addOperationToPortfolio(data, codeExchange);
+		await this.addTransaction(data, codeExchange);
 
-		await this.addOparationToCashAccount(data);
+		await this.addCashAccountTransaction(data);
 
 		return {
 			success: true,
 		};
 	}
 
-	private async addOperationToPortfolio(data: CreateTransactionInput, codeExchange: string) {
+	private async addTransaction(data: TransactionCreateInput, codeExchange: string) {
+		let instrument = await this.instruments.instrumentDB(codeExchange);
+
+		if (!instrument) {
+			instrument = await this.instruments.instrumentCreate({
+				code: data.instrument.code,
+				exchange: data.instrument.exchange,
+				name: data.instrument.name,
+				type: data.instrument.type,
+				currency: data.instrument.currency,
+			});
+		}
+
 		await this.prisma.transaction.create({
 			data: {
 				portfolio: {
@@ -57,16 +65,20 @@ export class TransactionsService {
 						uuid: data.portfolioUuid,
 					},
 				},
-				codeExchange,
 				price: data.price,
 				quantity: data.quantity,
-				date: new Date(data.date),
+				date: new Date(data.date).toISOString(),
 				type: "buy",
+				instrument: {
+					connect: {
+						uuid: instrument.uuid,
+					},
+				},
 			},
 		});
 	}
 
-	private async addOparationToCashAccount(data: CreateTransactionInput) {
+	private async addCashAccountTransaction(data: TransactionCreateInput) {
 		await this.prisma.cashAccountOperation.create({
 			data: {
 				cashAccountUuid: data.cashAccountUuid,
@@ -76,60 +88,5 @@ export class TransactionsService {
 				portfolioUuid: data.portfolioUuid,
 			},
 		});
-	}
-
-	private generateInstrumentCodeExchange(code: string, exchange: string) {
-		return `${code.toUpperCase()}.${exchange.toUpperCase()}`;
-	}
-
-	private async getInstrument(code: string, exchange: string) {
-		const { data } = await firstValueFrom(
-			this.httpService
-				.get<EodHistoricalDataSearchResponse>(
-					`https://eodhistoricaldata.com/api/search/${code}.${exchange}`,
-					{
-						params: {
-							api_token: this.config.get("EODHD_API_KEY"),
-							fmt: "json",
-						},
-					},
-				)
-				.pipe(
-					catchError(() => {
-						return of(null);
-					}),
-				),
-		);
-
-		const [CODE, EXCHANGE] = [code.toUpperCase(), exchange.toUpperCase()];
-
-		const instrument = data.find(({ Code, Exchange }) => Code === CODE && Exchange === EXCHANGE);
-
-		return instrument || null;
-	}
-
-	private async checkIfInstrumentExists(code: string, exchange: string) {
-		const data = await firstValueFrom(
-			this.httpService
-				.get(
-					`https://eodhistoricaldata.com/api/eod/${code.toUpperCase()}.${exchange.toUpperCase()}`,
-					{
-						params: {
-							api_token: this.config.get("EODHD_API_KEY"),
-							fmt: "json",
-							period: "1d",
-							from: new Date().toISOString().split("T")[0],
-							to: new Date().toISOString().split("T")[0],
-						},
-					},
-				)
-				.pipe(
-					catchError(() => {
-						return of(false);
-					}),
-				),
-		);
-
-		return Boolean(data);
 	}
 }

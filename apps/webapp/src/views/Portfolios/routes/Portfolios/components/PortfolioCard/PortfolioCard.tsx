@@ -6,6 +6,8 @@ import { usePortfolioRenameDialog } from "components/dialogs/Portfolios/Portfoli
 import { MoreVertical, Pencil, PieChart, Trash2 } from "lucide-react";
 import { Fragment, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { generatePath, Link } from "react-router-dom";
+import { ROUTES } from "routes/paths";
 
 type PortfolioCardProps = {
 	isPending: boolean;
@@ -60,7 +62,15 @@ export const PortfolioCard = ({ name, isPending, uuid, handleRefetch }: Portfoli
 			>
 				<Card.Header className="w-full">
 					<div className="flex items-center justify-between">
-						<Card.Title className="max-w-[80%]">{name}</Card.Title>
+						<Card.Title className="max-w-[80%]">
+							<Link
+								to={generatePath(ROUTES.PORTFOLIOS.PORTFOLIO, {
+									uuid,
+								})}
+							>
+								{name}
+							</Link>
+						</Card.Title>
 						{/* <Card.Description>{formatCurrency(balance, currency)}</Card.Description> */}
 						<DropdownMenu>
 							<DropdownMenu.Trigger asChild>

@@ -13,7 +13,7 @@ export const Signup = () => {
 
 	return (
 		<ClearCentered>
-			<Card>
+			<Card className="sm:max-w-md">
 				<Card.Header className="text-center">
 					<H1>{t("common.sign_up")}</H1>
 
