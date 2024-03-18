@@ -10,6 +10,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import clsx from "clsx";
 import { formatCurrency } from "helpers/formatCurrency";
+import { useBackgroundQueryPortfolio } from "hooks/api/portfolios/useBackgroundQueryPortfolio";
 import { useMutationTransactionCreate } from "hooks/api/transactions/useMutationTransactionCreate";
 import { FC, Fragment, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
@@ -62,10 +63,15 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 		getValues,
 	} = form;
 
+	const [, { refetch: refetchPortfolios }] = useBackgroundQueryPortfolio(getValues("portfolio"));
+
 	const [transactionCreate] = useMutationTransactionCreate({
 		onCompleted: async () => {
 			setOpen(false);
 			emitSuccessToast(t("modal.InvestFunds.toast.success"));
+
+			await refetchPortfolios();
+
 			navigate(generatePath(ROUTES.PORTFOLIOS.PORTFOLIO, { uuid: getValues("portfolio") }));
 		},
 		onError: () => {

@@ -18,6 +18,7 @@ export const GET_PORTFOLIO = gql(/* GraphQL */ `
 					codeExchange
 					name
 					type
+					currency
 				}
 			}
 		}

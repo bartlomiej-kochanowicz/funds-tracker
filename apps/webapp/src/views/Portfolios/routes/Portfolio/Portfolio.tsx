@@ -1,4 +1,5 @@
 import { Badge, Card, H1, Table } from "@funds-tracker/ui";
+import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
 import { useSuspenseQueryPortfolio } from "hooks/api/portfolios/useSuspenseQueryPortfolio";
 import { ArrowDownCircle } from "lucide-react";
@@ -33,7 +34,14 @@ export const Portfolio = () => {
 						</Table.Header>
 						<Table.Body>
 							{data?.portfolio.transactions.map(
-								({ uuid, instrument: { codeExchange, name }, price, quantity, date, type }) => (
+								({
+									uuid,
+									instrument: { codeExchange, name, currency },
+									price,
+									quantity,
+									date,
+									type,
+								}) => (
 									<Table.Row key={uuid}>
 										<Table.Cell>
 											<Badge>{codeExchange.replace(".", ":")}</Badge>
@@ -43,7 +51,7 @@ export const Portfolio = () => {
 											{type === "buy" && <ArrowDownCircle className="size-4 rotate-180" />}
 										</Table.Cell>
 										<Table.Cell>{name}</Table.Cell>
-										<Table.Cell>{price}</Table.Cell>
+										<Table.Cell>{formatCurrency(price, currency)}</Table.Cell>
 										<Table.Cell>{quantity}</Table.Cell>
 										<Table.Cell>{formatDate(date, { withTime: false })}</Table.Cell>
 									</Table.Row>
