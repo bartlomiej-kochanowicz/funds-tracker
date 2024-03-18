@@ -179,7 +179,7 @@
 	"page.portfolios.need.more.button": "Add new one here",
 	"modal.PortfolioCreate.name": "Add new portfolio",
 	"modal.PortfolioCreate.description": "Here you can create your new portfolio e.g. passive, active, real estate, etc. An investment portfolio is a collection of assets that you want to invest.",
-	"common.manage": "Manage",
+	"common.view": "View",
 	"modal.PortfolioRename.name": "Rename portfolio",
 	"modal.PortfolioConfirmDelete.name": "Delete portfolio",
 	"modal.PortfolioConfirmDelete.description": "Are you sure you want to delete <bold>{{name}}</bold> portfolio? <bold>This action cannot be undone.</bold>",

@@ -28,7 +28,10 @@ export const PortfolioCard = ({ name, isPending, uuid, handleRefetch }: Portfoli
 			[
 				{
 					icon: PieChart,
-					label: t("common.manage"),
+					label: t("common.view"),
+					to: generatePath(ROUTES.PORTFOLIOS.PORTFOLIO, {
+						uuid,
+					}),
 				},
 			],
 			[
@@ -91,6 +94,7 @@ export const PortfolioCard = ({ name, isPending, uuid, handleRefetch }: Portfoli
 													<DropdownMenu.Item
 														key={label}
 														onSelect={rest.onSelect}
+														to={rest.to}
 													>
 														<Icon className="mr-2 size-4" />
 
