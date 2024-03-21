@@ -27,6 +27,8 @@ export * from "./components/Table";
 export * from "./components/Text";
 export * from "./components/Tile";
 export * from "./components/Toaster";
+export * from "./components/Toggle";
+export * from "./components/ToggleGroup";
 export * from "./components/Tooltip";
 
 // Path: src/hooks
