@@ -194,10 +194,10 @@
 	"modal.InvestFunds.form.label.account.balance": "Account balance",
 	"modal.InvestFunds.form.label.instrumentType": "Instrument type",
 	"modal.InvestFunds.form.select.portfolio.instrumentType.placeholder": "Select instrument type",
-	"modal.InvestFunds.form.label.instrument": "Instrument",
+	"common.instrument": "Instrument",
 	"modal.InvestFunds.form.label.portfolio": "Portfolio",
-	"modal.InvestFunds.form.label.purchase_date": "Purchase date",
-	"modal.InvestFunds.form.label.quantity": "Quantity",
+	"common.purchase_date": "Purchase date",
+	"common.quantity": "Quantity",
 	"modal.InvestFunds.form.label.price": "Unit price",
 	"modal.InvestFunds.form.label.comission": "Comission ({{currency}})",
 	"modal.InvestFunds.form.label.transaction_cost": "Transaction cost",
@@ -231,5 +231,11 @@
 	"modal.InvestFunds.form.placeholder.purchase_date": "Select purchase date",
 	"form.search_instrument.empty": "No instruments found",
 	"modal.InvestFunds.instrument.tooltip": "We support more than 60 exchanges all around the world. All US exchanges are combined into one virtual exchange &quot;US&quot; which includes NYSE, NASDAQ, NYSE ARCA, and OTC/PINK tickers.",
-	"modal.InvestFunds.toast.success": "Transaction has been added successfully."
+	"modal.InvestFunds.toast.success": "Transaction has been added successfully.",
+	"page.portfolio.table.caption": "Transactions table",
+	"common.ticker": "Ticker",
+	"common.operation": "Operation",
+	"common.price": "Price",
+	"common.operation.buy": "Buy",
+	"common.operation.sell": "Sell"
 }

@@ -194,10 +194,10 @@
 	"modal.InvestFunds.form.label.account.balance": "Saldo konta",
 	"modal.InvestFunds.form.label.instrumentType": "Typ instrumentu",
 	"modal.InvestFunds.form.select.portfolio.instrumentType.placeholder": "Wybierz typ instrumentu",
-	"modal.InvestFunds.form.label.instrument": "Instrument",
+	"common.instrument": "Instrument",
 	"modal.InvestFunds.form.label.portfolio": "Portfel",
-	"modal.InvestFunds.form.label.purchase_date": "Data zakupu",
-	"modal.InvestFunds.form.label.quantity": "Ilość",
+	"common.purchase_date": "Data zakupu",
+	"common.quantity": "Ilość",
 	"modal.InvestFunds.form.label.price": "Cena jednostkowa",
 	"modal.InvestFunds.form.label.comission": "Prowizja ({{currency}})",
 	"modal.InvestFunds.form.label.transaction_cost": "Koszt transakcji",
@@ -231,5 +231,11 @@
 	"modal.InvestFunds.form.placeholder.purchase_date": "Wybierz datę zakupu",
 	"form.search_instrument.empty": "Nie znaleziono instrumentów",
 	"modal.InvestFunds.instrument.tooltip": "Obsługujemy ponad 60 giełd na całym świecie. Wszystkie giełdy amerykańskie są połączone w jedną wirtualną giełdę \"US\", która obejmuje NYSE, NASDAQ, NYSE ARCA i tickery OTC/PINK.",
-	"modal.InvestFunds.toast.success": "Transakcja została pomyślnie dodana."
+	"modal.InvestFunds.toast.success": "Transakcja została pomyślnie dodana.",
+	"page.portfolio.table.caption": "Tabela transakcji",
+	"common.ticker": "Ticker",
+	"common.operation": "Operacja",
+	"common.price": "Cena",
+	"common.operation.buy": "Kupno",
+	"common.operation.sell": "Sprzedaż"
 }

@@ -25,7 +25,7 @@ export const SearchInstrumentField = () => {
 			render={({ field }) => (
 				<Form.Item orientation="horizontal">
 					<Form.Label className="flex min-w-44">
-						{t("modal.InvestFunds.form.label.instrument")}
+						{t("common.instrument")}
 
 						<Tooltip.Provider delayDuration={250}>
 							<Tooltip>

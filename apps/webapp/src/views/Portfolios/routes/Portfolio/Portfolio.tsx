@@ -3,10 +3,12 @@ import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
 import { useSuspenseQueryPortfolio } from "hooks/api/portfolios/useSuspenseQueryPortfolio";
 import { ArrowDownCircle } from "lucide-react";
-import { Suspense } from "react";
+import { Fragment, Suspense } from "react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 export const Portfolio = () => {
+	const { t } = useTranslation();
 	const { uuid } = useParams<{ uuid: string }>();
 
 	if (!uuid) {
@@ -21,15 +23,15 @@ export const Portfolio = () => {
 			<Card>
 				<Card.Content>
 					<Table>
-						<Table.Caption>Tabela transakcji</Table.Caption>
+						<Table.Caption>{t("page.portfolio.table.caption")}</Table.Caption>
 						<Table.Header>
 							<Table.Row>
-								<Table.Head>Ticker</Table.Head>
-								<Table.Head>Typ</Table.Head>
-								<Table.Head>Nazwa</Table.Head>
-								<Table.Head>Cena</Table.Head>
-								<Table.Head>Ilość</Table.Head>
-								<Table.Head>Data zakupu</Table.Head>
+								<Table.Head>{t("common.ticker")}</Table.Head>
+								<Table.Head>{t("common.operation")}</Table.Head>
+								<Table.Head>{t("common.instrument")}</Table.Head>
+								<Table.Head>{t("common.price")}</Table.Head>
+								<Table.Head>{t("common.quantity")}</Table.Head>
+								<Table.Head>{t("common.purchase_date")}</Table.Head>
 							</Table.Row>
 						</Table.Header>
 						<Table.Body>
@@ -46,9 +48,19 @@ export const Portfolio = () => {
 										<Table.Cell>
 											<Badge>{codeExchange.replace(".", ":")}</Badge>
 										</Table.Cell>
-										<Table.Cell>
-											{type === "sell" && <ArrowDownCircle className="size-4 text-destructive" />}
-											{type === "buy" && <ArrowDownCircle className="size-4 rotate-180" />}
+										<Table.Cell className="flex items-center gap-1">
+											{type === "sell" && (
+												<Fragment>
+													<ArrowDownCircle className="size-4 text-destructive" />
+													{t("common.operation.sell")}
+												</Fragment>
+											)}
+											{type === "buy" && (
+												<Fragment>
+													<ArrowDownCircle className="size-4 rotate-180" />
+													{t("common.operation.buy")}
+												</Fragment>
+											)}
 										</Table.Cell>
 										<Table.Cell>{name}</Table.Cell>
 										<Table.Cell>{formatCurrency(price, currency)}</Table.Cell>
