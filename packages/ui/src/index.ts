@@ -6,7 +6,7 @@ export * from "./components/Calendar";
 export * from "./components/Card";
 export * from "./components/Command";
 export * from "./components/DatePicker";
-export * from "./components/DateTimeInput";
+export * from "./components/DateRangePicker";
 export { Dialog } from "./components/Dialog";
 export { Drawer } from "./components/Drawer";
 export * from "./components/DropdownMenu";

@@ -27,6 +27,7 @@
 		"@hookform/resolvers": "3.3.4",
 		"@internationalized/date": "3.5.2",
 		"clsx": "2.1.0",
+		"date-fns": "3.6.0",
 		"framer-motion": "10.17.9",
 		"graphql": "16.8.1",
 		"i18next": "23.7.16",

@@ -1,13 +1,24 @@
-import { Card, ToggleGroup } from "@funds-tracker/ui";
+import { Card, DateRangePicker, DateRangeType, ToggleGroup } from "@funds-tracker/ui";
+import { subDays } from "date-fns";
+import { useState } from "react";
 
 type SummaryChartProps = {
 	uuid: string;
 };
 
 export const SummaryChart = ({ uuid }: SummaryChartProps) => {
+	const [date, setDate] = useState<DateRangeType | undefined>({
+		from: subDays(new Date(), 30),
+		to: new Date(),
+	});
+
 	return (
 		<Card>
 			<Card.Content>
+				<DateRangePicker
+					value={date}
+					onChange={setDate}
+				/>
 				<ToggleGroup
 					variant="outline"
 					type="single"

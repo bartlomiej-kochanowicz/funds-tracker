@@ -5,7 +5,7 @@ const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={twMerge("rounded-lg border bg-card text-card-foreground  shadow-sm", className)}
+			className={twMerge("rounded-lg border bg-card text-card-foreground shadow-sm", className)}
 			{...props}
 		/>
 	),
@@ -52,7 +52,7 @@ const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={twMerge("p-6 pt-0", className)}
+			className={twMerge("p-6 py-0", className)}
 			{...props}
 		/>
 	),
