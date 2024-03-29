@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { ComponentProps } from "react";
 import { DateRange } from "react-day-picker";
 import { twMerge } from "tailwind-merge";
 
@@ -11,9 +12,9 @@ type DateRangePickerProps = {
 	className?: string;
 	value?: DateRange;
 	onChange: (date?: DateRange) => void;
-};
+} & Omit<ComponentProps<typeof Calendar>, "mode" | "selected">;
 
-const DateRangePicker = ({ className, value, onChange }: DateRangePickerProps) => (
+const DateRangePicker = ({ className, value, onChange, ...rest }: DateRangePickerProps) => (
 	<div className={twMerge("grid gap-2", className)}>
 		<Popover>
 			<Popover.Trigger asChild>
@@ -49,6 +50,7 @@ const DateRangePicker = ({ className, value, onChange }: DateRangePickerProps) =
 					selected={value}
 					onSelect={onChange}
 					numberOfMonths={2}
+					{...rest}
 				/>
 			</Popover.Content>
 		</Popover>
