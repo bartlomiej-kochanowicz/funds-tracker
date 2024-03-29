@@ -7,7 +7,7 @@ type SummaryChartProps = {
 };
 
 export const SummaryChart = ({ uuid }: SummaryChartProps) => {
-	const [{ range, timeFrame }] = useState<{
+	const [{ range, timeFrame }, setState] = useState<{
 		range: DateRangeType | undefined;
 		timeFrame: "max" | "1y" | "1m" | "1w" | "1d";
 	}>({
@@ -18,8 +18,12 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 		timeFrame: "max",
 	});
 
-	const handleRangeChange = () => {};
-	const handleTimeFrameChange = () => {};
+	const handleRangeChange = (range?: DateRangeType) => {
+		setState(state => ({ ...state, range }));
+	};
+	const handleTimeFrameChange = timeFrame => {
+		setState(state => ({ ...state, timeFrame }));
+	};
 
 	return (
 		<Card>
@@ -32,7 +36,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 					/>
 					<ToggleGroup
 						value={timeFrame}
-						onChange={handleTimeFrameChange}
+						onValueChange={handleTimeFrameChange}
 						variant="outline"
 						type="single"
 					>
