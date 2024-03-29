@@ -5,7 +5,10 @@ const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={twMerge("rounded-lg border bg-card text-card-foreground shadow-sm", className)}
+			className={twMerge(
+				"rounded-lg border bg-card text-card-foreground shadow-s [&_.card-content]:has-[#card-footer]:pb-0 [&_.card-content]:has-[#card-header]:pt-0",
+				className,
+			)}
 			{...props}
 		/>
 	),
@@ -17,6 +20,7 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
+			id="card-header"
 			className={twMerge("flex flex-col space-y-1.5 p-6", className)}
 			{...props}
 		/>
@@ -52,7 +56,7 @@ const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={twMerge("p-6 py-0", className)}
+			className={twMerge("p-6 card-content", className)}
 			{...props}
 		/>
 	),
@@ -63,6 +67,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
+			id="card-footer"
 			className={twMerge("flex items-center p-6 pt-0", className)}
 			{...props}
 		/>

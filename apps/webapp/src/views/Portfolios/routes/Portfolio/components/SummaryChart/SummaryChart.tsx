@@ -1,29 +1,13 @@
-import { Card, DateRangePicker, DateRangeType, ToggleGroup } from "@funds-tracker/ui";
-import { subDays } from "date-fns";
-import { useState } from "react";
+import { Card, DateRangePicker, ToggleGroup } from "@funds-tracker/ui";
+
+import { useChartState } from "./hooks/useChartState";
 
 type SummaryChartProps = {
 	uuid: string;
 };
 
 export const SummaryChart = ({ uuid }: SummaryChartProps) => {
-	const [{ range, timeFrame }, setState] = useState<{
-		range: DateRangeType | undefined;
-		timeFrame: "max" | "1y" | "1m" | "1w" | "1d";
-	}>({
-		range: {
-			from: subDays(new Date(), 30),
-			to: new Date(),
-		},
-		timeFrame: "max",
-	});
-
-	const handleRangeChange = (range?: DateRangeType) => {
-		setState(state => ({ ...state, range }));
-	};
-	const handleTimeFrameChange = timeFrame => {
-		setState(state => ({ ...state, timeFrame }));
-	};
+	const { range, timeFrame, handleRangeChange, handleTimeFrameChange } = useChartState();
 
 	return (
 		<Card>
