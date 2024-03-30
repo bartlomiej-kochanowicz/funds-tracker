@@ -1,22 +1,41 @@
-import { Card, DateRangePicker, ToggleGroup } from "@funds-tracker/ui";
+import { Currency } from "__generated__/graphql";
+import { Card, DateRangePicker, Text, ToggleGroup } from "@funds-tracker/ui";
 import { useUserContext } from "contexts/UserContext";
 import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
 import {
 	Area,
+	AreaChart,
 	CartesianGrid,
-	Line,
-	LineChart,
 	ResponsiveContainer,
 	Tooltip,
 	XAxis,
 	YAxis,
 } from "recharts";
+import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
+import { TooltipProps } from "recharts/types/component/Tooltip";
 
 import { useChartState } from "./hooks/useChartState";
 
 type SummaryChartProps = {
 	uuid: string;
+};
+
+const CustomTooltip = (props?: TooltipProps<ValueType, NameType> & { currency: Currency }) => {
+	if (!props) return null;
+
+	const { label, payload, currency } = props;
+
+	if (!payload || !payload[0]) return null;
+
+	const { value } = payload[0];
+
+	return (
+		<div className="z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md">
+			<Text className="block font-bold">{formatCurrency(value, currency)}</Text>
+			<Text className="block">{formatDate(label, { withTime: false })}</Text>
+		</div>
+	);
 };
 
 export const SummaryChart = ({ uuid }: SummaryChartProps) => {
@@ -98,7 +117,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 		<Card>
 			<Card.Content>
 				<ResponsiveContainer height={300}>
-					<LineChart
+					<AreaChart
 						data={data}
 						margin={{
 							left: 28,
@@ -107,53 +126,50 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 					>
 						<defs>
 							<linearGradient
-								id="colorUv"
+								id="colorView"
 								x1="0"
 								y1="0"
 								x2="0"
 								y2="1"
 							>
 								<stop
-									offset="5%"
-									stopColor="#129a74"
-									stopOpacity={0.1}
+									offset="30%"
+									stopColor="#3B82F6"
+									stopOpacity={0.4}
 								/>
 								<stop
 									offset="95%"
 									stopColor="#FFFFFF"
-									stopOpacity={0.1}
+									stopOpacity={0.2}
 								/>
 							</linearGradient>
 						</defs>
-						<Tooltip />
+						<Tooltip content={<CustomTooltip currency={user.defaultCurrency} />} />
 						<CartesianGrid vertical={false} />
 						<XAxis
 							dataKey="date"
 							tickFormatter={convertDate}
 						/>
-						<YAxis tickFormatter={convertValue} />
-						<Line
-							strokeWidth={2}
-							type="monotone"
+						<YAxis
 							dataKey="marketValue"
-							stroke="#8884d8"
-							dot={false}
+							tickFormatter={convertValue}
 						/>
 						<Area
-							type="monotone"
 							dataKey="marketValue"
-							stroke="#8884d8"
+							type="monotone"
+							stroke="#3B82F6"
 							strokeWidth={2}
-							fillOpacity={1}
-							fill="url(#colorUv)"
+							strokeOpacity={1}
+							fill="url(#colorView)"
 						/>
+
 						{/* <Line
 							dot={false}
 							type="monotone"
 							dataKey="cash"
 							stroke="#82ca9d"
 						/> */}
-					</LineChart>
+					</AreaChart>
 				</ResponsiveContainer>
 				<div className="flex flex-wrap justify-end gap-4">
 					<DateRangePicker
