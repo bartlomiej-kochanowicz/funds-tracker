@@ -22,7 +22,7 @@ const DateRangePicker = ({ className, value, onChange, ...rest }: DateRangePicke
 					id="date"
 					variant="outline"
 					className={twMerge(
-						"w-[300px] justify-start text-left font-normal",
+						"justify-start text-left font-normal",
 						!value && "text-muted-foreground",
 					)}
 				>

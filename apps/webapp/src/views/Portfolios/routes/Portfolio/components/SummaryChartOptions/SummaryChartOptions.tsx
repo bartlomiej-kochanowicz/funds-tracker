@@ -6,7 +6,7 @@ export const SummaryChartOptions = () => {
 	const { range, timeFrame, handleRangeChange, handleTimeFrameChange } = useSummaryChartContext();
 
 	return (
-		<div className="flex flex-wrap justify-end gap-4">
+		<div className="mb-4 flex flex-wrap gap-4">
 			<DateRangePicker
 				value={range}
 				onChange={handleRangeChange}

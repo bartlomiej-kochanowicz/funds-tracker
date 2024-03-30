@@ -76,16 +76,16 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 	const convertDate = (date: string) =>
 		formatDate(date, {
 			withTime: false,
-			yearFormat: "2-digit",
-			withDay: timeFrame === "1d" || timeFrame === "1w",
+			yearFormat: timeFrame === "5y" || timeFrame === "max" ? "numeric" : "2-digit",
+			withDay: timeFrame === "1d" || timeFrame === "1w" || timeFrame === "1m",
 			withMonth:
 				timeFrame === "1d" ||
 				timeFrame === "1w" ||
 				timeFrame === "1m" ||
 				timeFrame === "3m" ||
-				timeFrame === "6m",
+				timeFrame === "6m" ||
+				timeFrame === "1y",
 			withYear:
-				timeFrame === "1m" ||
 				timeFrame === "3m" ||
 				timeFrame === "6m" ||
 				timeFrame === "1y" ||
@@ -117,7 +117,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 						/>
 						<stop
 							offset="95%"
-							stopColor="#FFFFFF"
+							stopColor="#FFFFFFFF"
 							stopOpacity={0.2}
 						/>
 					</linearGradient>
@@ -129,12 +129,14 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 					tickFormatter={convertDate}
 				/>
 				<YAxis
+					tickLine={false}
+					axisLine={false}
 					dataKey="marketValue"
 					tickFormatter={convertValue}
 				/>
 				<Area
+					type="linear"
 					dataKey="marketValue"
-					type="monotone"
 					stroke="#3B82F6"
 					strokeWidth={2}
 					strokeOpacity={1}

@@ -12,8 +12,8 @@ export const SummaryChartCard = ({ uuid }: SummaryChartCardProps) => (
 	<Card>
 		<Card.Content>
 			<SummaryChartContextProvider>
-				<SummaryChart uuid={uuid} />
 				<SummaryChartOptions />
+				<SummaryChart uuid={uuid} />
 			</SummaryChartContextProvider>
 		</Card.Content>
 	</Card>
