@@ -390,8 +390,17 @@ input InstrumentHistoryInput {
 }
 
 input PortfolioSummaryInput {
-  """Portfolio name."""
-  name: String!
+  """Account uuid."""
+  uuid: ID!
+
+  """Time frame."""
+  timeFrame: String!
+
+  """From date."""
+  from: DateTime!
+
+  """To date."""
+  to: DateTime!
 }
 
 type Mutation {

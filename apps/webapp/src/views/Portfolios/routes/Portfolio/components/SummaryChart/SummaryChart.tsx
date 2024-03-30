@@ -1,5 +1,17 @@
 import { Card, DateRangePicker, ToggleGroup } from "@funds-tracker/ui";
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { useUserContext } from "contexts/UserContext";
+import { formatCurrency } from "helpers/formatCurrency";
+import { formatDate } from "helpers/formatDate";
+import {
+	Area,
+	CartesianGrid,
+	Line,
+	LineChart,
+	ResponsiveContainer,
+	Tooltip,
+	XAxis,
+	YAxis,
+} from "recharts";
 
 import { useChartState } from "./hooks/useChartState";
 
@@ -8,6 +20,8 @@ type SummaryChartProps = {
 };
 
 export const SummaryChart = ({ uuid }: SummaryChartProps) => {
+	const { user } = useUserContext();
+
 	const { range, timeFrame, handleRangeChange, handleTimeFrameChange } = useChartState();
 
 	const data = [
@@ -58,24 +72,87 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 		},
 	];
 
+	const convertValue = (value: number) => formatCurrency(value, user.defaultCurrency);
+
+	const convertDate = (date: string) =>
+		formatDate(date, {
+			withTime: false,
+			yearFormat: "2-digit",
+			withDay: timeFrame === "1d" || timeFrame === "1w",
+			withMonth:
+				timeFrame === "1d" ||
+				timeFrame === "1w" ||
+				timeFrame === "1m" ||
+				timeFrame === "3m" ||
+				timeFrame === "6m",
+			withYear:
+				timeFrame === "1m" ||
+				timeFrame === "3m" ||
+				timeFrame === "6m" ||
+				timeFrame === "1y" ||
+				timeFrame === "5y" ||
+				timeFrame === "max",
+		});
+
 	return (
 		<Card>
 			<Card.Content>
 				<ResponsiveContainer height={300}>
-					<LineChart data={data}>
-						<CartesianGrid />
-						<XAxis dataKey="date" />
-						<YAxis />
+					<LineChart
+						data={data}
+						margin={{
+							left: 28,
+							right: 8,
+						}}
+					>
+						<defs>
+							<linearGradient
+								id="colorUv"
+								x1="0"
+								y1="0"
+								x2="0"
+								y2="1"
+							>
+								<stop
+									offset="5%"
+									stopColor="#129a74"
+									stopOpacity={0.1}
+								/>
+								<stop
+									offset="95%"
+									stopColor="#FFFFFF"
+									stopOpacity={0.1}
+								/>
+							</linearGradient>
+						</defs>
+						<Tooltip />
+						<CartesianGrid vertical={false} />
+						<XAxis
+							dataKey="date"
+							tickFormatter={convertDate}
+						/>
+						<YAxis tickFormatter={convertValue} />
 						<Line
+							strokeWidth={2}
 							type="monotone"
 							dataKey="marketValue"
 							stroke="#8884d8"
+							dot={false}
 						/>
-						<Line
+						<Area
+							type="monotone"
+							dataKey="marketValue"
+							stroke="#8884d8"
+							strokeWidth={2}
+							fillOpacity={1}
+							fill="url(#colorUv)"
+						/>
+						{/* <Line
+							dot={false}
 							type="monotone"
 							dataKey="cash"
 							stroke="#82ca9d"
-						/>
+						/> */}
 					</LineChart>
 				</ResponsiveContainer>
 				<div className="flex flex-wrap justify-end gap-4">

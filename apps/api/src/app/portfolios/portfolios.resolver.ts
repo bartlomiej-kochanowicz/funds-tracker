@@ -70,7 +70,7 @@ export class PortfoliosResolver {
 		@GetCurrentUserId() userId: string,
 		@Args("data")
 		portfolioSummaryInput: PortfolioSummaryInput,
-	): PortfolioSummary {
+	): Promise<PortfolioSummary> {
 		return this.portfoliosService.portfolioSummary(userId, portfolioSummaryInput);
 	}
 }

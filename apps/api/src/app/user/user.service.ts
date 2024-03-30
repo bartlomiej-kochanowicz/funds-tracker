@@ -13,6 +13,10 @@ export class UserService {
 			where: { uuid: userId },
 		});
 
+		if (!user) {
+			throw new Error("User not found");
+		}
+
 		return user;
 	}
 

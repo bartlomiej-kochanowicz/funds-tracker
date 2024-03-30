@@ -7,11 +7,16 @@ import {
 	PortfolioCreateInput,
 	IntroductionPortfolioCreatesInput,
 	PortfolioUpdateInput,
+	PortfolioSummaryInput,
 } from "./inputs";
+import { UserService } from "../user/user.service";
 
 @Injectable()
 export class PortfoliosService {
-	constructor(private prisma: PrismaService) {}
+	constructor(
+		private prisma: PrismaService,
+		private userService: UserService,
+	) {}
 
 	async create(
 		userUuid: string,
@@ -165,9 +170,59 @@ export class PortfoliosService {
 		}
 	}
 
-	portfolioSummary(userId: string, data: PortfolioCreateInput): PortfolioSummary {
+	async portfolioSummary(userId: string, data: PortfolioSummaryInput): Promise<PortfolioSummary> {
+		const { defaultCurrency } = await this.userService.getUser(userId);
+
+		const { uuid, from, to, timeFrame } = data;
+
 		return {
-			data: [],
+			data: [
+				{
+					date: "2024-02-29",
+					marketValue: 1000,
+					cash: 500,
+				},
+				{
+					date: "2024-03-01",
+					marketValue: 995,
+					cash: 500,
+				},
+				{
+					date: "2024-03-02",
+					marketValue: 1106,
+					cash: 500,
+				},
+				{
+					date: "2024-03-03",
+					marketValue: 885,
+					cash: 1000,
+				},
+				{
+					date: "2024-03-04",
+					marketValue: 1200,
+					cash: 1500,
+				},
+				{
+					date: "2024-03-05",
+					marketValue: 1300,
+					cash: 1600,
+				},
+				{
+					date: "2024-03-06",
+					marketValue: 1400,
+					cash: 1700,
+				},
+				{
+					date: "2024-03-07",
+					marketValue: 1500,
+					cash: 1800,
+				},
+				{
+					date: "2024-03-08",
+					marketValue: 1400,
+					cash: 1800,
+				},
+			],
 		};
 	}
 }
