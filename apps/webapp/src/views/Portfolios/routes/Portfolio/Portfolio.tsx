@@ -3,7 +3,7 @@ import { useSuspenseQueryPortfolio } from "hooks/api/portfolios/useSuspenseQuery
 import { Suspense } from "react";
 import { useParams } from "react-router-dom";
 
-import { SummaryChart } from "./components/SummaryChart";
+import { SummaryChartCard } from "./components/SummaryChartCard/SummaryChartCard";
 import { TransactionsTable } from "./components/TransactionsTable";
 
 export const Portfolio = () => {
@@ -19,7 +19,7 @@ export const Portfolio = () => {
 		<Suspense>
 			<H1 className="mb-4">{data.portfolio.name}</H1>
 			<div className="flex flex-col gap-4">
-				<SummaryChart uuid={uuid} />
+				<SummaryChartCard uuid={uuid} />
 				<TransactionsTable uuid={uuid} />
 			</div>
 		</Suspense>
