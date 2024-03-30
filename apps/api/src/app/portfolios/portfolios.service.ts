@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { IntroductionStep } from "@prisma/client";
 import { MAX_PORTFOLIOS } from "@constants/common";
 import { PrismaService } from "@services/prisma/prisma.service";
-import { IntroductionPortfolios, Portfolio, PortfolioDelete } from "./entities";
+import { IntroductionPortfolios, Portfolio, PortfolioDelete, PortfolioSummary } from "./entities";
 import {
 	PortfolioCreateInput,
 	IntroductionPortfolioCreatesInput,
@@ -165,5 +165,9 @@ export class PortfoliosService {
 		}
 	}
 
-	/* summary(userUuid: string, uuid: string) {} */
+	portfolioSummary(userId: string, data: PortfolioCreateInput): PortfolioSummary {
+		return {
+			data: [],
+		};
+	}
 }

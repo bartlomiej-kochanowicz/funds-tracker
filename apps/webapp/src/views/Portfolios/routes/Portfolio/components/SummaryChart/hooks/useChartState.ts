@@ -5,7 +5,7 @@ import { useState } from "react";
 export const useChartState = () => {
 	const [{ range, timeFrame }, setState] = useState<{
 		range: DateRangeType | undefined;
-		timeFrame: "1y" | "1m" | "1w" | "1d";
+		timeFrame: "1d" | "1w" | "1m" | "3m" | "6m" | "1y" | "5y" | "max";
 	}>({
 		range: {
 			from: subDays(new Date(), 30),

@@ -1,10 +1,11 @@
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { GetCurrentUserId } from "@decorators/get-current-user-id.decorator";
-import { IntroductionPortfolios, Portfolio, PortfolioDelete } from "./entities";
+import { IntroductionPortfolios, Portfolio, PortfolioDelete, PortfolioSummary } from "./entities";
 import {
 	PortfolioCreateInput,
 	PortfolioUpdateInput,
 	IntroductionPortfolioCreatesInput,
+	PortfolioSummaryInput,
 } from "./inputs";
 import { PortfoliosService } from "./portfolios.service";
 
@@ -62,5 +63,14 @@ export class PortfoliosResolver {
 		@Args("uuid", { type: () => String }) uuid: string,
 	) {
 		return this.portfoliosService.delete(userId, uuid);
+	}
+
+	@Query(() => PortfolioSummary, { description: "Get portfolio summary data." })
+	portfolioSummary(
+		@GetCurrentUserId() userId: string,
+		@Args("data")
+		portfolioSummaryInput: PortfolioSummaryInput,
+	): PortfolioSummary {
+		return this.portfoliosService.portfolioSummary(userId, portfolioSummaryInput);
 	}
 }
