@@ -326,6 +326,22 @@ type TransactionCreate {
   success: Boolean!
 }
 
+type PortfolioSummaryItem {
+  """Date"""
+  date: String!
+
+  """Market value."""
+  marketValue: Float!
+
+  """Deposited cash."""
+  cash: Float!
+}
+
+type PortfolioSummary {
+  """Portfolio summary data."""
+  data: [PortfolioSummaryItem!]!
+}
+
 type Query {
   emailExist(data: EmailInput!): Email!
   cashAccounts: [CashAccount!]!
@@ -335,6 +351,9 @@ type Query {
   portfolios: [Portfolio!]!
   portfolio(uuid: String!): Portfolio!
   user: User!
+
+  """Get portfolio summary data."""
+  portfolioSummary(uuid: String!): PortfolioSummary!
 }
 
 input EmailInput {
