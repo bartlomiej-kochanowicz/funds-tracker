@@ -71,7 +71,10 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 		},
 	];
 
-	const convertValue = (value: number) => formatCurrency(value, user.defaultCurrency);
+	const convertValue = (value: number) =>
+		formatCurrency(value, user.defaultCurrency, {
+			withFractionDigits: false,
+		});
 
 	const convertDate = (date: string) =>
 		formatDate(date, {
@@ -98,8 +101,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 			<AreaChart
 				data={data}
 				margin={{
-					left: 28,
-					right: 8,
+					left: -8,
 				}}
 			>
 				<defs>
@@ -111,28 +113,38 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 						y2="1"
 					>
 						<stop
-							offset="30%"
+							offset="20%"
 							stopColor="#3B82F6"
-							stopOpacity={0.4}
+							stopOpacity={0.35}
 						/>
 						<stop
-							offset="95%"
-							stopColor="#FFFFFFFF"
-							stopOpacity={0.2}
+							offset="100%"
+							stopColor="transparent"
+							stopOpacity={0.5}
 						/>
 					</linearGradient>
 				</defs>
-				<Tooltip content={<SummaryChartTooltip currency={user.defaultCurrency} />} />
-				<CartesianGrid vertical={false} />
+				<Tooltip
+					content={<SummaryChartTooltip currency={user.defaultCurrency} />}
+					cursor={{
+						strokeDasharray: "3",
+					}}
+				/>
+				<CartesianGrid
+					vertical={false}
+					strokeOpacity={0.25}
+				/>
 				<XAxis
 					dataKey="date"
 					tickFormatter={convertDate}
+					tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
 				/>
 				<YAxis
 					tickLine={false}
 					axisLine={false}
 					dataKey="marketValue"
 					tickFormatter={convertValue}
+					tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
 				/>
 				<Area
 					type="linear"

@@ -17,9 +17,9 @@ export const SummaryChartTooltip = (
 	const { value } = payload[0];
 
 	return (
-		<div className="z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md">
-			<Text className="block font-bold">{formatCurrency(value as number, currency)}</Text>
-			<Text className="block">{formatDate(label, { withTime: false })}</Text>
+		<div className="z-50 overflow-hidden rounded border bg-popover px-2 py-1 text-sm text-popover-foreground shadow-md">
+			<Text className="block text-xs font-bold">{formatCurrency(value as number, currency)}</Text>
+			<Text className="block text-xs">{formatDate(label, { withTime: false })}</Text>
 		</div>
 	);
 };
