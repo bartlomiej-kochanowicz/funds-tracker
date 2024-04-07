@@ -56,7 +56,7 @@ const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={twMerge("p-6 card-content", className)}
+			className={twMerge("p-4 md:p-6 card-content", className)}
 			{...props}
 		/>
 	),

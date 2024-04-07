@@ -5,6 +5,8 @@ import {
 	Area,
 	AreaChart,
 	CartesianGrid,
+	ComposedChart,
+	Line,
 	ResponsiveContainer,
 	Tooltip,
 	XAxis,
@@ -98,7 +100,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 
 	return (
 		<ResponsiveContainer height={300}>
-			<AreaChart
+			<ComposedChart
 				data={data}
 				margin={{
 					left: -8,
@@ -155,13 +157,13 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 					fill="url(#colorView)"
 				/>
 
-				{/* <Line
-							dot={false}
-							type="monotone"
-							dataKey="cash"
-							stroke="#82ca9d"
-						/> */}
-			</AreaChart>
+				<Line
+					dot={false}
+					type="step"
+					dataKey="cash"
+					stroke="#82ca9d"
+				/>
+			</ComposedChart>
 		</ResponsiveContainer>
 	);
 };

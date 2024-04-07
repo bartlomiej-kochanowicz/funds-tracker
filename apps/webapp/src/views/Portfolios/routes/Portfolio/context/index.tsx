@@ -2,7 +2,7 @@ import { DateRangeType } from "@funds-tracker/ui";
 import { subDays } from "date-fns";
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type TimeFrame = "1d" | "1w" | "1m" | "3m" | "6m" | "1y" | "5y" | "max";
+type TimeFrame = "1d" | "1w" | "1m" | "3m" | "6m" | "1y" | "5y" | "max" | "custom";
 
 const useSummaryChartContextState = () => {
 	const [{ range, timeFrame }, setState] = useState<{

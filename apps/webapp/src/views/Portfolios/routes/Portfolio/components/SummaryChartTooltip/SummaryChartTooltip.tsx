@@ -12,13 +12,22 @@ export const SummaryChartTooltip = (
 
 	const { label, payload, currency } = props;
 
-	if (!payload || !payload[0]) return null;
+	console.log(payload);
 
-	const { value } = payload[0];
+	if (!payload) return null;
 
 	return (
 		<div className="z-50 overflow-hidden rounded border bg-popover px-2 py-1 text-sm text-popover-foreground shadow-md">
-			<Text className="block text-xs font-bold">{formatCurrency(value as number, currency)}</Text>
+			{payload[0] && (
+				<Text className="block text-xs font-bold">
+					{formatCurrency(payload[0].value as number, currency)}
+				</Text>
+			)}
+			{payload[1] && (
+				<Text className="block text-xs font-bold">
+					{formatCurrency(payload[1].value as number, currency)}
+				</Text>
+			)}
 			<Text className="block text-xs">{formatDate(label, { withTime: false })}</Text>
 		</div>
 	);
