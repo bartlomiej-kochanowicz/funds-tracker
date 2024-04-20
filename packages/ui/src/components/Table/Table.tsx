@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { ScrollArea } from "../ScrollArea";
+import { ScrollArea, ScrollBar } from "../ScrollArea";
 
 const Table = forwardRef<
 	HTMLTableElement,
@@ -13,6 +13,7 @@ const Table = forwardRef<
 			className={twMerge("w-full caption-bottom text-sm", className)}
 			{...props}
 		/>
+		<ScrollBar orientation="horizontal" />
 	</ScrollArea>
 ));
 Table.displayName = "Table";

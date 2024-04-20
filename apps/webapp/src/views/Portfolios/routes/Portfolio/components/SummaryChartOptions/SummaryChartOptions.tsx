@@ -1,4 +1,4 @@
-import { DateRangePicker, ScrollArea, ToggleGroup } from "@funds-tracker/ui";
+import { DateRangePicker, ScrollArea, ScrollBar, ToggleGroup } from "@funds-tracker/ui";
 
 import { useSummaryChartContext } from "../../context";
 
@@ -6,8 +6,8 @@ export const SummaryChartOptions = () => {
 	const { range, timeFrame, handleRangeChange, handleTimeFrameChange } = useSummaryChartContext();
 
 	return (
-		<div className="mb-4 flex flex-wrap gap-4">
-			<ScrollArea>
+		<ScrollArea>
+			<div className="flex gap-4 pb-4">
 				<ToggleGroup
 					value={timeFrame}
 					onValueChange={handleTimeFrameChange}
@@ -69,14 +69,15 @@ export const SummaryChartOptions = () => {
 						Custom
 					</ToggleGroup.Item>
 				</ToggleGroup>
-			</ScrollArea>
-			{timeFrame === "custom" && (
-				<DateRangePicker
-					value={range}
-					onChange={handleRangeChange}
-					toDate={new Date()}
-				/>
-			)}
-		</div>
+				{timeFrame === "custom" && (
+					<DateRangePicker
+						value={range}
+						onChange={handleRangeChange}
+						toDate={new Date()}
+					/>
+				)}
+			</div>
+			<ScrollBar orientation="horizontal" />
+		</ScrollArea>
 	);
 };
