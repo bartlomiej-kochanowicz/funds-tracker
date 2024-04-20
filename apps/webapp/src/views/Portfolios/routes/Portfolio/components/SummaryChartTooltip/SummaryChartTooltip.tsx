@@ -12,22 +12,27 @@ export const SummaryChartTooltip = (
 
 	const { label, payload, currency } = props;
 
-	console.log(payload);
-
 	if (!payload) return null;
 
 	return (
 		<div className="z-50 overflow-hidden rounded border bg-popover px-2 py-1 text-sm text-popover-foreground shadow-md">
-			{payload[0] && (
-				<Text className="block text-xs font-bold">
-					{formatCurrency(payload[0].value as number, currency)}
-				</Text>
-			)}
-			{payload[1] && (
-				<Text className="block text-xs font-bold">
-					{formatCurrency(payload[1].value as number, currency)}
-				</Text>
-			)}
+			{payload.map(entry => (
+				<div
+					className="flex items-center"
+					key={entry.dataKey}
+				>
+					<span
+						className="mr-1 block size-2 rounded-full"
+						style={{
+							backgroundColor: entry.color,
+						}}
+					/>
+					<Text className="block text-xs font-bold">
+						{formatCurrency(entry.value as number, currency)}
+					</Text>
+				</div>
+			))}
+
 			<Text className="block text-xs">{formatDate(label, { withTime: false })}</Text>
 		</div>
 	);

@@ -17,9 +17,14 @@ const useSummaryChartContextState = () => {
 	});
 
 	const handleRangeChange = (range?: DateRangeType) => {
+		if (!range) return;
+
 		setState(state => ({ ...state, range }));
 	};
+
 	const handleTimeFrameChange = (timeFrame: TimeFrame) => {
+		if (!timeFrame) return;
+
 		setState(state => ({ ...state, timeFrame }));
 	};
 

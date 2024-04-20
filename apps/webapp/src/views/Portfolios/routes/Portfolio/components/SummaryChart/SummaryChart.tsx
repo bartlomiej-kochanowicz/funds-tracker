@@ -3,9 +3,9 @@ import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
 import {
 	Area,
-	AreaChart,
 	CartesianGrid,
 	ComposedChart,
+	Legend,
 	Line,
 	ResponsiveContainer,
 	Tooltip,
@@ -108,7 +108,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 			>
 				<defs>
 					<linearGradient
-						id="colorView"
+						id="gradient-primary"
 						x1="0"
 						y1="0"
 						x2="0"
@@ -116,13 +116,13 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 					>
 						<stop
 							offset="20%"
-							stopColor="#3B82F6"
-							stopOpacity={0.35}
+							stopColor="hsl(var(--primary))"
+							stopOpacity={0.25}
 						/>
 						<stop
 							offset="100%"
-							stopColor="transparent"
-							stopOpacity={0.5}
+							stopColor="hsl(var(--primary))"
+							stopOpacity={0.05}
 						/>
 					</linearGradient>
 				</defs>
@@ -147,21 +147,42 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 					dataKey="marketValue"
 					tickFormatter={convertValue}
 					tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+					domain={[0, dataMax => dataMax * 1.25]}
 				/>
 				<Area
 					type="linear"
 					dataKey="marketValue"
-					stroke="#3B82F6"
+					stroke="hsl(var(--primary))"
 					strokeWidth={2}
 					strokeOpacity={1}
-					fill="url(#colorView)"
+					fill="url(#gradient-primary)"
+					activeDot={{
+						strokeWidth: 0,
+					}}
 				/>
 
 				<Line
 					dot={false}
 					type="step"
 					dataKey="cash"
-					stroke="#82ca9d"
+					stroke="hsl(var(--success))"
+					activeDot={{
+						strokeWidth: 0,
+					}}
+				/>
+				<Legend
+					payload={[
+						{
+							id: "marketValue",
+							value: "Market Value",
+							color: "hsl(var(--primary))",
+						},
+						{
+							id: "cash",
+							value: "Cash",
+							color: "hsl(var(--success))",
+						},
+					]}
 				/>
 			</ComposedChart>
 		</ResponsiveContainer>
