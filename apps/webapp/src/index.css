@@ -1,0 +1,5 @@
+/* here you can override styles globally */
+
+.recharts-legend-item-text {
+  vertical-align: middle;
+}
