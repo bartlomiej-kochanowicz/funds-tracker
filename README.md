@@ -97,6 +97,7 @@ deviation from the model you provide before, tells you how to rebalance the inst
 - [ ] Dashboard page
 - [ ] Transactions page
 - [ ] My profile/Settings page
+- [ ] Importing gov bonds from [official polish govermant page](https://www.obligacjeskarbowe.pl/tabela-odsetkowa/)
 
 ## 🛠 Getting Started
 
