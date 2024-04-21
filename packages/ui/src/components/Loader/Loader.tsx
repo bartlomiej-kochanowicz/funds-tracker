@@ -7,7 +7,7 @@ interface LoaderProps {
 
 export const Loader = ({ className, ...rest }: LoaderProps) => (
 	<Loader2
-		className={twMerge(className, "size-4 animate-spin")}
+		className={twMerge("size-4 animate-spin", className)}
 		{...rest}
 	/>
 );

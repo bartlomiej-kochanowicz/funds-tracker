@@ -1,6 +1,9 @@
+import { Loader } from "@funds-tracker/ui";
 import { useUserContext } from "contexts/UserContext";
+import { differenceInDays } from "date-fns";
 import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
+import { useQueryPortfolioSummary } from "hooks/api/portfolios/useQueryPortfolioSummary";
 import {
 	Area,
 	CartesianGrid,
@@ -23,55 +26,19 @@ type SummaryChartProps = {
 export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 	const { user } = useUserContext();
 
-	const { timeFrame } = useSummaryChartContext();
+	const { range } = useSummaryChartContext();
 
-	const data = [
-		{
-			date: "2024-02-29",
-			marketValue: 1000,
-			cash: 500,
-		},
-		{
-			date: "2024-03-01",
-			marketValue: 995,
-			cash: 500,
-		},
-		{
-			date: "2024-03-02",
-			marketValue: 1106,
-			cash: 500,
-		},
-		{
-			date: "2024-03-03",
-			marketValue: 885,
-			cash: 1000,
-		},
-		{
-			date: "2024-03-04",
-			marketValue: 1200,
-			cash: 1500,
-		},
-		{
-			date: "2024-03-05",
-			marketValue: 1300,
-			cash: 1600,
-		},
-		{
-			date: "2024-03-06",
-			marketValue: 1400,
-			cash: 1700,
-		},
-		{
-			date: "2024-03-07",
-			marketValue: 1500,
-			cash: 1800,
-		},
-		{
-			date: "2024-03-08",
-			marketValue: 1400,
-			cash: 1800,
-		},
-	];
+	if (!range.from || !range.to) {
+		return null;
+	}
+
+	const daysDifference = differenceInDays(range.to, range.from);
+
+	const { data, loading } = useQueryPortfolioSummary({
+		uuid,
+		from: range.from,
+		to: range.to,
+	});
 
 	const convertValue = (value: number) =>
 		formatCurrency(value, user.defaultCurrency, {
@@ -81,27 +48,28 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 	const convertDate = (date: string) =>
 		formatDate(date, {
 			withTime: false,
-			yearFormat: timeFrame === "5y" || timeFrame === "max" ? "numeric" : "2-digit",
-			withDay: timeFrame === "1d" || timeFrame === "1w" || timeFrame === "1m",
-			withMonth:
-				timeFrame === "1d" ||
-				timeFrame === "1w" ||
-				timeFrame === "1m" ||
-				timeFrame === "3m" ||
-				timeFrame === "6m" ||
-				timeFrame === "1y",
-			withYear:
-				timeFrame === "3m" ||
-				timeFrame === "6m" ||
-				timeFrame === "1y" ||
-				timeFrame === "5y" ||
-				timeFrame === "max",
+			yearFormat: daysDifference >= 365 ? "numeric" : "2-digit",
+			withDay: daysDifference <= 30,
+			withMonth: daysDifference <= 365,
+			withYear: daysDifference > 30,
 		});
 
+	if (loading || !data) {
+		return (
+			<div className="flex h-80 items-center justify-center">
+				<Loader className="size-8" />
+			</div>
+		);
+	}
+
+	const {
+		portfolioSummary: { data: chartData },
+	} = data;
+
 	return (
-		<ResponsiveContainer height={300}>
+		<ResponsiveContainer height={320}>
 			<ComposedChart
-				data={data}
+				data={chartData}
 				margin={{
 					left: -8,
 				}}

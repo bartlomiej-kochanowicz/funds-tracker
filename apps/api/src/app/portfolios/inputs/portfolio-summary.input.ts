@@ -1,5 +1,5 @@
 import { InputType, Field, ID } from "@nestjs/graphql";
-import { IsString, IsUUID } from "class-validator";
+import { IsDate, IsUUID } from "class-validator";
 
 @InputType()
 export class PortfolioSummaryInput {
@@ -7,15 +7,11 @@ export class PortfolioSummaryInput {
 	@IsUUID()
 	uuid: string;
 
-	@IsString()
-	@Field(() => String, { description: "Time frame." })
-	timeFrame: "1d" | "1w" | "1m" | "3m" | "6m" | "1y" | "5y";
-
-	@IsString()
+	@IsDate()
 	@Field(() => Date, { description: "From date." })
 	from: Date;
 
-	@IsString()
+	@IsDate()
 	@Field(() => Date, { description: "To date." })
 	to: Date;
 }

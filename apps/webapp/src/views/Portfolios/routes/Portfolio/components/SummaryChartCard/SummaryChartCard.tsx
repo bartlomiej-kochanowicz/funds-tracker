@@ -1,4 +1,5 @@
 import { Card } from "@funds-tracker/ui";
+import { Suspense } from "react";
 
 import { SummaryChartContextProvider } from "../../context";
 import { SummaryChart } from "../SummaryChart/SummaryChart";
@@ -13,7 +14,9 @@ export const SummaryChartCard = ({ uuid }: SummaryChartCardProps) => (
 		<Card.Content>
 			<SummaryChartContextProvider>
 				<SummaryChartOptions />
-				<SummaryChart uuid={uuid} />
+				<Suspense fallback="Loading...">
+					<SummaryChart uuid={uuid} />
+				</Suspense>
 			</SummaryChartContextProvider>
 		</Card.Content>
 	</Card>

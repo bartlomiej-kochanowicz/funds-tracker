@@ -1,8 +1,11 @@
 import { DateRangePicker, ScrollArea, ScrollBar, ToggleGroup } from "@funds-tracker/ui";
+import { useTranslation } from "react-i18next";
 
 import { useSummaryChartContext } from "../../context";
 
 export const SummaryChartOptions = () => {
+	const { t } = useTranslation();
+
 	const { range, timeFrame, handleRangeChange, handleTimeFrameChange } = useSummaryChartContext();
 
 	return (
@@ -48,25 +51,19 @@ export const SummaryChartOptions = () => {
 						value="1y"
 						aria-label="Toggle one year"
 					>
-						1y
+						{t("date.1y")}
 					</ToggleGroup.Item>
 					<ToggleGroup.Item
 						value="5y"
-						aria-label="Toggle max"
+						aria-label="Toggle 5 years"
 					>
-						5y
-					</ToggleGroup.Item>
-					<ToggleGroup.Item
-						value="max"
-						aria-label="Toggle max"
-					>
-						Max
+						{t("date.5y")}
 					</ToggleGroup.Item>
 					<ToggleGroup.Item
 						value="custom"
 						aria-label="Toggle custom"
 					>
-						Custom
+						{t("common.custom")}
 					</ToggleGroup.Item>
 				</ToggleGroup>
 				{timeFrame === "custom" && (

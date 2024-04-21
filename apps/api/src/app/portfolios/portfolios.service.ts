@@ -173,7 +173,7 @@ export class PortfoliosService {
 	async portfolioSummary(userId: string, data: PortfolioSummaryInput): Promise<PortfolioSummary> {
 		const { defaultCurrency } = await this.userService.getUser(userId);
 
-		const { uuid, from, to, timeFrame } = data;
+		const { uuid, from, to } = data;
 
 		return {
 			data: [
@@ -188,37 +188,37 @@ export class PortfoliosService {
 					cash: 500,
 				},
 				{
-					date: "2024-03-02",
+					date: "2024-04-02",
 					marketValue: 1106,
 					cash: 500,
 				},
 				{
-					date: "2024-03-03",
+					date: "2024-05-03",
 					marketValue: 885,
 					cash: 1000,
 				},
 				{
-					date: "2024-03-04",
+					date: "2024-06-04",
 					marketValue: 1200,
 					cash: 1500,
 				},
 				{
-					date: "2024-03-05",
+					date: "2024-07-05",
 					marketValue: 1300,
 					cash: 1600,
 				},
 				{
-					date: "2024-03-06",
+					date: "2024-08-06",
 					marketValue: 1400,
 					cash: 1700,
 				},
 				{
-					date: "2024-03-07",
+					date: "2024-09-07",
 					marketValue: 1500,
 					cash: 1800,
 				},
 				{
-					date: "2024-03-08",
+					date: "2024-10-08",
 					marketValue: 1400,
 					cash: 1800,
 				},

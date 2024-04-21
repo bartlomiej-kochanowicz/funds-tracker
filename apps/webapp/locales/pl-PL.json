@@ -237,5 +237,10 @@
 	"common.operation": "Operacja",
 	"common.price": "Cena",
 	"common.operation.buy": "Kupno",
-	"common.operation.sell": "Sprzedaż"
+	"common.operation.sell": "Sprzedaż",
+	"date.1y": "1 rok",
+	"date.5y": "5 lat",
+	"common.custom": "Niestandardowy",
+	"common.min": "Min",
+	"common.max": "Maks"
 }
