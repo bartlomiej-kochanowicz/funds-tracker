@@ -81,7 +81,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 
 	const onSubmit = useCallback(
 		async (data: CashAccountInvestFundsFormSchemaType) => {
-			const date = data.date.setHours(12, 0, 0, 0);
+			const date = new Date(data.date.setHours(12, 0, 0, 0));
 
 			await transactionCreate({
 				variables: {

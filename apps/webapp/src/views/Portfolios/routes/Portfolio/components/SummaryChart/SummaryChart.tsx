@@ -112,10 +112,9 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 				<YAxis
 					tickLine={false}
 					axisLine={false}
-					dataKey="marketValue"
 					tickFormatter={convertValue}
 					tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
-					domain={[0, dataMax => dataMax * 1.25]}
+					domain={[0, dataMax => dataMax * 1.05]}
 				/>
 				<Area
 					type="linear"
@@ -132,7 +131,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 				<Line
 					dot={false}
 					type="step"
-					dataKey="cash"
+					dataKey="cumulativeCash"
 					stroke="hsl(var(--success))"
 					activeDot={{
 						strokeWidth: 0,
@@ -146,7 +145,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 							color: "hsl(var(--primary))",
 						},
 						{
-							id: "cash",
+							id: "cumulativeCash",
 							value: "Cash",
 							color: "hsl(var(--success))",
 						},

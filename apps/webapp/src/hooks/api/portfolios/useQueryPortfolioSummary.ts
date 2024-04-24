@@ -8,7 +8,7 @@ export const GET_PORTFOLIO_SUMMARY = gql(/* GraphQL */ `
 			data {
 				date
 				marketValue
-				cash
+				cumulativeCash
 			}
 		}
 	}

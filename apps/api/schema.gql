@@ -207,14 +207,19 @@ type PortfolioDelete {
 
 type PortfolioSummaryItem {
   """Date"""
-  date: String!
+  date: DateTime!
 
   """Market value."""
   marketValue: Float!
 
-  """Deposited cash."""
-  cash: Float!
+  """Cumulative deposited cash."""
+  cumulativeCash: Float!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type PortfolioSummary {
   """Portfolio summary data."""
@@ -270,11 +275,6 @@ type Transaction {
   """Instrument"""
   instrument: Instrument!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 enum OperationType {
   deposit

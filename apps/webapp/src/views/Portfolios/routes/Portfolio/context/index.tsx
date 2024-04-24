@@ -16,13 +16,15 @@ const timeFrameDays: Record<TimeFrame, number> = {
 };
 
 const useSummaryChartContextState = () => {
+	const today = new Date(new Date().setHours(12, 0, 0, 0));
+
 	const [{ range, timeFrame }, setState] = useState<{
 		range: DateRangeType;
 		timeFrame: TimeFrame;
 	}>({
 		range: {
-			from: subDays(new Date(), 30),
-			to: new Date(),
+			from: subDays(today, 30),
+			to: today,
 		},
 		timeFrame: "1m",
 	});
@@ -39,8 +41,8 @@ const useSummaryChartContextState = () => {
 		setState(state => ({
 			...state,
 			range: {
-				from: subDays(new Date(), timeFrameDays[timeFrame]),
-				to: new Date(),
+				from: subDays(today, timeFrameDays[timeFrame]),
+				to: today,
 			},
 			timeFrame,
 		}));

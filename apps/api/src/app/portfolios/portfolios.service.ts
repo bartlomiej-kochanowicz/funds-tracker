@@ -10,6 +10,7 @@ import {
 	PortfolioSummaryInput,
 } from "./inputs";
 import { UserService } from "../user/user.service";
+import { subDays } from "date-fns";
 
 @Injectable()
 export class PortfoliosService {
@@ -175,54 +176,74 @@ export class PortfoliosService {
 
 		const { uuid, from, to } = data;
 
+		const sumCash = (
+			await this.prisma.transaction.findMany({
+				select: {
+					price: true,
+					quantity: true,
+				},
+				where: {
+					portfolioUuid: uuid,
+					date: {
+						gte: new Date(0),
+						lte: subDays(from, 1),
+					},
+				},
+			})
+		).reduce((acc, transaction) => {
+			const price = transaction.price * transaction.quantity;
+
+			return acc + price;
+		}, 0);
+
+		const transactionsGroupedByDate = await this.prisma.transaction.groupBy({
+			by: ["date"],
+			where: {
+				portfolioUuid: uuid,
+				date: {
+					gte: from,
+					lte: to,
+				},
+			},
+		});
+
+		console.log("%%", from, to, transactionsGroupedByDate);
+
+		const result = (
+			await Promise.all(
+				transactionsGroupedByDate.map(async ({ date }) => {
+					const dayTransactions = await this.prisma.transaction.findMany({
+						where: {
+							date,
+						},
+						include: {
+							instrument: true,
+						},
+					});
+
+					const cash = dayTransactions.reduce((acc, transaction) => {
+						const price = transaction.price * transaction.quantity;
+
+						return acc + price;
+					}, 0);
+
+					return {
+						date,
+						cash: sumCash + cash,
+						marketValue: 1000,
+					};
+				}),
+			)
+		).reduce((acc, entry) => {
+			const previousSum = acc.length > 0 ? acc[acc.length - 1].cumulativeCash : 0;
+			const cumulativeCash = previousSum + entry.cash;
+			return [...acc, { date: entry.date, cumulativeCash, marketValue: entry.marketValue }];
+		}, []);
+
+		// console.log(result);
+
 		return {
-			data: [
-				{
-					date: "2024-02-29",
-					marketValue: 1000,
-					cash: 500,
-				},
-				{
-					date: "2024-03-01",
-					marketValue: 995,
-					cash: 500,
-				},
-				{
-					date: "2024-04-02",
-					marketValue: 1106,
-					cash: 500,
-				},
-				{
-					date: "2024-05-03",
-					marketValue: 885,
-					cash: 1000,
-				},
-				{
-					date: "2024-06-04",
-					marketValue: 1200,
-					cash: 1500,
-				},
-				{
-					date: "2024-07-05",
-					marketValue: 1300,
-					cash: 1600,
-				},
-				{
-					date: "2024-08-06",
-					marketValue: 1400,
-					cash: 1700,
-				},
-				{
-					date: "2024-09-07",
-					marketValue: 1500,
-					cash: 1800,
-				},
-				{
-					date: "2024-10-08",
-					marketValue: 1400,
-					cash: 1800,
-				},
-			],
+			data: result,
 		};
 	}
 }
