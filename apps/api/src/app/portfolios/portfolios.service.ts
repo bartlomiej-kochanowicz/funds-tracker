@@ -172,15 +172,18 @@ export class PortfoliosService {
 	}
 
 	async portfolioSummary(userId: string, data: PortfolioSummaryInput): Promise<PortfolioSummary> {
-		const { defaultCurrency } = await this.userService.getUser(userId);
+		const {
+			/* defaultCurrency */
+		} = await this.userService.getUser(userId);
 
 		const { uuid, from, to } = data;
 
-		const sumCash = (
+		const { cash: sumCash } = (
 			await this.prisma.transaction.findMany({
 				select: {
 					price: true,
 					quantity: true,
+					commission: true,
 				},
 				where: {
 					portfolioUuid: uuid,
@@ -190,11 +193,20 @@ export class PortfoliosService {
 					},
 				},
 			})
-		).reduce((acc, transaction) => {
-			const price = transaction.price * transaction.quantity;
+		).reduce(
+			(acc, transaction) => {
+				const price = transaction.price * transaction.quantity;
 
-			return acc + price;
-		}, 0);
+				return {
+					cash: acc.cash + price,
+					commission: acc.commission + transaction.commission,
+				};
+			},
+			{
+				cash: 0,
+				commission: 0,
+			},
+		);
 
 		const transactionsGroupedByDate = await this.prisma.transaction.groupBy({
 			by: ["date"],

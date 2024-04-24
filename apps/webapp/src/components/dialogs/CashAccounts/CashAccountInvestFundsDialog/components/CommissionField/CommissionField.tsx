@@ -5,23 +5,23 @@ import { useTranslation } from "react-i18next";
 
 import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
-interface ComissionFieldProps {
+interface CommissionFieldProps {
 	activeCurrency: Currency;
 }
 
-export const ComissionField = ({ activeCurrency }: ComissionFieldProps) => {
+export const CommissionField = ({ activeCurrency }: CommissionFieldProps) => {
 	const { watch, control, resetField } = useFormContext<CashAccountInvestFundsFormSchemaType>();
 
-	const watchComissionType = watch("comission_type");
+	const watchCommissionType = watch("commission_type");
 
 	const { t, i18n } = useTranslation();
 
 	useUpdateEffect(() => {
-		resetField("comission");
-	}, [watchComissionType]);
+		resetField("commission");
+	}, [watchCommissionType]);
 
 	const numberFormat =
-		watchComissionType === "amount"
+		watchCommissionType === "amount"
 			? {
 					style: "currency",
 					currency: activeCurrency,
@@ -31,18 +31,18 @@ export const ComissionField = ({ activeCurrency }: ComissionFieldProps) => {
 	return (
 		<Form.Field
 			control={control}
-			name="comission"
+			name="commission"
 			render={({ field }) => (
 				<Form.Item orientation="horizontal">
 					<Form.Label className="min-w-44">
-						{t("modal.InvestFunds.form.label.comission", {
+						{t("modal.InvestFunds.form.label.commission", {
 							currency: activeCurrency,
 						})}
 					</Form.Label>
 					<NumberInput
 						locale={i18n.language}
 						formatOptions={numberFormat}
-						aria-label={t("modal.InvestFunds.form.label.comission", {
+						aria-label={t("modal.InvestFunds.form.label.commission", {
 							currency: activeCurrency,
 						})}
 						placeholder={t("modal.InvestFunds.form.input.price.placeholder")}

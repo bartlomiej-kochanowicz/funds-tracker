@@ -7,7 +7,7 @@ import {
 	defaultValues,
 } from "../../CashAccountInvestFundsFormSchema";
 
-export const ComissionTypeField = () => {
+export const CommissionTypeField = () => {
 	const { control } = useFormContext<CashAccountInvestFundsFormSchemaType>();
 
 	const { t } = useTranslation();
@@ -15,14 +15,14 @@ export const ComissionTypeField = () => {
 	return (
 		<Form.Field
 			control={control}
-			name="comission_type"
+			name="commission_type"
 			render={({ field }) => (
 				<Form.Item orientation="horizontal">
 					<Form.Label className="min-w-44">{t("modal.InvestFunds.form.label.price")}</Form.Label>
 					<RadioGroup
 						className="flex items-center py-3"
 						onValueChange={field.onChange}
-						defaultValue={defaultValues.comission_type}
+						defaultValue={defaultValues.commission_type}
 						value={field.value}
 					>
 						<div className="flex items-center space-x-2">

@@ -68,6 +68,7 @@ export class TransactionsService {
 				price: data.price,
 				quantity: data.quantity,
 				date: new Date(data.date).toISOString(),
+				commission: data.commission,
 				type: "buy",
 				instrument: {
 					connect: {
@@ -83,7 +84,7 @@ export class TransactionsService {
 			data: {
 				cashAccountUuid: data.cashAccountUuid,
 				// currency calculate
-				amount: data.price * data.quantity + data.comission,
+				amount: data.price * data.quantity + data.commission,
 				type: "transfer",
 				portfolioUuid: data.portfolioUuid,
 			},

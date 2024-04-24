@@ -1,1 +1,1 @@
-export * from "./ComissionTypeField";
+export * from "./CommissionTypeField";

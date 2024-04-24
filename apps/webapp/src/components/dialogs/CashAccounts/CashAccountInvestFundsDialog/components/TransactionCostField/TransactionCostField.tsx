@@ -19,13 +19,13 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 
 	const watchQuantity = watch("quantity");
 	const watchPrice = watch("price");
-	const watchComission = watch("comission");
+	const watchCommission = watch("commission");
 
 	const calculateTransactionCost = () => {
-		const { price, quantity, comission, comission_type: comissionType } = getValues();
+		const { price, quantity, commission, commission_type: commissionType } = getValues();
 
 		if (
-			!validateNonNullish([price, quantity, comission, comissionType]) ||
+			!validateNonNullish([price, quantity, commission, commissionType]) ||
 			watchQuantity === 0 ||
 			watchPrice === 0
 		)
@@ -33,13 +33,13 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 
 		let transactionCost = 0;
 
-		if (comissionType === "amount") {
-			transactionCost = Number(price) * Number(quantity) + Number(comission);
+		if (commissionType === "amount") {
+			transactionCost = Number(price) * Number(quantity) + Number(commission);
 		}
 
-		if (comissionType === "%") {
+		if (commissionType === "%") {
 			transactionCost =
-				Number(price) * Number(quantity) + Number(price) * Number(quantity) * Number(comission);
+				Number(price) * Number(quantity) + Number(price) * Number(quantity) * Number(commission);
 		}
 
 		setValue("transaction_cost", Number(transactionCost.toFixed(2)), {
@@ -50,7 +50,7 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 
 	useUpdateEffect(() => {
 		calculateTransactionCost();
-	}, [watchQuantity, watchPrice, watchComission]);
+	}, [watchQuantity, watchPrice, watchCommission]);
 
 	return (
 		<Form.Field
@@ -67,7 +67,7 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 							style: "currency",
 							currency: activeCurrency,
 						}}
-						aria-label={t("modal.InvestFunds.form.label.comission", {
+						aria-label={t("modal.InvestFunds.form.label.commission", {
 							currency: activeCurrency,
 						})}
 						placeholder={t("modal.InvestFunds.form.input.transaction_cost.placeholder")}
@@ -78,7 +78,7 @@ export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldPro
 						variant="secondary"
 						onClick={calculateTransactionCost}
 						disabled={
-							!validateNonNullish([watchQuantity, watchPrice, watchComission]) ||
+							!validateNonNullish([watchQuantity, watchPrice, watchCommission]) ||
 							watchQuantity === 0 ||
 							watchPrice === 0
 						}

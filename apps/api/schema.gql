@@ -544,7 +544,7 @@ input TransactionCreateInput {
   date: DateTime!
   quantity: Float!
   price: Float!
-  comission: Float!
+  commission: Float!
 }
 
 input InstrumentCreateInput {

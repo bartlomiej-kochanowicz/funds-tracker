@@ -22,8 +22,8 @@ export const CashAccountInvestFundsFormSchema = object().shape({
 	date: date().max(new Date()).required(EMPTY_VALIDATION_MESSAGE),
 	quantity: number().required(EMPTY_VALIDATION_MESSAGE).min(0.0001),
 	price: number().required(EMPTY_VALIDATION_MESSAGE).min(0.0001),
-	comission: number().required(EMPTY_VALIDATION_MESSAGE),
-	comission_type: string().oneOf(["%", "amount"]).required(EMPTY_VALIDATION_MESSAGE),
+	commission: number().required(EMPTY_VALIDATION_MESSAGE),
+	commission_type: string().oneOf(["%", "amount"]).required(EMPTY_VALIDATION_MESSAGE),
 	transaction_cost: number().required(EMPTY_VALIDATION_MESSAGE).notOneOf([0]),
 });
 
@@ -34,7 +34,7 @@ export type CashAccountInvestFundsFormSchemaType = InferType<
 export const defaultValues: Partial<CashAccountInvestFundsFormSchemaType> = {
 	price: 0,
 	quantity: 0,
-	comission_type: "%",
-	comission: 0,
+	commission_type: "%",
+	commission: 0,
 	transaction_cost: 0,
 };

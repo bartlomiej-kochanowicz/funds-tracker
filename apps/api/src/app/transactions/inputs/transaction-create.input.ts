@@ -29,5 +29,5 @@ export class TransactionCreateInput {
 
 	@IsNumber()
 	@Field(() => Number)
-	comission: number;
+	commission: number;
 }

@@ -617,7 +617,7 @@ export type TransactionCreate = {
 
 export type TransactionCreateInput = {
   cashAccountUuid: Scalars['String']['input'];
-  comission: Scalars['Float']['input'];
+  commission: Scalars['Float']['input'];
   date: Scalars['DateTime']['input'];
   instrument: InstrumentCreateInput;
   portfolioUuid: Scalars['String']['input'];

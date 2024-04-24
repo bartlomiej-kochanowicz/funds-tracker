@@ -70,6 +70,7 @@ model Transaction {
   type           OperationType
   quantity       Float
   price          Float
+  commission     Float
   portfolio      Portfolio     @relation(fields: [portfolioUuid], references: [uuid])
   portfolioUuid  String
   instrument     Instrument    @relation(fields: [instrumentUuid], references: [uuid])

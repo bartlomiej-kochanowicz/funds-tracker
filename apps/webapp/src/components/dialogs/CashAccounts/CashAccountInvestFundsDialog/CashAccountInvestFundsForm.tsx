@@ -23,8 +23,8 @@ import {
 	CashAccountInvestFundsFormSchemaType,
 	defaultValues,
 } from "./CashAccountInvestFundsFormSchema";
-import { ComissionField } from "./components/ComissionField";
-import { ComissionTypeField } from "./components/CommissionTypeField";
+import { CommissionField } from "./components/CommissionField";
+import { CommissionTypeField } from "./components/CommissionTypeField";
 import { DateField } from "./components/DateField";
 import { NotSupportedYet } from "./components/NotSupportedYet";
 import { PriceField } from "./components/PriceField";
@@ -98,7 +98,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						date,
 						quantity: data.quantity,
 						price: data.price,
-						comission: data.comission,
+						commission: data.commission,
 					},
 				},
 			});
@@ -153,8 +153,8 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 							<PriceField activeCurrency={activeCurrency} />
 							<QuantityField />
 							<SelectPortfolioField />
-							<ComissionTypeField />
-							<ComissionField activeCurrency={activeCurrency} />
+							<CommissionTypeField />
+							<CommissionField activeCurrency={activeCurrency} />
 							<TransactionCostField activeCurrency={activeCurrency} />
 						</Fragment>
 					)}
