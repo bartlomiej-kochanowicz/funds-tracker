@@ -177,7 +177,7 @@ export class PortfoliosService {
 		} = await this.userService.getUser(userId);
 
 		const { uuid, from, to } = data;
-
+		// data must be provided for every day for 1d to 1y and for every week for over 1y
 		const { cash: sumCash } = (
 			await this.prisma.transaction.findMany({
 				select: {
@@ -219,8 +219,6 @@ export class PortfoliosService {
 			},
 		});
 
-		console.log("%%", from, to, transactionsGroupedByDate);
-
 		const result = (
 			await Promise.all(
 				transactionsGroupedByDate.map(async ({ date }) => {
@@ -251,8 +249,6 @@ export class PortfoliosService {
 			const cumulativeCash = previousSum + entry.cash;
 			return [...acc, { date: entry.date, cumulativeCash, marketValue: entry.marketValue }];
 		}, []);
-
-		// console.log(result);
 
 		return {
 			data: result,
