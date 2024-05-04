@@ -10,7 +10,7 @@ import {
 	PortfolioSummaryInput,
 } from "./inputs";
 import { UserService } from "../user/user.service";
-import { isBefore, addDays, min, max } from "date-fns";
+import { isBefore, addDays, min } from "date-fns";
 import { MarketService } from "@services/market/market.service";
 import { formatDate } from "@src/utils/format-date";
 
@@ -182,8 +182,6 @@ export class PortfoliosService {
 		const { uuid, from, to } = data;
 
 		const transactions = await this.getPortfolioTransactions(uuid);
-
-		// console.log(transactions);
 
 		const summary = transactions.reduce<
 			{
