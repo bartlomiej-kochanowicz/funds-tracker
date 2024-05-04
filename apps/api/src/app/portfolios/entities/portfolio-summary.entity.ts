@@ -9,7 +9,7 @@ class PortfolioSummaryItem {
 	marketValue: number;
 
 	@Field(() => Number, { description: "Cumulative deposited cash." })
-	cumulativeCash: number;
+	cash: number;
 }
 
 @ObjectType()

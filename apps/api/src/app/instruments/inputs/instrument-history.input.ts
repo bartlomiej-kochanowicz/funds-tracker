@@ -1,5 +1,5 @@
 import { InputType, Field } from "@nestjs/graphql";
-import { IsOptional, IsString } from "class-validator";
+import { IsDate, IsOptional, IsString } from "class-validator";
 
 @InputType()
 export class InstrumentHistoryInput {
@@ -16,12 +16,12 @@ export class InstrumentHistoryInput {
 	@Field(() => String, { description: "Period", nullable: true })
 	period?: "1d" | "1w" | "1m";
 
-	@IsString()
-	@Field(() => String, { description: "From" })
-	from: `${string}-${string}-${string}`;
+	@IsDate()
+	@Field(() => Date, { description: "From" })
+	from: Date;
 
-	@IsString()
+	@IsDate()
 	@IsOptional()
-	@Field(() => String, { description: "To", nullable: true })
-	to?: `${string}-${string}-${string}`;
+	@Field(() => Date, { description: "To", nullable: true })
+	to?: Date;
 }

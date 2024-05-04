@@ -213,7 +213,7 @@ type PortfolioSummaryItem {
   marketValue: Float!
 
   """Cumulative deposited cash."""
-  cumulativeCash: Float!
+  cash: Float!
 }
 
 """
@@ -383,10 +383,10 @@ input InstrumentHistoryInput {
   period: String
 
   """From"""
-  from: String!
+  from: DateTime!
 
   """To"""
-  to: String
+  to: DateTime
 }
 
 input PortfolioSummaryInput {

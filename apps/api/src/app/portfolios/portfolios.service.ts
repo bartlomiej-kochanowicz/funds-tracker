@@ -10,13 +10,16 @@ import {
 	PortfolioSummaryInput,
 } from "./inputs";
 import { UserService } from "../user/user.service";
-import { subDays, isBefore, addDays, format } from "date-fns";
+import { isBefore, addDays, min, max } from "date-fns";
+import { MarketService } from "@services/market/market.service";
+import { formatDate } from "@src/utils/format-date";
 
 @Injectable()
 export class PortfoliosService {
 	constructor(
 		private prisma: PrismaService,
 		private userService: UserService,
+		private marketService: MarketService,
 	) {}
 
 	async create(
@@ -178,36 +181,77 @@ export class PortfoliosService {
 
 		const { uuid, from, to } = data;
 
-		const dates = this.generateDateRangeDays(from, to);
+		const transactions = await this.getPortfolioTransactions(uuid);
 
-		const { cash: sumCash } = await this.getSummaryCashBeforeDate(uuid, from);
+		// console.log(transactions);
 
-		const transactionsCashSummary = await this.transactionsCashSummary(uuid, from, to, sumCash);
+		const summary = transactions.reduce<
+			{
+				date: Date;
+				cash: number;
+				commission: number;
+			}[]
+		>((acc, transaction) => {
+			return [
+				...acc,
+				{
+					date: transaction.date,
+					cash:
+						Math.round(
+							((acc[acc.length - 1]?.cash || 0) + transaction.price * transaction.quantity) * 100,
+						) / 100,
+					commission:
+						Math.round(((acc[acc.length - 1]?.commission || 0) + transaction.commission) * 100) /
+						100,
+				},
+			];
+		}, []);
 
-		let currentCash = sumCash;
+		const transactionsDatesArray = transactions.map(({ date }) => date);
+		const minDate = min(transactionsDatesArray);
 
-		const result = dates.map(date => {
-			const found = transactionsCashSummary.find(
-				entry => this.formatDate(entry.date) === this.formatDate(date),
+		let currentCash = 0;
+		let currentCommission = 0;
+
+		const result = this.generateDateRangeDays(minDate, to).map(date => {
+			const dayWithTransactions = summary.filter(
+				entry => formatDate(entry.date) === formatDate(date),
 			);
 
-			if (found) {
-				currentCash = found.cumulativeCash;
+			const { cash, commission } = dayWithTransactions.at(-1) || {};
+
+			if (cash) {
+				currentCash = cash;
+			}
+			if (commission) {
+				currentCommission = commission;
 			}
 
 			return {
 				date,
 				marketValue: 1000,
-				cumulativeCash: currentCash,
+				cash: currentCash,
+				commission: currentCommission,
 			};
 		});
 
+		if (isBefore(from, minDate)) {
+			const fill = this.generateDateRangeDays(from, minDate).map(date => ({
+				date,
+				marketValue: 0,
+				cash: 0,
+				commission: 0,
+			}));
+
+			result.unshift(...fill);
+		}
+
 		return {
-			data: result,
+			data: result.filter(({ date }) => date >= from && date <= to),
 		};
 	}
 
-	private generateDateRangeDays(from: Date, to: Date) {
+	private generateDateRangeDays(from: Date, to: Date): Date[] {
 		const dates = [];
 		let currentDate = new Date(from);
 
@@ -219,82 +263,16 @@ export class PortfoliosService {
 		return dates;
 	}
 
-	private formatDate(date: Date): string {
-		return format(date, "yyyy-MM-dd");
-	}
-
-	private async getSummaryCashBeforeDate(uuid: string, date: Date) {
+	private async getPortfolioTransactions(uuid: string) {
 		return (
 			await this.prisma.transaction.findMany({
-				select: {
-					price: true,
-					quantity: true,
-					commission: true,
-				},
 				where: {
 					portfolioUuid: uuid,
-					date: {
-						gte: new Date(0),
-						lte: subDays(date, 1),
-					},
+				},
+				include: {
+					instrument: true,
 				},
 			})
-		).reduce(
-			(acc, transaction) => {
-				const price = transaction.price * transaction.quantity;
-
-				return {
-					cash: acc.cash + price,
-					commission: acc.commission + transaction.commission,
-				};
-			},
-			{
-				cash: 0,
-				commission: 0,
-			},
-		);
-	}
-
-	private async transactionsCashSummary(uuid: string, from: Date, to: Date, sumCash: number) {
-		const transactionsGroupedByDate = await this.prisma.transaction.groupBy({
-			by: ["date"],
-			where: {
-				portfolioUuid: uuid,
-				date: {
-					gte: from,
-					lte: to,
-				},
-			},
-		});
-
-		return (
-			await Promise.all(
-				transactionsGroupedByDate.map(async ({ date }) => {
-					const dayTransactions = await this.prisma.transaction.findMany({
-						where: {
-							date,
-						},
-						include: {
-							instrument: true,
-						},
-					});
-
-					const cash = dayTransactions.reduce((acc, transaction) => {
-						const price = transaction.price * transaction.quantity;
-
-						return acc + price;
-					}, 0);
-
-					return {
-						date,
-						cash: sumCash + cash,
-					};
-				}),
-			)
-		).reduce((acc, entry) => {
-			const previousCashSum = acc.length > 0 ? acc[acc.length - 1].cumulativeCash : 0;
-			const cumulativeCash = previousCashSum + entry.cash;
-			return [...acc, { date: entry.date, cumulativeCash }];
-		}, []);
+		).sort((a, b) => Number(a.date) - Number(b.date));
 	}
 }

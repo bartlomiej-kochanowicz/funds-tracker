@@ -25,7 +25,7 @@ const documents = {
     "\n\tmutation PortfolioCreate($data: PortfolioCreateInput!) {\n\t\tportfolioCreate(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.PortfolioCreateDocument,
     "\n\tmutation PortfolioDelete($uuid: String!) {\n\t\tportfolioDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.PortfolioDeleteDocument,
     "\n\tmutation PortfolioUpdate($uuid: String!, $data: PortfolioUpdateInput!) {\n\t\tportfolioUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.PortfolioUpdateDocument,
-    "\n\tquery GetPortfolioSummary($data: PortfolioSummaryInput!) {\n\t\tportfolioSummary(data: $data) {\n\t\t\tdata {\n\t\t\t\tdate\n\t\t\t\tmarketValue\n\t\t\t\tcumulativeCash\n\t\t\t}\n\t\t}\n\t}\n": types.GetPortfolioSummaryDocument,
+    "\n\tquery GetPortfolioSummary($data: PortfolioSummaryInput!) {\n\t\tportfolioSummary(data: $data) {\n\t\t\tdata {\n\t\t\t\tdate\n\t\t\t\tmarketValue\n\t\t\t\tcash\n\t\t\t}\n\t\t}\n\t}\n": types.GetPortfolioSummaryDocument,
     "\n\tquery GetPortfolio($uuid: String!) {\n\t\tportfolio(uuid: $uuid) {\n\t\t\tuuid\n\t\t\tname\n\t\t\ttransactions {\n\t\t\t\tuuid\n\t\t\t\tdate\n\t\t\t\tquantity\n\t\t\t\tprice\n\t\t\t\ttype\n\t\t\t\tinstrument {\n\t\t\t\t\tuuid\n\t\t\t\t\tcodeExchange\n\t\t\t\t\tname\n\t\t\t\t\ttype\n\t\t\t\t\tcurrency\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n": types.GetPortfolioDocument,
     "\n\tquery GetPortfolios {\n\t\tportfolios {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.GetPortfoliosDocument,
     "\n\tmutation TransactionCreate($data: TransactionCreateInput!) {\n\t\ttransactionCreate(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.TransactionCreateDocument,
@@ -105,7 +105,7 @@ export function gql(source: "\n\tmutation PortfolioUpdate($uuid: String!, $data:
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tquery GetPortfolioSummary($data: PortfolioSummaryInput!) {\n\t\tportfolioSummary(data: $data) {\n\t\t\tdata {\n\t\t\t\tdate\n\t\t\t\tmarketValue\n\t\t\t\tcumulativeCash\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetPortfolioSummary($data: PortfolioSummaryInput!) {\n\t\tportfolioSummary(data: $data) {\n\t\t\tdata {\n\t\t\t\tdate\n\t\t\t\tmarketValue\n\t\t\t\tcumulativeCash\n\t\t\t}\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tquery GetPortfolioSummary($data: PortfolioSummaryInput!) {\n\t\tportfolioSummary(data: $data) {\n\t\t\tdata {\n\t\t\t\tdate\n\t\t\t\tmarketValue\n\t\t\t\tcash\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetPortfolioSummary($data: PortfolioSummaryInput!) {\n\t\tportfolioSummary(data: $data) {\n\t\t\tdata {\n\t\t\t\tdate\n\t\t\t\tmarketValue\n\t\t\t\tcash\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

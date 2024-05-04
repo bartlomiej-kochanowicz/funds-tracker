@@ -6,9 +6,10 @@ import { InstrumentType } from "@prisma/client";
 import { InstrumentHistoryInput, SearchInstrumentInput } from "./inputs";
 import { InstrumentHistory, SearchInstrument } from "./entities";
 import { EodHistoricalDataSearchResponse } from "@src/types/eodhistoricaldata-search";
-import { PrismaService } from "@src/services/prisma/prisma.service";
+import { PrismaService } from "@services/prisma/prisma.service";
 import { InstrumentCreateInput } from "./inputs/instrument-create.input";
 import { Instrument } from "./entities/instrument.entity";
+import { MarketService } from "@services/market/market.service";
 
 @Injectable()
 export class InstrumentsService {
@@ -16,6 +17,7 @@ export class InstrumentsService {
 		private readonly httpService: HttpService,
 		private config: ConfigService,
 		private prisma: PrismaService,
+		private marketService: MarketService,
 	) {}
 
 	async search(searchInstrumentInput: SearchInstrumentInput): Promise<SearchInstrument[]> {
@@ -44,27 +46,7 @@ export class InstrumentsService {
 	}
 
 	async findHistory(instrumentHistoryInput: InstrumentHistoryInput): Promise<InstrumentHistory[]> {
-		const { code, exchange, from, to = new Date(), period = "1d" } = instrumentHistoryInput;
-
-		const { data } = await firstValueFrom(
-			this.httpService
-				.get(`https://eodhistoricaldata.com/api/eod/${code}.${exchange}`, {
-					params: {
-						api_token: this.config.get("EODHD_API_KEY"),
-						fmt: "json",
-						period,
-						from: new Date(from).toISOString().split("T")[0],
-						to: new Date(to).toISOString().split("T")[0],
-					},
-				})
-				.pipe(
-					catchError(e => {
-						console.error(e);
-
-						throw Error("Error fetching instrument history");
-					}),
-				),
-		);
+		const data = await this.marketService.getMarketInstrumentHistory(instrumentHistoryInput);
 
 		return data;
 	}

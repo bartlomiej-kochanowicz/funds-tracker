@@ -131,7 +131,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 				<Line
 					dot={false}
 					type="step"
-					dataKey="cumulativeCash"
+					dataKey="cash"
 					stroke="hsl(var(--success))"
 					activeDot={{
 						strokeWidth: 0,
@@ -145,7 +145,7 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 							color: "hsl(var(--primary))",
 						},
 						{
-							id: "cumulativeCash",
+							id: "cash",
 							value: "Cash",
 							color: "hsl(var(--success))",
 						},

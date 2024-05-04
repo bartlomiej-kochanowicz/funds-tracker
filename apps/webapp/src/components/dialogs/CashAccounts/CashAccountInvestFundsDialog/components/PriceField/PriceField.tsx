@@ -39,8 +39,8 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 					data: {
 						code: watchInstrument.Code,
 						exchange: watchInstrument.Exchange,
-						from: sevenDaysAgo.toISOString(),
-						to: watchDate.toISOString(),
+						from: sevenDaysAgo,
+						to: watchDate,
 						period: "1d",
 					},
 				},
