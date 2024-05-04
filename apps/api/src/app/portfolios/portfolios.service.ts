@@ -10,7 +10,7 @@ import {
 	PortfolioSummaryInput,
 } from "./inputs";
 import { UserService } from "../user/user.service";
-import { subDays } from "date-fns";
+import { subDays, isBefore, addDays, format } from "date-fns";
 
 @Injectable()
 export class PortfoliosService {
@@ -177,8 +177,54 @@ export class PortfoliosService {
 		} = await this.userService.getUser(userId);
 
 		const { uuid, from, to } = data;
-		// data must be provided for every day for 1d to 1y and for every week for over 1y
-		const { cash: sumCash } = (
+
+		const dates = this.generateDateRangeDays(from, to);
+
+		const { cash: sumCash } = await this.getSummaryCashBeforeDate(uuid, from);
+
+		const transactionsCashSummary = await this.transactionsCashSummary(uuid, from, to, sumCash);
+
+		let currentCash = sumCash;
+
+		const result = dates.map(date => {
+			const found = transactionsCashSummary.find(
+				entry => this.formatDate(entry.date) === this.formatDate(date),
+			);
+
+			if (found) {
+				currentCash = found.cumulativeCash;
+			}
+
+			return {
+				date,
+				marketValue: 1000,
+				cumulativeCash: currentCash,
+			};
+		});
+
+		return {
+			data: result,
+		};
+	}
+
+	private generateDateRangeDays(from: Date, to: Date) {
+		const dates = [];
+		let currentDate = new Date(from);
+
+		while (isBefore(currentDate, new Date(to))) {
+			dates.push(currentDate);
+			currentDate = addDays(currentDate, 1);
+		}
+
+		return dates;
+	}
+
+	private formatDate(date: Date): string {
+		return format(date, "yyyy-MM-dd");
+	}
+
+	private async getSummaryCashBeforeDate(uuid: string, date: Date) {
+		return (
 			await this.prisma.transaction.findMany({
 				select: {
 					price: true,
@@ -189,7 +235,7 @@ export class PortfoliosService {
 					portfolioUuid: uuid,
 					date: {
 						gte: new Date(0),
-						lte: subDays(from, 1),
+						lte: subDays(date, 1),
 					},
 				},
 			})
@@ -207,7 +253,9 @@ export class PortfoliosService {
 				commission: 0,
 			},
 		);
+	}
 
+	private async transactionsCashSummary(uuid: string, from: Date, to: Date, sumCash: number) {
 		const transactionsGroupedByDate = await this.prisma.transaction.groupBy({
 			by: ["date"],
 			where: {
@@ -219,7 +267,7 @@ export class PortfoliosService {
 			},
 		});
 
-		const result = (
+		return (
 			await Promise.all(
 				transactionsGroupedByDate.map(async ({ date }) => {
 					const dayTransactions = await this.prisma.transaction.findMany({
@@ -240,18 +288,13 @@ export class PortfoliosService {
 					return {
 						date,
 						cash: sumCash + cash,
-						marketValue: 1000,
 					};
 				}),
 			)
 		).reduce((acc, entry) => {
-			const previousSum = acc.length > 0 ? acc[acc.length - 1].cumulativeCash : 0;
-			const cumulativeCash = previousSum + entry.cash;
-			return [...acc, { date: entry.date, cumulativeCash, marketValue: entry.marketValue }];
+			const previousCashSum = acc.length > 0 ? acc[acc.length - 1].cumulativeCash : 0;
+			const cumulativeCash = previousCashSum + entry.cash;
+			return [...acc, { date: entry.date, cumulativeCash }];
 		}, []);
-
-		return {
-			data: result,
-		};
 	}
 }
