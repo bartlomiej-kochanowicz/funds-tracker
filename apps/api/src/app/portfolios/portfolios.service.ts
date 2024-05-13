@@ -175,13 +175,17 @@ export class PortfoliosService {
 	}
 
 	async portfolioSummary(userId: string, data: PortfolioSummaryInput): Promise<PortfolioSummary> {
-		const {
-			/* defaultCurrency */
-		} = await this.userService.getUser(userId);
+		const { defaultCurrency } = await this.userService.getUser(userId);
 
 		const { uuid, from, to } = data;
 
 		const transactions = await this.getPortfolioTransactions(uuid);
+
+		const codeExchanges = [
+			...new Set(transactions.map(({ instrument }) => instrument.codeExchange)),
+		];
+
+		console.log(codeExchanges, defaultCurrency, transactions);
 
 		const summary = transactions.reduce<
 			{
