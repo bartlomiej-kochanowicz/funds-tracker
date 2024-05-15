@@ -5,7 +5,7 @@ import { ConfigService } from "@nestjs/config";
 import { InstrumentType } from "@prisma/client";
 import { InstrumentHistoryInput, SearchInstrumentInput } from "./inputs";
 import { InstrumentHistory, SearchInstrument } from "./entities";
-import { EodHistoricalDataSearchResponse } from "@src/types/eodhistoricaldata-search";
+import { MarketDataSearchResponse } from "@src/types/market";
 import { PrismaService } from "@services/prisma/prisma.service";
 import { InstrumentCreateInput } from "./inputs/instrument-create.input";
 import { Instrument } from "./entities/instrument.entity";
@@ -117,7 +117,7 @@ export class InstrumentsService {
 	async getInstrument(code: string, exchange: string) {
 		const { data } = await firstValueFrom(
 			this.httpService
-				.get<EodHistoricalDataSearchResponse>(
+				.get<MarketDataSearchResponse>(
 					`https://eodhistoricaldata.com/api/search/${code}.${exchange}`,
 					{
 						params: {

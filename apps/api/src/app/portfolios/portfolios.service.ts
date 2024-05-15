@@ -13,6 +13,7 @@ import { UserService } from "../user/user.service";
 import { isBefore, addDays, min } from "date-fns";
 import { MarketService } from "@services/market/market.service";
 import { formatDate } from "@src/utils/format-date";
+import { MarketHistoryDataResponse } from "@src/types/market";
 
 @Injectable()
 export class PortfoliosService {
@@ -180,12 +181,10 @@ export class PortfoliosService {
 		const { uuid, from, to } = data;
 
 		const transactions = await this.getPortfolioTransactions(uuid);
+		const instruments = [...new Set(transactions.map(({ instrument }) => instrument.codeExchange))];
+		const history = await this.getInstrumentsHistory(instruments, from, to);
 
-		const codeExchanges = [
-			...new Set(transactions.map(({ instrument }) => instrument.codeExchange)),
-		];
-
-		console.log(codeExchanges, defaultCurrency, transactions);
+		console.log(history);
 
 		const summary = transactions.reduce<
 			{
@@ -276,5 +275,34 @@ export class PortfoliosService {
 				},
 			})
 		).sort((a, b) => Number(a.date) - Number(b.date));
+	}
+
+	private async getInstrumentsHistory(
+		instruments: string[],
+		from: Date,
+		to: Date,
+	): Promise<Record<string, MarketHistoryDataResponse>> {
+		const history = (
+			await Promise.all(
+				instruments.map(async codeExchange => {
+					const history = await this.marketService.getMarketInstrumentHistory({
+						code: codeExchange.split(".")[0],
+						exchange: codeExchange.split(".")[1],
+						from,
+						to,
+					});
+
+					return { codeExchange, history };
+				}),
+			)
+		).reduce<Record<string, MarketHistoryDataResponse>>(
+			(acc, current) => ({
+				...acc,
+				[current.codeExchange]: current.history,
+			}),
+			{},
+		);
+
+		return history;
 	}
 }

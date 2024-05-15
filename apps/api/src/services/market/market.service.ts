@@ -1,6 +1,7 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { MarketHistoryDataResponse } from "@src/types/market";
 import { formatDate } from "@src/utils/format-date";
 import { isBefore } from "date-fns";
 import { catchError, firstValueFrom } from "rxjs";
@@ -31,25 +32,18 @@ export class MarketService {
 
 		const { data } = await firstValueFrom(
 			this.httpService
-				.get<
+				.get<MarketHistoryDataResponse>(
+					`https://eodhistoricaldata.com/api/eod/${code}.${exchange}`,
 					{
-						date: string;
-						open: number;
-						high: number;
-						low: number;
-						close: number;
-						adjusted_close: number;
-						volume: number;
-					}[]
-				>(`https://eodhistoricaldata.com/api/eod/${code}.${exchange}`, {
-					params: {
-						api_token: this.config.get("EODHD_API_KEY"),
-						fmt: "json",
-						period,
-						from: formatDate(from),
-						to: formatDate(to),
+						params: {
+							api_token: this.config.get("EODHD_API_KEY"),
+							fmt: "json",
+							period,
+							from: formatDate(from),
+							to: formatDate(to),
+						},
 					},
-				})
+				)
 				.pipe(
 					catchError(e => {
 						console.error(e);
