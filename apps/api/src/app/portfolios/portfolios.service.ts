@@ -216,12 +216,17 @@ export class PortfoliosService {
 		let currentCash = 0;
 		let currentCommission = 0;
 		let prevDayValue = 0;
+		const instrumentsQuantity = new Map(instruments.map(codeExchange => [codeExchange, 0]));
+
 		const result = this.generateDateRangeDays(minDate, to).map(date => {
 			const dayWithTransactions = summary.filter(
 				entry => formatDate(entry.date) === formatDate(date),
 			);
 
-			const { cash, commission } = dayWithTransactions.at(-1) || {};
+			dayWithTransactions.forEach(({ codeExchange, quantity }) => {
+				instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
+			});
+
 			const dailyValue = history[formatDate(date)];
 			let currentMarketValue = 0;
 
@@ -230,13 +235,16 @@ export class PortfoliosService {
 					const { close } = dailyValue[codeExchange] || {};
 
 					if (close) {
-						currentMarketValue += close;
+						currentMarketValue += close * instrumentsQuantity.get(codeExchange);
 						prevDayValue = currentMarketValue;
 					}
 				});
 			} else {
 				currentMarketValue = prevDayValue;
 			}
+
+			// Calculate cash and commission
+			const { cash, commission } = dayWithTransactions.at(-1) || {};
 
 			if (cash) {
 				currentCash = cash;
