@@ -182,15 +182,15 @@ export class PortfoliosService {
 
 		const transactions = await this.getPortfolioTransactions(uuid);
 		const instruments = [...new Set(transactions.map(({ instrument }) => instrument.codeExchange))];
-		const history = await this.getInstrumentsHistory(instruments, from, to);
-
-		console.log(history);
+		const history = await this.getInstrumentsHistoryByDate(instruments, from, to);
 
 		const summary = transactions.reduce<
 			{
 				date: Date;
 				cash: number;
 				commission: number;
+				quantity: number;
+				codeExchange: string;
 			}[]
 		>((acc, transaction) => {
 			return [
@@ -204,6 +204,8 @@ export class PortfoliosService {
 					commission:
 						Math.round(((acc[acc.length - 1]?.commission || 0) + transaction.commission) * 100) /
 						100,
+					quantity: transaction.quantity,
+					codeExchange: transaction.instrument.codeExchange,
 				},
 			];
 		}, []);
@@ -213,13 +215,28 @@ export class PortfoliosService {
 
 		let currentCash = 0;
 		let currentCommission = 0;
-
+		let prevDayValue = 0;
 		const result = this.generateDateRangeDays(minDate, to).map(date => {
 			const dayWithTransactions = summary.filter(
 				entry => formatDate(entry.date) === formatDate(date),
 			);
 
 			const { cash, commission } = dayWithTransactions.at(-1) || {};
+			const dailyValue = history[formatDate(date)];
+			let currentMarketValue = 0;
+
+			if (dailyValue) {
+				instruments.forEach(codeExchange => {
+					const { close } = dailyValue[codeExchange] || {};
+
+					if (close) {
+						currentMarketValue += close;
+						prevDayValue = currentMarketValue;
+					}
+				});
+			} else {
+				currentMarketValue = prevDayValue;
+			}
 
 			if (cash) {
 				currentCash = cash;
@@ -230,7 +247,7 @@ export class PortfoliosService {
 
 			return {
 				date,
-				marketValue: 1000,
+				marketValue: currentMarketValue,
 				cash: currentCash,
 				commission: currentCommission,
 			};
@@ -277,11 +294,9 @@ export class PortfoliosService {
 		).sort((a, b) => Number(a.date) - Number(b.date));
 	}
 
-	private async getInstrumentsHistory(
-		instruments: string[],
-		from: Date,
-		to: Date,
-	): Promise<Record<string, MarketHistoryDataResponse>> {
+	private async getInstrumentsHistoryByDate(instruments: string[], from: Date, to: Date) {
+		type HistoryRecord = Omit<MarketHistoryDataResponse[0], "date">;
+
 		const history = (
 			await Promise.all(
 				instruments.map(async codeExchange => {
@@ -295,11 +310,29 @@ export class PortfoliosService {
 					return { codeExchange, history };
 				}),
 			)
-		).reduce<Record<string, MarketHistoryDataResponse>>(
-			(acc, current) => ({
-				...acc,
-				[current.codeExchange]: current.history,
-			}),
+		).reduce(
+			(
+				acc: {
+					[date: string]: { [codeExchange: string]: HistoryRecord };
+				},
+				item: {
+					codeExchange: string;
+					history: MarketHistoryDataResponse;
+				},
+			) => {
+				item.history.forEach(record => {
+					acc[record.date] ??= {};
+					acc[record.date][item.codeExchange] = {
+						open: record.open,
+						high: record.high,
+						low: record.low,
+						close: record.close,
+						adjusted_close: record.adjusted_close,
+						volume: record.volume,
+					};
+				});
+				return acc;
+			},
 			{},
 		);
 
