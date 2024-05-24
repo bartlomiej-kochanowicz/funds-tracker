@@ -10,7 +10,7 @@ import {
 	PortfolioSummaryInput,
 } from "./inputs";
 import { UserService } from "../user/user.service";
-import { isBefore, addDays, min } from "date-fns";
+import { isBefore, addDays, min, subDays } from "date-fns";
 import { MarketService } from "@services/market/market.service";
 import { formatDate } from "@src/utils/format-date";
 import { MarketHistoryDataResponse } from "@src/types/market";
@@ -227,7 +227,10 @@ export class PortfoliosService {
 				instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
 			});
 
-			const dailyValue = history[formatDate(date)];
+			const dailyValue = [0, 1, 2]
+				.map(i => history[formatDate(subDays(date, i))])
+				.filter(Boolean)[0];
+
 			let currentMarketValue = 0;
 
 			if (dailyValue) {
@@ -311,7 +314,7 @@ export class PortfoliosService {
 					const history = await this.marketService.getMarketInstrumentHistory({
 						code: codeExchange.split(".")[0],
 						exchange: codeExchange.split(".")[1],
-						from,
+						from: subDays(from, 3),
 						to,
 					});
 
