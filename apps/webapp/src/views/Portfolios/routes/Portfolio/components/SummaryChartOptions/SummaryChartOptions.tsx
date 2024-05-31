@@ -50,12 +50,14 @@ export const SummaryChartOptions = () => {
 					<ToggleGroup.Item
 						value="1y"
 						aria-label="Toggle one year"
+						className="whitespace-nowrap"
 					>
 						{t("date.1y")}
 					</ToggleGroup.Item>
 					<ToggleGroup.Item
 						value="5y"
 						aria-label="Toggle 5 years"
+						className="whitespace-nowrap"
 					>
 						{t("date.5y")}
 					</ToggleGroup.Item>

@@ -227,7 +227,8 @@ export class PortfoliosService {
 				instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
 			});
 
-			const dailyValue = [0, 1, 2]
+			// Weekend or holiday is not in the history data
+			const dailyValue = [0, 1, 2, 3]
 				.map(i => history[formatDate(subDays(date, i))])
 				.filter(Boolean)[0];
 
