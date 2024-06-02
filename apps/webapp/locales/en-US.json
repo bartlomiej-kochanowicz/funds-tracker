@@ -242,5 +242,9 @@
 	"date.5y": "5 years",
 	"common.custom": "Custom",
 	"common.min": "Min",
-	"common.max": "Max"
+	"common.max": "Max",
+	"toast.user.update.defaultCurrency.success": "Default currency has been updated.",
+	"toast.user.update.email.success": "Email has been updated.",
+	"toast.user.update.name.success": "Name has been updated.",
+	"toast.user.update.unknown.success": "Data has been updated."
 }

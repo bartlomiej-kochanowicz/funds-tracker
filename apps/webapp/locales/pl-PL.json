@@ -242,5 +242,9 @@
 	"date.5y": "5 lat",
 	"common.custom": "Niestandardowy",
 	"common.min": "Min",
-	"common.max": "Maks"
+	"common.max": "Maks",
+	"toast.user.update.defaultCurrency.success": "Domyślna waluta została pomyślnie zaktualizowana.",
+	"toast.user.update.email.success": "Email został pomyślnie zaktualizowany.",
+	"toast.user.update.name.success": "Imię zostało pomyślnie zaktualizowane.",
+	"toast.user.update.unknown.success": "Dane zostały pomyślnie zaktualizowane."
 }

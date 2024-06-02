@@ -1,10 +1,13 @@
 import { GetUserQuery, IntroductionStep, UpdateUserInput } from "__generated__/graphql";
 import { LazyQueryExecFunction, OperationVariables } from "@apollo/client";
+import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
 import { IS_DEVELOPMENT } from "config/env";
 import { isUserLoggedIn } from "helpers/isUserLoggedIn";
 import { useLazyQueryUser } from "hooks/api/user/useLazyQueryUser";
+import { useMutationUserUpdate } from "hooks/api/user/useMutationUserUpdate";
 import LogRocket from "logrocket";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 type UpdateLocalUserData = UpdateUserInput & { introductionStep?: IntroductionStep };
 
@@ -19,19 +22,52 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | null>(null);
 
 const useUser = (): UserContextType => {
+	const { t } = useTranslation();
 	const [getUser, { loading, data, client, error, updateQuery }] = useLazyQueryUser();
+	const [updateUserMutation, { loading: updateLoading }] = useMutationUserUpdate();
 
-	const updateUser = ({ defaultCurrency, email, name, introductionStep }: UpdateLocalUserData) => {
-		updateQuery(prev => ({
-			...prev,
-			user: {
-				...prev.user,
-				defaultCurrency: defaultCurrency ?? prev.user.defaultCurrency,
-				email: email ?? prev.user.email,
-				name: name ?? prev.user.name,
-				introductionStep: introductionStep ?? prev.user.introductionStep,
-			},
-		}));
+	const updateUser = async ({ defaultCurrency, email, name }: UpdateLocalUserData) => {
+		try {
+			await updateUserMutation({
+				variables: {
+					data: {
+						defaultCurrency,
+						email,
+						name,
+					},
+				},
+			});
+
+			updateQuery(prev => ({
+				...prev,
+				user: {
+					...prev.user,
+					defaultCurrency: defaultCurrency ?? prev.user.defaultCurrency,
+					email: email ?? prev.user.email,
+					name: name ?? prev.user.name,
+				},
+			}));
+
+			const getSuccesMessage = () => {
+				if (defaultCurrency) {
+					return t("toast.user.update.defaultCurrency.success");
+				}
+
+				if (email) {
+					return t("toast.user.update.email.success");
+				}
+
+				if (name) {
+					return t("toast.user.update.name.success");
+				}
+
+				return t("toast.user.update.unknown.success");
+			};
+
+			emitSuccessToast(getSuccesMessage());
+		} catch {
+			emitErrorToast(t("service.unknown_error"));
+		}
 	};
 
 	if (
@@ -61,7 +97,7 @@ const useUser = (): UserContextType => {
 	}, [data]);
 
 	return {
-		loading,
+		loading: loading || updateLoading,
 		user: data?.user ?? null,
 		getUser,
 		clearUser,

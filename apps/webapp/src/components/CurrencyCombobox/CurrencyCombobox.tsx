@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 interface CurrencyComboboxProps {
 	value: Currency;
 	onChange: (value: Currency) => void;
-	onBlur: () => void;
+	onBlur?: () => void;
 	defautValue?: Currency;
 	disabled?: boolean;
 }
