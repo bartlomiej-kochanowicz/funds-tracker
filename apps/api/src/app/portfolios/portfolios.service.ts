@@ -237,7 +237,7 @@ export class PortfoliosService {
 			let dailyInstrumentsMarketValue = history[formatDate(date)];
 
 			// Days when the stock exchange is closed are not in the history data, so we need to fill them with the last known value
-			// note: different stock exchanges have different holidays so me must check all instruments one by one
+			// note: different stock exchanges have different holidays so we must check all instruments one by one
 			if (
 				dailyInstrumentsMarketValue &&
 				Object.keys(dailyInstrumentsMarketValue).length !== instruments.length
