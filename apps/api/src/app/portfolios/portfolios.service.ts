@@ -14,6 +14,7 @@ import { isBefore, addDays, min, subDays } from "date-fns";
 import { MarketService } from "@services/market/market.service";
 import { formatDate } from "@src/utils/format-date";
 import { MarketHistoryDataResponse } from "@src/types/market";
+import { CurrenciesService } from "@src/services/currencies/currencies.service";
 
 @Injectable()
 export class PortfoliosService {
@@ -21,6 +22,7 @@ export class PortfoliosService {
 		private prisma: PrismaService,
 		private userService: UserService,
 		private marketService: MarketService,
+		private currenciesService: CurrenciesService,
 	) {}
 
 	async create(
@@ -182,7 +184,12 @@ export class PortfoliosService {
 
 		const transactions = await this.getPortfolioTransactions(uuid);
 		const instruments = [...new Set(transactions.map(({ instrument }) => instrument.codeExchange))];
+		const currencies = [
+			...new Set(transactions.map(({ instrument }) => instrument.currency)),
+		].filter(currency => currency !== defaultCurrency);
 		const history = await this.getInstrumentsHistoryByDate(instruments, from, to);
+
+		// console.log("@@", defaultCurrency, currencies);
 
 		const summary = transactions.reduce<
 			{
@@ -192,8 +199,8 @@ export class PortfoliosService {
 				quantity: number;
 				codeExchange: string;
 			}[]
-		>((acc, transaction) => {
-			return [
+		>(
+			(acc, transaction) => [
 				...acc,
 				{
 					date: transaction.date,
@@ -207,8 +214,9 @@ export class PortfoliosService {
 					quantity: transaction.quantity,
 					codeExchange: transaction.instrument.codeExchange,
 				},
-			];
-		}, []);
+			],
+			[],
+		);
 
 		const transactionsDatesArray = transactions.map(({ date }) => date);
 		const minDate = min(transactionsDatesArray);
@@ -222,21 +230,34 @@ export class PortfoliosService {
 			const dayWithTransactions = summary.filter(
 				entry => formatDate(entry.date) === formatDate(date),
 			);
-
 			dayWithTransactions.forEach(({ codeExchange, quantity }) => {
 				instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
 			});
 
-			// Weekend or holiday is not in the history data
-			const dailyValue = [0, 1, 2, 3]
-				.map(i => history[formatDate(subDays(date, i))])
-				.filter(Boolean)[0];
+			let dailyInstrumentsMarketValue = history[formatDate(date)];
+
+			// Days when the stock exchange is closed are not in the history data, so we need to fill them with the last known value
+			// note: different stock exchanges have different holidays so me must check all instruments one by one
+			if (
+				dailyInstrumentsMarketValue &&
+				Object.keys(dailyInstrumentsMarketValue).length !== instruments.length
+			) {
+				dailyInstrumentsMarketValue = instruments.reduce(
+					(acc, instrument) => ({
+						...acc,
+						[instrument]: [0, 1, 2, 3]
+							.map(i => history[formatDate(subDays(date, i))]?.[instrument])
+							.filter(Boolean)[0],
+					}),
+					{},
+				);
+			}
 
 			let currentMarketValue = 0;
 
-			if (dailyValue) {
+			if (dailyInstrumentsMarketValue) {
 				instruments.forEach(codeExchange => {
-					const { close } = dailyValue[codeExchange] || {};
+					const { close } = dailyInstrumentsMarketValue[codeExchange] || {};
 
 					if (close) {
 						currentMarketValue += close * instrumentsQuantity.get(codeExchange);
