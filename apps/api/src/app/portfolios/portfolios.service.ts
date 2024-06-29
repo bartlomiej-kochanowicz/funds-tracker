@@ -183,13 +183,23 @@ export class PortfoliosService {
 		const { uuid, from, to } = data;
 
 		const transactions = await this.getPortfolioTransactions(uuid);
-		const instruments = [...new Set(transactions.map(({ instrument }) => instrument.codeExchange))];
+		const instruments = [
+			...new Set(
+				transactions.map(({ instrument }) => ({
+					codeExchange: instrument.codeExchange,
+					currency: instrument.currency,
+					name: instrument.name,
+				})),
+			),
+		];
 		const currencies = [
 			...new Set(transactions.map(({ instrument }) => instrument.currency)),
 		].filter(currency => currency !== defaultCurrency);
-		const history = await this.getInstrumentsHistoryByDate(instruments, from, to);
-
-		// console.log("@@", defaultCurrency, currencies);
+		const history = await this.getInstrumentsHistoryByDate(
+			instruments.map(({ codeExchange }) => codeExchange),
+			from,
+			to,
+		);
 
 		const summary = transactions.reduce<
 			{
@@ -224,7 +234,14 @@ export class PortfoliosService {
 		let currentCash = 0;
 		let currentCommission = 0;
 		let prevDayValue = 0;
-		const instrumentsQuantity = new Map(instruments.map(codeExchange => [codeExchange, 0]));
+		const instrumentsQuantity = new Map(instruments.map(({ codeExchange }) => [codeExchange, 0]));
+
+		const currenciesTimeseries = await this.currenciesService.timeseries(
+			defaultCurrency,
+			minDate,
+			to,
+			currencies,
+		);
 
 		const result = this.generateDateRangeDays(minDate, to).map(date => {
 			const dayWithTransactions = summary.filter(
@@ -233,6 +250,11 @@ export class PortfoliosService {
 			dayWithTransactions.forEach(({ codeExchange, quantity }) => {
 				instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
 			});
+
+			const currentCurrenciesValues = {
+				...currenciesTimeseries[formatDate(date)],
+				[defaultCurrency]: 1,
+			};
 
 			let dailyInstrumentsMarketValue = history[formatDate(date)];
 
@@ -245,8 +267,8 @@ export class PortfoliosService {
 				dailyInstrumentsMarketValue = instruments.reduce(
 					(acc, instrument) => ({
 						...acc,
-						[instrument]: [0, 1, 2, 3]
-							.map(i => history[formatDate(subDays(date, i))]?.[instrument])
+						[instrument.codeExchange]: [0, 1, 2, 3]
+							.map(i => history[formatDate(subDays(date, i))]?.[instrument.codeExchange])
 							.filter(Boolean)[0],
 					}),
 					{},
@@ -256,11 +278,12 @@ export class PortfoliosService {
 			let currentMarketValue = 0;
 
 			if (dailyInstrumentsMarketValue) {
-				instruments.forEach(codeExchange => {
+				instruments.forEach(({ codeExchange, currency }) => {
 					const { close } = dailyInstrumentsMarketValue[codeExchange] || {};
 
 					if (close) {
-						currentMarketValue += close * instrumentsQuantity.get(codeExchange);
+						currentMarketValue +=
+							close * instrumentsQuantity.get(codeExchange) * currentCurrenciesValues[currency];
 						prevDayValue = currentMarketValue;
 					}
 				});
