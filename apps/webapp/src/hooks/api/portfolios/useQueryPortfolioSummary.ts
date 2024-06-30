@@ -7,7 +7,10 @@ export const GET_PORTFOLIO_SUMMARY = gql(/* GraphQL */ `
 		portfolioSummary(data: $data) {
 			data {
 				date
-				marketValue
+				marketValues {
+					codeExchange
+					value
+				}
 				cash
 			}
 		}

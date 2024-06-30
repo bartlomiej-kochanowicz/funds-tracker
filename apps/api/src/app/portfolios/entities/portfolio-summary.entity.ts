@@ -1,12 +1,21 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
+class MarketValueItem {
+	@Field(() => String, { description: "Code exchange" })
+	codeExchange: string;
+
+	@Field(() => Number, { description: "Cumulative deposited cash." })
+	value: number;
+}
+
+@ObjectType()
 class PortfolioSummaryItem {
 	@Field(() => Date, { description: "Date" })
 	date: Date;
 
-	@Field(() => Number, { description: "Market value." })
-	marketValue: number;
+	@Field(() => [MarketValueItem], { description: "Market values." })
+	marketValues: MarketValueItem[];
 
 	@Field(() => Number, { description: "Cumulative deposited cash." })
 	cash: number;

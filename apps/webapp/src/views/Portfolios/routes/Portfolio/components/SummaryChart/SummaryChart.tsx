@@ -69,7 +69,11 @@ export const SummaryChart = ({ uuid }: SummaryChartProps) => {
 	return (
 		<ResponsiveContainer height={320}>
 			<ComposedChart
-				data={chartData}
+				data={chartData.map(({ date, cash, marketValues }) => ({
+					date,
+					cash,
+					marketValue: marketValues.reduce((acc, { value }) => acc + value, 0),
+				}))}
 				margin={{
 					left: -8,
 				}}

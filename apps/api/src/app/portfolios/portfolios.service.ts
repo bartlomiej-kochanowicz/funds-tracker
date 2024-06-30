@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { IntroductionStep } from "@prisma/client";
+import { Currency, IntroductionStep } from "@prisma/client";
 import { MAX_PORTFOLIOS } from "@constants/common";
 import { PrismaService } from "@services/prisma/prisma.service";
 import { IntroductionPortfolios, Portfolio, PortfolioDelete, PortfolioSummary } from "./entities";
@@ -184,14 +184,13 @@ export class PortfoliosService {
 
 		const transactions = await this.getPortfolioTransactions(uuid);
 		const instruments = [
-			...new Set(
-				transactions.map(({ instrument }) => ({
-					codeExchange: instrument.codeExchange,
-					currency: instrument.currency,
-					name: instrument.name,
-				})),
-			),
-		];
+			...new Set(transactions.map(({ instrument: { codeExchange } }) => codeExchange)),
+		].map(codeExchange => ({
+			codeExchange,
+			currency: transactions.find(({ instrument }) => instrument.codeExchange === codeExchange)
+				.instrument.currency,
+		}));
+
 		const currencies = [
 			...new Set(transactions.map(({ instrument }) => instrument.currency)),
 		].filter(currency => currency !== defaultCurrency);
@@ -201,7 +200,7 @@ export class PortfoliosService {
 			to,
 		);
 
-		const summary = transactions.reduce<
+		const allTransactionsSummary = transactions.reduce<
 			{
 				date: Date;
 				cash: number;
@@ -233,28 +232,36 @@ export class PortfoliosService {
 
 		let currentCash = 0;
 		let currentCommission = 0;
-		let prevDayValue = 0;
+		const prevDayInstrumentsValue = this.getInstrumentsMap(instruments);
 		const instrumentsQuantity = new Map(instruments.map(({ codeExchange }) => [codeExchange, 0]));
 
 		const currenciesTimeseries = await this.currenciesService.timeseries(
 			defaultCurrency,
-			minDate,
+			from,
 			to,
 			currencies,
 		);
 
-		const result = this.generateDateRangeDays(minDate, to).map(date => {
-			const dayWithTransactions = summary.filter(
+		const transactionsBeforeFromDate = allTransactionsSummary.filter(entry =>
+			isBefore(entry.date, from),
+		);
+
+		transactionsBeforeFromDate.forEach(({ codeExchange, quantity, cash, commission }) => {
+			instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
+			currentCash = cash;
+			currentCommission = commission;
+		});
+
+		const result = this.generateDateRangeDays(from, to).map(date => {
+			const dayWithTransactions = allTransactionsSummary.filter(
 				entry => formatDate(entry.date) === formatDate(date),
 			);
-			dayWithTransactions.forEach(({ codeExchange, quantity }) => {
-				instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
-			});
 
-			const currentCurrenciesValues = {
-				...currenciesTimeseries[formatDate(date)],
-				[defaultCurrency]: 1,
-			};
+			dayWithTransactions.forEach(({ codeExchange, quantity, cash, commission }) => {
+				instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
+				currentCash = cash;
+				currentCommission = commission;
+			});
 
 			let dailyInstrumentsMarketValue = history[formatDate(date)];
 
@@ -275,21 +282,49 @@ export class PortfoliosService {
 				);
 			}
 
-			let currentMarketValue = 0;
+			const currentCurrenciesValues = {
+				...currenciesTimeseries[formatDate(date)],
+				[defaultCurrency]: 1,
+			};
 
-			if (dailyInstrumentsMarketValue) {
-				instruments.forEach(({ codeExchange, currency }) => {
-					const { close } = dailyInstrumentsMarketValue[codeExchange] || {};
+			const marketValues = this.getInstrumentsObject(instruments).map(({ codeExchange }) => {
+				let value = 0;
 
-					if (close) {
-						currentMarketValue +=
-							close * instrumentsQuantity.get(codeExchange) * currentCurrenciesValues[currency];
-						prevDayValue = currentMarketValue;
-					}
-				});
-			} else {
-				currentMarketValue = prevDayValue;
-			}
+				if (dailyInstrumentsMarketValue) {
+					instruments.forEach(({ codeExchange, currency }) => {
+						const { close } = dailyInstrumentsMarketValue[codeExchange] || {};
+
+						if (close) {
+							value =
+								close *
+								instrumentsQuantity.get(codeExchange) /*  * currentCurrenciesValues[currency] */;
+							prevDayInstrumentsValue.set(codeExchange, value);
+						}
+					});
+				} else {
+					value = prevDayInstrumentsValue.get(codeExchange);
+				}
+
+				return {
+					codeExchange,
+					value,
+				};
+			});
+
+			return {
+				date,
+				marketValues,
+				cash: currentCash,
+				commission: currentCommission,
+			};
+		});
+
+		/* const result = this.generateDateRangeDays(minDate, to).map(date => {
+			
+
+		
+
+		
 
 			// Calculate cash and commission
 			const { cash, commission } = dayWithTransactions.at(-1) || {};
@@ -307,12 +342,12 @@ export class PortfoliosService {
 				cash: currentCash,
 				commission: currentCommission,
 			};
-		});
+		}); */
 
 		if (isBefore(from, minDate)) {
 			const fill = this.generateDateRangeDays(from, minDate).map(date => ({
 				date,
-				marketValue: 0,
+				marketValues: this.getInstrumentsObject(instruments),
 				cash: 0,
 				commission: 0,
 			}));
@@ -323,6 +358,22 @@ export class PortfoliosService {
 		return {
 			data: result.filter(({ date }) => date >= from && date <= to),
 		};
+	}
+
+	private getInstrumentsObject(
+		instruments: {
+			codeExchange: string;
+		}[],
+	) {
+		return instruments.map(({ codeExchange }) => ({ codeExchange, value: 0 }));
+	}
+
+	private getInstrumentsMap(
+		instruments: {
+			codeExchange: string;
+		}[],
+	) {
+		return new Map(instruments.map(({ codeExchange }) => [codeExchange, 0]));
 	}
 
 	private generateDateRangeDays(from: Date, to: Date): Date[] {

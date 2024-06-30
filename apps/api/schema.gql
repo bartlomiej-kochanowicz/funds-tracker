@@ -205,12 +205,20 @@ type PortfolioDelete {
   success: Boolean!
 }
 
+type MarketValueItem {
+  """Code exchange"""
+  codeExchange: String!
+
+  """Cumulative deposited cash."""
+  value: Float!
+}
+
 type PortfolioSummaryItem {
   """Date"""
   date: DateTime!
 
-  """Market value."""
-  marketValue: Float!
+  """Market values."""
+  marketValues: [MarketValueItem!]!
 
   """Cumulative deposited cash."""
   cash: Float!
