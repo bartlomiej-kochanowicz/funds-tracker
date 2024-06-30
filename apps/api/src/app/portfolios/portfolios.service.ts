@@ -196,7 +196,7 @@ export class PortfoliosService {
 		].filter(currency => currency !== defaultCurrency);
 		const history = await this.getInstrumentsHistoryByDate(
 			instruments.map(({ codeExchange }) => codeExchange),
-			from,
+			subDays(from, 4),
 			to,
 		);
 
@@ -232,7 +232,6 @@ export class PortfoliosService {
 
 		let currentCash = 0;
 		let currentCommission = 0;
-		const prevDayInstrumentsValue = this.getInstrumentsMap(instruments);
 		const instrumentsQuantity = new Map(instruments.map(({ codeExchange }) => [codeExchange, 0]));
 
 		const currenciesTimeseries = await this.currenciesService.timeseries(
@@ -268,13 +267,14 @@ export class PortfoliosService {
 			// Days when the stock exchange is closed are not in the history data, so we need to fill them with the last known value
 			// note: different stock exchanges have different holidays so we must check all instruments one by one
 			if (
-				dailyInstrumentsMarketValue &&
-				Object.keys(dailyInstrumentsMarketValue).length !== instruments.length
+				(dailyInstrumentsMarketValue &&
+					Object.keys(dailyInstrumentsMarketValue).length !== instruments.length) ||
+				!dailyInstrumentsMarketValue
 			) {
 				dailyInstrumentsMarketValue = instruments.reduce(
 					(acc, instrument) => ({
 						...acc,
-						[instrument.codeExchange]: [0, 1, 2, 3]
+						[instrument.codeExchange]: [0, 1, 2, 3, 4]
 							.map(i => history[formatDate(subDays(date, i))]?.[instrument.codeExchange])
 							.filter(Boolean)[0],
 					}),
@@ -290,20 +290,15 @@ export class PortfoliosService {
 			const marketValues = this.getInstrumentsObject(instruments).map(({ codeExchange }) => {
 				let value = 0;
 
-				if (dailyInstrumentsMarketValue) {
-					instruments.forEach(({ codeExchange, currency }) => {
-						const { close } = dailyInstrumentsMarketValue[codeExchange] || {};
+				instruments.forEach(({ codeExchange, currency }) => {
+					const { close } = dailyInstrumentsMarketValue[codeExchange] || {};
 
-						if (close) {
-							value =
-								close *
-								instrumentsQuantity.get(codeExchange) /*  * currentCurrenciesValues[currency] */;
-							prevDayInstrumentsValue.set(codeExchange, value);
-						}
-					});
-				} else {
-					value = prevDayInstrumentsValue.get(codeExchange);
-				}
+					if (close) {
+						value =
+							close *
+							instrumentsQuantity.get(codeExchange) /* * currentCurrenciesValues[currency] */;
+					}
+				});
 
 				return {
 					codeExchange,
@@ -368,14 +363,6 @@ export class PortfoliosService {
 		return instruments.map(({ codeExchange }) => ({ codeExchange, value: 0 }));
 	}
 
-	private getInstrumentsMap(
-		instruments: {
-			codeExchange: string;
-		}[],
-	) {
-		return new Map(instruments.map(({ codeExchange }) => [codeExchange, 0]));
-	}
-
 	private generateDateRangeDays(from: Date, to: Date): Date[] {
 		const dates = [];
 		let currentDate = new Date(from);
@@ -410,7 +397,7 @@ export class PortfoliosService {
 					const history = await this.marketService.getMarketInstrumentHistory({
 						code: codeExchange.split(".")[0],
 						exchange: codeExchange.split(".")[1],
-						from: subDays(from, 3),
+						from,
 						to,
 					});
 
