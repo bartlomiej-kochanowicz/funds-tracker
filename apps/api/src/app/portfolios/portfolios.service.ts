@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { Currency, IntroductionStep } from "@prisma/client";
+import { IntroductionStep } from "@prisma/client";
 import { MAX_PORTFOLIOS } from "@constants/common";
 import { PrismaService } from "@services/prisma/prisma.service";
 import { IntroductionPortfolios, Portfolio, PortfolioDelete, PortfolioSummary } from "./entities";
@@ -287,18 +287,11 @@ export class PortfoliosService {
 				[defaultCurrency]: 1,
 			};
 
-			const marketValues = this.getInstrumentsObject(instruments).map(({ codeExchange }) => {
-				let value = 0;
+			const marketValues = instruments.map(({ codeExchange, currency }) => {
+				const { close } = dailyInstrumentsMarketValue[codeExchange];
 
-				instruments.forEach(({ codeExchange, currency }) => {
-					const { close } = dailyInstrumentsMarketValue[codeExchange] || {};
-
-					if (close) {
-						value =
-							close *
-							instrumentsQuantity.get(codeExchange) /* * currentCurrenciesValues[currency] */;
-					}
-				});
+				const value =
+					(close * instrumentsQuantity.get(codeExchange)) / currentCurrenciesValues[currency];
 
 				return {
 					codeExchange,

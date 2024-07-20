@@ -60,14 +60,13 @@ export const CurrencyCombobox = forwardRef(
 										}}
 									>
 										<div className="flex w-full items-center justify-between">
-											<div className="flex items-center gap-2">
+											<div className="flex w-full items-center gap-2">
 												<img
-													className="h-4 w-auto"
+													className="max-h-4 w-auto"
 													src={currencyFlags[currency]}
 													alt={currency}
 												/>
-
-												{t(`currency.${currency}`)}
+												<span>{t(`currency.${currency}`)}</span>
 											</div>
 
 											{value.toLowerCase() === currency.toLowerCase() ? (

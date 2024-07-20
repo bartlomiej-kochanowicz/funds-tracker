@@ -117,44 +117,52 @@ enum InstrumentType {
 
 enum Currency {
   USD
-  EUR
-  JPY
   GBP
-  CNY
-  AUD
   CAD
+  EUR
   CHF
-  HKD
-  SGD
-  SEK
-  KRW
+  ISK
   NOK
-  NZD
+  DKK
+  SEK
+  ZWL
+  UGX
+  TZS
+  CZK
+  RWF
+  BWP
+  EGP
+  NGN
+  GHS
+  MWK
+  XOF
+  KES
+  MAD
+  MUR
+  ILS
+  KRW
+  HUF
+  PLN
+  PHP
+  PKR
+  AUD
+  ZAR
+  CLP
+  IDR
+  THB
+  CNY
   INR
+  LKR
+  VND
+  MYR
+  RON
+  ARS
+  BRL
   MXN
   TWD
-  ZAR
-  BRL
-  DKK
-  PLN
-  THB
-  ILS
-  IDR
-  CZK
-  AED
-  TRY
-  HUF
-  CLP
-  SAR
-  PHP
-  MYR
-  COP
   RUB
-  RON
   PEN
-  BHD
-  BGN
-  ARS
+  TRY
 }
 
 enum IntroductionStep {

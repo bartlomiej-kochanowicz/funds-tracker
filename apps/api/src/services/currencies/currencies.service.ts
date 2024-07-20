@@ -14,6 +14,14 @@ export class CurrenciesService {
 		const start_date = startDate.toISOString().split("T")[0];
 		const end_date = endDate.toISOString().split("T")[0];
 
+		console.log("@@@@", {
+			api_key: this.config.get("CURRENCY_API_KEY"),
+			base,
+			start_date,
+			end_date,
+			symbols: symbols.join(","),
+		});
+
 		const { data } = await firstValueFrom(
 			this.httpService
 				.get<{
