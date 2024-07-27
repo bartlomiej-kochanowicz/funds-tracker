@@ -1,4 +1,4 @@
-import { Currency, InstrumentType, SearchInstrumentQuery } from "__generated__/graphql";
+import { InstrumentType, SearchInstrumentQuery } from "__generated__/graphql";
 import {
 	Badge,
 	Button,
@@ -10,7 +10,6 @@ import {
 	Text,
 } from "@funds-tracker/ui";
 import { mergeRefs } from "@funds-tracker/ui/src/helpers/mergeRefs";
-import { formatCurrency } from "helpers/formatCurrency";
 import { useLazyQueryInstrumentSearch } from "hooks/api/instruments/useLazyQueryInstrumentSearch";
 import { ChevronsUpDown } from "lucide-react";
 import { forwardRef, useRef, useState } from "react";
@@ -65,7 +64,6 @@ export const SearchInstrumentCombobox = forwardRef<
 				variables: {
 					data: {
 						name,
-						type: instrumentType,
 					},
 				},
 			});
@@ -88,7 +86,7 @@ export const SearchInstrumentCombobox = forwardRef<
 					ref={mergeRefs([triggerRef, ref])}
 				>
 					<span className="truncate">
-						{value?.Name || t("input.search_instrument.placeholder")}
+						{value?.name || t("input.search_instrument.placeholder")}
 					</span>
 
 					<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
@@ -123,13 +121,11 @@ export const SearchInstrumentCombobox = forwardRef<
 
 								{data &&
 									data.searchInstrument.map(instrument => {
-										const { Name, Exchange, Code, Currency: currency, previousClose } = instrument;
-
-										const ticker = `${Code}:${Exchange}`;
+										const { symbol, currency, name, exchangeShortName } = instrument;
 
 										return (
 											<Command.Item
-												key={ticker}
+												key={symbol}
 												onSelect={() => {
 													onChange(instrument);
 													setOpen(false);
@@ -137,14 +133,14 @@ export const SearchInstrumentCombobox = forwardRef<
 												className="flex items-center justify-between gap-2"
 											>
 												<div className="flex items-center gap-1">
-													<Badge>{ticker}</Badge>
+													<Badge>{symbol}</Badge>
 
-													<Text>{Name}</Text>
+													<Text>
+														{name} ({currency.toUpperCase()})
+													</Text>
 												</div>
 
-												<Text>
-													{formatCurrency(Number(previousClose.toFixed(2)), currency as Currency)}
-												</Text>
+												<Text>{exchangeShortName}</Text>
 											</Command.Item>
 										);
 									})}

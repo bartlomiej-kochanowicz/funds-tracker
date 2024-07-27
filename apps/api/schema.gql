@@ -175,32 +175,20 @@ type InstrumentHistory {
 }
 
 type SearchInstrument {
-  """Code"""
-  Code: String!
-
-  """Exchange"""
-  Exchange: String!
+  """Symbol"""
+  symbol: String!
 
   """Name"""
-  Name: String!
-
-  """Type"""
-  Type: String!
-
-  """Country"""
-  Country: String!
+  name: String!
 
   """Currency"""
-  Currency: String!
+  currency: String!
 
-  """ISIN"""
-  ISIN: String
+  """Stock exchange"""
+  stockExchange: String
 
-  """previousClose"""
-  previousClose: Float!
-
-  """previousCloseDate"""
-  previousCloseDate: String!
+  """Exchange short name"""
+  exchangeShortName: String!
 }
 
 type IntroductionPortfolios {
@@ -383,9 +371,6 @@ input EmailInput {
 input SearchInstrumentInput {
   """Instrument name."""
   name: String!
-
-  """Instrument type."""
-  type: InstrumentType!
 }
 
 input InstrumentHistoryInput {

@@ -21,7 +21,7 @@ const documents = {
     "\n\tquery GetCashAccountOperations($uuid: ID!) {\n\t\tcashAccount(uuid: $uuid) {\n\t\t\toperations {\n\t\t\t\tuuid\n\t\t\t\ttype\n\t\t\t\tamount\n\t\t\t\tdate\n\t\t\t}\n\t\t}\n\t}\n": types.GetCashAccountOperationsDocument,
     "\n\tquery GetCashAccounts {\n\t\tcashAccounts {\n\t\t\tuuid\n\t\t\tname\n\t\t\tcurrency\n\t\t\tbalance\n\t\t}\n\t}\n": types.GetCashAccountsDocument,
     "\n\tquery GetInstrumentHistory($data: InstrumentHistoryInput!) {\n\t\tinstrumentHistory(data: $data) {\n\t\t\tdate\n\t\t\topen\n\t\t\tclose\n\t\t\thigh\n\t\t\tlow\n\t\t\tvolume\n\t\t}\n\t}\n": types.GetInstrumentHistoryDocument,
-    "\n\tquery SearchInstrument($data: SearchInstrumentInput!) {\n\t\tsearchInstrument(data: $data) {\n\t\t\tCode\n\t\t\tExchange\n\t\t\tName\n\t\t\tType\n\t\t\tCountry\n\t\t\tCurrency\n\t\t\tISIN\n\t\t\tpreviousClose\n\t\t\tpreviousCloseDate\n\t\t}\n\t}\n": types.SearchInstrumentDocument,
+    "\n\tquery SearchInstrument($data: SearchInstrumentInput!) {\n\t\tsearchInstrument(data: $data) {\n\t\t\tsymbol\n\t\t\tname\n\t\t\tcurrency\n\t\t\tstockExchange\n\t\t\texchangeShortName\n\t\t}\n\t}\n": types.SearchInstrumentDocument,
     "\n\tmutation PortfolioCreate($data: PortfolioCreateInput!) {\n\t\tportfolioCreate(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.PortfolioCreateDocument,
     "\n\tmutation PortfolioDelete($uuid: String!) {\n\t\tportfolioDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.PortfolioDeleteDocument,
     "\n\tmutation PortfolioUpdate($uuid: String!, $data: PortfolioUpdateInput!) {\n\t\tportfolioUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.PortfolioUpdateDocument,
@@ -90,7 +90,7 @@ export function gql(source: "\n\tquery GetInstrumentHistory($data: InstrumentHis
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tquery SearchInstrument($data: SearchInstrumentInput!) {\n\t\tsearchInstrument(data: $data) {\n\t\t\tCode\n\t\t\tExchange\n\t\t\tName\n\t\t\tType\n\t\t\tCountry\n\t\t\tCurrency\n\t\t\tISIN\n\t\t\tpreviousClose\n\t\t\tpreviousCloseDate\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery SearchInstrument($data: SearchInstrumentInput!) {\n\t\tsearchInstrument(data: $data) {\n\t\t\tCode\n\t\t\tExchange\n\t\t\tName\n\t\t\tType\n\t\t\tCountry\n\t\t\tCurrency\n\t\t\tISIN\n\t\t\tpreviousClose\n\t\t\tpreviousCloseDate\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tquery SearchInstrument($data: SearchInstrumentInput!) {\n\t\tsearchInstrument(data: $data) {\n\t\t\tsymbol\n\t\t\tname\n\t\t\tcurrency\n\t\t\tstockExchange\n\t\t\texchangeShortName\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery SearchInstrument($data: SearchInstrumentInput!) {\n\t\tsearchInstrument(data: $data) {\n\t\t\tsymbol\n\t\t\tname\n\t\t\tcurrency\n\t\t\tstockExchange\n\t\t\texchangeShortName\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

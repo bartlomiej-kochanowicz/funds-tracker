@@ -2,7 +2,6 @@ import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
 import { catchError, firstValueFrom, of } from "rxjs";
 import { ConfigService } from "@nestjs/config";
-import { InstrumentType } from "@prisma/client";
 import { InstrumentHistoryInput, SearchInstrumentInput } from "./inputs";
 import { InstrumentHistory, SearchInstrument } from "./entities";
 import { MarketDataSearchResponse } from "@src/types/market";
@@ -21,16 +20,12 @@ export class InstrumentsService {
 	) {}
 
 	async search(searchInstrumentInput: SearchInstrumentInput): Promise<SearchInstrument[]> {
-		const type = this.getType(searchInstrumentInput.type);
-
 		const { data } = await firstValueFrom(
 			this.httpService
-				.get(`https://eodhistoricaldata.com/api/search/${searchInstrumentInput.name}`, {
+				.get("https://financialmodelingprep.com/api/v3/search", {
 					params: {
-						api_token: this.config.get("EODHD_API_KEY"),
-						type,
-						bonds_only: type === "bond" ? 1 : 0,
-						fmt: "json",
+						apikey: this.config.get("FINANCIAL_MODELING_API_KEY"),
+						query: searchInstrumentInput.name,
 					},
 				})
 				.pipe(
@@ -97,21 +92,6 @@ export class InstrumentsService {
 		});
 
 		return instrument;
-	}
-
-	getType(type: SearchInstrumentInput["type"]): string {
-		switch (type) {
-			case InstrumentType.stocks:
-				return "stock";
-			case InstrumentType.bonds:
-				return "bond";
-			case InstrumentType.etfs:
-				return "etf";
-			case InstrumentType.crypto:
-				return "crypto";
-			default:
-				return "all";
-		}
 	}
 
 	async getInstrument(code: string, exchange: string) {

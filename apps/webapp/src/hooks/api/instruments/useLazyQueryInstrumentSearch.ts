@@ -5,15 +5,11 @@ import { useLazyQuery } from "@apollo/client";
 const SEARCH_INSTRUMENT = gql(/* GraphQL */ `
 	query SearchInstrument($data: SearchInstrumentInput!) {
 		searchInstrument(data: $data) {
-			Code
-			Exchange
-			Name
-			Type
-			Country
-			Currency
-			ISIN
-			previousClose
-			previousCloseDate
+			symbol
+			name
+			currency
+			stockExchange
+			exchangeShortName
 		}
 	}
 `);

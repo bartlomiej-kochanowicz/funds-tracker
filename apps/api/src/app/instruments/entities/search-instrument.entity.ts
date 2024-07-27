@@ -2,30 +2,18 @@ import { Field, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 export class SearchInstrument {
-	@Field(() => String, { description: "Code" })
-	Code: string;
-
-	@Field(() => String, { description: "Exchange" })
-	Exchange: string;
+	@Field(() => String, { description: "Symbol" })
+	symbol: string;
 
 	@Field(() => String, { description: "Name" })
-	Name: string;
-
-	@Field(() => String, { description: "Type" })
-	Type: string;
-
-	@Field(() => String, { description: "Country" })
-	Country: string;
+	name: string;
 
 	@Field(() => String, { description: "Currency" })
-	Currency: string;
+	currency: string;
 
-	@Field(() => String, { description: "ISIN", nullable: true })
-	ISIN?: string;
+	@Field(() => String, { description: "Stock exchange", nullable: true })
+	stockExchange?: string;
 
-	@Field(() => Number, { description: "previousClose" })
-	previousClose: number;
-
-	@Field(() => String, { description: "previousCloseDate" })
-	previousCloseDate: string;
+	@Field(() => String, { description: "Exchange short name" })
+	exchangeShortName: string;
 }
