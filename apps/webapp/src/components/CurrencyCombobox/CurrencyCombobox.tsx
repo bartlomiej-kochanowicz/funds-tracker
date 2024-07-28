@@ -35,7 +35,7 @@ export const CurrencyCombobox = forwardRef(
 						onBlur={onBlur}
 						disabled={disabled}
 					>
-						{value ? t(`currency.${value.toUpperCase()}`) : t("form.currency.select.placeholder")}
+						{value ? t(`currency.${value}`) : t("form.currency.select.placeholder")}
 						<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
 					</Button>
 				</Popover.Trigger>
@@ -53,12 +53,14 @@ export const CurrencyCombobox = forwardRef(
 										key={currency}
 										value={currency}
 										onSelect={currentValue => {
-											onChange(currentValue.toUpperCase());
+											onChange(currentValue);
 											setOpen(false);
 										}}
 									>
 										<div className="flex w-full items-center justify-between">
-											<span>{currency}</span>
+											<span>
+												{t(`currency.${currency}`)} ({currency})
+											</span>
 
 											{value?.toLowerCase() === currency.toLowerCase() ? (
 												<Check className={clsx("size-4 justify-self-end")} />
