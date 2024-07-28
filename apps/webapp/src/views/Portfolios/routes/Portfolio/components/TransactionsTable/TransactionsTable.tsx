@@ -33,14 +33,7 @@ export const TransactionsTable = ({ uuid }: TransactionsTableProps) => {
 						</Table.Header>
 						<Table.Body>
 							{data?.portfolio.transactions.map(
-								({
-									uuid,
-									instrument: { symbol, name, currency },
-									price,
-									quantity,
-									date,
-									type,
-								}) => (
+								({ uuid, instrument: { symbol, name, currency }, price, quantity, date, type }) => (
 									<Table.Row key={uuid}>
 										<Table.Cell>
 											<Badge>{symbol.replace(".", ":")}</Badge>
