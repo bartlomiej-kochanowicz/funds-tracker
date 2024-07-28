@@ -35,7 +35,7 @@ export const TransactionsTable = ({ uuid }: TransactionsTableProps) => {
 							{data?.portfolio.transactions.map(
 								({
 									uuid,
-									instrument: { codeExchange, name, currency },
+									instrument: { symbol, name, currency },
 									price,
 									quantity,
 									date,
@@ -43,7 +43,7 @@ export const TransactionsTable = ({ uuid }: TransactionsTableProps) => {
 								}) => (
 									<Table.Row key={uuid}>
 										<Table.Cell>
-											<Badge>{codeExchange.replace(".", ":")}</Badge>
+											<Badge>{symbol.replace(".", ":")}</Badge>
 										</Table.Cell>
 										<Table.Cell className="flex items-center gap-1">
 											{type === "sell" && (

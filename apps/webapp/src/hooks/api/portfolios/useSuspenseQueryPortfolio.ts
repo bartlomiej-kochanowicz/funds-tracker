@@ -15,7 +15,7 @@ export const GET_PORTFOLIO = gql(/* GraphQL */ `
 				type
 				instrument {
 					uuid
-					codeExchange
+					symbol
 					name
 					type
 					currency

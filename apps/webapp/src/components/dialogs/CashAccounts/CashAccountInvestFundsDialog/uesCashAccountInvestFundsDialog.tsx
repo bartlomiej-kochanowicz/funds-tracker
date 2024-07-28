@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import { responsiveDialog } from "@funds-tracker/ui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +7,7 @@ import { CashAccountInvestFundsForm } from "./CashAccountInvestFundsForm";
 type UseCashAccountInvestFundsDialogProps = {
 	handleRefetch: () => void;
 	balance: number;
-	currency: Currency;
+	currency: string;
 	uuid: string;
 };
 

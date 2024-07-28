@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import { responsiveDialog } from "@funds-tracker/ui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,7 +6,7 @@ import { OperationsTable } from "./components/OperationsTable/OperationsTable";
 
 type UseCashAccountOperationsDialogProps = {
 	uuid: string;
-	currency: Currency;
+	currency: string;
 };
 
 export const useCashAccountOperationsDialog = ({

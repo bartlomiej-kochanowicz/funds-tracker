@@ -1,16 +1,12 @@
 import { InputType, Field } from "@nestjs/graphql";
-import { Currency, InstrumentType } from "@prisma/client";
+import { InstrumentType } from "@prisma/client";
 import { IsEnum, IsString } from "class-validator";
 
 @InputType()
 export class InstrumentCreateInput {
 	@IsString()
-	@Field(() => String, { description: "Code" })
-	code: string;
-
-	@IsString()
-	@Field(() => String, { description: "Exchange" })
-	exchange: string;
+	@Field(() => String, { description: "Symbol" })
+	symbol: string;
 
 	@IsString()
 	@Field(() => String, { description: "Name" })
@@ -20,7 +16,6 @@ export class InstrumentCreateInput {
 	@Field(() => InstrumentType, { description: "Type" })
 	type: InstrumentType;
 
-	@IsEnum(Currency)
-	@Field(() => Currency, { description: "Instrument currency" })
-	currency: Currency;
+	@Field(() => String, { description: "Instrument currency" })
+	currency: string;
 }

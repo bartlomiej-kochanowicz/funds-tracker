@@ -13,7 +13,7 @@ export class TransactionsService {
 	async transactionCreate(userUuid: string, data: TransactionCreateInput) {
 		const { instrument, portfolioUuid, cashAccountUuid } = data;
 
-		const { code, exchange } = instrument;
+		const { symbol } = instrument;
 
 		const user = await this.prisma.user.findUnique({
 			where: { uuid: userUuid },
@@ -28,15 +28,13 @@ export class TransactionsService {
 			throw new HttpException("Portfolio not found", HttpStatus.NOT_FOUND);
 		}
 
-		const instrumentExists = await this.instruments.instrumentExists(code, exchange);
+		const instrumentExists = await this.instruments.instrumentExists(symbol);
 
 		if (!instrumentExists) {
 			throw new Error("Instrument does not exist");
 		}
 
-		const codeExchange = this.instruments.generateInstrumentCodeExchange(code, exchange);
-
-		await this.addTransaction(data, codeExchange);
+		await this.addTransaction(data, symbol);
 
 		await this.addCashAccountTransaction(data);
 
@@ -45,13 +43,12 @@ export class TransactionsService {
 		};
 	}
 
-	private async addTransaction(data: TransactionCreateInput, codeExchange: string) {
-		let instrument = await this.instruments.instrumentDB(codeExchange);
+	private async addTransaction(data: TransactionCreateInput, symbol: string) {
+		let instrument = await this.instruments.instrumentDB(symbol);
 
 		if (!instrument) {
 			instrument = await this.instruments.instrumentCreate({
-				code: data.instrument.code,
-				exchange: data.instrument.exchange,
+				symbol: data.instrument.symbol,
 				name: data.instrument.name,
 				type: data.instrument.type,
 				currency: data.instrument.currency,

@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import { Form, NumberInput, useUpdateEffect } from "@funds-tracker/ui";
 import { useLazyQueryInstrumentHistory } from "hooks/api/instruments/useLazyQueryInstrumentHistory";
 import { useCallback } from "react";
@@ -8,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
 interface PriceFieldProps {
-	activeCurrency: Currency;
+	activeCurrency: string;
 }
 
 export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
@@ -31,14 +30,13 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 	const watchDate = watch("date");
 
 	const updatePrice = useCallback(() => {
-		if (watchInstrument?.Code && watchDate) {
+		if (watchInstrument?.symbol && watchDate) {
 			const sevenDaysAgo: Date = new Date(watchDate.getTime() - 7 * 24 * 60 * 60 * 1000);
 
 			getInstrumentHistory({
 				variables: {
 					data: {
-						code: watchInstrument.Code,
-						exchange: watchInstrument.Exchange,
+						symbol: watchInstrument.symbol,
 						from: sevenDaysAgo,
 						to: watchDate,
 						period: "1d",

@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import {
 	Button,
 	emitErrorToast,
@@ -36,7 +35,7 @@ import { TransactionCostField } from "./components/TransactionCostField";
 
 interface CashAccountInvestFundsFormFormProps {
 	balance: number;
-	currency: Currency;
+	currency: string;
 	uuid: string;
 	setOpen: (open: boolean) => void;
 }
@@ -90,10 +89,9 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						cashAccountUuid: uuid,
 						instrument: {
 							type: data.instrumentType,
-							code: data.instrument.Code,
-							exchange: data.instrument.Exchange,
-							name: data.instrument.Name,
-							currency: data.instrument.Currency as Currency,
+							symbol: data.instrument.symbol,
+							name: data.instrument.name,
+							currency: data.instrument.currency,
 						},
 						date,
 						quantity: data.quantity,
@@ -109,7 +107,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 	const watchInstrument = watch("instrument");
 	const watchInstrumentType = watch("instrumentType");
 
-	const activeCurrency = (watchInstrument?.Currency || currency) as Currency;
+	const activeCurrency = watchInstrument?.currency || currency;
 
 	const shouldRenderMarketInstrumentFields = useMemo(() => {
 		switch (watchInstrumentType) {

@@ -46,21 +46,18 @@ export class InstrumentsService {
 		return data;
 	}
 
-	async instrumentExists(code: string, exchange: string): Promise<boolean> {
+	async instrumentExists(symbol: string): Promise<boolean> {
 		const data = await firstValueFrom(
 			this.httpService
-				.get(
-					`https://eodhistoricaldata.com/api/eod/${code.toUpperCase()}.${exchange.toUpperCase()}`,
-					{
-						params: {
-							api_token: this.config.get("EODHD_API_KEY"),
-							fmt: "json",
-							period: "1d",
-							from: new Date().toISOString().split("T")[0],
-							to: new Date().toISOString().split("T")[0],
-						},
+				.get(`https://eodhistoricaldata.com/api/eod/${symbol}`, {
+					params: {
+						api_token: this.config.get("EODHD_API_KEY"),
+						fmt: "json",
+						period: "1d",
+						from: new Date().toISOString().split("T")[0],
+						to: new Date().toISOString().split("T")[0],
 					},
-				)
+				})
 				.pipe(
 					catchError(() => {
 						return of(false);
@@ -71,10 +68,10 @@ export class InstrumentsService {
 		return Boolean(data);
 	}
 
-	async instrumentDB(codeExchange: string): Promise<Instrument> {
+	async instrumentDB(symbol: string): Promise<Instrument> {
 		const instrument = await this.prisma.instrument.findUnique({
 			where: {
-				codeExchange,
+				symbol,
 			},
 		});
 
@@ -84,7 +81,7 @@ export class InstrumentsService {
 	async instrumentCreate(data: InstrumentCreateInput): Promise<Instrument> {
 		const instrument = await this.prisma.instrument.create({
 			data: {
-				codeExchange: this.generateInstrumentCodeExchange(data.code, data.exchange),
+				symbol: data.symbol,
 				name: data.name,
 				type: data.type,
 				currency: data.currency,
@@ -94,18 +91,15 @@ export class InstrumentsService {
 		return instrument;
 	}
 
-	async getInstrument(code: string, exchange: string) {
+	async getInstrument(symbol: string) {
 		const { data } = await firstValueFrom(
 			this.httpService
-				.get<MarketDataSearchResponse>(
-					`https://eodhistoricaldata.com/api/search/${code}.${exchange}`,
-					{
-						params: {
-							api_token: this.config.get("EODHD_API_KEY"),
-							fmt: "json",
-						},
+				.get<MarketDataSearchResponse>(`https://eodhistoricaldata.com/api/search/${symbol}`, {
+					params: {
+						api_token: this.config.get("EODHD_API_KEY"),
+						fmt: "json",
 					},
-				)
+				})
 				.pipe(
 					catchError(() => {
 						return of(null);
@@ -113,14 +107,8 @@ export class InstrumentsService {
 				),
 		);
 
-		const [CODE, EXCHANGE] = [code.toUpperCase(), exchange.toUpperCase()];
-
-		const instrument = data.find(({ Code, Exchange }) => Code === CODE && Exchange === EXCHANGE);
+		const instrument = data.find(({ symbol: dataSymbol }) => dataSymbol === symbol);
 
 		return instrument || null;
-	}
-
-	generateInstrumentCodeExchange(code: string, exchange: string) {
-		return `${code.toUpperCase()}.${exchange.toUpperCase()}`;
 	}
 }

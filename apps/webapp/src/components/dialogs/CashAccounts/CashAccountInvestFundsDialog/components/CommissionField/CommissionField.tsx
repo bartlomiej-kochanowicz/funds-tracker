@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import { Form, NumberInput, useUpdateEffect } from "@funds-tracker/ui";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -6,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
 interface CommissionFieldProps {
-	activeCurrency: Currency;
+	activeCurrency: string;
 }
 
 export const CommissionField = ({ activeCurrency }: CommissionFieldProps) => {
@@ -19,14 +18,6 @@ export const CommissionField = ({ activeCurrency }: CommissionFieldProps) => {
 	useUpdateEffect(() => {
 		resetField("commission");
 	}, [watchCommissionType]);
-
-	const numberFormat =
-		watchCommissionType === "amount"
-			? {
-					style: "currency",
-					currency: activeCurrency,
-				}
-			: { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 2 };
 
 	return (
 		<Form.Field
@@ -41,7 +32,14 @@ export const CommissionField = ({ activeCurrency }: CommissionFieldProps) => {
 					</Form.Label>
 					<NumberInput
 						locale={i18n.language}
-						formatOptions={numberFormat}
+						formatOptions={
+							watchCommissionType === "amount"
+								? {
+										style: "currency",
+										currency: activeCurrency,
+									}
+								: { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 2 }
+						}
 						aria-label={t("modal.InvestFunds.form.label.commission", {
 							currency: activeCurrency,
 						})}

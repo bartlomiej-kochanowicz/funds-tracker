@@ -7,15 +7,11 @@ export const CashAccountInvestFundsFormSchema = object().shape({
 	instrumentType: mixed<InstrumentType>().oneOf(instruments).required(EMPTY_VALIDATION_MESSAGE),
 	instrument: object<SearchInstrument>()
 		.shape({
-			Code: string().required(),
-			Exchange: string().required(),
-			Name: string().required(),
-			Type: string().required(),
-			Country: string().required(),
-			Currency: string().required(),
-			ISIN: string(),
-			previousClose: number().required(),
-			previousCloseDate: string().required(),
+			currency: string().required(),
+			exchangeShortName: string().required(),
+			name: string().required(),
+			stockExchange: string().optional(),
+			symbol: string().required(),
 		})
 		.required(EMPTY_VALIDATION_MESSAGE),
 	portfolio: string().required(EMPTY_VALIDATION_MESSAGE),

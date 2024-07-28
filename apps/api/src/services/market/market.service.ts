@@ -14,14 +14,12 @@ export class MarketService {
 	) {}
 
 	async getMarketInstrumentHistory({
-		code,
-		exchange,
+		symbol,
 		from,
 		to = new Date(),
 		period = "1d",
 	}: {
-		code: string;
-		exchange: string;
+		symbol: string;
 		from: Date;
 		to?: Date;
 		period?: "1d" | "1w" | "1m";
@@ -32,18 +30,15 @@ export class MarketService {
 
 		const { data } = await firstValueFrom(
 			this.httpService
-				.get<MarketHistoryDataResponse>(
-					`https://eodhistoricaldata.com/api/eod/${code}.${exchange}`,
-					{
-						params: {
-							api_token: this.config.get("EODHD_API_KEY"),
-							fmt: "json",
-							period,
-							from: formatDate(from),
-							to: formatDate(to),
-						},
+				.get<MarketHistoryDataResponse>(`https://eodhistoricaldata.com/api/eod/${symbol}`, {
+					params: {
+						api_token: this.config.get("EODHD_API_KEY"),
+						fmt: "json",
+						period,
+						from: formatDate(from),
+						to: formatDate(to),
 					},
-				)
+				})
 				.pipe(
 					catchError(e => {
 						console.error(e);

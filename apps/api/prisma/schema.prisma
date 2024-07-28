@@ -14,7 +14,7 @@ model User {
   name                 String
   password             String
   confirmationCodeHash String?          @unique
-  defaultCurrency      Currency         @default(USD)
+  defaultCurrency      String
   introductionStep     IntroductionStep @default(DefaultCurrency)
   sessions             Session[]
   cashAccounts         CashAccount[]
@@ -34,7 +34,7 @@ model CashAccount {
   uuid       String                 @id @default(uuid())
   name       String
   balance    Float                  @default(0)
-  currency   Currency
+  currency   String
   user       User                   @relation(fields: [userUuid], references: [uuid])
   userUuid   String
   operations CashAccountOperation[] @relation()
@@ -79,10 +79,10 @@ model Transaction {
 
 model Instrument {
   uuid         String         @id @default(uuid())
-  codeExchange String         @unique
+  symbol       String         @unique
   name         String
   type         InstrumentType
-  currency     Currency
+  currency     String
   transactions Transaction[]
 }
 
@@ -113,56 +113,6 @@ enum InstrumentType {
   immovables
   movables
   others
-}
-
-enum Currency {
-  USD
-  GBP
-  CAD
-  EUR
-  CHF
-  ISK
-  NOK
-  DKK
-  SEK
-  ZWL
-  UGX
-  TZS
-  CZK
-  RWF
-  BWP
-  EGP
-  NGN
-  GHS
-  MWK
-  XOF
-  KES
-  MAD
-  MUR
-  ILS
-  KRW
-  HUF
-  PLN
-  PHP
-  PKR
-  AUD
-  ZAR
-  CLP
-  IDR
-  THB
-  CNY
-  INR
-  LKR
-  VND
-  MYR
-  RON
-  ARS
-  BRL
-  MXN
-  TWD
-  RUB
-  PEN
-  TRY
 }
 
 enum IntroductionStep {

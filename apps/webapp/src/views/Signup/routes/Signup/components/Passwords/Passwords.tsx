@@ -3,12 +3,12 @@ import { Fragment } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { SignupFormValues } from "../../Signup.types";
+import { SignupFormSchemaType } from "../../SignupFormSchema";
 
 export const Passwords = () => {
 	const { t } = useTranslation();
 
-	const { control } = useFormContext<SignupFormValues>();
+	const { control } = useFormContext<SignupFormSchemaType>();
 
 	return (
 		<Fragment>

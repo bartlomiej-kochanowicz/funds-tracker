@@ -87,7 +87,7 @@ CREATE TABLE "Transaction" (
 -- CreateTable
 CREATE TABLE "Instrument" (
     "uuid" TEXT NOT NULL,
-    "codeExchange" TEXT NOT NULL,
+    "symbol" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" "InstrumentType" NOT NULL,
     "currency" "Currency" NOT NULL,
@@ -111,7 +111,7 @@ CREATE UNIQUE INDEX "CashAccount_userUuid_uuid_key" ON "CashAccount"("userUuid",
 CREATE UNIQUE INDEX "Portfolio_userUuid_uuid_key" ON "Portfolio"("userUuid", "uuid");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Instrument_codeExchange_key" ON "Instrument"("codeExchange");
+CREATE UNIQUE INDEX "Instrument_codeExchange_key" ON "Instrument"("symbol");
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userUuid_fkey" FOREIGN KEY ("userUuid") REFERENCES "User"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;

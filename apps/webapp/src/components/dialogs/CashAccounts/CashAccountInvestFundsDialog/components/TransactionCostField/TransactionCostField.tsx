@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import { Button, Form, NumberInput, useUpdateEffect } from "@funds-tracker/ui";
 import { Calculator } from "lucide-react";
 import { useFormContext } from "react-hook-form";
@@ -8,7 +7,7 @@ import { validateNonNullish } from "utils/nonNullish";
 import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFundsFormSchema";
 
 interface TransactionCostFieldProps {
-	activeCurrency: Currency;
+	activeCurrency: string;
 }
 
 export const TransactionCostField = ({ activeCurrency }: TransactionCostFieldProps) => {

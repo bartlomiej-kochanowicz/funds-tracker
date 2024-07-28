@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import { Loader, Table, Text } from "@funds-tracker/ui";
 import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
@@ -9,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 interface OperationsTableProps {
 	uuid: string;
-	currency: Currency;
+	currency: string;
 }
 
 export const OperationsTable: FC<OperationsTableProps> = ({ uuid, currency }) => {

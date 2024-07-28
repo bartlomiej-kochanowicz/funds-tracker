@@ -1,11 +1,10 @@
-import { Currency } from "__generated__/graphql";
 import i18n from "utils/i18n";
 
 type Options = {
 	withFractionDigits?: boolean;
 };
 
-export const formatCurrency = (value: number, currency: Currency, options?: Options): string => {
+export const formatCurrency = (value: number, currency: string, options?: Options): string => {
 	const { withFractionDigits } = {
 		withFractionDigits: true,
 		...options,

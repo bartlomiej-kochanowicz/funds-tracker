@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import {
 	Button,
 	emitErrorToast,
@@ -23,7 +22,7 @@ import {
 type UseCashAccountAddFundsDialogProps = {
 	handleRefetch: () => void;
 	uuid: string;
-	currency: Currency;
+	currency: string;
 };
 
 export const useCashAccountAddFundsDialog = ({

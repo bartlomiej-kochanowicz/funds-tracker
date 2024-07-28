@@ -1,6 +1,5 @@
-import { InputType, Field, registerEnumType } from "@nestjs/graphql";
-import { Currency } from "@prisma/client";
-import { IsEnum, Length } from "class-validator";
+import { InputType, Field } from "@nestjs/graphql";
+import { Length } from "class-validator";
 
 @InputType()
 export class CashAccountCreateInput {
@@ -8,11 +7,6 @@ export class CashAccountCreateInput {
 	@Field(() => String, { description: "Cash account name." })
 	name: string;
 
-	@IsEnum(Currency)
-	@Field(() => Currency, { description: "Cash account currency." })
-	currency: Currency;
+	@Field(() => String, { description: "Cash account currency." })
+	currency: string;
 }
-
-registerEnumType(Currency, {
-	name: "Currency",
-});

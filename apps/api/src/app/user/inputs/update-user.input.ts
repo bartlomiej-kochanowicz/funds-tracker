@@ -1,5 +1,4 @@
 import { InputType, Field, registerEnumType } from "@nestjs/graphql";
-import { Currency } from "@prisma/client";
 import { IsEmail, IsOptional, Length } from "class-validator";
 import { EmailAddressResolver } from "graphql-scalars";
 
@@ -16,10 +15,6 @@ export class UpdateUserInput {
 	name?: string;
 
 	@IsOptional()
-	@Field(() => Currency, { description: "New user default currency.", nullable: true })
-	defaultCurrency?: Currency;
+	@Field(() => String, { description: "New default currency.", nullable: true })
+	defaultCurrency?: string;
 }
-
-registerEnumType(Currency, {
-	name: "Currency",
-});

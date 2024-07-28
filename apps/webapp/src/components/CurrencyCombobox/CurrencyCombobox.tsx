@@ -1,17 +1,15 @@
-import { Currency } from "__generated__/graphql";
 import { Button, Command, Popover, ScrollArea } from "@funds-tracker/ui";
 import clsx from "clsx";
-import { currencyFlags } from "constants/currencyFlags";
 import { CURRENCIES_ARRAY } from "constants/selectors/currencies";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface CurrencyComboboxProps {
-	value: Currency;
-	onChange: (value: Currency) => void;
+	value: string;
+	onChange: (value: string) => void;
 	onBlur?: () => void;
-	defautValue?: Currency;
+	defautValue?: string;
 	disabled?: boolean;
 }
 
@@ -55,21 +53,14 @@ export const CurrencyCombobox = forwardRef(
 										key={currency}
 										value={currency}
 										onSelect={currentValue => {
-											onChange(currentValue.toUpperCase() as Currency);
+											onChange(currentValue.toUpperCase());
 											setOpen(false);
 										}}
 									>
 										<div className="flex w-full items-center justify-between">
-											<div className="flex w-full items-center gap-2">
-												<img
-													className="max-h-4 w-auto"
-													src={currencyFlags[currency]}
-													alt={currency}
-												/>
-												<span>{t(`currency.${currency}`)}</span>
-											</div>
+											<span>{currency}</span>
 
-											{value.toLowerCase() === currency.toLowerCase() ? (
+											{value?.toLowerCase() === currency.toLowerCase() ? (
 												<Check className={clsx("size-4 justify-self-end")} />
 											) : null}
 										</div>

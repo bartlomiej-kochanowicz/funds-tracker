@@ -1,13 +1,9 @@
 export type MarketDataSearchResponse = {
-	Code: string;
-	Exchange: string;
-	Name: string;
-	Type: string;
-	Country: string;
-	Currency: string;
-	ISIN: string;
-	previousClose: number;
-	previousCloseDate: string;
+	symbol: string;
+	name: string;
+	currency: string;
+	stockExchange: string | null;
+	exchangeShortName: string;
 }[];
 
 export type MarketHistoryDataResponse = {
@@ -16,6 +12,5 @@ export type MarketHistoryDataResponse = {
 	high: number;
 	low: number;
 	close: number;
-	adjusted_close: number;
 	volume: number;
 }[];

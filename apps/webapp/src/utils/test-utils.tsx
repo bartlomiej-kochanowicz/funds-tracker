@@ -1,4 +1,4 @@
-import { Currency, IntroductionStep } from "__generated__/graphql";
+import { IntroductionStep } from "__generated__/graphql";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { render as rtlRender, RenderOptions } from "@testing-library/react";
 import { UserContextProvider } from "contexts/UserContext";
@@ -20,7 +20,7 @@ export const userMock = {
 				email: "test123@test.xyz",
 				createdAt: "2022-11-29T20:42:43.948Z",
 				introductionStep: IntroductionStep.DefaultCurrency,
-				defaultCurrency: Currency.Usd,
+				defaultCurrency: "USD",
 			},
 		},
 	},

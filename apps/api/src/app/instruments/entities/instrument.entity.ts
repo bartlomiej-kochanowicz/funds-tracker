@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
-import { Currency, InstrumentType } from "@prisma/client";
+import { InstrumentType } from "@prisma/client";
 import { IsEnum, IsString, IsUUID } from "class-validator";
 
 @ObjectType()
@@ -10,7 +10,7 @@ export class Instrument {
 
 	@IsString()
 	@Field(() => String, { description: "Code" })
-	codeExchange: string;
+	symbol: string;
 
 	@IsString()
 	@Field(() => String, { description: "Name" })
@@ -20,7 +20,6 @@ export class Instrument {
 	@Field(() => InstrumentType, { description: "Type" })
 	type: InstrumentType;
 
-	@IsEnum(Currency)
-	@Field(() => Currency, { description: "Instrument currency" })
-	currency: Currency;
+	@Field(() => String, { description: "Instrument currency" })
+	currency: string;
 }

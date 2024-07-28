@@ -87,63 +87,13 @@ type CashAccount {
   name: String!
 
   """Cash account currency."""
-  currency: Currency!
+  currency: String!
 
   """Account balance."""
   balance: Float!
 
   """Account opeartions."""
   operations(first: Float, skip: Float): [CashAccountOperation!]!
-}
-
-enum Currency {
-  USD
-  GBP
-  CAD
-  EUR
-  CHF
-  ISK
-  NOK
-  DKK
-  SEK
-  ZWL
-  UGX
-  TZS
-  CZK
-  RWF
-  BWP
-  EGP
-  NGN
-  GHS
-  MWK
-  XOF
-  KES
-  MAD
-  MUR
-  ILS
-  KRW
-  HUF
-  PLN
-  PHP
-  PKR
-  AUD
-  ZAR
-  CLP
-  IDR
-  THB
-  CNY
-  INR
-  LKR
-  VND
-  MYR
-  RON
-  ARS
-  BRL
-  MXN
-  TWD
-  RUB
-  PEN
-  TRY
 }
 
 type IntroductionCashAccounts {
@@ -166,9 +116,6 @@ type InstrumentHistory {
 
   """Close"""
   close: Float!
-
-  """Adjusted close"""
-  adjusted_close: Float!
 
   """Volume"""
   volume: Float!
@@ -202,8 +149,8 @@ type PortfolioDelete {
 }
 
 type MarketValueItem {
-  """Code exchange"""
-  codeExchange: String!
+  """Symbol"""
+  symbol: String!
 
   """Cumulative deposited cash."""
   value: Float!
@@ -235,7 +182,7 @@ type Instrument {
   uuid: ID!
 
   """Code"""
-  codeExchange: String!
+  symbol: String!
 
   """Name"""
   name: String!
@@ -244,7 +191,7 @@ type Instrument {
   type: InstrumentType!
 
   """Instrument currency"""
-  currency: Currency!
+  currency: String!
 }
 
 enum InstrumentType {
@@ -321,7 +268,7 @@ type User {
   introductionStep: IntroductionStep!
 
   """User default currency."""
-  defaultCurrency: Currency!
+  defaultCurrency: String!
 }
 
 """
@@ -374,11 +321,8 @@ input SearchInstrumentInput {
 }
 
 input InstrumentHistoryInput {
-  """Code"""
-  code: String!
-
-  """Exchange"""
-  exchange: String!
+  """Symbol"""
+  symbol: String!
 
   """Period"""
   period: String
@@ -491,7 +435,7 @@ input CashAccountCreateInput {
   name: String!
 
   """Cash account currency."""
-  currency: Currency!
+  currency: String!
 }
 
 input IntroductionCashAccountCreatesInput {
@@ -534,8 +478,8 @@ input UpdateUserInput {
   """New user name."""
   name: String
 
-  """New user default currency."""
-  defaultCurrency: Currency
+  """New default currency."""
+  defaultCurrency: String
 }
 
 input TransactionCreateInput {
@@ -549,11 +493,8 @@ input TransactionCreateInput {
 }
 
 input InstrumentCreateInput {
-  """Code"""
-  code: String!
-
-  """Exchange"""
-  exchange: String!
+  """Symbol"""
+  symbol: String!
 
   """Name"""
   name: String!
@@ -562,5 +503,5 @@ input InstrumentCreateInput {
   type: InstrumentType!
 
   """Instrument currency"""
-  currency: Currency!
+  currency: String!
 }

@@ -118,7 +118,7 @@ export class PortfoliosService {
 						instrument: {
 							select: {
 								uuid: true,
-								codeExchange: true,
+								symbol: true,
 								name: true,
 								type: true,
 								currency: true,
@@ -183,19 +183,19 @@ export class PortfoliosService {
 		const { uuid, from, to } = data;
 
 		const transactions = await this.getPortfolioTransactions(uuid);
-		const instruments = [
-			...new Set(transactions.map(({ instrument: { codeExchange } }) => codeExchange)),
-		].map(codeExchange => ({
-			codeExchange,
-			currency: transactions.find(({ instrument }) => instrument.codeExchange === codeExchange)
-				.instrument.currency,
-		}));
+		const instruments = [...new Set(transactions.map(({ instrument: { symbol } }) => symbol))].map(
+			symbol => ({
+				symbol,
+				currency: transactions.find(({ instrument }) => instrument.symbol === symbol).instrument
+					.currency,
+			}),
+		);
 
 		const currencies = [
 			...new Set(transactions.map(({ instrument }) => instrument.currency)),
 		].filter(currency => currency !== defaultCurrency);
 		const history = await this.getInstrumentsHistoryByDate(
-			instruments.map(({ codeExchange }) => codeExchange),
+			instruments.map(({ symbol }) => symbol),
 			subDays(from, 4),
 			to,
 		);
@@ -206,7 +206,7 @@ export class PortfoliosService {
 				cash: number;
 				commission: number;
 				quantity: number;
-				codeExchange: string;
+				symbol: string;
 			}[]
 		>(
 			(acc, transaction) => [
@@ -221,7 +221,7 @@ export class PortfoliosService {
 						Math.round(((acc[acc.length - 1]?.commission || 0) + transaction.commission) * 100) /
 						100,
 					quantity: transaction.quantity,
-					codeExchange: transaction.instrument.codeExchange,
+					symbol: transaction.instrument.symbol,
 				},
 			],
 			[],
@@ -232,7 +232,7 @@ export class PortfoliosService {
 
 		let currentCash = 0;
 		let currentCommission = 0;
-		const instrumentsQuantity = new Map(instruments.map(({ codeExchange }) => [codeExchange, 0]));
+		const instrumentsQuantity = new Map(instruments.map(({ symbol }) => [symbol, 0]));
 
 		const currenciesTimeseries = await this.currenciesService.timeseries(
 			defaultCurrency,
@@ -245,8 +245,8 @@ export class PortfoliosService {
 			isBefore(entry.date, from),
 		);
 
-		transactionsBeforeFromDate.forEach(({ codeExchange, quantity, cash, commission }) => {
-			instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
+		transactionsBeforeFromDate.forEach(({ symbol, quantity, cash, commission }) => {
+			instrumentsQuantity.set(symbol, instrumentsQuantity.get(symbol) + quantity);
 			currentCash = cash;
 			currentCommission = commission;
 		});
@@ -256,8 +256,8 @@ export class PortfoliosService {
 				entry => formatDate(entry.date) === formatDate(date),
 			);
 
-			dayWithTransactions.forEach(({ codeExchange, quantity, cash, commission }) => {
-				instrumentsQuantity.set(codeExchange, instrumentsQuantity.get(codeExchange) + quantity);
+			dayWithTransactions.forEach(({ symbol, quantity, cash, commission }) => {
+				instrumentsQuantity.set(symbol, instrumentsQuantity.get(symbol) + quantity);
 				currentCash = cash;
 				currentCommission = commission;
 			});
@@ -274,8 +274,8 @@ export class PortfoliosService {
 				dailyInstrumentsMarketValue = instruments.reduce(
 					(acc, instrument) => ({
 						...acc,
-						[instrument.codeExchange]: [0, 1, 2, 3, 4]
-							.map(i => history[formatDate(subDays(date, i))]?.[instrument.codeExchange])
+						[instrument.symbol]: [0, 1, 2, 3, 4]
+							.map(i => history[formatDate(subDays(date, i))]?.[instrument.symbol])
 							.filter(Boolean)[0],
 					}),
 					{},
@@ -287,14 +287,13 @@ export class PortfoliosService {
 				[defaultCurrency]: 1,
 			};
 
-			const marketValues = instruments.map(({ codeExchange, currency }) => {
-				const { close } = dailyInstrumentsMarketValue[codeExchange];
+			const marketValues = instruments.map(({ symbol, currency }) => {
+				const { close } = dailyInstrumentsMarketValue[symbol];
 
-				const value =
-					(close * instrumentsQuantity.get(codeExchange)) / currentCurrenciesValues[currency];
+				const value = (close * instrumentsQuantity.get(symbol)) / currentCurrenciesValues[currency];
 
 				return {
-					codeExchange,
+					symbol,
 					value,
 				};
 			});
@@ -350,10 +349,10 @@ export class PortfoliosService {
 
 	private getInstrumentsObject(
 		instruments: {
-			codeExchange: string;
+			symbol: string;
 		}[],
 	) {
-		return instruments.map(({ codeExchange }) => ({ codeExchange, value: 0 }));
+		return instruments.map(({ symbol }) => ({ symbol, value: 0 }));
 	}
 
 	private generateDateRangeDays(from: Date, to: Date): Date[] {
@@ -386,35 +385,33 @@ export class PortfoliosService {
 
 		const history = (
 			await Promise.all(
-				instruments.map(async codeExchange => {
+				instruments.map(async symbol => {
 					const history = await this.marketService.getMarketInstrumentHistory({
-						code: codeExchange.split(".")[0],
-						exchange: codeExchange.split(".")[1],
+						symbol,
 						from,
 						to,
 					});
 
-					return { codeExchange, history };
+					return { symbol, history };
 				}),
 			)
 		).reduce(
 			(
 				acc: {
-					[date: string]: { [codeExchange: string]: HistoryRecord };
+					[date: string]: { [symbol: string]: HistoryRecord };
 				},
 				item: {
-					codeExchange: string;
+					symbol: string;
 					history: MarketHistoryDataResponse;
 				},
 			) => {
 				item.history.forEach(record => {
 					acc[record.date] ??= {};
-					acc[record.date][item.codeExchange] = {
+					acc[record.date][item.symbol] = {
 						open: record.open,
 						high: record.high,
 						low: record.low,
 						close: record.close,
-						adjusted_close: record.adjusted_close,
 						volume: record.volume,
 					};
 				});

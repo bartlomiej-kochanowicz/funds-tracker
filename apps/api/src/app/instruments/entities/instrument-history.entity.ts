@@ -17,9 +17,6 @@ export class InstrumentHistory {
 	@Field(() => Number, { description: "Close" })
 	close: number;
 
-	@Field(() => Number, { description: "Adjusted close" })
-	adjusted_close: number;
-
 	@Field(() => Number, { description: "Volume" })
 	volume: number;
 }

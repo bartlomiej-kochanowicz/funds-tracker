@@ -5,10 +5,7 @@ import { ComponentPropsWithoutRef, forwardRef, useRef } from "react";
 import { mergeRefs } from "../../helpers/mergeRefs";
 import { Input } from "../Input";
 
-type NumberInputProps = {
-	locale: string;
-} & NumberFieldStateOptions &
-	ComponentPropsWithoutRef<"input">;
+type NumberInputProps = NumberFieldStateOptions & ComponentPropsWithoutRef<"input">;
 
 export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 	({ locale, ...props }, ref) => {

@@ -1,4 +1,3 @@
-import { Currency } from "__generated__/graphql";
 import { Text } from "@funds-tracker/ui";
 import { formatCurrency } from "helpers/formatCurrency";
 import { formatDate } from "helpers/formatDate";
@@ -6,7 +5,7 @@ import { TooltipProps } from "recharts";
 import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 
 export const SummaryChartTooltip = (
-	props?: TooltipProps<ValueType, NameType> & { currency: Currency },
+	props?: TooltipProps<ValueType, NameType> & { currency: string },
 ) => {
 	if (!props) return null;
 
