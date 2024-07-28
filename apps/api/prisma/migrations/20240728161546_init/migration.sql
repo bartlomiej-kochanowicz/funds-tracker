@@ -8,9 +8,6 @@ CREATE TYPE "CashAccountOperationType" AS ENUM ('deposit', 'withdrawal', 'transf
 CREATE TYPE "InstrumentType" AS ENUM ('stocks', 'bonds', 'governmentBonds', 'etfs', 'options', 'commodities', 'crypto', 'immovables', 'movables', 'others');
 
 -- CreateEnum
-CREATE TYPE "Currency" AS ENUM ('USD', 'EUR', 'JPY', 'GBP', 'CNY', 'AUD', 'CAD', 'CHF', 'HKD', 'SGD', 'SEK', 'KRW', 'NOK', 'NZD', 'INR', 'MXN', 'TWD', 'ZAR', 'BRL', 'DKK', 'PLN', 'THB', 'ILS', 'IDR', 'CZK', 'AED', 'TRY', 'HUF', 'CLP', 'SAR', 'PHP', 'MYR', 'COP', 'RUB', 'RON', 'PEN', 'BHD', 'BGN', 'ARS');
-
--- CreateEnum
 CREATE TYPE "IntroductionStep" AS ENUM ('DefaultCurrency', 'CashAccounts', 'Portfolios', 'Completed');
 
 -- CreateEnum
@@ -24,7 +21,7 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "confirmationCodeHash" TEXT,
-    "defaultCurrency" "Currency" NOT NULL DEFAULT 'USD',
+    "defaultCurrency" TEXT NOT NULL,
     "introductionStep" "IntroductionStep" NOT NULL DEFAULT 'DefaultCurrency',
     "subscription" "Subscription" NOT NULL DEFAULT 'FREE',
 
@@ -44,7 +41,7 @@ CREATE TABLE "CashAccount" (
     "uuid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "balance" DOUBLE PRECISION NOT NULL DEFAULT 0,
-    "currency" "Currency" NOT NULL,
+    "currency" TEXT NOT NULL,
     "userUuid" TEXT NOT NULL,
 
     CONSTRAINT "CashAccount_pkey" PRIMARY KEY ("uuid")
@@ -78,6 +75,7 @@ CREATE TABLE "Transaction" (
     "type" "OperationType" NOT NULL,
     "quantity" DOUBLE PRECISION NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
+    "commission" DOUBLE PRECISION NOT NULL,
     "portfolioUuid" TEXT NOT NULL,
     "instrumentUuid" TEXT NOT NULL,
 
@@ -90,7 +88,7 @@ CREATE TABLE "Instrument" (
     "symbol" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" "InstrumentType" NOT NULL,
-    "currency" "Currency" NOT NULL,
+    "currency" TEXT NOT NULL,
 
     CONSTRAINT "Instrument_pkey" PRIMARY KEY ("uuid")
 );
@@ -111,7 +109,7 @@ CREATE UNIQUE INDEX "CashAccount_userUuid_uuid_key" ON "CashAccount"("userUuid",
 CREATE UNIQUE INDEX "Portfolio_userUuid_uuid_key" ON "Portfolio"("userUuid", "uuid");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Instrument_codeExchange_key" ON "Instrument"("symbol");
+CREATE UNIQUE INDEX "Instrument_symbol_key" ON "Instrument"("symbol");
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userUuid_fkey" FOREIGN KEY ("userUuid") REFERENCES "User"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
