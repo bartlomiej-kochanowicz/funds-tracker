@@ -79,7 +79,7 @@ export class MarketService {
 					`https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}`,
 					{
 						params: {
-							api_token: this.config.get("EODHD_API_KEY"),
+							apikey: this.config.get("FINANCIAL_MODELING_API_KEY"),
 							from: formatDate(from),
 							to: formatDate(to),
 						},

@@ -39,7 +39,6 @@ export const PriceField = ({ activeCurrency }: PriceFieldProps) => {
 						symbol: watchInstrument.symbol,
 						from: sevenDaysAgo,
 						to: watchDate,
-						period: "1d",
 					},
 				},
 			});
