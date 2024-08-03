@@ -191,7 +191,6 @@
 	"common.link.home": "Go to home",
 	"modal.InvestFunds.form.placeholder.purchase_date": "Select purchase date",
 	"form.search_instrument.empty": "No instruments found",
-	"modal.InvestFunds.instrument.tooltip": "We support more than 60 exchanges all around the world. All US exchanges are combined into one virtual exchange &quot;US&quot; which includes NYSE, NASDAQ, NYSE ARCA, and OTC/PINK tickers.",
 	"modal.InvestFunds.toast.success": "Transaction has been added successfully.",
 	"page.portfolio.table.caption": "Transactions table",
 	"common.ticker": "Ticker",
