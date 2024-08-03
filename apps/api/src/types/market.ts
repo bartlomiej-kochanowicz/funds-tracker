@@ -1,4 +1,4 @@
-export type MarketDataSearchResponse = {
+export type GetInstrumentSearchResponse = {
 	symbol: string;
 	name: string;
 	currency: string;
@@ -6,11 +6,20 @@ export type MarketDataSearchResponse = {
 	exchangeShortName: string;
 }[];
 
-export type MarketHistoryDataResponse = {
-	date: string;
-	open: number;
-	high: number;
-	low: number;
-	close: number;
+export type GetInstrumentHistoryResponse = {
+	symbol: string;
+	historical: {
+		date: string;
+		open: number;
+		high: number;
+		low: number;
+		close: number;
+		volume: number;
+	}[];
+};
+
+export type GetInstrumentShortResponse = {
+	symbol: string;
+	price: number;
 	volume: number;
-}[];
+};

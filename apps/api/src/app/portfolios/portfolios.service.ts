@@ -13,8 +13,8 @@ import { UserService } from "../user/user.service";
 import { isBefore, addDays, min, subDays } from "date-fns";
 import { MarketService } from "@services/market/market.service";
 import { formatDate } from "@src/utils/format-date";
-import { MarketHistoryDataResponse } from "@src/types/market";
 import { CurrenciesService } from "@src/services/currencies/currencies.service";
+import { GetInstrumentHistoryResponse } from "@src/types/market";
 
 @Injectable()
 export class PortfoliosService {
@@ -381,7 +381,7 @@ export class PortfoliosService {
 	}
 
 	private async getInstrumentsHistoryByDate(instruments: string[], from: Date, to: Date) {
-		type HistoryRecord = Omit<MarketHistoryDataResponse[0], "date">;
+		type HistoryRecord = Omit<GetInstrumentHistoryResponse["historical"][number], "date">;
 
 		const history = (
 			await Promise.all(
@@ -402,7 +402,7 @@ export class PortfoliosService {
 				},
 				item: {
 					symbol: string;
-					history: MarketHistoryDataResponse;
+					history: GetInstrumentHistoryResponse["historical"];
 				},
 			) => {
 				item.history.forEach(record => {
