@@ -2,11 +2,7 @@ import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { catchError, firstValueFrom, of } from "rxjs";
-import {
-	GetInstrumentShortResponse,
-	GetInstrumentSearchResponse,
-	GetInstrumentHistoryResponse,
-} from "@src/types/market";
+import { GetInstrumentSearchResponse, GetInstrumentHistoryResponse } from "@src/types/market";
 import { formatDate } from "@src/utils/format-date";
 import { isBefore } from "date-fns";
 
@@ -38,11 +34,11 @@ export class MarketService {
 		return data;
 	}
 
-	async getInstrumentShort(symbol: string): Promise<GetInstrumentShortResponse> {
+	async getInstrumentBaseInfo(symbol: string): Promise<GetInstrumentSearchResponse[number] | null> {
 		const { data } = await firstValueFrom(
 			this.httpService
-				.get<GetInstrumentShortResponse>(
-					`https://financialmodelingprep.com/api/v3/quote-short/${symbol}`,
+				.get<GetInstrumentSearchResponse>(
+					`https://financialmodelingprep.com/api/v3/search/${symbol.toUpperCase()}`,
 					{
 						params: {
 							apikey: this.config.get("FINANCIAL_MODELING_API_KEY"),
@@ -56,7 +52,11 @@ export class MarketService {
 				),
 		);
 
-		return data;
+		return (
+			data?.find(
+				({ symbol: currentSymbol }) => currentSymbol.toUpperCase() === currentSymbol.toUpperCase(),
+			) || null
+		);
 	}
 
 	async getMarketInstrumentHistory({

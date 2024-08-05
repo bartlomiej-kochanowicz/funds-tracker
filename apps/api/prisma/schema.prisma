@@ -103,16 +103,7 @@ enum CashAccountOperationType {
 }
 
 enum InstrumentType {
-  stocks
-  bonds
-  governmentBonds
-  etfs
-  options
-  commodities
-  crypto
-  immovables
-  movables
-  others
+  market
 }
 
 enum IntroductionStep {

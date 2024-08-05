@@ -1,10 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InstrumentHistoryInput, SearchInstrumentInput } from "./inputs";
 import { InstrumentHistory, SearchInstrument } from "./entities";
 import { PrismaService } from "@services/prisma/prisma.service";
 import { InstrumentCreateInput } from "./inputs/instrument-create.input";
 import { Instrument } from "./entities/instrument.entity";
 import { MarketService } from "@services/market/market.service";
+import { InstrumentType } from "@prisma/client";
 
 @Injectable()
 export class InstrumentsService {
@@ -25,12 +26,27 @@ export class InstrumentsService {
 		return data;
 	}
 
-	async instrumentExistsInDB(symbol: string): Promise<Instrument> {
-		const instrument = await this.prisma.instrument.findUnique({
+	async getOrCreateInstrumentInDB(symbol: string): Promise<Instrument> {
+		let instrument = await this.prisma.instrument.findUnique({
 			where: {
 				symbol,
 			},
 		});
+
+		if (!instrument) {
+			const data = await this.marketService.getInstrumentBaseInfo(symbol);
+
+			if (!data) {
+				throw new HttpException("Symbol not found", HttpStatus.NOT_FOUND);
+			}
+
+			instrument = await this.instrumentCreate({
+				symbol: data.symbol,
+				name: data.name,
+				type: InstrumentType.market,
+				currency: data.currency,
+			});
+		}
 
 		return instrument;
 	}

@@ -2,6 +2,7 @@ import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { catchError, firstValueFrom } from "rxjs";
+import { GetCurrencyTimeseriesResponse } from "@src/types/currencies";
 
 @Injectable()
 export class CurrenciesService {
@@ -10,35 +11,27 @@ export class CurrenciesService {
 		private config: ConfigService,
 	) {}
 
-	async timeseries(base: string, startDate: Date, endDate: Date, symbols: string[]) {
-		const start_date = startDate.toISOString().split("T")[0];
-		const end_date = endDate.toISOString().split("T")[0];
+	async timeseries(base: string, currencies: string[]) {
+		return await Promise.all(
+			currencies.map(currency => this.getHistoricalPriceFull(this.createSymbol(base, currency))),
+		);
+	}
 
-		console.log("@@@@", {
-			api_key: this.config.get("CURRENCY_API_KEY"),
-			base,
-			start_date,
-			end_date,
-			symbols: symbols.join(","),
-		});
+	private createSymbol(base: string, currency: string) {
+		return `${base.toUpperCase()}${currency.toLocaleUpperCase()}`;
+	}
 
+	private async getHistoricalPriceFull(symbol: string) {
 		const { data } = await firstValueFrom(
 			this.httpService
-				.get<{
-					response: {
-						[key in string]: {
-							[key in string]: number;
-						};
-					};
-				}>("https://api.currencybeacon.com/v1/timeseries", {
-					params: {
-						api_key: this.config.get("CURRENCY_API_KEY"),
-						base,
-						start_date,
-						end_date,
-						symbols: symbols.join(","),
+				.get<GetCurrencyTimeseriesResponse>(
+					`https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}`,
+					{
+						params: {
+							apikey: this.config.get("FINANCIAL_MODELING_API_KEY"),
+						},
 					},
-				})
+				)
 				.pipe(
 					catchError(e => {
 						console.error(e);
@@ -48,6 +41,6 @@ export class CurrenciesService {
 				),
 		);
 
-		return data.response;
+		return data.historical;
 	}
 }

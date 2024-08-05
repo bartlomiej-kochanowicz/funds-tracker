@@ -195,16 +195,7 @@ type Instrument {
 }
 
 enum InstrumentType {
-  stocks
-  bonds
-  governmentBonds
-  etfs
-  options
-  commodities
-  crypto
-  immovables
-  movables
-  others
+  market
 }
 
 type Transaction {

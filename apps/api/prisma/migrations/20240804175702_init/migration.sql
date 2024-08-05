@@ -5,7 +5,7 @@ CREATE TYPE "Subscription" AS ENUM ('FREE', 'LITE', 'EXPERT');
 CREATE TYPE "CashAccountOperationType" AS ENUM ('deposit', 'withdrawal', 'transfer', 'interest', 'tax', 'fee', 'other');
 
 -- CreateEnum
-CREATE TYPE "InstrumentType" AS ENUM ('stocks', 'bonds', 'governmentBonds', 'etfs', 'options', 'commodities', 'crypto', 'immovables', 'movables', 'others');
+CREATE TYPE "InstrumentType" AS ENUM ('market');
 
 -- CreateEnum
 CREATE TYPE "IntroductionStep" AS ENUM ('DefaultCurrency', 'CashAccounts', 'Portfolios', 'Completed');

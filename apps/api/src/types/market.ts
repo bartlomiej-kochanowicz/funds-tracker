@@ -17,9 +17,3 @@ export type GetInstrumentHistoryResponse = {
 		volume: number;
 	}[];
 };
-
-export type GetInstrumentShortResponse = {
-	symbol: string;
-	price: number;
-	volume: number;
-};

@@ -236,8 +236,6 @@ export class PortfoliosService {
 
 		const currenciesTimeseries = await this.currenciesService.timeseries(
 			defaultCurrency,
-			from,
-			to,
 			currencies,
 		);
 

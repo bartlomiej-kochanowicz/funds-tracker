@@ -20,18 +20,16 @@ export class TransactionsService {
 			include: { portfolios: true, cashAccounts: true },
 		});
 
-		if (!user.cashAccounts.some(cashAccount => cashAccount.uuid === cashAccountUuid)) {
+		const cashAccount = await user.cashAccounts.find(
+			cashAccount => cashAccount.uuid === cashAccountUuid,
+		);
+
+		if (!cashAccount) {
 			throw new HttpException("Account not found", HttpStatus.NOT_FOUND);
 		}
 
 		if (!user.portfolios.some(portfolio => portfolio.uuid === portfolioUuid)) {
 			throw new HttpException("Portfolio not found", HttpStatus.NOT_FOUND);
-		}
-
-		const instrumentExists = await this.instruments.instrumentExistsInDB(symbol);
-
-		if (!instrumentExists) {
-			throw new Error("Instrument does not exist");
 		}
 
 		await this.addTransaction(data, symbol);
@@ -44,16 +42,7 @@ export class TransactionsService {
 	}
 
 	private async addTransaction(data: TransactionCreateInput, symbol: string) {
-		let instrument = await this.instruments.instrumentExistsInDB(symbol);
-
-		if (!instrument) {
-			instrument = await this.instruments.instrumentCreate({
-				symbol: data.instrument.symbol,
-				name: data.instrument.name,
-				type: data.instrument.type,
-				currency: data.instrument.currency,
-			});
-		}
+		const instrument = await this.instruments.getOrCreateInstrumentInDB(symbol);
 
 		await this.prisma.transaction.create({
 			data: {
@@ -80,7 +69,7 @@ export class TransactionsService {
 		await this.prisma.cashAccountOperation.create({
 			data: {
 				cashAccountUuid: data.cashAccountUuid,
-				// currency calculate
+				// TODO: currency calculate
 				amount: data.price * data.quantity + data.commission,
 				type: "transfer",
 				portfolioUuid: data.portfolioUuid,

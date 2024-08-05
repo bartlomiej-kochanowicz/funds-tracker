@@ -7,11 +7,10 @@ import {
 	ScrollArea,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import clsx from "clsx";
 import { formatCurrency } from "helpers/formatCurrency";
 import { useBackgroundQueryPortfolio } from "hooks/api/portfolios/useBackgroundQueryPortfolio";
 import { useMutationTransactionCreate } from "hooks/api/transactions/useMutationTransactionCreate";
-import { FC, Fragment, useCallback, useMemo } from "react";
+import { FC, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { generatePath, useNavigate } from "react-router-dom";
@@ -25,11 +24,9 @@ import {
 import { CommissionField } from "./components/CommissionField";
 import { CommissionTypeField } from "./components/CommissionTypeField";
 import { DateField } from "./components/DateField";
-import { NotSupportedYet } from "./components/NotSupportedYet";
 import { PriceField } from "./components/PriceField";
 import { QuantityField } from "./components/QuantityField";
 import { SearchInstrumentField } from "./components/SearchInstrumentField";
-import { SelectInstrumentType } from "./components/SelectInstrumentType";
 import { SelectPortfolioField } from "./components/SelectPortfolioField";
 import { TransactionCostField } from "./components/TransactionCostField";
 
@@ -105,29 +102,13 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 	);
 
 	const watchInstrument = watch("instrument");
-	const watchInstrumentType = watch("instrumentType");
 
 	const activeCurrency = watchInstrument?.currency || currency;
-
-	const shouldRenderMarketInstrumentFields = useMemo(() => {
-		switch (watchInstrumentType) {
-			case "stocks":
-			case "etfs":
-			case "crypto":
-				return true;
-			default:
-				return false;
-		}
-	}, [watchInstrumentType]);
-
-	const shouldRenderNotSupportedYet = Boolean(
-		!shouldRenderMarketInstrumentFields && watchInstrumentType,
-	);
 
 	const ResponsiveDialog = responsiveDialog();
 
 	return (
-		<ScrollArea className={clsx(shouldRenderMarketInstrumentFields && "h-[75vh] md:h-auto")}>
+		<ScrollArea className="h-[75vh] md:h-auto">
 			<Form {...form}>
 				<form
 					className="my-2 flex flex-col gap-2 px-2"
@@ -142,22 +123,14 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						</Form.Description>
 					</Form.Item>
 
-					<SelectInstrumentType />
-
-					{shouldRenderMarketInstrumentFields && (
-						<Fragment>
-							<SearchInstrumentField />
-							<DateField />
-							<PriceField activeCurrency={activeCurrency} />
-							<QuantityField />
-							<SelectPortfolioField />
-							<CommissionTypeField />
-							<CommissionField activeCurrency={activeCurrency} />
-							<TransactionCostField activeCurrency={activeCurrency} />
-						</Fragment>
-					)}
-
-					{shouldRenderNotSupportedYet && <NotSupportedYet />}
+					<SearchInstrumentField />
+					<DateField />
+					<PriceField activeCurrency={activeCurrency} />
+					<QuantityField />
+					<SelectPortfolioField />
+					<CommissionTypeField />
+					<CommissionField activeCurrency={activeCurrency} />
+					<TransactionCostField activeCurrency={activeCurrency} />
 
 					<ResponsiveDialog.Footer>
 						<ResponsiveDialog.Close asChild>
@@ -171,7 +144,7 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 
 						<Button
 							className="flex items-center justify-center gap-2 md:w-1/2"
-							disabled={!isValid || isSubmitting || shouldRenderNotSupportedYet}
+							disabled={!isValid || isSubmitting}
 							type="submit"
 						>
 							{!isSubmitting && "Invest 🎉"}
