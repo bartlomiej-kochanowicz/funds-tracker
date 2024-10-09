@@ -2,7 +2,7 @@ import { ForbiddenException, Injectable } from "@nestjs/common";
 import * as crypto from "crypto";
 import { PrismaService } from "@services/prisma/prisma.service";
 import * as bcrypt from "bcrypt";
-import { InjectRedis } from "@liaoliaots/nestjs-redis";
+import { RedisService } from "@liaoliaots/nestjs-redis";
 import Redis from "ioredis";
 import { ttl24h } from "@constants/redis";
 import { ConfigService } from "@nestjs/config";
@@ -12,12 +12,16 @@ import { ResetPasswordInput, SetNewPasswordInput } from "../inputs";
 
 @Injectable()
 export class PasswordService {
+	private readonly redis: Redis | null;
+
 	constructor(
 		private authService: AuthService,
 		private prisma: PrismaService,
 		private readonly configService: ConfigService,
-		@InjectRedis() private readonly redis: Redis,
-	) {}
+		private readonly redisService: RedisService,
+	) {
+		this.redis = this.redisService.getOrThrow();
+	}
 
 	async resetPassword(resetPasswordInput: ResetPasswordInput): Promise<ResetPassword> {
 		const { email, token } = resetPasswordInput;

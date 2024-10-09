@@ -1,8 +1,8 @@
 {
   "moduleDirectories": ["node_modules", "<rootDir>"],
   "moduleFileExtensions": ["js", "json", "ts"],
-  "globalSetup": "./common/tests/setup.ts",
-  "globalTeardown": "./common/tests/teardown.ts",
+  "globalSetup": "./tests/setup.ts",
+  "globalTeardown": "./tests/teardown.ts",
   "rootDir": "src",
   "testRegex": ".*\\.spec\\.ts$",
   "transform": {

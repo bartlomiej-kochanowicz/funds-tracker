@@ -23,15 +23,14 @@ describe("send code", () => {
 		let prevCodeHash: string;
 
 		beforeAll(async () => {
-			const res = {} as Response;
-
-			res.req = {} as any;
-
-			res.req.headers = {
-				"user-agent": "sendCode-user-session",
-			};
-
-			res.req.ip = "::ffff:127.0.0.1";
+			const res = {
+				req: {
+					ip: "::ffff:127.0.0.1",
+					headers: {
+						"user-agent": "sendCode-user-session",
+					},
+				},
+			} as Response;
 
 			res.cookie = (): any => {};
 

@@ -21,15 +21,14 @@ export default async () => {
 
 	await prismaService.cleanDatabase();
 
-	const res = {} as Response;
-
-	res.req = {} as any;
-
-	res.req.headers = {
-		"user-agent": "main-user-session",
-	};
-
-	res.req.ip = "::ffff:127.0.0.1";
+	const res = {
+		req: {
+			ip: "::ffff:127.0.0.1",
+			headers: {
+				"user-agent": "main-user-session",
+			},
+		},
+	} as Response;
 
 	res.cookie = (): any => {};
 
