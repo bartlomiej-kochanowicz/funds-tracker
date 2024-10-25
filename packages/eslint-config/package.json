@@ -1,8 +1,17 @@
 {
-	"name": "eslint-config-custom",
+	"name": "@funds-tracker/eslint-config",
+	"type": "module",
 	"license": "MIT",
 	"version": "0.0.0",
 	"private": true,
+	"exports": {
+		"./react": {
+			"require": "./react.cjs"
+		},
+		"./typescript": {
+			"require": "./typescript.cjs"
+		}
+	},
 	"scripts": {
 		"lint": "eslint ."
 	},

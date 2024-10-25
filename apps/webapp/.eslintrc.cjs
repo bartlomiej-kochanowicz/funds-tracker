@@ -1,5 +1,5 @@
 module.exports = {
-	extends: ["custom/react"],
+	extends: ["@funds-tracker/eslint-config/react"],
 	parserOptions: {
 		project: "tsconfig.json",
 		tsconfigRootDir: __dirname,

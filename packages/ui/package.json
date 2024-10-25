@@ -54,6 +54,7 @@
 		"vaul": "1.0.0"
 	},
 	"devDependencies": {
+		"@funds-tracker/eslint-config": "workspace:*",
 		"@storybook/addon-essentials": "8.3.5",
 		"@storybook/addon-interactions": "8.3.5",
 		"@storybook/addon-links": "8.3.5",
@@ -69,7 +70,6 @@
 		"@types/react-dom": "18.3.0",
 		"autoprefixer": "10.4.20",
 		"chromatic": "11.12.5",
-		"eslint-config-custom": "workspace:*",
 		"eslint-plugin-storybook": "0.9.0",
 		"mq-polyfill": "1.1.8",
 		"postcss": "8.4.47",

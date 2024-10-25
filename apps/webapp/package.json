@@ -51,6 +51,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "7.25.7",
+		"@funds-tracker/eslint-config": "workspace:*",
 		"@graphql-codegen/cli": "5.0.3",
 		"@graphql-codegen/typed-document-node": "5.0.10",
 		"@graphql-codegen/typescript": "4.1.0",
@@ -70,7 +71,6 @@
 		"@vitejs/plugin-react": "4.3.2",
 		"@vitest/coverage-c8": "0.33.0",
 		"autoprefixer": "10.4.20",
-		"eslint-config-custom": "workspace:*",
 		"jsdom": "25.0.1",
 		"madge": "8.0.0",
 		"mq-polyfill": "1.1.8",

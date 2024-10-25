@@ -1,5 +1,10 @@
 module.exports = {
-	extends: ["eslint-config-airbnb", "eslint-config-airbnb-typescript", "prettier", "plugin:tailwindcss/recommended"],
+	extends: [
+		"eslint-config-airbnb",
+		"eslint-config-airbnb-typescript",
+		"prettier",
+		"plugin:tailwindcss/recommended",
+	],
 	parser: "@typescript-eslint/parser",
 	plugins: [
 		"react",
@@ -10,7 +15,7 @@ module.exports = {
 		"jest-dom",
 		"testing-library",
 		"simple-import-sort",
-		"prettier"
+		"prettier",
 	],
 	globals: {
 		JSX: true,
@@ -50,12 +55,12 @@ module.exports = {
 		"@typescript-eslint/no-shadow": "off",
 		"react/no-array-index-key": "off",
 		"react/button-has-type": "off",
-		"react/no-unknown-property": ['error', { ignore: ['cmdk-input-wrapper'] }]
+		"react/no-unknown-property": ["error", { ignore: ["cmdk-input-wrapper"] }],
 	},
 	settings: {
-		tailwindcss:{
+		tailwindcss: {
 			callees: ["clsx"],
-			whitelist:["toaster", "lucide", "^lucide(.+)$"]
-		}
-	}
+			whitelist: ["toaster", "lucide", "^lucide(.+)$"],
+		},
+	},
 };
