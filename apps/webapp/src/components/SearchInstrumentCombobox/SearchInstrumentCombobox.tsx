@@ -1,4 +1,4 @@
-import { InstrumentType, SearchInstrumentQuery } from "__generated__/graphql";
+import { SearchInstrumentQuery } from "__generated__/graphql";
 import {
 	Badge,
 	Button,
@@ -17,7 +17,6 @@ import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 interface SearchInstrumentComboboxProps {
-	instrumentType: InstrumentType | null;
 	onChange: (value: SearchInstrumentQuery["searchInstrument"][0]) => void;
 	onBlur: () => void;
 	disabled?: boolean;
@@ -28,7 +27,7 @@ interface SearchInstrumentComboboxProps {
 export const SearchInstrumentCombobox = forwardRef<
 	HTMLButtonElement,
 	SearchInstrumentComboboxProps
->(({ value, onChange, onBlur, disabled, instrumentType, className }, ref) => {
+>(({ value, onChange, onBlur, disabled, className }, ref) => {
 	const [open, setOpen] = useState(false);
 
 	const triggerRef = useRef<HTMLButtonElement>(null);
@@ -59,15 +58,13 @@ export const SearchInstrumentCombobox = forwardRef<
 	};
 
 	const handleInputChange = (name: string) => {
-		if (instrumentType) {
-			findInstruments({
-				variables: {
-					data: {
-						name,
-					},
+		findInstruments({
+			variables: {
+				data: {
+					name,
 				},
-			});
-		}
+			},
+		});
 	};
 
 	return (
@@ -102,7 +99,7 @@ export const SearchInstrumentCombobox = forwardRef<
 				<Command shouldFilter={false}>
 					<Command.Input
 						onValueChange={debounce(handleInputChange)}
-						placeholder={t(`input.search_instrument.placeholder.${instrumentType}`)}
+						placeholder={t(`input.search_instrument.placeholder.stocks`)}
 					/>
 
 					<Command.List>

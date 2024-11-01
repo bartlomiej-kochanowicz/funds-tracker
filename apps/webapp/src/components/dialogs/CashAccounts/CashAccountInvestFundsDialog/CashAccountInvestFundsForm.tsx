@@ -85,7 +85,6 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 						portfolioUuid: data.portfolio,
 						cashAccountUuid: uuid,
 						instrument: {
-							type: data.instrumentType,
 							symbol: data.instrument.symbol,
 							name: data.instrument.name,
 							currency: data.instrument.currency,

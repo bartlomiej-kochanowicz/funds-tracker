@@ -32,6 +32,10 @@ export class TransactionsService {
 			throw new HttpException("Portfolio not found", HttpStatus.NOT_FOUND);
 		}
 
+		if (cashAccount.balance < data.price * data.quantity + data.commission) {
+			throw new HttpException("Insufficient funds", HttpStatus.BAD_REQUEST);
+		}
+
 		await this.addTransaction(data, symbol);
 
 		await this.addCashAccountTransaction(data);

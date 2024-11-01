@@ -1,4 +1,4 @@
-import { Form, useUpdateEffect } from "@funds-tracker/ui";
+import { Form } from "@funds-tracker/ui";
 import { SearchInstrumentCombobox } from "components/SearchInstrumentCombobox";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -7,13 +7,6 @@ import { CashAccountInvestFundsFormSchemaType } from "../../CashAccountInvestFun
 
 export const SearchInstrumentField = () => {
 	const form = useFormContext<CashAccountInvestFundsFormSchemaType>();
-
-	const instrumentType = form.watch("instrumentType");
-
-	useUpdateEffect(() => {
-		form.resetField("instrument");
-		form.resetField("price");
-	}, [instrumentType]);
 
 	const { t } = useTranslation();
 
@@ -27,7 +20,6 @@ export const SearchInstrumentField = () => {
 
 					<SearchInstrumentCombobox
 						className="w-full md:max-w-[350px] lg:max-w-[446px]"
-						instrumentType={instrumentType}
 						{...field}
 					/>
 				</Form.Item>

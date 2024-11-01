@@ -120,7 +120,6 @@ export class PortfoliosService {
 								uuid: true,
 								symbol: true,
 								name: true,
-								type: true,
 								currency: true,
 							},
 						},

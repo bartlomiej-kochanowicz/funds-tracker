@@ -5,7 +5,6 @@ import { PrismaService } from "@services/prisma/prisma.service";
 import { InstrumentCreateInput } from "./inputs/instrument-create.input";
 import { Instrument } from "./entities/instrument.entity";
 import { MarketService } from "@services/market/market.service";
-import { InstrumentType } from "@prisma/client";
 
 @Injectable()
 export class InstrumentsService {
@@ -43,7 +42,6 @@ export class InstrumentsService {
 			instrument = await this.instrumentCreate({
 				symbol: data.symbol,
 				name: data.name,
-				type: InstrumentType.market,
 				currency: data.currency,
 			});
 		}
@@ -56,7 +54,6 @@ export class InstrumentsService {
 			data: {
 				symbol: data.symbol,
 				name: data.name,
-				type: data.type,
 				currency: data.currency,
 			},
 		});

@@ -1,5 +1,4 @@
-import { InputType, Field, registerEnumType } from "@nestjs/graphql";
-import { InstrumentType } from "@prisma/client";
+import { InputType, Field } from "@nestjs/graphql";
 import { IsString } from "class-validator";
 
 @InputType()
@@ -8,7 +7,3 @@ export class SearchInstrumentInput {
 	@Field(() => String, { description: "Instrument name." })
 	name: string;
 }
-
-registerEnumType(InstrumentType, {
-	name: "InstrumentType",
-});

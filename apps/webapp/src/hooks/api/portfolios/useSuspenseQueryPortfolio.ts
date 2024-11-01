@@ -17,7 +17,6 @@ export const GET_PORTFOLIO = gql(/* GraphQL */ `
 					uuid
 					symbol
 					name
-					type
 					currency
 				}
 			}

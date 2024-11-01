@@ -1,11 +1,9 @@
-import { InstrumentType, SearchInstrument } from "__generated__/graphql";
+import { SearchInstrumentQuery } from "__generated__/graphql";
 import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
-import instruments from "constants/instruments";
-import { date, InferType, mixed, number, object, string } from "yup";
+import { date, InferType, number, object, string } from "yup";
 
 export const CashAccountInvestFundsFormSchema = object().shape({
-	instrumentType: mixed<InstrumentType>().oneOf(instruments).required(EMPTY_VALIDATION_MESSAGE),
-	instrument: object<SearchInstrument>()
+	instrument: object<SearchInstrumentQuery>()
 		.shape({
 			currency: string().required(),
 			exchangeShortName: string().required(),

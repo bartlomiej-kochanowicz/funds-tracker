@@ -81,7 +81,6 @@ model Instrument {
   uuid         String         @id @default(uuid())
   symbol       String         @unique
   name         String
-  type         InstrumentType
   currency     String
   transactions Transaction[]
 }
@@ -100,10 +99,6 @@ enum CashAccountOperationType {
   tax
   fee
   other
-}
-
-enum InstrumentType {
-  market
 }
 
 enum IntroductionStep {

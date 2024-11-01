@@ -187,15 +187,8 @@ type Instrument {
   """Name"""
   name: String!
 
-  """Type"""
-  type: InstrumentType!
-
   """Instrument currency"""
   currency: String!
-}
-
-enum InstrumentType {
-  market
 }
 
 type Transaction {
@@ -489,9 +482,6 @@ input InstrumentCreateInput {
 
   """Name"""
   name: String!
-
-  """Type"""
-  type: InstrumentType!
 
   """Instrument currency"""
   currency: String!

@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID, registerEnumType } from "@nestjs/graphql";
-import { InstrumentType, OperationType } from "@prisma/client";
+import { OperationType } from "@prisma/client";
 import { Instrument } from "@src/app/instruments/entities/instrument.entity";
 
 @ObjectType()
@@ -25,8 +25,4 @@ export class Transaction {
 
 registerEnumType(OperationType, {
 	name: "OperationType",
-});
-
-registerEnumType(InstrumentType, {
-	name: "InstrumentType",
 });

@@ -11,6 +11,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
  * Therefore it is highly recommended to use the babel or swc plugin for production.
+ * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
     "\n\tmutation RefreshToken {\n\t\trefreshToken {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.RefreshTokenDocument,
@@ -26,7 +27,7 @@ const documents = {
     "\n\tmutation PortfolioDelete($uuid: String!) {\n\t\tportfolioDelete(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.PortfolioDeleteDocument,
     "\n\tmutation PortfolioUpdate($uuid: String!, $data: PortfolioUpdateInput!) {\n\t\tportfolioUpdate(uuid: $uuid, data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.PortfolioUpdateDocument,
     "\n\tquery GetPortfolioSummary($data: PortfolioSummaryInput!) {\n\t\tportfolioSummary(data: $data) {\n\t\t\tdata {\n\t\t\t\tdate\n\t\t\t\tmarketValues {\n\t\t\t\t\tsymbol\n\t\t\t\t\tvalue\n\t\t\t\t}\n\t\t\t\tcash\n\t\t\t}\n\t\t}\n\t}\n": types.GetPortfolioSummaryDocument,
-    "\n\tquery GetPortfolio($uuid: String!) {\n\t\tportfolio(uuid: $uuid) {\n\t\t\tuuid\n\t\t\tname\n\t\t\ttransactions {\n\t\t\t\tuuid\n\t\t\t\tdate\n\t\t\t\tquantity\n\t\t\t\tprice\n\t\t\t\ttype\n\t\t\t\tinstrument {\n\t\t\t\t\tuuid\n\t\t\t\t\tsymbol\n\t\t\t\t\tname\n\t\t\t\t\ttype\n\t\t\t\t\tcurrency\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n": types.GetPortfolioDocument,
+    "\n\tquery GetPortfolio($uuid: String!) {\n\t\tportfolio(uuid: $uuid) {\n\t\t\tuuid\n\t\t\tname\n\t\t\ttransactions {\n\t\t\t\tuuid\n\t\t\t\tdate\n\t\t\t\tquantity\n\t\t\t\tprice\n\t\t\t\ttype\n\t\t\t\tinstrument {\n\t\t\t\t\tuuid\n\t\t\t\t\tsymbol\n\t\t\t\t\tname\n\t\t\t\t\tcurrency\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n": types.GetPortfolioDocument,
     "\n\tquery GetPortfolios {\n\t\tportfolios {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.GetPortfoliosDocument,
     "\n\tmutation TransactionCreate($data: TransactionCreateInput!) {\n\t\ttransactionCreate(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.TransactionCreateDocument,
     "\n\tquery GetUser {\n\t\tuser {\n\t\t\tuuid\n\t\t\tname\n\t\t\temail\n\t\t\tcreatedAt\n\t\t\tintroductionStep\n\t\t\tdefaultCurrency\n\t\t}\n\t}\n": types.GetUserDocument,
@@ -110,7 +111,7 @@ export function gql(source: "\n\tquery GetPortfolioSummary($data: PortfolioSumma
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n\tquery GetPortfolio($uuid: String!) {\n\t\tportfolio(uuid: $uuid) {\n\t\t\tuuid\n\t\t\tname\n\t\t\ttransactions {\n\t\t\t\tuuid\n\t\t\t\tdate\n\t\t\t\tquantity\n\t\t\t\tprice\n\t\t\t\ttype\n\t\t\t\tinstrument {\n\t\t\t\t\tuuid\n\t\t\t\t\tsymbol\n\t\t\t\t\tname\n\t\t\t\t\ttype\n\t\t\t\t\tcurrency\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetPortfolio($uuid: String!) {\n\t\tportfolio(uuid: $uuid) {\n\t\t\tuuid\n\t\t\tname\n\t\t\ttransactions {\n\t\t\t\tuuid\n\t\t\t\tdate\n\t\t\t\tquantity\n\t\t\t\tprice\n\t\t\t\ttype\n\t\t\t\tinstrument {\n\t\t\t\t\tuuid\n\t\t\t\t\tsymbol\n\t\t\t\t\tname\n\t\t\t\t\ttype\n\t\t\t\t\tcurrency\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n"];
+export function gql(source: "\n\tquery GetPortfolio($uuid: String!) {\n\t\tportfolio(uuid: $uuid) {\n\t\t\tuuid\n\t\t\tname\n\t\t\ttransactions {\n\t\t\t\tuuid\n\t\t\t\tdate\n\t\t\t\tquantity\n\t\t\t\tprice\n\t\t\t\ttype\n\t\t\t\tinstrument {\n\t\t\t\t\tuuid\n\t\t\t\t\tsymbol\n\t\t\t\t\tname\n\t\t\t\t\tcurrency\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetPortfolio($uuid: String!) {\n\t\tportfolio(uuid: $uuid) {\n\t\t\tuuid\n\t\t\tname\n\t\t\ttransactions {\n\t\t\t\tuuid\n\t\t\t\tdate\n\t\t\t\tquantity\n\t\t\t\tprice\n\t\t\t\ttype\n\t\t\t\tinstrument {\n\t\t\t\t\tuuid\n\t\t\t\t\tsymbol\n\t\t\t\t\tname\n\t\t\t\t\tcurrency\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

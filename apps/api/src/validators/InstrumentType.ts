@@ -1,5 +1,4 @@
-import { InstrumentType } from "@prisma/client";
-import {
+/* import {
 	registerDecorator,
 	ValidationOptions,
 	ValidatorConstraint,
@@ -30,3 +29,4 @@ export const IsInstrumentType =
 			validator: CustomValidator,
 		});
 	};
+ */
