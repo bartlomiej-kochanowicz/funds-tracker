@@ -70,8 +70,8 @@ export const CashAccountInvestFundsForm: FC<CashAccountInvestFundsFormFormProps>
 
 			navigate(generatePath(ROUTES.PORTFOLIOS.PORTFOLIO, { uuid: getValues("portfolio") }));
 		},
-		onError: () => {
-			emitErrorToast(t("service.unknown_error"));
+		onError: e => {
+			emitErrorToast(t(e.message, { defaultValue: "api.unknown_error" }));
 		},
 	});
 

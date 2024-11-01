@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/classnames-order */
 import { SearchInstrumentQuery } from "__generated__/graphql";
 import {
 	Badge,
@@ -127,7 +128,7 @@ export const SearchInstrumentCombobox = forwardRef<
 													onChange(instrument);
 													setOpen(false);
 												}}
-												className="flex items-center justify-between gap-2"
+												className="flex items-center justify-between gap-2 cursor-pointer"
 											>
 												<div className="flex items-center gap-1">
 													<Badge>{symbol}</Badge>

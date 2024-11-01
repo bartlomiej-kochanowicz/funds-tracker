@@ -39,7 +39,7 @@
 		"@react-stately/datepicker": "3.10.3",
 		"@react-stately/numberfield": "3.9.7",
 		"class-variance-authority": "0.7.0",
-		"cmdk": "1.0.0",
+		"cmdk": "0.2.1",
 		"date-fns": "4.1.0",
 		"framer-motion": "11.11.7",
 		"lucide-react": "0.451.0",

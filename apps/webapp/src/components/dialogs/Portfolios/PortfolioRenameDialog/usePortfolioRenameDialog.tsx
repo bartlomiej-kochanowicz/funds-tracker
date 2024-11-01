@@ -61,7 +61,7 @@ export const usePortfolioRenameDialog = ({
 			emitSuccessToast(t("modal.PortfolioRename.toast.success"));
 		},
 		onError: () => {
-			emitErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("api.unknown_error"));
 		},
 	});
 

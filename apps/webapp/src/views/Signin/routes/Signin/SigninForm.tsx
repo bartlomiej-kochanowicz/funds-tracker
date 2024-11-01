@@ -71,7 +71,7 @@ export const SigninForm = () => {
 			}
 		},
 		onError: () => {
-			emitErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("api.unknown_error"));
 		},
 	});
 

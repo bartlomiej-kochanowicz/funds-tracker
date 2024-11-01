@@ -25,15 +25,15 @@ export class TransactionsService {
 		);
 
 		if (!cashAccount) {
-			throw new HttpException("Account not found", HttpStatus.NOT_FOUND);
+			throw new HttpException("api.account_not_found", HttpStatus.NOT_FOUND);
 		}
 
 		if (!user.portfolios.some(portfolio => portfolio.uuid === portfolioUuid)) {
-			throw new HttpException("Portfolio not found", HttpStatus.NOT_FOUND);
+			throw new HttpException("api.portfolio_not_found", HttpStatus.NOT_FOUND);
 		}
 
 		if (cashAccount.balance < data.price * data.quantity + data.commission) {
-			throw new HttpException("Insufficient funds", HttpStatus.BAD_REQUEST);
+			throw new HttpException("api.insufficient_funds", HttpStatus.BAD_REQUEST);
 		}
 
 		await this.addTransaction(data, symbol);

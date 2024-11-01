@@ -71,7 +71,7 @@ export const SignupForm = () => {
 			}
 		},
 		onError: () => {
-			emitErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("api.unknown_error"));
 		},
 	});
 
@@ -82,7 +82,7 @@ export const SignupForm = () => {
 
 				navigate(ROUTES.SIGNUP.CONFIRM, { state: { email: userEmail } });
 			} else {
-				setError("userPassword", { type: "custom", message: t("service.unknown_error") });
+				setError("userPassword", { type: "custom", message: t("api.unknown_error") });
 				setError("userPasswordConfirmation", {
 					type: "custom",
 					message: EMPTY_VALIDATION_MESSAGE,
@@ -90,7 +90,7 @@ export const SignupForm = () => {
 			}
 		},
 		onError: () => {
-			const message = t("service.unknown_error");
+			const message = t("api.unknown_error");
 
 			setError("userPassword", { type: "custom", message });
 			setError("userPasswordConfirmation", {

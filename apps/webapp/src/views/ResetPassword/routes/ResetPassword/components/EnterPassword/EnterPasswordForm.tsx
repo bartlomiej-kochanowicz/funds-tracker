@@ -52,7 +52,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 			setNewPasswordSuccess(true);
 		},
 		onError: a => {
-			const message = a.message || t("service.unknown_error");
+			const message = a.message || t("api.unknown_error");
 
 			setError("userPassword", { type: "custom", message });
 			setError("userPasswordConfirmation", { type: "custom", message: EMPTY_VALIDATION_MESSAGE });

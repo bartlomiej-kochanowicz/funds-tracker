@@ -21,7 +21,7 @@ export const DateField = () => {
 						className="grow"
 						placeholder={t("modal.InvestFunds.form.placeholder.purchase_date")}
 						formatDate={date => formatDate(date, { withTime: false })}
-						toDate={new Date()}
+						disabled={{ after: new Date() }}
 						fromYear={2000}
 						toYear={new Date().getFullYear()}
 						{...field}

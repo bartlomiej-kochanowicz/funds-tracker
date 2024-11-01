@@ -54,7 +54,7 @@ export const ConfirmForm: FC<ConfirmFormProps> = ({ email }) => {
 			navigate(ROUTES.HOME);
 		},
 		onError: () => {
-			setError("code", { type: "custom", message: t("service.unknown_error") });
+			setError("code", { type: "custom", message: t("api.unknown_error") });
 		},
 	});
 

@@ -69,7 +69,7 @@ export const useCashAccountAddFundsDialog = ({
 			emitSuccessToast(t("toast.add_funds.success"));
 		},
 		onError: () => {
-			emitErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("api.unknown_error"));
 		},
 	});
 

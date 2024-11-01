@@ -58,7 +58,7 @@ export const PortfolioCreateDialog = ({ children, handleRefetch }: PortfolioCrea
 			emitSuccessToast(t("modal.PortfolioCreate.toast.success"));
 		},
 		onError: () => {
-			emitErrorToast(t("service.unknown_error"));
+			emitErrorToast(t("api.unknown_error"));
 		},
 	});
 
