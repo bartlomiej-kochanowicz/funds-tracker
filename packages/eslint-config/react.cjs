@@ -23,7 +23,7 @@ module.exports = {
 	ignorePatterns: [
 		"node_modules/",
 		"dist/",
-		".eslintrc.js",
+		".eslintrc.cjs",
 		"tailwind.config.js",
 		"postcss.config.js",
 	],

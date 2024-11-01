@@ -1,5 +1,5 @@
 module.exports = {
-	extends: ["custom/react", "plugin:storybook/recommended"],
+	extends: ["@funds-tracker/eslint-config/react", "plugin:storybook/recommended"],
 	parserOptions: {
 		project: "tsconfig.json",
 		tsconfigRootDir: __dirname,
