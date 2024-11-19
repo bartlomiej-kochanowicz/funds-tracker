@@ -2,17 +2,20 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { IntroductionStep } from "@prisma/client";
 import { MAX_PORTFOLIOS } from "@constants/common";
 import { PrismaService } from "@services/prisma/prisma.service";
-import { IntroductionPortfolios, Portfolio, PortfolioDelete, PortfolioSummary } from "./entities";
+import {
+	IntroductionPortfolios,
+	Portfolio,
+	PortfolioDelete /* , PortfolioSummary */,
+} from "./entities";
 import {
 	PortfolioCreateInput,
 	IntroductionPortfolioCreatesInput,
 	PortfolioUpdateInput,
-	PortfolioSummaryInput,
+	/* PortfolioSummaryInput, */
 } from "./inputs";
-import { UserService } from "../user/user.service";
-import { isBefore, addDays, min, subDays } from "date-fns";
+import { isBefore, addDays /* min, subDays  */ } from "date-fns";
 import { MarketService } from "@services/market/market.service";
-import { formatDate } from "@src/utils/format-date";
+/* import { formatDate } from "@src/utils/format-date"; */
 import { CurrenciesService } from "@src/services/currencies/currencies.service";
 import { GetInstrumentHistoryResponse } from "@src/types/market";
 
@@ -20,7 +23,6 @@ import { GetInstrumentHistoryResponse } from "@src/types/market";
 export class PortfoliosService {
 	constructor(
 		private prisma: PrismaService,
-		private userService: UserService,
 		private marketService: MarketService,
 		private currenciesService: CurrenciesService,
 	) {}
@@ -176,7 +178,7 @@ export class PortfoliosService {
 		}
 	}
 
-	async portfolioSummary(userId: string, data: PortfolioSummaryInput): Promise<PortfolioSummary> {
+	/* async portfolioSummary(userId: string, data: PortfolioSummaryInput): Promise<PortfolioSummary> {
 		const { defaultCurrency } = await this.userService.getUser(userId);
 
 		const { uuid, from, to } = data;
@@ -303,30 +305,25 @@ export class PortfoliosService {
 			};
 		});
 
-		/* const result = this.generateDateRangeDays(minDate, to).map(date => {
-			
+		// const result = this.generateDateRangeDays(minDate, to).map(date => {
 
-		
+		// Calculate cash and commission
+		// const { cash, commission } = dayWithTransactions.at(-1) || {};
 
-		
+		//if (cash) {
+		//currentCash = cash;
+		//}
+		//if (commission) {
+		//currentCommission = commission;
+		//}
 
-			// Calculate cash and commission
-			const { cash, commission } = dayWithTransactions.at(-1) || {};
-
-			if (cash) {
-				currentCash = cash;
-			}
-			if (commission) {
-				currentCommission = commission;
-			}
-
-			return {
-				date,
-				marketValue: currentMarketValue,
-				cash: currentCash,
-				commission: currentCommission,
-			};
-		}); */
+		//	return {
+		//	date,
+		//	marketValue: currentMarketValue,
+		//	cash: currentCash,
+		//	commission: currentCommission,
+		//};
+		// });
 
 		if (isBefore(from, minDate)) {
 			const fill = this.generateDateRangeDays(from, minDate).map(date => ({
@@ -342,7 +339,7 @@ export class PortfoliosService {
 		return {
 			data: result.filter(({ date }) => date >= from && date <= to),
 		};
-	}
+	} */
 
 	private getInstrumentsObject(
 		instruments: {

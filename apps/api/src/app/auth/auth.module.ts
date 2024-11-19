@@ -1,28 +1,35 @@
 import { Module } from "@nestjs/common";
-import { JwtModule } from "@nestjs/jwt";
-import { HttpModule } from "@nestjs/axios";
-import { SendGridModule } from "@services/send-grid/send-grid.module";
-import { AuthResolver } from "./auth.resolver";
-import { AuthService } from "./auth.service";
-import { AtStrategy, RtStrategy } from "./strategies";
-import { SignupService } from "./services/signup.service";
-import { SigninService } from "./services/signin.service";
-import { LogoutService } from "./services/logout.service";
-import { PasswordService } from "./services/password.service";
-import { TokenService } from "./services/token.service";
+import { MiddlewareConsumer, NestModule, DynamicModule } from "@nestjs/common";
+import { AuthMiddleware } from "./auth.middleware";
+import { SupertokensService } from "./supertokens/supertokens.service";
+import { ConfigInjectionToken, AuthModuleConfig } from "./config.interface";
 
 @Module({
-	imports: [JwtModule.register({}), HttpModule, SendGridModule],
-	providers: [
-		AuthResolver,
-		AuthService,
-		SignupService,
-		SigninService,
-		LogoutService,
-		PasswordService,
-		TokenService,
-		AtStrategy,
-		RtStrategy,
-	],
+	providers: [SupertokensService],
+	exports: [],
+	controllers: [],
 })
-export class AuthModule {}
+export class AuthModule implements NestModule {
+	configure(consumer: MiddlewareConsumer) {
+		consumer.apply(AuthMiddleware).forRoutes("*");
+	}
+
+	static forRoot({ connectionURI, apiKey, appInfo }: AuthModuleConfig): DynamicModule {
+		return {
+			providers: [
+				{
+					useValue: {
+						appInfo,
+						connectionURI,
+						apiKey,
+					},
+					provide: ConfigInjectionToken,
+				},
+				SupertokensService,
+			],
+			exports: [],
+			imports: [],
+			module: AuthModule,
+		};
+	}
+}

@@ -65,12 +65,12 @@ export class PortfoliosResolver {
 		return this.portfoliosService.delete(userId, uuid);
 	}
 
-	@Query(() => PortfolioSummary, { description: "Get portfolio summary data." })
+	/* @Query(() => PortfolioSummary, { description: "Get portfolio summary data." })
 	portfolioSummary(
 		@GetCurrentUserId() userId: string,
 		@Args("data")
 		portfolioSummaryInput: PortfolioSummaryInput,
 	): Promise<PortfolioSummary> {
 		return this.portfoliosService.portfolioSummary(userId, portfolioSummaryInput);
-	}
+	} */
 }

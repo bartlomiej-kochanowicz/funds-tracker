@@ -39,7 +39,8 @@ services:
   development-database:
     image: postgres:14.5-alpine
     container_name: development-database
-    restart: always
+    networks:
+      - app_network
     environment:
       - POSTGRES_USER=${DEVELOPMENT_POSTGRES_USER}
       - POSTGRES_PASSWORD=${DEVELOPMENT_POSTGRES_PASSWORD}
@@ -48,9 +49,46 @@ services:
       - "${DEVELOPMENT_POSTGRES_PORT}:5432"
     volumes:
       - development-database:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-U",
+          "${DEVELOPMENT_POSTGRES_USER}",
+          "-d",
+          "${DEVELOPMENT_POSTGRES_DB}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  supertokens:
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:9.3.0
+    depends_on:
+      development-database:
+        condition: service_healthy
+    ports:
+      - 3567:3567
+    environment:
+      POSTGRESQL_CONNECTION_URI: "postgresql://${DEVELOPMENT_POSTGRES_USER}:${DEVELOPMENT_POSTGRES_PASSWORD}@development-database:5432/${TESTS_POSTGRES_DB}"
+    networks:
+      - app_network
+    restart: unless-stopped
+    healthcheck:
+      test: >
+        bash -c 'exec 3<>/dev/tcp/127.0.0.1/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 127.0.0.1:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   development-database:
     driver: local
   development-redis:
     driver: local
+
+networks:
+  app_network:
+    driver: bridge

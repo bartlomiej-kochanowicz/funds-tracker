@@ -2,10 +2,10 @@ import "tsconfig-paths/register";
 import { Test } from "@nestjs/testing";
 import { PrismaService } from "@services/prisma/prisma.service";
 import { AppModule } from "@src/app.module";
-import { testUser } from "@tests/stubs/testUser.stub";
+/* import { testUser } from "@tests/stubs/testUser.stub"; */
 import { Response } from "express";
-import { ConfirmSignupInput } from "@app/auth/inputs";
-import { SignupService } from "@app/auth/services/signup.service";
+/* import { ConfirmSignupInput } from "@app/auth/inputs";
+import { SignupService } from "@app/auth/services/signup.service"; */
 
 export default async () => {
 	const moduleRef = await Test.createTestingModule({
@@ -17,7 +17,7 @@ export default async () => {
 	await app.init();
 
 	const prismaService = moduleRef.get<PrismaService>(PrismaService);
-	const signupService = moduleRef.get<SignupService>(SignupService);
+	/* const signupService = moduleRef.get<SignupService>(SignupService); */
 
 	await prismaService.cleanDatabase();
 
@@ -32,7 +32,7 @@ export default async () => {
 
 	res.cookie = (): any => {};
 
-	await signupService.signupLocal(testUser);
+	/* await signupService.signupLocal(testUser);
 
 	const confirmSignupInput: ConfirmSignupInput = {
 		email: testUser.email,
@@ -40,7 +40,7 @@ export default async () => {
 		token: testUser.token,
 	};
 
-	await signupService.confirmSignup(confirmSignupInput, res);
+	await signupService.confirmSignup(confirmSignupInput, res); */
 
 	await app.close();
 };

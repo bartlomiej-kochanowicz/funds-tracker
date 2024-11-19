@@ -16,18 +16,9 @@ model User {
   confirmationCodeHash String?          @unique
   defaultCurrency      String
   introductionStep     IntroductionStep @default(DefaultCurrency)
-  sessions             Session[]
   cashAccounts         CashAccount[]
   portfolios           Portfolio[]
   subscription         Subscription     @default(FREE)
-}
-
-model Session {
-  name      String
-  rtHash    String   @unique
-  updatedAt DateTime @default(now())
-  user      User     @relation(fields: [userUuid], references: [uuid])
-  userUuid  String
 }
 
 model CashAccount {
@@ -78,8 +69,8 @@ model Transaction {
 }
 
 model Instrument {
-  uuid         String         @id @default(uuid())
-  symbol       String         @unique
+  uuid         String        @id @default(uuid())
+  symbol       String        @unique
   name         String
   currency     String
   transactions Transaction[]
