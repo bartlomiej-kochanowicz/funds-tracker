@@ -3,6 +3,7 @@ import supertokens from "supertokens-node";
 import Session from "supertokens-node/recipe/session";
 import ThirdParty from "supertokens-node/recipe/thirdparty";
 import EmailPassword from "supertokens-node/recipe/emailpassword";
+import Dashboard from "supertokens-node/recipe/dashboard";
 
 import { ConfigInjectionToken, AuthModuleConfig } from "../config.interface";
 
@@ -54,6 +55,7 @@ export class SupertokensService {
 					},
 				}),
 				Session.init(),
+				Dashboard.init(),
 			],
 		});
 	}
