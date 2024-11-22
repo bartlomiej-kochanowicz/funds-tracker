@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as SendGrid from "@sendgrid/mail";
 import { IS_DEVELOPMENT, IS_PRODUCTION } from "@config/env";
-import * as Handlebars from "handlebars";
 import * as nodemailer from "nodemailer";
 
 @Injectable()
@@ -27,11 +26,11 @@ export class SendGridService {
 		}
 	}
 
-	getHtml(template: string, variables: unknown) {
+	/* getHtml(template: string, variables: unknown) {
 		const html = Handlebars.compile(template);
 
 		return html(variables);
-	}
+	} */
 
 	private async sendEmailDevelopment(mail: SendGrid.MailDataRequired): Promise<boolean> {
 		try {

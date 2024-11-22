@@ -1,5 +1,4 @@
 import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
-import { GetCurrentUserId } from "@decorators/get-current-user-id.decorator";
 import { CashAccountsService } from "./cash-accounts.service";
 import {
 	CashAccount,
@@ -20,33 +19,35 @@ export class CashAccountsResolver {
 
 	@Mutation(() => CashAccount)
 	cashAccountCreate(
-		@GetCurrentUserId() userId: string,
+		// @GetCurrentUserId() userId: string,
 		@Args("data")
 		cashAccountCreateInput: CashAccountCreateInput,
 	) {
-		return this.cashAccountsService.create(userId, cashAccountCreateInput);
+		return this.cashAccountsService.create("", cashAccountCreateInput);
 	}
 
 	@Mutation(() => IntroductionCashAccounts)
 	introductionCashAccountCreates(
-		@GetCurrentUserId() userId: string,
+		// @GetCurrentUserId() userId: string,
 		@Args("data")
 		introductionCashAccountCreateInput: IntroductionCashAccountCreatesInput,
 	) {
 		return this.cashAccountsService.introductionCashAccountCreates(
-			userId,
+			"",
 			introductionCashAccountCreateInput,
 		);
 	}
 
 	@Query(() => [CashAccount])
-	cashAccounts(@GetCurrentUserId() userId: string) {
-		return this.cashAccountsService.findAll(userId);
+	cashAccounts(/* @GetCurrentUserId() userId: string */) {
+		return this.cashAccountsService.findAll("");
 	}
 
 	@Query(() => CashAccount)
-	cashAccount(@GetCurrentUserId() userId: string, @Args("uuid", { type: () => ID }) uuid: string) {
-		return this.cashAccountsService.findOne(userId, uuid);
+	cashAccount(
+		/* @GetCurrentUserId() userId: string, */ @Args("uuid", { type: () => ID }) uuid: string,
+	) {
+		return this.cashAccountsService.findOne("", uuid);
 	}
 
 	@ResolveField(() => [CashAccountOperation])
@@ -64,28 +65,28 @@ export class CashAccountsResolver {
 
 	@Mutation(() => CashAccount)
 	cashAccountUpdate(
-		@GetCurrentUserId() userId: string,
+		/* @GetCurrentUserId() userId: string, */
 		@Args("uuid", { type: () => ID }) uuid: string,
 		@Args("data")
 		cashAccountUpdateInput: CashAccountUpdateInput,
 	) {
-		return this.cashAccountsService.update(userId, uuid, cashAccountUpdateInput);
+		return this.cashAccountsService.update("", uuid, cashAccountUpdateInput);
 	}
 
 	@Mutation(() => CashAccountDelete)
 	cashAccountDelete(
-		@GetCurrentUserId() userId: string,
+		/* @GetCurrentUserId() userId: string, */
 		@Args("uuid", { type: () => ID }) uuid: string,
 	): Promise<CashAccountDelete> {
-		return this.cashAccountsService.delete(userId, uuid);
+		return this.cashAccountsService.delete("", uuid);
 	}
 
 	@Mutation(() => CashAccount)
 	cashAccountAddFunds(
-		@GetCurrentUserId() userId: string,
+		/* @GetCurrentUserId() userId: string, */
 		@Args("data")
 		cashAccountAddFundsInput: CashAccountAddFundsInput,
 	) {
-		return this.cashAccountsService.cashAccountAddFundsInput(userId, cashAccountAddFundsInput);
+		return this.cashAccountsService.cashAccountAddFundsInput("", cashAccountAddFundsInput);
 	}
 }

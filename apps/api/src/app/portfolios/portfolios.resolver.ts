@@ -1,11 +1,9 @@
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
-import { GetCurrentUserId } from "@decorators/get-current-user-id.decorator";
-import { IntroductionPortfolios, Portfolio, PortfolioDelete, PortfolioSummary } from "./entities";
+import { IntroductionPortfolios, Portfolio, PortfolioDelete } from "./entities";
 import {
 	PortfolioCreateInput,
 	PortfolioUpdateInput,
 	IntroductionPortfolioCreatesInput,
-	PortfolioSummaryInput,
 } from "./inputs";
 import { PortfoliosService } from "./portfolios.service";
 
@@ -15,54 +13,54 @@ export class PortfoliosResolver {
 
 	@Mutation(() => Portfolio)
 	portfolioCreate(
-		@GetCurrentUserId() userId: string,
+		/* @GetCurrentUserId() userId: string, */
 		@Args("data")
 		portfolioCreateInput: PortfolioCreateInput,
 	) {
-		return this.portfoliosService.create(userId, portfolioCreateInput);
+		return this.portfoliosService.create("", portfolioCreateInput);
 	}
 
 	@Mutation(() => IntroductionPortfolios)
 	introductionPortfolioCreates(
-		@GetCurrentUserId() userId: string,
+		/* @GetCurrentUserId() userId: string, */
 		@Args("data")
 		introductionPortfolioCreatesInput: IntroductionPortfolioCreatesInput,
 	) {
 		return this.portfoliosService.introductionPortfolioCreates(
-			userId,
+			"",
 			introductionPortfolioCreatesInput,
 		);
 	}
 
 	@Query(() => [Portfolio])
-	portfolios(@GetCurrentUserId() userId: string) {
-		return this.portfoliosService.findAll(userId);
+	portfolios(/* @GetCurrentUserId() userId: string */) {
+		return this.portfoliosService.findAll("");
 	}
 
 	@Query(() => Portfolio)
 	portfolio(
-		@GetCurrentUserId() userId: string,
+		/* @GetCurrentUserId() userId: string, */
 		@Args("uuid", { type: () => String }) uuid: string,
 	) {
-		return this.portfoliosService.findOne(userId, uuid);
+		return this.portfoliosService.findOne("", uuid);
 	}
 
 	@Mutation(() => Portfolio)
 	portfolioUpdate(
-		@GetCurrentUserId() userId: string,
+		/* @GetCurrentUserId() userId: string, */
 		@Args("uuid", { type: () => String }) uuid: string,
 		@Args("data")
 		portfolioUpdateInput: PortfolioUpdateInput,
 	) {
-		return this.portfoliosService.update(userId, uuid, portfolioUpdateInput);
+		return this.portfoliosService.update("", uuid, portfolioUpdateInput);
 	}
 
 	@Mutation(() => PortfolioDelete)
 	portfolioDelete(
-		@GetCurrentUserId() userId: string,
+		/* @GetCurrentUserId() userId: string, */
 		@Args("uuid", { type: () => String }) uuid: string,
 	) {
-		return this.portfoliosService.delete(userId, uuid);
+		return this.portfoliosService.delete("", uuid);
 	}
 
 	/* @Query(() => PortfolioSummary, { description: "Get portfolio summary data." })

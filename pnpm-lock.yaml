@@ -270,6 +270,9 @@ importers:
       recharts:
         specifier: 2.12.7
         version: 2.12.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      supertokens-auth-react:
+        specifier: 0.48.0
+        version: 0.48.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(supertokens-web-js@0.14.0)
       supertokens-web-js:
         specifier: 0.14.0
         version: 0.14.0
@@ -6410,6 +6413,9 @@ packages:
   intl-messageformat@10.5.11:
     resolution: {integrity: sha512-eYq5fkFBVxc7GIFDzpFQkDOZgNayNTQn4Oufe8jw6YY6OHVw70/4pA3FyCsQ0Gb2DnvEJEMmN2tOaXUGByM+kg==}
 
+  intl-tel-input@17.0.21:
+    resolution: {integrity: sha512-TfyPxLe41QZPOf6RqBxRE2dpQ0FThB/PBD/gRbxVhGW7IuYg30QD90x/vjmEo4vkZw7j8etxpVcjIZVRcG+Otw==}
+
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
 
@@ -7791,6 +7797,9 @@ packages:
   pure-rand@6.0.4:
     resolution: {integrity: sha512-LA0Y9kxMYv47GIPJy6MI84fqTd2HmYZI83W/kM/SkKfDlajnZYfmXFTxkbY+xSBPkLJxltMa9hIkmdc29eguMA==}
 
+  qr.js@0.0.0:
+    resolution: {integrity: sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==}
+
   qs@6.11.0:
     resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
     engines: {node: '>=0.6'}
@@ -7927,6 +7936,11 @@ packages:
 
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+
+  react-qr-code@2.0.15:
+    resolution: {integrity: sha512-MkZcjEXqVKqXEIMVE0mbcGgDpkfSdd8zhuzXEl9QzYeNcw8Hq2oVIzDLWuZN2PQBwM5PWjc2S31K8Q1UbcFMfw==}
+    peerDependencies:
+      react: '*'
 
   react-refresh@0.14.2:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
@@ -8637,6 +8651,14 @@ packages:
   supertest@7.0.0:
     resolution: {integrity: sha512-qlsr7fIC0lSddmA3tzojvzubYxvlGtzumcdHgPwbFWMISQwL22MhM2Y3LNt+6w9Yyx7559VW5ab70dgphm8qQA==}
     engines: {node: '>=14.18.0'}
+
+  supertokens-auth-react@0.48.0:
+    resolution: {integrity: sha512-JDahnvSKahso6LbD3Oe/e2Ifxz/dg7kMVGnlt+sZbz/kNSQAKk7yaTrxrCemcNDw5IDB9etheCVrLu7ye/ndmQ==}
+    engines: {node: '>=16.0.0', npm: '>=8'}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+      supertokens-web-js: ^0.14.0
 
   supertokens-js-override@0.0.4:
     resolution: {integrity: sha512-r0JFBjkMIdep3Lbk3JA+MpnpuOtw4RSyrlRAbrzMcxwiYco3GFWl/daimQZ5b1forOiUODpOlXbSOljP/oyurg==}
@@ -16798,6 +16820,8 @@ snapshots:
       '@formatjs/icu-messageformat-parser': 2.7.6
       tslib: 2.7.0
 
+  intl-tel-input@17.0.21: {}
+
   invariant@2.2.4:
     dependencies:
       loose-envify: 1.4.0
@@ -18327,6 +18351,8 @@ snapshots:
 
   pure-rand@6.0.4: {}
 
+  qr.js@0.0.0: {}
+
   qs@6.11.0:
     dependencies:
       side-channel: 1.0.4
@@ -18469,6 +18495,12 @@ snapshots:
   react-is@18.1.0: {}
 
   react-is@18.3.1: {}
+
+  react-qr-code@2.0.15(react@18.3.1):
+    dependencies:
+      prop-types: 15.8.1
+      qr.js: 0.0.0
+      react: 18.3.1
 
   react-refresh@0.14.2: {}
 
@@ -19316,6 +19348,16 @@ snapshots:
       superagent: 9.0.2
     transitivePeerDependencies:
       - supports-color
+
+  supertokens-auth-react@0.48.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(supertokens-web-js@0.14.0):
+    dependencies:
+      intl-tel-input: 17.0.21
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-qr-code: 2.0.15(react@18.3.1)
+      supertokens-js-override: 0.0.4
+      supertokens-web-js: 0.14.0
 
   supertokens-js-override@0.0.4: {}
 

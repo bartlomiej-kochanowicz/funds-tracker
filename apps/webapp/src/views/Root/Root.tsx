@@ -7,10 +7,8 @@ import { HomeRoutes } from "views/Home";
 import { HubRoutes } from "views/Hub";
 import { NotFoundRoutes } from "views/NotFound";
 import { PortfoliosRoutes } from "views/Portfolios";
-import { ResetPasswordRoutes } from "views/ResetPassword";
 import { SettingsRoutes } from "views/Settings";
 import { SinginRoutes } from "views/Signin";
-import { SignupRoutes } from "views/Signup";
 
 export const Root: FC = () => {
 	const { theme = "system" } = useTheme();
@@ -18,8 +16,6 @@ export const Root: FC = () => {
 	const views = useRoutes([
 		...HomeRoutes,
 		...SinginRoutes,
-		...SignupRoutes,
-		...ResetPasswordRoutes,
 		...CashAccountsRoutes,
 		...PortfoliosRoutes,
 		...SettingsRoutes,

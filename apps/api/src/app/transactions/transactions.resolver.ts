@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Args } from "@nestjs/graphql";
-import { GetCurrentUserId } from "@decorators/get-current-user-id.decorator";
+/* import { GetCurrentUserId } from "@decorators/get-current-user-id.decorator"; */
 import { TransactionsService } from "./transactions.service";
 import { TransactionCreate } from "./entities/transaction-create.entity";
 import { TransactionCreateInput } from "./inputs/transaction-create.input";
@@ -10,9 +10,9 @@ export class TransactionsResolver {
 
 	@Mutation(() => TransactionCreate)
 	transactionCreate(
-		@GetCurrentUserId() userUuid: string,
+		/* @GetCurrentUserId() userUuid: string, */
 		@Args("data") data: TransactionCreateInput,
 	) {
-		return this.transactionsService.transactionCreate(userUuid, data);
+		return this.transactionsService.transactionCreate("", data);
 	}
 }

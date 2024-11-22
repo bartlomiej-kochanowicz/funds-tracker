@@ -46,6 +46,7 @@
 		"react-is": "18.3.1",
 		"react-router-dom": "6.26.2",
 		"recharts": "2.12.7",
+		"supertokens-auth-react": "0.48.0",
 		"supertokens-web-js": "0.14.0",
 		"tailwind-merge": "2.5.3",
 		"yup": "1.4.0"
