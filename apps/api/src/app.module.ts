@@ -7,11 +7,8 @@ import { RedisModule } from "@liaoliaots/nestjs-redis";
 import { AtGuard } from "@guards/at.guard";
 import { PrismaModule } from "./services/prisma/prisma.module";
 import { AuthModule } from "./app/auth/auth.module";
-import { CashAccountsModule } from "./app/cash-accounts/cash-accounts.module";
-import { InstrumentsModule } from "./app/instruments/instruments.module";
-import { PortfoliosModule } from "./app/portfolios/portfolios.module";
+
 import { UserModule } from "./app/user/user.module";
-import { TransactionsModule } from "./app/transactions/transactions.module";
 import { CurrenciesModule } from "./services/currencies/currencies.module";
 
 @Module({
@@ -35,13 +32,8 @@ import { CurrenciesModule } from "./services/currencies/currencies.module";
 		}),
 		PrismaModule,
 		AuthModule,
-		CashAccountsModule,
-		InstrumentsModule,
-		PortfoliosModule,
 		UserModule,
-		TransactionsModule,
 		CurrenciesModule,
-		TransactionsModule,
 	],
 	controllers: [],
 	providers: [

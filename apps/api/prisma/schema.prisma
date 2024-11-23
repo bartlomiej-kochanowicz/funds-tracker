@@ -8,81 +8,96 @@ datasource db {
 }
 
 model User {
-  uuid                 String           @id @default(uuid())
-  createdAt            DateTime         @default(now())
-  email                String           @unique
+  uuid                 String       @id @default(uuid())
+  createdAt            DateTime     @default(now())
+  email                String       @unique
   name                 String
   password             String
-  confirmationCodeHash String?          @unique
-  defaultCurrency      String
-  introductionStep     IntroductionStep @default(DefaultCurrency)
+  confirmationCodeHash String?      @unique
   sessions             Session[]
-  cashAccounts         CashAccount[]
   portfolios           Portfolio[]
-  subscription         Subscription     @default(FREE)
+  subscription         Subscription @default(FREE)
 }
 
 model Session {
   name      String
   rtHash    String   @unique
   updatedAt DateTime @default(now())
-  user      User     @relation(fields: [userUuid], references: [uuid])
+  user      User     @relation(references: [uuid], fields: [userUuid])
   userUuid  String
 }
 
-model CashAccount {
-  uuid       String                 @id @default(uuid())
-  name       String
-  balance    Float                  @default(0)
-  currency   String
-  user       User                   @relation(fields: [userUuid], references: [uuid])
-  userUuid   String
-  operations CashAccountOperation[] @relation()
-
-  @@unique([userUuid, uuid])
-}
-
-model CashAccountOperation {
-  uuid            String                   @id @default(uuid())
-  cashAccount     CashAccount              @relation(fields: [cashAccountUuid], references: [uuid])
-  cashAccountUuid String
-  date            DateTime                 @default(now())
-  type            CashAccountOperationType
-  amount          Float
-  portfolio       Portfolio?               @relation(fields: [portfolioUuid], references: [uuid])
-  portfolioUuid   String?
-}
-
 model Portfolio {
-  uuid                  String                 @id @default(uuid())
-  name                  String
-  user                  User                   @relation(fields: [userUuid], references: [uuid])
-  userUuid              String
-  transactions          Transaction[]
-  cashAccountOperations CashAccountOperation[]
+  uuid         String        @id @default(uuid())
+  name         String
+  user         User          @relation(fields: [userUuid], references: [uuid])
+  userUuid     String
+  securities   Security[]
+  cashHoldings CashHolding[]
+  hardAssets   HardAsset[]
 
   @@unique([userUuid, uuid])
 }
 
-model Transaction {
-  uuid           String        @id @default(uuid())
-  date           DateTime
-  type           OperationType
-  quantity       Float
-  price          Float
-  commission     Float
-  portfolio      Portfolio     @relation(fields: [portfolioUuid], references: [uuid])
-  portfolioUuid  String
-  instrument     Instrument    @relation(fields: [instrumentUuid], references: [uuid])
-  instrumentUuid String
+model Security {
+  uuid              String             @id @default(uuid())
+  symbol            String
+  stockExchange     String?
+  exchangeShortName String?
+  name              String
+  currency          String?
+  activities        SecurityActivity[]
+  Portfolio         Portfolio          @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid     String
 }
 
-model Instrument {
-  uuid         String         @id @default(uuid())
-  symbol       String         @unique
-  name         String
-  currency     String
-  transactions Transaction[]
+model SecurityActivity {
+  uuid         String               @id @default(uuid())
+  date         DateTime
+  activityType SecurityActivityType
+  quantity     Float
+  price        Int
+  fee          Int
+  Security     Security?            @relation(fields: [securityUuid], references: [uuid])
+  securityUuid String?
+}
+
+model CashHolding {
+  uuid          String                @id @default(uuid())
+  name          String
+  currency      String
+  activities    CashHoldingActivity[]
+  portfolio     Portfolio             @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid String
+}
+
+model CashHoldingActivity {
+  uuid            String                  @id @default(uuid())
+  date            DateTime
+  activityType    CashHoldingActivityType
+  amount          Int
+  fee             Int
+  CashHolding     CashHolding             @relation(fields: [cashHoldingUuid], references: [uuid])
+  cashHoldingUuid String
+}
+
+model HardAsset {
+  uuid          String              @id @default(uuid())
+  name          String
+  currency      String
+  activities    HardAssetActivity[]
+  Portfolio     Portfolio           @relation(fields: [portfolioUuid], references: [uuid])
+  portfolioUuid String
+}
+
+model HardAssetActivity {
+  uuid          String    @id @default(uuid())
+  date          DateTime
+  type          String
+  amount        Int
+  fee           Int
+  HardAsset     HardAsset @relation(fields: [hardAssetUuid], references: [uuid])
+  hardAssetUuid String
 }
 
 enum Subscription {
@@ -91,32 +106,13 @@ enum Subscription {
   EXPERT
 }
 
-enum CashAccountOperationType {
-  deposit
-  withdrawal
-  transfer
-  interest
-  tax
-  fee
-  other
+enum SecurityActivityType {
+  purchase
+  sale
 }
 
-enum IntroductionStep {
-  DefaultCurrency
-  CashAccounts
-  Portfolios
-  Completed
-}
-
-enum OperationType {
+enum CashHoldingActivityType {
   deposit
-  withdrawal
-  transfer
-  buy
-  sell
-  dividend
+  payout
   interest
-  tax
-  fee
-  other
 }
