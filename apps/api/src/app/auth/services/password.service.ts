@@ -29,7 +29,7 @@ export class PasswordService {
 		const isHuman = await this.authService.validateHuman(token);
 
 		if (!isHuman) {
-			throw new ForbiddenException("You are a robot!");
+			throw new ForbiddenException("api.you-are-a-robot");
 		}
 
 		const resetPasswordToken = crypto.randomBytes(32).toString("hex");
@@ -57,12 +57,12 @@ export class PasswordService {
 		const isHuman = await this.authService.validateHuman(token);
 
 		if (!isHuman) {
-			throw new ForbiddenException("You are a robot!");
+			throw new ForbiddenException("api.you-are-a-robot");
 		}
 		const uuid = await this.redis.get(resetToken);
 
 		if (!uuid) {
-			throw new ForbiddenException("Invalid or expired token.");
+			throw new ForbiddenException("api.reset-password-token-expired");
 		}
 
 		const { password: currentPassword } = await this.prisma.user.findUnique({
@@ -74,7 +74,7 @@ export class PasswordService {
 		const isPasswordsMatches = await bcrypt.compare(newPassword, currentPassword);
 
 		if (isPasswordsMatches)
-			throw new ForbiddenException("The new password must be different from the previous one.");
+			throw new ForbiddenException("api.new-password-must-be-different-from-the-old-one");
 
 		await this.redis.del(resetToken);
 

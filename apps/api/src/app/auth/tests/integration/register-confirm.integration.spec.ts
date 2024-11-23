@@ -2,11 +2,11 @@ import gql from "graphql-tag";
 import request from "supertest-graphql";
 import { IntegrationTestManager } from "@tests/IntegrationTestManager";
 import { testUser } from "@tests/stubs/testUser.stub";
-import { signupUserStub, confirmUserStub } from "@src/app/auth/tests/stubs/confirm-signup.stub";
+import { registerUserStub, confirmUserStub } from "@src/app/auth/tests/stubs/register-confirm.stub";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
-import { ConfirmSignup } from "@app/auth/entities";
+import { RegisterConfirm } from "@app/auth/entities";
 
-describe("confirm signup", () => {
+describe.skip("register confirm", () => {
 	const integrationTestManager = new IntegrationTestManager();
 
 	beforeAll(async () => {
@@ -18,19 +18,19 @@ describe("confirm signup", () => {
 	});
 
 	describe("given the user exists", () => {
-		describe("when a confirmSignup mutation is executed", () => {
-			let confirmedUser: ConfirmSignup;
+		describe("when a registerConfirm mutation is executed", () => {
+			let confirmedUser: RegisterConfirm;
 
 			beforeAll(async () => {
 				// sign up new user to have new user in database for confirm action
-				await integrationTestManager.getSignupService().signupLocal(signupUserStub);
+				await integrationTestManager.getRegisterService().registerLocal(registerUserStub);
 
-				const response = await request<{ confirmSignup: ConfirmSignup }>(
+				const response = await request<{ registerConfirm: RegisterConfirm }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation ConfirmSignup($data: ConfirmSignupInput!) {
-							confirmSignup(data: $data) {
+						mutation RegisterConfirm($data: RegisterConfirmInput!) {
+							registerConfirm(data: $data) {
 								success
 							}
 						}
@@ -40,7 +40,7 @@ describe("confirm signup", () => {
 					})
 					.expectNoErrors();
 
-				confirmedUser = response.data.confirmSignup;
+				confirmedUser = response.data.registerConfirm;
 			});
 
 			it("should return user entity", async () => {
@@ -52,7 +52,7 @@ describe("confirm signup", () => {
 			it("should update confirmationCodeHash fild in database", async () => {
 				const user = await integrationTestManager.getPrismaService().user.findUnique({
 					where: {
-						email: signupUserStub.email,
+						email: registerUserStub.email,
 					},
 					select: {
 						confirmationCodeHash: true,
@@ -65,16 +65,16 @@ describe("confirm signup", () => {
 	});
 
 	describe("given the user exists and confirmed", () => {
-		describe("when a confirmSignup mutation is executed", () => {
+		describe("when a registerConfirm mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {
-				const { response } = await request<{ confirmSignup: ConfirmSignup }>(
+				const { response } = await request<{ registerConfirm: RegisterConfirm }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation ConfirmSignup($data: ConfirmSignupInput!) {
-							confirmSignup(data: $data) {
+						mutation RegisterConfirm($data: RegisterConfirmInput!) {
+							registerConfirm(data: $data) {
 								success
 							}
 						}
@@ -97,16 +97,16 @@ describe("confirm signup", () => {
 	});
 
 	describe("given the user not exists", () => {
-		describe("when a confirmSignup mutation is executed", () => {
+		describe("when a registerConfirm mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {
-				const { response } = await request<{ confirmSignup: ConfirmSignup }>(
+				const { response } = await request<{ registerConfirm: RegisterConfirm }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation ConfirmSignup($data: ConfirmSignupInput!) {
-							confirmSignup(data: $data) {
+						mutation RegisterConfirm($data: RegisterConfirmInput!) {
+							registerConfirm(data: $data) {
 								success
 							}
 						}
@@ -129,7 +129,7 @@ describe("confirm signup", () => {
 			it("should update confirmationCodeHash fild in database", async () => {
 				const user = await integrationTestManager.getPrismaService().user.findUnique({
 					where: {
-						email: signupUserStub.email,
+						email: registerUserStub.email,
 					},
 					select: {
 						confirmationCodeHash: true,

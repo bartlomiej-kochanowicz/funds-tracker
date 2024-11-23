@@ -1,12 +1,14 @@
 import { InputType, Field } from "@nestjs/graphql";
 import { IsEmail } from "class-validator";
-import { EmailAddressResolver } from "graphql-scalars";
 
 @InputType()
-export class ResetPasswordInput {
+export class LoginInput {
 	@IsEmail()
-	@Field(() => EmailAddressResolver)
+	@Field(() => String)
 	email: string;
+
+	@Field(() => String)
+	password: string;
 
 	@Field(() => String)
 	token: string;

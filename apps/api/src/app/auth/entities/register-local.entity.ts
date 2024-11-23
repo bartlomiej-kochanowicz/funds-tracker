@@ -1,7 +1,7 @@
 import { ObjectType, Field } from "@nestjs/graphql";
 
 @ObjectType()
-export class SetNewPassword {
+export class RegisterLocal {
 	@Field(() => Boolean)
 	success: boolean;
 }

@@ -34,16 +34,19 @@ describe("logout", () => {
 			res.cookie = (): any => {};
 
 			// sign up new user to have new user in database for logout
-			await integrationTestManager.getSignupService().signupLocal(logoutStub1);
+			await integrationTestManager.getRegisterService().registerLocal(logoutStub1);
 
 			// confirm user
 			await integrationTestManager
-				.getSignupService()
-				.confirmSignup({ email: logoutStub1.email, token: logoutStub1.token, code: "123456" }, res);
+				.getRegisterService()
+				.confirmRegister(
+					{ email: logoutStub1.email, token: logoutStub1.token, code: "123456" },
+					res,
+				);
 
 			const { accessToken, refreshToken } = await integrationTestManager
-				.getSigninService()
-				.signinLocalForTests(logoutStub1.email, "::ffff:127.0.0.1-user-to-logout-session");
+				.getLoginService()
+				.loginLocalForTests(logoutStub1.email, "::ffff:127.0.0.1-user-to-logout-session");
 
 			const response = await request<{ logout: Logout }>(integrationTestManager.httpServer)
 				.set("Cookie", `accessToken=${accessToken}; refreshToken=${refreshToken}`)
@@ -102,16 +105,19 @@ describe("logout", () => {
 			res.cookie = (): any => {};
 
 			// sign up new user to have user in database
-			await integrationTestManager.getSignupService().signupLocal(logoutStub2);
+			await integrationTestManager.getRegisterService().registerLocal(logoutStub2);
 
 			// confirm user
 			await integrationTestManager
-				.getSignupService()
-				.confirmSignup({ email: logoutStub2.email, token: logoutStub2.token, code: "123456" }, res);
+				.getRegisterService()
+				.confirmRegister(
+					{ email: logoutStub2.email, token: logoutStub2.token, code: "123456" },
+					res,
+				);
 
 			const { accessToken, refreshToken } = await integrationTestManager
-				.getSigninService()
-				.signinLocalForTests(logoutStub2.email, "::ffff:127.0.0.1-logout-user-session");
+				.getLoginService()
+				.loginLocalForTests(logoutStub2.email, "::ffff:127.0.0.1-logout-user-session");
 
 			const { uuid } = await integrationTestManager
 				.getPrismaService()

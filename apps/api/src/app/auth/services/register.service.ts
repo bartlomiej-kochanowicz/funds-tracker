@@ -5,23 +5,23 @@ import { ForbiddenException, Injectable } from "@nestjs/common";
 import * as bcrypt from "bcrypt";
 import { Response } from "express";
 import { AuthService } from "../auth.service";
-import { ConfirmSignup, SendCode, SignupLocal } from "../entities";
-import { ConfirmSignupInput, SendCodeInput, SignupInput } from "../inputs";
+import { RegisterConfirm, SendCode, RegisterLocal } from "../entities";
+import { RegisterConfirmInput, SendCodeInput, RegisterInput } from "../inputs";
 
 @Injectable()
-export class SignupService {
+export class RegisterService {
 	constructor(
 		private prisma: PrismaService,
 		private authService: AuthService,
 	) {}
 
-	async signupLocal(signupInput: SignupInput): Promise<SignupLocal> {
-		const { email, password, name, token } = signupInput;
+	async registerLocal(registerInput: RegisterInput): Promise<RegisterLocal> {
+		const { email, password, name, token } = registerInput;
 
 		const isHuman = await this.authService.validateHuman(token);
 
 		if (!isHuman) {
-			throw new ForbiddenException("You are a robot!");
+			throw new ForbiddenException("api.you-are-a-robot");
 		}
 
 		const hashedPwd = await this.authService.hashData(password);
@@ -29,7 +29,7 @@ export class SignupService {
 		const existedUser = await this.prisma.user.findUnique({ where: { email } });
 
 		if (existedUser) {
-			throw new ForbiddenException("Email already in use.");
+			throw new ForbiddenException("api.email-already-in-use");
 		}
 
 		const confirmationCode = this.authService.generateConfirmationCode();
@@ -54,33 +54,33 @@ export class SignupService {
 		};
 	}
 
-	async confirmSignup(
-		confirmSignupInput: ConfirmSignupInput,
+	async confirmRegister(
+		confirmRegisterInput: RegisterConfirmInput,
 		res: Response,
-	): Promise<ConfirmSignup> {
-		const { code, email, token } = confirmSignupInput;
+	): Promise<RegisterConfirm> {
+		const { code, email, token } = confirmRegisterInput;
 
 		const isHuman = await this.authService.validateHuman(token);
 
 		if (!isHuman) {
-			throw new ForbiddenException("You are a robot!");
+			throw new ForbiddenException("api.you-are-a-robot");
 		}
 
 		const user = await this.prisma.user.findUnique({ where: { email } });
 
 		if (!user) {
-			throw new ForbiddenException("User not found.");
+			throw new ForbiddenException("api.user-not-found");
 		}
 
 		if (!user.confirmationCodeHash) {
-			throw new ForbiddenException("User already confirmed.");
+			throw new ForbiddenException("api.email-already-confirmed");
 		}
 
 		// allways pass for tests enviroment
-		const isPasswordsMatches = IS_TEST || (await bcrypt.compare(code, user.confirmationCodeHash));
+		const isCodesMatches = IS_TEST || (await bcrypt.compare(code, user.confirmationCodeHash));
 
-		if (!isPasswordsMatches) {
-			throw new ForbiddenException("Wrong confirmation code.");
+		if (!isCodesMatches) {
+			throw new ForbiddenException("api.wrong-registration-confirm-code");
 		}
 
 		await this.prisma.user.update({
@@ -123,17 +123,17 @@ export class SignupService {
 		const isHuman = await this.authService.validateHuman(token);
 
 		if (!isHuman) {
-			throw new ForbiddenException("You are a robot!");
+			throw new ForbiddenException("api.you-are-a-robot");
 		}
 
 		const user = await this.prisma.user.findUnique({ where: { email } });
 
 		if (!user) {
-			throw new ForbiddenException("User not found.");
+			throw new ForbiddenException("api.user-not-found");
 		}
 
 		if (!user.confirmationCodeHash) {
-			throw new ForbiddenException("User already confirmed.");
+			throw new ForbiddenException("api.email-already-confirmed");
 		}
 
 		const confirmationCode = this.authService.generateConfirmationCode();

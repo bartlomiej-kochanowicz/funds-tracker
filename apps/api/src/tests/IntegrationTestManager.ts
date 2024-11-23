@@ -4,8 +4,8 @@ import * as cookieParser from "cookie-parser";
 import { PrismaService } from "@services/prisma/prisma.service";
 import { testUser } from "@tests/stubs/testUser.stub";
 import { AppModule } from "@src/app.module";
-import { SigninService } from "@app/auth/services/signin.service";
-import { SignupService } from "@app/auth/services/signup.service";
+import { LoginService } from "@src/app/auth/services/login.service";
+import { RegisterService } from "@src/app/auth/services/register.service";
 
 export class IntegrationTestManager {
 	public httpServer: any;
@@ -18,9 +18,9 @@ export class IntegrationTestManager {
 
 	private prismaService: PrismaService;
 
-	private signinService: SigninService;
+	private loginService: LoginService;
 
-	private signupService: SignupService;
+	private registerService: RegisterService;
 
 	async beforeAll(): Promise<void> {
 		const moduleRef = await Test.createTestingModule({
@@ -34,8 +34,8 @@ export class IntegrationTestManager {
 		this.httpServer = this.app.getHttpServer();
 
 		this.prismaService = moduleRef.get<PrismaService>(PrismaService);
-		this.signinService = moduleRef.get<SigninService>(SigninService);
-		this.signupService = moduleRef.get<SignupService>(SignupService);
+		this.loginService = moduleRef.get<LoginService>(LoginService);
+		this.registerService = moduleRef.get<RegisterService>(RegisterService);
 
 		const { email } = await this.prismaService.user.findUnique({
 			where: {
@@ -43,7 +43,7 @@ export class IntegrationTestManager {
 			},
 		});
 
-		const { accessToken, refreshToken } = await this.signinService.signinLocalForTests(
+		const { accessToken, refreshToken } = await this.loginService.loginLocalForTests(
 			email,
 			"::ffff:127.0.0.1-main-user-session",
 		);
@@ -59,12 +59,12 @@ export class IntegrationTestManager {
 		return this.prismaService;
 	}
 
-	getSigninService(): SigninService {
-		return this.signinService;
+	getLoginService(): LoginService {
+		return this.loginService;
 	}
 
-	getSignupService(): SignupService {
-		return this.signupService;
+	getRegisterService(): RegisterService {
+		return this.registerService;
 	}
 
 	getAccessToken(): string {

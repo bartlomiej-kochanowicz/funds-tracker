@@ -2,48 +2,39 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ConfirmSignup {
-  """Confirmatiopn signup successful."""
+type RegisterConfirm {
   success: Boolean!
 }
 
 type Email {
-  """Email existence."""
   exist: Boolean!
 }
 
 type Logout {
-  """Logout successful."""
   success: Boolean!
 }
 
 type Refresh {
-  """Refresh successful."""
   success: Boolean!
 }
 
 type ResetPassword {
-  """Send reset password successful."""
   success: Boolean!
 }
 
 type SendCode {
-  """Send code successful."""
   success: Boolean!
 }
 
 type SetNewPassword {
-  """Name of the user."""
   success: Boolean!
 }
 
-type SigninLocal {
-  """Signin local successful."""
+type LoginLocal {
   success: Boolean!
 }
 
-type SignupLocal {
-  """Signup local successful."""
+type RegisterLocal {
   success: Boolean!
 }
 
@@ -77,7 +68,6 @@ type Query {
 }
 
 input EmailInput {
-  """Email."""
   email: EmailAddress!
 
   """Token."""
@@ -85,10 +75,10 @@ input EmailInput {
 }
 
 type Mutation {
-  signupLocal(data: SignupInput!): SignupLocal!
-  confirmSignup(data: ConfirmSignupInput!): ConfirmSignup!
+  registerLocal(data: RegisterInput!): RegisterLocal!
+  registerConfirm(data: RegisterConfirmInput!): RegisterConfirm!
   sendCode(data: SendCodeInput!): SendCode!
-  signinLocal(data: SigninInput!): SigninLocal!
+  loginLocal(data: LoginInput!): LoginLocal!
   logout: Logout!
   resetPassword(data: ResetPasswordInput!): ResetPassword!
   setNewPassword(data: SetNewPasswordInput!): SetNewPassword!
@@ -96,55 +86,32 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
 }
 
-input SignupInput {
-  """Email."""
+input RegisterInput {
   email: EmailAddress!
-
-  """Name."""
   name: String!
-
-  """Password."""
   password: String!
-
-  """Token."""
   token: String!
 }
 
-input ConfirmSignupInput {
-  """Email."""
+input RegisterConfirmInput {
   email: EmailAddress!
-
-  """Code."""
   code: String!
-
-  """Token."""
   token: String!
 }
 
 input SendCodeInput {
-  """Email."""
   email: EmailAddress!
-
-  """Token."""
   token: String!
 }
 
-input SigninInput {
-  """Email."""
+input LoginInput {
   email: String!
-
-  """Password."""
   password: String!
-
-  """Token."""
   token: String!
 }
 
 input ResetPasswordInput {
-  """Email."""
   email: EmailAddress!
-
-  """Token."""
   token: String!
 }
 

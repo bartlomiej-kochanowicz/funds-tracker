@@ -1,12 +1,13 @@
 import gql from "graphql-tag";
 import request from "supertest-graphql";
-import { SigninLocal } from "@app/auth/entities";
+import { LoginLocal } from "@app/auth/entities";
 import { IntegrationTestManager } from "@tests/IntegrationTestManager";
 import { testUser } from "@tests/stubs/testUser.stub";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
-import { signinUserStub } from "@src/app/auth/tests/stubs/signin-local.stup";
+import { loginUserStub } from "@src/app/auth/tests/stubs/login-local.stup";
+import { registerUserStub } from "../stubs/register-confirm.stub";
 
-describe("signin local", () => {
+describe("login local", () => {
 	const integrationTestManager = new IntegrationTestManager();
 
 	beforeAll(async () => {
@@ -18,16 +19,16 @@ describe("signin local", () => {
 	});
 
 	describe("given the user exists", () => {
-		describe("when a signinLocal mutation is executed", () => {
-			let signinUser: SigninLocal;
+		describe("when a loginLocal mutation is executed", () => {
+			let loginUser: LoginLocal;
 
 			beforeAll(async () => {
-				const response = await request<{ signinLocal: SigninLocal }>(
+				const response = await request<{ loginLocal: LoginLocal }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation SigninLocal($data: SigninInput!) {
-							signinLocal(data: $data) {
+						mutation LoginLocal($data: LoginInput!) {
+							loginLocal(data: $data) {
 								success
 							}
 						}
@@ -41,11 +42,11 @@ describe("signin local", () => {
 					})
 					.expectNoErrors();
 
-				signinUser = response.data.signinLocal;
+				loginUser = response.data.loginLocal;
 			});
 
 			it("should return user entity", async () => {
-				expect(signinUser).toMatchObject({
+				expect(loginUser).toMatchObject({
 					success: true,
 				});
 			});
@@ -53,28 +54,28 @@ describe("signin local", () => {
 	});
 
 	describe("given the user exists but it is not confirmed", () => {
-		describe("when a signinLocal mutation is executed", () => {
+		describe("when a loginLocal mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {
-				// sign up new user to have new user in database for confirm action
-				await integrationTestManager.getSignupService().signupLocal(signinUserStub);
+				// register new user to have new user in database for confirm action
+				await integrationTestManager.getRegisterService().registerLocal(registerUserStub);
 
-				const { response } = await request<{ signinLocal: SigninLocal }>(
+				const { response } = await request<{ loginLocal: LoginLocal }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation SigninLocal($data: SigninInput!) {
-							signinLocal(data: $data) {
+						mutation LoginLocal($data: LoginInput!) {
+							loginLocal(data: $data) {
 								success
 							}
 						}
 					`)
 					.variables({
 						data: {
-							email: signinUserStub.email,
-							password: signinUserStub.password,
-							token: signinUserStub.token,
+							email: loginUserStub.email,
+							password: loginUserStub.password,
+							token: loginUserStub.token,
 						},
 					});
 
@@ -88,16 +89,16 @@ describe("signin local", () => {
 	});
 
 	describe("given the user wrong password", () => {
-		describe("when a signinLocal mutation is executed", () => {
+		describe("when a loginLocal mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {
-				const { response } = await request<{ signinLocal: SigninLocal }>(
+				const { response } = await request<{ loginLocal: LoginLocal }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation SigninLocal($data: SigninInput!) {
-							signinLocal(data: $data) {
+						mutation LoginLocal($data: LoginInput!) {
+							loginLocal(data: $data) {
 								success
 							}
 						}
@@ -120,16 +121,16 @@ describe("signin local", () => {
 	});
 
 	describe("given the user wrong email", () => {
-		describe("when a signinLocal mutation is executed", () => {
+		describe("when a loginLocal mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {
-				const { response } = await request<{ signinLocal: SigninLocal }>(
+				const { response } = await request<{ loginLocal: LoginLocal }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation SigninLocal($data: SigninInput!) {
-							signinLocal(data: $data) {
+						mutation LoginLocal($data: LoginInput!) {
+							loginLocal(data: $data) {
 								success
 							}
 						}

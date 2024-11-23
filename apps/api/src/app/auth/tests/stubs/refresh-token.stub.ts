@@ -1,6 +1,6 @@
-import { SignupInput } from "@app/auth/inputs";
+import { RegisterInput } from "@app/auth/inputs";
 
-export const refreshTokenStub: SignupInput = {
+export const refreshTokenStub: RegisterInput = {
 	email: "testlogoutuser@test.com",
 	password: "testlogoutPassword",
 	name: "testlogoutName",

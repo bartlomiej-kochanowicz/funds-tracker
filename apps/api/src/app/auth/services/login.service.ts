@@ -4,36 +4,36 @@ import { ForbiddenException, Injectable } from "@nestjs/common";
 import { Response } from "express";
 import * as bcrypt from "bcrypt";
 import { PrismaService } from "@services/prisma/prisma.service";
-import { Email, SigninLocal } from "../entities";
-import { EmailInput, SigninInput } from "../inputs";
+import { Email, LoginLocal } from "../entities";
+import { EmailInput, LoginInput } from "../inputs";
 import { AuthService } from "../auth.service";
 
 @Injectable()
-export class SigninService {
+export class LoginService {
 	constructor(
 		private prisma: PrismaService,
 		private authService: AuthService,
 	) {}
 
-	async signinLocal(signinInput: SigninInput, res: Response): Promise<SigninLocal> {
-		const { email, password, token } = signinInput;
+	async loginLocal(loginInput: LoginInput, res: Response): Promise<LoginLocal> {
+		const { email, password, token } = loginInput;
 
 		const isHuman = await this.authService.validateHuman(token);
 
 		if (!isHuman) {
-			throw new ForbiddenException("You are a robot!");
+			throw new ForbiddenException("api.you-are-a-robot");
 		}
 
 		const user = await this.prisma.user.findUnique({ where: { email } });
 
-		if (!user) throw new ForbiddenException("Wrong credencials provided.");
+		if (!user) throw new ForbiddenException("api.user-not-found");
 
 		const isPasswordsMatches = await bcrypt.compare(password, user.password);
 
-		if (!isPasswordsMatches) throw new ForbiddenException("Wrong password.");
+		if (!isPasswordsMatches) throw new ForbiddenException("api.wrong-password");
 
 		if (user.confirmationCodeHash) {
-			throw new ForbiddenException("User not confirmed.");
+			throw new ForbiddenException("api.email-not-confirmed");
 		}
 
 		const { accessToken, refreshToken } = await this.authService.getTokens(user.uuid, user.email);
@@ -65,7 +65,7 @@ export class SigninService {
 		};
 	}
 
-	async signinLocalForTests(
+	async loginLocalForTests(
 		email: string,
 		sessionName: string,
 	): Promise<{ accessToken: string; refreshToken: string }> {
@@ -87,7 +87,7 @@ export class SigninService {
 		const isHuman = await this.authService.validateHuman(token);
 
 		if (!isHuman) {
-			throw new ForbiddenException("You are a robot!");
+			throw new ForbiddenException("api.you-are-a-robot");
 		}
 
 		const user = await this.prisma.user.findUnique({ where: { email } });
