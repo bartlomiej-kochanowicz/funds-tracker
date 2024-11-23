@@ -47,194 +47,6 @@ type SignupLocal {
   success: Boolean!
 }
 
-type CashAccountDelete {
-  """Confirmatiopn delete cash account."""
-  success: Boolean!
-}
-
-type CashAccountOperation {
-  """Transaction uuid."""
-  uuid: ID!
-
-  """Date of the transaction."""
-  date: String!
-
-  """Cash account balance."""
-  amount: Float!
-
-  """Cash account oparation type."""
-  type: CashAccountOperationType!
-
-  """Portfolio uuid."""
-  portfolioUuid: String!
-}
-
-enum CashAccountOperationType {
-  deposit
-  withdrawal
-  transfer
-  interest
-  tax
-  fee
-  other
-}
-
-type CashAccount {
-  """Cash account uuid."""
-  uuid: ID!
-
-  """Cash account name."""
-  name: String!
-
-  """Cash account currency."""
-  currency: String!
-
-  """Account balance."""
-  balance: Float!
-
-  """Account opeartions."""
-  operations(first: Float, skip: Float): [CashAccountOperation!]!
-}
-
-type IntroductionCashAccounts {
-  """Cash accounts created successfully."""
-  success: Boolean!
-}
-
-type InstrumentHistory {
-  """Date"""
-  date: String!
-
-  """Open"""
-  open: Float!
-
-  """High"""
-  high: Float!
-
-  """Low"""
-  low: Float!
-
-  """Close"""
-  close: Float!
-
-  """Volume"""
-  volume: Float!
-}
-
-type SearchInstrument {
-  """Symbol"""
-  symbol: String!
-
-  """Name"""
-  name: String!
-
-  """Currency"""
-  currency: String!
-
-  """Stock exchange"""
-  stockExchange: String
-
-  """Exchange short name"""
-  exchangeShortName: String!
-}
-
-type IntroductionPortfolios {
-  """Portfolios created successfully."""
-  success: Boolean!
-}
-
-type PortfolioDelete {
-  """Confirmatiopn delete portfolio."""
-  success: Boolean!
-}
-
-type MarketValueItem {
-  """Symbol"""
-  symbol: String!
-
-  """Cumulative deposited cash."""
-  value: Float!
-}
-
-type PortfolioSummaryItem {
-  """Date"""
-  date: DateTime!
-
-  """Market values."""
-  marketValues: [MarketValueItem!]!
-
-  """Cumulative deposited cash."""
-  cash: Float!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type PortfolioSummary {
-  """Portfolio summary data."""
-  data: [PortfolioSummaryItem!]!
-}
-
-type Instrument {
-  """Instrument uuid."""
-  uuid: ID!
-
-  """Code"""
-  symbol: String!
-
-  """Name"""
-  name: String!
-
-  """Instrument currency"""
-  currency: String!
-}
-
-type Transaction {
-  """Transaction uuid."""
-  uuid: ID!
-
-  """Date of purchase"""
-  date: DateTime!
-
-  """Operation type"""
-  type: OperationType!
-
-  """Quantity"""
-  quantity: Float!
-
-  """Price"""
-  price: Float!
-
-  """Instrument"""
-  instrument: Instrument!
-}
-
-enum OperationType {
-  deposit
-  withdrawal
-  transfer
-  buy
-  sell
-  dividend
-  interest
-  tax
-  fee
-  other
-}
-
-type Portfolio {
-  """Portfolio uuid."""
-  uuid: ID!
-
-  """Portfolio name."""
-  name: String!
-
-  """Portfolio transactions."""
-  transactions: [Transaction!]!
-}
-
 type User {
   """User uuid."""
   uuid: ID!
@@ -272,22 +84,8 @@ enum IntroductionStep {
   Completed
 }
 
-type TransactionCreate {
-  """Success"""
-  success: Boolean!
-}
-
 type Query {
   emailExist(data: EmailInput!): Email!
-  cashAccounts: [CashAccount!]!
-  cashAccount(uuid: ID!): CashAccount!
-  searchInstrument(data: SearchInstrumentInput!): [SearchInstrument!]!
-  instrumentHistory(data: InstrumentHistoryInput!): [InstrumentHistory!]!
-  portfolios: [Portfolio!]!
-  portfolio(uuid: String!): Portfolio!
-
-  """Get portfolio summary data."""
-  portfolioSummary(data: PortfolioSummaryInput!): PortfolioSummary!
   user: User!
 }
 
@@ -299,36 +97,6 @@ input EmailInput {
   token: String!
 }
 
-input SearchInstrumentInput {
-  """Instrument name."""
-  name: String!
-}
-
-input InstrumentHistoryInput {
-  """Symbol"""
-  symbol: String!
-
-  """Period"""
-  period: String
-
-  """From"""
-  from: DateTime!
-
-  """To"""
-  to: DateTime
-}
-
-input PortfolioSummaryInput {
-  """Account uuid."""
-  uuid: ID!
-
-  """From date."""
-  from: DateTime!
-
-  """To date."""
-  to: DateTime!
-}
-
 type Mutation {
   signupLocal(data: SignupInput!): SignupLocal!
   confirmSignup(data: ConfirmSignupInput!): ConfirmSignup!
@@ -338,17 +106,7 @@ type Mutation {
   resetPassword(data: ResetPasswordInput!): ResetPassword!
   setNewPassword(data: SetNewPasswordInput!): SetNewPassword!
   refreshToken: Refresh!
-  cashAccountCreate(data: CashAccountCreateInput!): CashAccount!
-  introductionCashAccountCreates(data: IntroductionCashAccountCreatesInput!): IntroductionCashAccounts!
-  cashAccountUpdate(uuid: ID!, data: CashAccountUpdateInput!): CashAccount!
-  cashAccountDelete(uuid: ID!): CashAccountDelete!
-  cashAccountAddFunds(data: CashAccountAddFundsInput!): CashAccount!
-  portfolioCreate(data: PortfolioCreateInput!): Portfolio!
-  introductionPortfolioCreates(data: IntroductionPortfolioCreatesInput!): IntroductionPortfolios!
-  portfolioUpdate(uuid: String!, data: PortfolioUpdateInput!): Portfolio!
-  portfolioDelete(uuid: String!): PortfolioDelete!
   updateUser(data: UpdateUserInput!): User!
-  transactionCreate(data: TransactionCreateInput!): TransactionCreate!
 }
 
 input SignupInput {
@@ -414,47 +172,6 @@ input SetNewPasswordInput {
   token: String!
 }
 
-input CashAccountCreateInput {
-  """Cash account name."""
-  name: String!
-
-  """Cash account currency."""
-  currency: String!
-}
-
-input IntroductionCashAccountCreatesInput {
-  """Cash accounts array."""
-  cashAccounts: [CashAccountCreateInput!]!
-}
-
-input CashAccountUpdateInput {
-  """Cash account name."""
-  name: String!
-}
-
-input CashAccountAddFundsInput {
-  """Account uuid."""
-  uuid: ID!
-
-  """Cash amount."""
-  amount: Float!
-}
-
-input PortfolioCreateInput {
-  """Portfolio name."""
-  name: String!
-}
-
-input IntroductionPortfolioCreatesInput {
-  """Portfolios array."""
-  portfolios: [PortfolioCreateInput!]!
-}
-
-input PortfolioUpdateInput {
-  """Portfolio name."""
-  name: String
-}
-
 input UpdateUserInput {
   """New user email."""
   email: EmailAddress
@@ -464,25 +181,4 @@ input UpdateUserInput {
 
   """New default currency."""
   defaultCurrency: String
-}
-
-input TransactionCreateInput {
-  portfolioUuid: String!
-  cashAccountUuid: String!
-  instrument: InstrumentCreateInput!
-  date: DateTime!
-  quantity: Float!
-  price: Float!
-  commission: Float!
-}
-
-input InstrumentCreateInput {
-  """Symbol"""
-  symbol: String!
-
-  """Name"""
-  name: String!
-
-  """Instrument currency"""
-  currency: String!
 }

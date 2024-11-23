@@ -1,21 +1,21 @@
 version: "3.9"
 
 services:
-  development-redis:
-    container_name: development-redis
+  dev-redis:
+    container_name: dev-redis
     image: redis:7.0.9-alpine
     ports:
-      - "${TESTS_REDIS_PORT}:6379"
+      - "${DEV_REDIS_PORT}:6379"
     volumes:
-      - development-redis:/data
+      - dev-redis:/data
 
   tests-redis:
     container_name: tests-redis
     image: redis:7.0.9-alpine
     ports:
-      - "${DEVELOPMENT_REDIS_PORT}:6379"
+      - "${TESTS_REDIS_PORT}:6379"
     volumes:
-      - development-redis:/data
+      - dev-redis:/data
 
   mailslurper:
     container_name: mailslurper
@@ -36,21 +36,26 @@ services:
       - POSTGRES_PASSWORD=${TESTS_POSTGRES_PASSWORD}
       - POSTGRES_DB=${TESTS_POSTGRES_DB}
 
-  development-database:
+  dev-database:
     image: postgres:14.5-alpine
-    container_name: development-database
-    restart: always
+    container_name: dev-database
+    restart: unless-stopped
     environment:
-      - POSTGRES_USER=${DEVELOPMENT_POSTGRES_USER}
-      - POSTGRES_PASSWORD=${DEVELOPMENT_POSTGRES_PASSWORD}
-      - POSTGRES_DB=${DEVELOPMENT_POSTGRES_DB}
+      - POSTGRES_USER=${DEV_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DEV_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DEV_POSTGRES_DB}
     ports:
-      - "${DEVELOPMENT_POSTGRES_PORT}:5432"
+      - "${DEV_POSTGRES_PORT}:5432"
     volumes:
-      - development-database:/var/lib/postgresql/data
+      - dev-database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DEV_POSTGRES_USER}", "-d", "${DEV_POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
-  development-database:
+  dev-database:
     driver: local
-  development-redis:
+  dev-redis:
     driver: local
