@@ -59,12 +59,6 @@ type User {
 
   """User name."""
   name: String!
-
-  """User introduction step."""
-  introductionStep: IntroductionStep!
-
-  """User default currency."""
-  defaultCurrency: String!
 }
 
 """
@@ -76,13 +70,6 @@ scalar Date
 A field whose value conforms to the standard internet email address format as specified in HTML Spec: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address.
 """
 scalar EmailAddress @specifiedBy(url: "https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address")
-
-enum IntroductionStep {
-  DefaultCurrency
-  CashAccounts
-  Portfolios
-  Completed
-}
 
 type Query {
   emailExist(data: EmailInput!): Email!
@@ -178,7 +165,4 @@ input UpdateUserInput {
 
   """New user name."""
   name: String
-
-  """New default currency."""
-  defaultCurrency: String
 }

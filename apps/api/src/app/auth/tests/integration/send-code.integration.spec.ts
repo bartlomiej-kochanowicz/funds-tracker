@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import request from "supertest-graphql";
 import { SendCode } from "@app/auth/entities/send-code.entity";
 import { IntegrationTestManager } from "@tests/IntegrationTestManager";
-import { sendCodeStub } from "@app/auth/tests/stubs/sendCode.stup";
+import { sendCodeStub } from "@src/app/auth/tests/stubs/send-code.stup";
 import { Response } from "express";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
 import { testUser } from "@tests/stubs/testUser.stub";

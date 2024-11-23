@@ -27,9 +27,9 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: ${{secrets.TESTS_POSTGRES_USER}}
-          POSTGRES_PASSWORD: ${{secrets.TESTS_POSTGRES_PASSWORD}}
-          POSTGRES_DB: ${{secrets.TESTS_POSTGRES_DB}}
+          POSTGRES_USER: ${{secrets.TEST_POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.TEST_POSTGRES_PASSWORD}}
+          POSTGRES_DB: ${{secrets.TEST_POSTGRES_DB}}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -64,4 +64,4 @@ jobs:
           RT_SECRET: ${{secrets.TESTS_RT_SECRET}}
           SEND_GRID_API_KEY: ${{secrets.TESTS_SEND_GRID_API_KEY}}
           REDIS_URL: ${{secrets.TESTS_REDIS_URL}}
-          REDIS_PORT: ${{secrets.TESTS_REDIS_PORT}}
+          REDIS_PORT: ${{secrets.TEST_REDIS_PORT}}

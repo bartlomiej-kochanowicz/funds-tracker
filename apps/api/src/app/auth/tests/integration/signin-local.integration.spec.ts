@@ -4,7 +4,7 @@ import { SigninLocal } from "@app/auth/entities";
 import { IntegrationTestManager } from "@tests/IntegrationTestManager";
 import { testUser } from "@tests/stubs/testUser.stub";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
-import { signinUserStub } from "@app/auth/tests/stubs/signinLocal.stup";
+import { signinUserStub } from "@src/app/auth/tests/stubs/signin-local.stup";
 
 describe("signin local", () => {
 	const integrationTestManager = new IntegrationTestManager();

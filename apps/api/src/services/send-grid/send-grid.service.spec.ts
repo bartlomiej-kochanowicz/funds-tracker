@@ -1,6 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { SendGridService } from "./send-grid.service";
 
+// TODO: Fix this test
 describe.skip("SendGridService", () => {
 	let service: SendGridService;
 
