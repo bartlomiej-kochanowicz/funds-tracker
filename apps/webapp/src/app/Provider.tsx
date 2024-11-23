@@ -4,11 +4,14 @@ import { FullscreenErrorContent } from "components/FullscreenErrorContent";
 import client from "config/client";
 import { UserContextProvider } from "contexts/UserContext";
 import { ThemeProvider } from "next-themes";
-import { FC } from "react";
+import { type ReactNode } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Root } from "views/Root";
 
-const App: FC = (): JSX.Element => (
+type Props = {
+	children: ReactNode;
+};
+
+const Provider = ({ children }: Props) => (
 	<BrowserRouter>
 		<ApolloProvider client={client}>
 			<UserContextProvider>
@@ -17,13 +20,11 @@ const App: FC = (): JSX.Element => (
 					defaultTheme="system"
 					enableSystem
 				>
-					<ErrorBoundary fallback={<FullscreenErrorContent />}>
-						<Root />
-					</ErrorBoundary>
+					<ErrorBoundary fallback={<FullscreenErrorContent />}>{children}</ErrorBoundary>
 				</ThemeProvider>
 			</UserContextProvider>
 		</ApolloProvider>
 	</BrowserRouter>
 );
 
-export default App;
+export { Provider };

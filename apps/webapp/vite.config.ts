@@ -27,7 +27,7 @@ export default defineConfig({
 	resolve: {
 		alias: [
 			{
-				find: "@web/aero-ui",
+				find: "@funds-tracker/ui",
 				replacement: resolve(__dirname, "./node_modules/@funds-tracker/ui"),
 			},
 		],
