@@ -42,7 +42,6 @@ export class SignupService {
 				name,
 				password: hashedPwd,
 				confirmationCodeHash: hashedConfirmationCode,
-				defaultCurrency: "USD", // TODO: add default currency to signup
 			},
 		});
 

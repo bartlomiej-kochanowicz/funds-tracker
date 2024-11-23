@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { IntroductionStep } from "@prisma/client";
 import { PrismaService } from "@services/prisma/prisma.service";
 import { User } from "./entities";
 import { UpdateUserInput } from "./inputs";
@@ -25,19 +24,6 @@ export class UserService {
 			where: { uuid: userId },
 			data: updateUserInput,
 		});
-
-		// If the user has just set their default currency in introductiopn step, we need to update his introduction step
-		if (
-			updateUserInput.defaultCurrency &&
-			user.introductionStep === IntroductionStep.DefaultCurrency
-		) {
-			const updatedUser = await this.prisma.user.update({
-				where: { uuid: userId },
-				data: { introductionStep: IntroductionStep.CashAccounts },
-			});
-
-			return updatedUser;
-		}
 
 		return user;
 	}

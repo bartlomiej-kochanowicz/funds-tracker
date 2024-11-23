@@ -14,9 +14,13 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 	async cleanDatabase() {
 		await Promise.all([
 			await this.session.deleteMany(),
-			await this.cashAccountOperation.deleteMany(),
+			await this.securityActivity.deleteMany(),
+			await this.security.deleteMany(),
+			await this.cashHoldingActivity.deleteMany(),
+			await this.cashHolding.deleteMany(),
+			await this.hardAssetActivity.deleteMany(),
+			await this.hardAsset.deleteMany(),
 			await this.portfolio.deleteMany(),
-			await this.cashAccount.deleteMany(),
 			await this.user.deleteMany(),
 		]);
 	}

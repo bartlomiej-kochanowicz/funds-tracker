@@ -1,4 +1,4 @@
-import { InputType, Field, registerEnumType } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { IsEmail, IsOptional, Length } from "class-validator";
 import { EmailAddressResolver } from "graphql-scalars";
 
@@ -13,8 +13,4 @@ export class UpdateUserInput {
 	@IsOptional()
 	@Field(() => String, { description: "New user name.", nullable: true })
 	name?: string;
-
-	@IsOptional()
-	@Field(() => String, { description: "New default currency.", nullable: true })
-	defaultCurrency?: string;
 }
