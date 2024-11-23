@@ -67,7 +67,7 @@ describe("refresh token", () => {
 		let resStatus: number;
 
 		beforeAll(async () => {
-			// sign up new user to have new user in database for confirm action
+			// register new user to have new user in database for confirm action
 			await integrationTestManager.getRegisterService().registerLocal(refreshTokenStub);
 
 			const { refreshToken } = await integrationTestManager

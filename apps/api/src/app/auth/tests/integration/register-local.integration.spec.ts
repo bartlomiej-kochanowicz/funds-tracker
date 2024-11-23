@@ -18,7 +18,7 @@ describe("register local", () => {
 	});
 
 	describe("given does the user does not already register", () => {
-		describe("when a signinLocal mutation is executed", () => {
+		describe("when a loginLocal mutation is executed", () => {
 			let register: RegisterLocal;
 
 			beforeAll(async () => {
@@ -59,7 +59,7 @@ describe("register local", () => {
 	});
 
 	describe("given does the user already register", () => {
-		describe("when a signinLocal mutation is executed", () => {
+		describe("when a loginLocal mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {

@@ -16,7 +16,7 @@ describe("exist email", () => {
 	});
 
 	describe("given the email exists", () => {
-		describe("when a signinLocal mutation is executed", () => {
+		describe("when a loginLocal mutation is executed", () => {
 			let email: Email;
 
 			beforeAll(async () => {

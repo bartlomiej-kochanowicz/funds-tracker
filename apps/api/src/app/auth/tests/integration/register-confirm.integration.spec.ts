@@ -22,7 +22,7 @@ describe("register confirm", () => {
 			let confirmedUser: RegisterConfirm;
 
 			beforeAll(async () => {
-				// sign up new user to have new user in database for confirm action
+				// register new user to have new user in database for confirm action
 				await integrationTestManager.getRegisterService().registerLocal(registerUserStub);
 
 				const response = await request<{ registerConfirm: RegisterConfirm }>(

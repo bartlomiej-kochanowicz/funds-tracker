@@ -33,7 +33,7 @@ describe("logout", () => {
 
 			res.cookie = (): any => {};
 
-			// sign up new user to have new user in database for logout
+			// register new user to have new user in database for logout
 			await integrationTestManager.getRegisterService().registerLocal(logoutStub1);
 
 			// confirm user
@@ -104,7 +104,7 @@ describe("logout", () => {
 
 			res.cookie = (): any => {};
 
-			// sign up new user to have user in database
+			// register new user to have user in database
 			await integrationTestManager.getRegisterService().registerLocal(logoutStub2);
 
 			// confirm user
