@@ -1,6 +1,6 @@
 import { Avatar, DropdownMenu, Loader } from "@funds-tracker/ui";
 import { useUserContext } from "contexts/UserContext";
-import { useMutationUserLogout } from "hooks/api/user/useMutationUserLogout";
+import { useMutationUserLogout } from "graphql/user/useMutationUserLogout";
 import { LogOut, Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";

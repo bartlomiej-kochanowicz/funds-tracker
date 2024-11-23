@@ -1,8 +1,8 @@
 import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
 import { waitFor } from "@testing-library/react";
 import { GraphQLError } from "graphql";
-import { CONFIRM_SIGNUP } from "hooks/api/user/useMutationUserConfirmSignup";
-import { SEND_CODE } from "hooks/api/user/useMutationUserSendCode";
+import { CONFIRM_SIGNUP } from "graphql/user/useMutationUserConfirmSignup";
+import { SEND_CODE } from "graphql/user/useMutationUserSendCode";
 import { useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { ROUTES } from "routes/paths";

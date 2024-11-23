@@ -1,9 +1,9 @@
 import { Button, emitErrorToast, emitSuccessToast, Form, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
-import { useLazyQueryUserEmailExist } from "hooks/api/user/useLazyQueryUserEmailExist";
-import { useMutationUserSendCode } from "hooks/api/user/useMutationUserSendCode";
-import { useMutationUserSignin } from "hooks/api/user/useMutationUserSignin";
+import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
+import { useMutationUserSendCode } from "graphql/user/useMutationUserSendCode";
+import { useMutationUserSignin } from "graphql/user/useMutationUserSignin";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";

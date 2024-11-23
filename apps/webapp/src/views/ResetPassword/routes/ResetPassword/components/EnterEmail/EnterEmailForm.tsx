@@ -8,7 +8,7 @@ import {
 	Text,
 } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutationUserResetPassword } from "hooks/api/user/useMutationUserResetPassword";
+import { useMutationUserResetPassword } from "graphql/user/useMutationUserResetPassword";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

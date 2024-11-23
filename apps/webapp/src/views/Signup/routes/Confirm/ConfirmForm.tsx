@@ -1,7 +1,7 @@
 import { Button, Form, Input, Loader } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "contexts/UserContext";
-import { useMutationUserConfirmSignup } from "hooks/api/user/useMutationUserConfirmSignup";
+import { useMutationUserConfirmSignup } from "graphql/user/useMutationUserConfirmSignup";
 import { FC, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

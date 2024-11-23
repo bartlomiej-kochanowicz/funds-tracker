@@ -10,7 +10,7 @@ import {
 import { LangSelector } from "components/LangSelector";
 import { ClearCentered } from "components/layouts/ClearCentered";
 import { ThemeToggle } from "components/ThemeToggle";
-import { useMutationUserSendCode } from "hooks/api/user/useMutationUserSendCode";
+import { useMutationUserSendCode } from "graphql/user/useMutationUserSendCode";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation } from "react-router-dom";

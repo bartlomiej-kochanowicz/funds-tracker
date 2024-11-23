@@ -1,7 +1,7 @@
 import { Button, emitErrorToast, Form, Input, Loader, Text } from "@funds-tracker/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
-import { useMutationUserSetNewPassword } from "hooks/api/user/useMutationUserSetNewPassword";
+import { useMutationUserSetNewPassword } from "graphql/user/useMutationUserSetNewPassword";
 import { FC, lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
