@@ -6,7 +6,7 @@ import { registerUserStub, confirmUserStub } from "@src/app/auth/tests/stubs/reg
 import { getGqlErrorStatus } from "@tests/gqlStatus";
 import { RegisterConfirm } from "@app/auth/entities";
 
-describe.skip("register confirm", () => {
+describe("register confirm", () => {
 	const integrationTestManager = new IntegrationTestManager();
 
 	beforeAll(async () => {

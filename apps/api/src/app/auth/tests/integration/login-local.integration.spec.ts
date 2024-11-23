@@ -5,7 +5,6 @@ import { IntegrationTestManager } from "@tests/IntegrationTestManager";
 import { testUser } from "@tests/stubs/testUser.stub";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
 import { loginUserStub } from "@src/app/auth/tests/stubs/login-local.stup";
-import { registerUserStub } from "../stubs/register-confirm.stub";
 
 describe("login local", () => {
 	const integrationTestManager = new IntegrationTestManager();
@@ -59,7 +58,7 @@ describe("login local", () => {
 
 			beforeAll(async () => {
 				// register new user to have new user in database for confirm action
-				await integrationTestManager.getRegisterService().registerLocal(registerUserStub);
+				await integrationTestManager.getRegisterService().registerLocal(loginUserStub);
 
 				const { response } = await request<{ loginLocal: LoginLocal }>(
 					integrationTestManager.httpServer,
