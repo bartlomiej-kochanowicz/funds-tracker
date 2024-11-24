@@ -35,13 +35,19 @@
 		},
 		"login": {
 			"title": "Zaloguj się do Funds Tracker",
-			"description": "Witaj ponownie! Możesz kontynuować zarządzanie swoimi finansami"
+			"description": "Witaj ponownie! Możesz kontynuować zarządzanie swoimi finansami",
+			"forgot-password": "Nie pamiętasz hasła?"
 		},
 		"not-found": {
 			"title": "Hmm... wygląda na to, że ta strona nie istnieje.",
 			"description": "Strona, której szukasz, mogła zostać usunięta w wyniku zmiany jej nazwy lub jest tymczasowo niedostępna.",
 			"go-to-homepage": "Przejdź do strony głównej"
 		}
+	},
+	"form": {
+		"email": "Email address",
+		"password": "Password",
+		"next": "Dalej"
 	},
 	"currency": {
 		"AED": "Dirham arabski",

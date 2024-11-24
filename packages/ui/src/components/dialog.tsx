@@ -58,7 +58,7 @@ DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
 	<div
-		className={cn("flex flex-col space-y-1.5 text-center sm:text-left", className)}
+		className={cn("flex flex-col space-y-1.5", className)}
 		{...props}
 	/>
 );
@@ -78,7 +78,7 @@ const DialogTitle = forwardRef<
 >(({ className, ...props }, ref) => (
 	<DialogPrimitive.Title
 		ref={ref}
-		className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+		className={cn("text-2xl font-semibold leading-none tracking-tight", className)}
 		{...props}
 	/>
 ));

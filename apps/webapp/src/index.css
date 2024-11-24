@@ -4,6 +4,10 @@
 	vertical-align: middle;
 }
 
+.grecaptcha-badge {
+	display: none;
+}
+
 body {
 	@apply min-h-svh;
 }

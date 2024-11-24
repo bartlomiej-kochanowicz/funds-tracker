@@ -35,13 +35,20 @@
 		},
 		"login": {
 			"title": "Log in to Funds Tracker",
-			"description": "Welcome back! You can continue to manage your investments"
+			"description": "Welcome back! You can continue to manage your investments",
+			"forgot-password": "Forgot password?"
 		},
 		"not-found": {
 			"title": "Hmm... looks like this page doesn’t exist.",
 			"description": "The page are you looking for might have been removed had it's name changed or is temporary unavaliable.",
 			"go-to-homepage": "Go to homepage"
 		}
+	},
+	"form": {
+		"email": "Email address",
+		"password": "Password",
+		"forgot-password": "Forgot password?",
+		"next": "Next"
 	},
 	"currency": {
 		"AED": "United Arab Emirates Dirham",

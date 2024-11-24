@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import {
@@ -8,7 +9,6 @@ import {
 	HTMLAttributes,
 	useContext,
 	useId,
-	useMemo,
 } from "react";
 import {
 	Controller,
@@ -39,10 +39,8 @@ const FormField = <
 >({
 	...props
 }: ControllerProps<TFieldValues, TName>) => {
-	const contextValue = useMemo(() => ({ name: props.name }), [props.name]);
-
 	return (
-		<FormFieldContext.Provider value={contextValue}>
+		<FormFieldContext.Provider value={{ name: props.name }}>
 			<Controller {...props} />
 		</FormFieldContext.Provider>
 	);
@@ -79,11 +77,10 @@ const useFormField = () => {
 
 const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => {
-		const id = useMemo(useId, []);
-		const contextValue = useMemo(() => ({ id }), [id]);
+		const id = useId();
 
 		return (
-			<FormItemContext.Provider value={contextValue}>
+			<FormItemContext.Provider value={{ id }}>
 				<div
 					ref={ref}
 					className={cn("space-y-2", className)}
