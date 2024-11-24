@@ -8,9 +8,34 @@
 		"new-password-must-be-different-from-the-old-one": "Nowe hasło musi różnić się od starego",
 		"email-already-confirmed": "Email już został potwierdzony",
 		"wrong-registration-confirm-code": "Nieprawidłowy kod potwierdzający rejestrację",
-		"api.email-already-in-use": "Email jest już w użyciu"
+		"email-already-in-use": "Email jest już w użyciu"
 	},
-	"common": {},
+	"toast": {
+		"data-saved": "Dane zapisane"
+	},
+	"component": {
+		"error-content": {
+			"title": "Wystąpił błąd",
+			"message": "Spróbuj ponownie później"
+		}
+	},
+	"common": {
+		"or": "lub"
+	},
+	"page": {
+		"homepage": {
+			"slogan": "Wiesz, gdzie idą Twoje pieniądze.",
+			"join-today": "Dołącz już dziś",
+			"sign-up-with-google": "Zarejestruj się przez Google",
+			"sign-up-with-apple": "Zarejestruj się przez Apple",
+			"create-account": "Utwórz konto",
+			"disclaimer": "Rejestrując się, zgadzasz się na <tos>Warunki korzystania</tos> i <privacy>Politykę prywatności</privacy>, łącznie z <cookie>Polityką ciasteczek</cookie>.",
+			"already-have-an-account": "Masz już konto?",
+			"log-in": "Zaloguj się"
+		},
+		"title": "Zaloguj się do Funds Tracker",
+		"description": "Witaj ponownie! Możesz kontynuować zarządzanie swoimi finansami"
+	},
 	"currency": {
 		"AED": "Dirham arabski",
 		"AFN": "Afgani afgański",

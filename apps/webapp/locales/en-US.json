@@ -10,7 +10,34 @@
 		"wrong-registration-confirm-code": "Wrong registration confirm code",
 		"api.email-already-in-use": "Email already in use"
 	},
-	"common": {},
+	"toast": {
+		"data-saved": "Data saved"
+	},
+	"component": {
+		"error-content": {
+			"title": "Some error occurred",
+			"message": "Please try again later"
+		}
+	},
+	"common": {
+		"or": "or"
+	},
+	"page": {
+		"homepage": {
+			"slogan": "Know Where Your Money Goes.",
+			"join-today": "Join today",
+			"sign-up-with-google": "Sign up with Google",
+			"sign-up-with-apple": "Sign up with Apple",
+			"create-account": "Create account",
+			"disclaimer": "By signing up, you agree to our <tos>Terms of Service</tos> and <privacy>Privacy Policy</privacy>, including <cookie>Cookie Use</cookie>.",
+			"already-have-an-account": "Already have an account?",
+			"log-in": "Log in"
+		},
+		"login": {
+			"title": "Log in to Funds Tracker",
+			"description": "Welcome back! You can continue to manage your investments"
+		}
+	},
 	"currency": {
 		"AED": "United Arab Emirates Dirham",
 		"AFN": "Afghan Afghani",

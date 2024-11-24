@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { ROUTES } from "routes/paths";
 import { waitFor } from "utils/test-utils";
 
-import { Signin } from "../Signin";
+import { Signin } from "../login";
 import { SigninPO } from "./Signin.po";
 
 vi.mock("react-google-recaptcha-v3", () => ({

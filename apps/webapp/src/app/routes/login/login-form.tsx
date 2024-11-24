@@ -1,5 +1,16 @@
-import { Button, emitErrorToast, emitSuccessToast, Form, Input, Loader } from "@funds-tracker/ui";
-import { yupResolver } from "@hookform/resolvers/yup";
+import {
+	Button,
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormMessage,
+	Input,
+	Loader,
+	useToast,
+} from "@funds-tracker/ui";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { paths } from "config/paths";
 import { useUserContext } from "contexts/UserContext";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
 import { useMutationUserSendCode } from "graphql/user/useMutationUserSendCode";
@@ -9,9 +20,8 @@ import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "routes/paths";
 
-import { SigninFormSchema, SigninFormSchemaType } from "./SigninFormSchema";
+import { type LoginFormSchema, loginFormSchema } from "./login-form-schema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -23,17 +33,19 @@ type FormStates = "email" | "password";
 
 type FormActions = "CHANGE_TO_PASSWORD";
 
-const SigninStateMachine = new StateMachine<FormStates, FormActions>(
+const LoginStateMachine = new StateMachine<FormStates, FormActions>(
 	"email",
 	{ email: "email", password: "password" },
 	{ CHANGE_TO_PASSWORD: "CHANGE_TO_PASSWORD" },
 	{ email: { CHANGE_TO_PASSWORD: "password" } },
 );
 
-export const SigninForm = () => {
+const LoginForm = () => {
 	const { t } = useTranslation();
 
 	const { getUser } = useUserContext();
+
+	const { toast } = useToast();
 
 	const [token, setToken] = useState<string>("");
 	const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
@@ -41,14 +53,14 @@ export const SigninForm = () => {
 	const navigate = useNavigate();
 
 	const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
-		SigninStateMachine,
+		LoginStateMachine,
 	);
 
-	const defaultValues = { userEmail: "", userPassword: "" } satisfies SigninFormSchemaType;
+	const defaultValues = { userEmail: "", userPassword: "" } satisfies LoginFormSchema;
 
-	const form = useForm<SigninFormSchemaType>({
+	const form = useForm<LoginFormSchema>({
 		defaultValues,
-		resolver: yupResolver(SigninFormSchema(compareState(states.password))),
+		resolver: zodResolver(loginFormSchema(compareState(states.password))),
 	});
 
 	const {
@@ -71,16 +83,25 @@ export const SigninForm = () => {
 			}
 		},
 		onError: () => {
-			emitErrorToast(t("api.unknown_error"));
+			/* toast({
+				status: "error",
+				title: t("api.error"),
+				description: t("api.unknown_error"),
+			}); */
 		},
 	});
 
 	const [sendCode] = useMutationUserSendCode({
 		onCompleted: async () => {
-			emitSuccessToast(t("toast.send_confirm_code.success"));
+			toast({
+				desctiption: t("toast.send_confirm_code.success"),
+			});
 		},
 		onError: () => {
-			emitErrorToast(t("toast.send_confirm_code.failure"));
+			/* toast({
+				status: "error",
+				description: t("toast.send_confirm_code.failure")
+			}); */
 		},
 	});
 
@@ -88,7 +109,7 @@ export const SigninForm = () => {
 		onCompleted: async () => {
 			await getUser();
 
-			navigate(ROUTES.HOME);
+			navigate(paths.portfolios);
 		},
 		onError: async error => {
 			setError("userPassword", { type: "custom", message: error.message });
@@ -98,14 +119,14 @@ export const SigninForm = () => {
 
 				await sendCode({ variables: { data: { email: userEmail, token } } });
 
-				navigate(ROUTES.SIGNUP.CONFIRM, { state: { email: userEmail } });
+				navigate(paths.register.confirm, { state: { email: userEmail } });
 			}
 		},
 	});
 
 	const onVerify = useCallback(setToken, [setToken]);
 
-	const onSubmit = async ({ userEmail, userPassword }: SigninFormSchemaType) => {
+	const onSubmit = async ({ userEmail, userPassword }: LoginFormSchema) => {
 		if (!token) {
 			setRefreshReCaptcha(r => !r);
 
@@ -140,31 +161,31 @@ export const SigninForm = () => {
 					/>
 				</Suspense>
 
-				<Form.Field
+				<FormField
 					control={control}
 					name="userEmail"
 					render={({ field }) => (
-						<Form.Item>
-							<Form.Control>
+						<FormItem>
+							<FormControl>
 								<Input
 									aria-label={t("common.email")}
 									data-testid="email-input"
 									placeholder={t("common.email")}
 									{...field}
 								/>
-							</Form.Control>
-							<Form.Message />
-						</Form.Item>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
 					)}
 				/>
 
 				{compareState(states.password) && (
-					<Form.Field
+					<FormField
 						control={control}
 						name="userPassword"
 						render={({ field }) => (
-							<Form.Item>
-								<Form.Control>
+							<FormItem>
+								<FormControl>
 									<Input
 										autoFocus
 										type="password"
@@ -173,9 +194,9 @@ export const SigninForm = () => {
 										placeholder={t("common.password")}
 										{...field}
 									/>
-								</Form.Control>
-								<Form.Message />
-							</Form.Item>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
 						)}
 					/>
 				)}
@@ -197,3 +218,5 @@ export const SigninForm = () => {
 		</Form>
 	);
 };
+
+export { LoginForm };

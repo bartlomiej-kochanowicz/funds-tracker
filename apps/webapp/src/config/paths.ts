@@ -1,4 +1,8 @@
 const paths = {
+	homepage: "/",
+	termsOfService: "/tos",
+	privacyPolicy: "/privacy",
+	cookies: "/cookies",
 	login: "/login",
 	register: {
 		register: "/register",

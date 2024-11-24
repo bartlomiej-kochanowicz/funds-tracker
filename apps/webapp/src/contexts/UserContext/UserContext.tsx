@@ -1,10 +1,10 @@
 import { GetUserQuery, IntroductionStep, UpdateUserInput } from "__generated__/graphql";
 import { LazyQueryExecFunction, OperationVariables } from "@apollo/client";
-import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
+import { useToast } from "@funds-tracker/ui";
 import { IS_DEVELOPMENT } from "config/env";
-import { isUserLoggedIn } from "helpers/isUserLoggedIn";
 import { useLazyQueryUser } from "graphql/user/useLazyQueryUser";
 import { useMutationUserUpdate } from "graphql/user/useMutationUserUpdate";
+import { isUserLoggedIn } from "helpers/isUserLoggedIn";
 import LogRocket from "logrocket";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,12 +26,13 @@ const useUser = (): UserContextType => {
 	const [getUser, { loading, data, client, error, updateQuery }] = useLazyQueryUser();
 	const [updateUserMutation, { loading: updateLoading }] = useMutationUserUpdate();
 
-	const updateUser = async ({ defaultCurrency, email, name }: UpdateLocalUserData) => {
+	const { toast } = useToast();
+
+	const updateUser = async ({ email, name }: UpdateLocalUserData) => {
 		try {
 			await updateUserMutation({
 				variables: {
 					data: {
-						defaultCurrency,
 						email,
 						name,
 					},
@@ -42,31 +43,20 @@ const useUser = (): UserContextType => {
 				...prev,
 				user: {
 					...prev.user,
-					defaultCurrency: defaultCurrency ?? prev.user.defaultCurrency,
 					email: email ?? prev.user.email,
 					name: name ?? prev.user.name,
 				},
 			}));
 
-			const getSuccesMessage = () => {
-				if (defaultCurrency) {
-					return t("toast.user.update.defaultCurrency.success");
-				}
-
-				if (email) {
-					return t("toast.user.update.email.success");
-				}
-
-				if (name) {
-					return t("toast.user.update.name.success");
-				}
-
-				return t("toast.user.update.unknown.success");
-			};
-
-			emitSuccessToast(getSuccesMessage());
+			toast({
+				description: t("toasts.data_saved"),
+			});
 		} catch {
-			emitErrorToast(t("api.unknown_error"));
+			toast({
+				variant: "destructive",
+				// TODO
+				description: "Error",
+			});
 		}
 	};
 

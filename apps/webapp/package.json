@@ -44,10 +44,12 @@
 		"react-hook-form": "7.53.0",
 		"react-i18next": "15.0.2",
 		"react-is": "18.3.1",
-		"react-router-dom": "6.26.2",
+		"react-router": "^7.0.1",
+		"react-router-dom": "7.0.1",
 		"recharts": "2.12.7",
 		"tailwind-merge": "2.5.3",
-		"yup": "1.4.0"
+		"yup": "1.4.0",
+		"zod": "^3.23.8"
 	},
 	"devDependencies": {
 		"@babel/core": "7.25.7",
