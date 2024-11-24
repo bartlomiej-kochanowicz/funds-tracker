@@ -1,4 +1,5 @@
 import animate from "tailwindcss-animate";
+import defailt from "tailwindcss/defaultTheme";
 
 
 /** @type {import('tailwindcss').Config} */
@@ -93,8 +94,12 @@ export default {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
-  	}
+  		},
+			maxWidth:{
+			...defailt.maxWidth,
+			'8xl': '90rem',
+			}
+  	},
   },
   plugins: [animate],
 }

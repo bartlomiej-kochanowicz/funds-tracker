@@ -6,24 +6,27 @@ import LogoNameVerticalDark from "assets/logo/logo-name-vertical-dark.svg?react"
 import AppleLogo from "assets/social/apple.svg?react";
 import GoogleLogo from "assets/social/google.svg?react";
 import { paths } from "config/paths";
+import { useModal } from "hooks/use-modal";
 import { Trans, useTranslation } from "react-i18next";
-import { Link } from "react-router";
-import { D } from "react-router/dist/production/fog-of-war-CbNQuoo8";
+import { Link, Outlet } from "react-router";
 
 const Homepage = () => {
 	const { t } = useTranslation();
 
+	const loginModal = useModal({ to: paths.login });
+	const registerModal = useModal({ to: paths.register.register });
+
 	return (
 		<>
-			<main className="p-9">
-				<div>
+			<main className="mx-auto min-h-[calc(100svh-56px)] p-9 lg:flex lg:max-w-8xl lg:items-center lg:gap-28 xl:gap-40">
+				<div className="lg:w-1/2">
 					<Logo className="light:hidden size-12 lg:hidden" />
 					<LogoDark className="size-12 dark:hidden lg:hidden" />
 					<LogoNameVertical className="light:hidden hidden lg:block" />
 					<LogoNameVerticalDark className="hidden dark:hidden lg:block" />
 				</div>
 
-				<div>
+				<div className="lg:w-1/2">
 					<H1 className="my-10 leading-tight">{t("page.homepage.slogan")}</H1>
 					<H2>{t("page.homepage.join-today")}</H2>
 					<div className="my-5 flex flex-col gap-5">
@@ -39,7 +42,12 @@ const Homepage = () => {
 					<Separator>
 						<Text muted>{t("common.or")}</Text>
 					</Separator>
-					<Button className="mt-5 w-full">{t("page.homepage.create-account")}</Button>
+					<Button
+						className="mt-5 w-full"
+						asChild
+					>
+						<Link {...registerModal}>{t("page.homepage.create-account")}</Link>
+					</Button>
 					<Text
 						muted
 						className="text-xs"
@@ -72,8 +80,9 @@ const Homepage = () => {
 					<Button
 						variant="outline"
 						className="mt-3 w-full"
+						asChild
 					>
-						{t("page.homepage.log-in")}
+						<Link {...loginModal}>{t("page.homepage.log-in")}</Link>
 					</Button>
 				</div>
 			</main>
@@ -85,6 +94,7 @@ const Homepage = () => {
 					© {new Date().getFullYear()} Funds Tracker
 				</Text>
 			</footer>
+			<Outlet />
 		</>
 	);
 };

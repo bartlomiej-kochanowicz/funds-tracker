@@ -1,5 +1,13 @@
 /* here you can override styles globally */
 
 .recharts-legend-item-text {
-  vertical-align: middle;
+	vertical-align: middle;
+}
+
+body {
+	@apply min-h-svh;
+}
+
+#root {
+	@apply min-h-svh;
 }

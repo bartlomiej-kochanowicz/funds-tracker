@@ -5,10 +5,10 @@ const Heading = Object.fromEntries(
 	new Map(
 		(
 			[
-				["h1", "text-4xl font-extrabold"],
-				["h2", "text-3xl font-bold"],
-				["h3", "text-2xl font-bold"],
-				["h4", "text-xl font-bold"],
+				["h1", "text-4xl lg:text-5xl font-extrabold"],
+				["h2", "text-3xl lg:text-4xl font-bold"],
+				["h3", "text-2xl lg:text-3xl font-bold"],
+				["h4", "text-xl lg:text-2xl font-bold"],
 				["h5", "text-xl font-bold"],
 				["h6", "text-lg font-bold"],
 			] as const

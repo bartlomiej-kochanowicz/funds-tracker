@@ -36,6 +36,11 @@
 		"login": {
 			"title": "Log in to Funds Tracker",
 			"description": "Welcome back! You can continue to manage your investments"
+		},
+		"not-found": {
+			"title": "Hmm... looks like this page doesn’t exist.",
+			"description": "The page are you looking for might have been removed had it's name changed or is temporary unavaliable.",
+			"go-to-homepage": "Go to homepage"
 		}
 	},
 	"currency": {
