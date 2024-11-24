@@ -9,6 +9,8 @@ const meta: Meta<typeof Loader> = {
 export default meta;
 type Story = StoryObj<typeof Loader>;
 
-export const Default: Story = {
+const Default: Story = {
 	render: () => <Loader />,
 };
+
+export { Default };

@@ -1,5 +1,5 @@
 /* eslint-disable func-names */
-export const debounce = <F extends (...params: any[]) => void>(func: F, timeout: number = 1000) => {
+const debounce = <F extends (...params: any[]) => void>(func: F, timeout: number = 1000) => {
 	let timer: NodeJS.Timeout;
 
 	return function (...args: any) {
@@ -9,3 +9,5 @@ export const debounce = <F extends (...params: any[]) => void>(func: F, timeout:
 		}, timeout);
 	} as F;
 };
+
+export { debounce };

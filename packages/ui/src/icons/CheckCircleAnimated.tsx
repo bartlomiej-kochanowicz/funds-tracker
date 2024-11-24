@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 
-export const CheckCircleAnimated = ({ className, ...rest }: React.SVGProps<SVGSVGElement>) => (
+const CheckCircleAnimated = ({ className, ...rest }: React.SVGProps<SVGSVGElement>) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="24"
@@ -31,3 +31,5 @@ export const CheckCircleAnimated = ({ className, ...rest }: React.SVGProps<SVGSV
 		/>
 	</svg>
 );
+
+export { CheckCircleAnimated };

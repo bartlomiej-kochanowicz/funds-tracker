@@ -10,7 +10,7 @@ const meta: Meta<typeof H1> = {
 export default meta;
 type Story = StoryObj<typeof H1>;
 
-export const Default: Story = {
+const Default: Story = {
 	render: () => (
 		<Fragment>
 			<H1>Hello world</H1>
@@ -21,3 +21,5 @@ export const Default: Story = {
 		</Fragment>
 	),
 };
+
+export { Default };

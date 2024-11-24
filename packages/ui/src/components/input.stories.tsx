@@ -9,11 +9,11 @@ const meta: Meta<typeof Input> = {
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const Default: Story = {
+const Default: Story = {
 	render: () => <Input placeholder="Placeholder text..." />,
 };
 
-export const Disabled: Story = {
+const Disabled: Story = {
 	render: () => (
 		<Input
 			disabled
@@ -21,3 +21,5 @@ export const Disabled: Story = {
 		/>
 	),
 };
+
+export { Default, Disabled };

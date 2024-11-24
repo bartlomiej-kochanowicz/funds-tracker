@@ -1,7 +1,7 @@
 import { createElement, HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
-export const Heading = Object.fromEntries(
+const Heading = Object.fromEntries(
 	new Map(
 		(
 			[

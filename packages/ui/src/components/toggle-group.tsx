@@ -1,18 +1,16 @@
-"use client";
-
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
-import { VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 import {
-	ComponentPropsWithoutRef,
+	type ComponentPropsWithoutRef,
 	createContext,
-	ElementRef,
+	type ElementRef,
 	forwardRef,
 	useContext,
 	useMemo,
 } from "react";
-import { twMerge } from "tailwind-merge";
 
-import { toggleVariants } from "../Toggle";
+import { toggleVariants } from "@/src/components/toggle";
+import { cn } from "@/src/lib/utils";
 
 const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
 	size: "default",
@@ -28,7 +26,7 @@ const ToggleGroup = forwardRef<
 	return (
 		<ToggleGroupPrimitive.Root
 			ref={ref}
-			className={twMerge("flex items-center justify-center gap-1", className)}
+			className={cn("flex items-center justify-center gap-1", className)}
 			{...props}
 		>
 			<ToggleGroupContext.Provider value={contextValue}>{children}</ToggleGroupContext.Provider>
@@ -47,7 +45,7 @@ const ToggleGroupItem = forwardRef<
 	return (
 		<ToggleGroupPrimitive.Item
 			ref={ref}
-			className={twMerge(
+			className={cn(
 				toggleVariants({
 					variant: context.variant || variant,
 					size: context.size || size,

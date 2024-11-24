@@ -1,6 +1,6 @@
 import { LegacyRef, MutableRefObject, RefCallback } from "react";
 
-export const mergeRefs =
+const mergeRefs =
 	<T extends any>(
 		refs: Array<MutableRefObject<T> | LegacyRef<T> | undefined | null>,
 	): RefCallback<T> =>
@@ -13,3 +13,5 @@ export const mergeRefs =
 			}
 		});
 	};
+
+export { mergeRefs };

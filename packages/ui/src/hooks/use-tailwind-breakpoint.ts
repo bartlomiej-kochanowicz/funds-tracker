@@ -6,7 +6,7 @@ import tailwindConfig from "../../tailwind.config";
 const fullConfig = resolveConfig(tailwindConfig);
 const { screens } = fullConfig.theme;
 
-export const useTailwindBreakpoint = (name: keyof typeof screens) => {
+const useTailwindBreakpoint = (name: keyof typeof screens) => {
 	const pixels = screens[name];
 	const matchMediaQuery = `(min-width: ${pixels})`;
 	const [match, setMatch] = useState(window.matchMedia(matchMediaQuery).matches);
@@ -39,3 +39,5 @@ export const useTailwindBreakpoint = (name: keyof typeof screens) => {
 
 	return match;
 };
+
+export { useTailwindBreakpoint };

@@ -4,7 +4,7 @@ import { DependencyList, EffectCallback, useEffect } from "react";
 
 import { useIsFirstRender } from "./use-is-first-render";
 
-export const useUpdateEffect = (effect: EffectCallback, deps?: DependencyList) => {
+const useUpdateEffect = (effect: EffectCallback, deps?: DependencyList) => {
 	const isFirst = useIsFirstRender();
 
 	useEffect(() => {
@@ -13,3 +13,5 @@ export const useUpdateEffect = (effect: EffectCallback, deps?: DependencyList) =
 		}
 	}, deps);
 };
+
+export { useUpdateEffect };

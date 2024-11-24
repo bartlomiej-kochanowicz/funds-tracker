@@ -9,6 +9,8 @@ const meta: Meta<typeof Text> = {
 export default meta;
 type Story = StoryObj<typeof Text>;
 
-export const Default: Story = {
+const Default: Story = {
 	render: () => <Text>Hello world</Text>,
 };
+
+export { Default };

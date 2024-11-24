@@ -11,7 +11,7 @@ const meta: Meta<typeof Tile> = {
 export default meta;
 type Story = StoryObj<typeof Tile>;
 
-export const Default: Story = {
+const Default: Story = {
 	render: () => (
 		<Tile title="Hello world">
 			<Landmark />
@@ -19,7 +19,7 @@ export const Default: Story = {
 	),
 };
 
-export const Link: Story = {
+const Link: Story = {
 	render: () => (
 		<Tile
 			title="Hello world"
@@ -30,3 +30,5 @@ export const Link: Story = {
 	),
 	decorators: [withRouter],
 };
+
+export { Default, Link };

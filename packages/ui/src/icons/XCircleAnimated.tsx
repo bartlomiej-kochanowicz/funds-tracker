@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 
-export const XCircleanimated = ({ className, ...rest }: React.SVGProps<SVGSVGElement>) => (
+const XCircleanimated = ({ className, ...rest }: React.SVGProps<SVGSVGElement>) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="24"
@@ -37,3 +37,5 @@ export const XCircleanimated = ({ className, ...rest }: React.SVGProps<SVGSVGEle
 		/>
 	</svg>
 );
+
+export { XCircleanimated };

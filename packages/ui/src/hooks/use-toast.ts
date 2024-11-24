@@ -63,6 +63,8 @@ const addToRemoveQueue = (toastId: string) => {
 
 	const timeout = setTimeout(() => {
 		toastTimeouts.delete(toastId);
+
+		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		dispatch({
 			type: "REMOVE_TOAST",
 			toastId,
@@ -72,7 +74,7 @@ const addToRemoveQueue = (toastId: string) => {
 	toastTimeouts.set(toastId, timeout);
 };
 
-export const reducer = (state: State, action: Action): State => {
+const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
 		case "ADD_TOAST":
 			return {
