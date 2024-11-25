@@ -8,7 +8,7 @@ const paths = {
 		register: "/register",
 		confirm: "/register/confirm",
 	},
-	resetPassword: "/reset-password",
+	resetPassword: "/password-reset",
 	profile: "/profile",
 	portfolios: "/portfolios",
 	portfolio: "/portfolios/:uuid",

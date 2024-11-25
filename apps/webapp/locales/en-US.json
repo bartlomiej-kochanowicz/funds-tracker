@@ -28,8 +28,8 @@
 		"homepage": {
 			"slogan": "Know Where Your Money Goes.",
 			"join-today": "Join today",
-			"sign-up-with-google": "Sign up with Google",
-			"sign-up-with-apple": "Sign up with Apple",
+			"register-with-google": "Register with Google",
+			"register-with-apple": "Register with Apple",
 			"create-account": "Create account",
 			"disclaimer": "By signing up, you agree to our <tos>Terms of Service</tos> and <privacy>Privacy Policy</privacy>, including <cookie>Cookie Use</cookie>.",
 			"already-have-an-account": "Already have an account?",
@@ -38,7 +38,10 @@
 		"login": {
 			"title": "Log in to Funds Tracker",
 			"description": "Welcome back! You can continue to manage your investments",
-			"forgot-password": "Forgot password?"
+			"forgot-password": "Forgot password?",
+			"login-with-google": "Log in with Google",
+			"login-with-apple": "Log in with Apple",
+			"do-not-have-an-account": "Don't have an account? <register>Register now</register>"
 		},
 		"not-found": {
 			"title": "Hmm... looks like this page doesn’t exist.",

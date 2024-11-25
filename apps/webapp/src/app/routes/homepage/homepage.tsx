@@ -32,11 +32,11 @@ const Homepage = () => {
 					<div className="my-5 flex flex-col gap-5">
 						<Button variant="white">
 							<GoogleLogo />
-							{t("page.homepage.sign-up-with-google")}
+							{t("page.homepage.register-with-google")}
 						</Button>
 						<Button variant="white">
 							<AppleLogo />
-							{t("page.homepage.sign-up-with-apple")}
+							{t("page.homepage.register-with-apple")}
 						</Button>
 					</div>
 					<Separator>

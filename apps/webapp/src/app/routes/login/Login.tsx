@@ -13,16 +13,23 @@ import {
 	FormMessage,
 	Input,
 	Loader,
+	Separator,
+	Text,
 } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Logo from "assets/logo/logo.svg?react";
+import LogoDark from "assets/logo/logo-dark.svg?react";
+import AppleLogo from "assets/social/apple.svg?react";
+import GoogleLogo from "assets/social/google.svg?react";
 import { IS_PRODUCTION } from "config/env";
+import { paths } from "config/paths";
 import { useUserContext } from "contexts/UserContext";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Trans, useTranslation } from "react-i18next";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { LoginFormSchema, loginFormSchema } from "./login-form-schema";
 
@@ -131,76 +138,128 @@ const Login = () => {
 			open
 			onOpenChange={handleOpenChange}
 		>
-			<DialogContent showClose={!!state}>
-				<DialogHeader>
-					<DialogTitle>{t("page.login.title")}</DialogTitle>
-					<DialogDescription>{t("page.login.description")}</DialogDescription>
-				</DialogHeader>
+			<DialogContent
+				showClose={!!state}
+				mobileFullScreen
+			>
+				<div className="mx-auto max-w-96">
+					<Logo className="light:hidden mx-auto size-10" />
+					<LogoDark className="mx-auto size-10 dark:hidden" />
 
-				<Form {...form}>
-					<form
-						className="flex flex-col gap-4"
-						onSubmit={handleSubmit(onSubmit)}
-					>
-						<GoogleReCaptcha
-							onVerify={onVerify}
-							refreshReCaptcha={refreshReCaptcha}
-						/>
+					<div className="flex h-[calc(100svh-104px)] items-center sm:h-auto">
+						<div>
+							<DialogHeader className="mb-10 sm:my-10">
+								<DialogTitle>{t("page.login.title")}</DialogTitle>
+								<DialogDescription>{t("page.login.description")}</DialogDescription>
+							</DialogHeader>
 
-						<FormField
-							control={control}
-							name="userEmail"
-							render={({ field }) => (
-								<FormItem>
-									<FormControl>
-										<Input
-											aria-label={t("form.email.label")}
-											placeholder={t("form.email.label")}
-											data-testid="email-input"
-											{...field}
+							<div className="my-5 flex flex-col gap-5">
+								<Button variant="white">
+									<GoogleLogo />
+									{t("page.login.login-with-google")}
+								</Button>
+								<Button variant="white">
+									<AppleLogo />
+									{t("page.login.login-with-apple")}
+								</Button>
+							</div>
+
+							<Separator>
+								<Text muted>{t("common.or")}</Text>
+							</Separator>
+
+							<Form {...form}>
+								<form
+									className="mt-5 flex flex-col gap-4"
+									onSubmit={handleSubmit(onSubmit)}
+								>
+									<GoogleReCaptcha
+										onVerify={onVerify}
+										refreshReCaptcha={refreshReCaptcha}
+									/>
+
+									<FormField
+										control={control}
+										name="userEmail"
+										render={({ field }) => (
+											<FormItem>
+												<FormControl>
+													<Input
+														aria-label={t("form.email.label")}
+														placeholder={t("form.email.label")}
+														data-testid="email-input"
+														{...field}
+													/>
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+									{compareState(states.password) && (
+										<FormField
+											control={control}
+											name="userPassword"
+											render={({ field }) => (
+												<FormItem>
+													<FormControl>
+														<Input
+															autoFocus
+															type="password"
+															aria-label={t("form.password")}
+															placeholder={t("form.password")}
+															data-testid="password-input"
+															{...field}
+														/>
+													</FormControl>
+													<FormMessage />
+												</FormItem>
+											)}
 										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						{compareState(states.password) && (
-							<FormField
-								control={control}
-								name="userPassword"
-								render={({ field }) => (
-									<FormItem>
-										<FormControl>
-											<Input
-												autoFocus
-												type="password"
-												aria-label={t("form.password")}
-												placeholder={t("form.password")}
-												data-testid="password-input"
-												{...field}
+									)}
+
+									<Button
+										disabled={isSubmitting}
+										type="submit"
+										data-testid="submit-button"
+									>
+										{isSubmitting && <Loader />}
+
+										{compareState(states.email) && t("form.next")}
+
+										{compareState(states.password) && !userNotConfirmed && t("common.sign_in")}
+
+										{compareState(states.password) &&
+											userNotConfirmed &&
+											t("common.sign_up_confirm")}
+									</Button>
+								</form>
+							</Form>
+							<Button
+								variant="outline"
+								className="mt-5 w-full"
+								asChild
+							>
+								<Link to={paths.resetPassword}>{t("page.login.forgot-password")}</Link>
+							</Button>
+							<Text
+								muted
+								className="mt-10 block text-xs sm:mb-10"
+							>
+								<Trans
+									i18nKey="page.login.do-not-have-an-account"
+									components={{
+										register: (
+											<Link
+												to={paths.register.register}
+												className="text-primary"
 											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						)}
-
-						<Button
-							disabled={isSubmitting}
-							type="submit"
-							data-testid="submit-button"
-						>
-							{isSubmitting && <Loader />}
-
-							{compareState(states.email) && t("form.next")}
-
-							{compareState(states.password) && !userNotConfirmed && t("common.sign_in")}
-
-							{compareState(states.password) && userNotConfirmed && t("common.sign_up_confirm")}
-						</Button>
-					</form>
-				</Form>
+										),
+									}}
+								/>
+							</Text>
+						</div>
+					</div>
+				</div>
 			</DialogContent>
 		</Dialog>
 	);
