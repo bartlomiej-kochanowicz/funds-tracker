@@ -1,6 +1,6 @@
 import { GetUserQuery, IntroductionStep, UpdateUserInput } from "__generated__/graphql";
 import { LazyQueryExecFunction, OperationVariables } from "@apollo/client";
-import { useToast } from "@funds-tracker/ui";
+import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
 import { IS_DEVELOPMENT } from "config/env";
 import { useLazyQueryUser } from "graphql/user/useLazyQueryUser";
 import { useMutationUserUpdate } from "graphql/user/useMutationUserUpdate";
@@ -26,8 +26,6 @@ const useUser = (): UserContextType => {
 	const [getUser, { loading, data, client, error, updateQuery }] = useLazyQueryUser();
 	const [updateUserMutation, { loading: updateLoading }] = useMutationUserUpdate();
 
-	const { toast } = useToast();
-
 	const updateUser = async ({ email, name }: UpdateLocalUserData) => {
 		try {
 			await updateUserMutation({
@@ -48,15 +46,10 @@ const useUser = (): UserContextType => {
 				},
 			}));
 
-			toast({
-				description: t("toasts.data_saved"),
-			});
+			emitSuccessToast(t("toasts.data_saved"));
 		} catch {
-			toast({
-				variant: "destructive",
-				// TODO
-				description: "Error",
-			});
+			// TODO
+			// emitErrorToast(t("toasts.error"));
 		}
 	};
 

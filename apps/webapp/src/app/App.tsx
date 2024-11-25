@@ -1,17 +1,22 @@
 import { Toaster } from "@funds-tracker/ui";
-import { Suspense } from "react";
+import { useTheme } from "next-themes";
+import { ComponentProps, Suspense } from "react";
 
 import { Provider } from "./provider";
 import { Router } from "./router";
 
-const App = () => (
-	<Provider>
-		<Toaster />
+const App = () => {
+	const { theme = "system" } = useTheme();
 
-		<Suspense>
-			<Router />
-		</Suspense>
-	</Provider>
-);
+	return (
+		<Provider>
+			<Toaster theme={theme as ComponentProps<typeof Toaster>["theme"]} />
+
+			<Suspense>
+				<Router />
+			</Suspense>
+		</Provider>
+	);
+};
 
 export default App;

@@ -5,7 +5,9 @@ import { RefreshTokenMutation } from "__generated__/graphql";
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, Observable } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { RetryLink } from "@apollo/client/link/retry";
-import { IS_DEVELOPMENT } from "config/env";
+import { emitErrorToast } from "@funds-tracker/ui";
+import { API_DOMAIN, IS_DEVELOPMENT } from "config/env";
+import i18next from "i18next";
 
 const REFRESH_TOKEN = gql(/* GraphQL */ `
 	mutation RefreshToken {
@@ -15,7 +17,11 @@ const REFRESH_TOKEN = gql(/* GraphQL */ `
 	}
 `);
 
-const refreshTokensLink = onError(({ graphQLErrors, operation, forward }) => {
+const refreshTokensLink = onError(({ graphQLErrors, operation, forward, networkError }) => {
+	if (networkError?.message === "Failed to fetch") {
+		emitErrorToast(i18next.t("api.server-unavaliable"));
+	}
+
 	if (!graphQLErrors) return;
 
 	if (graphQLErrors?.[0]?.extensions?.code === "UNAUTHENTICATED") {
@@ -54,16 +60,21 @@ const retryLink = new RetryLink({
 	},
 	attempts: {
 		max: 3,
-		retryIf: error => !!error,
+		retryIf: error => {
+			if (!error?.graphQLErrors) return false;
+
+			return !!error;
+		},
 	},
 });
 
 const httpLink = new HttpLink({
-	uri: "http://localhost:4000/graphql",
+	uri: `${API_DOMAIN}/graphql`,
 	credentials: "include",
 });
 
 export const cache = new InMemoryCache();
+
 const client = new ApolloClient({
 	link: ApolloLink.from([retryLink, refreshTokensLink, httpLink]),
 	cache,

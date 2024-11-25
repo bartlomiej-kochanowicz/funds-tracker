@@ -249,7 +249,7 @@ describe("Signin tests", () => {
 					},
 				},
 				result: {
-					errors: [new GraphQLError("User not confirmed.")],
+					errors: [new GraphQLError("api.user-not-confirmed")],
 				},
 			},
 			{
@@ -293,7 +293,7 @@ describe("Signin tests", () => {
 
 		// then
 		await signinPO.expectLoaderDisappeared();
-		await signinPO.expectTextDisplayed("User not confirmed.");
+		await signinPO.expectTextDisplayed("api.user-not-confirmed");
 		await waitFor(() =>
 			expect(mockNavigate).toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, {
 				state: { email: "test@email.xyz" },
@@ -340,7 +340,7 @@ describe("Signin tests", () => {
 					},
 				},
 				result: {
-					errors: [new GraphQLError("User not confirmed.")],
+					errors: [new GraphQLError("api.user-not-confirmed")],
 				},
 			},
 			{
@@ -380,7 +380,7 @@ describe("Signin tests", () => {
 
 		// then
 		await signinPO.expectLoaderDisappeared();
-		await signinPO.expectTextDisplayed("User not confirmed.");
+		await signinPO.expectTextDisplayed("api.user-not-confirmed");
 		await waitFor(() =>
 			expect(mockNavigate).toHaveBeenCalledWith(ROUTES.SIGNUP.CONFIRM, {
 				state: { email: "test@email.xyz" },

@@ -36,4 +36,6 @@ export * from "./components/tooltip";
 // hooks exports
 
 export * from "./hooks/use-mobile";
-export * from "./hooks/use-toast";
+
+// helpers exports
+export * from "./helpers/emit-toast";

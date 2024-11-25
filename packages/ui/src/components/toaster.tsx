@@ -1,36 +1,22 @@
-import {
-	Toast,
-	ToastClose,
-	ToastDescription,
-	ToastProvider,
-	ToastTitle,
-	ToastViewport,
-} from "@/src/components/toast";
-import { useToast } from "@/src/hooks/use-toast";
+import { ComponentProps } from "react";
+import { Toaster as Sonner } from "sonner";
 
-const Toaster = () => {
-	const { toasts } = useToast();
+type ToasterProps = ComponentProps<typeof Sonner>;
 
-	return (
-		<ToastProvider>
-			{toasts.map(({ id, title, description, action, ...props }) => {
-				return (
-					<Toast
-						key={id}
-						{...props}
-					>
-						<div className="grid gap-1">
-							{title && <ToastTitle>{title}</ToastTitle>}
-							{description && <ToastDescription>{description}</ToastDescription>}
-						</div>
-						{action}
-						<ToastClose />
-					</Toast>
-				);
-			})}
-			<ToastViewport />
-		</ToastProvider>
-	);
-};
+const Toaster = ({ ...props }: ToasterProps) => (
+	<Sonner
+		className="toaster group"
+		toastOptions={{
+			classNames: {
+				toast:
+					"group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
+				description: "group-[.toast]:text-muted-foreground",
+				actionButton: "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+				cancelButton: "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
+			},
+		}}
+		{...props}
+	/>
+);
 
 export { Toaster };

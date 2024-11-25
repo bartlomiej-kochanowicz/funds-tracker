@@ -7,7 +7,6 @@ import {
 	FormMessage,
 	Input,
 	Loader,
-	useToast,
 } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paths } from "config/paths";
@@ -44,8 +43,6 @@ const LoginForm = () => {
 	const { t } = useTranslation();
 
 	const { getUser } = useUserContext();
-
-	const { toast } = useToast();
 
 	const [token, setToken] = useState<string>("");
 	const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
@@ -114,7 +111,7 @@ const LoginForm = () => {
 		onError: async error => {
 			setError("userPassword", { type: "custom", message: error.message });
 
-			if (error.message === "User not confirmed.") {
+			if (error.message === "api.user-not-confirmed") {
 				const { userEmail } = getValues();
 
 				await sendCode({ variables: { data: { email: userEmail, token } } });
@@ -146,7 +143,7 @@ const LoginForm = () => {
 		setRefreshReCaptcha(r => !r);
 	};
 
-	const userNotConfirmed = errors.userPassword?.message === "User not confirmed.";
+	const userNotConfirmed = errors.userPassword?.message === "api.user-not-confirmed";
 
 	return (
 		<Form {...form}>

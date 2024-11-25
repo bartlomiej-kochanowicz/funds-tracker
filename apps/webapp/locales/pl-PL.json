@@ -2,13 +2,15 @@
 	"api": {
 		"you-are-a-robot": "Jesteś robotem",
 		"user-not-found": "Użytkownik nie znaleziony",
+		"user-not-confirmed": "Użytkownik nie potwierdzony",
 		"wrong-password": "Nieprawidłowe hasło",
 		"email-not-confirmed": "Email nie został potwierdzony",
 		"reset-password-token-expired": "Token resetujący hasło wygasł",
 		"new-password-must-be-different-from-the-old-one": "Nowe hasło musi różnić się od starego",
 		"email-already-confirmed": "Email już został potwierdzony",
 		"wrong-registration-confirm-code": "Nieprawidłowy kod potwierdzający rejestrację",
-		"email-already-in-use": "Email jest już w użyciu"
+		"email-already-in-use": "Email jest już w użyciu",
+		"server-unavaliable": "Serwer niedostępny, spróbuj ponownie później"
 	},
 	"toast": {
 		"data-saved": "Dane zapisane"
@@ -45,9 +47,19 @@
 		}
 	},
 	"form": {
-		"email": "Email address",
-		"password": "Password",
-		"next": "Dalej"
+		"email": {
+			"label": "Adres email",
+			"invalid": "Nieprawidłowy adres email",
+			"required": "Adres email jest wymagany"
+		},
+		"password": {
+			"label": "Hasło",
+			"required": "Hasło jest wymagane",
+			"min": "Hasło musi mieć co najmniej 8 znaków",
+			"max": "Hasło musi mieć maksymalnie 32 znaki"
+		},
+		"next": "Dalej",
+		"required": "Pole jest wymagane"
 	},
 	"currency": {
 		"AED": "Dirham arabski",

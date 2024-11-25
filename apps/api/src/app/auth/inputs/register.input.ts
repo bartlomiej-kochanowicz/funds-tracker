@@ -8,11 +8,11 @@ export class RegisterInput {
 	@Field(() => EmailAddressResolver)
 	email: string;
 
-	@Length(4, 50, { message: "Name must be between 4 and 50 characters." })
+	@Length(4, 32, { message: "form.password.min" })
 	@Field(() => String)
 	name: string;
 
-	@Length(8, 50, { message: "Password must be between 4 and 50 characters." })
+	@Length(8, 32, { message: "form.password.max" })
 	@Field(() => String)
 	password: string;
 

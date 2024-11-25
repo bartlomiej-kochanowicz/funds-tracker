@@ -27,6 +27,23 @@ const Router = () => {
 	const location = useLocation();
 	const background = location.state && location.state.background;
 
+	const modals = [
+		<Route
+			key={paths.login}
+			path={paths.login}
+			element={
+				<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+					<Login />
+				</GoogleReCaptchaProvider>
+			}
+		/>,
+		<Route
+			key={paths.register.register}
+			path={paths.register.register}
+			element={<Register />}
+		/>,
+	];
+
 	return (
 		<>
 			<Routes location={background || location}>
@@ -34,28 +51,14 @@ const Router = () => {
 					path={paths.homepage}
 					element={<Homepage />}
 				/>
+				{!background ? modals : null}
 				<Route
 					path="*"
 					element={<NotFound />}
 				/>
 			</Routes>
 			{/* Render modals here */}
-			{background && (
-				<Routes>
-					<Route
-						path={paths.login}
-						element={
-							<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-								<Login />
-							</GoogleReCaptchaProvider>
-						}
-					/>
-					<Route
-						path={paths.register.register}
-						element={<Register />}
-					/>
-				</Routes>
-			)}
+			{background && <Routes>{modals}</Routes>}
 		</>
 	);
 };
