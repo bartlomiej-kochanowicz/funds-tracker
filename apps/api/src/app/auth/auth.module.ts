@@ -5,8 +5,8 @@ import { SendGridModule } from "@services/send-grid/send-grid.module";
 import { AuthResolver } from "./auth.resolver";
 import { AuthService } from "./auth.service";
 import { AtStrategy, RtStrategy } from "./strategies";
-import { SignupService } from "./services/sign-up.service";
-import { SigninService } from "./services/sign-in.service";
+import { SignUpService } from "./services/sign-up.service";
+import { SignInService } from "./services/sign-in.service";
 import { LogoutService } from "./services/logout.service";
 import { PasswordService } from "./services/password.service";
 import { TokenService } from "./services/token.service";
@@ -16,8 +16,8 @@ import { TokenService } from "./services/token.service";
 	providers: [
 		AuthResolver,
 		AuthService,
-		SignupService,
-		SigninService,
+		SignUpService,
+		SignInService,
 		LogoutService,
 		PasswordService,
 		TokenService,

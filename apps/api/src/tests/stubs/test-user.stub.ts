@@ -1,6 +1,6 @@
-import { SignupInput } from "@app/auth/inputs";
+import { SignUpInput } from "@app/auth/inputs";
 
-export const testUser: SignupInput = {
+export const testUser: SignUpInput = {
 	email: "test@email.com",
 	password: "testPassword",
 	name: "testName",

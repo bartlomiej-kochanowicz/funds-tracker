@@ -2,11 +2,11 @@ import gql from "graphql-tag";
 import request from "supertest-graphql";
 import { IntegrationTestManager } from "@src/tests/integration-test-manager";
 import { testUser } from "@src/tests/stubs/test-user.stub";
-import { signupUserStub, confirmUserStub } from "@src/app/auth/tests/stubs/confirm-sign-up.stub";
+import { signUpUserStub, confirmUserStub } from "@src/app/auth/tests/stubs/confirm-sign-up.stub";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
-import { ConfirmSignup } from "@app/auth/entities";
+import { ConfirmSignUp } from "@app/auth/entities";
 
-describe("confirm signup", () => {
+describe("confirm signUp", () => {
 	const integrationTestManager = new IntegrationTestManager();
 
 	beforeAll(async () => {
@@ -18,19 +18,19 @@ describe("confirm signup", () => {
 	});
 
 	describe("given the user exists", () => {
-		describe("when a confirmSignup mutation is executed", () => {
-			let confirmedUser: ConfirmSignup;
+		describe("when a confirmSignUp mutation is executed", () => {
+			let confirmedUser: ConfirmSignUp;
 
 			beforeAll(async () => {
 				// sign up new user to have new user in database for confirm action
-				await integrationTestManager.getSignupService().signupLocal(signupUserStub);
+				await integrationTestManager.getSignUpService().signUpLocal(signUpUserStub);
 
-				const response = await request<{ confirmSignup: ConfirmSignup }>(
+				const response = await request<{ confirmSignUp: ConfirmSignUp }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation ConfirmSignup($data: ConfirmSignupInput!) {
-							confirmSignup(data: $data) {
+						mutation ConfirmSignUp($data: ConfirmSignUpInput!) {
+							confirmSignUp(data: $data) {
 								success
 							}
 						}
@@ -40,7 +40,7 @@ describe("confirm signup", () => {
 					})
 					.expectNoErrors();
 
-				confirmedUser = response.data.confirmSignup;
+				confirmedUser = response.data.confirmSignUp;
 			});
 
 			it("should return user entity", async () => {
@@ -52,7 +52,7 @@ describe("confirm signup", () => {
 			it("should update confirmationCodeHash fild in database", async () => {
 				const user = await integrationTestManager.getPrismaService().user.findUnique({
 					where: {
-						email: signupUserStub.email,
+						email: signUpUserStub.email,
 					},
 					select: {
 						confirmationCodeHash: true,
@@ -65,16 +65,16 @@ describe("confirm signup", () => {
 	});
 
 	describe("given the user exists and confirmed", () => {
-		describe("when a confirmSignup mutation is executed", () => {
+		describe("when a confirmSignUp mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {
-				const { response } = await request<{ confirmSignup: ConfirmSignup }>(
+				const { response } = await request<{ confirmSignUp: ConfirmSignUp }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation ConfirmSignup($data: ConfirmSignupInput!) {
-							confirmSignup(data: $data) {
+						mutation ConfirmSignUp($data: ConfirmSignUpInput!) {
+							confirmSignUp(data: $data) {
 								success
 							}
 						}
@@ -97,16 +97,16 @@ describe("confirm signup", () => {
 	});
 
 	describe("given the user not exists", () => {
-		describe("when a confirmSignup mutation is executed", () => {
+		describe("when a confirmSignUp mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {
-				const { response } = await request<{ confirmSignup: ConfirmSignup }>(
+				const { response } = await request<{ confirmSignUp: ConfirmSignUp }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation ConfirmSignup($data: ConfirmSignupInput!) {
-							confirmSignup(data: $data) {
+						mutation ConfirmSignUp($data: ConfirmSignUpInput!) {
+							confirmSignUp(data: $data) {
 								success
 							}
 						}
@@ -129,7 +129,7 @@ describe("confirm signup", () => {
 			it("should update confirmationCodeHash fild in database", async () => {
 				const user = await integrationTestManager.getPrismaService().user.findUnique({
 					where: {
-						email: signupUserStub.email,
+						email: signUpUserStub.email,
 					},
 					select: {
 						confirmationCodeHash: true,

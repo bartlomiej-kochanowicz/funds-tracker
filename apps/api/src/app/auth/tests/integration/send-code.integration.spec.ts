@@ -35,7 +35,7 @@ describe("send code", () => {
 			res.cookie = (): any => {};
 
 			// sign up new user to have user in database
-			await integrationTestManager.getSignupService().signupLocal(sendCodeStub);
+			await integrationTestManager.getSignUpService().signUpLocal(sendCodeStub);
 
 			prevCodeHash = (
 				await integrationTestManager

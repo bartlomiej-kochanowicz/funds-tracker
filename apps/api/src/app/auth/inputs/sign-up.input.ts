@@ -3,7 +3,7 @@ import { IsEmail, Length } from "class-validator";
 import { EmailAddressResolver } from "graphql-scalars";
 
 @InputType()
-export class SignupInput {
+export class SignUpInput {
 	@IsEmail()
 	@Field(() => EmailAddressResolver)
 	email: string;

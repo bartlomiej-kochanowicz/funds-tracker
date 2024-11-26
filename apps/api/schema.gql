@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ConfirmSignup {
+type ConfirmSignUp {
   success: Boolean!
 }
 
@@ -30,11 +30,11 @@ type SetNewPassword {
   success: Boolean!
 }
 
-type SigninLocal {
+type SignInLocal {
   success: Boolean!
 }
 
-type SignupLocal {
+type SignUpLocal {
   success: Boolean!
 }
 
@@ -66,10 +66,10 @@ input EmailInput {
 }
 
 type Mutation {
-  signupLocal(data: SignupInput!): SignupLocal!
-  confirmSignup(data: ConfirmSignupInput!): ConfirmSignup!
+  signUpLocal(data: SignUpInput!): SignUpLocal!
+  confirmSignUp(data: ConfirmSignUpInput!): ConfirmSignUp!
   sendCode(data: SendCodeInput!): SendCode!
-  signinLocal(data: SigninInput!): SigninLocal!
+  signInLocal(data: SignInInput!): SignInLocal!
   logout: Logout!
   resetPassword(data: ResetPasswordInput!): ResetPassword!
   setNewPassword(data: SetNewPasswordInput!): SetNewPassword!
@@ -77,14 +77,14 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
 }
 
-input SignupInput {
+input SignUpInput {
   email: EmailAddress!
   name: String!
   password: String!
   token: String!
 }
 
-input ConfirmSignupInput {
+input ConfirmSignUpInput {
   email: EmailAddress!
   code: String!
   token: String!
@@ -95,7 +95,7 @@ input SendCodeInput {
   token: String!
 }
 
-input SigninInput {
+input SignInInput {
   email: String!
   password: String!
   token: String!
