@@ -5,18 +5,18 @@ import { ForbiddenException, Injectable } from "@nestjs/common";
 import * as bcrypt from "bcrypt";
 import { Response } from "express";
 import { AuthService } from "../auth.service";
-import { RegisterConfirm, SendCode, RegisterLocal } from "../entities";
-import { RegisterConfirmInput, SendCodeInput, RegisterInput } from "../inputs";
+import { ConfirmSignup, SendCode, SignupLocal } from "../entities";
+import { ConfirmSignupInput, SendCodeInput, SignupInput } from "../inputs";
 
 @Injectable()
-export class RegisterService {
+export class SignupService {
 	constructor(
 		private prisma: PrismaService,
 		private authService: AuthService,
 	) {}
 
-	async registerLocal(registerInput: RegisterInput): Promise<RegisterLocal> {
-		const { email, password, name, token } = registerInput;
+	async signupLocal(signupInput: SignupInput): Promise<SignupLocal> {
+		const { email, password, name, token } = signupInput;
 
 		const isHuman = await this.authService.validateHuman(token);
 
@@ -54,11 +54,11 @@ export class RegisterService {
 		};
 	}
 
-	async confirmRegister(
-		confirmRegisterInput: RegisterConfirmInput,
+	async confirmSignup(
+		confirmSignupInput: ConfirmSignupInput,
 		res: Response,
-	): Promise<RegisterConfirm> {
-		const { code, email, token } = confirmRegisterInput;
+	): Promise<ConfirmSignup> {
+		const { code, email, token } = confirmSignupInput;
 
 		const isHuman = await this.authService.validateHuman(token);
 
@@ -77,9 +77,10 @@ export class RegisterService {
 		}
 
 		// allways pass for tests enviroment
-		const isCodesMatches = IS_TEST || (await bcrypt.compare(code, user.confirmationCodeHash));
+		const isConfirmationCodeMatches =
+			IS_TEST || (await bcrypt.compare(code, user.confirmationCodeHash));
 
-		if (!isCodesMatches) {
+		if (!isConfirmationCodeMatches) {
 			throw new ForbiddenException("api.wrong-registration-confirm-code");
 		}
 

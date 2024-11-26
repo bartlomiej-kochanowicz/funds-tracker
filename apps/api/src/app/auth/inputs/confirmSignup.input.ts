@@ -3,12 +3,16 @@ import { IsEmail, IsString } from "class-validator";
 import { EmailAddressResolver } from "graphql-scalars";
 
 @InputType()
-export class SendCodeInput {
+export class ConfirmSignupInput {
+	@Field(() => EmailAddressResolver, { description: "Email." })
 	@IsEmail()
-	@Field(() => EmailAddressResolver)
 	email: string;
 
+	@Field(() => String, { description: "Code." })
 	@IsString()
-	@Field(() => String)
+	code: string;
+
+	@Field(() => String, { description: "Token." })
+	@IsString()
 	token: string;
 }

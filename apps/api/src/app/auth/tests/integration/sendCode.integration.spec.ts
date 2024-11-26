@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import request from "supertest-graphql";
 import { SendCode } from "@app/auth/entities/send-code.entity";
 import { IntegrationTestManager } from "@tests/IntegrationTestManager";
-import { sendCodeStub } from "@src/app/auth/tests/stubs/send-code.stup";
+import { sendCodeStub } from "@app/auth/tests/stubs/sendCode.stup";
 import { Response } from "express";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
 import { testUser } from "@tests/stubs/testUser.stub";
@@ -34,8 +34,8 @@ describe("send code", () => {
 
 			res.cookie = (): any => {};
 
-			// register new user to have user in database
-			await integrationTestManager.getRegisterService().registerLocal(sendCodeStub);
+			// sign up new user to have user in database
+			await integrationTestManager.getSignupService().signupLocal(sendCodeStub);
 
 			prevCodeHash = (
 				await integrationTestManager

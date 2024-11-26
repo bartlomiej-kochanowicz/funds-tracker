@@ -1,2 +1,2 @@
-export * from "./jwt-payload.type";
+export * from "./jwtPayload.type";
 export * from "./tokens.type";

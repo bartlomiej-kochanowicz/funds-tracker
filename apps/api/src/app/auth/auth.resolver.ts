@@ -6,27 +6,27 @@ import { Public } from "@decorators/public.decorator";
 import { RtGuard } from "@guards/rt.guard";
 import { Response } from "express";
 import {
-	RegisterConfirm,
+	ConfirmSignup,
 	Email,
 	Logout,
 	Refresh,
 	ResetPassword,
 	SetNewPassword,
-	LoginLocal,
-	RegisterLocal,
+	SigninLocal,
+	SignupLocal,
 } from "./entities";
 import { SendCode } from "./entities/send-code.entity";
 import {
-	RegisterConfirmInput,
+	ConfirmSignupInput,
 	EmailInput,
 	ResetPasswordInput,
 	SendCodeInput,
 	SetNewPasswordInput,
-	LoginInput,
-	RegisterInput,
+	SigninInput,
+	SignupInput,
 } from "./inputs";
-import { RegisterService } from "./services/register.service";
-import { LoginService } from "./services/login.service";
+import { SignupService } from "./services/signup.service";
+import { SigninService } from "./services/signin.service";
 import { LogoutService } from "./services/logout.service";
 import { PasswordService } from "./services/password.service";
 import { TokenService } from "./services/token.service";
@@ -34,30 +34,30 @@ import { TokenService } from "./services/token.service";
 @Resolver()
 export class AuthResolver {
 	constructor(
-		private registerService: RegisterService,
-		private loginService: LoginService,
+		private signupService: SignupService,
+		private signinService: SigninService,
 		private logoutService: LogoutService,
 		private passwordService: PasswordService,
 		private tokenService: TokenService,
 	) {}
 
 	@Public()
-	@Mutation(() => RegisterLocal)
-	registerLocal(
+	@Mutation(() => SignupLocal)
+	signupLocal(
 		@Args("data")
-		registerInput: RegisterInput,
+		signupInput: SignupInput,
 	) {
-		return this.registerService.registerLocal(registerInput);
+		return this.signupService.signupLocal(signupInput);
 	}
 
 	@Public()
-	@Mutation(() => RegisterConfirm)
-	registerConfirm(
+	@Mutation(() => ConfirmSignup)
+	confirmSignup(
 		@Args("data")
-		registerConfirmInput: RegisterConfirmInput,
+		confirmSignupInput: ConfirmSignupInput,
 		@Context("res") res: Response,
 	) {
-		return this.registerService.confirmRegister(registerConfirmInput, res);
+		return this.signupService.confirmSignup(confirmSignupInput, res);
 	}
 
 	@Public()
@@ -66,17 +66,17 @@ export class AuthResolver {
 		@Args("data")
 		sendCodeInput: SendCodeInput,
 	) {
-		return this.registerService.sendCode(sendCodeInput);
+		return this.signupService.sendCode(sendCodeInput);
 	}
 
 	@Public()
-	@Mutation(() => LoginLocal)
-	loginLocal(
+	@Mutation(() => SigninLocal)
+	signinLocal(
 		@Args("data")
-		loginInput: LoginInput,
+		signinInput: SigninInput,
 		@Context("res") res: Response,
 	) {
-		return this.loginService.loginLocal(loginInput, res);
+		return this.signinService.signinLocal(signinInput, res);
 	}
 
 	@Public()
@@ -85,7 +85,7 @@ export class AuthResolver {
 		@Args("data")
 		emailInput: EmailInput,
 	): Promise<Email> {
-		return this.loginService.checkEmail(emailInput);
+		return this.signinService.checkEmail(emailInput);
 	}
 
 	@Mutation(() => Logout)

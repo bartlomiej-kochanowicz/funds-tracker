@@ -4,8 +4,8 @@ import { PrismaService } from "@services/prisma/prisma.service";
 import { AppModule } from "@src/app.module";
 import { testUser } from "@tests/stubs/testUser.stub";
 import { Response } from "express";
-import { RegisterConfirmInput } from "@app/auth/inputs";
-import { RegisterService } from "@src/app/auth/services/register.service";
+import { ConfirmSignupInput } from "@app/auth/inputs";
+import { SignupService } from "@app/auth/services/signup.service";
 
 export default async () => {
 	const moduleRef = await Test.createTestingModule({
@@ -17,7 +17,7 @@ export default async () => {
 	await app.init();
 
 	const prismaService = moduleRef.get<PrismaService>(PrismaService);
-	const registerService = moduleRef.get<RegisterService>(RegisterService);
+	const signupService = moduleRef.get<SignupService>(SignupService);
 
 	await prismaService.cleanDatabase();
 
@@ -32,15 +32,15 @@ export default async () => {
 
 	res.cookie = (): any => {};
 
-	await registerService.registerLocal(testUser);
+	await signupService.signupLocal(testUser);
 
-	const registerConfirmInput: RegisterConfirmInput = {
+	const confirmSignupInput: ConfirmSignupInput = {
 		email: testUser.email,
 		code: "123456",
 		token: testUser.token,
 	};
 
-	await registerService.confirmRegister(registerConfirmInput, res);
+	await signupService.confirmSignup(confirmSignupInput, res);
 
 	await app.close();
 };

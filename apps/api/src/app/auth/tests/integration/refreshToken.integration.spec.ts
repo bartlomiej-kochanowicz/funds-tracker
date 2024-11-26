@@ -3,7 +3,7 @@ import request from "supertest-graphql";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
 import { Refresh } from "@app/auth/entities";
 import { IntegrationTestManager } from "@tests/IntegrationTestManager";
-import { refreshTokenStub } from "@src/app/auth/tests/stubs/refresh-token.stub";
+import { refreshTokenStub } from "@app/auth/tests/stubs/refreshToken.stub";
 
 describe("refresh token", () => {
 	const integrationTestManager = new IntegrationTestManager();
@@ -67,12 +67,12 @@ describe("refresh token", () => {
 		let resStatus: number;
 
 		beforeAll(async () => {
-			// register new user to have new user in database for confirm action
-			await integrationTestManager.getRegisterService().registerLocal(refreshTokenStub);
+			// sign up new user to have new user in database for confirm action
+			await integrationTestManager.getSignupService().signupLocal(refreshTokenStub);
 
 			const { refreshToken } = await integrationTestManager
-				.getLoginService()
-				.loginLocalForTests(refreshTokenStub.email, "refresh-session");
+				.getSigninService()
+				.signinLocalForTests(refreshTokenStub.email, "refresh-session");
 
 			const { response } = await request<{ refreshToken: Refresh }>(
 				integrationTestManager.httpServer,

@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
 import request from "supertest-graphql";
-import { RegisterLocal } from "@app/auth/entities";
+import { SignupLocal } from "@app/auth/entities";
 import { IntegrationTestManager } from "@tests/IntegrationTestManager";
 import { testUser } from "@tests/stubs/testUser.stub";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
-import { registerUserStub } from "../stubs/register.stub";
+import { signupUserStub } from "../stubs/signup.stub";
 
-describe("register local", () => {
+describe("signup local", () => {
 	const integrationTestManager = new IntegrationTestManager();
 
 	beforeAll(async () => {
@@ -17,31 +17,31 @@ describe("register local", () => {
 		await integrationTestManager.afterAll();
 	});
 
-	describe("given does the user does not already register", () => {
-		describe("when a loginLocal mutation is executed", () => {
-			let register: RegisterLocal;
+	describe("given does the user does not already signup", () => {
+		describe("when a signinLocal mutation is executed", () => {
+			let signup: SignupLocal;
 
 			beforeAll(async () => {
-				const response = await request<{ registerLocal: RegisterLocal }>(
+				const response = await request<{ signupLocal: SignupLocal }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation RegisterLocal($data: RegisterInput!) {
-							registerLocal(data: $data) {
+						mutation SignupLocal($data: SignupInput!) {
+							signupLocal(data: $data) {
 								success
 							}
 						}
 					`)
 					.variables({
-						data: registerUserStub,
+						data: signupUserStub,
 					})
 					.expectNoErrors();
 
-				register = response.data.registerLocal;
+				signup = response.data.signupLocal;
 			});
 
 			it("should return success", async () => {
-				expect(register).toMatchObject({
+				expect(signup).toMatchObject({
 					success: true,
 				});
 			});
@@ -49,7 +49,7 @@ describe("register local", () => {
 			it("should create new user in database", async () => {
 				const user = await integrationTestManager.getPrismaService().user.findUnique({
 					where: {
-						email: registerUserStub.email,
+						email: signupUserStub.email,
 					},
 				});
 
@@ -58,17 +58,17 @@ describe("register local", () => {
 		});
 	});
 
-	describe("given does the user already register", () => {
-		describe("when a loginLocal mutation is executed", () => {
+	describe("given does the user already signup", () => {
+		describe("when a signinLocal mutation is executed", () => {
 			let resStatus: number;
 
 			beforeAll(async () => {
-				const { response } = await request<{ registerLocal: RegisterLocal }>(
+				const { response } = await request<{ signupLocal: SignupLocal }>(
 					integrationTestManager.httpServer,
 				)
 					.mutate(gql`
-						mutation RegisterLocal($data: RegisterInput!) {
-							registerLocal(data: $data) {
+						mutation SignupLocal($data: SignupInput!) {
+							signupLocal(data: $data) {
 								success
 							}
 						}

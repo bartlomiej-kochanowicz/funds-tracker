@@ -2,6 +2,6 @@ import { ObjectType, Field } from "@nestjs/graphql";
 
 @ObjectType()
 export class SendCode {
-	@Field(() => Boolean)
+	@Field(() => Boolean, { description: "Send code successful." })
 	success: boolean;
 }

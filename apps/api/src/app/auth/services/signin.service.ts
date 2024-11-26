@@ -4,19 +4,19 @@ import { ForbiddenException, Injectable } from "@nestjs/common";
 import { Response } from "express";
 import * as bcrypt from "bcrypt";
 import { PrismaService } from "@services/prisma/prisma.service";
-import { Email, LoginLocal } from "../entities";
-import { EmailInput, LoginInput } from "../inputs";
+import { Email, SigninLocal } from "../entities";
+import { EmailInput, SigninInput } from "../inputs";
 import { AuthService } from "../auth.service";
 
 @Injectable()
-export class LoginService {
+export class SigninService {
 	constructor(
 		private prisma: PrismaService,
 		private authService: AuthService,
 	) {}
 
-	async loginLocal(loginInput: LoginInput, res: Response): Promise<LoginLocal> {
-		const { email, password, token } = loginInput;
+	async signinLocal(signinInput: SigninInput, res: Response): Promise<SigninLocal> {
+		const { email, password, token } = signinInput;
 
 		const isHuman = await this.authService.validateHuman(token);
 
@@ -65,7 +65,7 @@ export class LoginService {
 		};
 	}
 
-	async loginLocalForTests(
+	async signinLocalForTests(
 		email: string,
 		sessionName: string,
 	): Promise<{ accessToken: string; refreshToken: string }> {
