@@ -1,14 +1,13 @@
 {
 	"api": {
 		"you-are-a-robot": "You are a robot",
-		"user-not-found": "User not found",
-		"user-not-confirmed": "User not confirmed",
+		"account-not-found": "Account does not exist",
+		"account-not-confirmed": "Account is not confirmed",
 		"wrong-password": "Wrong password",
-		"email-not-confirmed": "Email not confirmed",
 		"reset-password-token-expired": "Reset password token expired",
 		"new-password-must-be-different-from-the-old-one": "New password must be different from the old one",
 		"email-already-confirmed": "Email already confirmed",
-		"wrong-registration-confirm-code": "Wrong registration confirm code",
+		"wrong-confirmation-code": "Wrong confirmation code",
 		"email-already-in-use": "Email already in use",
 		"server-unavaliable": "Server unavaliable, please try again later"
 	},

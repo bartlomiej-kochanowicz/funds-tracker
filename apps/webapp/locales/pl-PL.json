@@ -1,14 +1,13 @@
 {
 	"api": {
 		"you-are-a-robot": "Jesteś robotem",
-		"user-not-found": "Użytkownik nie znaleziony",
-		"user-not-confirmed": "Użytkownik nie potwierdzony",
+		"account-not-found": "Konto nie istnieje",
+		"account-not-confirmed": "Konto nie zostało potwierdzone",
 		"wrong-password": "Nieprawidłowe hasło",
-		"email-not-confirmed": "Email nie został potwierdzony",
 		"reset-password-token-expired": "Token resetujący hasło wygasł",
 		"new-password-must-be-different-from-the-old-one": "Nowe hasło musi różnić się od starego",
 		"email-already-confirmed": "Email już został potwierdzony",
-		"wrong-registration-confirm-code": "Nieprawidłowy kod potwierdzający rejestrację",
+		"wrong-confirmation-code": "Nieprawidłowy kod potwierdzający",
 		"email-already-in-use": "Email jest już w użyciu",
 		"server-unavaliable": "Serwer niedostępny, spróbuj ponownie później"
 	},

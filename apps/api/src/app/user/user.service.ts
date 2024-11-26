@@ -13,7 +13,7 @@ export class UserService {
 		});
 
 		if (!user) {
-			throw new Error("api.user-not-found");
+			throw new Error("api.account-not-found");
 		}
 
 		return user;

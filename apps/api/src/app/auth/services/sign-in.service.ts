@@ -26,14 +26,14 @@ export class SignInService {
 
 		const user = await this.prisma.user.findUnique({ where: { email } });
 
-		if (!user) throw new ForbiddenException("api.user-not-found");
+		if (!user) throw new ForbiddenException("api.account-not-found");
 
 		const isPasswordsMatches = await bcrypt.compare(password, user.password);
 
 		if (!isPasswordsMatches) throw new ForbiddenException("api.wrong-password");
 
 		if (user.confirmationCodeHash) {
-			throw new ForbiddenException("api.email-not-confirmed");
+			throw new ForbiddenException("api.account-not-confirmed");
 		}
 
 		const { accessToken, refreshToken } = await this.authService.getTokens(user.uuid, user.email);

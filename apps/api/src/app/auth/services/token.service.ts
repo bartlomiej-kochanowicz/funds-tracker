@@ -28,7 +28,7 @@ export class TokenService {
 		if (!user || !user.sessions.length) throw new ForbiddenException();
 
 		if (user.confirmationCodeHash) {
-			throw new ForbiddenException("api.email-not-confirmed");
+			throw new ForbiddenException("api.account-not-confirmed");
 		}
 
 		const rtMatch = user.sessions.find(async ({ rtHash }) => await bcrypt.compare(rt, rtHash));

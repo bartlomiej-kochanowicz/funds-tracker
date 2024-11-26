@@ -69,7 +69,7 @@ export class SignUpService {
 		const user = await this.prisma.user.findUnique({ where: { email } });
 
 		if (!user) {
-			throw new ForbiddenException("api.user-not-found");
+			throw new ForbiddenException("api.account-not-found");
 		}
 
 		if (!user.confirmationCodeHash) {
@@ -81,7 +81,7 @@ export class SignUpService {
 			IS_TEST || (await bcrypt.compare(code, user.confirmationCodeHash));
 
 		if (!isConfirmationCodeMatches) {
-			throw new ForbiddenException("api.wrong-registration-confirm-code");
+			throw new ForbiddenException("api.wrong-confirmation-code");
 		}
 
 		await this.prisma.user.update({
@@ -130,7 +130,7 @@ export class SignUpService {
 		const user = await this.prisma.user.findUnique({ where: { email } });
 
 		if (!user) {
-			throw new ForbiddenException("api.user-not-found");
+			throw new ForbiddenException("api.account-not-found");
 		}
 
 		if (!user.confirmationCodeHash) {

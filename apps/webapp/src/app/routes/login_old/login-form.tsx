@@ -111,7 +111,7 @@ const SignInForm = () => {
 		onError: async error => {
 			setError("userPassword", { type: "custom", message: error.message });
 
-			if (error.message === "api.user-not-confirmed") {
+			if (error.message === "api.account-not-confirmed") {
 				const { userEmail } = getValues();
 
 				await sendCode({ variables: { data: { email: userEmail, token } } });
@@ -143,7 +143,7 @@ const SignInForm = () => {
 		setRefreshReCaptcha(r => !r);
 	};
 
-	const userNotConfirmed = errors.userPassword?.message === "api.user-not-confirmed";
+	const userNotConfirmed = errors.userPassword?.message === "api.account-not-confirmed";
 
 	return (
 		<Form {...form}>

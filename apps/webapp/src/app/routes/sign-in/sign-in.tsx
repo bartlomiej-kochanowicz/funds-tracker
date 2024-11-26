@@ -126,7 +126,7 @@ const SignIn = () => {
 		setRefreshReCaptcha(r => !r);
 	};
 
-	const userNotConfirmed = errors.userPassword?.message === "api.user-not-confirmed";
+	const userNotConfirmed = errors.userPassword?.message === "api.account-not-confirmed";
 
 	return (
 		<Dialog
