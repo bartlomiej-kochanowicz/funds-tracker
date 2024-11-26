@@ -1,11 +1,11 @@
 import gql from "graphql-tag";
 import request from "supertest-graphql";
 import { SendCode } from "@app/auth/entities/send-code.entity";
-import { IntegrationTestManager } from "@tests/IntegrationTestManager";
-import { sendCodeStub } from "@app/auth/tests/stubs/sendCode.stup";
+import { IntegrationTestManager } from "@src/tests/integration-test-manager";
+import { sendCodeStub } from "@src/app/auth/tests/stubs/send-code.stup";
 import { Response } from "express";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
-import { testUser } from "@tests/stubs/testUser.stub";
+import { testUser } from "@src/tests/stubs/test-user.stub";
 
 describe("send code", () => {
 	const integrationTestManager = new IntegrationTestManager();

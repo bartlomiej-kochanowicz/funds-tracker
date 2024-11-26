@@ -2,10 +2,10 @@ import { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import * as cookieParser from "cookie-parser";
 import { PrismaService } from "@services/prisma/prisma.service";
-import { testUser } from "@tests/stubs/testUser.stub";
+import { testUser } from "@src/tests/stubs/test-user.stub";
 import { AppModule } from "@src/app.module";
-import { SigninService } from "@app/auth/services/signin.service";
-import { SignupService } from "@app/auth/services/signup.service";
+import { SigninService } from "@src/app/auth/services/sign-in.service";
+import { SignupService } from "@src/app/auth/services/sign-up.service";
 
 export class IntegrationTestManager {
 	public httpServer: any;

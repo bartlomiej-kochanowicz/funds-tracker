@@ -3,61 +3,45 @@
 # ------------------------------------------------------
 
 type ConfirmSignup {
-  """Confirmatiopn signup successful."""
   success: Boolean!
 }
 
 type Email {
-  """Email existence."""
   exist: Boolean!
 }
 
 type Logout {
-  """Logout successful."""
   success: Boolean!
 }
 
 type Refresh {
-  """Refresh successful."""
   success: Boolean!
 }
 
 type ResetPassword {
-  """Send reset password successful."""
   success: Boolean!
 }
 
 type SendCode {
-  """Send code successful."""
   success: Boolean!
 }
 
 type SetNewPassword {
-  """Name of the user."""
   success: Boolean!
 }
 
 type SigninLocal {
-  """Signin local successful."""
   success: Boolean!
 }
 
 type SignupLocal {
-  """Signup local successful."""
   success: Boolean!
 }
 
 type User {
-  """User uuid."""
   uuid: ID!
-
-  """User date created."""
   createdAt: Date!
-
-  """User email."""
   email: EmailAddress!
-
-  """User name."""
   name: String!
 }
 
@@ -77,10 +61,7 @@ type Query {
 }
 
 input EmailInput {
-  """Email."""
   email: EmailAddress!
-
-  """Token."""
   token: String!
 }
 
@@ -97,72 +78,41 @@ type Mutation {
 }
 
 input SignupInput {
-  """Email."""
   email: EmailAddress!
-
-  """Name."""
   name: String!
-
-  """Password."""
   password: String!
-
-  """Token."""
   token: String!
 }
 
 input ConfirmSignupInput {
-  """Email."""
   email: EmailAddress!
-
-  """Code."""
   code: String!
-
-  """Token."""
   token: String!
 }
 
 input SendCodeInput {
-  """Email."""
   email: EmailAddress!
-
-  """Token."""
   token: String!
 }
 
 input SigninInput {
-  """Email."""
   email: String!
-
-  """Password."""
   password: String!
-
-  """Token."""
   token: String!
 }
 
 input ResetPasswordInput {
-  """Email."""
   email: EmailAddress!
-
-  """Token."""
   token: String!
 }
 
 input SetNewPasswordInput {
-  """Password."""
   password: String!
-
-  """Reset token."""
   resetToken: String!
-
-  """Token."""
   token: String!
 }
 
 input UpdateUserInput {
-  """New user email."""
   email: EmailAddress
-
-  """New user name."""
   name: String
 }

@@ -5,10 +5,10 @@ import { EmailAddressResolver } from "graphql-scalars";
 @InputType()
 export class SendCodeInput {
 	@IsEmail()
-	@Field(() => EmailAddressResolver, { description: "Email." })
+	@Field(() => EmailAddressResolver)
 	email: string;
 
 	@IsString()
-	@Field(() => String, { description: "Token." })
+	@Field(() => String)
 	token: string;
 }

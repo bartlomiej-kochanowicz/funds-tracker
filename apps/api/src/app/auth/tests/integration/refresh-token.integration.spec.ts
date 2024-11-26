@@ -2,8 +2,8 @@ import gql from "graphql-tag";
 import request from "supertest-graphql";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
 import { Refresh } from "@app/auth/entities";
-import { IntegrationTestManager } from "@tests/IntegrationTestManager";
-import { refreshTokenStub } from "@app/auth/tests/stubs/refreshToken.stub";
+import { IntegrationTestManager } from "@src/tests/integration-test-manager";
+import { refreshTokenStub } from "@src/app/auth/tests/stubs/refresh-token.stub";
 
 describe("refresh token", () => {
 	const integrationTestManager = new IntegrationTestManager();

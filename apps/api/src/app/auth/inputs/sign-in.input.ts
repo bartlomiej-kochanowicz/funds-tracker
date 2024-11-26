@@ -4,12 +4,12 @@ import { IsEmail } from "class-validator";
 @InputType()
 export class SigninInput {
 	@IsEmail()
-	@Field(() => String, { description: "Email." })
+	@Field(() => String)
 	email: string;
 
-	@Field(() => String, { description: "Password." })
+	@Field(() => String)
 	password: string;
 
-	@Field(() => String, { description: "Token." })
+	@Field(() => String)
 	token: string;
 }

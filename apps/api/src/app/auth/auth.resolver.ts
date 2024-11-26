@@ -25,8 +25,8 @@ import {
 	SigninInput,
 	SignupInput,
 } from "./inputs";
-import { SignupService } from "./services/signup.service";
-import { SigninService } from "./services/signin.service";
+import { SignupService } from "./services/sign-up.service";
+import { SigninService } from "./services/sign-in.service";
 import { LogoutService } from "./services/logout.service";
 import { PasswordService } from "./services/password.service";
 import { TokenService } from "./services/token.service";

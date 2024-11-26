@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 import request from "supertest-graphql";
 import { Email } from "@app/auth/entities";
-import { IntegrationTestManager } from "@tests/IntegrationTestManager";
-import { testUser } from "@tests/stubs/testUser.stub";
+import { IntegrationTestManager } from "@src/tests/integration-test-manager";
+import { testUser } from "@src/tests/stubs/test-user.stub";
 
 describe("exist email", () => {
 	const integrationTestManager = new IntegrationTestManager();

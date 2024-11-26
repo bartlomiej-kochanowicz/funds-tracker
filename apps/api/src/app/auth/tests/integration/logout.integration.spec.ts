@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 import request from "supertest-graphql";
 import * as bcrypt from "bcrypt";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
-import { IntegrationTestManager } from "@tests/IntegrationTestManager";
+import { IntegrationTestManager } from "@src/tests/integration-test-manager";
 import { logoutStub1, logoutStub2 } from "@app/auth/tests/stubs/logout.stub";
 import { Response } from "express";
 

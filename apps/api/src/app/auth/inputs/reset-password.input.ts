@@ -5,9 +5,9 @@ import { EmailAddressResolver } from "graphql-scalars";
 @InputType()
 export class ResetPasswordInput {
 	@IsEmail()
-	@Field(() => EmailAddressResolver, { description: "Email." })
+	@Field(() => EmailAddressResolver)
 	email: string;
 
-	@Field(() => String, { description: "Token." })
+	@Field(() => String)
 	token: string;
 }

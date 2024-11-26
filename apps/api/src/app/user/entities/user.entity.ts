@@ -3,15 +3,15 @@ import { DateResolver, EmailAddressResolver } from "graphql-scalars";
 
 @ObjectType()
 export class User {
-	@Field(() => ID, { description: "User uuid." })
+	@Field(() => ID)
 	uuid: string;
 
-	@Field(() => DateResolver, { description: "User date created." })
+	@Field(() => DateResolver)
 	createdAt: Date;
 
-	@Field(() => EmailAddressResolver, { description: "User email." })
+	@Field(() => EmailAddressResolver)
 	email: string;
 
-	@Field(() => String, { description: "User name." })
+	@Field(() => String)
 	name: string;
 }

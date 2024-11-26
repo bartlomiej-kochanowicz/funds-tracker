@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 import request from "supertest-graphql";
-import { IntegrationTestManager } from "@tests/IntegrationTestManager";
-import { testUser } from "@tests/stubs/testUser.stub";
-import { signupUserStub, confirmUserStub } from "@app/auth/tests/stubs/confirmSignup.stub";
+import { IntegrationTestManager } from "@src/tests/integration-test-manager";
+import { testUser } from "@src/tests/stubs/test-user.stub";
+import { signupUserStub, confirmUserStub } from "@src/app/auth/tests/stubs/confirm-sign-up.stub";
 import { getGqlErrorStatus } from "@tests/gqlStatus";
 import { ConfirmSignup } from "@app/auth/entities";
 

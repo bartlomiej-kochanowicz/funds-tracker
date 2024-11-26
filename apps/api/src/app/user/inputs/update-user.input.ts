@@ -6,11 +6,11 @@ import { EmailAddressResolver } from "graphql-scalars";
 export class UpdateUserInput {
 	@IsEmail()
 	@IsOptional()
-	@Field(() => EmailAddressResolver, { description: "New user email.", nullable: true })
+	@Field(() => EmailAddressResolver, { nullable: true })
 	email?: string;
 
 	@Length(4, 50, { message: "Name must be between 4 and 50 characters." })
 	@IsOptional()
-	@Field(() => String, { description: "New user name.", nullable: true })
+	@Field(() => String, { nullable: true })
 	name?: string;
 }
