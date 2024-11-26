@@ -1,7 +1,7 @@
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { paths } from "config/paths";
 import { lazy } from "react";
-import { Route, Routes, useLocation } from "react-router";
+import { Route, Routes } from "react-router";
 
 import { SignUp } from "./routes/sign-up";
 
@@ -24,42 +24,41 @@ const NotFound = lazy(() =>
 );
 
 const Router = () => {
-	const location = useLocation();
-	const background = location.state && location.state.background;
-
-	const modals = [
-		<Route
-			key={paths.signIn}
-			path={paths.signIn}
-			element={
-				<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-					<SignIn />
-				</GoogleReCaptchaProvider>
-			}
-		/>,
-		<Route
-			key={paths.signUp.signUp}
-			path={paths.signUp.signUp}
-			element={<SignUp />}
-		/>,
-	];
-
 	return (
-		<>
-			<Routes location={background || location}>
-				<Route
-					path={paths.homepage}
-					element={<Homepage />}
-				/>
-				{!background ? modals : null}
-				<Route
-					path="*"
-					element={<NotFound />}
-				/>
-			</Routes>
-			{/* Render modals here */}
-			{background && <Routes>{modals}</Routes>}
-		</>
+		<Routes>
+			<Route
+				path={paths.homepage}
+				element={<Homepage />}
+			/>
+			<Route
+				key={paths.signIn}
+				path={paths.signIn}
+				element={
+					<>
+						<Homepage />
+						<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+							<SignIn />
+						</GoogleReCaptchaProvider>
+					</>
+				}
+			/>
+			<Route
+				key={paths.signUp.signUp}
+				path={paths.signUp.signUp}
+				element={
+					<>
+						<Homepage />
+						<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+							<SignUp />
+						</GoogleReCaptchaProvider>
+					</>
+				}
+			/>
+			<Route
+				path="*"
+				element={<NotFound />}
+			/>
+		</Routes>
 	);
 };
 

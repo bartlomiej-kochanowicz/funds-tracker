@@ -5,6 +5,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@funds-tracker/ui";
+import { paths } from "config/paths";
 import { useNavigate } from "react-router";
 
 const SignUp = () => {
@@ -14,7 +15,7 @@ const SignUp = () => {
 		<Dialog
 			open
 			onOpenChange={() => {
-				navigate(-1);
+				navigate(paths.homepage);
 			}}
 		>
 			<DialogContent>

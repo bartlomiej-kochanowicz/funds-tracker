@@ -25,12 +25,11 @@ import { IS_PRODUCTION } from "config/env";
 import { paths } from "config/paths";
 import { useUserContext } from "contexts/UserContext";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
-import { useModal } from "hooks/use-modal";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { SignInFormSchema, signInFormSchema } from "./sign-in-form-schema";
 
@@ -53,11 +52,8 @@ const SignInStateMachine = new StateMachine<FormStates, FormActions>(
 
 const SignIn = () => {
 	const navigate = useNavigate();
-	const { state } = useLocation();
 	const { t } = useTranslation();
 	const { getUser } = useUserContext();
-
-	const signUpModal = useModal({ to: paths.signUp.signUp });
 
 	const [token, setToken] = useState<string>("");
 	const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
@@ -67,9 +63,7 @@ const SignIn = () => {
 	);
 
 	const handleOpenChange = () => {
-		if (state) {
-			navigate(-1);
-		}
+		navigate(paths.homepage);
 	};
 
 	const defaultValues = { userEmail: "", userPassword: "" } satisfies SignInFormSchema;
@@ -139,10 +133,7 @@ const SignIn = () => {
 			open
 			onOpenChange={handleOpenChange}
 		>
-			<DialogContent
-				showClose={!!state}
-				mobileFullScreen
-			>
+			<DialogContent mobileFullScreen>
 				<div className="mx-auto max-w-96">
 					<Logo className="light:hidden mx-auto size-10" />
 					<LogoDark className="mx-auto size-10 dark:hidden" />
@@ -251,7 +242,7 @@ const SignIn = () => {
 									components={{
 										signup: (
 											<Link
-												{...signUpModal}
+												to={paths.signUp.signUp}
 												className="text-primary"
 											/>
 										),

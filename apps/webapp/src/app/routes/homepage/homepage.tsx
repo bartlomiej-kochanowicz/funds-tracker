@@ -6,15 +6,11 @@ import LogoNameVerticalDark from "assets/logo/logo-name-vertical-dark.svg?react"
 import AppleLogo from "assets/social/apple.svg?react";
 import GoogleLogo from "assets/social/google.svg?react";
 import { paths } from "config/paths";
-import { useModal } from "hooks/use-modal";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, Outlet } from "react-router";
 
 const Homepage = () => {
 	const { t } = useTranslation();
-
-	const signInModal = useModal({ to: paths.signIn });
-	const signUpModal = useModal({ to: paths.signUp.signUp });
 
 	return (
 		<>
@@ -46,7 +42,7 @@ const Homepage = () => {
 						className="mt-5 w-full"
 						asChild
 					>
-						<Link {...signUpModal}>{t("page.homepage.create-account")}</Link>
+						<Link to={paths.signUp.signUp}>{t("page.homepage.create-account")}</Link>
 					</Button>
 					<Text
 						muted
@@ -82,7 +78,7 @@ const Homepage = () => {
 						className="mt-3 w-full"
 						asChild
 					>
-						<Link {...signInModal}>{t("page.homepage.sign-in")}</Link>
+						<Link to={paths.signIn}>{t("page.homepage.sign-in")}</Link>
 					</Button>
 				</div>
 			</main>
