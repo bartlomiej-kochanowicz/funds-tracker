@@ -13,8 +13,8 @@ import { Link, Outlet } from "react-router";
 const Homepage = () => {
 	const { t } = useTranslation();
 
-	const loginModal = useModal({ to: paths.login });
-	const registerModal = useModal({ to: paths.register.register });
+	const signInModal = useModal({ to: paths.signIn });
+	const signUpModal = useModal({ to: paths.signUp.signUp });
 
 	return (
 		<>
@@ -32,11 +32,11 @@ const Homepage = () => {
 					<div className="my-5 flex flex-col gap-5">
 						<Button variant="white">
 							<GoogleLogo />
-							{t("page.homepage.register-with-google")}
+							{t("page.homepage.sign-up-with-google")}
 						</Button>
 						<Button variant="white">
 							<AppleLogo />
-							{t("page.homepage.register-with-apple")}
+							{t("page.homepage.sign-up-with-apple")}
 						</Button>
 					</div>
 					<Separator>
@@ -46,7 +46,7 @@ const Homepage = () => {
 						className="mt-5 w-full"
 						asChild
 					>
-						<Link {...registerModal}>{t("page.homepage.create-account")}</Link>
+						<Link {...signUpModal}>{t("page.homepage.create-account")}</Link>
 					</Button>
 					<Text
 						muted
@@ -82,7 +82,7 @@ const Homepage = () => {
 						className="mt-3 w-full"
 						asChild
 					>
-						<Link {...loginModal}>{t("page.homepage.log-in")}</Link>
+						<Link {...signInModal}>{t("page.homepage.sign-in")}</Link>
 					</Button>
 				</div>
 			</main>

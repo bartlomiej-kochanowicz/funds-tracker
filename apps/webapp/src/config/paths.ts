@@ -3,10 +3,10 @@ const paths = {
 	termsOfService: "/tos",
 	privacyPolicy: "/privacy",
 	cookies: "/cookies",
-	login: "/login",
-	register: {
-		register: "/register",
-		confirm: "/register/confirm",
+	signIn: "/sign-in",
+	signUp: {
+		signUp: "/sign-up",
+		confirm: "/sign-up/confirm",
 	},
 	resetPassword: "/password-reset",
 	profile: "/profile",

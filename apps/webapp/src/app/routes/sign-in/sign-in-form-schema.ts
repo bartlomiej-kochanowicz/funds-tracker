@@ -1,7 +1,7 @@
 import { TFunction } from "i18next";
 import * as z from "zod";
 
-const loginFormSchema = (isPasswordStep: boolean, t: TFunction) =>
+const signInFormSchema = (isPasswordStep: boolean, t: TFunction) =>
 	z.object({
 		userEmail: z
 			.string()
@@ -20,6 +20,6 @@ const loginFormSchema = (isPasswordStep: boolean, t: TFunction) =>
 			.max(32, { message: t("form.password.max") }), */
 	});
 
-type LoginFormSchema = z.infer<ReturnType<typeof loginFormSchema>>;
+type SignInFormSchema = z.infer<ReturnType<typeof signInFormSchema>>;
 
-export { type LoginFormSchema, loginFormSchema };
+export { type SignInFormSchema, signInFormSchema };

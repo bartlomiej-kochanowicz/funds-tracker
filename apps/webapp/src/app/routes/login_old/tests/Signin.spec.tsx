@@ -1,13 +1,13 @@
 import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
+import { ROUTES } from "config/paths";
 import { GraphQLError } from "graphql";
 import { EMAIL_EXIST } from "graphql/user/useLazyQueryUserEmailExist";
 import { SEND_CODE } from "graphql/user/useMutationUserSendCode";
 import { SIGNIN } from "graphql/user/useMutationUserSignin";
 import { useEffect } from "react";
-import { ROUTES } from "routes/paths";
 import { waitFor } from "utils/test-utils";
 
-import { Signin } from "../login";
+import { Signin } from "../sign-in";
 import { SigninPO } from "./Signin.po";
 
 vi.mock("react-google-recaptcha-v3", () => ({

@@ -7,7 +7,7 @@ import {
 } from "@funds-tracker/ui";
 import { useNavigate } from "react-router";
 
-const Register = () => {
+const SignUp = () => {
 	const navigate = useNavigate();
 
 	return (
@@ -19,7 +19,7 @@ const Register = () => {
 		>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Register modal</DialogTitle>
+					<DialogTitle>SignUp modal</DialogTitle>
 					<DialogDescription>
 						This action cannot be undone. This will permanently delete your account and remove your
 						data from our servers.
@@ -30,4 +30,4 @@ const Register = () => {
 	);
 };
 
-export { Register };
+export { SignUp };

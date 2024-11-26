@@ -3,7 +3,7 @@ import { paths } from "config/paths";
 import { lazy } from "react";
 import { Route, Routes, useLocation } from "react-router";
 
-import { Register } from "./routes/register";
+import { SignUp } from "./routes/sign-up";
 
 const GoogleReCaptchaProvider = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptchaProvider: component }) => ({
@@ -15,8 +15,8 @@ const Homepage = lazy(() =>
 	import("./routes/homepage").then(({ Homepage: component }) => ({ default: component })),
 );
 
-const Login = lazy(() =>
-	import("./routes/login").then(({ Login: component }) => ({ default: component })),
+const SignIn = lazy(() =>
+	import("./routes/sign-in").then(({ SignIn: component }) => ({ default: component })),
 );
 
 const NotFound = lazy(() =>
@@ -29,18 +29,18 @@ const Router = () => {
 
 	const modals = [
 		<Route
-			key={paths.login}
-			path={paths.login}
+			key={paths.signIn}
+			path={paths.signIn}
 			element={
 				<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-					<Login />
+					<SignIn />
 				</GoogleReCaptchaProvider>
 			}
 		/>,
 		<Route
-			key={paths.register.register}
-			path={paths.register.register}
-			element={<Register />}
+			key={paths.signUp.signUp}
+			path={paths.signUp.signUp}
+			element={<SignUp />}
 		/>,
 	];
 

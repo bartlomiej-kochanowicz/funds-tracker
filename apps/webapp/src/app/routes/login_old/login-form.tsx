@@ -20,7 +20,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { type LoginFormSchema, loginFormSchema } from "./login-form-schema";
+import { type SignInFormSchema, signInFormSchema } from "./sign-in-form-schema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -32,14 +32,14 @@ type FormStates = "email" | "password";
 
 type FormActions = "CHANGE_TO_PASSWORD";
 
-const LoginStateMachine = new StateMachine<FormStates, FormActions>(
+const SignInStateMachine = new StateMachine<FormStates, FormActions>(
 	"email",
 	{ email: "email", password: "password" },
 	{ CHANGE_TO_PASSWORD: "CHANGE_TO_PASSWORD" },
 	{ email: { CHANGE_TO_PASSWORD: "password" } },
 );
 
-const LoginForm = () => {
+const SignInForm = () => {
 	const { t } = useTranslation();
 
 	const { getUser } = useUserContext();
@@ -50,14 +50,14 @@ const LoginForm = () => {
 	const navigate = useNavigate();
 
 	const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
-		LoginStateMachine,
+		SignInStateMachine,
 	);
 
-	const defaultValues = { userEmail: "", userPassword: "" } satisfies LoginFormSchema;
+	const defaultValues = { userEmail: "", userPassword: "" } satisfies SignInFormSchema;
 
-	const form = useForm<LoginFormSchema>({
+	const form = useForm<SignInFormSchema>({
 		defaultValues,
-		resolver: zodResolver(loginFormSchema(compareState(states.password))),
+		resolver: zodResolver(signInFormSchema(compareState(states.password))),
 	});
 
 	const {
@@ -116,14 +116,14 @@ const LoginForm = () => {
 
 				await sendCode({ variables: { data: { email: userEmail, token } } });
 
-				navigate(paths.register.confirm, { state: { email: userEmail } });
+				navigate(paths.signUp.confirm, { state: { email: userEmail } });
 			}
 		},
 	});
 
 	const onVerify = useCallback(setToken, [setToken]);
 
-	const onSubmit = async ({ userEmail, userPassword }: LoginFormSchema) => {
+	const onSubmit = async ({ userEmail, userPassword }: SignInFormSchema) => {
 		if (!token) {
 			setRefreshReCaptcha(r => !r);
 
@@ -216,4 +216,4 @@ const LoginForm = () => {
 	);
 };
 
-export { LoginForm };
+export { SignInForm };

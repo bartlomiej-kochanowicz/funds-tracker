@@ -25,13 +25,14 @@ import { IS_PRODUCTION } from "config/env";
 import { paths } from "config/paths";
 import { useUserContext } from "contexts/UserContext";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
+import { useModal } from "hooks/use-modal";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { LoginFormSchema, loginFormSchema } from "./login-form-schema";
+import { SignInFormSchema, signInFormSchema } from "./sign-in-form-schema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -43,28 +44,26 @@ type FormStates = "email" | "password";
 
 type FormActions = "CHANGE_TO_PASSWORD";
 
-const LoginStateMachine = new StateMachine<FormStates, FormActions>(
+const SignInStateMachine = new StateMachine<FormStates, FormActions>(
 	"email",
 	{ email: "email", password: "password" },
 	{ CHANGE_TO_PASSWORD: "CHANGE_TO_PASSWORD" },
 	{ email: { CHANGE_TO_PASSWORD: "password" } },
 );
 
-type Props = {
-	asModal?: boolean;
-};
-
-const Login = () => {
+const SignIn = () => {
 	const navigate = useNavigate();
 	const { state } = useLocation();
 	const { t } = useTranslation();
 	const { getUser } = useUserContext();
 
+	const signUpModal = useModal({ to: paths.signUp.signUp });
+
 	const [token, setToken] = useState<string>("");
 	const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
 
 	const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
-		LoginStateMachine,
+		SignInStateMachine,
 	);
 
 	const handleOpenChange = () => {
@@ -73,11 +72,11 @@ const Login = () => {
 		}
 	};
 
-	const defaultValues = { userEmail: "", userPassword: "" } satisfies LoginFormSchema;
+	const defaultValues = { userEmail: "", userPassword: "" } satisfies SignInFormSchema;
 
-	const form = useForm<LoginFormSchema>({
+	const form = useForm<SignInFormSchema>({
 		defaultValues,
-		resolver: zodResolver(loginFormSchema(compareState(states.password), t)),
+		resolver: zodResolver(signInFormSchema(compareState(states.password), t)),
 	});
 
 	const {
@@ -109,9 +108,11 @@ const Login = () => {
 		},
 	});
 
+	// TODO: move form to new component
+
 	const onVerify = useCallback(setToken, [setToken]);
 
-	const onSubmit = async ({ userEmail, userPassword }: LoginFormSchema) => {
+	const onSubmit = async ({ userEmail, userPassword }: SignInFormSchema) => {
 		if (!token && IS_PRODUCTION) {
 			setRefreshReCaptcha(r => !r);
 
@@ -149,18 +150,18 @@ const Login = () => {
 					<div className="flex h-[calc(100svh-104px)] items-center sm:h-auto">
 						<div>
 							<DialogHeader className="mb-10 sm:my-10">
-								<DialogTitle>{t("page.login.title")}</DialogTitle>
-								<DialogDescription>{t("page.login.description")}</DialogDescription>
+								<DialogTitle>{t("page.sign-in.title")}</DialogTitle>
+								<DialogDescription>{t("page.sign-in.description")}</DialogDescription>
 							</DialogHeader>
 
 							<div className="my-5 flex flex-col gap-5">
 								<Button variant="white">
 									<GoogleLogo />
-									{t("page.login.login-with-google")}
+									{t("page.sign-in.sign-in-with-google")}
 								</Button>
 								<Button variant="white">
 									<AppleLogo />
-									{t("page.login.login-with-apple")}
+									{t("page.sign-in.sign-in-with-apple")}
 								</Button>
 							</div>
 
@@ -239,18 +240,18 @@ const Login = () => {
 								className="mt-5 w-full"
 								asChild
 							>
-								<Link to={paths.resetPassword}>{t("page.login.forgot-password")}</Link>
+								<Link to={paths.resetPassword}>{t("page.sign-in.forgot-password")}</Link>
 							</Button>
 							<Text
 								muted
 								className="mt-10 block text-xs sm:mb-10"
 							>
 								<Trans
-									i18nKey="page.login.do-not-have-an-account"
+									i18nKey="page.sign-in.do-not-have-an-account"
 									components={{
-										register: (
+										signup: (
 											<Link
-												to={paths.register.register}
+												{...signUpModal}
 												className="text-primary"
 											/>
 										),
@@ -265,4 +266,4 @@ const Login = () => {
 	);
 };
 
-export { Login };
+export { SignIn };
