@@ -9,8 +9,6 @@ const UPDATE_USER = gql(/* GraphQL */ `
 			name
 			email
 			createdAt
-			introductionStep
-			defaultCurrency
 		}
 	}
 `);

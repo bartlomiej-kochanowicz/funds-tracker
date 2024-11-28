@@ -1,5 +1,6 @@
 {
 	"api": {
+		"generic-error": "Ups! Coś poszło nie tak. Spróbuj ponownie później.",
 		"you-are-a-robot": "Jesteś robotem",
 		"account-not-found": "Konto nie istnieje",
 		"account-not-confirmed": "Konto nie zostało potwierdzone",
@@ -56,9 +57,7 @@
 		},
 		"password": {
 			"label": "Hasło",
-			"required": "Hasło jest wymagane",
-			"min": "Hasło musi mieć co najmniej 8 znaków",
-			"max": "Hasło musi mieć maksymalnie 32 znaki"
+			"invalid": "Hało musi zawierać od 8 do 32 znaków"
 		},
 		"next": "Dalej",
 		"required": "Pole jest wymagane"

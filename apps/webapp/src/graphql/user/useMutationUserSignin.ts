@@ -3,8 +3,8 @@ import { SigninMutation, SigninMutationVariables } from "__generated__/graphql";
 import { MutationHookOptions, NoInfer, useMutation } from "@apollo/client";
 
 export const SIGNIN = gql(/* GraphQL */ `
-	mutation Signin($data: SigninInput!) {
-		signinLocal(data: $data) {
+	mutation Signin($data: SignInInput!) {
+		signInLocal(data: $data) {
 			success
 		}
 	}

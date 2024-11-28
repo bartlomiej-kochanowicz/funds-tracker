@@ -15,6 +15,7 @@ import { useUserContext } from "contexts/UserContext";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
 import { useMutationUserSignin } from "graphql/user/useMutationUserSignin";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
+import { use } from "i18next";
 import { lazy, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -64,7 +65,7 @@ const SignInForm = () => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		setError,
-		/* getValues, */
+		getValues,
 	} = form;
 
 	const [emailExist] = useLazyQueryUserEmailExist({
@@ -87,15 +88,20 @@ const SignInForm = () => {
 			navigate(paths.portfolios);
 		},
 		onError: async error => {
-			setError("userPassword", { type: "custom", message: error.message });
+			setError("userPassword", {
+				type: "custom",
+				message: t([error.message, "api.generic-error"]),
+			});
 
-			/* if (error.message === "api.account-not-confirmed") {
+			if (error.message === "api.account-not-confirmed") {
 				const { userEmail } = getValues();
 
-				await sendCode({ variables: { data: { email: userEmail, token } } });
+				console.log("@@@", userEmail);
 
-				navigate(paths.signUp.confirm, { state: { email: userEmail } });
-			} */
+				/* await sendCode({ variables: { data: { email: userEmail, token } } });
+
+				navigate(paths.signUp.confirm, { state: { email: userEmail } }); */
+			}
 		},
 	});
 

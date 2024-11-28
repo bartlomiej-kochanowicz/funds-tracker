@@ -1,6 +1,6 @@
 import { GetUserQuery, IntroductionStep, UpdateUserInput } from "__generated__/graphql";
 import { LazyQueryExecFunction, OperationVariables } from "@apollo/client";
-import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui";
+/* import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui"; */
 import { IS_DEVELOPMENT } from "config/env";
 import { useLazyQueryUser } from "graphql/user/useLazyQueryUser";
 import { useMutationUserUpdate } from "graphql/user/useMutationUserUpdate";
@@ -46,7 +46,7 @@ const useUser = (): UserContextType => {
 				},
 			}));
 
-			emitSuccessToast(t("toasts.data_saved"));
+			/* emitSuccessToast(t("toasts.data_saved")); */
 		} catch {
 			// TODO
 			// emitErrorToast(t("toasts.error"));

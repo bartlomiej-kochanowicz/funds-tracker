@@ -1,5 +1,6 @@
 {
 	"api": {
+		"generic-error": "Oops! Something went wrong. Please try again later.",
 		"you-are-a-robot": "You are a robot",
 		"account-not-found": "Account does not exist",
 		"account-not-confirmed": "Account is not confirmed",
@@ -56,9 +57,7 @@
 		},
 		"password": {
 			"label": "Password",
-			"required": "Password is required",
-			"min": "Password must be at least 8 characters long",
-			"max": "Password must be at most 32 characters long"
+			"invalid": "Password must be between 8 and 32 characters"
 		},
 		"forgot-password": "Forgot password?",
 		"next": "Next"
