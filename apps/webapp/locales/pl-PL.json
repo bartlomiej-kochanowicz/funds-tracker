@@ -41,7 +41,9 @@
 			"forgot-password": "Nie pamiętasz hasła?",
 			"sign-in-with-google": "Zaloguj się przez Google",
 			"sign-in-with-apple": "Zaloguj się przez Apple",
-			"do-not-have-an-account": "Nie masz jeszcze konta? <signup>Zerejestruj się</signup>"
+			"do-not-have-an-account": "Nie masz jeszcze konta? <signup>Zerejestruj się</signup>",
+			"send-confirmation-code": "Wyślij kod potwierdzający",
+			"account-not-confirmed-send-code": "Konto nie zostało potwierdzone. Użyj przycisku poniżej, aby wysłać kod potwierdzający."
 		},
 		"not-found": {
 			"title": "Hmm... wygląda na to, że ta strona nie istnieje.",

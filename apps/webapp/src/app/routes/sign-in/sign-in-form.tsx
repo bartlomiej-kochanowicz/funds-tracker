@@ -15,7 +15,6 @@ import { useUserContext } from "contexts/UserContext";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
 import { useMutationUserSignin } from "graphql/user/useMutationUserSignin";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
-import { use } from "i18next";
 import { lazy, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -29,15 +28,21 @@ const GoogleReCaptcha = lazy(() =>
 	})),
 );
 
-type FormStates = "email" | "password";
+type FormStates = "email" | "password" | "confirm";
 
-type FormActions = "CHANGE_TO_PASSWORD";
+type FormActions = "CHANGE_TO_PASSWORD" | "CHANGE_TO_CONFIRM";
 
 const SignInStateMachine = new StateMachine<FormStates, FormActions>(
 	"email",
-	{ email: "email", password: "password" },
-	{ CHANGE_TO_PASSWORD: "CHANGE_TO_PASSWORD" },
-	{ email: { CHANGE_TO_PASSWORD: "password" } },
+	{ email: "email", password: "password", confirm: "confirm" },
+	{ CHANGE_TO_PASSWORD: "CHANGE_TO_PASSWORD", CHANGE_TO_CONFIRM: "CHANGE_TO_CONFIRM" },
+	{
+		email: { CHANGE_TO_PASSWORD: "password" },
+		password: { CHANGE_TO_CONFIRM: "confirm" },
+		confirm: {
+			CHANGE_TO_PASSWORD: "password",
+		},
+	},
 );
 
 const SignInForm = () => {
@@ -94,9 +99,13 @@ const SignInForm = () => {
 			});
 
 			if (error.message === "api.account-not-confirmed") {
-				const { userEmail } = getValues();
+				updateState(actions.CHANGE_TO_CONFIRM);
+				setError("userEmail", {
+					type: "custom",
+					message: t("page.sign-in.account-not-confirmed-send-code"),
+				});
 
-				console.log("@@@", userEmail);
+				const { userEmail } = getValues();
 
 				/* await sendCode({ variables: { data: { email: userEmail, token } } });
 
@@ -120,14 +129,12 @@ const SignInForm = () => {
 			await emailExist({ variables: { data: { email: userEmail, token } } });
 		}
 
-		if (compareState(states.password) && userPassword) {
+		if (compareState(states.password)) {
 			await signin({ variables: { data: { email: userEmail, password: userPassword, token } } });
 		}
 
 		setRefreshReCaptcha(r => !r);
 	};
-
-	const accountNotConfirmed = errors.userPassword?.message === "api.account-not-confirmed";
 
 	return (
 		<Form {...form}>
@@ -143,6 +150,7 @@ const SignInForm = () => {
 				<FormField
 					control={control}
 					name="userEmail"
+					disabled={compareState(states.confirm)}
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
@@ -188,9 +196,9 @@ const SignInForm = () => {
 
 					{compareState(states.email) && t("form.next")}
 
-					{compareState(states.password) && !accountNotConfirmed && t("page.homepage.sign-in")}
+					{compareState(states.password) && t("page.homepage.sign-in")}
 
-					{compareState(states.password) && accountNotConfirmed && t("common.sign_up_confirm")}
+					{compareState(states.confirm) && t("page.sign-in.send-confirmation-code")}
 				</Button>
 			</form>
 		</Form>

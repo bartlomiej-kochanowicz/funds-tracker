@@ -41,7 +41,9 @@
 			"forgot-password": "Forgot password?",
 			"sign-in-with-google": "Sign in with Google",
 			"sign-in-with-apple": "Sign in with Apple",
-			"do-not-have-an-account": "Don't have an account? <signup>Sign up</signup>"
+			"do-not-have-an-account": "Don't have an account? <signup>Sign up</signup>",
+			"send-confirmation-code": "Send confirmation code",
+			"account-not-confirmed-send-code": "Account is not confirmed. Use the button below to send a confirmation code."
 		},
 		"not-found": {
 			"title": "Hmm... looks like this page doesn’t exist.",
