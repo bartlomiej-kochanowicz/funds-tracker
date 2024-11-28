@@ -6,7 +6,7 @@ import {
 	DialogTitle,
 } from "@funds-tracker/ui";
 import { paths } from "config/paths";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 	const navigate = useNavigate();

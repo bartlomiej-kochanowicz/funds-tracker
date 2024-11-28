@@ -7,7 +7,7 @@ import AppleLogo from "assets/social/apple.svg?react";
 import GoogleLogo from "assets/social/google.svg?react";
 import { paths } from "config/paths";
 import { Trans, useTranslation } from "react-i18next";
-import { Link, Outlet } from "react-router";
+import { Link } from "react-router-dom";
 
 const Homepage = () => {
 	const { t } = useTranslation();
@@ -90,7 +90,6 @@ const Homepage = () => {
 					© {new Date().getFullYear()} Funds Tracker
 				</Text>
 			</footer>
-			<Outlet />
 		</>
 	);
 };

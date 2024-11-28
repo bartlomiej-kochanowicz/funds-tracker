@@ -1,7 +1,7 @@
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { paths } from "config/paths";
 import { lazy } from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
 
 import { SignUp } from "./routes/sign-up";
 

@@ -1,7 +1,7 @@
 import { Button, H1, H2, Text } from "@funds-tracker/ui";
 import { paths } from "config/paths";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
 	const { t } = useTranslation();

@@ -7,7 +7,7 @@ const signInFormSchema = (isPasswordStep: boolean, t: TFunction) =>
 			.string()
 			.min(1, { message: t("form.email.required") })
 			.email({ message: t("form.email.invalid") }),
-		userPassword: z.string().refine(
+		userPassword: z.string() /* .refine(
 			val => {
 				console.log("@@@", isPasswordStep);
 				return !isPasswordStep;
@@ -15,7 +15,7 @@ const signInFormSchema = (isPasswordStep: boolean, t: TFunction) =>
 			{
 				message: t("form.password.required"),
 			},
-		),
+		), */,
 		/* . min(8, { message: t("form.password.min") })
 			.max(32, { message: t("form.password.max") }), */
 	});

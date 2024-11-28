@@ -9,18 +9,18 @@ import {
 	Loader,
 } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IS_PRODUCTION } from "config/env";
 import { paths } from "config/paths";
 import { useUserContext } from "contexts/UserContext";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
-import { useMutationUserSendCode } from "graphql/user/useMutationUserSendCode";
 import { useMutationUserSignin } from "graphql/user/useMutationUserSignin";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
-import { lazy, Suspense, useCallback, useState } from "react";
+import { lazy, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { type SignInFormSchema, signInFormSchema } from "./sign-in-form-schema";
+import { SignInFormSchema, signInFormSchema } from "./sign-in-form-schema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
@@ -41,13 +41,12 @@ const SignInStateMachine = new StateMachine<FormStates, FormActions>(
 
 const SignInForm = () => {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
 
 	const { getUser } = useUserContext();
 
 	const [token, setToken] = useState<string>("");
 	const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
-
-	const navigate = useNavigate();
 
 	const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
 		SignInStateMachine,
@@ -57,7 +56,7 @@ const SignInForm = () => {
 
 	const form = useForm<SignInFormSchema>({
 		defaultValues,
-		resolver: zodResolver(signInFormSchema(compareState(states.password))),
+		resolver: zodResolver(signInFormSchema(compareState(states.password), t)),
 	});
 
 	const {
@@ -65,7 +64,7 @@ const SignInForm = () => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		setError,
-		getValues,
+		/* getValues, */
 	} = form;
 
 	const [emailExist] = useLazyQueryUserEmailExist({
@@ -75,37 +74,35 @@ const SignInForm = () => {
 			} else {
 				setError("userEmail", {
 					type: "custom",
-					message: t("page.signin.account.does_not_exist"),
+					message: t("api.account-not-found"),
 				});
 			}
 		},
-		onError: () => {
-			/* toast({
-				status: "error",
-				title: t("api.error"),
-				description: t("api.unknown_error"),
-			}); */
-		},
 	});
 
-	const [sendCode] = useMutationUserSendCode({
+	const [signin] = useMutationUserSignin({
 		onCompleted: async () => {
-			toast({
-				desctiption: t("toast.send_confirm_code.success"),
-			});
+			await getUser();
+
+			navigate(paths.portfolios);
 		},
-		onError: () => {
-			/* toast({
-				status: "error",
-				description: t("toast.send_confirm_code.failure")
-			}); */
+		onError: async error => {
+			setError("userPassword", { type: "custom", message: error.message });
+
+			/* if (error.message === "api.account-not-confirmed") {
+				const { userEmail } = getValues();
+
+				await sendCode({ variables: { data: { email: userEmail, token } } });
+
+				navigate(paths.signUp.confirm, { state: { email: userEmail } });
+			} */
 		},
 	});
 
 	const onVerify = useCallback(setToken, [setToken]);
 
 	const onSubmit = async ({ userEmail, userPassword }: SignInFormSchema) => {
-		if (!token) {
+		if (!token && IS_PRODUCTION) {
 			setRefreshReCaptcha(r => !r);
 
 			onSubmit({ userEmail, userPassword });
@@ -124,20 +121,18 @@ const SignInForm = () => {
 		setRefreshReCaptcha(r => !r);
 	};
 
-	const userNotConfirmed = errors.userPassword?.message === "api.account-not-confirmed";
+	const accountNotConfirmed = errors.userPassword?.message === "api.account-not-confirmed";
 
 	return (
 		<Form {...form}>
 			<form
-				className="flex flex-col gap-4"
+				className="mt-5 flex flex-col gap-4"
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<Suspense>
-					<GoogleReCaptcha
-						onVerify={onVerify}
-						refreshReCaptcha={refreshReCaptcha}
-					/>
-				</Suspense>
+				<GoogleReCaptcha
+					onVerify={onVerify}
+					refreshReCaptcha={refreshReCaptcha}
+				/>
 
 				<FormField
 					control={control}
@@ -146,9 +141,9 @@ const SignInForm = () => {
 						<FormItem>
 							<FormControl>
 								<Input
-									aria-label={t("common.email")}
+									aria-label={t("form.email.label")}
+									placeholder={t("form.email.label")}
 									data-testid="email-input"
-									placeholder={t("common.email")}
 									{...field}
 								/>
 							</FormControl>
@@ -156,7 +151,6 @@ const SignInForm = () => {
 						</FormItem>
 					)}
 				/>
-
 				{compareState(states.password) && (
 					<FormField
 						control={control}
@@ -167,9 +161,9 @@ const SignInForm = () => {
 									<Input
 										autoFocus
 										type="password"
-										aria-label={t("common.password")}
+										aria-label={t("form.password.label")}
+										placeholder={t("form.password.label")}
 										data-testid="password-input"
-										placeholder={t("common.password")}
 										{...field}
 									/>
 								</FormControl>
@@ -186,11 +180,11 @@ const SignInForm = () => {
 				>
 					{isSubmitting && <Loader />}
 
-					{compareState(states.email) && t("common.next")}
+					{compareState(states.email) && t("form.next")}
 
-					{compareState(states.password) && !userNotConfirmed && t("common.sign_in")}
+					{compareState(states.password) && !accountNotConfirmed && t("page.homepage.sign-in")}
 
-					{compareState(states.password) && userNotConfirmed && t("common.sign_up_confirm")}
+					{compareState(states.password) && accountNotConfirmed && t("common.sign_up_confirm")}
 				</Button>
 			</form>
 		</Form>
