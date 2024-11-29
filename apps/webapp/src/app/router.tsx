@@ -19,6 +19,12 @@ const SignIn = lazy(() =>
 	import("./routes/sign-in").then(({ SignIn: component }) => ({ default: component })),
 );
 
+const SignUpConfirm = lazy(() =>
+	import("./routes/sign-up-confirm").then(({ SignUpConfirm: component }) => ({
+		default: component,
+	})),
+);
+
 const NotFound = lazy(() =>
 	import("./routes/not-found").then(({ NotFound: component }) => ({ default: component })),
 );
@@ -31,7 +37,6 @@ const Router = () => {
 				element={<Homepage />}
 			/>
 			<Route
-				key={paths.signIn}
 				path={paths.signIn}
 				element={
 					<>
@@ -43,13 +48,23 @@ const Router = () => {
 				}
 			/>
 			<Route
-				key={paths.signUp.signUp}
 				path={paths.signUp.signUp}
 				element={
 					<>
 						<Homepage />
 						<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
 							<SignUp />
+						</GoogleReCaptchaProvider>
+					</>
+				}
+			/>
+			<Route
+				path={paths.signUp.confirm}
+				element={
+					<>
+						<Homepage />
+						<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+							<SignUpConfirm />
 						</GoogleReCaptchaProvider>
 					</>
 				}

@@ -1,7 +1,7 @@
 import { Card } from "@funds-tracker/ui";
-import { LangSelector } from "components/LangSelector";
+import { LangSelector } from "components/atoms/LangSelector";
+import { ThemeToggle } from "components/atoms/ThemeToggle";
 import { ClearCentered } from "components/layouts/ClearCentered";
-import { ThemeToggle } from "components/ThemeToggle";
 import { useSearchParams } from "react-router-dom";
 
 import { EnterEmail } from "./components/EnterEmail";

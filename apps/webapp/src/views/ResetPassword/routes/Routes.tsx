@@ -1,4 +1,4 @@
-import { PublicRoute } from "components/PublicRoute";
+import { PublicRoute } from "components/public-route";
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { lazy } from "react";
 import { ROUTES } from "routes/paths";
