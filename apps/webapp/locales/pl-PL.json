@@ -13,7 +13,13 @@
 		"server-unavaliable": "Serwer niedostępny, spróbuj ponownie później"
 	},
 	"toast": {
-		"data-saved": "Dane zapisane"
+		"data-saved": "Dane zapisane",
+		"send-confirm-code": {
+			"completed": {
+				"title": "Kod potwierdzający został wysłany",
+				"description": "Sprawdź swoją skrzynkę odbiorczą"
+			}
+		}
 	},
 	"component": {
 		"error-content": {
@@ -43,7 +49,7 @@
 			"sign-in-with-apple": "Zaloguj się przez Apple",
 			"do-not-have-an-account": "Nie masz jeszcze konta? <signup>Zerejestruj się</signup>",
 			"send-confirmation-code": "Wyślij kod potwierdzający",
-			"account-not-confirmed-send-code": "Konto nie zostało potwierdzone. Użyj przycisku poniżej, aby wysłać kod potwierdzający."
+			"account-not-confirmed-send-code": "Konto nie zostało potwierdzone. Użyj przycisku poniżej, aby wysłać kod potwierdzający na powyższy adres email."
 		},
 		"not-found": {
 			"title": "Hmm... wygląda na to, że ta strona nie istnieje.",

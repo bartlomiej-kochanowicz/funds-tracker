@@ -7,42 +7,26 @@ import {
 	FormMessage,
 	Input,
 	Loader,
+	useToast,
 } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IS_PRODUCTION } from "config/env";
 import { paths } from "config/paths";
 import { useUserContext } from "contexts/UserContext";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
+import { useMutationUserSendCode } from "graphql/user/useMutationUserSendCode";
 import { useMutationUserSignin } from "graphql/user/useMutationUserSignin";
-import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { lazy, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { SignInFormSchema, signInFormSchema } from "./sign-in-form-schema";
+import { SignInFormSchema, signInFormSchema, useFormState } from "./sign-in-form-schema";
 
 const GoogleReCaptcha = lazy(() =>
 	import("react-google-recaptcha-v3").then(({ GoogleReCaptcha: component }) => ({
 		default: component,
 	})),
-);
-
-type FormStates = "email" | "password" | "confirm";
-
-type FormActions = "CHANGE_TO_PASSWORD" | "CHANGE_TO_CONFIRM";
-
-const SignInStateMachine = new StateMachine<FormStates, FormActions>(
-	"email",
-	{ email: "email", password: "password", confirm: "confirm" },
-	{ CHANGE_TO_PASSWORD: "CHANGE_TO_PASSWORD", CHANGE_TO_CONFIRM: "CHANGE_TO_CONFIRM" },
-	{
-		email: { CHANGE_TO_PASSWORD: "password" },
-		password: { CHANGE_TO_CONFIRM: "confirm" },
-		confirm: {
-			CHANGE_TO_PASSWORD: "password",
-		},
-	},
 );
 
 const SignInForm = () => {
@@ -51,26 +35,30 @@ const SignInForm = () => {
 
 	const { getUser } = useUserContext();
 
+	const { toast } = useToast();
+
 	const [token, setToken] = useState<string>("");
 	const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
 
-	const { states, actions, updateState, compareState } = useStateMachine<FormStates, FormActions>(
-		SignInStateMachine,
-	);
+	const { states, actions, updateState, compareState } = useFormState();
 
 	const defaultValues = { userEmail: "", userPassword: "" } satisfies SignInFormSchema;
 
 	const form = useForm<SignInFormSchema>({
 		defaultValues,
-		resolver: zodResolver(signInFormSchema(compareState(states.password), t)),
+		resolver: zodResolver(
+			signInFormSchema({
+				t,
+				isPasswordState: compareState(states.password),
+			}),
+		),
 	});
 
 	const {
 		control,
 		handleSubmit,
-		formState: { errors, isSubmitting },
+		formState: { isSubmitting },
 		setError,
-		getValues,
 	} = form;
 
 	const [emailExist] = useLazyQueryUserEmailExist({
@@ -98,19 +86,30 @@ const SignInForm = () => {
 				message: t([error.message, "api.generic-error"]),
 			});
 
-			if (error.message === "api.account-not-confirmed") {
+			if (compareState(states.password) && error.message === "api.account-not-confirmed") {
 				updateState(actions.CHANGE_TO_CONFIRM);
 				setError("userEmail", {
 					type: "custom",
 					message: t("page.sign-in.account-not-confirmed-send-code"),
 				});
-
-				const { userEmail } = getValues();
-
-				/* await sendCode({ variables: { data: { email: userEmail, token } } });
-
-				navigate(paths.signUp.confirm, { state: { email: userEmail } }); */
 			}
+		},
+	});
+
+	const [sendCode] = useMutationUserSendCode({
+		onCompleted: () => {
+			toast({
+				title: t("toast.send-confirm-code.completed.title"),
+				description: t("toast.send-confirm-code.completed.description"),
+			});
+
+			navigate(paths.signUp.confirm);
+		},
+		onError: error => {
+			toast({
+				variant: "destructive",
+				description: t([error.message, "api.generic-error"]),
+			});
 		},
 	});
 
@@ -133,6 +132,10 @@ const SignInForm = () => {
 			await signin({ variables: { data: { email: userEmail, password: userPassword, token } } });
 		}
 
+		if (compareState(states.confirm)) {
+			await sendCode({ variables: { data: { email: userEmail, token } } });
+		}
+
 		setRefreshReCaptcha(r => !r);
 	};
 
@@ -150,7 +153,6 @@ const SignInForm = () => {
 				<FormField
 					control={control}
 					name="userEmail"
-					disabled={compareState(states.confirm)}
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
@@ -158,6 +160,7 @@ const SignInForm = () => {
 									aria-label={t("form.email.label")}
 									placeholder={t("form.email.label")}
 									data-testid="email-input"
+									readOnly={compareState(states.confirm)}
 									{...field}
 								/>
 							</FormControl>

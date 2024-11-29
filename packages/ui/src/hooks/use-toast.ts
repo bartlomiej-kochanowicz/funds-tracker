@@ -169,8 +169,6 @@ function toast({ ...props }: Toast) {
 function useToast() {
 	const [state, setState] = useState<State>(memoryState);
 
-	console.log("state", state);
-
 	useEffect(() => {
 		listeners.push(setState);
 		return () => {

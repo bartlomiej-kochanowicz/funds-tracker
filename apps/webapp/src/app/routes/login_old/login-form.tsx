@@ -88,20 +88,6 @@ const SignInForm = () => {
 		},
 	});
 
-	const [sendCode] = useMutationUserSendCode({
-		onCompleted: async () => {
-			toast({
-				desctiption: t("toast.send_confirm_code.success"),
-			});
-		},
-		onError: () => {
-			/* toast({
-				status: "error",
-				description: t("toast.send_confirm_code.failure")
-			}); */
-		},
-	});
-
 	const onVerify = useCallback(setToken, [setToken]);
 
 	const onSubmit = async ({ userEmail, userPassword }: SignInFormSchema) => {
