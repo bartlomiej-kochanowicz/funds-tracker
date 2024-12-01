@@ -22,9 +22,9 @@
 		}
 	},
 	"component": {
-		"error-content": {
-			"title": "Some error occurred",
-			"message": "Please try again later"
+		"error-message": {
+			"title": "An error occurred",
+			"description": "Sorry, we couldn't load the content. Please try again later."
 		}
 	},
 	"common": {

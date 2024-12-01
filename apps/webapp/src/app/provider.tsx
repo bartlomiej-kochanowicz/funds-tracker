@@ -1,7 +1,7 @@
 import { ApolloProvider } from "@apollo/client";
 import { Toaster, useToast } from "@funds-tracker/ui";
 import { ErrorBoundary } from "components/error-boundary";
-import { FullscreenErrorContent } from "components/FullscreenErrorContent";
+import { ErrorMessage } from "components/error-message";
 import client from "config/client";
 import { UserContextProvider } from "contexts/UserContext";
 import { ThemeProvider } from "next-themes";
@@ -24,7 +24,7 @@ const Provider = ({ children }: Props) => {
 						defaultTheme="system"
 						enableSystem
 					>
-						<ErrorBoundary fallback={<FullscreenErrorContent />}>
+						<ErrorBoundary fallback={<ErrorMessage className="h-svh" />}>
 							<Toaster toasts={toasts} />
 
 							{children}

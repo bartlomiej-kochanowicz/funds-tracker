@@ -22,9 +22,9 @@
 		}
 	},
 	"component": {
-		"error-content": {
+		"error-message": {
 			"title": "Wystąpił błąd",
-			"message": "Spróbuj ponownie później"
+			"description": "Przepraszamy, nie udało się załadować treści. Spróbuj ponownie później."
 		}
 	},
 	"common": {
