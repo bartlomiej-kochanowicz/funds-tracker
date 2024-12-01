@@ -5,6 +5,7 @@ import LogoNameVertical from "assets/logo/logo-name-vertical.svg?react";
 import LogoNameVerticalDark from "assets/logo/logo-name-vertical-dark.svg?react";
 import AppleLogo from "assets/social/apple.svg?react";
 import GoogleLogo from "assets/social/google.svg?react";
+import { Footer } from "components/footer";
 import { paths } from "config/paths";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -82,14 +83,7 @@ const Homepage = () => {
 					</Button>
 				</div>
 			</main>
-			<footer className="px-9 py-4 text-center">
-				<Text
-					muted
-					className="text-sm"
-				>
-					© {new Date().getFullYear()} Funds Tracker
-				</Text>
-			</footer>
+			<Footer />
 		</>
 	);
 };

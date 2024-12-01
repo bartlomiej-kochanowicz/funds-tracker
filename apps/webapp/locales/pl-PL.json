@@ -25,6 +25,11 @@
 		"error-message": {
 			"title": "Wystąpił błąd",
 			"description": "Przepraszamy, nie udało się załadować treści. Spróbuj ponownie później."
+		},
+		"theme-toggle": {
+			"dark-mode": "Tryb ciemny",
+			"light-mode": "Tryb jasny",
+			"system-mode": "Tryb systemowy"
 		}
 	},
 	"common": {

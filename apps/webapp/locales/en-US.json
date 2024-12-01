@@ -25,6 +25,11 @@
 		"error-message": {
 			"title": "An error occurred",
 			"description": "Sorry, we couldn't load the content. Please try again later."
+		},
+		"theme-toggle": {
+			"dark-mode": "Dark mode",
+			"light-mode": "Light mode",
+			"system-mode": "System mode"
 		}
 	},
 	"common": {

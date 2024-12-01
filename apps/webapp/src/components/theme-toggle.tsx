@@ -33,7 +33,7 @@ const ThemeToggle = () => {
 						onClick={() => setTheme(theme)}
 						className="flex w-full items-center justify-between"
 					>
-						{t(`theme.${theme}`)}
+						{t(`component.theme-toggle.${theme}-mode`)}
 
 						{theme === currentTheme && <Check className="size-4" />}
 					</DropdownMenuItem>
