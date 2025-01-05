@@ -5,7 +5,6 @@ import {
 	FormDescription,
 	FormField,
 	FormItem,
-	FormLabel,
 	FormMessage,
 	InputOTP,
 	InputOTPGroup,
@@ -50,7 +49,7 @@ const SignUpConfirmForm = ({ email }: Props) => {
 
 	const {
 		setError,
-		formState: { errors, isSubmitting },
+		formState: { isSubmitting },
 	} = form;
 
 	const [confirmSignup] = useMutationUserConfirmSignup({
@@ -60,15 +59,12 @@ const SignUpConfirmForm = ({ email }: Props) => {
 			navigate(paths.dashboard);
 		},
 		onError: error => {
-			console.error(error.message);
 			setError("code", {
 				type: "custom",
 				message: t([error.message, "api.generic-error"]),
 			});
 
-			if (error.message === "api.wrong-confirmation-code") {
-				setShowSendCodeButton(true);
-			}
+			setShowSendCodeButton(error.message === "api.wrong-confirmation-code");
 		},
 	});
 
@@ -85,6 +81,9 @@ const SignUpConfirmForm = ({ email }: Props) => {
 	};
 
 	const onVerify = useCallback(setToken, [setToken]);
+
+	// TODO
+	const handleResendCode = () => {};
 
 	return (
 		<Form {...form}>
@@ -133,6 +132,7 @@ const SignUpConfirmForm = ({ email }: Props) => {
 					<Button
 						className="w-full"
 						variant="outline"
+						onClick={handleResendCode}
 					>
 						{t("page.sign-up-confirm.resend-code")}
 					</Button>
