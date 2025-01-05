@@ -56,6 +56,17 @@
 			"send-confirmation-code": "Send confirmation code",
 			"account-not-confirmed-send-code": "Account is not confirmed. Use the button below to send a confirmation code on the above email address."
 		},
+		"sign-up": {
+			"title": "Sign up to Funds Tracker",
+			"description": "Join our community and start managing your finances wisely."
+		},
+		"sign-up-confirm": {
+			"title": "Confirm your email address",
+			"description": "Check your inbox for the confirmation code and enter it below.",
+			"resend-code": "Resend code",
+			"code": "Confirmation code",
+			"confirm": "Confirm"
+		},
 		"not-found": {
 			"title": "Hmm... looks like this page doesn’t exist.",
 			"description": "The page are you looking for might have been removed had it's name changed or is temporary unavaliable.",
@@ -71,7 +82,12 @@
 		"password": {
 			"label": "Password",
 			"description": "Please enter the one-time code sent to",
-			"invalid": "Password must be between 8 and 32 characters"
+			"invalid": "Password must be between 8 and 32 characters",
+			"not-matching": "Passwords do not match"
+		},
+		"name": {
+			"label": "Name",
+			"invalid": "Name must be between 2 and 32 characters"
 		},
 		"code": {
 			"label": "One-Time code",

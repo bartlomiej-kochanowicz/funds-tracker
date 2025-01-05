@@ -56,13 +56,16 @@
 			"send-confirmation-code": "Wyślij kod potwierdzający",
 			"account-not-confirmed-send-code": "Konto nie zostało potwierdzone. Użyj przycisku poniżej, aby wysłać kod potwierdzający na powyższy adres email."
 		},
+		"sign-up": {
+			"title": "Zarejestruj się do Funds Tracker",
+			"description": "Dołącz do naszej społeczności i zacznij mądrze zarządzać swoimi finansami."
+		},
 		"sign-up-confirm": {
 			"title": "Potwierdź swój adres email",
 			"description": "Sprawdź swoją skrzynkę odbiorczą, aby znaleźć kod potwierdzający i wpisz go poniżej.",
 			"resend-code": "Wyślij ponownie kod",
 			"code": "Kod potwierdzający",
-			"confirm": "Potwierdź",
-			"account-not-confirmed": "Konto nie zostało potwierdzone. Sprawdź swoją skrzynkę odbiorczą, aby znaleźć kod potwierdzający."
+			"confirm": "Potwierdź"
 		},
 		"not-found": {
 			"title": "Hmm... wygląda na to, że ta strona nie istnieje.",
@@ -76,9 +79,16 @@
 			"invalid": "Nieprawidłowy adres email",
 			"required": "Adres email jest wymagany"
 		},
+		"name": {
+			"label": "Imię",
+			"invalid": "Imię musi zawierać od 4 do 50 znaków",
+			"required": "Imię jest wymagane"
+		},
 		"password": {
 			"label": "Hasło",
-			"invalid": "Hało musi zawierać od 8 do 32 znaków"
+			"invalid": "Hało musi zawierać od 8 do 32 znaków",
+			"required": "Hasło jest wymagane",
+			"not-matching": "Hasła nie pasują do siebie"
 		},
 		"code": {
 			"label": "Jednorazowy kod",
