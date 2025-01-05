@@ -70,7 +70,7 @@
 		},
 		"password": {
 			"label": "Password",
-			"description": "Please enter the one-time code sent to your email.",
+			"description": "Please enter the one-time code sent to",
 			"invalid": "Password must be between 8 and 32 characters"
 		},
 		"code": {

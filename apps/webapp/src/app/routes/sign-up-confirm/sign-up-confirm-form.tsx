@@ -13,16 +13,33 @@ import {
 	InputOTPSlot,
 } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IS_PRODUCTION } from "config/env";
+import { paths } from "config/paths";
+import { useUserContext } from "contexts/UserContext";
+import { useMutationUserConfirmSignup } from "graphql/user/useMutationUserConfirmSignup";
+import { useCallback, useState } from "react";
+import { GoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import {
 	type SignUpConfirmFormSchema,
 	signUpConfirmFormSchema,
 } from "./sign-up-confirm-form-schema";
 
-const SignUpConfirmForm = () => {
+type Props = {
+	email: string;
+};
+
+const SignUpConfirmForm = ({ email }: Props) => {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
+
+	const [token, setToken] = useState<string>("");
+	const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
+	const [showSendCodeButton, setShowSendCodeButton] = useState<boolean>(false);
+	const { getUser } = useUserContext();
 
 	const form = useForm<SignUpConfirmFormSchema>({
 		resolver: zodResolver(signUpConfirmFormSchema({ t })),
@@ -31,29 +48,63 @@ const SignUpConfirmForm = () => {
 		},
 	});
 
-	const onSubmit = (data: SignUpConfirmFormSchema) => {
-		console.log(data.code);
-		/* toast({
-			title: "You submitted the following values:",
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">{JSON.stringify(data, null, 2)}</code>
-				</pre>
-			),
-		}); */
+	const {
+		setError,
+		formState: { errors, isSubmitting },
+	} = form;
+
+	const [confirmSignup] = useMutationUserConfirmSignup({
+		onCompleted: async () => {
+			await getUser();
+
+			navigate(paths.dashboard);
+		},
+		onError: error => {
+			console.error(error.message);
+			setError("code", {
+				type: "custom",
+				message: t([error.message, "api.generic-error"]),
+			});
+
+			if (error.message === "api.wrong-confirmation-code") {
+				setShowSendCodeButton(true);
+			}
+		},
+	});
+
+	const onSubmit = async (data: SignUpConfirmFormSchema) => {
+		if (!token && IS_PRODUCTION) {
+			setRefreshReCaptcha(r => !r);
+
+			await onSubmit(data);
+		}
+
+		await confirmSignup({ variables: { data: { code: data.code, email, token } } });
+
+		setRefreshReCaptcha(r => !r);
 	};
+
+	const onVerify = useCallback(setToken, [setToken]);
 
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)}>
+				<GoogleReCaptcha
+					onVerify={onVerify}
+					refreshReCaptcha={refreshReCaptcha}
+				/>
+
 				<FormField
 					control={form.control}
 					name="code"
 					render={({ field }) => (
-						<FormItem className="flex flex-col items-center justify-center text-center">
-							<FormLabel>{t("form.code.label")}</FormLabel>
+						<FormItem
+							className="mb-10 flex flex-col items-center justify-center text-center"
+							aria-label={t("form.code.label")}
+						>
 							<FormControl>
 								<InputOTP
+									aria-label={t("form.code.label")}
 									maxLength={6}
 									{...field}
 								>
@@ -70,14 +121,26 @@ const SignUpConfirmForm = () => {
 									</InputOTPGroup>
 								</InputOTP>
 							</FormControl>
-							<FormDescription>{t("form.code.description")}</FormDescription>
 							<FormMessage />
+							<FormDescription className="max-w-[320px]">
+								{t("form.code.description")} <strong>{email}</strong>.
+							</FormDescription>
 						</FormItem>
 					)}
 				/>
 
+				{showSendCodeButton && (
+					<Button
+						className="w-full"
+						variant="outline"
+					>
+						{t("page.sign-up-confirm.resend-code")}
+					</Button>
+				)}
+
 				<Button
-					className="mt-10 w-full"
+					className="mt-2 w-full"
+					disabled={isSubmitting}
 					type="submit"
 				>
 					{t("form.submit")}

@@ -82,7 +82,7 @@
 		},
 		"code": {
 			"label": "Jednorazowy kod",
-			"description": "Wprowadź kod jednorazowy wysłany na Twój adres email.",
+			"description": "Wprowadź kod jednorazowy wysłany na",
 			"invalid": "Nieprawidłowy kod"
 		},
 		"next": "Dalej",
