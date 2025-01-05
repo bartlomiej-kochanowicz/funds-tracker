@@ -1,6 +1,6 @@
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
 import { TFunction } from "i18next";
-import * as z from "zod";
+import { z } from "zod";
 
 type FormStates = "email" | "password" | "confirm";
 

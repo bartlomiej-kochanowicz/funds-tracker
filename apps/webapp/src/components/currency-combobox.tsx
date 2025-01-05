@@ -11,7 +11,7 @@ import {
 	ScrollArea,
 } from "@funds-tracker/ui";
 import clsx from "clsx";
-import { CURRENCIES_ARRAY } from "constants/selectors/currencies";
+import { CURRENCIES_ARRAY } from "constants/selectors/currency";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";

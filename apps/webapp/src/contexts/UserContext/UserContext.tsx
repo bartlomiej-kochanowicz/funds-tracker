@@ -1,4 +1,4 @@
-import { GetUserQuery, IntroductionStep, UpdateUserInput } from "__generated__/graphql";
+import { GetUserQuery, UpdateUserInput } from "__generated__/graphql";
 import { LazyQueryExecFunction, OperationVariables } from "@apollo/client";
 /* import { emitErrorToast, emitSuccessToast } from "@funds-tracker/ui"; */
 import { IS_DEVELOPMENT } from "config/env";
@@ -7,26 +7,22 @@ import { useMutationUserUpdate } from "graphql/user/useMutationUserUpdate";
 import { isUserLoggedIn } from "helpers/isUserLoggedIn";
 import LogRocket from "logrocket";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-
-type UpdateLocalUserData = UpdateUserInput & { introductionStep?: IntroductionStep };
 
 type UserContextType = {
 	loading: boolean;
 	user: GetUserQuery["user"];
 	getUser: LazyQueryExecFunction<GetUserQuery, OperationVariables>;
 	clearUser: () => void;
-	updateUser: (data: UpdateLocalUserData) => void;
+	updateUser: (data: UpdateUserInput) => void;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
 
 const useUser = (): UserContextType => {
-	const { t } = useTranslation();
 	const [getUser, { loading, data, client, error, updateQuery }] = useLazyQueryUser();
 	const [updateUserMutation, { loading: updateLoading }] = useMutationUserUpdate();
 
-	const updateUser = async ({ email, name }: UpdateLocalUserData) => {
+	const updateUser = async ({ email, name }: UpdateUserInput) => {
 		try {
 			await updateUserMutation({
 				variables: {

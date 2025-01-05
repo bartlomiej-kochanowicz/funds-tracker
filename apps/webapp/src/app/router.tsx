@@ -1,8 +1,10 @@
+import { ProtectedRoute } from "components/protected-route";
 import { RECAPTCHA_SITE_KEY } from "config/env";
 import { paths } from "config/paths";
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
+import { Dashboard } from "./routes/dashboard";
 import { SignUp } from "./routes/sign-up";
 
 const GoogleReCaptchaProvider = lazy(() =>
@@ -67,6 +69,14 @@ const Router = () => {
 							<SignUpConfirm />
 						</GoogleReCaptchaProvider>
 					</>
+				}
+			/>
+			<Route
+				path={paths.dashboard}
+				element={
+					<ProtectedRoute>
+						<Dashboard />
+					</ProtectedRoute>
 				}
 			/>
 			<Route

@@ -10,9 +10,9 @@ const paths = {
 	},
 	resetPassword: "/password-reset",
 	profile: "/profile",
+	dashboard: "/dashboard",
 	portfolios: "/portfolios",
 	portfolio: "/portfolios/:uuid",
-	market: "/market",
 };
 
 export { paths };

@@ -6,7 +6,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@funds-tracker/ui";
-import languages from "constants/selectors/languages";
+import languages from "constants/selectors/language";
 import { Globe2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -25,8 +25,8 @@ const LangSelect = () => {
 			onValueChange={handleChangeLanguage}
 			defaultValue={defaultValue}
 		>
-			<SelectTrigger className="w-[180px]">
-				<Globe2 className="mr-2" />
+			<SelectTrigger className="w-[130px]">
+				<Globe2 />
 
 				<SelectValue />
 			</SelectTrigger>

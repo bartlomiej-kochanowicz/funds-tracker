@@ -70,10 +70,23 @@
 		},
 		"password": {
 			"label": "Password",
+			"description": "Please enter the one-time code sent to your email.",
 			"invalid": "Password must be between 8 and 32 characters"
 		},
+		"code": {
+			"label": "One-Time code",
+			"invalid": "Invalid code"
+		},
 		"forgot-password": "Forgot password?",
-		"next": "Next"
+		"next": "Next",
+		"required": "This field is required",
+		"submit": "Submit"
+	},
+	"selector": {
+		"language": {
+			"pl-PL": "Polish",
+			"en-US": "English"
+		}
 	},
 	"currency": {
 		"AED": "United Arab Emirates Dirham",

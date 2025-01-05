@@ -1,15 +1,20 @@
 import {
 	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
+	InputOTP,
+	InputOTPGroup,
+	InputOTPSeparator,
+	InputOTPSlot,
 } from "@funds-tracker/ui";
+import { HomepageDialogContent } from "components/homepage-dialog-content";
 import { paths } from "config/paths";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+import { SignUpConfirmForm } from "./sign-up-confirm-form";
 
 const SignUpConfirm = () => {
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 
 	return (
 		<Dialog
@@ -18,15 +23,12 @@ const SignUpConfirm = () => {
 				navigate(paths.homepage);
 			}}
 		>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>Confirm modal</DialogTitle>
-					<DialogDescription>
-						This action cannot be undone. This will permanently delete your account and remove your
-						data from our servers.
-					</DialogDescription>
-				</DialogHeader>
-			</DialogContent>
+			<HomepageDialogContent
+				title={t("page.sign-up-confirm.title")}
+				description={t("page.sign-up-confirm.description")}
+			>
+				<SignUpConfirmForm />
+			</HomepageDialogContent>
 		</Dialog>
 	);
 };

@@ -1,18 +1,7 @@
-import {
-	Button,
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	Separator,
-	Text,
-} from "@funds-tracker/ui";
+import { Button, Dialog, Separator, Text } from "@funds-tracker/ui";
 import { AppleButton } from "components/apple-button";
-import { ErrorBoundary } from "components/error-boundary";
-import { ErrorMessage } from "components/error-message";
 import { GoogleButton } from "components/google-button";
-import { Logo } from "components/logo";
+import { HomepageDialogContent } from "components/homepage-dialog-content";
 import { paths } from "config/paths";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
@@ -32,57 +21,45 @@ const SignIn = () => {
 			open
 			onOpenChange={handleOpenChange}
 		>
-			<DialogContent mobileFullScreen>
-				<div className="mx-auto max-w-96">
-					<ErrorBoundary fallback={<ErrorMessage className="h-52" />}>
-						<Logo className="mx-auto size-10" />
-
-						<div className="flex h-[calc(100svh-104px)] items-center sm:h-auto">
-							<div>
-								<DialogHeader className="mb-10 sm:my-10">
-									<DialogTitle>{t("page.sign-in.title")}</DialogTitle>
-									<DialogDescription>{t("page.sign-in.description")}</DialogDescription>
-								</DialogHeader>
-
-								<div className="my-5 flex flex-col gap-5">
-									<GoogleButton>{t("page.sign-in.sign-in-with-google")}</GoogleButton>
-									<AppleButton>{t("page.sign-in.sign-in-with-apple")}</AppleButton>
-								</div>
-
-								<Separator>
-									<Text muted>{t("common.or")}</Text>
-								</Separator>
-
-								<SignInForm />
-
-								<Button
-									variant="outline"
-									className="mt-5 w-full"
-									asChild
-								>
-									<Link to={paths.resetPassword}>{t("page.sign-in.forgot-password")}</Link>
-								</Button>
-								<Text
-									muted
-									className="mt-10 block text-xs sm:mb-10"
-								>
-									<Trans
-										i18nKey="page.sign-in.do-not-have-an-account"
-										components={{
-											signup: (
-												<Link
-													to={paths.signUp.signUp}
-													className="text-primary"
-												/>
-											),
-										}}
-									/>
-								</Text>
-							</div>
-						</div>
-					</ErrorBoundary>
+			<HomepageDialogContent
+				title={t("page.sign-in.title")}
+				description={t("page.sign-in.description")}
+			>
+				<div className="my-5 flex flex-col gap-5">
+					<GoogleButton>{t("page.sign-in.sign-in-with-google")}</GoogleButton>
+					<AppleButton>{t("page.sign-in.sign-in-with-apple")}</AppleButton>
 				</div>
-			</DialogContent>
+
+				<Separator>
+					<Text muted>{t("common.or")}</Text>
+				</Separator>
+
+				<SignInForm />
+
+				<Button
+					variant="outline"
+					className="mt-5 w-full"
+					asChild
+				>
+					<Link to={paths.resetPassword}>{t("page.sign-in.forgot-password")}</Link>
+				</Button>
+				<Text
+					muted
+					className="mt-10 block text-xs sm:mb-10"
+				>
+					<Trans
+						i18nKey="page.sign-in.do-not-have-an-account"
+						components={{
+							signup: (
+								<Link
+									to={paths.signUp.signUp}
+									className="text-primary"
+								/>
+							),
+						}}
+					/>
+				</Text>
+			</HomepageDialogContent>
 		</Dialog>
 	);
 };

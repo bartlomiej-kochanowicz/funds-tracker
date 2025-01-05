@@ -4,10 +4,9 @@ import { Navigate } from "react-router-dom";
 
 type Props = {
 	children: JSX.Element;
-	to?: string;
 };
 
-const ProtectedRoute = ({ children, to = paths.homepage }: Props) => {
+const ProtectedRoute = ({ children }: Props) => {
 	const { user, loading } = useUserContext();
 
 	const isAuthenticated = Boolean(!loading && user);
@@ -17,7 +16,7 @@ const ProtectedRoute = ({ children, to = paths.homepage }: Props) => {
 	}
 
 	if (!isAuthenticated) {
-		return <Navigate to={to} />;
+		return <Navigate to={paths.homepage} />;
 	}
 
 	return children;

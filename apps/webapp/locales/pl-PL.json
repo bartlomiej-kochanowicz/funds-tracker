@@ -37,7 +37,7 @@
 	},
 	"page": {
 		"homepage": {
-			"slogan": "Wiesz, gdzie idą Twoje pieniądze.",
+			"slogan": "Wiesz, gdzie pracują Twoje pieniądze.",
 			"join-today": "Dołącz już dziś",
 			"sign-up-with-google": "Zarejestruj się przez Google",
 			"sign-up-with-apple": "Zarejestruj się przez Apple",
@@ -56,6 +56,14 @@
 			"send-confirmation-code": "Wyślij kod potwierdzający",
 			"account-not-confirmed-send-code": "Konto nie zostało potwierdzone. Użyj przycisku poniżej, aby wysłać kod potwierdzający na powyższy adres email."
 		},
+		"sign-up-confirm": {
+			"title": "Potwierdź swój adres email",
+			"description": "Sprawdź swoją skrzynkę odbiorczą, aby znaleźć kod potwierdzający i wpisz go poniżej.",
+			"resend-code": "Wyślij ponownie kod",
+			"code": "Kod potwierdzający",
+			"confirm": "Potwierdź",
+			"account-not-confirmed": "Konto nie zostało potwierdzone. Sprawdź swoją skrzynkę odbiorczą, aby znaleźć kod potwierdzający."
+		},
 		"not-found": {
 			"title": "Hmm... wygląda na to, że ta strona nie istnieje.",
 			"description": "Strona, której szukasz, mogła zostać usunięta w wyniku zmiany jej nazwy lub jest tymczasowo niedostępna.",
@@ -72,8 +80,20 @@
 			"label": "Hasło",
 			"invalid": "Hało musi zawierać od 8 do 32 znaków"
 		},
+		"code": {
+			"label": "Jednorazowy kod",
+			"description": "Wprowadź kod jednorazowy wysłany na Twój adres email.",
+			"invalid": "Nieprawidłowy kod"
+		},
 		"next": "Dalej",
-		"required": "Pole jest wymagane"
+		"required": "Pole jest wymagane",
+		"submit": "Potwierdź"
+	},
+	"selector": {
+		"language": {
+			"pl-PL": "Polski",
+			"en-US": "Angielski"
+		}
 	},
 	"currency": {
 		"AED": "Dirham arabski",
