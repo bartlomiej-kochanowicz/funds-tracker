@@ -42,8 +42,8 @@ const Homepage = () => {
 					<H1 className="my-10 leading-tight">{t("page.homepage.slogan")}</H1>
 					<H2>{t("page.homepage.join-today")}</H2>
 					<div className="my-5 flex flex-col gap-5">
-						<GoogleButton>{t("page.homepage.sign-up-with-google")}</GoogleButton>
-						<AppleButton>{t("page.homepage.sign-up-with-apple")}</AppleButton>
+						<GoogleButton disabled>{t("page.homepage.sign-up-with-google")}</GoogleButton>
+						<AppleButton disabled>{t("page.homepage.sign-up-with-apple")}</AppleButton>
 					</div>
 					<Separator>
 						<Text muted>{t("common.or")}</Text>

@@ -26,8 +26,8 @@ const SignIn = () => {
 				description={t("page.sign-in.description")}
 			>
 				<div className="my-5 flex flex-col gap-5">
-					<GoogleButton>{t("page.sign-in.sign-in-with-google")}</GoogleButton>
-					<AppleButton>{t("page.sign-in.sign-in-with-apple")}</AppleButton>
+					<GoogleButton disabled>{t("page.sign-in.sign-in-with-google")}</GoogleButton>
+					<AppleButton disabled>{t("page.sign-in.sign-in-with-apple")}</AppleButton>
 				</div>
 
 				<Separator>

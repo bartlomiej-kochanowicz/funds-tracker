@@ -1,22 +1,28 @@
-import { Button } from "@funds-tracker/ui";
+import { Button, ButtonProps } from "@funds-tracker/ui";
 import AppleLogo from "assets/social/apple.svg?react";
 import { useTheme } from "next-themes";
-import { ReactNode } from "react";
+import { forwardRef, ReactNode } from "react";
 
 type Props = {
 	children: ReactNode;
 };
 
-const AppleButton = ({ children }: Props) => {
-	const { theme } = useTheme();
+const AppleButton = forwardRef<HTMLButtonElement, ButtonProps & Props>(
+	({ children, ...props }: Props, ref) => {
+		const { theme } = useTheme();
 
-	return (
-		<Button variant={theme === "light" ? "outline-alternative" : "white"}>
-			<AppleLogo />
+		return (
+			<Button
+				variant={theme === "light" ? "outline-alternative" : "white"}
+				ref={ref}
+				{...props}
+			>
+				<AppleLogo />
 
-			{children}
-		</Button>
-	);
-};
+				{children}
+			</Button>
+		);
+	},
+);
 
 export { AppleButton };
