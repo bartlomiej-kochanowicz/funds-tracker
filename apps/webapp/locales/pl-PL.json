@@ -81,14 +81,18 @@
 		},
 		"name": {
 			"label": "Imię",
-			"invalid": "Imię musi zawierać od 4 do 50 znaków",
+			"invalid": "Imię musi zawierać od 3 do 30 znaków",
 			"required": "Imię jest wymagane"
 		},
 		"password": {
 			"label": "Hasło",
-			"invalid": "Hało musi zawierać od 8 do 32 znaków",
-			"required": "Hasło jest wymagane",
-			"not-matching": "Hasła nie pasują do siebie"
+			"invalid": "Hało musi zawierać od 12 do 64 znaków",
+			"required": "Hasło jest wymagane"
+		},
+		"password-confirm": {
+			"label": "Potwierdź hasło",
+			"invalid": "Hasła nie pasują do siebie",
+			"required": "Potwierdzenie hasła jest wymagane"
 		},
 		"code": {
 			"label": "Jednorazowy kod",
@@ -96,6 +100,7 @@
 			"invalid": "Nieprawidłowy kod"
 		},
 		"next": "Dalej",
+		"sign-up": "Zarejestruj się",
 		"required": "Pole jest wymagane",
 		"submit": "Potwierdź"
 	},

@@ -2,33 +2,66 @@ import i18n from "utils/i18n";
 import { z } from "zod";
 
 export const signUpFormSchema = (isPasswordsStep: boolean) =>
-	z.object({
-		userName: z
-			.string()
-			.min(1, { message: i18n.t("form.name.required") })
-			.min(4, { message: i18n.t("form.name.invalid") })
-			.max(50, { message: i18n.t("form.name.invalid") }),
-		userEmail: z
-			.string()
-			.min(1, { message: i18n.t("form.email.required") })
-			.email({ message: i18n.t("form.email.invalid") }),
-		userPassword: z
-			.string()
-			.min(1, { message: i18n.t("form.password.required") })
-			.min(8, { message: i18n.t("form.password.invalid") })
-			.max(50, { message: i18n.t("form.password.invalid") })
-			.optional(),
-		/* .refine(val => !isPasswordsStep || !!val, {
-				message: i18n.t("form.password.required"),
-			}), */
-		userPasswordConfirmation: z
-			.string()
-			.min(1, { message: i18n.t("form.password.required") })
-			.optional(),
-		/* .refine((val: string, ctx) => !isPasswordsStep || val === ctx.parent.userPassword, {
-				message: i18n.t("page.signup.password.do_not_match"),
-			})
-			.refine(val => !isPasswordsStep || !!val, {}) */
-	});
+	z
+		.object({
+			userName: z
+				.string()
+				.min(1, { message: i18n.t("form.name.required") })
+				.min(3, { message: i18n.t("form.name.invalid") })
+				.max(30, { message: i18n.t("form.name.invalid") }),
+			userEmail: z
+				.string()
+				.min(1, { message: i18n.t("form.email.required") })
+				.email({ message: i18n.t("form.email.invalid") }),
+			userPassword: z.string().optional(),
+			userPasswordConfirm: z.string().optional(),
+		})
+		.superRefine((data, ctx) => {
+			if (isPasswordsStep) {
+				if (!data.userPassword) {
+					ctx.addIssue({
+						code: z.ZodIssueCode.too_small,
+						path: ["userPassword"],
+						minimum: 1,
+						message: i18n.t("form.password.required"),
+						inclusive: true,
+						type: "string",
+					});
+				}
+
+				if (data.userPassword && (data.userPassword.length < 12 || data.userPassword.length > 64)) {
+					ctx.addIssue({
+						code: z.ZodIssueCode.too_small,
+						path: ["userPassword"],
+						minimum: 1,
+						message: i18n.t("form.password.invalid"),
+						inclusive: true,
+						type: "string",
+					});
+				}
+
+				if (!data.userPasswordConfirm) {
+					ctx.addIssue({
+						code: z.ZodIssueCode.too_small,
+						path: ["userPasswordConfirm"],
+						minimum: 1,
+						message: i18n.t("form.password-confirm.required"),
+						inclusive: true,
+						type: "string",
+					});
+				}
+
+				if (data.userPasswordConfirm !== data.userPassword) {
+					ctx.addIssue({
+						code: z.ZodIssueCode.too_small,
+						path: ["userPasswordConfirm"],
+						minimum: 1,
+						message: i18n.t("form.password-confirm.invalid"),
+						inclusive: true,
+						type: "string",
+					});
+				}
+			}
+		});
 
 export type SignUpFormSchema = z.infer<ReturnType<typeof signUpFormSchema>>;

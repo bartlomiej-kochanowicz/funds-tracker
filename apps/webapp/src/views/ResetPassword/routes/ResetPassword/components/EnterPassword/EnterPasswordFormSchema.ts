@@ -6,7 +6,7 @@ export const EnterPasswordFormSchema = object().shape({
 		.min(12, i18n.t("page.signin.password.too_short"))
 		.max(50, i18n.t("page.signin.password.too_long"))
 		.required(i18n.t("page.signin.password.required")),
-	userPasswordConfirmation: string()
+	userPasswordConfirm: string()
 		.required(i18n.t("page.signup.password.confirm.required"))
 		.oneOf([ref("userPassword")], i18n.t("page.signup.password.do_not_match")),
 });

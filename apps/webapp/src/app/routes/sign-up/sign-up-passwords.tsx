@@ -21,8 +21,8 @@ export const SignUpPasswords = () => {
 							<Input
 								type="password"
 								autoFocus
-								aria-label={t("common.password")}
-								placeholder={t("common.password")}
+								aria-label={t("form.password.label")}
+								placeholder={t("form.password.label")}
 								{...field}
 							/>
 						</FormControl>
@@ -33,14 +33,14 @@ export const SignUpPasswords = () => {
 
 			<FormField
 				control={control}
-				name="userPasswordConfirmation"
+				name="userPasswordConfirm"
 				render={({ field }) => (
 					<FormItem>
 						<FormControl>
 							<Input
 								type="password"
-								aria-label={t("page.signup.password.confirm")}
-								placeholder={t("page.signup.password.confirm")}
+								aria-label={t("form.password-confirm.label")}
+								placeholder={t("form.password-confirm.label")}
 								{...field}
 							/>
 						</FormControl>

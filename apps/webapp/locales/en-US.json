@@ -79,15 +79,20 @@
 			"invalid": "Invalid email address",
 			"required": "Email address is required"
 		},
-		"password": {
-			"label": "Password",
-			"description": "Please enter the one-time code sent to",
-			"invalid": "Password must be between 8 and 32 characters",
-			"not-matching": "Passwords do not match"
-		},
 		"name": {
 			"label": "Name",
-			"invalid": "Name must be between 2 and 32 characters"
+			"invalid": "Name must be between 3 and 30 characters",
+			"required": "Name is required"
+		},
+		"password": {
+			"label": "Password",
+			"invalid": "Password must be between 12 and 64 characters",
+			"required": "Password is required"
+		},
+		"password-confirm": {
+			"label": "Confirm password",
+			"invalid": "Passwords must match",
+			"required": "Password confirmation is required"
 		},
 		"code": {
 			"label": "One-Time code",
@@ -95,6 +100,7 @@
 		},
 		"forgot-password": "Forgot password?",
 		"next": "Next",
+		"sign-up": "Sign up",
 		"required": "This field is required",
 		"submit": "Submit"
 	},

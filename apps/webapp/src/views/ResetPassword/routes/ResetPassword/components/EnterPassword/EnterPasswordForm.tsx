@@ -32,7 +32,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 	const defaultValues = {
 		userPassword: "",
-		userPasswordConfirmation: "",
+		userPasswordConfirm: "",
 	} satisfies EnterPasswordFormSchemaType;
 
 	const form = useForm<EnterPasswordFormSchemaType>({
@@ -55,19 +55,19 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 			const message = a.message || t("api.unknown_error");
 
 			setError("userPassword", { type: "custom", message });
-			setError("userPasswordConfirmation", { type: "custom", message: EMPTY_VALIDATION_MESSAGE });
+			setError("userPasswordConfirm", { type: "custom", message: EMPTY_VALIDATION_MESSAGE });
 			emitErrorToast(message);
 		},
 	});
 
 	const onSubmit = async ({
 		userPassword,
-		userPasswordConfirmation,
+		userPasswordConfirm,
 	}: EnterPasswordFormSchemaType) => {
 		if (!token) {
 			setRefreshReCaptcha(r => !r);
 
-			onSubmit({ userPassword, userPasswordConfirmation });
+			onSubmit({ userPassword, userPasswordConfirm });
 
 			return;
 		}
@@ -137,7 +137,7 @@ export const EnterPasswordForm: FC<EnterPasswordFormProps> = ({ token: resetToke
 
 				<Form.Field
 					control={control}
-					name="userPasswordConfirmation"
+					name="userPasswordConfirm"
 					render={({ field }) => (
 						<Form.Item>
 							<Form.Control>

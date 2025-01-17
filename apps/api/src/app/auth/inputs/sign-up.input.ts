@@ -8,11 +8,11 @@ export class SignUpInput {
 	@Field(() => EmailAddressResolver)
 	email: string;
 
-	@Length(4, 50, { message: "Name must be between 4 and 50 characters." })
+	@Length(3, 30, { message: "form.name.invalid" })
 	@Field(() => String)
 	name: string;
 
-	@Length(8, 32, { message: "Name must be between 8 and 32 characters." })
+	@Length(12, 64, { message: "form.password.invalid" })
 	@Field(() => String)
 	password: string;
 

@@ -1,7 +1,7 @@
 import { Button, Form, Loader } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IS_PRODUCTION } from "config/env";
 import { paths } from "config/paths";
-import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
 import { useLazyQueryUserEmailExist } from "graphql/user/useLazyQueryUserEmailExist";
 import { useMutationUserSignup } from "graphql/user/useMutationUserSignup";
 import { StateMachine, useStateMachine } from "hooks/useStateMachie";
@@ -42,7 +42,7 @@ const SignUpForm = () => {
 		userName: "",
 		userEmail: "",
 		userPassword: "",
-		userPasswordConfirmation: "",
+		userPasswordConfirm: "",
 	} satisfies SignUpFormSchema;
 
 	const form = useForm<SignUpFormSchema>({
@@ -60,13 +60,10 @@ const SignUpForm = () => {
 	const [emailExist] = useLazyQueryUserEmailExist({
 		onCompleted: data => {
 			if (data.emailExist.exist) {
-				setError("userEmail", { type: "custom", message: t("page.signup.email.already_in_use") });
+				setError("userEmail", { type: "custom", message: t("api.email-already-in-use") });
 			} else {
 				updateState(actions.CHANGE_TO_PASSWORDS);
 			}
-		},
-		onError: () => {
-			// emitErrorToast(t("api.unknown_error"));
 		},
 	});
 
@@ -81,31 +78,14 @@ const SignUpForm = () => {
 						email: userEmail,
 					}).toString(),
 				});
-			} else {
-				setError("userPassword", { type: "custom", message: t("api.unknown_error") });
-				setError("userPasswordConfirmation", {
-					type: "custom",
-					message: EMPTY_VALIDATION_MESSAGE,
-				});
 			}
-		},
-		onError: () => {
-			const message = t("api.unknown_error");
-
-			setError("userPassword", { type: "custom", message });
-			setError("userPasswordConfirmation", {
-				type: "custom",
-				message: EMPTY_VALIDATION_MESSAGE,
-			});
-
-			// emitErrorToast(message);
 		},
 	});
 
 	const onVerify = useCallback(setToken, [setToken]);
 
 	const onSubmit = async ({ userName, userEmail, userPassword }: SignUpFormSchema) => {
-		if (!token) {
+		if (!token && IS_PRODUCTION) {
 			setRefreshReCaptcha(r => !r);
 
 			onSubmit({ userName, userEmail, userPassword });
@@ -114,7 +94,9 @@ const SignUpForm = () => {
 		}
 
 		if (compareState(states.nameAndEmail)) {
-			emailExist({ variables: { data: { email: userEmail, token } } });
+			await emailExist({ variables: { data: { email: userEmail, token } } });
+
+			return;
 		}
 
 		if (compareState(states.passwords) && userPassword) {
@@ -146,10 +128,8 @@ const SignUpForm = () => {
 					type="submit"
 				>
 					{isSubmitting && <Loader className="mr-2" />}
-
 					{compareState(states.nameAndEmail) && t("form.next")}
-
-					{compareState(states.passwords) && t("common.sign_up")}
+					{compareState(states.passwords) && t("form.sign-up")}
 				</Button>
 			</form>
 		</Form>
