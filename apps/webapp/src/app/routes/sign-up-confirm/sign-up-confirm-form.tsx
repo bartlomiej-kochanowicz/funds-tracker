@@ -10,6 +10,7 @@ import {
 	InputOTPGroup,
 	InputOTPSeparator,
 	InputOTPSlot,
+	useToast,
 } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IS_PRODUCTION } from "config/env";
@@ -40,6 +41,8 @@ const SignUpConfirmForm = ({ email }: Props) => {
 	const [showSendCodeButton, setShowSendCodeButton] = useState<boolean>(false);
 	const { getUser } = useUserContext();
 
+	const { toast } = useToast();
+
 	const form = useForm<SignUpConfirmFormSchema>({
 		resolver: zodResolver(signUpConfirmFormSchema({ t })),
 		defaultValues: {
@@ -55,6 +58,12 @@ const SignUpConfirmForm = ({ email }: Props) => {
 	const [confirmSignup] = useMutationUserConfirmSignup({
 		onCompleted: async () => {
 			await getUser();
+
+			toast({
+				variant: "success",
+				title: t("toast.sign-up-confirm.title"),
+				description: t("toast.sign-up-confirm.description"),
+			});
 
 			navigate(paths.dashboard);
 		},

@@ -19,6 +19,10 @@
 				"title": "Confirmation code sent",
 				"description": "Check your inbox"
 			}
+		},
+		"sign-up-confirm": {
+			"title": "Sign up completed",
+			"description": "You have been redirected to the dashboard page"
 		}
 	},
 	"component": {
@@ -96,9 +100,9 @@
 		},
 		"code": {
 			"label": "One-Time code",
+			"description": "Enter the one-time code sent to",
 			"invalid": "Invalid code"
 		},
-		"forgot-password": "Forgot password?",
 		"next": "Next",
 		"sign-up": "Sign up",
 		"required": "This field is required",

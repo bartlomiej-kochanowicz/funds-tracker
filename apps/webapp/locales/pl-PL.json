@@ -19,6 +19,10 @@
 				"title": "Kod potwierdzający został wysłany",
 				"description": "Sprawdź swoją skrzynkę odbiorczą"
 			}
+		},
+		"sign-up-confirm": {
+			"title": "Rejestracja zakończona",
+			"description": "Zostałeś przekierowany na panel główny"
 		}
 	},
 	"component": {
