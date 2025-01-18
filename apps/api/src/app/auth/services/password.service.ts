@@ -34,9 +34,15 @@ export class PasswordService {
 
 		const resetPasswordToken = crypto.randomBytes(32).toString("hex");
 
-		const { uuid, name } = await this.prisma.user.findUniqueOrThrow({
+		const user = await this.prisma.user.findUnique({
 			where: { email },
 		});
+
+		if (!user) {
+			throw new Error("api.account-not-found");
+		}
+
+		const { uuid, name } = user;
 
 		this.redis.set(resetPasswordToken, uuid, "EX", ttl24h);
 

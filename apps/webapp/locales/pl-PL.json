@@ -23,6 +23,10 @@
 		"sign-up-confirm": {
 			"title": "Rejestracja zakończona",
 			"description": "Zostałeś przekierowany na panel główny"
+		},
+		"reset-password": {
+			"title": "Link resetujący hasło został wysłany",
+			"description": "Sprawdź swoją skrzynkę odbiorczą"
 		}
 	},
 	"component": {
@@ -71,6 +75,12 @@
 			"code": "Kod potwierdzający",
 			"confirm": "Potwierdź"
 		},
+		"reset-password": {
+			"title": "Zresetuj hasło",
+			"description": "Jeśli zapomniałeś hasła, możesz łatwo odzyskać dostęp do swojego konta, postępując zgodnie z poniższą instrukcją.",
+			"send-reset-link": "Wyślij link resetujący",
+			"reset-email-sent": "Link resetujący hasło został wysłany na adres email powiązany z Twoim kontem."
+		},
 		"not-found": {
 			"title": "Hmm... wygląda na to, że ta strona nie istnieje.",
 			"description": "Strona, której szukasz, mogła zostać usunięta w wyniku zmiany jej nazwy lub jest tymczasowo niedostępna.",
@@ -102,6 +112,11 @@
 			"label": "Jednorazowy kod",
 			"description": "Wprowadź kod jednorazowy wysłany na",
 			"invalid": "Nieprawidłowy kod"
+		},
+		"reset-password": {
+			"email": {
+				"label": "Adres email do Twojego konta"
+			}
 		},
 		"next": "Dalej",
 		"sign-up": "Zarejestruj się",

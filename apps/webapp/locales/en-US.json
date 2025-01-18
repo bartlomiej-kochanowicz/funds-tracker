@@ -23,6 +23,10 @@
 		"sign-up-confirm": {
 			"title": "Sign up completed",
 			"description": "You have been redirected to the dashboard page"
+		},
+		"reset-password": {
+			"title": "A password reset link has been sent to the email",
+			"description": "Check your inbox"
 		}
 	},
 	"component": {
@@ -71,6 +75,12 @@
 			"code": "Confirmation code",
 			"confirm": "Confirm"
 		},
+		"reset-password": {
+			"title": "Reset Password",
+			"description": "If you forgot your password, you can easily regain access to your account by following the instructions below.",
+			"send-reset-link": "Send reset link",
+			"reset-email-sent": "A password reset link has been sent to the email address associated with your account."
+		},
 		"not-found": {
 			"title": "Hmm... looks like this page doesn’t exist.",
 			"description": "The page are you looking for might have been removed had it's name changed or is temporary unavaliable.",
@@ -102,6 +112,11 @@
 			"label": "One-Time code",
 			"description": "Enter the one-time code sent to",
 			"invalid": "Invalid code"
+		},
+		"reset-password": {
+			"email": {
+				"label": "Email address for your account"
+			}
 		},
 		"next": "Next",
 		"sign-up": "Sign up",
