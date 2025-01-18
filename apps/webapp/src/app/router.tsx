@@ -4,7 +4,6 @@ import { paths } from "config/paths";
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Dashboard } from "./routes/dashboard";
 import { SignUp } from "./routes/sign-up";
 
 const GoogleReCaptchaProvider = lazy(() =>
@@ -27,64 +26,85 @@ const SignUpConfirm = lazy(() =>
 	})),
 );
 
+const ResetPassword = lazy(() =>
+	import("./routes/reset-password").then(({ ResetPassword: component }) => ({
+		default: component,
+	})),
+);
+
+const Dashboard = lazy(() =>
+	import("./routes/dashboard").then(({ Dashboard: component }) => ({
+		default: component,
+	})),
+);
+
 const NotFound = lazy(() =>
 	import("./routes/not-found").then(({ NotFound: component }) => ({ default: component })),
 );
 
-const Router = () => {
-	return (
-		<Routes>
-			<Route
-				path={paths.homepage}
-				element={<Homepage />}
-			/>
-			<Route
-				path={paths.signIn}
-				element={
-					<>
-						<Homepage />
-						<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-							<SignIn />
-						</GoogleReCaptchaProvider>
-					</>
-				}
-			/>
-			<Route
-				path={paths.signUp.signUp}
-				element={
-					<>
-						<Homepage />
-						<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-							<SignUp />
-						</GoogleReCaptchaProvider>
-					</>
-				}
-			/>
-			<Route
-				path={paths.signUp.confirm}
-				element={
-					<>
-						<Homepage />
-						<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-							<SignUpConfirm />
-						</GoogleReCaptchaProvider>
-					</>
-				}
-			/>
-			<Route
-				path={paths.dashboard}
-				element={
-					<ProtectedRoute>
-						<Dashboard />
-					</ProtectedRoute>
-				}
-			/>
-			<Route
-				path="*"
-				element={<NotFound />}
-			/>
-		</Routes>
-	);
-};
+const Router = () => (
+	<Routes>
+		<Route
+			path={paths.homepage}
+			element={<Homepage />}
+		/>
+		<Route
+			path={paths.signIn}
+			element={
+				<>
+					<Homepage />
+					<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+						<SignIn />
+					</GoogleReCaptchaProvider>
+				</>
+			}
+		/>
+		<Route
+			path={paths.signUp.signUp}
+			element={
+				<>
+					<Homepage />
+					<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+						<SignUp />
+					</GoogleReCaptchaProvider>
+				</>
+			}
+		/>
+		<Route
+			path={paths.signUp.confirm}
+			element={
+				<>
+					<Homepage />
+					<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+						<SignUpConfirm />
+					</GoogleReCaptchaProvider>
+				</>
+			}
+		/>
+		<Route
+			path={paths.resetPassword}
+			element={
+				<>
+					<Homepage />
+					<GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+						<ResetPassword />
+					</GoogleReCaptchaProvider>
+				</>
+			}
+		/>
+		<Route
+			path={paths.dashboard}
+			element={
+				<ProtectedRoute>
+					<Dashboard />
+				</ProtectedRoute>
+			}
+		/>
+		<Route
+			path="*"
+			element={<NotFound />}
+		/>
+	</Routes>
+);
 
 export { Router };
