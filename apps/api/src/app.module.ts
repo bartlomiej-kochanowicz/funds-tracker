@@ -20,6 +20,7 @@ import { CurrenciesModule } from "./services/currencies/currencies.module";
 			config: {
 				host: process.env.REDIS_URL,
 				port: Number(process.env.REDIS_PORT),
+				password: process.env.REDIS_PASSWORD,
 			},
 		}),
 		GraphQLModule.forRoot({
