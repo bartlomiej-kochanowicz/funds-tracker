@@ -78,7 +78,7 @@ const SignInForm = () => {
 		onCompleted: async () => {
 			await getUser();
 
-			navigate(paths.portfolios);
+			navigate(paths.dashboard);
 		},
 		onError: async error => {
 			setError("userPassword", {

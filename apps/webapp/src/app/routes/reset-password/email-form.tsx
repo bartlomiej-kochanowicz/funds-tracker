@@ -87,7 +87,7 @@ const EmailForm = () => {
 		return (
 			<Text
 				muted
-				className="flex justify-center text-center text-sm italic"
+				className="text-center text-sm italic"
 			>
 				{t("page.reset-password.reset-email-sent")}
 			</Text>

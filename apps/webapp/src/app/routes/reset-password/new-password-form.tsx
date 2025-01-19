@@ -7,13 +7,15 @@ import {
 	FormMessage,
 	Input,
 	Loader,
+	Text,
 } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EMPTY_VALIDATION_MESSAGE } from "constants/common";
+import { paths } from "config/paths";
 import { useMutationUserSetNewPassword } from "graphql/user/useMutationUserSetNewPassword";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import { type NewPasswordFormSchema, newPasswordFormSchema } from "./new-password-form-schema";
 
@@ -58,12 +60,13 @@ const NewPasswordForm = ({ token: resetToken }: Props) => {
 		onCompleted: () => {
 			setNewPasswordSuccess(true);
 		},
-		onError: a => {
-			const message = a.message || t("api.unknown_error");
+		onError: error => {
+			const message = t([error.message, "api.generic-error"]);
 
-			setError("userPassword", { type: "custom", message });
-			setError("userPasswordConfirm", { type: "custom", message: EMPTY_VALIDATION_MESSAGE });
-			// emitErrorToast(message);
+			setError("userPasswordConfirm", {
+				type: "custom",
+				message,
+			});
 		},
 	});
 
@@ -90,22 +93,24 @@ const NewPasswordForm = ({ token: resetToken }: Props) => {
 	};
 
 	if (newPasswordSuccess) {
-		return "test";
-		/* return (
-			<Text className="text-center text-sm text-gray-400">
+		return (
+			<Text
+				muted
+				className="text-center text-sm italic"
+			>
 				<Trans
-					i18nKey="page.forgot_password.enter_password.submit.success"
+					i18nKey="page.reset-password.reset-completed"
 					components={{
-						signin: (
+						"sign-in": (
 							<Link
-								to={ROUTES.SIGNIN}
-								className="text-blue-500 hover:underline"
+								to={paths.signIn}
+								className="inline text-primary"
 							/>
 						),
 					}}
 				/>
 			</Text>
-		); */
+		);
 	}
 
 	return (
@@ -164,7 +169,7 @@ const NewPasswordForm = ({ token: resetToken }: Props) => {
 				>
 					{isSubmitting && <Loader className="mr-2" />}
 
-					{t("common.save")}
+					{t("form.submit")}
 				</Button>
 			</form>
 		</Form>

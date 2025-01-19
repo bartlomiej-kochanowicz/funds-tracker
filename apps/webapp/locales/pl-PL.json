@@ -5,7 +5,7 @@
 		"account-not-found": "Konto nie istnieje",
 		"account-not-confirmed": "Konto nie zostało potwierdzone",
 		"wrong-password": "Nieprawidłowe hasło",
-		"reset-password-token-expired": "Token resetujący hasło wygasł",
+		"reset-password-token-expired": "Token resetujący hasło wygasł. Spróbuj ponownie od nowa",
 		"new-password-must-be-different-from-the-old-one": "Nowe hasło musi różnić się od starego",
 		"email-already-confirmed": "Email już został potwierdzony",
 		"wrong-confirmation-code": "Nieprawidłowy kod potwierdzający",
@@ -79,7 +79,8 @@
 			"title": "Zresetuj hasło",
 			"description": "Jeśli zapomniałeś hasła, możesz łatwo odzyskać dostęp do swojego konta, postępując zgodnie z poniższą instrukcją.",
 			"send-reset-link": "Wyślij link resetujący",
-			"reset-email-sent": "Link resetujący hasło został wysłany na adres email powiązany z Twoim kontem."
+			"reset-email-sent": "Link resetujący hasło został wysłany na adres email powiązany z Twoim kontem.",
+			"reset-completed": "Twoje hasło zostało zresetowane. Możesz teraz <sign-in>zalogować się na swoje konto</sign-in>."
 		},
 		"not-found": {
 			"title": "Hmm... wygląda na to, że ta strona nie istnieje.",
@@ -121,7 +122,6 @@
 		},
 		"next": "Dalej",
 		"sign-up": "Zarejestruj się",
-		"required": "Pole jest wymagane",
 		"submit": "Potwierdź"
 	},
 	"selector": {

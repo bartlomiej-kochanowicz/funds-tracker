@@ -5,7 +5,7 @@
 		"account-not-found": "Account does not exist",
 		"account-not-confirmed": "Account is not confirmed",
 		"wrong-password": "Wrong password",
-		"reset-password-token-expired": "Reset password token expired",
+		"reset-password-token-expired": "Reset password token expired. Try again from the beginning",
 		"new-password-must-be-different-from-the-old-one": "New password must be different from the old one",
 		"email-already-confirmed": "Email already confirmed",
 		"wrong-confirmation-code": "Wrong confirmation code",
@@ -79,7 +79,8 @@
 			"title": "Reset Password",
 			"description": "If you forgot your password, you can easily regain access to your account by following the instructions below.",
 			"send-reset-link": "Send reset link",
-			"reset-email-sent": "A password reset link has been sent to the email address associated with your account."
+			"reset-email-sent": "A password reset link has been sent to the email address associated with your account.",
+			"reset-completed": "Your password has been reset. You can now <sign-in>sign in to your account</sign-in>."
 		},
 		"not-found": {
 			"title": "Hmm... looks like this page doesn’t exist.",
@@ -121,7 +122,6 @@
 		},
 		"next": "Next",
 		"sign-up": "Sign up",
-		"required": "This field is required",
 		"submit": "Submit"
 	},
 	"selector": {
