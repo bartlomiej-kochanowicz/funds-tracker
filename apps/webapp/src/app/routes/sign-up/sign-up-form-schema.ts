@@ -1,18 +1,24 @@
-import i18n from "utils/i18n";
+import { TFunction } from "i18next";
 import { z } from "zod";
 
-export const signUpFormSchema = (isPasswordsStep: boolean) =>
+export const signUpFormSchema = ({
+	isPasswordsStep,
+	t,
+}: {
+	isPasswordsStep: boolean;
+	t: TFunction;
+}) =>
 	z
 		.object({
 			userName: z
 				.string()
-				.min(1, { message: i18n.t("form.name.required") })
-				.min(3, { message: i18n.t("form.name.invalid") })
-				.max(30, { message: i18n.t("form.name.invalid") }),
+				.min(1, { message: t("form.name.required") })
+				.min(3, { message: t("form.name.invalid") })
+				.max(30, { message: t("form.name.invalid") }),
 			userEmail: z
 				.string()
-				.min(1, { message: i18n.t("form.email.required") })
-				.email({ message: i18n.t("form.email.invalid") }),
+				.min(1, { message: t("form.email.required") })
+				.email({ message: t("form.email.invalid") }),
 			userPassword: z.string().optional(),
 			userPasswordConfirm: z.string().optional(),
 		})
@@ -23,7 +29,7 @@ export const signUpFormSchema = (isPasswordsStep: boolean) =>
 						code: z.ZodIssueCode.too_small,
 						path: ["userPassword"],
 						minimum: 1,
-						message: i18n.t("form.password.required"),
+						message: t("form.password.required"),
 						inclusive: true,
 						type: "string",
 					});
@@ -34,7 +40,7 @@ export const signUpFormSchema = (isPasswordsStep: boolean) =>
 						code: z.ZodIssueCode.too_small,
 						path: ["userPassword"],
 						minimum: 1,
-						message: i18n.t("form.password.invalid"),
+						message: t("form.password.invalid"),
 						inclusive: true,
 						type: "string",
 					});
@@ -45,7 +51,7 @@ export const signUpFormSchema = (isPasswordsStep: boolean) =>
 						code: z.ZodIssueCode.too_small,
 						path: ["userPasswordConfirm"],
 						minimum: 1,
-						message: i18n.t("form.password-confirm.required"),
+						message: t("form.confirm-password.required"),
 						inclusive: true,
 						type: "string",
 					});
@@ -56,7 +62,7 @@ export const signUpFormSchema = (isPasswordsStep: boolean) =>
 						code: z.ZodIssueCode.too_small,
 						path: ["userPasswordConfirm"],
 						minimum: 1,
-						message: i18n.t("form.password-confirm.invalid"),
+						message: t("form.confirm-password.invalid"),
 						inclusive: true,
 						type: "string",
 					});

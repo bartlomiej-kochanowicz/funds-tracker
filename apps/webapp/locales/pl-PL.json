@@ -103,7 +103,7 @@
 			"invalid": "Hało musi zawierać od 12 do 64 znaków",
 			"required": "Hasło jest wymagane"
 		},
-		"password-confirm": {
+		"confirm-password": {
 			"label": "Potwierdź hasło",
 			"invalid": "Hasła nie pasują do siebie",
 			"required": "Potwierdzenie hasła jest wymagane"
@@ -113,10 +113,11 @@
 			"description": "Wprowadź kod jednorazowy wysłany na",
 			"invalid": "Nieprawidłowy kod"
 		},
-		"reset-password": {
-			"email": {
-				"label": "Adres email do Twojego konta"
-			}
+		"reset-password-email": {
+			"label": "Adres email do Twojego konta"
+		},
+		"reset-password-password": {
+			"label": "Nowe hasło"
 		},
 		"next": "Dalej",
 		"sign-up": "Zarejestruj się",

@@ -47,7 +47,7 @@ const SignUpForm = () => {
 
 	const form = useForm<SignUpFormSchema>({
 		defaultValues,
-		resolver: zodResolver(signUpFormSchema(compareState(states.passwords))),
+		resolver: zodResolver(signUpFormSchema({ isPasswordsStep: compareState(states.passwords), t })),
 	});
 
 	const {

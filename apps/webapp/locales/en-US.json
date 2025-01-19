@@ -103,7 +103,7 @@
 			"invalid": "Password must be between 12 and 64 characters",
 			"required": "Password is required"
 		},
-		"password-confirm": {
+		"confirm-password": {
 			"label": "Confirm password",
 			"invalid": "Passwords must match",
 			"required": "Password confirmation is required"
@@ -113,10 +113,11 @@
 			"description": "Enter the one-time code sent to",
 			"invalid": "Invalid code"
 		},
-		"reset-password": {
-			"email": {
-				"label": "Email address for your account"
-			}
+		"reset-password-email": {
+			"label": "Email address for your account"
+		},
+		"reset-password-password": {
+			"label": "New password"
 		},
 		"next": "Next",
 		"sign-up": "Sign up",

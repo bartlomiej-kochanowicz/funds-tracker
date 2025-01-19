@@ -113,8 +113,8 @@ const EmailForm = () => {
 							<FormControl>
 								<Input
 									autoFocus
-									aria-label={t("form.reset-password.email.label")}
-									placeholder={t("form.reset-password.email.label")}
+									aria-label={t("form.reset-password-email.label")}
+									placeholder={t("form.reset-password-email.label")}
 									{...field}
 								/>
 							</FormControl>

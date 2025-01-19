@@ -39,8 +39,8 @@ export const SignUpPasswords = () => {
 						<FormControl>
 							<Input
 								type="password"
-								aria-label={t("form.password-confirm.label")}
-								placeholder={t("form.password-confirm.label")}
+								aria-label={t("form.confirm-password.label")}
+								placeholder={t("form.confirm-password.label")}
 								{...field}
 							/>
 						</FormControl>
