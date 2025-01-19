@@ -10,6 +10,7 @@ import { AuthModule } from "./app/auth/auth.module";
 
 import { UserModule } from "./app/user/user.module";
 import { CurrenciesModule } from "./services/currencies/currencies.module";
+import { HealthCheckController } from './health-check/health-check.controller';
 
 @Module({
 	imports: [
@@ -36,7 +37,7 @@ import { CurrenciesModule } from "./services/currencies/currencies.module";
 		UserModule,
 		CurrenciesModule,
 	],
-	controllers: [],
+	controllers: [HealthCheckController],
 	providers: [
 		{
 			provide: APP_GUARD,
