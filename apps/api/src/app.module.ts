@@ -10,7 +10,7 @@ import { AuthModule } from "./app/auth/auth.module";
 
 import { UserModule } from "./app/user/user.module";
 import { CurrenciesModule } from "./services/currencies/currencies.module";
-import { HealthCheckController } from './health-check/health-check.controller';
+import { HealthCheckController } from "./health-check/health-check.controller";
 
 @Module({
 	imports: [
@@ -19,9 +19,9 @@ import { HealthCheckController } from './health-check/health-check.controller';
 		}),
 		RedisModule.forRoot({
 			config: {
+				url: process.env.REDIS_URL,
 				host: process.env.REDIS_URL,
-				port: Number(process.env.REDIS_PORT),
-				password: process.env.REDIS_PASSWORD,
+				port: process.env.REDIS_PORT ? Number(process.env.REDIS_PORT) : undefined,
 			},
 		}),
 		GraphQLModule.forRoot({
