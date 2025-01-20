@@ -5,5 +5,5 @@ export * from "./refresh.entity";
 export * from "./reset-password.entity";
 export * from "./send-code.entity";
 export * from "./set-new-password.entity";
-export * from "./signin-local.entity";
-export * from "./signup-local.entity";
+export * from "./sign-in-local.entity";
+export * from "./sign-up-local.entity";
