@@ -1,16 +1,11 @@
 {
   "version": 2,
   "buildCommand": "pnpm build",
-  "builds": [
-    {
-      "src": "dist/main.js",
-      "use": "@vercel/node"
-    }
-  ],
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/main.js",
+      "dest": "/dist/main.js",
       "methods": [
         "GET",
         "POST",
