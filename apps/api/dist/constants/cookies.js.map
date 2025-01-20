@@ -1,0 +1,1 @@
+{"version":3,"file":"cookies.js","sourceRoot":"","sources":["../../src/constants/cookies.ts"],"names":[],"mappings":";;;AAAa,QAAA,OAAO,GAAG;IACtB,OAAO,EAAE,CAAC,GAAG,EAAE,GAAG,IAAI;IACtB,QAAQ,EAAE,EAAE,GAAG,EAAE,GAAG,EAAE,GAAG,EAAE,GAAG,IAAI;CAClC,CAAC;AAEW,QAAA,YAAY,GAAG;IAC3B,YAAY,EAAE,aAAa;IAC3B,aAAa,EAAE,cAAc;IAC7B,YAAY,EAAE,YAAY;CAC1B,CAAC"}

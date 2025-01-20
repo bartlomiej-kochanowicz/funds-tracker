@@ -38,4 +38,6 @@ _old
 
 dist
 
+!apps/api/dist
+
 .DS_Store
