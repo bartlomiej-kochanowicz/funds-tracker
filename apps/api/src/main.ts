@@ -22,6 +22,13 @@ const bootstrap = async () => {
 
 	const port = process.env.PORT || 4000;
 
+	console.log(
+		Object.entries(process.memoryUsage()).reduce((acc, [key, value]) => {
+			acc[key] = (value / (1024 * 1024)).toFixed(2) + " MB";
+			return acc;
+		}, {}),
+	);
+
 	await app.listen(port);
 
 	console.log(`Funds Tracker Api listening on port ${port}`);
