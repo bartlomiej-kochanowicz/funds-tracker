@@ -5,9 +5,8 @@
 	"scripts": {
 		"build": "prisma generate && nest build",
 		"dev": "nest start --watch",
-		"start": "nest start",
-		"start:debug": "nest start --debug --watch",
-		"start:prod": "node dist/main",
+		"start": "node dist/main.js",
+		"dev:debug": "nest start --debug --watch",
 		"lint": "eslint src",
 		"lint:fix": "eslint src --fix",
 		"test": "dotenv -e .env.test -- jest",
