@@ -2,7 +2,6 @@
 	"private": true,
 	"scripts": {
 		"compose": "docker compose up -d && pnpm prisma:generate && pnpm prisma:migrate",
-		"install:api:prod": "pnpm --filter=api install --prod",
 		"prisma:generate": "cd apps/api && pnpm dlx prisma generate",
 		"prisma:migrate": "cd apps/api && pnpm dlx prisma migrate dev",
 		"prisma:migrate:test": "cd apps/api && dotenv -e .env.test -- pnpm dlx prisma migrate dev",
