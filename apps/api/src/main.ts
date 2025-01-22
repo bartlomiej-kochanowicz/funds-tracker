@@ -13,7 +13,7 @@ const bootstrap = async () => {
 	app.enableCors({
 		credentials: true,
 		exposedHeaders: ["Set-cookie"],
-		origin: ["http://localhost:3000"],
+		origin: ["http://localhost:3000", "www.funds-tracker.com", "funds-tracker.com"],
 	});
 
 	app.use(cookieParser());
@@ -21,13 +21,6 @@ const bootstrap = async () => {
 	app.useGlobalPipes(new ValidationPipe());
 
 	const port = process.env.PORT || 4000;
-
-	console.log(
-		Object.entries(process.memoryUsage()).reduce((acc, [key, value]) => {
-			acc[key] = (value / (1024 * 1024)).toFixed(2) + " MB";
-			return acc;
-		}, {}),
-	);
 
 	await app.listen(port);
 
