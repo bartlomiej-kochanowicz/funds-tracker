@@ -16,7 +16,7 @@
 		"build:api": "turbo run build --filter=api...",
 		"start": "turbo run start",
 		"start:webapp": "turbo run start --filter=webapp...",
-		"start:api": "turbo run start --filter=api...",
+		"start:api": "turbo run start --filter=api",
 		"dev": "turbo run dev",
 		"dev:webapp": "turbo run dev --no-daemon --filter=webapp...",
 		"dev:api": "turbo run dev --no-daemon --filter=api...",
