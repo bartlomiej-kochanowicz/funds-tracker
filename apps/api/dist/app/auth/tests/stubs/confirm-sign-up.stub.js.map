@@ -1,1 +1,0 @@
-{"version":3,"file":"confirm-sign-up.stub.js","sourceRoot":"","sources":["../../../../../src/app/auth/tests/stubs/confirm-sign-up.stub.ts"],"names":[],"mappings":";;;AAEa,QAAA,cAAc,GAAgB;IAC1C,KAAK,EAAE,wBAAwB;IAC/B,QAAQ,EAAE,cAAc;IACxB,IAAI,EAAE,UAAU;IAChB,KAAK,EAAE,WAAW;CAClB,CAAC;AAEW,QAAA,eAAe,GAAuB;IAClD,KAAK,EAAE,wBAAwB;IAC/B,IAAI,EAAE,QAAQ;IACd,KAAK,EAAE,WAAW;CAClB,CAAC"}
