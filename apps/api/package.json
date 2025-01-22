@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"build": "pnpm dlx prisma generate && nest build",
+		"build": "prisma generate && nest build",
 		"dev": "nest start --watch",
 		"start": "nest start",
 		"start:debug": "nest start --debug --watch",
