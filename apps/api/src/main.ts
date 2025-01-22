@@ -20,7 +20,11 @@ const bootstrap = async () => {
 
 	app.useGlobalPipes(new ValidationPipe());
 
-	await app.listen(process.env.PORT || 4000);
+	const port = process.env.PORT || 4000;
+
+	await app.listen(port);
+
+	console.log(`Funds Tracker Api listening on port ${port}`);
 };
 
 bootstrap();
