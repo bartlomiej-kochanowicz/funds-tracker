@@ -1,3 +1,6 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - apps/api
+  - apps/webapp
+  - packages/eslint-config
+  - packages/tsconfig
+  - packages/ui

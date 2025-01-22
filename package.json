@@ -1,6 +1,8 @@
 {
 	"private": true,
 	"scripts": {
+		"install:api": "pnpm install --filter api",
+		"install:webapp": "pnpm install --filter webapp",
 		"compose": "docker compose up -d && pnpm prisma:generate && pnpm prisma:migrate",
 		"prisma:generate": "cd apps/api && pnpm dlx prisma generate",
 		"prisma:migrate": "cd apps/api && pnpm dlx prisma migrate dev",
@@ -12,6 +14,9 @@
 		"build": "turbo run build",
 		"build:webapp": "turbo run build --filter=webapp...",
 		"build:api": "turbo run build --filter=api...",
+		"start": "turbo run start",
+		"start:webapp": "turbo run start --filter=webapp...",
+		"start:api": "turbo run start --filter=api...",
 		"dev": "turbo run dev",
 		"dev:webapp": "turbo run dev --no-daemon --filter=webapp...",
 		"dev:api": "turbo run dev --no-daemon --filter=api...",
