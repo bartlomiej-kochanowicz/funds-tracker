@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
-import { Loader } from "@/src/components/loader";
+import { Loader } from "components/loader";
 
 const meta: Meta<typeof Loader> = {
 	component: Loader,

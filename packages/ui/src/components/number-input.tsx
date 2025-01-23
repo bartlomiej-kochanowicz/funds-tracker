@@ -1,9 +1,8 @@
 import { useNumberField } from "@react-aria/numberfield";
 import { NumberFieldStateOptions, useNumberFieldState } from "@react-stately/numberfield";
+import { Input } from "components/input";
+import { mergeRefs } from "lib/merge-refs";
 import { ComponentPropsWithoutRef, forwardRef, useRef } from "react";
-
-import { Input } from "@/src/components/input";
-import { mergeRefs } from "@/src/lib/merge-refs";
 
 type NumberInputProps = NumberFieldStateOptions & ComponentPropsWithoutRef<"input">;
 

@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { H1, H2, H3, H4, H5 } from "components/heading";
 import { Fragment } from "react";
-
-import { H1, H2, H3, H4, H5 } from "@/src/components/heading";
 
 const meta: Meta<typeof H1> = {
 	component: H1,

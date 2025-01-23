@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Tile } from "components/tile";
 import { Landmark } from "lucide-react";
 import { withRouter } from "storybook-addon-react-router-v6";
-
-import { Tile } from "@/src/components/tile";
 
 const meta: Meta<typeof Tile> = {
 	component: Tile,

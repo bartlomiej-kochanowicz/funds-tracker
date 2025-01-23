@@ -1,3 +1,4 @@
+import { cn } from "lib/utils";
 import {
 	type ComponentProps,
 	type ComponentPropsWithoutRef,
@@ -6,8 +7,6 @@ import {
 	type HTMLAttributes,
 } from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
-
-import { cn } from "@/src/lib/utils";
 
 const Drawer = ({
 	shouldScaleBackground = true,

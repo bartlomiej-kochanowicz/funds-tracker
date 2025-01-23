@@ -1,10 +1,9 @@
+import { Button } from "components/button";
+import { Calendar } from "components/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "components/popover";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { type ComponentProps, forwardRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-
-import { Button } from "@/src/components/button";
-import { Calendar } from "@/src/components/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/popover";
 
 type DatePickerProps = {
 	value: Date | null;

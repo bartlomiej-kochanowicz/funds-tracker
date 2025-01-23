@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
+import { Label } from "components/label";
+import { cn } from "lib/utils";
 import {
 	ComponentPropsWithoutRef,
 	createContext,
@@ -18,9 +20,6 @@ import {
 	FormProvider,
 	useFormContext,
 } from "react-hook-form";
-
-import { Label } from "@/src/components/label";
-import { cn } from "@/src/lib/utils";
 
 const Form = FormProvider;
 

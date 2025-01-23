@@ -14,6 +14,6 @@ module.exports = {
 			},
 		],
 		// Disable import/extensions rule because it's not working properly with TypeScript for import like "@/src/*"
-		"import/extensions": "off"
+		// "import/extensions": "off"
 	}
 };

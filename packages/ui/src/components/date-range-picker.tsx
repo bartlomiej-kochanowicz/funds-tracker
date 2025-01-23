@@ -1,12 +1,11 @@
+import { Button } from "components/button";
+import { Calendar } from "components/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "components/popover";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { type ComponentProps } from "react";
 import { DateRange } from "react-day-picker";
 import { twMerge } from "tailwind-merge";
-
-import { Button } from "@/src/components/button";
-import { Calendar } from "@/src/components/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/popover";
 
 type DateRangePickerProps = {
 	className?: string;

@@ -5,8 +5,8 @@ import {
 	ToastProvider,
 	ToastTitle,
 	ToastViewport,
-} from "@/src/components/toast";
-import { ToasterToast } from "@/src/hooks/use-toast";
+} from "components/toast";
+import { ToasterToast } from "hooks/use-toast";
 
 type Props = {
 	toasts: ToasterToast[];

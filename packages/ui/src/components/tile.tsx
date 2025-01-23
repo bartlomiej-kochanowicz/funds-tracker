@@ -1,7 +1,6 @@
+import { Text } from "components/text";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-
-import { Text } from "@/src/components/text";
 
 interface TilelProps {
 	children: ReactNode;
