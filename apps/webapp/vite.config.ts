@@ -77,8 +77,4 @@ export default defineConfig({
 		}),
 		eslint(),
 	],
-	build: {
-		assetsDir: "static",
-		outDir: "./dist",
-	},
 });

@@ -21,8 +21,7 @@ const Provider = ({ children }: Props) => {
 				<UserContextProvider>
 					<ThemeProvider
 						attribute="class"
-						defaultTheme="system"
-						enableSystem
+						enableSystem={false}
 					>
 						<ErrorBoundary fallback={<ErrorMessage className="h-svh" />}>
 							<Toaster toasts={toasts} />

@@ -3,6 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsc && vite build",
+		"preview": "vite preview",
 		"clean": "rm -rf dist",
 		"dev": "vite --clearScreen false",
 		"check:circular-deps": "madge --warning --circular --extensions ts,tsx src",
@@ -81,7 +82,7 @@
 		"tsconfig-paths-webpack-plugin": "4.1.0",
 		"typescript": "5.6.3",
 		"update-browserslist-db": "1.1.1",
-		"vite": "5.4.8",
+		"vite": "6.0.11",
 		"vite-plugin-eslint": "1.8.1",
 		"vite-plugin-pwa": "0.20.5",
 		"vite-plugin-svgr": "4.2.0",

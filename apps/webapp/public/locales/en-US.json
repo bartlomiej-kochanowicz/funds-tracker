@@ -36,8 +36,7 @@
 		},
 		"theme-toggle": {
 			"dark-mode": "Dark mode",
-			"light-mode": "Light mode",
-			"system-mode": "System mode"
+			"light-mode": "Light mode"
 		}
 	},
 	"common": {
