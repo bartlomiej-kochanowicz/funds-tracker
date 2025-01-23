@@ -10,7 +10,7 @@ i18next
 	.use(initReactI18next)
 	.init({
 		backend: {
-			loadPath: "/locales/{{lng}}.json",
+			loadPath: "/public/locales/{{lng}}.json",
 		},
 		fallbackLng: "en-US",
 		interpolation: {
