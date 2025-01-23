@@ -13,7 +13,13 @@ const bootstrap = async () => {
 	app.enableCors({
 		credentials: true,
 		exposedHeaders: ["Set-cookie"],
-		origin: ["http://localhost:3000", "www.funds-tracker.com", "funds-tracker.com"],
+		origin: [
+			"http://localhost:3000",
+			"www.funds-tracker.com",
+			"funds-tracker.com",
+			"https://www.funds-tracker.com",
+			"https://funds-tracker.com",
+		],
 	});
 
 	app.use(cookieParser());
