@@ -46,11 +46,11 @@ export class PasswordService {
 
 		this.redis.set(resetPasswordToken, uuid, "EX", ttl24h);
 
-		const resetPasswordLink = `${this.configService.get<string>(
+		const passwordResetLink = `${this.configService.get<string>(
 			"WEBAPP_URL",
 		)}/reset-password?token=${resetPasswordToken}`;
 
-		await this.authService.sendEmailWithResetPasswordLink(email, name, resetPasswordLink);
+		await this.authService.sendEmailWithResetPasswordLink({ email, name, passwordResetLink });
 
 		return {
 			success: true,

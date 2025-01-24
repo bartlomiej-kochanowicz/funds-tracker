@@ -24,7 +24,15 @@ export class AuthService {
 		private readonly sendgridService: SendGridService,
 	) {}
 
-	async sendEmailWithConfirmCode(email: string, uuid: string, code: string): Promise<void> {
+	async sendEmailWithConfirmCode({
+		email,
+		code,
+		name,
+	}: {
+		email: string;
+		code: string;
+		name: string;
+	}): Promise<void> {
 		const mail = {
 			to: email,
 			subject: "Your Funds Tracker confirmation code",
@@ -32,18 +40,22 @@ export class AuthService {
 			html: this.sendgridService.getHtml(emailConfirmationHbs, {
 				email,
 				code,
-				uuid,
+				name,
 			}),
 		};
 
 		await this.sendgridService.send(mail);
 	}
 
-	async sendEmailWithResetPasswordLink(
-		email: string,
-		name: string,
-		resetPasswordLink: string,
-	): Promise<void> {
+	async sendEmailWithResetPasswordLink({
+		email,
+		name,
+		passwordResetLink,
+	}: {
+		email: string;
+		name: string;
+		passwordResetLink: string;
+	}): Promise<void> {
 		const mail = {
 			to: email,
 			subject: "Funds Tracker - reset password",
@@ -51,7 +63,7 @@ export class AuthService {
 			html: this.sendgridService.getHtml(resetPasswordHbs, {
 				name,
 				email,
-				resetPasswordLink,
+				passwordResetLink,
 			}),
 		};
 

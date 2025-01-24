@@ -36,7 +36,7 @@ export class SignUpService {
 
 		const hashedConfirmationCode = await this.authService.hashData(confirmationCode);
 
-		const { uuid } = await this.prisma.user.create({
+		await this.prisma.user.create({
 			data: {
 				email,
 				name,
@@ -46,7 +46,7 @@ export class SignUpService {
 		});
 
 		if (!IS_TEST) {
-			await this.authService.sendEmailWithConfirmCode(email, uuid, confirmationCode);
+			await this.authService.sendEmailWithConfirmCode({ email, code: confirmationCode, name });
 		}
 
 		return {
@@ -147,7 +147,11 @@ export class SignUpService {
 		});
 
 		if (!IS_TEST) {
-			await this.authService.sendEmailWithConfirmCode(email, user.uuid, confirmationCode);
+			await this.authService.sendEmailWithConfirmCode({
+				email,
+				name: user.name,
+				code: confirmationCode,
+			});
 		}
 
 		return {
