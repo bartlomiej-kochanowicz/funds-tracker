@@ -276,9 +276,6 @@ importers:
       react-focus-lock:
         specifier: 2.13.2
         version: 2.13.2(@types/react@18.3.11)(react@18.3.1)
-      react-google-recaptcha-hook:
-        specifier: ^1.1.1
-        version: 1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-google-recaptcha-v3:
         specifier: 1.10.1
         version: 1.10.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -619,7 +616,7 @@ importers:
         version: 8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.5)(typescript@5.6.3)
       '@storybook/react-vite':
         specifier: 8.3.5
-        version: 8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.31.0)(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))
+        version: 8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.31.0)(storybook@8.3.5)(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))
       '@storybook/testing-library':
         specifier: 0.2.2
         version: 0.2.2
@@ -8577,12 +8574,6 @@ packages:
       '@types/react':
         optional: true
 
-  react-google-recaptcha-hook@1.1.1:
-    resolution: {integrity: sha512-PQ9ES7RB+c2xwtrvU6HwlXaqXDrpV8bhcPgQ/IJo5jPivAU7ymtDachqwZd603vetWLN0IRNm+RuJJuzq3uypg==}
-    peerDependencies:
-      react: '>=16.13.1'
-      react-dom: '>=16.13.1'
-
   react-google-recaptcha-v3@1.10.1:
     resolution: {integrity: sha512-K3AYzSE0SasTn+XvV2tq+6YaxM+zQypk9rbCgG4OVUt7Rh4ze9basIKefoBz9sC0CNslJj9N1uwTTgRMJQbQJQ==}
     peerDependencies:
@@ -12807,13 +12798,13 @@ snapshots:
 
   '@josephg/resolvable@1.0.1': {}
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.6.3)
-      vite: 5.4.8(@types/node@22.7.5)(terser@5.37.0)
+      vite: 6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0)
     optionalDependencies:
       typescript: 5.6.3
 
@@ -14375,7 +14366,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.3.5(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))':
+  '@storybook/builder-vite@8.3.5(storybook@8.3.5)(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))':
     dependencies:
       '@storybook/csf-plugin': 8.3.5(storybook@8.3.5)
       '@types/find-cache-dir': 3.2.1
@@ -14387,7 +14378,7 @@ snapshots:
       magic-string: 0.30.17
       storybook: 8.3.5
       ts-dedent: 2.2.0
-      vite: 5.4.8(@types/node@22.7.5)(terser@5.37.0)
+      vite: 6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0)
     optionalDependencies:
       typescript: 5.6.3
     transitivePeerDependencies:
@@ -14475,11 +14466,11 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.3.5
 
-  '@storybook/react-vite@8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.31.0)(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))':
+  '@storybook/react-vite@8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.31.0)(storybook@8.3.5)(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))
       '@rollup/pluginutils': 5.1.4(rollup@4.31.0)
-      '@storybook/builder-vite': 8.3.5(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))
+      '@storybook/builder-vite': 8.3.5(storybook@8.3.5)(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))
       '@storybook/react': 8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.5)(typescript@5.6.3)
       find-up: 5.0.0
       magic-string: 0.30.17
@@ -14489,7 +14480,7 @@ snapshots:
       resolve: 1.22.10
       storybook: 8.3.5
       tsconfig-paths: 4.2.0
-      vite: 5.4.8(@types/node@22.7.5)(terser@5.37.0)
+      vite: 6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - '@storybook/test'
@@ -19798,11 +19789,6 @@ snapshots:
       use-sidecar: 1.1.3(@types/react@18.3.11)(react@18.3.1)
     optionalDependencies:
       '@types/react': 18.3.11
-
-  react-google-recaptcha-hook@1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   react-google-recaptcha-v3@1.10.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
