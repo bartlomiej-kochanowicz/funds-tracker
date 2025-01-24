@@ -72,7 +72,7 @@ const retryLink = new RetryLink({
 });
 
 const httpLink = new HttpLink({
-	uri: `${API_DOMAIN}/graphql`,
+	uri: "/graphql",
 	credentials: "include",
 });
 
