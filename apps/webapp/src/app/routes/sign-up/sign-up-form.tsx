@@ -84,8 +84,6 @@ const SignUpForm = () => {
 
 	const onVerify = useCallback(setToken, [setToken]);
 
-	console.log("token", token);
-
 	const onSubmit = async ({ userName, userEmail, userPassword }: SignUpFormSchema) => {
 		if (!token && IS_PRODUCTION) {
 			setRefreshReCaptcha(r => !r);
@@ -97,8 +95,6 @@ const SignUpForm = () => {
 
 		if (compareState(states.nameAndEmail)) {
 			await emailExist({ variables: { data: { email: userEmail, token } } });
-
-			return;
 		}
 
 		if (compareState(states.passwords) && userPassword) {
