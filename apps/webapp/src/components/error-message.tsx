@@ -13,7 +13,7 @@ const ErrorMessage = ({ className }: Props) => {
 	return (
 		<div className={twMerge("flex flex-col items-center justify-center text-center", className)}>
 			<Frown className="mx-auto size-16 text-red-500" />
-			<H1>{t("component.error-message.title")}</H1>
+			<H1 className="mb-4">{t("component.error-message.title")}</H1>
 			<Text>{t("component.error-message.description")}</Text>
 		</div>
 	);

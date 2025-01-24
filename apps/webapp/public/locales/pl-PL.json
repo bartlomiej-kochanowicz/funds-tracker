@@ -101,12 +101,14 @@
 		"password": {
 			"label": "Hasło",
 			"invalid": "Hało musi zawierać od 12 do 64 znaków",
-			"required": "Hasło jest wymagane"
+			"required": "Hasło jest wymagane",
+			"toggle": "Pokaż lub ukryj hasło"
 		},
 		"confirm-password": {
 			"label": "Potwierdź hasło",
 			"invalid": "Hasła nie pasują do siebie",
-			"required": "Potwierdzenie hasła jest wymagane"
+			"required": "Potwierdzenie hasła jest wymagane",
+			"toggle": "Pokaż lub ukryj hasło potwierdzające"
 		},
 		"code": {
 			"label": "Jednorazowy kod",
