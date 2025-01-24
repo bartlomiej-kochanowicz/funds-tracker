@@ -19,6 +19,7 @@
 		"start:webapp": "turbo run start --filter=webapp --env-mode=loose",
 		"start:api": "turbo run start --filter=api --env-mode=loose",
 		"dev": "turbo run dev",
+		"check:circular-deps": "turbo run check:circular-deps",
 		"dev:webapp": "turbo run dev --no-daemon --filter=webapp...",
 		"dev:api": "turbo run dev --no-daemon --filter=api...",
 		"lint": "turbo run lint",
@@ -37,10 +38,11 @@
 		"packages/*"
 	],
 	"devDependencies": {
-		"@commitlint/cli": "^19.6.1",
-		"@commitlint/config-angular": "^19.7.0",
+		"@commitlint/cli": "19.6.1",
+		"@commitlint/config-angular": "19.7.0",
 		"eslint": "8.56.0",
-		"husky": "^9.1.7",
+		"husky": "9.1.7",
+		"madge": "8.0.0",
 		"prettier": "3.2.4",
 		"tsconfig": "workspace:*",
 		"turbo": "2.1.3"

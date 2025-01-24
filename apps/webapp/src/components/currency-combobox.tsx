@@ -10,7 +10,6 @@ import {
 	PopoverTrigger,
 	ScrollArea,
 } from "@funds-tracker/ui";
-import clsx from "clsx";
 import { CURRENCIES_ARRAY } from "constants/selectors/currency";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { forwardRef, useState } from "react";
@@ -74,7 +73,7 @@ const CurrencyCombobox = forwardRef(
 											</span>
 
 											{value?.toLowerCase() === currency.toLowerCase() ? (
-												<Check className={clsx("size-4 justify-self-end")} />
+												<Check className="size-4 justify-self-end" />
 											) : null}
 										</div>
 									</CommandItem>

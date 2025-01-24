@@ -18,6 +18,7 @@
 			"cache": false,
 			"persistent": true
 		},
+		"check:circular-deps": {},
 		"test": {},
 		"tsc": {},
 		"start": {
