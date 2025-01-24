@@ -101,12 +101,14 @@
 		"password": {
 			"label": "Password",
 			"invalid": "Password must be between 12 and 64 characters",
-			"required": "Password is required"
+			"required": "Password is required",
+			"toggle": "Toggle password"
 		},
 		"confirm-password": {
 			"label": "Confirm password",
 			"invalid": "Passwords must match",
-			"required": "Password confirmation is required"
+			"required": "Password confirmation is required",
+			"toggle": "Toggle password confirmation"
 		},
 		"code": {
 			"label": "One-Time code",

@@ -7,6 +7,8 @@
 	"scripts": {
 		"build": "tsup ./src/index.ts --format esm,cjs --dts --external react",
 		"dev": "tsup ./src/index.ts --format esm,cjs --watch --dts --external react",
+		"check:circular-deps": "madge --warning --circular src",
+		"check:circular-deps-image": "madge --image graph.svg src",
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
 		"test": "vitest run",
 		"test:ui": "pnpm test",

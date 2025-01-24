@@ -6,7 +6,7 @@ import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, Observable } from "@
 import { onError } from "@apollo/client/link/error";
 import { RetryLink } from "@apollo/client/link/retry";
 import { toast } from "@funds-tracker/ui";
-import { IS_DEVELOPMENT } from "config/env";
+import { API_DOMAIN, IS_DEVELOPMENT } from "config/env";
 import i18next from "i18next";
 
 const REFRESH_TOKEN = gql(/* GraphQL */ `
@@ -72,7 +72,7 @@ const retryLink = new RetryLink({
 });
 
 const httpLink = new HttpLink({
-	uri: "/graphql",
+	uri: `${IS_DEVELOPMENT ? API_DOMAIN : ""}/graphql`,
 	credentials: "include",
 });
 
