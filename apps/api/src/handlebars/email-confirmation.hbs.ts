@@ -10,11 +10,11 @@ export default `
 
   <body style="margin: 0;width: 100%;font-size: 16px;background-color: rgb(249, 249, 250);font-family: 'Roboto', sans-serif;color: rgb(52, 52, 52);">
     <div style="margin: 0 auto;max-width: 550px;width: 90%;">
-      <img src="https://www.funds-tracker.com/favicon.svg"  style="display:block;margin: 0 auto;width: 50px;height: auto;padding: 24px 0;" alt="Funds Tracker logo">
+      <img src="https://www.funds-tracker.com/favicon.svg" width="50" height="auto" style="display:block;margin: 0 auto;padding: 24px 0;" alt="Funds Tracker logo"/>
 
       <div style="display: block;margin: 0;color: rgb(255, 255, 255);font-size: 20px;padding: 24px;text-align: center;background-color: rgb(52, 52, 52);border-radius: 6px;margin-bottom: 4px;">Complete registration</div>
 
-      <div style="margin: 0;margin-top: 4px;padding: 24px;background-color: rgb(255, 255, 255);border-radius: 6px;">
+      <div style="margin: 0;margin-top: 8px;padding: 24px;background-color: rgb(255, 255, 255);border-radius: 6px;text-align: center;font-size: 14px;">
         <p>Hello {{name}},</p>
         <p style="margin: 0;display: block;text-align: center;font-size: 14px;">
           <b style="margin: 0;">Please enter this confirmation code in the window

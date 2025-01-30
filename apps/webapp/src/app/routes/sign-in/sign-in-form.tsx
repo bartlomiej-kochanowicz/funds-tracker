@@ -19,7 +19,7 @@ import { useMutationUserSignin } from "graphql/user/useMutationUserSignin";
 import { lazy, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 import { SignInFormSchema, signInFormSchema, useFormState } from "./sign-in-form-schema";
 
@@ -103,7 +103,14 @@ const SignInForm = () => {
 				description: t("toast.send-confirm-code.completed.description"),
 			});
 
-			navigate(paths.signUp.confirm);
+			const { userEmail } = form.getValues();
+
+			navigate({
+				pathname: paths.signUp.confirm,
+				search: createSearchParams({
+					email: userEmail,
+				}).toString(),
+			});
 		},
 		onError: error => {
 			toast({
