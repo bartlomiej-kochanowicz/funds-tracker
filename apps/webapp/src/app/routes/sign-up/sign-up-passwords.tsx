@@ -21,6 +21,16 @@ export const SignUpPasswords = () => {
 
 	const { control } = useFormContext<SignUpFormSchema>();
 
+	const handleShowPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		toggleShowPassword();
+	};
+
+	const handleShowPasswordConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		toggleShowPasswordConfirm();
+	};
+
 	return (
 		<Fragment>
 			<FormField
@@ -41,7 +51,7 @@ export const SignUpPasswords = () => {
 							<Button
 								variant="ghost"
 								size="icon"
-								onClick={toggleShowPassword}
+								onClick={handleShowPassword}
 								className="text-muted-foreground"
 								aria-label={t("form.password.toggle")}
 							>
@@ -70,7 +80,7 @@ export const SignUpPasswords = () => {
 							<Button
 								variant="ghost"
 								size="icon"
-								onClick={toggleShowPasswordConfirm}
+								onClick={handleShowPasswordConfirm}
 								className="text-muted-foreground"
 								aria-label={t("form.confirm-password.toggle")}
 							>
