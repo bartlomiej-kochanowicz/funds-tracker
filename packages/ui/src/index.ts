@@ -42,3 +42,7 @@ export * from "./components/tooltip";
 export * from "./hooks/use-mobile";
 export * from "./hooks/use-toast";
 export * from "./hooks/use-toggle";
+
+// lib exports
+
+export * from "./lib/utils";

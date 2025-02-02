@@ -44,7 +44,6 @@
 		"react-is": "18.3.1",
 		"react-router-dom": "7.0.1",
 		"recharts": "2.13.3",
-		"tailwind-merge": "2.5.5",
 		"zod": "3.23.8"
 	},
 	"devDependencies": {
