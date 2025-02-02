@@ -8,10 +8,12 @@ import {
 	Input,
 	Loader,
 	Text,
+	useToggle,
 } from "@funds-tracker/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paths } from "config/paths";
 import { useMutationUserSetNewPassword } from "graphql/user/useMutationUserSetNewPassword";
+import { Eye, EyeOff } from "lucide-react";
 import { lazy, Suspense, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -36,6 +38,18 @@ const NewPasswordForm = ({ token: resetToken }: Props) => {
 
 	const [token, setToken] = useState<string>("");
 	const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
+	const [showPassword, toggleShowPassword] = useToggle();
+	const [showPasswordConfirm, toggleShowPasswordConfirm] = useToggle();
+
+	const handleShowPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		toggleShowPassword();
+	};
+
+	const handleShowPasswordConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		toggleShowPasswordConfirm();
+	};
 
 	const onVerify = useCallback(setToken, [setToken]);
 
@@ -131,15 +145,26 @@ const NewPasswordForm = ({ token: resetToken }: Props) => {
 					name="userPassword"
 					render={({ field }) => (
 						<FormItem>
-							<FormControl>
-								<Input
-									autoFocus
-									type="password"
-									aria-label={t("form.reset-password-password.label")}
-									placeholder={t("form.reset-password-password.label")}
-									{...field}
-								/>
-							</FormControl>
+							<div className="flex w-full max-w-sm items-center space-x-2">
+								<FormControl>
+									<Input
+										autoFocus
+										type={showPassword ? "text" : "password"}
+										aria-label={t("form.reset-password-password.label")}
+										placeholder={t("form.reset-password-password.label")}
+										{...field}
+									/>
+								</FormControl>
+								<Button
+									variant="ghost"
+									size="icon"
+									onClick={handleShowPassword}
+									className="text-muted-foreground"
+									aria-label={t("form.password.toggle")}
+								>
+									{showPassword ? <EyeOff /> : <Eye />}
+								</Button>
+							</div>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -150,14 +175,25 @@ const NewPasswordForm = ({ token: resetToken }: Props) => {
 					name="userPasswordConfirm"
 					render={({ field }) => (
 						<FormItem>
-							<FormControl>
-								<Input
-									type="password"
-									aria-label={t("form.confirm-password.label")}
-									placeholder={t("form.confirm-password.label")}
-									{...field}
-								/>
-							</FormControl>
+							<div className="flex w-full max-w-sm items-center space-x-2">
+								<FormControl>
+									<Input
+										type={showPasswordConfirm ? "text" : "password"}
+										aria-label={t("form.confirm-password.label")}
+										placeholder={t("form.confirm-password.label")}
+										{...field}
+									/>
+								</FormControl>
+								<Button
+									variant="ghost"
+									size="icon"
+									onClick={handleShowPasswordConfirm}
+									className="text-muted-foreground"
+									aria-label={t("form.confirm-password.toggle")}
+								>
+									{showPasswordConfirm ? <EyeOff /> : <Eye />}
+								</Button>
+							</div>
 							<FormMessage />
 						</FormItem>
 					)}
