@@ -1,4 +1,5 @@
-import { ObjectType, Field, ID } from "@nestjs/graphql";
+import { ObjectType, Field, ID, registerEnumType } from "@nestjs/graphql";
+import { Subscription } from "@prisma/client";
 import { DateResolver, EmailAddressResolver } from "graphql-scalars";
 
 @ObjectType()
@@ -14,4 +15,12 @@ export class User {
 
 	@Field(() => String)
 	name: string;
+
+	@Field(() => Subscription)
+	subscription: Subscription;
 }
+
+registerEnumType(Subscription, {
+	name: "Subscription",
+	description: "The subscription status of the user",
+});

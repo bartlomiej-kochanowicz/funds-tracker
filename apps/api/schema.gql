@@ -43,6 +43,7 @@ type User {
   createdAt: Date!
   email: EmailAddress!
   name: String!
+  subscription: Subscription!
 }
 
 """
@@ -54,6 +55,13 @@ scalar Date
 A field whose value conforms to the standard internet email address format as specified in HTML Spec: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address.
 """
 scalar EmailAddress @specifiedBy(url: "https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address")
+
+"""The subscription status of the user"""
+enum Subscription {
+  FREE
+  LITE
+  EXPERT
+}
 
 type Query {
   emailExist(data: EmailInput!): Email!
