@@ -12,6 +12,12 @@ const GoogleReCaptchaProvider = lazy(() =>
 	})),
 );
 
+const SidebarLayout = lazy(() =>
+	import("../layouts/sidebar-layout").then(({ SidebarLayout: component }) => ({
+		default: component,
+	})),
+);
+
 const Homepage = lazy(() =>
 	import("./routes/homepage").then(({ Homepage: component }) => ({ default: component })),
 );
@@ -96,7 +102,9 @@ const Router = () => (
 			path={paths.dashboard}
 			element={
 				<ProtectedRoute>
-					<Dashboard />
+					<SidebarLayout>
+						<Dashboard />
+					</SidebarLayout>
 				</ProtectedRoute>
 			}
 		/>
