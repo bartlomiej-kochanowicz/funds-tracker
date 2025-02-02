@@ -509,7 +509,7 @@ importers:
         specifier: 2.1.2
         version: 2.1.2(@types/react-dom@18.3.0)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-separator':
-        specifier: ^1.1.0
+        specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-slot':
         specifier: 1.1.0
@@ -607,7 +607,7 @@ importers:
         version: 8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.5)(typescript@5.6.3)
       '@storybook/react-vite':
         specifier: 8.3.5
-        version: 8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.31.0)(storybook@8.3.5)(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))
+        version: 8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.31.0)(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))
       '@storybook/testing-library':
         specifier: 0.2.2
         version: 0.2.2
@@ -12773,13 +12773,13 @@ snapshots:
 
   '@josephg/resolvable@1.0.1': {}
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.6.3)
-      vite: 6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0)
+      vite: 5.4.8(@types/node@22.7.5)(terser@5.37.0)
     optionalDependencies:
       typescript: 5.6.3
 
@@ -14350,7 +14350,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.3.5(storybook@8.3.5)(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))':
+  '@storybook/builder-vite@8.3.5(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))':
     dependencies:
       '@storybook/csf-plugin': 8.3.5(storybook@8.3.5)
       '@types/find-cache-dir': 3.2.1
@@ -14362,7 +14362,7 @@ snapshots:
       magic-string: 0.30.17
       storybook: 8.3.5
       ts-dedent: 2.2.0
-      vite: 6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0)
+      vite: 5.4.8(@types/node@22.7.5)(terser@5.37.0)
     optionalDependencies:
       typescript: 5.6.3
     transitivePeerDependencies:
@@ -14450,11 +14450,11 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.3.5
 
-  '@storybook/react-vite@8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.31.0)(storybook@8.3.5)(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))':
+  '@storybook/react-vite@8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.31.0)(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))
       '@rollup/pluginutils': 5.1.4(rollup@4.31.0)
-      '@storybook/builder-vite': 8.3.5(storybook@8.3.5)(typescript@5.6.3)(vite@6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))
+      '@storybook/builder-vite': 8.3.5(storybook@8.3.5)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.37.0))
       '@storybook/react': 8.3.5(@storybook/test@8.3.5(storybook@8.3.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.5)(typescript@5.6.3)
       find-up: 5.0.0
       magic-string: 0.30.17
@@ -14464,7 +14464,7 @@ snapshots:
       resolve: 1.22.10
       storybook: 8.3.5
       tsconfig-paths: 4.2.0
-      vite: 6.0.11(@types/node@22.7.5)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0)
+      vite: 5.4.8(@types/node@22.7.5)(terser@5.37.0)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - '@storybook/test'
