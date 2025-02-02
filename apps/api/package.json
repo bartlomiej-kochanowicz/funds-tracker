@@ -60,6 +60,7 @@
 		"@nestjs/cli": "10.4.5",
 		"@nestjs/schematics": "10.1.4",
 		"@nestjs/testing": "10.4.4",
+		"@prisma/extension-pulse": "^1.2.0",
 		"@types/bcrypt": "5.0.2",
 		"@types/cookie-parser": "1.4.7",
 		"@types/express": "5.0.0",

@@ -1,10 +1,17 @@
 import { INestApplication, Injectable, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
 import { PrismaClient } from "@prisma/client";
+import { withPulse } from "@prisma/extension-pulse";
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
 	async onModuleInit() {
-		await this.$connect();
+		const apiKey = process.env.PULSE_API_KEY;
+
+		if (apiKey) {
+			await this.$extends(withPulse({ apiKey: process.env.PULSE_API_KEY })).$connect();
+		} else {
+			await this.$connect();
+		}
 	}
 
 	async onModuleDestroy() {

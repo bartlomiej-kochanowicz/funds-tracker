@@ -153,6 +153,9 @@ importers:
       '@nestjs/testing':
         specifier: 10.4.4
         version: 10.4.4(@nestjs/common@10.4.4(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.4)(@nestjs/platform-express@10.4.4)
+      '@prisma/extension-pulse':
+        specifier: ^1.2.0
+        version: 1.2.0(@prisma/client@5.20.0(prisma@5.20.0))
       '@types/bcrypt':
         specifier: 5.0.2
         version: 5.0.2
@@ -2845,6 +2848,12 @@ packages:
 
   '@prisma/engines@5.20.0':
     resolution: {integrity: sha512-DtqkP+hcZvPEbj8t8dK5df2b7d3B8GNauKqaddRRqQBBlgkbdhJkxhoJTrOowlS3vaRt2iMCkU0+CSNn0KhqAQ==}
+
+  '@prisma/extension-pulse@1.2.0':
+    resolution: {integrity: sha512-ya8c0G9XVf1d8c+6iNczEWUVPjgXBokbjRp9M5Igqm3Ph2NRhbD/6ZyjEzDifTbwhlP9jGwur2XOqtYoQIUptA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@prisma/client': '>=4.16.1'
 
   '@prisma/fetch-engine@5.20.0':
     resolution: {integrity: sha512-JVcaPXC940wOGpCOwuqQRTz6I9SaBK0c1BAyC1pcz9xBi+dzFgUu3G/p9GV1FhFs9OKpfSpIhQfUJE9y00zhqw==}
@@ -13036,6 +13045,14 @@ snapshots:
       '@prisma/engines-version': 5.20.0-12.06fc58a368dc7be9fbbbe894adf8d445d208c284
       '@prisma/fetch-engine': 5.20.0
       '@prisma/get-platform': 5.20.0
+
+  '@prisma/extension-pulse@1.2.0(@prisma/client@5.20.0(prisma@5.20.0))':
+    dependencies:
+      '@prisma/client': 5.20.0(prisma@5.20.0)
+      ws: 8.18.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   '@prisma/fetch-engine@5.20.0':
     dependencies:
