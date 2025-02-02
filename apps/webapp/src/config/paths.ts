@@ -11,8 +11,8 @@ const paths = {
 	resetPassword: "/reset-password",
 	profile: "/profile",
 	dashboard: "/dashboard",
-	portfolios: "/portfolios",
-	portfolio: "/portfolios/:uuid",
+	wallets: "/wallets",
+	wallet: "/wallet/:uuid",
 };
 
 export { paths };

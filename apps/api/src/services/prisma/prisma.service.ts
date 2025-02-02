@@ -27,7 +27,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
 			await this.cashHolding.deleteMany(),
 			await this.hardAssetActivity.deleteMany(),
 			await this.hardAsset.deleteMany(),
-			await this.portfolio.deleteMany(),
+			await this.wallet.deleteMany(),
 			await this.user.deleteMany(),
 		]);
 	}

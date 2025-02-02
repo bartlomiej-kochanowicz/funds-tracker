@@ -6,10 +6,14 @@ import {
 	SidebarHeader,
 } from "@funds-tracker/ui";
 
+import { WalletSwitcher } from "./wallet-switcher";
+
 const AppSidebar = () => {
 	return (
-		<Sidebar>
-			<SidebarHeader />
+		<Sidebar collapsible="icon">
+			<SidebarHeader>
+				<WalletSwitcher />
+			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup />
 				<SidebarGroup />

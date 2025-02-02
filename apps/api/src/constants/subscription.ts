@@ -1,16 +1,16 @@
 type Limits = {
-	maxPortfolios: number;
+	maxWallets: number;
 };
 
 export default {
 	FREE: {
-		maxPortfolios: 1,
+		maxWallets: 1,
 	},
 	LITE: {
-		maxPortfolios: 5,
+		maxWallets: 5,
 	},
 	EXPERT: {
-		maxPortfolios: 20,
+		maxWallets: 20,
 	},
 } satisfies {
 	FREE: Limits;

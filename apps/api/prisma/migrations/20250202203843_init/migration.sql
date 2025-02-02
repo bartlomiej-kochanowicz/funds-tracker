@@ -29,12 +29,12 @@ CREATE TABLE "Session" (
 );
 
 -- CreateTable
-CREATE TABLE "Portfolio" (
+CREATE TABLE "Wallet" (
     "uuid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "userUuid" TEXT NOT NULL,
 
-    CONSTRAINT "Portfolio_pkey" PRIMARY KEY ("uuid")
+    CONSTRAINT "Wallet_pkey" PRIMARY KEY ("uuid")
 );
 
 -- CreateTable
@@ -45,7 +45,7 @@ CREATE TABLE "Security" (
     "exchangeShortName" TEXT,
     "name" TEXT NOT NULL,
     "currency" TEXT,
-    "portfolioUuid" TEXT NOT NULL,
+    "walletUuid" TEXT NOT NULL,
 
     CONSTRAINT "Security_pkey" PRIMARY KEY ("uuid")
 );
@@ -68,7 +68,7 @@ CREATE TABLE "CashHolding" (
     "uuid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "currency" TEXT NOT NULL,
-    "portfolioUuid" TEXT NOT NULL,
+    "walletUuid" TEXT NOT NULL,
 
     CONSTRAINT "CashHolding_pkey" PRIMARY KEY ("uuid")
 );
@@ -90,7 +90,7 @@ CREATE TABLE "HardAsset" (
     "uuid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "currency" TEXT NOT NULL,
-    "portfolioUuid" TEXT NOT NULL,
+    "walletUuid" TEXT NOT NULL,
 
     CONSTRAINT "HardAsset_pkey" PRIMARY KEY ("uuid")
 );
@@ -117,28 +117,28 @@ CREATE UNIQUE INDEX "User_confirmationCodeHash_key" ON "User"("confirmationCodeH
 CREATE UNIQUE INDEX "Session_rtHash_key" ON "Session"("rtHash");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Portfolio_userUuid_uuid_key" ON "Portfolio"("userUuid", "uuid");
+CREATE UNIQUE INDEX "Wallet_userUuid_uuid_key" ON "Wallet"("userUuid", "uuid");
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userUuid_fkey" FOREIGN KEY ("userUuid") REFERENCES "User"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Portfolio" ADD CONSTRAINT "Portfolio_userUuid_fkey" FOREIGN KEY ("userUuid") REFERENCES "User"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Wallet" ADD CONSTRAINT "Wallet_userUuid_fkey" FOREIGN KEY ("userUuid") REFERENCES "User"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Security" ADD CONSTRAINT "Security_portfolioUuid_fkey" FOREIGN KEY ("portfolioUuid") REFERENCES "Portfolio"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Security" ADD CONSTRAINT "Security_walletUuid_fkey" FOREIGN KEY ("walletUuid") REFERENCES "Wallet"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SecurityActivity" ADD CONSTRAINT "SecurityActivity_securityUuid_fkey" FOREIGN KEY ("securityUuid") REFERENCES "Security"("uuid") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CashHolding" ADD CONSTRAINT "CashHolding_portfolioUuid_fkey" FOREIGN KEY ("portfolioUuid") REFERENCES "Portfolio"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "CashHolding" ADD CONSTRAINT "CashHolding_walletUuid_fkey" FOREIGN KEY ("walletUuid") REFERENCES "Wallet"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CashHoldingActivity" ADD CONSTRAINT "CashHoldingActivity_cashHoldingUuid_fkey" FOREIGN KEY ("cashHoldingUuid") REFERENCES "CashHolding"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "HardAsset" ADD CONSTRAINT "HardAsset_portfolioUuid_fkey" FOREIGN KEY ("portfolioUuid") REFERENCES "Portfolio"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "HardAsset" ADD CONSTRAINT "HardAsset_walletUuid_fkey" FOREIGN KEY ("walletUuid") REFERENCES "Wallet"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "HardAssetActivity" ADD CONSTRAINT "HardAssetActivity_hardAssetUuid_fkey" FOREIGN KEY ("hardAssetUuid") REFERENCES "HardAsset"("uuid") ON DELETE RESTRICT ON UPDATE CASCADE;

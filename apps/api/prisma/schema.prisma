@@ -15,7 +15,7 @@ model User {
   password             String
   confirmationCodeHash String?      @unique
   sessions             Session[]
-  portfolios           Portfolio[]
+  wallets              Wallet[]
   subscription         Subscription @default(FREE)
 }
 
@@ -27,7 +27,7 @@ model Session {
   userUuid  String
 }
 
-model Portfolio {
+model Wallet {
   uuid         String        @id @default(uuid())
   name         String
   user         User          @relation(fields: [userUuid], references: [uuid])
@@ -47,8 +47,8 @@ model Security {
   name              String
   currency          String?
   activities        SecurityActivity[]
-  Portfolio         Portfolio          @relation(fields: [portfolioUuid], references: [uuid])
-  portfolioUuid     String
+  Wallet            Wallet             @relation(fields: [walletUuid], references: [uuid])
+  walletUuid        String
 }
 
 model SecurityActivity {
@@ -63,12 +63,12 @@ model SecurityActivity {
 }
 
 model CashHolding {
-  uuid          String                @id @default(uuid())
-  name          String
-  currency      String
-  activities    CashHoldingActivity[]
-  portfolio     Portfolio             @relation(fields: [portfolioUuid], references: [uuid])
-  portfolioUuid String
+  uuid       String                @id @default(uuid())
+  name       String
+  currency   String
+  activities CashHoldingActivity[]
+  Wallet     Wallet                @relation(fields: [walletUuid], references: [uuid])
+  walletUuid String
 }
 
 model CashHoldingActivity {
@@ -82,12 +82,12 @@ model CashHoldingActivity {
 }
 
 model HardAsset {
-  uuid          String              @id @default(uuid())
-  name          String
-  currency      String
-  activities    HardAssetActivity[]
-  Portfolio     Portfolio           @relation(fields: [portfolioUuid], references: [uuid])
-  portfolioUuid String
+  uuid       String              @id @default(uuid())
+  name       String
+  currency   String
+  activities HardAssetActivity[]
+  Wallet     Wallet              @relation(fields: [walletUuid], references: [uuid])
+  walletUuid String
 }
 
 model HardAssetActivity {
