@@ -72,7 +72,7 @@ type Query {
   emailExist(data: EmailInput!): Email!
   user: User!
   wallets: [Wallet!]!
-  wallet(uuid: String!): Wallet!
+  wallet(uuid: ID!): Wallet!
 }
 
 input EmailInput {
@@ -91,8 +91,8 @@ type Mutation {
   refreshToken: Refresh!
   updateUser(data: UpdateUserInput!): User!
   createWallet(createWalletInput: CreateWalletInput!): Wallet!
-  updateWallet(data: UpdateWalletInput!): Wallet!
-  removeWallet(uuid: String!): Wallet!
+  updateWallet(uuid: ID!, data: UpdateWalletInput!): Wallet!
+  removeWallet(uuid: ID!): Wallet!
 }
 
 input SignUpInput {
@@ -141,5 +141,4 @@ input CreateWalletInput {
 
 input UpdateWalletInput {
   name: String!
-  uuid: ID!
 }

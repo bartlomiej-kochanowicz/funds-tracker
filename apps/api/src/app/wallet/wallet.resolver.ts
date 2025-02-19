@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from "@nestjs/graphql";
+import { Resolver, Query, Mutation, Args, ID } from "@nestjs/graphql";
 import { WalletService } from "./wallet.service";
 import { Wallet } from "./entities/wallet.entity";
 import { CreateWalletInput } from "./dto/create-wallet.input";
@@ -25,7 +25,7 @@ export class WalletResolver {
 	@Query(() => Wallet, { name: "wallet" })
 	findOne(
 		@GetCurrentUserId() userId: string,
-		@Args("uuid", { type: () => String }) uuid: string,
+		@Args("uuid", { type: () => ID }) uuid: string,
 	): Promise<Wallet> {
 		return this.walletService.findOne(userId, uuid);
 	}
@@ -33,15 +33,16 @@ export class WalletResolver {
 	@Mutation(() => Wallet)
 	updateWallet(
 		@GetCurrentUserId() userId: string,
+		@Args("uuid", { type: () => ID }) uuid: string,
 		@Args("data") updateWalletInput: UpdateWalletInput,
 	): Promise<Wallet> {
-		return this.walletService.update(userId, updateWalletInput);
+		return this.walletService.update(userId, uuid, updateWalletInput);
 	}
 
-	@Mutation(() => ({ success: Boolean }))
+	@Mutation(() => Wallet)
 	removeWallet(
 		@GetCurrentUserId() userId: string,
-		@Args("uuid", { type: () => String }) uuid: string,
+		@Args("uuid", { type: () => ID }) uuid: string,
 	): Promise<{ success: boolean }> {
 		return this.walletService.remove(userId, uuid);
 	}

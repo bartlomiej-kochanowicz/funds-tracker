@@ -2,7 +2,7 @@ type Limits = {
 	maxWallets: number;
 };
 
-export default {
+const SUBSCRIPTION = {
 	FREE: {
 		maxWallets: 1,
 	},
@@ -17,3 +17,5 @@ export default {
 	LITE: Limits;
 	EXPERT: Limits;
 };
+
+export { SUBSCRIPTION };
