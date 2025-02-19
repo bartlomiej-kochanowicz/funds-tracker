@@ -31,6 +31,10 @@ export type ConfirmSignUpInput = {
   token: Scalars['String']['input'];
 };
 
+export type CreateWalletInput = {
+  name: Scalars['String']['input'];
+};
+
 export type Email = {
   __typename?: 'Email';
   exist: Scalars['Boolean']['output'];
@@ -49,19 +53,32 @@ export type Logout = {
 export type Mutation = {
   __typename?: 'Mutation';
   confirmSignUp: ConfirmSignUp;
+  createWallet: Wallet;
   logout: Logout;
   refreshToken: Refresh;
+  removeWallet: RemoveWallet;
   resetPassword: ResetPassword;
   sendCode: SendCode;
   setNewPassword: SetNewPassword;
   signInLocal: SignInLocal;
   signUpLocal: SignUpLocal;
   updateUser: User;
+  updateWallet: Wallet;
 };
 
 
 export type MutationConfirmSignUpArgs = {
   data: ConfirmSignUpInput;
+};
+
+
+export type MutationCreateWalletArgs = {
+  createWalletInput: CreateWalletInput;
+};
+
+
+export type MutationRemoveWalletArgs = {
+  uuid: Scalars['ID']['input'];
 };
 
 
@@ -94,10 +111,18 @@ export type MutationUpdateUserArgs = {
   data: UpdateUserInput;
 };
 
+
+export type MutationUpdateWalletArgs = {
+  data: UpdateWalletInput;
+  uuid: Scalars['ID']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
   emailExist: Email;
   user: User;
+  wallet: Wallet;
+  wallets: Array<Wallet>;
 };
 
 
@@ -105,8 +130,18 @@ export type QueryEmailExistArgs = {
   data: EmailInput;
 };
 
+
+export type QueryWalletArgs = {
+  uuid: Scalars['ID']['input'];
+};
+
 export type Refresh = {
   __typename?: 'Refresh';
+  success: Scalars['Boolean']['output'];
+};
+
+export type RemoveWallet = {
+  __typename?: 'RemoveWallet';
   success: Scalars['Boolean']['output'];
 };
 
@@ -172,8 +207,11 @@ export enum Subscription {
 }
 
 export type UpdateUserInput = {
-  email?: InputMaybe<Scalars['EmailAddress']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateWalletInput = {
+  name: Scalars['String']['input'];
 };
 
 export type User = {
@@ -182,6 +220,12 @@ export type User = {
   email: Scalars['EmailAddress']['output'];
   name: Scalars['String']['output'];
   subscription: Subscription;
+  uuid: Scalars['ID']['output'];
+};
+
+export type Wallet = {
+  __typename?: 'Wallet';
+  name: Scalars['String']['output'];
   uuid: Scalars['ID']['output'];
 };
 
@@ -256,6 +300,18 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', uuid: string, name: string, email: any, createdAt: any } };
 
+export type GetWalletQueryVariables = Exact<{
+  uuid: Scalars['ID']['input'];
+}>;
+
+
+export type GetWalletQuery = { __typename?: 'Query', wallet: { __typename?: 'Wallet', name: string, uuid: string } };
+
+export type GetWalletsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetWalletsQuery = { __typename?: 'Query', wallets: Array<{ __typename?: 'Wallet', name: string, uuid: string }> };
+
 
 export const RefreshTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RefreshToken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"refreshToken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<RefreshTokenMutation, RefreshTokenMutationVariables>;
 export const GetUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"subscription"}}]}}]}}]} as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
@@ -268,3 +324,5 @@ export const SetNewPasswordDocument = {"kind":"Document","definitions":[{"kind":
 export const SigninDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signin"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignInInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signInLocal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<SigninMutation, SigninMutationVariables>;
 export const SignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SignUpInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signUpLocal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
 export const UpdateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
+export const GetWalletDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetWallet"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"wallet"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"uuid"}}]}}]}}]} as unknown as DocumentNode<GetWalletQuery, GetWalletQueryVariables>;
+export const GetWalletsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetWallets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"wallets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"uuid"}}]}}]}}]} as unknown as DocumentNode<GetWalletsQuery, GetWalletsQueryVariables>;

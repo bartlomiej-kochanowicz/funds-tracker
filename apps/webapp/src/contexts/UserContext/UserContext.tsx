@@ -22,12 +22,12 @@ const useUser = (): UserContextType => {
 	const [getUser, { loading, data, client, error, updateQuery }] = useLazyQueryUser();
 	const [updateUserMutation, { loading: updateLoading }] = useMutationUserUpdate();
 
-	const updateUser = async ({ email, name }: UpdateUserInput) => {
+	const updateUser = async ({ /* email, */ name }: UpdateUserInput) => {
 		try {
 			await updateUserMutation({
 				variables: {
 					data: {
-						email,
+						/* email, */
 						name,
 					},
 				},
@@ -37,7 +37,7 @@ const useUser = (): UserContextType => {
 				...prev,
 				user: {
 					...prev.user,
-					email: email ?? prev.user.email,
+					/* email: email ?? prev.user.email, */
 					name: name ?? prev.user.name,
 				},
 			}));

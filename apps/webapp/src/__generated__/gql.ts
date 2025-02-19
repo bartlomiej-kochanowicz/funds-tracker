@@ -25,6 +25,8 @@ const documents = {
     "\n\tmutation Signin($data: SignInInput!) {\n\t\tsignInLocal(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SigninDocument,
     "\n\tmutation Signup($data: SignUpInput!) {\n\t\tsignUpLocal(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SignupDocument,
     "\n\tmutation UpdateUser($data: UpdateUserInput!) {\n\t\tupdateUser(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\temail\n\t\t\tcreatedAt\n\t\t}\n\t}\n": types.UpdateUserDocument,
+    "\n\tquery GetWallet($uuid: ID!) {\n\t\twallet(uuid: $uuid) {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n": types.GetWalletDocument,
+    "\n\tquery GetWallets {\n\t\twallets {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n": types.GetWalletsDocument,
 };
 
 /**
@@ -85,6 +87,14 @@ export function gql(source: "\n\tmutation Signup($data: SignUpInput!) {\n\t\tsig
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n\tmutation UpdateUser($data: UpdateUserInput!) {\n\t\tupdateUser(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\temail\n\t\t\tcreatedAt\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateUser($data: UpdateUserInput!) {\n\t\tupdateUser(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\temail\n\t\t\tcreatedAt\n\t\t}\n\t}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n\tquery GetWallet($uuid: ID!) {\n\t\twallet(uuid: $uuid) {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetWallet($uuid: ID!) {\n\t\twallet(uuid: $uuid) {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n\tquery GetWallets {\n\t\twallets {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetWallets {\n\t\twallets {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

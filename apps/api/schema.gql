@@ -135,7 +135,6 @@ input SetNewPasswordInput {
 }
 
 input UpdateUserInput {
-  email: EmailAddress
   name: String
 }
 
