@@ -24,7 +24,7 @@ import {
 	SetNewPasswordInput,
 	SignInInput,
 	SignUpInput,
-} from "./inputs";
+} from "./dto";
 import { SignUpService } from "./services/sign-up.service";
 import { SignInService } from "./services/sign-in.service";
 import { LogoutService } from "./services/logout.service";

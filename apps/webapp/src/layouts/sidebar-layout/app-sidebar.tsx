@@ -8,11 +8,14 @@ import {
 	useSidebar,
 } from "@funds-tracker/ui";
 import { Logo } from "components/logo";
+import { useUserContext } from "contexts/UserContext";
 
+import { NavUser } from "./nav-user";
 import { WalletSwitcher } from "./wallet-switcher";
 
 const AppSidebar = () => {
 	const { open } = useSidebar();
+	const { user } = useUserContext();
 
 	return (
 		<Sidebar collapsible="icon">
@@ -27,7 +30,9 @@ const AppSidebar = () => {
 				<SidebarGroup />
 				<SidebarGroup />
 			</SidebarContent>
-			<SidebarFooter />
+			<SidebarFooter>
+				<NavUser user={user} />
+			</SidebarFooter>
 		</Sidebar>
 	);
 };

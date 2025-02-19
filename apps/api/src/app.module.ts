@@ -11,6 +11,7 @@ import { AuthModule } from "./app/auth/auth.module";
 import { UserModule } from "./app/user/user.module";
 import { CurrenciesModule } from "./services/currencies/currencies.module";
 import { HealthCheckController } from "./health-check/health-check.controller";
+import { WalletModule } from "./app/wallet/wallet.module";
 
 @Module({
 	imports: [
@@ -36,6 +37,7 @@ import { HealthCheckController } from "./health-check/health-check.controller";
 		AuthModule,
 		UserModule,
 		CurrenciesModule,
+		WalletModule,
 	],
 	controllers: [HealthCheckController],
 	providers: [

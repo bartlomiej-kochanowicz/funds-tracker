@@ -8,7 +8,7 @@ import { isUserLoggedIn } from "helpers/isUserLoggedIn";
 import LogRocket from "logrocket";
 import { createContext, FC, ReactNode, useContext, useEffect } from "react";
 
-type UserContextType = {
+export type UserContextType = {
 	loading: boolean;
 	user: GetUserQuery["user"];
 	getUser: LazyQueryExecFunction<GetUserQuery, OperationVariables>;

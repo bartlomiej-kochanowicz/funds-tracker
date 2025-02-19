@@ -1,4 +1,4 @@
-import { SignUpInput } from "@app/auth/inputs";
+import { SignUpInput } from "@src/app/auth/dto";
 
 export const logoutStub1: SignUpInput = {
 	email: "testlogoutuser1@test.com",

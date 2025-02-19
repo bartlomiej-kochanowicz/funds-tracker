@@ -45,4 +45,5 @@ export * from "./hooks/use-toggle";
 
 // lib exports
 
+export * from "./lib/initials";
 export * from "./lib/utils";

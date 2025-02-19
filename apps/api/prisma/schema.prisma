@@ -35,8 +35,6 @@ model Wallet {
   securities   Security[]
   cashHoldings CashHolding[]
   hardAssets   HardAsset[]
-
-  @@unique([userUuid, uuid])
 }
 
 model Security {

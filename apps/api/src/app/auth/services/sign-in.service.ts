@@ -5,7 +5,7 @@ import { Response } from "express";
 import * as bcrypt from "bcrypt";
 import { PrismaService } from "@services/prisma/prisma.service";
 import { Email, SignInLocal } from "../entities";
-import { EmailInput, SignInInput } from "../inputs";
+import { EmailInput, SignInInput } from "../dto";
 import { AuthService } from "../auth.service";
 
 @Injectable()

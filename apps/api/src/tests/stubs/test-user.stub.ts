@@ -1,4 +1,4 @@
-import { SignUpInput } from "@app/auth/inputs";
+import { SignUpInput } from "@src/app/auth/dto";
 
 export const testUser: SignUpInput = {
 	email: "test@email.com",

@@ -6,7 +6,7 @@ import * as bcrypt from "bcrypt";
 import { Response } from "express";
 import { AuthService } from "../auth.service";
 import { ConfirmSignUp, SendCode, SignUpLocal } from "../entities";
-import { ConfirmSignUpInput, SendCodeInput, SignUpInput } from "../inputs";
+import { ConfirmSignUpInput, SendCodeInput, SignUpInput } from "../dto";
 
 @Injectable()
 export class SignUpService {

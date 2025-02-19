@@ -4,7 +4,7 @@ import { PrismaService } from "@services/prisma/prisma.service";
 import { AppModule } from "@src/app.module";
 import { testUser } from "@src/tests/stubs/test-user.stub";
 import { Response } from "express";
-import { ConfirmSignUpInput } from "@app/auth/inputs";
+import { ConfirmSignUpInput } from "@src/app/auth/dto";
 import { SignUpService } from "@src/app/auth/services/sign-up.service";
 
 export default async () => {

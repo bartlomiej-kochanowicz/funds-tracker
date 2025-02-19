@@ -63,9 +63,16 @@ enum Subscription {
   EXPERT
 }
 
+type Wallet {
+  uuid: ID!
+  name: String!
+}
+
 type Query {
   emailExist(data: EmailInput!): Email!
   user: User!
+  wallets: [Wallet!]!
+  wallet(uuid: String!): Wallet!
 }
 
 input EmailInput {
@@ -83,6 +90,9 @@ type Mutation {
   setNewPassword(data: SetNewPasswordInput!): SetNewPassword!
   refreshToken: Refresh!
   updateUser(data: UpdateUserInput!): User!
+  createWallet(createWalletInput: CreateWalletInput!): Wallet!
+  updateWallet(data: UpdateWalletInput!): Wallet!
+  removeWallet(uuid: String!): Wallet!
 }
 
 input SignUpInput {
@@ -123,4 +133,13 @@ input SetNewPasswordInput {
 input UpdateUserInput {
   email: EmailAddress
   name: String
+}
+
+input CreateWalletInput {
+  name: String!
+}
+
+input UpdateWalletInput {
+  name: String!
+  uuid: ID!
 }

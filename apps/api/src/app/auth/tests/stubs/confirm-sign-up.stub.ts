@@ -1,4 +1,4 @@
-import { ConfirmSignUpInput, SignUpInput } from "@app/auth/inputs";
+import { ConfirmSignUpInput, SignUpInput } from "@src/app/auth/dto";
 
 export const signUpUserStub: SignUpInput = {
 	email: "confirmsignUp@test.com",

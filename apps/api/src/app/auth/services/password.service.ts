@@ -8,7 +8,7 @@ import { ttl24h } from "@constants/redis";
 import { ConfigService } from "@nestjs/config";
 import { AuthService } from "../auth.service";
 import { ResetPassword, SetNewPassword } from "../entities";
-import { ResetPasswordInput, SetNewPasswordInput } from "../inputs";
+import { ResetPasswordInput, SetNewPasswordInput } from "../dto";
 
 @Injectable()
 export class PasswordService {
