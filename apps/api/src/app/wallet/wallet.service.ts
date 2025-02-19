@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { CreateWalletInput } from "./dto/create-wallet.input";
-import { UpdateWalletInput } from "./dto/update-wallet.input";
-import { Wallet } from "./entities/wallet.entity";
+import { CreateWalletInput, UpdateWalletInput } from "./dto";
+import { Wallet } from "./entities";
 import { PrismaService } from "@src/services/prisma/prisma.service";
 import { SUBSCRIPTION } from "@src/constants/subscription";
 
@@ -86,7 +85,7 @@ export class WalletService {
 				data: updateWalletInput,
 			})
 			.catch(error => {
-				if (error.code === "P2025") throw new Error("Wallet not found");
+				if (error.code === "P2025") throw new Error("Wallet not found"); //TODO: translation
 
 				throw error;
 			});
@@ -95,12 +94,18 @@ export class WalletService {
 	}
 
 	async remove(userId: string, uuid: string) {
-		await this.prisma.wallet.delete({
-			where: {
-				uuid,
-				userUuid: userId,
-			},
-		});
+		await this.prisma.wallet
+			.delete({
+				where: {
+					uuid,
+					userUuid: userId,
+				},
+			})
+			.catch(error => {
+				if (error.code === "P2025") throw new Error("Wallet not found"); //TODO: translation
+
+				throw error;
+			});
 
 		return {
 			success: true,

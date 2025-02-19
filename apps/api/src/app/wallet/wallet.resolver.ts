@@ -1,8 +1,7 @@
 import { Resolver, Query, Mutation, Args, ID } from "@nestjs/graphql";
 import { WalletService } from "./wallet.service";
-import { Wallet } from "./entities/wallet.entity";
-import { CreateWalletInput } from "./dto/create-wallet.input";
-import { UpdateWalletInput } from "./dto/update-wallet.input";
+import { RemoveWallet, Wallet } from "./entities";
+import { CreateWalletInput, UpdateWalletInput } from "./dto";
 import { GetCurrentUserId } from "@src/decorators/get-current-user-id.decorator";
 
 @Resolver(() => Wallet)
@@ -39,7 +38,7 @@ export class WalletResolver {
 		return this.walletService.update(userId, uuid, updateWalletInput);
 	}
 
-	@Mutation(() => Wallet)
+	@Mutation(() => RemoveWallet)
 	removeWallet(
 		@GetCurrentUserId() userId: string,
 		@Args("uuid", { type: () => ID }) uuid: string,

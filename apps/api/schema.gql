@@ -63,6 +63,10 @@ enum Subscription {
   EXPERT
 }
 
+type RemoveWallet {
+  success: Boolean!
+}
+
 type Wallet {
   uuid: ID!
   name: String!
@@ -92,7 +96,7 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
   createWallet(createWalletInput: CreateWalletInput!): Wallet!
   updateWallet(uuid: ID!, data: UpdateWalletInput!): Wallet!
-  removeWallet(uuid: ID!): Wallet!
+  removeWallet(uuid: ID!): RemoveWallet!
 }
 
 input SignUpInput {
