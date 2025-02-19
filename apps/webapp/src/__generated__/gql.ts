@@ -25,6 +25,9 @@ const documents = {
     "\n\tmutation Signin($data: SignInInput!) {\n\t\tsignInLocal(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SigninDocument,
     "\n\tmutation Signup($data: SignUpInput!) {\n\t\tsignUpLocal(data: $data) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.SignupDocument,
     "\n\tmutation UpdateUser($data: UpdateUserInput!) {\n\t\tupdateUser(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\temail\n\t\t\tcreatedAt\n\t\t}\n\t}\n": types.UpdateUserDocument,
+    "\n\tmutation CreateWallet($data: CreateWalletInput!) {\n\t\tcreateWallet(createWalletInput: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n": types.CreateWalletDocument,
+    "\n\tmutation RemoveWallet($uuid: ID!) {\n\t\tremoveWallet(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n": types.RemoveWalletDocument,
+    "\n\tmutation UpdateWallet($uuid: ID!, $data: UpdateWalletInput!) {\n\t\tupdateWallet(uuid: $uuid, data: $data) {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n": types.UpdateWalletDocument,
     "\n\tquery GetWallet($uuid: ID!) {\n\t\twallet(uuid: $uuid) {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n": types.GetWalletDocument,
     "\n\tquery GetWallets {\n\t\twallets {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n": types.GetWalletsDocument,
 };
@@ -87,6 +90,18 @@ export function gql(source: "\n\tmutation Signup($data: SignUpInput!) {\n\t\tsig
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n\tmutation UpdateUser($data: UpdateUserInput!) {\n\t\tupdateUser(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\temail\n\t\t\tcreatedAt\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateUser($data: UpdateUserInput!) {\n\t\tupdateUser(data: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t\temail\n\t\t\tcreatedAt\n\t\t}\n\t}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n\tmutation CreateWallet($data: CreateWalletInput!) {\n\t\tcreateWallet(createWalletInput: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CreateWallet($data: CreateWalletInput!) {\n\t\tcreateWallet(createWalletInput: $data) {\n\t\t\tuuid\n\t\t\tname\n\t\t}\n\t}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n\tmutation RemoveWallet($uuid: ID!) {\n\t\tremoveWallet(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation RemoveWallet($uuid: ID!) {\n\t\tremoveWallet(uuid: $uuid) {\n\t\t\tsuccess\n\t\t}\n\t}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n\tmutation UpdateWallet($uuid: ID!, $data: UpdateWalletInput!) {\n\t\tupdateWallet(uuid: $uuid, data: $data) {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation UpdateWallet($uuid: ID!, $data: UpdateWalletInput!) {\n\t\tupdateWallet(uuid: $uuid, data: $data) {\n\t\t\tname\n\t\t\tuuid\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
