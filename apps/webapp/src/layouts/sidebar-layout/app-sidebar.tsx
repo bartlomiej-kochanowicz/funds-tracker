@@ -8,6 +8,7 @@ import {
 	useSidebar,
 } from "@funds-tracker/ui";
 import { Logo } from "components/logo";
+import { ThemeToggle } from "components/theme-toggle";
 import { useUserContext } from "contexts/UserContext";
 
 import { NavUser } from "./nav-user";
@@ -31,6 +32,7 @@ const AppSidebar = () => {
 				<SidebarGroup />
 			</SidebarContent>
 			<SidebarFooter>
+				{open && <ThemeToggle />}
 				<NavUser user={user} />
 			</SidebarFooter>
 		</Sidebar>
