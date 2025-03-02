@@ -35,8 +35,34 @@
 			"description": "Sorry, we couldn't load the content. Please try again later."
 		},
 		"theme-toggle": {
+			"label": "Change theme",
 			"dark-mode": "Dark mode",
 			"light-mode": "Light mode"
+		},
+		"sidebar": {
+			"wallet-switcher": {
+				"label": "Wallet",
+				"dropdown": {
+					"label": "Select wallet",
+					"add-wallet": "Add wallet"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"investments": {
+			"label": "Investments",
+			"dashboard": "Dashboard",
+			"analysis": "Analysis",
+			"activities": "Activities",
+			"dividends": "Dividends"
+		},
+		"tools": {
+			"label": "Tools",
+			"wallets": "Wallets",
+			"watchlist": "Watchlist",
+			"dividend-calendar": "Dividend Calender",
+			"community": "Community"
 		}
 	},
 	"common": {

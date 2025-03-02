@@ -13,8 +13,10 @@ import {
 } from "@funds-tracker/ui";
 import { useQueryWallets } from "graphql/wallet/useQueryWallets";
 import { ChevronsUpDown, Plus, Wallet } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const WalletSwitcher = () => {
+	const { t } = useTranslation();
 	const { isMobile } = useSidebar();
 
 	const { data, loading } = useQueryWallets();
@@ -48,7 +50,9 @@ const WalletSwitcher = () => {
 							</div>
 							<div className="grid flex-1 text-left text-sm leading-tight">
 								<span className="truncate font-semibold">{activeWallet.name}</span>
-								<span className="truncate text-xs">Wallet</span>
+								<span className="truncate text-xs">
+									{t("component.sidebar.wallet-switcher.label")}
+								</span>
 							</div>
 							<ChevronsUpDown className="ml-auto" />
 						</SidebarMenuButton>
@@ -59,7 +63,9 @@ const WalletSwitcher = () => {
 						side={isMobile ? "bottom" : "right"}
 						sideOffset={4}
 					>
-						<DropdownMenuLabel className="text-xs text-muted-foreground">Wallets</DropdownMenuLabel>
+						<DropdownMenuLabel className="text-xs text-muted-foreground">
+							{t("component.sidebar.wallet-switcher.dropdown.label")}
+						</DropdownMenuLabel>
 						{wallets.map(wallet => (
 							<DropdownMenuItem
 								key={wallet.uuid}
@@ -73,7 +79,9 @@ const WalletSwitcher = () => {
 							<div className="flex size-6 items-center justify-center rounded-md border bg-background">
 								<Plus className="size-4" />
 							</div>
-							<div className="font-medium text-muted-foreground">Add wallet</div>
+							<div className="font-medium text-muted-foreground">
+								{t("component.sidebar.wallet-switcher.dropdown.add-wallet")}
+							</div>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

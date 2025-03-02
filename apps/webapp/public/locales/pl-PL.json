@@ -35,8 +35,34 @@
 			"description": "Przepraszamy, nie udało się załadować treści. Spróbuj ponownie później."
 		},
 		"theme-toggle": {
+			"label": "Zmień motyw",
 			"dark-mode": "Tryb ciemny",
 			"light-mode": "Tryb jasny"
+		},
+		"sidebar": {
+			"wallet-switcher": {
+				"label": "Portfel",
+				"dropdown": {
+					"label": "Wybierz portfel",
+					"add-wallet": "Dodaj portfel"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"investments": {
+			"label": "Inwestycje",
+			"dashboard": "Panel główny",
+			"analysis": "Analiza",
+			"activities": "Aktywności",
+			"dividends": "Dywidendy"
+		},
+		"tools": {
+			"label": "Narzędzia",
+			"wallets": "Portfele",
+			"watchlist": "Obserwowane",
+			"dividend-calendar": "Kalendarz dywidend",
+			"community": "Społeczność"
 		}
 	},
 	"common": {

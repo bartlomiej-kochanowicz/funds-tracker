@@ -1,17 +1,10 @@
-import {
-	cn,
-	Sidebar,
-	SidebarContent,
-	SidebarFooter,
-	SidebarGroup,
-	SidebarHeader,
-	useSidebar,
-} from "@funds-tracker/ui";
+import { cn, Sidebar, SidebarFooter, SidebarHeader, useSidebar } from "@funds-tracker/ui";
 import { Logo } from "components/logo";
 import { ThemeToggle } from "components/theme-toggle";
 import { useUserContext } from "contexts/UserContext";
 
 import { NavUser } from "./nav-user";
+import { SidebarNavigation } from "./sidebar-navigation";
 import { WalletSwitcher } from "./wallet-switcher";
 
 const AppSidebar = () => {
@@ -27,10 +20,9 @@ const AppSidebar = () => {
 				/>
 				<WalletSwitcher />
 			</SidebarHeader>
-			<SidebarContent>
-				<SidebarGroup />
-				<SidebarGroup />
-			</SidebarContent>
+
+			<SidebarNavigation />
+
 			<SidebarFooter>
 				{open && <ThemeToggle />}
 				<NavUser user={user} />
