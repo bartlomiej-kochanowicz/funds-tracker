@@ -1,4 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from "@funds-tracker/ui";
+import { ErrorBoundary } from "components/error-boundary";
+import { ErrorMessage } from "components/error-message";
 import { ReactNode } from "react";
 
 import { AppSidebar } from "./app-sidebar";
@@ -18,7 +20,9 @@ const SidebarLayout = ({ children }: Props) => {
 					</div>
 				</header>
 
-				<div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+				<div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+					<ErrorBoundary fallback={<ErrorMessage className="h-svh" />}>{children}</ErrorBoundary>
+				</div>
 			</main>
 		</SidebarProvider>
 	);

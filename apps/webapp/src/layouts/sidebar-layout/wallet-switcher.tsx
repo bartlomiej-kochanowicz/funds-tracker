@@ -8,28 +8,29 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
+	Skeleton,
 	useSidebar,
 } from "@funds-tracker/ui";
+import { useQueryWallets } from "graphql/wallet/useQueryWallets";
 import { ChevronsUpDown, Plus, Wallet } from "lucide-react";
 
 const WalletSwitcher = () => {
 	const { isMobile } = useSidebar();
 
-	// TODO: Fetch wallets from the API
-	const wallets = [
-		{
-			name: "Main wallet",
-			uuid: "64bce0c9-2cc9-438a-97f8-a11a8ca44a48",
-		},
-		{
-			name: "Savings",
-			uuid: "64bce0c9-2cc9-438a-97f8-a11a8ca44a49",
-		},
-		{
-			name: "Investments",
-			uuid: "64bce0c9-2cc9-438a-97f8-a11a8ca44a50",
-		},
-	];
+	const { data, loading } = useQueryWallets();
+
+	if (loading || !data)
+		return (
+			<div className="flex items-center space-x-2 p-2">
+				<Skeleton className="size-8 rounded-full" />
+				<div className="grow space-y-2">
+					<Skeleton className="h-4 w-full" />
+					<Skeleton className="h-3 w-1/2" />
+				</div>
+			</div>
+		);
+
+	const { wallets } = data;
 
 	const activeWallet = wallets[0];
 
