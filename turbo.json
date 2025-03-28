@@ -1,10 +1,29 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"globalDependencies": [
-		"**/.env.*local"
+		".env",
+		".env.test"
 	],
 	"globalEnv": [
-		"PORT"
+		"PORT",
+		"DATABASE_URL",
+		"REDIS_URL",
+		"SENDGRID_API_KEY",
+		"NODE_ENV",
+		"AT_SECRET",
+		"RT_SECRET",
+		"VITE_API_URL",
+		"DEV_REDIS_PORT",
+		"DEV_POSTGRES_PORT",
+		"DEV_POSTGRES_USER",
+		"DEV_POSTGRES_PASSWORD",
+		"DEV_POSTGRES_DB",
+		"TEST_REDIS_PORT",
+		"TEST_POSTGRES_PORT",
+		"TEST_POSTGRES_USER",
+		"TEST_POSTGRES_PASSWORD",
+		"TEST_POSTGRES_DB",
+		"PROJECT_TOKEN"
 	],
 	"tasks": {
 		"build": {

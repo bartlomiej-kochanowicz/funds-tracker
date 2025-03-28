@@ -36,7 +36,7 @@ export class SendGridService {
 	private async sendEmailDevelopment(mail: SendGrid.MailDataRequired): Promise<boolean> {
 		try {
 			const transport = nodemailer.createTransport({
-				// host: "127.0.0.1",
+				host: "mailslurper",
 				port: 2500,
 				secure: false,
 				encoding: "utf-8",

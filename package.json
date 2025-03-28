@@ -3,7 +3,6 @@
 	"scripts": {
 		"install:api": "pnpm install --filter api",
 		"install:webapp": "pnpm install --filter webapp",
-		"compose": "docker compose up -d && pnpm prisma:generate && pnpm prisma:migrate",
 		"prisma:generate": "cd apps/api && pnpm prisma generate",
 		"prisma:migrate": "cd apps/api && pnpm prisma migrate dev",
 		"prisma:migrate:deploy": "cd apps/api && pnpm prisma migrate deploy",

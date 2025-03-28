@@ -12,10 +12,8 @@
         "docs",
         "style",
         "refactor",
-        "perf",
         "test",
-        "chore",
-        "revert"
+        "chore"
       ]
     ]
   }

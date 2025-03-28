@@ -36,6 +36,11 @@ const WalletSwitcher = () => {
 
 	const activeWallet = wallets[0];
 
+	if (!wallets.length) {
+		// TODO: add a button to create a wallet
+		return "no wallet";
+	}
+
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem>

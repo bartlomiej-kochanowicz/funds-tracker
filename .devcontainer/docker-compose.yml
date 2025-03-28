@@ -1,6 +1,27 @@
 version: "3.9"
 
 services:
+  dev:
+    build:
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../:/workspace:cached
+    command: sleep infinity
+    ports:
+      - "3000:3000" # Webapp (React/Vite)
+      - "3001:3001" # API (NestJS)
+      - "6006:6006" # Storybook
+    env_file:
+      - ../.env
+    depends_on:
+      dev-database:
+        condition: service_healthy
+      dev-redis:
+        condition: service_started
+      mailslurper:
+        condition: service_started
+
   dev-redis:
     container_name: dev-redis
     image: redis:7.0.9-alpine
@@ -11,9 +32,11 @@ services:
 
   tests-redis:
     container_name: tests-redis
-    image: redis:7.0.9-alpine
+    build:
+      context: ./
+      dockerfile: tests-redis.Dockerfile
     ports:
-      - "${TEST_REDIS_PORT}:6379"
+      - "${TEST_REDIS_PORT:-6380}:6379"
     volumes:
       - dev-redis:/data
 
@@ -26,24 +49,26 @@ services:
       - "8085:8085"
 
   tests-database:
-    image: postgres:14.5-alpine
+    build:
+      context: ./
+      dockerfile: tests-database.Dockerfile
     restart: always
     container_name: tests-database
     ports:
-      - "${TEST_POSTGRES_PORT}:5432"
+      - "${TEST_POSTGRES_PORT:-5433}:5432"
     environment:
       - POSTGRES_USER=${TEST_POSTGRES_USER}
       - POSTGRES_PASSWORD=${TEST_POSTGRES_PASSWORD}
       - POSTGRES_DB=${TEST_POSTGRES_DB}
 
   dev-database:
-    image: postgres:14.5-alpine
     container_name: dev-database
+    image: postgres:17.4-alpine
     restart: unless-stopped
     environment:
-      - POSTGRES_USER=${DEV_POSTGRES_USER}
-      - POSTGRES_PASSWORD=${DEV_POSTGRES_PASSWORD}
-      - POSTGRES_DB=${DEV_POSTGRES_DB}
+      - POSTGRES_USER=dev_user
+      - POSTGRES_PASSWORD=dev_password
+      - POSTGRES_DB=funds_tracker_dev
     ports:
       - "${DEV_POSTGRES_PORT}:5432"
     volumes:

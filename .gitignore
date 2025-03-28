@@ -20,11 +20,7 @@ yarn-error.log*
 
 # local env files
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
+.env.test
 # turbo
 .turbo
 
@@ -39,3 +35,4 @@ _old
 dist
 
 .DS_Store
+.pnpm-store
