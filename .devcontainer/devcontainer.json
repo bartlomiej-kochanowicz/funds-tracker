@@ -32,6 +32,7 @@
 				"[typescript]": {
 					"editor.defaultFormatter": "esbenp.prettier-vscode",
 				},
+				"terminal.integrated.defaultProfile.linux": "zsh",
 			},
 		},
 	},
