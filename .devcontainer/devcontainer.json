@@ -6,9 +6,9 @@
 	"shutdownAction": "stopCompose",
 	"features": {
 		"ghcr.io/devcontainers/features/node:1": {
-			"version": "20",
+			"version": "20"
 		},
-		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers/features/git:1": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -21,20 +21,20 @@
 				"christian-kohler.npm-intellisense",
 				"vitest.explorer",
 				"GraphQL.vscode-graphql",
-				"GraphQL.vscode-graphql-syntax",
+				"GraphQL.vscode-graphql-syntax"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
 				"editor.defaultFormatter": "esbenp.prettier-vscode",
 				"[javascript]": {
-					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
 				},
 				"[typescript]": {
-					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
 				},
-				"terminal.integrated.defaultProfile.linux": "zsh",
-			},
-		},
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			}
+		}
 	},
 	"forwardPorts": [3000, 3001, 6006, 2500, 8080, 8085],
 	"portsAttributes": {
@@ -43,8 +43,8 @@
 		"6006": { "label": "Storybook", "onAutoForward": "notify" },
 		"2500": { "label": "Mailslurper SMTP", "onAutoForward": "silent" },
 		"8080": { "label": "Mailslurper Admin", "onAutoForward": "silent" },
-		"8085": { "label": "Mailslurper Web", "onAutoForward": "silent" },
+		"8085": { "label": "Mailslurper Web", "onAutoForward": "silent" }
 	},
 	"postCreateCommand": "pnpm install && pnpm prisma:generate && pnpm prisma:migrate",
-	"postStartCommand": "pnpm turbo run build",
+	"postStartCommand": "pnpm turbo run build"
 }
